@@ -1,0 +1,43 @@
+{
+  "name": "igniteui-theming",
+  "version": "1.0.0",
+  "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgniteUI/igniteui-theming.git"
+  },
+  "keywords": [
+    "sass",
+    "Ignite",
+    "UI",
+    "theming",
+    "palettes",
+    "elevations",
+    "typography"
+  ],
+  "author": "Infragistics",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-theming/issues"
+  },
+  "homepage": "https://github.com/IgniteUI/igniteui-theming#readme",
+  "exports": {
+    ".": {
+      "sass": "./_index.scss"
+    },
+    "./functions": {
+      "sass": "./sass/_functions.scss"
+    }
+  },
+  "devDependencies": {
+    "jest": "^28.1.1",
+    "sass-true": "^6.1.0"
+  },
+  "peerDependencies": {
+    "sass": "^1.52.3"
+  }
+}

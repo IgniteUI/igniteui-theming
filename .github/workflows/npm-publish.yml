@@ -1,0 +1,39 @@
+name: Npm.js deploy
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - run: echo ${VERSION}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test package
+        run: npm test
+
+      - name: Define NPM tag
+        run: |
+            if [[ ${VERSION} == *"alpha"* || ${VERSION} == *"beta"* || ${VERSION} == *"rc"* ]]; then echo "NPM_TAG=next"; else echo "NPM_TAG=latest"; fi >> $GITHUB_ENV
+            echo ${NPM_TAG}
+      - name: Create package version
+        run: npm version ${VERSION} --no-git-tag-version --save --allow-same-version
+        working-directory: ./
+
+      - name: Publish igniteui-theming
+        run: npm publish --tag ${NPM_TAG}
+        working-directory: ./
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
