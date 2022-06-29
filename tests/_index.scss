@@ -1,8 +1,0 @@
-@use '../node_modules/sass-true/' as *;
-
-@include describe('Zip [function]') {
-    @include it('Zips multiple lists into a single multi-dimensional list') {
-      // Assert the expected results
-      @include assert-equal(zip(a b c, 1 2 3), (a 1, b 2, c 3));
-    }
-}

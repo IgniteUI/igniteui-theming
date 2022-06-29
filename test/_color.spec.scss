@@ -1,0 +1,109 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../node_modules/sass-true/' as *;
+@use '../sass/color' as *;
+
+// primary and secondary colors
+$_primary: #09f;
+$_secondary: #97c;
+
+// palette mockup
+$_palette: (
+    primary: (
+        500: $_primary,
+        '500-contrast': #000
+    ),
+    secondary: (
+        500: $_secondary,
+        '500-contrast': #000
+    ),
+    _meta: (
+        variant: 'material'
+    )
+);
+
+@include describe('Color operations') {
+    @include describe('base') {
+        @include it('should calculate the contrast ratio between two colors') {
+            @include assert-equal(math.div(math.round(contrast($_primary, $_secondary) * 100), 100), 1.19);
+        }    
+        
+        @include it('should mix two colors to produce an opaque color') {
+            @include assert-equal(to-opaque(rgba(255, 255, 255, .32), #fff), #fff);
+            @include assert-equal(to-opaque(rgba(233, 233, 233, .32), rgba(255, 255, 255, 0)), #f7f7f7);
+        }
+        
+        @include it('converts a color to a list of HSL values') {
+            @include assert-equal(to-hsl(#000), (0deg, 0%, 0%));
+        }
+    }
+
+    @include describe('contrast') {
+        @include it('should return black for a white background') {
+            $background: #fff;
+            @include assert-equal(text-contrast($background), #000);
+        }
+
+        @include it('should return white for a black background') {
+            $background: #000;
+            @include assert-equal(text-contrast($background), #fff);
+        }
+
+        @include it('should return a AAA contrasting color for a given background') {
+            $test-color: #000;
+            @include assert-equal(text-contrast($_primary, $test-color, 'AAA'), $test-color);
+        }
+
+        @include it('should return a AA contrasting color for a given background') {
+            $test-color: #222;
+            @include assert-equal(text-contrast($_primary, $test-color, 'AA'), $test-color);
+        } 
+    }
+
+    @include describe('palette') {
+        @include it('should return a shade of type color w/ palette as only argument')  {
+            $value: color($_palette);
+            @include assert-equal(type-of($value), color);
+        }
+
+        @include it('should return a shade of type color w/ palette and color as only arguments')  {
+            $value: color($_palette, 'secondary');
+            @include assert-equal($value, $_secondary);
+        }
+
+        @include it('should return a shade of type color w/ all arguments passed')  {
+            $value: color($_palette, 'secondary', 500);
+            @include assert-equal($value, $_secondary);
+        }
+
+        @include it('should return a shade as CSS variable w/o arguments')  {
+            $value: color();
+            @include assert-equal(type-of($value), string);
+            @include assert-equal($value, hsla(var(--ig-primary-500), var(--ig-primary-a)));
+        }
+
+        @include it('should return a shade as CSS variable w/ color as only argument')  {
+            $value: color($color: secondary);
+            @include assert-equal(type-of($value), string);
+            @include assert-equal($value, hsla(var(--ig-secondary-500), var(--ig-secondary-a)));
+        }
+
+        @include it('should return a shade of type string as CSS var w/ color and variant as only arguments')  {
+            $value: color($color: secondary, $variant: 'A400');
+            @include assert-equal(type-of($value), string);
+            @include assert-equal($value, hsla(var(--ig-secondary-A400), var(--ig-secondary-a)));
+        }
+
+        @include it('should return a contrast shade of type color w/ palette as only argument')  {
+            $value: contrast-color($_palette);
+            @include assert-equal(type-of($value), color);
+            @include assert-equal(text-contrast(color($_palette, 'primary'), $value), $value);
+        }
+
+        @include it('should return a contrast shade of type string as CSS var w/ color and variant as only arguments')  {
+            $value: contrast-color($color: secondary, $variant: 'A400');
+            @include assert-equal(type-of($value), string);
+            @include assert-equal($value, hsla(var(--ig-secondary-A400-contrast), var(--ig-secondary-a)));
+        }
+    }
+}

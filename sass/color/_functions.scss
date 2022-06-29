@@ -1,0 +1,167 @@
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "sass:list";
+@use "sass:color";
+@use "sass:string";
+
+$p-test: (
+    primary: (),
+    secondary: (),
+    _meta: (
+        variant: 'material'
+    )
+);
+
+/// Retrieves a color from a color palette.
+/// @access public
+/// @group Colors
+/// @param {Map} $palette [null]- The source palette map.
+/// @param {string} $color [primary]- The target color from the color palette.
+/// @param {number|string} $variant [500] - The target color shade from the color palette.
+/// @returns {Color} White if no palette, color, and variant matches found.
+@function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
+    $c: map.get($palette or $p-test, $color);
+    $a: var(--ig-#{$color}-a);
+    $var-string: #{var(--ig-#{$color}-#{$variant})};
+    $contrast: if(
+        meta.type-of($variant) == string,
+        list.index(str-split($variant, '-'), 'contrast'),
+        null
+    );
+    $meta: if($palette, map.get($palette, '_meta'), null);
+
+    @if not($c) {
+        @error 'The passed color #{$color} is not valid.';
+    }
+
+    @if $palette == null or $meta == null {
+        @return if(
+            $contrast,
+            $var-string,
+            hsla($var-string, if($opacity, $opacity, $a)),
+        );
+    }
+
+    @return rgba(map.get($c, $variant), $alpha: if($opacity, $opacity, 1));
+}
+
+/// Retrieves a contrast text color for a given color from a color palette.
+/// @access public
+/// @group Palettes
+/// @param {Map} $palette [null] - The source palette map.
+/// @param {string} $color [primary] - The target color from the color palette.
+/// @param {number|variant} $variant [500] - The target color shade from the color palette.
+/// @requires color
+/// @returns {Color} [#fff] - Returns white if no palette, color and/or variant matches found.
+@function contrast-color($palette: null, $color: primary, $variant: 500, $opacity: null) {
+    @return color($palette, $color, #{$variant}-contrast, $opacity);
+}
+
+/// Returns a contrast color for a passed color.
+/// @access public
+/// @group Palettes
+/// @param {Color} $background - The background color used to return a contrast/forground color for.
+/// @param {Color} $foreground - The foreground color used in case it has enough contrast against the provided background.
+/// @param {String} $contrast - The contrast level according to WCAG 2.0 standards.
+/// @returns {Color} - Returns either white or black depending on the luminance of the input color.
+/// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+@function text-contrast(
+    $background,
+    $foreground: white,
+    $contrast: 'AAA'
+) {
+    @if meta.type-of($foreground) == 'color' and meta.type-of($background) == 'color' {
+        $level: map.get((
+            'A': 3,
+            'AA': 4.5,
+            'AAA': 7
+        ), $contrast);
+
+        @if $level == null {
+            @error "$contrast must be 'A', 'AA', or 'AAA'";
+        }
+
+        @if contrast($background, $foreground) >= $level {
+            @return $foreground;
+        } @else {
+            $lightContrast: contrast($background, white);
+            $darkContrast: contrast($background, black);
+
+            @if ($lightContrast > $darkContrast) {
+                @return white;
+            } @else {
+                @return black;
+            }
+        }
+    } @else {
+        @return $background;
+    }
+}
+
+/// Mixes two colors to produce an opaque color.
+/// @access public
+/// @param {Color} $color-1 - The first color, usually transparent.
+/// @param {Color} $color-2 [#fff] - The second color, usually opaque.
+/// @param {Map} $palette [$default-palette] - Pass an palette if the passed colors are CSS variable references.
+/// @return {Color} - The color representation of the rgba value.
+@function to-opaque($color-1, $color-2: #fff) {
+    @if meta.type-of($color-1) == color and meta.type-of($color-2) == color {
+        $red: color.red($color-1);
+        $green: color.green($color-1);
+        $blue: color.blue($color-1);
+        $a: color.alpha($color-1);
+        $r: math.floor($a * $red + (1 - $a) * color.red($color-2));
+        $g: math.floor($a * $green + (1 - $a) * color.green($color-2));
+        $b: math.floor($a * $blue + (1 - $a) * color.blue($color-2));
+        @return rgb($r, $g, $b);
+    }
+    @return $color-1;
+}
+
+/// Retruns a comma separated list of hue, saturation, and lightness values for a given color.
+/// @access public
+/// $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
+/// @param {Color} $color - The color to be converted to an HSL list of values.
+/// @return {List} - This list of HSL values.
+@function to-hsl($color) {
+    @return (color.hue($color), color.saturation($color), color.lightness($color));
+}
+
+/// Calculates the contrast ratio between two colors.
+/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+///
+/// @param {Color} $background - The background color.
+/// @param {Color} $foreground - The foreground color.
+/// @returns {Number} - The contrast ratio between the background and foreground colors.
+@function contrast($background, $foreground) {
+    $backLum: luminance($background) + .05;
+    $foreLum: luminance($foreground) + .05;
+
+    @return math.div(math.max($backLum, $foreLum), math.min($backLum, $foreLum));
+}
+
+/// Calculates the luminance for a given color.
+/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests.
+///
+/// @param {Color} $color - The color to calculate luminance for.
+@function luminance($color) {
+    @if meta.type-of($color) == 'color' {
+        $r: math.div(color.red($color), 255);
+        $g: math.div(color.green($color), 255);
+        $b: math.div(color.blue($color), 255);
+
+        @return .2126 * _lcv($r) + .7152 * _lcv($g) + .0722 * _lcv($b);
+    }
+    @return $color;
+}
+
+/// Calculates the linear channel value for a given sRGB color.
+/// @access private
+@function _lcv($value) {
+    @return if(
+        $value < .03928,
+        math.div($value, 12.92),
+        math.pow(math.div($value + .055, 1.055), 2.4)
+    );
+}
