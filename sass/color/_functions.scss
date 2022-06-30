@@ -15,7 +15,7 @@ $p-test: (
 
 /// Retrieves a color from a color palette.
 /// @access public
-/// @group Colors
+/// @group Palettes
 /// @param {Map} $palette [null]- The source palette map.
 /// @param {string} $color [primary]- The target color from the color palette.
 /// @param {number|string} $variant [500] - The target color shade from the color palette.
@@ -60,42 +60,54 @@ $p-test: (
 
 /// Returns a contrast color for a passed color.
 /// @access public
-/// @group Palettes
+/// @group Color
 /// @param {Color} $background - The background color used to return a contrast/forground color for.
-/// @param {Color} $foreground - The foreground color used in case it has enough contrast against the provided background.
-/// @param {String} $contrast - The contrast level according to WCAG 2.0 standards.
-/// @returns {Color} - Returns either white or black depending on the luminance of the input color.
+/// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors that can be used with the provided background.
+/// @param {AAA | AA | A} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
+/// @returns {Color} - Returns either white, black, or the provided foreground color if it meets the required contrast level.
 /// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 @function text-contrast(
     $background,
     $foreground: white,
     $contrast: 'AAA'
 ) {
-    @if meta.type-of($foreground) == 'color' and meta.type-of($background) == 'color' {
-        $level: map.get((
-            'A': 3,
-            'AA': 4.5,
-            'AAA': 7
-        ), $contrast);
-
-        @if $level == null {
-            @error "$contrast must be 'A', 'AA', or 'AAA'";
-        }
-
-        @if contrast($background, $foreground) >= $level {
-            @return $foreground;
-        } @else {
-            $lightContrast: contrast($background, white);
-            $darkContrast: contrast($background, black);
-
-            @if ($lightContrast > $darkContrast) {
-                @return white;
-            } @else {
-                @return black;
-            }
-        }
-    } @else {
+    @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
         @return $background;
+    }
+    
+    $level: map.get((
+        'a': 3,
+        'aa': 4.5,
+        'aaa': 7
+    ), string.to-lower-case($contrast));
+
+    @if $level == null {
+        @error "$contrast must be 'A', 'AA', or 'AAA'";
+    }
+
+    $candidates: ();
+
+    @each $color in $foreground {
+        @if meta.type-of($color) != 'color' {
+            @return $background;
+        }
+
+        $candidates: list.append($candidates, contrast($background, $color));
+    }
+    
+    $foreground: list.nth($foreground, list.index($candidates, math.max($candidates...)));
+
+    @if contrast($background, $foreground) >= $level {
+        @return $foreground;
+    } @else {
+        $lightContrast: contrast($background, white);
+        $darkContrast: contrast($background, black);
+
+        @if ($lightContrast > $darkContrast) {
+            @return white;
+        } @else {
+            @return black;
+        }
     }
 }
 
@@ -103,7 +115,6 @@ $p-test: (
 /// @access public
 /// @param {Color} $color-1 - The first color, usually transparent.
 /// @param {Color} $color-2 [#fff] - The second color, usually opaque.
-/// @param {Map} $palette [$default-palette] - Pass an palette if the passed colors are CSS variable references.
 /// @return {Color} - The color representation of the rgba value.
 @function to-opaque($color-1, $color-2: #fff) {
     @if meta.type-of($color-1) == color and meta.type-of($color-2) == color {
@@ -121,8 +132,9 @@ $p-test: (
 
 /// Retruns a comma separated list of hue, saturation, and lightness values for a given color.
 /// @access public
-/// $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
 /// @param {Color} $color - The color to be converted to an HSL list of values.
+/// @example scss Turn #000 into an HSL list of values
+///   $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
 /// @return {List} - This list of HSL values.
 @function to-hsl($color) {
     @return (color.hue($color), color.saturation($color), color.lightness($color));

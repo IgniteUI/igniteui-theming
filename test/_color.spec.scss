@@ -39,6 +39,11 @@ $_palette: (
     }
 
     @include describe('contrast') {
+        @include it('should return the passed background value if no valid colors are provided') {
+            $value: 'not a color';
+            @include assert-equal(text-contrast($value), $value);
+        }
+
         @include it('should return black for a white background') {
             $background: #fff;
             @include assert-equal(text-contrast($background), #000);
@@ -49,12 +54,23 @@ $_palette: (
             @include assert-equal(text-contrast($background), #fff);
         }
 
-        @include it('should return a AAA contrasting color for a given background') {
+        @include it('should return a contrasting color for a given background regardless of level case') {
+            $test-color: #000;
+            @include assert-equal(text-contrast($_primary, $test-color, 'AAA'), $test-color);
+            @include assert-equal(text-contrast($_primary, $test-color, 'aaa'), $test-color);
+            @include assert-equal(text-contrast($_primary, $test-color, 'Aaa'), $test-color);
+        }
+
+        @include it('returns the best contrast color from a list of candidates') {
+            @include assert-equal(text-contrast($_primary, #fff #222 #333, 'AA'), #222);
+        }
+
+        @include it('should return an AAA contrasting color for a given background') {
             $test-color: #000;
             @include assert-equal(text-contrast($_primary, $test-color, 'AAA'), $test-color);
         }
 
-        @include it('should return a AA contrasting color for a given background') {
+        @include it('should return an AA contrasting color for a given background') {
             $test-color: #222;
             @include assert-equal(text-contrast($_primary, $test-color, 'AA'), $test-color);
         } 
