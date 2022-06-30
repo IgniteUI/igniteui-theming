@@ -1,0 +1,16 @@
+/// Returns true if the scope where it's called is the root of the document.
+/// @access private
+/// @example scss Check if the current scope is root
+///   @mixin smart-mixin() {
+///     $scope: if(is-root(), ':root', '&');
+///
+///     #{$scope} {
+///       /* style rules here */
+///     }
+///   }
+///
+@function is-root() {
+    @each $selector in & {
+        @return if($selector == null, true, false);
+    }
+}

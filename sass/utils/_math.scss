@@ -1,0 +1,7 @@
+@use 'sass:math';
+
+@function to-fixed($number, $precision: 2) {
+    $pow: math.pow(10, $precision);
+
+    @return math.div(math.round($number * $pow), $pow);
+}

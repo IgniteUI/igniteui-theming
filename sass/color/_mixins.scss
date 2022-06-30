@@ -3,13 +3,15 @@
 @use 'sass:math';
 @use 'sass:color';
 @use 'sass:string';
+@use '../utils/meta' as *;
 
 /// Generates CSS variables for a given palette.
 /// @access public
+/// @group Palettes
 /// @param {Map} $palette [null] - The palette used to generate CSS variables.
 /// @param {Boolean} $contrast [true] - Specify if contrast colors should be included.
 /// @param {String} $prefix [ig] - The prefix for all generated CSS variables.
-/// @example scss Generate css variables for a `$palette`.
+/// @example scss Generate css variables for a palette
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
 ///
@@ -19,21 +21,30 @@
     $theme: if($_meta, map.get($_meta, 'variant'), null);
 
     #{$scope} {
-        @each $key, $value in $_meta {
-            $_valid-color: meta.type-of($value == 'color');
-            $_valid-key: not(string.index(#{$key}, 'variant'));
-
-            @if $_valid-color and $_valid-key {
-                --#{$prefix}-#{$key}-h: #{math.round(color.hue($value))};
-                --#{$prefix}-#{$key}-s: #{math.round(color.saturation($value))};
-                --#{$prefix}-#{$key}-l: #{math.round(color.lightness($value))};
-                --#{$prefix}-#{$key}-a: #{color.alpha($value)};
-            }
-        }
-
-        @each $name, $shades in map.remove($palette, '_meta') {
+        @each $color, $shades in map.remove($palette, '_meta') {
             @each $shade, $value in $shades {
-                --#{$prefix}-#{meta.inspect($name)}-#{$shade}: #{$value};
+                $_base-shade: $shade == 500;
+                $_valid-color: meta.type-of($value == 'color');
+                $_other-shade: meta.type-of($shade) == 'string';
+                $_hsl: if($_other-shade, string.index($shade, 'chunks'), false);
+                $_contrast: if($_other-shade, string.index($shade, 'contrast'), false);
+
+                @if $_base-shade and $_valid-color {
+                    --#{$prefix}-#{meta.inspect($color)}-h: #{math.round(color.hue($value))};
+                    --#{$prefix}-#{meta.inspect($color)}-s: #{math.round(color.saturation($value))};
+                    --#{$prefix}-#{meta.inspect($color)}-l: #{math.round(color.lightness($value))};
+                    --#{$prefix}-#{meta.inspect($color)}-a: #{color.alpha($value)};
+                }
+
+                @if $_hsl {
+                    $variant: string.slice($shade, 1, string.index($shade, '-chunks') - 1);
+
+                    --#{$prefix}-#{meta.inspect($color)}-#{$variant}: #{$value};
+                }
+
+                @if $_contrast {
+                    --#{$prefix}-#{meta.inspect($color)}-#{$shade}: #{$value};
+                }
             }
         }
     }

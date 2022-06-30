@@ -1,40 +1,27 @@
+/* stylelint-disable custom-property-no-missing-var-function */
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:color';
 @use '../node_modules/sass-true/' as *;
-@use '../sass/color' as *;
+@use '../index' as *;
 
 // base colors
 $_primary: #09f;
 $_secondary: #97c;
+$_surface: #fff;
 $_gray: #000;
-
-// palette mockup
-$_palette: (
-    primary: (
-        500: $_primary,
-        '500-contrast': #000
-    ),
-    secondary: (
-        500: $_secondary,
-        '500-contrast': #000
-    ),
-    gray: (
-        500: $_gray,
-        '500-contrast': #fff
-    ),
-    _meta: (
-        'primary': $_primary,
-        'secondary': $_secondary,
-        'gray': $_gray,
-        'variant': 'material'
-    )
+$_palette: palette(
+    $primary: $_primary,
+    $secondary: $_secondary,
+    $gray: $_gray,
+    $surface: $_surface,
+    $variant: 'material'
 );
 
 @include describe('Color operations') {
     @include describe('base') {
         @include it('should calculate the contrast ratio between two colors') {
-            @include assert-equal(math.div(math.round(contrast($_primary, $_secondary) * 100), 100), 1.19);
+            @include assert-equal(contrast($_primary, $_secondary), 1.19);
         }
 
         @include it('should mix two colors to produce an opaque color') {
@@ -145,7 +132,47 @@ $_palette: (
             @include assert-equal($value, hsla(var(--ig-secondary-A400-contrast), var(--ig-secondary-a)));
         }
 
-        /* stylelint-disable custom-property-no-missing-var-function */
+        @include it('should generate an HSL color shade from a given base color') {
+            $color: primary;
+            $variant: 600;
+            $shade: shade($color, $_primary, $variant, null);
+            $expected: (
+                raw: hsl(204deg 100% 44.5%),
+                hsl_chunks: #{var(--ig-primary-h), calc(var(--ig-primary-s) * 1.26), calc(var(--ig-primary-l) * .89)}
+            );
+
+            @include assert-equal($shade, $expected);
+        }
+
+        @include it('should generate an HSL grayscale shade from a given base color') {
+            $color: gray;
+            $variant: 50;
+            $surface: #eee;
+            $shade: shade($color, $_gray, $variant, $surface);
+            $expected: (
+                raw: hsl(0deg 0% 98%),
+                hsl_chunks: #{var(--ig-gray-h), var(--ig-gray-s), 98%}
+            );
+
+            // $surface is bright, return a darker shade of gray
+            @include assert-equal($shade, $expected);
+
+            $surface: #444;
+            $shade: shade($color, $_gray, $variant, $surface);
+            $expected: #{var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%};
+            $expected: (
+                raw: hsl(0deg 0% 13%),
+                hsl_chunks: #{var(--ig-gray-h), var(--ig-gray-s), 13%}
+            );
+
+            // $surface is dark, return a lighter shade of gray
+            @include assert-equal($shade, $expected);
+        }
+
+        @include it('should generate a complete palette') {
+            @debug $_palette;
+        }
+
         @include it('should generate CSS variables for all colors in a palette') {
             @include assert() {
                 @include output() {
@@ -165,11 +192,17 @@ $_palette: (
                     --ig-gray-s: #{math.round(color.saturation($_gray))};
                     --ig-gray-l: #{math.round(color.lightness($_gray))};
                     --ig-gray-a: #{math.round(color.alpha($_gray))};
-                    --ig-primary-500: #{var(--ig-primary-h), var(--ig-primary-s), var(--ig-primary-l)};
+                    --ig-primary-500:
+                        #{var(--ig-primary-h),
+                        calc(var(--ig-primary-s) * 1),
+                        calc(var(--ig-primary-l) * 1)};
                     --ig-primary-500-contrast: #{contrast-color($_palette, primary, 500)};
-                    --ig-secondary-500: #{var(--ig-secondary-h), var(--ig-secondary-s), var(--ig-secondary-l)};
+                    --ig-secondary-500:
+                        #{var(--ig-secondary-h),
+                        calc(var(--ig-secondary-s) * 1),
+                        calc(var(--ig-secondary-l) * 1)};
                     --ig-secondary-500-contrast: #{contrast-color($_palette, secondary, 500)};
-                    --ig-gray-500: #{var(--ig-gray-h), var(--ig-gray-s), var(--ig-gray-l)};
+                    --ig-gray-500: #{var(--ig-gray-h), calc(var(--ig-gray-s) * 1), calc(var(--ig-gray-l) * 1)};
                     --ig-gray-500-contrast: #{contrast-color($_palette, gray, 500)};
                 }
             }
