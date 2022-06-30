@@ -1,0 +1,59 @@
+@use 'sass:map';
+
+$IGrayShades: (
+    50: '',
+    '50-contrast': '',
+    100: '',
+    '100-contrast': '',
+    200: '',
+    '200-contrast': '',
+    300: '',
+    '300-contrast': '',
+    400: '',
+    '400-contrast': '',
+    500: '',
+    '500-contrast': '',
+    600: '',
+    '600-contrast': '',
+    700: '',
+    '700-contrast': '',
+    800: '',
+    '800-contrast': '',
+    900: '',
+);
+$IColorShades: map.merge(
+    $IGrayShades,
+    (
+        'A100': '',
+        'A100-contrast': '',
+        'A200': '',
+        'A200-contrast': '',
+        'A400': '',
+        'A400-contrast': '',
+        'A700': '',
+        'A700-contrast': '',
+    )
+);
+$IPaletteColors: (
+    primary: $IColorShades,
+    secondary: $IColorShades,
+    gray: $IGrayShades,
+    surface: $IColorShades,
+    info: $IColorShades,
+    success: $IColorShades,
+    warn: $IColorShades,
+    error: $IColorShades,
+    variant: ''
+);
+$IPaletteMeta: (
+    primary: '',
+    secondary: '',
+    gray: '',
+    surface: '',
+    info: '',
+    success: '',
+    warn: '',
+    error: '',
+    variant: '',
+);
+$IPalette: map.merge($IPaletteColors, (_meta: $IPaletteMeta));

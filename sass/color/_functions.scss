@@ -1,17 +1,10 @@
-@use "sass:map";
-@use "sass:meta";
-@use "sass:math";
-@use "sass:list";
-@use "sass:color";
-@use "sass:string";
-
-$p-test: (
-    primary: (),
-    secondary: (),
-    _meta: (
-        variant: 'material'
-    )
-);
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:color';
+@use 'sass:string';
+@use 'types';
 
 /// Retrieves a color from a color palette.
 /// @access public
@@ -21,7 +14,7 @@ $p-test: (
 /// @param {number|string} $variant [500] - The target color shade from the color palette.
 /// @returns {Color} White if no palette, color, and variant matches found.
 @function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
-    $c: map.get($palette or $p-test, $color);
+    $c: map.get($palette or types.$IPalette, $color);
     $a: var(--ig-#{$color}-a);
     $var-string: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(
@@ -35,7 +28,7 @@ $p-test: (
         @error 'The passed color #{$color} is not valid.';
     }
 
-    @if $palette == null or $meta == null {
+    @if not($palette) or not($meta) {
         @return if(
             $contrast,
             $var-string,
@@ -62,9 +55,11 @@ $p-test: (
 /// @access public
 /// @group Color
 /// @param {Color} $background - The background color used to return a contrast/forground color for.
-/// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors that can be used with the provided background.
+/// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors
+/// that can be used with the provided background.
 /// @param {AAA | AA | A} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
-/// @returns {Color} - Returns either white, black, or the provided foreground color if it meets the required contrast level.
+/// @returns {Color} - Returns either white, black, or the provided foreground
+/// color if it meets the required contrast level.
 /// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 @function text-contrast(
     $background,
@@ -74,14 +69,17 @@ $p-test: (
     @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
         @return $background;
     }
-    
-    $level: map.get((
-        'a': 3,
-        'aa': 4.5,
-        'aaa': 7
-    ), string.to-lower-case($contrast));
 
-    @if $level == null {
+    $level: map.get(
+        (
+            'a': 3,
+            'aa': 4.5,
+            'aaa': 7
+        ),
+        string.to-lower-case($contrast)
+    );
+
+    @if not($level) {
         @error "$contrast must be 'A', 'AA', or 'AAA'";
     }
 
@@ -94,7 +92,7 @@ $p-test: (
 
         $candidates: list.append($candidates, contrast($background, $color));
     }
-    
+
     $foreground: list.nth($foreground, list.index($candidates, math.max($candidates...)));
 
     @if contrast($background, $foreground) >= $level {
@@ -103,7 +101,7 @@ $p-test: (
         $lightContrast: contrast($background, white);
         $darkContrast: contrast($background, black);
 
-        @if ($lightContrast > $darkContrast) {
+        @if $lightContrast > $darkContrast {
             @return white;
         } @else {
             @return black;
@@ -125,8 +123,10 @@ $p-test: (
         $r: math.floor($a * $red + (1 - $a) * color.red($color-2));
         $g: math.floor($a * $green + (1 - $a) * color.green($color-2));
         $b: math.floor($a * $blue + (1 - $a) * color.blue($color-2));
+
         @return rgb($r, $g, $b);
     }
+
     @return $color-1;
 }
 
@@ -165,12 +165,14 @@ $p-test: (
 
         @return .2126 * _lcv($r) + .7152 * _lcv($g) + .0722 * _lcv($b);
     }
+
     @return $color;
 }
 
 /// Calculates the linear channel value for a given sRGB color.
 /// @access private
 @function _lcv($value) {
+    /* stylelint-disable number-max-precision */
     @return if(
         $value < .03928,
         math.div($value, 12.92),

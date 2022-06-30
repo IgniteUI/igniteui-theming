@@ -1,0 +1,40 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:string';
+
+/// Generates CSS variables for a given palette.
+/// @access public
+/// @param {Map} $palette [null] - The palette used to generate CSS variables.
+/// @param {Boolean} $contrast [true] - Specify if contrast colors should be included.
+/// @param {String} $prefix [ig] - The prefix for all generated CSS variables.
+/// @example scss Generate css variables for a `$palette`.
+///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
+///    @include palette($palette);
+///
+@mixin palette($palette, $contrast: true, $prefix: 'ig') {
+    $scope: if(is-root(), ':root', '&');
+    $_meta: map.get($palette, '_meta');
+    $theme: if($_meta, map.get($_meta, 'variant'), null);
+
+    #{$scope} {
+        @each $key, $value in $_meta {
+            $_valid-color: meta.type-of($value == 'color');
+            $_valid-key: not(string.index(#{$key}, 'variant'));
+
+            @if $_valid-color and $_valid-key {
+                --#{$prefix}-#{$key}-h: #{math.round(color.hue($value))};
+                --#{$prefix}-#{$key}-s: #{math.round(color.saturation($value))};
+                --#{$prefix}-#{$key}-l: #{math.round(color.lightness($value))};
+                --#{$prefix}-#{$key}-a: #{color.alpha($value)};
+            }
+        }
+
+        @each $name, $shades in map.remove($palette, '_meta') {
+            @each $shade, $value in $shades {
+                --#{$prefix}-#{meta.inspect($name)}-#{$shade}: #{$value};
+            }
+        }
+    }
+}
