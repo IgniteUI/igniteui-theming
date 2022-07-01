@@ -11,7 +11,6 @@
 $_primary: #09f;
 $_secondary: #97c;
 $_surface: #fff;
-$_gray: #000;
 $_success: green;
 $_info: blue;
 $_warn: orange;
@@ -19,7 +18,6 @@ $_error: red;
 $_palette: palette(
     $primary: $_primary,
     $secondary: $_secondary,
-    $gray: $_gray,
     $surface: $_surface,
     $success: $_success,
     $info: $_info,
@@ -154,11 +152,11 @@ $_palette: palette(
             @include assert-equal($shade, $expected);
         }
 
-        @include it('should generate an HSL grayscale shade from a given base color') {
+        @include it('should generate an a contrasting HSL grayscale shade for a given surface color') {
             $color: gray;
             $variant: 50;
             $surface: #eee;
-            $shade: shade($color, $_gray, $variant, $surface);
+            $shade: shade($color, null, $variant, $surface);
             $expected: (
                 raw: hsl(0deg 0% 98%),
                 hsl: #{var(--ig-gray-h), var(--ig-gray-s), 98%}
@@ -168,7 +166,7 @@ $_palette: palette(
             @include assert-equal($shade, $expected);
 
             $surface: #444;
-            $shade: shade($color, $_gray, $variant, $surface);
+            $shade: shade($color, null, $variant, $surface);
             $expected: #{var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%};
             $expected: (
                 raw: hsl(0deg 0% 13%),

@@ -12,21 +12,21 @@
 /// @access public
 /// @group Palettes
 /// @requires {function} _color-palette
-/// @param {Color} $primary - The primary color used to generate the primary color palette.
-/// @param {Color} $secondary - The secondary color used to generate the secondary color palette.
-/// @param {Color} $surface - The color used as a background in components, such as cards, sheets, and menus
-/// @param {Color} $gray [null] - The color used for generating the grays palette.
-/// @param {Color} $info [null] - The information color used throughout the application.
-/// @param {Color} $success [null] - The success color used throughout the application.
-/// @param {Color} $warn [null] - The warning color used throughout the application.
-/// @param {Color} $error [null] - The error color used throughout the application.
-/// @param {String} $variant [null] - The palette variant that gets generated.
+/// @param {Color} $primary - The primary color used to generate the primary color palette (required).
+/// @param {Color} $secondary - The secondary color used to generate the secondary color palette (required).
+/// @param {Color} $surface - The color used as a background in components, such as cards, sheets, and menus (required).
+/// @param {Color} $gray [null] - The color used for generating the grayscale palette (optional).
+/// @param {Color} $info [null] - The information color used throughout the application (optional).
+/// @param {Color} $success [null] - The success color used throughout the application (optional).
+/// @param {Color} $warn [null] - The warning color used throughout the application (optional).
+/// @param {Color} $error [null] - The error color used throughout the application (optional).
+/// @param {String} $variant [null] - Used internally (optional).
 /// @returns {Map} - A map consisting of color shades for the passed base colors(primary, secondary, gray, etc).
 @function palette(
     $primary,
     $secondary,
     $surface,
-    $gray,
+    $gray: null,
     $info: null,
     $success: null,
     $warn: null,
@@ -114,6 +114,7 @@
 
     @if $name == gray {
         $lum: luminance($surface);
+        $color: if($color, $color, if($lum > .5, #000, #fff));
         $lmap: map.get(multipliers.$grayscale, 'l');
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), $shade);
