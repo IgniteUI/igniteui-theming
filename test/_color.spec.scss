@@ -1,6 +1,8 @@
 /* stylelint-disable custom-property-no-missing-var-function */
+/* stylelint-disable max-nesting-depth */
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
 @use 'sass:color';
 @use '../node_modules/sass-true/' as *;
 @use '../index' as *;
@@ -10,11 +12,19 @@ $_primary: #09f;
 $_secondary: #97c;
 $_surface: #fff;
 $_gray: #000;
+$_success: green;
+$_info: blue;
+$_warn: orange;
+$_error: red;
 $_palette: palette(
     $primary: $_primary,
     $secondary: $_secondary,
     $gray: $_gray,
     $surface: $_surface,
+    $success: $_success,
+    $info: $_info,
+    $warn: $_warn,
+    $error: $_error,
     $variant: 'material'
 );
 
@@ -129,7 +139,7 @@ $_palette: palette(
             $value: contrast-color($color: secondary, $variant: 'A400');
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsla(var(--ig-secondary-A400-contrast), var(--ig-secondary-a)));
+            @include assert-equal($value, var(--ig-secondary-A400-contrast));
         }
 
         @include it('should generate an HSL color shade from a given base color') {
@@ -138,7 +148,7 @@ $_palette: palette(
             $shade: shade($color, $_primary, $variant, null);
             $expected: (
                 raw: hsl(204deg 100% 44.5%),
-                hsl_chunks: #{var(--ig-primary-h), calc(var(--ig-primary-s) * 1.26), calc(var(--ig-primary-l) * .89)}
+                hsl: #{var(--ig-primary-h), calc(var(--ig-primary-s) * 1.26), calc(var(--ig-primary-l) * .89)}
             );
 
             @include assert-equal($shade, $expected);
@@ -151,7 +161,7 @@ $_palette: palette(
             $shade: shade($color, $_gray, $variant, $surface);
             $expected: (
                 raw: hsl(0deg 0% 98%),
-                hsl_chunks: #{var(--ig-gray-h), var(--ig-gray-s), 98%}
+                hsl: #{var(--ig-gray-h), var(--ig-gray-s), 98%}
             );
 
             // $surface is bright, return a darker shade of gray
@@ -162,18 +172,43 @@ $_palette: palette(
             $expected: #{var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%};
             $expected: (
                 raw: hsl(0deg 0% 13%),
-                hsl_chunks: #{var(--ig-gray-h), var(--ig-gray-s), 13%}
+                hsl: #{var(--ig-gray-h), var(--ig-gray-s), 13%}
             );
 
             // $surface is dark, return a lighter shade of gray
             @include assert-equal($shade, $expected);
         }
 
-        @include it('should generate a complete palette') {
-            @debug $_palette;
+        @include it('should generate a valid palette') {
+            @each $color, $shades in $IPalette {
+                @include assert-true(map.get($_palette, $color));
+                @include assert-true(meta.type-of(map.get($_palette, $color)), 'map');
+
+                @each $shade, $value in $shades {
+                    // Test if each shade exists and is a color
+                    @include assert-true(map.get($_palette, $color, $shade));
+                    @include assert-true(meta.type-of(map.get($_palette, $color, $shade)), 'color');
+
+                    @if $shade != variant {
+                        // Test if each contrast shade exits and is a color
+                        @include assert-true(map.get($_palette, $color, #{$shade}-contrast));
+                        @include assert-true(meta.type-of(map.get($_palette, $color, #{$shade}-contrast)), 'color');
+
+                        // Test if each hsl list shade exits and is a list
+                        @include assert-true(map.get($_palette, $color, #{$shade}-hsl));
+                        @include assert-true(meta.type-of(map.get($_palette, $color, #{$shade}-hsl)), 'list');
+                    }
+
+                    @if $shade == variant {
+                        @include assert-true(meta.type-of(map.get($_palette, $shade)), 'string');
+                    }
+                }
+            }
         }
 
-        @include it('should generate CSS variables for all colors in a palette') {
+        @include it('should generate correct CSS variables for color and grayscale shades in a palette') {
+            $gray-500: color($_palette, gray, 500);
+
             @include assert() {
                 @include output() {
                     @include palette($_palette);
@@ -184,25 +219,16 @@ $_palette: palette(
                     --ig-primary-s: #{math.round(color.saturation($_primary))};
                     --ig-primary-l: #{math.round(color.lightness($_primary))};
                     --ig-primary-a: #{math.round(color.alpha($_primary))};
-                    --ig-secondary-h: #{math.round(color.hue($_secondary))};
-                    --ig-secondary-s: #{math.round(color.saturation($_secondary))};
-                    --ig-secondary-l: #{math.round(color.lightness($_secondary))};
-                    --ig-secondary-a: #{math.round(color.alpha($_secondary))};
-                    --ig-gray-h: #{math.round(color.hue($_gray))};
-                    --ig-gray-s: #{math.round(color.saturation($_gray))};
-                    --ig-gray-l: #{math.round(color.lightness($_gray))};
-                    --ig-gray-a: #{math.round(color.alpha($_gray))};
                     --ig-primary-500:
                         #{var(--ig-primary-h),
                         calc(var(--ig-primary-s) * 1),
                         calc(var(--ig-primary-l) * 1)};
                     --ig-primary-500-contrast: #{contrast-color($_palette, primary, 500)};
-                    --ig-secondary-500:
-                        #{var(--ig-secondary-h),
-                        calc(var(--ig-secondary-s) * 1),
-                        calc(var(--ig-secondary-l) * 1)};
-                    --ig-secondary-500-contrast: #{contrast-color($_palette, secondary, 500)};
-                    --ig-gray-500: #{var(--ig-gray-h), calc(var(--ig-gray-s) * 1), calc(var(--ig-gray-l) * 1)};
+                    --ig-gray-h: #{math.round(color.hue($gray-500))};
+                    --ig-gray-s: #{math.round(color.saturation($gray-500))};
+                    --ig-gray-l: #{math.round(color.lightness($gray-500))};
+                    --ig-gray-a: #{math.round(color.alpha($gray-500))};
+                    --ig-gray-500: #{var(--ig-gray-h), var(--ig-gray-s), #{math.round(color.lightness($gray-500))}};
                     --ig-gray-500-contrast: #{contrast-color($_palette, gray, 500)};
                 }
             }

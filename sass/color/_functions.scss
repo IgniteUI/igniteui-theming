@@ -14,8 +14,8 @@
 /// @requires {function} _color-palette
 /// @param {Color} $primary - The primary color used to generate the primary color palette.
 /// @param {Color} $secondary - The secondary color used to generate the secondary color palette.
-/// @param {Color} $gray - The color used for generating the grays palette.
-/// @param {Color} $surface [null] - The color used as a background in components, such as cards, sheets, and menus
+/// @param {Color} $surface - The color used as a background in components, such as cards, sheets, and menus
+/// @param {Color} $gray [null] - The color used for generating the grays palette.
 /// @param {Color} $info [null] - The information color used throughout the application.
 /// @param {Color} $success [null] - The success color used throughout the application.
 /// @param {Color} $warn [null] - The warning color used throughout the application.
@@ -25,8 +25,8 @@
 @function palette(
     $primary,
     $secondary,
-    $gray,
     $surface,
+    $gray,
     $info: null,
     $success: null,
     $warn: null,
@@ -35,18 +35,14 @@
 ) {
     $color-shades: map.keys(types.$IColorShades);
     $gray-shades: map.keys(types.$IGrayShades);
-
-    // Base Colors
-    $primary-palette: shades('primary', $primary, $color-shades, $surface);
-    $secondary-palette: shades('secondary', $secondary, $color-shades, $surface);
-    $grayscale-palette: shades('gray', $gray, $gray-shades, $surface);
-    $surface-palette: shades('surface', $surface, $color-shades, $surface);
-
-    // Non-required colors
-    $info-palette: if($info, shades('info', $info, $color-shades, $surface), ());
-    $success-palette: if($success, shades('success', $success, $color-shades, $surface), ());
-    $warn-palette: if($warn, shades('warn', $warn, $color-shades, $surface), ());
-    $error-palette: if($success, shades('error', $error, $color-shades, $surface), ());
+    $primary-palette: shades(primary, $primary, $color-shades);
+    $secondary-palette: shades(secondary, $secondary, $color-shades);
+    $surface-palette: shades(surface, $surface, $color-shades);
+    $grayscale-palette: shades(gray, $gray, $gray-shades, $surface);
+    $info-palette: if($info, shades(info, $info, $color-shades), ());
+    $success-palette: if($success, shades(success, $success, $color-shades), ());
+    $warn-palette: if($warn, shades(warn, $warn, $color-shades), ());
+    $error-palette: if($success, shades(error, $error, $color-shades), ());
 
     @return (
         primary: $primary-palette,
@@ -58,7 +54,7 @@
         warn: $warn-palette,
         error: $error-palette,
         _meta: (
-            'variant': $variant,
+            variant: $variant,
         )
     );
 }
@@ -69,7 +65,7 @@
 /// @param {String} $name - The name of the color.
 /// @param {Color} $color - The base color used to generate the palette.
 /// @param {List} $shades - The list of shades.
-/// @param {Color} $surface [#fff] - The base color to calculate contrast colors against.
+/// @param {Color} $surface [null] - The surface color. Usefull when generating shades of gray (optional).
 /// @requires {function} _color-shade
 /// @requires {function} _hsla-shade
 /// @requires {function} contrast
@@ -79,7 +75,7 @@
     $name,
     $color,
     $shades,
-    $surface: #fff
+    $surface: null
 ) {
     $result: ();
 
@@ -90,7 +86,7 @@
             (
                 $variant: map.get($shade, 'raw'),
                 #{$variant}-contrast: text-contrast(map.get($shade, 'raw')),
-                #{$variant}-chunks: map.get($shade, 'hsl_chunks'),
+                #{$variant}-hsl: map.get($shade, 'hsl'),
             )
         );
     }
@@ -104,13 +100,13 @@
 /// @param {String} $name - The base color name (primary, secondary, etc.) to be used to generate a color variant.
 /// @param {Color} $color - The color value to be used to generate a color shade.
 /// @param {String | Number} $shade - The color shade variant.
-/// @param {Color} $surface - The surface color.
+/// @param {Color} $surface [null] - The surface color. Usefull when generating a shade of gray (optional).
 /// @returns {Map} - A map containing a list of HSL values and a raw color value.
 @function shade(
     $name,
     $color,
     $shade,
-    $surface,
+    $surface: null,
 ) {
     $h: var(--ig-#{$name}-h);
     $s: var(--ig-#{$name}-s);
@@ -124,8 +120,12 @@
         $l: list.nth(map.values($lmap), if($lum > .5, $len - $i + 1, $i));
 
         @return (
-            raw: hsl(color.hue($color), color.saturation($color), $l),
-            hsl_chunks: #{$h, $s, $l}
+            raw: hsl(
+                to-fixed(color.hue($color)),
+                to-fixed(color.saturation($color)),
+                $l
+            ),
+            hsl: #{$h, $s, $l}
         );
     } @else {
         $sx: map.get(multipliers.$color, 's', $shade);
@@ -133,11 +133,11 @@
 
         @return (
             raw: hsl(
-                color.hue($color),
+                to-fixed(color.hue($color)),
                 to-fixed(color.saturation($color) * $sx),
                 to-fixed(color.lightness($color) * $lx)
             ),
-            hsl_chunks: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})}
+            hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})}
         );
     }
 }
@@ -145,18 +145,19 @@
 /// Retrieves a color from a color palette.
 /// @access public
 /// @group Palettes
-/// @param {Map} $palette [null]- The source palette map.
-/// @param {string} $color [primary]- The target color from the color palette.
-/// @param {number|string} $variant [500] - The target color shade from the color palette.
-/// @returns {Color} White if no palette, color, and variant matches found.
+/// @param {Map} $palette [null]- The source palette map (optional).
+/// @param {String} $color [primary]- The target color from the color palette.
+/// @param {Number | String} $variant [500] - The target color shade from the color palette.
+/// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
+/// @returns {Color | String} - The raw color shade or CSS variable reference from the palette.
 @function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
     $c: map.get($palette or types.$IPalette, $color);
     $a: var(--ig-#{$color}-a);
-    $var-string: #{var(--ig-#{$color}-#{$variant})};
+    $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(
         meta.type-of($variant) == string,
-        list.index(str-split($variant, '-'), 'contrast'),
-        null
+        string.index($variant, 'contrast'),
+        false
     );
     $meta: if($palette, map.get($palette, '_meta'), null);
 
@@ -167,8 +168,8 @@
     @if not($palette) or not($meta) {
         @return if(
             $contrast,
-            $var-string,
-            hsla($var-string, if($opacity, $opacity, $a)),
+            $s,
+            hsla($s, if($opacity, $opacity, $a)),
         );
     }
 
@@ -177,14 +178,14 @@
 
 /// Retrieves a contrast text color for a given color from a color palette.
 /// @access public
-/// @group Palettes
-/// @param {Map} $palette [null] - The source palette map.
-/// @param {string} $color [primary] - The target color from the color palette.
-/// @param {number|variant} $variant [500] - The target color shade from the color palette.
+/// @group Palettesreference
+/// @param {Map} $palette [null]- The source palette map (optional).
+/// @param {String} $color [primary]- The target color from the color palette.
+/// @param {Number | String} $variant [500] - The target color shade from the color palette.
 /// @requires color
-/// @returns {Color} [#fff] - Returns white if no palette, color and/or variant matches found.
-@function contrast-color($palette: null, $color: primary, $variant: 500, $opacity: null) {
-    @return color($palette, $color, #{$variant}-contrast, $opacity);
+/// @returns {Color | String} - The raw contrast color shade or CSS variable from the palette.
+@function contrast-color($palette: null, $color: primary, $variant: 500) {
+    @return color($palette, $color, #{$variant}-contrast);
 }
 
 /// Returns a contrast color for a passed color.
