@@ -1,0 +1,31 @@
+/// Generates CSS variables for a given elevations map.
+/// @access public
+/// @param {Map} $elevations - The elevations map to use to generate CSS variables for.
+/// @param {string} $prefix [igx] - The prefix attached to the CSS variables.
+///
+/// @example scss Generate CSS variables for elevations.
+///    $elevations: elevations(red, green, blue); // umbra, penumbra, ambient
+///    @include elevation-vars($elevations);
+///
+@mixin elevation-vars($elevations, $prefix: 'igx') {
+    $scope: if(is-root(), ':root', '&');
+
+    #{$scope} {
+        @each $level, $shadow in $elevations {
+            --#{$prefix}-elevation-#{$level}: #{$shadow};
+        }
+    }
+}
+
+/// Translates Ignite UI for Angular CSS variables for elevations
+/// into Ignite UI for Web Components compatible ones
+/// @access public
+/// @param {Map} $elevations - The elevations map to use to generate CSS variables for.
+///
+/// @example scss Translates igx- prefixed variables for elevations to igc- prefixed ones.
+///    $elevations: elevations(red, green, blue);
+///    @include elevations-to-wc($elevations);
+///
+@mixin elevations-to-wc($elevations) {
+    @include elevation-vars($elevations, $prefix: 'igc');
+}
