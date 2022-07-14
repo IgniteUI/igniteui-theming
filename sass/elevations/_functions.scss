@@ -7,7 +7,7 @@
 
 @function _transform-levels($levels) {
     $result: ();
-    $x: var(--igx-elevation-factor, 1);
+    $x: var(--ig-elevation-factor, 1);
 
     @each $k, $v in $levels {
         $l: ();
@@ -169,7 +169,7 @@ $elevations: elevations(
     rgba(0, 0, 0, .08)
 ) !default;
 
-/// Returns an igx elevation from an elevations produced map.
+/// Returns an ig elevation from an elevations produced map.
 /// @access public
 /// @param {Map} $elevations [null] - The elevations map to extract the elevation from.
 /// @param {number} $elevation [0] - The elevation level from 0 to 24.
@@ -184,7 +184,7 @@ $elevations: elevations(
     }
 
     @if $elevations == null {
-        @return #{var(--igx-elevation-#{$elevation})};
+        @return #{var(--ig-elevation-#{$elevation})};
     }
 
     @return map.get($elevations, #{$elevation});

@@ -14,7 +14,7 @@ $scope: if(is-root(), ':root', '&');
             @include contains() {
                 #{$scope} {
                     @each $level, $shadow in $_my-elevations {
-                        --igx-elevation-#{$level}: #{$shadow};
+                        --ig-elevation-#{$level}: #{$shadow};
                     }
                 }
             }
@@ -22,7 +22,7 @@ $scope: if(is-root(), ':root', '&');
     }
 
     @include it('should get an elevation as a CSS variable') {
-        $expected: var(--igx-elevation-5);
+        $expected: var(--ig-elevation-5);
         $actual: elevation($elevation: 5);
 
         @include assert-equal($actual, $expected);
@@ -39,25 +39,7 @@ $scope: if(is-root(), ':root', '&');
             @include contains() {
                 #{$scope} {
                     @each $level, $shadow in $_my-elevations {
-                        --igx-elevation-#{$level}: #{$shadow};
-                    }
-                }
-            }
-        }
-    }
-}
-
-@include describe('elevations-to-wc') {
-    @include it('should generate CSS variables for a given elevations map prefixed with --igc') {
-        @include assert() {
-            @include output() {
-                @include elevations-to-wc($_my-elevations);
-            }
-
-            @include contains() {
-                #{$scope} {
-                    @each $level, $shadow in $_my-elevations {
-                        --igc-elevation-#{$level}: #{$shadow};
+                        --ig-elevation-#{$level}: #{$shadow};
                     }
                 }
             }
