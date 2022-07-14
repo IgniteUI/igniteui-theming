@@ -49,19 +49,32 @@
 /// - caption
 /// - overline
 /// @access public
-/// @param {Map} $h1 [null] - A map containing type style properties as produced by the type-style function. This type scale styles h1 elements and elements with `igx-font-h1` class.
-/// @param {Map} $h2 [null] - A map containing type style properties as produced by the type-style function. This type scale styles h2 elements and elements with `igx-font-h2` class.
-/// @param {Map} $h3 [null] - A map containing type style properties as produced by the type-style function. This type scale styles h3 elements and elements with `igx-font-h3` class.
-/// @param {Map} $h4 [null] - A map containing type style properties as produced by the type-style function. This type scale styles h4 elements and elements with `igx-font-h4` class.
-/// @param {Map} $h5 [null] - A map containing type style properties as produced by the type-style function. This type scale styles h5 elements and elements with `igx-font-h5` class.
-/// @param {Map} $h6 [null] - A map containing type style properties as produced by the type-style function. This type scale styles h6 elements and elements with `igx-font-h6` class.
-/// @param {Map} $subtitle-1 [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-font-subtitle-1` class.
-/// @param {Map} $subtitle-2 [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-font-subtitle-2` class.
-/// @param {Map} $body-1 [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-font-body-1` class.
-/// @param {Map} $body-2 [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-font-body-2` class.
-/// @param {Map} $button [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-button` class.
-/// @param {Map} $caption [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-font-caption` class.
-/// @param {Map} $overline [null] - A map containing type style properties as produces by the type-style function. This type scale styles elements with `igx-font-overline` class.
+/// @param {Map} $h1 [null] - A map containing type style properties as produced by the type-style function.
+/// This type scale styles h1 elements and elements with `ig-font-h1` class.
+/// @param {Map} $h2 [null] - A map containing type style properties as produced by the type-style function.
+/// This type scale styles h2 elements and elements with `ig-font-h2` class.
+/// @param {Map} $h3 [null] - A map containing type style properties as produced by the type-style function.
+/// This type scale styles h3 elements and elements with `ig-font-h3` class.
+/// @param {Map} $h4 [null] - A map containing type style properties as produced by the type-style function.
+/// This type scale styles h4 elements and elements with `ig-font-h4` class.
+/// @param {Map} $h5 [null] - A map containing type style properties as produced by the type-style function.
+/// This type scale styles h5 elements and elements with `ig-font-h5` class.
+/// @param {Map} $h6 [null] - A map containing type style properties as produced by the type-style function.
+/// This type scale styles h6 elements and elements with `ig-font-h6` class.
+/// @param {Map} $subtitle-1 [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-font-subtitle-1` class.
+/// @param {Map} $subtitle-2 [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-font-subtitle-2` class.
+/// @param {Map} $body-1 [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-font-body-1` class.
+/// @param {Map} $body-2 [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-font-body-2` class.
+/// @param {Map} $button [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-button` class.
+/// @param {Map} $caption [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-font-caption` class.
+/// @param {Map} $overline [null] - A map containing type style properties as produces by the type-style function.
+/// This type scale styles elements with `ig-font-overline` class.
 /// @requires type-style
 /// @returns {Map} - A map of all defined type scales.
 @function type-scale(
@@ -81,9 +94,8 @@
     $_meta: ()
 ) {
     $default-scale: (
-        _meta: (variant: 'material'),
         h1: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(96px),
             $font-weight: 300,
             $font-style: normal,
@@ -94,7 +106,7 @@
             $margin-bottom: rem(56px)
         ),
         h2: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(60px),
             $font-weight: 300,
             $font-style: normal,
@@ -105,7 +117,7 @@
             $margin-bottom: rem(28px)
         ),
         h3: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(48px),
             $font-weight: 400,
             $font-style: normal,
@@ -116,7 +128,7 @@
             $margin-bottom: 0
         ),
         h4: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(34px),
             $font-weight: 400,
             $font-style: normal,
@@ -127,7 +139,7 @@
             $margin-bottom: 0
         ),
         h5: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(24px),
             $font-weight: 400,
             $font-style: normal,
@@ -138,7 +150,7 @@
             $margin-bottom: 0
         ),
         h6: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(20px),
             $font-weight: 600,
             $font-style: normal,
@@ -149,7 +161,7 @@
             $margin-bottom: 0
         ),
         subtitle-1: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(16px),
             $font-weight: 400,
             $font-style: normal,
@@ -158,7 +170,7 @@
             $text-transform: none
         ),
         subtitle-2: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(14px),
             $font-weight: 600,
             $font-style: normal,
@@ -167,7 +179,7 @@
             $text-transform: none
         ),
         body-1: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(16px),
             $font-weight: 400,
             $font-style: normal,
@@ -178,7 +190,7 @@
             $margin-bottom: rem(16)
         ),
         body-2: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(14px),
             $font-weight: 400,
             $font-style: normal,
@@ -187,7 +199,7 @@
             $text-transform: none
         ),
         button: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(14px),
             $font-weight: 600,
             $font-style: normal,
@@ -196,7 +208,7 @@
             $text-transform: uppercase
         ),
         caption: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(12px),
             $font-weight: 400,
             $font-style: normal,
@@ -205,7 +217,7 @@
             $text-transform: none
         ),
         overline: type-style(
-            $font-family: css-font-var,
+            $font-family: var(--ig-font-family),
             $font-size: rem(10px),
             $font-weight: 400,
             $font-style: normal,
@@ -229,6 +241,15 @@
         button: extend(map.get($default-scale, 'button'), $button),
         caption: extend(map.get($default-scale, 'caption'), $caption),
         overline: extend(map.get($default-scale, 'overline'), $overline),
-        _meta: extend(map.get($default-scale, '_meta'), $_meta)
     );
+}
+
+/// Get type scale category config.
+/// @param {Map} $scale - A type scale map reference as produces by type-scale.
+/// @param {String} $category - The scale category you want config for. For instance - 'h1';
+/// @example scss Get the type scale category config for the `h1` scale.
+///   $h1-type-scale: type-scale-category($default-type-scale, 'h1');
+/// @returns {Map} - The config map for the selected category in the type scale.
+@function type-scale-category($scale, $category) {
+    @return map.get($scale, $category);
 }

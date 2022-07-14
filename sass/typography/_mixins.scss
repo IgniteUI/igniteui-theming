@@ -4,93 +4,48 @@
 @use 'variables' as *;
 @use '../utils/meta' as *;
 
-/* stylelint-disable at-rule-empty-line-before */
-/* stylelint-disable scss/at-rule-conditional-no-parentheses */
+/// Assigns type scale category config properties
+/// as style rules wherever this mixin is included.
+/// @param {Map} $scale - A type scale map reference as produces by ig-type-scale.
+/// @param {String} $category - The type scale category config you want to use as CSS style rules.
+/// @example scss Add the `h1` styles to custom CSS selector.
+///   .fancy-h1 {
+///      @include ig-type-style($default-type-scale, 'h1');
+///      font-family: 'GT Walsheim';
+///      color: mediumvioletred;
+///   }
+@mixin type-style($scale, $category) {
+    $type-category: map.get($scale, $category);
 
-/// @access private
-/// @param {String} $font-family [$material-typeface] - The font family to be used across all typographic elements.
-/// @param {Map} $type-scale [] - A type scale map as produced by type-scale.
-/// @param {Map} $type-scale [] - A type scale map as produced by type-scale.
-/// @param {Map} $prefix [] - The prefix used for css variables and scoping.
-@mixin _typography($font-family, $type-scale, $prefix) {
-    @if (is-root()) {
-        // Use the BEM notation to create a link
-        // between the igx-typography class selector
-        // and all typographic elements.
-        @include b(#{$prefix}-typography) {
-            @include _typography-styles($font-family, $type-scale, $prefix);
+    @each $key, $value in $type-category {
+        #{$key}: var(--ig-#{$category}-#{$key});
+    }
+    @content;
+}
 
-            // Maps type scale typographic categories
-            // to native elements.
-            $category-element-map: (
-                h1: 'h1',
-                h2: 'h2',
-                h3: 'h3',
-                h4: 'h4',
-                h5: 'h5',
-                h6: 'h6',
-                body-1: 'p',
-            );
-
-            /* stylelint-disable max-nesting-depth */
-            @each $category, $type-style in $type-scale {
-                @if $category != _meta {
-                    // Get the native element that uses typographic styles directly
-                    // as mapped in the $category-element-map
-                    $e: map.get($category-element-map, $category);
-
-                    // Add CSS variables to .igx-typography class selector
-                    @each $key, $value in $type-style {
-                        @if $key == 'font-family' and $value == 'css-font-var' {
-                            --#{$prefix}-#{$category}-#{$key}: var(--#{$prefix}-font-family);
-                        } @else {
-                            --#{$prefix}-#{$category}-#{$key}: #{$value};
-                        }
-                    }
-
-                    // Create a placeholder selector with styles for each
-                    // typographic style to be able to easily extend it
-                    // elsewhere.
-                    %#{$category} {
-                        @include type-style($type-scale, $category);
-                    }
-
-                    // Add native element typographic styles.
-                    @if $e != null {
-                        #{$e} {
-                            @extend %#{$category};
-                        }
-                    }
-
-                    // Add class selector typographic styles.
-                    @include e(#{$category}) {
-                        @extend %#{$category};
-                    }
-                }
-            }
-
-            /* stylint-enable max-nesting-depth */
-        }
-    } @else {
-        @include _typography-styles($font-family, $type-scale);
+/// Transforms a type style map into css font variables.
+/// @param {String} $name - The custom CSS variable name.
+/// @param {Map} $type-style - A type style map reference as produces by ig-type-style.
+/// @param {String} $prefix [null] - Optional prefix.
+/// @example scss Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
+///   $h1-style: type-scale-category($type-scale, 'h1');
+///   @include type-style-vars($h1-style);
+@mixin type-style-vars($name, $type-style) {
+    @each $key, $value in $type-style {
+        /* stylelint-disable */
+        --igc-#{$name}-#{$key}: #{$value};
+        /* stylelint-enable */
     }
 }
 
-/// Adds typography styles for h1-h6, paragraph and creates custom typography class selectors.
-/// The produces styles are based on the passed typeface and type scale.
-/// If omitted the $material-typeface and $material-type-scale will be used.
-/// @access public
-/// @param {String} $font-family [$material-typeface] - The font family to be used across all typographic elements.
-/// @param {Map} $type-scale [$material-type-scale] - A type scale map as produced by type-scale.
-/// @param {Boolean} $wc [false] - Enable theming support for Ignite UI for Web Components
-/// @requires $material-typeface
-/// @requires $material-type-scale
-/// @see $material-typeface
-/// @see $material-type-scale
-@mixin typography($font-family: $material-typeface, $type-scale: $material-type-scale, $wc: false) {
-    @include _typography($font-family, $type-scale, $prefix: 'igx');
+@mixin typography($font-family, $type-scale) {
+    $scope: if(is-root(), ':root', '&');
 
-    @if $wc {
-        @include _typography($font-family, $type-scale, $prefix: 'igc');
+    #{$scope} {
+        --ig-font-family: #{string.unquote($font-family)};
+
+        @each $name, $style in map.remove($type-scale, '_meta') {
+            @include type-style-vars($name, $style);
+        }
     }
 }
