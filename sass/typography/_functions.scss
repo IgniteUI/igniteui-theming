@@ -1,114 +1,87 @@
 @use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+@use './types';
 
-/// In interface-like type style map.
+/// Produces a type style map of values that adheres to the ITypeStyle map.
 /// @access public
-/// @param {String} $font-family [null] - The font family of the type style.
-/// @param {String} $font-size [null] - The font size of the type style.
-/// @param {Number|String} $font-weight [null] - The font weight of the type style.
-/// @param {String} $font-style [null] - The font style of the type style.
-/// @param {Number|string} $line-height [null] - The line height of the type style.
-/// @param {Number|String} $letter-spacing [null] - The letter spacing of the type style.
-/// @param {String} $text-transform [null] - The text-transform property of the type style.
+/// @param {String} $font-family [var(--igc-font-family)] - The font family of the type style.
+/// @param {String} $font-size - The font size of the type style.
+/// @param {Number|String} $font-weight [normal] - The font weight of the type style.
+/// @param {String} $font-style [normal] - The font style of the type style.
+/// @param {Number|String} $line-height [normal] - The line height of the type style.
+/// @param {Number|String} $letter-spacing [normal] - The letter spacing of the type style.
+/// @param {String} $text-transform [none] - The text-transform property of the type style.
+/// @param {Number} $margin-top [0] - The margin-top property of the type style.
+/// @param {Number} $margin-bottom [0] - The margin-bottom property of the type style.
+/// @requires $ITypeStyle
 /// @returns {Map} - A map of all defined type style properties.
-@function type-style(
-    $font-family: null,
-    $font-size: null,
-    $font-weight: null,
-    $font-style: null,
-    $line-height: null,
-    $letter-spacing: null,
-    $text-transform: null,
-    $margin-top: null,
-    $margin-bottom: null,
-) {
-    @return (
-        font-family: $font-family,
-        font-size: $font-size,
-        font-weight: $font-weight,
-        font-style: $font-style,
-        line-height: $line-height,
-        letter-spacing: $letter-spacing,
-        text-transform: $text-transform,
-        margin-top: $margin-top,
-        margin-bottom: $margin-bottom,
-    );
+@function type-style($args...) {
+    $keywords: meta.keywords($args);
+    $result: ();
+
+    @each $style, $value in types.$ITypeStyle {
+        $overwrite: map.get($keywords, $style);
+        $value: if($overwrite, $overwrite, $value);
+
+        @if not($value) {
+            @error 'Missing argument $#{$style}.';
+        }
+
+        $result: map.merge(
+            $result,
+            (
+                $style: $value
+            )
+        );
+    }
+
+    @return $result;
 }
 
-/// Creates a type scale map containing type style definitions for:
-/// - h1
-/// - h2
-/// - h3
-/// - h4
-/// - h5
-/// - h6
-/// - subtitle-1
-/// - subtitle-2
-/// - body-1
-/// - body-2
-/// - button
-/// - caption
-/// - overline
+/// Produces a type scale map containing type styles that adheres to the ITypeScale list.
 /// @access public
-/// @param {Map} $h1 [null] - A map containing type style properties as produced by the type-style function.
-/// This type scale styles h1 elements and elements with `ig-font-h1` class.
-/// @param {Map} $h2 [null] - A map containing type style properties as produced by the type-style function.
-/// This type scale styles h2 elements and elements with `ig-font-h2` class.
-/// @param {Map} $h3 [null] - A map containing type style properties as produced by the type-style function.
-/// This type scale styles h3 elements and elements with `ig-font-h3` class.
-/// @param {Map} $h4 [null] - A map containing type style properties as produced by the type-style function.
-/// This type scale styles h4 elements and elements with `ig-font-h4` class.
-/// @param {Map} $h5 [null] - A map containing type style properties as produced by the type-style function.
-/// This type scale styles h5 elements and elements with `ig-font-h5` class.
-/// @param {Map} $h6 [null] - A map containing type style properties as produced by the type-style function.
-/// This type scale styles h6 elements and elements with `ig-font-h6` class.
-/// @param {Map} $subtitle-1 [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-font-subtitle-1` class.
-/// @param {Map} $subtitle-2 [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-font-subtitle-2` class.
-/// @param {Map} $body-1 [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-font-body-1` class.
-/// @param {Map} $body-2 [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-font-body-2` class.
-/// @param {Map} $button [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-button` class.
-/// @param {Map} $caption [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-font-caption` class.
-/// @param {Map} $overline [null] - A map containing type style properties as produces by the type-style function.
-/// This type scale styles elements with `ig-font-overline` class.
+/// @param {Map} $h1 - A map containing type style properties as produced by the type-style function.
+/// @param {Map} $h2 - A map containing type style properties as produced by the type-style function.
+/// @param {Map} $h3 - A map containing type style properties as produced by the type-style function.
+/// @param {Map} $h4 - A map containing type style properties as produced by the type-style function.
+/// @param {Map} $h5 - A map containing type style properties as produced by the type-style function.
+/// @param {Map} $h6 - A map containing type style properties as produced by the type-style function.
+/// @param {Map} $subtitle-1 - A map containing type style properties as produces by the type-style function.
+/// @param {Map} $subtitle-2 - A map containing type style properties as produces by the type-style function.
+/// @param {Map} $body-1 - A map containing type style properties as produces by the type-style function.
+/// @param {Map} $body-2 - A map containing type style properties as produces by the type-style function.
+/// @param {Map} $button - A map containing type style properties as produces by the type-style function.
+/// @param {Map} $caption - A map containing type style properties as produces by the type-style function.
+/// @param {Map} $overline - A map containing type style properties as produces by the type-style function.
+/// @param {String} $_theme [null] - The theme related to this type scale. Internal use only.
 /// @requires type-style
+/// @requires $ITypeScale
 /// @returns {Map} - A map of all defined type scales.
-@function type-scale(
-    $h1: (),
-    $h2: (),
-    $h3: (),
-    $h4: (),
-    $h5: (),
-    $h6: (),
-    $subtitle-1: (),
-    $subtitle-2: (),
-    $body-1: (),
-    $body-2: (),
-    $button: (),
-    $caption: (),
-    $overline: (),
-    $_meta: ()
-) {
-    @return (
-        h1: $h1,
-        h2: $h2,
-        h3: $h3,
-        h4: $h4,
-        h5: $h5,
-        h6: $h6,
-        subtitle-1: $subtitle-1,
-        subtitle-2: $subtitle-2,
-        body-1: $body-1,
-        body-2: $body-2,
-        button: $button,
-        caption: $caption,
-        overline: $overline,
-        _meta: $_meta
-    );
+@function type-scale($_theme: null, $args...) {
+    $style_fn: meta.get-function('type-style');
+    $categories: meta.keywords($args);
+    $result: (_meta: (
+        variant: $_theme
+    ));
+
+    @each $category in types.$ITypeScale {
+        $value: map.get($categories, $category);
+
+        @if not($value) {
+            @error 'Missing argument $#{$category}.';
+        }
+
+        $result: map.merge(
+            $result,
+            (
+                $category: meta.call($style_fn, $value...)
+            )
+        );
+    }
+
+    @return $result;
 }
 
 /// Get type scale category config.

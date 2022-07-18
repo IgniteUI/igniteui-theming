@@ -4,131 +4,303 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use 'sass:color';
+@use 'sass:string';
 @use '../node_modules/sass-true/' as *;
 @use '../index' as *;
+@use '../sass/typography/types';
 
-$my-type-style: type-style(
-    $font-family: 'Times New Roman',
-    $font-size: 24px,
-    $font-weight: 600,
-    $font-style: italic,
-    $line-height: 8px,
-    $letter-spacing: 4px,
-    $text-transform: uppercase,
-    $margin-top: 2px,
-    $margin-bottom: 2px,
-);
-$my-h1: type-style($font-size: 42px, $font-weight: 800);
-$my-subtitle1: type-style($font-size: 16px, $font-weight: 400);
-$my-body1: type-style($font-size: 14px, $font-weight: 400);
-$my-type-scale: type-scale(
-    $h1: $my-h1,
-    $subtitle-1: $my-subtitle1,
-    $body-1: $my-body1
-);
-$h1-style: type-scale-category($my-type-scale, 'h1');
-$scope: if(is-root(), ':root', '&');
+// $my-type-style: type-style(
+//     $font-family: 'Times New Roman',
+//     $font-size: 24px,
+//     $font-weight: 600,
+//     $font-style: italic,
+//     $line-height: 8px,
+//     $letter-spacing: 4px,
+//     $text-transform: uppercase,
+//     $margin-top: 2px,
+//     $margin-bottom: 2px,
+// );
+// $my-h1: type-style($font-size: 42px, $font-weight: 800);
+// $my-subtitle1: type-style($font-size: 16px, $font-weight: 400);
+// $my-body1: type-style($font-size: 14px, $font-weight: 400);
+// $my-type-scale: type-scale(
+//     $h1: $my-h1,
+//     $subtitle-1: $my-subtitle1,
+//     $body-1: $my-body1
+// );
+// $h1-style: type-scale-category($my-type-scale, 'h1');
+// $scope: if(is-root(), ':root', '&');
 
 // @include typography($type-scale: $my-type-scale);
 
+@mixin type-style($type-scale, $category) {
+    @if $type-scale {
+        $valid: if(
+            list.index(types.$ITypeScale, $category),
+            map.get($type-scale, $category),
+            null
+        );
+
+        @if $valid {
+            @each $style, $value in $category {
+                #{$style}: #{value};
+            }
+            @content;
+        } @else {
+            @warn '#{$category} is not a valid type style';
+        }
+    } @else {
+        @warn 'Not a valid type scale.';
+    }
+}
+
 @include describe('Typography') {
-    @include it('should create a map of of css type style properties') {
-        $test-type-style: (
-            font-family: 'Times New Roman',
-            font-size: 24px,
-            font-weight: 600,
-            font-style: italic,
-            line-height: 8px,
-            letter-spacing: 4px,
-            text-transform: uppercase,
-            margin-top: 2px,
-            margin-bottom: 2px,
+    @include it('should produce a map of default type style rules matching the ITypeStyle map') {
+        $font-size: 18px;
+        $rules: type-style($font-size: $font-size);
+
+        @each $rule, $value in map.remove(types.$ITypeStyle, 'font-size') {
+            @include assert-equal(map.get($rules, $rule), $value);
+        }
+
+        @include assert-equal(map.get($rules, 'font-size'), $font-size);
+    }
+
+    @include it('should only produce a map of allowed type style rules') {
+        $font-family: 'Times New Roman';
+        $font-size: 24px;
+        $font-weight: 600;
+        $font-style: italic;
+        $line-height: 8px;
+        $letter-spacing: 4px;
+        $text-transform: uppercase;
+        $margin-top: 2px;
+        $margin-bottom: 2px;
+        $random-input: 'test';
+        $rules: type-style(
+            $font-family: $font-family,
+            $font-size: $font-size,
+            $font-weight: $font-weight,
+            $font-style: $font-style,
+            $line-height: $line-height,
+            $letter-spacing: $letter-spacing,
+            $text-transform: $text-transform,
+            $margin-top: $margin-top,
+            $margin-bottom: $margin-bottom,
+            $random-input: $random-input
         );
 
-        @include assert-equal($my-type-style, $test-type-style);
+        @include assert-equal(map.get($rules, 'font-family'), $font-family);
+        @include assert-equal(map.get($rules, 'font-size'), $font-size);
+        @include assert-equal(map.get($rules, 'font-weight'), $font-weight);
+        @include assert-equal(map.get($rules, 'font-style'), $font-style);
+        @include assert-equal(map.get($rules, 'line-height'), $line-height);
+        @include assert-equal(map.get($rules, 'letter-spacing'), $letter-spacing);
+        @include assert-equal(map.get($rules, 'text-transform'), $text-transform);
+        @include assert-equal(map.get($rules, 'margin-top'), $margin-top);
+        @include assert-equal(map.get($rules, 'margin-bottom'), $margin-bottom);
+        @include assert-false(map.has-key($rules, 'random-input'));
     }
 
-    @include it('should create a map with each typography element having their own map of type style properties') {
-        $test-type-scale: (
-            h1: (
-                font-size: 42px,
-                font-weight: 800
-            ),
-            subtitle-1: (
-                font-size: 16px,
-                font-weight: 400
-            ),
-            body-1: (
-                font-size: 14px,
-                font-weight: 400
-            )
+    @include it('should produce a type scale map of type style values for each category') {
+        $h1: (font-size: 96px);
+        $h2: (font-size: 70px);
+        $h3: (font-size: 40px);
+        $h4: (font-size: 30px);
+        $h5: (font-size: 20px);
+        $h6: (font-size: 10px);
+        $subtitle-1: (font-size: 96px);
+        $subtitle-2: (font-size: 70px);
+        $body-1: (font-size: 40px);
+        $body-2: (font-size: 30px);
+        $button: (font-size: 20px);
+        $caption: (font-size: 10px);
+        $overline: (font-size: 10px);
+        $theme: 'material';
+        $scale: type-scale(
+            $h1: $h1,
+            $h2: $h2,
+            $h3: $h3,
+            $h4: $h4,
+            $h5: $h5,
+            $h6: $h6,
+            $subtitle-1: $subtitle-1,
+            $subtitle-2: $subtitle-2,
+            $body-1: $body-1,
+            $body-2: $body-2,
+            $button: $button,
+            $caption: $caption,
+            $overline: $overline,
+            $_theme: $theme
         );
 
-        @include assert-equal($my-type-scale, $test-type-scale);
+        @include assert-equal(map.get($scale, 'h1'), type-style($h1...));
+        @include assert-equal(map.get($scale, 'h2'), type-style($h2...));
+        @include assert-equal(map.get($scale, 'h3'), type-style($h3...));
+        @include assert-equal(map.get($scale, 'h4'), type-style($h4...));
+        @include assert-equal(map.get($scale, 'h5'), type-style($h5...));
+        @include assert-equal(map.get($scale, 'h6'), type-style($h6...));
+        @include assert-equal(map.get($scale, 'subtitle-1'), type-style($subtitle-1...));
+        @include assert-equal(map.get($scale, 'subtitle-2'), type-style($subtitle-2...));
+        @include assert-equal(map.get($scale, 'body-1'), type-style($body-1...));
+        @include assert-equal(map.get($scale, 'body-2'), type-style($body-2...));
+        @include assert-equal(map.get($scale, 'button'), type-style($button...));
+        @include assert-equal(map.get($scale, 'caption'), type-style($caption...));
+        @include assert-equal(map.get($scale, 'overline'), type-style($overline...));
+        @include assert-equal(map.get($scale, '_meta', 'variant'), $theme);
     }
 
-    @include it('should get type scale category configuration for a certain type scale element') {
-        $test-scale-category: (
-            font-size: 42px,
-            font-weight: 800
-        );
+    // @include it('should include type styles to a style rule scope') {
+    //     @include assert() {
+    //         @include output() {
+    //             .my-h1 {
+    //                 @include type-style('h1');
+    //             }
+    //         }
 
-        @include assert-equal($h1-style, $test-scale-category);
-    }
+    //         @include expect() {
+    //             .my-h1 {
+    //                 font-family: Roboto, sans-serif;
+    //                 font-size: 96px;
+    //                 font-weight: 300;
+    //                 letter-spacing: -1.5px;
+    //             }
+    //         }
+    //     }
+    // }
 
-    @include it('should assign type scale category configuration properties as style rules wherever the type-style mixin is included.') {
-        @include assert() {
-            @include output() {
-                .my-h1 {
-                    @include type-style($my-type-scale, 'h1');
-                }
-            }
+    // @include it('should include type styles for all caterogies in a type scale') {
+    //     @include assert() {
+    //         @include output() {
+    //             @each $type-style in types.$ITypeScale {
+    //                 .#{$type-style} {
+    //                     @include type-style($type-style);
+    //                 }
+    //             }
+    //         }
 
-            @include expect() {
-                .my-h1 {
-                    font-size: 42px;
-                    font-weight: 800;
-                }
-            }
-        }
-    }
+    //         @include expect() {
+    //             .h1 {
+    //                 font-family: Roboto, sans-serif;
+    //                 font-size: 96px;
+    //                 font-weight: 300;
+    //                 letter-spacing: -1.5px;
+    //             }
 
-    @include it('should transform a type style map into css font variables.') {
-        @include assert() {
-            @include output() {
-                .my-h1 {
-                    @include type-style-vars('h1', $h1-style);
-                }
-            }
+    //             .h2 {
+    //                 font-family: Roboto, sans-serif;
+    //                 font-size: 60px;
+    //                 font-weight: 300;
+    //                 letter-spacing: -.5px;
+    //             }
 
-            @include expect() {
-                .my-h1 {
-                    --ig-h1-font-size: 42px;
-                    --ig-h1-font-weight: 800;
-                }
-            }
-        }
-    }
+    //             .h3 {
+    //                 font-family: Roboto, sans-serif;
+    //                 font-size: 48px;
+    //                 font-weight: 300;
+    //                 letter-spacing: -.5px;
+    //             }
+    //         }
+    //     }
+    // }
 
-    @include it('should assign typography styles globally by given a type scale map') {
-        @include assert() {
-            @include output() {
-                #{$scope} {
-                    @include typography('Helvetica', $my-type-scale);
-                }
-            }
+    // @include it('should create a map of of css type style properties') {
+    //     $test-type-style: (
+    //         font-family: 'Times New Roman',
+    //         font-size: 24px,
+    //         font-weight: 600,
+    //         font-style: italic,
+    //         line-height: 8px,
+    //         letter-spacing: 4px,
+    //         text-transform: uppercase,
+    //         margin-top: 2px,
+    //         margin-bottom: 2px,
+    //     );
 
-            @include expect() {
-                #{$scope} {
-                    --ig-font-family: Helvetica;
-                    --ig-h1-font-size: 42px;
-                    --ig-h1-font-weight: 800;
-                    --ig-subtitle-1-font-size: 16px;
-                    --ig-subtitle-1-font-weight: 400;
-                    --ig-body-1-font-size: 14px;
-                    --ig-body-1-font-weight: 400;
-                }
-            }
-        }
-    }
+    //     @include assert-equal($my-type-style, $test-type-style);
+    // }
+
+    // @include it('should create a map with each typography element having their own map of type style properties') {
+    //     $test-type-scale: (
+    //         h1: (
+    //             font-size: 42px,
+    //             font-weight: 800
+    //         ),
+    //         subtitle-1: (
+    //             font-size: 16px,
+    //             font-weight: 400
+    //         ),
+    //         body-1: (
+    //             font-size: 14px,
+    //             font-weight: 400
+    //         )
+    //     );
+
+    //     @include assert-equal($my-type-scale, $test-type-scale);
+    // }
+
+    // @include it('should get type scale category configuration for a certain type scale element') {
+    //     $test-scale-category: (
+    //         font-size: 42px,
+    //         font-weight: 800
+    //     );
+
+    //     @include assert-equal($h1-style, $test-scale-category);
+    // }
+
+    // @include it('should assign type scale category configuration properties as') {
+    //     @include assert() {
+    //         @include output() {
+    //             .my-h1 {
+    //                 @include type-style($my-type-scale, 'h1');
+    //             }
+    //         }
+
+    //         @include expect() {
+    //             .my-h1 {
+    //                 font-size: 42px;
+    //                 font-weight: 800;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // @include it('should transform a type style map into css font variables.') {
+    //     @include assert() {
+    //         @include output() {
+    //             .my-h1 {
+    //                 @include type-style-vars('h1', $h1-style);
+    //             }
+    //         }
+
+    //         @include expect() {
+    //             .my-h1 {
+    //                 --ig-h1-font-size: 42px;
+    //                 --ig-h1-font-weight: 800;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // @include it('should assign typography styles globally by given a type scale map') {
+    //     @include assert() {
+    //         @include output() {
+    //             #{$scope} {
+    //                 @include typography('Helvetica', $my-type-scale);
+    //             }
+    //         }
+
+    //         @include expect() {
+    //             #{$scope} {
+    //                 --ig-font-family: 'Helvetica';
+    //                 --ig-h1-font-size: 42px;
+    //                 --ig-h1-font-weight: 800;
+    //                 --ig-subtitle-1-font-size: 16px;
+    //                 --ig-subtitle-1-font-weight: 400;
+    //                 --ig-body-1-font-size: 14px;
+    //                 --ig-body-1-font-weight: 400;
+    //             }
+    //         }
+    //     }
+    // }
 }
