@@ -23,12 +23,12 @@
 ) {
     @return (
         font-family: $font-family,
-        font-weight: $font-weight,
         font-size: $font-size,
+        font-weight: $font-weight,
         font-style: $font-style,
+        line-height: $line-height,
         letter-spacing: $letter-spacing,
         text-transform: $text-transform,
-        line-height: $line-height,
         margin-top: $margin-top,
         margin-bottom: $margin-bottom,
     );
@@ -93,154 +93,21 @@
     $overline: (),
     $_meta: ()
 ) {
-    $default-scale: (
-        h1: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(96px),
-            $font-weight: 300,
-            $font-style: normal,
-            $letter-spacing: rem(-1.5px),
-            $line-height: rem(112px),
-            $text-transform: none,
-            $margin-top: rem(28px),
-            $margin-bottom: rem(56px)
-        ),
-        h2: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(60px),
-            $font-weight: 300,
-            $font-style: normal,
-            $letter-spacing: rem(-.5px),
-            $line-height: rem(71px),
-            $text-transform: none,
-            $margin-top: rem(28px),
-            $margin-bottom: rem(28px)
-        ),
-        h3: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(48px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: 0,
-            $line-height: rem(57px),
-            $text-transform: none,
-            $margin-top: rem(28px),
-            $margin-bottom: 0
-        ),
-        h4: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(34px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: rem(.25px),
-            $line-height: rem(40px),
-            $text-transform: none,
-            $margin-top: rem(28px),
-            $margin-bottom: 0
-        ),
-        h5: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(24px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: 0,
-            $line-height: rem(28px),
-            $text-transform: none,
-            $margin-top: rem(28px),
-            $margin-bottom: 0
-        ),
-        h6: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(20px),
-            $font-weight: 600,
-            $font-style: normal,
-            $letter-spacing: rem(.15px),
-            $line-height: rem(24px),
-            $text-transform: none,
-            $margin-top: 0,
-            $margin-bottom: 0
-        ),
-        subtitle-1: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(16px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: rem(.15px),
-            $line-height: rem(24px),
-            $text-transform: none
-        ),
-        subtitle-2: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(14px),
-            $font-weight: 600,
-            $font-style: normal,
-            $letter-spacing: rem(.1px),
-            $line-height: rem(24px),
-            $text-transform: none
-        ),
-        body-1: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(16px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: rem(.5px),
-            $line-height: rem(28px),
-            $text-transform: none,
-            $margin-top: rem(28px),
-            $margin-bottom: rem(16)
-        ),
-        body-2: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(14px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: rem(.25px),
-            $line-height: rem(20px),
-            $text-transform: none
-        ),
-        button: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(14px),
-            $font-weight: 600,
-            $font-style: normal,
-            $letter-spacing: rem(.75px),
-            $line-height: rem(16px),
-            $text-transform: uppercase
-        ),
-        caption: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(12px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: rem(.4px),
-            $line-height: rem(16px),
-            $text-transform: none
-        ),
-        overline: type-style(
-            $font-family: var(--ig-font-family),
-            $font-size: rem(10px),
-            $font-weight: 400,
-            $font-style: normal,
-            $letter-spacing: rem(1.5px),
-            $line-height: rem(16px),
-            $text-transform: uppercase
-        )
-    );
-
     @return (
-        h1: extend(map.get($default-scale, 'h1'), $h1),
-        h2: extend(map.get($default-scale, 'h2'), $h2),
-        h3: extend(map.get($default-scale, 'h3'), $h3),
-        h4: extend(map.get($default-scale, 'h4'), $h4),
-        h5: extend(map.get($default-scale, 'h5'), $h5),
-        h6: extend(map.get($default-scale, 'h6'), $h6),
-        subtitle-1: extend(map.get($default-scale, 'subtitle-1'), $subtitle-1),
-        subtitle-2: extend(map.get($default-scale, 'subtitle-2'), $subtitle-2),
-        body-1: extend(map.get($default-scale, 'body-1'), $body-1),
-        body-2: extend(map.get($default-scale, 'body-2'), $body-2),
-        button: extend(map.get($default-scale, 'button'), $button),
-        caption: extend(map.get($default-scale, 'caption'), $caption),
-        overline: extend(map.get($default-scale, 'overline'), $overline),
+        h1: $h1,
+        h2: $h2,
+        h3: $h3,
+        h4: $h4,
+        h5: $h5,
+        h6: $h6,
+        subtitle-1: $subtitle-1,
+        subtitle-2: $subtitle-2,
+        body-1: $body-1,
+        body-2: $body-2,
+        button: $button,
+        caption: $caption,
+        overline: $overline,
+        _meta: $_meta
     );
 }
 

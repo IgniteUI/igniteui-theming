@@ -1,0 +1,134 @@
+/* stylelint-disable custom-property-no-missing-var-function */
+/* stylelint-disable max-nesting-depth */
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:color';
+@use '../node_modules/sass-true/' as *;
+@use '../index' as *;
+
+$my-type-style: type-style(
+    $font-family: 'Times New Roman',
+    $font-size: 24px,
+    $font-weight: 600,
+    $font-style: italic,
+    $line-height: 8px,
+    $letter-spacing: 4px,
+    $text-transform: uppercase,
+    $margin-top: 2px,
+    $margin-bottom: 2px,
+);
+$my-h1: type-style($font-size: 42px, $font-weight: 800);
+$my-subtitle1: type-style($font-size: 16px, $font-weight: 400);
+$my-body1: type-style($font-size: 14px, $font-weight: 400);
+$my-type-scale: type-scale(
+    $h1: $my-h1,
+    $subtitle-1: $my-subtitle1,
+    $body-1: $my-body1
+);
+$h1-style: type-scale-category($my-type-scale, 'h1');
+$scope: if(is-root(), ':root', '&');
+
+// @include typography($type-scale: $my-type-scale);
+
+@include describe('Typography') {
+    @include it('should create a map of of css type style properties') {
+        $test-type-style: (
+            font-family: 'Times New Roman',
+            font-size: 24px,
+            font-weight: 600,
+            font-style: italic,
+            line-height: 8px,
+            letter-spacing: 4px,
+            text-transform: uppercase,
+            margin-top: 2px,
+            margin-bottom: 2px,
+        );
+
+        @include assert-equal($my-type-style, $test-type-style);
+    }
+
+    @include it('should create a map with each typography element having their own map of type style properties') {
+        $test-type-scale: (
+            h1: (
+                font-size: 42px,
+                font-weight: 800
+            ),
+            subtitle-1: (
+                font-size: 16px,
+                font-weight: 400
+            ),
+            body-1: (
+                font-size: 14px,
+                font-weight: 400
+            )
+        );
+
+        @include assert-equal($my-type-scale, $test-type-scale);
+    }
+
+    @include it('should get type scale category configuration for a certain type scale element') {
+        $test-scale-category: (
+            font-size: 42px,
+            font-weight: 800
+        );
+
+        @include assert-equal($h1-style, $test-scale-category);
+    }
+
+    @include it('should assign type scale category configuration properties as style rules wherever the type-style mixin is included.') {
+        @include assert() {
+            @include output() {
+                .my-h1 {
+                    @include type-style($my-type-scale, 'h1');
+                }
+            }
+
+            @include expect() {
+                .my-h1 {
+                    font-size: 42px;
+                    font-weight: 800;
+                }
+            }
+        }
+    }
+
+    @include it('should transform a type style map into css font variables.') {
+        @include assert() {
+            @include output() {
+                .my-h1 {
+                    @include type-style-vars('h1', $h1-style);
+                }
+            }
+
+            @include expect() {
+                .my-h1 {
+                    --ig-h1-font-size: 42px;
+                    --ig-h1-font-weight: 800;
+                }
+            }
+        }
+    }
+
+    @include it('should assign typography styles globally by given a type scale map') {
+        @include assert() {
+            @include output() {
+                #{$scope} {
+                    @include typography('Helvetica', $my-type-scale);
+                }
+            }
+
+            @include expect() {
+                #{$scope} {
+                    --ig-font-family: Helvetica;
+                    --ig-h1-font-size: 42px;
+                    --ig-h1-font-weight: 800;
+                    --ig-subtitle-1-font-size: 16px;
+                    --ig-subtitle-1-font-weight: 400;
+                    --ig-body-1-font-size: 14px;
+                    --ig-body-1-font-weight: 400;
+                }
+            }
+        }
+    }
+}

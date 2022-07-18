@@ -1,16 +1,14 @@
 @use 'sass:map';
 @use 'sass:string';
-@use 'base' as *;
-@use 'variables' as *;
 @use '../utils/meta' as *;
 
 /// Assigns type scale category config properties
 /// as style rules wherever this mixin is included.
-/// @param {Map} $scale - A type scale map reference as produces by ig-type-scale.
+/// @param {Map} $scale - A type scale map reference as produces by igx-type-scale.
 /// @param {String} $category - The type scale category config you want to use as CSS style rules.
 /// @example scss Add the `h1` styles to custom CSS selector.
 ///   .fancy-h1 {
-///      @include ig-type-style($default-type-scale, 'h1');
+///      @include type-style($default-type-scale, 'h1');
 ///      font-family: 'GT Walsheim';
 ///      color: mediumvioletred;
 ///   }
@@ -18,7 +16,7 @@
     $type-category: map.get($scale, $category);
 
     @each $key, $value in $type-category {
-        #{$key}: var(--ig-#{$category}-#{$key});
+        #{$key}: #{$value};
     }
     @content;
 }
@@ -32,9 +30,7 @@
 ///   @include type-style-vars($h1-style);
 @mixin type-style-vars($name, $type-style) {
     @each $key, $value in $type-style {
-        /* stylelint-disable */
-        --igc-#{$name}-#{$key}: #{$value};
-        /* stylelint-enable */
+        --ig-#{$name}-#{$key}: #{$value};
     }
 }
 
