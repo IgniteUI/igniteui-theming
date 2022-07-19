@@ -26,7 +26,7 @@ $_palette: palette(
     $variant: 'material'
 );
 
-@include describe('Color operations') {
+@include describe('Color') {
     @include describe('base') {
         @include it('should calculate the contrast ratio between two colors') {
             @include assert-equal(contrast($_primary, $_secondary), 1.19);
