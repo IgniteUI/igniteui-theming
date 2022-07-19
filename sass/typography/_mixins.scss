@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:list';
+@use '../utils/meta' as *;
+@use './types';
+
+/// Includes all category related styles into the current style block.
+/// @param {String} $category - The type scale category.
+/// @example scss Add the `h1` styles to custom CSS selector.
+///   .fancy-h1 {
+///      @include type-style('h1');
+///      color: mediumvioletred;
+///   }
+@mixin type-style($category) {
+    $valid: list.index(types.$ITypeScale, $category);
+
+    @if $valid {
+        @each $key, $value in types.$ITypeStyle {
+            #{$key}: var(--ig-#{$category}-#{$key});
+        }
+        @content;
+    } @else {
+        @warn '#{$category} is not a valid type style';
+    }
+}
+
+/// Transforms a type style map into css font variables.
+/// @param {String} $name - The custom CSS variable name.
+/// @param {Map} $type-style - A type style map reference as produces by type-style.
+/// @param {String} $prefix [null] - Optional prefix.
+/// @example scss Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
+///   $h1-style: type-scale-category($type-scale, 'h1');
+///   @include type-style-vars('h1', $h1-style);
+@mixin type-style-vars($name, $type-style) {
+    @each $key, $value in map.remove($type-style, '_meta') {
+        --ig-#{$name}-#{$key}: #{$value};
+    }
+}
+
+@mixin type-style-elements() {
+    @each $category in types.$ITypeScale {
+        // Get the native element that uses typographic styles directly
+        // as mapped in the $IElementCategories
+        $e: map.get(types.$IElementCategories, $category);
+
+        // Add native element typographic styles.
+        @if $e {
+            #{$e} {
+                @include type-style($category);
+            }
+        }
+    }
+}
+
+@mixin type-style-classes() {
+    @each $category in types.$ITypeScale {
+        // Add class selector typographic styles.
+        &__#{$category} {
+            @include type-style($category);
+        }
+    }
+}
+
+@mixin typography($font-family, $type-scale) {
+    $scope: if(is-root(), ':root', '&');
+
+    #{$scope} {
+        --ig-font-family: #{string.unquote($font-family)};
+
+        @each $name, $style in map.remove($type-scale, '_meta') {
+            @include type-style-vars($name, $style);
+        }
+    }
+
+    @if is-root() {
+        .ig-typography {
+            @include type-style-classes();
+            @include type-style-elements();
+        }
+    }
+}

@@ -4,6 +4,7 @@
   "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
   "main": "index.js",
   "scripts": {
+    "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
     "test": "jest",
     "lint": "stylelint ./sass"
   },
@@ -43,6 +44,6 @@
     "stylelint-scss": "^4.2.0"
   },
   "peerDependencies": {
-    "sass": "^1.52.3"
+    "sass": "^1.53.0"
   }
 }

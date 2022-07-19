@@ -1,0 +1,251 @@
+/* stylelint-disable value-keyword-case */
+/* stylelint-disable custom-property-no-missing-var-function */
+/* stylelint-disable max-nesting-depth */
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:color';
+@use 'sass:string';
+@use '../node_modules/sass-true/' as *;
+@use '../index' as *;
+@use '../sass/typography/types';
+
+$h1: (font-size: 96px);
+$h2: (font-size: 70px);
+$h3: (font-size: 40px);
+$h4: (font-size: 30px);
+$h5: (font-size: 20px);
+$h6: (font-size: 10px);
+$subtitle-1: (font-size: 96px);
+$subtitle-2: (font-size: 70px);
+$body-1: (font-size: 40px);
+$body-2: (font-size: 30px);
+$button: (font-size: 20px);
+$caption: (font-size: 10px);
+$overline: (font-size: 10px);
+$theme: 'material';
+$scale: type-scale(
+    $h1: $h1,
+    $h2: $h2,
+    $h3: $h3,
+    $h4: $h4,
+    $h5: $h5,
+    $h6: $h6,
+    $subtitle-1: $subtitle-1,
+    $subtitle-2: $subtitle-2,
+    $body-1: $body-1,
+    $body-2: $body-2,
+    $button: $button,
+    $caption: $caption,
+    $overline: $overline,
+    $_theme: $theme
+);
+
+@include describe('Typography') {
+    @include describe('operations') {
+        @include it('should convert pixel numbers to rem') {
+            @include assert-equal(rem(16px, 16px), 1rem);
+        }
+
+        @include it('should convert unitless numbers to rem') {
+            @include assert-equal(rem(16, 16), 1rem);
+        }
+
+        @include it('should convert pixel numbers to em') {
+            @include assert-equal(em(16px, 16px), 1em);
+        }
+
+        @include it('should convert unitless numbers to em') {
+            @include assert-equal(em(16px, 16px), 1em);
+        }
+
+        @include it('should convert relative unit numbers to pixels') {
+            @include assert-equal(px(1em, 16px), 16px);
+            @include assert-equal(px(1rem, 16px), 16px);
+        }
+
+        @include it('should convert unitless numbers to pixels') {
+            @include assert-equal(px(1, 16), 16px);
+        }
+    }
+
+    @include describe('generation') {
+        @include it('should produce a map of default type style rules matching the ITypeStyle map') {
+            $font-size: 18px;
+            $rules: type-style($font-size: $font-size);
+
+            @each $rule, $value in map.remove(types.$ITypeStyle, 'font-size') {
+                @include assert-equal(map.get($rules, $rule), $value);
+            }
+
+            @include assert-equal(map.get($rules, 'font-size'), $font-size);
+        }
+
+        @include it('should only produce a map of allowed type style rules') {
+            $font-family: 'Times New Roman';
+            $font-size: 24px;
+            $font-weight: 600;
+            $font-style: italic;
+            $line-height: 8px;
+            $letter-spacing: 4px;
+            $text-transform: uppercase;
+            $margin-top: 2px;
+            $margin-bottom: 2px;
+            $random-input: 'test';
+            $rules: type-style(
+                $font-family: $font-family,
+                $font-size: $font-size,
+                $font-weight: $font-weight,
+                $font-style: $font-style,
+                $line-height: $line-height,
+                $letter-spacing: $letter-spacing,
+                $text-transform: $text-transform,
+                $margin-top: $margin-top,
+                $margin-bottom: $margin-bottom,
+                $random-input: $random-input
+            );
+
+            @include assert-equal(map.get($rules, 'font-family'), $font-family);
+            @include assert-equal(map.get($rules, 'font-size'), $font-size);
+            @include assert-equal(map.get($rules, 'font-weight'), $font-weight);
+            @include assert-equal(map.get($rules, 'font-style'), $font-style);
+            @include assert-equal(map.get($rules, 'line-height'), $line-height);
+            @include assert-equal(map.get($rules, 'letter-spacing'), $letter-spacing);
+            @include assert-equal(map.get($rules, 'text-transform'), $text-transform);
+            @include assert-equal(map.get($rules, 'margin-top'), $margin-top);
+            @include assert-equal(map.get($rules, 'margin-bottom'), $margin-bottom);
+            @include assert-false(map.has-key($rules, 'random-input'));
+        }
+
+        @include it('should produce a type scale map of type style values for each category') {
+            @include assert-equal(map.get($scale, 'h1'), type-style($h1...));
+            @include assert-equal(map.get($scale, 'h2'), type-style($h2...));
+            @include assert-equal(map.get($scale, 'h3'), type-style($h3...));
+            @include assert-equal(map.get($scale, 'h4'), type-style($h4...));
+            @include assert-equal(map.get($scale, 'h5'), type-style($h5...));
+            @include assert-equal(map.get($scale, 'h6'), type-style($h6...));
+            @include assert-equal(map.get($scale, 'subtitle-1'), type-style($subtitle-1...));
+            @include assert-equal(map.get($scale, 'subtitle-2'), type-style($subtitle-2...));
+            @include assert-equal(map.get($scale, 'body-1'), type-style($body-1...));
+            @include assert-equal(map.get($scale, 'body-2'), type-style($body-2...));
+            @include assert-equal(map.get($scale, 'button'), type-style($button...));
+            @include assert-equal(map.get($scale, 'caption'), type-style($caption...));
+            @include assert-equal(map.get($scale, 'overline'), type-style($overline...));
+            @include assert-equal(map.get($scale, '_meta', 'variant'), $theme);
+        }
+
+        @include it('should retreive type styles from a scale') {
+            $h1-scale: type-scale-category($scale, 'h1');
+
+            @each $style, $value in $h1-scale {
+                @include assert-equal(map.get(type-style($h1...), $style), $value);
+            }
+        }
+
+        @include it('should generate CSS variables from a type style map') {
+            $h1-scale: type-style($h1...);
+
+            @include assert() {
+                @include output() {
+                    @include type-style-vars('h1', $h1-scale);
+                }
+
+                @include expect() {
+                    @each $key, $value in $h1-scale {
+                        --ig-h1-#{$key}: #{$value};
+                    }
+                }
+            }
+        }
+
+        @include it('should include type styles with CSS var refs as values for a specific category') {
+            $category: 'h1';
+
+            @include assert() {
+                @include output() {
+                    .my-h1 {
+                        @include type-style($category);
+                    }
+                }
+
+                @include expect() {
+                    .my-h1 {
+                        @each $key, $value in types.$ITypeStyle {
+                            #{$key}: var(--ig-#{$category}-#{$key});
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should include CSS classes with style rules for all categories in a type scale') {
+            @include assert() {
+                @include output() {
+                    @include type-style-classes();
+                }
+
+                @include expect() {
+                    @each $category in types.$ITypeScale {
+                        &__#{$category} {
+                            @include type-style($category);
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should include CSS headeing and paragraph style rules for mapped categories in a type scale') {
+            @include assert() {
+                @include output() {
+                    @include type-style-elements();
+                }
+
+                @include expect() {
+                    @each $category, $element in types.$IElementCategories {
+                        #{$element} {
+                            @include type-style($category);
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should include typography variables in the :root scope') {
+            @include assert() {
+                @include output($selector: false) {
+                    @include typography('Roboto, sans-serif', $scale);
+                }
+
+                @include contains($selector: false) {
+                    :root {
+                        --ig-font-family: Roboto, sans-serif;
+
+                        @each $category, $styles in map.remove($scale, '_meta') {
+                            @each $rule, $value in $styles {
+                                --ig-#{$category}-#{$rule}: #{$value};
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should include typography variables for a parent scope') {
+            @include assert() {
+                @include output() {
+                    @include typography('Roboto, sans-serif', $scale);
+                }
+
+                @include expect() {
+                    --ig-font-family: Roboto, sans-serif;
+
+                    @each $category, $styles in map.remove($scale, '_meta') {
+                        @each $rule, $value in $styles {
+                            --ig-#{$category}-#{$rule}: #{$value};
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

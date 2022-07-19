@@ -1,0 +1,36 @@
+@use '../../index' as *;
+
+$h1: (font-size: 96px);
+$h2: (font-size: 70px);
+$h3: (font-size: 40px);
+$h4: (font-size: 30px);
+$h5: (font-size: 20px);
+$h6: (font-size: 10px);
+$subtitle-1: (font-size: 96px);
+$subtitle-2: (font-size: 70px);
+$body-1: (font-size: 40px);
+$body-2: (font-size: 30px);
+$button: (font-size: 20px);
+$caption: (font-size: 10px);
+$overline: (font-size: 10px);
+$theme: 'material';
+$scale: type-scale(
+    $h1: $h1,
+    $h2: $h2,
+    $h3: $h3,
+    $h4: $h4,
+    $h5: $h5,
+    $h6: $h6,
+    $subtitle-1: $subtitle-1,
+    $subtitle-2: $subtitle-2,
+    $body-1: $body-1,
+    $body-2: $body-2,
+    $button: $button,
+    $caption: $caption,
+    $overline: $overline,
+    $_theme: $theme
+);
+$palette: palette($primary: #9fe, $secondary: orange, $surface: #fff);
+
+@include palette($palette);
+@include typography("'Roboto', sans-serif", $scale);
