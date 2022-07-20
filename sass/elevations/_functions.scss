@@ -1,0 +1,66 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:list';
+
+$factor: var(--ig-elevation-factor, 1);
+
+@function _is-shadow($shadow) {
+    $lastIndex: list.length($shadow);
+
+    @if type-of($shadow) != list {
+        @return false;
+    }
+
+    @if $lastIndex < 2 or $lastIndex > 5 {
+        @return false;
+    }
+
+    @if list.separator($shadow) != space {
+        @return false;
+    }
+
+    @return true;
+}
+
+@function _transform-shadow($shadow) {
+    $result: ();
+
+    @each $value in $shadow {
+        @if meta.type-of($value) != color and $value != 0 and $value != inset {
+            $result: list.append($result, calc($factor * $value));
+        } @else {
+            $result: list.append($result, $value);
+        }
+    }
+
+    @return $result;
+}
+
+@function box-shadow($shadows) {
+    $result: ();
+    $s: ();
+
+    @if meta.type-of($shadows) != list {
+        @error 'shadow expects a list of box-shadow values. ex.: shadow((0 2px 2px black))';
+    }
+
+    @if list.separator($shadows) == space {
+        $s: list.append($s, $shadows);
+    }
+
+    @if list.separator($shadows) == comma {
+        $s: $shadows;
+    }
+
+    @each $shadow in $s {
+        @if _is-shadow($shadow) {
+            $result: list.append($result, _transform-shadow($shadow), $separator: comma);
+        }
+    }
+
+    @return $result;
+}
+
+@function elevation($name) {
+    @return var(--ig-elevation-#{$name});
+}
