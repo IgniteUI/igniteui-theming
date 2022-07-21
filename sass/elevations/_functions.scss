@@ -2,8 +2,16 @@
 @use 'sass:map';
 @use 'sass:list';
 
+////
+/// @group elevations
+////
+
 $factor: var(--ig-elevation-factor, 1);
 
+/// Checks if the passed argument is a valid box-shadow.
+/// @access public
+/// @param {List} $shadow - A list of shadow properties.
+/// @return {Boolean} - Returns a boolean depending on if the passed argument is a valid shadow.
 @function _is-shadow($shadow) {
     $lastIndex: list.length($shadow);
 
@@ -22,6 +30,10 @@ $factor: var(--ig-elevation-factor, 1);
     @return true;
 }
 
+/// Transforms the passed box-shadow list according to the elevation factor value.
+/// @access public
+/// @param {List} $shadow - A list of shadow properties.
+/// @return {List} - The transformed shadow list.
 @function _transform-shadow($shadow) {
     $result: ();
 
@@ -36,6 +48,12 @@ $factor: var(--ig-elevation-factor, 1);
     @return $result;
 }
 
+/// Sorts out a list of valid only box-shadows.
+/// @access public
+/// @param {List} $shadows - A list of shadow values.
+/// @return {List} - The transformed shadow list.
+/// @requires {function} _is-shadow
+/// @requires {function} _transform-shadow
 @function box-shadow($shadows) {
     $result: ();
     $s: ();
@@ -61,6 +79,9 @@ $factor: var(--ig-elevation-factor, 1);
     @return $result;
 }
 
+/// Gets a CSS elevation variable by name.
+/// @access public
+/// @param {String} $name - The name of the shadow.
 @function elevation($name) {
     @return var(--ig-elevation-#{$name});
 }

@@ -1,5 +1,9 @@
 @use '../utils' as *;
 
+////
+/// @group elevations
+////
+
 /// Generates CSS variables for a given elevations map.
 /// @access public
 /// @param {Map} $elevations - The elevations map to use to generate CSS variables.
@@ -10,7 +14,7 @@
 ///     medium: box-shadow(0 .25rem .5rem rgba(0 0 0 / 85%)),
 ///     large: box-shadow(0 .75rem 1rem rgba(0 0 0 / 95%)),
 /// );
-/// @include elevation($elevations);
+/// @include elevations($elevations);
 ///
 @mixin elevations($elevations) {
     $scope: if(is-root(), ':root', '&');
@@ -22,6 +26,9 @@
     }
 }
 
+/// Includes box-shadow styles for an elevation by name
+/// @access public
+/// @param {String} $name - The name of the shadow.
 @mixin elevation($name) {
     box-shadow: var(--ig-elevation-#{$name});
 }

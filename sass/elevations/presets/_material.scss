@@ -4,6 +4,16 @@
 /// @group elevations
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
+
+/// Level 1 - Umbra Shadows
+/// Level 2 - Penumbra Shadows
+/// Level 3 - Ambient Shadows
+/// @access public
+/// @property {Color} $color-1 - The color used to generate umbra shadows.
+/// @property {Color} $color-2 - The color used to generate penumbra shadows.
+/// @property {Color} $color-3 - The color used to generate ambient shadows.
+/// @property {Map} $elevations - А map of 24 shadow elevations with the umbra, penumbra and ambient shadows.
+
 $color-1: rgba(0 0 0 / 26%);
 $color-2: rgba(0 0 0 / 12%);
 $color-3: rgba(0 0 0 / 8%);
