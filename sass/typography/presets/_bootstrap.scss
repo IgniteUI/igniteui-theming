@@ -1,3 +1,5 @@
+@use '../index' as *;
+
 $scale: (
     h1: type-style(
         $font-size: rem(40px),
@@ -111,7 +113,7 @@ $bootstrap_weekday: type-style(
     $margin-bottom: 0
 );
 $bootstrap_type-scale: utils.extend(
-    $_scale,
+    $scale,
     (
         calendar-labels: $bootstrap_weekday,
     )
