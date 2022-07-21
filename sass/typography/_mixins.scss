@@ -4,8 +4,11 @@
 @use '../utils/meta' as *;
 @use './types';
 
-/// Includes all category related styles into the current style block.
+////
 /// @group Typography
+////
+
+/// Includes all category related styles into the current style block.
 /// @param {String} $category - The type scale category.
 /// @example scss Add the `h1` styles to custom CSS selector.
 ///   .fancy-h1 {
@@ -26,7 +29,6 @@
 }
 
 /// Transforms a type style map into css font variables.
-/// @group Typography
 /// @param {String} $name - The custom CSS variable name.
 /// @param {Map} $type-style - A type style map reference as produces by type-style.
 /// @param {String} $prefix [null] - Optional prefix.
@@ -39,8 +41,7 @@
     }
 }
 
-/// Styles all native elements that adheres to the IElementCategories map.
-/// @group Typography
+/// Styles all native elements that match the IElementCategories map.
 /// @requires type-style
 /// @requires $ITypeScale
 /// @requires $IElementCategories
@@ -59,8 +60,7 @@
     }
 }
 
-/// Creates style classes for all categories in the ITypeScale map and includes their css styles.
-/// @group Typography
+/// Creates CSS classes with style rules for all categories in the ITypeScale map.
 /// @requires type-style
 /// @requires $ITypeScale
 @mixin type-style-classes() {
@@ -75,7 +75,6 @@
 /// Adds typography styles for h1-h6, paragraph and creates custom typography class selectors.
 /// The produced styles are based on the passed typeface and type scale.
 /// @access public
-/// @group Typography
 /// @param {String} $font-family - The font family to be used across all typographic elements.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
 /// @requires type-style-vars
