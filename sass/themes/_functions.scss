@@ -1,6 +1,8 @@
 @use 'sass:map';
 @use 'sass:meta';
+@use 'sass:string';
 @use '../utils/map' as *;
+@use '../elevations/' as *;
 @use '../color/' as color;
 
 /// Digests a theme schema and returns a resolved theme map.
@@ -25,6 +27,16 @@
             $result: extend($result, (#{$key}: resolve-value($value)));
         } @else {
             $result: extend($result, (#{$key}: $value));
+        }
+
+        // Special case for chart elevation literals
+        @if string.index($key, 'elevation') {
+            $result: extend(
+                $result,
+                (
+                    #{$key}: #{elevation($value)}
+                )
+            );
         }
 
         // Special case for chart brushes
@@ -67,4 +79,23 @@
     }
 
     @return $result;
+}
+
+/// Retrieves the CSS custom property reference for the given key in the component theme.
+/// @access public
+/// @param {map} $theme - The source theme to be used to read values from.
+/// @param {string} $property - A key from the theme map to assign as value to the property.
+/// @example scss Assign the color property in a set of rules to a value from the theme.
+///   [part='icon'] {
+///     color: var-get($theme, 'icon-color', inherit); // var(--icon-color, inherit)
+///   }
+/// @returns {String} - The CSS reference of the property in the theme.
+@function var-get($theme, $property, $fallback: null) {
+    @if map.has-key($theme, $property) {
+        $p: --#{$property};
+
+        @return if($fallback, var($p, $fallback), var($p));
+    } @else {
+        @error 'The theme for #{map.get($map, 'name')} does not contain #{$key}';
+    }
 }

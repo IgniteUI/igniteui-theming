@@ -1,8 +1,26 @@
+/* stylelint-disable color-function-notation */
+/* stylelint-disable max-nesting-depth */
 @use 'sass:list';
 @use 'sass:map';
 @use '../node_modules/sass-true/' as *;
-@use '../sass/color';
 @use '../index' as *;
+
+$schema: (
+    background: (
+        color: (primary, 400)
+    ),
+    hover-background: (
+        color: (secondary, 700, .26)
+    ),
+    foreground: (
+        contrast-color: (primary, 400)
+    ),
+    hover-foreground: contrast-color($color: secondary, $variant: 700),
+    border-style: solid,
+    border-radius: rem(2px),
+    brushes: series,
+    resting-elevation: 2,
+);
 
 @include describe('Themes') {
     @include describe('schemas') {
@@ -25,30 +43,138 @@
         }
 
         @include it('should output theme maps from schema definitions') {
-            $schema: (
-                background: (
-                    color: (primary, 400)
-                ),
-                hover-background: (
-                    color: (secondary, 700, .26)
-                ),
-                foreground: (
-                    contrast-color: (primary, 400)
-                ),
-                border-style: solid,
-                border-radius: rem(2px),
-                brushes: series
-            );
             $theme: (
-                background: #{hsla(var(--ig-primary-400), var(--ig-primary-a))},
-                hover-background: #{hsla(var(--ig-secondary-700), .26)},
+                background: hsla(var(--ig-primary-400), var(--ig-primary-a)),
+                hover-background: hsla(var(--ig-secondary-700), .26),
                 foreground: var(--ig-primary-400-contrast),
+                hover-foreground: var(--ig-secondary-700-contrast),
                 border-style: solid,
                 border-radius: .125rem,
-                brushes: #{chart-brushes()}
+                brushes: #{chart-brushes()},
+                resting-elevation: var(--ig-elevation-2),
             );
 
             @include assert-equal(digest-schema($schema), $theme);
+        }
+
+        @include it('should retrieve a reference to the CSS variable for a given theme') {
+            $theme: map.merge(digest-schema($schema), (name: 'igc-avatar'));
+
+            @include assert-equal(var-get($theme, 'background', inherit), var(--background, inherit));
+        }
+
+        @include it('should convert component theme props into CSS variables') {
+            $name: 'igc-avatar';
+            $theme: digest-schema($schema);
+
+            @include assert() {
+                @include output() {
+                    @include css-vars-from-theme($theme, $name);
+                }
+
+                @include expect() {
+                    @each $key, $value in $theme {
+                        --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                    }
+                }
+            }
+        }
+
+        @include it('should ignore all keys in the ignore list') {
+            $name: 'igc-avatar';
+            $theme: digest-schema($schema);
+
+            @each $key in $ignored-keys {
+                $theme: map.merge($theme, (#{$key}: 'test'));
+            }
+
+            @include assert() {
+                @include output() {
+                    @include css-vars-from-theme($theme, $name);
+                }
+
+                @include expect() {
+                    @each $key, $value in map.remove($theme, $ignored-keys...) {
+                        --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                    }
+                }
+            }
+        }
+
+        @include it('should scope theme CSS variables to correctly') {
+            $name: 'igc-avatar';
+            $theme: map.merge(digest-schema($schema), (name: $name));
+
+            // Calling from the root of the stylesheet
+            @include assert() {
+                @include output($selector: false) {
+                    @include css-vars($theme);
+                }
+
+                @include expect($selector: false) {
+                    #{$name} {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        }
+                    }
+                }
+            }
+
+            // Calling from within another selector
+            @include assert() {
+                @include output($selector: false) {
+                    .my-theme {
+                        @include css-vars($theme);
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .my-theme,
+                    .my-theme #{$name} {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should scope theme CSS variables to a specified scope') {
+            $name: 'igc-avatar';
+            $theme: map.merge(digest-schema($schema), (name: $name));
+
+            // Calling from the root of the stylesheet w/ custom selector provided
+            @include assert() {
+                @include output($selector: false) {
+                    @include css-vars($theme, '.custom-selector');
+                }
+
+                @include expect($selector: false) {
+                    .custom-selector {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        }
+                    }
+                }
+            }
+
+            // Calling from within another selector w/ custom selector provided
+            @include assert() {
+                @include output($selector: false) {
+                    .my-theme {
+                        @include css-vars($theme, '.custom-selector');
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .my-theme,
+                    .my-theme .custom-selector {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        }
+                    }
+                }
+            }
         }
     }
 }
