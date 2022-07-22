@@ -1,0 +1,70 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '../utils/map' as *;
+@use '../color/' as color;
+
+/// Digests a theme schema and returns a resolved theme map.
+/// @access private
+/// @param {Map} $schema - A theme schema.
+/// @requires {function} extend
+/// @requires {function} resolve-value
+/// @example scss Get the resolved theme for a schema
+///   $custom-schema: (
+///     foreground: (
+///        color: ('primary', 800, .5)
+///     ),
+///     border-radius: rem(5px)
+///   );
+///   $theme: digest-schema($custom-schema);
+/// @returns {Map} - A theme map with resolved values.
+@function digest-schema($schema) {
+    $result: ();
+
+    @each $key, $value in $schema {
+        @if meta.type-of($value) == 'map' {
+            $result: extend($result, (#{$key}: resolve-value($value)));
+        } @else {
+            $result: extend($result, (#{$key}: $value));
+        }
+
+        // Special case for chart brushes
+        @if $value == 'series' {
+            $result: extend(
+                $result,
+                (
+                    #{$key}: #{color.chart-brushes()}
+                )
+            );
+        }
+    }
+
+    @return $result;
+}
+
+/// Resolves schema values, where the keys of the passed value map are the names
+/// of the functions to be called and the value for a given key is the argument
+/// the function should be called with.
+/// @access private
+/// @param {Map} $instructions - The map to be used as instruction set.
+/// @example scss Resolve primary 500 color
+///   $value: resolve-value((color: (primary, 500)));
+/// @returns {dynamic} - The resolved value.
+@function resolve-value($instructions) {
+    $result: ();
+
+    @each $fn, $args in $instructions {
+        $func: if(
+            meta.function-exists($fn, $module: color),
+            meta.get-function($fn, $module: color),
+            null
+        );
+
+        @if $func {
+            @if $fn == 'color'  or $fn == 'contrast-color' {
+                $result: meta.call($func, null, $args...);
+            }
+        }
+    }
+
+    @return $result;
+}

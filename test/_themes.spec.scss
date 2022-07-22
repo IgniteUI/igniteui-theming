@@ -1,0 +1,54 @@
+@use 'sass:list';
+@use 'sass:map';
+@use '../node_modules/sass-true/' as *;
+@use '../sass/color';
+@use '../index' as *;
+
+@include describe('Themes') {
+    @include describe('schemas') {
+        @include it('should resolve values from function instructions') {
+            $instructions: (
+                (color: primary),
+                (contrast-color: (primary, '400')),
+            );
+            $results: (
+                color($color: primary),
+                contrast-color($color: primary, $variant: '400'),
+            );
+
+            @for $i from 1 through list.length($instructions) {
+                $instruction: list.nth($instructions, $i);
+                $result: list.nth($results, $i);
+
+                @include assert-equal(resolve-value($instruction), $result);
+            }
+        }
+
+        @include it('should output theme maps from schema definitions') {
+            $schema: (
+                background: (
+                    color: (primary, 400)
+                ),
+                hover-background: (
+                    color: (secondary, 700, .26)
+                ),
+                foreground: (
+                    contrast-color: (primary, 400)
+                ),
+                border-style: solid,
+                border-radius: rem(2px),
+                brushes: series
+            );
+            $theme: (
+                background: #{hsla(var(--ig-primary-400), var(--ig-primary-a))},
+                hover-background: #{hsla(var(--ig-secondary-700), .26)},
+                foreground: var(--ig-primary-400-contrast),
+                border-style: solid,
+                border-radius: .125rem,
+                brushes: #{chart-brushes()}
+            );
+
+            @include assert-equal(digest-schema($schema), $theme);
+        }
+    }
+}
