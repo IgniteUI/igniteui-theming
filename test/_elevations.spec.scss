@@ -1,0 +1,69 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use '../node_modules/sass-true/' as *;
+@use '../index' as *;
+
+@include describe('Elevations') {
+    @include it('should return an empty list for a list of non box-shadow values') {
+        $raw: (pink, yellow, 9px, 'black');
+        $transformed: box-shadow($raw);
+        $expected: ();
+
+        @include assert-equal($transformed, $expected);
+    }
+
+    @include it('should produce a box shadow that reacts to CSS --ig-elevation-factor changes') {
+        $raw: (0 0 2px 3px black, 0 6px 9px orange);
+        $transformed: box-shadow($raw);
+        $expected: (
+            0 0 calc($factor * 2px) calc($factor * 3px) black,
+            0 calc($factor * 6px) calc($factor * 9px) orange
+        );
+
+        @include assert-equal($transformed, $expected);
+    }
+
+    @include it('should produce CSS variables for a map of shadows') {
+        $shadows: (
+            small: box-shadow(0 .125rem .25rem rgba(0 0 0 / 75%)),
+            medium: box-shadow(0 .25rem .5rem rgba(0 0 0 / 85%)),
+            large: box-shadow(0 .75rem 1rem rgba(0 0 0 / 95%)),
+        );
+
+        @include assert() {
+            @include output() {
+                @include elevations($shadows);
+            }
+
+            @include expect() {
+                @each $key, $value in $shadows {
+                    --ig-elevation-#{$key}: #{$value};
+                }
+            }
+        }
+    }
+
+    @include it('should retrieve a CSS variable elevation by name') {
+        @include assert() {
+            @include output() {
+                box-shadow: elevation(small);
+            }
+
+            @include expect() {
+                box-shadow: var(--ig-elevation-small);
+            }
+        }
+    }
+
+    @include it('should include box-shadow styles for an elevation level') {
+        @include assert() {
+            @include output() {
+                @include elevation(small);
+            }
+
+            @include expect() {
+                box-shadow: var(--ig-elevation-small);
+            }
+        }
+    }
+}

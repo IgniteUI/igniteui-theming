@@ -1,4 +1,5 @@
 @use '../../index' as *;
+@use '../../sass/elevations/presets/material' as *;
 
 $h1: (font-size: 96px);
 $h2: (font-size: 70px);
@@ -34,3 +35,4 @@ $palette: palette($primary: #9fe, $secondary: orange, $surface: #fff);
 
 @include palette($palette);
 @include typography("'Roboto', sans-serif", $scale);
+@include elevations($elevations);
