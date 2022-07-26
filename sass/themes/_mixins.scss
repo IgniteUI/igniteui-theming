@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../utils/' as *;
+@use '../elevations/' as *;
+
+/// A list of ignored keywords to be excluded when generating CSS variables for a theme.
+/// @access private
+$ignored-keys: ('name', 'palette', 'variant', 'selector');
+
+/// Parses a map of key value pairs from component themes to css variables.
+/// @access private
+/// @param {map} $theme - The component theme to be used to generate css variables.
+/// @example scss Convert theme colors to CSS variables.
+///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
+///   :root {
+///     @include css-vars-from-theme($theme);
+///   }
+@mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
+    $themes: map.get($theme, 'themes');
+
+    // This is here only because the button theme consists of 4 nested themes.
+    @if $themes and meta.type-of($themes) == 'map' {
+        @each $theme in $themes {
+            @include css-vars(list.nth($theme, 2));
+        }
+    }
+
+    @each $key, $value in map.remove($theme, $ignored...) {
+        @if meta.type-of($value) != 'map' {
+            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+        }
+    }
+}
+
+/// Add theme colors as CSS variables to a given scope.
+/// @access public
+/// @param {map} $theme - The component theme to be used.
+/// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
+/// @requires {mixin} css-vars-from-theme
+@mixin css-vars($theme, $scope: null) {
+    $s: map.get($theme, 'selector');
+    $n: map.get($theme, 'name');
+    $name: if($scope, $scope, $s or $n);
+
+    @if not($n) or string.length($n) == 0 {
+        @error 'Theme should have a non-null or empty name property. Example: theme: (name: my-theme)';
+    }
+
+    @if is-root() {
+        #{$name} {
+            @include css-vars-from-theme($theme, $n);
+        }
+    } @else {
+        &,
+        #{$name} {
+            @include css-vars-from-theme($theme, $n);
+        }
+    }
+}

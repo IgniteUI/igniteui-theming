@@ -1,0 +1,53 @@
+/* stylelint-disable max-nesting-depth */
+@use '../node_modules/sass-true/' as *;
+@use '../index' as *;
+
+@include describe('Utilities') {
+    @include describe('meta') {
+        @include it('should resolve if the call context is the root of the stylesheet') {
+            @include assert() {
+                @include output($selector: false) {
+                    // called from the root scope of the stylesheet
+                    $is-root: is-root();
+
+                    .test-output {
+                        content: $is-root;
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .test-output {
+                        content: true;
+                    }
+                }
+            }
+
+            @include assert() {
+                @include output($selector: true) {
+                    content: is-root();
+                }
+
+                @include expect($selector: true) {
+                    content: false;
+                }
+            }
+        }
+    }
+
+    @include describe('map') {
+        @include it('should clean a map of null values') {
+            $dirty: (one: 'foo', two: null, three: 'baz');
+            $clean: (one: 'foo', three: 'baz');
+
+            @include assert-equal(clean($dirty), $clean);
+        }
+
+        @include it('should merge two maps removing null values in the process') {
+            $map-1: (one: 'foo', two: null, three: 'baz');
+            $map-2: (one: 'foo', two: 'bar', three: 'bozo');
+            $result: (one: 'foo', two: 'bar', three: 'bozo');
+
+            @include assert-equal(extend($map-1, $map-2), $result);
+        }
+    }
+}

@@ -4,9 +4,21 @@
 @use 'sass:list';
 @use 'sass:color';
 @use 'sass:string';
-@use 'types';
+@use 'charts';
 @use 'multipliers';
+@use 'types';
 @use '../utils' as *;
+
+$_enhanced-accessibility: false;
+
+/// Configures the color module.
+/// @access public
+/// @param {Boolean} $enhanced-accessibility - Enables features like color blind palettes.
+@mixin configure($enhanced-accessibility: null) {
+    @if $enhanced-accessibility {
+        $_enhanced-accessibility: $enhanced-accessibility !global;
+    }
+}
 
 /// Generates a color palette.
 /// @access public
@@ -316,4 +328,12 @@
         math.div($value, 12.92),
         math.pow(math.div($value + .055, 1.055), 2.4)
     );
+}
+
+/// Returns a list of colors to be used as chart brushes.
+/// @access public
+/// @group Palettes
+/// @returns { List } - A list of colors to be used as chart brushes.
+@function chart-brushes() {
+    @return if($_enhanced-accessibility, charts.$brushes-color-blind, charts.$brushes-regular);
 }

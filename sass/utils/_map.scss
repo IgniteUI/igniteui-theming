@@ -1,0 +1,37 @@
+@use 'sass:map';
+
+/// Removes all null key-value pairs from a map
+/// @access private
+/// @param {Map} $map - The target map to be cleaned.
+/// @returns {Map} - Returns a map with null key-value pairs removed.
+@function clean($map) {
+    $result: ();
+
+    @each $key, $value in $map {
+        @if $value {
+            $result: map.merge(
+                $result,
+                (
+                    #{$key}: $value
+                )
+            );
+        }
+    }
+
+    @return $result;
+}
+
+/// Extends a Map with the values of another Map, disregarding null values in the process.
+/// @access public
+/// @param {Map...} $maps - The maps to get extended.
+/// @requires {function} map-clean
+/// @returns {Map} - Returns the merged maps.
+@function extend($maps...) {
+    $result: ();
+
+    @each $map in $maps {
+        $result: map.merge($result, clean($map));
+    }
+
+    @return $result;
+}
