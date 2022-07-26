@@ -337,3 +337,12 @@ $_enhanced-accessibility: false;
 @function chart-brushes() {
     @return if($_enhanced-accessibility, charts.$brushes-color-blind, charts.$brushes-regular);
 }
+
+/// Returns a list of H, S, L values for a given color.
+/// @access public
+/// @param {Color} $color - The color to generate HSL values for.
+/// @group Palettes
+/// @returns { List } - The list of values.
+@function to-hsl($color) {
+    @return (color.hue($color), color.saturation($color), color.lightness($color));
+}

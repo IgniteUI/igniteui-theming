@@ -99,3 +99,12 @@
         @error 'The theme for #{map.get($map, 'name')} does not contain #{$key}';
     }
 }
+
+/// Returns a value between an upper and lower bound.
+/// @access private
+/// @param {Number} $radius - The preferred value.
+/// @param {Number} $min [rem(0)] - The minimum value.
+/// @param {Number} $max [$radius] - The maximum allowed value.
+@function border-radius($radius, $min: rem(0), $max: $radius) {
+    @return clamp($min, calc(var(--ig-radius-factor) * #{$radius}), $max);
+}
