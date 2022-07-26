@@ -1,10 +1,11 @@
-@use '../index' as *;
+@use '../functions' as *;
+@use '../../utils/map' as *;
 
 ////
 /// @group Typography
 ////
 
-$scale: (
+$_base-scale: (
     h1: type-style(
         $font-size: rem(40px),
         $font-weight: 500,
@@ -116,8 +117,8 @@ $bootstrap_weekday: type-style(
     $margin-top: 0,
     $margin-bottom: 0
 );
-$bootstrap_type-scale: utils.extend(
-    $scale,
+$scale: extend(
+    $_base-scale,
     (
         calendar-labels: $bootstrap_weekday,
     )
