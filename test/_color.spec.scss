@@ -243,5 +243,9 @@ $_palette: palette(
                 }
             }
         }
+
+        @include it('should convert a color to a list of HSL values') {
+            @include assert-equal(to-hsl(black), (0deg, 0%, 0%));
+        }
     }
 }

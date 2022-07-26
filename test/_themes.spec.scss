@@ -1,7 +1,9 @@
+/* stylelint-disable value-no-vendor-prefix */
 /* stylelint-disable color-function-notation */
 /* stylelint-disable max-nesting-depth */
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:meta';
 @use '../node_modules/sass-true/' as *;
 @use '../index' as *;
 
@@ -173,6 +175,77 @@ $schema: (
                             --#{$key}: var(--#{$name}-#{$key}, #{$value});
                         }
                     }
+                }
+            }
+        }
+
+        @include it('should set the border-radius to a value between min and max') {
+            $border-radius: border-radius(4px, 2px, 3px);
+            $expected: meta.inspect(clamp(2px, var(--ig-radius-factor) * 4px, 3px));
+
+            @include assert-equal($assert: $border-radius, $expected: $expected, $inspect: true);
+        }
+
+        @include it('should include border-radius styles to a given scope with a value between min and max') {
+            $expected: meta.inspect(clamp(2px, var(--ig-radius-factor) * 4px, 3px));
+
+            @include assert() {
+                @include output() {
+                    @include border-radius(4px, 2px, 3px);
+                }
+
+                @include expect() {
+                    border-radius: $expected;
+                }
+            }
+        }
+
+        @include it('include single-line truncate styles when the ellipsis mixin is included') {
+            @include assert() {
+                @include output() {
+                    @include ellipsis();
+                }
+
+                @include expect() {
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        @include it('includes multi-line truncate styles when the line-clamp mixin is included') {
+            @include assert() {
+                @include output() {
+                    @include line-clamp(3, true, true);
+                }
+
+                @include expect() {
+                    display: -webkit-inline-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        @include it('includes styles that hide the default element when the hide-default mixin is included') {
+            @include assert() {
+                @include output() {
+                    @include hide-default();
+                }
+
+                @include expect() {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    margin: -1px;
+                    border: none;
+                    clip: rect(0, 0, 0, 0);
+                    outline: 0;
+                    pointer-events: none;
+                    overflow: hidden;
+                    appearance: none;
                 }
             }
         }
