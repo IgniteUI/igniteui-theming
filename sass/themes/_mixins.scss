@@ -1,9 +1,8 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
-@use '../utils/' as *;
-@use '../elevations/' as *;
-@use './functions' as *;
+@use '../utils/meta' as *;
+@use '../typography/functions' as *;
 
 /// A list of ignored keywords to be excluded when generating CSS variables for a theme.
 /// @access private
@@ -65,8 +64,8 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// @param {Number} $radius - The preferred value.
 /// @param {Number} $min [rem(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
-@mixin border-radius($radius, $min: rem(0), $max: $radius) {
-    border-radius: border-radius($radius, $min, $max);
+@mixin border-radius($radius, $min: #{rem(0)}, $max: $radius) {
+    border-radius: clamp(#{$min}, #{calc(var(--ig-radius-factor) * #{$radius})}, #{$max});
 }
 
 /// Truncates text to a specific number of lines.

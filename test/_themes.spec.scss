@@ -180,18 +180,18 @@ $schema: (
         }
 
         @include it('should set the border-radius to a value between min and max') {
-            $border-radius: border-radius(4px, 2px, 3px);
-            $expected: meta.inspect(clamp(2px, var(--ig-radius-factor) * 4px, 3px));
+            $border-radius: border-radius(rem(4px), rem(2px), rem(3px));
+            $expected: clamp(.125rem, meta.inspect(calc(var(--ig-radius-factor) * .25rem)), .1875rem);
 
             @include assert-equal($assert: $border-radius, $expected: $expected, $inspect: true);
         }
 
         @include it('should include border-radius styles to a given scope with a value between min and max') {
-            $expected: meta.inspect(clamp(2px, var(--ig-radius-factor) * 4px, 3px));
+            $expected: clamp(.125rem, meta.inspect(calc(var(--ig-radius-factor) * .25rem)), .1875rem);
 
             @include assert() {
                 @include output() {
-                    @include border-radius(4px, 2px, 3px);
+                    @include border-radius(rem(4px), rem(2px), rem(3px));
                 }
 
                 @include expect() {

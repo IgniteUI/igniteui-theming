@@ -7,8 +7,7 @@
 @use 'sass:color';
 @use 'sass:string';
 @use '../node_modules/sass-true/' as *;
-@use '../index' as *;
-@use '../sass/typography/types';
+@use '../sass/typography/' as *;
 
 $h1: (font-size: 96px);
 $h2: (font-size: 70px);
@@ -74,7 +73,7 @@ $scale: type-scale(
             $font-size: 18px;
             $rules: type-style($font-size: $font-size);
 
-            @each $rule, $value in map.remove(types.$ITypeStyle, 'font-size') {
+            @each $rule, $value in map.remove($ITypeStyle, 'font-size') {
                 @include assert-equal(map.get($rules, $rule), $value);
             }
 
@@ -170,7 +169,7 @@ $scale: type-scale(
 
                 @include expect() {
                     .my-h1 {
-                        @each $key, $value in types.$ITypeStyle {
+                        @each $key, $value in $ITypeStyle {
                             #{$key}: var(--ig-#{$category}-#{$key});
                         }
                     }
@@ -185,7 +184,7 @@ $scale: type-scale(
                 }
 
                 @include expect() {
-                    @each $category in types.$ITypeScale {
+                    @each $category in $ITypeScale {
                         &__#{$category} {
                             @include type-style($category);
                         }
@@ -201,7 +200,7 @@ $scale: type-scale(
                 }
 
                 @include expect() {
-                    @each $category, $element in types.$IElementCategories {
+                    @each $category, $element in $IElementCategories {
                         #{$element} {
                             @include type-style($category);
                         }
