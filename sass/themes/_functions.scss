@@ -1,14 +1,13 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
-@use '../utils/map' as *;
-@use '../elevations/' as *;
-@use '../color/' as color;
+@use '../typography/functions' as *;
+@use '../elevations/functions' as *;
+@use '../color/functions' as color;
 
 /// Digests a theme schema and returns a resolved theme map.
 /// @access private
 /// @param {Map} $schema - A theme schema.
-/// @requires {function} extend
 /// @requires {function} resolve-value
 /// @example scss Get the resolved theme for a schema
 ///   $custom-schema: (
@@ -24,14 +23,14 @@
 
     @each $key, $value in $schema {
         @if meta.type-of($value) == 'map' {
-            $result: extend($result, (#{$key}: resolve-value($value)));
+            $result: map.merge($result, (#{$key}: resolve-value($value)));
         } @else {
-            $result: extend($result, (#{$key}: $value));
+            $result: map.merge($result, (#{$key}: $value));
         }
 
         // Special case for chart elevation literals
         @if string.index($key, 'elevation') {
-            $result: extend(
+            $result: map.merge(
                 $result,
                 (
                     #{$key}: #{elevation($value)}
@@ -41,7 +40,7 @@
 
         // Special case for chart brushes
         @if $value == 'series' {
-            $result: extend(
+            $result: map.merge(
                 $result,
                 (
                     #{$key}: #{color.chart-brushes()}
@@ -105,6 +104,6 @@
 /// @param {Number} $radius - The preferred value.
 /// @param {Number} $min [rem(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
-@function border-radius($radius, $min: rem(0), $max: $radius) {
-    @return clamp($min, calc(var(--ig-radius-factor) * #{$radius}), $max);
+@function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
+    @return clamp(#{$min}, #{calc(var(--ig-radius-factor) * #{$radius})}, #{$max});
 }

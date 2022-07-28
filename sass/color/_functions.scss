@@ -7,7 +7,7 @@
 @use 'charts';
 @use 'multipliers';
 @use 'types';
-@use '../utils' as *;
+@use '../utils/math' as *;
 
 $_enhanced-accessibility: false;
 
@@ -175,7 +175,7 @@ $_enhanced-accessibility: false;
     $meta: if($palette, map.get($palette, '_meta'), null);
 
     @if not($c) {
-        @error 'The passed color #{$color} is not valid.';
+        @error 'The passed color #{meta.inspect($color)} is not valid.';
     }
 
     @if not($palette) or not($meta) {

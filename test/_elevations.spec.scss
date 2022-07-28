@@ -1,7 +1,7 @@
 @use 'sass:meta';
 @use 'sass:list';
 @use '../node_modules/sass-true/' as *;
-@use '../index' as *;
+@use '../sass/elevations/' as *;
 
 @include describe('Elevations') {
     @include it('should return an empty list for a list of non box-shadow values') {
