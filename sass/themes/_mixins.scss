@@ -10,12 +10,15 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 
 /// Parses a map of key value pairs from component themes to css variables.
 /// @access private
-/// @param {map} $theme - The component theme to be used to generate css variables.
+/// @param {Map} $theme - The component theme to be used to generate css variables.
+/// @param {String} $name - The CSS variables name
+/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables
 /// @example scss Convert theme colors to CSS variables.
 ///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
 ///   :root {
 ///     @include css-vars-from-theme($theme);
 ///   }
+/// @require {mixin} css-vars
 @mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
     $themes: map.get($theme, 'themes');
 
@@ -69,6 +72,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 }
 
 /// Truncates text to a specific number of lines.
+/// @access public
 /// @param {number|string} $lines - The number of lines to show
 /// @param {Boolean} $inline - Sets whether an element displays inline-box or box
 /// @param {Boolean} $vertical - Sets whether an element lays out its contents horizontally or vertically

@@ -9,6 +9,8 @@
 /// @access private
 /// @param {Map} $schema - A theme schema.
 /// @requires {function} resolve-value
+/// @requires {function} elevation
+/// @requires {function} chart-brushes
 /// @example scss Get the resolved theme for a schema
 ///   $custom-schema: (
 ///     foreground: (
@@ -82,8 +84,9 @@
 
 /// Retrieves the CSS custom property reference for the given key in the component theme.
 /// @access public
-/// @param {map} $theme - The source theme to be used to read values from.
-/// @param {string} $property - A key from the theme map to assign as value to the property.
+/// @param {Map} $theme - The source theme to be used to read values from.
+/// @param {String} $property - A key from the theme map to assign as value to the property.
+/// @param {String} $fallback [null] - A value to be used if the CSS property is not defined.
 /// @example scss Assign the color property in a set of rules to a value from the theme.
 ///   [part='icon'] {
 ///     color: var-get($theme, 'icon-color', inherit); // var(--icon-color, inherit)
@@ -104,6 +107,7 @@
 /// @param {Number} $radius - The preferred value.
 /// @param {Number} $min [rem(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
+/// @return {Number} - The clamped value
 @function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
     @return clamp(#{$min}, #{calc(var(--ig-radius-factor) * #{$radius})}, #{$max});
 }

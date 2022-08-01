@@ -5,16 +5,16 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
-/// Level 1 - Umbra Shadows
-/// @type {Color} $_color-1 - The color used to generate umbra shadows.
+/// Level 1 - The color used to generate umbra shadows.
+/// @type Color
 $_color-1: rgba(0 0 0 / 26%);
 
-/// Level 2 - Penumbra Shadows
-/// @type {Color} $_color-2 - The color used to generate penumbra shadows.
+/// Level 2 - The color used to generate penumbra shadows.
+/// @type Color
 $_color-2: rgba(0 0 0 / 12%);
 
-/// Level 3 - Ambient Shadows
-/// @type {Color} $_color-3 - The color used to generate ambient shadows.
+/// Level 3 - The color used to generate ambient shadows.
+/// @type Color
 $_color-3: rgba(0 0 0 / 8%);
 
 /// Allows user configration of this module.
@@ -32,7 +32,8 @@ $_color-3: rgba(0 0 0 / 8%);
     }
 }
 
-/// @type {Map} $elevations - А map of 24 shadow elevations with the umbra, penumbra and ambient shadows.
+/// А map of 24 shadow elevations with the umbra, penumbra and ambient shadows.
+/// @type Map
 $elevations: (
     0: none,
     1: box-shadow((0 1px 3px 0 $_color-1, 0 1px 1px 0 $_color-2, 0 2px 1px -1px $_color-3)),

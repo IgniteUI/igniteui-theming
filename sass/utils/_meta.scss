@@ -8,7 +8,7 @@
 ///       /* style rules here */
 ///     }
 ///   }
-///
+/// @return {Boolean} - Returns a boolean depending on the scope where it's called
 @function is-root() {
     @each $selector in & {
         @return if($selector == null, true, false);
