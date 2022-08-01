@@ -15,6 +15,7 @@ $browser-context: 16px;
 /// @access public
 /// @param {number|string} $pixels - The pixel value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
+/// @return {number} - Returns the pixels value converted to em.
 @function em($pixels, $context: $browser-context) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
@@ -27,10 +28,11 @@ $browser-context: 16px;
     @return math.div($pixels, $context) * 1em;
 }
 
-/// Pixels to root relative values (rem).
+/// Converts pixels to root relative values (rem).
 /// @access public
 /// @param {number|string} $pixels - The pixel value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
+/// @return {number} - Returns the pixels value converted to rem.
 @function rem($pixels, $context: $browser-context) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
@@ -43,10 +45,11 @@ $browser-context: 16px;
     @return math.div($pixels, $context) * 1rem;
 }
 
-/// Relative value(em/rem) to pixel.
+/// Converts relative value (em/rem) to pixel.
 /// @access public
 /// @param {number|string} $num - The relative value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
+/// @return {number} - Returns the relative value converted to pixels.
 @function px($num, $context: $browser-context) {
     @if meta.type-of($num) == 'number' {
         @return math.div($num, $num * 0 + 1) * 16px;
@@ -107,7 +110,6 @@ $browser-context: 16px;
 /// @param {Map} $caption - A map containing type style properties as produces by the type-style function.
 /// @param {Map} $overline - A map containing type style properties as produces by the type-style function.
 /// @param {String} $_theme [null] - The theme related to this type scale. Internal use only.
-/// @requires type-style
 /// @requires $ITypeScale
 /// @returns {Map} - A map of all defined type scales.
 @function type-scale($_theme: null, $args...) {

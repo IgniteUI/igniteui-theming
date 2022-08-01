@@ -1,3 +1,9 @@
+////
+/// @group Typography
+////
+
+/// A list consisting of 13 different category type styles
+/// @type List
 $ITypeScale: (
     h1,
     h2,
@@ -13,6 +19,9 @@ $ITypeScale: (
     caption,
     overline
 );
+
+/// A set of style rules for all categories
+/// @type Map
 $ITypeStyle: (
     font-family: var(--ig-font-family),
     font-size: null,
@@ -24,6 +33,9 @@ $ITypeStyle: (
     margin-top: 0,
     margin-bottom: 0
 );
+
+/// A list of all category type styles that can be maped to native elements
+/// @type Map
 $IElementCategories: (
     h1: 'h1',
     h2: 'h2',

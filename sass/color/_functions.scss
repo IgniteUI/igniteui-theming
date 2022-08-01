@@ -13,7 +13,7 @@ $_enhanced-accessibility: false;
 
 /// Configures the color module.
 /// @access public
-/// @param {Boolean} $enhanced-accessibility - Enables features like color blind palettes.
+/// @param {Boolean} $enhanced-accessibility [null] - Enables features like color blind palettes.
 @mixin configure($enhanced-accessibility: null) {
     @if $enhanced-accessibility {
         $_enhanced-accessibility: $enhanced-accessibility !global;
@@ -23,7 +23,6 @@ $_enhanced-accessibility: false;
 /// Generates a color palette.
 /// @access public
 /// @group Palettes
-/// @requires {function} _color-palette
 /// @param {Color} $primary - The primary color used to generate the primary color palette (required).
 /// @param {Color} $secondary - The secondary color used to generate the secondary color palette (required).
 /// @param {Color} $surface - The color used as a background in components, such as cards, sheets, and menus (required).
@@ -33,7 +32,8 @@ $_enhanced-accessibility: false;
 /// @param {Color} $warn [null] - The warning color used throughout the application (optional).
 /// @param {Color} $error [null] - The error color used throughout the application (optional).
 /// @param {String} $variant [null] - Used internally (optional).
-/// @returns {Map} - A map consisting of color shades for the passed base colors(primary, secondary, gray, etc).
+/// @requires {function} shades
+/// @returns {Map} - A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
 @function palette(
     $primary,
     $secondary,
@@ -78,10 +78,8 @@ $_enhanced-accessibility: false;
 /// @param {Color} $color - The base color used to generate the palette.
 /// @param {List} $shades - The list of shades.
 /// @param {Color} $surface [null] - The surface color. Usefull when generating shades of gray (optional).
-/// @requires {function} _color-shade
-/// @requires {function} _hsla-shade
-/// @requires {function} contrast
-/// @requires {function} to-opaque
+/// @requires {function} shade
+/// @requires {function} text-contrast
 /// @returns {Map} - A map consisting of hsla color shades and thier respective contrast colors.
 @function shades(
     $name,
@@ -113,6 +111,8 @@ $_enhanced-accessibility: false;
 /// @param {Color} $color - The color value to be used to generate a color shade.
 /// @param {String | Number} $shade - The color shade variant.
 /// @param {Color} $surface [null] - The surface color. Usefull when generating a shade of gray (optional).
+/// @require {function} luminance
+/// @require {function} to-fixed
 /// @returns {Map} - A map containing a list of HSL values and a raw color value.
 @function shade(
     $name,
@@ -158,8 +158,8 @@ $_enhanced-accessibility: false;
 /// Retrieves a color from a color palette.
 /// @access public
 /// @group Palettes
-/// @param {Map} $palette [null]- The source palette map (optional).
-/// @param {String} $color [primary]- The target color from the color palette.
+/// @param {Map} $palette [null] - The source palette map (optional).
+/// @param {String} $color [primary] - The target color from the color palette.
 /// @param {Number | String} $variant [500] - The target color shade from the color palette.
 /// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
 /// @returns {Color | String} - The raw color shade or CSS variable reference from the palette.
@@ -191,11 +191,11 @@ $_enhanced-accessibility: false;
 
 /// Retrieves a contrast text color for a given color from a color palette.
 /// @access public
-/// @group Palettesreference
-/// @param {Map} $palette [null]- The source palette map (optional).
-/// @param {String} $color [primary]- The target color from the color palette.
+/// @group Palettes
+/// @param {Map} $palette [null] - The source palette map (optional).
+/// @param {String} $color [primary] - The target color from the color palette.
 /// @param {Number | String} $variant [500] - The target color shade from the color palette.
-/// @requires color
+/// @requires {function} color
 /// @returns {Color | String} - The raw contrast color shade or CSS variable from the palette.
 @function contrast-color($palette: null, $color: primary, $variant: 500) {
     @return color($palette, $color, #{$variant}-contrast);
@@ -208,6 +208,7 @@ $_enhanced-accessibility: false;
 /// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors
 /// that can be used with the provided background.
 /// @param {AAA | AA | A} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
+/// @require {function} contrast
 /// @returns {Color} - Returns either white, black, or the provided foreground
 /// color if it meets the required contrast level.
 /// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
@@ -261,6 +262,7 @@ $_enhanced-accessibility: false;
 
 /// Mixes two colors to produce an opaque color.
 /// @access public
+/// @group Color
 /// @param {Color} $color-1 - The first color, usually transparent.
 /// @param {Color} $color-2 [#fff] - The second color, usually opaque.
 /// @return {Color} - The color representation of the rgba value.
@@ -282,6 +284,7 @@ $_enhanced-accessibility: false;
 
 /// Retruns a comma separated list of hue, saturation, and lightness values for a given color.
 /// @access public
+/// @group Color
 /// @param {Color} $color - The color to be converted to an HSL list of values.
 /// @example scss Turn #000 into an HSL list of values
 ///   $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
@@ -292,9 +295,12 @@ $_enhanced-accessibility: false;
 
 /// Calculates the contrast ratio between two colors.
 /// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
-///
+/// @access public
+/// @group Color
 /// @param {Color} $background - The background color.
 /// @param {Color} $foreground - The foreground color.
+/// @require {function} luminance
+/// @require {function} to-fixed
 /// @returns {Number} - The contrast ratio between the background and foreground colors.
 @function contrast($background, $foreground) {
     $backLum: luminance($background) + .05;
@@ -305,8 +311,10 @@ $_enhanced-accessibility: false;
 
 /// Calculates the luminance for a given color.
 /// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests.
-///
+/// @access public
+/// @group Color
 /// @param {Color} $color - The color to calculate luminance for.
+/// @returns {Number | String} - The calculated luminance of a given color
 @function luminance($color) {
     @if meta.type-of($color) == 'color' {
         $r: math.div(color.red($color), 255);
@@ -321,6 +329,9 @@ $_enhanced-accessibility: false;
 
 /// Calculates the linear channel value for a given sRGB color.
 /// @access private
+/// @group Color
+/// @param {Number} $value - The sRGB color
+/// @returns {Number} - The calculated linear channel value
 @function _lcv($value) {
     /* stylelint-disable number-max-precision */
     @return if(
@@ -336,13 +347,4 @@ $_enhanced-accessibility: false;
 /// @returns { List } - A list of colors to be used as chart brushes.
 @function chart-brushes() {
     @return if($_enhanced-accessibility, charts.$brushes-color-blind, charts.$brushes-regular);
-}
-
-/// Returns a list of H, S, L values for a given color.
-/// @access public
-/// @param {Color} $color - The color to generate HSL values for.
-/// @group Palettes
-/// @returns { List } - The list of values.
-@function to-hsl($color) {
-    @return (color.hue($color), color.saturation($color), color.lightness($color));
 }

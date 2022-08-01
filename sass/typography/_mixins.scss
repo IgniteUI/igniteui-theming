@@ -30,8 +30,7 @@
 
 /// Transforms a type style map into css font variables.
 /// @param {String} $name - The custom CSS variable name.
-/// @param {Map} $type-style - A type style map reference as produces by type-style.
-/// @param {String} $prefix [null] - Optional prefix.
+/// @param {Map} $type-style - A type style map reference as produced by type-style.
 /// @example scss Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
 ///   $h1-style: type-scale-category($type-scale, 'h1');
 ///   @include type-style-vars('h1', $h1-style);
@@ -42,7 +41,7 @@
 }
 
 /// Styles all native elements that match the IElementCategories map.
-/// @requires type-style
+/// @requires {mixin} type-style
 /// @requires $ITypeScale
 /// @requires $IElementCategories
 @mixin type-style-elements() {
@@ -61,7 +60,7 @@
 }
 
 /// Creates CSS classes with style rules for all categories in the ITypeScale map.
-/// @requires type-style
+/// @requires {mixin} type-style
 /// @requires $ITypeScale
 @mixin type-style-classes() {
     @each $category in types.$ITypeScale {
@@ -77,9 +76,10 @@
 /// @access public
 /// @param {String} $font-family - The font family to be used across all typographic elements.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
-/// @requires type-style-vars
-/// @requires type-style-classes
-/// @requires type-style-elements
+/// @requires {function} is-root
+/// @requires {mixin} type-style-vars
+/// @requires {mixin} type-style-classes
+/// @requires {mixin} type-style-elements
 @mixin typography($font-family, $type-scale) {
     $scope: if(is-root(), ':root', '&');
 

@@ -24,7 +24,7 @@
 /// Extends a Map with the values of another Map, disregarding null values in the process.
 /// @access public
 /// @param {Map...} $maps - The maps to get extended.
-/// @requires {function} map-clean
+/// @requires {function} clean
 /// @returns {Map} - Returns the merged maps.
 @function extend($maps...) {
     $result: ();

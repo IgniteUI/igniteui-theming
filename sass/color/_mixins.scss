@@ -8,12 +8,12 @@
 /// Generates CSS variables for a given palette.
 /// @access public
 /// @group Palettes
-/// @param {Map} $palette [null] - The palette used to generate CSS variables.
+/// @param {Map} $palette - The palette used to generate CSS variables.
 /// @param {Boolean} $contrast [true] - Specify if contrast colors should be included.
 /// @example scss Generate css variables for a palette
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
-///
+/// @require {function} is-root
 @mixin palette($palette, $contrast: true) {
     $scope: if(is-root(), ':root', '&');
 

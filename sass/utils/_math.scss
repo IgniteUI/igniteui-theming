@@ -1,5 +1,10 @@
 @use 'sass:math';
 
+/// Rounds a number to a certain precision
+/// @access public
+/// @param {Number} $number - The number to be rounded
+/// @param {Number} $precision [2] - Specifies the number of the digits after the decimal separator
+/// @returns {Number} - The rounded number
 @function to-fixed($number, $precision: 2) {
     $pow: math.pow(10, $precision);
 
