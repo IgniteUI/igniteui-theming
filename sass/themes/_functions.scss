@@ -111,3 +111,17 @@
 @function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
     @return clamp(#{$min}, #{calc(var(--ig-radius-factor) * #{$radius})}, #{$max});
 }
+
+/// Used to switch between values based on the size of the component.
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @return {Function} - The evaluated value value.
+@function sizable($sm, $md: $sm, $lg: $md) {
+    @return max(
+        calc(var(--is-large, 1) * #{$lg}),
+        calc(var(--is-medium, 1) * #{$md}),
+        calc(var(--is-small, 1) * #{$sm})
+    );
+}
