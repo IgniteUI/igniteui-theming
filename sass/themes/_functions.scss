@@ -117,7 +117,7 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
-/// @return {Function} - The evaluated value value.
+/// @return {Function} - The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
     @return max(
         calc(var(--is-large, 1) * #{$lg}),
