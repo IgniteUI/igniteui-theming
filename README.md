@@ -12,25 +12,26 @@ In order to use the Ignite UI Theming in your application you should install the
 npm install igniteui-theming
 ```
 
-Next you will need to **use** it in the file that you want like this:
+Next, you will need to **use** it in the file that you want like this:
 
 ```scss
-@use '../../../node_modules/igniteui-theming/' as *;
+@use '.../node_modules/igniteui-theming/' as *;
 ```
 
 You can also **use** just a fraction of the package:
 
 ```scss
-@use '../../../../node_modules/igniteui-theming/sass/color' as *;
+@use '.../node_modules/igniteui-theming/sass/color' as *;
 ```
 
-We provide presets for **material, bootstrap, fluent and indigo** themes for the color(light and dark palettes), typography and elevations fractions. You can import them in your scss file like this:
+We provide presets for **material, bootstrap, fluent and indigo** themes for the color(light and dark palettes), typography and elevations fractions. You can import them into your scss file like this:
 
 ```scss
-@use '../../../../node_modules/igniteui-theming/sass/typography/presets' as *;
+@use '.../node_modules/igniteui-theming/sass/typography/presets' as *;
 ```
 
-You can read more on the what the package contains on the [Wiki page](https://github.com/IgniteUI/igniteui-theming/wiki)
+You can read more about what the package contains on the [Wiki page](https://github.com/IgniteUI/igniteui-theming/wiki)
+
 ## Linting and Testing
 
 To scan the project for linting errors, run
@@ -45,7 +46,7 @@ To run the suite of tests, run
 npm run test
 ```
 
-## Building and Running Docs
+## Building and Running API Docs
 
 To build the docs, run
 
