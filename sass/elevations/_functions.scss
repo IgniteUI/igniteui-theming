@@ -82,7 +82,7 @@ $factor: var(--ig-elevation-factor, 1);
 /// Gets a CSS elevation variable by name.
 /// @access public
 /// @param {String} $name - The name of the shadow.
-/// @return {String} - The CSS elevation variable 
+/// @return {String} - The CSS elevation variable
 @function elevation($name) {
     @return var(--ig-elevation-#{$name});
 }
