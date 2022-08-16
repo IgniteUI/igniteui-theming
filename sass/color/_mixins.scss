@@ -27,20 +27,20 @@
                 $_contrast: if($_other-shade, string.index($shade, 'contrast'), false);
 
                 @if $_base-shade and $_valid-color {
-                    --ig-#{meta.inspect($color)}-h: #{math.round(color.hue($value))};
-                    --ig-#{meta.inspect($color)}-s: #{math.round(color.saturation($value))};
-                    --ig-#{meta.inspect($color)}-l: #{math.round(color.lightness($value))};
-                    --ig-#{meta.inspect($color)}-a: #{color.alpha($value)};
+                    --ig-#{$color}-h: #{math.round(color.hue($value))};
+                    --ig-#{$color}-s: #{math.round(color.saturation($value))};
+                    --ig-#{$color}-l: #{math.round(color.lightness($value))};
+                    --ig-#{$color}-a: #{color.alpha($value)};
                 }
 
                 @if $_hsl {
                     $variant: string.slice($shade, 1, string.index($shade, '-hsl') - 1);
 
-                    --ig-#{meta.inspect($color)}-#{$variant}: #{$value};
+                    --ig-#{$color}-#{$variant}: #{$value};
                 }
 
                 @if $_contrast and $contrast {
-                    --ig-#{meta.inspect($color)}-#{$shade}: #{$value};
+                    --ig-#{$color}-#{$shade}: #{$value};
                 }
             }
         }

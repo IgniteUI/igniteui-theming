@@ -1,4 +1,7 @@
 @use '../../index' as *;
+@use '../../sass/color/presets' as *;
+@use '../../sass/typography/presets' as *;
+@use '../../sass/elevations/presets' as *;
 @include palette($light-material-palette);
 @include typography($material-typeface, $material-type-scale);
 @include elevations($material-elevations);

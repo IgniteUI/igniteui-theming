@@ -47,26 +47,26 @@ $_enhanced-accessibility: false;
 ) {
     $color-shades: map.keys(types.$IColorShades);
     $gray-shades: map.keys(types.$IGrayShades);
-    $primary-palette: shades(primary, $primary, $color-shades);
-    $secondary-palette: shades(secondary, $secondary, $color-shades);
-    $surface-palette: shades(surface, $surface, $color-shades);
-    $grayscale-palette: shades(gray, $gray, $gray-shades, $surface);
-    $info-palette: if($info, shades(info, $info, $color-shades), ());
-    $success-palette: if($success, shades(success, $success, $color-shades), ());
-    $warn-palette: if($warn, shades(warn, $warn, $color-shades), ());
-    $error-palette: if($success, shades(error, $error, $color-shades), ());
+    $primary-palette: shades('primary', $primary, $color-shades);
+    $secondary-palette: shades('secondary', $secondary, $color-shades);
+    $surface-palette: shades('surface', $surface, $color-shades);
+    $grayscale-palette: shades('gray', $gray, $gray-shades, $surface);
+    $info-palette: if($info, shades('info', $info, $color-shades), ());
+    $success-palette: if($success, shades('success', $success, $color-shades), ());
+    $warn-palette: if($warn, shades('warn', $warn, $color-shades), ());
+    $error-palette: if($success, shades('error', $error, $color-shades), ());
 
     @return (
-        primary: $primary-palette,
-        secondary: $secondary-palette,
-        gray: $grayscale-palette,
-        surface: $surface-palette,
-        info: $info-palette,
-        success: $success-palette,
-        warn: $warn-palette,
-        error: $error-palette,
-        _meta: (
-            variant: $variant,
+        'primary': $primary-palette,
+        'secondary': $secondary-palette,
+        'gray': $grayscale-palette,
+        'surface': $surface-palette,
+        'info': $info-palette,
+        'success': $success-palette,
+        'warn': $warn-palette,
+        'error': $error-palette,
+        '_meta': (
+            'variant': $variant,
         )
     );
 }
@@ -124,7 +124,7 @@ $_enhanced-accessibility: false;
     $s: var(--ig-#{$name}-s);
     $l: var(--ig-#{$name}-l);
 
-    @if $name == gray {
+    @if #{$name} == 'gray' {
         $lum: luminance($surface);
         $color: if($color, $color, if($lum > .5, #000, #fff));
         $lmap: map.get(multipliers.$grayscale, 'l');
@@ -163,8 +163,8 @@ $_enhanced-accessibility: false;
 /// @param {Number | String} $variant [500] - The target color shade from the color palette.
 /// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
 /// @returns {Color | String} - The raw color shade or CSS variable reference from the palette.
-@function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
-    $c: map.get($palette or types.$IPalette, $color);
+@function color($palette: null, $color: 'primary', $variant: 500, $opacity: null) {
+    $c: map.get($palette or types.$IPalette, #{$color});
     $a: var(--ig-#{$color}-a);
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(
