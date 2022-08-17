@@ -10,13 +10,15 @@
 
 /// Includes all category related styles into the current style block.
 /// @param {String} $category - The type scale category.
+/// @param {String} $check [true] - Toggles category checks against ITypeScale.
+/// Set to false when using a custom type scale.
 /// @example scss Add the `h1` styles to custom CSS selector.
 ///   .fancy-h1 {
 ///      @include type-style('h1');
 ///      color: mediumvioletred;
 ///   }
-@mixin type-style($category) {
-    $valid: list.index(types.$ITypeScale, $category);
+@mixin type-style($category, $check: true) {
+    $valid: if($check, list.index(types.$ITypeScale, $category), true);
 
     @if $valid {
         @each $key, $value in types.$ITypeStyle {
