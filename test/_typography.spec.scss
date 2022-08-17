@@ -8,6 +8,7 @@
 @use 'sass:string';
 @use '../node_modules/sass-true/' as *;
 @use '../sass/typography/' as *;
+@use '../sass/typography/presets' as presets;
 
 $h1: (font-size: 96px);
 $h2: (font-size: 70px);
@@ -152,6 +153,22 @@ $scale: type-scale(
                 @include expect() {
                     @each $key, $value in $h1-scale {
                         --ig-h1-#{$key}: #{$value};
+                    }
+                }
+            }
+        }
+
+        @include it('should include all styles from a custom type category') {
+            @include assert() {
+                $custom-category: 'calendar-labels';
+
+                @include output() {
+                    @include type-style($custom-category, $check: false);
+                }
+
+                @include expect() {
+                    @each $key, $value in map.get(presets.$bootstrap-type-scale, $custom-category) {
+                        #{$key}: var(--ig-#{$custom-category}-#{$key});
                     }
                 }
             }
