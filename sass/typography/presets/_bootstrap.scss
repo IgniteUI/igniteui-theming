@@ -7,8 +7,9 @@
 
 /* stylelint-disable-next-line max-line-length */
 $typeface: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
-$_base-scale: (
-    h1: type-style(
+$_base-scale: type-scale(
+    $_theme: 'bootstrap',
+    $h1: type-style(
         $font-size: rem(40px),
         $font-weight: 500,
         $letter-spacing: rem(-1.5px),
@@ -17,7 +18,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: rem(8px)
     ),
-    h2: type-style(
+    $h2: type-style(
         $font-size: rem(32px),
         $font-weight: 500,
         $letter-spacing: rem(-.5px),
@@ -26,7 +27,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: rem(8px)
     ),
-    h3: type-style(
+    $h3: type-style(
         $font-size: rem(28px),
         $font-weight: 500,
         $letter-spacing: 0,
@@ -35,7 +36,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: rem(8px)
     ),
-    h4: type-style(
+    $h4: type-style(
         $font-size: rem(24px),
         $font-weight: 500,
         $letter-spacing: rem(.25px),
@@ -44,7 +45,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: rem(8px)
     ),
-    h5: type-style(
+    $h5: type-style(
         $font-size: rem(20px),
         $font-weight: 500,
         $letter-spacing: 0,
@@ -53,7 +54,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: rem(8px)
     ),
-    h6: type-style(
+    $h6: type-style(
         $font-size: rem(16px),
         $font-weight: 500,
         $letter-spacing: rem(.15px),
@@ -62,7 +63,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: rem(8px)
     ),
-    body-1: type-style(
+    $body-1: type-style(
         $font-size: rem(16px),
         $font-weight: 400,
         $letter-spacing: rem(.5px),
@@ -71,7 +72,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    body-2: type-style(
+    $body-2: type-style(
         $font-size: rem(14.4px),
         $font-weight: 400,
         $letter-spacing: rem(.25px),
@@ -80,7 +81,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    subtitle-1: type-style(
+    $subtitle-1: type-style(
         $font-size: rem(14px),
         $font-weight: 400,
         $letter-spacing: rem(.15px),
@@ -89,7 +90,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    subtitle-2: type-style(
+    $subtitle-2: type-style(
         $font-size: rem(14.4px),
         $font-weight: 400,
         $letter-spacing: rem(.1px),
@@ -98,7 +99,7 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    button: type-style(
+    $button: type-style(
         $font-size: rem(16px),
         $font-weight: 500,
         $letter-spacing: rem(.75px),
@@ -107,14 +108,14 @@ $_base-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    caption: type-style(
+    $caption: type-style(
         $font-size: rem(12px),
         $font-weight: 400,
         $letter-spacing: rem(.4px),
         $line-height: rem(16px),
         $text-transform: none
     ),
-    overline: type-style(
+    $overline: type-style(
         $font-size: rem(10px),
         $font-weight: 400,
         $letter-spacing: rem(1.5px),
