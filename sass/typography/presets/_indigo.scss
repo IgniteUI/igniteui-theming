@@ -4,8 +4,9 @@
 /// @group Typography
 ////
 $typeface: "'Nunito Sans', sans-serif";
-$type-scale: (
-    h1: type-style(
+$type-scale: type-scale(
+    $_theme: 'indigo',
+    $h1: type-style(
         $font-size: rem(96px),
         $font-weight: 200,
         $letter-spacing: rem(-1.5px),
@@ -14,7 +15,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    h2: type-style(
+    $h2: type-style(
         $font-size: rem(60px),
         $font-weight: 200,
         $letter-spacing: rem(-.5px),
@@ -23,7 +24,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    h3: type-style(
+    $h3: type-style(
         $font-size: rem(48px),
         $font-weight: 200,
         $letter-spacing: 0,
@@ -32,7 +33,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    h4: type-style(
+    $h4: type-style(
         $font-size: rem(36px),
         $font-weight: 200,
         $letter-spacing: rem(.25px),
@@ -41,7 +42,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    h5: type-style(
+    $h5: type-style(
         $font-size: rem(24px),
         $font-weight: 200,
         $letter-spacing: 0,
@@ -50,7 +51,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    h6: type-style(
+    $h6: type-style(
         $font-size: rem(20px),
         $font-weight: 600,
         $letter-spacing: rem(.15px),
@@ -59,7 +60,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    body-1: type-style(
+    $body-1: type-style(
         $font-size: rem(16px),
         $font-weight: 400,
         $letter-spacing: rem(.5px),
@@ -68,7 +69,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    body-2: type-style(
+    $body-2: type-style(
         $font-size: rem(14px),
         $font-weight: 400,
         $letter-spacing: rem(.25px),
@@ -77,7 +78,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    subtitle-1: type-style(
+    $subtitle-1: type-style(
         $font-size: rem(16px),
         $font-weight: 600,
         $letter-spacing: rem(.15px),
@@ -86,7 +87,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    subtitle-2: type-style(
+    $subtitle-2: type-style(
         $font-size: rem(14px),
         $font-weight: 700,
         $letter-spacing: rem(.1px),
@@ -95,7 +96,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    button: type-style(
+    $button: type-style(
         $font-size: rem(12px),
         $font-weight: 700,
         $letter-spacing: rem(.75px),
@@ -104,7 +105,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    caption: type-style(
+    $caption: type-style(
         $font-size: rem(12px),
         $font-weight: 400,
         $letter-spacing: rem(.4px),
@@ -113,7 +114,7 @@ $type-scale: (
         $margin-top: 0,
         $margin-bottom: 0
     ),
-    overline: type-style(
+    $overline: type-style(
         $font-size: rem(10px),
         $font-weight: 700,
         $letter-spacing: rem(.2px),
