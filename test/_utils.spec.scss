@@ -1,8 +1,17 @@
 /* stylelint-disable max-nesting-depth */
 @use '../node_modules/sass-true/' as *;
 @use '../sass/utils/' as *;
+@use 'sass:meta';
 
 @include describe('Utilities') {
+    @include describe('css') {
+        @include it('should expand shorthand properties') {
+            $expected: ('padding-top': 4px, 'padding-right': 8px, 'padding-bottom': 4px, 'padding-left': 8px);
+
+            @include assert-equal(expand-shorthand(4px 8px, 'padding'), $expected);
+        }
+    }
+
     @include describe('meta') {
         @include it('should resolve if the call context is the root of the stylesheet') {
             @include assert() {
@@ -48,6 +57,50 @@
             $result: (one: 'foo', two: 'bar', three: 'bozo');
 
             @include assert-equal(extend($map-1, $map-2), $result);
+        }
+
+        @include it('should prefix all keys in a map with a given string') {
+            $map: (one: 'foo', two: 'bar', three: 'baz');
+            $prefixed-map: (test_one: 'foo', test_two: 'bar', test_three: 'baz');
+
+            @include assert-equal(map-keys-prefix($map, 'test', '_'), $prefixed-map);
+        }
+    }
+
+    @include describe('math') {
+        @include it('returns a number to a fixed floating point') {
+            /* stylelint-disable-next-line number-max-precision */
+            $pi: 3.141592653589793;
+            $fixed: to-fixed($pi, 2);
+
+            @include assert-equal($fixed, 3.14);
+        }
+
+        @include it('converts a number to string') {
+            @include assert-equal(to-string(20, 10), '20');
+        }
+    }
+
+    @include describe('string') {
+        @include it('should split a string by a given separator into a list of values') {
+            $source: 'the quick brown fox';
+            $expected: ('the' 'quick' 'brown' 'fox');
+
+            @include assert-equal(split($source, ' '), $expected);
+        }
+
+        @include it('should replace a search term in target string') {
+            $source: 'the quick brown fox';
+            $expected: 'the quick brown wolf';
+
+            @include assert-equal(replace($source, 'fox', 'wolf'), $expected);
+        }
+
+        @include it('converts a string into a number') {
+            $result: to-number('5');
+
+            @include assert-equal($result, 5);
+            @include assert-equal(meta.type-of($result), number);
         }
     }
 }
