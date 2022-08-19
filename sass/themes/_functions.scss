@@ -1,9 +1,11 @@
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:meta';
 @use 'sass:string';
 @use '../typography/functions' as *;
 @use '../elevations/functions' as *;
 @use '../color/functions' as color;
+@use '../utils' as utils;
 
 /// Digests a theme schema and returns a resolved theme map.
 /// @access private
@@ -66,15 +68,26 @@
     $result: ();
 
     @each $fn, $args in $instructions {
-        $func: if(
-            meta.function-exists($fn, $module: color),
-            meta.get-function($fn, $module: color),
-            null
-        );
+        $color: meta.function-exists($fn, $module: color);
+        $util: meta.function-exists($fn, $module: utils);
 
-        @if $func {
-            @if $fn == 'color'  or $fn == 'contrast-color' {
+        @if $color {
+            $func: meta.get-function($fn, $module: color);
+
+            @if $fn == 'color' or $fn == 'contrast-color' {
                 $result: meta.call($func, null, $args...);
+            }
+        }
+
+        @if $util {
+            $func: meta.get-function($fn, $module: utils);
+
+            @if $fn != 'map-keys-prefix' {
+                $result: meta.call($func, $args...);
+            }
+
+            @if $fn == 'map-keys-prefix' {
+                $result: meta.call($func, $result, $args...);
             }
         }
     }

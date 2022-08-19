@@ -26,6 +26,37 @@ $schema: (
 
 @include describe('Themes') {
     @include describe('schemas') {
+        @include it('resolves util function values') {
+            $instructions: (
+                expand-shorthand: (4px 8px, 'padding'),
+                map-keys-prefix: 'title'
+            );
+            $result: ((
+                title-padding-top: 4px,
+                title-padding-right: 8px,
+                title-padding-bottom: 4px,
+                title-padding-left: 8px
+            ));
+            $resolved: resolve-value($instructions);
+
+            @include assert-equal($resolved, $result);
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include css-vars(map.merge($resolved, (name: 'data-chart', selector: 'igx-data-chart')));
+                }
+
+                @include expect($selector: false) {
+                    igx-data-chart {
+                        --title-padding-top: var(--data-chart-title-padding-top, 4px);
+                        --title-padding-right: var(--data-chart-title-padding-right, 8px);
+                        --title-padding-bottom: var(--data-chart-title-padding-bottom, 4px);
+                        --title-padding-left: var(--data-chart-title-padding-left, 8px);
+                    }
+                }
+            }
+        }
+
         @include it('should resolve values from function instructions') {
             $instructions: (
                 (color: primary),
