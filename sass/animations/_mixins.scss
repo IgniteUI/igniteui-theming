@@ -1,0 +1,11 @@
+/// Registers a keyframes animation in the global keyframes registry list.
+/// @access public
+/// @group animations
+/// @param {String} $name - The name of the keyframes animation.
+@mixin keyframes($name) {
+    @at-root {
+        @keyframes #{$name} {
+            @content;
+        }
+    }
+}

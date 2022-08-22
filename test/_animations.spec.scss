@@ -1,0 +1,14 @@
+@use '../node_modules/sass-true/' as *;
+@use '../sass/animations/mixins' as *;
+@use 'sass:map';
+
+@include describe('Animations') {
+    @include describe('keyframes') {
+        $keyframes: () !default;
+
+        @include it('should register a keyframe animation in the global keyframes registry list') {
+            @include keyframes('my-keyframe');
+            @include assert-true(map.has-key($keyframes, 'my-keyframe'));
+        }
+    }
+}
