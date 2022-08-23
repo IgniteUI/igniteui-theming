@@ -1,14 +1,52 @@
+/* stylelint-disable max-nesting-depth */
 @use '../node_modules/sass-true/' as *;
 @use '../sass/animations/mixins' as *;
 @use 'sass:map';
 
-@include describe('Animations') {
-    @include describe('keyframes') {
-        $keyframes: () !default;
+@mixin test-keyframes {
+    @include keyframes('test-keyframes') {
+        0% {
+            color: red;
+        }
 
-        @include it('should register a keyframe animation in the global keyframes registry list') {
-            @include keyframes('my-keyframe');
-            @include assert-true(map.has-key($keyframes, 'my-keyframe'));
+        100% {
+            color: blue;
+        }
+    }
+}
+
+@include describe('Animations') {
+    @include it('should include a keyframe animation only once at the root of the stylesheet') {
+        @include assert() {
+            @include output($selector: false) {
+                @include test-keyframes();
+                @include test-keyframes();
+                @include test-keyframes();
+            }
+
+            @include expect($selector: false) {
+                @keyframes test-keyframes {
+                    0% {
+                        color: red;
+                    }
+
+                    100% {
+                        color: blue;
+                    }
+                }
+            }
+        }
+    }
+
+    @include it('should include a list of animations using the animation mixin') {
+        @include assert() {
+            @include output() {
+                @include animation('test-keyframes' 2s ease-out, 'bounce-out' 1s ease-out);
+            }
+
+            @include expect() {
+                animation: 'test-keyframes' 2s ease-out, 'bounce-out' 1s ease-out;
+            }
         }
     }
 }
