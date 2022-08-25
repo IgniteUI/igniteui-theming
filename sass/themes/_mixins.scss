@@ -116,11 +116,11 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// Adds the required CSS properties so that the scope can react to size changes.
 /// @access public
 @mixin sizable() {
-    --is-large: clamp(0, (var(--ig-size, 1) + 1) - var(--ig-size-large, 3), 1);
+    --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
     --is-medium:
         min(
-            clamp(0, (var(--ig-size, 1) + 1) - var(--ig-size-medium, 2), 1),
-            clamp(0, var(--ig-size-large, 3) - var(--ig-size, 1), 1)
+            clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-medium, 2), 1),
+            clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
         );
-    --is-small: clamp(0, var(--ig-size-medium) - var(--ig-size, 1), 1);
+    --is-small: clamp(0, var(--ig-size-medium) - var(--component-size, 1), 1);
 }
