@@ -1,0 +1,168 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable max-nesting-depth */
+@use '../node_modules/sass-true/' as *;
+@use '../sass/bem' as *;
+
+@include describe('BEM') {
+    @include it('creates block__element classes using the respective mixins') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    background: black;
+
+                    @include e(element) {
+                        color: orange;
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block {
+                    background: black;
+                }
+
+                .block__element {
+                    color: orange;
+                }
+            }
+        }
+    }
+
+    @include it('creates block--modifier classes using the modifier mixins') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    background: black;
+
+                    @include m(error) {
+                        background: red;
+                    }
+
+                    @include mx(error, selected) {
+                        background: darkred;
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block {
+                    background: black;
+                }
+
+                .block--error {
+                    background: red;
+                }
+
+                .block--error.block--selected {
+                    background: darkred;
+                }
+            }
+        }
+    }
+
+    @include it('creates block__element--modifier classes using the element mixin') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    background: black;
+
+                    @include e(element, $m: small) {
+                        font-size: 12px;
+                    }
+
+                    @include e(element, $m: medium) {
+                        font-size: 14px;
+                    }
+
+                    @include e(element, $m: large) {
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block {
+                    background: black;
+                }
+
+                .block__element--small {
+                    font-size: 12px;
+                }
+
+                .block__element--medium {
+                    font-size: 14px;
+                }
+
+                .block__element--large {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    @include it('creates multiple element modifier classes using the element mixin') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    background: black;
+
+                    @include e(element, $mods: (small, pink)) {
+                        color: pink;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block {
+                    background: black;
+                }
+
+                .block__element--small.block__element--pink {
+                    color: pink;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    @include it('overwrites element styles in a modified block') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    background: black;
+
+                    @include e(element) {
+                        color: wheat;
+                    }
+
+                    @include m(error) {
+                        background: red;
+
+                        @include e(element) {
+                            color: white;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block {
+                    background: black;
+                }
+
+                .block__element {
+                    color: wheat;
+                }
+
+                .block--error {
+                    background: red;
+                }
+
+                .block--error .block__element {
+                    color: white;
+                }
+            }
+        }
+    }
+}
