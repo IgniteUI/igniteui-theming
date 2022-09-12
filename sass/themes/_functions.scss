@@ -138,3 +138,40 @@
         calc(var(--is-small, 1) * #{$sm})
     );
 }
+
+/// Used to add spacing.
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @param {Number} $dir [null] - The preferred direction - inline or block.
+/// @return {Function} - The evaluated value.
+@function pad($sm, $md: $sm, $lg: $md, $dir: null) {
+    $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
+
+    @return max(
+        calc(var(--is-large, 1) * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, --ig-spacing))),
+        calc(var(--is-medium, 1) * #{$md} * var(#{$spacing}-medium, var(#{$spacing}, --ig-spacing))),
+        calc(var(--is-small, 1) * #{$sm} * var(#{$spacing}-small, var(#{$spacing}, --ig-spacing)))
+    );
+}
+
+/// Used to add inline spacing.
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @return {Function} - The evaluated value.
+@function pad-inline($sm, $md: $sm, $lg: $md) {
+    @return pad($sm, $md, $lg, $dir: inline);
+}
+
+/// Used to add block spacing.
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @return {Function} - The evaluated value.
+@function pad-block($sm, $md: $sm, $lg: $md) {
+    @return pad($sm, $md, $lg, $dir: block);
+}
