@@ -1,3 +1,4 @@
+/* stylelint-disable max-line-length */
 /* stylelint-disable value-no-vendor-prefix */
 /* stylelint-disable color-function-notation */
 /* stylelint-disable max-nesting-depth */
@@ -277,6 +278,77 @@ $schema: (
                     pointer-events: none;
                     overflow: hidden;
                     appearance: none;
+                }
+            }
+        }
+
+        @include describe('Spacing') {
+            @include it('should use customizable spacing when declaring padding/margin') {
+                @include assert() {
+                    @include output() {
+                        padding: pad(14px);
+                    }
+
+                    @include expect() {
+                        padding:
+                            max(
+                                calc(
+                                    var(--is-large, 1) * 14px * var(--ig-spacing-large, var(--ig-spacing, --ig-spacing))
+                                ),
+                                calc(
+                                    var(--is-medium, 1) * 14px * var(--ig-spacing-medium, var(--ig-spacing, --ig-spacing))
+                                ),
+                                calc(
+                                    var(--is-small, 1) * 14px * var(--ig-spacing-small, var(--ig-spacing, --ig-spacing))
+                                )
+                            );
+                    }
+                }
+            }
+
+            @include it('should use customizable inline spacing when declaring inline padding/margin') {
+                @include assert() {
+                    @include output() {
+                        padding-inline: pad-inline(14px);
+                    }
+
+                    @include expect() {
+                        padding-inline:
+                            max(
+                                calc(
+                                    var(--is-large, 1) * 14px * var(--ig-spacing-inline-large, var(--ig-spacing-inline, --ig-spacing))
+                                ),
+                                calc(
+                                    var(--is-medium, 1) * 14px * var(--ig-spacing-inline-medium, var(--ig-spacing-inline, --ig-spacing))
+                                ),
+                                calc(
+                                    var(--is-small, 1) * 14px * var(--ig-spacing-inline-small, var(--ig-spacing-inline, --ig-spacing))
+                                )
+                            );
+                    }
+                }
+            }
+
+            @include it('should use customizable block spacing when declaring inline padding/margin') {
+                @include assert() {
+                    @include output() {
+                        padding-block: pad-block(4px, 8px, 16px);
+                    }
+
+                    @include expect() {
+                        padding-block:
+                            max(
+                                calc(
+                                    var(--is-large, 1) * 16px * var(--ig-spacing-block-large, var(--ig-spacing-block, --ig-spacing))
+                                ),
+                                calc(
+                                    var(--is-medium, 1) * 8px * var(--ig-spacing-block-medium, var(--ig-spacing-block, --ig-spacing))
+                                ),
+                                calc(
+                                    var(--is-small, 1) * 4px * var(--ig-spacing-block-small, var(--ig-spacing-block, --ig-spacing))
+                                )
+                            );
+                    }
                 }
             }
         }
