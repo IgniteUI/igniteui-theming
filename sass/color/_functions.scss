@@ -45,8 +45,8 @@ $_enhanced-accessibility: false;
     $error: null,
     $variant: null,
 ) {
-    $color-shades: map.keys(types.$IColorShades);
-    $gray-shades: map.keys(types.$IGrayShades);
+    $color-shades: types.$IColorShades;
+    $gray-shades: types.$IGrayShades;
     $primary-palette: shades('primary', $primary, $color-shades);
     $secondary-palette: shades('secondary', $secondary, $color-shades);
     $surface-palette: shades('surface', $surface, $color-shades);

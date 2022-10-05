@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 
 ////
 /// @group Palettes
@@ -6,30 +7,11 @@
 
 /// A list consisting of all generated gray shades
 /// @type Map
-$IGrayShades: (
-    50: '',
-    100: '',
-    200: '',
-    300: '',
-    400: '',
-    500: '',
-    600: '',
-    700: '',
-    800: '',
-    900: '',
-);
+$IGrayShades: (50, 100, 200, 300, 400, 500, 600, 700, 800, 900);
 
 /// A list consisting of all generated shades for palette colors
 /// @type Map
-$IColorShades: map.merge(
-    $IGrayShades,
-    (
-        'A100': '',
-        'A200': '',
-        'A400': '',
-        'A700': '',
-    )
-);
+$IColorShades: list.join($IGrayShades, ('A100', 'A200', 'A400', 'A700'));
 
 /// All palette colors mapped with corresponding color shades
 /// @type Map
@@ -47,7 +29,7 @@ $IPaletteColors: (
 /// A list consisting of palette metadata
 /// @type Map
 $IPaletteMeta: (
-    'variant': '',
+    'variant': null,
 );
 
 /// A map with all palette colors and palette meta

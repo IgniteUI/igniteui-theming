@@ -4,8 +4,10 @@
   "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf \"json/\"",
     "build:docs": "npx sassdoc ./sass",
     "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
+    "build:json": "node scripts/buildJSON.mjs",
     "lint": "stylelint ./sass",
     "test": "jest",
     "serve:docs": "npx http-server ./sassdoc"
@@ -38,8 +40,11 @@
     }
   },
   "devDependencies": {
+    "globby": "^13.1.2",
     "jest": "^28.1.1",
     "postcss": "^8.4.14",
+    "rimraf": "^3.0.2",
+    "sass-export": "^2.1.2",
     "sass-true": "^6.1.0",
     "stylelint": "^14.9.1",
     "stylelint-config-standard-scss": "^4.0.0",
