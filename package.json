@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf \"json/\"",
+    "build": "npm run build:json && npm run build:e2e",
     "build:docs": "npx sassdoc ./sass",
     "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
     "build:json": "node scripts/buildJSON.mjs",
