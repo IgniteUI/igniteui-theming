@@ -1,3 +1,4 @@
+/* stylelint-disable max-line-length */
 @use '../functions' as *;
 @use '../../utils/map' as *;
 
@@ -5,123 +6,122 @@
 /// @group Typography
 ////
 
-/* stylelint-disable-next-line max-line-length */
+/**
+ * @sass-export-section="bootstrap"
+ */
 $typeface: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
-$_base-scale: type-scale(
-    $_theme: 'bootstrap',
-    $h1: type-style(
-        $font-size: rem(40px),
-        $font-weight: 500,
-        $letter-spacing: rem(-1.5px),
-        $line-height: rem(48px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: rem(8px)
-    ),
-    $h2: type-style(
-        $font-size: rem(32px),
-        $font-weight: 500,
-        $letter-spacing: rem(-.5px),
-        $line-height: rem(38.4px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: rem(8px)
-    ),
-    $h3: type-style(
-        $font-size: rem(28px),
-        $font-weight: 500,
-        $letter-spacing: 0,
-        $line-height: rem(33.6px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: rem(8px)
-    ),
-    $h4: type-style(
-        $font-size: rem(24px),
-        $font-weight: 500,
-        $letter-spacing: rem(.25px),
-        $line-height: rem(28.8px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: rem(8px)
-    ),
-    $h5: type-style(
-        $font-size: rem(20px),
-        $font-weight: 500,
-        $letter-spacing: 0,
-        $line-height: rem(24px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: rem(8px)
-    ),
-    $h6: type-style(
-        $font-size: rem(16px),
-        $font-weight: 500,
-        $letter-spacing: rem(.15px),
-        $line-height: rem(19.2px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: rem(8px)
-    ),
-    $body-1: type-style(
-        $font-size: rem(16px),
-        $font-weight: 400,
-        $letter-spacing: rem(.5px),
-        $line-height: rem(24px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: 0
-    ),
-    $body-2: type-style(
-        $font-size: rem(14.4px),
-        $font-weight: 400,
-        $letter-spacing: rem(.25px),
-        $line-height: rem(24px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: 0
-    ),
-    $subtitle-1: type-style(
-        $font-size: rem(14px),
-        $font-weight: 400,
-        $letter-spacing: rem(.15px),
-        $line-height: rem(24px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: 0
-    ),
-    $subtitle-2: type-style(
-        $font-size: rem(14.4px),
-        $font-weight: 400,
-        $letter-spacing: rem(.1px),
-        $line-height: rem(21.6px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: 0
-    ),
-    $button: type-style(
-        $font-size: rem(16px),
-        $font-weight: 500,
-        $letter-spacing: rem(.75px),
-        $line-height: rem(24px),
-        $text-transform: none,
-        $margin-top: 0,
-        $margin-bottom: 0
-    ),
-    $caption: type-style(
-        $font-size: rem(12px),
-        $font-weight: 400,
-        $letter-spacing: rem(.4px),
-        $line-height: rem(16px),
-        $text-transform: none
-    ),
-    $overline: type-style(
-        $font-size: rem(10px),
-        $font-weight: 400,
-        $letter-spacing: rem(1.5px),
-        $line-height: rem(16px),
-        $text-transform: uppercase
-    ),
+$h1: type-style(
+    $font-size: rem(40px),
+    $font-weight: 500,
+    $letter-spacing: rem(-1.5px),
+    $line-height: rem(48px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: rem(8px)
+);
+$h2: type-style(
+    $font-size: rem(32px),
+    $font-weight: 500,
+    $letter-spacing: rem(-.5px),
+    $line-height: rem(38.4px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: rem(8px)
+);
+$h3: type-style(
+    $font-size: rem(28px),
+    $font-weight: 500,
+    $letter-spacing: 0,
+    $line-height: rem(33.6px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: rem(8px)
+);
+$h4: type-style(
+    $font-size: rem(24px),
+    $font-weight: 500,
+    $letter-spacing: rem(.25px),
+    $line-height: rem(28.8px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: rem(8px)
+);
+$h5: type-style(
+    $font-size: rem(20px),
+    $font-weight: 500,
+    $letter-spacing: 0,
+    $line-height: rem(24px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: rem(8px)
+);
+$h6: type-style(
+    $font-size: rem(16px),
+    $font-weight: 500,
+    $letter-spacing: rem(.15px),
+    $line-height: rem(19.2px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: rem(8px)
+);
+$body-1: type-style(
+    $font-size: rem(16px),
+    $font-weight: 400,
+    $letter-spacing: rem(.5px),
+    $line-height: rem(24px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0
+);
+$body-2: type-style(
+    $font-size: rem(14.4px),
+    $font-weight: 400,
+    $letter-spacing: rem(.25px),
+    $line-height: rem(24px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0
+);
+$subtitle-1: type-style(
+    $font-size: rem(14px),
+    $font-weight: 400,
+    $letter-spacing: rem(.15px),
+    $line-height: rem(24px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0
+);
+$subtitle-2: type-style(
+    $font-size: rem(14.4px),
+    $font-weight: 400,
+    $letter-spacing: rem(.1px),
+    $line-height: rem(21.6px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0
+);
+$button: type-style(
+    $font-size: rem(16px),
+    $font-weight: 500,
+    $letter-spacing: rem(.75px),
+    $line-height: rem(24px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0
+);
+$caption: type-style(
+    $font-size: rem(12px),
+    $font-weight: 400,
+    $letter-spacing: rem(.4px),
+    $line-height: rem(16px),
+    $text-transform: none
+);
+$overline: type-style(
+    $font-size: rem(10px),
+    $font-weight: 400,
+    $letter-spacing: rem(1.5px),
+    $line-height: rem(16px),
+    $text-transform: uppercase
 );
 $bootstrap_weekday: type-style(
     $font-size: rem(13px),
@@ -130,6 +130,22 @@ $bootstrap_weekday: type-style(
     $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0
+);
+$_base-scale: type-scale(
+    $_theme: 'bootstrap',
+    $h1: $h1,
+    $h2: $h2,
+    $h3: $h3,
+    $h4: $h4,
+    $h5: $h5,
+    $h6: $h6,
+    $body-1: $body-1,
+    $body-2: $body-2,
+    $subtitle-1: $subtitle-1,
+    $subtitle-2: $subtitle-2,
+    $button: $button,
+    $caption: $caption,
+    $overline: $overline
 );
 $type-scale: extend(
     $_base-scale,

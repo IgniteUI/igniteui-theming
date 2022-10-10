@@ -26,6 +26,9 @@ jobs:
 
       - name: Test package
         run: npm test
+          
+      - name: Build package
+        run: npm run build
 
       - name: Define NPM tag
         run: |

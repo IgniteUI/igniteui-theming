@@ -17,6 +17,32 @@ $_color-2: rgba(0 0 0 / 12%);
 /// @type Color
 $_color-3: rgba(0 0 0 / 8%);
 
+/// All elevation levels
+$_1: box-shadow((0 1px 3px 0 $_color-1, 0 1px 1px 0 $_color-2, 0 2px 1px -1px $_color-3));
+$_2: box-shadow((0 1px 5px 0 $_color-1, 0 2px 2px 0 $_color-2, 0 3px 1px -2px $_color-3));
+$_3: box-shadow((0 1px 8px 0 $_color-1, 0 3px 4px 0 $_color-2, 0 3px 3px -2px $_color-3));
+$_4: box-shadow((0 2px 4px -1px $_color-1, 0 4px 5px 0 $_color-2, 0 1px 10px 0 $_color-3));
+$_5: box-shadow((0 3px 5px -1px $_color-1, 0 5px 8px 0 $_color-2, 0 1px 14px 0 $_color-3));
+$_6: box-shadow((0 3px 5px -1px $_color-1, 0 6px 10px 0 $_color-2, 0 1px 18px 0 $_color-3));
+$_7: box-shadow((0 4px 5px -2px $_color-1, 0 7px 10px 1px $_color-2, 0 2px 16px 1px $_color-3));
+$_8: box-shadow((0 5px 5px -3px $_color-1, 0 8px 10px 1px $_color-2, 0 3px 14px 2px $_color-3));
+$_9: box-shadow((0 5px 6px -3px $_color-1, 0 9px 12px 1px $_color-2, 0 3px 16px 2px $_color-3));
+$_10: box-shadow((0 6px 6px -3px $_color-1, 0 10px 14px 1px $_color-2, 0 4px 18px 3px $_color-3));
+$_11: box-shadow((0 6px 7px -4px $_color-1, 0 11px 15px 1px $_color-2, 0 4px 20px 3px $_color-3));
+$_12: box-shadow((0 7px 8px -4px $_color-1, 0 12px 17px 2px $_color-2, 0 5px 22px 4px $_color-3));
+$_13: box-shadow((0 7px 8px -4px $_color-1, 0 13px 19px 2px $_color-2, 0 5px 24px 4px $_color-3));
+$_14: box-shadow((0 7px 9px -4px $_color-1, 0 14px 21px 2px $_color-2, 0 5px 26px 4px $_color-3));
+$_15: box-shadow((0 8px 9px -5px $_color-1, 0 15px 22px 2px $_color-2, 0 6px 28px 5px $_color-3));
+$_16: box-shadow((0 8px 10px -5px $_color-1, 0 16px 24px 2px $_color-2, 0 6px 30px 5px $_color-3));
+$_17: box-shadow((0 8px 11px -5px $_color-1, 0 17px 26px 2px $_color-2, 0 6px 32px 5px $_color-3));
+$_18: box-shadow((0 9px 11px -5px $_color-1, 0 18px 28px 2px $_color-2, 0 7px 34px 6px $_color-3));
+$_19: box-shadow((0 9px 12px -6px $_color-1, 0 19px 29px 2px $_color-2, 0 7px 36px 6px $_color-3));
+$_20: box-shadow((0 10px 13px -6px $_color-1, 0 20px 31px 3px $_color-2, 0 8px 38px 7px $_color-3));
+$_21: box-shadow((0 10px 13px -6px $_color-1, 0 21px 33px 3px $_color-2, 0 8px 40px 7px $_color-3));
+$_22: box-shadow((0 10px 14px -6px $_color-1, 0 22px 35px 3px $_color-2, 0 8px 42px 7px $_color-3));
+$_23: box-shadow((0 11px 14px -7px $_color-1, 0 23px 36px 3px $_color-2, 0 9px 44px 8px $_color-3));
+$_24: box-shadow((0 11px 15px -7px $_color-1, 0 24px 38px 3px $_color-2, 0 9px 46px 8px $_color-3));
+
 /// Allows user configration of this module.
 @mixin configure($color-1, $color-2, $color-3) {
     @if $color-1 {
@@ -32,32 +58,37 @@ $_color-3: rgba(0 0 0 / 8%);
     }
 }
 
+/**
+ * @sass-export-section="material"
+ */
 /// А map of 24 shadow elevations with the umbra, penumbra and ambient shadows.
 /// @type Map
 $elevations: (
     0: none,
-    1: box-shadow((0 1px 3px 0 $_color-1, 0 1px 1px 0 $_color-2, 0 2px 1px -1px $_color-3)),
-    2: box-shadow((0 1px 5px 0 $_color-1, 0 2px 2px 0 $_color-2, 0 3px 1px -2px $_color-3)),
-    3: box-shadow((0 1px 8px 0 $_color-1, 0 3px 4px 0 $_color-2, 0 3px 3px -2px $_color-3)),
-    4: box-shadow((0 2px 4px -1px $_color-1, 0 4px 5px 0 $_color-2, 0 1px 10px 0 $_color-3)),
-    5: box-shadow((0 3px 5px -1px $_color-1, 0 5px 8px 0 $_color-2, 0 1px 14px 0 $_color-3)),
-    6: box-shadow((0 3px 5px -1px $_color-1, 0 6px 10px 0 $_color-2, 0 1px 18px 0 $_color-3)),
-    7: box-shadow((0 4px 5px -2px $_color-1, 0 7px 10px 1px $_color-2, 0 2px 16px 1px $_color-3)),
-    8: box-shadow((0 5px 5px -3px $_color-1, 0 8px 10px 1px $_color-2, 0 3px 14px 2px $_color-3)),
-    9: box-shadow((0 5px 6px -3px $_color-1, 0 9px 12px 1px $_color-2, 0 3px 16px 2px $_color-3)),
-    10: box-shadow((0 6px 6px -3px $_color-1, 0 10px 14px 1px $_color-2, 0 4px 18px 3px $_color-3)),
-    11: box-shadow((0 6px 7px -4px $_color-1, 0 11px 15px 1px $_color-2, 0 4px 20px 3px $_color-3)),
-    12: box-shadow((0 7px 8px -4px $_color-1, 0 12px 17px 2px $_color-2, 0 5px 22px 4px $_color-3)),
-    13: box-shadow((0 7px 8px -4px $_color-1, 0 13px 19px 2px $_color-2, 0 5px 24px 4px $_color-3)),
-    14: box-shadow((0 7px 9px -4px $_color-1, 0 14px 21px 2px $_color-2, 0 5px 26px 4px $_color-3)),
-    15: box-shadow((0 8px 9px -5px $_color-1, 0 15px 22px 2px $_color-2, 0 6px 28px 5px $_color-3)),
-    16: box-shadow((0 8px 10px -5px $_color-1, 0 16px 24px 2px $_color-2, 0 6px 30px 5px $_color-3)),
-    17: box-shadow((0 8px 11px -5px $_color-1, 0 17px 26px 2px $_color-2, 0 6px 32px 5px $_color-3)),
-    18: box-shadow((0 9px 11px -5px $_color-1, 0 18px 28px 2px $_color-2, 0 7px 34px 6px $_color-3)),
-    19: box-shadow((0 9px 12px -6px $_color-1, 0 19px 29px 2px $_color-2, 0 7px 36px 6px $_color-3)),
-    20: box-shadow((0 10px 13px -6px $_color-1, 0 20px 31px 3px $_color-2, 0 8px 38px 7px $_color-3)),
-    21: box-shadow((0 10px 13px -6px $_color-1, 0 21px 33px 3px $_color-2, 0 8px 40px 7px $_color-3)),
-    22: box-shadow((0 10px 14px -6px $_color-1, 0 22px 35px 3px $_color-2, 0 8px 42px 7px $_color-3)),
-    23: box-shadow((0 11px 14px -7px $_color-1, 0 23px 36px 3px $_color-2, 0 9px 44px 8px $_color-3)),
-    24: box-shadow((0 11px 15px -7px $_color-1, 0 24px 38px 3px $_color-2, 0 9px 46px 8px $_color-3))
+    1: $_1,
+    2: $_2,
+    3: $_3,
+    4: $_4,
+    5: $_5,
+    6: $_6,
+    7: $_7,
+    8: $_8,
+    9: $_9,
+    10: $_10,
+    11: $_11,
+    12: $_12,
+    13: $_13,
+    14: $_14,
+    15: $_15,
+    16: $_16,
+    17: $_17,
+    18: $_18,
+    19: $_19,
+    20: $_20,
+    21: $_21,
+    22: $_22,
+    23: $_23,
+    24: $_24
 );
+
+// @end-sass-export-section
