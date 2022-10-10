@@ -11,6 +11,7 @@ const exec = promisify(_exec);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PALETTE_PRESETS = "sass/color/presets";
 const TYPOGRAPHY_PRESETS = "sass/typography/presets";
+const ELEVATION_PRESETS = "sass/elevations/presets";
 const DEST_DIR = path.join.bind(null, path.resolve(__dirname, "../json"));
 
 async function palettesToJSON() {
@@ -119,17 +120,47 @@ async function colorsToJSON() {
   writeFile(paletteFile, JSON.stringify(palette), "utf-8");
 }
 
+async function elevationsToJSON() {
+  const paths = await globby(`${ELEVATION_PRESETS}/*.scss`);
+  const options = {
+    inputFiles: paths,
+    includePaths: [`${ELEVATION_PRESETS}`],
+  };
+  const presets = exporter(options).getStructured();
+  const data = Object.entries(presets).filter(([key]) => key !== "variables" && key !== "mixins");
+  const elevations = data.reduce((acc, [key, value]) => {
+    acc[key] = value.reduce((acc, next) => {
+      if(next.name === '$elevations') {
+        acc.elevations = next.mapValue.reduce((result, elevation) => {
+          result[elevation.name] = elevation.compiledValue;
+          return result;
+        }, {});
+      }
+      return acc;
+    }, {});
+    return acc;
+  }, {});
+
+  const outputFile = DEST_DIR("elevations/elevations.json");
+  makeDir(path.dirname(outputFile), { recursive: true });
+
+  writeFile(outputFile, JSON.stringify(elevations), "utf-8");
+}
+
 (async () => {
   await exec("npm run clean");
 
   console.info("Exporting palette presets to JSON...");
   await palettesToJSON();
 
+  console.info("Exporting color metadata to JSON...");
+  await colorsToJSON();
+
   console.info("Exporting typography presets to JSON...");
   await typographyToJSON();
 
-  console.info("Exporting color metadata to JSON...");
-  await colorsToJSON();
+  console.info("Exporting elevation presets to JSON...");
+  await elevationsToJSON();
 
   console.log(`Done! 🎉`);
 })();
