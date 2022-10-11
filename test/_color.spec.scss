@@ -44,12 +44,12 @@ $_palette: palette(
 
     @include describe('charts') {
         @include it('should resolve regular chart brushes') {
-            @include configure($enhanced-accessibility: false);
+            @include configure-colors($enhanced-accessibility: false);
             @include assert-equal(chart-brushes(), $brushes-regular);
         }
 
         @include it('should resolve color-blind chart brushes') {
-            @include configure($enhanced-accessibility: true);
+            @include configure-colors($enhanced-accessibility: true);
             @include assert-equal(chart-brushes(), $brushes-color-blind);
         }
     }

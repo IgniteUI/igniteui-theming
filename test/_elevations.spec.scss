@@ -1,7 +1,9 @@
+/* stylelint-disable scss/operator-no-unspaced */
 @use 'sass:meta';
 @use 'sass:list';
 @use '../node_modules/sass-true/' as *;
 @use '../sass/elevations/' as *;
+@use '../sass/elevations/presets' as * with ($color-1: red, $color-2: green, $color-3: blue);
 
 @include describe('Elevations') {
     @include it('should return an empty list for a list of non box-shadow values') {
@@ -21,6 +23,18 @@
         );
 
         @include assert-equal($transformed, $expected);
+    }
+
+    @include it('should configure the material elevations module') {
+        @include assert() {
+            @include output() {
+                @include elevations($material-elevations);
+            }
+
+            @include contains() {
+                --ig-elevation-1: #{box-shadow((0 1px 3px 0 red, 0 1px 1px 0 green, 0 2px 1px -1px blue))};
+            }
+        }
     }
 
     @include it('should produce CSS variables for a map of shadows') {

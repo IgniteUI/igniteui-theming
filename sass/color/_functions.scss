@@ -14,7 +14,7 @@ $_enhanced-accessibility: false;
 /// Configures the color module.
 /// @access public
 /// @param {Boolean} $enhanced-accessibility [null] - Enables features like color blind palettes.
-@mixin configure($enhanced-accessibility: null) {
+@mixin configure-colors($enhanced-accessibility: null) {
     @if $enhanced-accessibility {
         $_enhanced-accessibility: $enhanced-accessibility !global;
     }
