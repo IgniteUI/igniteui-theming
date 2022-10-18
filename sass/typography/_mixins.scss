@@ -95,8 +95,8 @@
 
     @if is-root() {
         .ig-typography {
-            @include type-style-classes();
             @include type-style-elements();
+            @include type-style-classes();
         }
     }
 }
