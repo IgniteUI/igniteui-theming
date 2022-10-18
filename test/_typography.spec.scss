@@ -196,13 +196,15 @@ $scale: type-scale(
 
         @include it('should include CSS classes with style rules for all categories in a type scale') {
             @include assert() {
-                @include output() {
-                    @include type-style-classes();
+                @include output($selector: false) {
+                    .ig-typography {
+                        @include type-style-classes();
+                    }
                 }
 
-                @include expect() {
+                @include expect($selector: false) {
                     @each $category in $ITypeScale {
-                        &__#{$category} {
+                        .ig-typography .ig-typography__#{$category} {
                             @include type-style($category);
                         }
                     }
