@@ -67,7 +67,7 @@
 @mixin type-style-classes() {
     @each $category in types.$ITypeScale {
         // Add class selector typographic styles.
-        &__#{$category} {
+        & &__#{$category} {
             @include type-style($category);
         }
     }
