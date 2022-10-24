@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use './charts/index' as charts;
+
+$light-material-schema: map.merge(
+    charts.$light-material-schema,
+    ()
+);
+$light-bootstrap-schema: map.merge(
+    charts.$light-bootstrap-schema,
+    ()
+);
+$light-fluent-schema: map.merge(
+    charts.$light-fluent-schema,
+    ()
+);
+$light-indigo-schema: map.merge(
+    charts.$light-indigo-schema,
+    ()
+);

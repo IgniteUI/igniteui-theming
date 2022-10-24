@@ -1,0 +1,17 @@
+@use '../mixins' as *;
+@use './category-chart-theme' as *;
+@use './data-chart-theme' as *;
+@use './doughnut-chart-theme' as *;
+@use './financial-chart-theme' as *;
+@use './funnel-chart-theme' as *;
+@use './gauge-theme' as *;
+
+@mixin chart-themes($schema, $target: 'angular') {
+    @include css-vars(category-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(data-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(doughnut-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(financial-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(funnel-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(linear-gauge-theme($schema: $schema, $target: $target));
+    @include css-vars(radial-gauge-theme($schema: $schema, $target: $target));
+}

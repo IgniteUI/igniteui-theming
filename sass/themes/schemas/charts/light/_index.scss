@@ -1,0 +1,43 @@
+@use './category-chart' as *;
+@use './data-chart' as *;
+@use './doughnut-chart' as *;
+@use './financial-chart' as *;
+@use './funnel-chart' as *;
+@use './gauge' as *;
+
+$light-material-schema: (
+    category-chart: $material-category-chart,
+    data-chart: $material-data-chart,
+    doughnut-chart: $material-doughnut-chart,
+    financial-chart: $material-financial-chart,
+    funnel-chart: $material-funnel-chart,
+    linear-gauge: $material-linear-gauge,
+    radial-gauge: $material-radial-gauge,
+);
+$light-bootstrap-schema: (
+    category-chart: $bootstrap-category-chart,
+    data-chart: $bootstrap-data-chart,
+    doughnut-chart: $bootstrap-doughnut-chart,
+    financial-chart: $bootstrap-financial-chart,
+    funnel-chart: $bootstrap-funnel-chart,
+    linear-gauge: $bootstrap-linear-gauge,
+    radial-gauge: $bootstrap-radial-gauge,
+);
+$light-fluent-schema: (
+    category-chart: $fluent-category-chart,
+    data-chart: $fluent-data-chart,
+    doughnut-chart: $fluent-doughnut-chart,
+    financial-chart: $fluent-financial-chart,
+    funnel-chart: $fluent-funnel-chart,
+    linear-gauge: $fluent-linear-gauge,
+    radial-gauge: $fluent-radial-gauge,
+);
+$light-indigo-schema: (
+    category-chart: $indigo-category-chart,
+    data-chart: $indigo-data-chart,
+    doughnut-chart: $indigo-doughnut-chart,
+    financial-chart: $indigo-financial-chart,
+    funnel-chart: $indigo-funnel-chart,
+    linear-gauge: $indigo-linear-gauge,
+    radial-gauge: $indigo-radial-gauge,
+);

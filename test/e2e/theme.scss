@@ -1,7 +1,14 @@
 @use '../../index' as *;
 @use '../../sass/color/presets' as *;
 @use '../../sass/typography/presets' as *;
+@use '../../sass/typography/charts' as *;
 @use '../../sass/elevations/presets' as *;
+@use '../../sass/themes/charts' as *;
+@use '../../sass/themes/schemas' as *;
 @include palette($light-material-palette);
 @include typography($material-typeface, $material-type-scale);
 @include elevations($material-elevations);
+
+// Chart themes and typography
+@include chart-themes($schema: $light-material-schema, $target: 'webc');
+@include charts-typography($type-scale: $material-type-scale, $target: 'webc');
