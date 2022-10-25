@@ -4,6 +4,11 @@
 @use './financial-chart' as *;
 @use './funnel-chart' as *;
 @use './gauge' as *;
+@use './geo-map' as *;
+@use './graph' as *;
+@use './pie-chart' as *;
+@use './shape-chart' as *;
+@use './sparkline' as *;
 
 $light-material-schema: (
     category-chart: $material-category-chart,
@@ -13,6 +18,11 @@ $light-material-schema: (
     funnel-chart: $material-funnel-chart,
     linear-gauge: $material-linear-gauge,
     radial-gauge: $material-radial-gauge,
+    geo-map: $material-geo-map,
+    bullet-graph: $material-graph,
+    pie-chart: $material-pie-chart,
+    shape-chart: $material-shape-chart,
+    sparkline: $material-sparkline,
 );
 $light-bootstrap-schema: (
     category-chart: $bootstrap-category-chart,
@@ -22,6 +32,11 @@ $light-bootstrap-schema: (
     funnel-chart: $bootstrap-funnel-chart,
     linear-gauge: $bootstrap-linear-gauge,
     radial-gauge: $bootstrap-radial-gauge,
+    geo-map: $bootstrap-geo-map,
+    bullet-graph: $bootstrap-graph,
+    pie-chart: $bootstrap-pie-chart,
+    shape-chart: $bootstrap-shape-chart,
+    sparkline: $bootstrap-sparkline,
 );
 $light-fluent-schema: (
     category-chart: $fluent-category-chart,
@@ -31,6 +46,11 @@ $light-fluent-schema: (
     funnel-chart: $fluent-funnel-chart,
     linear-gauge: $fluent-linear-gauge,
     radial-gauge: $fluent-radial-gauge,
+    geo-map: $fluent-geo-map,
+    bullet-graph: $fluent-graph,
+    pie-chart: $fluent-pie-chart,
+    shape-chart: $fluent-shape-chart,
+    sparkline: $fluent-sparkline,
 );
 $light-indigo-schema: (
     category-chart: $indigo-category-chart,
@@ -40,4 +60,9 @@ $light-indigo-schema: (
     funnel-chart: $indigo-funnel-chart,
     linear-gauge: $indigo-linear-gauge,
     radial-gauge: $indigo-radial-gauge,
+    geo-map: $indigo-geo-map,
+    bullet-graph: $indigo-graph,
+    pie-chart: $indigo-pie-chart,
+    shape-chart: $indigo-shape-chart,
+    sparkline: $indigo-sparkline,
 );
