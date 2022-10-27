@@ -1,0 +1,27 @@
+@use '../mixins' as *;
+@use './category-chart-theme' as *;
+@use './data-chart-theme' as *;
+@use './doughnut-chart-theme' as *;
+@use './financial-chart-theme' as *;
+@use './funnel-chart-theme' as *;
+@use './gauge-theme' as *;
+@use './geo-map-theme' as *;
+@use './graph-theme' as *;
+@use './pie-chart-theme' as *;
+@use './shape-chart-theme' as *;
+@use './sparkline-theme' as *;
+
+@mixin chart-themes($schema, $target: 'angular') {
+    @include css-vars(category-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(data-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(doughnut-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(financial-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(funnel-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(linear-gauge-theme($schema: $schema, $target: $target));
+    @include css-vars(radial-gauge-theme($schema: $schema, $target: $target));
+    @include css-vars(geo-map-theme($schema: $schema, $target: $target));
+    @include css-vars(bullet-graph-theme($schema: $schema, $target: $target));
+    @include css-vars(pie-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(shape-chart-theme($schema: $schema, $target: $target));
+    @include css-vars(sparkline-theme($schema: $schema, $target: $target));
+}
