@@ -4,13 +4,17 @@
 /// @group Typography
 ////
 
+/* Typescale reference: https://developer.microsoft.com/en-us/fluentui#/styles/web/typography
+Also used in our Figma UI Kit for Fluent: https://www.figma.com/file/hHXKBpg1UhCMziIkdsYLFF/Indigo.Design-for-Fluent---Workfile?node-id=1602%3A134705&t=4JiRXrp6ifvJVMtO-1
+*/
+
 /**
  * @sass-export-section="fluent"
  */
 $typeface: "'Open Sans', Helvetica, Arial, sans-serif";
 $h1: type-style(
     $font-size: rem(68px),
-    $font-weight: 700,
+    $font-weight: 400,
     $letter-spacing: rem(-1.5px),
     $line-height: rem(76px),
     $text-transform: none,
@@ -19,8 +23,8 @@ $h1: type-style(
 );
 $h2: type-style(
     $font-size: rem(42px),
-    $font-weight: 700,
-    $letter-spacing: rem(-.5px),
+    $font-weight: 400,
+    $letter-spacing: 0,
     $line-height: rem(52px),
     $text-transform: none,
     $margin-top: 0,
@@ -28,7 +32,7 @@ $h2: type-style(
 );
 $h3: type-style(
     $font-size: rem(32px),
-    $font-weight: 600,
+    $font-weight: 400,
     $letter-spacing: 0,
     $line-height: rem(40px),
     $text-transform: none,
@@ -38,7 +42,7 @@ $h3: type-style(
 $h4: type-style(
     $font-size: rem(28px),
     $font-weight: 400,
-    $letter-spacing: rem(.25px),
+    $letter-spacing: 0,
     $line-height: rem(36px),
     $text-transform: none,
     $margin-top: 0,
@@ -56,7 +60,7 @@ $h5: type-style(
 $h6: type-style(
     $font-size: rem(20px),
     $font-weight: 400,
-    $letter-spacing: rem(.15px),
+    $letter-spacing: 0,
     $line-height: rem(28px),
     $text-transform: none,
     $margin-top: 0,
@@ -65,7 +69,7 @@ $h6: type-style(
 $body-1: type-style(
     $font-size: rem(16px),
     $font-weight: 400,
-    $letter-spacing: rem(.5px),
+    $letter-spacing: 0,
     $line-height: rem(22px),
     $text-transform: none,
     $margin-top: 0,
@@ -74,7 +78,7 @@ $body-1: type-style(
 $body-2: type-style(
     $font-size: rem(14px),
     $font-weight: 400,
-    $letter-spacing: rem(.25px),
+    $letter-spacing: 0,
     $line-height: rem(20px),
     $text-transform: none,
     $margin-top: 0,
@@ -83,7 +87,7 @@ $body-2: type-style(
 $subtitle-1: type-style(
     $font-size: rem(18px),
     $font-weight: 400,
-    $letter-spacing: rem(.15px),
+    $letter-spacing: 0,
     $line-height: rem(24px),
     $text-transform: none,
     $margin-top: 0,
@@ -91,8 +95,8 @@ $subtitle-1: type-style(
 );
 $subtitle-2: type-style(
     $font-size: rem(14px),
-    $font-weight: 600,
-    $letter-spacing: rem(.1px),
+    $font-weight: 700,
+    $letter-spacing: 0,
     $line-height: rem(20px),
     $text-transform: none,
     $margin-top: 0,
@@ -100,8 +104,8 @@ $subtitle-2: type-style(
 );
 $button: type-style(
     $font-size: rem(14px),
-    $font-weight: 400,
-    $letter-spacing: rem(.75px),
+    $font-weight: 600,
+    $letter-spacing: 0,
     $line-height: rem(14px),
     $text-transform: capitalize,
     $margin-top: 0,
@@ -111,14 +115,14 @@ $caption: type-style(
     $font-size: rem(12px),
     $font-weight: 400,
     $font-style: normal,
-    $letter-spacing: rem(.4px),
+    $letter-spacing: 0,
     $line-height: rem(16px),
     $text-transform: none
 );
 $overline: type-style(
     $font-size: rem(10px),
     $font-weight: 400,
-    $letter-spacing: rem(1.5px),
+    $letter-spacing: 0,
     $line-height: rem(14px),
     $text-transform: uppercase,
     $margin-top: 0,
