@@ -7,6 +7,10 @@
     "clean": "rimraf \"json/\"",
     "build": "npm run build:json && npm run build:e2e",
     "build:docs": "npx sassdoc ./sass",
+    "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./sass",
+    "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./sass",
+    "build:docs:ja:production": "set NODE_ENV=production && npx sassdoc ./sass",
+    "build:docs:ja:staging": "set NODE_ENV=staging && npx sassdoc ./sass",
     "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
     "build:json": "node scripts/buildJSON.mjs",
     "lint": "stylelint ./sass",
@@ -47,6 +51,7 @@
   },
   "devDependencies": {
     "globby": "^13.1.2",
+    "igniteui-sassdoc-theme": "^1.1.4",
     "jest": "^28.1.1",
     "postcss": "^8.4.14",
     "rimraf": "^3.0.2",
@@ -58,5 +63,9 @@
   },
   "peerDependencies": {
     "sass": "^1.53.0"
+  },
+  "dependencies": {
+    "lunr": "^2.3.9",
+    "sassdoc-plugin-localization": "^1.4.3"
   }
 }
