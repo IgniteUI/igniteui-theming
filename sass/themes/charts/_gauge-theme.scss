@@ -43,7 +43,7 @@
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($custom-gauge-theme);
 @function linear-gauge-theme(
-    $schema: $light-schema,
+    $schema: $light-material-schema,
     $target: 'angular',
     $rest...
 ) {
@@ -103,7 +103,7 @@
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($custom-gauge-theme);
 @function radial-gauge-theme(
-    $schema: $light-schema,
+    $schema: $light-material-schema,
     $target: 'angular',
     $rest...
 ) {

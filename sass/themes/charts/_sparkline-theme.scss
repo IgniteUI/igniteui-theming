@@ -11,7 +11,7 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
-/// @param {Map} $schema [$light-schema] - The schema used as basis for styling the component.
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 ///
 /// @param {Color} $brush [null] - Sets the sparkline brush.
@@ -42,7 +42,7 @@
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($my-sparkline-theme);
 @function sparkline-theme(
-    $schema: $light-schema,
+    $schema: $light-material-schema,
     $target: 'angular',
 
     $brush: null,
