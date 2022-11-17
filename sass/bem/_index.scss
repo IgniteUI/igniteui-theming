@@ -11,12 +11,15 @@
 ////
 
 /// @type String - The Element separator used. Default '__'.
+/// @access private
 $bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
 
 /// @type String - The Modifier separator used. Default '--'.
+/// @access private
 $bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
 
 /// @type String - The Modifier Value separator used. Default '-'.
+/// @access private
 $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val, '-');
 
 /// Converts a passed selector value into plain string.
