@@ -39,6 +39,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 
 /// Add theme colors as CSS variables to a given scope.
 /// @access public
+/// @group themes
 /// @param {map} $theme - The component theme to be used.
 /// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
 /// @requires {mixin} css-vars-from-theme
@@ -74,6 +75,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 
 /// Truncates text to a specific number of lines.
 /// @access public
+/// @group utilities
 /// @param {number|string} $lines - The number of lines to show
 /// @param {Boolean} $inline - Sets whether an element displays inline-box or box
 /// @param {Boolean} $vertical - Sets whether an element lays out its contents horizontally or vertically
@@ -88,6 +90,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 
 /// Applies text-overflow ellipsis to e text element.
 /// This won't work on display flex elements.
+/// @group utilities
 /// @access public
 @mixin ellipsis() {
     white-space: nowrap;
@@ -96,6 +99,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 }
 
 /// Hides the element from the DOM.
+/// @group utilities
 /// @access public
 /// @example scss - Sample usage
 ///   input[type="checkbox"] {
@@ -115,6 +119,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 }
 
 /// Adds the required CSS properties so that the scope can react to size changes.
+/// @group themes
 /// @access public
 @mixin sizable() {
     --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);

@@ -96,7 +96,7 @@
 }
 
 /// Retrieves the CSS custom property reference for the given key in the component theme.
-/// @access public
+/// @access private
 /// @param {Map} $theme - The source theme to be used to read values from.
 /// @param {String} $property - A key from the theme map to assign as value to the property.
 /// @param {String} $fallback [null] - A value to be used if the CSS property is not defined.
@@ -126,6 +126,7 @@
 }
 
 /// Used to switch between values based on the size of the component.
+/// @group themes
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
@@ -140,6 +141,7 @@
 }
 
 /// Used to add spacing.
+/// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
@@ -157,6 +159,7 @@
 }
 
 /// Used to add inline spacing.
+/// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
@@ -167,6 +170,7 @@
 }
 
 /// Used to add block spacing.
+/// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.

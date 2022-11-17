@@ -4,6 +4,8 @@
 @use 'sass:meta';
 
 /// Splits a string into a list by a given separator.
+/// @access public
+/// @group utilities
 /// @param {String} $string - The string to split.
 /// @param {String} $separator - The string separator to split the string by.
 @function split($string, $separator) {
@@ -23,6 +25,8 @@
 }
 
 /// Returns a new string with one, some, or all matches of a string replaced by a replacement.
+/// @access public
+/// @group utilities
 /// @param {String} $string - The target string.
 /// @param {String} $search - The term to search form.
 /// @param {String} $replace - The string to replace the search term with.
@@ -41,6 +45,8 @@
 }
 
 /// Converts a string to a number.
+/// @access private
+/// @group utilities
 /// @param {String} $value - The target string.
 @function to-number($value) {
     @if meta.type-of($value) == 'number' {

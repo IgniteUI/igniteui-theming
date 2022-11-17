@@ -128,7 +128,7 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 }
 
 /// Generates a full BEM selector.
-/// @access public
+/// @access private
 /// @param {String} $block - Required. A string block name.
 /// @param {String|List} $elem - Optional. A sub-element name. If `$mod` is not present, it is
 /// joined with $block. If $mod is present, it is nested under `$block--$mod`.
