@@ -34,7 +34,7 @@
 /// @param {Number} $scale-stroke-thickness [null] - Sets the stroke thickness of the scale outline.
 /// @param {Color} $tick-brush [null] - Sets the color to use for the major tickmarks.
 /// @param {Number} $tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering ticks.
-/// @requires $light-schema
+/// @requires $light-material-schema
 /// @requires extend
 ///
 /// @example scss
@@ -42,7 +42,7 @@
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($custom-gauge-theme);
 @function linear-gauge-theme(
-    $schema: $light-schema,
+    $schema: $light-material-schema,
     $target: 'angular',
     $rest...
 ) {
@@ -75,7 +75,7 @@
     );
 }
 
-/// @param {Map} $schema [$light-schema] - The schema used as basis for styling the component.
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {Map} $width [null] - The width of the gauge in pixels, string (px) or percentage (%).
 /// @param {Map} $height [null] - The height of the gauge in pixels, string (px) or percentage (%).
@@ -94,7 +94,7 @@
 /// @param {Number} $tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering ticks.
 /// @param {Color} $needle-pivot-brush [null] - Sets the color of the needle pivot point.
 /// @param {Color} $needle-pivot-outline [null] - Sets the outline color of the needle pivot point.
-/// @requires $light-schema
+/// @requires $light-material-schema
 /// @requires extend
 ///
 /// @example scss
@@ -102,7 +102,7 @@
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($custom-gauge-theme);
 @function radial-gauge-theme(
-    $schema: $light-schema,
+    $schema: $light-material-schema,
     $target: 'angular',
     $rest...
 ) {
