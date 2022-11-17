@@ -1,6 +1,7 @@
 /* stylelint-disable max-line-length */
 @use 'sass:map';
-@use '../index' as *;
+@use '../mixins' as *;
+@use '../functions' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography' as *;
@@ -22,7 +23,7 @@
 /// @param {Number} $outline-thickness [null] - Sets the thickness of outline around slices.
 /// @param {Color} $text-color - [null] Sets the Color used for the inner labels.
 ///
-/// @requires $light-schema
+/// @requires $light-material-schema
 /// @requires extend
 ///
 /// @example scss

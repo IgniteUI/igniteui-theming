@@ -1,6 +1,7 @@
 /* stylelint-disable max-line-length */
 @use 'sass:map';
-@use '../index' as *;
+@use '../mixins' as *;
+@use '../functions' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography' as *;
@@ -53,7 +54,7 @@
 /// @param {String} $y-axis-title-alignment [null] - Sets Horizontal alignment of the Y-axis title.
 /// @param {Color} $y-axis-title-color [null] - Sets color of title on the Y-axis.
 /// @param {List} $y-axis-title-margin [null] - Sets the margin around the title on the Y-axis.
-/// @requires $light-schema
+/// @requires $light-material-schema
 /// @requires extend
 ///
 /// @example scss

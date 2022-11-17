@@ -1,6 +1,7 @@
 /* stylelint-disable max-line-length */
 @use 'sass:map';
-@use '../index' as *;
+@use '../mixins' as *;
+@use '../functions' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography' as *;
@@ -23,7 +24,7 @@
 /// @param {String} $leader-line-type [null] - Sets what type of leader lines will be used for the outside end labels. Valid values are: 'straight', 'spline', and 'arc'.
 /// @param {String} $leader-line-visibility [null] - Sets whether the leader lines are visible. Valid values are: 'visible' and 'collapsed'.
 /// @param {Number} $radius-factor [null] - Sets the scaling factor of the chart's radius. Value between 0 and 1.
-/// @requires $light-schema
+/// @requires $light-material-schema
 /// @requires extend
 ///
 /// @example scss
