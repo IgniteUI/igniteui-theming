@@ -9,7 +9,7 @@
 $factor: var(--ig-elevation-factor, 1);
 
 /// Checks if the passed argument is a valid box-shadow.
-/// @access public
+/// @access private
 /// @param {List} $shadow - A list of shadow properties.
 /// @return {Boolean} - Returns a boolean depending on if the passed argument is a valid shadow.
 @function _is-shadow($shadow) {
@@ -31,7 +31,7 @@ $factor: var(--ig-elevation-factor, 1);
 }
 
 /// Transforms the passed box-shadow list according to the elevation factor value.
-/// @access public
+/// @access private
 /// @param {List} $shadow - A list of shadow properties.
 /// @return {List} - The transformed shadow list.
 @function _transform-shadow($shadow) {

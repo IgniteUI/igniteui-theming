@@ -10,6 +10,14 @@
 @use './shape-chart' as *;
 @use './sparkline' as *;
 
+////
+/// @group schemas
+/// @access public
+/// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
+////
+
+/// Generates the global charts light material schema.
+/// @type {Map}
 $light-material-schema: (
     category-chart: $material-category-chart,
     data-chart: $material-data-chart,
@@ -24,6 +32,9 @@ $light-material-schema: (
     shape-chart: $material-shape-chart,
     sparkline: $material-sparkline,
 );
+
+/// Generates the global charts light bootstrap schema.
+/// @type {Map}
 $light-bootstrap-schema: (
     category-chart: $bootstrap-category-chart,
     data-chart: $bootstrap-data-chart,
@@ -38,6 +49,9 @@ $light-bootstrap-schema: (
     shape-chart: $bootstrap-shape-chart,
     sparkline: $bootstrap-sparkline,
 );
+
+/// Generates the global charts light fluent schema.
+/// @type {Map}
 $light-fluent-schema: (
     category-chart: $fluent-category-chart,
     data-chart: $fluent-data-chart,
@@ -52,6 +66,9 @@ $light-fluent-schema: (
     shape-chart: $fluent-shape-chart,
     sparkline: $fluent-sparkline,
 );
+
+/// Generates the global charts light indigo schema.
+/// @type {Map}
 $light-indigo-schema: (
     category-chart: $indigo-category-chart,
     data-chart: $indigo-data-chart,
