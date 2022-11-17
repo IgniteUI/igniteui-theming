@@ -23,6 +23,7 @@
 }
 
 /// Extends a Map with the values of another Map, disregarding null values in the process.
+/// @group utilities
 /// @access public
 /// @param {Map...} $maps - The maps to get extended.
 /// @requires {function} clean
@@ -38,6 +39,7 @@
 }
 
 /// Prefixes the keys in a map with the specified prefix and separator.
+/// @access private
 /// @param {Map} $map - The target map.
 /// @param {String} $prefix - The string used to prefix all keys in the map.
 /// @param {String} $separator [-] - The string used as a separator between the prefix and the key.
