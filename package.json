@@ -14,6 +14,7 @@
     "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
     "build:json": "node scripts/buildJSON.mjs",
     "lint": "stylelint ./sass",
+    "preview:palette": "node scripts/previewPalette.mjs",
     "test": "jest",
     "serve:docs": "npx http-server ./docs"
   },
@@ -52,16 +53,17 @@
   "devDependencies": {
     "globby": "^13.1.2",
     "igniteui-sassdoc-theme": "^1.1.4",
-    "sassdoc-plugin-localization": "^1.4.3",
     "jest": "^28.1.1",
+    "lunr": "^2.3.9",
     "postcss": "^8.4.14",
     "rimraf": "^3.0.2",
     "sass-export": "^2.1.2",
     "sass-true": "^6.1.0",
+    "sassdoc-plugin-localization": "^1.4.3",
     "stylelint": "^14.9.1",
     "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-scss": "^4.2.0",
-    "lunr": "^2.3.9"
+    "yargs": "^17.6.2"
   },
   "peerDependencies": {
     "sass": "^1.53.0"
