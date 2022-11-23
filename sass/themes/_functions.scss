@@ -131,6 +131,8 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
 /// @return {Function} - The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
     @return max(
@@ -147,6 +149,10 @@
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
 /// @param {Number} $dir [null] - The preferred direction - inline or block.
+/// @example
+///   .my-component {
+///     padding: pad(4px, 8px, 16px);
+///   }
 /// @return {Function} - The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
     $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
@@ -164,6 +170,10 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   .my-component {
+///     padding: pad-inline(4px, 8px, 16px);
+///   }
 /// @return {Function} - The evaluated value.
 @function pad-inline($sm, $md: $sm, $lg: $md) {
     @return pad($sm, $md, $lg, $dir: inline);
@@ -175,6 +185,10 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   .my-component {
+///     padding: pad-block(4px, 8px, 16px);
+///   }
 /// @return {Function} - The evaluated value.
 @function pad-block($sm, $md: $sm, $lg: $md) {
     @return pad($sm, $md, $lg, $dir: block);

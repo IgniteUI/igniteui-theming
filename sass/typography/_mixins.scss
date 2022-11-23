@@ -108,6 +108,8 @@
 /// @requires {mixin} type-style-vars
 /// @requires {mixin} type-style-classes
 /// @requires {mixin} type-style-elements
+/// @example scss
+///   @include typography('Roboto', $my-type-scale);
 @mixin typography($font-family, $type-scale) {
     $scope: if(is-root(), ':root', '&');
 

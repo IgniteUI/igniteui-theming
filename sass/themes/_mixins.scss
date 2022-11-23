@@ -43,6 +43,14 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// @param {map} $theme - The component theme to be used.
 /// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
 /// @requires {mixin} css-vars-from-theme
+/// @example scss Convert grid theme colors to css variables
+///   $my-grid-theme grid-theme(
+///     $header-background: red,
+///     $content-background: #222
+///   )
+///   .my-grid {
+///     @include css-vars($my-grid-theme);
+///   }
 @mixin css-vars($theme, $scope: null) {
     $s: map.get($theme, 'selector');
     $n: map.get($theme, 'name');
@@ -69,6 +77,8 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// @param {Number} $radius - The preferred value.
 /// @param {Number} $min [rem(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
+/// @example scss
+///    @include border-radius(4px);
 @mixin border-radius($radius, $min: #{rem(0)}, $max: $radius) {
     border-radius: clamp(#{$min}, #{calc(var(--ig-radius-factor) * #{$radius})}, #{$max});
 }
@@ -92,6 +102,10 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// This won't work on display flex elements.
 /// @group utilities
 /// @access public
+/// @example scss
+///   .my-class {
+///     @include ellipsis();
+///   }
 @mixin ellipsis() {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -121,6 +135,10 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// Adds the required CSS properties so that the scope can react to size changes.
 /// @group themes
 /// @access public
+/// @example scss - Sample usage
+///   .my-component {
+///     @include sizable();
+///   }
 @mixin sizable() {
     --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
     --is-medium:
