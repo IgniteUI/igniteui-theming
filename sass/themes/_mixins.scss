@@ -31,9 +31,11 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
     }
 
     @each $key, $value in map.remove($theme, $ignored...) {
-        @if meta.type-of($value) != 'map' {
-            --#{$key}: var(--#{$name}-#{$key}, #{$value});
-        }
+	    @if $name == 'igc-dockmanager' {
+		    --igc-#{$key}: var(--#{$name}-#{$key}, #{$value});
+	    } @else {
+		    --#{$key}: var(--#{$name}-#{$key}, #{$value});
+	    }
     }
 }
 
