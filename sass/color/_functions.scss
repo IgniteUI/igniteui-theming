@@ -28,10 +28,10 @@ $_enhanced-accessibility: false;
 /// @param {Color} $secondary - The secondary color used to generate the secondary color palette (required).
 /// @param {Color} $surface - The color used as a background in components, such as cards, sheets, and menus (required).
 /// @param {Color} $gray [null] - The color used for generating the grayscale palette (optional).
-/// @param {Color} $info [null] - The information color used throughout the application (optional).
-/// @param {Color} $success [null] - The success color used throughout the application (optional).
-/// @param {Color} $warn [null] - The warning color used throughout the application (optional).
-/// @param {Color} $error [null] - The error color used throughout the application (optional).
+/// @param {Color} $info [#1377d5] - The information color used throughout the application (optional).
+/// @param {Color} $success [#4eb862] - The success color used throughout the application (optional).
+/// @param {Color} $warn [#faa419] - The warning color used throughout the application (optional).
+/// @param {Color} $error [#ff134a] - The error color used throughout the application (optional).
 /// @param {String} $variant [null] - Used internally (optional).
 /// @requires {function} shades
 /// @returns {Map} - A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
@@ -40,10 +40,10 @@ $_enhanced-accessibility: false;
     $secondary,
     $surface,
     $gray: null,
-    $info: null,
-    $success: null,
-    $warn: null,
-    $error: null,
+    $info: #1377d5,
+    $success: #4eb862,
+    $warn: #faa419,
+    $error: #ff134a,
     $variant: null,
 ) {
     $color-shades: types.$IColorShades;
