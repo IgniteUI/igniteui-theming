@@ -93,7 +93,7 @@ $browser-context: 16px;
 ///
 ///   // Use the type-style() mixin to consume the new type style produced from the type-style() function.
 ///   .main-nav {
-///     @include type-style($main_navigation)
+///     @include type-style($main_navigation);
 ///   }
 /// @returns {Map} - A map of all defined type style properties.
 @function type-style($args...) {
