@@ -54,10 +54,9 @@ $factor: var(--ig-elevation-factor, 1);
 /// @example scss
 ///   box-shadow((0 0 2px 3px black, 0 6px 9px orange));
 ///   // Return
-///   (
+///   box-shadow:
 ///      0 0 calc(--ig-elevation-factor * 2px) calc(--ig-elevation-factor * 3px) black,
-///      0 calc(--ig-elevation-factor * 6px) calc(--ig-elevation-factor * 9px) orange
-///   )
+///      0 calc(--ig-elevation-factor * 6px) calc(--ig-elevation-factor * 9px) orange;
 /// @return {List} - The transformed shadow list.
 /// @requires {function} _is-shadow
 /// @requires {function} _transform-shadow
