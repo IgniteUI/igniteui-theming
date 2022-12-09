@@ -14,15 +14,15 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// @param {Map} $theme - The component theme to be used to generate css variables.
 /// @param {String} $name - The CSS variables name
 /// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables
-/// @param {Map} $prefix [null] - A string to prefix the name of the CSS variable. (optional)
 /// @example scss Convert theme colors to CSS variables.
 ///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
 ///   :root {
 ///     @include css-vars-from-theme($theme);
 ///   }
 /// @require {mixin} css-vars
-@mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys, $prefix: null) {
+@mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
     $themes: map.get($theme, 'themes');
+    $prefix: map.get($theme, 'prefix');
 
     // This is here only because the button theme consists of 4 nested themes.
     @if $themes and meta.type-of($themes) == 'map' {
@@ -34,7 +34,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
     @each $key, $value in map.remove($theme, $ignored...) {
         $variable: if($prefix, #{$prefix}-#{$key}, #{$key});
 
-        @if meta.type-of($value) != 'map' {
+        @if meta.type-of($value) != 'map' and $key != 'prefix' {
             --#{$variable}: var(--#{$name}-#{$key}, #{$value});
         }
     }
@@ -45,7 +45,6 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// @group themes
 /// @param {map} $theme - The component theme to be used.
 /// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
-/// @param {map} $prefix [null] - A string to prefix the name of the CSS variable. (optional)
 /// @requires {mixin} css-vars-from-theme
 /// @example scss Convert grid theme colors to css variables
 ///   $my-grid-theme grid-theme(
@@ -55,7 +54,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 ///   .my-grid {
 ///     @include css-vars($my-grid-theme);
 ///   }
-@mixin css-vars($theme, $scope: null, $prefix: null) {
+@mixin css-vars($theme, $scope: null) {
     $s: map.get($theme, 'selector');
     $n: map.get($theme, 'name');
     $name: if($scope, $scope, $s or $n);
@@ -66,20 +65,12 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 
     @if is-root() {
         #{$name} {
-            @include css-vars-from-theme(
-                $theme: $theme,
-                $name: $n,
-                $prefix: $prefix
-            );
+            @include css-vars-from-theme($theme, $n);
         }
     } @else {
         &,
         #{$name} {
-            @include css-vars-from-theme(
-                $theme: $theme,
-                $name: $n,
-                $prefix: $prefix
-            );
+            @include css-vars-from-theme($theme, $n);
         }
     }
 }

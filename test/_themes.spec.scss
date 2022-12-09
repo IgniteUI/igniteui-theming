@@ -117,15 +117,15 @@ $schema: (
         @include it('should convert component theme props into CSS variables with a prefix') {
             $name: 'igc-dockmanager';
             $prefix: 'igc';
-            $theme: digest-schema($schema);
+            $theme: extend(digest-schema($schema), ('prefix': $prefix));
 
             @include assert() {
                 @include output() {
-                    @include css-vars-from-theme($theme: $theme, $name: $name, $prefix: $prefix);
+                    @include css-vars-from-theme($theme, $name);
                 }
 
                 @include expect() {
-                    @each $key, $value in $theme {
+                    @each $key, $value in map.remove($theme, 'prefix') {
                         --#{$prefix}-#{$key}: var(--#{$name}-#{$key}, #{$value});
                     }
                 }
