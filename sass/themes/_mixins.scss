@@ -22,6 +22,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
 /// @require {mixin} css-vars
 @mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
     $themes: map.get($theme, 'themes');
+    $prefix: map.get($theme, 'prefix');
 
     // This is here only because the button theme consists of 4 nested themes.
     @if $themes and meta.type-of($themes) == 'map' {
@@ -31,8 +32,10 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector');
     }
 
     @each $key, $value in map.remove($theme, $ignored...) {
-        @if meta.type-of($value) != 'map' {
-            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+        $variable: if($prefix, #{$prefix}-#{$key}, #{$key});
+
+        @if meta.type-of($value) != 'map' and $key != 'prefix' {
+            --#{$variable}: var(--#{$name}-#{$key}, #{$value});
         }
     }
 }
