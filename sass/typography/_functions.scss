@@ -15,6 +15,10 @@ $browser-context: 16px;
 /// @access public
 /// @param {number|string} $pixels - The pixel value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
+/// @example
+///   .my-component {
+///     margin: em(10px) em(5px);
+///   }
 /// @return {number} - Returns the pixels value converted to em.
 @function em($pixels, $context: $browser-context) {
     @if math.is-unitless($pixels) {
@@ -32,6 +36,10 @@ $browser-context: 16px;
 /// @access public
 /// @param {number|string} $pixels - The pixel value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
+/// @example
+///   .my-component {
+///     margin: rem(10px) rem(5px);
+///   }
 /// @return {number} - Returns the pixels value converted to rem.
 @function rem($pixels, $context: $browser-context) {
     @if math.is-unitless($pixels) {
@@ -49,6 +57,10 @@ $browser-context: 16px;
 /// @access public
 /// @param {number|string} $num - The relative value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
+/// @example
+///   .my-component {
+///     margin: px(3.23rem);
+///   }
 /// @return {number} - Returns the relative value converted to pixels.
 @function px($num, $context: $browser-context) {
     @if meta.type-of($num) == 'number' {
@@ -70,6 +82,19 @@ $browser-context: 16px;
 /// @param {Number} $margin-top [0] - The margin-top property of the type style.
 /// @param {Number} $margin-bottom [0] - The margin-bottom property of the type style.
 /// @requires $ITypeStyle
+/// @example
+///   $main_navigation: type-style(
+///      $font-size: rem(14px),
+///      $font-weight: 600,
+///      $letter-spacing: rem(.1px),
+///      $line-height: rem(14px),
+///      $text-transform: none,
+///   );
+///
+///   // Use the type-style() mixin to consume the new type style produced from the type-style() function.
+///   .main-nav {
+///     @include type-style($main_navigation);
+///   }
 /// @returns {Map} - A map of all defined type style properties.
 @function type-style($args...) {
     $keywords: meta.keywords($args);
@@ -111,6 +136,18 @@ $browser-context: 16px;
 /// @param {Map} $overline - A map containing type style properties as produces by the type-style function.
 /// @param {String} $_theme [null] - The theme related to this type scale. Internal use only.
 /// @requires $ITypeScale
+/// @example
+///   // First define type styles to use
+///   $my-body-1: type-style(
+///      $font-size: rem(14px),
+///   );
+///
+///   // Use the type style map to override one of the existing maps
+///   $type-scale: type-scale(
+///	    ...
+///	    $body-1: $my-body-1,
+///	    ...
+///   );
 /// @returns {Map} - A map of all defined type scales.
 @function type-scale($_theme: null, $args...) {
     $style_fn: meta.get-function('type-style');
