@@ -114,6 +114,24 @@ $schema: (
             }
         }
 
+        @include it('should convert component theme props into CSS variables with a prefix') {
+            $name: 'igc-dockmanager';
+            $prefix: 'igc';
+            $theme: digest-schema($schema);
+
+            @include assert() {
+                @include output() {
+                    @include css-vars-from-theme($theme: $theme, $name: $name, $prefix: $prefix);
+                }
+
+                @include expect() {
+                    @each $key, $value in $theme {
+                        --#{$prefix}-#{$key}: var(--#{$name}-#{$key}, #{$value});
+                    }
+                }
+            }
+        }
+
         @include it('should ignore all keys in the ignore list') {
             $name: 'igc-avatar';
             $theme: digest-schema($schema);
