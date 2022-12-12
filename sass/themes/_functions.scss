@@ -136,10 +136,14 @@
 ///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
 /// @return {Function} - The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
+    $sm: max(#{$sm}, -1 * #{$sm});
+    $md: max(#{$md}, -1 * #{$md});
+    $lg: max(#{$lg}, -1 * #{$lg});
+
     @return max(
-        calc(var(--is-large, 1) * -1 * #{$lg}),
-        calc(var(--is-medium, 1) * -1 * #{$md}),
-        calc(var(--is-small, 1) * -1 * #{$sm})
+        calc(var(--is-large, 1) * #{$lg}),
+        calc(var(--is-medium, 1) * #{$md}),
+        calc(var(--is-small, 1) * #{$sm})
     );
 }
 
@@ -158,11 +162,14 @@
 /// @return {Function} - The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
     $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
+    $sm: max(#{$sm}, -1 * #{$sm});
+    $md: max(#{$md}, -1 * #{$md});
+    $lg: max(#{$lg}, -1 * #{$lg});
 
     @return max(
-        calc(var(--is-large, 1) * -1 * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, --ig-spacing))),
-        calc(var(--is-medium, 1) * -1 * #{$md} * var(#{$spacing}-medium, var(#{$spacing}, --ig-spacing))),
-        calc(var(--is-small, 1) * -1 * #{$sm} * var(#{$spacing}-small, var(#{$spacing}, --ig-spacing)))
+        calc(var(--is-large, 1) * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, --ig-spacing))),
+        calc(var(--is-medium, 1) * #{$md} * var(#{$spacing}-medium, var(#{$spacing}, --ig-spacing))),
+        calc(var(--is-small, 1) * #{$sm} * var(#{$spacing}-small, var(#{$spacing}, --ig-spacing)))
     );
 }
 
