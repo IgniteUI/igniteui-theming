@@ -12,7 +12,7 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
-/// @param {Map} $schema [$light-schema] - The schema used as basis for styling the component.
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {Color} $backing-brush [null] - Sets the brush to use to fill the backing of the bullet graph.
 /// @param {Color} $backing-outline [null] - Sets the brush to use for the outline of the backing.
@@ -34,7 +34,7 @@
 /// @param {Color} $value-brush [null] - Sets the brush to use for the actual value element.
 /// @param {Color} $value-outline [null] - Sets the brush to use for the outline of actual value element.
 /// @param {Number} $value-stroke-thickness [null] - Sets the stroke thickness to use when rendering single actual value element.
-/// @requires $light-schema
+/// @requires $light-material-schema
 /// @requires extend
 ///
 /// @example scss
@@ -42,7 +42,7 @@
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($my-chart-theme);
 @function bullet-graph-theme(
-    $schema: $light-schema,
+    $schema: $light-material-schema,
     $target: 'angular',
 
     $backing-brush: null,

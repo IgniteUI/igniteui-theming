@@ -96,7 +96,7 @@
 }
 
 /// Retrieves the CSS custom property reference for the given key in the component theme.
-/// @access public
+/// @access private
 /// @param {Map} $theme - The source theme to be used to read values from.
 /// @param {String} $property - A key from the theme map to assign as value to the property.
 /// @param {String} $fallback [null] - A value to be used if the CSS property is not defined.
@@ -126,10 +126,13 @@
 }
 
 /// Used to switch between values based on the size of the component.
+/// @group themes
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
 /// @return {Function} - The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
     @return max(
@@ -140,11 +143,16 @@
 }
 
 /// Used to add spacing.
+/// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
 /// @param {Number} $dir [null] - The preferred direction - inline or block.
+/// @example
+///   .my-component {
+///     padding: pad(4px, 8px, 16px);
+///   }
 /// @return {Function} - The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
     $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
@@ -157,20 +165,30 @@
 }
 
 /// Used to add inline spacing.
+/// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   .my-component {
+///     padding: pad-inline(4px, 8px, 16px);
+///   }
 /// @return {Function} - The evaluated value.
 @function pad-inline($sm, $md: $sm, $lg: $md) {
     @return pad($sm, $md, $lg, $dir: inline);
 }
 
 /// Used to add block spacing.
+/// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   .my-component {
+///     padding: pad-block(4px, 8px, 16px);
+///   }
 /// @return {Function} - The evaluated value.
 @function pad-block($sm, $md: $sm, $lg: $md) {
     @return pad($sm, $md, $lg, $dir: block);

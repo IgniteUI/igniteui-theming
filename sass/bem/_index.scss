@@ -11,12 +11,15 @@
 ////
 
 /// @type String - The Element separator used. Default '__'.
+/// @access private
 $bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
 
 /// @type String - The Modifier separator used. Default '--'.
+/// @access private
 $bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
 
 /// @type String - The Modifier Value separator used. Default '-'.
+/// @access private
 $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val, '-');
 
 /// Converts a passed selector value into plain string.
@@ -125,7 +128,7 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 }
 
 /// Generates a full BEM selector.
-/// @access public
+/// @access private
 /// @param {String} $block - Required. A string block name.
 /// @param {String|List} $elem - Optional. A sub-element name. If `$mod` is not present, it is
 /// joined with $block. If $mod is present, it is nested under `$block--$mod`.
@@ -135,7 +138,7 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 /// @example scss Include a block and an element
 ///   @include bem-selector(block, $e:elem); // outputs .block__elem
 /// @example scss Include block, element, and element modifier
-///   @include bem-selector(block, $e:(elem,emod); // outputs .block__elem-emod
+///   @include bem-selector(block, $e:(elem, $mod); // outputs .block__elem-emod
 /// @example scss Include block and block modifier
 ///   @include bem-selector(block, $m:mod) // outputs .block--mod
 /// @example scss Include block and modifier value
@@ -188,8 +191,14 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 
 /// Simply unrolls into a class-selector. The main purpose of using this mixin
 /// is to clearly denote the start of a BEM block.
-/// @access public
+/// @access public scss
 /// @param {String} $block - The block name.
+/// @example
+///   @include bem-block(block) {
+///      background: green;
+///   }
+///   // Return
+///   .block { background: green; }
 @mixin bem-block($block) {
     @at-root {
         #{bem-selector($block)} {
@@ -207,6 +216,14 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 /// @param {String} $elem - The sub-element name.
 /// @param {String} $m - The modifier name.
 /// @param {String} $mod - An alias of `$m`.
+/// @example scss
+///   @include bem-block(block) {
+///      @include bem-elem(element) {
+///        background: blue;
+///      }
+///   }
+///   // Return
+///   .block__element { background: blue; }
 @mixin bem-elem($elem, $m: null, $mod: null, $mods: null) {
     $this: bem--selector-to-string(&);
     $block: bem--extract-block($this);
@@ -269,6 +286,14 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 /// that should mean isn't clear.
 /// @access public
 /// @param {String} $mod - The modifier name.
+/// @example scss
+///   @include bem-block(block) {
+///      @include bem-mod(modifier) {
+///        background: red;
+///      }
+///   }
+///   // Return
+///   .block--modifier { background: red; }
 @mixin bem-mod($mod) {
     $skip: false;
     $this: bem--selector-to-string(&);
@@ -297,6 +322,18 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 /// or block element when two or more modifiers are applied in tandem
 /// @access public
 /// @param {List} $mods - A list of modifiers
+/// @example scss
+///   @include bem-block(block) {
+///      @include bem-mods(error, warn) {
+///        position: absolute;
+///      }
+///   }
+///   // Return
+///   .block--error,
+///   .block--warn {
+///       position: absolute;
+///    }
+///
 @mixin bem-mods($mods...) {
     $this: bem--selector-to-string(&);
     $mod-classes: ();
