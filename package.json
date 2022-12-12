@@ -13,10 +13,17 @@
     "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./sass -d docs",
     "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
     "build:json": "node scripts/buildJSON.mjs",
-    "lint": "stylelint ./sass",
+    "serve:docs": "npx http-server ./docs",
     "preview:palette": "node scripts/previewPalette.mjs",
+    "lint": "stylelint ./sass",
     "test": "jest",
-    "serve:docs": "npx http-server ./docs"
+    "format": "stylelint \"**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{scss,css}": [
+      "npm run format"
+    ]
   },
   "files": [
     "/sass",
@@ -52,6 +59,7 @@
   },
   "devDependencies": {
     "globby": "^13.1.2",
+    "husky": "^8.0.2",
     "igniteui-sassdoc-theme": "^1.1.4",
     "jest": "^28.1.1",
     "lunr": "^2.3.9",
