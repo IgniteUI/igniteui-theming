@@ -126,6 +126,7 @@
 }
 
 /// Used to switch between values based on the size of the component.
+/// The passed sizes are converted to absolute values before comparing.
 /// @group themes
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
@@ -135,6 +136,10 @@
 ///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
 /// @return {Function} - The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
+    $sm: max(#{$sm}, -1 * #{$sm});
+    $md: max(#{$md}, -1 * #{$md});
+    $lg: max(#{$lg}, -1 * #{$lg});
+
     @return max(
         calc(var(--is-large, 1) * #{$lg}),
         calc(var(--is-medium, 1) * #{$md}),
@@ -142,7 +147,8 @@
     );
 }
 
-/// Used to add spacing.
+/// Returns a value based on the size of the component taking spacing values into consideration.
+/// The passed sizes are converted to absolute values before comparing.
 /// @group utilities
 /// @access public
 /// @param {Number} $sm - The preferred value when the component's size is small.
@@ -156,6 +162,9 @@
 /// @return {Function} - The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
     $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
+    $sm: max(#{$sm}, -1 * #{$sm});
+    $md: max(#{$md}, -1 * #{$md});
+    $lg: max(#{$lg}, -1 * #{$lg});
 
     @return max(
         calc(var(--is-large, 1) * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, --ig-spacing))),

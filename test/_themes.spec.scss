@@ -300,8 +300,33 @@ $schema: (
             }
         }
 
+        @include describe('Sizing') {
+            @include it('should produce size variables') {
+                $sm: 100px;
+                $md: 200px;
+                $lg: 300px;
+
+                @include assert() {
+                    @include output() {
+                        width: sizable($sm, $md, $lg);
+                    }
+
+                    @include expect() {
+                        width:
+                            max(
+                                calc(var(--is-large, 1) * max(#{$lg}, -1 * #{$lg})),
+                                calc(var(--is-medium, 1) * max(#{$md}, -1 * #{$md})),
+                                calc(var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}))
+                            );
+                    }
+                }
+            }
+        }
+
         @include describe('Spacing') {
             @include it('should use customizable spacing when declaring padding/margin') {
+                $value: 14px;
+
                 @include assert() {
                     @include output() {
                         padding: pad(14px);
@@ -311,13 +336,13 @@ $schema: (
                         padding:
                             max(
                                 calc(
-                                    var(--is-large, 1) * 14px * var(--ig-spacing-large, var(--ig-spacing, --ig-spacing))
+                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-large, var(--ig-spacing, --ig-spacing))
                                 ),
                                 calc(
-                                    var(--is-medium, 1) * 14px * var(--ig-spacing-medium, var(--ig-spacing, --ig-spacing))
+                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-medium, var(--ig-spacing, --ig-spacing))
                                 ),
                                 calc(
-                                    var(--is-small, 1) * 14px * var(--ig-spacing-small, var(--ig-spacing, --ig-spacing))
+                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-small, var(--ig-spacing, --ig-spacing))
                                 )
                             );
                     }
@@ -325,22 +350,24 @@ $schema: (
             }
 
             @include it('should use customizable inline spacing when declaring inline padding/margin') {
+                $value: 14px;
+
                 @include assert() {
                     @include output() {
-                        padding-inline: pad-inline(14px);
+                        padding-inline: pad-inline($value);
                     }
 
                     @include expect() {
                         padding-inline:
                             max(
                                 calc(
-                                    var(--is-large, 1) * 14px * var(--ig-spacing-inline-large, var(--ig-spacing-inline, --ig-spacing))
+                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-large, var(--ig-spacing-inline, --ig-spacing))
                                 ),
                                 calc(
-                                    var(--is-medium, 1) * 14px * var(--ig-spacing-inline-medium, var(--ig-spacing-inline, --ig-spacing))
+                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-medium, var(--ig-spacing-inline, --ig-spacing))
                                 ),
                                 calc(
-                                    var(--is-small, 1) * 14px * var(--ig-spacing-inline-small, var(--ig-spacing-inline, --ig-spacing))
+                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-small, var(--ig-spacing-inline, --ig-spacing))
                                 )
                             );
                     }
@@ -348,22 +375,26 @@ $schema: (
             }
 
             @include it('should use customizable block spacing when declaring inline padding/margin') {
+                $sm: 4px;
+                $md: 8px;
+                $lg: 16px;
+
                 @include assert() {
                     @include output() {
-                        padding-block: pad-block(4px, 8px, 16px);
+                        padding-block: pad-block($sm, $md, $lg);
                     }
 
                     @include expect() {
                         padding-block:
                             max(
                                 calc(
-                                    var(--is-large, 1) * 16px * var(--ig-spacing-block-large, var(--ig-spacing-block, --ig-spacing))
+                                    var(--is-large, 1) * max(#{$lg}, -1 * #{$lg}) * var(--ig-spacing-block-large, var(--ig-spacing-block, --ig-spacing))
                                 ),
                                 calc(
-                                    var(--is-medium, 1) * 8px * var(--ig-spacing-block-medium, var(--ig-spacing-block, --ig-spacing))
+                                    var(--is-medium, 1) * max(#{$md}, -1 * #{$md}) * var(--ig-spacing-block-medium, var(--ig-spacing-block, --ig-spacing))
                                 ),
                                 calc(
-                                    var(--is-small, 1) * 4px * var(--ig-spacing-block-small, var(--ig-spacing-block, --ig-spacing))
+                                    var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}) * var(--ig-spacing-block-small, var(--ig-spacing-block, --ig-spacing))
                                 )
                             );
                     }
