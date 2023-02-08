@@ -26,7 +26,7 @@
     $result: ();
 
     @each $key, $value in $schema {
-        @if meta.type-of($value) == 'map' {
+        @if meta.type-of($value) == 'map' and $key != '_meta' {
             $result: map.merge($result, (#{$key}: resolve-value($value)));
         } @else {
             $result: map.merge($result, (#{$key}: $value));
