@@ -9,6 +9,8 @@
 @use '../index' as *;
 
 $schema: (
+    variant: 'material',
+    type: 'light',
     background: (
         color: (primary, 400)
     ),
@@ -23,6 +25,9 @@ $schema: (
     border-radius: rem(2px),
     brushes: series,
     resting-elevation: 2,
+    _meta: (
+        version: 1,
+    ),
 );
 
 @include describe('Themes') {
@@ -78,6 +83,8 @@ $schema: (
 
         @include it('should output theme maps from schema definitions') {
             $theme: (
+                variant: 'material',
+                type: 'light',
                 background: hsla(var(--ig-primary-400), var(--ig-primary-a)),
                 hover-background: hsla(var(--ig-secondary-700), .26),
                 foreground: var(--ig-primary-400-contrast),
@@ -86,6 +93,9 @@ $schema: (
                 border-radius: .125rem,
                 brushes: #{chart-brushes()},
                 resting-elevation: var(--ig-elevation-2),
+                _meta: (
+                    version: 1
+                )
             );
 
             @include assert-equal(digest-schema($schema), $theme);
@@ -107,7 +117,7 @@ $schema: (
                 }
 
                 @include expect() {
-                    @each $key, $value in $theme {
+                    @each $key, $value in map.remove($theme, $ignored-keys...) {
                         --#{$key}: var(--#{$name}-#{$key}, #{$value});
                     }
                 }
@@ -117,7 +127,12 @@ $schema: (
         @include it('should convert component theme props into CSS variables with a prefix') {
             $name: 'igc-dockmanager';
             $prefix: 'igc';
-            $theme: extend(digest-schema($schema), ('prefix': $prefix));
+            $theme: extend(
+                map.remove(digest-schema($schema), $ignored-keys...),
+                (
+                    'prefix': $prefix
+                )
+            );
 
             @include assert() {
                 @include output() {
