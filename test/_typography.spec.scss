@@ -142,8 +142,24 @@ $scale: type-scale(
             }
         }
 
-        @include it('should generate CSS variables from a type style map') {
+        @include it('generates CSS variables from a type style map without font-family if its value is "inherit"') {
             $h1-scale: type-style($h1...);
+
+            @include assert() {
+                @include output() {
+                    @include type-style-vars('h1', $h1-scale);
+                }
+
+                @include expect() {
+                    @each $key, $value in map.remove($h1-scale, 'font-family') {
+                        --ig-h1-#{$key}: #{$value};
+                    }
+                }
+            }
+        }
+
+        @include it('generates CSS variables for a type style map with font-family if its value is not "inherit"') {
+            $h1-scale: type-style($font-family: "'American Typewriter', serif", $h1...);
 
             @include assert() {
                 @include output() {
@@ -168,7 +184,11 @@ $scale: type-scale(
 
                 @include expect() {
                     @each $key, $value in map.get(presets.$bootstrap-type-scale, $custom-category) {
-                        #{$key}: var(--ig-#{$custom-category}-#{$key});
+                        @if $key == 'font-family' {
+                            #{$key}: var(--ig-#{$custom-category}-#{$key}, var(--ig-font-family));
+                        } @else {
+                            #{$key}: var(--ig-#{$custom-category}-#{$key});
+                        }
                     }
                 }
             }
@@ -187,7 +207,11 @@ $scale: type-scale(
                 @include expect() {
                     .my-h1 {
                         @each $key, $value in $ITypeStyle {
-                            #{$key}: var(--ig-#{$category}-#{$key});
+                            @if $key == 'font-family' {
+                                #{$key}: var(--ig-#{$category}-#{$key}, var(--ig-font-family));
+                            } @else {
+                                #{$key}: var(--ig-#{$category}-#{$key});
+                            }
                         }
                     }
                 }
@@ -239,7 +263,7 @@ $scale: type-scale(
                         --ig-font-family: Roboto, sans-serif;
 
                         @each $category, $styles in map.remove($scale, '_meta') {
-                            @each $rule, $value in $styles {
+                            @each $rule, $value in map.remove($styles, 'font-family') {
                                 --ig-#{$category}-#{$rule}: #{$value};
                             }
                         }
@@ -258,7 +282,7 @@ $scale: type-scale(
                     --ig-font-family: Roboto, sans-serif;
 
                     @each $category, $styles in map.remove($scale, '_meta') {
-                        @each $rule, $value in $styles {
+                        @each $rule, $value in map.remove($styles, 'font-family') {
                             --ig-#{$category}-#{$rule}: #{$value};
                         }
                     }
