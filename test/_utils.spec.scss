@@ -41,6 +41,35 @@
                 }
             }
         }
+
+        @include it('should resolve if the call context is :host') {
+            @include assert() {
+                @include output($selector: false) {
+                    // called from the :host
+                    :host {
+                        $is-host: is-host();
+
+                        content: $is-host;
+                    }
+                }
+
+                @include expect($selector: false) {
+                    :host {
+                        content: true;
+                    }
+                }
+            }
+
+            @include assert() {
+                @include output($selector: true) {
+                    content: is-root();
+                }
+
+                @include expect($selector: true) {
+                    content: false;
+                }
+            }
+        }
     }
 
     @include describe('map') {
