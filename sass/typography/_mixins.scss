@@ -23,7 +23,11 @@
 
     @if $valid {
         @each $key, $value in types.$ITypeStyle {
-            #{$key}: var(--ig-#{$category}-#{$key});
+            @if #{$key} == 'font-family' {
+                font-family: var(--ig-#{$category}-#{$key}, var(--ig-font-family));
+            } @else {
+                #{$key}: var(--ig-#{$category}-#{$key});
+            }
         }
         @content;
     } @else {
@@ -39,7 +43,13 @@
 ///   @include type-style-vars('h1', $h1-style);
 @mixin type-style-vars($name, $type-style) {
     @each $key, $value in map.remove($type-style, '_meta') {
-        --ig-#{$name}-#{$key}: #{$value};
+        @if $key == 'font-family' and $value != inherit {
+            --ig-#{$name}-#{$key}: #{$value};
+        }
+
+        @if $key != 'font-family' {
+            --ig-#{$name}-#{$key}: #{$value};
+        }
     }
 }
 
