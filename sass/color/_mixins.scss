@@ -47,9 +47,6 @@
 ///    @include palette($palette);
 /// @require {function} is-root
 @mixin palette($palette, $contrast: true) {
-    // @include _base-colors($palette);
-    // @include _shade-colors($palette, $contrast);
-
     $scope: if(is-root(), ':root', '&');
 
     #{$scope} {
