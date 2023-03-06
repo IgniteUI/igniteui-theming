@@ -39,4 +39,9 @@ $IPaletteMeta: (
 /// A map with all palette colors and palette meta
 /// @type Map
 /// @access private
-$IPalette: map.merge($IPaletteColors, (_meta: $IPaletteMeta));
+$IPalette: map.merge(
+    $IPaletteColors,
+    (
+        _meta: $IPaletteMeta,
+    )
+);

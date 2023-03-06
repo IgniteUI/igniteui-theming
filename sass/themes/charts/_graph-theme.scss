@@ -64,14 +64,14 @@
     $tick-stroke-thickness: null,
     $value-brush: null,
     $value-outline: null,
-    $value-stroke-thickness: null,
+    $value-stroke-thickness: null
 ) {
     $name: 'bullet-graph';
     $selector: map.get(
         (
             'angular': 'igx-bullet-graph',
             'webc': 'igc-bullet-graph',
-            'blazor': 'igb-bullet-graph'
+            'blazor': 'igb-bullet-graph',
         ),
         $target
     );
@@ -123,7 +123,7 @@
         (
             'angular': 'igx-bullet-graph',
             'webc': 'igc-bullet-graph',
-            'blazor': 'igb-bullet-graph'
+            'blazor': 'igb-bullet-graph',
         ),
         $target
     );

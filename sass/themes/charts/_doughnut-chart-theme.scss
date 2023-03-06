@@ -41,14 +41,14 @@
     $selected-slice-fill: null,
     $selected-slice-opacity: null,
     $selected-slice-stroke: null,
-    $selected-slice-stroke-thickness: null,
+    $selected-slice-stroke-thickness: null
 ) {
     $name: 'doughnut-chart';
     $selector: map.get(
         (
             'angular': 'igx-doughnut-chart',
             'webc': 'igc-doughnut-chart',
-            'blazor': 'igb-doughnut-chart'
+            'blazor': 'igb-doughnut-chart',
         ),
         $target
     );

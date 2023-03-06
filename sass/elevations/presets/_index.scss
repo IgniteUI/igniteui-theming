@@ -13,8 +13,4 @@ $color-2: rgba(0 0 0 / 12%) !default;
 /// @access private
 $color-3: rgba(0 0 0 / 8%) !default;
 
-@forward './material' as material-* with(
-    $color-1: $color-1,
-    $color-2: $color-2,
-    $color-3: $color-3
-);
+@forward './material' as material-* with($color-1: $color-1, $color-2: $color-2, $color-3: $color-3);

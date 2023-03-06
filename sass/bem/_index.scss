@@ -152,7 +152,7 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
     // Return early if possible
     $mods: $m or $mod or $mods;
 
-    @if not ($elem or $mods) {
+    @if not($elem or $mods) {
         @return $block;
     }
 
@@ -175,7 +175,7 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
     }
 
     @if meta.type-of($mods) != 'list' {
-        $mods: ($mods, );
+        $mods: ($mods);
     }
 
     $bemcls: '';
@@ -351,7 +351,13 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
             @error 'Nesting a Modifier inside a pseudo-selector is not supported: #{$this} #{$mod}';
         }
 
-        $mod-classes: list.append($mod-classes, #{bem-selector($block: $this, $m: $mod)});
+        $mod-classes: list.append(
+            $mod-classes,
+            #{bem-selector(
+                    $block: $this,
+                    $m: $mod,
+                )}
+        );
     }
 
     @at-root {

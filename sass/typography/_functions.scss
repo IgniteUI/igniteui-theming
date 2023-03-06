@@ -111,7 +111,7 @@ $browser-context: 16px;
         $result: map.merge(
             $result,
             (
-                $style: $value
+                $style: $value,
             )
         );
     }
@@ -152,9 +152,11 @@ $browser-context: 16px;
 @function type-scale($_theme: null, $args...) {
     $style_fn: meta.get-function('type-style');
     $categories: meta.keywords($args);
-    $result: (_meta: (
-        variant: $_theme
-    ));
+    $result: (
+        _meta: (
+            variant: $_theme,
+        ),
+    );
 
     @each $category in types.$ITypeScale {
         $value: map.get($categories, $category);
@@ -166,7 +168,7 @@ $browser-context: 16px;
         $result: map.merge(
             $result,
             (
-                $category: meta.call($style_fn, $value...)
+                $category: meta.call($style_fn, $value...),
             )
         );
     }

@@ -144,7 +144,7 @@
         (
             'angular': 'igx-financial-chart',
             'webc': 'igc-financial-chart',
-            'blazor': 'igb-financial-chart'
+            'blazor': 'igb-financial-chart',
         ),
         $target
     );
@@ -266,7 +266,7 @@
             y-axis-title-margin: $y-axis-title-margin,
             y-axis-title-text-color: $y-axis-title-text-color,
             zoom-slider-x-axis-major-stroke: $zoom-slider-x-axis-major-stroke,
-            zoom-slider-x-axis-major-stroke-thicknes: $zoom-slider-x-axis-major-stroke-thickness
+            zoom-slider-x-axis-major-stroke-thicknes: $zoom-slider-x-axis-major-stroke-thickness,
         )
     );
 }
@@ -285,20 +285,24 @@
 /// 'y-axis-title-text-style': 'body-2',
 /// )] - The categories from the typographic scale used for type styles.
 /// @requires {mixin} type-style
-@mixin financial-chart-typography($type-scale, $categories: (
-    'title': 'h6',
-    'subtitle': 'subtitle-1',
-    'x-axis-label-text-style': 'body-2',
-    'x-axis-title-text-style': 'body-2',
-    'y-axis-label-text-style': 'body-2',
-    'y-axis-title-text-style': 'body-2',
-), $target: 'angular') {
+@mixin financial-chart-typography(
+    $type-scale,
+    $categories: (
+        'title': 'h6',
+        'subtitle': 'subtitle-1',
+        'x-axis-label-text-style': 'body-2',
+        'x-axis-title-text-style': 'body-2',
+        'y-axis-label-text-style': 'body-2',
+        'y-axis-title-text-style': 'body-2'
+    ),
+    $target: 'angular'
+) {
     $name: 'financial-chart';
     $selector: map.get(
         (
             'angular': 'igx-financial-chart',
             'webc': 'igc-financial-chart',
-            'blazor': 'igb-financial-chart'
+            'blazor': 'igb-financial-chart',
         ),
         $target
     );

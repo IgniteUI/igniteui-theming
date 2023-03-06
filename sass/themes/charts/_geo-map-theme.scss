@@ -22,17 +22,13 @@
 ///   $my-map-theme: geo-map-theme($width: 550px);
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($my-map-theme);
-@function geo-map-theme(
-    $schema: $light-material-schema,
-    $target: 'angular',
-    $plot-area-background: null
-) {
+@function geo-map-theme($schema: $light-material-schema, $target: 'angular', $plot-area-background: null) {
     $name: 'geo-map';
     $selector: map.get(
         (
             'angular': 'igx-geographic-map',
             'webc': 'igc-geographic-map',
-            'blazor': 'igb-geographic-map'
+            'blazor': 'igb-geographic-map',
         ),
         $target
     );
@@ -46,9 +42,12 @@
 
     $theme: digest-schema($chart-schema);
 
-    @return extend( $theme, (
-        name: $name,
-        selector: $selector,
-        plot-area-background: $plot-area-background,
-    ));
+    @return extend(
+        $theme,
+        (
+            name: $name,
+            selector: $selector,
+            plot-area-background: $plot-area-background,
+        )
+    );
 }

@@ -10,12 +10,7 @@
 
     @each $key, $value in $map {
         @if $value {
-            $result: map.merge(
-                $result,
-                (
-                    #{$key}: $value
-                )
-            );
+            $result: map.merge($result, (#{$key}: $value));
         }
     }
 
@@ -54,8 +49,9 @@
         $result: map.merge(
             $result,
             (
-                '#{$prefix}#{$separator}#{$key}': map.get($map, $key))
-            );
+                '#{$prefix}#{$separator}#{$key}': map.get($map, $key),
+            )
+        );
     }
 
     @return $result;
