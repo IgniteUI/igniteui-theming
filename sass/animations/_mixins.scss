@@ -3,11 +3,16 @@
 @use 'sass:map';
 @use 'sass:string';
 
+////
+/// @package theming
+/// @group animations
+/// @access public
+/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
+////
+
 $keyframes: () !default;
 
 /// Registers a keyframes animation in the keyframes registry.
-/// @access public
-/// @group animations
 /// @param {String} $name - The name of the keyframes animation.
 @mixin keyframes($name) {
     $keyframe: map.has-key($keyframes, $name);
@@ -25,8 +30,6 @@ $keyframes: () !default;
 }
 
 /// Animates an element.
-/// @access public
-/// @group animations
 /// @param {List} $animate - The list of animation properties.
 /// @example scss - Animating an element
 ///  @include fade-in(); // include the 'fade-in' keyframes animation mixin

@@ -234,9 +234,6 @@ $_palette: palette(
                         --ig-gray-s: #{math.round(color.saturation($gray-500))};
                         --ig-gray-l: #{math.round(color.lightness($gray-500))};
                         --ig-gray-a: #{math.round(color.alpha($gray-500))};
-                    }
-
-                    * {
                         --ig-primary-500:
                             #{var(--ig-primary-h),
                             calc(var(--ig-primary-s) * 1),
