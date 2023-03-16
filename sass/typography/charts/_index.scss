@@ -7,8 +7,12 @@
 @use '../../themes/charts/pie-chart-theme' as *;
 @use '../../themes/charts/shape-chart-theme' as *;
 
-/// Includes all chart related typography styles for a given type-scale and target.
+////
+/// @package theming
 /// @group typography
+////
+
+/// Includes all chart related typography styles for a given type-scale and target.
 /// @param {Map} $type-scale - The type-scale to be used when including typography styles.
 /// @param {String} $target ['angular'] - The target platform. Could be 'angular', 'webc', or 'blazor'.
 /// @access public

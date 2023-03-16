@@ -5,6 +5,10 @@
 @use '../utils/meta' as *;
 @use '../typography/functions' as *;
 
+////
+/// @package theming
+////
+
 /// A list of ignored keywords to be excluded when generating CSS variables for a theme.
 /// @access private
 $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
