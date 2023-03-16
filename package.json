@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
   "main": "index.js",
+  "workspaces": [
+    "./pages/*"
+  ],
   "scripts": {
     "clean": "npm run clean:json && npm run clean:docs",
     "clean:json": "rimraf \"json/\"",
