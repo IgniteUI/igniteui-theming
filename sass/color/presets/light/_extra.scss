@@ -1,12 +1,16 @@
 @use '../../functions' as *;
 
+////
+/// @package theming
+/// @group palettes
+/// @access public
+////
+
 /**
  * @sass-export-section="light"
  */
 /// Generates the light green palette.
 /// @type Map
-/// @access public
-/// @group palettes
 /// @name light-green-palette
 /// @prop {Color} primary [#09f] - The primary color
 /// @prop {Color} secondary [#72da67] - The secondary color
@@ -28,8 +32,6 @@ $green-palette: palette(
 
 /// Generates the light purple palette.
 /// @type Map
-/// @access public
-/// @group palettes
 /// @name light-purple-palette
 /// @prop {Color} primary [#00b4d6] - The primary color
 /// @prop {Color} secondary [#514590] - The secondary color
