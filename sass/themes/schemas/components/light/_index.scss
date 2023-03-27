@@ -1,0 +1,47 @@
+////
+/// @group component schemas
+/// @access public
+////
+
+@use './avatar' as *;
+@forward './avatar';
+@use './button' as *;
+@forward './button';
+
+/// The default schema. Used to create Material Design themes.
+/// Use with light palettes.
+/// @type Map
+/// @property {Map} igx-avatar [$light-avatar]
+$light-schema: (
+    igx-avatar: $light-avatar,
+    igx-button: $light-button,
+);
+
+/// An alias of $light-schema.
+/// @alias light-schema
+/// @see $light-schema
+$light-material-schema: $light-schema;
+
+/// Used to create fluent component themes.
+/// Use in combination with light palettes.
+/// @type Map
+$light-fluent-schema: (
+    igx-avatar: $fluent-avatar,
+    igx-button: $fluent-button,
+);
+
+/// Used to create bootstrap component themes.
+/// Use in combination with light palettes.
+/// @type Map
+$light-bootstrap-schema: (
+    igx-avatar: $bootstrap-avatar,
+    igx-button: $bootstrap-button,
+);
+
+/// Used to create indigo component themes.
+/// Use in combination with light palettes.
+/// @type Map
+$light-indigo-schema: (
+    igx-avatar: $indigo-avatar,
+    igx-button: $indigo-button,
+);
