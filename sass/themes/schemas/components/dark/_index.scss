@@ -1,7 +1,6 @@
 ////
 /// @group schemas
 /// @access public
-/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
 @use './avatar' as *;
@@ -12,9 +11,9 @@
 /// The default schema. Used to create Material Design themes.
 /// Use with dark palettes.
 /// @type Map
-/// @property {Map} igx-avatar [$dark-avatar]
+/// @property {Map} avatar [$dark-avatar]
 $dark-schema: (
-    igx-avatar: $dark-avatar,
+    avatar: $dark-avatar,
 );
 
 /// An alias of $dark-schema.
@@ -26,19 +25,19 @@ $dark-material-schema: $dark-schema;
 /// Use in combination with dark palettes.
 /// @type Map
 $dark-fluent-schema: (
-    igx-avatar: $dark-fluent-avatar,
+    avatar: $dark-fluent-avatar,
 );
 
 /// Used to create bootstrap component themes.
 /// Use in combination with dark palettes.
 /// @type Map
 $dark-bootstrap-schema: (
-    igx-avatar: $dark-bootstrap-avatar,
+    avatar: $dark-bootstrap-avatar,
 );
 
 /// Used to create indigo component themes.
 /// Use in combination with dark palettes.
 /// @type Map
 $dark-indigo-schema: (
-    igx-avatar: $dark-indigo-avatar,
+    avatar: $dark-indigo-avatar,
 );
