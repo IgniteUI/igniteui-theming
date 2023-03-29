@@ -1,26 +1,19 @@
 ////
-/// @group component schemas
+/// @package theming
+/// @group schemas
 /// @access public
 ////
 
 @use './avatar' as *;
-@forward './avatar';
 @use './button' as *;
-@forward './button';
 
-/// The default schema. Used to create Material Design themes.
-/// Use with light palettes.
-/// @type Map
-/// @property {Map} avatar [$light-avatar]
-$light-schema: (
+/// Used to create material component themes.
+/// Use in combination with light palettes.
+/// @type Map.
+$light-material-schema: (
     avatar: $light-avatar,
     button: $light-button,
 );
-
-/// An alias of $light-schema.
-/// @alias light-schema
-/// @see $light-schema
-$light-material-schema: $light-schema;
 
 /// Used to create fluent component themes.
 /// Use in combination with light palettes.

@@ -1,25 +1,18 @@
 ////
+/// @package theming
 /// @group schemas
 /// @access public
 ////
 
 @use './avatar' as *;
-@forward './avatar';
 @use './button' as *;
-@forward './button';
 
-/// The default schema. Used to create Material Design themes.
-/// Use with dark palettes.
+/// Used to create material component themes.
+/// Use in combination with dark palettes.
 /// @type Map
-/// @property {Map} avatar [$dark-avatar]
-$dark-schema: (
+$dark-material-schema: (
     avatar: $dark-avatar,
 );
-
-/// An alias of $dark-schema.
-/// @alias dark-schema
-/// @see $dark-schema
-$dark-material-schema: $dark-schema;
 
 /// Used to create fluent component themes.
 /// Use in combination with dark palettes.

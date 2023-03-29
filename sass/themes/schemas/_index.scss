@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use './charts/index' as charts;
-@use './components/index' as components;
+@use 'charts';
+@use 'components';
 
 $light-material-schema: map.merge(
     charts.$light-material-schema,
