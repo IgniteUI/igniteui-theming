@@ -7,6 +7,7 @@
 @use './avatar' as *;
 @use './button' as *;
 @use './icon' as *;
+@use './navbar' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -14,7 +15,8 @@
 $light-material-schema: (
     avatar: $light-avatar,
     button: $light-button,
-    icon: $light-icon
+    icon: $light-icon,
+    navbar: $light-navbar
 );
 
 /// Used to create fluent component themes.
@@ -23,7 +25,8 @@ $light-material-schema: (
 $light-fluent-schema: (
     avatar: $fluent-avatar,
     button: $fluent-button,
-    icon: $fluent-icon
+    icon: $fluent-icon,
+    navbar: $fluent-navbar,
 );
 
 /// Used to create bootstrap component themes.
@@ -32,7 +35,8 @@ $light-fluent-schema: (
 $light-bootstrap-schema: (
     avatar: $bootstrap-avatar,
     button: $bootstrap-button,
-    icon: $bootstrap-icon
+    icon: $bootstrap-icon,
+    navbar: $bootstrap-navbar,
 );
 
 /// Used to create indigo component themes.
@@ -41,5 +45,6 @@ $light-bootstrap-schema: (
 $light-indigo-schema: (
     avatar: $indigo-avatar,
     button: $indigo-button,
-    icon: $indigo-icon
+    icon: $indigo-icon,
+    navbar: $indigo-navbar,
 );
