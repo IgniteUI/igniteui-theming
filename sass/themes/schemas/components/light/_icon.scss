@@ -1,0 +1,45 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light icon schema.
+/// @type {Map}
+/// @prop {Color} color [color: ('gray', 800)] - The icon color.
+/// @prop {String} size [rem(24px)] - The icon size.
+/// @prop {Color} disabled-color [color: ('gray', 500)] - The disabled icon color.
+$light-icon: (
+    color: (
+        color: ('gray', 800)
+    ),
+    size: rem(24px),
+    disabled-color: (
+        color: ('gray', 500)
+    ),
+);
+
+/// Generates a fluent icon schema.
+/// @type {Map}
+/// @requires {Map} $light-icon
+$fluent-icon: $light-icon;
+
+/// Generates a bootstrap icon schema.
+/// @type {Map}
+/// @requires {Map} $light-icon
+$bootstrap-icon: $light-icon;
+
+/// Generates an indigo icon schema.
+/// @type {Map}
+/// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled icon color.
+/// @requires {Map} $light-icon
+$indigo-icon: extend(
+    $light-icon,
+    (
+        disabled-color: (
+            color: ('gray', 400)
+        )
+    )
+);

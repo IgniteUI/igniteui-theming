@@ -6,13 +6,15 @@
 
 @use './avatar' as *;
 @use './button' as *;
+@use './icon' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
 /// @type Map
 $dark-material-schema: (
     avatar: $dark-avatar,
-    button: $dark-button
+    button: $dark-button,
+    icon: $dark-icon,
 );
 
 /// Used to create fluent component themes.
@@ -21,6 +23,7 @@ $dark-material-schema: (
 $dark-fluent-schema: (
     avatar: $dark-fluent-avatar,
     button: $dark-fluent-button,
+    icon: $dark-fluent-icon,
 );
 
 /// Used to create bootstrap component themes.
@@ -29,6 +32,7 @@ $dark-fluent-schema: (
 $dark-bootstrap-schema: (
     avatar: $dark-bootstrap-avatar,
     button: $dark-bootstrap-button,
+    icon: $dark-bootstrap-icon,
 );
 
 /// Used to create indigo component themes.
@@ -37,4 +41,5 @@ $dark-bootstrap-schema: (
 $dark-indigo-schema: (
     avatar: $dark-indigo-avatar,
     button: $dark-indigo-button,
+    icon: $dark-indigo-icon,
 );
