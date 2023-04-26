@@ -1,0 +1,69 @@
+@use '../../../../utils/map' as *;
+@use '../light/checkbox' as *;
+
+////
+/// @group schemas
+/// @access public
+/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
+////
+
+/// Generates a dark checkbox schema.
+/// @type {Map}
+/// @requires $light-checkbox
+$dark-checkbox: extend(
+    $light-checkbox,
+    (
+        type: 'dark',
+    )
+);
+
+/// Generates a dark fluent checkbox schema.
+/// @type {Map}
+/// @prop {Map} fill-color-hover [color: ('primary', 200)] - The checked border and fill colors on hover.
+/// @requires $fluent-checkbox
+$dark-fluent-checkbox: extend(
+    $fluent-checkbox,
+    (
+        fill-color-hover: (
+            color: ('primary', 200)
+        ),
+    )
+);
+
+/// Generates a dark bootstrap checkbox schema.
+/// @type {Map}
+/// @prop {Map} tick-color [color: ('gray', 900)] - The checked mark color.
+/// @requires $bootstrap-checkbox
+$dark-bootstrap-checkbox: extend(
+    $bootstrap-checkbox,
+    (
+        tick-color: (
+            color: ('gray', 900)
+        )
+    )
+);
+
+/// Generates a dark indigo checkbox schema.
+/// @type {Map}
+/// @prop {Map} fill-color [color: ('gray', 900)] - The checked border and fill colors.
+/// @prop {Map} empty-color [color: ('gray', 700)] - The unchecked border color.
+/// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled border and fill colors.
+/// @prop {Map} disabled-color-label [color: ('gray', 400)] - The disabled label color.
+/// @requires $indigo-checkbox
+$dark-indigo-checkbox: extend(
+    $indigo-checkbox,
+    (
+        fill-color: (
+            color: ('gray', 900)
+        ),
+        empty-color: (
+            color: ('gray', 700)
+        ),
+        disabled-color: (
+            color: ('gray', 400),
+        ),
+        disabled-color-label: (
+            color: ('gray', 400),
+        )
+    )
+);
