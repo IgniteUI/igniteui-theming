@@ -52,7 +52,7 @@ const config = {
             'https://github.com/IgniteUI/igniteui-theming/pages/docs/',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [require.resolve('./src/css/custom.css'), require.resolve('./src/css/palettes.scss')],
         },
       }),
     ],
@@ -134,6 +134,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+  plugins: ['docusaurus-plugin-sass']
 };
 
 module.exports = config;

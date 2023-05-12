@@ -1,0 +1,18 @@
+@use '../../node_modules/igniteui-theming/sass/color' as *;
+@use '../../node_modules/igniteui-theming/sass/color/presets' as *;
+
+.material-light {
+    @include palette($light-material-palette);
+}
+
+.bootstrap-light {
+    @include palette($light-bootstrap-palette);
+}
+
+.fluent-light {
+    @include palette($light-fluent-palette);
+}
+
+.indigo-light {
+    @include palette($light-indigo-palette);
+}
