@@ -1,60 +1,54 @@
 @use '../node_modules/igniteui-theming' as *;
 @use '../node_modules/igniteui-theming/sass/color/presets' as *;
 @use '../node_modules/igniteui-theming/sass/typography/presets' as *;
-
 @include typography(
-  $font-family: "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-  $type-scale: $material-type-scale,
+    $font-family: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+    $type-scale: $material-type-scale,
 );
-
 @include palette($light-material-palette);
 
 :root {
-  font-family: var(--ig-font-family);
-
-  color-scheme: light dark;
-  color: contrast-color(null, primary, 200);
-  background-color: color(null, primary, 200);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    font-family: var(--ig-font-family);
+    color-scheme: light dark;
+    color: contrast-color(null, primary, 900);
+    background-color: color(null, primary, 900);
+    font-synthesis: none;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 h1 {
-  @include type-style('h2');
+    @include type-style('h2');
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.logo {
+    height: 8rem;
 }
 
 .read-the-docs {
-  color: color(null, 'gray', 800);
+    opacity: .72;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: contrast-color(null, primary, 100);
+        background-color: color(null, primary, 100);
+    }
 }
