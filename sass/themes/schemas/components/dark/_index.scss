@@ -11,6 +11,7 @@
 @use './input-group' as *;
 @use './checkbox' as *;
 @use './switch' as *;
+@use './radio' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
@@ -23,6 +24,7 @@ $dark-material-schema: (
     input-group: $dark-input-group,
     checkbox: $dark-checkbox,
     switch: $dark-switch,
+    radio: $dark-radio,
     _meta: (
         theme: 'material',
         variant: 'dark',
@@ -39,7 +41,7 @@ $dark-fluent-schema: (
     navbar: $dark-fluent-navbar,
     input-group: $dark-fluent-input-group,
     checkbox: $dark-fluent-checkbox,
-    switch: $dark-fluent-switch,
+    radio: $dark-fluent-radio,
     _meta: (
         theme: 'fluent',
         variant: 'dark',
@@ -57,6 +59,7 @@ $dark-bootstrap-schema: (
     input-group: $dark-bootstrap-input-group,
     checkbox: $dark-bootstrap-checkbox,
     switch: $dark-bootstrap-switch,
+    radio: $dark-bootstrap-radio,
     _meta: (
         theme: 'bootstrap',
         variant: 'dark',
@@ -74,6 +77,7 @@ $dark-indigo-schema: (
     input-group: $dark-indigo-input-group,
     checkbox: $dark-indigo-checkbox,
     switch: $dark-indigo-switch,
+    radio: $dark-indigo-radio,
     _meta: (
         theme: 'indigo-design',
         variant: 'dark',

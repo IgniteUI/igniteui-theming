@@ -11,6 +11,7 @@
 @use './input-group' as *;
 @use './checkbox' as *;
 @use './switch' as *;
+@use './radio' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -23,6 +24,7 @@ $light-material-schema: (
     input-group: $light-input-group,
     checkbox: $light-checkbox,
     switch: $light-switch,
+    radio: $light-radio,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -40,6 +42,7 @@ $light-fluent-schema: (
     input-group: $fluent-input-group,
     checkbox: $fluent-checkbox,
     switch: $fluent-switch,
+    radio: $fluent-radio,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -57,6 +60,7 @@ $light-bootstrap-schema: (
     input-group: $bootstrap-input-group,
     checkbox: $bootstrap-checkbox,
     switch: $bootstrap-switch,
+    radio: $bootstrap-radio,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -74,6 +78,7 @@ $light-indigo-schema: (
     input-group: $indigo-input-group,
     checkbox: $indigo-checkbox,
     switch: $indigo-switch,
+    radio: $indigo-radio,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',
