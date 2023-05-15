@@ -14,6 +14,7 @@
 @use './radio' as *;
 @use './tabs' as *;
 @use './rating' as *;
+@use './select' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -29,6 +30,7 @@ $light-material-schema: (
     radio: $light-radio,
     tabs: $light-tabs,
     rating: $light-rating,
+    select: $light-select,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -49,6 +51,7 @@ $light-fluent-schema: (
     radio: $fluent-radio,
     tabs: $fluent-tabs,
     rating: $fluent-rating,
+    select: $fluent-select,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -69,6 +72,7 @@ $light-bootstrap-schema: (
     radio: $bootstrap-radio,
     tabs: $bootstrap-tabs,
     rating: $bootstrap-rating,
+    select: $bootstrap-select,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -89,6 +93,7 @@ $light-indigo-schema: (
     radio: $indigo-radio,
     tabs: $indigo-tabs,
     rating: $indigo-rating,
+    select: $indigo-select,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',

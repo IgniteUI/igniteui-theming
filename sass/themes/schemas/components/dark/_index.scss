@@ -14,6 +14,7 @@
 @use './radio' as *;
 @use './tabs' as *;
 @use './rating' as *;
+@use './select' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
@@ -29,6 +30,7 @@ $dark-material-schema: (
     radio: $dark-radio,
     tabs: $dark-tabs,
     rating: $dark-rating,
+    select: $dark-select,
     _meta: (
         theme: 'material',
         variant: 'dark',
@@ -48,6 +50,7 @@ $dark-fluent-schema: (
     radio: $dark-fluent-radio,
     tabs: $dark-fluent-tabs,
     rating: $dark-fluent-rating,
+    select: $dark-fluent-select,
     _meta: (
         theme: 'fluent',
         variant: 'dark',
@@ -68,6 +71,7 @@ $dark-bootstrap-schema: (
     radio: $dark-bootstrap-radio,
     tabs: $dark-bootstrap-tabs,
     rating: $dark-bootstrap-rating,
+    select: $dark-bootstrap-select,
     _meta: (
         theme: 'bootstrap',
         variant: 'dark',
@@ -88,6 +92,7 @@ $dark-indigo-schema: (
     radio: $dark-indigo-radio,
     tabs: $dark-indigo-tabs,
     rating: $dark-indigo-rating,
+    select: $dark-indigo-select,
     _meta: (
         theme: 'indigo-design',
         variant: 'dark',
