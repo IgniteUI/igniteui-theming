@@ -10,6 +10,7 @@
 @use './navbar' as *;
 @use './input-group' as *;
 @use './checkbox' as *;
+@use './switch' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
@@ -21,6 +22,11 @@ $dark-material-schema: (
     navbar: $dark-navbar,
     input-group: $dark-input-group,
     checkbox: $dark-checkbox,
+    switch: $dark-switch,
+    _meta: (
+        theme: 'material',
+        variant: 'dark',
+    ),
 );
 
 /// Used to create fluent component themes.
@@ -33,6 +39,11 @@ $dark-fluent-schema: (
     navbar: $dark-fluent-navbar,
     input-group: $dark-fluent-input-group,
     checkbox: $dark-fluent-checkbox,
+    switch: $dark-fluent-switch,
+    _meta: (
+        theme: 'fluent',
+        variant: 'dark',
+    ),
 );
 
 /// Used to create bootstrap component themes.
@@ -45,6 +56,11 @@ $dark-bootstrap-schema: (
     navbar: $dark-bootstrap-navbar,
     input-group: $dark-bootstrap-input-group,
     checkbox: $dark-bootstrap-checkbox,
+    switch: $dark-bootstrap-switch,
+    _meta: (
+        theme: 'bootstrap',
+        variant: 'dark',
+    ),
 );
 
 /// Used to create indigo component themes.
@@ -57,4 +73,9 @@ $dark-indigo-schema: (
     navbar: $dark-indigo-navbar,
     input-group: $dark-indigo-input-group,
     checkbox: $dark-indigo-checkbox,
+    switch: $dark-indigo-switch,
+    _meta: (
+        theme: 'indigo-design',
+        variant: 'dark',
+    ),
 );
