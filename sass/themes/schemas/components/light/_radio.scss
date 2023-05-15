@@ -19,9 +19,6 @@
 /// @prop {Map} error-color [color: ('error', 500)] - The label, border and dot color in invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and dot color in invalid state on hover.
 $light-radio: (
-    variant: 'material',
-    name: 'igx-radio',
-    type: 'light',
     hover-color: transparent,
     fill-hover-border-color:(
         color: ('secondary', 500)
@@ -66,7 +63,6 @@ $light-radio: (
 $fluent-radio: extend(
     $light-radio,
     (
-        variant: 'fluent',
         focus-outline-color: (
             color: ('gray', 700)
         ),
@@ -107,7 +103,6 @@ $fluent-radio: extend(
 $bootstrap-radio: extend(
     $light-radio,
     (
-        variant: 'bootstrap',
         focus-outline-color: (
             color: ('primary', 200)
         ),
@@ -147,7 +142,6 @@ $bootstrap-radio: extend(
 $indigo-radio: extend(
     $light-radio,
     (
-        variant: 'indigo-design',
         focus-outline-color: (
             color: ('gray', 300)
         ),

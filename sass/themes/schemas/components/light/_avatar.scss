@@ -15,7 +15,6 @@
 /// @prop {Number} size - The size of the avatar.
 $light-avatar: extend(
     (
-        variant: 'material',
         background: (
             color: ('gray', 400, .54)
         ),
@@ -29,12 +28,7 @@ $light-avatar: extend(
 /// Generates a fluent avatar schema.
 /// @type {Map}
 /// @requires {Map} $light-avatar
-$fluent-avatar: extend(
-    $light-avatar,
-    (
-        variant: 'fluent',
-    )
-);
+$fluent-avatar: extend($light-avatar);
 
 /// Generates a bootstrap avatar schema.
 /// @type {Map}
@@ -45,7 +39,6 @@ $fluent-avatar: extend(
 $bootstrap-avatar: extend(
     $light-avatar,
     (
-        variant: 'bootstrap',
         background: (
             color: ('gray', 400)
         ),
@@ -59,9 +52,4 @@ $bootstrap-avatar: extend(
 /// Generates an indigo avatar schema.
 /// @type {Map}
 /// @requires {Map} $light-avatar
-$indigo-avatar: extend(
-    $light-avatar,
-    (
-        variant: 'indigo-design',
-    )
-);
+$indigo-avatar: extend($light-avatar);

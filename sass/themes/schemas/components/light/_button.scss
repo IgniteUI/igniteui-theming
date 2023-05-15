@@ -21,7 +21,6 @@
 /// @prop {Map} disabled-background [color: ('gray', 300)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
 $material-base-button: (
-    variant: 'material',
     shadow-color: transparent,
     border-color: transparent,
     hover-border-color: transparent,
@@ -282,7 +281,6 @@ $fluent-base-button: extend(
     $material-base-button,
     $flat-elevation-button,
     (
-        variant: 'fluent',
         disabled-background: (
             color: ('gray', 200)
         ),
@@ -605,7 +603,6 @@ $bootstrap-base-button: extend(
     $material-base-button,
     $flat-elevation-button,
     (
-        variant: 'bootstrap',
         disabled-foreground: (
             color: ('primary', 200)
         ),
@@ -910,13 +907,7 @@ $bootstrap-button: (
 /// @type {Map}
 /// @requires {Map} $material-base-button
 /// @requires {Map} $flat-elevation-button
-$indigo-base-button: extend(
-    $material-base-button,
-    $flat-elevation-button,
-    (
-        variant: 'indigo-design',
-    )
-);
+$indigo-base-button: extend($material-base-button, $flat-elevation-button);
 
 /// @type {Map}
 /// @prop {Map} foreground [color: ('gray', 700)] - The idle text color of a flat button.

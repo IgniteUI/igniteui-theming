@@ -18,7 +18,6 @@
 $light-navbar: extend(
     $default-elevation-navbar,
     (
-        variant: 'material',
         background: (
             color: ('primary', 500)
         ),
@@ -44,7 +43,6 @@ $light-navbar: extend(
 $fluent-navbar: extend(
     $light-navbar,
     (
-        variant: 'fluent',
         background: (
             color: 'surface'
         ),
@@ -73,7 +71,6 @@ $bootstrap-navbar: extend(
     $light-navbar,
     $bootstrap-elevation-navbar,
     (
-        variant: 'bootstrap',
         background: (
             color: 'surface',
         ),
@@ -94,10 +91,4 @@ $bootstrap-navbar: extend(
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the navbar.
 /// @requires {Map} $light-navbar
 /// @requires {Map} $indigo-elevation-navbar
-$indigo-navbar: extend(
-    $light-navbar,
-    $indigo-elevation-navbar,
-    (
-        variant: 'indigo-design',
-    )
-);
+$indigo-navbar: extend($light-navbar, $indigo-elevation-navbar);

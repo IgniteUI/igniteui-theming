@@ -26,7 +26,6 @@
 /// @prop {Number} border-radius-ripple [24px] - The border radius used for checkbox ripple. Can be a fraction between 0 and 1, pixels, or percent.
 $light-checkbox: extend(
     (
-        variant: 'material',
         type: 'light',
         tick-color: (
             color: ('surface', 500)
@@ -87,7 +86,6 @@ $light-checkbox: extend(
 $fluent-checkbox: extend(
     $light-checkbox,
     (
-        variant: 'fluent',
         tick-color-hover: (
             color: ('gray', 700)
         ),
@@ -134,7 +132,6 @@ $fluent-checkbox: extend(
 $bootstrap-checkbox: extend(
     $light-checkbox,
     (
-        variant: 'bootstrap',
         focus-outline-color: (
             color: ('primary', 100)
         ),
@@ -178,7 +175,6 @@ $bootstrap-checkbox: extend(
 $indigo-checkbox: extend(
     $light-checkbox,
     (
-        variant: 'indigo-design',
         outline-color-hover-unchecked: (
             color: ('gray', 200, .87)
         ),
