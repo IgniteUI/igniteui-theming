@@ -15,6 +15,7 @@
 @use './tabs' as *;
 @use './rating' as *;
 @use './select' as *;
+@use './slider' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -31,6 +32,7 @@ $light-material-schema: (
     tabs: $light-tabs,
     rating: $light-rating,
     select: $light-select,
+    slider: $light-slider,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -52,6 +54,7 @@ $light-fluent-schema: (
     tabs: $fluent-tabs,
     rating: $fluent-rating,
     select: $fluent-select,
+    slider: $fluent-slider,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -73,6 +76,7 @@ $light-bootstrap-schema: (
     tabs: $bootstrap-tabs,
     rating: $bootstrap-rating,
     select: $bootstrap-select,
+    slider: $bootstrap-slider,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -94,6 +98,7 @@ $light-indigo-schema: (
     tabs: $indigo-tabs,
     rating: $indigo-rating,
     select: $indigo-select,
+    slider: $indigo-slider,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',

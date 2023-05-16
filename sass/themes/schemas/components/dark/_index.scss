@@ -15,6 +15,7 @@
 @use './tabs' as *;
 @use './rating' as *;
 @use './select' as *;
+@use './slider' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
@@ -31,6 +32,7 @@ $dark-material-schema: (
     tabs: $dark-tabs,
     rating: $dark-rating,
     select: $dark-select,
+    slider: $dark-slider,
     _meta: (
         theme: 'material',
         variant: 'dark',
@@ -51,6 +53,7 @@ $dark-fluent-schema: (
     tabs: $dark-fluent-tabs,
     rating: $dark-fluent-rating,
     select: $dark-fluent-select,
+    slider: $dark-fluent-slider,
     _meta: (
         theme: 'fluent',
         variant: 'dark',
@@ -72,6 +75,7 @@ $dark-bootstrap-schema: (
     tabs: $dark-bootstrap-tabs,
     rating: $dark-bootstrap-rating,
     select: $dark-bootstrap-select,
+    slider: $dark-bootstrap-slider,
     _meta: (
         theme: 'bootstrap',
         variant: 'dark',
@@ -93,6 +97,7 @@ $dark-indigo-schema: (
     tabs: $dark-indigo-tabs,
     rating: $dark-indigo-rating,
     select: $dark-indigo-select,
+    slider: $dark-indigo-slider,
     _meta: (
         theme: 'indigo-design',
         variant: 'dark',
