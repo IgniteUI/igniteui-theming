@@ -18,6 +18,7 @@
 @use './slider' as *;
 @use './drop-down' as *;
 @use './combo' as *;
+@use './tree' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -37,6 +38,7 @@ $light-material-schema: (
     slider: $light-slider,
     dropdown: $light-drop-down,
     combo: $light-combo,
+    tree: $light-tree,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -61,6 +63,7 @@ $light-fluent-schema: (
     slider: $fluent-slider,
     dropdown: $fluent-drop-down,
     combo: $fluent-combo,
+    tree: $fluent-tree,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -85,6 +88,7 @@ $light-bootstrap-schema: (
     slider: $bootstrap-slider,
     dropdown: $bootstrap-drop-down,
     combo: $bootstrap-combo,
+    tree: $bootstrap-tree,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -109,6 +113,7 @@ $light-indigo-schema: (
     slider: $indigo-slider,
     dropdown: $indigo-drop-down,
     combo: $indigo-combo,
+    tree: $indigo-tree,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',
