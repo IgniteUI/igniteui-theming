@@ -16,6 +16,7 @@
 @use './rating' as *;
 @use './select' as *;
 @use './slider' as *;
+@use './drop-down' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -33,6 +34,7 @@ $light-material-schema: (
     rating: $light-rating,
     select: $light-select,
     slider: $light-slider,
+    dropdown: $light-drop-down,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -55,6 +57,7 @@ $light-fluent-schema: (
     rating: $fluent-rating,
     select: $fluent-select,
     slider: $fluent-slider,
+    dropdown: $fluent-drop-down,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -77,6 +80,7 @@ $light-bootstrap-schema: (
     rating: $bootstrap-rating,
     select: $bootstrap-select,
     slider: $bootstrap-slider,
+    dropdown: $bootstrap-drop-down,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -99,6 +103,7 @@ $light-indigo-schema: (
     rating: $indigo-rating,
     select: $indigo-select,
     slider: $indigo-slider,
+    dropdown: $indigo-dropdown,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',
