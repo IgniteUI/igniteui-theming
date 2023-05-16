@@ -17,6 +17,7 @@
 @use './select' as *;
 @use './slider' as *;
 @use './drop-down' as *;
+@use './combo' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -35,6 +36,7 @@ $light-material-schema: (
     select: $light-select,
     slider: $light-slider,
     dropdown: $light-drop-down,
+    combo: $light-combo,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -58,6 +60,7 @@ $light-fluent-schema: (
     select: $fluent-select,
     slider: $fluent-slider,
     dropdown: $fluent-drop-down,
+    combo: $fluent-combo,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -81,6 +84,7 @@ $light-bootstrap-schema: (
     select: $bootstrap-select,
     slider: $bootstrap-slider,
     dropdown: $bootstrap-drop-down,
+    combo: $bootstrap-combo,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -104,6 +108,7 @@ $light-indigo-schema: (
     select: $indigo-select,
     slider: $indigo-slider,
     dropdown: $indigo-drop-down,
+    combo: $indigo-combo,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',

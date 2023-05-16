@@ -17,6 +17,7 @@
 @use './select' as *;
 @use './slider' as *;
 @use './drop-down' as *;
+@use './combo' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
@@ -35,6 +36,7 @@ $dark-material-schema: (
     select: $dark-select,
     slider: $dark-slider,
     dropdown: $dark-drop-down,
+    combo: $dark-combo,
     _meta: (
         theme: 'material',
         variant: 'dark',
@@ -57,6 +59,7 @@ $dark-fluent-schema: (
     select: $dark-fluent-select,
     slider: $dark-fluent-slider,
     dropdown: $dark-fluent-drop-down,
+    combo: $dark-fluent-combo,
     _meta: (
         theme: 'fluent',
         variant: 'dark',
@@ -80,6 +83,7 @@ $dark-bootstrap-schema: (
     select: $dark-bootstrap-select,
     slider: $dark-bootstrap-slider,
     dropdown: $dark-bootstrap-drop-down,
+    combo: $dark-bootstrap-combo,
     _meta: (
         theme: 'bootstrap',
         variant: 'dark',
@@ -103,6 +107,7 @@ $dark-indigo-schema: (
     select: $dark-indigo-select,
     slider: $dark-indigo-slider,
     dropdown: $dark-indigo-drop-down,
+    combo: $dark-indigo-combo,
     _meta: (
         theme: 'indigo-design',
         variant: 'dark',
