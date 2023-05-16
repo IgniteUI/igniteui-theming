@@ -1,0 +1,29 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../light/rating' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark rating schema.
+/// @type {Map}
+/// @requires $light-rating
+$dark-rating: $light-rating;
+
+/// Generates a dark fluent rating schema.
+/// @type {Map}
+/// @requires $fluent-rating
+$dark-fluent-rating: $fluent-rating;
+
+/// Generates a dark bootstrap rating schema.
+/// @type {Map}
+/// @requires $bootstrap-rating
+$dark-bootstrap-rating: $bootstrap-rating;
+
+/// Generates a dark indigo rating schema.
+/// @type {Map}
+/// @requires $indigo-rating
+$dark-indigo-rating: $indigo-rating;

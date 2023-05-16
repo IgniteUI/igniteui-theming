@@ -1,0 +1,120 @@
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+@use './avatar' as *;
+@use './button' as *;
+@use './icon' as *;
+@use './navbar' as *;
+@use './input-group' as *;
+@use './checkbox' as *;
+@use './switch' as *;
+@use './radio' as *;
+@use './tabs' as *;
+@use './rating' as *;
+@use './select' as *;
+@use './slider' as *;
+@use './drop-down' as *;
+@use './combo' as *;
+@use './tree' as *;
+
+/// Used to create material component themes.
+/// Use in combination with dark palettes.
+/// @type Map
+$dark-material-schema: (
+    avatar: $dark-avatar,
+    button: $dark-button,
+    icon: $dark-icon,
+    navbar: $dark-navbar,
+    input-group: $dark-input-group,
+    checkbox: $dark-checkbox,
+    switch: $dark-switch,
+    radio: $dark-radio,
+    tabs: $dark-tabs,
+    rating: $dark-rating,
+    select: $dark-select,
+    slider: $dark-slider,
+    dropdown: $dark-drop-down,
+    combo: $dark-combo,
+    tree: $dark-tree,
+    _meta: (
+        theme: 'material',
+        variant: 'dark',
+    ),
+);
+
+/// Used to create fluent component themes.
+/// Use in combination with dark palettes.
+/// @type Map
+$dark-fluent-schema: (
+    avatar: $dark-fluent-avatar,
+    button: $dark-fluent-button,
+    icon: $dark-fluent-icon,
+    navbar: $dark-fluent-navbar,
+    input-group: $dark-fluent-input-group,
+    checkbox: $dark-fluent-checkbox,
+    radio: $dark-fluent-radio,
+    tabs: $dark-fluent-tabs,
+    rating: $dark-fluent-rating,
+    select: $dark-fluent-select,
+    slider: $dark-fluent-slider,
+    dropdown: $dark-fluent-drop-down,
+    combo: $dark-fluent-combo,
+    tree: $dark-fluent-tree,
+    _meta: (
+        theme: 'fluent',
+        variant: 'dark',
+    ),
+);
+
+/// Used to create bootstrap component themes.
+/// Use in combination with dark palettes.
+/// @type Map
+$dark-bootstrap-schema: (
+    avatar: $dark-bootstrap-avatar,
+    button: $dark-bootstrap-button,
+    icon: $dark-bootstrap-icon,
+    navbar: $dark-bootstrap-navbar,
+    input-group: $dark-bootstrap-input-group,
+    checkbox: $dark-bootstrap-checkbox,
+    switch: $dark-bootstrap-switch,
+    radio: $dark-bootstrap-radio,
+    tabs: $dark-bootstrap-tabs,
+    rating: $dark-bootstrap-rating,
+    select: $dark-bootstrap-select,
+    slider: $dark-bootstrap-slider,
+    dropdown: $dark-bootstrap-drop-down,
+    combo: $dark-bootstrap-combo,
+    tree: $dark-bootstrap-tree,
+    _meta: (
+        theme: 'bootstrap',
+        variant: 'dark',
+    ),
+);
+
+/// Used to create indigo component themes.
+/// Use in combination with dark palettes.
+/// @type Map
+$dark-indigo-schema: (
+    avatar: $dark-indigo-avatar,
+    button: $dark-indigo-button,
+    icon: $dark-indigo-icon,
+    navbar: $dark-indigo-navbar,
+    input-group: $dark-indigo-input-group,
+    checkbox: $dark-indigo-checkbox,
+    switch: $dark-indigo-switch,
+    radio: $dark-indigo-radio,
+    tabs: $dark-indigo-tabs,
+    rating: $dark-indigo-rating,
+    select: $dark-indigo-select,
+    slider: $dark-indigo-slider,
+    dropdown: $dark-indigo-drop-down,
+    combo: $dark-indigo-combo,
+    tree: $dark-indigo-tree,
+    _meta: (
+        theme: 'indigo-design',
+        variant: 'dark',
+    ),
+);

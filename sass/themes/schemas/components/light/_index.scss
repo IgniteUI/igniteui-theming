@@ -1,0 +1,121 @@
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+@use './avatar' as *;
+@use './button' as *;
+@use './icon' as *;
+@use './navbar' as *;
+@use './input-group' as *;
+@use './checkbox' as *;
+@use './switch' as *;
+@use './radio' as *;
+@use './tabs' as *;
+@use './rating' as *;
+@use './select' as *;
+@use './slider' as *;
+@use './drop-down' as *;
+@use './combo' as *;
+@use './tree' as *;
+
+/// Used to create material component themes.
+/// Use in combination with light palettes.
+/// @type Map.
+$light-material-schema: (
+    avatar: $light-avatar,
+    button: $light-button,
+    icon: $light-icon,
+    navbar: $light-navbar,
+    input-group: $light-input-group,
+    checkbox: $light-checkbox,
+    switch: $light-switch,
+    radio: $light-radio,
+    tabs: $light-tabs,
+    rating: $light-rating,
+    select: $light-select,
+    slider: $light-slider,
+    dropdown: $light-drop-down,
+    combo: $light-combo,
+    tree: $light-tree,
+    _meta: (
+        theme: 'material',
+        variant: 'light',
+    ),
+);
+
+/// Used to create fluent component themes.
+/// Use in combination with light palettes.
+/// @type Map
+$light-fluent-schema: (
+    avatar: $fluent-avatar,
+    button: $fluent-button,
+    icon: $fluent-icon,
+    navbar: $fluent-navbar,
+    input-group: $fluent-input-group,
+    checkbox: $fluent-checkbox,
+    switch: $fluent-switch,
+    radio: $fluent-radio,
+    tabs: $fluent-tabs,
+    rating: $fluent-rating,
+    select: $fluent-select,
+    slider: $fluent-slider,
+    dropdown: $fluent-drop-down,
+    combo: $fluent-combo,
+    tree: $fluent-tree,
+    _meta: (
+        theme: 'fluent',
+        variant: 'light',
+    ),
+);
+
+/// Used to create bootstrap component themes.
+/// Use in combination with light palettes.
+/// @type Map
+$light-bootstrap-schema: (
+    avatar: $bootstrap-avatar,
+    button: $bootstrap-button,
+    icon: $bootstrap-icon,
+    navbar: $bootstrap-navbar,
+    input-group: $bootstrap-input-group,
+    checkbox: $bootstrap-checkbox,
+    switch: $bootstrap-switch,
+    radio: $bootstrap-radio,
+    tabs: $bootstrap-tabs,
+    rating: $bootstrap-rating,
+    select: $bootstrap-select,
+    slider: $bootstrap-slider,
+    dropdown: $bootstrap-drop-down,
+    combo: $bootstrap-combo,
+    tree: $bootstrap-tree,
+    _meta: (
+        theme: 'bootstrap',
+        variant: 'light',
+    ),
+);
+
+/// Used to create indigo component themes.
+/// Use in combination with light palettes.
+/// @type Map
+$light-indigo-schema: (
+    avatar: $indigo-avatar,
+    button: $indigo-button,
+    icon: $indigo-icon,
+    navbar: $indigo-navbar,
+    input-group: $indigo-input-group,
+    checkbox: $indigo-checkbox,
+    switch: $indigo-switch,
+    radio: $indigo-radio,
+    tabs: $indigo-tabs,
+    rating: $indigo-rating,
+    select: $indigo-select,
+    slider: $indigo-slider,
+    dropdown: $indigo-drop-down,
+    combo: $indigo-combo,
+    tree: $indigo-tree,
+    _meta: (
+        theme: 'indigo-design',
+        variant: 'light',
+    ),
+);
