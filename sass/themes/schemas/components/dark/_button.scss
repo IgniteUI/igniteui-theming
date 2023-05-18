@@ -16,10 +16,17 @@
 $material-base-button-dark: extend(
     (
         disabled-background: (
-            color: ('gray', 100, .3)
+            color: (
+                'gray',
+                100,
+                0.3,
+            ),
         ),
         disabled-foreground: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
     )
 );
@@ -36,13 +43,25 @@ $material-flat-button-dark: extend(
     $material-base-button-dark,
     (
         hover-background: (
-            color: ('secondary', 500, .12),
+            color: (
+                'secondary',
+                500,
+                0.12,
+            ),
         ),
         focus-background: (
-            color: ('secondary', 400, .24),
+            color: (
+                'secondary',
+                400,
+                0.24,
+            ),
         ),
         focus-visible-background: (
-            color: ('secondary', 400, .24),
+            color: (
+                'secondary',
+                400,
+                0.24,
+            ),
         ),
         disabled-background: transparent,
     )
@@ -60,13 +79,25 @@ $material-icon-button-dark: extend(
     $material-base-button-dark,
     (
         hover-background: (
-            color: ('gray', 100, .5)
+            color: (
+                'gray',
+                100,
+                0.5,
+            ),
         ),
         focus-background: (
-            color: ('gray', 200, .8)
+            color: (
+                'gray',
+                200,
+                0.8,
+            ),
         ),
         focus-visible-background: (
-            color: ('gray', 200, .8)
+            color: (
+                'gray',
+                200,
+                0.8,
+            ),
         ),
         disabled-background: transparent,
     )
@@ -89,7 +120,11 @@ $material-outlined-button-dark: extend(
     $material-base-button-dark,
     (
         disabled-border-color: (
-            color: ('gray', 100, .3)
+            color: (
+                'gray',
+                100,
+                0.3,
+            ),
         ),
         disabled-background: transparent,
     )
@@ -117,10 +152,16 @@ $dark-button: (
 $fluent-base-button-dark: extend(
     (
         disabled-background: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         disabled-foreground: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
     )
 );
@@ -133,23 +174,17 @@ $fluent-flat-button-dark: extend(
     $fluent-flat-button,
     $fluent-base-button-dark,
     (
-        disabled-background: transparent
+        disabled-background: transparent,
     )
 );
 
 /// @requires {Map} $fluent-raised-button
 /// @requires {Map} $fluent-base-button-dark
-$fluent-raised-button-dark: extend(
-    $fluent-raised-button,
-    $fluent-base-button-dark
-);
+$fluent-raised-button-dark: extend($fluent-raised-button, $fluent-base-button-dark);
 
 /// @requires {Map} $fluent-fab-button
 /// @requires {Map} $fluent-base-button-dark
-$fluent-fab-button-dark: extend(
-    $fluent-fab-button,
-    $fluent-base-button-dark
-);
+$fluent-fab-button-dark: extend($fluent-fab-button, $fluent-base-button-dark);
 
 /// @prop {Map} hover-background [color: ('gray', 50)] - The hover background color of an icon button.
 /// @prop {Map} active-background [color: ('gray', 100, .8)] - The active background color of an icon button.
@@ -161,13 +196,23 @@ $fluent-icon-button-dark: extend(
     $fluent-base-button-dark,
     (
         hover-background: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         active-background: (
-            color: ('gray', 100, .8)
+            color: (
+                'gray',
+                100,
+                0.8,
+            ),
         ),
         disabled-border-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
     )
 );
@@ -183,16 +228,29 @@ $fluent-outlined-button-dark: extend(
     $fluent-base-button-dark,
     (
         hover-background: (
-            color:('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         active-background: (
-            color: ('gray', 100, .8)
+            color: (
+                'gray',
+                100,
+                0.8,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('gray', 100)
+            contrast-color: (
+                'gray',
+                100,
+            ),
         ),
         border-color: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
     )
 );
@@ -225,7 +283,10 @@ $bootstrap-outlined-button-dark: extend(
     $bootstrap-outlined-button,
     (
         disabled-border-color: (
-            color: ('primary', 900)
+            color: (
+                'primary',
+                900,
+            ),
         ),
     )
 );
@@ -233,10 +294,7 @@ $bootstrap-outlined-button-dark: extend(
 /// @type {Map}
 /// @requires {Map} $bootstrap-base-button-dark
 /// @requires {Map} $bootstrap-flat-button
-$bootstrap-flat-button-dark: extend(
-    $bootstrap-base-button-dark,
-    $bootstrap-flat-button,
-);
+$bootstrap-flat-button-dark: extend($bootstrap-base-button-dark, $bootstrap-flat-button);
 
 /// Generates a dark bootstrap button schema.
 /// @type {Map}
@@ -260,11 +318,18 @@ $dark-bootstrap-button: (
 $indigo-base-button-dark: extend(
     (
         disabled-foreground: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-background: (
-            color: ('gray', 200, .1),
-        )
+            color: (
+                'gray',
+                200,
+                0.1,
+            ),
+        ),
     )
 );
 
@@ -278,9 +343,13 @@ $indigo-flat-button-dark: extend(
     $indigo-base-button-dark,
     (
         foreground: (
-            color: ('gray', 600, .8),
+            color: (
+                'gray',
+                600,
+                0.8,
+            ),
         ),
-        disabled-background: transparent
+        disabled-background: transparent,
     )
 );
 
@@ -296,16 +365,28 @@ $indigo-raised-button-dark: extend(
     $indigo-base-button-dark,
     (
         foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         hover-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
     )
 );
@@ -322,15 +403,25 @@ $indigo-outlined-button-dark: extend(
     $indigo-base-button-dark,
     (
         foreground: (
-            color: ('gray', 500),
+            color: (
+                'gray',
+                500,
+            ),
         ),
         border-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         shadow-color: (
-            color: ('gray', 200, .8),
+            color: (
+                'gray',
+                200,
+                0.8,
+            ),
         ),
-        disabled-background: transparent
+        disabled-background: transparent,
     )
 );
 
@@ -342,7 +433,7 @@ $indigo-icon-button-dark: extend(
     $indigo-icon-button,
     $indigo-base-button-dark,
     (
-        disabled-background: transparent
+        disabled-background: transparent,
     )
 );
 
@@ -358,16 +449,28 @@ $indigo-fab-button-dark: extend(
     $indigo-base-button-dark,
     (
         foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         hover-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
     )
 );

@@ -65,14 +65,14 @@
     $trend-line-thickness: null,
     $horizontal-axis-brush: null,
     $vertical-axis-brush: null,
-    $normal-range-fill: null,
+    $normal-range-fill: null
 ) {
     $name: 'sparkline';
     $selector: map.get(
         (
             'angular': 'igx-sparkline',
             'webc': 'igc-sparkline',
-            'blazor': 'igb-sparkline'
+            'blazor': 'igb-sparkline',
         ),
         $target
     );

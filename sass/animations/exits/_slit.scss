@@ -9,7 +9,7 @@
 
 /// @requires {mixin} keyframes
 @mixin slit-out-vertical {
-    @include keyframes (slit-out-vertical) {
+    @include keyframes(slit-out-vertical) {
         0% {
             transform: translateZ(0) rotateY(0);
             opacity: 1;
@@ -29,7 +29,7 @@
 
 /// @requires {mixin} keyframes
 @mixin slit-out-horizontal {
-    @include keyframes (slit-out-horizontal) {
+    @include keyframes(slit-out-horizontal) {
         0% {
             transform: translateZ(0) rotateX(0);
             opacity: 1;
@@ -49,7 +49,7 @@
 
 /// @requires {mixin} keyframes
 @mixin slit-out-diagonal-1 {
-    @include keyframes (slit-out-diagonal-1) {
+    @include keyframes(slit-out-diagonal-1) {
         0% {
             transform: translateZ(0) rotate3d(1, 1, 0, 0);
             opacity: 1;
@@ -69,7 +69,7 @@
 
 /// @requires {mixin} keyframes
 @mixin slit-out-diagonal-2 {
-    @include keyframes (slit-out-diagonal-2) {
+    @include keyframes(slit-out-diagonal-2) {
         0% {
             transform: translateZ(0) rotate3d(-1, 1, 0, 0);
             opacity: 1;

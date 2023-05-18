@@ -9,7 +9,7 @@
 
 /// @requires {mixin} keyframes
 @mixin flicker-out-1 {
-    @include keyframes (flicker-out-1) {
+    @include keyframes(flicker-out-1) {
         0% {
             opacity: 1;
         }
@@ -154,23 +154,17 @@
 
 /// @requires {mixin} keyframes
 @mixin flicker-out-2 {
-    @include keyframes (flicker-out-2) {
+    @include keyframes(flicker-out-2) {
         0% {
             opacity: 1;
-            box-shadow:
-                0 0 30px rgb(255 255 255 / 60%),
-                0 0 60px rgb(255 255 255 / 45%),
-                0 0 110px rgb(255 255 255 / 25%),
-                0 0 100px rgb(255 255 255 / 10%);
+            box-shadow: 0 0 30px rgb(255 255 255 / 60%), 0 0 60px rgb(255 255 255 / 45%),
+                0 0 110px rgb(255 255 255 / 25%), 0 0 100px rgb(255 255 255 / 10%);
         }
 
         13.9% {
             opacity: 1;
-            box-shadow:
-                0 0 30px rgb(255 255 255 / 60%),
-                0 0 60px rgb(255 255 255 / 45%),
-                0 0 110px rgb(255 255 255 / 25%),
-                0 0 100px rgb(255 255 255 / 10%);
+            box-shadow: 0 0 30px rgb(255 255 255 / 60%), 0 0 60px rgb(255 255 255 / 45%),
+                0 0 110px rgb(255 255 255 / 25%), 0 0 100px rgb(255 255 255 / 10%);
         }
 
         14% {
@@ -185,20 +179,14 @@
 
         15% {
             opacity: 1;
-            box-shadow:
-                0 0 30px rgb(255 255 255 / 55%),
-                0 0 60px rgb(255 255 255 / 40%),
-                0 0 110px rgb(255 255 255 / 20%),
-                0 0 100px rgb(255 255 255 / 10%);
+            box-shadow: 0 0 30px rgb(255 255 255 / 55%), 0 0 60px rgb(255 255 255 / 40%),
+                0 0 110px rgb(255 255 255 / 20%), 0 0 100px rgb(255 255 255 / 10%);
         }
 
         22.9% {
             opacity: 1;
-            box-shadow:
-                0 0 30px rgb(255 255 255 / 55%),
-                0 0 60px rgb(255 255 255 / 40%),
-                0 0 110px rgb(255 255 255 / 20%),
-                0 0 100px rgb(255 255 255 / 10%);
+            box-shadow: 0 0 30px rgb(255 255 255 / 55%), 0 0 60px rgb(255 255 255 / 40%),
+                0 0 110px rgb(255 255 255 / 20%), 0 0 100px rgb(255 255 255 / 10%);
         }
 
         23% {
@@ -213,17 +201,13 @@
 
         25% {
             opacity: 1;
-            box-shadow:
-                0 0 30px rgb(255 255 255 / 55%),
-                0 0 60px rgb(255 255 255 / 35%),
+            box-shadow: 0 0 30px rgb(255 255 255 / 55%), 0 0 60px rgb(255 255 255 / 35%),
                 0 0 100px rgb(255 255 255 / 10%);
         }
 
         34.9% {
             opacity: 1;
-            box-shadow:
-                0 0 30px rgb(255 255 255 / 55%),
-                0 0 60px rgb(255 255 255 / 35%),
+            box-shadow: 0 0 30px rgb(255 255 255 / 55%), 0 0 60px rgb(255 255 255 / 35%),
                 0 0 100px rgb(255 255 255 / 10%);
         }
 

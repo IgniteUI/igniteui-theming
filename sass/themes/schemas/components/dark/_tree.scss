@@ -16,13 +16,23 @@
 /// @prop {Map} foreground-active [color: ('gray', 900)] - The color used for the content in active state of the tree node.
 $base-dark-tree: (
     background-active: (
-        color: ('gray', 100),
+        color: (
+            'gray',
+            100,
+        ),
     ),
     foreground-active: (
-        color: ('gray', 900),
+        color: (
+            'gray',
+            900,
+        ),
     ),
     hover-color: (
-        color: ('gray', 50, .1)
+        color: (
+            'gray',
+            50,
+            0.1,
+        ),
     ),
 );
 
@@ -46,22 +56,41 @@ $dark-fluent-tree: extend(
     $base-dark-tree,
     (
         background-active: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         background-selected: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         foreground-selected: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         background-active-selected: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         foreground-active-selected: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         hover-color: (
-            color: ('gray', 200, .5)
+            color: (
+                'gray',
+                200,
+                0.5,
+            ),
         ),
     )
 );
@@ -75,8 +104,12 @@ $dark-bootstrap-tree: extend(
     $base-dark-tree,
     (
         hover-color: (
-            color: ('gray', 500, .3)
-        )
+            color: (
+                'gray',
+                500,
+                0.3,
+            ),
+        ),
     )
 );
 
@@ -89,7 +122,11 @@ $dark-indigo-tree: extend(
     $base-dark-tree,
     (
         hover-color: (
-            color: ('primary', 200, .5)
-        )
+            color: (
+                'primary',
+                200,
+                0.5,
+            ),
+        ),
     )
 );

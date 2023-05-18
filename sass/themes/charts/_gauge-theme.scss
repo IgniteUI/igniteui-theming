@@ -43,17 +43,13 @@
 ///   $custom-gauge-theme: linear-gauge-theme($brushes: (red, green, blue));
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($custom-gauge-theme);
-@function linear-gauge-theme(
-    $schema: $light-material-schema,
-    $target: 'angular',
-    $rest...
-) {
+@function linear-gauge-theme($schema: $light-material-schema, $target: 'angular', $rest...) {
     $name: 'linear-gauge';
     $selector: map.get(
         (
             'angular': 'igx-linear-gauge',
             'webc': 'igc-linear-gauge',
-            'blazor': 'igb-linear-gauge'
+            'blazor': 'igb-linear-gauge',
         ),
         $target
     );
@@ -73,7 +69,7 @@
         (
             name: $name,
             selector: $selector,
-        ),
+        )
     );
 }
 
@@ -103,17 +99,13 @@
 ///   $custom-gauge-theme: radial-gauge-theme($brushes: (red, green, blue));
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($custom-gauge-theme);
-@function radial-gauge-theme(
-    $schema: $light-material-schema,
-    $target: 'angular',
-    $rest...
-) {
+@function radial-gauge-theme($schema: $light-material-schema, $target: 'angular', $rest...) {
     $name: 'radial-gauge';
     $selector: map.get(
         (
             'angular': 'igx-radial-gauge',
             'webc': 'igc-radial-gauge',
-            'blazor': 'igb-radial-gauge'
+            'blazor': 'igb-radial-gauge',
         ),
         $target
     );
@@ -133,7 +125,7 @@
         (
             name: $name,
             selector: $selector,
-        ),
+        )
     );
 }
 
@@ -146,7 +138,7 @@
         (
             'angular': 'igx-linear-gauge',
             'webc': 'igc-linear-gauge',
-            'blazor': 'igb-linear-gauge'
+            'blazor': 'igb-linear-gauge',
         ),
         $target
     );
@@ -154,7 +146,7 @@
         (
             'angular': 'igx-radial-gauge',
             'webc': 'igc-radial-gauge',
-            'blazor': 'igb-radial-gauge'
+            'blazor': 'igb-radial-gauge',
         ),
         $target
     );

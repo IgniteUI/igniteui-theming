@@ -30,7 +30,12 @@
 
         $key: list.nth(map.keys($props), $i);
         $value: list.nth($list, $n);
-        $props: map.merge($props, ($key: $value));
+        $props: map.merge(
+            $props,
+            (
+                $key: $value,
+            )
+        );
     }
 
     @return $props;

@@ -9,7 +9,7 @@
 
 /// @requires {mixin} keyframes
 @mixin roll-out-left {
-    @include keyframes (roll-out-left) {
+    @include keyframes(roll-out-left) {
         0% {
             transform: translateX(0) rotate(0deg);
             opacity: 1;
@@ -24,7 +24,7 @@
 
 /// @requires {mixin} keyframes
 @mixin roll-out-top {
-    @include keyframes (roll-out-top) {
+    @include keyframes(roll-out-top) {
         0% {
             transform: translateY(0) rotate(0deg);
             opacity: 1;
@@ -39,7 +39,7 @@
 
 /// @requires {mixin} keyframes
 @mixin roll-out-right {
-    @include keyframes (roll-out-right) {
+    @include keyframes(roll-out-right) {
         0% {
             transform: translateX(0) rotate(0deg);
             opacity: 1;
@@ -54,7 +54,7 @@
 
 /// @requires {mixin} keyframes
 @mixin roll-out-bottom {
-    @include keyframes (roll-out-bottom) {
+    @include keyframes(roll-out-bottom) {
         0% {
             transform: translateY(0) rotate(0deg);
             opacity: 1;

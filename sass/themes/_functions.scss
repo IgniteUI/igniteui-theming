@@ -38,22 +38,12 @@
 
         // Special case for chart elevation literals
         @if string.index($key, 'elevation') {
-            $result: map.merge(
-                $result,
-                (
-                    #{$key}: #{elevation($value)}
-                )
-            );
+            $result: map.merge($result, (#{$key}: #{elevation($value)}));
         }
 
         // Special case for chart brushes
         @if $value == 'series' {
-            $result: map.merge(
-                $result,
-                (
-                    #{$key}: #{color.chart-brushes()}
-                )
-            );
+            $result: map.merge($result, (#{$key}: #{color.chart-brushes()}));
         }
     }
 

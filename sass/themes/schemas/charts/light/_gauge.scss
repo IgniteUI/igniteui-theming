@@ -33,10 +33,16 @@ $material-gauge: (
     ),
     'backing-stroke-thickness': null,
     'font-brush': (
-        contrast-color: ('surface', 500),
+        contrast-color: (
+            'surface',
+            500,
+        ),
     ),
     'minor-tick-brush': (
-        contrast-color: ('surface', 500),
+        contrast-color: (
+            'surface',
+            500,
+        ),
     ),
     'minor-tick-stroke-thickness': null,
     'needle-brush': (
@@ -52,9 +58,12 @@ $material-gauge: (
         color: 'surface',
     ),
     'tick-brush': (
-        contrast-color: ('surface', 500)
+        contrast-color: (
+            'surface',
+            500,
+        ),
     ),
-    'tick-stroke-thickness': null
+    'tick-stroke-thickness': null,
 );
 
 /// Generates a material linear gauge schema.
@@ -97,7 +106,7 @@ $material-radial-gauge: extend(
         ),
         needle-pivot-outline: (
             color: 'surface',
-        )
+        ),
     )
 );
 

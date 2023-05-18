@@ -36,65 +36,120 @@
 $light-tabs: extend(
     (
         item-text-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         item-background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         item-hover-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         item-hover-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         item-active-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         item-icon-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         item-active-icon-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         item-hover-icon-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         item-disabled-icon-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         item-active-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         item-disabled-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         indicator-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         button-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         button-background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         button-hover-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         button-hover-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         button-disabled-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         tab-ripple-color: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         button-ripple-color: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         border-color: transparent,
         border-color--hover: transparent,
-        border-radius: rem(0)
+        border-radius: rem(0),
     )
 );
 
@@ -112,25 +167,46 @@ $fluent-tabs: extend(
     $light-tabs,
     (
         item-text-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         item-hover-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         item-disabled-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         item-disabled-icon-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         button-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         button-hover-color: (
-            color: ('gray', 600)
+            color: (
+                'gray',
+                600,
+            ),
         ),
         button-disabled-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
     )
 );
@@ -160,57 +236,107 @@ $bootstrap-tabs: extend(
     $light-tabs,
     (
         item-background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         button-background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         button-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         button-hover-color: (
-            color: ('gray', 600)
+            color: (
+                'gray',
+                600,
+            ),
         ),
         item-hover-background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         button-disabled-color: (
-            color: ('primary', 500, .5)
+            color: (
+                'primary',
+                500,
+                0.5,
+            ),
         ),
         item-active-background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         border-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         border-color--hover: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         item-text-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         item-icon-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         item-hover-color: (
-            color: ('primary', 700)
+            color: (
+                'primary',
+                700,
+            ),
         ),
         item-hover-icon-color: (
-            color: ('primary', 700)
+            color: (
+                'primary',
+                700,
+            ),
         ),
         item-active-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         item-active-icon-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         item-disabled-color: (
-            color: ('primary', 500, .5)
+            color: (
+                'primary',
+                500,
+                0.5,
+            ),
         ),
         item-disabled-icon-color: (
-            color: ('primary', 500, .5)
+            color: (
+                'primary',
+                500,
+                0.5,
+            ),
         ),
-        border-radius: rem(4px)
+        border-radius: rem(4px),
     )
 );
 
@@ -235,22 +361,40 @@ $indigo-tabs: extend(
         item-hover-background: transparent,
         item-active-background: transparent,
         item-hover-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         item-hover-icon-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         item-active-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         item-active-icon-color: (
-            color: ('primary', 400)
+            color: (
+                'primary',
+                400,
+            ),
         ),
         indicator-color: (
-            color: ('primary', 400)
+            color: (
+                'primary',
+                400,
+            ),
         ),
         button-disabled-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         button-background: transparent,
         button-hover-background: transparent,

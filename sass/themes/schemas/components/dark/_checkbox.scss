@@ -26,7 +26,10 @@ $dark-fluent-checkbox: extend(
     $fluent-checkbox,
     (
         fill-color-hover: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
     )
 );
@@ -39,8 +42,11 @@ $dark-bootstrap-checkbox: extend(
     $bootstrap-checkbox,
     (
         tick-color: (
-            color: ('gray', 900)
-        )
+            color: (
+                'gray',
+                900,
+            ),
+        ),
     )
 );
 
@@ -55,16 +61,28 @@ $dark-indigo-checkbox: extend(
     $indigo-checkbox,
     (
         fill-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         empty-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         disabled-color: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
         disabled-color-label: (
-            color: ('gray', 400),
-        )
+            color: (
+                'gray',
+                400,
+            ),
+        ),
     )
 );

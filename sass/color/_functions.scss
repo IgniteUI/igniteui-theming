@@ -55,7 +55,7 @@ $_enhanced-accessibility: false;
     $success: #4eb862,
     $warn: #faa419,
     $error: #ff134a,
-    $variant: null,
+    $variant: null
 ) {
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
@@ -95,12 +95,7 @@ $_enhanced-accessibility: false;
 /// @returns {Map} - A map consisting of hsla color shades and their respective contrast colors.
 /// @example scss
 ///   $special-color-shades: shades('accent', #09f, (50,100,200,300,400,500,600,700,800,900))
-@function shades(
-    $name,
-    $color,
-    $shades,
-    $surface: null
-) {
+@function shades($name, $color, $shades, $surface: null) {
     $result: ();
 
     @each $variant in $shades {
@@ -128,44 +123,31 @@ $_enhanced-accessibility: false;
 /// @require {function} luminance
 /// @require {function} to-fixed
 /// @returns {Map} - A map containing a list of HSL values and a raw color value.
-@function shade(
-    $name,
-    $color,
-    $shade,
-    $surface: null,
-) {
+@function shade($name, $color, $shade, $surface: null) {
     $h: var(--ig-#{$name}-h);
     $s: var(--ig-#{$name}-s);
     $l: var(--ig-#{$name}-l);
 
     @if #{$name} == 'gray' {
         $lum: luminance($surface);
-        $color: if($color, $color, if($lum > .5, #000, #fff));
+        $color: if($color, $color, if($lum > 0.5, #000, #fff));
         $lmap: map.get(multipliers.$grayscale, 'l');
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), $shade);
-        $l: list.nth(map.values($lmap), if($lum > .5, $len - $i + 1, $i));
+        $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
 
-        @return (
-            raw: hsl(
-                to-fixed(color.hue($color)),
-                to-fixed(color.saturation($color)),
-                $l
-            ),
-            hsl: #{$h, $s, $l}
-        );
+        @return (raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l), hsl: #{$h, $s, $l});
     } @else {
         $sx: map.get(multipliers.$color, 's', $shade);
         $lx: map.get(multipliers.$color, 'l', $shade);
-
-        @return (
-            raw: hsl(
-                to-fixed(color.hue($color)),
-                to-fixed(color.saturation($color) * $sx),
-                to-fixed(color.lightness($color) * $lx)
-            ),
-            hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})}
+        $raw: hsl(
+            to-fixed(color.hue($color)),
+            to-fixed(color.saturation($color) * $sx),
+            to-fixed(color.lightness($color) * $lx)
         );
+        $hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})};
+
+        @return (raw: $raw, hsl: $hsl);
     }
 }
 
@@ -193,11 +175,7 @@ $_enhanced-accessibility: false;
     $c: map.get($palette or types.$IPalette, #{$color});
     $a: var(--ig-#{$color}-a);
     $s: #{var(--ig-#{$color}-#{$variant})};
-    $contrast: if(
-        meta.type-of($variant) == string,
-        string.index($variant, 'contrast'),
-        false
-    );
+    $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $meta: if($palette, map.get($palette, '_meta'), null);
 
     @if not($c) {
@@ -205,11 +183,7 @@ $_enhanced-accessibility: false;
     }
 
     @if not($palette) or not($meta) {
-        @return if(
-            $contrast,
-            $s,
-            hsla($s, if($opacity, $opacity, $a)),
-        );
+        @return if($contrast, $s, hsla($s, if($opacity, $opacity, $a)));
     }
 
     @return rgba(map.get($c, $variant), $alpha: if($opacity, $opacity, 1));
@@ -248,11 +222,7 @@ $_enhanced-accessibility: false;
 ///      background: #09f
 ///      color: text-contrast(#09f)
 ///    }
-@function text-contrast(
-    $background,
-    $foreground: white,
-    $contrast: 'AAA'
-) {
+@function text-contrast($background, $foreground: white, $contrast: 'AAA') {
     @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
         @return $background;
     }
@@ -261,7 +231,7 @@ $_enhanced-accessibility: false;
         (
             'a': 3,
             'aa': 4.5,
-            'aaa': 7
+            'aaa': 7,
         ),
         string.to-lower-case($contrast)
     );
@@ -341,8 +311,8 @@ $_enhanced-accessibility: false;
 ///   contrast(#09f, #000);
 /// @returns {Number} - The contrast ratio between the background and foreground colors.
 @function contrast($background, $foreground) {
-    $backLum: luminance($background) + .05;
-    $foreLum: luminance($foreground) + .05;
+    $backLum: luminance($background) + 0.05;
+    $foreLum: luminance($foreground) + 0.05;
 
     @return to-fixed(math.div(math.max($backLum, $foreLum), math.min($backLum, $foreLum)));
 }
@@ -361,7 +331,7 @@ $_enhanced-accessibility: false;
         $g: math.div(color.green($color), 255);
         $b: math.div(color.blue($color), 255);
 
-        @return .2126 * _lcv($r) + .7152 * _lcv($g) + .0722 * _lcv($b);
+        @return 0.2126 * _lcv($r) + 0.7152 * _lcv($g) + 0.0722 * _lcv($b);
     }
 
     @return $color;
@@ -374,11 +344,7 @@ $_enhanced-accessibility: false;
 /// @returns {Number} - The calculated linear channel value
 @function _lcv($value) {
     /* stylelint-disable number-max-precision */
-    @return if(
-        $value < .03928,
-        math.div($value, 12.92),
-        math.pow(math.div($value + .055, 1.055), 2.4)
-    );
+    @return if($value < 0.03928, math.div($value, 12.92), math.pow(math.div($value + 0.055, 1.055), 2.4));
 }
 
 /// Returns a list of colors to be used as chart brushes.

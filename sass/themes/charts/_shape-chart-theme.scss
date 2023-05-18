@@ -103,14 +103,14 @@
     $y-axis-stroke-thickness: null,
     $y-axis-title-alignment: null,
     $y-axis-title-color: null,
-    $y-axis-title-margin: null,
+    $y-axis-title-margin: null
 ) {
     $name: 'shape-chart';
     $selector: map.get(
         (
             'angular': 'igx-shape-chart',
             'webc': 'igc-shape-chart',
-            'blazor': 'igb-shape-chart'
+            'blazor': 'igb-shape-chart',
         ),
         $target
     );
@@ -232,20 +232,24 @@
 /// 'y-axis-title-text-style': 'h3',
 /// )] - The categories from the typographic scale used for type styles.
 /// @requires {mixin} type-style
-@mixin shape-chart-typography($type-scale, $categories: (
-    'title': 'h6',
-    'subtitle': 'subtitle-1',
-    'x-axis-label-text-style': 'h4',
-    'y-axis-label-text-style': 'h4',
-    'x-axis-title-text-style': 'h3',
-    'y-axis-title-text-style': 'h3',
-), $target: 'angular') {
+@mixin shape-chart-typography(
+    $type-scale,
+    $categories: (
+        'title': 'h6',
+        'subtitle': 'subtitle-1',
+        'x-axis-label-text-style': 'h4',
+        'y-axis-label-text-style': 'h4',
+        'x-axis-title-text-style': 'h3',
+        'y-axis-title-text-style': 'h3'
+    ),
+    $target: 'angular'
+) {
     $name: 'shape-chart';
     $selector: map.get(
         (
             'angular': 'igx-shape-chart',
             'webc': 'igc-shape-chart',
-            'blazor': 'igb-shape-chart'
+            'blazor': 'igb-shape-chart',
         ),
         $target
     );

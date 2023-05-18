@@ -25,45 +25,81 @@
 /// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
 $light-tree: (
     background: (
-        color: ('surface')
+        color: (
+            'surface',
+        ),
     ),
     foreground: (
-        contrast-color: ('surface')
+        contrast-color: (
+            'surface',
+        ),
     ),
     background-selected: (
-        color: ('secondary', 200)
+        color: (
+            'secondary',
+            200,
+        ),
     ),
     foreground-selected: (
-        contrast-color: ('secondary', 200)
+        contrast-color: (
+            'secondary',
+            200,
+        ),
     ),
     background-active: (
-        color: ('gray', 200),
+        color: (
+            'gray',
+            200,
+        ),
     ),
     foreground-active: (
-        contrast-color: ('gray', 200),
+        contrast-color: (
+            'gray',
+            200,
+        ),
     ),
     background-active-selected: (
-        color: ('secondary', 300)
+        color: (
+            'secondary',
+            300,
+        ),
     ),
     foreground-active-selected: (
-        contrast-color: ('secondary', 300),
+        contrast-color: (
+            'secondary',
+            300,
+        ),
     ),
     border-color: (
-        color: ('secondary')
+        color: (
+            'secondary',
+        ),
     ),
     // Same for all themes
-    background-disabled: (
-        color: ('surface')
-    ),
+    background-disabled:
+        (
+            color: (
+                'surface',
+            ),
+        ),
     foreground-disabled: (
-        color: ('gray', 500)
+        color: (
+            'gray',
+            500,
+        ),
     ),
     drop-area-color: (
-        color: ('secondary')
+        color: (
+            'secondary',
+        ),
     ),
     hover-color: (
-        color: ('gray', 900, .1)
-    )
+        color: (
+            'gray',
+            900,
+            0.1,
+        ),
+    ),
 );
 
 /// Generates a light fluent tree schema.
@@ -82,31 +118,56 @@ $fluent-tree: extend(
     $light-tree,
     (
         background: (
-            color: ('surface')
+            color: (
+                'surface',
+            ),
         ),
         foreground: (
-            contrast-color: ('surface')
+            contrast-color: (
+                'surface',
+            ),
         ),
         background-selected: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         foreground-selected: (
-            contrast-color: ('gray', 200)
+            contrast-color: (
+                'gray',
+                200,
+            ),
         ),
         background-active: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         foreground-active: (
-            contrast-color: ('gray', 200)
+            contrast-color: (
+                'gray',
+                200,
+            ),
         ),
         background-active-selected: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         foreground-active-selected: (
-            contrast-color: ('gray', 300),
+            contrast-color: (
+                'gray',
+                300,
+            ),
         ),
         border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
     )
 );
@@ -124,26 +185,45 @@ $bootstrap-tree: extend(
     $light-tree,
     (
         foreground-active: (
-            color: ('primary'),
+            color: (
+                'primary',
+            ),
         ),
         background-selected: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         foreground-selected: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         background-active-selected: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         foreground-active-selected: (
-            contrast-color: ('primary', 600),
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         border-color: (
-            color: ('primary' 200)
+            color: (
+                'primary' 200,
+            ),
         ),
         hover-color: (
-            color: ('gray', 900, .1)
-        )
+            color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
     )
 );
 
@@ -161,28 +241,48 @@ $indigo-tree: extend(
     $light-tree,
     (
         background-active: (
-            color: ('surface'),
+            color: (
+                'surface',
+            ),
         ),
         foreground-active: (
-            color: ('primary'),
+            color: (
+                'primary',
+            ),
         ),
         background-selected: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         foreground-selected: (
-            contrast-color: ('primary')
+            contrast-color: (
+                'primary',
+            ),
         ),
         background-active-selected: (
-            color: ('primary', 400)
+            color: (
+                'primary',
+                400,
+            ),
         ),
         foreground-active-selected: (
-            contrast-color: ('primary', 400),
+            contrast-color: (
+                'primary',
+                400,
+            ),
         ),
         border-color: (
-            color: ('primary', 300)
+            color: (
+                'primary',
+                300,
+            ),
         ),
         hover-color: (
-            color: ('primary', 100)
-        )
+            color: (
+                'primary',
+                100,
+            ),
+        ),
     )
 );

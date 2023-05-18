@@ -20,16 +20,28 @@ $light-navbar: extend(
     $default-elevation-navbar,
     (
         background: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         text-color: (
-            contrast-color: ('primary', 500)
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
         idle-icon-color: (
-            contrast-color: ('primary', 500)
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
         hover-icon-color: (
-            contrast-color: ('primary', 500)
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
     )
 );
@@ -45,16 +57,25 @@ $fluent-navbar: extend(
     $light-navbar,
     (
         background: (
-            color: 'surface'
+            color: 'surface',
         ),
         text-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         idle-icon-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-icon-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
     )
 );

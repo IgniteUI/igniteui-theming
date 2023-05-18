@@ -49,14 +49,14 @@
     $marker-outlines: null,
     $plot-area-background: null,
     $title-horizontal-alignment: null,
-    $subtitle-horizontal-alignment: null,
+    $subtitle-horizontal-alignment: null
 ) {
     $name: 'data-chart';
     $selector: map.get(
         (
             'angular': 'igx-data-chart',
             'webc': 'igc-data-chart',
-            'blazor': 'igb-data-chart'
+            'blazor': 'igb-data-chart',
         ),
         $target
     );
@@ -119,10 +119,7 @@
 /// @param {Map} $type-scale - A typographic scale as produced by type-scale.
 /// @param {Map} $categories [(title: 'h6', subtitle: 'subtitle-1')] - The categories from the typographic scale used for type styles.
 /// @requires {mixin} type-style
-@mixin data-chart-typography($type-scale, $categories: (
-    title: 'h6',
-    subtitle: 'subtitle-1',
-), $target: 'angular') {
+@mixin data-chart-typography($type-scale, $categories: (title: 'h6', subtitle: 'subtitle-1'), $target: 'angular') {
     $name: 'data-chart';
     $title: map.get($categories, 'title');
     $subtitle: map.get($categories, 'subtitle');
@@ -132,7 +129,7 @@
         (
             'angular': 'igx-data-chart',
             'webc': 'igc-data-chart',
-            'blazor': 'igb-data-chart'
+            'blazor': 'igb-data-chart',
         ),
         $target
     );
