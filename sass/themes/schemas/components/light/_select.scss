@@ -20,25 +20,47 @@
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The select toggle button foreground color when the select is disabled.
 $light-select: (
     toggle-button-background: (
-        color: ('gray', 300),
+        color: (
+            'gray',
+            300,
+        ),
     ),
     toggle-button-background-focus: (
-        color: ('gray', 400, .3),
+        color: (
+            'gray',
+            400,
+            0.3,
+        ),
     ),
     toggle-button-foreground: (
-        color: ('gray', 700),
+        color: (
+            'gray',
+            700,
+        ),
     ),
     toggle-button-foreground-focus: (
-        color: ('gray', 700),
+        color: (
+            'gray',
+            700,
+        ),
     ),
     toggle-button-foreground-filled: (
-        color: ('gray', 900),
+        color: (
+            'gray',
+            900,
+        ),
     ),
     toggle-button-background-disabled: (
-        color: ('gray', 300),
+        color: (
+            'gray',
+            300,
+        ),
     ),
     toggle-button-foreground-disabled: (
-        color: ('gray', 500),
+        color: (
+            'gray',
+            500,
+        ),
     ),
 );
 
@@ -54,19 +76,34 @@ $fluent-select: extend(
     $light-select,
     (
         toggle-button-background: (
-            color: ('gray', 100),
+            color: (
+                'gray',
+                100,
+            ),
         ),
         toggle-button-background-focus: (
-            color: ('gray', 100),
+            color: (
+                'gray',
+                100,
+            ),
         ),
         toggle-button-foreground-filled: (
-            color: ('gray', 700),
+            color: (
+                'gray',
+                700,
+            ),
         ),
         toggle-button-background-disabled: (
-            color: ('gray', 100),
+            color: (
+                'gray',
+                100,
+            ),
         ),
         toggle-button-foreground-disabled: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
     )
 );
@@ -83,19 +120,34 @@ $bootstrap-select: extend(
     $light-select,
     (
         toggle-button-background-disabled: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         toggle-button-foreground-disabled: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
         toggle-button-foreground: (
-            color: ('gray', 800),
+            color: (
+                'gray',
+                800,
+            ),
         ),
         toggle-button-foreground--focus: (
-            color: ('gray', 800),
+            color: (
+                'gray',
+                800,
+            ),
         ),
         toggle-button-foreground-filled: (
-            color: ('gray', 800),
+            color: (
+                'gray',
+                800,
+            ),
         ),
     )
 );
@@ -109,10 +161,16 @@ $indigo-select: extend(
     $light-select,
     (
         toggle-button-background-disabled: (
-            color: ('gray', 100),
+            color: (
+                'gray',
+                100,
+            ),
         ),
         toggle-button-foreground-disabled: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
     )
 );

@@ -47,50 +47,92 @@ $light-switch: extend(
         border-on-color: transparent,
         border-on-hover-color: transparent,
         thumb-on-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         track-on-color: (
-            color: ('secondary', 200),
+            color: (
+                'secondary',
+                200,
+            ),
         ),
         thumb-off-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         track-disabled-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         track-on-disabled-color: (
-            color: ('secondary', 50)
+            color: (
+                'secondary',
+                50,
+            ),
         ),
         track-off-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         thumb-disabled-color: (
-            color: ('gray', 200),
+            color: (
+                'gray',
+                200,
+            ),
         ),
         thumb-on-disabled-color: (
-            color: ('secondary', 100),
+            color: (
+                'secondary',
+                100,
+            ),
         ),
         label-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         label-disabled-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         label-invalid-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         track-error-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         error-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         error-color-hover: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         border-radius-track: rem(7px),
         border-radius-thumb: rem(10px),
-        border-radius-ripple: rem(24px)
+        border-radius-ripple: rem(24px),
     )
 );
 
@@ -124,50 +166,95 @@ $fluent-switch: extend(
     $light-switch,
     (
         focus-outline-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         border-color: (
-            color: ('gray', 700),
+            color: (
+                'gray',
+                700,
+            ),
         ),
         thumb-off-color: (
-            color: ('gray', 700),
+            color: (
+                'gray',
+                700,
+            ),
         ),
         track-off-color: transparent,
-        border-hover-color:(
-            color: ('gray', 800),
+        border-hover-color: (
+            color: (
+                'gray',
+                800,
+            ),
         ),
         track-on-color: (
-            color: ('primary', 500),
+            color: (
+                'primary',
+                500,
+            ),
         ),
-        border-on-color:(
-            color: ('primary', 500)
+        border-on-color: (
+            color: (
+                'primary',
+                500,
+            ),
         ),
-        track-on-hover-color:(
-            color: ('primary', 800)
+        track-on-hover-color: (
+            color: (
+                'primary',
+                800,
+            ),
         ),
-        border-on-hover-color:(
-            color: ('primary', 800)
+        border-on-hover-color: (
+            color: (
+                'primary',
+                800,
+            ),
         ),
         thumb-on-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
-        track-on-disabled-color:(
-            color: ('gray', 400)
+        track-on-disabled-color: (
+            color: (
+                'gray',
+                400,
+            ),
         ),
-        thumb-disabled-color:(
-            color: ('gray', 400)
+        thumb-disabled-color: (
+            color: (
+                'gray',
+                400,
+            ),
         ),
-        thumb-on-disabled-color:(
-            color: ('gray', 100)
+        thumb-on-disabled-color: (
+            color: (
+                'gray',
+                100,
+            ),
         ),
-        border-disabled-color:(
-            color: ('gray', 400),
+        border-disabled-color: (
+            color: (
+                'gray',
+                400,
+            ),
         ),
         error-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         error-color-hover: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         track-disabled-color: transparent,
         border-radius-track: rem(10px),
@@ -197,37 +284,70 @@ $bootstrap-switch: extend(
     $fluent-switch,
     (
         focus-outline-color: (
-            color: ('primary', 100),
+            color: (
+                'primary',
+                100,
+            ),
         ),
         focus-fill-color: (
-            color: ('primary', 200),
+            color: (
+                'primary',
+                200,
+            ),
         ),
         border-color: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
         border-disabled-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         thumb-off-color: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
         thumb-disabled-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         thumb-on-disabled-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         track-on-color: (
-            color: ('primary', 500),
+            color: (
+                'primary',
+                500,
+            ),
         ),
-        track-on-disabled-color:(
-            color: ('primary', 200)
+        track-on-disabled-color: (
+            color: (
+                'primary',
+                200,
+            ),
         ),
         error-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         error-color-hover: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         border-radius-track: rem(32px),
         border-radius-thumb: rem(32px),
@@ -263,49 +383,91 @@ $indigo-switch: extend(
     $light-switch,
     (
         focus-outline-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         focus-outline-color-focused: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         border-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
-        border-hover-color:(
-            color: ('gray', 500)
+        border-hover-color: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-        border-disabled-color:(
-            color: ('gray', 300)
+        border-disabled-color: (
+            color: (
+                'gray',
+                300,
+            ),
         ),
-        border-on-color:(
-            color: ('primary', 500)
+        border-on-color: (
+            color: (
+                'primary',
+                500,
+            ),
         ),
-        border-on-hover-color:(
-            color: ('primary', 500)
+        border-on-hover-color: (
+            color: (
+                'primary',
+                500,
+            ),
         ),
         thumb-on-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         thumb-off-color: (
-            color: ('gray', 600)
+            color: (
+                'gray',
+                600,
+            ),
         ),
         track-on-color: (
-            color: ('primary', 500),
+            color: (
+                'primary',
+                500,
+            ),
         ),
         error-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         error-color-hover: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         track-off-color: transparent,
         track-disabled-color: transparent,
         thumb-disabled-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         label-disabled-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
-        border-radius-track: rem(8px)
+        border-radius-track: rem(8px),
     )
 );

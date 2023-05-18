@@ -37,56 +37,104 @@ $light-drop-down: extend(
     $default-elevation-drop-down,
     (
         background-color: (
-            color: 'surface'
+            color: 'surface',
         ),
         header-text-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         item-text-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         hover-item-text-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         hover-item-background: (
-            color: ('gray', 100, .8)
+            color: (
+                'gray',
+                100,
+                0.8,
+            ),
         ),
         focused-item-background: (
-            color: ('gray', 100, .8)
+            color: (
+                'gray',
+                100,
+                0.8,
+            ),
         ),
         focused-item-text-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         selected-item-background: (
-            color: ('secondary', 100),
+            color: (
+                'secondary',
+                100,
+            ),
         ),
         selected-item-text-color: (
-            contrast-color: ('secondary', 100)
+            contrast-color: (
+                'secondary',
+                100,
+            ),
         ),
         selected-hover-item-background: (
-            color: ('secondary', 200),
+            color: (
+                'secondary',
+                200,
+            ),
         ),
         selected-hover-item-text-color: (
-            contrast-color: ('secondary', 200)
+            contrast-color: (
+                'secondary',
+                200,
+            ),
         ),
         selected-focus-item-background: (
-            color: ('secondary', 200),
+            color: (
+                'secondary',
+                200,
+            ),
         ),
         selected-focus-item-text-color: (
-            contrast-color: ('secondary', 200)
+            contrast-color: (
+                'secondary',
+                200,
+            ),
         ),
         disabled-item-background: (
-            color: ('gray', 50, 0)
+            color: (
+                'gray',
+                50,
+                0,
+            ),
         ),
         disabled-item-text-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         border-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         border-width: 0,
         border-radius: rem(4px),
-        item-border-radius: rem(0)
+        item-border-radius: rem(0),
     )
 );
 
@@ -108,22 +156,40 @@ $fluent-drop-down: extend(
     $fluent-elevation-drop-down,
     (
         selected-item-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         selected-item-text-color: (
-            contrast-color: ('gray', 100)
+            contrast-color: (
+                'gray',
+                100,
+            ),
         ),
         selected-hover-item-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         selected-hover-item-text-color: (
-            contrast-color: ('gray', 200)
+            contrast-color: (
+                'gray',
+                200,
+            ),
         ),
         selected-focus-item-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         selected-focus-item-text-color: (
-            contrast-color: ('gray', 200)
+            contrast-color: (
+                'gray',
+                200,
+            ),
         ),
         border-radius: rem(2px),
     )
@@ -152,39 +218,72 @@ $bootstrap-drop-down: extend(
     $bootstrap-elevation-drop-down,
     (
         header-text-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         hover-item-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         focused-item-background: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         focused-item-text-color: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         selected-item-background: (
-            color: ('primary', 500),
+            color: (
+                'primary',
+                500,
+            ),
         ),
         selected-item-text-color: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         selected-hover-item-background: (
-            color: ('primary', 600),
+            color: (
+                'primary',
+                600,
+            ),
         ),
         selected-hover-item-text-color: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         selected-focus-item-background: (
-            color: ('primary', 600),
+            color: (
+                'primary',
+                600,
+            ),
         ),
         selected-focus-item-text-color: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         border-width: 1px,
         disabled-item-text-color: (
-            color: ('gray', 400)
-        )
+            color: (
+                'gray',
+                400,
+            ),
+        ),
     )
 );
 
@@ -210,36 +309,68 @@ $indigo-drop-down: extend(
     $indigo-elevation-drop-down,
     (
         header-text-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         item-text-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         hover-item-background: (
-            color: ('primary', 500, .15),
+            color: (
+                'primary',
+                500,
+                0.15,
+            ),
         ),
         focused-item-background: (
-            color: ('primary', 500, .15),
+            color: (
+                'primary',
+                500,
+                0.15,
+            ),
         ),
         selected-item-background: (
-            color: ('primary', 500),
+            color: (
+                'primary',
+                500,
+            ),
         ),
         selected-item-text-color: (
-            contrast-color: ('primary', 500),
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
         selected-hover-item-background: (
-            color: ('primary', 400),
+            color: (
+                'primary',
+                400,
+            ),
         ),
         selected-hover-item-text-color: (
-            contrast-color: ('primary', 400),
+            contrast-color: (
+                'primary',
+                400,
+            ),
         ),
         selected-focus-item-background: (
-            color: ('primary', 400),
+            color: (
+                'primary',
+                400,
+            ),
         ),
         selected-focus-item-text-color: (
-            contrast-color: ('primary', 400),
+            contrast-color: (
+                'primary',
+                400,
+            ),
         ),
         border-radius: rem(2px),
-        item-border-radius: rem(2px)
+        item-border-radius: rem(2px),
     )
 );

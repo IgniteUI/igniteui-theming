@@ -27,40 +27,73 @@
 $light-checkbox: extend(
     (
         tick-color: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         tick-color-hover: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         label-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         empty-color: (
-            color: ('gray', 600)
+            color: (
+                'gray',
+                600,
+            ),
         ),
         fill-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         fill-color-hover: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         disabled-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         disabled-indeterminate-color: (
-            color: ('secondary', 100)
+            color: (
+                'secondary',
+                100,
+            ),
         ),
         disabled-color-label: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         error-color: (
-            color: ('error', 500)
+            color: (
+                'error',
+                500,
+            ),
         ),
         error-color-hover: (
-            color: ('error', 500)
+            color: (
+                'error',
+                500,
+            ),
         ),
         border-radius: rem(2px),
-        border-radius-ripple: rem(24px)
+        border-radius-ripple: rem(24px),
     )
 );
 
@@ -80,28 +113,49 @@ $fluent-checkbox: extend(
     $light-checkbox,
     (
         tick-color-hover: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         focus-outline-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         empty-color: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         fill-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         fill-color-hover: (
-            color: ('primary', 900)
+            color: (
+                'primary',
+                900,
+            ),
         ),
         disabled-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         error-color-hover: (
-            color: ('error', 900)
+            color: (
+                'error',
+                900,
+            ),
         ),
         border-radius: rem(2px),
-        border-radius-ripple: rem(2px)
+        border-radius-ripple: rem(2px),
     )
 );
 
@@ -120,25 +174,43 @@ $bootstrap-checkbox: extend(
     $light-checkbox,
     (
         focus-outline-color: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         fill-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         empty-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         disabled-color: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         disabled-color-label: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         error-color-hover: (
-            color: ('error', 100)
+            color: (
+                'error',
+                100,
+            ),
         ),
         border-radius: rem(4px),
-        border-radius-ripple: rem(4px)
+        border-radius-ripple: rem(4px),
     )
 );
 
@@ -160,33 +232,54 @@ $indigo-checkbox: extend(
     $light-checkbox,
     (
         focus-outline-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         focus-outline-color-focused: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         tick-color: (
-            color: 'surface'
+            color: 'surface',
         ),
         tick-color-hover: (
-            color: 'surface'
+            color: 'surface',
         ),
         fill-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         empty-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         disabled-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-color-label: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         error-color-hover: (
-            color: ('error', 200)
+            color: (
+                'error',
+                200,
+            ),
         ),
         border-radius: rem(3px),
-        border-radius-ripple: rem(3px)
+        border-radius-ripple: rem(3px),
     )
 );

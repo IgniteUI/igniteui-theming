@@ -16,10 +16,18 @@
 /// @prop {Map} item-active-background [color: ('gray', 100, .5)] - The color used for the active/focused tab background.
 $base-dark-tabs: (
     item-hover-background: (
-        color: ('gray', 100, .5)
+        color: (
+            'gray',
+            100,
+            0.5,
+        ),
     ),
     item-active-background: (
-        color: ('gray', 100, .5)
+        color: (
+            'gray',
+            100,
+            0.5,
+        ),
     ),
 );
 
@@ -43,7 +51,10 @@ $dark-bootstrap-tabs: extend(
     $bootstrap-tabs,
     (
         item-hover-color: (
-            color: ('primary', 400)
+            color: (
+                'primary',
+                400,
+            ),
         ),
     )
 );

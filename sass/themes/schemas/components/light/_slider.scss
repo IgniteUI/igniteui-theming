@@ -32,55 +32,105 @@
 $light-slider: (
     variant: 'material',
     track-color: (
-        color: ('secondary', 500)
+        color: (
+            'secondary',
+            500,
+        ),
     ),
     track-step-color: (
-        color: ('secondary', 200)
+        color: (
+            'secondary',
+            200,
+        ),
     ),
     track-step-size: rem(3px),
     track-hover-color: (
-        color: ('secondary', 400)
+        color: (
+            'secondary',
+            400,
+        ),
     ),
     thumb-color: (
-        color: ('secondary', 500)
+        color: (
+            'secondary',
+            500,
+        ),
     ),
     thumb-focus-color: transparent,
     thumb-border-color: (
-        color: ('secondary', 500)
+        color: (
+            'secondary',
+            500,
+        ),
     ),
     thumb-border-focus-color: (
-        color: ('secondary', 500)
+        color: (
+            'secondary',
+            500,
+        ),
     ),
     thumb-disabled-border-color: (
-        color: ('gray', 400)
+        color: (
+            'gray',
+            400,
+        ),
     ),
     disabled-thumb-color: (
-        color: ('gray', 400),
+        color: (
+            'gray',
+            400,
+        ),
     ),
     label-background-color: (
-        color: ('gray', 700),
+        color: (
+            'gray',
+            700,
+        ),
     ),
     label-text-color: (
-        contrast-color: ('gray', 700)
+        contrast-color: (
+            'gray',
+            700,
+        ),
     ),
     base-track-color: (
-        color: ('secondary', 500, .24),
+        color: (
+            'secondary',
+            500,
+            0.24,
+        ),
     ),
-    base-track-hover-color:  (
-        color: ('secondary', 500, .24),
+    base-track-hover-color: (
+        color: (
+            'secondary',
+            500,
+            0.24,
+        ),
     ),
     disabled-base-track-color: (
-        color: ('gray', 200)
+        color: (
+            'gray',
+            200,
+        ),
     ),
     disabled-fill-track-color: (
-        color: ('gray', 400)
+        color: (
+            'gray',
+            400,
+        ),
     ),
-    tick-color:  (
-        color: ('gray', 500)
+    tick-color: (
+        color: (
+            'gray',
+            500,
+        ),
     ),
-    tick-label-color:  (
-        color: ('gray', 500)
-    )
+    tick-label-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
 );
 
 /// Generates a fluent slider schema.
@@ -106,44 +156,83 @@ $fluent-slider: extend(
     (
         variant: 'fluent',
         track-color: (
-            color: ('gray', 800),
+            color: (
+                'gray',
+                800,
+            ),
         ),
         track-step-color: white,
         track-hover-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         thumb-color: (
-            color: ('surface', 500)
+            color: (
+                'surface',
+                500,
+            ),
         ),
         thumb-border-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         thumb-border-focus-color: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         thumb-focus-color: (
-            color: ('primary', 700)
+            color: (
+                'primary',
+                700,
+            ),
         ),
         thumb-disabled-border-color: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
         disabled-thumb-color: (
-            color: ('surface', 500),
+            color: (
+                'surface',
+                500,
+            ),
         ),
         base-track-color: (
-            color: ('gray', 600),
+            color: (
+                'gray',
+                600,
+            ),
         ),
-        base-track-hover-color:  (
-            color: ('gray', 600)
+        base-track-hover-color: (
+            color: (
+                'gray',
+                600,
+            ),
         ),
         disabled-base-track-color: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         disabled-fill-track-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         label-background-color: (
-            color: ('primary', 500),
+            color: (
+                'primary',
+                500,
+            ),
         ),
     )
 );
@@ -164,25 +253,48 @@ $bootstrap-slider: extend(
     (
         variant: 'bootstrap',
         base-track-color: (
-            color: ('secondary', 500, .24)
+            color: (
+                'secondary',
+                500,
+                0.24,
+            ),
         ),
-        base-track-hover-color:  (
-            color: ('secondary', 500, .24)
+        base-track-hover-color: (
+            color: (
+                'secondary',
+                500,
+                0.24,
+            ),
         ),
         thumb-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         thumb-border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         thumb-border-focus-color: (
-            color: ('surface', 500)
+            color: (
+                'surface',
+                500,
+            ),
         ),
         thumb-focus-color: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         disabled-thumb-color: (
-            color: ('gray', 400),
+            color: (
+                'gray',
+                400,
+            ),
         ),
     )
 );
@@ -205,25 +317,46 @@ $indigo-slider: extend(
         variant: 'indigo-design',
         track-step-color: white,
         track-hover-color: (
-            color: ('primary', 400)
+            color: (
+                'primary',
+                400,
+            ),
         ),
         base-track-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         base-track-hover-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         thumb-focus-color: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         disabled-thumb-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-base-track-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-fill-track-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
     )
 );

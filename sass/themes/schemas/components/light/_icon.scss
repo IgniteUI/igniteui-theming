@@ -14,11 +14,17 @@
 /// @prop {Color} disabled-color [color: ('gray', 500)] - The disabled icon color.
 $light-icon: (
     color: (
-        color: ('gray', 800)
+        color: (
+            'gray',
+            800,
+        ),
     ),
     size: rem(24px),
     disabled-color: (
-        color: ('gray', 500)
+        color: (
+            'gray',
+            500,
+        ),
     ),
 );
 
@@ -40,7 +46,10 @@ $indigo-icon: extend(
     $light-icon,
     (
         disabled-color: (
-            color: ('gray', 400)
-        )
+            color: (
+                'gray',
+                400,
+            ),
+        ),
     )
 );

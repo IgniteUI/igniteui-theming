@@ -15,7 +15,10 @@
 /// @prop {Map} border-color [color: ('gray', 100)] - The border color used for drop-down component.
 $base-dark-drop-down: (
     border-color: (
-        color: ('gray', 100),
+        color: (
+            'gray',
+            100,
+        ),
     ),
 );
 
@@ -37,13 +40,13 @@ $dark-fluent-drop-down: extend(
     $base-dark-drop-down,
     (
         selected-item-text-color: (
-            contrast-color: 'surface'
+            contrast-color: 'surface',
         ),
         selected-hover-item-text-color: (
-            contrast-color: 'surface'
+            contrast-color: 'surface',
         ),
         selected-focus-item-text-color: (
-            contrast-color: 'surface'
+            contrast-color: 'surface',
         ),
     )
 );
@@ -59,10 +62,10 @@ $dark-bootstrap-drop-down: extend(
     $base-dark-drop-down,
     (
         item-text-color: (
-            contrast-color: 'surface'
+            contrast-color: 'surface',
         ),
         hover-item-text-color: (
-            contrast-color: 'surface'
+            contrast-color: 'surface',
         ),
     )
 );
@@ -77,7 +80,7 @@ $dark-indigo-drop-down: extend(
     $base-dark-drop-down,
     (
         header-text-color: (
-            contrast-color: 'surface'
+            contrast-color: 'surface',
         ),
     )
 );

@@ -29,10 +29,16 @@ $material-base-button: (
     active-border-color: transparent,
     disabled-border-color: transparent,
     disabled-background: (
-        color: ('gray', 300)
+        color: (
+            'gray',
+            300,
+        ),
     ),
     disabled-foreground: (
-        color: ('gray', 500)
+        color: (
+            'gray',
+            500,
+        ),
     ),
 );
 
@@ -58,34 +64,65 @@ $material-flat-button: extend(
         selector: '[igxButton="flat"], .igx-button--flat',
         background: transparent,
         foreground: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         hover-background: (
-            color: ('secondary', 500, .05),
+            color: (
+                'secondary',
+                500,
+                0.05,
+            ),
         ),
         hover-foreground: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         focus-background: (
-            color: ('secondary', 400, .12),
+            color: (
+                'secondary',
+                400,
+                0.12,
+            ),
         ),
         focus-foreground: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         focus-visible-background: (
-            color: ('secondary', 400, .12),
+            color: (
+                'secondary',
+                400,
+                0.12,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         active-background: (
-            color: ('secondary', 400, .12),
+            color: (
+                'secondary',
+                400,
+                0.12,
+            ),
         ),
         active-foreground: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         disabled-background: transparent,
-        border-radius: rem(4px)
+        border-radius: rem(4px),
     )
 );
 
@@ -102,22 +139,40 @@ $material-outlined-button: extend(
     (
         selector: '[igxButton="outlined"], .igx-button--outlined',
         border-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         hover-border-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         focus-border-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         focus-visible-border-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         active-border-color: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         disabled-border-color: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
     )
 );
@@ -145,36 +200,66 @@ $material-raised-button: extend(
     (
         selector: '[igxButton="raised"], .igx-button--raised',
         background: (
-            color: ('secondary', 500)
+            color: (
+                'secondary',
+                500,
+            ),
         ),
         foreground: (
-            contrast-color: ('secondary', 500)
+            contrast-color: (
+                'secondary',
+                500,
+            ),
         ),
         hover-background: (
-            color: ('secondary', 300)
+            color: (
+                'secondary',
+                300,
+            ),
         ),
         hover-foreground: (
-            contrast-color: ('secondary', 300)
+            contrast-color: (
+                'secondary',
+                300,
+            ),
         ),
         focus-background: (
-            color: ('secondary', 300)
+            color: (
+                'secondary',
+                300,
+            ),
         ),
         focus-foreground: (
-            contrast-color: ('secondary', 300)
+            contrast-color: (
+                'secondary',
+                300,
+            ),
         ),
         focus-visible-background: (
-            color: ('secondary', 300)
+            color: (
+                'secondary',
+                300,
+            ),
         ),
         focus-visible-foreground: (
-            contrast-color: ('secondary', 300)
+            contrast-color: (
+                'secondary',
+                300,
+            ),
         ),
         active-background: (
-            color: ('secondary', 300)
+            color: (
+                'secondary',
+                300,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('secondary', 300)
+            contrast-color: (
+                'secondary',
+                300,
+            ),
         ),
-        border-radius: rem(4px)
+        border-radius: rem(4px),
     )
 );
 
@@ -190,7 +275,7 @@ $material-fab-button: extend(
     $material-fab-elevation,
     (
         selector: '[igxButton="fab"], .igx-button--fab',
-        border-radius: rem(28px)
+        border-radius: rem(28px),
     )
 );
 
@@ -219,39 +304,72 @@ $material-icon-button: extend(
         selector: '[igxButton="icon"], .igx-button--icon',
         background: transparent,
         foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         hover-background: transparent,
         hover-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         focus-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         active-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         active-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         disabled-background: transparent,
         active-border-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         focus-border-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         focus-visible-border-color: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         border-radius: rem(20px),
     )
@@ -282,10 +400,16 @@ $fluent-base-button: extend(
     $flat-elevation-button,
     (
         disabled-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         disabled-foreground: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
     )
 );
@@ -308,26 +432,41 @@ $fluent-flat-button: extend(
     $fluent-base-button,
     (
         foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         hover-background: transparent,
         focus-background: transparent,
         focus-visible-background: transparent,
         active-background: transparent,
         focus-visible-border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         hover-foreground: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         active-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         disabled-background: transparent,
-        border-radius: rem(0)
+        border-radius: rem(0),
     )
 );
 
@@ -356,52 +495,98 @@ $fluent-outlined-button: extend(
     $fluent-base-button,
     (
         border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         hover-border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         focus-border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         focus-visible-border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         active-border-color: (
-            color: ('gray', 800)
+            color: (
+                'gray',
+                800,
+            ),
         ),
         foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         hover-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         hover-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         focus-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         active-background: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('gray', 300)
+            contrast-color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         disabled-foreground: (
-            color: ('gray', 400, .5)
+            color: (
+                'gray',
+                400,
+                0.5,
+            ),
         ),
-        border-radius: rem(2px)
+        border-radius: rem(2px),
     )
 );
 
@@ -432,51 +617,96 @@ $fluent-raised-button: extend(
     $fluent-base-button,
     (
         border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-border-color: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-border-color: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-border-color: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         active-border-color: (
-            color: ('primary', 800)
+            color: (
+                'primary',
+                800,
+            ),
         ),
         background: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         foreground: (
-            contrast-color: ('primary', 900)
+            contrast-color: (
+                'primary',
+                900,
+            ),
         ),
         hover-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         hover-foreground: (
-            contrast-color: ('primary', 900)
+            contrast-color: (
+                'primary',
+                900,
+            ),
         ),
         focus-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-foreground: (
-            contrast-color: ('primary', 900)
+            contrast-color: (
+                'primary',
+                900,
+            ),
         ),
         focus-visible-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-foreground: (
-            contrast-color: ('primary', 900)
+            contrast-color: (
+                'primary',
+                900,
+            ),
         ),
         active-background: (
-            color: ('primary', 800)
+            color: (
+                'primary',
+                800,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('primary', 900)
+            contrast-color: (
+                'primary',
+                900,
+            ),
         ),
-        border-radius: rem(2px)
+        border-radius: rem(2px),
     )
 );
 
@@ -498,21 +728,36 @@ $fluent-fab-button: extend(
     (
         selector: '[igxButton="fab"], .igx-button--fab',
         border-color: (
-            contrast-color: ('gray', 900)
+            contrast-color: (
+                'gray',
+                900,
+            ),
         ),
         hover-border-color: (
-            contrast-color: ('gray', 900)
+            contrast-color: (
+                'gray',
+                900,
+            ),
         ),
         focus-border-color: (
-            contrast-color: ('gray', 900)
+            contrast-color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-border-color: (
-            contrast-color: ('gray', 900)
+            contrast-color: (
+                'gray',
+                900,
+            ),
         ),
         active-border-color: (
-            contrast-color: ('gray', 900)
+            contrast-color: (
+                'gray',
+                900,
+            ),
         ),
-        border-radius: rem(14px)
+        border-radius: rem(14px),
     )
 );
 
@@ -541,41 +786,69 @@ $fluent-icon-button: extend(
     $fluent-base-button,
     (
         foreground: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         focus-visible-border-color: (
-            color: ('gray', 500)
+            color: (
+                'gray',
+                500,
+            ),
         ),
         hover-background: (
-            color: ('gray', 200)
+            color: (
+                'gray',
+                200,
+            ),
         ),
         hover-foreground: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         focus-background: transparent,
         focus-foreground: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         active-background: (
-            color: ('gray', 300)
+            color: (
+                'gray',
+                300,
+            ),
         ),
         active-foreground: (
-            color: ('primary')
+            color: (
+                'primary',
+            ),
         ),
         disabled-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         disabled-foreground: (
-            color: ('gray', 400)
+            color: (
+                'gray',
+                400,
+            ),
         ),
         disabled-border-color: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
-        border-radius: rem(0)
+        border-radius: rem(0),
     )
 );
 
@@ -604,10 +877,16 @@ $bootstrap-base-button: extend(
     $flat-elevation-button,
     (
         disabled-foreground: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
         disabled-background: (
-            color: ('primary', 50)
+            color: (
+                'primary',
+                50,
+            ),
         ),
     )
 );
@@ -631,28 +910,47 @@ $bootstrap-flat-button: extend(
     $bootstrap-base-button,
     (
         foreground: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-background: transparent,
         hover-foreground: (
-            color: ('primary', 800)
+            color: (
+                'primary',
+                800,
+            ),
         ),
         focus-background: transparent,
         focus-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         active-background: transparent,
         active-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         disabled-background: transparent,
         shadow-color: (
-            color: ('primary', 200, .5)
-        )
+            color: (
+                'primary',
+                200,
+                0.5,
+            ),
+        ),
     )
 );
 
@@ -682,48 +980,91 @@ $bootstrap-outlined-button: extend(
     $bootstrap-base-button,
     (
         foreground: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-background: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-foreground: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         focus-background: transparent,
         focus-foreground: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         active-background: (
-            color: ('primary', 700)
+            color: (
+                'primary',
+                700,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('primary', 700)
+            contrast-color: (
+                'primary',
+                700,
+            ),
         ),
         border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         focus-border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         focus-visible-border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         active-border-color: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         disabled-border-color: (
-            color: ('primary', 50)
+            color: (
+                'primary',
+                50,
+            ),
         ),
         shadow-color: (
-            color: ('primary', 200, .5)
+            color: (
+                'primary',
+                200,
+                0.5,
+            ),
         ),
         disabled-background: transparent,
     )
@@ -749,37 +1090,70 @@ $bootstrap-raised-button: extend(
     $bootstrap-base-button,
     (
         background: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         foreground: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         hover-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
-        hover-foreground:  (
-            contrast-color: ('primary', 600)
+        hover-foreground: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         focus-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-foreground: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-foreground: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         active-background: (
-            color: ('primary', 700)
+            color: (
+                'primary',
+                700,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('primary', 700)
+            contrast-color: (
+                'primary',
+                700,
+            ),
         ),
         shadow-color: (
-            color: ('primary', 200)
+            color: (
+                'primary',
+                200,
+            ),
         ),
     )
 );
@@ -805,33 +1179,60 @@ $bootstrap-fab-button: extend(
     (
         selector: '[igxButton="fab"], .igx-button--fab',
         background: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
-        hover-foreground:  (
-            contrast-color: ('primary', 600)
+        hover-foreground: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         focus-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-foreground: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-background: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-foreground: (
-            contrast-color: ('primary', 600)
+            contrast-color: (
+                'primary',
+                600,
+            ),
         ),
         active-background: (
-            color: ('primary', 700)
+            color: (
+                'primary',
+                700,
+            ),
         ),
         active-foreground: (
-            contrast-color: ('primary', 700)
+            contrast-color: (
+                'primary',
+                700,
+            ),
         ),
-        border-radius: rem(15px)
+        border-radius: rem(15px),
     )
 );
 
@@ -857,35 +1258,62 @@ $bootstrap-icon-button: extend(
         selector: '[igxButton="icon"], .igx-button--icon',
         background: transparent,
         foreground: (
-            color: ('primary', 500)
+            color: (
+                'primary',
+                500,
+            ),
         ),
         hover-background: transparent,
         hover-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         focus-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         focus-visible-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         active-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         active-foreground: (
-            color: ('primary', 600)
+            color: (
+                'primary',
+                600,
+            ),
         ),
         disabled-background: transparent,
         disabled-foreground: (
-            color: ('primary', 100)
+            color: (
+                'primary',
+                100,
+            ),
         ),
-        border-radius: rem(4px)
+        border-radius: rem(4px),
     )
 );
 
@@ -929,29 +1357,47 @@ $indigo-flat-button: extend(
     $indigo-base-button,
     (
         foreground: (
-            color: ('gray', 700),
+            color: (
+                'gray',
+                700,
+            ),
         ),
         hover-background: transparent,
         hover-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-background: transparent,
         focus-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         active-background: transparent,
         active-foreground: (
-            color: ('gray', 700),
+            color: (
+                'gray',
+                700,
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         shadow-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-background: transparent,
-        border-radius: rem(20px)
+        border-radius: rem(20px),
     )
 );
 
@@ -982,21 +1428,36 @@ $indigo-outlined-button: extend(
     (
         background: transparent,
         foreground: (
-            color: ('gray', 700),
+            color: (
+                'gray',
+                700,
+            ),
         ),
         hover-background: (
-            color: ('gray', 100)
+            color: (
+                'gray',
+                100,
+            ),
         ),
         hover-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-background: transparent,
         focus-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         border-color: (
             color: 'gray',
@@ -1015,13 +1476,19 @@ $indigo-outlined-button: extend(
         ),
         active-background: transparent,
         active-foreground: (
-            color: ('gray', 900),
+            color: (
+                'gray',
+                900,
+            ),
         ),
         shadow-color: (
-            color: ('gray', 300),
+            color: (
+                'gray',
+                300,
+            ),
         ),
         disabled-background: transparent,
-        border-radius: rem(20px)
+        border-radius: rem(20px),
     )
 );
 
@@ -1043,33 +1510,60 @@ $indigo-raised-button: extend(
     $indigo-base-button,
     (
         foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         hover-background: (
-            color: ('secondary', 400),
+            color: (
+                'secondary',
+                400,
+            ),
         ),
         hover-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         focus-background: (
-            color: ('secondary', 400),
+            color: (
+                'secondary',
+                400,
+            ),
         ),
         focus-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         focus-visible-background: (
-            color: ('secondary', 400),
+            color: (
+                'secondary',
+                400,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         active-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         shadow-color: (
-            color: ('secondary', 200),
+            color: (
+                'secondary',
+                200,
+            ),
         ),
-        border-radius: rem(20px)
+        border-radius: rem(20px),
     )
 );
 
@@ -1089,18 +1583,30 @@ $indigo-fab-button: extend(
     (
         selector: '[igxButton="fab"], .igx-button--fab',
         foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         hover-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         focus-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
         focus-visible-foreground: (
-            color: ('gray', 50)
+            color: (
+                'gray',
+                50,
+            ),
         ),
-        border-radius: rem(28px)
+        border-radius: rem(28px),
     )
 );
 
@@ -1126,33 +1632,54 @@ $indigo-icon-button: extend(
     $indigo-base-button,
     (
         foreground: (
-            color: ('gray', 700)
+            color: (
+                'gray',
+                700,
+            ),
         ),
         hover-background: transparent,
         hover-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-background: transparent,
         focus-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         focus-visible-background: transparent,
         focus-visible-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         active-background: transparent,
         active-foreground: (
-            color: ('gray', 900)
+            color: (
+                'gray',
+                900,
+            ),
         ),
         disabled-background: transparent,
         focus-border-color: (
-            color: ('gray' 300)
+            color: (
+                'gray' 300,
+            ),
         ),
         focus-visible-border-color: (
-            color: ('gray' 300)
+            color: (
+                'gray' 300,
+            ),
         ),
         active-border-color: (
-            color: ('gray' 300)
+            color: (
+                'gray' 300,
+            ),
         ),
     )
 );
