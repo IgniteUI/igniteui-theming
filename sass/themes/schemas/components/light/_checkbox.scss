@@ -24,77 +24,75 @@
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and fill colors in invalid state on hover.
 /// @prop {Number} border-radius [2px] - The border radius used for checkbox. Can be a fraction between 0 and 1, pixels, or percent.
 /// @prop {Number} border-radius-ripple [24px] - The border radius used for checkbox ripple. Can be a fraction between 0 and 1, pixels, or percent.
-$light-checkbox: extend(
-    (
-        tick-color: (
-            color: (
-                'gray',
-                50,
-            ),
+$light-checkbox: (
+    tick-color: (
+        color: (
+            'gray',
+            50,
         ),
-        tick-color-hover: (
-            color: (
-                'gray',
-                50,
-            ),
+    ),
+    tick-color-hover: (
+        color: (
+            'gray',
+            50,
         ),
-        label-color: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    label-color: (
+        color: (
+            'gray',
+            900,
         ),
-        empty-color: (
-            color: (
-                'gray',
-                600,
-            ),
+    ),
+    empty-color: (
+        color: (
+            'gray',
+            600,
         ),
-        fill-color: (
-            color: (
-                'secondary',
-                500,
-            ),
+    ),
+    fill-color: (
+        color: (
+            'secondary',
+            500,
         ),
-        fill-color-hover: (
-            color: (
-                'secondary',
-                500,
-            ),
+    ),
+    fill-color-hover: (
+        color: (
+            'secondary',
+            500,
         ),
-        disabled-color: (
-            color: (
-                'gray',
-                400,
-            ),
+    ),
+    disabled-color: (
+        color: (
+            'gray',
+            400,
         ),
-        disabled-indeterminate-color: (
-            color: (
-                'secondary',
-                100,
-            ),
+    ),
+    disabled-indeterminate-color: (
+        color: (
+            'secondary',
+            100,
         ),
-        disabled-color-label: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    disabled-color-label: (
+        color: (
+            'gray',
+            500,
         ),
-        error-color: (
-            color: (
-                'error',
-                500,
-            ),
+    ),
+    error-color: (
+        color: (
+            'error',
+            500,
         ),
-        error-color-hover: (
-            color: (
-                'error',
-                500,
-            ),
+    ),
+    error-color-hover: (
+        color: (
+            'error',
+            500,
         ),
-        border-radius: rem(2px),
-        border-radius-ripple: rem(24px),
-    )
+    ),
+    border-radius: rem(2px),
+    border-radius-ripple: rem(24px),
 );
 
 /// Generates a fluent checkbox schema.

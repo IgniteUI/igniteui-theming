@@ -13,24 +13,22 @@
 /// @prop {Map} color [color: ('gray', 800, .96)] - The text/icon color of the avatar.
 /// @prop {Number} border-radius [0] - The border radius. Can be a fraction between 0 and 1, pixels, or percent.
 /// @prop {Number} size - The size of the avatar.
-$light-avatar: extend(
-    (
-        background: (
-            color: (
-                'gray',
-                400,
-                0.54,
-            ),
-        ),
+$light-avatar: (
+    background: (
         color: (
-            color: (
-                'gray',
-                800,
-                0.96,
-            ),
+            'gray',
+            400,
+            0.54,
         ),
-        border-radius: rem(0),
-    )
+    ),
+    color: (
+        color: (
+            'gray',
+            800,
+            0.96,
+        ),
+    ),
+    border-radius: rem(0),
 );
 
 /// Generates a fluent avatar schema.
@@ -66,4 +64,4 @@ $bootstrap-avatar: extend(
 /// Generates an indigo avatar schema.
 /// @type {Map}
 /// @requires {Map} $light-avatar
-$indigo-avatar: extend($light-avatar);
+$indigo-avatar: $light-avatar;

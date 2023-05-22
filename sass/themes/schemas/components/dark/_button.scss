@@ -13,22 +13,20 @@
 /// @prop {Map} disabled-background [color: ('gray', 100, .3)] - The disabled background color of the button.
 /// @prop {Color} disabled-foreground [color: ('gray', 200)] - The disabled foreground color of the button.
 /// @requires {Map} $material-base-button
-$material-base-button-dark: extend(
-    (
-        disabled-background: (
-            color: (
-                'gray',
-                100,
-                0.3,
-            ),
+$material-base-button-dark: (
+    disabled-background: (
+        color: (
+            'gray',
+            100,
+            0.3,
         ),
-        disabled-foreground: (
-            color: (
-                'gray',
-                200,
-            ),
+    ),
+    disabled-foreground: (
+        color: (
+            'gray',
+            200,
         ),
-    )
+    ),
 );
 
 /// @type {Map}
@@ -149,21 +147,19 @@ $dark-button: (
 /// @requires {Map} $material-base-button
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 100)] - The disabled foreground color of the button.
-$fluent-base-button-dark: extend(
-    (
-        disabled-background: (
-            color: (
-                'gray',
-                50,
-            ),
+$fluent-base-button-dark: (
+    disabled-background: (
+        color: (
+            'gray',
+            50,
         ),
-        disabled-foreground: (
-            color: (
-                'gray',
-                100,
-            ),
+    ),
+    disabled-foreground: (
+        color: (
+            'gray',
+            100,
         ),
-    )
+    ),
 );
 
 /// @type {Map}
@@ -272,7 +268,7 @@ $dark-fluent-button: (
 
 /// @type {Map}
 /// @requires {Map} $bootstrap-base-button
-$bootstrap-base-button-dark: extend($bootstrap-base-button);
+$bootstrap-base-button-dark: $bootstrap-base-button;
 
 /// @type {Map}
 /// @prop {Map} disabled-border-color [color: ('primary', 900)] - The disabled border color of the button.
@@ -315,22 +311,20 @@ $dark-bootstrap-button: (
 /// @prop {Color} disabled-foreground [color: ('gray', 300)] - The disabled foreground color of the button.
 /// @prop {Color} disabled-background [color: ('gray', 200, .1)] - The disabled background color of the button.
 /// @requires {Map} $indigo-base-button
-$indigo-base-button-dark: extend(
-    (
-        disabled-foreground: (
-            color: (
-                'gray',
-                300,
-            ),
+$indigo-base-button-dark: (
+    disabled-foreground: (
+        color: (
+            'gray',
+            300,
         ),
-        disabled-background: (
-            color: (
-                'gray',
-                200,
-                0.1,
-            ),
+    ),
+    disabled-background: (
+        color: (
+            'gray',
+            200,
+            0.1,
         ),
-    )
+    ),
 );
 
 /// @type {Map}

@@ -33,124 +33,122 @@
 /// @prop {Map} tab-ripple-color [color: ('gray', 100)] - The color used for the button background.
 /// @prop {Map} button-ripple-color [color: ('gray', 100)] - The color used for the button background on hover.
 /// @prop {Number} border-radius [0] - The border radius used for tabs. Can be a fraction between 0 and 1, pixels, or percent.
-$light-tabs: extend(
-    (
-        item-text-color: (
-            color: (
-                'gray',
-                700,
-            ),
+$light-tabs: (
+    item-text-color: (
+        color: (
+            'gray',
+            700,
         ),
-        item-background: (
-            color: (
-                'surface',
-            ),
+    ),
+    item-background: (
+        color: (
+            'surface',
         ),
-        item-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
+    ),
+    item-hover-background: (
+        color: (
+            'gray',
+            200,
         ),
-        item-hover-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    item-hover-color: (
+        color: (
+            'gray',
+            700,
         ),
-        item-active-color: (
-            color: (
-                'primary',
-                500,
-            ),
+    ),
+    item-active-color: (
+        color: (
+            'primary',
+            500,
         ),
-        item-icon-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    item-icon-color: (
+        color: (
+            'gray',
+            700,
         ),
-        item-active-icon-color: (
-            color: (
-                'primary',
-                500,
-            ),
+    ),
+    item-active-icon-color: (
+        color: (
+            'primary',
+            500,
         ),
-        item-hover-icon-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    item-hover-icon-color: (
+        color: (
+            'gray',
+            700,
         ),
-        item-disabled-icon-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    item-disabled-icon-color: (
+        color: (
+            'gray',
+            500,
         ),
-        item-active-background: (
-            color: (
-                'gray',
-                200,
-            ),
+    ),
+    item-active-background: (
+        color: (
+            'gray',
+            200,
         ),
-        item-disabled-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    item-disabled-color: (
+        color: (
+            'gray',
+            500,
         ),
-        indicator-color: (
-            color: (
-                'primary',
-                500,
-            ),
+    ),
+    indicator-color: (
+        color: (
+            'primary',
+            500,
         ),
-        button-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    button-color: (
+        color: (
+            'gray',
+            700,
         ),
-        button-background: (
-            color: (
-                'surface',
-            ),
+    ),
+    button-background: (
+        color: (
+            'surface',
         ),
-        button-hover-background: (
-            color: (
-                'gray',
-                100,
-            ),
+    ),
+    button-hover-background: (
+        color: (
+            'gray',
+            100,
         ),
-        button-hover-color: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    button-hover-color: (
+        color: (
+            'gray',
+            900,
         ),
-        button-disabled-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    button-disabled-color: (
+        color: (
+            'gray',
+            500,
         ),
-        tab-ripple-color: (
-            color: (
-                'gray',
-                100,
-            ),
+    ),
+    tab-ripple-color: (
+        color: (
+            'gray',
+            100,
         ),
-        button-ripple-color: (
-            color: (
-                'gray',
-                100,
-            ),
+    ),
+    button-ripple-color: (
+        color: (
+            'gray',
+            100,
         ),
-        border-color: transparent,
-        border-color--hover: transparent,
-        border-radius: rem(0),
-    )
+    ),
+    border-color: transparent,
+    border-color--hover: transparent,
+    border-radius: rem(0),
 );
 
 /// Generates a fluent tabs schema.
