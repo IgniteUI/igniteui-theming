@@ -27,7 +27,7 @@
         @if $_type == 'list' and list.length($value) == 3 {
             --ig-#{$color}-h: #{list.nth($value, 1)};
             --ig-#{$color}-s: #{list.nth($value, 2)};
-            --ig-#{$color}-s: #{list.nth($value, 3)};
+            --ig-#{$color}-l: #{list.nth($value, 3)};
             --ig-#{$color}-a: 1;
         }
     }
