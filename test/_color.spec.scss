@@ -1,11 +1,13 @@
 /* stylelint-disable custom-property-no-missing-var-function */
 /* stylelint-disable max-nesting-depth */
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:meta';
 @use 'sass:color';
 @use '../node_modules/sass-true/' as *;
 @use '../sass/color' as *;
+@use './styles/mocks';
 
 // base colors
 $_primary: #09f;
@@ -23,7 +25,7 @@ $_palette: palette(
     $info: $_info,
     $warn: $_warn,
     $error: $_error,
-    $variant: 'material'
+    $variant: 'material',
 );
 
 @include describe('Color') {
@@ -33,8 +35,8 @@ $_palette: palette(
         }
 
         @include it('should mix two colors to produce an opaque color') {
-            @include assert-equal(to-opaque(rgba(255, 255, 255, .32), #fff), #fff);
-            @include assert-equal(to-opaque(rgba(233, 233, 233, .32), rgba(255, 255, 255, 0)), #f7f7f7);
+            @include assert-equal(to-opaque(rgba(255, 255, 255, 0.32), #fff), #fff);
+            @include assert-equal(to-opaque(rgba(233, 233, 233, 0.32), rgba(255, 255, 255, 0)), #f7f7f7);
         }
 
         @include it('converts a color to a list of HSL values') {
@@ -125,14 +127,19 @@ $_palette: palette(
         }
 
         @include it('should return a shade as CSS variable w/ color as only argument') {
-            $value: color($color: secondary);
+            $value: color(
+                $color: secondary,
+            );
 
             @include assert-equal(type-of($value), string);
             @include assert-equal($value, hsla(var(--ig-secondary-500), var(--ig-secondary-a)));
         }
 
         @include it('should return a shade of type string as CSS var w/ color and variant as only arguments') {
-            $value: color($color: secondary, $variant: 'A400');
+            $value: color(
+                $color: secondary,
+                $variant: 'A400',
+            );
 
             @include assert-equal(type-of($value), string);
             @include assert-equal($value, hsla(var(--ig-secondary-A400), var(--ig-secondary-a)));
@@ -146,7 +153,10 @@ $_palette: palette(
         }
 
         @include it('should return a contrast shade of type string as CSS var w/ color and variant as only arguments') {
-            $value: contrast-color($color: secondary, $variant: 'A400');
+            $value: contrast-color(
+                $color: secondary,
+                $variant: 'A400',
+            );
 
             @include assert-equal(type-of($value), string);
             @include assert-equal($value, var(--ig-secondary-A400-contrast));
@@ -158,7 +168,11 @@ $_palette: palette(
             $shade: shade($color, $_primary, $variant, null);
             $expected: (
                 raw: hsl(204deg 100% 44.5%),
-                hsl: #{var(--ig-primary-h), calc(var(--ig-primary-s) * 1.26), calc(var(--ig-primary-l) * .89)}
+                hsl: #{var(--ig-primary-h),
+                calc(
+                    var(--ig-primary-s) * 1.26,
+                ),
+                calc(var(--ig-primary-l) * 0.89)},
             );
 
             @include assert-equal($shade, $expected);
@@ -171,7 +185,11 @@ $_palette: palette(
             $shade: shade($color, null, $variant, $surface);
             $expected: (
                 raw: hsl(0deg 0% 98%),
-                hsl: #{var(--ig-gray-h), var(--ig-gray-s), 98%}
+                hsl: #{var(--ig-gray-h),
+                var(
+                    --ig-gray-s,
+                ),
+                98%},
             );
 
             // $surface is bright, return a darker shade of gray
@@ -182,7 +200,11 @@ $_palette: palette(
             $expected: #{var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%};
             $expected: (
                 raw: hsl(0deg 0% 13%),
-                hsl: #{var(--ig-gray-h), var(--ig-gray-s), 13%}
+                hsl: #{var(--ig-gray-h),
+                var(
+                    --ig-gray-s,
+                ),
+                13%},
             );
 
             // $surface is dark, return a lighter shade of gray
@@ -234,16 +256,66 @@ $_palette: palette(
                         --ig-gray-s: #{math.round(color.saturation($gray-500))};
                         --ig-gray-l: #{math.round(color.lightness($gray-500))};
                         --ig-gray-a: #{math.round(color.alpha($gray-500))};
-                        --ig-primary-500:
-                            #{var(--ig-primary-h),
-                            calc(var(--ig-primary-s) * 1),
+                        --ig-primary-500: #{var(--ig-primary-h), calc(var(--ig-primary-s) * 1),
                             calc(var(--ig-primary-l) * 1)};
                         --ig-primary-500-contrast: #{contrast-color($_palette, primary, 500)};
-                        --ig-gray-500:
-                            #{var(--ig-gray-h),
-                            var(--ig-gray-s),
-                            #{math.round(color.lightness($gray-500))}};
+                        --ig-gray-500: #{var(--ig-gray-h), var(--ig-gray-s), #{math.round(color.lightness($gray-500))}};
                         --ig-gray-500-contrast: #{contrast-color($_palette, gray, 500)};
+                    }
+                }
+            }
+        }
+
+        @include it('verify the integrity of sample handmade palette') {
+            $_palette: mocks.$handmade-palette;
+
+            @each $color, $shades in map.remove($IPalette, '_meta') {
+                @include assert-true(map.get($_palette, $color));
+                @include assert-true(meta.type-of(map.get($_palette, $color)), 'map');
+
+                @each $shade, $value in $shades {
+                    // Test if each shade exists
+                    @include assert-true(map.get($_palette, $color, $shade));
+
+                    @if $shade != variant {
+                        // Test if each contrast shade exits
+                        @include assert-true(map.get($_palette, $color, #{$shade}-contrast));
+
+                        // Test if each hsl list shade exits and is a list
+                        @include assert-true(meta.type-of(map.get($_palette, $color, $shade)), 'list');
+                    }
+
+                    @if $shade == variant {
+                        @include assert-true(meta.type-of(map.get($_palette, $shade)), 'string');
+                    }
+                }
+            }
+        }
+
+        @include it('should generate CSS variables for handmande palettes') {
+            $_palette: mocks.$handmade-palette;
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include palette($_palette);
+                }
+
+                @include contains($selector: false) {
+                    :root {
+                        @each $color, $shades in map.remove($IPalette, '_meta') {
+                            @each $shade in $shades {
+                                $value: map.get($_palette, $color, $shade);
+
+                                @if $shade == 500 {
+                                    --ig-#{$color}-h: #{list.nth($value, 1)};
+                                    --ig-#{$color}-s: #{list.nth($value, 2)};
+                                    --ig-#{$color}-s: #{list.nth($value, 3)};
+                                    --ig-#{$color}-a: 1;
+                                }
+
+                                --ig-#{$color}-#{$shade}: #{$value};
+                            }
+                        }
                     }
                 }
             }

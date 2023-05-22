@@ -4,6 +4,7 @@
 @use '../../sass/typography/charts' as *;
 @use '../../sass/elevations/presets' as *;
 @use '../../sass/themes/schemas' as *;
+@use '../../test/styles/mocks';
 @include palette($light-material-palette);
 @include typography($material-typeface, $material-type-scale);
 @include elevations($material-elevations);
@@ -11,3 +12,8 @@
 // Chart themes and typography
 @include chart-themes($schema: $dark-material-schema, $target: 'webc');
 @include charts-typography($type-scale: $material-type-scale, $target: 'webc');
+
+// Test handmade palette
+.handmade {
+    @include palette(mocks.$handmade-palette);
+}

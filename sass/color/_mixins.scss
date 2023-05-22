@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:meta';
 @use 'sass:math';
 @use 'sass:color';
@@ -12,14 +13,23 @@
 // Generates CSS variables for a base color
 // @access private
 @mixin _base($color, $shade, $value) {
-    $_shade: $shade == 500;
-    $_valid: meta.type-of($value == 'color');
+    @if $shade == 500 {
+        $_type: meta.type-of($value);
 
-    @if $_shade and $_valid {
-        --ig-#{$color}-h: #{math.round(color.hue($value))};
-        --ig-#{$color}-s: #{math.round(color.saturation($value))};
-        --ig-#{$color}-l: #{math.round(color.lightness($value))};
-        --ig-#{$color}-a: #{color.alpha($value)};
+        @if $_type == 'color' {
+            --ig-#{$color}-h: #{math.round(color.hue($value))};
+            --ig-#{$color}-s: #{math.round(color.saturation($value))};
+            --ig-#{$color}-l: #{math.round(color.lightness($value))};
+            --ig-#{$color}-a: #{color.alpha($value)};
+        }
+
+        // Cover handmade palettes with hsl values for base color
+        @if $_type == 'list' and list.length($value) == 3 {
+            --ig-#{$color}-h: #{list.nth($value, 1)};
+            --ig-#{$color}-s: #{list.nth($value, 2)};
+            --ig-#{$color}-s: #{list.nth($value, 3)};
+            --ig-#{$color}-a: 1;
+        }
     }
 }
 
@@ -34,6 +44,10 @@
         $variant: string.slice($shade, 1, string.index($shade, '-hsl') - 1);
 
         --ig-#{$color}-#{$variant}: #{$value};
+    }
+
+    @if not($_hsl) and not($_contrast) {
+        --ig-#{$color}-#{$shade}: #{$value};
     }
 
     @if $_contrast and $contrast {
