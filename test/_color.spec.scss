@@ -1,11 +1,13 @@
 /* stylelint-disable custom-property-no-missing-var-function */
 /* stylelint-disable max-nesting-depth */
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:meta';
 @use 'sass:color';
 @use '../node_modules/sass-true/' as *;
 @use '../sass/color' as *;
+@use './styles/mocks';
 
 // base colors
 $_primary: #09f;
@@ -244,6 +246,61 @@ $_palette: palette(
                             var(--ig-gray-s),
                             #{math.round(color.lightness($gray-500))}};
                         --ig-gray-500-contrast: #{contrast-color($_palette, gray, 500)};
+                    }
+                }
+            }
+        }
+
+        @include it('verify the integrity of sample handmade palette') {
+            $_palette: mocks.$handmade-palette;
+
+            @each $color, $shades in map.remove($IPalette, '_meta') {
+                @include assert-true(map.get($_palette, $color));
+                @include assert-true(meta.type-of(map.get($_palette, $color)), 'map');
+
+                @each $shade, $value in $shades {
+                    // Test if each shade exists
+                    @include assert-true(map.get($_palette, $color, $shade));
+
+                    @if $shade != variant{
+                        // Test if each contrast shade exits
+                        @include assert-true(map.get($_palette, $color, #{$shade}-contrast));
+
+                        // Test if each hsl list shade exits and is a list
+                        @include assert-true(meta.type-of(map.get($_palette, $color, $shade)), 'list');
+                    }
+
+                    @if $shade == variant {
+                        @include assert-true(meta.type-of(map.get($_palette, $shade)), 'string');
+                    }
+                }
+            }
+        }
+
+        @include it('should generate CSS variables for handmande palettes') {
+            $_palette: mocks.$handmade-palette;
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include palette($_palette);
+                }
+
+                @include contains($selector: false) {
+                    :root {
+                        @each $color, $shades in map.remove($IPalette, '_meta') {
+                          @each $shade in $shades {
+                            $value: map.get($_palette, $color, $shade);
+
+                            @if $shade == 500 {
+                              --ig-#{$color}-h: #{list.nth($value, 1)};
+                              --ig-#{$color}-s: #{list.nth($value, 2)};
+                              --ig-#{$color}-l: #{list.nth($value, 3)};
+                              --ig-#{$color}-a: 1;
+                            }
+
+                            --ig-#{$color}-#{$shade}: #{$value};
+                          }
+                        }
                     }
                 }
             }

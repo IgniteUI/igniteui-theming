@@ -296,7 +296,7 @@ $_enhanced-accessibility: false;
 ///   $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
 /// @return {List} - This list of HSL values.
 @function to-hsl($color) {
-    @return (color.hue($color), color.saturation($color), color.lightness($color));
+    @return (math.round(color.hue($color)), math.round(color.saturation($color)), math.round(color.lightness($color)));
 }
 
 /// Calculates the contrast ratio between two colors.
