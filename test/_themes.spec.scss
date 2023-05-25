@@ -81,6 +81,24 @@ $schema: (
             }
         }
 
+        @include it('should work with custom(handmade) palettes') {
+            $instructions: (
+                (color: tertiary),
+                (contrast-color: (tertiary, '400')),
+            );
+            $results: (
+                color($color: tertiary),
+                contrast-color($color: tertiary, $variant: '400'),
+            );
+
+            @for $i from 1 through list.length($instructions) {
+                $instruction: list.nth($instructions, $i);
+                $result: list.nth($results, $i);
+
+                @include assert-equal(resolve-value($instruction), $result);
+            }
+        }
+
         @include it('should output theme maps from schema definitions') {
             $theme: (
                 variant: 'material',

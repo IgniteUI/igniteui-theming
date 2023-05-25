@@ -178,10 +178,6 @@ $_enhanced-accessibility: false;
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $meta: if($palette, map.get($palette, '_meta'), null);
 
-    @if not($c) {
-        @error 'The passed color #{meta.inspect($color)} is not valid.';
-    }
-
     @if not($palette) or not($meta) {
         @return if($contrast, $s, hsla($s, if($opacity, $opacity, $a)));
     }
