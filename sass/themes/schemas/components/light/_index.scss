@@ -4,41 +4,114 @@
 /// @access public
 ////
 
+@use './action-strip' as *;
 @use './avatar' as *;
+@use './badge' as *;
+@use './banner' as *;
+@use './bottom-nav' as *;
 @use './button' as *;
-@use './icon' as *;
-@use './navbar' as *;
-@use './input-group' as *;
+@use './button-group' as *;
+@use './calendar' as *;
+@use './card' as *;
+@use './carousel' as *;
 @use './checkbox' as *;
-@use './switch' as *;
+@use './chip' as *;
+@use './column-actions' as *;
+@use './combo' as *;
+@use './date-range-picker' as *;
+@use './dialog' as *;
+@use './divider' as *;
+@use './dock-manager' as *;
+@use './drop-down' as *;
+@use './expansion-panel' as *;
+@use './grid' as *;
+@use './grid-filtering' as *;
+@use './grid-summary' as *;
+@use './grid-toolbar' as *;
+@use './highlight' as *;
+@use './icon' as *;
+@use './input-group' as *;
+@use './list' as *;
+@use './navbar' as *;
+@use './navdrawer' as *;
+@use './overlay' as *;
+@use './pagination' as *;
+@use './pivot-data-selector' as *;
+@use './progress' as *;
+@use './query-builder' as *;
 @use './radio' as *;
-@use './tabs' as *;
 @use './rating' as *;
+@use './ripple' as *;
+@use './scrollbar' as *;
 @use './select' as *;
 @use './slider' as *;
-@use './drop-down' as *;
-@use './combo' as *;
+@use './snackbar' as *;
+@use './splitter' as *;
+@use './stepper' as *;
+@use './switch' as *;
+@use './tabs' as *;
+@use './time-picker' as *;
+@use './toast' as *;
+@use './tooltip' as *;
 @use './tree' as *;
+@use './watermark' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
 /// @type Map.
 $light-material-schema: (
+    action-strip: $light-action-strip,
     avatar: $light-avatar,
+    badge: $light-badge,
+    banner: $light-banner,
+    bottom-nav: $light-bottom-nav,
     button: $light-button,
-    icon: $light-icon,
-    navbar: $light-navbar,
-    input-group: $light-input-group,
+    button-group: $light-button-group,
+    calendar: $light-calendar,
+    card: $light-card,
+    carousel: $light-carousel,
     checkbox: $light-checkbox,
-    switch: $light-switch,
+    chip: $light-chip,
+    column-actions: $light-column-actions,
+    combo: $light-combo,
+    date-range: $light-date-range-picker,
+    dialog: $light-dialog,
+    divider: $light-divider,
+    dockmanager: $light-dock-manager,
+    drop-down: $light-drop-down,
+    expansion-panel: $light-expansion-panel,
+    grid: $light-grid,
+    grid-filtering: $light-grid-filtering,
+    grid-summary: $light-grid-summary,
+    grid-toolbar: $light-grid-toolbar,
+    highlight: $light-highlight,
+    icon: $light-icon,
+    input-group: $light-input-group,
+    list: $light-list,
+    navbar: $light-navbar,
+    nav-drawer: $light-navdrawer,
+    overlay: $light-overlay,
+    paginator: $light-pagination,
+    pivot-data-selector: $light-pivot-data-selector,
+    linear-bar: $light-progress-linear,
+    circular-bar: $light-progress-circular,
+    query-builder: $light-query-builder,
     radio: $light-radio,
-    tabs: $light-tabs,
     rating: $light-rating,
+    ripple: $light-ripple,
+    scrollbar: $light-scrollbar,
     select: $light-select,
     slider: $light-slider,
-    dropdown: $light-drop-down,
-    combo: $light-combo,
+    snackbar: $light-snackbar,
+    splitter: $light-splitter,
+    stepper: $light-stepper,
+    switch: $light-switch,
+    tabs: $light-tabs,
+    time-picker: $light-time-picker,
+    toast: $light-toast,
+    tooltip: $light-tooltip,
     tree: $light-tree,
+    watermark: $light-watermark,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -49,21 +122,58 @@ $light-material-schema: (
 /// Use in combination with light palettes.
 /// @type Map
 $light-fluent-schema: (
+    action-strip: $fluent-action-strip,
     avatar: $fluent-avatar,
+    badge: $fluent-badge,
+    banner: $fluent-banner,
+    bottom-nav: $fluent-bottom-nav,
     button: $fluent-button,
-    icon: $fluent-icon,
-    navbar: $fluent-navbar,
-    input-group: $fluent-input-group,
+    button-group: $fluent-button-group,
+    calendar: $fluent-calendar,
+    card: $fluent-card,
+    carousel: $fluent-carousel,
     checkbox: $fluent-checkbox,
-    switch: $fluent-switch,
+    chip: $fluent-chip,
+    column-actions: $fluent-column-actions,
+    combo: $fluent-combo,
+    date-range: $fluent-date-range-picker,
+    dialog: $fluent-dialog,
+    divider: $fluent-divider,
+    dockmanager: $fluent-dock-manager,
+    drop-down: $fluent-drop-down,
+    expansion-panel: $fluent-expansion-panel,
+    grid: $fluent-grid,
+    grid-filtering: $fluent-grid-filtering,
+    grid-summary: $fluent-grid-summary,
+    grid-toolbar: $fluent-grid-toolbar,
+    highlight: $fluent-highlight,
+    icon: $fluent-icon,
+    input-group: $fluent-input-group,
+    list: $fluent-list,
+    navbar: $fluent-navbar,
+    nav-drawer: $fluent-navdrawer,
+    overlay: $fluent-overlay,
+    paginator: $fluent-pagination,
+    pivot-data-selector: $fluent-pivot-data-selector,
+    linear-bar: $fluent-progress-linear,
+    circular-bar: $fluent-progress-circular,
+    query-builder: $fluent-query-builder,
     radio: $fluent-radio,
-    tabs: $fluent-tabs,
     rating: $fluent-rating,
+    ripple: $fluent-ripple,
+    scrollbar: $fluent-scrollbar,
     select: $fluent-select,
     slider: $fluent-slider,
-    dropdown: $fluent-drop-down,
-    combo: $fluent-combo,
+    snackbar: $fluent-snackbar,
+    splitter: $fluent-splitter,
+    stepper: $fluent-stepper,
+    switch: $fluent-switch,
+    tabs: $fluent-tabs,
+    time-picker: $fluent-time-picker,
+    toast: $fluent-toast,
+    tooltip: $fluent-tooltip,
     tree: $fluent-tree,
+    watermark: $fluent-watermark,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -74,21 +184,58 @@ $light-fluent-schema: (
 /// Use in combination with light palettes.
 /// @type Map
 $light-bootstrap-schema: (
+    action-strip: $bootstrap-action-strip,
     avatar: $bootstrap-avatar,
+    badge: $bootstrap-badge,
+    banner: $bootstrap-banner,
+    bottom-nav: $bootstrap-bottom-nav,
     button: $bootstrap-button,
-    icon: $bootstrap-icon,
-    navbar: $bootstrap-navbar,
-    input-group: $bootstrap-input-group,
+    button-group: $bootstrap-button-group,
+    calendar: $bootstrap-calendar,
+    card: $bootstrap-card,
+    carousel: $bootstrap-carousel,
     checkbox: $bootstrap-checkbox,
-    switch: $bootstrap-switch,
+    chip: $bootstrap-chip,
+    column-actions: $bootstrap-column-actions,
+    combo: $bootstrap-combo,
+    date-range: $bootstrap-date-range-picker,
+    dialog: $bootstrap-dialog,
+    divider: $bootstrap-divider,
+    dockmanager: $bootstrap-dock-manager,
+    drop-down: $bootstrap-drop-down,
+    expansion-panel: $bootstrap-expansion-panel,
+    grid: $bootstrap-grid,
+    grid-filtering: $bootstrap-grid-filtering,
+    grid-summary: $bootstrap-grid-summary,
+    grid-toolbar: $bootstrap-grid-toolbar,
+    highlight: $bootstrap-highlight,
+    icon: $bootstrap-icon,
+    input-group: $bootstrap-input-group,
+    list: $bootstrap-list,
+    navbar: $bootstrap-navbar,
+    nav-drawer: $bootstrap-navdrawer,
+    overlay: $bootstrap-overlay,
+    paginator: $bootstrap-pagination,
+    pivot-data-selector: $bootstrap-pivot-data-selector,
+    linear-bar: $bootstrap-progress-linear,
+    circular-bar: $bootstrap-progress-circular,
+    query-builder: $bootstrap-query-builder,
     radio: $bootstrap-radio,
-    tabs: $bootstrap-tabs,
     rating: $bootstrap-rating,
+    ripple: $bootstrap-ripple,
+    scrollbar: $bootstrap-scrollbar,
     select: $bootstrap-select,
     slider: $bootstrap-slider,
-    dropdown: $bootstrap-drop-down,
-    combo: $bootstrap-combo,
+    snackbar: $bootstrap-snackbar,
+    splitter: $bootstrap-splitter,
+    stepper: $bootstrap-stepper,
+    switch: $bootstrap-switch,
+    tabs: $bootstrap-tabs,
+    time-picker: $bootstrap-time-picker,
+    toast: $bootstrap-toast,
+    tooltip: $bootstrap-tooltip,
     tree: $bootstrap-tree,
+    watermark: $bootstrap-watermark,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -99,21 +246,58 @@ $light-bootstrap-schema: (
 /// Use in combination with light palettes.
 /// @type Map
 $light-indigo-schema: (
+    action-strip: $indigo-action-strip,
     avatar: $indigo-avatar,
+    badge: $indigo-badge,
+    banner: $indigo-banner,
+    bottom-nav: $indigo-bottom-nav,
     button: $indigo-button,
-    icon: $indigo-icon,
-    navbar: $indigo-navbar,
-    input-group: $indigo-input-group,
+    button-group: $indigo-button-group,
+    calendar: $indigo-calendar,
+    card: $indigo-card,
+    carousel: $indigo-carousel,
     checkbox: $indigo-checkbox,
-    switch: $indigo-switch,
+    chip: $indigo-chip,
+    column-actions: $indigo-column-actions,
+    combo: $indigo-combo,
+    date-range: $indigo-date-range-picker,
+    dialog: $indigo-dialog,
+    divider: $indigo-divider,
+    dockmanager: $indigo-dock-manager,
+    drop-down: $indigo-drop-down,
+    expansion-panel: $indigo-expansion-panel,
+    grid: $indigo-grid,
+    grid-filtering: $indigo-grid-filtering,
+    grid-summary: $indigo-grid-summary,
+    grid-toolbar: $indigo-grid-toolbar,
+    highlight: $indigo-highlight,
+    icon: $indigo-icon,
+    input-group: $indigo-input-group,
+    list: $indigo-list,
+    navbar: $indigo-navbar,
+    nav-drawer: $indigo-navdrawer,
+    overlay: $indigo-overlay,
+    paginator: $indigo-pagination,
+    pivot-data-selector: $indigo-pivot-data-selector,
+    linear-bar: $indigo-progress-linear,
+    circular-bar: $indigo-progress-circular,
+    query-builder: $indigo-query-builder,
     radio: $indigo-radio,
-    tabs: $indigo-tabs,
     rating: $indigo-rating,
+    ripple: $indigo-ripple,
+    scrollbar: $indigo-scrollbar,
     select: $indigo-select,
     slider: $indigo-slider,
-    dropdown: $indigo-drop-down,
-    combo: $indigo-combo,
+    snackbar: $indigo-snackbar,
+    splitter: $indigo-splitter,
+    stepper: $indigo-stepper,
+    switch: $indigo-switch,
+    tabs: $indigo-tabs,
+    time-picker: $indigo-time-picker,
+    toast: $indigo-toast,
+    tooltip: $indigo-tooltip,
     tree: $indigo-tree,
+    watermark: $indigo-watermark,
     _meta: (
         theme: 'indigo-design',
         variant: 'light',
