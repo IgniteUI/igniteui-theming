@@ -1,0 +1,34 @@
+@use '../../../../utils/map' as *;
+@use '../light/overlay' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark overlay schema.
+/// @type {Map}
+/// @requires $light-overlay
+$dark-overlay: $light-overlay;
+
+/// Generates a dark fluent overlay schema.
+/// @type {Map}
+/// @property {Color} background-color [rgba(0, 0, 0, .4)] - The background color used for modal overlays.
+/// @requires $fluent-overlay
+$dark-fluent-overlay: extend(
+    $fluent-overlay,
+    (
+        background-color: rgb(0 0 0 / 40%),
+    )
+);
+
+/// Generates a dark bootstrap overlay schema.
+/// @type {Map}
+/// @requires $bootstrap-overlay
+$dark-bootstrap-overlay: $bootstrap-overlay;
+
+/// Generates a dark indigo overlay schema.
+/// @type {Map}
+/// @requires $indigo-overlay
+$dark-indigo-overlay: $indigo-overlay;
