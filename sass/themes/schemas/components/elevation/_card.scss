@@ -22,11 +22,11 @@ $flat-card: (
 
 /// @type Map
 /// @requires {Map} $flat-card
-$fluent-elevation-card: extend($flat-card);
+$fluent-elevation-card: $flat-card;
 
 /// @type Map
 /// @requires {Map} $flat-card
-$bootstrap-elevation-card: extend($flat-card);
+$bootstrap-elevation-card: $flat-card;
 
 /// @type Map
 /// @prop {Number} resting-elevation [4] - The elevation level, between 0-24, to be used for the resting state.
