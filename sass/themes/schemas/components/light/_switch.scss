@@ -42,7 +42,6 @@
 $light-switch: extend(
     $default-elevation-switch,
     (
-        variant: 'material',
         type: 'light',
         border-color: transparent,
         border-hover-color: transparent,
@@ -175,7 +174,6 @@ $light-switch: extend(
 $fluent-switch: extend(
     $light-switch,
     (
-        variant: 'fluent',
         focus-outline-color: (
             color: (
                 'gray',
@@ -300,7 +298,6 @@ $fluent-switch: extend(
 $bootstrap-switch: extend(
     $fluent-switch,
     (
-        variant: 'bootstrap',
         focus-outline-color: (
             color: (
                 'primary',
@@ -401,7 +398,6 @@ $bootstrap-switch: extend(
 $indigo-switch: extend(
     $light-switch,
     (
-        variant: 'indigo-design',
         focus-outline-color: (
             color: (
                 'gray',

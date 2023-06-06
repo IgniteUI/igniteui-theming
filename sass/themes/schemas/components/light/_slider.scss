@@ -30,7 +30,6 @@
 /// @prop {Map} tick-label-color [color: ('gray', 500)] - The color of the tick label.
 /// @prop {Map} tick-color [color: ('gray', 500)] - The background-color of the tick.
 $light-slider: (
-    variant: 'material',
     track-color: (
         color: (
             'secondary',
@@ -154,7 +153,6 @@ $light-slider: (
 $fluent-slider: extend(
     $light-slider,
     (
-        variant: 'fluent',
         track-color: (
             color: (
                 'gray',
@@ -251,7 +249,6 @@ $fluent-slider: extend(
 $bootstrap-slider: extend(
     $fluent-slider,
     (
-        variant: 'bootstrap',
         base-track-color: (
             color: (
                 'secondary',
@@ -314,7 +311,6 @@ $bootstrap-slider: extend(
 $indigo-slider: extend(
     $light-slider,
     (
-        variant: 'indigo-design',
         track-step-color: white,
         track-hover-color: (
             color: (
