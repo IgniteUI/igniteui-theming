@@ -58,7 +58,7 @@ $light-badge: extend(
 /// Generates a fluent badge schema.
 /// @type {Map}
 /// @requires {Map} $light-badge
-$fluent-badge: extend($light-badge);
+$fluent-badge: $light-badge;
 
 /// Generates a bootstrap badge schema.
 /// @type {Map}
@@ -79,4 +79,4 @@ $bootstrap-badge: extend(
 /// Generates an indigo badge schema.
 /// @type {Map}
 /// @requires {Map} $light-badge
-$indigo-badge: extend($light-badge);
+$indigo-badge: $light-badge;

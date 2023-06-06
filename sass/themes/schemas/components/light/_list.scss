@@ -34,99 +34,97 @@
 /// @prop {Number} item-border-radius [0] - The border radius used for list item. Can be a fraction between 0 and 1, pixels, or percent.
 /// @prop {Number} border-color [transparent] - The list border color.
 /// @prop {Color} border-width [0] - The list border width.
-$light-list: extend(
-    (
-        background: (
-            color: 'surface',
+$light-list: (
+    background: (
+        color: 'surface',
+    ),
+
+    header-background: (
+        color: 'surface',
+    ),
+
+    header-text-color: (
+        color: (
+            'secondary',
+            500,
         ),
+    ),
 
-        header-background: (
-            color: 'surface',
+    item-background: (
+        color: 'surface',
+    ),
+
+    item-background-hover: (
+        color: (
+            'gray',
+            200,
         ),
+    ),
 
-        header-text-color: (
-            color: (
-                'secondary',
-                500,
-            ),
+    item-background-active: (
+        color: (
+            'gray',
+            200,
         ),
+    ),
 
-        item-background: (
-            color: 'surface',
+    item-text-color: (
+        color: (
+            'gray',
+            700,
         ),
+    ),
 
-        item-background-hover: (
-            color: (
-                'gray',
-                200,
-            ),
+    item-text-color-hover: (
+        color: (
+            'gray',
+            700,
         ),
+    ),
 
-        item-background-active: (
-            color: (
-                'gray',
-                200,
-            ),
+    item-text-color-active: (
+        color: (
+            'gray',
+            700,
         ),
+    ),
 
-        item-text-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
+    item-title-color: "'currentColor'",
 
-        item-text-color-hover: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
+    item-title-color-hover: "'currentColor'",
 
-        item-text-color-active: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
+    item-title-color-active: "'currentColor'",
 
-        item-title-color: "'currentColor'",
+    item-action-color: "'currentColor'",
 
-        item-title-color-hover: "'currentColor'",
+    item-action-color-hover: "'currentColor'",
 
-        item-title-color-active: "'currentColor'",
+    item-action-color-active: "'currentColor'",
 
-        item-action-color: "'currentColor'",
+    item-subtitle-color: "'currentColor'",
 
-        item-action-color-hover: "'currentColor'",
+    item-subtitle-color-hover: "'currentColor'",
 
-        item-action-color-active: "'currentColor'",
+    item-subtitle-color-active: "'currentColor'",
 
-        item-subtitle-color: "'currentColor'",
+    item-thumbnail-color: "'currentColor'",
 
-        item-subtitle-color-hover: "'currentColor'",
+    item-thumbnail-color-hover: "'currentColor'",
 
-        item-subtitle-color-active: "'currentColor'",
+    item-thumbnail-color-active: "'currentColor'",
 
-        item-thumbnail-color: "'currentColor'",
+    border-color: transparent,
 
-        item-thumbnail-color-hover: "'currentColor'",
+    border-width: 0,
 
-        item-thumbnail-color-active: "'currentColor'",
-
-        border-color: transparent,
-
-        border-width: 0,
-
-        border-radius: rem(0),
-        item-border-radius: rem(0),
-    )
+    border-radius: rem(0),
+    item-border-radius: rem(0),
 );
 
 /// Generates a fluent list schema.
 /// @type {Map}
 /// @requires {Map} $light-list
-$fluent-list: extend($light-list);
+$fluent-list: $light-list;
 
 /// Generates a bootstrap list schema.
 /// @type {Map}

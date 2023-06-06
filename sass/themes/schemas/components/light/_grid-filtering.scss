@@ -97,9 +97,9 @@ $fluent-grid-filtering: extend(
 /// Generates a bootstrap grid-filtering schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-filtering
-$bootstrap-grid-filtering: extend($light-grid-filtering);
+$bootstrap-grid-filtering: $light-grid-filtering;
 
 /// Generates an indigo grid-filtering schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-filtering
-$indigo-grid-filtering: extend($light-grid-filtering);
+$indigo-grid-filtering: $light-grid-filtering;

@@ -23,14 +23,14 @@ $light-ripple: (
 /// Generates a fluent ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$fluent-ripple: extend($light-ripple);
+$fluent-ripple: $light-ripple;
 
 /// Generates a bootstrap ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$bootstrap-ripple: extend($light-ripple);
+$bootstrap-ripple: $light-ripple;
 
 /// Generates an indigo ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$indigo-ripple: extend($light-ripple);
+$indigo-ripple: $light-ripple;

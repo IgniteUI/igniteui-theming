@@ -12,25 +12,23 @@
 /// @prop {Map} background [color: ('gray', 700, .9),] - The background color of the tooltip.
 /// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text color of the tooltip.
 /// @prop {Number} border-radius [4px] - The border radius used for tooltip. Can be a fraction between 0 and 1, pixels, or percent.
-$light-tooltip: extend(
-    (
-        background: (
-            color: (
-                'gray',
-                700,
-                0.9,
-            ),
+$light-tooltip: (
+    background: (
+        color: (
+            'gray',
+            700,
+            0.9,
         ),
+    ),
 
-        text-color: (
-            contrast-color: (
-                'gray',
-                700,
-            ),
+    text-color: (
+        contrast-color: (
+            'gray',
+            700,
         ),
+    ),
 
-        border-radius: rem(4px),
-    )
+    border-radius: rem(4px),
 );
 
 /// Generates a light fluent tooltip schema.

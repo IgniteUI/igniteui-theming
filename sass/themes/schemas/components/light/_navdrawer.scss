@@ -113,12 +113,12 @@ $light-navdrawer: extend(
 /// Generates a fluent navdrawer schema.
 /// @type {Map}
 /// @requires {Map} $light-navdrawer
-$fluent-navdrawer: extend($light-navdrawer);
+$fluent-navdrawer: $light-navdrawer;
 
 /// Generates a bootstrap navdrawer schema.
 /// @type {Map}
 /// @requires {Map} $light-navdrawer
-$bootstrap-navdrawer: extend($light-navdrawer);
+$bootstrap-navdrawer: $light-navdrawer;
 
 /// Generates an indigo navdrawer schema.
 /// @type {Map}

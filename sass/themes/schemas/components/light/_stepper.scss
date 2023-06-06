@@ -68,342 +68,340 @@
 /// @prop {String} complete-step-separator-style ['solid'] - The separator border-style between the completed steps.
 /// @prop {Number} border-radius-indicator [100px] - The border radius. Can be a fraction between 0 and 1, pixels, or percent.
 /// @prop {Number} border-radius-step-header [0] - The border radius. Can be a fraction between 0 and 1, pixels, or percent.
-$light-stepper: extend(
-    (
-        // Step incomplete
-        step-background: transparent,
-        step-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
+$light-stepper: (
+    // Step incomplete
+    step-background: transparent,
+    step-hover-background: (
+        color: (
+            'gray',
+            200,
         ),
-        step-focus-background: (
-            color: (
-                'gray',
-                100,
-            ),
+    ),
+    step-focus-background: (
+        color: (
+            'gray',
+            100,
         ),
+    ),
 
-        indicator-background: (
+    indicator-background: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+    indicator-outline: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+    indicator-color: (
+        contrast-color: (
+            'gray',
+            400,
+        ),
+    ),
+
+    title-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    title-hover-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    title-focus-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+
+    subtitle-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    subtitle-hover-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    subtitle-focus-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    // Complete
+    complete-step-background: transparent,
+    complete-step-hover-background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    complete-step-focus-background: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    complete-indicator-background: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    complete-indicator-outline: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    complete-indicator-color: (
+        contrast-color: (
+            'gray',
+            900,
+        ),
+    ),
+
+    complete-title-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    complete-title-hover-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    complete-title-focus-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+
+    complete-subtitle-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    complete-subtitle-hover-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    complete-subtitle-focus-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    // Current
+    current-step-background: transparent,
+    current-step-hover-background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    current-step-focus-background: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    current-indicator-background: (
+        color: (
+            'primary',
+            500,
+        ),
+    ),
+
+    current-indicator-outline: (
+        color: (
+            'primary',
+            500,
+        ),
+    ),
+
+    current-indicator-color: (
+        contrast-color: (
+            'gray',
+            900,
+        ),
+    ),
+
+    current-title-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    current-title-hover-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    current-title-focus-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+
+    current-subtitle-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    current-subtitle-hover-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    current-subtitle-focus-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    // Invalid
+    invalid-step-background: transparent,
+    invalid-step-hover-background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    invalid-step-focus-background: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    invalid-indicator-background: (
+        color: (
+            'error',
+        ),
+    ),
+    invalid-indicator-outline: (
+        color: (
+            'error',
+        ),
+    ),
+    invalid-indicator-color: (
+        contrast-color: (
+            'gray',
+            900,
+        ),
+    ),
+
+    invalid-title-color: (
+        color: (
+            'error',
+        ),
+    ),
+    invalid-title-hover-color: (
+        color: (
+            'error',
+        ),
+    ),
+    invalid-title-focus-color: (
+        color: (
+            'error',
+        ),
+    ),
+
+    invalid-subtitle-color: (
+        color: (
+            'error',
+        ),
+    ),
+    invalid-subtitle-hover-color: (
+        color: (
+            'error',
+        ),
+    ),
+    invalid-subtitle-focus-color: (
+        color: (
+            'error',
+        ),
+    ),
+
+    // Disabled
+    disabled-indicator-color:
+        (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+    disabled-indicator-background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    disabled-indicator-outline: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    disabled-title-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    disabled-subtitle-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+
+    // Separator
+    step-separator-color:
+        (
             color: (
                 'gray',
                 300,
             ),
         ),
-        indicator-outline: (
-            color: (
-                'gray',
-                300,
-            ),
+    complete-step-separator-color: (
+        color: (
+            'gray',
+            900,
         ),
-        indicator-color: (
-            contrast-color: (
-                'gray',
-                400,
-            ),
-        ),
-
-        title-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        title-hover-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        title-focus-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        subtitle-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-        subtitle-hover-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-        subtitle-focus-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        // Complete
-        complete-step-background: transparent,
-        complete-step-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        complete-step-focus-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        complete-indicator-background: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        complete-indicator-outline: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        complete-indicator-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        complete-title-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        complete-title-hover-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        complete-title-focus-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        complete-subtitle-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-        complete-subtitle-hover-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-        complete-subtitle-focus-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        // Current
-        current-step-background: transparent,
-        current-step-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        current-step-focus-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        current-indicator-background: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-
-        current-indicator-outline: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-
-        current-indicator-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        current-title-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        current-title-hover-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        current-title-focus-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        current-subtitle-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-        current-subtitle-hover-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-        current-subtitle-focus-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        // Invalid
-        invalid-step-background: transparent,
-        invalid-step-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        invalid-step-focus-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        invalid-indicator-background: (
-            color: (
-                'error',
-            ),
-        ),
-        invalid-indicator-outline: (
-            color: (
-                'error',
-            ),
-        ),
-        invalid-indicator-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        invalid-title-color: (
-            color: (
-                'error',
-            ),
-        ),
-        invalid-title-hover-color: (
-            color: (
-                'error',
-            ),
-        ),
-        invalid-title-focus-color: (
-            color: (
-                'error',
-            ),
-        ),
-
-        invalid-subtitle-color: (
-            color: (
-                'error',
-            ),
-        ),
-        invalid-subtitle-hover-color: (
-            color: (
-                'error',
-            ),
-        ),
-        invalid-subtitle-focus-color: (
-            color: (
-                'error',
-            ),
-        ),
-
-        // Disabled
-        disabled-indicator-color:
-            (
-                color: (
-                    'gray',
-                    500,
-                ),
-            ),
-        disabled-indicator-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        disabled-indicator-outline: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        disabled-title-color: (
-            color: (
-                'gray',
-                500,
-            ),
-        ),
-        disabled-subtitle-color: (
-            color: (
-                'gray',
-                500,
-            ),
-        ),
-
-        // Separator
-        step-separator-color:
-            (
-                color: (
-                    'gray',
-                    300,
-                ),
-            ),
-        complete-step-separator-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        step-separator-style: 'dashed',
-        complete-step-separator-style: 'solid',
-        border-radius-indicator: rem(100px),
-        border-radius-step-header: rem(0)
-    )
+    ),
+    step-separator-style: 'dashed',
+    complete-step-separator-style: 'solid',
+    border-radius-indicator: rem(100px),
+    border-radius-step-header: rem(0)
 );
 
 /// Generates a fluent stepper schema.
