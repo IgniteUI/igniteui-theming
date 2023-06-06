@@ -9,23 +9,13 @@
 
 /// Generates a light icon schema.
 /// @type {Map}
-/// @prop {Color} color [color: ('gray', 800)] - The icon color.
+/// @prop {Color} color ["'currentColor'"] - The icon color.
 /// @prop {String} size [rem(24px)] - The icon size.
-/// @prop {Color} disabled-color [color: ('gray', 500)] - The disabled icon color.
+/// @prop {Color} disabled-color ["'currentColor'"] - The disabled icon color.
 $light-icon: (
-    color: (
-        color: (
-            'gray',
-            800,
-        ),
-    ),
+    color: "'currentColor'",
     size: rem(24px),
-    disabled-color: (
-        color: (
-            'gray',
-            500,
-        ),
-    ),
+    disabled-color: "'currentColor'",
 );
 
 /// Generates a fluent icon schema.
