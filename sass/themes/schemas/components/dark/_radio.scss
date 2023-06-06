@@ -11,12 +11,7 @@
 /// Generates a dark radio schema.
 /// @type {Map}
 /// @requires $light-radio
-$dark-radio: extend(
-    $light-radio,
-    (
-        type: 'dark',
-    )
-);
+$dark-radio: $light-radio;
 
 /// Generates a dark fluent radio schema.
 /// @type {Map}

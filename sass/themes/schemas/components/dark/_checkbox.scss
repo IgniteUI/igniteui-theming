@@ -11,12 +11,7 @@
 /// Generates a dark checkbox schema.
 /// @type {Map}
 /// @requires $light-checkbox
-$dark-checkbox: extend(
-    $light-checkbox,
-    (
-        type: 'dark',
-    )
-);
+$dark-checkbox: $light-checkbox;
 
 /// Generates a dark fluent checkbox schema.
 /// @type {Map}

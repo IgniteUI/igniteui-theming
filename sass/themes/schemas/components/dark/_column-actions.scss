@@ -10,19 +10,19 @@
 /// Generates a dark column actions schema based on a mix of $light-column-actions.
 /// @type {Map}
 /// @requires $light-column-actions
-$dark-column-actions: extend($light-column-actions);
+$dark-column-actions: $light-column-actions;
 
 /// Generates a dark fluent column actions schema based on a mix of $luent-column-actions.
 /// @type {Map}
 /// @requires $fluent-column-actions
-$dark-fluent-column-actions: extend($fluent-column-actions);
+$dark-fluent-column-actions: $fluent-column-actions;
 
 /// Generates a dark bootstrap column actions schema based on a mix of $bootstrap-column-actions.
 /// @type {Map}
 /// @requires $bootstrap-column-actions
-$dark-bootstrap-column-actions: extend($bootstrap-column-actions);
+$dark-bootstrap-column-actions: $bootstrap-column-actions;
 
 /// Generates a dark indigo column actions schema based on a mix of $indigo-column-actions.
 /// @type {Map}
 /// @requires $indigo-column-actions
-$dark-indigo-column-actions: extend($indigo-column-actions);
+$dark-indigo-column-actions: $indigo-column-actions;

@@ -10,18 +10,18 @@
 /// Generates a dark chip schema based on a mix of $light-chip and $base-dark-chip.
 /// @type {Map}
 /// @requires $light-chip
-$dark-chip: extend($light-chip);
+$dark-chip: $light-chip;
 
 /// Generates a dark fluent chip schema based on a mix of $fluent-chip and $base-dark-chip.
 /// @type {Map}
 /// @requires $fluent-chip
-$dark-fluent-chip: extend($fluent-chip);
+$dark-fluent-chip: $fluent-chip;
 
 /// Generates a dark bootstrap chip schema based on a mix of $bootstrap-chip and $ase-dark-chip.
 /// @type {Map}
 /// @requires $bootstrap-chip
 /// @requires $base-dark-chip
-$dark-bootstrap-chip: extend($bootstrap-chip);
+$dark-bootstrap-chip: $bootstrap-chip;
 
 /// Generates a dark indigo chip schema based on a mix of $indigo-chip and $base-dark-chip.
 /// @type {Map}
