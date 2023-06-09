@@ -1,0 +1,89 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light action-strip schema.
+/// @type {Map}
+/// @prop {Color} icon-color ["'currentColor'"] - The color used for the actions icons.
+/// @prop {Map} background [color: ('gray', 100, .38)] - The color used for the action strip component content background.
+/// @prop {Map} actions-background [color: ('gray', 200)] - The color used for actions background.
+/// @prop {Map} delete-action [color: ('error')] - The color used for the delete icon in action strip component.
+/// @prop {Number} actions-border-radius [24px] - The border radius used for action strip actions container. Can be a fraction between 0 and 1, pixels, or percent.
+$light-action-strip: extend(
+    (
+        actions-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        background: (
+            color: (
+                'gray',
+                100,
+                0.38,
+            ),
+        ),
+
+        icon-color: "'currentColor'",
+
+        delete-action: (
+            color: (
+                'error',
+            ),
+        ),
+
+        actions-border-radius: rem(24px),
+    )
+);
+
+/// Generates a fluent action strip schema.
+/// @type {Map}
+/// @prop {Number} actions-border-radius [24px] - The border radius used for action strip actions container. Can be a fraction between 0 and 1, pixels, or percent.
+/// @requires {Map} $light-action-strip
+$fluent-action-strip: extend(
+    $light-action-strip,
+    (
+        actions-border-radius: rem(0),
+    )
+);
+
+/// Generates a bootstrap action strip schema.
+/// @type {Map}
+/// @prop {Number} actions-border-radius [4px] - The border radius used for action strip actions container. Can be a fraction between 0 and 1, pixels, or percent.
+/// @requires {Map} $light-action-strip
+$bootstrap-action-strip: extend(
+    $light-action-strip,
+    (
+        actions-border-radius: rem(4px),
+    )
+);
+
+/// Generates an indigo action strip schema.
+/// @type {Map}
+/// @prop {Map} icon-color [contrast-color: 'primary'] - The color used for the actions icons.
+/// @prop {Map} actions-background [color: ('primary')] - The color used for actions background.
+/// @prop {Number} actions-border-radius [3px] - The border radius used for action strip actions container. Can be a fraction between 0 and 1, pixels, or percent.
+/// @requires {Map} $light-action-strip
+$indigo-action-strip: extend(
+    $light-action-strip,
+    (
+        actions-background: (
+            color: (
+                'primary',
+            ),
+        ),
+
+        icon-color: (
+            contrast-color: 'primary',
+        ),
+
+        actions-border-radius: rem(3px),
+    )
+);

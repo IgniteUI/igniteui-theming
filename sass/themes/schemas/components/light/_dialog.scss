@@ -1,0 +1,102 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../elevation/dialog' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light dialog schema.
+/// @type {Map}
+/// @prop {Map} background [color: 'surface'] - The dialog background color.
+/// @prop {Map} title-color [color: ('gray', 900)] - The dialog title text color.
+/// @prop {Map} message-color [color: ('gray', 600)] - The dialog message text color.
+/// @prop {Color} border-color [transparent] - The border color for dialog component.
+/// @prop {Number} elevation [24] - The elevation level, between 0-24, to be used for the dialog.
+/// @prop {Number} border-radius [4px] - The border radius used for dialog. Can be a fraction between 0 and 1, pixels, or percent.
+/// @requires {Map} $default-elevation-dialog
+$light-dialog: extend(
+    $default-elevation-dialog,
+    (
+        background: (
+            color: 'surface',
+        ),
+
+        title-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        message-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
+        border-color: transparent,
+
+        border-radius: rem(4px),
+    )
+);
+
+/// Generates a fluent dialog schema.
+/// @type {Map}
+/// @prop {Number} border-radius [2px] - The border radius used for dialog. Can be a fraction between 0 and 1, pixels, or percent.
+/// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
+/// @requires {Map} $light-dialog
+$fluent-dialog: extend(
+    $light-dialog,
+    (
+        border-radius: rem(2px),
+        message-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+    )
+);
+
+/// Generates a bootstrap dialog schema.
+/// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 300)] - The border color for dialog component.
+/// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the dialog.
+/// @prop {Number} border-radius [4px] - The border radius used for dialog. Can be a fraction between 0 and 1, pixels, or percent.
+/// @requires {Map} $light-dialog
+/// @requires {Map} $bootstrap-elevation-dialog
+$bootstrap-dialog: extend(
+    $light-dialog,
+    $bootstrap-elevation-dialog,
+    (
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
+
+/// Generates an indigo dialog schema.
+/// @type {Map}
+/// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
+/// @prop {Number} border-radius [2px] - The border radius used for dialog. Can be a fraction between 0 and 1, pixels, or percent.
+/// @requires {Map} $light-dialog
+$indigo-dialog: extend(
+    $light-dialog,
+    (
+        message-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        border-radius: rem(2px),
+    )
+);
