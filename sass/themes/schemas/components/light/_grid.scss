@@ -44,7 +44,9 @@
 /// @prop {Map} cell-selected-background [color: ('gray', 200)] - The selected cell background color.
 /// @prop {Map} cell-selected-text-color [contrast-color: ('gray', 200)] - The selected cell text color.
 /// @prop {Color} cell-editing-background [color: ('gray', 50)] - The editing background color of a cell.
-/// @prop {Map} edit-mode-color [color: ('secondary', 500)] - The text color in edit mode.
+/// @prop {Map} cell-editing-foreground [color: ('gray', 900)] - The cell text color in edit mode
+/// @prop {Map} cell-editing-focus-foreground [color: ('gray', 900)] - The cell text color in edit mode on focus.
+/// @prop {Map} edit-mode-color [color: ('secondary', 500)] - The color applied around the row/cell when in editing mode.
 /// @prop {Map} edited-row-indicator [color: ('gray', 400)] - The indicator's color of edited row.
 /// @prop {String} cell-new-color [inherit] - The text color of a new, unedited cell. Used when adding new row in a grid.
 /// @prop {Map} cell-edited-value-color [color: ('gray', 600)] - The color of cell edited value.
@@ -388,6 +390,20 @@ $light-grid: extend(
             color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        cell-editing-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        cell-editing-focus-foreground: (
+            color: (
+                'gray',
+                900,
             ),
         ),
 
