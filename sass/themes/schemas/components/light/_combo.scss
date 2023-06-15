@@ -20,7 +20,7 @@
 /// @prop {Map} toggle-button-foreground-focus [color: ('gray', 700)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 900)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-background-disabled [color: ('gray', 100)] - The combo toggle button background color when the combo is disabled.
-/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 700)] - The combo toggle button foreground color when the combo is disabled.
+/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The combo toggle button foreground color when the combo is disabled.
 /// @prop {Map} toggle-button-background-focus--border [color: ('gray', 300)] The combo toggle button background color when the combo is focused in material border variant.
 /// @prop {Color} clear-button-background [transparent] - The combo clear button background color.
 /// @prop {Color} clear-button-background-focus [transparent] - The combo clear button background color when the combo is focused.
@@ -276,6 +276,7 @@ $bootstrap-combo: extend(
 /// @prop {Map} clear-button-foreground [color: ('gray', 600)] - The combo toggle clear foreground color.
 /// @prop {Map} clear-button-foreground-focus [color: ('gray', 600)] - The combo clear button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 300)] - The combo toggle button foreground color when the combo is disabled.
+/// @prop {Color} toggle-button-background-disabled [transparent] - The combo toggle button background color when the combo is disabled.
 /// @prop {Color} toggle-button-background-focus [transparent] - The combo toggle button background color when the combo is focused.
 /// @requires {Map} $light-combo
 $indigo-combo: extend(
@@ -300,6 +301,12 @@ $indigo-combo: extend(
                 600,
             ),
         ),
-        toggle-button-foreground-disabled: transparent,
+        toggle-button-foreground-disabled: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        toggle-button-background-disabled: transparent,
     )
 );
