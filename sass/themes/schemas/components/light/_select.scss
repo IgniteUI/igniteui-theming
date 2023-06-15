@@ -15,10 +15,17 @@
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 400, .3)] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-foreground [color: ('gray', 700)] - The select toggle button foreground color.
 /// @prop {Map} toggle-button-foreground-focus [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
-/// @prop {Map} toggle-button-foreground-filled [color: ('gray', 900)] - The select toggle button foreground color when the select is focused.
-/// @prop {Map} toggle-button-background-disabled [color: ('gray', 300] - The select toggle button background color when the select is disabled.
+/// @prop {Map} toggle-button-foreground-filled [color: ('gray', 900)] - The select toggle button foreground color when the select is filled.
+/// @prop {Map} toggle-button-background-disabled [color: ('gray', 100] - The select toggle button background color when the select is disabled.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The select toggle button foreground color when the select is disabled.
+/// @prop {Map} toggle-button-background-focus--border [color: ('gray', 300)] The select toggle button background color when the select is focused in material border variant.
 $light-select: (
+    toggle-button-background-focus--border: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
     toggle-button-background: (
         color: (
             'gray',
@@ -53,7 +60,7 @@ $light-select: (
     toggle-button-background-disabled: (
         color: (
             'gray',
-            300,
+            100,
         ),
     ),
     toggle-button-foreground-disabled: (
@@ -69,7 +76,6 @@ $light-select: (
 /// @prop {Map} toggle-button-background [color: ('gray', 100)] - The select toggle button background color.
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 100)] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
-/// @prop {Map} toggle-button-background-disabled [color: ('gray', 100] - The select toggle button background color when the select is disabled.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 400)] - The select toggle button foreground color when the select is disabled.
 /// @requires {Map} $light-select
 $fluent-select: extend(
@@ -93,12 +99,6 @@ $fluent-select: extend(
                 700,
             ),
         ),
-        toggle-button-background-disabled: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
         toggle-button-foreground-disabled: (
             color: (
                 'gray',
@@ -110,7 +110,6 @@ $fluent-select: extend(
 
 /// Generates a bootstrap select schema.
 /// @type {Map}
-/// @prop {Map} toggle-button-background-disabled [color: ('gray', 300] - The select toggle button background color when the select is disabled.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 400)] - The select toggle button foreground color when the select is disabled.
 /// @prop {Map} toggle-button-foreground [color: ('gray', 800)] - The select toggle button foreground color.
 /// @prop {Map} toggle-button-foreground-focus [color: ('gray', 800)] - The select toggle button foreground color when the select is focused.
@@ -119,12 +118,6 @@ $fluent-select: extend(
 $bootstrap-select: extend(
     $light-select,
     (
-        toggle-button-background-disabled: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
         toggle-button-foreground-disabled: (
             color: (
                 'gray',
@@ -154,18 +147,13 @@ $bootstrap-select: extend(
 
 /// Generates an indigo select schema.
 /// @type {Map}
-/// @prop {Map} toggle-button-background-disabled [color: ('gray', 100] - The select toggle button background color when the select is disabled.
+/// @prop {Color} toggle-button-background-disabled [transparent] - The select toggle button background color when the select is disabled.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 300)] - The select toggle button foreground color when the select is disabled.
 /// @requires {Map} $light-select
 $indigo-select: extend(
     $light-select,
     (
-        toggle-button-background-disabled: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
+        toggle-button-background-disabled: transparent,
         toggle-button-foreground-disabled: (
             color: (
                 'gray',
