@@ -18,7 +18,7 @@
 /// @prop {Map} outline-color [color: ('gray', 400, .54)] - The outline color of an outlined type card.
 /// @prop {Number} resting-elevation [2] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [8] - The elevation level, between 0-24, to be used for the hover state.
-/// @prop {Number} border-radius [4px] - The border radius used for card. Can be a fraction between 0 and 1, pixels, or percent.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for card.
 /// @requires {Map} $default-elevation-card
 $light-card: extend(
     $default-elevation-card,
@@ -63,7 +63,11 @@ $light-card: extend(
             ),
         ),
 
-        border-radius: rem(4px),
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(24px),
+        ),
     )
 );
 
@@ -72,7 +76,7 @@ $light-card: extend(
 /// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
 /// @prop {Number} resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state.
-/// @prop {Number} border-radius [2px] - The border radius used for card. Can be a fraction between 0 and 1, pixels, or percent.
+/// @prop {List} border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 /// @requires {Map} $fluent-elevation-card
 $fluent-card: extend(
@@ -86,7 +90,11 @@ $fluent-card: extend(
             ),
         ),
 
-        border-radius: rem(2px),
+        border-radius: (
+            rem(2px),
+            rem(0),
+            rem(24px),
+        ),
     )
 );
 
@@ -100,7 +108,6 @@ $fluent-card: extend(
 /// @prop {Map} actions-text-color [color: ('gray', 900)] - The text color of the card buttons.
 /// @prop {Number} resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state.
-/// @prop {Number} border-radius [4px] - The border radius used for card. Can be a fraction between 0 and 1, pixels, or percent.
 /// @requires {Map} $light-card
 /// @requires {Map} $bootstrap-elevation-card
 $bootstrap-card: extend(
@@ -160,7 +167,7 @@ $bootstrap-card: extend(
 /// @prop {Map} actions-text-color [color: ('gray', 600)] - The text color of the card buttons.
 /// @prop {Number} resting-elevation [4] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [6] - The elevation level, between 0-24, to be used for the hover state.
-/// @prop {Number} border-radius [3px] - The border radius used for card. Can be a fraction between 0 and 1, pixels, or percent.
+/// @prop {List} border-radius [(rem(3px), rem(0), rem(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 /// @requires {Map} $indigo-elevation-card
 $indigo-card: extend(
@@ -202,6 +209,10 @@ $indigo-card: extend(
             ),
         ),
 
-        border-radius: rem(3px),
+        border-radius: (
+            rem(3px),
+            rem(0),
+            rem(24px),
+        ),
     )
 );

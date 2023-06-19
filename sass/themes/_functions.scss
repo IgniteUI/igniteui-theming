@@ -23,7 +23,7 @@
 ///     foreground: (
 ///        color: ('primary', 800, .5)
 ///     ),
-///     border-radius: rem(5px)
+///     border-radius: (rem(5px), rem(0), rem(8px)) // default, min and max radius
 ///   );
 ///   $theme: digest-schema($custom-schema);
 /// @returns {Map} - A theme map with resolved values.
