@@ -2,6 +2,7 @@
 @use 'sass:list';
 @use 'sass:meta';
 @use 'sass:string';
+@use 'sass:math';
 @use '../typography/functions' as *;
 @use '../elevations/functions' as *;
 @use '../color/functions' as color;
@@ -22,7 +23,7 @@
 ///     foreground: (
 ///        color: ('primary', 800, .5)
 ///     ),
-///     border-radius: rem(5px)
+///     border-radius: (rem(5px), rem(0), rem(8px)) // default, min and max radius
 ///   );
 ///   $theme: digest-schema($custom-schema);
 /// @returns {Map} - A theme map with resolved values.
@@ -116,7 +117,9 @@
 /// @param {Number} $max [$radius] - The maximum allowed value.
 /// @return {Number} - The clamped value
 @function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
-    @return clamp(#{$min}, #{calc(var(--ig-radius-factor) * #{$radius})}, #{$max});
+    $factor: math.div($radius, $max);
+
+    @return clamp(#{$min}, #{calc(var(--ig-radius-factor, #{$factor}) * #{$max})}, #{$max});
 }
 
 /// Used to switch between values based on the size of the component.
