@@ -1,0 +1,33 @@
+@use '../light/label' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark material label schema.
+/// @type {Map}
+/// @prop {Color} color [color: ('gray', 700)] - The label color.
+$dark-material-label: $material-label;
+
+/// Generates a dark fluent label schema.
+/// @type {Map}
+/// @prop {Color} color [color: ('gray', 900)] - The label color.
+$dark-fluent-label: $fluent-label;
+
+/// Generates a dark bootstrap label schema.
+/// @type {Map}
+/// @prop {Color} color [color: ('gray', 700)] - The label color.
+$dark-bootstrap-label: $bootstrap-label;
+
+/// Generates an dark indigo label schema.
+/// @type {Map}
+/// @prop {Color} color [color: ('surface')] - The label color.
+$dark-indigo-label: (
+    color: (
+        color: (
+            'surface',
+        ),
+    ),
+);
