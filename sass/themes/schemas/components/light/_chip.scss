@@ -36,6 +36,7 @@
 /// @prop {Map} $disabled-text-color [color: ('gray', 500)] - The disabled chip text color.
 /// @prop {Map} $disabled-background [color: ('gray', 200)] - The disabled chip background color.
 /// @prop {Map} $disabled-border-color [color: ('gray', 200)] - The disabled chip border color.
+/// @prop {List} size [(rem(20px), rem(24px), rem(32px))] - The size used for the chip height.
 /// @prop {Map} $default-elevation-chip
 $light-chip: extend(
     $default-elevation-chip,
@@ -175,6 +176,11 @@ $light-chip: extend(
                 'gray',
                 200,
             ),
+        ),
+        size: (
+            rem(20px),
+            rem(24px),
+            rem(32px),
         ),
     )
 );

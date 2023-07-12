@@ -12,8 +12,13 @@
 /// @prop {Map} background [color: ('gray', 400, .54)]- The background color of the avatar.
 /// @prop {Map} color [color: ('gray', 800, .96)] - The text/icon color of the avatar.
 /// @prop {Number} border-radius [rem(0)] - The border radius.
-/// @prop {Number} size - The size of the avatar.
+/// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the avatar width and height.
 $light-avatar: (
+    size: (
+        rem(40px),
+        rem(64px),
+        rem(88px),
+    ),
     background: (
         color: (
             'gray',

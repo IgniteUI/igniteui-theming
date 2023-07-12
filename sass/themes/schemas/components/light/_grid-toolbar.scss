@@ -17,6 +17,7 @@
 /// @prop {Map} item-hover-text-color [color: ('gray', 600)] - The toolbar drop-down item hover text color.
 /// @prop {Map} item-focus-background [color: ('gray', 100)] - The toolbar drop-down item focus background color.
 /// @prop {Map} item-focus-text-color [color: ('gray', 600)] - The toolbar drop-down item focus text color.
+/// @prop {List} size [(rem(44px), rem(52px), rem(58px))] - The size used for the grid toolbar min-height.
 $light-grid-toolbar: (
     background-color: (
         color: (
@@ -71,6 +72,11 @@ $light-grid-toolbar: (
             'gray',
             600,
         ),
+    ),
+    size: (
+        rem(44px),
+        rem(52px),
+        rem(58px),
     ),
 );
 
