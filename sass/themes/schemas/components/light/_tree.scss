@@ -23,6 +23,7 @@
 /// @prop {Map} foreground-disabled [color: ('gray', 500)] - The color used for the content of the disabled tree node.
 /// @prop {Map} drop-area-color [color: ('secondary'] - The background color used for the tree node drop aria.
 /// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
+/// @prop {List} size [(rem(32px), rem(40px), rem(50px))] - The size used for the tree node.
 $light-tree: (
     background: (
         color: (
@@ -99,6 +100,11 @@ $light-tree: (
             900,
             0.1,
         ),
+    ),
+    size: (
+        rem(32px),
+        rem(40px),
+        rem(50px),
     ),
 );
 

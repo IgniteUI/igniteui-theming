@@ -11,9 +11,15 @@
 /// @type {Map}
 /// @prop {Color} color ["'currentColor'"] - The icon color.
 /// @prop {Color} disabled-color ["'currentColor'"] - The disabled icon color.
+/// @prop {List} size [(rem(16px), rem(20px), rem(24px))] - The size used for the icon.
 $light-icon: (
     color: "'currentColor'",
     disabled-color: "'currentColor'",
+    size: (
+        rem(16px),
+        rem(20px),
+        rem(24px),
+    ),
 );
 
 /// Generates a fluent icon schema.
