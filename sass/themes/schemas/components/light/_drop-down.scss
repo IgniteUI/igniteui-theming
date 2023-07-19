@@ -32,6 +32,7 @@
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color used for drop-down component.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for drop-down component.
 /// @prop {List} item-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the drop-down items.
+/// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size used for the dropdown item height.
 /// @requires {Map} $default-elevation-drop-down
 $light-drop-down: extend(
     $default-elevation-drop-down,
@@ -142,6 +143,11 @@ $light-drop-down: extend(
             rem(0),
             rem(0),
             rem(20px),
+        ),
+        size: (
+            rem(28px),
+            rem(32px),
+            rem(40px),
         ),
     )
 );

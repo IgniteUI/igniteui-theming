@@ -55,6 +55,7 @@ $material-base-button: (
 /// @prop {Map} active-foreground [color: ('secondary', 500)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color a flat button.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for flat button.
+/// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the flat button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $flat-elevation-button
 $material-flat-button: extend(
@@ -126,6 +127,11 @@ $material-flat-button: extend(
             rem(4px),
             rem(0),
             rem(20px),
+        ),
+        size: (
+            rem(24px),
+            rem(30px),
+            rem(36px),
         ),
     )
 );
@@ -276,6 +282,7 @@ $material-raised-button: extend(
 /// @prop {Number} hover-elevation [12] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [12] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} border-radius [(rem(28px), rem(12px), rem(28px))] - The border radius used for floating button.
+/// @prop {List} size [(rem(32px), rem(40px), rem(48px))] - The size used for floating button.
 /// @requires {Map} $material-raised-button
 /// @requires {Map} $material-fab-elevation
 $material-fab-button: extend(
@@ -287,6 +294,11 @@ $material-fab-button: extend(
             rem(28px),
             rem(12px),
             rem(28px),
+        ),
+        size: (
+            rem(48px),
+            rem(40px),
+            rem(32px),
         ),
     )
 );
@@ -411,6 +423,7 @@ $light-button: (
 /// @requires {Map} $flat-elevation-button
 /// @prop {Map} disabled-background [color: ('gray', 200)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 400)] - The disabled foreground color of the button.
+/// @prop {List} size [(rem(24px), rem(32px), rem(38px))] - The size used for the button.
 $fluent-base-button: extend(
     $material-base-button,
     $flat-elevation-button,
@@ -426,6 +439,11 @@ $fluent-base-button: extend(
                 'gray',
                 400,
             ),
+        ),
+        size: (
+            rem(24px),
+            rem(32px),
+            rem(38px),
         ),
     )
 );
@@ -906,6 +924,7 @@ $fluent-button: (
 /// @type {Map}
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the button.
+/// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $flat-elevation-button
 $bootstrap-base-button: extend(
@@ -923,6 +942,11 @@ $bootstrap-base-button: extend(
                 'primary',
                 50,
             ),
+        ),
+        size: (
+            rem(31px),
+            rem(38px),
+            rem(48px),
         ),
     )
 );
@@ -1391,6 +1415,7 @@ $indigo-base-button: extend($material-base-button, $flat-elevation-button);
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
 /// @prop {Map} shadow-color [color: ('gray', 300)] - The shadow color of a flat button.
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for flat button.
+/// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size used for the flat button.
 /// @requires {Map} $material-flat-button
 /// @requires {Map} $indigo-base-button
 $indigo-flat-button: extend(
@@ -1442,6 +1467,11 @@ $indigo-flat-button: extend(
             rem(20px),
             rem(0),
             rem(20px),
+        ),
+        size: (
+            rem(28px),
+            rem(32px),
+            rem(36px),
         ),
     )
 );
@@ -1625,7 +1655,7 @@ $indigo-raised-button: extend(
 /// @prop {Map} hover-foreground [ color: ('gray', 50)] - The hover text color of a fab button.
 /// @prop {Map} focus-foreground [ color: ('gray', 50)] - The focus text color of a fab button.
 /// @prop {Map} focus-visible-foreground [ color: ('gray', 50)] - The focus-visible text color of a fab button.
-/// @prop {List} border-radius [(rem(28px), rem(12px), rem(28px))] - The border radius used for flat button.
+/// @prop {List} border-radius [(rem(36px), rem(42px), rem(48px))] - The border radius used for fab button.
 /// @requires {Map} $material-fab-button
 /// @requires {Map} $indigo-base-button
 /// @requires {Map} $indigo-raised-button
@@ -1663,6 +1693,11 @@ $indigo-fab-button: extend(
             rem(28px),
             rem(12px),
             rem(28px),
+        ),
+        size: (
+            rem(36px),
+            rem(42px),
+            rem(48px),
         ),
     )
 );
