@@ -14,11 +14,6 @@
 /// @prop {Number} border-radius [rem(0)] - The border radius.
 /// @prop {List} size [(rem(40px), rem(64px), rem(88px))] - The size used for the avatar width and height.
 $light-avatar: (
-    size: (
-        rem(40px),
-        rem(64px),
-        rem(88px),
-    ),
     background: (
         color: (
             'gray',
@@ -34,6 +29,11 @@ $light-avatar: (
         ),
     ),
     border-radius: rem(0),
+    size: (
+        rem(40px),
+        rem(64px),
+        rem(88px),
+    ),
 );
 
 /// Generates a fluent avatar schema.
