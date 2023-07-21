@@ -95,7 +95,6 @@
 /// @prop {List} header-size [(rem(32px), rem(40px), rem(50px))] - The size used for the grid header.
 /// @prop {List} drop-area-size [(rem(24px), rem(24px), rem(32px))] - The size used for the grid drop area.
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
-
 /// @requires {Map} $default-elevation-grid
 $light-grid: extend(
     $default-elevation-grid,
@@ -635,20 +634,29 @@ $light-grid: extend(
             rem(0),
             rem(16px),
         ),
+
         header-size: (
-            rem(32px),
-            rem(40px),
-            rem(50px),
+            sizable: (
+                rem(32px),
+                rem(40px),
+                rem(50px),
+            ),
         ),
+
         drop-area-size: (
-            rem(24px),
-            rem(24x),
-            rem(32px),
+            sizable: (
+                rem(24px),
+                rem(24px),
+                rem(32px),
+            ),
         ),
+
         group-area-size: (
-            rem(41px),
-            rem(49x),
-            rem(57px),
+            sizable: (
+                rem(41px),
+                rem(49px),
+                rem(57px),
+            ),
         ),
     )
 );

@@ -65,6 +65,7 @@
     @each $fn, $args in $instructions {
         $color: meta.function-exists($fn, $module: color);
         $util: meta.function-exists($fn, $module: utils);
+        $self: meta.function-exists($fn);
 
         @if $color {
             $func: meta.get-function($fn, $module: color);
@@ -83,6 +84,13 @@
 
             @if $fn == 'map-keys-prefix' {
                 $result: meta.call($func, $result, $args...);
+            }
+        }
+
+        @if $self {
+            @if $fn == 'sizable' {
+                $func: meta.get-function($fn);
+                $result: meta.call($func, $args...);
             }
         }
     }

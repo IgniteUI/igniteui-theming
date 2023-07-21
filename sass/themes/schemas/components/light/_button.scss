@@ -20,6 +20,7 @@
 /// @prop {Color} disabled-border-color [transparent] - The disabled border color of the button.
 /// @prop {Map} disabled-background [color: ('gray', 300)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
+/// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the button.
 $material-base-button: (
     shadow-color: transparent,
     border-color: transparent,
@@ -40,6 +41,13 @@ $material-base-button: (
             500,
         ),
     ),
+    size: (
+        sizable: (
+            rem(24px),
+            rem(30px),
+            rem(36px),
+        ),
+    ),
 );
 
 /// @type {Map}
@@ -55,7 +63,6 @@ $material-base-button: (
 /// @prop {Map} active-foreground [color: ('secondary', 500)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color a flat button.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for flat button.
-/// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the flat button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $flat-elevation-button
 $material-flat-button: extend(
@@ -127,11 +134,6 @@ $material-flat-button: extend(
             rem(4px),
             rem(0),
             rem(20px),
-        ),
-        size: (
-            rem(24px),
-            rem(30px),
-            rem(36px),
         ),
     )
 );
@@ -296,9 +298,11 @@ $material-fab-button: extend(
             rem(28px),
         ),
         size: (
-            rem(48px),
-            rem(40px),
-            rem(32px),
+            sizable: (
+                rem(48px),
+                rem(40px),
+                rem(32px),
+            ),
         ),
     )
 );
@@ -319,6 +323,7 @@ $material-fab-button: extend(
 /// @prop {Map} focus-visible-border-color [color: ('gray', 400)] - The focus-visible border color of the button.
 /// @prop {Map} active-border-color [color: ('gray', 400)] - The active border color of the button.
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for floating button.
+/// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for icon button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $material-ib-elevation
 $material-icon-button: extend(
@@ -400,6 +405,13 @@ $material-icon-button: extend(
             rem(0),
             rem(20px),
         ),
+        size: (
+            sizable: (
+                rem(24px),
+                rem(30px),
+                rem(36px),
+            ),
+        ),
     )
 );
 
@@ -441,9 +453,11 @@ $fluent-base-button: extend(
             ),
         ),
         size: (
-            rem(24px),
-            rem(32px),
-            rem(38px),
+            sizable: (
+                rem(24px),
+                rem(32px),
+                rem(38px),
+            ),
         ),
     )
 );
@@ -829,6 +843,7 @@ $fluent-fab-button: extend(
 /// @prop {Map} disabled-foreground [color: ('gray', 400)] - The disabled foreground color of an icon button.
 /// @prop {Map} disabled-border-color [color: ('gray', 100), lighten: 35%] - The disabled focused border color of an icon button.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for icon button.
+/// @prop {List} size [(rem(24px), rem(32px), rem(38px))] - The size used for the icon button.
 /// @requires {Map} $material-icon-button
 /// @requires {Map} $fluent-base-button
 $fluent-icon-button: extend(
@@ -903,6 +918,13 @@ $fluent-icon-button: extend(
             rem(0),
             rem(20px),
         ),
+        size: (
+            sizable: (
+                rem(24px),
+                rem(32px),
+                rem(38px),
+            ),
+        ),
     )
 );
 
@@ -944,9 +966,11 @@ $bootstrap-base-button: extend(
             ),
         ),
         size: (
-            rem(31px),
-            rem(38px),
-            rem(48px),
+            sizable: (
+                rem(31px),
+                rem(38px),
+                rem(48px),
+            ),
         ),
     )
 );
@@ -1311,6 +1335,7 @@ $bootstrap-fab-button: extend(
 /// @prop {Color} disabled-background [transparent] - The disabled background color of an outlined button.
 /// @prop {Map} disabled-foreground [color: ('primary', 100)] - The disabled foreground color of the button.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for outlined button.
+/// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the icon button.
 /// @requires {Map} $material-icon-button
 /// @requires {Map} $bootstrap-base-button
 $bootstrap-icon-button: extend(
@@ -1378,6 +1403,13 @@ $bootstrap-icon-button: extend(
             rem(4px),
             rem(0),
             rem(20px),
+        ),
+        size: (
+            sizable: (
+                rem(31px),
+                rem(38px),
+                rem(48px),
+            ),
         ),
     )
 );
@@ -1469,9 +1501,11 @@ $indigo-flat-button: extend(
             rem(20px),
         ),
         size: (
-            rem(28px),
-            rem(32px),
-            rem(36px),
+            sizable: (
+                rem(28px),
+                rem(32px),
+                rem(36px),
+            ),
         ),
     )
 );
@@ -1656,6 +1690,7 @@ $indigo-raised-button: extend(
 /// @prop {Map} focus-foreground [ color: ('gray', 50)] - The focus text color of a fab button.
 /// @prop {Map} focus-visible-foreground [ color: ('gray', 50)] - The focus-visible text color of a fab button.
 /// @prop {List} border-radius [(rem(36px), rem(42px), rem(48px))] - The border radius used for fab button.
+/// @prop {List} size [(rem(36px), rem(42px), rem(48px))] - The size used for the fab button.
 /// @requires {Map} $material-fab-button
 /// @requires {Map} $indigo-base-button
 /// @requires {Map} $indigo-raised-button
@@ -1695,9 +1730,11 @@ $indigo-fab-button: extend(
             rem(28px),
         ),
         size: (
-            rem(36px),
-            rem(42px),
-            rem(48px),
+            sizable: (
+                rem(36px),
+                rem(42px),
+                rem(48px),
+            ),
         ),
     )
 );
@@ -1716,6 +1753,7 @@ $indigo-fab-button: extend(
 /// @prop {Map} focus-border-color [color: ('gray' 300)] - The focus border color of the button.
 /// @prop {Map} focus-visible-border-color [color: ('gray' 300)] - The focus-visible border color of the button.
 /// @prop {Map} active-border-color [color: ('gray' 300)] - The active border color of the button.
+/// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size used for the icon button.
 /// @requires {Map} $material-icon-button
 /// @requires {Map} $indigo-base-button
 $indigo-icon-button: extend(
@@ -1770,6 +1808,13 @@ $indigo-icon-button: extend(
         active-border-color: (
             color: (
                 'gray' 300,
+            ),
+        ),
+        size: (
+            sizable: (
+                rem(28px),
+                rem(32px),
+                rem(36px),
             ),
         ),
     )
