@@ -20,7 +20,6 @@ $dark-fluent-chip: $fluent-chip;
 /// Generates a dark bootstrap chip schema based on a mix of $bootstrap-chip and $ase-dark-chip.
 /// @type {Map}
 /// @requires $bootstrap-chip
-/// @requires $base-dark-chip
 $dark-bootstrap-chip: $bootstrap-chip;
 
 /// Generates a dark indigo chip schema based on a mix of $indigo-chip and $base-dark-chip.
@@ -36,7 +35,6 @@ $dark-bootstrap-chip: $bootstrap-chip;
 /// @prop {Map} hover-border-color [color: ('gray', 400)] - The chip hover border color.
 /// @prop {Color} focus-border-color [color: ('gray', 400)] - The chip focus border color.
 /// @requires $indigo-chip
-/// @requires $base-dark-chip
 $dark-indigo-chip: extend(
     $indigo-chip,
     (
