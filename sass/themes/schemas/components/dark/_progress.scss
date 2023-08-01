@@ -32,20 +32,17 @@ $dark-base-progress-linear: (
 /// @type {Map}
 /// @requires $light-progress-linear
 /// @requires $dark-base-progress-linear
-/// @see $default-palette
 $dark-progress-linear: extend($light-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark fluent progress-linear schema.
 /// @type {Map}
 /// @requires $fluent-progress-linear
 /// @requires $dark-base-progress-linear
-/// @see $default-palette
 $dark-fluent-progress-linear: extend($fluent-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark bootstrap progress-linear schema.
 /// @type {Map}
 /// @requires $bootstrap-progress-linear
-/// @see $default-palette
 $dark-bootstrap-progress-linear: $bootstrap-progress-linear;
 
 /// Generates a dark indigo progress-linear schema.
@@ -53,7 +50,6 @@ $dark-bootstrap-progress-linear: $bootstrap-progress-linear;
 /// @prop {Map} track-color [color: ('gray', 100)] - The main track color.
 /// @prop {Color} stripes-color [rgba(#222, .35)] - The track stripes color.
 /// @requires $indigo-progress-linear
-/// @see $default-palette
 $dark-indigo-progress-linear: extend(
     $indigo-progress-linear,
     (

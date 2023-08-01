@@ -23,7 +23,6 @@ $base-dark-pagination: (
 /// @type {Map}
 /// @requires $light-pagination
 /// @requires $base-dark-pagination
-/// @see $default-palette
 $dark-pagination: extend($light-pagination, $base-dark-pagination);
 
 /// Generates a dark fluent pagination schema based on a mix of $fluent-pagination and $base-dark-pagination.
@@ -35,10 +34,9 @@ $dark-fluent-pagination: extend($fluent-pagination, $base-dark-pagination);
 /// Generates a dark bootstrap pagination schema based on a mix of $bootstrap-pagination and $base-dark-pagination.
 /// @type {Map}
 /// @requires $bootstrap-pagination
-/// @requires $base-dark-pagination
 $dark-bootstrap-pagination: $bootstrap-pagination;
 
 /// Generates a dark indigo pagination schema.
 /// @type {Map}
-/// @requires $dark-pagination
+/// @requires $indigo-pagination
 $dark-indigo-pagination: extend($indigo-pagination, $base-dark-pagination);
