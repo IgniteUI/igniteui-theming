@@ -137,10 +137,11 @@ $bootstrap-navdrawer: $light-navdrawer;
 /// @prop {Map} item-active-text-color [contrast-color: ('gray', 700)] - The item's active text color.
 /// @prop {Map} item-active-background [contrast-color: ('gray', 700, .1)] - The item's active background color.
 /// @prop {Map} item-active-icon-color [contrast-color: ('gray', 700)] - The item's icon active color.
-/// @prop {Map} item-hover-background [transparent] - The item's hover background color.
+/// @prop {Color} item-hover-background [transparent] - The item's hover background color.
 /// @prop {Map} item-hover-text-color [contrast-color: ('gray', 700)] - The item's hover text color.
 /// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 700)] - The item's hover icon color.
 /// @prop {Map} elevation [0] - The elevation level, between 0-24, to be used for the drawer.
+/// @prop {Color} border-color [transparent] - The navigation drawer right border color.
 /// @prop {List} item-border-radius [(rem(24px), rem(0), rem(24px))] - The border radius used for the navdrawer items.
 /// @requires {Map} $light-navdrawer
 /// @requires {Map} $indigo-elevation-navdrawer
@@ -148,6 +149,8 @@ $indigo-navdrawer: extend(
     $light-navdrawer,
     $indigo-elevation-navdrawer,
     (
+        border-color: transparent,
+
         background: (
             color: (
                 'gray',
