@@ -29,9 +29,11 @@ $light-tooltip: (
     ),
 
     border-radius: (
-        rem(4px),
-        rem(0),
-        rem(16px),
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(16px),
+        ),
     ),
 );
 
@@ -60,9 +62,11 @@ $fluent-tooltip: extend(
         ),
 
         border-radius: (
-            rem(2px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );
@@ -99,9 +103,11 @@ $indigo-tooltip: extend(
     $light-tooltip,
     (
         border-radius: (
-            rem(3px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(3px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );

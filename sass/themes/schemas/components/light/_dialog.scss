@@ -41,9 +41,11 @@ $light-dialog: extend(
         border-color: transparent,
 
         border-radius: (
-            rem(4px),
-            rem(0),
-            rem(36px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(36px),
+            ),
         ),
     )
 );
@@ -57,9 +59,11 @@ $fluent-dialog: extend(
     $light-dialog,
     (
         border-radius: (
-            rem(2px),
-            rem(0),
-            rem(36px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(36px),
+            ),
         ),
         message-color: (
             color: (
@@ -105,9 +109,11 @@ $indigo-dialog: extend(
         ),
 
         border-radius: (
-            rem(2px),
-            rem(0),
-            rem(36px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(36px),
+            ),
         ),
     )
 );

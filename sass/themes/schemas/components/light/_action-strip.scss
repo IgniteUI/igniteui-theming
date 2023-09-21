@@ -40,9 +40,11 @@ $light-action-strip: extend(
         ),
 
         actions-border-radius: (
-            rem(24px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(24px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );
@@ -55,9 +57,11 @@ $fluent-action-strip: extend(
     $light-action-strip,
     (
         actions-border-radius: (
-            rem(0),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );
@@ -70,9 +74,11 @@ $bootstrap-action-strip: extend(
     $light-action-strip,
     (
         actions-border-radius: (
-            rem(4px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );
@@ -97,9 +103,11 @@ $indigo-action-strip: extend(
         ),
 
         actions-border-radius: (
-            rem(3px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(3px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );

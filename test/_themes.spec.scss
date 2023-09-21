@@ -119,6 +119,25 @@ $schema: (
             @include assert-equal(digest-schema($schema), $theme);
         }
 
+        @include it('should resolve the border-radius function from schema definitions') {
+            $schema: (
+                variant: 'material',
+                border-radius: (
+                  border-radius: (
+                    12px,
+                    16px,
+                    20px
+                  )
+                ),
+                type: 'light',
+            );
+
+            @include assert-equal(
+                map.get(digest-schema($schema), 'border-radius'),
+                border-radius(12px, 16px, 20px)
+            );
+        }
+
         @include it('should retrieve a reference to the CSS variable for a given theme') {
             $theme: map.merge(digest-schema($schema), (name: 'igc-avatar'));
 

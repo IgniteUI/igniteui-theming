@@ -74,9 +74,11 @@ $light-progress-linear: extend(
         ),
 
         track-border-radius: (
-            rem(0),
-            rem(0),
-            rem(8px),
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(8px),
+            ),
         ),
     )
 );
@@ -111,9 +113,11 @@ $bootstrap-progress-linear: extend(
         ),
 
         track-border-radius: (
-            rem(4px),
-            rem(0),
-            rem(8px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(8px),
+            ),
         ),
     )
 );

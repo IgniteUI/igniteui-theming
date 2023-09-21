@@ -118,14 +118,18 @@ $light-list: (
     border-width: 0,
 
     border-radius: (
-        rem(0),
-        rem(0),
-        rem(24px),
+        border-radius: (
+            rem(0),
+            rem(0),
+            rem(24px),
+        ),
     ),
     item-border-radius: (
-        rem(0),
-        rem(0),
-        rem(24px),
+        border-radius: (
+            rem(0),
+            rem(0),
+            rem(24px),
+        ),
     ),
 );
 
@@ -192,9 +196,11 @@ $bootstrap-list: extend(
         ),
 
         border-radius: (
-            rem(4px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );
@@ -327,9 +333,11 @@ $indigo-list: extend(
         ),
 
         item-border-radius: (
-            rem(2px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );

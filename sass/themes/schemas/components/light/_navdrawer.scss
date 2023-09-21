@@ -106,14 +106,18 @@ $light-navdrawer: extend(
         ),
 
         border-radius: (
-            rem(0),
-            rem(0),
-            rem(36px),
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(36px),
+            ),
         ),
         item-border-radius: (
-            rem(4px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );
@@ -220,9 +224,11 @@ $indigo-navdrawer: extend(
         ),
 
         item-border-radius: (
-            rem(24px),
-            rem(0),
-            rem(24px),
+            border-radius: (
+                rem(24px),
+                rem(0),
+                rem(24px),
+            ),
         ),
     )
 );
