@@ -251,7 +251,7 @@ $bootstrap-checkbox: extend(
 /// @prop {Map} fill-color-hover [color: ('primary', 400)] - The checked border and fill colors on hover.
 /// @prop {Map} empty-color [color: ('gray', 500)] - The unchecked border color.
 /// @prop {Map} disabled-color [color: ('gray', 300)] - The disabled border and fill colors.
-/// @prop {Map} disabled-indeterminate-color [color: ('primary', 500, .3)] - The disabled border and fill colors in checked/indeterminate state.
+/// @prop {Map} disabled-indeterminate-color [color: ('primary', 200)] - The disabled border and fill colors in checked/indeterminate state.
 /// @prop {Map} disabled-color-label [color: ('gray', 300)] - The disabled label color.
 /// @prop {Map} focus-outline-color [color: ('gray', 300)] - The focus outlined color.
 /// @prop {Map} focus-outline-color-focused [color: ('primary', 200)] - The focus outlined color for focused state.
@@ -313,8 +313,7 @@ $indigo-checkbox: extend(
         disabled-indeterminate-color: (
             color: (
                 'primary',
-                500,
-                0.3,
+                200,
             ),
         ),
         error-color-hover: (

@@ -51,6 +51,7 @@ $dark-bootstrap-checkbox: extend(
 /// @prop {Map} empty-color [color: ('gray', 700)] - The unchecked border color.
 /// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled border and fill colors.
 /// @prop {Map} disabled-color-label [color: ('gray', 400)] - The disabled label color.
+/// @prop {Map} disabled-indeterminate-color [color: ('gray', 200)] - The disabled border and fill colors in checked/indeterminate state.
 /// @requires $indigo-checkbox
 $dark-indigo-checkbox: extend(
     $indigo-checkbox,
@@ -77,6 +78,12 @@ $dark-indigo-checkbox: extend(
             color: (
                 'gray',
                 400,
+            ),
+        ),
+        disabled-indeterminate-color: (
+            color: (
+                'gray',
+                200,
             ),
         ),
     )
