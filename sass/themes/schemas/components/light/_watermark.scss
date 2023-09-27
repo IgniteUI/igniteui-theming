@@ -32,9 +32,11 @@ $light-watermark: extend(
         ),
 
         border-radius: (
-            rem(0),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );
@@ -47,9 +49,11 @@ $fluent-watermark: extend(
     $light-watermark,
     (
         border-radius: (
-            rem(2px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );
@@ -62,9 +66,11 @@ $bootstrap-watermark: extend(
     $light-watermark,
     (
         border-radius: (
-            rem(4px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );
@@ -85,9 +91,11 @@ $indigo-watermark: extend(
         ),
 
         border-radius: (
-            rem(16px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(16px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );

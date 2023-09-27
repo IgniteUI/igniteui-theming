@@ -400,8 +400,20 @@ $light-stepper: (
     ),
     step-separator-style: 'dashed',
     complete-step-separator-style: 'solid',
-    border-radius-indicator: (rem(100px), rem(0), rem(100px)),
-    border-radius-step-header: (rem(0), rem(0), rem(100px))
+    border-radius-indicator: (
+        border-radius: (
+            rem(100px),
+            rem(0),
+            rem(100px),
+        ),
+    ),
+    border-radius-step-header: (
+        border-radius: (
+            rem(0),
+            rem(0),
+            rem(100px),
+        ),
+    )
 );
 
 /// Generates a fluent stepper schema.
@@ -456,14 +468,18 @@ $fluent-stepper: extend(
         disabled-indicator-background: transparent,
         disabled-indicator-outline: transparent,
         border-radius-indicator: (
-            rem(2px),
-            rem(0),
-            rem(100px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(100px),
+            ),
         ),
         border-radius-step-header: (
-            rem(2px),
-            rem(0),
-            rem(100px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(100px),
+            ),
         ),
     )
 );
@@ -615,14 +631,18 @@ $bootstrap-stepper: extend(
         step-separator-style: 'solid',
         complete-step-separator-style: 'solid',
         border-radius-indicator: (
-            rem(2px),
-            rem(0),
-            rem(100px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(100px),
+            ),
         ),
         border-radius-step-header: (
-            rem(2px),
-            rem(0),
-            rem(100px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(100px),
+            ),
         ),
     )
 );

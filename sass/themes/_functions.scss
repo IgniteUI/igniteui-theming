@@ -88,7 +88,7 @@
         }
 
         @if $self {
-            @if $fn == 'sizable' {
+            @if $fn == 'sizable' or $fn == 'border-radius' {
                 $func: meta.get-function($fn);
                 $result: meta.call($func, $args...);
             }

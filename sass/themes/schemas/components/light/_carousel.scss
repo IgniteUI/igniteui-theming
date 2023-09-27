@@ -99,9 +99,11 @@ $light-carousel: extend(
         ),
 
         border-radius: (
-            rem(0),
-            rem(0),
-            rem(36px),
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(36px),
+            ),
         ),
     )
 );
@@ -124,9 +126,11 @@ $bootstrap-carousel: extend(
     $bootstrap-elevation-carousel,
     (
         border-radius: (
-            rem(4px),
-            rem(0),
-            rem(36px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(36px),
+            ),
         ),
     )
 );

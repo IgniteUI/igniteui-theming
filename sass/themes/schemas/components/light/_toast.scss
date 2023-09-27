@@ -34,9 +34,11 @@ $light-toast: extend(
         ),
 
         border-radius: (
-            rem(26px),
-            rem(0),
-            rem(26px),
+            border-radius: (
+                rem(26px),
+                rem(0),
+                rem(26px),
+            ),
         ),
     )
 );
@@ -49,9 +51,11 @@ $fluent-toast: extend(
     $light-toast,
     (
         border-radius: (
-            rem(2px),
-            rem(0),
-            rem(26px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(26px),
+            ),
         ),
     )
 );
@@ -82,9 +86,11 @@ $bootstrap-toast: extend(
         ),
 
         border-radius: (
-            rem(4px),
-            rem(0),
-            rem(26px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(26px),
+            ),
         ),
     )
 );
@@ -97,9 +103,11 @@ $indigo-toast: extend(
     $light-toast,
     (
         border-radius: (
-            rem(24px),
-            rem(0),
-            rem(26px),
+            border-radius: (
+                rem(24px),
+                rem(0),
+                rem(26px),
+            ),
         ),
     )
 );

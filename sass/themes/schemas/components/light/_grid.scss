@@ -670,11 +670,12 @@ $light-grid: extend(
         ),
 
         drop-area-border-radius: (
-            rem(16px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(16px),
+                rem(0),
+                rem(16px),
+            ),
         ),
-
         header-size: (
             sizable: (
                 rem(32px),
@@ -900,9 +901,11 @@ $fluent-grid: extend(
         ),
 
         drop-area-border-radius: (
-            rem(2px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );
@@ -1060,9 +1063,11 @@ $bootstrap-grid: extend(
         ),
 
         drop-area-border-radius: (
-            rem(4px),
-            rem(0),
-            rem(16px),
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(16px),
+            ),
         ),
     )
 );
