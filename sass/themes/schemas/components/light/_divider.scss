@@ -10,6 +10,7 @@
 /// Generates a light divider schema.
 /// @type {Map}
 /// @prop {Map} color [color: ('gray', 300)] - The color used for the divider.
+/// @prop {number} inset [0] - The inset value of the divider.
 $light-divider: (
     color: (
         color: (
@@ -17,6 +18,7 @@ $light-divider: (
             300,
         ),
     ),
+    inset: 0,
 );
 
 /// Generates a fluent divider schema.
