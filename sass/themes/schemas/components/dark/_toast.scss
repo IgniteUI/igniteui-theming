@@ -10,9 +10,17 @@
 /// Generates a dark base toast schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 500, .9)] - The background color used for the toast.
+/// @prop {Map} border-color [color: ('gray', 500, .9)] - The border color used for the toast.
 /// @prop {Map} text-color [contrast-color: ('gray', 500)] - The text-color used for the toast.
 $dark-base-toast: (
     background: (
+        color: (
+            'gray',
+            500,
+            0.9,
+        ),
+    ),
+    border-color: (
         color: (
             'gray',
             500,
