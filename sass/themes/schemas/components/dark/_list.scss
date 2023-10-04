@@ -91,7 +91,7 @@ $dark-bootstrap-list: extend(
 /// Generates a dark indigo list schema
 /// @type {Map}
 /// @prop {Map} header-text-color [contrast-color: 'surface'] - The list header text color.
-/// @prop {Map} item-background-hover [color: ('primary')] - The list item hover background.
+/// @prop {Map} item-background-hover [color: ('primary', 500, .5)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('primary')] - The active list item background color.
 /// @requires $indigo-list
 $dark-indigo-list: extend(
@@ -104,6 +104,8 @@ $dark-indigo-list: extend(
         item-background-hover: (
             color: (
                 'primary',
+                500,
+                0.5,
             ),
         ),
 

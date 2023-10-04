@@ -14,6 +14,7 @@
 /// @type {Map}
 /// @prop {Map} background-active [color: ('gray', 100)] - The background color used for the active tree node.
 /// @prop {Map} foreground-active [color: ('gray', 900)] - The color used for the content in active state of the tree node.
+/// @prop {Map} hover-color [color: ('gray', 50, .1)] - The background color used for the tree node on hover.
 $base-dark-tree: (
     background-active: (
         color: (
@@ -49,6 +50,7 @@ $dark-tree: extend($light-tree, $base-dark-tree);
 /// @prop {Map} foreground-selected [color: ('gray', 900)] - The color used for the content of the selected tree node.
 /// @prop {Map} background-active-selected [color: ('gray', 200)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground-active-selected [color: ('gray', 900)] - The color used for the content of the active selected tree node.
+/// @prop {Map} hover-color [color: ('gray', 200, .5)] - The background color used for the tree node on hover.
 /// @requires $fluent-tree
 /// @requires $base-dark-tree
 $dark-fluent-tree: extend(
@@ -97,6 +99,7 @@ $dark-fluent-tree: extend(
 
 /// Generates a dark bootstrap tree schema.
 /// @type {Map}
+/// @prop {Map} hover-color [color: ('gray', 500, .3)] - The background color used for the tree node on hover.
 /// @requires $bootstrap-tree
 /// @requires $base-dark-tree
 $dark-bootstrap-tree: extend(
@@ -115,6 +118,7 @@ $dark-bootstrap-tree: extend(
 
 /// Generates a dark indigo tree schema.
 /// @type {Map}
+/// @prop {Map} hover-color [color: ('primary', 200, .5)] - The background color used for the tree node on hover.
 /// @requires $indigo-tree
 /// @requires $base-dark-tree
 $dark-indigo-tree: extend(
