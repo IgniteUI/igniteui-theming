@@ -9,25 +9,33 @@
 
 /* stylelint-disable max-line-length */
 
-/// @prop {Map} label-color [color: ('gray', 700)] - sets the color for the label.
+/// @prop {Map} label-color [color: ('gray', 900)] - sets the color for the label.
+/// @prop {Map} value-label [color: ('gray', 700)] - sets the color for the value label.
 /// @prop {Number} symbol-size [rem(36px)] - the size of the symbols.
 /// @prop {Map} symbol-empty-color [color: ('gray', 900)] - sets the idle color for the symbol when it is a plane text.
 /// @prop {Map} symbol-full-color [color: ('primary')] - sets the color in selected state for the symbol when it is a plane text.
-/// @prop {Color} symbol-empty-filter [grayscale(100%) opacity(50%)] - the filter(s) used for the empty symbol.
-/// @prop {Color} symbol-full-filter [grayscale(50%)] - the filter(s) used for the filled symbol.
+/// @prop {Function} symbol-empty-filter [grayscale(100%) opacity(50%)] - the filter(s) used for the empty symbol.
+/// @prop {Function} symbol-full-filter [grayscale(50%)] - the filter(s) used for the filled symbol.
 /// @prop {Map} disabled-label-color [color: ('gray', 400)] - sets the color for the label in disabled state.
 /// @prop {Map} disabled-empty-symbols-color [color: ('gray', 400)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} disabled-full-symbols-color [color: ('gray', 600)] - sets the color for the symbol in selected/disabled state when it is a plane text.
 /// Generates a light rating schema.
 /// @type {Map}
 $light-rating: (
+    symbol-size: null,
+
     label-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    value-label: (
         color: (
             'gray',
             700,
         ),
     ),
-    symbol-size: null,
     symbol-empty-color: (
         color: (
             'gray',
@@ -40,12 +48,18 @@ $light-rating: (
         ),
     ),
     symbol-empty-filter: (
-        grayscale(1),
+        grayscale(100%) opacity(50%),
     ),
     symbol-full-filter: (
-        grayscale(0),
+        grayscale(50%),
     ),
     disabled-label-color: (
+        color: (
+            'gray',
+            400,
+        ),
+    ),
+    disabled-value-label: (
         color: (
             'gray',
             400,
@@ -60,37 +74,58 @@ $light-rating: (
     disabled-full-symbol-color: (
         color: (
             'warn',
-            500,
-            0.38,
+            200,
         ),
     ),
 );
 
 /// Generates a fluent rating schema.
 /// @type {Map}
-/// @prop {Map} label-color [color: ('gray', 900)] - sets the color for the label.
+/// @prop {Map} value-label [color: ('gray', 900)] - sets the color for the value label.
 /// @prop {Map} disabled-idle-symbols-color [color: ('gray', 200)] - sets the idle color for the symbol in disabled state when it is a plane text.
+/// @prop {Map} symbol-empty-color [color: ('gray', 700)] - sets the idle color for the symbol when it is a plane text.
+/// @prop {Map} symbol-full-color [[color: ('warn', 900)] - sets the color in selected state for the symbol when it is a plane text.
+/// @prop {Map} disabled-empty-symbols-color [color: ('warn', 100)] - sets the idle color for the symbol in disabled state when it is a plane text.
+/// @prop {Map} disabled-full-symbols-color [color: ('warn', 100)] - sets the color for the symbol in selected/disabled state when it is a plane text.
 /// @prop {Map} disabled-selected-symbols-color [color: ('gray', 500)] - sets the color for the symbol in selected/disabled state when it is a plane text.
 /// @requires {Map} $light-rating
 $fluent-rating: extend(
     $light-rating,
     (
-        label-color: (
+        value-label: (
             color: (
                 'gray',
                 900,
             ),
         ),
-        disabled-empty-symbols-color: (
+        symbol-empty-color: (
             color: (
                 'gray',
-                200,
+                700,
+            ),
+        ),
+        symbol-full-color: (
+            color: (
+                'warn',
+                900,
+            ),
+        ),
+        disabled-value-label: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        disabled-empty-symbols-color: (
+            color: (
+                'warn',
+                100,
             ),
         ),
         disabled-full-symbols-color: (
             color: (
-                'gray',
-                500,
+                'warn',
+                100,
             ),
         ),
     )
@@ -98,12 +133,12 @@ $fluent-rating: extend(
 
 /// Generates a bootstrap rating schema.
 /// @type {Map}
-/// @prop {Map} label-color [color: ('gray', 900)] - sets the color for the label.
+/// @prop {Map} value-label [color: ('gray', 900)] - sets the color for the value label.
 /// @requires {Map} $light-rating
 $bootstrap-rating: extend(
     $light-rating,
     (
-        label-color: (
+        value-label: (
             color: (
                 'gray',
                 900,
@@ -114,12 +149,12 @@ $bootstrap-rating: extend(
 
 /// Generates an indigo rating schema.
 /// @type {Map}
-/// @prop {Map} label-color [color: ('gray', 900)] - sets the color for the label.
+/// @prop {Map} value-label [color: ('gray', 900)] - sets the color for the value label.
 /// @requires {Map} $light-rating
 $indigo-rating: extend(
     $light-rating,
     (
-        label-color: (
+        value-label: (
             color: (
                 'gray',
                 900,
