@@ -15,8 +15,40 @@ $dark-rating: $light-rating;
 
 /// Generates a dark fluent rating schema.
 /// @type {Map}
+/// @prop {Map} symbol-full-color [color: ('gray', 800)] - sets the color in selected state for the symbol when it is a plane text.
+/// @prop {Map} symbol-empty-color [color: ('gray', 400)] - sets the idle color for the symbol when it is a plane text.
+/// @prop {Map} disabled-full-symbols-color [color: ('warn', 900)] - sets the color for the symbol in selected/disabled state when it is a plane text.
+/// @prop {Map} disabled-empty-symbols-color [color: ('gray', 900)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @requires $fluent-rating
-$dark-fluent-rating: $fluent-rating;
+$dark-fluent-rating: extend(
+    $fluent-rating,
+    (
+        symbol-full-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        symbol-empty-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        disabled-full-symbol-color: (
+            color: (
+                'warn',
+                900,
+            ),
+        ),
+        disabled-empty-symbol-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark bootstrap rating schema.
 /// @type {Map}
