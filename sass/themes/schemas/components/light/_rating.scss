@@ -17,8 +17,8 @@
 /// @prop {Function} symbol-empty-filter [grayscale(100%) opacity(50%)] - the filter(s) used for the empty symbol.
 /// @prop {Function} symbol-full-filter [grayscale(50%)] - the filter(s) used for the filled symbol.
 /// @prop {Map} disabled-label-color [color: ('gray', 400)] - sets the color for the label in disabled state.
-/// @prop {Map} disabled-empty-symbols-color [color: ('gray', 400)] - sets the idle color for the symbol in disabled state when it is a plane text.
-/// @prop {Map} disabled-full-symbols-color [color: ('gray', 600)] - sets the color for the symbol in selected/disabled state when it is a plane text.
+/// @prop {Map} disabled-empty-symbol-color [color: ('gray', 400)] - sets the idle color for the symbol in disabled state when it is a plane text.
+/// @prop {Map} disabled-full-symbol-color [color: ('gray', 600)] - sets the color for the symbol in selected/disabled state when it is a plane text.
 /// Generates a light rating schema.
 /// @type {Map}
 $light-rating: (
@@ -85,9 +85,8 @@ $light-rating: (
 /// @prop {Map} disabled-idle-symbols-color [color: ('gray', 200)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} symbol-empty-color [color: ('gray', 700)] - sets the idle color for the symbol when it is a plane text.
 /// @prop {Map} symbol-full-color [[color: ('warn', 900)] - sets the color in selected state for the symbol when it is a plane text.
-/// @prop {Map} disabled-empty-symbols-color [color: ('warn', 100)] - sets the idle color for the symbol in disabled state when it is a plane text.
-/// @prop {Map} disabled-full-symbols-color [color: ('warn', 100)] - sets the color for the symbol in selected/disabled state when it is a plane text.
-/// @prop {Map} disabled-selected-symbols-color [color: ('gray', 500)] - sets the color for the symbol in selected/disabled state when it is a plane text.
+/// @prop {Map} disabled-empty-symbol-color [color: ('warn', 100)] - sets the idle color for the symbol in disabled state when it is a plane text.
+/// @prop {Map} disabled-full-symbol-color [color: ('warn', 100)] - sets the color for the symbol in selected/disabled state when it is a plane text.
 /// @requires {Map} $light-rating
 $fluent-rating: extend(
     $light-rating,
@@ -116,13 +115,13 @@ $fluent-rating: extend(
                 400,
             ),
         ),
-        disabled-empty-symbols-color: (
+        disabled-empty-symbol-color: (
             color: (
                 'warn',
                 100,
             ),
         ),
-        disabled-full-symbols-color: (
+        disabled-full-symbol-color: (
             color: (
                 'warn',
                 100,
