@@ -280,6 +280,7 @@ $scale: type-scale(
 
                 @include expect() {
                     --ig-font-family: Roboto, sans-serif;
+                    --ig-base-font-size: 16px;
 
                     @each $category, $styles in map.remove($scale, '_meta') {
                         @each $rule, $value in map.remove($styles, 'font-family') {
