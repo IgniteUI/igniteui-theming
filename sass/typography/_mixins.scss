@@ -4,6 +4,7 @@
 @use '../utils/meta' as *;
 @use './types';
 @use '../themes/mixins' as *;
+@use './config' as *;
 
 ////
 /// @package theming
@@ -126,6 +127,7 @@
 
     #{$scope} {
         --ig-font-family: #{string.unquote($font-family)};
+        --ig-base-font-size: #{browser-context()};
 
         @each $name, $style in map.remove($type-scale, '_meta') {
             @include type-style-vars($name, $style);

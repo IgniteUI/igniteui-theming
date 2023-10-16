@@ -1,0 +1,11 @@
+$-browser-context: null;
+
+@function browser-context() {
+    @return $-browser-context or 16px;
+}
+
+@mixin browser-context($font-size: null) {
+    @if $font-size {
+        $-browser-context: $font-size !global;
+    }
+}

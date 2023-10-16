@@ -4,13 +4,12 @@
 @use 'sass:list';
 @use 'sass:string';
 @use './types';
+@use './config' as *;
 
 ////
 /// @package theming
 /// @group Typography
 ////
-
-$browser-context: 16px;
 
 /// Converts pixels to relative values (em).
 /// @access public
@@ -21,7 +20,7 @@ $browser-context: 16px;
 ///     margin: em(10px) em(5px);
 ///   }
 /// @return {number} - Returns the pixels value converted to em.
-@function em($pixels, $context: $browser-context) {
+@function em($pixels, $context: browser-context()) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
     }
@@ -42,7 +41,7 @@ $browser-context: 16px;
 ///     margin: rem(10px) rem(5px);
 ///   }
 /// @return {number} - Returns the pixels value converted to rem.
-@function rem($pixels, $context: $browser-context) {
+@function rem($pixels, $context: browser-context()) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
     }
@@ -63,7 +62,7 @@ $browser-context: 16px;
 ///     margin: px(3.23rem);
 ///   }
 /// @return {number} - Returns the relative value converted to pixels.
-@function px($num, $context: $browser-context) {
+@function px($num, $context: browser-context()) {
     @if meta.type-of($num) == 'number' {
         @return math.div($num, $num * 0 + 1) * 16px;
     }

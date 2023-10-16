@@ -1,6 +1,10 @@
+@use './sass/typography/config' as *;
 @forward './sass/bem';
 @forward './sass/color';
 @forward './sass/elevations';
 @forward './sass/themes';
 @forward './sass/typography';
 @forward './sass/utils';
+
+$browser-context: 16px !default;
+@include browser-context($browser-context);
