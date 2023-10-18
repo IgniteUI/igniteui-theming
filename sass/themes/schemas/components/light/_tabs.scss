@@ -32,7 +32,7 @@
 /// @prop {Map} border-color--hover [transparent] - The color used for the tab items bottom border on hover.
 /// @prop {Map} tab-ripple-color [color: ('gray', 100)] - The color used for the button background.
 /// @prop {Map} button-ripple-color [color: ('gray', 100)] - The color used for the button background on hover.
-/// @prop {List} border-radius [(rem(0), rem(0), rem(6px))] - The border radius used for tabs.
+/// @prop {List} border-radius [(em(0), em(0), em(6px))] - The border radius used for tabs.
 $light-tabs: (
     item-text-color: (
         color: (
@@ -150,9 +150,9 @@ $light-tabs: (
     border-color--hover: transparent,
     border-radius: (
         border-radius: (
-            rem(0),
-            rem(0),
-            rem(6px),
+            em(0),
+            em(0),
+            em(6px),
         ),
     ),
 );
@@ -234,7 +234,7 @@ $fluent-tabs: extend(
 /// @prop {map} item-active-background [color: ('surface')] - The color used for the active/focused tab background.
 /// @prop {map} border-color [color: ('gray', 300)] - The color used for the tab items border.
 /// @prop {map} border-color--hover [color: ('gray', 200)] - The color used for the tab items border on hover.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(6px))] - The border radius used for tabs.
+/// @prop {List} border-radius [(em(4px), em(0), em(6px))] - The border radius used for tabs.
 /// @requires {Map} $light-tabs
 $bootstrap-tabs: extend(
     $light-tabs,
@@ -342,9 +342,9 @@ $bootstrap-tabs: extend(
         ),
         border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(6px),
+                em(4px),
+                em(0),
+                em(6px),
             ),
         ),
     )

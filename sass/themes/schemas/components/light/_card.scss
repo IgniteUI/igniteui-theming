@@ -18,7 +18,7 @@
 /// @prop {Map} outline-color [color: ('gray', 400, .54)] - The outline color of an outlined type card.
 /// @prop {Number} resting-elevation [4] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [6] - The elevation level, between 0-24, to be used for the hover state.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {List} border-radius [(em(4px), em(0), em(24px))] - The border radius used for card.
 /// @requires {Map} $default-elevation-card
 $light-card: extend(
     $default-elevation-card,
@@ -65,9 +65,9 @@ $light-card: extend(
 
         border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(24px),
+                em(4px),
+                em(0),
+                em(24px),
             ),
         ),
     )
@@ -76,7 +76,7 @@ $light-card: extend(
 /// Generates a fluent card schema.
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {List} border-radius [(em(2px), em(0), em(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 $fluent-card: extend(
     $light-card,
@@ -90,9 +90,9 @@ $fluent-card: extend(
 
         border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(24px),
+                em(2px),
+                em(0),
+                em(24px),
             ),
         ),
     )
@@ -161,7 +161,7 @@ $bootstrap-card: extend(
 /// @prop {Map} subtitle-text-color [color: ('gray', 500)] - The text color of the card subtitle.
 /// @prop {Map} content-text-color [color: ('gray', 700)] - The text color of the card content.
 /// @prop {Map} actions-text-color [color: ('gray', 600)] - The text color of the card buttons.
-/// @prop {List} border-radius [(rem(3px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {List} border-radius [(em(3px), em(0), em(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 $indigo-card: extend(
     $light-card,
@@ -203,9 +203,9 @@ $indigo-card: extend(
 
         border-radius: (
             border-radius: (
-                rem(3px),
-                rem(0),
-                rem(24px),
+                em(3px),
+                em(0),
+                em(24px),
             ),
         ),
     )

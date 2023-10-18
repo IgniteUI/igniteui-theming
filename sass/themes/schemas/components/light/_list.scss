@@ -119,16 +119,16 @@ $light-list: (
 
     border-radius: (
         border-radius: (
-            rem(0),
-            rem(0),
-            rem(24px),
+            em(0),
+            em(0),
+            em(24px),
         ),
     ),
     item-border-radius: (
         border-radius: (
-            rem(0),
-            rem(0),
-            rem(24px),
+            em(0),
+            em(0),
+            em(24px),
         ),
     ),
 );
@@ -145,14 +145,14 @@ $fluent-list: $light-list;
 /// @prop {Map} item-text-color [color: ('gray', 900)] - The list item text color.
 /// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color.
 /// @prop {Map} item-text-color-active [color: ('gray', 900)] - The active list item text color.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for list component.
+/// @prop {List} border-radius [(em(4px), em(0), em(24px))] - The border radius used for list component.
 /// @prop {Number} border-color [color: ('gray', 300)] - The list border color.
-/// @prop {Color} border-width [rem(1px)] - The list border width.
+/// @prop {Color} border-width [em(1px)] - The list border width.
 /// @requires {Map} $light-list
 $bootstrap-list: extend(
     $light-list,
     (
-        border-width: rem(1px),
+        border-width: em(1px),
         border-color: (
             color: (
                 'gray',
@@ -197,9 +197,9 @@ $bootstrap-list: extend(
 
         border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(24px),
+                em(4px),
+                em(0),
+                em(24px),
             ),
         ),
     )
@@ -222,7 +222,7 @@ $bootstrap-list: extend(
 /// @prop {Color} item-thumbnail-color [color: ('gray', 600)] - The list item thumbnail color.
 /// @prop {Color} item-thumbnail-color-hover [color: ('gray', 600)] - The list item thumbnail hover color.
 /// @prop {Color} item-thumbnail-color-active [color: ('gray', 600)] - The list item thumbnail active color.
-/// @prop {List} item-border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for list item.
+/// @prop {List} item-border-radius [(em(2px), em(0), em(24px))] - The border radius used for list item.
 /// @requires {Map} $light-list
 $indigo-list: extend(
     $light-list,
@@ -334,9 +334,9 @@ $indigo-list: extend(
 
         item-border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(24px),
+                em(2px),
+                em(0),
+                em(24px),
             ),
         ),
     )

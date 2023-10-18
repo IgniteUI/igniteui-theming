@@ -24,7 +24,7 @@
 /// @prop {Map} drop-area-color [color: ('secondary')] - The background color used for the tree node drop aria.
 /// @prop {Map} hover-color [color: ('gray', 900, .1)] - The background color used for the tree node on hover.
 /// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
-/// @prop {List} size [(rem(32px), rem(40px), rem(50px))] - The size used for the tree node.
+/// @prop {List} size [(em(32px), em(40px), em(50px))] - The size used for the tree node.
 $light-tree: (
     background: (
         color: (
@@ -104,9 +104,9 @@ $light-tree: (
     ),
     size: (
         sizable: (
-            rem(32px),
-            rem(40px),
-            rem(50px),
+            em(32px),
+            em(40px),
+            em(50px),
         ),
     ),
 );

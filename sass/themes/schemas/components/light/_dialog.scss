@@ -16,7 +16,7 @@
 /// @prop {Color} border-color [transparent] - The border color for dialog component.
 /// @prop {Map} backdrop [color: ('gray', 50, .54)] - The dialog backdrop color.
 /// @prop {Number} elevation [24] - The elevation level, between 0-24, to be used for the dialog.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(36px))] - The border radius used for dialog.
+/// @prop {List} border-radius [(em(4px), em(0), em(36px))] - The border radius used for dialog.
 /// @requires {Map} $default-elevation-dialog
 $light-dialog: extend(
     $default-elevation-dialog,
@@ -51,9 +51,9 @@ $light-dialog: extend(
 
         border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(36px),
+                em(4px),
+                em(0),
+                em(36px),
             ),
         ),
     )
@@ -62,7 +62,7 @@ $light-dialog: extend(
 /// Generates a fluent dialog schema.
 /// @type {Map}
 /// @prop {Map} backdrop [color: ('gray', 900, .4)] - The dialog backdrop color.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(36px))] - The border radius used for dialog.
+/// @prop {List} border-radius [(em(2px), em(0), em(36px))] - The border radius used for dialog.
 /// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
 /// @requires {Map} $light-dialog
 $fluent-dialog: extend(
@@ -78,9 +78,9 @@ $fluent-dialog: extend(
 
         border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(36px),
+                em(2px),
+                em(0),
+                em(36px),
             ),
         ),
         message-color: (
@@ -114,7 +114,7 @@ $bootstrap-dialog: extend(
 /// Generates an indigo dialog schema.
 /// @type {Map}
 /// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(36px))] - The border radius used for dialog.
+/// @prop {List} border-radius [(em(2px), em(0), em(36px))] - The border radius used for dialog.
 /// @requires {Map} $light-dialog
 $indigo-dialog: extend(
     $light-dialog,
@@ -128,9 +128,9 @@ $indigo-dialog: extend(
 
         border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(36px),
+                em(2px),
+                em(0),
+                em(36px),
             ),
         ),
     )

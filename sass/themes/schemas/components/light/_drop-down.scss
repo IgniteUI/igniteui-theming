@@ -30,9 +30,9 @@
 /// @prop {Number} elevation [8] - The elevation level, between 0-24, to be used for the drop-down shadow.
 /// @prop {Number} border-width [0] - The border width used for drop-down component.
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color used for drop-down component.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for drop-down component.
-/// @prop {List} item-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the drop-down items.
-/// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size used for the dropdown item height.
+/// @prop {List} border-radius [(em(4px), em(0), em(20px))] - The border radius used for drop-down component.
+/// @prop {List} item-border-radius [(em(0), em(0), em(20px))] - The border radius used for the drop-down items.
+/// @prop {List} size [(em(28px), em(32px), em(40px))] - The size used for the dropdown item height.
 /// @requires {Map} $default-elevation-drop-down
 $light-drop-down: extend(
     $default-elevation-drop-down,
@@ -136,23 +136,23 @@ $light-drop-down: extend(
         border-width: 0,
         border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(20px),
+                em(4px),
+                em(0),
+                em(20px),
             ),
         ),
         item-border-radius: (
             border-radius: (
-                rem(0),
-                rem(0),
-                rem(20px),
+                em(0),
+                em(0),
+                em(20px),
             ),
         ),
         size: (
             sizable: (
-                rem(28px),
-                rem(32px),
-                rem(40px),
+                em(28px),
+                em(32px),
+                em(40px),
             ),
         ),
     )
@@ -167,7 +167,7 @@ $light-drop-down: extend(
 /// @prop {Map} selected-focus-item-background [color: ('gray', 200)] - The drop-down selected item focus background color.
 /// @prop {Map} selected-focus-item-text-color [contrast-color: ('gray', 200)] - The drop-down selected item focus text color.
 /// @prop {Number} elevation [4] - The elevation level, between 0-24, to be used for the drop-down shadow.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for drop-down component.
+/// @prop {List} border-radius [(em(2px), em(0), em(20px))] - The border radius used for drop-down component.
 /// @requires {Map} $light-drop-down
 /// @requires {Map} $fluent-elevation-drop-down
 $fluent-drop-down: extend(
@@ -212,9 +212,9 @@ $fluent-drop-down: extend(
         ),
         border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(20px),
+                em(2px),
+                em(0),
+                em(20px),
             ),
         ),
     )
@@ -323,8 +323,8 @@ $bootstrap-drop-down: extend(
 /// @prop {Map} selected-focus-item-background [color: ('primary', 400)] - The drop-down selected item focus background color.
 /// @prop {Color} selected-focus-item-text-color [#fff] - The drop-down selected item focus text color.
 /// @prop {Number} elevation [3] - The elevation level, between 0-24, to be used for the badge shadow.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for drop-down component.
-/// @prop {List} item-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the drop-down items.
+/// @prop {List} border-radius [(em(2px), em(0), em(20px))] - The border radius used for drop-down component.
+/// @prop {List} item-border-radius [(em(2px), em(0), em(20px))] - The border radius used for the drop-down items.
 /// @requires {Map} $light-drop-down
 /// @requires {Map} $indigo-elevation-drop-down
 $indigo-drop-down: extend(
@@ -395,16 +395,16 @@ $indigo-drop-down: extend(
         ),
         border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(20px),
+                em(2px),
+                em(0),
+                em(20px),
             ),
         ),
         item-border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(20px),
+                em(2px),
+                em(0),
+                em(20px),
             ),
         ),
     )

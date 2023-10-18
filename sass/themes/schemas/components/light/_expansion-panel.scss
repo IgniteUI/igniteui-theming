@@ -17,7 +17,7 @@
 /// @prop {Map} header-icon-color [color: ('gray', 800)] - The panel header icon color.
 /// @prop {Map} body-color [color: ('gray', 900)] - The panel body text color.
 /// @prop {Map} disabled-color [color: ('gray', 500)] - The panel disabled text color.
-/// @prop {List} border-radius [(rem(0), rem(0), rem(16px))] - The border radius used for expansion-panel.
+/// @prop {List} border-radius [(em(0), em(0), em(16px))] - The border radius used for expansion-panel.
 /// @prop {Number} expanded-margin [8px] - The expansion panel margin in expanded state when positioned inside accordion.
 $light-expansion-panel: (
     header-background: (
@@ -74,11 +74,11 @@ $light-expansion-panel: (
         ),
     ),
 
-    expanded-margin: rem(8px),
+    expanded-margin: em(8px),
     border-radius: (
-        rem(0),
-        rem(0),
-        rem(16px),
+        em(0),
+        em(0),
+        em(16px),
     ),
 );
 
@@ -136,7 +136,7 @@ $bootstrap-expansion-panel: extend(
 /// @prop {Map} header-description-color [color: ('gray', 500)] - The panel header description text color.
 /// @prop {Map} header-icon-color [color: ('gray', 600)] - The panel header icon color.
 /// @prop {Map} disabled-color [color: ('gray', 400)] - The panel disabled text color.
-/// @prop {List} border-radius [(rem(3px), rem(0), rem(16px))] - The border radius used for expansion-panel.
+/// @prop {List} border-radius [(em(3px), em(0), em(16px))] - The border radius used for expansion-panel.
 /// @requires {Map} $light-expansion-panel
 $indigo-expansion-panel: extend(
     $light-expansion-panel,
@@ -172,9 +172,9 @@ $indigo-expansion-panel: extend(
 
         border-radius: (
             border-radius: (
-                rem(3px),
-                rem(0),
-                rem(16px),
+                em(3px),
+                em(0),
+                em(16px),
             ),
         ),
     )

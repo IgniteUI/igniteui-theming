@@ -11,7 +11,7 @@
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 700, .9),] - The background color of the tooltip.
 /// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text color of the tooltip.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @prop {List} border-radius [(em(4px), em(0), em(16px))] - The border radius used for tooltip.
 $light-tooltip: (
     background: (
         color: (
@@ -30,9 +30,9 @@ $light-tooltip: (
 
     border-radius: (
         border-radius: (
-            rem(4px),
-            rem(0),
-            rem(16px),
+            em(4px),
+            em(0),
+            em(16px),
         ),
     ),
 );
@@ -41,7 +41,7 @@ $light-tooltip: (
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 900, .8)] - The background color of the tooltip.
 /// @prop {Map} text-color [contrast-color: ('gray', 900)] - The text color of the tooltip.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @prop {List} border-radius [(em(2px), em(0), em(16px))] - The border radius used for tooltip.
 /// @requires {Map} $light-tooltip
 $fluent-tooltip: extend(
     $light-tooltip,
@@ -63,9 +63,9 @@ $fluent-tooltip: extend(
 
         border-radius: (
             border-radius: (
-                rem(2px),
-                rem(0),
-                rem(16px),
+                em(2px),
+                em(0),
+                em(16px),
             ),
         ),
     )
@@ -97,16 +97,16 @@ $bootstrap-tooltip: extend(
 
 /// Generates an indigo tooltip schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(3px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @prop {List} border-radius [(em(3px), em(0), em(16px))] - The border radius used for tooltip.
 /// @requires {Map} $light-tooltip
 $indigo-tooltip: extend(
     $light-tooltip,
     (
         border-radius: (
             border-radius: (
-                rem(3px),
-                rem(0),
-                rem(16px),
+                em(3px),
+                em(0),
+                em(16px),
             ),
         ),
     )

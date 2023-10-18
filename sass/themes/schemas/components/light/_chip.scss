@@ -10,7 +10,7 @@
 
 /// Generates a light chip schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(16px), rem(0), rem(16px))] - The border radius used for chip.
+/// @prop {List} border-radius [(em(16px), em(0), em(16px))] - The border radius used for chip.
 /// @prop {Map} text-color [contrast-color: ('gray', 300)] - The chip text color.
 /// @prop {Map} background [color: ('gray', 300)] - The chip background color.
 /// @prop {Color} border-color [transparent] - The chip border color.
@@ -36,7 +36,7 @@
 /// @prop {Map} $disabled-text-color [color: ('gray', 500)] - The disabled chip text color.
 /// @prop {Map} $disabled-background [color: ('gray', 200)] - The disabled chip background color.
 /// @prop {Map} $disabled-border-color [color: ('gray', 200)] - The disabled chip border color.
-/// @prop {List} size [(rem(20px), rem(24px), rem(32px))] - The size used for the chip height.
+/// @prop {List} size [(em(20px), em(24px), em(32px))] - The size used for the chip height.
 /// @prop {Map} $default-elevation-chip
 $light-chip: extend(
     $default-elevation-chip,
@@ -154,9 +154,9 @@ $light-chip: extend(
 
         border-radius: (
             border-radius: (
-                rem(16px),
-                rem(0),
-                rem(16px),
+                em(16px),
+                em(0),
+                em(16px),
             ),
         ),
 
@@ -183,9 +183,9 @@ $light-chip: extend(
 
         size: (
             sizable: (
-                rem(20px),
-                rem(24px),
-                rem(32px),
+                em(20px),
+                em(24px),
+                em(32px),
             ),
         ),
     )
@@ -317,7 +317,7 @@ $fluent-chip: extend(
 /// @prop {Map} focus-selected-background [color: ('gray', 400)] - The selected chip focus background color.
 /// @prop {Map} focus-selected-text-color [contrast-color: ('gray', 400)] - The selected chip text focus color.
 /// @prop {Number} ghost-elevation [0] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for chip.
+/// @prop {List} border-radius [(em(4px), em(0), em(16px))] - The border radius used for chip.
 /// @prop {Map} focus-outline-color [color: ('gray', 200)] - The chip focus outline color.
 /// @prop {Map} focus-selected-outline-color [color: ('primary', 200)] - The selected chip focus outline color.
 /// @requires {Map} $light-chip
@@ -398,9 +398,9 @@ $bootstrap-chip: extend(
 
         border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(16px),
+                em(4px),
+                em(0),
+                em(16px),
             ),
         ),
     )

@@ -63,7 +63,7 @@ $fluent-badge: $light-badge;
 /// Generates a bootstrap badge schema.
 /// @type {Map}
 /// @prop {Number} border-width [1px] - The border width of the badge component.
-/// @prop {Number} border-radius [rem(4px)] - The border radius used for badge.
+/// @prop {Number} border-radius [em(4px)] - The border radius used for badge.
 /// @requires {Map} $light-badge
 /// @requires {Map} $bootstrap-elevation-badge
 $bootstrap-badge: extend(
@@ -72,7 +72,7 @@ $bootstrap-badge: extend(
     (
         border-width: 1px,
 
-        border-radius: rem(4px),
+        border-radius: em(4px),
     )
 );
 

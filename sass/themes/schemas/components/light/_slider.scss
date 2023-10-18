@@ -13,7 +13,7 @@
 /// @type {Map}
 /// @prop {Map} track-color [color: ('secondary', 500)] - The color of the track.
 /// @prop {Color} track-step-color [color: ('secondary', 200)] - The color of the track steps.
-/// @prop {Number} track-step-size [rem(3px)] - The size of the track steps.
+/// @prop {Number} track-step-size [em(3px)] - The size of the track steps.
 /// @prop {Map} track-hover-color [color: ('secondary', 400)] - The color of the track on hover.
 /// @prop {Map} thumb-color [color: ('secondary', 500)] - The color of the thumb.
 /// @prop {Color} thumb-focus-color [transparent] - The focus outline color of the thumb.
@@ -42,7 +42,7 @@ $light-slider: (
             200,
         ),
     ),
-    track-step-size: rem(3px),
+    track-step-size: em(3px),
     track-hover-color: (
         color: (
             'secondary',

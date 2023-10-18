@@ -22,8 +22,8 @@
 /// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The item's hover icon color.
 /// @prop {Map} elevation [16] - The elevation level, between 0-24, to be used for the drawer.
-/// @prop {List} border-radius [(rem(0), rem(0), rem(36px))] - The border radius used for the navdrawer component.
-/// @prop {List} item-border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for the navdrawer items.
+/// @prop {List} border-radius [(em(0), em(0), em(36px))] - The border radius used for the navdrawer component.
+/// @prop {List} item-border-radius [(em(4px), em(0), em(24px))] - The border radius used for the navdrawer items.
 /// @requires {Map} $default-elevation-navdrawer
 $light-navdrawer: extend(
     $default-elevation-navdrawer,
@@ -107,16 +107,16 @@ $light-navdrawer: extend(
 
         border-radius: (
             border-radius: (
-                rem(0),
-                rem(0),
-                rem(36px),
+                em(0),
+                em(0),
+                em(36px),
             ),
         ),
         item-border-radius: (
             border-radius: (
-                rem(4px),
-                rem(0),
-                rem(24px),
+                em(4px),
+                em(0),
+                em(24px),
             ),
         ),
     )
@@ -146,7 +146,7 @@ $bootstrap-navdrawer: $light-navdrawer;
 /// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 700)] - The item's hover icon color.
 /// @prop {Map} elevation [0] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {Color} border-color [transparent] - The navigation drawer right border color.
-/// @prop {List} item-border-radius [(rem(24px), rem(0), rem(24px))] - The border radius used for the navdrawer items.
+/// @prop {List} item-border-radius [(em(24px), em(0), em(24px))] - The border radius used for the navdrawer items.
 /// @requires {Map} $light-navdrawer
 /// @requires {Map} $indigo-elevation-navdrawer
 $indigo-navdrawer: extend(
@@ -225,9 +225,9 @@ $indigo-navdrawer: extend(
 
         item-border-radius: (
             border-radius: (
-                rem(24px),
-                rem(0),
-                rem(24px),
+                em(24px),
+                em(0),
+                em(24px),
             ),
         ),
     )

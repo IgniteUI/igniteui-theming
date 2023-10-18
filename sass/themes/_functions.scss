@@ -23,7 +23,7 @@
 ///     foreground: (
 ///        color: ('primary', 800, .5)
 ///     ),
-///     border-radius: (rem(5px), rem(0), rem(8px)) // default, min and max radius
+///     border-radius: (em(5px), em(0), em(8px)) // default, min and max radius
 ///   );
 ///   $theme: digest-schema($custom-schema);
 /// @returns {Map} - A theme map with resolved values.
@@ -121,10 +121,10 @@
 /// Returns a value between an upper and lower bound.
 /// @access private
 /// @param {Number} $radius - The preferred value.
-/// @param {Number} $min [rem(0)] - The minimum value.
+/// @param {Number} $min [em(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
 /// @return {Number} - The clamped value
-@function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
+@function border-radius($radius, $min: #{em(0)}, $max: $radius) {
     $factor: math.div($radius, $max);
 
     @return clamp(#{$min}, #{calc(var(--ig-radius-factor, #{$factor}) * #{$max})}, #{$max});
@@ -138,7 +138,7 @@
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
 /// @example
-///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
+///   --size: #{sizable(em(40px), em(64px), em(88px))};
 /// @return {Function} - The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
     $sm: max(#{$sm}, -1 * #{$sm});
