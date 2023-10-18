@@ -4,7 +4,7 @@
 @use 'sass:list';
 @use 'sass:string';
 @use './types';
-@use './config' as *;
+@use '../config' as *;
 
 ////
 /// @package theming
@@ -20,7 +20,7 @@
 ///     margin: em(10px) em(5px);
 ///   }
 /// @return {number} - Returns the pixels value converted to em.
-@function em($pixels, $context: browser-context()) {
+@function em($pixels, $context: $base-font-size) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
     }
@@ -41,7 +41,9 @@
 ///     margin: rem(10px) rem(5px);
 ///   }
 /// @return {number} - Returns the pixels value converted to rem.
-@function rem($pixels, $context: browser-context()) {
+@function rem($pixels, $context: $base-font-size) {
+    @debug $base-font-size;
+
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
     }
@@ -62,7 +64,7 @@
 ///     margin: px(3.23rem);
 ///   }
 /// @return {number} - Returns the relative value converted to pixels.
-@function px($num, $context: browser-context()) {
+@function px($num, $context: $base-font-size) {
     @if meta.type-of($num) == 'number' {
         @return math.div($num, $num * 0 + 1) * 16px;
     }
