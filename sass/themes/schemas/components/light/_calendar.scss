@@ -57,6 +57,7 @@
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for calendar date.
 /// @prop {List} month-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for calendar month.
+/// @prop {Number} default-size [2] - The default size used for the calendar component.
 $light-calendar: (
     content-background: (
         color: 'surface',
@@ -381,6 +382,7 @@ $light-calendar: (
             rem(20px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent calendar schema.

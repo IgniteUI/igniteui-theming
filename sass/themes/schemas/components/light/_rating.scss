@@ -19,6 +19,7 @@
 /// @prop {Map} disabled-label-color [color: ('gray', 400)] - sets the color for the label in disabled state.
 /// @prop {Map} disabled-empty-symbol-color [color: ('gray', 400)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} disabled-full-symbol-color [color: ('gray', 600)] - sets the color for the symbol in selected/disabled state when it is a plane text.
+/// @prop {Number} default-size [2] - The default size used for the rating component.
 /// Generates a light rating schema.
 /// @type {Map}
 $light-rating: (
@@ -77,6 +78,7 @@ $light-rating: (
             200,
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent rating schema.

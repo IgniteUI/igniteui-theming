@@ -19,6 +19,7 @@
 /// @prop {Map} toggle-button-background-disabled [color: ('gray', 100] - The select toggle button background color when the select is disabled.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The select toggle button foreground color when the select is disabled.
 /// @prop {Map} toggle-button-background-focus--border [color: ('gray', 300)] The select toggle button background color when the select is focused in material border and line variants.
+/// @prop {Number} default-size [2] - The default size used for the select component.
 $light-select: (
     toggle-button-background-focus--border: (
         color: (
@@ -69,6 +70,7 @@ $light-select: (
             500,
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent select schema.

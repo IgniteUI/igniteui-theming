@@ -34,6 +34,7 @@
 /// @prop {List} item-border-radius [()] - The border radius used for list item.
 /// @prop {Number} border-color [transparent] - The list border color.
 /// @prop {Color} border-width [0] - The list border width.
+/// @prop {Number} default-size [2] - The default size used for the list component.
 $light-list: (
     background: (
         color: 'surface',
@@ -131,6 +132,7 @@ $light-list: (
             rem(24px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent list schema.
