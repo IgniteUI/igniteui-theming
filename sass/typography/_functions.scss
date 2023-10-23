@@ -42,8 +42,6 @@
 ///   }
 /// @return {number} - Returns the pixels value converted to rem.
 @function rem($pixels, $context: $base-font-size) {
-    @debug $base-font-size;
-
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
     }
