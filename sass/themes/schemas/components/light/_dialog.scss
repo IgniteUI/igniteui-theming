@@ -17,6 +17,7 @@
 /// @prop {Map} backdrop [color: ('gray', 50, .54)] - The dialog backdrop color.
 /// @prop {Number} elevation [24] - The elevation level, between 0-24, to be used for the dialog.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(36px))] - The border radius used for dialog.
+/// @prop {Number} default-size [2] - The default size used for the dialog component.
 /// @requires {Map} $default-elevation-dialog
 $light-dialog: extend(
     $default-elevation-dialog,
@@ -56,6 +57,7 @@ $light-dialog: extend(
                 rem(36px),
             ),
         ),
+        default-size: 2,
     )
 );
 

@@ -21,6 +21,7 @@
 /// @prop {Map} disabled-background [color: ('gray', 300)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the button.
+/// @prop {Number} default-size [1] - The default size used for the button component.
 $material-base-button: (
     shadow-color: transparent,
     border-color: transparent,
@@ -48,6 +49,7 @@ $material-base-button: (
             rem(36px),
         ),
     ),
+    default-size: 1,
 );
 
 /// @type {Map}
@@ -330,6 +332,7 @@ $material-fab-button: extend(
 /// @prop {Map} active-border-color [color: ('gray', 400)] - The active border color of the button.
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for floating button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for icon button.
+/// @prop {Number} default-size [2] - The default size used for the icon button component.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $material-ib-elevation
 $material-icon-button: extend(
@@ -420,6 +423,7 @@ $material-icon-button: extend(
                 rem(36px),
             ),
         ),
+        default-size: 2,
     )
 );
 
@@ -444,6 +448,7 @@ $light-button: (
 /// @prop {Map} disabled-background [color: ('gray', 200)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 400)] - The disabled foreground color of the button.
 /// @prop {List} size [(rem(24px), rem(32px), rem(38px))] - The size used for the button.
+/// @prop {Number} default-size [2] - The default size used for the button component.
 $fluent-base-button: extend(
     $material-base-button,
     $flat-elevation-button,
@@ -467,6 +472,7 @@ $fluent-base-button: extend(
                 rem(38px),
             ),
         ),
+        default-size: 2,
     )
 );
 
@@ -965,6 +971,7 @@ $fluent-button: (
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the button.
 /// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the button.
+/// @prop {Number} default-size [2] - The default size used for the button component.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $flat-elevation-button
 $bootstrap-base-button: extend(
@@ -990,6 +997,7 @@ $bootstrap-base-button: extend(
                 rem(48px),
             ),
         ),
+        default-size: 2,
     )
 );
 

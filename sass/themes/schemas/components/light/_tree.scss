@@ -25,6 +25,7 @@
 /// @prop {Map} hover-color [color: ('gray', 900, .1)] - The background color used for the tree node on hover.
 /// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
 /// @prop {List} size [(rem(32px), rem(40px), rem(50px))] - The size used for the tree node.
+/// @prop {Number} default-size [2] - The default size used for the tree component.
 $light-tree: (
     background: (
         color: (
@@ -109,6 +110,7 @@ $light-tree: (
             rem(50px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a light fluent tree schema.
