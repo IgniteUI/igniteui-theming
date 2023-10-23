@@ -42,22 +42,57 @@ $fluent-flat-icon-button-dark: extend($fluent-flat-icon-button);
 
 /// Generates a dark fluent contained icon button schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('primary', 300)] - The background color of the fluent dark contained icon button.
 /// @prop {Map} foreground [color: ('surface', 500)] - The idle text color of the fluent dark contained icon button.
-/// @prop {Map} focus-background [color: ('primary', 300)] - The hover/focus background color of the fluent dark contained icon button.
+/// @prop {Map} hover-background [color: ('primary', 200)] - The hover background color of the fluent dark contained icon button.
+/// @prop {Map} focus-background [color: ('primary', 300)] - The focus background color of the fluent dark contained icon button.
+/// @prop {Map} active-background [color: ('primary', 200)] - The active background color of the fluent dark contained icon button.
+/// @prop {Map} active-foreground [color: ('surface', 500)] - The active text color of the fluent dark contained icon button.
+/// @prop {Map} focus-border-color [color: ('surface', 500)] - The focus border color of the fluent dark contained icon button.
 /// @requires {Map} $fluent-contained-icon-button
 $fluent-contained-icon-button-dark: extend(
     $fluent-contained-icon-button,
     (
+        background: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
         foreground: (
             color: (
                 'surface',
                 500,
             ),
         ),
+        hover-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
         focus-background: (
             color: (
                 'primary',
                 300,
+            ),
+        ),
+        active-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        active-foreground: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'surface',
+                500,
             ),
         ),
     )
