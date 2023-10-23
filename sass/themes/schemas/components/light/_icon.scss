@@ -12,6 +12,7 @@
 /// @prop {Color} color ["'currentColor'"] - The icon color.
 /// @prop {Color} disabled-color ["'currentColor'"] - The disabled icon color.
 /// @prop {List} size [(rem(18px), rem(20px), rem(24px))] - The size used for the icon.
+/// @prop {Number} default-size [2] - The default size used for the icon component.
 $light-icon: (
     color: "'currentColor'",
     disabled-color: "'currentColor'",
@@ -22,6 +23,7 @@ $light-icon: (
             rem(24px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent icon schema.

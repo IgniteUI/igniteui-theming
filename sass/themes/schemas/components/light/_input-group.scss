@@ -63,6 +63,7 @@
 /// @prop {Map} input-suffix-color--focused [color: ('gray', 900)] - The input suffix color in the focused state.
 /// @prop {Color} input-suffix-background--focused [inherit] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(40px), rem(48px), rem(56px))] - The size used for the input group.
+/// @prop {Number} default-size [2] - The default size used for the input group component.
 /// @requires {Map} $default-elevation-input-group
 $light-input-group: extend(
     $default-elevation-input-group,
@@ -323,6 +324,7 @@ $light-input-group: extend(
                 rem(56px),
             ),
         ),
+        default-size: 2,
     )
 );
 

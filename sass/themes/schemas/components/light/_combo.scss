@@ -28,6 +28,7 @@
 /// @prop {Map} clear-button-foreground-focus [contrast-color: ('gray', 100)] - The combo clear button foreground color when the combo is focused.
 /// @prop {Map} case-icon-color [color: ('gray', 400)] - The case sensitive icon color in inactive state for combo search input
 /// @prop {Map} case-icon-color--active [color: ('primary', 500)] - The case sensitive icon color in active state for combo search input
+/// @prop {Number} default-size [2] - The default size used for the combo component.
 $light-combo: (
     toggle-button-background-focus--border: (
         color: (
@@ -119,6 +120,7 @@ $light-combo: (
             500,
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent combo schema.
