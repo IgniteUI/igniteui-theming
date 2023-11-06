@@ -21,6 +21,7 @@
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the material icon button.
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the material icon button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the material icon button.
+/// @prop {Number} default-size [2] - The default size used for the icon button.
 $material-base-icon-button: (
     background: transparent,
     border-color: transparent,
@@ -69,6 +70,7 @@ $material-base-icon-button: (
             rem(36px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a material flat icon button schema.
@@ -153,6 +155,7 @@ $light-icon-button: (
 /// @prop {Map} disabled-foreground [color: ('gray', 400)] - The disabled foreground color of the fluent icon button.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the fluent flat icon button.
 /// @prop {List} size [(rem(24px), rem(32px), rem(38px))] - The size used for the fluent icon button.
+/// @prop {Number} default-size [2] - The default size used for the icon button.
 $fluent-base-icon-button: (
     background: transparent,
     foreground: (
@@ -211,6 +214,7 @@ $fluent-base-icon-button: (
             rem(38px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a fluent flat icon button schema.
@@ -339,6 +343,7 @@ $fluent-icon-button: (
 /// @prop {Map} disabled-foreground [color: ('primary', 100)] - The disabled foreground color of the bootstrap icon button.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the bootstrap icon button.
 /// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the bootstrap icon button.
+/// @prop {Number} default-size [2] - The default size used for the icon button
 $bootstrap-base-icon-button: (
     background: transparent,
     foreground: (
@@ -374,6 +379,7 @@ $bootstrap-base-icon-button: (
             rem(48px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates a bootstrap flat icon button schema.
@@ -533,6 +539,7 @@ $bootstrap-icon-button: (
 /// @prop {Map} disabled-foreground [color: ('gray', 400)] - The disabled foreground color of the indigo icon button.
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the indigo icon button.
 /// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size used for the indigo icon button.
+/// @prop {Number} default-size [2] - The default size used for the icon button.
 $indigo-base-icon-button: (
     background: transparent,
     foreground: (
@@ -569,6 +576,7 @@ $indigo-base-icon-button: (
             rem(36px),
         ),
     ),
+    default-size: 2,
 );
 
 /// Generates an indigo flat icon button schema.
