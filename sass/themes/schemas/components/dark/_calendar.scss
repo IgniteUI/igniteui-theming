@@ -9,49 +9,6 @@
 
 /// Generates a dark calendar schema.
 /// @type {Map}
-/// @prop {Map} week-number-background [color: ('gray', 100, .3)] - The background color of the week number column.
-/// @prop {Map} date-hover-background [color: ('gray', 100)] - The hover date background color.
-/// @prop {Map} month-hover-background [color: ('gray', 100, .5)] - The month hover text color.
-/// @prop {Map} date-selected-hover-foreground [contrast-color: ('gray', 100)] - The hover text color for the selected date.
-/// @prop {Map} date-selected-focus-foreground [contrast-color: ('gray', 100)] - The focus text color for the selected date.
-$dark-base-calendar: (
-    week-number-background: (
-        color: (
-            'gray',
-            100,
-            0.3,
-        ),
-    ),
-
-    date-hover-background: (
-        color: (
-            'gray',
-            100,
-        ),
-    ),
-
-    month-hover-background: (
-        color: (
-            'gray',
-            100,
-            0.5,
-        ),
-    ),
-
-    date-selected-hover-foreground: (
-        contrast-color: (
-            'gray',
-            100,
-        ),
-    ),
-
-    date-selected-focus-foreground: (
-        contrast-color: (
-            'gray',
-            100,
-        ),
-    ),
-);
 
 /// Generates a dark calendar schema.
 /// @type {Map}
@@ -62,7 +19,6 @@ $dark-base-calendar: (
 /// @requires $dark-base-calendar
 $dark-calendar: extend(
     $light-calendar,
-    $dark-base-calendar,
     (
         date-disabled-text-color: (
             color: (
@@ -90,7 +46,7 @@ $dark-calendar: extend(
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
 /// @requires $fluent-calendar
-$dark-fluent-calendar: extend($fluent-calendar, $dark-base-calendar);
+$dark-fluent-calendar: extend($fluent-calendar);
 
 /// Generates a dark bootstrap calendar schema.
 /// @type {Map}
@@ -109,7 +65,6 @@ $dark-fluent-calendar: extend($fluent-calendar, $dark-base-calendar);
 /// @requires $dark-base-calendar
 $dark-bootstrap-calendar: extend(
     $bootstrap-calendar,
-    $dark-base-calendar,
     (
         content-background: (
             color: (
@@ -205,7 +160,6 @@ $dark-bootstrap-calendar: extend(
 /// @requires $dark-base-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
-    $dark-base-calendar,
     (
         content-text-color: (
             contrast-color: (
