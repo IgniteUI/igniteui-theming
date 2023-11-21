@@ -23,6 +23,7 @@
 /// @prop {Map} foreground-disabled [color: ('gray', 500)] - The color used for the content of the disabled tree node.
 /// @prop {Map} drop-area-color [color: ('secondary')] - The background color used for the tree node drop aria.
 /// @prop {Map} hover-color [color: ('gray', 900, .1)] - The background color used for the tree node on hover.
+/// @prop {Map} hover-selected-color [color: ('gray', 900, .1)] - The background color used for the selected tree node on hover.
 /// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
 /// @prop {List} size [(rem(32px), rem(40px), rem(50px))] - The size used for the tree node.
 /// @prop {Number} default-size [2] - The default size used for the tree component.
@@ -97,6 +98,13 @@ $light-tree: (
         ),
     ),
     hover-color: (
+        color: (
+            'gray',
+            900,
+            0.1,
+        ),
+    ),
+    hover-selected-color: (
         color: (
             'gray',
             900,
@@ -191,7 +199,6 @@ $fluent-tree: extend(
 /// @prop {Map} background-active-selected [color: ('primary', 600)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground-active-selected [contrast-color: ('primary', 600)] - The color used for the content of the active selected tree node.
 /// @prop {Map} border-color [color: ('primary', 200)] - The outline shadow color used for tree node in focus state.
-/// @prop {Map} hover-color [color: ('gray', 900, .1)] - The background color used for the tree node on hover.
 /// @requires $light-tree
 $bootstrap-tree: extend(
     $light-tree,
@@ -229,13 +236,6 @@ $bootstrap-tree: extend(
                 'primary' 200,
             ),
         ),
-        hover-color: (
-            color: (
-                'gray',
-                900,
-                0.1,
-            ),
-        ),
     )
 );
 
@@ -249,6 +249,7 @@ $bootstrap-tree: extend(
 /// @prop {Map} foreground-active-selected [contrast-color: ('primary', 400)] - The color used for the content of the active selected tree node.
 /// @prop {Map} border-color [color: ('primary', 300)] - The outline shadow color used for tree node in focus state.
 /// @prop {Map} hover-color [color: ('primary', 100)] - The background color used for the tree node on hover.
+/// @prop {Map} hover-selected-color [color: ('primary', 100)] - The background color used for the selected tree node on hover.
 /// @requires {Map} $light-tree
 $indigo-tree: extend(
     $light-tree,
@@ -292,6 +293,12 @@ $indigo-tree: extend(
             ),
         ),
         hover-color: (
+            color: (
+                'primary',
+                100,
+            ),
+        ),
+        hover-selected-color: (
             color: (
                 'primary',
                 100,
