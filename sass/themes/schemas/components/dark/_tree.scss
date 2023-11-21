@@ -15,6 +15,7 @@
 /// @prop {Map} background-active [color: ('gray', 100)] - The background color used for the active tree node.
 /// @prop {Map} foreground-active [color: ('gray', 900)] - The color used for the content in active state of the tree node.
 /// @prop {Map} hover-color [color: ('gray', 50, .1)] - The background color used for the tree node on hover.
+/// @prop {Map} hover-selected-color [color: ('gray', 50, .1)] - The background color used for the selected tree node on hover.
 $base-dark-tree: (
     background-active: (
         color: (
@@ -35,13 +36,32 @@ $base-dark-tree: (
             0.1,
         ),
     ),
+    hover-selected-color: (
+        color: (
+            'gray',
+            50,
+            0.1,
+        ),
+    ),
 );
 
 /// Generates a dark tree schema.
 /// @type {Map}
 /// @requires $light-tree
 /// @requires $base-dark-tree
-$dark-tree: extend($light-tree, $base-dark-tree);
+$dark-tree: extend(
+    $light-tree,
+    $base-dark-tree,
+    (
+        hover-color: (
+            color: (
+                'gray',
+                200,
+                0.5,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent tree schema.
 /// @type {Map}
