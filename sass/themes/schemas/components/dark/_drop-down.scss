@@ -33,6 +33,8 @@ $dark-drop-down: extend($light-drop-down, $base-dark-drop-down);
 /// @prop {Map} selected-item-text-color [contrast-color: 'surface'] - The drop-down selected item text color.
 /// @prop {Map} selected-hover-item-text-color [contrast-color: 'surface'] - The drop-down selected item hover text color.
 /// @prop {Map} selected-focus-item-text-color [contrast-color: 'surface'] - The drop-down selected item focus text color.
+/// @prop {Map} border-color [color: ('gray', 400)] - The border color used for the drop-down items on focus state.
+/// @prop {Map} disabled-item-text-color [color: ('gray', 200)] - The drop-down disabled item text color.
 /// @requires $fluent-drop-down
 /// @requires $base-dark-drop-down
 $dark-fluent-drop-down: extend(
@@ -48,6 +50,18 @@ $dark-fluent-drop-down: extend(
         selected-focus-item-text-color: (
             contrast-color: 'surface',
         ),
+        border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        disabled-item-text-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
     )
 );
 
@@ -55,6 +69,7 @@ $dark-fluent-drop-down: extend(
 /// @type {Map}
 /// @prop {Map} item-text-color [contrast-color: 'surface'] - The drop-down text color.
 /// @prop {Map} hover-item-text-color [contrast-color: 'surface'] - The drop-down hover text color.
+/// @prop {Map} disabled-item-text-color [color: ('gray', 200)] - The drop-down disabled item text color.
 /// @requires $bootstrap-drop-down
 /// @requires $base-dark-drop-down
 $dark-bootstrap-drop-down: extend(
@@ -66,6 +81,12 @@ $dark-bootstrap-drop-down: extend(
         ),
         hover-item-text-color: (
             contrast-color: 'surface',
+        ),
+        disabled-item-text-color: (
+            color: (
+                'gray',
+                200,
+            ),
         ),
     )
 );
