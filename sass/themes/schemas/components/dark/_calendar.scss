@@ -12,36 +12,8 @@
 
 /// Generates a dark calendar schema.
 /// @type {Map}
-/// @prop {Map} date-disabled-foreground [color: ('gray', 500)] - The text color for disabled dates.
-/// @prop {Map} date-selected-hover-foreground [contrast-color: ('secondary', 500)] - The hover text color for the selected date.
-/// @prop {Map} date-selected-focus-foreground [contrast-color: ('secondary', 500)] - The focus text color for the selected date.
 /// @requires $light-calendar
-/// @requires $dark-base-calendar
-$dark-calendar: extend(
-    $light-calendar,
-    (
-        date-disabled-foreground: (
-            color: (
-                'gray',
-                500,
-            ),
-        ),
-
-        date-selected-hover-foreground: (
-            contrast-color: (
-                'secondary',
-                500,
-            ),
-        ),
-
-        date-selected-focus-foreground: (
-            contrast-color: (
-                'secondary',
-                500,
-            ),
-        ),
-    )
-);
+$dark-calendar: extend($light-calendar);
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
@@ -73,7 +45,6 @@ $dark-fluent-calendar: extend(
 /// @prop {Map} date-selected-hover-foreground [contrast-color: ('surface')] - The hover text color for the selected date.
 /// @prop {Map} date-selected-focus-foreground [contrast-color: ('surface')] - The focus text color for the selected date.
 /// @requires $bootstrap-calendar
-/// @requires $dark-base-calendar
 $dark-bootstrap-calendar: extend(
     $bootstrap-calendar,
     (
@@ -148,170 +119,5 @@ $dark-bootstrap-calendar: extend(
 
 /// Generates a dark indigo calendar schema.
 /// @type {Map}
-/// @prop {Map} content-foreground [contrast-color: ('surface')] - The main content text color.
-/// @prop {Map} inactive-foreground [color: ('gray', 700)] - The text color for previous and next month dates.
-/// @prop {Map} label-color [color: ('gray', 700)] - The text color for weekday labels.
-/// @prop {Map} weekend-foreground [color: ('gray', 700)] - The text color for weekend days.
-
-/// @prop {Map} picker-foreground [color: ('gray', 800)]- The idle picker month/year color.
-/// @prop {Map} picker-hover-foreground [contrast-color: ('surface')]-  The hover picker month/year color.
-/// @prop {Map} picker-focus-foreground [contrast-color: ('surface')] - The :focus foreground of the month and year pickers.
-
-/// @prop {Map} month-nav-arrow-color [color: ('gray', 800)] - The idle picker arrow color.
-/// @prop {Map} month-nav-arrow-hover-color [contrast-color: ('surface')] - The picker hover arrow color.
-/// @prop {Map} month-nav-arrow-focus-color [contrast-color: ('surface')] - The picker hover arrow color.
-/// @prop {Map} month-hover-foreground [color: ('primary', 300)] - The month hover text color.
-/// @prop {Map} year-hover-foreground [color: ('primary', 300)] - The year hover text color.
-/// @prop {Map} year-current-foreground [color: ('primary', 300)] - The text color for the current/selected year.
-/// @prop {Map} month-current-foreground [color: ('primary', 300)]- The text color for the current/selected month.
-/// @prop {Map} month-hover-current-foreground [color: ('primary', 300)]- The text color for the current/selected month on hover.
-/// @prop {Map} date-selected-hover-foreground [contrast-color: ('surface')] - The hover text color for the selected date.
-/// @prop {Map} date-selected-focus-foreground [contrast-color: ('surface')] - The focus text color for the selected date.
-/// @prop {Map} date-current-hover-foreground [color: ('primary', 200)] - The hover text color for the current date.
-/// @prop {Map} date-current-focus-foreground [color: ('gray', 100)] - The focus background color for the current date.
 /// @requires $indigo-calendar
-/// @requires $dark-base-calendar
-$dark-indigo-calendar: extend(
-    $indigo-calendar,
-    (
-        content-foreground: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        date-current-hover-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        date-current-focus-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        date-current-hover-foreground: (
-            color: (
-                'primary',
-                200,
-            ),
-        ),
-
-        date-current-focus-foreground: (
-            color: (
-                'primary',
-                200,
-            ),
-        ),
-
-        inactive-foreground: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        date-selected-hover-foreground: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        date-selected-focus-foreground: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        label-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        weekend-foreground: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        month-nav-arrow-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
-        month-nav-arrow-hover-color: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        month-nav-arrow-focus-color: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        picker-foreground: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
-        picker-hover-foreground: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        picker-focus-foreground: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        month-hover-foreground: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-
-        year-hover-foreground: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-
-        month-current-foreground: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-
-        month-hover-current-foreground: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-
-        year-current-foreground: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-    )
-);
+$dark-indigo-calendar: extend($indigo-calendar);
