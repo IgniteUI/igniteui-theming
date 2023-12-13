@@ -182,7 +182,7 @@
 /// @prop {List} month-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the month in month view.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size of the days, months, and years views..
-/// @prop {Number} default-size [2] - The default size used for the calendar component.
+/// @prop {Number} default-size [3] - The default size used for the calendar component.
 $light-calendar: (
     content-foreground: (
         contrast-color: 'surface',
@@ -1667,13 +1667,6 @@ $fluent-calendar: extend(
                 rem(8px),
             ),
         ),
-        size: (
-            sizable: (
-                rem(24px),
-                rem(28px),
-                rem(32px),
-            ),
-        ),
         date-range-border-color: (
             color: (
                 'gray',
@@ -2307,13 +2300,6 @@ $bootstrap-calendar: extend(
                 rem(8px),
             ),
         ),
-        size: (
-            sizable: (
-                rem(24px),
-                rem(28px),
-                rem(32px),
-            ),
-        ),
     )
 );
 
@@ -2337,13 +2323,6 @@ $indigo-calendar: extend(
                 rem(4px),
                 rem(0),
                 rem(8px),
-            ),
-        ),
-        size: (
-            sizable: (
-                rem(24px),
-                rem(28px),
-                rem(32px),
             ),
         ),
     )
