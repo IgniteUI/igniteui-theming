@@ -138,7 +138,7 @@ $_enhanced-accessibility: false;
         $hsl: hsl(from var(--ig-#{$name}-500) h s $l);
 
         @if #{$shade} == '500' {
-            $hsl: #{$h, $s, $l};
+            $hsl: #{hsl($h $s $l)};
         }
 
         @return (raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l), hsl: $hsl);
@@ -153,7 +153,7 @@ $_enhanced-accessibility: false;
         $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * #{$sx}) calc(l * #{$lx}))};
 
         @if #{$shade} == '500' {
-            $hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})};
+            $hsl: #{hsl($h calc(#{$s} * #{$sx}) calc(#{$l} * #{$lx}))};
         }
 
         @return (raw: $raw, hsl: $hsl);
@@ -188,7 +188,7 @@ $_enhanced-accessibility: false;
     $meta: if($palette, map.get($palette, '_meta'), null);
 
     @if not($palette) or not($meta) {
-        @return if($contrast, $s, hsla($s, if($opacity, $opacity, $a)));
+        @return if($contrast, $s, hsl(from $s h s l/ if($opacity, $opacity, $a)));
     }
 
     @return rgba(map.get($c, $variant), $alpha: if($opacity, $opacity, 1));
