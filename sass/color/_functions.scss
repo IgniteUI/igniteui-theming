@@ -135,13 +135,14 @@ $_enhanced-accessibility: false;
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), $shade);
         $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
-        $hsl: #{hsl(from var(--ig-#{$name}-500) $h $s $l)};
+        $raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l);
+        $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
 
         @if #{$shade} == '500' {
-            $hsl: #{hsl($h $s $l)};
+            $hsl: $raw;
         }
 
-        @return (raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l), hsl: $hsl);
+        @return (raw: $raw, hsl: $hsl);
     } @else {
         $sx: map.get(multipliers.$color, 's', $shade);
         $lx: map.get(multipliers.$color, 'l', $shade);
@@ -150,10 +151,10 @@ $_enhanced-accessibility: false;
             to-fixed(color.saturation($color) * $sx),
             to-fixed(color.lightness($color) * $lx)
         );
-        $hsl: #{hsl(from var(--ig-#{$name}-500) $h calc($s * #{$sx}) calc($l * #{$lx}))};
+        $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
 
         @if #{$shade} == '500' {
-            $hsl: #{hsl($h calc(#{$s} * #{$sx}) calc(#{$l} * #{$lx}))};
+            $hsl: $raw;
         }
 
         @return (raw: $raw, hsl: $hsl);
