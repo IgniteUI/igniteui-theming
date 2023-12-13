@@ -9,8 +9,8 @@
 
 /// Generates a light calendar schema.
 /// @type {Map}
-/// @prop {Map} calendar-foreground [contrast-color: 'surface'] - The foreground color of the calendar views.
-/// @prop {Map} calendar-background [color: 'surface'] - The background color of the calendar views..
+/// @prop {Map} content-foreground [contrast-color: 'surface'] - The foreground color of the calendar views.
+/// @prop {Map} content-background [color: 'surface'] - The background color of the calendar views..
 ///
 /// @prop {Map} header-foreground [contrast-color: ('secondary', 600)] - The header foreground color.
 /// @prop {Map} header-background [color: ('secondary', 500)] - The header background color.
@@ -183,10 +183,10 @@
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {Number} default-size [2] - The default size used for the calendar component.
 $light-calendar: (
-    calendar-foreground: (
+    content-foreground: (
         contrast-color: 'surface',
     ),
-    calendar-background: (
+    content-background: (
         color: 'surface',
     ),
     calendar-border-color: (
@@ -1745,12 +1745,12 @@ $fluent-calendar: extend(
 /// @prop {Map} date-current-hover-background [color: ('gray', 200)] - The :hover background color of the current date.
 /// @prop {Map} date-current-focus-foreground [color: ('gray', 800)] - The :focus foreground color of the current date.
 /// @prop {Map} date-current-focus-background [color: ('gray', 200)] - The :focus background color of the current date.
+/// @prop {Map} date-selected-foreground [color: 'surface'] - The foreground color of the selected date.
 /// @prop {Map} date-selected-background [color: ('primary', 500)] - The background color of the selected date.
 /// @prop {Map} date-selected-hover-background [color: ('primary', 500)] - The :hover background color of the selected date.
 /// @prop {Map} date-selected-focus-background [color: ('primary', 500)] - The :focus background color of the selected date.
 /// @prop {Map} date-selected-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected date.
 /// @prop {Map} date-selected-focus-foreground [contrast-color: ('primary', 900)] - The :focus foreground color of the selected date.
-/// @prop {Map} date-selected-foreground [color: 'surface'] - The foreground color of the selected date.
 /// @prop {Map} date-selected-current-foreground [color: ('gray', 800)] - The foreground color of the selected current date.
 /// @prop {Map} date-selected-current-background [color: ('primary', 500)] - The background color of the selected current date.
 /// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('gray', 800)] - The :hover foreground color of the selected current date.
@@ -1763,6 +1763,12 @@ $fluent-calendar: extend(
 /// @prop {Map} date-selected-current-range-hover-background [color: ('primary', 500)] - The :hover background color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-focus-foreground [contrast-color: ('gray', 800)] - The :focus foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-focus-background [color: ('primary', 500)] - The :focus background color of the current date in the selected range.
+/// @prop {Map} date-selected-range-background [color: ('primary', 200)] - The background color of the selected range.
+/// @prop {Map} date-selected-range-foreground [contrast-color: ('primary', 600)] - The foreground color of the selected range.
+/// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('primary', 600)] - The :hover foreground color of the selected range.
+/// @prop {Map} date-selected-range-hover-background [color: ('primary', 500)] - The :hover background color of the selected range.
+/// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('primary', 600)] - The :focus foreground color of the selected range.
+/// @prop {Map} date-selected-range-focus-background [color: ('primary', 500)] - The :focus background color of the selected range.
 /// @prop {Map} date-selected-range-start-foreground [contrast-color: ('primary', 600)] - The foreground color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-background [color: ('primary', 500)] - The background color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-hover-foreground [contrast-color: ('primary', 500)] - The :hover foreground color of the first date in the selected range.
@@ -1775,12 +1781,6 @@ $fluent-calendar: extend(
 /// @prop {Map} date-selected-range-end-hover-background [color: ('primary', 600)] - The :hover background color of the last date in the selected range.
 /// @prop {Map} date-selected-range-end-focus-foreground [contrast-color: ('primary', 600)] - The :focus foreground color of the last date in the selected range.
 /// @prop {Map} date-selected-range-end-focus-background [color: ('primary', 600)] - The :focus background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-foreground [contrast-color: ('primary', 600)] - The foreground color of the selected range.
-/// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('primary', 600)] - The :hover foreground color of the selected range.
-/// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('primary', 600)] - The :focus foreground color of the selected range.
-/// @prop {Map} date-selected-range-background [color: ('primary', 200)] - The background color of the selected range.
-/// @prop {Map} date-selected-range-hover-background [color: ('primary', 500)] - The :hover background color of the selected range.
-/// @prop {Map} date-selected-range-focus-background [color: ('primary', 500)] - The :focus background color of the selected range.
 /// @prop {Color} date-current-outline [transparent] - The outline color of the current date.
 /// @prop {Color} date-current-hover-outline [transparent] - The :hover outline color of the current date.
 /// @prop {Color} date-current-focus-outline [transparent] - The :focus outline color of the current date.
@@ -1797,7 +1797,8 @@ $fluent-calendar: extend(
 /// @prop {Color} selected-current-hover-outline-color [transparent] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Color} selected-current-focus-outline-color [transparent] - The :focus outline color of the selected current year/month in year/month views.
 /// @prop {Map} calendar-border-color [color: ('gray', 200)] - The calendar border color.
-/// @prop {Map} weekday-color [color: 'info'] - The foreground color for weekday labels.
+/// @prop {Map} weekday-color [color: 'info', 300] - The foreground color for weekday labels.
+/// @prop {Map} week-number-foreground [color: ('info', 300)] - The foreground color of the week number column.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(0))] - The border radius used for the date outline in range selection.
@@ -2246,6 +2247,12 @@ $bootstrap-calendar: extend(
         selected-current-outline-hover-color: transparent,
         selected-current-outline-focus-color: transparent,
         weekday-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        week-number-foreground: (
             color: (
                 'info',
                 300,
