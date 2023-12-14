@@ -160,7 +160,7 @@ $_palette: palette(
             $shade: shade($color, $_primary, $variant, null);
             $expected: (
                 raw: hsl(204deg 100% 44.5%),
-                hsl: #{hsl(from var(--ig-primary-500) var(--ig-primary-h) calc(var(--ig-primary-s) * 1.26) calc(var(--ig-primary-l) * 0.89))}
+                hsl: #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))}
             );
 
             @include assert-equal($shade, $expected);
@@ -173,7 +173,7 @@ $_palette: palette(
             $shade: shade($color, null, $variant, $surface);
             $expected: (
                 raw: hsl(0deg 0% 98%),
-                hsl: #{hsl(from var(--ig-gray-500) var(--ig-gray-h) var(--ig-gray-s) 98%)}
+                hsl: #{hsl(from var(--ig-gray-500) h s 98%)}
             );
 
             // $surface is bright, return a darker shade of gray
@@ -184,7 +184,7 @@ $_palette: palette(
             $expected: #{var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%};
             $expected: (
                 raw: hsl(0deg 0% 13%),
-                hsl: #{hsl(from var(--ig-gray-500) var(--ig-gray-h) var(--ig-gray-s) 13%)}
+                hsl: #{hsl(from var(--ig-gray-500) h s 13%)}
             );
 
             // $surface is dark, return a lighter shade of gray
@@ -237,19 +237,17 @@ $_palette: palette(
                         --ig-gray-l: #{math.round(color.lightness($gray-500))};
                         --ig-gray-a: #{math.round(color.alpha($gray-500))};
                         --ig-primary-500:
-                            #{hsl(var(--ig-primary-h)
-                            calc(var(--ig-primary-s) * 1)
-                            calc(var(--ig-primary-l) * 1))};
+                            #{hsl(var(--ig-primary-h), var(--ig-primary-s), var(--ig-primary-l))};
                         --ig-primary-500-contrast: #{contrast-color($_palette, primary, 500)};
                         --ig-primary-600: 
-                            #{hsl(from var(--ig-primary-500) var(--ig-primary-h) calc(var(--ig-primary-s) * 1.26) calc(var(--ig-primary-l) * 0.89))};
+                            #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))};
                         --ig-gray-500:
                             #{hsl(var(--ig-gray-h)
                             var(--ig-gray-s)
                             #{math.round(color.lightness($gray-500))})};
                         --ig-gray-500-contrast: #{contrast-color($_palette, gray, 500)};
                         --ig-gray-600: 
-                            #{hsl(from var(--ig-gray-500) var(--ig-gray-h) var(--ig-gray-s) 54%)};
+                            #{hsl(from var(--ig-gray-500) h s 54%)};
                     }
                 }
             }

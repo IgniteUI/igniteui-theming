@@ -139,7 +139,7 @@ $_enhanced-accessibility: false;
         $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
 
         @if #{$shade} == '500' {
-            $hsl: $raw;
+            $hsl: hsl($h $s $l);
         }
 
         @return (raw: $raw, hsl: $hsl);
@@ -154,7 +154,7 @@ $_enhanced-accessibility: false;
         $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
 
         @if #{$shade} == '500' {
-            $hsl: $raw;
+            $hsl: hsl($h $s $l);
         }
 
         @return (raw: $raw, hsl: $hsl);
