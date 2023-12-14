@@ -161,7 +161,7 @@
 /// @prop {Map} selected-current-hover-outline-color [color: ('gray', 600)] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-focus-outline-color [color: ('secondary', 500)] - The :focus outline color of the selected current year/month in year/month views.
 ///
-/// @prop {Map} calendar-border-color [color: ('gray', 300)] - The calendar border color.
+/// @prop {Map} border-color [color: ('gray', 300)] - The calendar border color.
 /// @prop {Color} date-border-color [transparent] - The border color around a date.
 /// @prop {Color} date-hover-border-color [transparent] - The :hover border color around a date.
 /// @prop {Color} date-focus-border-color [transparent] - The :focus border color around a date.
@@ -176,7 +176,7 @@
 /// @prop {Map} date-disabled-range-foreground [color: ('secondary', 200)] - The foreground color of disabled dates inside range selection.
 /// @prop {Color} date-disabled-range-background [transparent] - The background color of disabled dates inside range selection.
 ///
-/// @prop {List} calendar-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
 /// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] -The border radius used for the date in range selection.
 /// @prop {List} month-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the month in month view.
@@ -190,7 +190,7 @@ $light-calendar: (
     content-background: (
         color: 'surface',
     ),
-    calendar-border-color: (
+    border-color: (
         color: (
             'gray',
             300,
@@ -880,7 +880,7 @@ $light-calendar: (
     weekend-color: (
         contrast-color: 'surface',
     ),
-    calendar-border-radius: (
+    border-radius: (
         border-radius: (
             rem(4px),
             rem(0),
@@ -1086,7 +1086,7 @@ $light-calendar: (
 /// @prop {Map} date-selected-range-hover-background [color: ('gray', 300)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('gray', 300)] - The :focus background color of the selected range.
 /// @prop {Color} date-disabled-background [transparent] - The background color of disabled dates.
-/// @prop {List} calendar-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for calendar.
+/// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the date outline
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the date outline in range selection.
 /// @prop {List} month-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for calendar month.
@@ -1632,7 +1632,7 @@ $fluent-calendar: extend(
         selected-current-outline-color: transparent,
         selected-current-outline-hover-color: transparent,
         selected-current-outline-focus-color: transparent,
-        calendar-border-radius: (
+        border-radius: (
             border-radius: (
                 rem(0),
                 rem(0),
@@ -1790,20 +1790,20 @@ $fluent-calendar: extend(
 /// @prop {Color} selected-current-outline-color [transparent] - The outline color of the selected current year/month in year/month views.
 /// @prop {Color} selected-current-hover-outline-color [transparent] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Color} selected-current-focus-outline-color [transparent] - The :focus outline color of the selected current year/month in year/month views.
-/// @prop {Map} calendar-border-color [color: ('gray', 200)] - The calendar border color.
+/// @prop {Map} border-color [color: ('gray', 200)] - The calendar border color.
 /// @prop {Map} weekday-color [color: 'info', 300] - The foreground color for weekday labels.
 /// @prop {Map} week-number-foreground [color: ('info', 300)] - The foreground color of the week number column.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(0))] - The border radius used for the date outline in range selection.
-/// @prop {List} calendar-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
 /// @prop {List} month-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar month.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @requires {Map} $light-calendar
 $bootstrap-calendar: extend(
     $light-calendar,
     (
-        calendar-border-color: (
+        border-color: (
             color: (
                 'gray',
                 300,
@@ -2272,7 +2272,7 @@ $bootstrap-calendar: extend(
                 rem(20px),
             ),
         ),
-        calendar-border-radius: (
+        border-radius: (
             border-radius: (
                 rem(4px),
                 rem(0),
