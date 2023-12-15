@@ -1086,6 +1086,8 @@ $light-calendar: (
 /// @prop {Map} date-selected-range-hover-background [color: ('gray', 300)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('gray', 300)] - The :focus background color of the selected range.
 /// @prop {Color} date-disabled-background [transparent] - The background color of disabled dates.
+/// @prop {Map} date-disabled-range-foreground [color: ('gray', 500)] - The foreground color of disabled dates inside range selection.
+
 /// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the date outline
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the date outline in range selection.
@@ -1698,6 +1700,12 @@ $fluent-calendar: extend(
             ),
         ),
         date-disabled-background: transparent,
+        date-disabled-range-foreground: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
     )
 );
 
@@ -1705,7 +1713,6 @@ $fluent-calendar: extend(
 /// @type {Map}
 /// @prop {Map} header-background [color: ('secondary', 50, .2)] - The header background color.
 /// @prop {Map} header-foreground [contrast-color: ('gray', 50)] - The header foreground color.
-/// @prop {Map} month-nav-arrow-color [color: ('primary', 500)] - The color of the icon button responsible for month navigation.
 /// @prop {Map} month-nav-arrow-hover-color [color: ('primary', 800)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} month-nav-arrow-focus-color [color: ('primary', 800)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Map} picker-foreground [color: ('gray', 900)]- The foreground color of the month and year pickers.
@@ -1790,9 +1797,9 @@ $fluent-calendar: extend(
 /// @prop {Color} selected-current-outline-color [transparent] - The outline color of the selected current year/month in year/month views.
 /// @prop {Color} selected-current-hover-outline-color [transparent] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Color} selected-current-focus-outline-color [transparent] - The :focus outline color of the selected current year/month in year/month views.
+/// @prop {Map} date-disabled-range-foreground [color: ('primary', 100)] - The foreground color of disabled dates inside range selection.
 /// @prop {Map} border-color [color: ('gray', 200)] - The calendar border color.
 /// @prop {Map} weekday-color [color: 'info', 300] - The foreground color for weekday labels.
-/// @prop {Map} week-number-foreground [color: ('info', 300)] - The foreground color of the week number column.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(0))] - The border radius used for the date outline in range selection.
@@ -1833,12 +1840,6 @@ $bootstrap-calendar: extend(
                 'secondary',
                 50,
                 0.2,
-            ),
-        ),
-        month-nav-arrow-color: (
-            color: (
-                'primary',
-                500,
             ),
         ),
         month-nav-arrow-hover-color: (
@@ -2246,12 +2247,6 @@ $bootstrap-calendar: extend(
                 300,
             ),
         ),
-        week-number-foreground: (
-            color: (
-                'info',
-                300,
-            ),
-        ),
         weekend-color: (
             color: (
                 'gray',
@@ -2288,9 +2283,9 @@ $bootstrap-calendar: extend(
         ),
         date-range-border-radius: (
             border-radius: (
+                rem(4px),
                 rem(0),
-                rem(0),
-                rem(0),
+                rem(20px),
             ),
         ),
         week-number-border-radius: (
@@ -2298,6 +2293,12 @@ $bootstrap-calendar: extend(
                 rem(0),
                 rem(0),
                 rem(8px),
+            ),
+        ),
+        date-disabled-range-foreground: (
+            color: (
+                'primary',
+                100,
             ),
         ),
     )
