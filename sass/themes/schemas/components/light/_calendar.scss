@@ -179,7 +179,7 @@
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
 /// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] -The border radius used for the date in range selection.
-/// @prop {List} month-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the month in month view.
+/// @prop {List} month-year-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the month/year in month/year view.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size of the days, months, and years views..
 /// @prop {Number} default-size [3] - The default size used for the calendar component.
@@ -901,7 +901,7 @@ $light-calendar: (
             rem(20px),
         ),
     ),
-    month-border-radius: (
+    month-year-border-radius: (
         border-radius: (
             rem(20px),
             rem(0),
@@ -1091,7 +1091,7 @@ $light-calendar: (
 /// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the date outline
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the date outline in range selection.
-/// @prop {List} month-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for calendar month.
+/// @prop {List} month-year-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the month/year in month/year view.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @requires {Map} $light-calendar
 $fluent-calendar: extend(
@@ -1655,7 +1655,7 @@ $fluent-calendar: extend(
                 rem(25px),
             ),
         ),
-        month-border-radius: (
+        month-year-border-radius: (
             border-radius: (
                 rem(0),
                 rem(0),
@@ -1804,7 +1804,7 @@ $fluent-calendar: extend(
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(0))] - The border radius used for the date outline in range selection.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
-/// @prop {List} month-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar month.
+/// @prop {List} month-year-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the month/year in month/year view.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @requires {Map} $light-calendar
 $bootstrap-calendar: extend(
@@ -2260,7 +2260,7 @@ $bootstrap-calendar: extend(
             ),
         ),
         week-number-background: transparent,
-        month-border-radius: (
+        month-year-border-radius: (
             border-radius: (
                 rem(4px),
                 rem(0),
