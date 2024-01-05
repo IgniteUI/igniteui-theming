@@ -3,6 +3,7 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use 'sass:list';
+@use './functions' as *;
 @use '../utils/meta' as *;
 @use '../typography/functions' as *;
 
@@ -108,6 +109,12 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
     overflow: hidden;
 }
 
+%ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 /// Applies text-overflow ellipsis to e text element.
 /// This won't work on display flex elements.
 /// @group utilities
@@ -117,19 +124,10 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 ///     @include ellipsis();
 ///   }
 @mixin ellipsis() {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    @extend %ellipsis;
 }
 
-/// Hides the element from the DOM.
-/// @group utilities
-/// @access public
-/// @example scss - Sample usage
-///   input[type="checkbox"] {
-///     @include hide-default();
-///   }
-@mixin hide-default {
+%hide-default {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -142,6 +140,26 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
     appearance: none;
 }
 
+/// Hides the element from the DOM.
+/// @group utilities
+/// @access public
+/// @example scss - Sample usage
+///   input[type="checkbox"] {
+///     @include hide-default();
+///   }
+@mixin hide-default {
+    @extend %hide-default;
+}
+
+%sizable {
+    --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
+    --is-medium: min(
+        clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-medium, 2), 1),
+        clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
+    );
+    --is-small: clamp(0, var(--ig-size-medium) - var(--component-size, 1), 1);
+}
+
 /// Adds the required CSS properties so that the scope can react to size changes.
 /// @group themes
 /// @access public
@@ -150,10 +168,51 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 ///     @include sizable();
 ///   }
 @mixin sizable() {
-    --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
-    --is-medium: min(
-        clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-medium, 2), 1),
-        clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
-    );
-    --is-small: clamp(0, var(--ig-size-medium) - var(--component-size, 1), 1);
+    @extend %sizeable;
+}
+
+@mixin pad($sm, $md: $sm, $lg: $md, $prop) {
+    $id: pad-#{$sm}-#{$md}-#{$lg}-#{$prop};
+    $has-id: list.index($placeholder-registry, $id);
+    $placeholder-registry: list.append($placeholder-registry, $id) !global;
+
+    @if not($has-id) {
+        @at-root {
+            %#{$id} {
+                #{$prop}: pad($sm, $md, $lg);
+            }
+        }
+    }
+
+    @extend %#{$id};
+}
+
+@mixin padding($sm, $md: $sm, $lg: $md, $dir: null) {
+    $_prop: if($dir, padding-#{$dir}, padding);
+
+    @include pad($sm, $md, $lg, $_prop);
+}
+
+@mixin margin($sm, $md: $sm, $lg: $md, $dir: null) {
+    $_prop: if($dir, margin-#{$dir}, margin);
+
+    @include pad($sm, $md, $lg, $_prop);
+}
+
+@mixin helpers() {
+    %flex {
+        display: flex;
+    }
+
+    %inline-flex {
+        display: inline-flex;
+    }
+
+    %center-items {
+        align-items: center;
+    }
+
+    %center-content {
+        justify-content: center;
+    }
 }
