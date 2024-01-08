@@ -6,6 +6,7 @@
 @use './functions' as *;
 @use '../utils/meta' as *;
 @use '../typography/functions' as *;
+@use '../utils/string' as *;
 
 ////
 /// @package theming
@@ -14,6 +15,10 @@
 /// A list of ignored keywords to be excluded when generating CSS variables for a theme.
 /// @access private
 $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
+
+/// A registry to hold all the placeholder ids used for padding and margin mixins.
+/// @access private
+$placeholder-registry: () !default;
 
 /// Parses a map of key value pairs from component themes to css variables.
 /// @access private
@@ -130,7 +135,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 }
 
 @mixin pad($sm, $md: $sm, $lg: $md, $prop) {
-    $id: pad-#{$sm}-#{$md}-#{$lg}-#{$prop};
+    $id: replace(pad-#{$sm}-#{$md}-#{$lg}-#{$prop}, '.', '-');
     $has-id: list.index($placeholder-registry, $id);
     $placeholder-registry: list.append($placeholder-registry, $id) !global;
 
@@ -177,10 +182,6 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
         appearance: none;
     }
 
-    %user-none {
-        user-select: none;
-    }
-
     %flex {
         display: flex;
     }
@@ -189,43 +190,11 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
         display: inline-flex;
     }
 
-    %align-center {
+    %center-items {
         align-items: center;
     }
 
-    %justify-center {
-        justify-content: center;
-    }
-
-    %justify-start {
-        justify-content: flex-start;
-    }
-
-    %justify-end {
-        justify-content: flex-end;
-    }
-
-    %justify-between {
-        justify-content: space-between;
-    }
-
-    %position-absolute {
-        position: absolute;
-    }
-
-    %position-relative {
-        position: relative;
-    }
-
-    %flex-center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    %flex-inline-center {
-        display: inline-flex;
-        align-items: center;
+    %center-content {
         justify-content: center;
     }
 }
