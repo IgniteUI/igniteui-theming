@@ -49,12 +49,8 @@
 /// @prop {Map} date-focus-background [color: ('secondary', 100)] - The focus date background color.
 /// @prop {Map} date-hover-foreground [contrast-color: 'secondary', 100] - The hover date text color.
 /// @prop {Map} date-focus-foreground [contrast-color: 'secondary', 100] - The focused date text color.
-/// @prop {Map} date-selected-background [color: ('secondary', 500)] - The background color for the selected date.
-/// @prop {Map} date-selected-text-color [contrast-color: ('secondary', 600)] - The text color for the selected date.
 /// @prop {Map} date-selected-hover-background [color: ('secondary', 700)] - The hover background color for the selected date.
 /// @prop {Map} date-selected-focus-background [color: ('secondary', 700)] - The focus background color for the selected date.
-/// @prop {Map} date-selected-hover-foreground [contrast-color: ('gray', 600)] - The hover text color for the selected date.
-/// @prop {Map} date-selected-focus-foreground [contrast-color: ('gray', 600)] - The focus text color for the selected date.
 /// @prop {Map} date-selected-color-range [contrast-color: ('secondary', 50)] - The text color for the selected range.
 /// @prop {Map} date-selected-background-range [color: ('secondary', 50)] - The background color for the selected range.
 /// @prop {Map} date-selected-color-range-hover [contrast-color: ('secondary', 100)] - The text color for the selected range on hover/focus.
@@ -70,9 +66,6 @@
 /// @prop {Map} current-outline-focus [color: ('surface', 500)] - The outline color for the current date on focus.
 /// @prop {Map} current-selected-outline [color: ('surface', 500)] - The outline color for the current selected date.
 /// @prop {Map} date-current-bg-color [color: ('surface', 500)] - The background color for the current date.
-/// @prop {Map} date-current-text-color [color: ('gray', 800)] - The text color for the current date.
-/// @prop {Map} date-current-hover-foreground [contrast-color: ('secondary', 200)] - The hover text color for the current date.
-/// @prop {Map} date-current-focus-foreground [contrast-color: ('secondary', 200)] - The focus text color for the current date.
 /// @prop {Map} date-current-hover-background [color: ('secondary', 100)] - The hover background color for the current date.
 /// @prop {Map} date-current-focus-background [color: ('secondary', 100)] - The focus background color for the current date.
 /// @prop {Map} date-special-background [color: ('gray', 100)] - The background color used for special dates.
@@ -266,13 +259,6 @@ $light-calendar: (
         ),
     ),
 
-    date-selected-background: (
-        color: (
-            'secondary',
-            500,
-        ),
-    ),
-
     date-selected-hover-background: (
         color: (
             'secondary',
@@ -308,27 +294,6 @@ $light-calendar: (
         ),
     ),
 
-    date-selected-text-color: (
-        contrast-color: (
-            'secondary',
-            600,
-        ),
-    ),
-
-    date-selected-hover-foreground: (
-        contrast-color: (
-            'secondary',
-            600,
-        ),
-    ),
-
-    date-selected-focus-foreground: (
-        contrast-color: (
-            'secondary',
-            600,
-        ),
-    ),
-
     date-selected-color-range: (
         contrast-color: (
             'secondary',
@@ -354,27 +319,6 @@ $light-calendar: (
         color: (
             'secondary',
             100,
-        ),
-    ),
-
-    date-current-text-color: (
-        color: (
-            'gray',
-            800,
-        ),
-    ),
-
-    date-current-hover-foreground: (
-        contrast-color: (
-            'secondary',
-            200,
-        ),
-    ),
-
-    date-current-focus-foreground: (
-        contrast-color: (
-            'secondary',
-            200,
         ),
     ),
 
@@ -563,12 +507,77 @@ $light-calendar: (
     ),
 );
 
+/// Generates a material calendar schema.
+/// @type {Map}
+/// @prop {Map} date-selected-background [color: ('secondary', 500)] - The background color for the selected date.
+/// @prop {Map} date-selected-text-color [contrast-color: ('secondary', 600)] - The text color for the selected date.
+/// @prop {Map} date-selected-hover-foreground [contrast-color: ('secondary', 600)] - The hover text color for the selected date.
+/// @prop {Map} date-selected-focus-foreground [contrast-color: ('secondary', 600)] - The focus text color for the selected date.
+/// @prop {Map} date-current-text-color [color: ('gray', 800)] - The text color for the current date.
+/// @prop {Map} date-current-hover-foreground [contrast-color: ('secondary', 200)] - The hover text color for the current date.
+/// @prop {Map} date-current-focus-foreground [contrast-color: ('secondary', 200)] - The focus text color for the current date.
+/// @requires {Map} $light-calendar
+$material-calendar: extend(
+    $light-calendar,
+    (
+        date-selected-background: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        date-selected-text-color: (
+            contrast-color: (
+                'secondary',
+                600,
+            ),
+        ),
+
+        date-selected-hover-foreground: (
+            contrast-color: (
+                'secondary',
+                600,
+            ),
+        ),
+
+        date-selected-focus-foreground: (
+            contrast-color: (
+                'secondary',
+                600,
+            ),
+        ),
+
+        date-current-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
+        date-current-hover-foreground: (
+            contrast-color: (
+                'secondary',
+                200,
+            ),
+        ),
+
+        date-current-focus-foreground: (
+            contrast-color: (
+                'secondary',
+                200,
+            ),
+        ),
+    )
+);
+
 /// Generates a fluent calendar schema.
 /// @type {Map}
 /// @prop {Color} date-current-text-color [color: 'surface'] - The text color for the current date.
 /// @prop {Map} date-current-bg-color [color: ('primary', 500)] - The background color for the current date.
 /// @prop {Map} date-selected-background [color: ('primary', 50)] - The background color for the selected date.
 /// @prop {Map} date-selected-text-color [color: ('primary', 100)] - The text color for the selected date.
+/// @prop {Map} date-selected-focus-foreground [contrast-color: ('primary', 50)] - The focus text color for the selected date.
 /// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('primary', 600)] - The hover text color for the selected/current date.
 /// @prop {Map} date-selected-current-focus-foreground [contrast-color: ('primary', 600)] - The focus text color for the selected/current date.
 /// @prop {Map} date-current-hover-background [color: ('primary', 500)] - The hover background color for the current date.
@@ -715,6 +724,7 @@ $fluent-calendar: extend(
 
 /// Generates a bootstrap calendar schema.
 /// @type {Map}
+/// @prop {Map} content-text-color [color: ('gray', 900)] - The main content text color.
 /// @prop {Map} year-hover-text-color [color: ('primary', 500)] - The year hover text color.
 /// @prop {Map} date-special-background [color: ('warn')] - The background color used for special dates.
 /// @prop {Map} month-hover-text-color [color: ('primary', 500)] - The month hover text color.

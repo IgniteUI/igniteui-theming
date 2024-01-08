@@ -22,7 +22,7 @@
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the button.
 /// @prop {Number} default-size [1] - The default size used for the button component.
-$material-base-button: (
+$light-base-button: (
     shadow-color: transparent,
     border-color: transparent,
     hover-border-color: transparent,
@@ -65,10 +65,10 @@ $material-base-button: (
 /// @prop {Map} active-foreground [color: ('secondary', 500)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color a flat button.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for flat button.
-/// @requires {Map} $material-base-button
+/// @requires {Map} $light-base-button
 /// @requires {Map} $flat-elevation-button
-$material-flat-button: extend(
-    $material-base-button,
+$light-flat-button: extend(
+    $light-base-button,
     $flat-elevation-button,
     (
         selector: '[igxButton="flat"], .igx-button--flat',
@@ -149,9 +149,9 @@ $material-flat-button: extend(
 /// @prop {Map} focus-visible-border-color [color: ('secondary', 500)] - The focus-visible border color of an outlined button.
 /// @prop {Map} active-border-color [color: ('secondary', 500)] - The active border color of an outlined button.
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled focused border color of an outlined button.
-/// @requires {Map} $material-flat-button
-$material-outlined-button: extend(
-    $material-flat-button,
+/// @requires {Map} $light-flat-button
+$light-outlined-button: extend(
+    $light-flat-button,
     (
         selector: '[igxButton="outlined"], .igx-button--outlined',
         border-color: (
@@ -208,11 +208,11 @@ $material-outlined-button: extend(
 /// @prop {Number} hover-elevation [4] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [8] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for contained button.
-/// @requires {Map} $material-base-button
-/// @requires {Map} $material-contained-elevation
-$material-contained-button: extend(
-    $material-base-button,
-    $material-contained-elevation,
+/// @requires {Map} $light-base-button
+/// @requires {Map} $light-contained-elevation
+$light-contained-button: extend(
+    $light-base-button,
+    $light-contained-elevation,
     (
         selector: '[igxButton="contained"], .igx-button--contained',
         background: (
@@ -291,11 +291,11 @@ $material-contained-button: extend(
 /// @prop {Number} focus-elevation [12] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} border-radius [(rem(28px), rem(12px), rem(28px))] - The border radius used for floating button.
 /// @prop {List} size [(rem(32px), rem(40px), rem(48px))] - The size used for floating button.
-/// @requires {Map} $material-contained-button
-/// @requires {Map} $material-fab-elevation
-$material-fab-button: extend(
-    $material-contained-button,
-    $material-fab-elevation,
+/// @requires {Map} $light-contained-button
+/// @requires {Map} $light-fab-elevation
+$light-fab-button: extend(
+    $light-contained-button,
+    $light-fab-elevation,
     (
         selector: '[igxButton="fab"], .igx-button--fab',
         border-radius: (
@@ -317,15 +317,15 @@ $material-fab-button: extend(
 
 /// Generates a light material button schema.
 /// @type {Map}
-/// @requires {Map} $material-flat-button
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-contained-button
-/// @requires {Map} $material-fab-button
-$light-button: (
-    flat: $material-flat-button,
-    outlined: $material-outlined-button,
-    contained: $material-contained-button,
-    fab: $material-fab-button,
+/// @requires {Map} $light-flat-button
+/// @requires {Map} $light-outlined-button
+/// @requires {Map} $light-contained-button
+/// @requires {Map} $light-fab-button
+$material-button: (
+    flat: $light-flat-button,
+    outlined: $light-outlined-button,
+    contained: $light-contained-button,
+    fab: $light-fab-button,
 );
 
 /// @type {Map}
