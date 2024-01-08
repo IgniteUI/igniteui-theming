@@ -1,0 +1,141 @@
+/* stylelint-disable max-line-length */
+@use '../../../../utils/map' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+/// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
+////
+
+/// Generates a material gauge schema.
+/// @type {Map}
+/// @property {Color} backing-brush [(color: 'surface', darken: 8%)] - Sets the color to use to fill the backing of the linear gauge.
+/// @property {Color} backing-outline [(color: 'surface', darken: 8%)] - Sets the color to use for the outline of the backing.
+/// @property {Number} backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
+/// @property {Color} font-brush [(color: 'surface', rgba: .62)] - Sets the color to use for the label font.
+/// @property {Color} minor-tick-brush [(color: 'surface', rgba: .62)] - Sets the color to use for the major tickmarks.
+/// @property {Number} minor-tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering minor ticks.
+/// @property {Color} needle-brush [(color: 'primary')] - Sets the color to use for the needle element.
+/// @property {Color} needle-outline [(color: 'surface')] - Sets the color to use for the outline of needle element.
+/// @property {Number} needle-stroke-thickness [null] - Sets the stroke thickness to use when rendering single actual value element.
+/// @property {List} range-brushes [series] - Sets a collection of colors to be used as the palette for linear gauge ranges.
+/// @property {List} range-outlines [series] - Sets a collection of colors to be used as the palette for linear gauge outlines.
+/// @property {Color} scale-brush [(color: 'surface', darken: 8%)] - Sets the color to use to fill the scale of the linear gauge.
+/// @property {Color} tick-brush [(color: 'surface', rgba: .62)] - Sets the color to use for the major tickmarks.
+/// @property {Number} tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering ticks.
+$material-gauge: (
+    'backing-brush': (
+        color: 'surface',
+    ),
+    'backing-outline': (
+        color: 'surface',
+    ),
+    'backing-stroke-thickness': null,
+    'font-brush': (
+        contrast-color: (
+            'surface',
+            500,
+        ),
+    ),
+    'minor-tick-brush': (
+        contrast-color: (
+            'surface',
+            500,
+        ),
+    ),
+    'minor-tick-stroke-thickness': null,
+    'needle-brush': (
+        color: 'primary',
+    ),
+    'needle-outline': (
+        color: 'surface',
+    ),
+    'needle-stroke-thickness': null,
+    'range-brushes': series,
+    'range-outlines': series,
+    'scale-brush': (
+        color: 'surface',
+    ),
+    'tick-brush': (
+        contrast-color: (
+            'surface',
+            500,
+        ),
+    ),
+    'tick-stroke-thickness': null,
+);
+
+/// Generates a material linear gauge schema.
+/// @type {Map}
+/// @property {Number} needle-breadth [null] - Sets the needle breadth.
+/// @property {Number} needle-inner-base-width [null] - Sets the width of the needle's inner base.
+/// @property {Number} needle-inner-point-width [null] - Sets the width of the needle's inner point.
+/// @property {Number} needle-outer-base-width [null] - Sets the width of the needle's outer base.
+/// @property {Number} needle-outer-point-width [null] - Sets the width of the needle's outer point.
+/// @property {Color} scale-outline [(color: 'surface', darken: 8%)] - Sets the color to use for the outline of the scale.
+/// @property {Number} scale-stroke-thickness [null] - Sets the stroke thickness of the scale outline.
+/// @requires {function} extend
+/// @requires {Map} $material-gauge
+$material-linear-gauge: extend(
+    $material-gauge,
+    (
+        needle-breadth: null,
+        needle-inner-base-width: null,
+        needle-inner-point-width: null,
+        needle-outer-base-width: null,
+        needle-outer-point-width: null,
+        scale-outline: (
+            color: 'surface',
+        ),
+        scale-stroke-thickness: null,
+    )
+);
+
+/// Generates a material radial gauge schema.
+/// @type {Map}
+/// @property {Color} needle-pivot-brush [color: 'primary'] - Sets the color of the needle pivot point.
+/// @property {Color} needle-pivot-outline [color: 'surface'] - Sets the outline color of the needle pivot point.
+/// @requires {function} extend
+/// @requires {Map} $material-gauge
+$material-radial-gauge: extend(
+    $material-gauge,
+    (
+        needle-pivot-brush: (
+            color: 'primary',
+        ),
+        needle-pivot-outline: (
+            color: 'surface',
+        ),
+    )
+);
+
+/// Generates a material fluent gauge schemas.
+/// @type {Map}
+/// @requires {Map} $material-linear-gauge
+$fluent-linear-gauge: $material-linear-gauge;
+
+/// Generates a material fluent gauge schemas.
+/// @type {Map}
+/// @requires {Map} $material-radial-gauge
+$fluent-radial-gauge: $material-radial-gauge;
+
+/// Generates a material bootstrap gauge schemas.
+/// @type {Map}
+/// @requires {Map} $material-linear-gauge
+$bootstrap-linear-gauge: $material-linear-gauge;
+
+/// Generates a material bootstrap gauge schemas.
+/// @type {Map}
+/// @requires {Map} $material-radial-gauge
+$bootstrap-radial-gauge: $material-radial-gauge;
+
+/// Generates a material indigo gauge schemas.
+/// @type {Map}
+/// @requires {Map} $material-linear-gauge
+$indigo-linear-gauge: $material-linear-gauge;
+
+/// Generates a material indigo gauge schemas.
+/// @type {Map}
+/// @requires {Map} $material-radial-gauge
+$indigo-radial-gauge: $material-radial-gauge;

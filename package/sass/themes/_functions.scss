@@ -1,0 +1,209 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:math';
+@use '../typography/functions' as *;
+@use '../elevations/functions' as *;
+@use '../color/functions' as color;
+@use '../utils' as utils;
+
+////
+/// @package theming
+////
+
+/// Digests a theme schema and returns a resolved theme map.
+/// @access private
+/// @param {Map} $schema - A theme schema.
+/// @requires {function} resolve-value
+/// @requires {function} elevation
+/// @requires {function} chart-brushes
+/// @example scss Get the resolved theme for a schema
+///   $custom-schema: (
+///     foreground: (
+///        color: ('primary', 800, .5)
+///     ),
+///     border-radius: (rem(5px), rem(0), rem(8px)) // default, min and max radius
+///   );
+///   $theme: digest-schema($custom-schema);
+/// @returns {Map} - A theme map with resolved values.
+@function digest-schema($schema) {
+    $result: ();
+
+    @each $key, $value in $schema {
+        @if meta.type-of($value) == 'map' and $key != '_meta' {
+            $result: map.merge($result, (#{$key}: resolve-value($value)));
+        } @else {
+            $result: map.merge($result, (#{$key}: $value));
+        }
+
+        // Special case for chart elevation literals
+        @if string.index($key, 'elevation') {
+            $result: map.merge($result, (#{$key}: #{elevation($value)}));
+        }
+
+        // Special case for chart brushes
+        @if $value == 'series' {
+            $result: map.merge($result, (#{$key}: #{color.chart-brushes()}));
+        }
+    }
+
+    @return $result;
+}
+
+/// Resolves schema values, where the keys of the passed value map are the names
+/// of the functions to be called and the value for a given key is the argument
+/// the function should be called with.
+/// @access private
+/// @param {Map} $instructions - The map to be used as instruction set.
+/// @example scss Resolve primary 500 color
+///   $value: resolve-value((color: (primary, 500)));
+/// @returns {dynamic} - The resolved value.
+@function resolve-value($instructions) {
+    $result: ();
+
+    @each $fn, $args in $instructions {
+        $color: meta.function-exists($fn, $module: color);
+        $util: meta.function-exists($fn, $module: utils);
+        $self: meta.function-exists($fn);
+
+        @if $color {
+            $func: meta.get-function($fn, $module: color);
+
+            @if $fn == 'color' or $fn == 'contrast-color' {
+                $result: meta.call($func, null, $args...);
+            }
+        }
+
+        @if $util {
+            $func: meta.get-function($fn, $module: utils);
+
+            @if $fn != 'map-keys-prefix' {
+                $result: meta.call($func, $args...);
+            }
+
+            @if $fn == 'map-keys-prefix' {
+                $result: meta.call($func, $result, $args...);
+            }
+        }
+
+        @if $self {
+            @if $fn == 'sizable' or $fn == 'border-radius' {
+                $func: meta.get-function($fn);
+                $result: meta.call($func, $args...);
+            }
+        }
+    }
+
+    @return $result;
+}
+
+/// Retrieves the CSS custom property reference for the given key in the component theme.
+/// @access private
+/// @param {Map} $theme - The source theme to be used to read values from.
+/// @param {String} $property - A key from the theme map to assign as value to the property.
+/// @param {String} $fallback [null] - A value to be used if the CSS property is not defined.
+/// @example scss Assign the color property in a set of rules to a value from the theme.
+///   [part='icon'] {
+///     color: var-get($theme, 'icon-color', inherit); // var(--icon-color, inherit)
+///   }
+/// @returns {String} - The CSS reference of the property in the theme.
+@function var-get($theme, $property, $fallback: null) {
+    @if map.has-key($theme, $property) {
+        $p: --#{$property};
+
+        @return if($fallback, var($p, $fallback), var($p));
+    } @else {
+        @error 'The theme for #{map.get($map, 'name')} does not contain #{$key}';
+    }
+}
+
+/// Returns a value between an upper and lower bound.
+/// @access private
+/// @param {Number} $radius - The preferred value.
+/// @param {Number} $min [rem(0)] - The minimum value.
+/// @param {Number} $max [$radius] - The maximum allowed value.
+/// @return {Number} - The clamped value
+@function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
+    $factor: math.div($radius, $max);
+
+    @return clamp(#{$min}, #{calc(var(--ig-radius-factor, #{$factor}) * #{$max})}, #{$max});
+}
+
+/// Used to switch between values based on the size of the component.
+/// The passed sizes are converted to absolute values before comparing.
+/// @group themes
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
+/// @return {Function} - The evaluated value.
+@function sizable($sm, $md: $sm, $lg: $md) {
+    $sm: max(#{$sm}, -1 * #{$sm});
+    $md: max(#{$md}, -1 * #{$md});
+    $lg: max(#{$lg}, -1 * #{$lg});
+
+    @return max(
+        calc(var(--is-large, 1) * #{$lg}),
+        calc(var(--is-medium, 1) * #{$md}),
+        calc(var(--is-small, 1) * #{$sm})
+    );
+}
+
+/// Returns a value based on the size of the component taking spacing values into consideration.
+/// The passed sizes are converted to absolute values before comparing.
+/// @group utilities
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @param {Number} $dir [null] - The preferred direction - inline or block.
+/// @example
+///   .my-component {
+///     padding: pad(4px, 8px, 16px);
+///   }
+/// @return {Function} - The evaluated value.
+@function pad($sm, $md: $sm, $lg: $md, $dir: null) {
+    $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
+    $sm: max(#{$sm}, -1 * #{$sm});
+    $md: max(#{$md}, -1 * #{$md});
+    $lg: max(#{$lg}, -1 * #{$lg});
+
+    @return max(
+        calc(var(--is-large, 1) * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, --ig-spacing))),
+        calc(var(--is-medium, 1) * #{$md} * var(#{$spacing}-medium, var(#{$spacing}, --ig-spacing))),
+        calc(var(--is-small, 1) * #{$sm} * var(#{$spacing}-small, var(#{$spacing}, --ig-spacing)))
+    );
+}
+
+/// Used to add inline spacing.
+/// @group utilities
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   .my-component {
+///     padding: pad-inline(4px, 8px, 16px);
+///   }
+/// @return {Function} - The evaluated value.
+@function pad-inline($sm, $md: $sm, $lg: $md) {
+    @return pad($sm, $md, $lg, $dir: inline);
+}
+
+/// Used to add block spacing.
+/// @group utilities
+/// @access public
+/// @param {Number} $sm - The preferred value when the component's size is small.
+/// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
+/// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @example
+///   .my-component {
+///     padding: pad-block(4px, 8px, 16px);
+///   }
+/// @return {Function} - The evaluated value.
+@function pad-block($sm, $md: $sm, $lg: $md) {
+    @return pad($sm, $md, $lg, $dir: block);
+}

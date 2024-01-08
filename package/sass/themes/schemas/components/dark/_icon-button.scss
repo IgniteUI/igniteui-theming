@@ -1,0 +1,181 @@
+@use '../../../../utils/map' as *;
+@use '../light/icon-button' as *;
+
+/* stylelint-disable max-line-length */
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark material flat icon button schema.
+/// @type {Map}
+/// @requires {Map} $material-flat-icon-button
+$material-flat-icon-button-dark: extend($material-flat-icon-button);
+
+/// Generates a dark material contained icon button schema.
+/// @type {Map}
+/// @requires {Map} $material-contained-icon-button
+$material-contained-icon-button-dark: extend($material-contained-icon-button);
+
+/// Generates a dark material outlined icon button schema.
+/// @type {Map}
+/// @requires {Map} $material-outlined-icon-button
+$material-outlined-icon-button-dark: extend($material-outlined-icon-button);
+
+/// Generates a dark material icon button schema.
+/// @type {Map}
+/// @requires {Map} $material-flat-icon-button-dark
+/// @requires {Map} $material-outlined-icon-button-dark
+/// @requires {Map} $material-contained-icon-button-dark
+$dark-icon-button: (
+    flat: $material-flat-icon-button-dark,
+    outlined: $material-outlined-icon-button-dark,
+    contained: $material-contained-icon-button-dark,
+);
+
+/// Generates a dark fluent flat icon button schema.
+/// @type {Map}
+/// @requires {Map} $fluent-flat-icon-button
+$fluent-flat-icon-button-dark: extend($fluent-flat-icon-button);
+
+/// Generates a dark fluent contained icon button schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('primary', 300)] - The background color of the fluent dark contained icon button.
+/// @prop {Map} foreground [color: ('surface', 500)] - The idle text color of the fluent dark contained icon button.
+/// @prop {Map} hover-background [color: ('primary', 200)] - The hover background color of the fluent dark contained icon button.
+/// @prop {Map} hover-foreground [color: ('surface', 500)] - The hover text color of the fluent dark contained icon button.
+/// @prop {Map} focus-background [color: ('primary', 200)] - The focus background color of the fluent dark contained icon button.
+/// @prop {Map} focus-foreground [color: ('surface', 500)] - The focus text color of the fluent dark contained icon button.
+/// @prop {Map} active-background [color: ('primary', 200)] - The active background color of the fluent dark contained icon button.
+/// @prop {Map} active-foreground [color: ('surface', 500)] - The active text color of the fluent dark contained icon button.
+/// @prop {Map} focus-border-color [color: ('surface', 500)] - The focus border color of the fluent dark contained icon button.
+/// @requires {Map} $fluent-contained-icon-button
+$fluent-contained-icon-button-dark: extend(
+    $fluent-contained-icon-button,
+    (
+        background: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        foreground: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        hover-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        hover-foreground: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        focus-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        focus-foreground: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        active-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        active-foreground: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark fluent outlined icon button schema.
+/// @type {Map}
+/// @requires {Map} $fluent-outlined-icon-button
+$fluent-outlined-icon-button-dark: extend($fluent-outlined-icon-button);
+
+/// Generates a dark fluent icon button schema.
+/// @type {Map}
+/// @requires {Map} $fluent-flat-icon-button-dark
+/// @requires {Map} $fluent-outlined-icon-button-dark
+/// @requires {Map} $fluent-contained-icon-button-dark
+$dark-fluent-icon-button: (
+    flat: $fluent-flat-icon-button-dark,
+    outlined: $fluent-outlined-icon-button-dark,
+    contained: $fluent-contained-icon-button-dark,
+);
+
+/// Generates a dark bootstrap flat icon button schema.
+/// @type {Map}
+/// @requires {Map} $bootstrap-flat-icon-button
+$bootstrap-flat-icon-button-dark: extend($bootstrap-flat-icon-button);
+
+/// Generates a dark bootstrap contained icon button schema.
+/// @type {Map}
+/// @requires {Map} $bootstrap-contained-icon-button
+$bootstrap-contained-icon-button-dark: extend($bootstrap-contained-icon-button);
+
+/// Generates a dark bootstrap outlined icon button schema.
+/// @type {Map}
+/// @requires {Map} $bootstrap-outlined-icon-button
+$bootstrap-outlined-icon-button-dark: extend($bootstrap-outlined-icon-button);
+
+/// Generates a dark bootstrap icon button schema.
+/// @type {Map}
+/// @requires {Map} $bootstrap-flat-icon-button-dark
+/// @requires {Map} $bootstrap-outlined-icon-button-dark
+/// @requires {Map} $bootstrap-contained-icon-button-dark
+$dark-bootstrap-icon-button: (
+    flat: $bootstrap-flat-icon-button-dark,
+    outlined: $bootstrap-outlined-icon-button-dark,
+    contained: $bootstrap-contained-icon-button-dark,
+);
+
+/// Generates a dark indigo flat icon button schema.
+/// @type {Map}
+/// @requires {Map} $indigo-flat-icon-button
+$indigo-flat-icon-button-dark: extend($indigo-flat-icon-button);
+
+/// Generates a dark indigo contained icon button schema.
+/// @type {Map}
+/// @requires {Map} $indigo-contained-icon-button
+$indigo-contained-icon-button-dark: extend($indigo-contained-icon-button);
+
+/// Generates a dark indigo outlined icon button schema.
+/// @type {Map}
+/// @requires {Map} $indigo-outlined-icon-button
+$indigo-outlined-icon-button-dark: extend($indigo-outlined-icon-button);
+
+/// Generates a dark indigo icon button schema.
+/// @type {Map}
+/// @requires {Map} $indigo-flat-icon-button-dark
+/// @requires {Map} $indigo-outlined-icon-button-dark
+/// @requires {Map} $indigo-contained-icon-button-dark
+$dark-indigo-icon-button: (
+    flat: $indigo-flat-icon-button-dark,
+    outlined: $indigo-outlined-icon-button-dark,
+    contained: $indigo-contained-icon-button-dark,
+);

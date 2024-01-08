@@ -1,0 +1,162 @@
+/* stylelint-disable max-line-length */
+@use 'sass:map';
+@use '../mixins' as *;
+@use '../functions' as *;
+@use '../schemas/charts' as *;
+@use '../../utils' as *;
+@use '../../typography/mixins' as *;
+@use '../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+/// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
+////
+
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
+///
+/// @param {Color} $backing-brush [null] - Sets the color to use to fill the backing of the linear gauge.
+/// @param {Color} $backing-outline [null] - Sets the color to use for the outline of the backing.
+/// @param {Number} $backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
+/// @param {Color} $font-brush [null] - Sets the color to use for the label font.
+/// @param {Number} $minor-tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering minor ticks.
+/// @param {Number} $needle-breadth [null] - Sets the needle breadth.
+/// @param {Color} $needle-brush [null] - Sets the color to use for the needle element.
+/// @param {Number} $needle-inner-base-width [null] - Sets the width of the needle's inner base.
+/// @param {Number} $needle-inner-point-width [null] - Sets the width of the needle's inner point.
+/// @param {Number} $needle-outer-base-width [null] - Sets the width of the needle's outer base.
+/// @param {Number} $needle-outer-point-width [null] - Sets the width of the needle's outer point.
+/// @param {Color} $needle-outline [null] - Sets the color to use for the outline of needle element.
+/// @param {Number} $needle-stroke-thickness [null] - Sets the stroke thickness to use when rendering single actual value element.
+/// @param {List} $range-brushes [null] - Sets a collection of colors to be used as the palette for linear gauge ranges.
+/// @param {List} $range-outlines [null] - Sets a collection of colors to be used as the palette for linear gauge outlines.
+/// @param {Color} $scale-brush [null] - Sets the color to use to fill the scale of the linear gauge.
+/// @param {Color} $scale-outline [null] - Sets the color to use for the outline of the scale.
+/// @param {Number} $scale-stroke-thickness [null] - Sets the stroke thickness of the scale outline.
+/// @param {Color} $tick-brush [null] - Sets the color to use for the major tickmarks.
+/// @param {Number} $tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering ticks.
+/// @requires $light-material-schema
+/// @requires extend
+///
+/// @example scss
+///   $custom-gauge-theme: linear-gauge-theme($brushes: (red, green, blue));
+///   // Pass the theme to the css-vars mixin
+///   @include css-vars($custom-gauge-theme);
+@function linear-gauge-theme($schema: $light-material-schema, $target: 'angular', $rest...) {
+    $name: 'linear-gauge';
+    $selector: map.get(
+        (
+            'angular': 'igx-linear-gauge',
+            'webc': 'igc-linear-gauge',
+            'blazor': 'igb-linear-gauge',
+        ),
+        $target
+    );
+    $chart-schema: ();
+
+    @if map.has-key($schema, $name) {
+        $chart-schema: map.get($schema, $name);
+    } @else {
+        $chart-schema: $schema;
+    }
+
+    $theme: digest-schema($chart-schema);
+
+    @return extend(
+        $theme,
+        keywords($rest),
+        (
+            name: $name,
+            selector: $selector,
+        )
+    );
+}
+
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
+/// @param {Map} $width [null] - The width of the gauge in pixels, string (px) or percentage (%).
+/// @param {Map} $height [null] - The height of the gauge in pixels, string (px) or percentage (%).
+/// @param {Color} $backing-brush [null] - Sets the color to use to fill the backing of the linear gauge.
+/// @param {Color} $backing-outline [null] - Sets the color to use for the outline of the backing.
+/// @param {Number} $backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
+/// @param {Color} $font-brush [null] - Sets the color to use for the label font.
+/// @param {Number} $minor-tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering minor ticks.
+/// @param {Color} $needle-brush [null] - Sets the color to use for the needle element.
+/// @param {Color} $needle-outline [null] - Sets the color to use for the outline of needle element.
+/// @param {Number} $needle-stroke-thickness [null] - Sets the stroke thickness to use when rendering single actual value element.
+/// @param {List} $range-brushes [null] - Sets a collection of colors to be used as the palette for linear gauge ranges.
+/// @param {List} $range-outlines [null] - Sets a collection of colors to be used as the palette for linear gauge outlines.
+/// @param {Color} $scale-brush [null] - Sets the color to use to fill the scale of the linear gauge.
+/// @param {Color} $tick-brush [null] - Sets the color to use for the major tickmarks.
+/// @param {Number} $tick-stroke-thickness [null] - Sets the stroke thickness to use when rendering ticks.
+/// @param {Color} $needle-pivot-brush [null] - Sets the color of the needle pivot point.
+/// @param {Color} $needle-pivot-outline [null] - Sets the outline color of the needle pivot point.
+/// @requires $light-material-schema
+/// @requires extend
+///
+/// @example scss
+///   $custom-gauge-theme: radial-gauge-theme($brushes: (red, green, blue));
+///   // Pass the theme to the css-vars mixin
+///   @include css-vars($custom-gauge-theme);
+@function radial-gauge-theme($schema: $light-material-schema, $target: 'angular', $rest...) {
+    $name: 'radial-gauge';
+    $selector: map.get(
+        (
+            'angular': 'igx-radial-gauge',
+            'webc': 'igc-radial-gauge',
+            'blazor': 'igb-radial-gauge',
+        ),
+        $target
+    );
+    $chart-schema: ();
+
+    @if map.has-key($schema, $name) {
+        $chart-schema: map.get($schema, $name);
+    } @else {
+        $chart-schema: $schema;
+    }
+
+    $theme: digest-schema($chart-schema);
+
+    @return extend(
+        $theme,
+        keywords($rest),
+        (
+            name: $name,
+            selector: $selector,
+        )
+    );
+}
+
+/// Adds typography styles for the linear-gauge component.
+/// @access private
+/// @group typography
+/// @requires {mixin} type-style
+@mixin gauge-typography($target: 'angular') {
+    $linear-selector: map.get(
+        (
+            'angular': 'igx-linear-gauge',
+            'webc': 'igc-linear-gauge',
+            'blazor': 'igb-linear-gauge',
+        ),
+        $target
+    );
+    $radial-selector: map.get(
+        (
+            'angular': 'igx-radial-gauge',
+            'webc': 'igc-radial-gauge',
+            'blazor': 'igb-radial-gauge',
+        ),
+        $target
+    );
+
+    #{$linear-selector} {
+        --linear-gauge-font: var(--ig-font-family, inherit);
+    }
+
+    #{$radial-selector} {
+        --radial-gauge-font: var(--ig-font-family, inherit);
+    }
+}

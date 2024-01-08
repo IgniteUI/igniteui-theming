@@ -1,0 +1,113 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light tooltip schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 700, .9),] - The background color of the tooltip.
+/// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text color of the tooltip.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for tooltip.
+$light-tooltip: (
+    background: (
+        color: (
+            'gray',
+            700,
+            0.9,
+        ),
+    ),
+
+    text-color: (
+        contrast-color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    border-radius: (
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(16px),
+        ),
+    ),
+);
+
+/// Generates a light fluent tooltip schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 900, .8)] - The background color of the tooltip.
+/// @prop {Map} text-color [contrast-color: ('gray', 900)] - The text color of the tooltip.
+/// @prop {List} border-radius [(rem(2px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @requires {Map} $light-tooltip
+$fluent-tooltip: extend(
+    $light-tooltip,
+    (
+        background: (
+            color: (
+                'gray',
+                900,
+                0.8,
+            ),
+        ),
+
+        text-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(16px),
+            ),
+        ),
+    )
+);
+
+/// Generates a bootstrap tooltip schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 900, .8)] - The background color of the tooltip.
+/// @prop {Map} text-color [contrast-color: ('gray', 900)] - The text color of the tooltip.
+/// @requires $light-tooltip
+$bootstrap-tooltip: extend(
+    $light-tooltip,
+    (
+        background: (
+            color: (
+                'gray',
+                900,
+                0.8,
+            ),
+        ),
+        text-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+    )
+);
+
+/// Generates an indigo tooltip schema.
+/// @type {Map}
+/// @prop {List} border-radius [(rem(3px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @requires {Map} $light-tooltip
+$indigo-tooltip: extend(
+    $light-tooltip,
+    (
+        border-radius: (
+            border-radius: (
+                rem(3px),
+                rem(0),
+                rem(16px),
+            ),
+        ),
+    )
+);

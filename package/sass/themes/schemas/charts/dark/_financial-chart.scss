@@ -1,0 +1,28 @@
+@use '../light/financial-chart' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+/// @author <a href="https://github.com/didimmova" target="_blank">Dilyana Dimova</a>
+////
+
+/// Generates a dark financial chart schema.
+/// @type {Map}
+/// @requires $material-financial-chart
+$dark-material-financial-chart: $material-financial-chart;
+
+/// Generates a dark fluent financial-chart schema.
+/// @type {Map}
+/// @requires $fluent-financial-chart
+$dark-fluent-financial-chart: $fluent-financial-chart;
+
+/// Generates a dark bootstrap financial-chart schema.
+/// @type {Map}
+/// @requires $bootstrap-financial-chart
+$dark-bootstrap-financial-chart: $bootstrap-financial-chart;
+
+/// Generates a dark indigo financial-chart schema.
+/// @type {Map}
+/// @requires $indigo-financial-chart
+$dark-indigo-financial-chart: $indigo-financial-chart;

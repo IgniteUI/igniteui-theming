@@ -1,0 +1,79 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light avatar schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 400, .54)]- The background color of the avatar.
+/// @prop {Map} color [color: ('gray', 800, .96)] - The text/icon color of the avatar.
+/// @prop {Number} border-radius [rem(8px)] - The border radius for rounded avatar.
+/// @prop {List} size [(rem(40px), rem(64px), rem(88px))] - The size used for the avatar width and height.
+/// @prop {Number} default-size [1] - The default size used for the avatar component.
+$light-avatar: (
+    background: (
+        color: (
+            'gray',
+            400,
+            0.54,
+        ),
+    ),
+    color: (
+        color: (
+            'gray',
+            800,
+            0.96,
+        ),
+    ),
+    border-radius: rem(8px),
+    size: (
+        sizable: (
+            rem(40px),
+            rem(64px),
+            rem(88px),
+        ),
+    ),
+    default-size: 1,
+);
+
+/// Generates a fluent avatar schema.
+/// @type {Map}
+/// @prop {Number} default-size [1] - The default size used for the avatar component.
+/// @requires {Map} $light-avatar
+$fluent-avatar: $light-avatar;
+
+/// Generates a bootstrap avatar schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 400)]- The background color of the avatar.
+/// @prop {Map} color [contrast-color: ('gray', 400)] - The text/icon color of the avatar.
+/// @prop {Number} border-radius [rem(4px)] - The border radius for rounded avatar.
+/// @prop {Number} default-size [1] - The default size used for the avatar component.
+/// @requires {Map} $light-avatar
+$bootstrap-avatar: extend(
+    $light-avatar,
+    (
+        background: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        color: (
+            contrast-color: (
+                'gray',
+                400,
+            ),
+        ),
+        border-radius: rem(4px),
+    )
+);
+
+/// Generates an indigo avatar schema.
+/// @type {Map}
+/// @prop {Number} default-size [1] - The default size used for the avatar component.
+/// @requires {Map} $light-avatar
+$indigo-avatar: $light-avatar;

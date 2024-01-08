@@ -1,0 +1,35 @@
+/* stylelint-disable max-line-length */
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
+////
+
+/// Generates a material geo map schema.
+/// @type {Map}
+/// @prop {String} plot-area-background [null] - Gets or sets the brush used as the background for the current Map object's plot area.
+$material-geo-map: (
+    'plot-area-background': (
+        color: 'surface',
+    ),
+);
+
+/// Generates a fluent geo map schema.
+/// @type {Map}
+/// @requires {function} extend
+/// @requires {Map} $material-geo-map
+$fluent-geo-map: $material-geo-map;
+
+/// Generates a bootstrap geo map schema.
+/// @type {Map}
+/// @requires {function} extend
+/// @requires {Map} $material-geo-map
+$bootstrap-geo-map: $material-geo-map;
+
+/// Generates an indigo geo map schema.
+/// @type {Map}
+/// @requires {function} extend
+/// @requires {Map} $material-geo-map
+$indigo-geo-map: $material-geo-map;

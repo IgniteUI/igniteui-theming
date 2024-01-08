@@ -1,0 +1,53 @@
+/* stylelint-disable keyframes-name-pattern */
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+
+////
+/// @package theming
+/// @group animations
+/// @access public
+/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
+////
+
+$keyframes: () !default;
+
+/// Registers a keyframes animation in the keyframes registry.
+/// @param {String} $name - The name of the keyframes animation.
+@mixin keyframes($name) {
+    $keyframe: map.has-key($keyframes, $name);
+
+    @if not($keyframe) {
+        $keyframe: string.unique-id();
+        $keyframes: map.merge($keyframes, (#{$name}: $keyframe)) !global;
+
+        @at-root {
+            @keyframes #{$name} {
+                @content;
+            }
+        }
+    }
+}
+
+/// Animates an element.
+/// @param {List} $animate - The list of animation properties.
+/// @example scss - Animating an element
+///  @include fade-in(); // include the 'fade-in' keyframes animation mixin
+///
+///  .bozo {
+///     @include animation('fade-in' .3s ease-out);
+///  }
+@mixin animation($animate...) {
+    $max: list.length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + list.nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ', '};
+        }
+    }
+
+    animation: #{$animations};
+}

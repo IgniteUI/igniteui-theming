@@ -1,0 +1,48 @@
+@use 'sass:math';
+@use 'sass:string';
+
+////
+/// @package theming
+////
+
+/// Rounds a number to a certain precision
+/// @group utilities
+/// @access public
+/// @param {Number} $number - The number to be rounded
+/// @param {Number} $precision [2] - Specifies the number of the digits after the decimal separator
+/// @returns {Number} - The rounded number
+@function to-fixed($number, $precision: 2) {
+    $pow: math.pow(10, $precision);
+
+    @return math.div(math.round($number * $pow), $pow);
+}
+
+/// Converts a number to a string.
+/// @access private
+/// @param {number} $num - The number to convert.
+/// @param {radix} $radix [16] - The base radix to use for the conversion.
+/// @return {String} - The resulting string.
+@function to-string($num, $radix: 16) {
+    $chars: '0123456789abcdef';
+    $result: '';
+    $sign: '';
+
+    @if $num < 0 {
+        $sign: '-';
+        $num: math.abs($num);
+    }
+
+    @if $num >= 0 and $num < $radix {
+        @return $sign + string.slice($chars, ($num + 1), ($num + 1));
+    }
+
+    $q: $num;
+
+    @while $q != 0 {
+        $r: $q % $radix;
+        $q: math.floor(math.div($q, $radix));
+        $result: string.slice($chars, ($r + 1), ($r + 1)) + $result;
+    }
+
+    @return $sign + $result;
+}

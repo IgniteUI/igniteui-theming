@@ -1,0 +1,40 @@
+@use '../utils/meta' as *;
+
+////
+/// @package theming
+/// @group Elevations
+////
+
+/// Generates CSS variables for a given elevations map.
+/// @access public
+/// @param {Map} $elevations - The elevations map to use to generate CSS variables.
+/// @example scss Generate CSS variables for elevations.
+///   $elevations: (
+///       small: box-shadow(0 .125rem .25rem rgba(0 0 0 / 75%)),
+///       medium: box-shadow(0 .25rem .5rem rgba(0 0 0 / 85%)),
+///       large: box-shadow(0 .75rem 1rem rgba(0 0 0 / 95%))
+///   );
+///   :root {
+///       @include elevations($elevations);
+///   }
+/// @require {function} is-root
+@mixin elevations($elevations) {
+    $scope: if(is-root(), ':root', '&');
+
+    #{$scope} {
+        @each $level, $shadow in $elevations {
+            --ig-elevation-#{$level}: #{$shadow};
+        }
+    }
+}
+
+/// Includes box-shadow styles for an elevation by name
+/// @access public
+/// @param {String} $name - The name of the shadow.
+/// @example scss Include a box shadow by its name.
+///   .my-class {
+///     @include elevation(small);
+///   }
+@mixin elevation($name) {
+    box-shadow: var(--ig-elevation-#{$name});
+}

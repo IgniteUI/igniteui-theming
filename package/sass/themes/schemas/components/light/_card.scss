@@ -1,0 +1,214 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../elevation/card' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light card schema.
+/// @type {Map}
+/// @prop {Map} background [color: 'surface']- The card background color.
+/// @prop {Map} header-text-color [color: ('gray', 900)] - The text color of the card title.
+/// @prop {Map} subtitle-text-color [color: ('gray', 700)] - The text color of the card subtitle.
+/// @prop {Map} content-text-color [color: ('gray', 700)] - The text color of the card content.
+/// @prop {Map} actions-text-color [color: ('gray', 700)] - The text color of the card buttons.
+/// @prop {Map} outline-color [color: ('gray', 400, .54)] - The outline color of an outlined type card.
+/// @prop {Number} resting-elevation [4] - The elevation level, between 0-24, to be used for the resting state.
+/// @prop {Number} hover-elevation [6] - The elevation level, between 0-24, to be used for the hover state.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {Number} default-size [2] - The default size used for the card component.
+/// @requires {Map} $default-elevation-card
+$light-card: extend(
+    $default-elevation-card,
+    (
+        background: (
+            color: 'surface',
+        ),
+
+        header-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        subtitle-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        content-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        actions-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        outline-color: (
+            color: (
+                'gray',
+                400,
+                0.54,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(24px),
+            ),
+        ),
+        default-size: 2,
+    )
+);
+
+/// Generates a fluent card schema.
+/// @type {Map}
+/// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
+/// @prop {List} border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for card.
+/// @requires {Map} $light-card
+$fluent-card: extend(
+    $light-card,
+    (
+        outline-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(24px),
+            ),
+        ),
+    )
+);
+
+/// Generates a bootstrap card schema.
+/// @type {Map}
+/// @prop {Map} background [contrast-color: ('gray', 900)]- The card background color.
+/// @prop {Map} outline-color [color: ('gray', 300)] - The outline color of an outlined type card.
+/// @prop {Map} header-text-color [color: ('gray', 900)] - The text color of the card title.
+/// @prop {Map} subtitle-text-color [color: ('gray', 800)] - The text color of the card subtitle.
+/// @prop {Map} content-text-color [color: ('gray', 800)] - The text color of the card content.
+/// @prop {Map} actions-text-color [color: ('gray', 900)] - The text color of the card buttons.
+/// @requires {Map} $light-card
+$bootstrap-card: extend(
+    $light-card,
+    (
+        background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        outline-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        header-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        subtitle-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
+        content-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
+        actions-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+    )
+);
+
+/// Generates an indigo card schema.
+/// @type {Map}
+/// @prop {Map} outline-color [color: ('gray', 400)] - The outline color of an outlined type card.
+/// @prop {Map} header-text-color [color: ('gray', 900)] - The text color of the card title.
+/// @prop {Map} subtitle-text-color [color: ('gray', 500)] - The text color of the card subtitle.
+/// @prop {Map} content-text-color [color: ('gray', 700)] - The text color of the card content.
+/// @prop {Map} actions-text-color [color: ('gray', 600)] - The text color of the card buttons.
+/// @prop {List} border-radius [(rem(3px), rem(0), rem(24px))] - The border radius used for card.
+/// @requires {Map} $light-card
+$indigo-card: extend(
+    $light-card,
+    (
+        outline-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        header-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        subtitle-text-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+
+        content-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        actions-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(3px),
+                rem(0),
+                rem(24px),
+            ),
+        ),
+    )
+);

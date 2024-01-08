@@ -1,0 +1,16 @@
+/// Level 1 - The color used to generate umbra shadows.
+/// @type Color
+/// @access private
+$color-1: rgba(0 0 0 / 26%) !default;
+
+/// Level 2 - The color used to generate penumbra shadows.
+/// @type Color
+/// @access private
+$color-2: rgba(0 0 0 / 12%) !default;
+
+/// Level 3 - The color used to generate ambient shadows.
+/// @type Color
+/// @access private
+$color-3: rgba(0 0 0 / 8%) !default;
+
+@forward './material' as material-* with($color-1: $color-1, $color-2: $color-2, $color-3: $color-3);

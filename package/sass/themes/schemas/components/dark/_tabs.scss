@@ -1,0 +1,65 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../light/tabs' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/* stylelint-disable max-line-length */
+
+/// Generates a base dark tabs schema.
+/// @type {Map}
+/// @prop {Map} item-hover-background [color: ('gray', 100, .5)] - The background used for the tabs on hover.
+/// @prop {Map} item-active-background [color: ('gray', 100, .5)] - The color used for the active/focused tab background.
+$base-dark-tabs: (
+    item-hover-background: (
+        color: (
+            'gray',
+            100,
+            0.5,
+        ),
+    ),
+    item-active-background: (
+        color: (
+            'gray',
+            100,
+            0.5,
+        ),
+    ),
+);
+
+/// Generates a dark tabs schema based on a mix of $light-tabs and $base-dark-tabs.
+/// @type {Map}
+/// @requires $light-tabs
+/// @requires $base-dark-tabs
+$dark-tabs: extend($light-tabs, $base-dark-tabs);
+
+/// Generates a dark fluent tabs schema based on a mix of $fluent-tabs and $base-dark-tabs.
+/// @type {Map}
+/// @requires $fluent-tabs
+/// @requires $base-dark-tabs
+$dark-fluent-tabs: extend($fluent-tabs, $base-dark-tabs);
+
+/// Generates a dark bootstrap tabs schema based on a mix of $bootstrap-tabs and $base-dark-tabs.
+/// @type {Map}
+/// @prop {Map} item-background [color: ('primary', 400)] - The background color used for the tabs header.
+/// @requires $bootstrap-tabs
+$dark-bootstrap-tabs: extend(
+    $bootstrap-tabs,
+    (
+        item-hover-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark indigo tabs schema.
+/// @type {Map}
+/// @requires $indigo-tabs
+$dark-indigo-tabs: $indigo-tabs;

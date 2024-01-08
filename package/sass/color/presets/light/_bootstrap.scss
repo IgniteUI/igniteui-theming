@@ -1,0 +1,33 @@
+@use '../../functions' as *;
+
+////
+/// @package theming
+/// @group palettes
+/// @access public
+////
+
+/**
+ * @sass-export-section="light-bootstrap"
+ */
+/// Generates the light bootstrap palette.
+/// @type Map
+/// @name light-bootstrap-palette
+/// @prop {Color} primary [#0d6efd] - The primary color
+/// @prop {Color} secondary [#6c757d] - The secondary color
+/// @prop {Color} gray [#adb5bd] - The gray color
+/// @prop {Color} surface [#f8f9fa] - The surface color
+/// @prop {Color} info [#0dcaf0] - The info color
+/// @prop {Color} success [#198754] - The success color
+/// @prop {Color} warn [#ffc107] - The warn color
+/// @prop {Color} error [#dc3545] - The error color
+$palette: palette(
+    $primary: #0d6efd,
+    $secondary: #6c757d,
+    $gray: #adb5bd,
+    $surface: #f8f9fa,
+    $info: #0dcaf0,
+    $success: #198754,
+    $warn: #ffc107,
+    $error: #dc3545,
+    $variant: 'bootstrap',
+);

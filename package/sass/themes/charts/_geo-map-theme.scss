@@ -1,0 +1,55 @@
+/* stylelint-disable max-line-length */
+@use 'sass:map';
+@use '../mixins' as *;
+@use '../functions' as *;
+@use '../schemas/charts' as *;
+@use '../../utils' as *;
+@use '../../typography/mixins' as *;
+@use '../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access private
+/// @author <a href="https://github.com/didimmova" target="_blank">Dilyana Dimova</a>
+////
+
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
+/// @param {String} $plot-area-background [null]- Gets or sets the brush used as the background for the current Map object's plot area.
+/// @requires $light-material-schema
+/// @requires extend
+///
+/// @example scss
+///   $my-map-theme: geo-map-theme($width: 550px);
+///   // Pass the theme to the css-vars mixin
+///   @include css-vars($my-map-theme);
+@function geo-map-theme($schema: $light-material-schema, $target: 'angular', $plot-area-background: null) {
+    $name: 'geo-map';
+    $selector: map.get(
+        (
+            'angular': 'igx-geographic-map',
+            'webc': 'igc-geographic-map',
+            'blazor': 'igb-geographic-map',
+        ),
+        $target
+    );
+    $chart-schema: ();
+
+    @if map.has-key($schema, $name) {
+        $chart-schema: map.get($schema, $name);
+    } @else {
+        $chart-schema: $schema;
+    }
+
+    $theme: digest-schema($chart-schema);
+
+    @return extend(
+        $theme,
+        (
+            name: $name,
+            selector: $selector,
+            plot-area-background: $plot-area-background,
+        )
+    );
+}

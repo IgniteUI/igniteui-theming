@@ -1,0 +1,101 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light watermark schema.
+/// @type {Map}
+/// @prop {Color} base-color [null] - The base color for all elements of the watermark.
+/// @prop {Color} image-color [null] - The color used for the stamp image.
+/// @prop {Number} image-opacity [null] - The opacity of the stamp image.
+/// @prop {Map} link-background [color: ('primary')] - The background color used for the link.
+/// @prop {Map} color [contrast-color: ('primary', 800)] - The color used for the link text.
+/// @prop {Map} border-color [color: ('primary')] - The border color used for the link.
+/// @prop {List} border-radius [(rem(0), rem(0), rem(16px))] - The border radius used for watermark.
+$light-watermark: extend(
+    (
+        base-color: (
+            color: (
+                'primary',
+            ),
+        ),
+
+        color: (
+            contrast-color: (
+                'primary',
+                800,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(16px),
+            ),
+        ),
+    )
+);
+
+/// Generates a light fluent watermark schema.
+/// @type {Map}
+/// @prop {List} border-radius [(rem(2px), rem(0), rem(16px))] - The border radius used for watermark.
+/// @requires {Map} $light-watermark
+$fluent-watermark: extend(
+    $light-watermark,
+    (
+        border-radius: (
+            border-radius: (
+                rem(2px),
+                rem(0),
+                rem(16px),
+            ),
+        ),
+    )
+);
+
+/// Generates a bootstrap watermark schema.
+/// @type {Map}
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for watermark.
+/// @requires {Map} $light-watermark
+$bootstrap-watermark: extend(
+    $light-watermark,
+    (
+        border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(16px),
+            ),
+        ),
+    )
+);
+
+/// Generates an indigo watermark schema.
+/// @type {Map}
+/// @prop {Map} border-color [color: ('primary', 300)] - The border color for the link.
+/// @prop {List} border-radius [(rem(16px), rem(0), rem(16px))] - The border radius used for watermark.
+/// @requires {Map} $light-watermark
+$indigo-watermark: extend(
+    $light-watermark,
+    (
+        border-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(16px),
+                rem(0),
+                rem(16px),
+            ),
+        ),
+    )
+);

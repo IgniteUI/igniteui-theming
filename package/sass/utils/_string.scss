@@ -1,0 +1,93 @@
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+////
+/// @package theming
+////
+
+/// Splits a string into a list by a given separator.
+/// @access public
+/// @group utilities
+/// @param {String} $string - The string to split.
+/// @param {String} $separator - The string separator to split the string by.
+@function split($string, $separator) {
+    $split-arr: ();
+    $index: string.index($string, $separator);
+
+    @while $index != null {
+        $item: string.slice($string, 1, $index - 1);
+        $split-arr: list.append($split-arr, $item);
+        $string: string.slice($string, $index + 1);
+        $index: string.index($string, $separator);
+    }
+
+    $split-arr: list.append($split-arr, $string);
+
+    @return $split-arr;
+}
+
+/// Returns a new string with one, some, or all matches of a string replaced by a replacement.
+/// @access public
+/// @group utilities
+/// @param {String} $string - The target string.
+/// @param {String} $search - The term to search form.
+/// @param {String} $replace - The string to replace the search term with.
+@function replace($string, $search, $replace: '') {
+    $index: string.index($string, $search);
+
+    @if $index {
+        @return string.slice($string, 1, $index - 1) + $replace +
+            replace(string.slice($string, $index + string.length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+/// Converts a string to a number.
+/// @access private
+/// @group utilities
+/// @param {String} $value - The target string.
+@function to-number($value) {
+    @if meta.type-of($value) == 'number' {
+        @return $value;
+    } @else if meta.type-of($value) != 'string' {
+        $_: log('Value for `to-number` should be a number or a string.');
+    }
+
+    $result: 0;
+    $digits: 0;
+    $minus: string.slice($value, 1, 1) == '-';
+    $numbers: (
+        '0': 0,
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+    );
+
+    @for $i from if($minus, 2, 1) through string.length($value) {
+        $character: string.slice($value, $i, $i);
+
+        @if not(list.index(map.keys($numbers), $character) or $character == '.') {
+            @return $value;
+        }
+
+        @if $character == '.' {
+            $digits: 1;
+        } @else if $digits == 0 {
+            $result: $result * 10 + map.get($numbers, $character);
+        } @else {
+            $digits: $digits * 10;
+            $result: $result + map.get($numbers, $character) / $digits;
+        }
+    }
+
+    @return if($minus, -$result, $result);
+}

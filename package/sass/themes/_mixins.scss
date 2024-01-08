@@ -1,0 +1,254 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:list';
+@use './functions' as *;
+@use '../utils/meta' as *;
+@use '../typography/functions' as *;
+
+////
+/// @package theming
+////
+
+/// A list of ignored keywords to be excluded when generating CSS variables for a theme.
+/// @access private
+$ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
+
+/// Parses a map of key value pairs from component themes to css variables.
+/// @access private
+/// @param {Map} $theme - The component theme to be used to generate css variables.
+/// @param {String} $name - The CSS variables name
+/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables
+/// @example scss Convert theme colors to CSS variables.
+///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
+///   :root {
+///     @include css-vars-from-theme($theme);
+///   }
+/// @require {mixin} css-vars
+@mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
+    $themes: map.get($theme, 'themes');
+    $prefix: map.get($theme, 'prefix');
+
+    // This is here only because the button theme consists of 4 nested themes.
+    @if $themes and meta.type-of($themes) == 'map' {
+        @each $theme in $themes {
+            @include css-vars(list.nth($theme, 2));
+        }
+    }
+
+    @each $key, $value in map.remove($theme, $ignored...) {
+        $variable: if($prefix, #{$prefix}-#{$key}, #{$key});
+
+        @if meta.type-of($value) != 'map' and $key != 'prefix' {
+            --#{$variable}: var(--#{$name}-#{$key}, #{$value});
+        }
+    }
+}
+
+/// Add theme colors as CSS variables to a given scope.
+/// @access public
+/// @group themes
+/// @param {map} $theme - The component theme to be used.
+/// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
+/// @requires {mixin} css-vars-from-theme
+/// @example scss Convert grid theme colors to css variables
+///   $my-grid-theme grid-theme(
+///     $header-background: red,
+///     $content-background: #222
+///   );
+///   .my-grid {
+///     @include css-vars($my-grid-theme);
+///   }
+@mixin css-vars($theme, $scope: null) {
+    $s: map.get($theme, 'selector');
+    $n: map.get($theme, 'name');
+    $name: if($scope, $scope, $s or $n);
+
+    @if not($n) or string.length($n) == 0 {
+        @error 'Theme should have a non-null or empty name property. Example: theme: (name: my-theme)';
+    }
+
+    @if is-root() {
+        #{$name} {
+            @include css-vars-from-theme($theme, $n);
+        }
+    } @else {
+        &,
+        #{$name} {
+            @include css-vars-from-theme($theme, $n);
+        }
+    }
+}
+
+/// Adds border-radius style with a value between an upper and a lower bound.
+/// @access private
+/// @param {Number} $radius - The preferred value.
+/// @param {Number} $min [rem(0)] - The minimum value.
+/// @param {Number} $max [$radius] - The maximum allowed value.
+/// @example scss
+///    @include border-radius(4px);
+@mixin border-radius($radius, $min: #{rem(0)}, $max: $radius) {
+    $factor: math.div($radius, $max);
+
+    border-radius: clamp(#{$min}, #{calc(var(--ig-radius-factor, #{$factor}) * #{$max})}, #{$max});
+}
+
+/// Truncates text to a specific number of lines.
+/// @access public
+/// @group utilities
+/// @param {number|string} $lines - The number of lines to show
+/// @param {Boolean} $inline - Sets whether an element displays inline-box or box
+/// @param {Boolean} $vertical - Sets whether an element lays out its contents horizontally or vertically
+/// @example scss Truncates text after the fourth line
+///    @include line-clamp(4, true, true);
+@mixin line-clamp($lines, $inline, $vertical) {
+    display: if($inline, -webkit-inline-box, -webkit-box);
+    -webkit-line-clamp: if($lines, $lines, initial);
+    -webkit-box-orient: if($vertical, vertical, initial);
+    overflow: hidden;
+}
+
+%sizable {
+    --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
+    --is-medium: min(
+        clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-medium, 2), 1),
+        clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
+    );
+    --is-small: clamp(0, var(--ig-size-medium) - var(--component-size, 1), 1);
+}
+
+/// Adds the required CSS properties so that the scope can react to size changes.
+/// @group themes
+/// @access public
+/// @example scss - Sample usage
+///   .my-component {
+///     @include sizable();
+///   }
+@mixin sizable() {
+    @extend %sizable;
+}
+
+@mixin pad($sm, $md: $sm, $lg: $md, $prop) {
+    $id: pad-#{$sm}-#{$md}-#{$lg}-#{$prop};
+    $has-id: list.index($placeholder-registry, $id);
+    $placeholder-registry: list.append($placeholder-registry, $id) !global;
+
+    @if not($has-id) {
+        @at-root {
+            %#{$id} {
+                #{$prop}: pad($sm, $md, $lg);
+            }
+        }
+    }
+
+    @extend %#{$id};
+}
+
+@mixin padding($sm, $md: $sm, $lg: $md, $dir: null) {
+    $_prop: if($dir, padding-#{$dir}, padding);
+
+    @include pad($sm, $md, $lg, $_prop);
+}
+
+@mixin margin($sm, $md: $sm, $lg: $md, $dir: null) {
+    $_prop: if($dir, margin-#{$dir}, margin);
+
+    @include pad($sm, $md, $lg, $_prop);
+}
+
+@mixin helpers() {
+    %ellipsis {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    %hide-default {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        border: none;
+        clip: rect(0, 0, 0, 0);
+        outline: 0;
+        pointer-events: none;
+        overflow: hidden;
+        appearance: none;
+    }
+
+    %user-none {
+        user-select: none;
+    }
+
+    %flex {
+        display: flex;
+    }
+
+    %inline-flex {
+        display: inline-flex;
+    }
+
+    %align-center {
+        align-items: center;
+    }
+
+    %justify-center {
+        justify-content: center;
+    }
+
+    %justify-start {
+        justify-content: flex-start;
+    }
+
+    %justify-end {
+        justify-content: flex-end;
+    }
+
+    %justify-between {
+        justify-content: space-between;
+    }
+
+    %position-absolute {
+        position: absolute;
+    }
+
+    %position-relative {
+        position: relative;
+    }
+
+    %flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    %flex-inline-center {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/// Applies text-overflow ellipsis to e text element.
+/// This won't work on display flex elements.
+/// @group utilities
+/// @access public
+/// @example scss
+///   .my-class {
+///     @include ellipsis();
+///   }
+@mixin ellipsis() {
+    @extend %ellipsis;
+}
+
+/// Hides the element from the DOM.
+/// @group utilities
+/// @access public
+/// @example scss - Sample usage
+///   input[type="checkbox"] {
+///     @include hide-default();
+///   }
+@mixin hide-default {
+    @extend %hide-default;
+}

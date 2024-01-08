@@ -1,0 +1,52 @@
+@use '../../functions' as *;
+
+////
+/// @package theming
+/// @group palettes
+/// @access public
+////
+
+/**
+ * @sass-export-section="light"
+ */
+/// Generates the light green palette.
+/// @type Map
+/// @name light-green-palette
+/// @prop {Color} primary [#09f] - The primary color
+/// @prop {Color} secondary [#72da67] - The secondary color
+/// @prop {Color} gray [#000] - The gray color
+/// @prop {Color} surface [#fff] - The surface color
+/// @prop {Color} info [#1377d5] - The info color
+/// @prop {Color} success [#4eb862] - The success color
+/// @prop {Color} warn [#fbb13c] - The warn color
+/// @prop {Color} error [#ff134a] - The error color
+$green-palette: palette(
+    $primary: #09f,
+    $secondary: #72da67,
+    $surface: #fff,
+    $info: #1377d5,
+    $success: #4eb862,
+    $warn: #fbb13c,
+    $error: #ff134a,
+);
+
+/// Generates the light purple palette.
+/// @type Map
+/// @name light-purple-palette
+/// @prop {Color} primary [#00b4d6] - The primary color
+/// @prop {Color} secondary [#514590] - The secondary color
+/// @prop {Color} gray [#000] - The gray color
+/// @prop {Color} surface [#fff] - The surface color
+/// @prop {Color} info [#1377d5] - The info color
+/// @prop {Color} success [#4eb862] - The success color
+/// @prop {Color} warn [#fbb13c] - The warn color
+/// @prop {Color} error [#ff134a] - The error color
+$purple-palette: palette(
+    $primary: #00b4d6,
+    $secondary: #514590,
+    $surface: #fff,
+    $info: #1377d5,
+    $success: #4eb862,
+    $warn: #fbb13c,
+    $error: #ff134a,
+);

@@ -1,0 +1,32 @@
+@use '../../functions' as *;
+
+////
+/// @package theming
+/// @group palettes
+/// @access public
+////
+
+/**
+ * @sass-export-section="light-material"
+ */
+/// Generates the light material palette.
+/// @type Map
+/// @name light-material-palette
+/// @prop {Color} primary [#09f] - The primary color
+/// @prop {Color} secondary [#e41c77] - The secondary color
+/// @prop {Color} gray [#000] - The gray color
+/// @prop {Color} surface [#fff] - The surface color
+/// @prop {Color} info [#1377d5] - The info color
+/// @prop {Color} success [#4eb862] - The success color
+/// @prop {Color} warn [#faa419] - The warn color
+/// @prop {Color} error [#ff134a] - The error color
+$palette: palette(
+    $primary: #09f,
+    $secondary: #e41c77,
+    $surface: white,
+    $info: #1377d5,
+    $success: #4eb862,
+    $warn: #faa419,
+    $error: #ff134a,
+    $variant: 'material',
+);

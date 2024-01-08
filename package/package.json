@@ -1,0 +1,92 @@
+{
+  "name": "igniteui-theming",
+  "version": "1.0.0",
+  "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "npm run clean:json && npm run clean:docs",
+    "clean:json": "rimraf \"json/\"",
+    "clean:docs": "rimraf \"docs/\"",
+    "build": "npm run build:json && npm run build:e2e",
+    "build:docs": "npm run clean:docs && npm run build:docs:en:production",
+    "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./sass -d docs",
+    "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./sass -d docs",
+    "build:e2e": "sass ./test/e2e/theme.scss ./test/e2e/theme.css",
+    "build:json": "node scripts/buildJSON.mjs",
+    "serve:docs": "npx http-server ./docs",
+    "preview:palette": "node scripts/previewPalette.mjs",
+    "lint": "npm run lint:styles && npm run lint:prettier",
+    "lint:styles": "stylelint ./sass/**/*.scss",
+    "lint:prettier": "prettier \"./sass/**/*.scss\" --check --ignore-path .gitignore",
+    "test": "jest",
+    "format": "stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
+    "prepare": "husky install"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-node-single-context"
+  },
+  "lint-staged": {
+    "sass/**/*.{scss,css}": [
+      "npm run format"
+    ]
+  },
+  "files": [
+    "/sass",
+    "/json",
+    "/_index.scss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgniteUI/igniteui-theming.git"
+  },
+  "keywords": [
+    "sass",
+    "Ignite",
+    "UI",
+    "theming",
+    "palettes",
+    "elevations",
+    "typography"
+  ],
+  "author": "Infragistics",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-theming/issues"
+  },
+  "homepage": "https://github.com/IgniteUI/igniteui-theming#readme",
+  "exports": {
+    ".": {
+      "sass": "./_index.scss",
+      "esm2020": "./index.js",
+      "es2020": "./index.js",
+      "es2015": "./index.js",
+      "node": "./index.js",
+      "default": "./index.js"
+    },
+    "./functions": {
+      "sass": "./sass/_functions.scss"
+    },
+    "./sass/**/*.*": "./sass/**/*.*"
+  },
+  "devDependencies": {
+    "globby": "^13.1.4",
+    "husky": "^8.0.3",
+    "igniteui-sassdoc-theme": "^1.1.6",
+    "jest": "^29.5.0",
+    "jest-environment-node-single-context": "^29.0.0",
+    "lunr": "^2.3.9",
+    "postcss": "^8.4.23",
+    "prettier": "^2.8.8",
+    "rimraf": "^4.4.1",
+    "sass-export": "^2.1.2",
+    "sass-true": "^7.0.0",
+    "sassdoc-plugin-localization": "^1.4.3",
+    "stylelint": "^15.6.2",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-scss": "^4.7.0",
+    "yargs": "^17.7.2"
+  },
+  "peerDependencies": {
+    "sass": "^1.58.1"
+  }
+}
