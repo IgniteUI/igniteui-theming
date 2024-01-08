@@ -177,6 +177,10 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
         appearance: none;
     }
 
+    %user-none {
+        user-select: none;
+    }
+
     %flex {
         display: flex;
     }
@@ -185,11 +189,43 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
         display: inline-flex;
     }
 
-    %center-items {
+    %align-center {
         align-items: center;
     }
 
-    %center-content {
+    %justify-center {
+        justify-content: center;
+    }
+
+    %justify-start {
+        justify-content: flex-start;
+    }
+
+    %justify-end {
+        justify-content: flex-end;
+    }
+
+    %justify-between {
+        justify-content: space-between;
+    }
+
+    %position-absolute {
+        position: absolute;
+    }
+
+    %position-relative {
+        position: relative;
+    }
+
+    %flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    %flex-inline-center {
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
     }
 }
