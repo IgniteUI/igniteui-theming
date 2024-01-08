@@ -109,48 +109,6 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
     overflow: hidden;
 }
 
-%ellipsis {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-/// Applies text-overflow ellipsis to e text element.
-/// This won't work on display flex elements.
-/// @group utilities
-/// @access public
-/// @example scss
-///   .my-class {
-///     @include ellipsis();
-///   }
-@mixin ellipsis() {
-    @extend %ellipsis;
-}
-
-%hide-default {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: none;
-    clip: rect(0, 0, 0, 0);
-    outline: 0;
-    pointer-events: none;
-    overflow: hidden;
-    appearance: none;
-}
-
-/// Hides the element from the DOM.
-/// @group utilities
-/// @access public
-/// @example scss - Sample usage
-///   input[type="checkbox"] {
-///     @include hide-default();
-///   }
-@mixin hide-default {
-    @extend %hide-default;
-}
-
 %sizable {
     --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
     --is-medium: min(
@@ -168,7 +126,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 ///     @include sizable();
 ///   }
 @mixin sizable() {
-    @extend %sizeable;
+    @extend %sizable;
 }
 
 @mixin pad($sm, $md: $sm, $lg: $md, $prop) {
@@ -200,6 +158,25 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 }
 
 @mixin helpers() {
+    %ellipsis {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    %hide-default {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        border: none;
+        clip: rect(0, 0, 0, 0);
+        outline: 0;
+        pointer-events: none;
+        overflow: hidden;
+        appearance: none;
+    }
+
     %flex {
         display: flex;
     }
@@ -215,4 +192,27 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
     %center-content {
         justify-content: center;
     }
+}
+
+/// Applies text-overflow ellipsis to e text element.
+/// This won't work on display flex elements.
+/// @group utilities
+/// @access public
+/// @example scss
+///   .my-class {
+///     @include ellipsis();
+///   }
+@mixin ellipsis() {
+    @extend %ellipsis;
+}
+
+/// Hides the element from the DOM.
+/// @group utilities
+/// @access public
+/// @example scss - Sample usage
+///   input[type="checkbox"] {
+///     @include hide-default();
+///   }
+@mixin hide-default {
+    @extend %hide-default;
 }

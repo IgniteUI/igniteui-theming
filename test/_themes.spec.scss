@@ -32,6 +32,8 @@ $schema: (
 
 @include describe('Themes') {
     @include describe('schemas') {
+        @include helpers();
+
         @include it('resolves util function values') {
             $instructions: (
                 expand-shorthand: (4px 8px, 'padding'),
