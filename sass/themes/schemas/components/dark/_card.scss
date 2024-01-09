@@ -24,6 +24,12 @@ $dark-card: extend(
     )
 );
 
+/// Generates a dark material card schema.
+/// @type {Map}
+/// @requires $material-card
+/// @requires $dark-card
+$dark-material-card: extend($material-card, $dark-card);
+
 /// Generates a dark fluent card schema.
 /// @type {Map}
 /// @requires $fluent-card

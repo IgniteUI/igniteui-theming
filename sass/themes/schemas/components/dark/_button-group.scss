@@ -67,6 +67,12 @@ $base-dark-button-group: (
 /// @requires $base-dark-button-group
 $dark-button-group: extend($light-button-group, $base-dark-button-group);
 
+/// Generates a dark material button-group schema based on a mix of $light-button-group and $base-dark-button-group
+/// @type {Map}
+/// @requires $material-button-group
+/// @requires $base-dark-button-group
+$dark-material-button-group: extend($material-button-group, $base-dark-button-group);
+
 /// Generates a dark fluent button-group schema based on a mix of $fluent-button-group and $base-dark-button-group
 /// @type {Map}
 /// @prop {Map} item-border-color [color: ('gray', 100)] - The border color for button group items.

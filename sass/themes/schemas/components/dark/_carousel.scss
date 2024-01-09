@@ -60,6 +60,12 @@ $base-dark-carousel: extend(
 /// @requires $base-dark-carousel
 $dark-carousel: $base-dark-carousel;
 
+/// Generates a dark material carousel schema based on a mix of $material-carousel and $base-dark-carousel
+/// @type {Map}
+/// @requires $material-carousel
+/// @requires $base-dark-carousel
+$dark-material-carousel: extend($material-carousel, $base-dark-carousel);
+
 /// Generates a dark fluent carousel schema based on a mix of $fluent-carousel and $base-dark-carousel
 /// @type {Map}
 /// @requires $fluent-carousel
