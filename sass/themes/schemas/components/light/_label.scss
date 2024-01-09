@@ -4,10 +4,10 @@
 /// @access public
 ////
 
-/// Generates a light material label schema.
+/// Generates a base light label schema.
 /// @type {Map}
 /// @prop {Color} color [color: ('gray', 700)] - The label color.
-$material-label: (
+$light-label: (
     color: (
         color: (
             'gray',
@@ -15,6 +15,11 @@ $material-label: (
         ),
     ),
 );
+
+/// Generates a light material label schema.
+/// @type {Map}
+/// @requires {Map} $light-label
+$material-label: $light-label;
 
 /// Generates a light fluent label schema.
 /// @type {Map}
@@ -30,15 +35,8 @@ $fluent-label: (
 
 /// Generates a light bootstrap label schema.
 /// @type {Map}
-/// @prop {Color} color [color: ('gray', 700)] - The label color.
-$bootstrap-label: (
-    color: (
-        color: (
-            'gray',
-            700,
-        ),
-    ),
-);
+/// @requires {Map} $light-label
+$bootstrap-label: $light-label;
 
 /// Generates a light indigo label schema.
 /// @type {Map}
