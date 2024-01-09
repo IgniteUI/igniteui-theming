@@ -7,10 +7,15 @@
 /// @access public
 ////
 
-/// Generates a dark time-picker schema.
+/// Generates a base dark time-picker schema.
 /// @type {Map}
 /// @requires $light-time-picker
 $dark-time-picker: $light-time-picker;
+
+/// Generates a dark material time-picker schema.
+/// @type {Map}
+/// @requires $material-time-picker
+$dark-material-time-picker: $material-time-picker;
 
 /// Generates a dark fluent time-picker schema.
 /// @type {Map}

@@ -6,10 +6,15 @@
 /// @access public
 ////
 
-/// Generates a dark navbar schema.
+/// Generates a base dark navbar schema.
 /// @type {Map}
 /// @requires $light-navbar
 $dark-navbar: $light-navbar;
+
+/// Generates a dark material navbar schema.
+/// @type {Map}
+/// @requires $material-navbar
+$dark-material-navbar: $material-navbar;
 
 /// Generates a dark fluent navbar schema.
 /// @type {Map}

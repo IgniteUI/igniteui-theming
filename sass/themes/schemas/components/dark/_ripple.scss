@@ -7,10 +7,15 @@
 /// @access public
 ////
 
-/// Generates a dark ripple schema.
+/// Generates a base dark ripple schema.
 /// @type {Map}
 /// @requires $light-ripple
 $dark-ripple: $light-ripple;
+
+/// Generates a dark material ripple schema.
+/// @type {Map}
+/// @requires $material-ripple
+$dark-material-ripple: $material-ripple;
 
 /// Generates a dark fluent ripple schema.
 /// @type {Map}

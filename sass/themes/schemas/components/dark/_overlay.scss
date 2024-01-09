@@ -7,10 +7,15 @@
 /// @access public
 ////
 
-/// Generates a dark overlay schema.
+/// Generates a base dark overlay schema.
 /// @type {Map}
 /// @requires $light-overlay
 $dark-overlay: $light-overlay;
+
+/// Generates a dark material overlay schema.
+/// @type {Map}
+/// @requires $material-overlay
+$dark-material-overlay: $material-overlay;
 
 /// Generates a dark fluent overlay schema.
 /// @type {Map}
