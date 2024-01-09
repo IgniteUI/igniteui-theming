@@ -8,7 +8,7 @@
 /// @access public
 ////
 
-/// Generates a light time-picker schema.
+/// Generates a base light time-picker schema.
 /// @type {Map}
 /// @prop {Map} text-color [color: ('gray', 500)] - The text color of an open time picker.
 /// @prop {Map} hover-text-color [color: ('secondary', 500)] - The hover text color of an open time picker.
@@ -23,7 +23,6 @@
 /// @prop {Number} modal-elevation [24] - The elevation level, between 0-24, to be used for the time picker in modal mode.
 /// @prop {Number} dropdown-elevation [8] - The elevation level, between 0-24, to be used for the time picker in dropdown mode.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
-/// @prop {List} active-item-border-radius [(rem(15px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @requires {Map} $default-elevation-time-picker
 $light-time-picker: extend(
     $default-elevation-time-picker,
@@ -97,6 +96,16 @@ $light-time-picker: extend(
                 rem(20px),
             ),
         ),
+    )
+);
+
+/// Generates a light material time-picker schema.
+/// @type {Map}
+/// @prop {List} active-item-border-radius [(rem(15px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
+/// @requires {Map} $light-time-picker
+$material-time-picker: extend(
+    $light-time-picker,
+    (
         active-item-border-radius: (
             border-radius: (
                 rem(15px),
@@ -111,7 +120,6 @@ $light-time-picker: extend(
 /// @type {Map}
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} active-item-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
-///
 /// @requires $light-time-picker
 $fluent-time-picker: extend(
     $light-time-picker,
@@ -139,7 +147,6 @@ $fluent-time-picker: extend(
 /// @prop {Map} hover-text-color [color: ('primary', 600)] - The hover text color of an open time picker.
 /// @prop {Map} header-background [color: ('primary', 500)] - The header background color of a time picker.
 /// @prop {List} active-item-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
-///
 /// @requires $light-time-picker
 $bootstrap-time-picker: extend(
     $light-time-picker,
