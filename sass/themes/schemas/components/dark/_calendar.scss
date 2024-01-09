@@ -39,6 +39,12 @@ $dark-calendar: extend(
     )
 );
 
+/// Generates a dark material calendar schema.
+/// @type {Map}
+/// @requires $material-calendar
+/// @requires $dark-calendar
+$dark-material-calendar: extend($material-calendar, $dark-calendar);
+
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
 /// @requires $fluent-calendar

@@ -25,6 +25,12 @@ $base-dark-divider: (
 /// @requires $base-dark-divider
 $dark-divider: extend($light-divider, $base-dark-divider);
 
+/// Generates a dark material divider schema.
+/// @type {Map}
+/// @requires $material-divider
+/// @requires $base-dark-divider
+$dark-material-divider: extend($material-divider, $base-dark-divider);
+
 /// Generates a dark fluent divider schema.
 /// @type {Map}
 /// @requires $fluent-divider

@@ -12,8 +12,8 @@
 /// @type {Map}
 /// @prop {Map} disabled-background [color: ('gray', 100, .3)] - The disabled background color of the button.
 /// @prop {Color} disabled-foreground [color: ('gray', 200)] - The disabled foreground color of the button.
-/// @requires {Map} $material-base-button
-$material-base-button-dark: (
+/// @requires {Map} $light-base-button
+$dark-base-button: (
     disabled-background: (
         color: (
             'gray',
@@ -34,11 +34,11 @@ $material-base-button-dark: (
 /// @prop {Map} focus-background [color: ('secondary', 400, .24)] - The focus background color of a flat button.
 /// @prop {Map} focus-visible-background [color: ('secondary', 400, .24)] - The focus-visible background color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color a flat button.
-/// @requires {Map} $material-base-button-dark
-/// @requires {Map} $material-flat-button
-$material-flat-button-dark: extend(
-    $material-flat-button,
-    $material-base-button-dark,
+/// @requires {Map} $dark-base-button
+/// @requires {Map} $light-flat-button
+$dark-flat-button: extend(
+    $light-flat-button,
+    $dark-base-button,
     (
         hover-background: (
             color: (
@@ -65,21 +65,21 @@ $material-flat-button-dark: extend(
     )
 );
 
-/// @requires {Map} $material-contained-button
-/// @requires {Map} $material-base-button-dark
-$material-contained-button-dark: extend($material-contained-button, $material-base-button-dark);
+/// @requires {Map} $light-contained-button
+/// @requires {Map} $dark-base-button
+$dark-contained-button: extend($light-contained-button, $dark-base-button);
 
-/// @requires {Map} $material-fab-button
-/// @requires {Map} $material-base-button-dark
-$material-fab-button-dark: extend($material-fab-button, $material-base-button-dark);
+/// @requires {Map} $light-fab-button
+/// @requires {Map} $dark-base-button
+$dark-fab-button: extend($light-fab-button, $dark-base-button);
 
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-base-button-dark
+/// @requires {Map} $light-outlined-button
+/// @requires {Map} $dark-base-button
 /// @prop {Map} disabled-border-color [color: ('gray', 100, .3)] - The disabled focused border color of an outlined button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color an outlined button.
-$material-outlined-button-dark: extend(
-    $material-outlined-button,
-    $material-base-button-dark,
+$dark-outlined-button: extend(
+    $light-outlined-button,
+    $dark-base-button,
     (
         disabled-border-color: (
             color: (
@@ -92,21 +92,34 @@ $material-outlined-button-dark: extend(
     )
 );
 
+/// Generates a dark button schema.
+/// @type {Map}
+/// @requires {Map} $dark-flat-button
+/// @requires {Map} $dark-outlined-button
+/// @requires {Map} $dark-contained-button
+/// @requires {Map} $dark-fab-button
+$dark-button: (
+    flat: $dark-flat-button,
+    outlined: $dark-outlined-button,
+    contained: $dark-contained-button,
+    fab: $dark-fab-button,
+);
+
 /// Generates a dark material button schema.
 /// @type {Map}
-/// @requires {Map} $material-flat-button-dark
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-contained-button
-/// @requires {Map} $material-fab-button
-$dark-button: (
-    flat: $material-flat-button-dark,
-    outlined: $material-outlined-button-dark,
-    contained: $material-contained-button-dark,
-    fab: $material-fab-button-dark,
+/// @requires {Map} $dark-flat-button
+/// @requires {Map} $dark-outlined-button
+/// @requires {Map} $dark-contained-button
+/// @requires {Map} $dark-fab-button
+$dark-material-button: (
+    flat: $dark-flat-button,
+    outlined: $dark-outlined-button,
+    contained: $dark-contained-button,
+    fab: $dark-fab-button,
 );
 
 /// @type {Map}
-/// @requires {Map} $material-base-button
+/// @requires {Map} $light-base-button
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 100)] - The disabled foreground color of the button.
 $fluent-base-button-dark: (

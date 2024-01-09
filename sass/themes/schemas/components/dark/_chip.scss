@@ -7,22 +7,27 @@
 /// @access public
 ////
 
-/// Generates a dark chip schema based on a mix of $light-chip and $base-dark-chip.
+/// Generates a dark chip schema.
 /// @type {Map}
 /// @requires $light-chip
 $dark-chip: $light-chip;
 
-/// Generates a dark fluent chip schema based on a mix of $fluent-chip and $base-dark-chip.
+/// Generates a dark material chip schema.
+/// @type {Map}
+/// @requires $material-chip
+$dark-material-chip: $material-chip;
+
+/// Generates a dark fluent chip schema.
 /// @type {Map}
 /// @requires $fluent-chip
 $dark-fluent-chip: $fluent-chip;
 
-/// Generates a dark bootstrap chip schema based on a mix of $bootstrap-chip and $ase-dark-chip.
+/// Generates a dark bootstrap chip schema.
 /// @type {Map}
 /// @requires $bootstrap-chip
 $dark-bootstrap-chip: $bootstrap-chip;
 
-/// Generates a dark indigo chip schema based on a mix of $indigo-chip and $base-dark-chip.
+/// Generates a dark indigo chip schema.
 /// @type {Map}
 /// @prop {Map} text-color [color: ('gray', 700)] - The chip text color.
 /// @prop {Map} hover-text-color [color: ('gray', 700)] - The chip text hover color.

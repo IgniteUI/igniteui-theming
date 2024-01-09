@@ -25,6 +25,12 @@ $base-dark-dialog: (
 /// @requires $base-dark-dialog
 $dark-dialog: extend($light-dialog, $base-dark-dialog);
 
+/// Generates a dark material dialog schema.
+/// @type {Map}
+/// @requires $material-dialog
+/// @requires $base-dark-dialog
+$dark-material-dialog: extend($material-dialog, $base-dark-dialog);
+
 /// Generates a dark fluent dialog schema.
 /// @type {Map}
 /// @requires $fluent-dialog
