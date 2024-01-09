@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a light progress-linear schema.
+/// Generates a base light progress-linear schema.
 /// @type {Map}
 /// @prop {Map} track-color [color: ('gray', 300)] - The main track color.
 /// @prop {Map} fill-color-default [color: ('primary', 500)] - The track default fill color.
@@ -83,6 +83,11 @@ $light-progress-linear: extend(
     )
 );
 
+/// Generates a material progress-linear schema.
+/// @type {Map}
+/// @requires $light-progress-linear
+$material-progress-linear: $light-progress-linear;
+
 /// Generates a fluent progress-linear schema.
 /// @type {Map}
 /// @requires $light-progress-linear
@@ -90,20 +95,12 @@ $fluent-progress-linear: $light-progress-linear;
 
 /// Generates a bootstrap progress-linear schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 200)] - The main track color.
 /// @prop {Map} stripes-color [color: ('gray', 50, .15)] - The track stripes color.
 /// @prop {List} track-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the progress bar track.
 /// @requires $light-progress-linear
 $bootstrap-progress-linear: extend(
     $light-progress-linear,
     (
-        track-color: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-
         stripes-color: (
             color: (
                 'gray',
@@ -124,19 +121,11 @@ $bootstrap-progress-linear: extend(
 
 /// Generates an indigo progress-linear schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 300)] - The main track color.
 /// @prop {Map} stripes-color [color: ('gray', 50, .45)] - The track stripes color.
 /// @requires $light-progress-linear
 $indigo-progress-linear: extend(
     $light-progress-linear,
     (
-        track-color: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-
         stripes-color: (
             color: (
                 'gray',
@@ -147,7 +136,7 @@ $indigo-progress-linear: extend(
     )
 );
 
-/// Generates a light progress-circular schema.
+/// Generates a base light progress-circular schema.
 /// @type {Map}
 /// @prop {Map} base-circle-color [color: ('gray', 300)] - The base circle fill color.
 /// @prop {Map} progress-circle-color [color: ('primary', 500)] - The progress circle fill color.
@@ -180,6 +169,11 @@ $light-progress-circular: extend(
     )
 );
 
+/// Generates a material progress-circular schema.
+/// @type {Map}
+/// @requires {Map} $light-progress-circular
+$material-progress-circular: $light-progress-circular;
+
 /// Generates a fluent progress-circular schema.
 /// @type {Map}
 /// @requires {Map} $light-progress-circular
@@ -187,32 +181,10 @@ $fluent-progress-circular: $light-progress-circular;
 
 /// Generates a bootstrap progress-circular schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 200)] - The main track color.
 /// @requires {Map} $light-progress-circular
-$bootstrap-progress-circular: extend(
-    $light-progress-circular,
-    (
-        track-color: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-    )
-);
+$bootstrap-progress-circular: $light-progress-circular;
 
 /// Generates an indigo progress-circular schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 300)] - The main track color.
 /// @requires {Map} $light-progress-circular
-$indigo-progress-circular: extend(
-    $light-progress-circular,
-    (
-        track-color: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-    )
-);
+$indigo-progress-circular: $light-progress-circular;

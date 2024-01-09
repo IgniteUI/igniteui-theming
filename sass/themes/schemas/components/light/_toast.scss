@@ -8,7 +8,7 @@
 /// @access public
 ////
 
-/// Generates a light toast schema.
+/// Generates a base light toast schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 700, .9)] - The background color used for the toast.
 /// @prop {Map} border-color [color: ('gray', 700, .9)] - The border color used for the toast.
@@ -50,6 +50,11 @@ $light-toast: extend(
         ),
     )
 );
+
+/// Generates a light material toast schema.
+/// @type {Map}
+/// @requires {Map} $light-toast
+$material-toast: $light-toast;
 
 /// Generates a fluent toast schema.
 /// @type {Map}

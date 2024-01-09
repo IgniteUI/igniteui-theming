@@ -9,22 +9,18 @@
 
 /* stylelint-disable max-line-length */
 
-/// Generates a light tree schema.
+/// Generates a base light tree schema.
 /// @type {Map}
 /// @prop {Map} background [ color: ('surface')] - The background color used for the tree node.
-/// @prop {Map} background-selected [color: ('secondary', 200)] - The background color used for the selected tree node.
+/// @prop {Map} background-selected [color: ('primary')] - The background color used for the selected tree node.
 /// @prop {Map} background-active [color: ('gray', 200)] - The background color used for the active tree node.
-/// @prop {Map} background-active-selected [color: ('secondary', 300)] - The background color used for the active selected tree node.
 /// @prop {Map} background-disabled [color: ('surface')] - The background color used for the tree node in disabled state.
 /// @prop {Map} foreground [contrast-color: ('surface')] - The color used for the tree node content.
-/// @prop {Map} foreground-selected [contrast-color: ('secondary', 200)] - The color used for the content of the selected tree node.
 /// @prop {Map} foreground-active [contrast-color: ('gray', 200)] - The color used for the content in active state of the tree node.
-/// @prop {Map} foreground-active-selected [contrast-color: ('secondary', 300)] - The color used for the content of the active selected tree node.
 /// @prop {Map} foreground-disabled [color: ('gray', 500)] - The color used for the content of the disabled tree node.
 /// @prop {Map} drop-area-color [color: ('secondary')] - The background color used for the tree node drop aria.
 /// @prop {Map} hover-color [color: ('gray', 900, .1)] - The background color used for the tree node on hover.
 /// @prop {Map} hover-selected-color [color: ('gray', 900, .1)] - The background color used for the selected tree node on hover.
-/// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
 /// @prop {List} size [(rem(32px), rem(40px), rem(50px))] - The size used for the tree node.
 /// @prop {Number} default-size [2] - The default size used for the tree component.
 $light-tree: (
@@ -40,14 +36,7 @@ $light-tree: (
     ),
     background-selected: (
         color: (
-            'secondary',
-            200,
-        ),
-    ),
-    foreground-selected: (
-        contrast-color: (
-            'secondary',
-            200,
+            'primary',
         ),
     ),
     background-active: (
@@ -62,30 +51,11 @@ $light-tree: (
             200,
         ),
     ),
-    background-active-selected: (
+    background-disabled: (
         color: (
-            'secondary',
-            300,
+            'surface',
         ),
     ),
-    foreground-active-selected: (
-        contrast-color: (
-            'secondary',
-            300,
-        ),
-    ),
-    border-color: (
-        color: (
-            'secondary',
-        ),
-    ),
-    // Same for all themes
-    background-disabled:
-        (
-            color: (
-                'surface',
-            ),
-        ),
     foreground-disabled: (
         color: (
             'gray',
@@ -121,14 +91,53 @@ $light-tree: (
     default-size: 2,
 );
 
+/// Generates a light material tree schema.
+/// @type {Map}
+/// @prop {Map} background-selected [color: ('secondary', 200)] - The background color used for the selected tree node.
+/// @prop {Map} foreground-selected [contrast-color: ('secondary', 200)] - The color used for the content of the selected tree node.
+/// @prop {Map} background-active-selected [color: ('secondary', 300)] - The background color used for the active selected tree node.
+/// @prop {Map} foreground-active-selected [contrast-color: ('secondary', 300)] - The color used for the content of the active selected tree node.
+/// @prop {Map} border-color [color: ('secondary')] - The outline shadow color used for tree node in focus state.
+/// @requires {Map} $light-tree
+$material-tree: extend(
+    $light-tree,
+    (
+        background-selected: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        foreground-selected: (
+            contrast-color: (
+                'secondary',
+                200,
+            ),
+        ),
+        background-active-selected: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        foreground-active-selected: (
+            contrast-color: (
+                'secondary',
+                300,
+            ),
+        ),
+        border-color: (
+            color: (
+                'secondary',
+            ),
+        ),
+    )
+);
+
 /// Generates a light fluent tree schema.
 /// @type {Map}
-/// @prop {Map} background [ color: ('surface')] - The background color used for the tree node.
-/// @prop {Map} foreground [contrast-color: ('surface')] - The color used for the tree node content.
 /// @prop {Map} background-selected [color: ('gray', 200)] - The background color used for the selected tree node.
 /// @prop {Map} foreground-selected [contrast-color: ('gray', 200)] - The color used for the content of the selected tree node.
-/// @prop {Map} background-active [color: ('gray', 200)] - The background color used for the active tree node.
-/// @prop {Map} foreground-active [contrast-color: ('gray', 200)] - The color used for the content in active state of the tree node.
 /// @prop {Map} background-active-selected [color: ('gray', 300)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground-active-selected [contrast-color: ('gray', 300)] - The color used for the content of the active selected tree node.
 /// @prop {Map} border-color [color: ('gray', 800)] - The outline shadow color used for tree node in focus state.
@@ -136,16 +145,6 @@ $light-tree: (
 $fluent-tree: extend(
     $light-tree,
     (
-        background: (
-            color: (
-                'surface',
-            ),
-        ),
-        foreground: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
         background-selected: (
             color: (
                 'gray',
@@ -153,18 +152,6 @@ $fluent-tree: extend(
             ),
         ),
         foreground-selected: (
-            contrast-color: (
-                'gray',
-                200,
-            ),
-        ),
-        background-active: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        foreground-active: (
             contrast-color: (
                 'gray',
                 200,
@@ -191,10 +178,9 @@ $fluent-tree: extend(
     )
 );
 
-/// Generates a bootstrap tree schema.
+/// Generates a light bootstrap tree schema.
 /// @type {Map}
 /// @prop {Map} foreground-active [contrast-color: ('primary')] - The color used for the content in active state of the tree node.
-/// @prop {Map} background-selected [color: ('primary')] - The background color used for the selected tree node.
 /// @prop {Map} foreground-selected [contrast-color: ('primary', 600)] - The color used for the content of the selected tree node.
 /// @prop {Map} background-active-selected [color: ('primary', 600)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground-active-selected [contrast-color: ('primary', 600)] - The color used for the content of the active selected tree node.
@@ -204,11 +190,6 @@ $bootstrap-tree: extend(
     $light-tree,
     (
         foreground-active: (
-            color: (
-                'primary',
-            ),
-        ),
-        background-selected: (
             color: (
                 'primary',
             ),
@@ -233,17 +214,17 @@ $bootstrap-tree: extend(
         ),
         border-color: (
             color: (
-                'primary' 200,
+                'primary',
+                200,
             ),
         ),
     )
 );
 
-/// Generates an indigo tree schema.
+/// Generates a light indigo tree schema.
 /// @type {Map}
 /// @prop {Map} background-active [color: ('surface')] - The background color used for the active tree node.
 /// @prop {Map} foreground-active [contrast-color: ('primary')] - The color used for the content in active state of the tree node.
-/// @prop {Map} background-selected [color: ('primary')] - The background color used for the selected tree node.
 /// @prop {Map} foreground-selected [contrast-color: ('primary')] - The color used for the content of the selected tree node.
 /// @prop {Map} background-active-selected [color: ('primary', 400)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground-active-selected [contrast-color: ('primary', 400)] - The color used for the content of the active selected tree node.
@@ -260,11 +241,6 @@ $indigo-tree: extend(
             ),
         ),
         foreground-active: (
-            color: (
-                'primary',
-            ),
-        ),
-        background-selected: (
             color: (
                 'primary',
             ),
