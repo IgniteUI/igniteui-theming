@@ -77,18 +77,17 @@ $light-select: (
 /// @type {Map}
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The select toggle button foreground color when the select is disabled.
 /// @requires {Map} $light-select
-$material-select: extend
+$material-select: extend(
+    $light-select,
     (
-        $light-select,
-        (
-            toggle-button-foreground-disabled: (
-                color: (
-                    'gray',
-                    500,
-                ),
+        toggle-button-foreground-disabled: (
+            color: (
+                'gray',
+                500,
             ),
-        )
-    );
+        ),
+    )
+);
 
 /// Generates a fluent select schema.
 /// @type {Map}
