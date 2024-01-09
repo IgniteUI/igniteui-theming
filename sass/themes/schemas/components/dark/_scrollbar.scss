@@ -7,11 +7,15 @@
 /// @access public
 ////
 
-/// Generates a dark scrollbar schema.
+/// Generates a base dark scrollbar schema.
 /// @type {Map}
-/// @prop {String | Number} size [16px] - The size of the track.
 /// @requires $light-scrollbar
 $dark-scrollbar: $light-scrollbar;
+
+/// Generates a dark material scrollbar schema.
+/// @type {Map}
+/// @requires $material-scrollbar
+$dark-material-scrollbar: $material-scrollbar;
 
 /// Generates a dark fluent scrollbar schema.
 /// @type {Map}

@@ -27,19 +27,19 @@ $base-dark-list: (
     ),
 );
 
-/// Generates a base dark list schema based on a mix of $light-list and $base-dark-list.
+/// Generates a dark material list schema based.
 /// @type {Map}
-/// @requires $light-list
+/// @requires $material-list
 /// @requires $base-dark-list
-$dark-list: extend($light-list, $base-dark-list);
+$dark-material-list: extend($material-list, $base-dark-list);
 
-/// Generates a base dark fluent list schema based on a mix of $fluent-list and $base-dark-list..
+/// Generates a dark fluent list schema.
 /// @type {Map}
 /// @requires $fluent-list
 /// @requires $base-dark-list
 $dark-fluent-list: extend($fluent-list, $base-dark-list);
 
-/// Generates a base dark bootstrap list schema based on a mix of $bootstrap-list and $base-dark-list..
+/// Generates a dark bootstrap list schema.
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 100)] - The list border color.
 /// @prop {Map} item-background [color: ('gray', 50)] - The list item background color.
@@ -47,7 +47,6 @@ $dark-fluent-list: extend($fluent-list, $base-dark-list);
 /// @prop {Map} item-background-active [color: ('gray', 100)] - The active list item background color.
 /// @prop {Map} header-background [color: ('gray', 50)] - The list header background color.
 /// @requires $bootstrap-list
-/// @requires $base-dark-list
 $dark-bootstrap-list: extend(
     $bootstrap-list,
     (
@@ -88,7 +87,7 @@ $dark-bootstrap-list: extend(
     )
 );
 
-/// Generates a dark indigo list schema
+/// Generates a dark indigo list schema.
 /// @type {Map}
 /// @prop {Map} header-text-color [contrast-color: 'surface'] - The list header text color.
 /// @prop {Map} item-background-hover [color: ('primary', 500, .5)] - The list item hover background.
