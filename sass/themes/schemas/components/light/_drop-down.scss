@@ -46,6 +46,12 @@ $light-drop-down: extend(
                 800,
             ),
         ),
+        hover-item-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
         focused-item-text-color: (
             color: (
                 'gray',
@@ -62,7 +68,6 @@ $light-drop-down: extend(
             color: (
                 'gray',
                 50,
-                0,
             ),
         ),
         disabled-item-text-color: (
@@ -174,7 +179,6 @@ $material-drop-down: extend(
 
 /// Generates a fluent drop-down schema.
 /// @type {Map}
-/// @prop {Map} hover-item-text-color [color: ('gray', 800)] - The drop-down hover text color.
 /// @prop {Map} hover-item-background [color: ('gray', 100)] - The drop-down hover item background color.
 /// @prop {Map} focused-item-background [color: 'surface'] - The drop-down focused item background color.
 /// @prop {Map} focused-item-text-color [color: ('gray', 800)] - The drop-down focused item text color.
@@ -194,12 +198,6 @@ $fluent-drop-down: extend(
     $light-drop-down,
     $fluent-elevation-drop-down,
     (
-        hover-item-text-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
         hover-item-background: (
             color: (
                 'gray',
