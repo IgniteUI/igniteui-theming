@@ -26,6 +26,7 @@
 /// @prop {List} border-radius-ripple [(rem(24px), rem(0), rem(24px))] - The border radius used for switch ripple.
 /// @prop {Map} border-on-color [color('primary', 500)] - The border color of the on-switch.
 /// @prop {Map} label-invalid-color [color: ('gray', 900)] - The color of the switch label in invalid state.
+/// @prop {Map} track-on-disabled-color [color: ('secondary', 50)] - The color of the track when the switch is on and disabled.
 /// @prop {Map} track-error-color [color: ('gray', 500)] - The color of the track in invalid state when the switch is off.
 /// @prop {Map} thumb-on-error-color [color: ('gray', 50)] - The color of the thumb when the switch is on and invalid.
 /// @requires {Map} $default-elevation-switch
@@ -76,6 +77,12 @@ $light-switch: extend(
                 900,
             ),
         ),
+        track-on-disabled-color: (
+            color: (
+                'secondary',
+                50,
+            ),
+        ),
         track-error-color: (
             color: (
                 'gray',
@@ -120,7 +127,6 @@ $light-switch: extend(
 /// @prop {Map} track-off-color [color: ('gray', 500)] - The color of the track when the switch is off.
 /// @prop {Map} track-on-color [color: ('secondary', 200)] - The color of the track when the switch is on.
 /// @prop {Map} track-disabled-color [color: ('gray', 300)] - The color of the track when the switch is disabled.
-/// @prop {Map} track-on-disabled-color [color: ('secondary', 50)] - The color of the track when the switch is on and disabled.
 /// @prop {Map} error-color [color: ('gray', 50)] - The color of the thumb in invalid state.
 /// @prop {Map} error-color-hover [color: ('gray', 500)] - The border color in invalid state on hover.
 /// @prop {List} border-radius-track [(rem(7px), rem(0), rem(7px))] - The border radius used for switch track.
@@ -174,12 +180,6 @@ $material-switch: extend(
             color: (
                 'gray',
                 300,
-            ),
-        ),
-        track-on-disabled-color: (
-            color: (
-                'secondary',
-                50,
             ),
         ),
         error-color: (
