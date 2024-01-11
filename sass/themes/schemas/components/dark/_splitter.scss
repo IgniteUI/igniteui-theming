@@ -7,13 +7,13 @@
 /// @access public
 ////
 
-/// Generates a base dark splitter schema.
+/// Generates a dark material splitter schema.
 /// @type {Map}
 /// @prop {Map} bar-color [color: ('gray', 50)] - The background color of the bar.
 /// @prop {Map} handle-color [color: ('gray', 800)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 800)] - The color for the arrow expander's.
 /// @requires $light-splitter
-$dark-splitter: extend(
+$dark-material-splitter: extend(
     $light-splitter,
     (
         bar-color: (
@@ -38,11 +38,6 @@ $dark-splitter: extend(
         ),
     )
 );
-
-/// Generates a dark material splitter schema.
-/// @type {Map}
-/// @requires $dark-splitter
-$dark-material-splitter: $dark-splitter;
 
 /// Generates a dark fluent splitter schema.
 /// @type {Map}

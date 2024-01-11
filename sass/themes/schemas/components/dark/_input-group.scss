@@ -9,17 +9,13 @@
 /// @access public
 ////
 
-/// Generates a base dark input-group schema.
-/// @type {Map}
-$base-dark-input-group: $light-input-group;
-
 /// Generates a dark material input-group schema.
 /// @type {Map}
 /// @prop {Map} box-background-focus [color: ('gray', 100)] - The background color of an input group of type box on focus.
 /// @prop {Map} hover-bottom-line-color [color: ('gray', 800)] - The bottom line and border colors in the hover state.
-/// @requires $base-dark-input-group
+/// @requires $material-input-group
 $dark-material-input-group: extend(
-    $base-dark-input-group,
+    $material-input-group,
     (
         box-background-focus: (
             color: (
@@ -46,9 +42,7 @@ $dark-material-input-group: extend(
 /// @prop {Map} focused-border-color [color: ('gray', 500)] - The focused input border color for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 100)] - The disabled border color for input groups of type border and fluent.
 /// @requires $fluent-input-group
-/// @requires $base-dark-input-group
 $dark-fluent-input-group: extend(
-    $base-dark-input-group,
     $fluent-input-group,
     (
         input-prefix-background: (
@@ -99,8 +93,7 @@ $dark-fluent-input-group: extend(
 /// Generates a dark bootstrap input-group schema.
 /// @type {Map}
 /// @requires $bootstrap-input-group
-/// @requires $base-dark-input-group
-$dark-bootstrap-input-group: extend($base-dark-input-group, $bootstrap-input-group);
+$dark-bootstrap-input-group: $bootstrap-input-group;
 
 /// Generates a dark indigo input-group schema,
 /// @type {Map}
