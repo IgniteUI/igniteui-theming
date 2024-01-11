@@ -219,12 +219,6 @@ $base-dark-grid: (
     ),
 );
 
-/// Generates a dark grid schema based on a mix of $light-grid and $base-dark-grid.
-/// @type {Map}
-/// @requires $light-grid
-/// @requires $base-dark-grid
-$dark-grid: extend($light-grid, $base-dark-grid);
-
 /// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
 /// @type {Map}
 /// @requires $material-grid
@@ -372,6 +366,7 @@ $dark-bootstrap-grid: extend(
 /// Generates a dark indigo grid schema.
 /// @type {Map}
 ///
+/// @prop {Color} content-background [color: 'surface'] - The table body background color.
 /// @prop {Map} header-background [color: 'surface'] - The table header background color.
 /// @prop {Map} header-border-color [color: ('gray', 100, .24)] - The color used for header borders.
 /// @prop {MAp} header-text-color [contrast-color: 'surface'] - The table header text color.
@@ -390,10 +385,13 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} row-even-background [color: ('gray', 100)] - The background color of even rows.
 /// @prop {Map} row-border-color [color: ('gray', 50, .24)] - The row bottom border color.
 /// @prop {Map} row-hover-background [color: ('primary', 200)] - The hover row background color.
+/// @prop {Map} row-hover-text-color [contrast-color: ('gray', 200)] - The hover row text color.
 /// @prop {Map} row-selected-background [color: 'primary'] - The selected row background color.
 /// @prop {Map} row-selected-text-color [contrast-color: 'primary'] - The selected row text color.
 /// @prop {Map} row-selected-hover-background [color: ('primary', 400)] - The selected row hover background.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('primary', 400)] - The selected row text color.
+/// @prop {Map} group-row-background [color: 'surface'] - The grid group row background color.
+/// @prop {Map} group-row-selected-background [color: ('gray', 200)] - The drop area background on drop color.
 /// @prop {Map} group-count-text-color [contrast-color: ('primary', 300)] - The grid group row cont badge text color.
 /// @prop {Map} group-label-column-name-text [contrast-color: 'surface'] - The grid group row column name text color.
 /// @prop {Map} group-label-icon [contrast-color: 'surface'] - The grid group row icon color.
@@ -417,6 +415,10 @@ $dark-bootstrap-grid: extend(
 $dark-indigo-grid: extend(
     $indigo-grid,
     (
+        content-background: (
+            color: 'surface',
+        ),
+
         header-background: (
             color: 'surface',
         ),
@@ -524,6 +526,13 @@ $dark-indigo-grid: extend(
             ),
         ),
 
+        row-hover-text-color: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+
         row-selected-background: (
             color: 'primary',
         ),
@@ -543,6 +552,20 @@ $dark-indigo-grid: extend(
             contrast-color: (
                 'primary',
                 400,
+            ),
+        ),
+
+        group-row-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        group-row-selected-background: (
+            color: (
+                'gray',
+                100,
             ),
         ),
 

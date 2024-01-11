@@ -7,14 +7,14 @@
 /// @access public
 ////
 
-/// Generates a dark calendar schema.
+/// Generates a dark material calendar schema.
 /// @type {Map}
 /// @prop {Map} date-disabled-text-color [color: ('gray', 500)] - The text color for disabled dates.
 /// @prop {Map} date-selected-hover-foreground [contrast-color: ('secondary', 500)] - The hover text color for the selected date.
 /// @prop {Map} date-selected-focus-foreground [contrast-color: ('secondary', 500)] - The focus text color for the selected date.
-/// @requires $light-calendar
-$dark-calendar: extend(
-    $light-calendar,
+/// @requires $material-calendar
+$dark-material-calendar: extend(
+    $material-calendar,
     (
         date-disabled-text-color: (
             color: (
@@ -38,12 +38,6 @@ $dark-calendar: extend(
         ),
     )
 );
-
-/// Generates a dark material calendar schema.
-/// @type {Map}
-/// @requires $material-calendar
-/// @requires $dark-calendar
-$dark-material-calendar: extend($material-calendar, $dark-calendar);
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}

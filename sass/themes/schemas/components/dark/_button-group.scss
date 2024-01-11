@@ -78,12 +78,6 @@ $base-dark-button-group: (
     ),
 );
 
-/// Generates a dark button-group schema based on a mix of $light-button-group and $base-dark-button-group
-/// @type {Map}
-/// @requires $light-button-group
-/// @requires $base-dark-button-group
-$dark-button-group: extend($light-button-group, $base-dark-button-group);
-
 /// Generates a dark material button-group schema based on a mix of $light-button-group and $base-dark-button-group
 /// @type {Map}
 /// @requires $material-button-group
