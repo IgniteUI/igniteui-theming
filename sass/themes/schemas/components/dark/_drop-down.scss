@@ -22,12 +22,6 @@ $base-dark-drop-down: (
     ),
 );
 
-/// Generates a dark drop-down schema.
-/// @type {Map}
-/// @requires $light-drop-down
-/// @requires $base-dark-drop-down
-$dark-drop-down: extend($light-drop-down, $base-dark-drop-down);
-
 /// Generates a dark material drop-down schema.
 /// @type {Map}
 /// @requires $material-drop-down
