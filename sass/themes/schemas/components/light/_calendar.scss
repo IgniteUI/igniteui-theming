@@ -967,6 +967,11 @@ $light-calendar: (
     ),
 );
 
+/// Generates a material calendar schema.
+/// @type {Map}
+/// @requires $light-calendar
+$material-calendar: $light-calendar;
+
 /// Generates a fluent calendar schema.
 /// @type {Map}
 /// @prop {Map} year-focus-foreground [contrast-color: ('primary', 50)]- The foreground color of the selected year in years view.
