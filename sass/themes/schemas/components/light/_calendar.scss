@@ -2497,19 +2497,11 @@ $bootstrap-calendar: extend(
 
 /// Generates an indigo calendar schema.
 /// @type {Map}
-/// @prop {List} calendar-border-radius [(rem(3px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @requires {Map} $light-calendar
 $indigo-calendar: extend(
     $light-calendar,
     (
-        calendar-border-radius: (
-            border-radius: (
-                rem(3px),
-                rem(0),
-                rem(20px),
-            ),
-        ),
         week-number-border-radius: (
             border-radius: (
                 rem(4px),
