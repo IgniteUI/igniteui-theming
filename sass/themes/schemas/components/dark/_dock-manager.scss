@@ -168,6 +168,12 @@ $dark-base-dock-manager: (
     ),
 );
 
+/// Generates a dark material dock-manager schema.
+/// @type {Map}
+/// @requires $material-dock-manager
+/// @requires $dark-base-dock-manager
+$dark-material-dock-manager: extend($material-dock-manager, $dark-base-dock-manager);
+
 /// Generates a dark dock-manager schema.
 /// @type {Map}
 /// @requires $light-dock-manager

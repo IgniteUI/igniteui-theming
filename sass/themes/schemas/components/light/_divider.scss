@@ -21,6 +21,11 @@ $light-divider: (
     inset: 0,
 );
 
+/// Generates a material divider schema.
+/// @type {Map}
+/// @requires {Map} $light-divider
+$material-divider: $light-divider;
+
 /// Generates a fluent divider schema.
 /// @type {Map}
 /// @requires {Map} $light-divider

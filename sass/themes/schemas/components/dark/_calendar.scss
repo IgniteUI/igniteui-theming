@@ -7,10 +7,10 @@
 /// @access public
 ////
 
-/// Generates a dark calendar schema.
+/// Generates a dark material calendar schema.
 /// @type {Map}
-/// @requires $light-calendar
-$dark-calendar: extend($light-calendar);
+/// @requires $material-calendar
+$dark-material-calendar: $material-calendar;
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
@@ -345,4 +345,4 @@ $dark-bootstrap-calendar: extend(
 /// Generates a dark indigo calendar schema.
 /// @type {Map}
 /// @requires $indigo-calendar
-$dark-indigo-calendar: extend($indigo-calendar);
+$dark-indigo-calendar: $indigo-calendar;

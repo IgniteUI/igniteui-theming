@@ -40,9 +40,13 @@ $light-avatar: (
     default-size: 1,
 );
 
+/// Generates a material avatar schema.
+/// @type {Map}
+/// @requires {Map} $light-avatar
+$material-avatar: $light-avatar;
+
 /// Generates a fluent avatar schema.
 /// @type {Map}
-/// @prop {Number} default-size [1] - The default size used for the avatar component.
 /// @requires {Map} $light-avatar
 $fluent-avatar: $light-avatar;
 
@@ -51,7 +55,6 @@ $fluent-avatar: $light-avatar;
 /// @prop {Map} background [color: ('gray', 400)]- The background color of the avatar.
 /// @prop {Map} color [contrast-color: ('gray', 400)] - The text/icon color of the avatar.
 /// @prop {Number} border-radius [rem(4px)] - The border radius for rounded avatar.
-/// @prop {Number} default-size [1] - The default size used for the avatar component.
 /// @requires {Map} $light-avatar
 $bootstrap-avatar: extend(
     $light-avatar,
@@ -74,6 +77,5 @@ $bootstrap-avatar: extend(
 
 /// Generates an indigo avatar schema.
 /// @type {Map}
-/// @prop {Number} default-size [1] - The default size used for the avatar component.
 /// @requires {Map} $light-avatar
 $indigo-avatar: $light-avatar;

@@ -34,6 +34,11 @@ $light-banner: (
     ),
 );
 
+/// Generates a material banner schema.
+/// @type {Map}
+/// @requires {Map} $light-banner
+$material-banner: $light-banner;
+
 /// Generates a fluent banner schema.
 /// @type {Map}
 /// @requires {Map} $light-banner
