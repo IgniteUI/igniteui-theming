@@ -14,6 +14,15 @@ $dark-material-calendar: $material-calendar;
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
+/// @prop {Map} date-current-foreground [contrast-color: ('gray', 900)] - The foreground color of the current date.
+/// @prop {Map} date-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date.
+/// @prop {Map} date-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date.
+/// @prop {Map} date-selected-current-foreground [contrast-color: ('gray', 900)] - The foreground color of the selected current date.
+/// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the selected current date.
+/// @prop {Map} date-selected-current-focus-foreground [contrast-color: ('gray', 900)] - The :focus foreground color of the selected current date.
+/// @prop {Map} date-selected-current-range-foreground [contrast-color: ('gray', 900)] - The foreground color of the current date in the selected range.
+/// @prop {Map} date-selected-current-range-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date in the selected range.
+/// @prop {Map} date-selected-current-range-focus-foreground [contrast-color: ('gray', 900)] - The :focus foreground color of the current date in the selected range.
 /// @prop {Map} year-selected-foreground [contrast-color: ('primary', 800)] - The foreground color of the selected year.
 /// @prop {Map} year-selected-background [color: ('primary', 800)]- The background color of the selected year in years view.
 /// @prop {Map} year-selected-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected year in years view.
@@ -56,6 +65,60 @@ $dark-material-calendar: $material-calendar;
 $dark-fluent-calendar: extend(
     $fluent-calendar,
     (
+        date-current-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-current-hover-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-current-focus-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-hover-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-focus-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-range-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-range-hover-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-range-focus-foreground: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
         year-selected-foreground: (
             contrast-color: (
                 'primary',
@@ -289,7 +352,6 @@ $dark-fluent-calendar: extend(
 
 /// Generates a dark bootstrap calendar schema.
 /// @type {Map}
-/// @prop {Map} content-background [color: ('gray', 50)] - The main content background color.
 /// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
 /// @prop {Map} picker-foreground [contrast-color: ('surface')]- The idle picker month/year color.
 /// @prop {Map} date-selected-foreground [contrast-color: ('secondary', 600)] - The text color for the selected date.
@@ -302,12 +364,6 @@ $dark-fluent-calendar: extend(
 $dark-bootstrap-calendar: extend(
     $bootstrap-calendar,
     (
-        content-background: (
-            color: (
-                'gray',
-                50,
-            ),
-        ),
         border-color: (
             color: (
                 'gray',
