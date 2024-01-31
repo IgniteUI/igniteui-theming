@@ -35,10 +35,55 @@ $dark-icon-button: (
     contained: $material-contained-icon-button-dark,
 );
 
+/// @type {Map}
+/// @prop {Map} focus-border-color [color: ('gray', 400)] - The focus border color of the fluent dark contained icon button.
+/// @prop {Map} disabled-background [color: ('gray', 50)] - The disabled background color of the icon button.
+/// @prop {Color} disabled-foreground [color: ('gray', 200)] - The disabled foreground color of the icon button.
+$fluent-base-icon-button-dark: (
+    focus-border-color: (
+        color: (
+            'gray',
+            400,
+        ),
+    ),
+    disabled-background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
+    disabled-foreground: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+);
+
 /// Generates a dark fluent flat icon button schema.
 /// @type {Map}
+/// @prop {Map} hover-background [color: ('gray', 50)] - The hover background color of the fluent contained icon button.
+/// @prop {Map} focus-hover-background [color: ('gray', 50)] - The background color on focus hovered state of the icon button.
 /// @requires {Map} $fluent-flat-icon-button
-$fluent-flat-icon-button-dark: extend($fluent-flat-icon-button);
+/// @requires {Map} $fluent-base-icon-button-dark
+$fluent-flat-icon-button-dark: extend(
+    $fluent-flat-icon-button,
+    $fluent-base-icon-button-dark,
+    (
+        hover-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        focus-hover-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent contained icon button schema.
 /// @type {Map}
@@ -46,14 +91,18 @@ $fluent-flat-icon-button-dark: extend($fluent-flat-icon-button);
 /// @prop {Map} foreground [color: ('surface', 500)] - The idle text color of the fluent dark contained icon button.
 /// @prop {Map} hover-background [color: ('primary', 200)] - The hover background color of the fluent dark contained icon button.
 /// @prop {Map} hover-foreground [color: ('surface', 500)] - The hover text color of the fluent dark contained icon button.
-/// @prop {Map} focus-background [color: ('primary', 200)] - The focus background color of the fluent dark contained icon button.
+/// @prop {Map} focus-background [color: ('primary', 300)] - The focus background color of the fluent dark contained icon button.
 /// @prop {Map} focus-foreground [color: ('surface', 500)] - The focus text color of the fluent dark contained icon button.
+/// @prop {Map} focus-hover-background [color: ('primary', 200)] - The background color on focus hovered state of the icon button.
+/// @prop {Map} focus-hover-foreground [color: ('surface', 500)] - The foreground color on focus hovered state of the icon button.
 /// @prop {Map} active-background [color: ('primary', 200)] - The active background color of the fluent dark contained icon button.
 /// @prop {Map} active-foreground [color: ('surface', 500)] - The active text color of the fluent dark contained icon button.
 /// @prop {Map} focus-border-color [color: ('surface', 500)] - The focus border color of the fluent dark contained icon button.
 /// @requires {Map} $fluent-contained-icon-button
+/// @requires {Map} $fluent-base-icon-button-dark
 $fluent-contained-icon-button-dark: extend(
     $fluent-contained-icon-button,
+    $fluent-base-icon-button-dark,
     (
         background: (
             color: (
@@ -82,10 +131,22 @@ $fluent-contained-icon-button-dark: extend(
         focus-background: (
             color: (
                 'primary',
-                200,
+                300,
             ),
         ),
         focus-foreground: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        focus-hover-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        focus-hover-foreground: (
             color: (
                 'surface',
                 500,
@@ -114,8 +175,28 @@ $fluent-contained-icon-button-dark: extend(
 
 /// Generates a dark fluent outlined icon button schema.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 400)] - The border color of the fluent outlined icon button.
+/// @prop {Map} disabled-border-color [color: ('gray', 100)] - The disabled focused border color of an outlined icon button.
 /// @requires {Map} $fluent-outlined-icon-button
-$fluent-outlined-icon-button-dark: extend($fluent-outlined-icon-button);
+/// @requires {Map} $fluent-base-icon-button-dark
+$fluent-outlined-icon-button-dark: extend(
+    $fluent-outlined-icon-button,
+    $fluent-base-icon-button-dark,
+    (
+        border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        disabled-border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent icon button schema.
 /// @type {Map}
