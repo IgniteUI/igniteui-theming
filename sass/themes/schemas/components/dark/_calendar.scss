@@ -352,7 +352,6 @@ $dark-fluent-calendar: extend(
 
 /// Generates a dark bootstrap calendar schema.
 /// @type {Map}
-/// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
 /// @prop {Map} picker-foreground [contrast-color: ('surface')]- The idle picker month/year color.
 /// @prop {Map} date-selected-foreground [contrast-color: ('secondary', 600)] - The text color for the selected date.
 /// @prop {Map} date-current-foreground [contrast-color: 'surface'] - The text color for the current date.
@@ -360,16 +359,14 @@ $dark-fluent-calendar: extend(
 /// @prop {Map} date-current-focus-foreground [color: ('surface')] - The focus text color for the current date.
 /// @prop {Map} date-selected-hover-foreground [contrast-color: ('surface')] - The hover text color for the selected date.
 /// @prop {Map} date-selected-focus-foreground [contrast-color: ('surface')] - The focus text color for the selected date.
+/// @prop {Map} picker-hover-foreground [color: ('secondary', 200)]- The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('secondary', 200)]- The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the buttons responsible for navigation.
+/// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the buttons responsible for navigation.
 /// @requires $bootstrap-calendar
 $dark-bootstrap-calendar: extend(
     $bootstrap-calendar,
     (
-        border-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
         date-selected-foreground: (
             contrast-color: (
                 'secondary',
@@ -394,6 +391,30 @@ $dark-bootstrap-calendar: extend(
         ),
         date-current-focus-foreground: (
             contrast-color: 'surface',
+        ),
+        picker-hover-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'secondary',
+                200,
+            ),
         ),
     )
 );
