@@ -76,4 +76,28 @@ $bootstrap-avatar: extend(
 /// @type {Map}
 /// @prop {Number} default-size [1] - The default size used for the avatar component.
 /// @requires {Map} $light-avatar
-$indigo-avatar: $light-avatar;
+$indigo-avatar: extend(
+    $light-avatar,
+    (
+        background: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        border-radius: rem(4px),
+        size: (
+            sizable: (
+                rem(20px),
+                rem(28px),
+                rem(36px),
+            ),
+        ),
+    )
+);
