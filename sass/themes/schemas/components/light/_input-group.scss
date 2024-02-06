@@ -686,28 +686,33 @@ $bootstrap-input-group: extend(
 /// @type {Map}
 /// @prop {Map} input-prefix-color [color: ('gray', 600)] - The text color of an input prefix of type line, box and border.
 /// @prop {Map} input-suffix-color [color: ('gray', 600)] - The text color of an input suffix of type line, box and border.
-/// @prop {Map} helper-text-color [color: ('gray', 600)] - The helper text color.
+/// @prop {Map} helper-text-color [color: ('gray', 700)] - The helper text color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color for input groups of type border and fluent.
 /// @prop {Color} box-background [transparent] - The background color of an input group of type box.
-/// @prop {Map} box-background-hover [color: ('gray', 100)] - The background color of an input group of type box on hover.
+/// @prop {Color} search-background [transparent] - The background color of an input group of type search.
+/// @prop {Color} search-disabled-background [transparent] - The background color of an input group of type search in the disabled state.
+/// @prop {Map} box-background-hover [color: ('gray', 900, .05)] - The background color of an input group of type box on hover.
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled border color for input groups of type border and fluent.
-/// @prop {Map} disabled-bottom-line-color [color: ('gray', 300)] - The bottom line and border colors in the disabled state.
+/// @prop {Map} disabled-bottom-line-color [color: ('gray', 900, .05)] - The bottom line and border colors in the disabled state.
 /// @prop {Color} box-disabled-background [transparent] - The background color of an input group in the disabled state.
-/// @prop {Map} disabled-text-color [color: ('gray', 300)] - The input text color in the disabled state.
-/// @prop {Map} idle-bottom-line-color [color: ('gray', 500)] - The bottom line and border colors in the idle state.
-/// @prop {Map} focused-bottom-line-color [color: ('secondary', 500)] - The bottom line and border colors in the focused state.
+/// @prop {Map} disabled-text-color [color: ('gray', 900, .2)] - The input text color in the disabled state.
+/// @prop {Map} idle-bottom-line-color [color: ('gray', 400)] - The bottom line and border colors in the idle state.
+/// @prop {Map} focused-bottom-line-color [color: ('primary', 400)] - The bottom line and border colors in the focused state.
 /// @prop {Map} focused-border-color [color: ('primary', 400)] - The focused input border color for input groups of type border and fluent.
 /// @prop {Map} hover-border-color [color: ('gray', 600)] - The hover input border for input groups of type border and fluent.
-/// @prop {Map} hover-bottom-line-color [color: ('gray', 500)] - The bottom line and border colors in the hover state.
+/// @prop {Map} hover-bottom-line-color [color: ('gray', 600)] - The bottom line and border colors in the hover state.
 /// @prop {Map} idle-text-color [color: ('gray', 600)] - The input text color in the idle state.
+/// @prop {Map} filled-text-color [color: ('gray', 800)] - The input text color in the filled state.
+/// @prop {Map} idle-secondary-color [color: ('gray', 600)] - The label color in the idle state.
+/// @prop {Map} focused-secondary-color [ color: ('gray', 600)] - The label color in the focused state.
 /// @prop {Number} search-resting-elevation [1] - The elevation level, between 0-24, to be used for the resting state of the search input.
 /// @prop {Number} search-hover-elevation [1] - The elevation level, between 0-24, to be used for the hover state of the search input.
 /// @prop {Number} search-disabled-elevation [1] - The elevation level, between 0-24, to be used for the disabled state of the search input.
 /// @prop {List} box-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for box input.
 /// @prop {List} border-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for border input.
 /// @prop {List} search-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for search input.
-/// @prop {Map} placeholder-color [color: ('gray', 300)] - The placeholder color of an input group.
-/// @prop {Map} disabled-placeholder-color [color: ('gray', 300)] - The disabled placeholder color of an input group.
+/// @prop {Map} placeholder-color [color: ('gray', 600)] - The placeholder color of an input group.
+/// @prop {Map} disabled-placeholder-color [color: ('gray', 900, .2)] - The disabled placeholder color of an input group.
 /// @prop {Map} input-prefix-color--filled [color: ('gray', 600)] - The input prefix color in the filled state.
 /// @prop {Map} input-suffix-color--filled [color: ('gray', 600)] - The input suffix color in the filled state.
 /// @prop {Map} input-prefix-color--focused [color: ('gray', 600)] - The input prefix color in the focused state.
@@ -757,7 +762,7 @@ $indigo-input-group: extend(
         helper-text-color: (
             color: (
                 'gray',
-                600,
+                700,
             ),
         ),
         border-color: (
@@ -787,36 +792,58 @@ $indigo-input-group: extend(
         idle-bottom-line-color: (
             color: (
                 'gray',
-                500,
+                400,
             ),
         ),
         focused-bottom-line-color: (
             color: (
-                'secondary',
-                500,
+                'primary',
+                400,
             ),
         ),
         hover-bottom-line-color: (
             color: (
                 'gray',
-                500,
+                600,
             ),
         ),
         disabled-bottom-line-color: (
             color: (
                 'gray',
-                300,
+                900,
+                0.05,
             ),
         ),
         box-background: transparent,
         box-disabled-background: transparent,
+        search-background: transparent,
+        search-disabled-background: transparent,
         box-background-hover: (
             color: (
                 'gray',
-                100,
+                900,
+                0.05,
             ),
         ),
         idle-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        filled-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        idle-secondary-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        focused-secondary-color: (
             color: (
                 'gray',
                 600,
@@ -825,19 +852,21 @@ $indigo-input-group: extend(
         disabled-text-color: (
             color: (
                 'gray',
-                300,
+                900,
+                0.2,
             ),
         ),
         placeholder-color: (
             color: (
                 'gray',
-                300,
+                600,
             ),
         ),
         disabled-placeholder-color: (
             color: (
                 'gray',
-                300,
+                900,
+                0.2,
             ),
         ),
         box-border-radius: (
@@ -859,12 +888,6 @@ $indigo-input-group: extend(
                 rem(2px),
                 rem(0),
                 rem(20px),
-            ),
-        ),
-        idle-secondary-color: (
-            color: (
-                'gray',
-                900,
             ),
         ),
     )
