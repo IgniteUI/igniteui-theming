@@ -601,7 +601,7 @@ $fluent-flat-button: extend(
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 600)] - The border color of an outlined button.
 /// @prop {Map} hover-border-color [color: ('gray', 600)] - The hover border color of an outlined button.
-/// @prop {Map} focus-border-color [color: ('gray', 700)] - The focus border color of the button.
+/// @prop {Map} focus-border-color [color: ('gray', 600)] - The focus border color of the button.
 /// @prop {Map} active-border-color [color: ('gray', 800)] - The active border color of an outlined button.
 /// @prop {Map} hover-background [color: ('gray', 200)] - The hover background color of an outlined button.
 /// @prop {Map} active-background [color: ('gray', 300)] - The active background color of an outlined button.
@@ -717,7 +717,7 @@ $fluent-contained-button: extend(
         focus-visible-border-color: (
             color: (
                 'primary',
-                600,
+                500,
             ),
         ),
         active-border-color: (
@@ -811,7 +811,6 @@ $fluent-contained-button: extend(
 /// @type {Map}
 /// @prop {Map} border-color [contrast-color: ('gray', 900)] - The border color of a fab button.
 /// @prop {Map} hover-border-color [contrast-color: ('gray', 900)] - The hover border color of a fab button.
-/// @prop {Map} focus-visible-border-color [contrast-color: ('gray', 900)] - The focus-visible border color of a fab button.
 /// @prop {Map} active-border-color [contrast-color: ('gray', 900)] - The active border color of a fab button.
 /// @prop {Number} resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state.
@@ -824,30 +823,6 @@ $fluent-fab-button: extend(
     $fluent-contained-button,
     (
         selector: '[igxButton="fab"], .igx-button--fab',
-        border-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-        hover-border-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-        focus-visible-border-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-        active-border-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
         border-radius: (
             border-radius: (
                 rem(14px),
