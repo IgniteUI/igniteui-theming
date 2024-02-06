@@ -63,7 +63,9 @@ $fluent-base-icon-button-dark: (
 /// Generates a dark fluent flat icon button schema.
 /// @type {Map}
 /// @prop {Map} hover-background [color: ('gray', 50)] - The hover background color of the fluent contained icon button.
+/// @prop {Map} hover-foreground [color: ('primary', 400)] - The hover text color of the fluent icon button.
 /// @prop {Map} focus-hover-background [color: ('gray', 50)] - The background color on focus hovered state of the icon button.
+/// @prop {Map} focus-hover-foreground [color: ('primary', 400)] - The foreground color on focus hovered state of the icon button.
 /// @requires {Map} $fluent-flat-icon-button
 /// @requires {Map} $fluent-base-icon-button-dark
 $fluent-flat-icon-button-dark: extend(
@@ -76,10 +78,22 @@ $fluent-flat-icon-button-dark: extend(
                 50,
             ),
         ),
+        hover-foreground: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
         focus-hover-background: (
             color: (
                 'gray',
                 50,
+            ),
+        ),
+        focus-hover-foreground: (
+            color: (
+                'primary',
+                400,
             ),
         ),
     )
