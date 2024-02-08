@@ -141,17 +141,17 @@ $_palette: palette(
         }
 
         @include it('should return a contrast shade of type color w/ palette as only argument') {
-            $value: contrast-color($_palette);
+            $value: contrast-color($_palette, $opacity: .5);
 
             @include assert-equal(type-of($value), color);
             @include assert-equal(text-contrast(color($_palette, primary), $value), $value);
         }
 
         @include it('should return a contrast shade of type string as CSS var w/ color and variant as only arguments') {
-            $value: contrast-color($color: secondary, $variant: 'A400');
+            $value: contrast-color($color: secondary, $variant: 'A400', $opacity: .25);
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, var(--ig-secondary-A400-contrast));
+            @include assert-equal($value, color-mix(in oklch, var(--ig-secondary-A400-contrast) 25%, transparent));
         }
 
         @include it('should generate an HSL color shade from a given base color') {
