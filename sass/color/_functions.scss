@@ -177,12 +177,15 @@ $_enhanced-accessibility: false;
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $meta: if($palette, map.get($palette, '_meta'), null);
+    $_alpha: if($opacity, $opacity, 1);
+    $_hsl-alpha: hsla($s, if($opacity, $opacity, $a));
+    $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
     @if not($palette) or not($meta) {
-        @return if($contrast, $s, hsla($s, if($opacity, $opacity, $a)));
+        @return if($contrast, $_mix-alpha, $_hsl-alpha);
     }
 
-    @return rgba(map.get($c, $variant), $alpha: if($opacity, $opacity, 1));
+    @return rgba(map.get($c, $variant), $alpha: $_alpha);
 }
 
 /// Retrieves a contrast text color for a given color variant from a color palette.
@@ -198,8 +201,8 @@ $_enhanced-accessibility: false;
 ///      background: color($color: 'primary', $variant: 200);
 ///      color: contrast-color($color: 'primary', $variant: 200);
 ///    }
-@function contrast-color($palette: null, $color: primary, $variant: 500) {
-    @return color($palette, $color, #{$variant}-contrast);
+@function contrast-color($palette: null, $color: primary, $variant: 500, $opacity: null) {
+    @return color($palette, $color, #{$variant}-contrast, $opacity);
 }
 
 /// Returns a contrast color for a passed color.
