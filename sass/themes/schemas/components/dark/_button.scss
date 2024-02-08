@@ -65,25 +65,6 @@ $material-contained-button-dark: extend($material-contained-button, $material-ba
 /// @requires {Map} $material-base-button-dark
 $material-fab-button-dark: extend($material-fab-button, $material-base-button-dark);
 
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-base-button-dark
-/// @prop {Map} disabled-border-color [color: ('gray', 100, .3)] - The disabled focused border color of an outlined button.
-/// @prop {Color} disabled-background [transparent] - The disabled background color an outlined button.
-$material-outlined-button-dark: extend(
-    $material-outlined-button,
-    $material-base-button-dark,
-    (
-        disabled-border-color: (
-            color: (
-                'gray',
-                100,
-                0.3,
-            ),
-        ),
-        disabled-background: transparent,
-    )
-);
-
 /// Generates a dark material button schema.
 /// @type {Map}
 /// @requires {Map} $material-flat-button-dark

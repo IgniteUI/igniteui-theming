@@ -333,12 +333,8 @@ $material-outlined-button: extend(
 /// @prop {Map} focus-hover-background [color: ('secondary', 400)] - The background color on focus hovered state of the button.
 /// @prop {Map} focus-hover-foreground [contrast-color: ('secondary', 400)] - The text color on focus hovered state of the button.
 /// @prop {Map} focus-visible-foreground [contrast-color: ('secondary', 300)] - The focus-visible text color of a contained button.
-/// @prop {Map} active-background [color: ('secondary', 300)] - The active background color of a contained button.
 /// @prop {Map} active-foreground [contrast-color: ('secondary', 300)] - The active text color of a contained button.
-/// @prop {Number} resting-elevation [2] - The elevation level, between 0-24, to be used for the resting state.
-/// @prop {Number} hover-elevation [4] - The elevation level, between 0-24, to be used for the hover state.
-/// @prop {Number} focus-elevation [8] - The elevation level, between 0-24, to be used for the focus state.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for contained button.
+/// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $material-contained-elevation
 $material-contained-button: extend(
@@ -418,11 +414,10 @@ $material-contained-button: extend(
                 300,
             ),
         ),
-        border-radius: (
-            border-radius: (
-                rem(4px),
-                rem(0),
-                rem(20px),
+        disabled-background: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )
@@ -567,7 +562,7 @@ $fluent-base-button: extend(
 
 /// @type {Map}
 /// @prop {Map} hover-background [color: ('gray', 200)] - The hover background color of a flat button.
-/// @prop {Color} focus-visible-background [transparent] - The focus-visible background color of a flat button.
+/// @prop {Color} active-background [transparent] - The active background color of a contained button.
 /// @prop {Map} active-foreground [color: ('gray', 900)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
 /// @requires {Map} $material-flat-button
