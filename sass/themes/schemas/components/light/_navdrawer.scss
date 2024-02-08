@@ -129,8 +129,19 @@ $fluent-navdrawer: $light-navdrawer;
 
 /// Generates a bootstrap navdrawer schema.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @requires {Map} $light-navdrawer
-$bootstrap-navdrawer: $light-navdrawer;
+$bootstrap-navdrawer: extend(
+    $light-navdrawer,
+    (
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
 
 /// Generates an indigo navdrawer schema.
 /// @type {Map}
