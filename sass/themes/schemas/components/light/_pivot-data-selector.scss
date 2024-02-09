@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a light pivot data selector schema.
+/// Generates a base light pivot data selector schema.
 /// @type {Map}
 $light-pivot-data-selector: (
     background: (
@@ -21,6 +21,11 @@ $light-pivot-data-selector: (
         ),
     ),
 );
+
+/// Generates a material pivot data selector schema.
+/// @type {Map}
+/// @requires {Map} $light-pivot-data-selector
+$material-pivot-data-selector: $light-pivot-data-selector;
 
 /// Generates a fluent pivot data selector schema.
 /// @type {Map}

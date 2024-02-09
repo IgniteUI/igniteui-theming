@@ -20,11 +20,11 @@ $base-dark-expansion-panel: (
     ),
 );
 
-/// Generates a dark expansion panel schema based on a mix of $light-expansion-panel and $base-dark-expansion-panel.
+/// Generates a dark material expansion panel schema based on a mix of $material-expansion-panel and $base-dark-expansion-panel.
 /// @type {Map}
-/// @requires $light-expansion-panel
+/// @requires $material-expansion-panel
 /// @requires $base-dark-expansion-panel
-$dark-expansion-panel: extend($light-expansion-panel, $base-dark-expansion-panel);
+$dark-material-expansion-panel: extend($material-expansion-panel, $base-dark-expansion-panel);
 
 /// Generates a dark fluent expansion panel schema based on a mix of $fluent-expansion-panel and $base-dark-expansion-panel.
 /// @type {Map}

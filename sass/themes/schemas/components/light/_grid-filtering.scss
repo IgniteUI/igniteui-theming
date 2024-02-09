@@ -81,18 +81,15 @@ $light-grid-filtering: (
     ),
 );
 
+/// Generates a material grid-filtering schema.
+/// @type {Map}
+/// @requires {Map} $light-grid-filtering
+$material-grid-filtering: $light-grid-filtering;
+
 /// Generates a fluent grid-filtering schema.
 /// @type {Map}
-/// @prop {Map} menu-background [color: 'surface'] - The idle menu background color.
 /// @requires {Map} $light-grid-filtering
-$fluent-grid-filtering: extend(
-    $light-grid-filtering,
-    (
-        menu-background: (
-            color: 'surface',
-        ),
-    )
-);
+$fluent-grid-filtering: $light-grid-filtering;
 
 /// Generates a bootstrap grid-filtering schema.
 /// @type {Map}
