@@ -7,12 +7,12 @@
 /// @access public
 ////
 
-/// Generates a dark card schema.
+/// Generates a dark material card schema.
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 400, .38)] - The outline color of an outlined type card.
-/// @requires $light-card
-$dark-card: extend(
-    $light-card,
+/// @requires $material-card
+$dark-material-card: extend(
+    $material-card,
     (
         outline-color: (
             color: (
