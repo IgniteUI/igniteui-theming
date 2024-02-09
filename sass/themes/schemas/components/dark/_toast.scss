@@ -27,7 +27,6 @@ $dark-base-toast: (
             0.9,
         ),
     ),
-
     text-color: (
         contrast-color: (
             'gray',
@@ -36,14 +35,16 @@ $dark-base-toast: (
     ),
 );
 
-/// Generates a dark toast schema.
+/// Generates a dark material toast schema.
 /// @type {Map}
-/// @requires $light-toast
-$dark-toast: extend($light-toast, $dark-base-toast);
+/// @requires $material-toast
+/// @requires $dark-base-toast
+$dark-material-toast: extend($material-toast, $dark-base-toast);
 
 /// Generates a dark fluent toast schema.
 /// @type {Map}
 /// @requires $fluent-toast
+/// @requires $dark-base-toast
 $dark-fluent-toast: extend($fluent-toast, $dark-base-toast);
 
 /// Generates a dark bootstrap toast schema.
@@ -72,4 +73,5 @@ $dark-bootstrap-toast: extend(
 /// Generates a dark indigo toast schema.
 /// @type {Map}
 /// @requires $indigo-toast
+/// @requires $dark-base-toast
 $dark-indigo-toast: extend($indigo-toast, $dark-base-toast);

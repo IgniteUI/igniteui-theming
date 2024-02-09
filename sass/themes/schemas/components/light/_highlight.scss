@@ -43,6 +43,11 @@ $light-highlight: (
     ),
 );
 
+/// Generates a material highlight schema.
+/// @type {Map}
+/// @requires {Map} $light-highlight
+$material-highlight: $light-highlight;
+
 /// Generates a fluent highlight schema.
 /// @type {Map}
 /// @requires {Map} $light-highlight

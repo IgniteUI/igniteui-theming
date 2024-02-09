@@ -83,6 +83,11 @@ $light-grid-toolbar: (
     ),
 );
 
+/// Generates a material grid-toolbar schema.
+/// @type {Map}
+/// @requires {Map} $light-grid-toolbar
+$material-grid-toolbar: $light-grid-toolbar;
+
 /// Generates a fluent grid-toolbar schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: 'surface'] - The toolbar background color.

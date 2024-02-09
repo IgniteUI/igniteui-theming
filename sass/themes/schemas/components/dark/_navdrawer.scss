@@ -20,10 +20,11 @@ $dark-base-navdrawer: (
     ),
 );
 
-/// Generates a dark navdrawer schema.
+/// Generates a dark material navdrawer schema.
 /// @type {Map}
-/// @requires $light-navdrawer
-$dark-navdrawer: extend($light-navdrawer, $dark-base-navdrawer);
+/// @requires $material-navdrawer
+/// @requires $dark-base-navdrawer
+$dark-material-navdrawer: extend($material-navdrawer, $dark-base-navdrawer);
 
 /// Generates a dark fluent navdrawer schema.
 /// @type {Map}
@@ -31,6 +32,7 @@ $dark-navdrawer: extend($light-navdrawer, $dark-base-navdrawer);
 /// @prop {Map} item-active-icon-color [color: ('primary', 100)] - The item's icon active color.
 /// @prop {Map} item-active-background [color: ('primary', 400, .12)] - The item's active background color.
 /// @requires $fluent-navdrawer
+/// @requires $dark-base-navdrawer
 $dark-fluent-navdrawer: extend(
     $fluent-navdrawer,
     $dark-base-navdrawer,
@@ -63,6 +65,7 @@ $dark-fluent-navdrawer: extend(
 /// @type {Map}
 /// @prop {Map} item-hover-background [color: ('gray', 100)] - The item's hover background color.
 /// @requires $bootstrap-navdrawer
+/// @requires $dark-base-navdrawer
 $dark-bootstrap-navdrawer: extend(
     $bootstrap-navdrawer,
     $dark-base-navdrawer,
