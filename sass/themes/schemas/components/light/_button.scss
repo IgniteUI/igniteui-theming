@@ -167,6 +167,7 @@ $light-button: (
     fab: $light-fab-button,
 );
 
+/// @type {Map}
 /// @requires {Map} $light-base-button
 $material-base-button: $light-base-button;
 
@@ -1194,7 +1195,6 @@ $bootstrap-button: (
 );
 
 /// @type {Map}
-
 /// @prop {Color} focus-hover-background [transparent] - The background color on focus hovered state of the button.
 /// @prop {Map} focus-hover-foreground [color: ('gray', 900)] - The text color on focus hovered state of the button.
 /// @requires {Map} $light-base-button
