@@ -26,6 +26,11 @@ $light-icon: (
     default-size: 3,
 );
 
+/// Generates a material icon schema.
+/// @type {Map}
+/// @requires {Map} $light-icon
+$material-icon: $light-icon;
+
 /// Generates a fluent icon schema.
 /// @type {Map}
 /// @requires {Map} $light-icon

@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a dark base progress-linear schema.
+/// Generates a base dark progress-linear schema.
 /// @type {Map}
 /// @prop {Map} track-color [color: ('gray', 100)] - The main track color.
 /// @prop {Map} stripes-color [color: ('gray', 900, .7)] - The track stripes color.
@@ -28,11 +28,11 @@ $dark-base-progress-linear: (
     ),
 );
 
-/// Generates a dark progress-linear schema.
+/// Generates a dark material progress-linear schema.
 /// @type {Map}
-/// @requires $light-progress-linear
+/// @requires $material-progress-linear
 /// @requires $dark-base-progress-linear
-$dark-progress-linear: extend($light-progress-linear, $dark-base-progress-linear);
+$dark-material-progress-linear: extend($material-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark fluent progress-linear schema.
 /// @type {Map}
@@ -48,7 +48,7 @@ $dark-bootstrap-progress-linear: $bootstrap-progress-linear;
 /// Generates a dark indigo progress-linear schema.
 /// @type {Map}
 /// @prop {Map} track-color [color: ('gray', 100)] - The main track color.
-/// @prop {Color} stripes-color [rgba(#222, .35)] - The track stripes color.
+/// @prop {Map} stripes-color [color: ('gray', 50, .35)] - The track stripes color.
 /// @requires $indigo-progress-linear
 $dark-indigo-progress-linear: extend(
     $indigo-progress-linear,
@@ -70,9 +70,9 @@ $dark-indigo-progress-linear: extend(
     )
 );
 
-/// Generates a dark progress-circular schema.
+/// Generates a base dark progress-circular schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 100)] - The main track color.
+/// @prop {Map} base-circle-color [color: ('gray', 100)] - The main track color.
 $dark-base-progress-circular: (
     base-circle-color: (
         color: (
@@ -82,22 +82,26 @@ $dark-base-progress-circular: (
     ),
 );
 
-/// Generates a dark progress-circular schema.
+/// Generates a dark material progress-circular schema.
 /// @type {Map}
-/// @requires $light-progress-circular
-$dark-progress-circular: extend($light-progress-circular, $dark-base-progress-circular);
+/// @requires $material-progress-circular
+/// @requires $dark-base-progress-circular
+$dark-material-progress-circular: extend($material-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark fluent progress-circular schema.
 /// @type {Map}
 /// @requires $fluent-progress-circular
+/// @requires $dark-base-progress-circular
 $dark-fluent-progress-circular: extend($fluent-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark bootstrap progress-circular schema.
 /// @type {Map}
 /// @requires $bootstrap-progress-circular
+/// @requires $dark-base-progress-circular
 $dark-bootstrap-progress-circular: extend($bootstrap-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark indigo progress-circular schema.
 /// @type {Map}
 /// @requires $indigo-progress-circular
+/// @requires $dark-base-progress-circular
 $dark-indigo-progress-circular: extend($indigo-progress-circular, $dark-base-progress-circular);

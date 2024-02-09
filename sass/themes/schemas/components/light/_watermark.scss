@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a light watermark schema.
+/// Generates a base light watermark schema.
 /// @type {Map}
 /// @prop {Color} base-color [null] - The base color for all elements of the watermark.
 /// @prop {Color} image-color [null] - The color used for the stamp image.
@@ -40,6 +40,11 @@ $light-watermark: extend(
         ),
     )
 );
+
+/// Generates a light material watermark schema.
+/// @type {Map}
+/// @requires {Map} $light-watermark
+$material-watermark: $light-watermark;
 
 /// Generates a light fluent watermark schema.
 /// @type {Map}
