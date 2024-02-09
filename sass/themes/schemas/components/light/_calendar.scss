@@ -97,13 +97,13 @@
 /// @prop {Map} date-selected-range-hover-background [color: ('secondary', 100)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('secondary', 100)] - The :focus foreground color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('secondary', 100)] - The :focus background color of the selected range.
-/// @prop {Map} date-selected-range-start-foreground [contrast-color: ('secondary', 900)] - The foreground color of the first date in the selected range.
+/// @prop {Map} date-selected-range-start-foreground [contrast-color: ('primary', 500)] - The foreground color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-background [color: ('secondary', 500)] - The background color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-hover-background [color: ('secondary', 700)] - The :hover background color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-focus-foreground [contrast-color: ('secondary', 900)] - The :focus foreground color of the first date in the selected range.
 /// @prop {Map} date-selected-range-start-focus-background [color: ('secondary', 700)] - The :focus background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-end-foreground [contrast-color: ('secondary', 900)] - The background color of the last date in the selected range.
+/// @prop {Map} date-selected-range-end-foreground [contrast-color: ('primary', 500)] - The background color of the last date in the selected range.
 /// @prop {Map} date-selected-range-end-background [color: ('secondary', 500)] - The background color of the last date in the selected range.
 /// @prop {Map} date-selected-range-end-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the last date in the selected range.
 /// @prop {Map} date-selected-range-end-hover-background [color: ('secondary', 700)] - The :hover background color of the last date in the selected range.
@@ -627,8 +627,8 @@ $light-calendar: (
     ),
     date-selected-range-start-foreground: (
         contrast-color: (
-            'secondary',
-            900,
+            'primary',
+            500,
         ),
     ),
     date-selected-range-start-background: (
@@ -663,8 +663,8 @@ $light-calendar: (
     ),
     date-selected-range-end-foreground: (
         contrast-color: (
-            'secondary',
-            900,
+            'primary',
+            500,
         ),
     ),
     date-selected-range-end-background: (
