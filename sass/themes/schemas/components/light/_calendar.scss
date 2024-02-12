@@ -1041,7 +1041,7 @@ $material-calendar: $light-calendar;
 /// @prop {Map} date-selected-current-hover-background [color: ('gray', 300)] - The :hover background color of the selected current date.
 /// @prop {Map} date-selected-current-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the selected current date.
 /// @prop {Map} date-selected-current-focus-background [color: ('gray', 300)] - The :focus background color of the selected current date.
-/// @prop {Map} date-selected-current-range-foreground [contrast-color: ('primary', 600)] - The foreground color of the current date in the selected range.
+/// @prop {Map} date-selected-current-range-foreground [contrast-color: ('gray', 50)] - The foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-background [color: ('gray', 200)] - The background color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-foreground [contrast-color: ('primary', 600)] - The :hover foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-background [color: ('gray', 300)] - The :hover background color of the current date in the selected range.
@@ -1388,8 +1388,8 @@ $fluent-calendar: extend(
         ),
         date-selected-current-range-foreground: (
             contrast-color: (
-                'primary',
-                600,
+                'gray',
+                50,
             ),
         ),
         date-selected-current-range-background: (
