@@ -7,11 +7,10 @@
 /// @access public
 ////
 
-/// Generates a dark scrollbar schema.
+/// Generates a dark material scrollbar schema.
 /// @type {Map}
-/// @prop {String | Number} size [16px] - The size of the track.
-/// @requires $light-scrollbar
-$dark-scrollbar: $light-scrollbar;
+/// @requires $material-scrollbar
+$dark-material-scrollbar: $material-scrollbar;
 
 /// Generates a dark fluent scrollbar schema.
 /// @type {Map}
@@ -22,7 +21,7 @@ $dark-fluent-scrollbar: $fluent-scrollbar;
 /// @type {Map}
 /// @prop {Map} thumb-background [color: ('gray', 200, .5)] - The background color used for the thumb.
 /// @prop {Color} track-background [color: ('gray', 100, .5)] - The background color used for the track.
-/// @requires $light-scrollbar
+/// @requires $bootstrap-scrollbar
 $dark-bootstrap-scrollbar: extend(
     $bootstrap-scrollbar,
     (

@@ -82,6 +82,11 @@ $light-expansion-panel: (
     ),
 );
 
+/// Generates a material expansion panel schema.
+/// @type {Map}
+/// @requires {Map} $light-expansion-panel
+$material-expansion-panel: $light-expansion-panel;
+
 /// Generates a fluent expansion panel schema.
 /// @type {Map}
 /// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.

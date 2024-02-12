@@ -55,6 +55,11 @@ $light-badge: extend(
     )
 );
 
+/// Generates a material badge schema.
+/// @type {Map}
+/// @requires {Map} $light-badge
+$material-badge: $light-badge;
+
 /// Generates a fluent badge schema.
 /// @type {Map}
 /// @requires {Map} $light-badge

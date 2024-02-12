@@ -61,6 +61,11 @@ $light-dialog: extend(
     )
 );
 
+/// Generates a material dialog schema.
+/// @type {Map}
+/// @requires {Map} $light-dialog
+$material-dialog: $light-dialog;
+
 /// Generates a fluent dialog schema.
 /// @type {Map}
 /// @prop {Map} backdrop [color: ('gray', 900, .4)] - The dialog backdrop color.

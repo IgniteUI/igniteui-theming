@@ -61,6 +61,11 @@ $light-grid-summary: (
     ),
 );
 
+/// Generates a material grid-summary schema.
+/// @type {Map}
+/// @requires {Map} $light-grid-summary
+$material-grid-summary: $light-grid-summary;
+
 /// Generates a fluent grid-summary schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('surface')] - The summaries background color is inherited from the grid footer.

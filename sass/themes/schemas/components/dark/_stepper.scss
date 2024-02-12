@@ -8,6 +8,7 @@
 ////
 
 /// Generates a base dark stepper schema.
+/// @type {Map}
 /// @prop {Map} current-indicator-color [color: ('gray', 900)] - The color of the current step indicator.
 /// @prop {Map} invalid-indicator-color [color: ('gray', 900)] - The color of the invalid step indicator.
 /// @prop {Map} step-hover-background [color: ('gray', 100, .3)] - The background of the step header on hover.
@@ -18,7 +19,6 @@
 /// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .5)] - The background of the invalid step header on hover.
 /// @prop {Map} current-step-focus-background [color: ('gray', 100, .5)] - The background of the current step header on hover.
 /// @prop {Map} complete-step-focus-background [color: ('gray', 100, .5)] - The background of the complete step header on hover.
-/// @type {Map}
 $base-stepper: (
     step-hover-background: (
         color: (
@@ -91,11 +91,11 @@ $base-stepper: (
     ),
 );
 
-/// Generates a dark stepper schema.
+/// Generates a dark material stepper schema.
 /// @type {Map}
-/// @requires $light-stepper
+/// @requires $material-stepper
 /// @requires $base-stepper
-$dark-stepper: extend($light-stepper, $base-stepper);
+$dark-material-stepper: extend($material-stepper, $base-stepper);
 
 /// Generates a dark fluent stepper schema
 /// @type {Map}
