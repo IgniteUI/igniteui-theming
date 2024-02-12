@@ -8,10 +8,29 @@
 /// @access public
 ////
 
-/// Generates a dark radio schema.
+/// Generates a base dark radio schema.
 /// @type {Map}
-/// @requires $light-radio
-$dark-radio: $light-radio;
+/// @prop {Map} fill-color-hover [color: ('gray', 900)] - The checked border and dot colors on hover.
+/// @prop {Map} fill-hover-border-color [color: ('gray', 900)] - The text color used for the label text.
+$base-dark-radio: (
+    fill-color-hover: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    fill-hover-border-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+);
+
+/// Generates a dark material radio schema.
+/// @type {Map}
+/// @requires $material-radio
+$dark-material-radio: $material-radio;
 
 /// Generates a dark fluent radio schema.
 /// @type {Map}
@@ -73,51 +92,22 @@ $dark-fluent-radio: extend(
 
 /// Generates a dark bootstrap radio schema.
 /// @type {Map}
-/// @prop {Map} fill-hover-border-color [color: ('gray', 900)] - The text color used for the label text.
-/// @prop {Map} fill-color-hover [color: ('gray', 900)] - The checked border and dot colors on hover.
 /// @requires $bootstrap-radio
-$dark-bootstrap-radio: extend(
-    $bootstrap-radio,
-    (
-        fill-hover-border-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        fill-color-hover: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-    )
-);
+/// @requires $base-dark-radio
+$dark-bootstrap-radio: extend($bootstrap-radio, $base-dark-radio);
 
 /// Generates a dark indigo radio schema.
 /// @type {Map}
-/// @prop {Map} fill-hover-border-color [color: ('gray', 900)] - The text color used for the label text.
 /// @prop {Map} empty-color [color: ('gray', 700)] - The unchecked border color.
 /// @prop {Map} fill-color [color: ('gray', 900)] - The checked border and dot colors.
-/// @prop {Map} fill-color-hover [color: ('gray', 900)] - The checked border and dot colors on hover.
 /// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled border and dot colors.
 /// @requires $indigo-radio
+/// @requires $base-dark-radio
 $dark-indigo-radio: extend(
     $indigo-radio,
+    $base-dark-radio,
     (
-        fill-hover-border-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
         fill-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-        fill-color-hover: (
             color: (
                 'gray',
                 900,

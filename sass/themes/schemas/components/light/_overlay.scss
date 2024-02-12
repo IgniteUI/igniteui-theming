@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a light overlay schema.
+/// Generates a base light overlay schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('gray', 500, .54)] - The background color used for modal overlays.
 $light-overlay: (
@@ -19,6 +19,11 @@ $light-overlay: (
         ),
     ),
 );
+
+/// Generates a material overlay schema.
+/// @type {Map}
+/// @requires {Map} $light-overlay
+$material-overlay: $light-overlay;
 
 /// Generates a fluent overlay schema.
 /// @type {Map}
