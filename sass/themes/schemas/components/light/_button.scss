@@ -393,6 +393,7 @@ $material-contained-button: extend(
 );
 
 /// @type {Map}
+/// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
 /// @prop {List} border-radius [(rem(28px), rem(12px), rem(28px))] - The border radius used for floating button.
 /// @requires {Map} $light-fab-button
 /// @requires {Map} $material-base-button
@@ -402,6 +403,12 @@ $material-fab-button: extend(
     $light-fab-button,
     (
         selector: '[igxButton="fab"], .igx-button--fab',
+        disabled-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
         border-radius: (
             border-radius: (
                 rem(28px),
@@ -812,7 +819,7 @@ $bootstrap-base-button: extend(
         ),
         size: (
             sizable: (
-                rem(31px),
+                rem(32px),
                 rem(38px),
                 rem(48px),
             ),
