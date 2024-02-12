@@ -37,6 +37,46 @@
     @return $result;
 }
 
+/// Extracts the differences between two or more maps, comparing the first map against the rest.
+/// @group utilities
+/// @access public
+/// @param {Map...} $maps - A list of maps that will be diffed.
+/// @example scss Pull out the unique properties of the second map when compared to the first.
+///   $map-1: (
+///     color: orange,
+///     background: black,
+///   );
+///
+///   $map-2: (
+///     color: red,
+///     background: black,
+///   );
+///
+///   $diffed: diff($map-1, $map-2); // returns (color: red);
+/// @returns {Map} - Returns a map of the unique properties.
+@function diff($maps...) {
+    $result: ();
+
+    @for $i from 1 through list.length($maps) {
+        $base: list.nth($maps, 1);
+
+        @each $key, $value in list.nth($maps, $i) {
+            $match: map.get($base, $key) == $value;
+
+            @if not($match) {
+                $result: map.merge(
+                    $result,
+                    (
+                        $key: $value,
+                    )
+                );
+            }
+        }
+    }
+
+    @return $result;
+}
+
 /// Prefixes the keys in a map with the specified prefix and separator.
 /// @access private
 /// @param {Map} $map - The target map.

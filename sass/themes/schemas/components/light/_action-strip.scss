@@ -38,7 +38,16 @@ $light-action-strip: extend(
                 'error',
             ),
         ),
+    )
+);
 
+/// Generates a material action strip schema.
+/// @type {Map}
+/// @prop {List} actions-border-radius [(rem(24px), rem(0), rem(24px))] - The border radius used for action strip actions container.
+/// @requires {Map} $light-action-strip
+$material-action-strip: extend(
+    $light-action-strip,
+    (
         actions-border-radius: (
             border-radius: (
                 rem(24px),

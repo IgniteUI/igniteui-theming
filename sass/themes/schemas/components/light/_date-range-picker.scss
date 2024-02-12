@@ -19,6 +19,11 @@ $light-date-range-picker: (
     ),
 );
 
+/// Generates a material date-range-picker schema.
+/// @type {Map}
+/// @requires {Map} $light-date-range-picker
+$material-date-range-picker: $light-date-range-picker;
+
 /// Generates a fluent date-range-picker schema.
 /// @type {Map}
 /// @requires {Map} $light-date-range-picker

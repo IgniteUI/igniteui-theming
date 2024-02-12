@@ -68,10 +68,10 @@ $material-fab-button-dark: extend($material-fab-button, $material-base-button-da
 /// Generates a dark material button schema.
 /// @type {Map}
 /// @requires {Map} $material-flat-button-dark
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-contained-button
-/// @requires {Map} $material-fab-button
-$dark-button: (
+/// @requires {Map} $material-outlined-button-dark
+/// @requires {Map} $material-contained-button-dark
+/// @requires {Map} $material-fab-button-dark
+$dark-material-button: (
     flat: $material-flat-button-dark,
     outlined: $material-outlined-button-dark,
     contained: $material-contained-button-dark,
@@ -413,7 +413,6 @@ $dark-bootstrap-button: (
 /// @type {Map}
 /// @prop {Color} disabled-foreground [color: ('gray', 300)] - The disabled foreground color of the button.
 /// @prop {Color} disabled-background [color: ('gray', 200, .1)] - The disabled background color of the button.
-/// @requires {Map} $indigo-base-button
 $indigo-base-button-dark: (
     disabled-foreground: (
         color: (

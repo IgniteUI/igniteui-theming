@@ -219,23 +219,21 @@ $base-dark-grid: (
     ),
 );
 
-/// Generates a dark grid schema based on a mix of $light-grid and $base-dark-grid.
+/// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
 /// @type {Map}
-/// @requires $light-grid
+/// @requires $material-grid
 /// @requires $base-dark-grid
-$dark-grid: extend($light-grid, $base-dark-grid);
+$dark-material-grid: extend($material-grid, $base-dark-grid);
 
 /// Generates a dark fluent grid schema based on a mix of $fluent-grid and $base-dark-grid.
 /// @prop {Map} header-selected-background [color: ('gray', 200)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray', 200)] - The table header text color when selected (ex. column selection).
-/// @prop {Map} row-hover-background [color: ('gray', 100)] - The hover row background color.
 /// @prop {Map} row-selected-background [color: ('gray', 100)] - The selected row background color.
 /// @prop {Map} row-selected-hover-background [color: ('gray', 200)] - The selected row background color on hover.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 200)] - The selected row hover text color.
 /// @prop {Map} cell-selected-within-background [color: ('gray', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 200)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} group-row-background [color: ('gray', 100, .5)] - The grid group row background color.
-/// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 ///
 /// @requires $fluent-grid
 /// @requires $base-dark-grid
@@ -254,13 +252,6 @@ $dark-fluent-grid: extend(
             contrast-color: (
                 'gray',
                 200,
-            ),
-        ),
-
-        row-hover-background: (
-            color: (
-                'gray',
-                100,
             ),
         ),
 
@@ -312,13 +303,6 @@ $dark-fluent-grid: extend(
                 'gray',
                 100,
                 0.5,
-            ),
-        ),
-
-        group-row-selected-background: (
-            color: (
-                'gray',
-                100,
             ),
         ),
     )
@@ -382,7 +366,7 @@ $dark-bootstrap-grid: extend(
 /// Generates a dark indigo grid schema.
 /// @type {Map}
 ///
-/// @prop {Map} content-background [color: 'surface'] - The table body background color.
+/// @prop {Color} content-background [color: 'surface'] - The table body background color.
 /// @prop {Map} header-background [color: 'surface'] - The table header background color.
 /// @prop {Map} header-border-color [color: ('gray', 100, .24)] - The color used for header borders.
 /// @prop {MAp} header-text-color [contrast-color: 'surface'] - The table header text color.

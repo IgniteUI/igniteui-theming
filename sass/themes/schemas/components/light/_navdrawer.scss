@@ -8,7 +8,7 @@
 /// @access public
 ////
 
-/// Generates a light navdrawer schema.
+/// Generates a base light navdrawer schema.
 /// @type {Map}
 /// @prop {Map} background [color: 'surface'] - The navigation drawer background color.
 /// @prop {Map} border-color [color: ('gray', 900, .14)] - The navigation drawer right border color.
@@ -122,6 +122,11 @@ $light-navdrawer: extend(
     )
 );
 
+/// Generates a material navdrawer schema.
+/// @type {Map}
+/// @requires {Map} $light-navdrawer
+$material-navdrawer: $light-navdrawer;
+
 /// Generates a fluent navdrawer schema.
 /// @type {Map}
 /// @requires {Map} $light-navdrawer
@@ -129,8 +134,19 @@ $fluent-navdrawer: $light-navdrawer;
 
 /// Generates a bootstrap navdrawer schema.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @requires {Map} $light-navdrawer
-$bootstrap-navdrawer: $light-navdrawer;
+$bootstrap-navdrawer: extend(
+    $light-navdrawer,
+    (
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
 
 /// Generates an indigo navdrawer schema.
 /// @type {Map}
