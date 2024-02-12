@@ -88,6 +88,14 @@
             @include assert-equal(extend($map-1, $map-2), $result);
         }
 
+        @include it('should diff two maps resolving all unique values in the second map in the process') {
+            $map-1: (one: 'foo', two: 'bar', three: 'baz');
+            $map-2: (one: 'foo', two: 'bar', three: 'bozo');
+            $result: (three: 'bozo');
+
+            @include assert-equal(diff($map-1, $map-2), $result);
+        }
+
         @include it('should prefix all keys in a map with a given string') {
             $map: (one: 'foo', two: 'bar', three: 'baz');
             $prefixed-map: (test_one: 'foo', test_two: 'bar', test_three: 'baz');
