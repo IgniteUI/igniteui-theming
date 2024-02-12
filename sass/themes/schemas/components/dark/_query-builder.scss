@@ -7,21 +7,21 @@
 /// @access public
 ////
 
-/// Generates the dark query builder schema.
+/// Generates a dark material query builder schema.
 /// @type {Map}
-/// @see $light-query-builder
-/// @requires $light-query-builder
-$dark-query-builder: $light-query-builder;
+/// @see $material-query-builder
+/// @requires $material-query-builder
+$dark-material-query-builder: $material-query-builder;
 
-/// Generates the dark fluent query builder schema.
+/// Generates a dark fluent query builder schema.
 /// @see $fluent-query-builder
 /// @requires $fluent-query-builder
 $dark-fluent-query-builder: $fluent-query-builder;
 
-/// Generates the dark bootstrap query builder schema.
+/// Generates a dark bootstrap query builder schema.
 $dark-bootstrap-query-builder: $bootstrap-query-builder;
 
-/// Generates the dark indigo query builder schema.
+/// Generates a dark indigo query builder schema.
 /// @type {Map}
 /// @prop {Map} background [color: 'surface'] - The background color of the filtering row.
 /// @requires $indigo-query-builder
