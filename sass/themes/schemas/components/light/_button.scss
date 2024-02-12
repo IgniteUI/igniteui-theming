@@ -335,6 +335,7 @@ $material-outlined-button: extend(
 /// @prop {Map} focus-visible-foreground [contrast-color: ('secondary', 300)] - The focus-visible text color of a contained button.
 /// @prop {Map} active-background [color: ('secondary', 300)] - The active background color of a contained button.
 /// @prop {Map} active-foreground [contrast-color: ('secondary', 300)] - The active text color of a contained button.
+/// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
 /// @prop {Number} resting-elevation [2] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [4] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [8] - The elevation level, between 0-24, to be used for the focus state.
@@ -416,6 +417,12 @@ $material-contained-button: extend(
             contrast-color: (
                 'secondary',
                 300,
+            ),
+        ),
+        disabled-background: (
+            color: (
+                'gray',
+                100,
             ),
         ),
         border-radius: (
