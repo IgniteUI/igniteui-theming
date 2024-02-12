@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a light scrollbar schema.
+/// Generates a base light scrollbar schema.
 /// @type {Map}
 /// @property {Color} thumb-background [color: ('gray', 400)] - The background color used for the thumb.
 /// @property {Color} track-background [color: ('gray', 100)] - The background color used for the track.
@@ -30,10 +30,14 @@ $light-scrollbar: (
     ),
 );
 
+/// Generates a material scrollbar schema.
+/// @type {Map}
+/// @requires {Map} $light-scrollbar
+$material-scrollbar: $light-scrollbar;
+
 /// Generates a fluent scrollbar schema.
 /// @type {Map}
 /// @property {Color} thumb-background [color: ('gray', 300)] - The background color used for the thumb.
-///
 /// @requires {Map} $light-scrollbar
 $fluent-scrollbar: extend(
     $light-scrollbar,
@@ -49,26 +53,16 @@ $fluent-scrollbar: extend(
 
 /// Generates a bootstrap scrollbar schema.
 /// @type {Map}
-///
 /// @requires {Map} $light-scrollbar
 $bootstrap-scrollbar: $light-scrollbar;
 
 /// Generates an indigo scrollbar schema.
 /// @type {Map}
-/// @property {Map} thumb-background [color: ('gray', 400)] - The background color used for the thumb.
 /// @property {Color} track-background [color: ('gray', 200)] - The background color used for the track.
-///
 /// @requires {Map} $light-scrollbar
 $indigo-scrollbar: extend(
     $light-scrollbar,
     (
-        thumb-background: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-
         track-background: (
             color: (
                 'gray',

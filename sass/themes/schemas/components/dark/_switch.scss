@@ -22,13 +22,13 @@ $base-dark-switch: (
     ),
 );
 
-/// Generates a dark switch schema based on a mix of $light-switch and $base-dark-switch.
+/// Generates a dark material switch schema.
 /// @type {Map}
-/// @requires $light-switch
+/// @requires $material-switch
 /// @requires $base-dark-switch
-$dark-switch: extend($light-switch, $base-dark-switch);
+$dark-material-switch: extend($material-switch, $base-dark-switch);
 
-/// Generates a dark fluent switch schema based on a mix of $fluent-switch and $base-dark-switch.
+/// Generates a dark fluent switch schema.
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 500)] - The border color of the switch.
 /// @prop {Map} border-on-color [color('primary', 300)] - The border color of the on-switch.
@@ -38,9 +38,7 @@ $dark-switch: extend($light-switch, $base-dark-switch);
 /// @prop {Map} track-on-disabled-color [color: ('gray', 200)] - The color of the track when the switch is on and disabled.
 /// @prop {Map} track-on-hover-color [color: ('primary', 100)] - The color of the track when the switch is on and hovered.
 /// @prop {Map} thumb-off-color [color: ('gray', 500)] - The color of the thumb when the switch is off.
-/// @prop {Map} thumb-disabled-color [color: ('gray', 200)] - The color of the thumb when the switch is disabled.
 /// @prop {Map} error-color [color: ('gray', 500)] - The border and thumb color in invalid state.
-///
 /// @requires $fluent-switch
 /// @requires $base-dark-switch
 $dark-fluent-switch: extend(
@@ -89,12 +87,6 @@ $dark-fluent-switch: extend(
                 200,
             ),
         ),
-        thumb-disabled-color: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
         track-on-disabled-color: (
             color: (
                 'gray',
@@ -110,7 +102,7 @@ $dark-fluent-switch: extend(
     )
 );
 
-/// Generates a dark bootstrap switch schema based on a mix of $bootstrap-switch and $base-dark-switch.
+/// Generates a dark bootstrap switch schema.
 /// @type {Map}
 /// @prop {Map} thumb-on-color [color: ('gray', 900)] - The color of the thumb when the switch is on.
 /// @prop {Map} thumb-on-disabled-color [color: ('gray', 900)] - The color of the thumb when the switch is on and disabled.
@@ -148,7 +140,6 @@ $dark-bootstrap-switch: extend(
 /// @prop {Map} track-on-color [color: ('gray', 900)] - The color of the track when the switch is on.
 /// @prop {Map} thumb-off-color [color: ('gray', 700)] - The color of the thumb when the switch is off.
 /// @prop {Color} track-off-color [transparent] - The color of the track when the switch is off.
-///
 /// @prop {Map} border-color [color: ('gray', 700)] - The border color of the switch.
 /// @prop {Map} border-hover-color [color: ('gray', 700)] - The border color of the switch on hover.
 /// @prop {Map} border-disabled-color [color: ('gray', 400)] - The border color of the disabled switch.
