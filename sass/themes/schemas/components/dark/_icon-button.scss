@@ -36,10 +36,17 @@ $dark-material-icon-button: (
 );
 
 /// @type {Map}
-/// @prop {Map} focus-border-color [color: ('gray', 400)] - The focus border color of the fluent dark contained icon button.
+/// @prop {Map} hover-background [color: ('gray', 50)] - The hover background color of the fluent icon button.
+/// @prop {Map} focus-border-color [color: ('gray', 400)] - The focus border color of the fluent dark icon button.
 /// @prop {Map} disabled-background [color: ('gray', 50)] - The disabled background color of the icon button.
 /// @prop {Color} disabled-foreground [color: ('gray', 200)] - The disabled foreground color of the icon button.
 $fluent-base-icon-button-dark: (
+    hover-background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
     focus-border-color: (
         color: (
             'gray',
@@ -62,7 +69,6 @@ $fluent-base-icon-button-dark: (
 
 /// Generates a dark fluent flat icon button schema.
 /// @type {Map}
-/// @prop {Map} hover-background [color: ('gray', 50)] - The hover background color of the fluent contained icon button.
 /// @prop {Map} hover-foreground [color: ('primary', 400)] - The hover text color of the fluent icon button.
 /// @prop {Map} focus-hover-background [color: ('gray', 50)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [color: ('primary', 400)] - The foreground color on focus hovered state of the icon button.
