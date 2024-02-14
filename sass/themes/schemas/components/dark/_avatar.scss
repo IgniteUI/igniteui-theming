@@ -42,5 +42,16 @@ $dark-bootstrap-avatar: extend(
 
 /// Generates a dark indigo avatar schema.
 /// @type {Map}
+/// @prop {Map} color [contrast-color: ('gray', 300)] - The text/icon color of the avatar.
 /// @requires $indigo-avatar
-$dark-indigo-avatar: $indigo-avatar;
+$dark-indigo-avatar: extend(
+    $indigo-avatar,
+    (
+        color: (
+            contrast-color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
