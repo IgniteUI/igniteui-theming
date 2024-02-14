@@ -991,12 +991,12 @@ $material-calendar: $light-calendar;
 /// @prop {Map} year-hover-background [color: ('grey', 200)]- The :hover background color of the year in years view.
 /// @prop {Map} year-focus-foreground [contrast-color: ('gray', 200)]- The foreground color of the selected year in years view.
 /// @prop {Map} year-focus-background [color: ('gray', 200)]- The background color of the selected year on :focus in years view.
-/// @prop {Map} year-current-foreground [contrast-color: ('gray', 200)] - The foreground color of the current year.
-/// @prop {Map} year-current-background [color: 'gray', 200) ]- The background color of the current year in years view.
+/// @prop {Map} year-current-foreground [contrast-color: ('gray', 100)] - The foreground color of the current year.
+/// @prop {Map} year-current-background [color: 'gray', 100) ]- The background color of the current year in years view.
 /// @prop {Map} year-current-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the current year in years view.
 /// @prop {Map} year-current-hover-background [color: ('gray' 200)] - The :hover background color of the current year in years view.
-/// @prop {Map} year-current-focus-foreground [contrast-color: ('primary', 50)] - The :focus foreground color of the current year in years view.
-/// @prop {Map} year-current-focus-background [color: ('primary' 50)] - The :focus background color of the current year in years view.
+/// @prop {Map} year-current-focus-foreground [contrast-color: ('gray', 200)] - The :focus foreground color of the current year in years view.
+/// @prop {Map} year-current-focus-background [color: ('gray' 200)] - The :focus background color of the current year in years view.
 /// @prop {Map} year-selected-foreground [contrast-color: ('primary', 50)] - The foreground color of the selected year.
 /// @prop {Map} year-selected-background [color: ('primary', 50)] - The background color of the selected year.
 /// @prop {Map} year-selected-hover-foreground [contrast-color: ('primary', 100)] - The foreground color of the selected year on :hover.
@@ -1178,13 +1178,13 @@ $fluent-calendar: extend(
         year-current-foreground: (
             contrast-color: (
                 'gray',
-                200,
+                100,
             ),
         ),
         year-current-background: (
             color: (
                 'gray',
-                200,
+                100,
             ),
         ),
         year-current-hover-foreground: (
@@ -1201,14 +1201,14 @@ $fluent-calendar: extend(
         ),
         year-current-focus-foreground: (
             contrast-color: (
-                'primary',
-                50,
+                'gray',
+                200,
             ),
         ),
         year-current-focus-background: (
             color: (
-                'primary',
-                50,
+                'gray',
+                200,
             ),
         ),
         year-selected-foreground: (
