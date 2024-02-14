@@ -77,5 +77,34 @@ $bootstrap-avatar: extend(
 
 /// Generates an indigo avatar schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('gray', 300)]- The background color of the avatar.
+/// @prop {Map} color [color: ('gray', 700)] - The text/icon color of the avatar.
+/// @prop {Number} border-radius [rem(4px)] - The border radius for rounded avatar.
+/// @prop {List} size [(rem(20px), rem(28px), rem(36px))] - The size used for the avatar width and height.
+/// @prop {Number} default-size [1] - The default size used for the avatar component.
 /// @requires {Map} $light-avatar
-$indigo-avatar: $light-avatar;
+$indigo-avatar: extend(
+    $light-avatar,
+    (
+        background: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        border-radius: rem(4px),
+        size: (
+            sizable: (
+                rem(20px),
+                rem(28px),
+                rem(36px),
+            ),
+        ),
+    )
+);
