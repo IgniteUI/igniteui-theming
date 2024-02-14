@@ -987,8 +987,10 @@ $material-calendar: $light-calendar;
 
 /// Generates a fluent calendar schema.
 /// @type {Map}
-/// @prop {Map} year-focus-foreground [contrast-color: ('primary', 50)]- The foreground color of the selected year in years view.
-/// @prop {Map} year-focus-background [color: ('primary', 50)]- The background color of the selected year on :focus in years view.
+/// @prop {Map} year-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the year in years view.
+/// @prop {Map} year-hover-background [color: ('grey', 200)]- The :hover background color of the year in years view.
+/// @prop {Map} year-focus-foreground [contrast-color: ('gray', 200)]- The foreground color of the selected year in years view.
+/// @prop {Map} year-focus-background [color: ('gray', 200)]- The background color of the selected year on :focus in years view.
 /// @prop {Map} year-current-foreground [contrast-color: ('gray', 200)] - The foreground color of the current year.
 /// @prop {Map} year-current-background [color: 'gray', 200) ]- The background color of the current year in years view.
 /// @prop {Map} year-current-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the current year in years view.
@@ -1007,6 +1009,8 @@ $material-calendar: $light-calendar;
 /// @prop {Map} year-selected-current-hover-background [color: ('primary', 100)] - The background color of the current/selected year on :hover.
 /// @prop {Map} year-selected-current-focus-foreground [contrast-color: ('primary', 100)] - The foreground color of the current/selected year on :focus.
 /// @prop {Map} year-selected-current-focus-background [color: ('primary', 100)] - The background color of the current/selected year on :focus.
+/// @prop {Map} month-hover-foreground [contrast-color: ('gray', 200)] -  The :hover foreground color of the month inside the months view.
+/// @prop {Map} month-hover-background [color: ('gray', 200)] - The :hover background color of the month inside the months view.
 /// @prop {Map} month-focus-foreground [contrast-color: ('gray', 200)] - The :focus foreground color of the :focused month in months view.
 /// @prop {Map} month-focus-background [color: ('gray', 200)] - The :focus background color of the :focused month in months view.
 /// @prop {Map} month-current-foreground [contrast-color: ('gray', 100)] - The foreground color of the current month in month view.
@@ -1147,16 +1151,28 @@ $fluent-calendar: extend(
                 900,
             ),
         ),
+        year-hover-foreground: (
+            contrast-color: (
+                'gray',
+                200,
+            ),
+        ),
+        year-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         year-focus-foreground: (
             contrast-color: (
-                'primary',
-                50,
+                'gray',
+                200,
             ),
         ),
         year-focus-background: (
             color: (
-                'primary',
-                50,
+                'gray',
+                200,
             ),
         ),
         year-current-foreground: (
@@ -1267,16 +1283,28 @@ $fluent-calendar: extend(
                 100,
             ),
         ),
+        month-hover-foreground: (
+            contrast-color: (
+                'gray',
+                200,
+            ),
+        ),
+        month-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         month-focus-foreground: (
             contrast-color: (
-                'primary',
-                50,
+                'gray',
+                200,
             ),
         ),
         month-focus-background: (
             color: (
-                'primary',
-                50,
+                'gray',
+                200,
             ),
         ),
         month-current-foreground: (
@@ -1315,7 +1343,6 @@ $fluent-calendar: extend(
                 200,
             ),
         ),
-
         month-selected-foreground: (
             contrast-color: (
                 'primary',
@@ -1801,7 +1828,7 @@ $fluent-calendar: extend(
 /// @prop {Map} year-selected-hover-background [color: ('primary', 600)] - The background color of the selected year on :hover.
 /// @prop {Map} year-selected-focus-foreground [contrast-color: ('primary', 900)] - The foreground color of the selected year on :focus.
 /// @prop {Map} year-selected-focus-background [color: ('primary', 600)] - The background color of the selected year on :focus.
-/// @prop {Map} year-selected-current-foreground [contrast-color: ('secondary', 900)] - The foreground color of the current/selected year.
+/// @prop {Map} year-selected-current-foreground [contrast-color: ('primary', 900)] - The foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-background [color: ('primary', 500)] - The foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the current/selected year.
