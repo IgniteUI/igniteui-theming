@@ -18,6 +18,7 @@
 /// @prop {Color} input-suffix-background [transparent] - The background color of an input suffix of type line, box and border.
 /// @prop {Map} idle-text-color [color: ('gray', 700)] - The input text color in the idle state.
 /// @prop {Map} filled-text-color [color: ('gray', 900)] - The input text color in the filled state.
+/// @prop {Map} filled-text-hover-color [color: ('gray', 900)] - The input text color in the filled state on hover.
 /// @prop {Map} focused-text-color [color: ('gray', 900)] - The input text color in the focused state.
 /// @prop {Map} disabled-text-color [color: ('gray', 500)] - The input text color in the disabled state.
 /// @prop {Map} helper-text-color [color: ('gray', 700)] - The helper text color.
@@ -50,6 +51,7 @@
 /// @prop {Map} success-shadow-color [color: ('success', 500, .38)] - The shadow/border color for success state for bootstrap input group.
 /// @prop {Map} error-shadow-color [color: ('error', 500, .38)] - The shadow/border color for error state for bootstrap input group.
 /// @prop {Map} placeholder-color [color: ('gray', 700)] - The placeholder color of an input group.
+/// @prop {Map} hover-placeholder-color [color: ('gray', 700)] - The placeholder color of an input group on hover.
 /// @prop {Map} disabled-placeholder-color [color: ('gray', 500)] - The disabled placeholder color of an input group.
 /// @prop {List} box-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for box input.
 /// @prop {List} border-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for border input.
@@ -125,6 +127,12 @@ $light-input-group: extend(
                 ),
             ),
         filled-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        filled-text-hover-color: (
             color: (
                 'gray',
                 900,
@@ -247,6 +255,12 @@ $light-input-group: extend(
             ),
         ),
         placeholder-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        hover-placeholder-color: (
             color: (
                 'gray',
                 700,
@@ -654,6 +668,7 @@ $bootstrap-input-group: extend(
 /// @prop {List} box-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for box input.
 /// @prop {List} border-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for border input.
 /// @prop {List} search-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for search input.
+/// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the input group.
 /// @requires {Map} $light-input-group
 /// @requires {Map} $indigo-elevation-input-group
 $indigo-input-group: extend(
@@ -807,6 +822,13 @@ $indigo-input-group: extend(
                 rem(2px),
                 rem(0),
                 rem(20px),
+            ),
+        ),
+        size: (
+            sizable: (
+                rem(24px),
+                rem(28px),
+                rem(32px),
             ),
         ),
     )
