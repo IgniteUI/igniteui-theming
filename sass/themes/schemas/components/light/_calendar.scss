@@ -143,6 +143,9 @@
 /// @prop {Color} date-current-border-color [transparent] - The border color of the current date.
 /// @prop {Color} date-current-hover-border-color [transparent] - The :hover border color of the current date.
 /// @prop {Color} date-current-focus-border-color [transparent] - The :focus border color of the current date.
+/// @prop {Color} date-selected-current-border-color [transparent] - The border color of the selected current date.
+/// @prop {Color} date-selected-current-hover-border-color [transparent] - The :hover border color of the selected current date.
+/// @prop {Color} date-selected-current-focus-border-color [transparent] - The :focus border color of the selected current date.
 /// @prop {Color} date-range-border-color [transparent] - The border color of range selection.
 /// @prop {Map} date-range-preview-border-color [color: ('gray', 300)] - The border color of the range selection in preview state(visible before selecting the end of the range).
 /// @prop {Map} date-disabled-foreground [color: ('gray', 500)] - The foreground color of disabled dates.
@@ -976,6 +979,9 @@ $light-calendar: (
     date-current-border-color: transparent,
     date-current-hover-border-color: transparent,
     date-current-focus-border-color: transparent,
+    date-selected-current-border-color: transparent,
+    date-selected-current-hover-border-color: transparent,
+    date-selected-current-focus-border-color: transparent,
     date-range-border-color: transparent,
     date-range-preview-border-color: (
         color: (
@@ -992,6 +998,12 @@ $material-calendar: $light-calendar;
 
 /// Generates a fluent calendar schema.
 /// @type {Map}
+/// @prop {Map} date-current-border-color [color: ('gray', 900)] - The border color of the current date.
+/// @prop {Map} date-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the current date.
+/// @prop {Map} date-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the current date.
+/// @prop {Map} date-selected-current-border-color [color: ('gray', 900)] - The border color of the selected current date.
+/// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
+/// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {Map} year-focus-foreground [contrast-color: ('gray', 200)]- The foreground color of the selected year in years view.
 /// @prop {Map} year-focus-background [color: ('gray', 200)]- The background color of the selected year on :focus in years view.
 /// @prop {Map} year-current-foreground [contrast-color: ('gray', 100)] - The foreground color of the current year.
@@ -1122,6 +1134,24 @@ $material-calendar: $light-calendar;
 $fluent-calendar: extend(
     $light-calendar,
     (
+        date-selected-current-border-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        date-selected-current-hover-border-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        date-selected-current-focus-border-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         date-special-outline: (
             color: (
                 'primary',
@@ -1906,7 +1936,11 @@ $fluent-calendar: extend(
 /// @prop {Map} date-current-border-color [color: ('gray', 900)] - The border color of the current date.
 /// @prop {Map} date-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the current date.
 /// @prop {Map} date-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the current date.
+/// @prop {Map} date-selected-current-border-color [color: ('gray', 900)] - The border color of the selected current date.
+/// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
+/// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {Map} date-special-outline [color: ('primary', 800)] - The outline color around a special date.
+/// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size of the days, months, and years views..
 /// @requires {Map} $light-calendar
 $bootstrap-calendar: extend(
     $light-calendar,
@@ -2488,6 +2522,24 @@ $bootstrap-calendar: extend(
             ),
         ),
         date-current-focus-border-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-border-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-hover-border-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-selected-current-focus-border-color: (
             color: (
                 'gray',
                 900,
