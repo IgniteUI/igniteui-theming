@@ -9,15 +9,39 @@
 
 /// Generates the base dark button-group schema.
 /// @type {Map}
-/// @prop {Map} item-disabled-border [color: ('gray', 100)] - The border color for a disabled item in the button group.
 /// @prop {Map} item-border-color [color: ('gray', 100)] - The border color between button group items.
+/// @prop {Map} item-hover-border-color [color: ('gray', 100)] - The hover border color between button group items.
 /// @prop {Map} item-focused-border-color [color: ('gray', 100)] - The focused border color for an item from the button group.
 /// @prop {Map} item-hover-background [color: ('gray', 100), .8] - The hover background color for button group items.
 /// @prop {Map} item-focused-background [color: ('gray', 100), .8] - The focused background color for button group items.
 /// @prop {Map} item-selected-background [color: ('gray', 200)] - The background color for a selected item in the button group.
-/// @prop {Map} item-selected-hover-background [color: ('gray', 300, .8)] - The background color for a selected item in hover or focus state in the button group.
+/// @prop {Map} item-selected-hover-background [color: ('gray', 300, .8)] - The hover background color for a selected item in hover or focus state in the button group.
 /// @prop {Map} item-selected-border-color [color: ('gray', 300)] - The border color for button group selected items.
+/// @prop {Map} item-selected-hover-border-color [color: ('gray', 300)] - The hover border color for button group selected items.
+/// @prop {Map} item-disabled-border [color: ('gray', 100)] - The border color for a disabled item in the button group.
+/// @prop {Map} disabled-selected-border-color [color: ('gray', 100)] - The disabled border color for a selected item from the button group.
 $base-dark-button-group: (
+    item-border-color: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    item-hover-border-color: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    item-focused-border-color: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
     item-hover-background: (
         color: (
             'gray',
@@ -56,21 +80,21 @@ $base-dark-button-group: (
         ),
     ),
 
-    item-border-color: (
+    item-selected-hover-border-color: (
         color: (
             'gray',
-            100,
-        ),
-    ),
-
-    item-focused-border-color: (
-        color: (
-            'gray',
-            100,
+            300,
         ),
     ),
 
     item-disabled-border: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    disabled-selected-border-color: (
         color: (
             'gray',
             100,
@@ -87,26 +111,43 @@ $dark-material-button-group: extend($material-button-group, $base-dark-button-gr
 /// Generates a dark fluent button-group schema based on a mix of $fluent-button-group and $base-dark-button-group
 /// @type {Map}
 /// @prop {Map} item-border-color [color: ('gray', 400)] - The border color for button group items.
+/// @prop {Map} item-hover-border-color [color: ('gray', 400)] - The hover border color between button group items.
 /// @prop {Map} item-focused-border-color [color: ('gray', 400)] - The focused border color for button group items.
-/// @prop {Map} item-disabled-border: [color: ('gray', 400)] - The border color for button group disabled items.
-/// @prop {Map} item-text-color [color: ('gray', 900)] - The text color for button group items.
 /// @prop {Map} item-hover-background [color: ('gray', 50)] - The background color for button group items on hover.
 /// @prop {Map} item-focused-background [color: ('gray', 100)] - The focused background color for button group items.
 /// @prop {Map} item-selected-background [color: ('gray', 200)] - The background color for button group selected items.
 /// @prop {Map} item-selected-hover-background [color: ('gray', 300)] - The background color for a selected item in hover or focus state in the button group.
 /// @prop {Map} item-selected-border-color [color: ('gray', 400)] - The border color for button group selected items.
-/// @prop {Map} disabled-background-color [color: ('gray', 50)] - The background color for button group disabled items.
+/// @prop {Map} item-selected-hover-border-color [color: ('gray', 400)] - The border color for a selected item in hover state in the button group.
+/// @prop {Map} item-disabled-border: [color: ('gray', 400)] - The border color for button group disabled items.
 /// @prop {Map} disabled-text-color [color: ('gray', 300)]- The text/icon color for a disabled item in the button group.
+/// @prop {Map} disabled-selected-text-color [color: ('gray', 300)] - The disabled text color for a selected item in the button group.
+/// @prop {Map} disabled-selected-icon-color [color: ('gray', 300)] - The disabled icon color for a selected item in the button group.
+/// @prop {Map} disabled-selected-border-color [color: ('gray', 400)] - The disabled border color for a selected item from the button group.
 /// @requires $fluent-button-group
 /// @requires $base-dark-button-group
 $dark-fluent-button-group: extend(
     $fluent-button-group,
     $base-dark-button-group,
     (
-        item-text-color: (
+        item-border-color: (
             color: (
                 'gray',
-                900,
+                400,
+            ),
+        ),
+
+        item-hover-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        item-focused-border-color: (
+            color: (
+                'gray',
+                400,
             ),
         ),
 
@@ -138,21 +179,14 @@ $dark-fluent-button-group: extend(
             ),
         ),
 
-        item-border-color: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-
-        item-focused-border-color: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-
         item-selected-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        item-selected-hover-border-color: (
             color: (
                 'gray',
                 400,
@@ -166,17 +200,31 @@ $dark-fluent-button-group: extend(
             ),
         ),
 
-        disabled-background-color: (
-            color: (
-                'gray',
-                50,
-            ),
-        ),
-
         disabled-text-color: (
             color: (
                 'gray',
                 300,
+            ),
+        ),
+
+        disabled-selected-text-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        disabled-selected-icon-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        disabled-selected-border-color: (
+            color: (
+                'gray',
+                400,
             ),
         ),
     )
@@ -189,25 +237,126 @@ $dark-bootstrap-button-group: $bootstrap-button-group;
 
 /// Generates a dark indigo button-group schema
 /// @type {Map}
-/// @prop {Map} item-background [color: ('surface')] - The background color for button group items.
-/// @prop {Color} item-text-color [contrast-color: 'surface']- The text color for button group items.
-/// @prop {Color} item-hover-text-color [contrast-color: 'surface'] - The hover text color for button group items.
+/// @prop {Map} item-background [contrast-color: ('gray', 50, .05)] - The background color for button group items.
+/// @prop {Map} item-text-color [contrast-color: ('gray', 50, .8)] - The text color for button group items.
+/// @prop {Map} item-icon-color [contrast-color: ('gray', 50, .8)] - The icon color for button group items.
+/// @prop {Map} item-border-color [contrast-color: ('gray', 50, .2)] - The border color between button group items.
+/// @prop {Map} idle-shadow-color [contrast-color: ('gray', 50, .2)] - The outline color of button group items.
+/// @prop {Map} item-hover-background [contrast-color: ('gray', 50, .1)] - The hover background color for button group items.
+/// @prop {Map} item-hover-text-color [contrast-color: ('gray', 50)] - The hover text color for button group items.
+/// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50)] - The hover icon color for button group items.
+/// @prop {Map} item-hover-border-color [contrast-color: ('gray', 50, .3)] - The hover border color between button group items.
+/// @prop {Color} disabled-background-color [transparent] - The background color for a disabled item in the button group.
+/// @prop {Map} disabled-text-color [contrast-color: ('gray', 50, .2)] - The text/icon color for a disabled item in the button group.
+/// @prop {Map} item-disabled-border [contrast-color: ('gray', 50, .15)] - The border color for a disabled item in the button group.
+/// @prop {Map} disabled-selected-text-color [contrast-color: ('primary', 500, .2)] - The disabled text color for a selected item in the button group.
+/// @prop {Map} disabled-selected-icon-color [contrast-color: ('primary', 500, .2)] - The disabled icon color for a selected item in the button group.
 /// @requires $indigo-button-group
 $dark-indigo-button-group: extend(
     $indigo-button-group,
     (
         item-background: (
-            color: (
-                'surface',
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
             ),
         ),
 
         item-text-color: (
-            contrast-color: 'surface',
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-border-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        idle-shadow-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        item-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
         ),
 
         item-hover-text-color: (
-            contrast-color: 'surface',
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        item-hover-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        item-hover-border-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.3,
+            ),
+        ),
+
+        disabled-background-color: transparent,
+
+        disabled-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        item-disabled-border: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+
+        disabled-selected-text-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
+        ),
+
+        disabled-selected-icon-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
         ),
     )
 );

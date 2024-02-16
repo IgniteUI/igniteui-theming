@@ -10,8 +10,8 @@
 
 /// Generates a light button group schema.
 /// @type {Map}
-/// @prop {Map} idle-shadow-color [transparent] - The outline color of button group items.
-/// @prop {Map} selected-shadow-color [transparent] - The outline color of selected button group items.
+/// @prop {Color} idle-shadow-color [transparent] - The outline color of button group items.
+/// @prop {Color} selected-shadow-color [transparent] - The outline color of selected button group items.
 /// @prop {Map} item-text-color [color: ('gray', 700)] - The text color for button group items.
 /// @prop {Map} item-background [color: ('gray', 50)] - The background color for button group items.
 /// @prop {Map} item-border-color [color: ('gray', 400)] - The border color between button group items.
@@ -121,7 +121,7 @@ $light-button-group: extend(
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 500)] - The border color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-hover-text-color [color: ('gray', 800)] - The text color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-hover-icon-color [color: ('gray', 800)] - The icon color for a selected item in hover state in the button group.
-/// @prop {Map} disabled-text-color [color: ('gray', 400)]- The text color for a disabled item in the button group.
+/// @prop {Map} disabled-text-color [color: ('gray', 400)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 400)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-text-color [color: ('gray', 400)] - The disabled text color for a selected item in the button group.
 /// @prop {Map} disabled-selected-icon-color [color: ('gray', 400)] - The disabled icon color for a selected item in the button group.
@@ -264,22 +264,22 @@ $material-button-group: extend(
 
 /// Generates a fluent button group schema.
 /// @type {Map}
-/// @prop {Map} item-text-color [color: ('gray', 900)]- The text color for button group items.
-/// @prop {Map} item-icon-color [color: ('gray', 900)]- The icon color for button group items.
+/// @prop {Map} item-text-color [color: ('gray', 900)] - The text color for button group items.
+/// @prop {Map} item-icon-color [color: ('gray', 900)] - The icon color for button group items.
 /// @prop {Map} item-background [contrast-color: ('gray', 900)] - The background color for button group items.
 /// @prop {Map} item-border-color [color: ('gray', 600)] - The border color between button group items.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The hover icon color for button group items.
 /// @prop {Map} item-hover-border-color [color: ('gray', 600)] - The hover border color between button group items.
 /// @prop {Map} item-selected-background [color: ('gray', 300)] - The background color for a selected item in the button group.
-/// @prop {Map} item-selected-text-color [color: ('gray', 900)]- The text color for a selected item in the button group.
-/// @prop {Map} item-selected-icon-color [color: ('gray', 900)]- The icon color for a selected item in the button group.
+/// @prop {Map} item-selected-text-color [color: ('gray', 900)] - The text color for a selected item in the button group.
+/// @prop {Map} item-selected-icon-color [color: ('gray', 900)] - The icon color for a selected item in the button group.
 /// @prop {Map} item-selected-border-color [color: ('gray', 600)] - The border color for a selected item from the button group.
 /// @prop {Map} item-selected-hover-background [color: ('gray', 400)] - The background color for a selected item in hover or focus state in the button group.
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 600)] - The border color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-hover-text-color [color: ('gray', 900)] - The text color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-hover-icon-color [color: ('gray', 900)] - The icon color for a selected item in hover state in the button group.
 /// @prop {Map} item-focused-border-color [color: ('gray', 700)] - The focused border color for an item from the button group.
-/// @prop {Map} disabled-text-color [color: ('gray', 500)] - The text color for a disabled item in the button group.
+/// @prop {Map} disabled-text-color [color: ('gray', 500)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 600)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-text-color [color: ('gray', 500)] - The disabled text color for a selected item in the button group.
 /// @prop {Map} disabled-selected-icon-color [color: ('gray', 500)] - The disabled icon color for a selected item in the button group.
