@@ -246,6 +246,8 @@ $dark-bootstrap-button-group: $bootstrap-button-group;
 /// @prop {Map} item-hover-text-color [contrast-color: ('gray', 50)] - The hover text color for button group items.
 /// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50)] - The hover icon color for button group items.
 /// @prop {Map} item-hover-border-color [contrast-color: ('gray', 50, .3)] - The hover border color between button group items.
+/// @prop {Map} item-focused-text-color [contrast-color: ('gray', 50, .8)] - The focused text color for button group items.
+/// @prop {Map} item-focused-background [contrast-color: ('gray', 50, .05)] - The focused background color for button group items.
 /// @prop {Color} disabled-background-color [transparent] - The background color for a disabled item in the button group.
 /// @prop {Map} disabled-text-color [contrast-color: ('gray', 50, .2)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [contrast-color: ('gray', 50, .15)] - The border color for a disabled item in the button group.
@@ -322,6 +324,22 @@ $dark-indigo-button-group: extend(
                 'gray',
                 50,
                 0.3,
+            ),
+        ),
+
+        item-focused-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-focused-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
             ),
         ),
 

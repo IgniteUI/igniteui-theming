@@ -17,6 +17,7 @@
 /// @prop {Map} item-border-color [color: ('gray', 400)] - The border color between button group items.
 /// @prop {Map} item-hover-background [color: ('gray', 200)] - The hover background color for button group items.
 /// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The hover text color for button group items.
+/// @prop {Map} item-focused-text-color [color: ('gray', 800)] - The focused text color for button group items.
 /// @prop {Map} item-focused-border-color [color: ('gray', 400)] - The focused border color for an item from the button group.
 /// @prop {Map} item-focused-background [color: ('gray', 300)] - The focused background color for button group items.
 /// @prop {Map} disabled-background-color [color: ('gray', 50)] - The background color for a disabled item in the button group.
@@ -63,6 +64,13 @@ $light-button-group: extend(
             color: (
                 'gray',
                 900,
+            ),
+        ),
+
+        item-focused-text-color: (
+            color: (
+                'gray',
+                800,
             ),
         ),
 
@@ -270,6 +278,8 @@ $material-button-group: extend(
 /// @prop {Map} item-border-color [color: ('gray', 600)] - The border color between button group items.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The hover icon color for button group items.
 /// @prop {Map} item-hover-border-color [color: ('gray', 600)] - The hover border color between button group items.
+/// @prop {Map} item-focused-text-color [color: ('gray', 900)] - The focused text color for button group items.
+/// @prop {Map} item-focused-border-color [color: ('gray', 700)] - The focused border color for an item from the button group.
 /// @prop {Map} item-selected-background [color: ('gray', 300)] - The background color for a selected item in the button group.
 /// @prop {Map} item-selected-text-color [color: ('gray', 900)] - The text color for a selected item in the button group.
 /// @prop {Map} item-selected-icon-color [color: ('gray', 900)] - The icon color for a selected item in the button group.
@@ -278,7 +288,6 @@ $material-button-group: extend(
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 600)] - The border color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-hover-text-color [color: ('gray', 900)] - The text color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-hover-icon-color [color: ('gray', 900)] - The icon color for a selected item in hover state in the button group.
-/// @prop {Map} item-focused-border-color [color: ('gray', 700)] - The focused border color for an item from the button group.
 /// @prop {Map} disabled-text-color [color: ('gray', 500)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 600)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-text-color [color: ('gray', 500)] - The disabled text color for a selected item in the button group.
@@ -292,6 +301,20 @@ $fluent-button-group: extend(
     $light-button-group,
     $fluent-elevation-button-group,
     (
+        item-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        item-icon-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
         item-background: (
             contrast-color: (
                 'gray',
@@ -306,24 +329,17 @@ $fluent-button-group: extend(
             ),
         ),
 
+        item-focused-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
         item-focused-border-color: (
             color: (
                 'gray',
                 700,
-            ),
-        ),
-
-        item-text-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        item-icon-color: (
-            color: (
-                'gray',
-                900,
             ),
         ),
 
@@ -452,6 +468,7 @@ $fluent-button-group: extend(
 /// @prop {Map} item-hover-text-color [contrast-color: ('primary', 600)] - The hover text color for button group items.
 /// @prop {Map} item-hover-icon-color [contrast-color: ('primary', 600)] - The hover icon color for button group items.
 /// @prop {Map} item-hover-border-color [color: ('primary', 500)] - The hover border color between button group items.
+/// @prop {Map} item-focused-text-color [contrast-color: ('primary', 600)] - The focused text color for button group items.
 /// @prop {Map} item-selected-background [color: ('primary', 700)] - The background color for a selected item in the button group.
 /// @prop {Map} item-selected-text-color [contrast-color: ('primary', 700)] - The text color for a selected item in the button group.
 /// @prop {Map} item-selected-icon-color [contrast-color: ('primary', 700)] - The icon color for a selected item in the button group.
@@ -524,6 +541,13 @@ $bootstrap-button-group: extend(
         ),
 
         item-hover-icon-color: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+
+        item-focused-text-color: (
             contrast-color: (
                 'primary',
                 600,
@@ -644,6 +668,7 @@ $bootstrap-button-group: extend(
 /// @prop {Map} selected-shadow-color [color: ('primary', 400, .5)] - The outline color of selected button group items.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 700)] - The hover icon color for button group items.
 /// @prop {Map} item-hover-border-color [color: ('gray', 500)] - The hover border color between button group items.
+/// @prop {Map} item-focused-background [color: ('gray', 50)] - The focused background color for button group items.
 /// @prop {Map} item-selected-background [color: ('primary', 500)] - The background color for a selected item in the button group.
 /// @prop {Map} item-selected-text-color [contrast-color: ('primary', 500)] - The text color for a selected item in the button group.
 /// @prop {Map} item-selected-icon-color [contrast-color: ('primary', 500, .8)] - The icon color for a selected item in the button group.
@@ -700,6 +725,13 @@ $indigo-button-group: extend(
             color: (
                 'gray',
                 500,
+            ),
+        ),
+
+        item-focused-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
 
