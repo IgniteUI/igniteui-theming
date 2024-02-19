@@ -468,6 +468,7 @@ $fluent-button-group: extend(
 /// @prop {Map} item-hover-text-color [contrast-color: ('primary', 600)] - The hover text color for button group items.
 /// @prop {Map} item-hover-icon-color [contrast-color: ('primary', 600)] - The hover icon color for button group items.
 /// @prop {Map} item-hover-border-color [color: ('primary', 500)] - The hover border color between button group items.
+/// @prop {Map} item-focused-background [color: ('primary', 600)] - The focused background color for button group items.
 /// @prop {Map} item-focused-text-color [contrast-color: ('primary', 600)] - The focused text color for button group items.
 /// @prop {Map} item-selected-background [color: ('primary', 700)] - The background color for a selected item in the button group.
 /// @prop {Map} item-selected-text-color [contrast-color: ('primary', 700)] - The text color for a selected item in the button group.
@@ -549,6 +550,13 @@ $bootstrap-button-group: extend(
 
         item-focused-text-color: (
             contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+
+        item-focused-background: (
+            color: (
                 'primary',
                 600,
             ),
