@@ -121,7 +121,7 @@ $bootstrap-dialog: extend(
 /// Generates an indigo dialog schema.
 /// @type {Map}
 /// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(36px))] - The border radius used for dialog.
+/// @prop {List} border-radius [(rem(10px), rem(0), rem(36px))] - The border radius used for dialog.
 /// @requires {Map} $light-dialog
 $indigo-dialog: extend(
     $light-dialog,
@@ -135,7 +135,7 @@ $indigo-dialog: extend(
 
         border-radius: (
             border-radius: (
-                rem(2px),
+                rem(10px),
                 rem(0),
                 rem(36px),
             ),

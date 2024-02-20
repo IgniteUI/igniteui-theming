@@ -50,6 +50,18 @@ $dark-bootstrap-dialog: extend(
 
 /// Generates a dark indigo dialog schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('gray', 50)] - The dialog background color.
 /// @requires $indigo-dialog
 /// @requires $base-dark-dialog
-$dark-indigo-dialog: extend($indigo-dialog, $base-dark-dialog);
+$dark-indigo-dialog: extend(
+    $indigo-dialog,
+    $base-dark-dialog,
+    (
+        background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+    )
+);
