@@ -412,6 +412,8 @@ $dark-bootstrap-button: (
 
 /// @type {Map}
 /// @prop {Map} foreground [contrast-color: ('primary', 500)] - The idle text color of a flat button.
+/// @prop {Map} icon-color [contrast-color: ('primary', 500, 0.8)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [contrast-color: ('primary', 500)] - The hover icon color of the button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 500)] - The hover text color of a flat button.
 /// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus text color of a flat button.
 /// @prop {Map} focus-hover-foreground [contrast-color: ('primary', 500)] - The text color on focus hovered state of the button.
@@ -421,6 +423,19 @@ $dark-bootstrap-button: (
 /// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.20)] - The disabled foreground color of the button.
 $indigo-base-button-dark: (
     foreground: (
+        contrast-color: (
+            'primary',
+            500,
+        ),
+    ),
+    icon-color: (
+        contrast-color: (
+            'primary',
+            500,
+            0.8,
+        ),
+    ),
+    icon-color-hover: (
         contrast-color: (
             'primary',
             500,
