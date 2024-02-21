@@ -8,9 +8,88 @@
 ////
 
 /// Generates a dark material calendar schema.
+/// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the icon button responsible for month navigation.
+/// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the icon button responsible for month navigation.
+/// @prop {Map} date-special-foreground [color: ('secondary', 200)] - The foreground color of a special date.
+/// @prop {Map} date-special-range-foreground [color: ('secondary', 200)] - The foreground color of a special date in a range selection.
+/// @prop {Map} date-special-outline [color: ('secondary', 200)] - The outline color around a special date.
+/// @prop {Map} date-special-range-outline [color: ('secondary', 200)] - The outline color around a special date in a range selection.
+/// @prop {Map} picker-hover-foreground [color: 'secondary' 200] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: 'secondary' 200] - The :focus foreground color of the month and year pickers.
 /// @type {Map}
 /// @requires $material-calendar
-$dark-material-calendar: $material-calendar;
+$dark-material-calendar: extend(
+    $material-calendar,
+    (
+        picker-hover-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        date-special-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        date-special-range-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        date-special-outline: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        date-special-range-outline: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        date-selected-range-background: (
+            color: (
+                'secondary',
+                500,
+                0.24,
+            ),
+        ),
+        date-selected-range-hover-foreground: (
+            contrast-color: (
+                'secondary',
+                900,
+            ),
+        ),
+        date-selected-range-focus-foreground: (
+            contrast-color: (
+                'secondary',
+                900,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
@@ -63,6 +142,7 @@ $dark-material-calendar: $material-calendar;
 /// @prop {Map} date-selected-range-end-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the last date in the selected range.
 /// @prop {Map} date-disabled-foreground [color: ('gray', 300)] - The foreground of disabled dates.
 /// @prop {Map} date-special-outline [color: ('primary', 50)] - The outline color around a special date.
+/// @prop {Map} date-special-range-outline [color: ('primary', 50)] - The outline color around a special date in a range selection.
 /// @prop {Map} header-foreground [contrast-color: ('primary', 200)] - The header foreground color.
 /// @prop {Map} header-background [color: ('primary', 200)] - The background color of the month and year pickers.
 /// @requires $fluent-calendar
@@ -243,6 +323,12 @@ $dark-fluent-calendar: extend(
                 50,
             ),
         ),
+        date-special-range-outline: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
         date-current-foreground: (
             contrast-color: (
                 'gray',
@@ -387,6 +473,7 @@ $dark-fluent-calendar: extend(
 /// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the buttons responsible for navigation.
 /// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the buttons responsible for navigation.
 /// @prop {Map} date-special-outline [color: ('primary', 200)] - The outline color around a special date.
+/// @prop {Map} date-special-range-outline [color: ('primary', 200)] - The outline color around a special date in a range selection.
 /// @prop {Map} date-current-hover-background [color: ('gray', 100)] - The :hover background color of the current date.
 /// @prop {Map} date-current-focus-background [color: ('gray', 100)] - The :focus background color of the current date.
 /// @prop {Map} date-selected-range-hover-background [color: ('gray', 100)] - The :hover background color of the selected range.
@@ -434,6 +521,12 @@ $dark-bootstrap-calendar: extend(
             ),
         ),
         date-special-outline: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        date-special-range-outline: (
             color: (
                 'primary',
                 200,
