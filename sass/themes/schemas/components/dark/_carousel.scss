@@ -74,53 +74,64 @@ $dark-bootstrap-carousel: extend($bootstrap-carousel, $base-dark-carousel);
 
 /// Generates a dark indigo carousel schema based on a mix of $indigo-carousel and $base-dark-carousel
 /// @type {Map}
-/// @prop {Map} button-background [color: ('gray', 400)] - The previous/next buttons idle background color.
-/// @prop {Map} button-hover-background [color: ('gray', 200)] - The previous/next buttons hover background color.
-/// @prop {Map} button-arrow-color [color: ('gray', 800)] - The previous/next buttons idle arrow color.
-/// @prop {Map} button-hover-arrow-color [color: ('gray', 900)] - The previous/next buttons hover arrow color.
-/// @prop {Map} indicator-dot-color [color: ('gray', 600, .6)] - The idle indicator dot color.
-/// @prop {Map} indicator-active-dot-color [color: ('gray', 900)] - The active indicator dot color.
+/// @prop {Map} button-hover-background [color: ('gray', 100)] - The previous/next buttons hover background color.
+/// @prop {Map} button-arrow-color [contrast-color: ('gray', 50, .8)] - The previous/next buttons idle arrow color.
+/// @prop {Map} button-hover-arrow-color [color: ('gray', 50)] - The previous/next buttons hover arrow color.
+/// @prop {Map} button-border-color [color: ('gray', 200)] - The previous/next buttons idle border color.
+/// @prop {Map} button-hover-border-color [color: ('gray', 300)] - The previous/next buttons hover border color.
+/// @prop {Map} indicator-dot-color [color: ('gray', 400)] - The idle indicator dot color.
+/// @prop {Map} indicator-active-dot-color [color: ('primary', 400)] - The active indicator dot color.
 /// @requires $indigo-carousel
 $dark-indigo-carousel: extend(
     $indigo-carousel,
     (
-        button-background: (
-            color: (
-                'gray' 400,
-            ),
-        ),
-
         button-hover-background: (
             color: (
-                'gray' 200,
+                'gray',
+                100,
             ),
         ),
 
         button-arrow-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                800,
+                50,
+                0.8,
             ),
         ),
 
         button-hover-arrow-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        button-border-color: (
             color: (
                 'gray',
-                900,
+                200,
+            ),
+        ),
+
+        button-hover-border-color: (
+            color: (
+                'gray',
+                300,
             ),
         ),
 
         indicator-dot-color: (
             color: (
                 'gray',
-                600,
-                0.6,
+                400,
             ),
         ),
 
         indicator-active-dot-color: (
             color: (
-                'gray' 900,
+                'primary',
+                400,
             ),
         ),
     )
