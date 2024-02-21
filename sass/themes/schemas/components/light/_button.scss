@@ -1158,6 +1158,7 @@ $bootstrap-button: (
 /// @prop {Map} shadow-color [color: ('gray', 900, .15)] - The shadow color of the button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 900, .20)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [color: ('gray', 900, .20)] - The disabled icon color of the button.
 /// @prop {List} border-radius [(rem(40px), rem(0), rem(40px))] - The border radius used for the button.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the button.
 /// @requires {Map} $light-base-button
@@ -1240,6 +1241,13 @@ $indigo-base-button: extend(
         ),
         disabled-background: transparent,
         disabled-foreground: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        disabled-icon-color: (
             color: (
                 'gray',
                 900,
@@ -1339,6 +1347,7 @@ $indigo-outlined-button: extend(
 /// @prop {Map} shadow-color [color: ('primary', 400, 0.50)] - The shadow color of a contained button.
 /// @prop {Map} disabled-background [color: ('primary', 400, 0.50)] - The disabled background color of a flat button.
 /// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.40)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [contrast-color: ('primary', 500, 0.30)] - The disabled icon color of the button.
 /// @requires {Map} $light-contained-button
 /// @requires {Map} $indigo-base-button
 $indigo-contained-button: extend(
@@ -1449,6 +1458,13 @@ $indigo-contained-button: extend(
                 'primary',
                 500,
                 0.4,
+            ),
+        ),
+        disabled-icon-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.3,
             ),
         ),
     )

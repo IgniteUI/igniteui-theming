@@ -419,8 +419,8 @@ $dark-bootstrap-button: (
 /// @prop {Map} focus-hover-foreground [contrast-color: ('primary', 500)] - The text color on focus hovered state of the button.
 /// @prop {Map} active-foreground [contrast-color: ('primary', 500)] - The active text color of a flat button.
 /// @prop {Map} focus-visible-foreground [contrast-color: ('primary', 500)] - The focus-visible text color of a flat button.
-/// @prop {Map} shadow-color [contrast-color: ('primary', 500, 0.20)] - The shadow color of a flat button.
 /// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.20)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [contrast-color: ('primary', 500, 0.30)] - The disabled icon color of the button.
 $indigo-base-button-dark: (
     foreground: (
         contrast-color: (
@@ -471,14 +471,14 @@ $indigo-base-button-dark: (
             500,
         ),
     ),
-    shadow-color: (
+    disabled-foreground: (
         contrast-color: (
             'primary',
             500,
             0.2,
         ),
     ),
-    disabled-foreground: (
+    disabled-icon-color: (
         contrast-color: (
             'primary',
             500,
@@ -490,6 +490,7 @@ $indigo-base-button-dark: (
 /// @type {Map}
 /// @prop {Map} hover-background [contrast-color: ('primary', 500, 0.10)] - The hover background color of a flat button.
 /// @prop {Map} focus-hover-background [contrast-color: ('primary', 500, 0.10] - The background color on focus hovered state of the button.
+/// @prop {Map} shadow-color [contrast-color: ('primary', 500, 0.20)] - The shadow color of a flat button.
 /// @requires {Map} $indigo-flat-button
 /// @requires {Map} $indigo-base-button-dark
 $indigo-flat-button-dark: extend(
@@ -510,6 +511,13 @@ $indigo-flat-button-dark: extend(
                 0.1,
             ),
         ),
+        shadow-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
+        ),
     )
 );
 
@@ -521,6 +529,7 @@ $indigo-flat-button-dark: extend(
 /// @prop {Map} focus-border-color [contrast-color: ('primary', 500, 0.60)] - The focus border color of a outlined button.
 /// @prop {Map} focus-visible-border-color [contrast-color: ('primary', 500, 0.60)] - The focus-visible border color of a outlined button.
 /// @prop {Map} active-border-color [contrast-color: ('primary', 500, 0.80))] - The active border color of a outlined button.
+/// @prop {Map} shadow-color [contrast-color: ('primary', 500, 0.20)] - The shadow color of a flat button.
 /// @prop {Map} disabled-border-color [contrast-color: ('primary', 500, 0.20)] - The disabled focused border color of an outlined button.
 /// @requires {Map} $indigo-outlined-button
 /// @requires {Map} $indigo-base-button-dark
@@ -575,6 +584,13 @@ $indigo-outlined-button-dark: extend(
                 'primary',
                 500,
                 0.8,
+            ),
+        ),
+        shadow-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
             ),
         ),
         disabled-border-color: (
