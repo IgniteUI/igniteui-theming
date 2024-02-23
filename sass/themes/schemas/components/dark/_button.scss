@@ -11,7 +11,8 @@
 
 /// @type {Map}
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
-/// @prop {Color} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [color: ('gray', 500)] - The disabled icon color of the button.
 $material-base-button-dark: (
     disabled-background: (
         color: (
@@ -20,6 +21,12 @@ $material-base-button-dark: (
         ),
     ),
     disabled-foreground: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    disabled-icon-color: (
         color: (
             'gray',
             500,
@@ -84,6 +91,7 @@ $dark-material-button: (
 /// @prop {Map} focus-hover-background [color: ('gray', 50)] - The background color on focus hovered state of the button.
 /// @prop {Map} disabled-background [color: ('gray', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 200)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [color: ('gray', 200)] - The disabled icon color of the button.
 $fluent-base-button-dark: (
     focus-visible-border-color: (
         color: (
@@ -110,6 +118,12 @@ $fluent-base-button-dark: (
         ),
     ),
     disabled-foreground: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    disabled-icon-color: (
         color: (
             'gray',
             200,
@@ -184,6 +198,8 @@ $fluent-outlined-button-dark: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('primary', 300)] - The background color of an contained button.
 /// @prop {Map} foreground [contrast-color: ('primary', 300)] - The idle text color of a contained button.
+/// @prop {Map} icon-color [contrast-color: ('primary', 300)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [contrast-color: ('primary', 300)] - The hover icon color of the button.
 /// @prop {Map} focus-visible-border-color [contrast-color: ('primary', 300)] - The focus-visible border color of a contained button.
 /// @prop {Map} hover-background [color: ('primary', 200)] - The hover background of a contained button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 500)] - The hover text color of a contained button.
@@ -208,6 +224,18 @@ $fluent-contained-button-dark: extend(
             ),
         ),
         foreground: (
+            contrast-color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-color-hover: (
             contrast-color: (
                 'primary',
                 300,
@@ -285,6 +313,8 @@ $fluent-contained-button-dark: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('primary', 300)] - The background color of an contained button.
 /// @prop {Map} foreground [contrast-color: ('primary', 300)] - The idle text color of a contained button.
+/// @prop {Map} icon-color [contrast-color: ('primary', 300)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [contrast-color: ('primary', 300)] - The hover icon color of the button.
 /// @prop {Map} focus-visible-border-color [contrast-color: ('primary', 300)] - The focus-visible border color of a contained button.
 /// @prop {Map} active-border-color [color: ('primary', 200)] - The active border color of a contained button.
 /// @prop {Map} hover-background [color: ('primary', 200)] - The hover background of a contained button.
@@ -310,6 +340,18 @@ $fluent-fab-button-dark: extend(
             ),
         ),
         foreground: (
+            contrast-color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-color-hover: (
             contrast-color: (
                 'primary',
                 300,

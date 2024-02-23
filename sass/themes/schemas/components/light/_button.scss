@@ -20,6 +20,7 @@
 /// @prop {Color} disabled-border-color [transparent] - The disabled border color of the button.
 /// @prop {Map} disabled-background [color: ('gray', 300)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [color: ('gray', 500)] - The disabled icon color of the button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the button.
 /// @prop {Number} default-size [1] - The default size used for the button component.
 $light-base-button: (
@@ -37,6 +38,12 @@ $light-base-button: (
         ),
     ),
     disabled-foreground: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    disabled-icon-color: (
         color: (
             'gray',
             500,
@@ -173,6 +180,8 @@ $material-base-button: $light-base-button;
 
 /// @type {Map}
 /// @prop {Map} foreground [color: ('secondary', 500)] - The idle text color of a flat button.
+/// @prop {Map} icon-color [color: ('secondary', 500)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [color: ('secondary', 500)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('secondary', 500, .08)] - The hover background color of a flat button.
 /// @prop {Map} hover-foreground [color: ('secondary', 500)] - The hover text color of a flat button.
 /// @prop {Map} focus-background [color: ('secondary', 400, .16)] - The focus background color of a flat button.
@@ -191,6 +200,18 @@ $material-flat-button: extend(
     $light-flat-button,
     (
         foreground: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        icon-color-hover: (
             color: (
                 'secondary',
                 500,
@@ -307,6 +328,8 @@ $material-outlined-button: extend(
 
 /// @type {Map}
 /// @prop {Map} foreground [contrast-color: ('secondary', 500)] - The idle text color of a contained button.
+/// @prop {Map} icon-color [color: ('secondary', 500)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [color: ('secondary', 500)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('secondary', 400)] - The hover background color of a flat button.
 /// @prop {Map} hover-foreground [contrast-color: ('secondary', 400)] - The hover text color of a contained button.
 /// @prop {Map} focus-background [color: ('secondary', 300)] - The focus background color of a flat button.
@@ -327,6 +350,18 @@ $material-contained-button: extend(
             contrast-color: (
                 'secondary',
                 500,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'secondary',
+                500,
+            ),
+        ),
+        icon-color-hover: (
+            contrast-color: (
+                'secondary',
+                400,
             ),
         ),
         hover-background: (
@@ -436,6 +471,8 @@ $material-button: (
 /// @requires {Map} $light-base-button
 /// @requires {Map} $flat-elevation-button
 /// @prop {Map} foreground [color: ('gray', 900)] - The idle text color of the button.
+/// @prop {Map} icon-color [color: ('gray', 900)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [color: ('gray', 900)] - The hover icon color of the button.
 /// @prop {Map} focus-visible-border-color [color: ('gray', 700)] - The focus-visible border color of the button.
 /// @prop {Map} hover-foreground [color: ('gray', 900)] - The hover text color of the button.
 /// @prop {Color} focus-background [transparent] - The focus text color of the button.
@@ -444,7 +481,6 @@ $material-button: (
 /// @prop {Map} focus-hover-foreground [color: ('gray', 900)] - The focus-hover text color of the button.
 /// @prop {Color} focus-visible-background [transparent] - The focus-visible text color of the button.
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
-/// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for outlined button.
 /// @prop {List} size [(rem(24px), rem(32px), rem(38px))] - The size used for the button.
 /// @prop {Number} default-size [2] - The default size used for the button component.
@@ -453,6 +489,18 @@ $fluent-base-button: extend(
     $flat-elevation-button,
     (
         foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        icon-color-hover: (
             color: (
                 'gray',
                 900,
@@ -500,12 +548,6 @@ $fluent-base-button: extend(
             color: (
                 'gray',
                 100,
-            ),
-        ),
-        disabled-foreground: (
-            color: (
-                'gray',
-                500,
             ),
         ),
         border-radius: (
@@ -634,6 +676,8 @@ $fluent-outlined-button: extend(
 /// @prop {Map} focus-visible-border-color [contrast-color: ('primary', 900)] - The focus-visible border color of a contained button.
 /// @prop {Map} background [color: ('primary', 500)] - The background color of an contained button.
 /// @prop {Map} foreground [contrast-color: ('primary', 900)] - The idle text color of a contained button.
+/// @prop {Map} icon-color [contrast-color: ('primary', 900)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [contrast-color: ('primary', 900)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('primary', 600)] - The hover background of a contained button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 900)] - The hover text color of a contained button.
 /// @prop {Map} focus-background [color: ('primary', 500)] - The focus background color of a contained button.
@@ -668,6 +712,18 @@ $fluent-contained-button: extend(
             ),
         ),
         foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        icon-color-hover: (
             contrast-color: (
                 'primary',
                 900,
@@ -789,6 +845,7 @@ $fluent-button: (
 /// @type {Map}
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [color: ('primary', 200)] - The disabled icon color of the button.
 /// @prop {Map} shadow-color [color: ('primary', 200, .5)] - The shadow color of an outlined button.
 /// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the button.
 /// @prop {Number} default-size [2] - The default size used for the button component.
@@ -798,16 +855,22 @@ $bootstrap-base-button: extend(
     $light-base-button,
     $flat-elevation-button,
     (
+        disabled-background: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
         disabled-foreground: (
             color: (
                 'primary',
                 200,
             ),
         ),
-        disabled-background: (
+        disabled-icon-color: (
             color: (
                 'primary',
-                50,
+                200,
             ),
         ),
         shadow-color: (
@@ -830,6 +893,8 @@ $bootstrap-base-button: extend(
 
 /// @type {Map}
 /// @prop {Map} foreground [color: ('primary', 500)] - The idle text color of a flat button.
+/// @prop {Map} icon-color [color: ('primary', 500)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [color: ('primary', 800)] - The hover icon color of the button.
 /// @prop {Color} hover-background [transparent] - The hover background color of a flat button.
 /// @prop {Map} hover-foreground [color: ('primary', 800)] - The hover text color of a flat button.
 /// @prop {Color} focus-background [transparent] - The focus background color of a flat button.
@@ -851,6 +916,18 @@ $bootstrap-flat-button: extend(
             color: (
                 'primary',
                 500,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        icon-color-hover: (
+            color: (
+                'primary',
+                800,
             ),
         ),
         hover-background: transparent,
@@ -894,6 +971,8 @@ $bootstrap-flat-button: extend(
 
 /// @type {Map}
 /// @prop {Map} foreground [color: ('primary', 500)] - The idle text color of an outlined button.
+/// @prop {Map} icon-color [color: ('primary', 500)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [contrast-color: ('primary', 600)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('primary', 500)] - The hover background color of an outlined button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 600)] - The hover text color of an outlined button.
 /// @prop {Color} focus-background [transparent] - The focus background color of an outlined button.
@@ -921,6 +1000,18 @@ $bootstrap-outlined-button: extend(
             color: (
                 'primary',
                 500,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        icon-color-hover: (
+            contrast-color: (
+                'primary',
+                600,
             ),
         ),
         hover-background: (
@@ -1016,6 +1107,8 @@ $bootstrap-outlined-button: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('primary', 500)] - The background color of a contained button.
 /// @prop {Map} foreground [contrast-color: ('primary', 600)] - The idle text color of a contained button.
+/// @prop {Map} icon-color [contrast-color: ('primary', 600)] - The idle icon color of the button.
+/// @prop {Map} icon-color-hover [contrast-color: ('primary', 600)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('primary', 600)] - The hover background color of an contained button.
 /// @prop {Color} hover-foreground [contrast-color: ('primary', 600)] - The hover text color of an contained button.
 /// @prop {Map} focus-background [color: ('primary', 500)] - The focus background color of an contained button.
@@ -1039,6 +1132,18 @@ $bootstrap-contained-button: extend(
             ),
         ),
         foreground: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+        icon-color-hover: (
             contrast-color: (
                 'primary',
                 600,
