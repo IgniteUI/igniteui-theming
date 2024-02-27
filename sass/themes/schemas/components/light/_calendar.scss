@@ -38,7 +38,7 @@
 /// @prop {Map} year-selected-hover-background [color: ('gray' 200)] - The :hover background color of the selected year in years view.
 /// @prop {Map} year-selected-focus-foreground [contrast-color: ('secondary', 600)] - The :focus foreground color of the selected year in years view.
 /// @prop {Map} year-selected-focus-background [color: ('secondary' 500)] - The :focus background color of the selected year in years view.
-/// @prop {Map} year-selected-current-foreground [contrast-color: ('secondary', 500)] - The foreground color of the current/selected year.
+/// @prop {Map} year-selected-current-foreground [contrast-color: ('secondary', 600)] - The foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-background [color: ('secondary', 500)] - The foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-hover-background [color: ('secondary', 500)] - The :hover background color of the current/selected year.
@@ -155,9 +155,9 @@
 /// @prop {Color} date-disabled-background [transparent] - The background color of disabled dates.
 /// @prop {Map} date-disabled-current-foreground [color: ('gray', 500)] - The foreground color of current/disabled date.
 /// @prop {Color} date-disabled-current-background [transparent] - The background color of current/disabled date.
-/// @prop {Map} date-disabled-range-foreground [color: ('secondary', 200)] - The foreground color of disabled dates inside range selection.
+/// @prop {Map} date-disabled-range-foreground [color: ('gray', 500)] - The foreground color of disabled dates inside range selection.
 /// @prop {Color} date-disabled-range-background [transparent] - The background color of disabled dates inside range selection.
-/// @prop {Map} date-disabled-current-range-foreground [color: ('secondary', 200)] - The foreground color of current/disabled date in range selection.
+/// @prop {Map} date-disabled-current-range-foreground [color: ('gray', 500)] - The foreground color of current/disabled date in range selection.
 /// @prop {Color} date-disabled-current-range-background [transparent] - The background color of current/disabled date in range selection.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
@@ -321,7 +321,7 @@ $light-calendar: (
     year-selected-current-foreground: (
         contrast-color: (
             'secondary',
-            500,
+            600,
         ),
     ),
     year-selected-current-background: (
@@ -854,15 +854,15 @@ $light-calendar: (
     date-disabled-current-background: transparent,
     date-disabled-range-foreground: (
         color: (
-            'secondary',
-            200,
+            'gray',
+            500,
         ),
     ),
     date-disabled-range-background: transparent,
     date-disabled-current-range-foreground: (
         color: (
-            'secondary',
-            200,
+            'gray',
+            500,
         ),
     ),
     date-disabled-current-range-background: transparent,
@@ -1111,14 +1111,9 @@ $material-calendar: $light-calendar;
 /// @prop {Map} date-selected-range-focus-background [color: ('gray', 200)] - The :focus background color of the selected range.
 /// @prop {Map} date-range-border-color [color: ('gray', 700)] - The border color of the selected date.
 /// @prop {Map} date-range-preview-border-color [color: ('gray', 700)] - The border color of the selected date.
-/// @prop {Color} date-disabled-background [transparent] - The background color of a disabled date.
 /// @prop {Map} date-special-outline [color: ('primary', 900)] - The outline color around a special date.
 /// @prop {Map} date-special-range-outline [color: ('primary', 900)] - The outline color around a special date in a range selection.
 /// @prop {Color} date-special-current-outline [transparent] - The outline color around a special date.
-/// @prop {Color} date-disabled-current-background [transparent] - The background color of current/disabled date.
-/// @prop {Map} date-disabled-current-foreground [contrast-color: ('primary', 900)] - The foreground color of current/disabled date.
-/// @prop {Map} date-disabled-range-foreground [color: ('gray', 500)] - The foreground color of disabled dates inside range selection.
-/// @prop {Map} date-disabled-current-range-foreground [contrast-color: ('primary', 900)] - The foreground color of current/disabled date inside range selection.
 /// @prop {Color} date-current-border-color [transparent] - The border color of the current date.
 /// @prop {Color} date-current-hover-border-color [transparent] - The :hover border color of the current date.
 /// @prop {Color} date-current-focus-border-color [transparent] - The :focus border color of the current date.
@@ -1796,26 +1791,6 @@ $fluent-calendar: extend(
                 700,
             ),
         ),
-        date-disabled-background: transparent,
-        date-disabled-current-background: transparent,
-        date-disabled-current-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-disabled-range-foreground: (
-            color: (
-                'gray',
-                500,
-            ),
-        ),
-        date-disabled-current-range-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
         date-special-background: transparent,
         date-current-border-color: transparent,
         date-current-hover-border-color: transparent,
@@ -1874,7 +1849,7 @@ $fluent-calendar: extend(
 /// @prop {Map} date-hover-foreground [contrast-color: 'gray', 200] - The :hover foreground color of a date.
 /// @prop {Map} date-hover-background [color: ('gray', 200)] - The :hover background color of a date.
 /// @prop {Map} date-focus-foreground [contrast-color: ('gray', 200)] - The :focus foreground color of a date.
-/// @prop {Map} date-focus-background [color: ('gray', 100)] - The :focus background color of a date.
+/// @prop {Map} date-focus-background [color: ('gray', 200)] - The :focus background color of a date.
 /// @prop {Map} date-selected-foreground [contrast-color: ('primary', '900')] - The foreground color of the selected date.
 /// @prop {Map} date-selected-background [color: ('primary', 500)] - The background color of the selected date.
 /// @prop {Map} date-selected-hover-foreground [contrast-color: ('primary', '900')] - The :hover foreground color of the selected date.
@@ -1933,8 +1908,6 @@ $fluent-calendar: extend(
 /// @prop {Map} selected-current-outline-color [color: ('gray', 900)] - The outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-hover-outline-color [color: ('gray', 900)] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-focus-outline-color [color: ('gray', 900)] - The :focus outline color of the selected current year/month in year/month views.
-/// @prop {Map} date-disabled-range-foreground [color: ('primary', 100)] - The foreground color of disabled dates inside range selection.
-/// @prop {Map} date-disabled-current-range-foreground [color: ('primary', 100)] - The foreground color of current/disabled dats inside range selection.
 /// @prop {Map} border-color [color: ('gray', 300)] - The calendar border color.
 /// @prop {Map} weekday-color [color: 'info', 300] - The foreground color for weekday labels.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
@@ -2273,7 +2246,7 @@ $bootstrap-calendar: extend(
         date-focus-background: (
             color: (
                 'gray',
-                100,
+                200,
             ),
         ),
         date-special-background: transparent,
@@ -2653,18 +2626,6 @@ $bootstrap-calendar: extend(
                 rem(0),
                 rem(0),
                 rem(8px),
-            ),
-        ),
-        date-disabled-range-foreground: (
-            color: (
-                'primary',
-                100,
-            ),
-        ),
-        date-disabled-current-range-foreground: (
-            color: (
-                'primary',
-                100,
             ),
         ),
         date-range-preview-border-color: transparent,
