@@ -108,31 +108,32 @@ $bootstrap-snackbar: extend(
 
 /// Generates an indigo snackbar schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 700, .9)] - The background color used in the snackbar.
-/// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text color used in the snackbar.
-/// @prop {Map} button-color [contrast-color: ('gray', 700)] - The button color used in the snackbar.
+/// @prop {Map} background [color: ('gray', 200)] - The background color used in the snackbar.
+/// @prop {Map} text-color [color: ('gray', 700)] - The text color used in the snackbar.
+/// @prop {Map} button-color [color: ('gray', 700)] - The button color used in the snackbar.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(24px))] - The border radius used for snackbar.
 /// @requires $light-snackbar
+/// @requires {Map} $indigo-elevation-snackbar
 $indigo-snackbar: extend(
     $light-snackbar,
+    $indigo-elevation-snackbar,
     (
         background: (
             color: (
                 'gray',
-                700,
-                0.9,
+                200,
             ),
         ),
 
         text-color: (
-            contrast-color: (
+            color: (
                 'gray',
                 700,
             ),
         ),
 
         button-color: (
-            contrast-color: (
+            color: (
                 'gray',
                 700,
             ),
