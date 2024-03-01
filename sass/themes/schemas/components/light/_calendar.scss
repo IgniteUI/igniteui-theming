@@ -97,18 +97,6 @@
 /// @prop {Map} date-selected-range-hover-background [color: ('secondary', 100)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('secondary', 100)] - The :focus foreground color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('secondary', 100)] - The :focus background color of the selected range.
-/// @prop {Map} date-selected-range-start-foreground [contrast-color: ('primary', 500)] - The foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-background [color: ('secondary', 500)] - The background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-hover-background [color: ('secondary', 700)] - The :hover background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-focus-foreground [contrast-color: ('secondary', 900)] - The :focus foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-focus-background [color: ('secondary', 700)] - The :focus background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-end-foreground [contrast-color: ('primary', 500)] - The background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-background [color: ('secondary', 500)] - The background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-hover-background [color: ('secondary', 700)] - The :hover background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-focus-foreground [contrast-color: ('secondary', 900)] - The :focus foreground color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-focus-background [color: ('secondary', 700)] - The :focus background color of the last date in the selected range.
 /// @prop {Map} date-selected-current-range-foreground [color: ('gray', 900)] - The foreground color of the current date in the selected range.
 /// @prop {Color} date-selected-current-range-background [transparent] - The background color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current date in the selected range.
@@ -636,78 +624,6 @@ $light-calendar: (
             100,
         ),
     ),
-    date-selected-range-start-foreground: (
-        contrast-color: (
-            'primary',
-            900,
-        ),
-    ),
-    date-selected-range-start-background: (
-        color: (
-            'secondary',
-            500,
-        ),
-    ),
-    date-selected-range-start-hover-foreground: (
-        contrast-color: (
-            'secondary',
-            900,
-        ),
-    ),
-    date-selected-range-start-hover-background: (
-        color: (
-            'secondary',
-            700,
-        ),
-    ),
-    date-selected-range-start-focus-foreground: (
-        contrast-color: (
-            'secondary',
-            900,
-        ),
-    ),
-    date-selected-range-start-focus-background: (
-        color: (
-            'secondary',
-            700,
-        ),
-    ),
-    date-selected-range-end-foreground: (
-        contrast-color: (
-            'primary',
-            900,
-        ),
-    ),
-    date-selected-range-end-background: (
-        color: (
-            'secondary',
-            500,
-        ),
-    ),
-    date-selected-range-end-hover-foreground: (
-        contrast-color: (
-            'secondary',
-            900,
-        ),
-    ),
-    date-selected-range-end-hover-background: (
-        color: (
-            'secondary',
-            700,
-        ),
-    ),
-    date-selected-range-end-focus-foreground: (
-        contrast-color: (
-            'secondary',
-            900,
-        ),
-    ),
-    date-selected-range-end-focus-background: (
-        color: (
-            'secondary',
-            700,
-        ),
-    ),
     date-selected-current-foreground: (
         contrast-color: (
             'secondary',
@@ -1095,18 +1011,6 @@ $material-calendar: $light-calendar;
 /// @prop {Color} selected-current-focus-outline-color [transparent] - The :focus outline color of the selected current year/month in year/month views.
 /// @prop {Map} date-selected-range-foreground [contrast-color: ('gray', 100)] - The foreground color of the selected range.
 /// @prop {Map} date-selected-range-background [color: ('gray', 100)] - The background color of the selected range.
-/// @prop {Map} date-selected-range-start-foreground [contrast-color: ('gray', 100)] - The foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-background [color: ('gray', 100)] - The background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-hover-background [color: ('gray', 200)] - The :hover background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-focus-foreground [contrast-color: ('gray', 200)] - The :focus foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-focus-background [color: ('gray', 200)] - The :focus background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-end-foreground [contrast-color: ('gray', 100)] - The background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-background [color: ('gray', 100)] - The background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-hover-background [color: ('gray', 200)] - The :hover background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-focus-foreground [contrast-color: ('gray', 200)] - The :focus foreground color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-focus-background [color: ('gray', 200)] - The :focus background color of the last date in the selected range.
 /// @prop {Map} date-selected-range-hover-background [color: ('gray', 200)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('gray', 200)] - The :focus background color of the selected range.
 /// @prop {Map} date-range-border-color [color: ('gray', 700)] - The border color of the selected date.
@@ -1540,78 +1444,6 @@ $fluent-calendar: extend(
                 200,
             ),
         ),
-        date-selected-range-start-foreground: (
-            contrast-color: (
-                'gray',
-                100,
-            ),
-        ),
-        date-selected-range-start-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        date-selected-range-start-hover-foreground: (
-            contrast-color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-start-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-start-focus-foreground: (
-            contrast-color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-start-focus-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-end-foreground: (
-            contrast-color: (
-                'gray',
-                100,
-            ),
-        ),
-        date-selected-range-end-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        date-selected-range-end-hover-foreground: (
-            contrast-color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-end-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-end-focus-foreground: (
-            contrast-color: (
-                'gray',
-                200,
-            ),
-        ),
-        date-selected-range-end-focus-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
         date-current-outline: transparent,
         date-current-hover-outline: transparent,
         date-current-focus-outline: transparent,
@@ -1886,18 +1718,6 @@ $fluent-calendar: extend(
 /// @prop {Map} date-selected-range-hover-background [color: ('gray', 200)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-foreground [color: ('gray', 900)] - The :focus foreground color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('gray', 200)] - The :focus background color of the selected range.
-/// @prop {Map} date-selected-range-start-foreground [contrast-color: ('primary', 900)] - The foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-background [color: ('primary', 500)] - The background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-hover-background [color: ('primary', 500)] - The :hover background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-focus-foreground [contrast-color: ('primary', 900)] - The :focus foreground color of the first date in the selected range.
-/// @prop {Map} date-selected-range-start-focus-background [color: ('primary', 600)] - The :focus background color of the first date in the selected range.
-/// @prop {Map} date-selected-range-end-foreground [contrast-color: ('primary', 900)] - The background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-background [color: ('primary', 600)] - The background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-hover-background [color: ('primary', 600)] - The :hover background color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-focus-foreground [contrast-color: ('primary', 900)] - The :focus foreground color of the last date in the selected range.
-/// @prop {Map} date-selected-range-end-focus-background [color: ('primary', 600)] - The :focus background color of the last date in the selected range.
 /// @prop {Color} date-special-background [transparent] - The background color used for special dates.
 /// @prop {Map} date-current-foreground [color: ('gray', 900)] - The foreground color of the current date.
 /// @prop {Color} date-current-background [transparent] - The background color of the current date.
@@ -2360,78 +2180,6 @@ $bootstrap-calendar: extend(
             ),
         ),
         date-selected-current-focus-background: (
-            color: (
-                'primary',
-                600,
-            ),
-        ),
-        date-selected-range-start-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-selected-range-start-background: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-        date-selected-range-start-hover-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-selected-range-start-hover-background: (
-            color: (
-                'primary',
-                600,
-            ),
-        ),
-        date-selected-range-start-focus-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-selected-range-start-focus-background: (
-            color: (
-                'primary',
-                600,
-            ),
-        ),
-        date-selected-range-end-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-selected-range-end-background: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-        date-selected-range-end-hover-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-selected-range-end-hover-background: (
-            color: (
-                'primary',
-                600,
-            ),
-        ),
-        date-selected-range-end-focus-foreground: (
-            contrast-color: (
-                'primary',
-                900,
-            ),
-        ),
-        date-selected-range-end-focus-background: (
             color: (
                 'primary',
                 600,
