@@ -54,6 +54,8 @@ $dark-bootstrap-checkbox: extend(
 /// @prop {Map} fill-color-hover [color: ('primary', 300)] - The checked border and fill colors on hover.
 /// @prop {Map} empty-color [color: ('gray', 900, .6)] - The unchecked border color.
 /// @prop {Map} empty-color-hover [color: ('gray', 900, .8)] - The unchecked border color on hover.
+/// @prop {Map} error-color [color: ('error', 400)] - The border and fill colors in invalid state.
+/// @prop {Map} error-color-hover [color: ('error', 300)] - The border and fill colors in invalid state on hover.
 /// @prop {Map} disabled-color [color: ('gray', 900, .2)] - The disabled border and fill colors.
 /// @prop {Map} disabled-color-label [color: ('gray', 900, .2)] - The disabled label color.
 /// @requires $indigo-checkbox
@@ -104,6 +106,18 @@ $dark-indigo-checkbox: extend(
                 'gray',
                 50,
                 0.8,
+            ),
+        ),
+        error-color: (
+            color: (
+                'error',
+                400,
+            ),
+        ),
+        error-color-hover: (
+            color: (
+                'error',
+                300,
             ),
         ),
         disabled-color: (

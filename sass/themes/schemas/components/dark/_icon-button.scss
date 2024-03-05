@@ -256,19 +256,22 @@ $dark-bootstrap-icon-button: (
 );
 
 /// Generates a dark base indigo icon button schema.
-/// @prop {Map} foreground [contrast-color: ('primary', 500)] - The idle text color of the indigo icon button.
+/// @prop {Map} foreground [contrast-color: ('primary', 500, .8)] - The idle text color of the indigo icon button.
 /// @prop {Map} hover-background [contrast-color: ('primary', 500, 0.10)] - The hover background color of the indigo icon button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 500)] - The hover text color of the indigo icon button.
 /// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus text color of the indigo icon button.
 /// @prop {Map} focus-hover-background [contrast-color: ('primary', 500, 0.10)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [contrast-color: ('primary', 500)] - The foreground color on focus hovered state of the icon button.
+/// @prop {Map} focus-border-color [contrast-color: ('primary', 500, .2)] - The focus border color of the indigo icon button.
 /// @prop {Map} active-foreground [contrast-color: ('primary', 500)] - The active text color of the indigo icon button.
+/// @prop {Map} disabled-foreground [contrast-color: ('gray', 50, .2)] - The disabled foreground color of the indigo icon button.
 /// @type {Map}
 $indigo-base-icon-button-dark: (
     foreground: (
         contrast-color: (
             'primary',
             500,
+            0.8,
         ),
     ),
     hover-foreground: (
@@ -287,6 +290,13 @@ $indigo-base-icon-button-dark: (
         contrast-color: (
             'primary',
             500,
+        ),
+    ),
+    focus-border-color: (
+        contrast-color: (
+            'primary',
+            500,
+            0.2,
         ),
     ),
     active-foreground: (
@@ -309,38 +319,28 @@ $indigo-base-icon-button-dark: (
             0.1,
         ),
     ),
+    disabled-foreground: (
+        contrast-color: (
+            'gray',
+            50,
+            0.2,
+        ),
+    ),
 );
 
 /// Generates a dark indigo flat icon button schema.
-/// @prop {Map} foreground [contrast-color: ('primary', 500)] - The idle text color of the indigo icon button.
 /// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus text color of the indigo icon button.
-/// @prop {Map} focus-border-color [contrast-color: ('primary', 500, 0.20)] - The focus border color of the indigo icon button.
 /// @type {Map}
 /// @requires {Map} $indigo-flat-icon-button
 $indigo-flat-icon-button-dark: extend(
     $indigo-flat-icon-button,
     $indigo-base-icon-button-dark,
     (
-        foreground: (
-            contrast-color: (
-                'primary',
-                500,
-                0.8,
-            ),
-        ),
-
         focus-foreground: (
             contrast-color: (
                 'primary',
                 500,
                 0.8,
-            ),
-        ),
-        focus-border-color: (
-            contrast-color: (
-                'primary',
-                500,
-                0.2,
             ),
         ),
     )
@@ -376,6 +376,7 @@ $indigo-outlined-icon-button-dark: extend(
 /// @type {Map}
 /// @prop {Map} hover-background [color: ('primary', 400)] - The hover background color of the indigo icon button.
 /// @prop {Map} focus-hover-background [color: ('primary', 400)] - The background color on focus hovered state of the icon button.
+/// @prop {Map} focus-border-color [contrast-color: ('primary', 400, .5)] - The focus border color of the indigo icon button.
 /// @requires {Map} $indigo-contained-icon-button
 $indigo-contained-icon-button-dark: extend(
     $indigo-contained-icon-button,
@@ -391,6 +392,13 @@ $indigo-contained-icon-button-dark: extend(
             color: (
                 'primary',
                 400,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'primary',
+                400,
+                0.5,
             ),
         ),
     )

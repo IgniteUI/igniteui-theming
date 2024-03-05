@@ -16,6 +16,9 @@
 /// @prop {Map} label-color [color: ('gray', 900)]- The text color used for the label text.
 /// @prop {Map} empty-color [color: ('gray', 500)] - The unchecked border color.
 /// @prop {Map} fill-color [color: ('primary', 500)] - The checked border and fill colors.
+/// @prop {Color} focus-outline-color [transparent] - The focus outlined color.
+/// @prop {Color} focus-outline-color-focused [transparent] - The focus outlined color for focused state.
+/// @prop {Color} focus-outline-color-error [transparent] - The focus outlined color for focused invalid state.
 /// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled border and fill colors.
 /// @prop {Map} disabled-indeterminate-color [color: ('secondary', 100)] - The disabled border and fill colors in indeterminate state.
 /// @prop {Map} disabled-color-label [color: ('gray', 500)] - The disabled color of the label.
@@ -54,7 +57,9 @@ $light-checkbox: (
             500,
         ),
     ),
-
+    focus-outline-color: transparent,
+    focus-outline-color-focused: transparent,
+    focus-outline-color-error: transparent,
     disabled-color: (
         color: (
             'gray',
@@ -268,6 +273,7 @@ $bootstrap-checkbox: extend(
 /// @prop {Map} disabled-color-label [color: ('gray', 900, .2)] - The disabled label color.
 /// @prop {Map} focus-outline-color [color: ('gray', 900, .15)] - The focus outlined color.
 /// @prop {Map} focus-outline-color-focused [color: ('primary', 400, .5)] - The focus outlined color for focused state.
+/// @prop {Map} focus-outline-color-error [color: ('error', 400, 0.5)] - The focus outlined color for focused invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 400)] - The focus outlined color in invalid state.
 /// @prop {List} border-radius [(rem(3px), rem(0), rem(10px))] - The border radius used for checkbox.
 /// @prop {List} border-radius-ripple [(rem(3px), rem(0), rem(24px))] - The border radius used for checkbox ripple.
@@ -297,6 +303,13 @@ $indigo-checkbox: extend(
         focus-outline-color-focused: (
             color: (
                 'primary',
+                400,
+                0.5,
+            ),
+        ),
+        focus-outline-color-error: (
+            color: (
+                'error',
                 400,
                 0.5,
             ),
