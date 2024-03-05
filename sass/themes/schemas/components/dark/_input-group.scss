@@ -105,7 +105,7 @@ $dark-bootstrap-input-group: $bootstrap-input-group;
 /// @prop {Map} input-suffix-color--focused [contrast-color: ('gray', 50, .6)] - The input suffix color in the focused state.
 /// @prop {Map} idle-bottom-line-color [contrast-color: ('gray', 50, .4)] - The bottom line and border colors in the idle state.
 /// @prop {Map} hover-bottom-line-color [contrast-color: ('gray', 50, .8)] - The bottom line and border colors in the hover state.
-/// @prop {Map} disabled-bottom-line-color [contrast-color: ('gray', 50, .2)] - The bottom line and border colors in the disabled state.
+/// @prop {Map} disabled-bottom-line-color [contrast-color: ('gray', 50, .15)] - The bottom line and border colors in the disabled state.
 /// @prop {Map} helper-text-color [contrast-color: ('gray', 50, .8)] - The helper text color.
 /// @prop {Map} idle-text-color [contrast-color: ('gray', 50, .8)] - The input text color in the idle state.
 /// @prop {Map} filled-text-color [contrast-color: ('gray', 50, .8)] - The input text color in the filled state.
@@ -113,6 +113,7 @@ $dark-bootstrap-input-group: $bootstrap-input-group;
 /// @prop {Map} disabled-text-color [contrast-color: ('gray', 50, .2)] - The input text color in the disabled state.
 /// @prop {Map} box-background-hover [contrast-color: ('gray', 50, .1)] - The background color of an input group of type box on hover.
 /// @prop {Map} idle-secondary-color [contrast-color: ('gray', 50, .6)] - The label color in the idle state.
+/// @prop {Map} focused-text-color [contrast-color: ('gray', 50)] - The input text color in the focused state.
 /// @prop {Map} focused-secondary-color [contrast-color: ('gray', 50, .6)] - The label color in the focused state.
 /// @prop {Map} placeholder-color [contrast-color: ('gray', 50, .6)] - The placeholder color of an input group.
 /// @prop {Map} hover-placeholder-color [contrast-color: ('gray', 50, .8)] - The placeholder color of an input group on hover.
@@ -181,7 +182,7 @@ $dark-indigo-input-group: extend(
             contrast-color: (
                 'gray',
                 50,
-                0.2,
+                0.15,
             ),
         ),
         helper-text-color: (
@@ -230,6 +231,12 @@ $dark-indigo-input-group: extend(
                 'gray',
                 50,
                 0.6,
+            ),
+        ),
+        focused-text-color: (
+            contrast-color: (
+                'gray',
+                50,
             ),
         ),
         focused-secondary-color: (

@@ -40,6 +40,7 @@ $dark-material-radio: $material-radio;
 /// @prop {Map} fill-color-hover [color: ('primary', 100)] - The checked border and dot colors on hover.
 /// @prop {Map} error-color-hover [color: ('error', 200)] - The border and dot color in invalid state on hover.
 /// @prop {Map} disabled-color [color: ('gray', 100)] - The disabled border and dot colors.
+/// @prop {Map} disabled-fill-color [color: ('gray', 100)] - The disabled checked border and dot colors.
 /// @prop {Map} disabled-label-color [color: ('gray', 300)] - The disabled label color.
 /// @requires $fluent-radio
 $dark-fluent-radio: extend(
@@ -76,6 +77,12 @@ $dark-fluent-radio: extend(
             ),
         ),
         disabled-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        disabled-fill-color: (
             color: (
                 'gray',
                 100,
