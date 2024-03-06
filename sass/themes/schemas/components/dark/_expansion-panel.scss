@@ -61,26 +61,60 @@ $dark-bootstrap-expansion-panel: extend(
 /// Generates a dark indigo expansion panel schema.
 /// @type {Map}
 ///
-/// @prop {Map} header-focus-background [color: ('primary', 500, .5)] - The panel header focus background color.
-/// @prop {Map} header-title-color [color: ('gray', 800)] - The panel header title text color.
-/// @prop {Number} border-radius [3px] - The border radius used for expansion-panel.
-///
+/// @prop {Map} header-title-color [contrast-color: ('gray', 50, 0.9)] - The panel header title text color.
+/// @prop {Map} header-description-color [contrast-color: ('gray', 50, 0.7)] - The panel header description text color.
+/// @prop {Map} header-icon-color [contrast-color: ('gray', 50, 0.8)] - The panel header icon color.
+/// @prop {Map} body-color [contrast-color: ('gray', 50, 0.8)] - The panel body text color.
+/// @prop {Map} disabled-color [contrast-color: ('gray', 50, 0.2)] - The panel disabled text color.
+/// @prop {Map} disabled-description-color [contrast-color: ('gray', 50, 0.2)] - The panel disabled header description text color.
 /// @requires $indigo-expansion-panel
 $dark-indigo-expansion-panel: extend(
     $indigo-expansion-panel,
     (
         header-title-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                800,
+                50,
+                0.9,
+            ),
+        ),
+        header-description-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.7,
             ),
         ),
 
-        header-focus-background: (
-            color: (
-                'primary',
-                500,
-                0.5,
+        header-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        body-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        disabled-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        disabled-description-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
             ),
         ),
     )
