@@ -104,7 +104,11 @@ $_enhanced-accessibility: false;
             $result,
             (
                 $variant: map.get($shade, 'raw'),
-                #{$variant}-contrast: text-contrast(map.get($shade, 'raw')),
+                #{$variant}-contrast:
+                    text-contrast(
+                        $background: map.get($shade, 'raw'),
+                        $contrast: 'AA',
+                    ),
                 #{$variant}-hsl: map.get($shade, 'hsl'),
             )
         );
