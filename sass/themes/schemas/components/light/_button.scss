@@ -1266,6 +1266,7 @@ $bootstrap-button: (
 /// @prop {Map} disabled-icon-color [color: ('gray', 900, .20)] - The disabled icon color of the button.
 /// @prop {List} border-radius [(rem(40px), rem(0), rem(40px))] - The border radius used for the button.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the button.
+/// @prop {Number} default-size [2] - The default size used for the button component.
 /// @requires {Map} $light-base-button
 /// @requires {Map} $flat-elevation-button
 $indigo-base-button: extend(
@@ -1373,6 +1374,7 @@ $indigo-base-button: extend(
                 rem(32px),
             ),
         ),
+        default-size: 2,
     )
 );
 
