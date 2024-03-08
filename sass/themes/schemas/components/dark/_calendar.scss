@@ -11,9 +11,11 @@
 /// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Map} date-special-foreground [color: ('secondary', 200)] - The foreground color of a special date.
+/// @prop {Map} date-special-hover-foreground [color: ('secondary', 200)] - The :hover foreground color of a special date.
+/// @prop {Map} date-special-focus-foreground [color: ('secondary', 200)] - The :focus foreground color of a special date.
 /// @prop {Map} date-special-range-foreground [color: ('secondary', 200)] - The foreground color of a special date in a range selection.
-/// @prop {Map} date-special-outline [color: ('secondary', 200)] - The outline color around a special date.
-/// @prop {Map} date-special-range-outline [color: ('secondary', 200)] - The outline color around a special date in a range selection.
+/// @prop {Map} date-special-border-color [color: ('secondary', 200)] - The outline color around a special date.
+/// @prop {Map} date-special-range-border-color [color: ('secondary', 200)] - The outline color around a special date in a range selection.
 /// @prop {Map} picker-hover-foreground [color: 'secondary' 200] - The :hover foreground color of the month and year pickers.
 /// @prop {Map} picker-focus-foreground [color: 'secondary' 200] - The :focus foreground color of the month and year pickers.
 /// @type {Map}
@@ -51,19 +53,31 @@ $dark-material-calendar: extend(
                 200,
             ),
         ),
+        date-special-hover-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        date-special-focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
         date-special-range-foreground: (
             color: (
                 'secondary',
                 200,
             ),
         ),
-        date-special-outline: (
+        date-special-border-color: (
             color: (
                 'secondary',
                 200,
             ),
         ),
-        date-special-range-outline: (
+        date-special-range-border-color: (
             color: (
                 'secondary',
                 200,
@@ -141,8 +155,8 @@ $dark-material-calendar: extend(
 /// @prop {Map} date-selected-range-end-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of the last date in the selected range.
 /// @prop {Map} date-selected-range-end-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the last date in the selected range.
 /// @prop {Map} date-disabled-foreground [color: ('gray', 300)] - The foreground of disabled dates.
-/// @prop {Map} date-special-outline [color: ('primary', 50)] - The outline color around a special date.
-/// @prop {Map} date-special-range-outline [color: ('primary', 50)] - The outline color around a special date in a range selection.
+/// @prop {Map} date-special-border-color [color: ('primary', 50)] - The outline color around a special date.
+/// @prop {Map} date-special-range-border-color [color: ('primary', 50)] - The outline color around a special date in a range selection.
 /// @prop {Map} header-foreground [contrast-color: ('primary', 200)] - The header foreground color.
 /// @prop {Map} header-background [color: ('primary', 200)] - The background color of the month and year pickers.
 /// @requires $fluent-calendar
@@ -317,13 +331,13 @@ $dark-fluent-calendar: extend(
                 50,
             ),
         ),
-        date-special-outline: (
+        date-special-border-color: (
             color: (
                 'primary',
                 50,
             ),
         ),
-        date-special-range-outline: (
+        date-special-range-border-color: (
             color: (
                 'primary',
                 50,
@@ -472,8 +486,8 @@ $dark-fluent-calendar: extend(
 /// @prop {Map} picker-focus-foreground [color: ('secondary', 200)]- The :focus foreground color of the month and year pickers.
 /// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the buttons responsible for navigation.
 /// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the buttons responsible for navigation.
-/// @prop {Map} date-special-outline [color: ('primary', 200)] - The outline color around a special date.
-/// @prop {Map} date-special-range-outline [color: ('primary', 200)] - The outline color around a special date in a range selection.
+/// @prop {Map} date-special-border-color [color: ('primary', 200)] - The outline color around a special date.
+/// @prop {Map} date-special-range-border-color [color: ('primary', 200)] - The outline color around a special date in a range selection.
 /// @prop {Map} date-current-hover-background [color: ('gray', 100)] - The :hover background color of the current date.
 /// @prop {Map} date-current-focus-background [color: ('gray', 100)] - The :focus background color of the current date.
 /// @prop {Map} date-selected-range-hover-background [color: ('gray', 100)] - The :hover background color of the selected range.
@@ -520,13 +534,13 @@ $dark-bootstrap-calendar: extend(
                 200,
             ),
         ),
-        date-special-outline: (
+        date-special-border-color: (
             color: (
                 'primary',
                 200,
             ),
         ),
-        date-special-range-outline: (
+        date-special-range-border-color: (
             color: (
                 'primary',
                 200,
@@ -573,5 +587,131 @@ $dark-bootstrap-calendar: extend(
 
 /// Generates a dark indigo calendar schema.
 /// @type {Map}
+/// @prop {Map} header-background [(color: 'gray', 50)] - The header background color.
+/// @prop {Map} content-background [(color: 'gray', 50)] - The background color of the days, months and years views.
+/// @prop {Map} picker-background [(color: 'gray', 50)] - The background color of the month and year pickers.
+/// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
+/// @prop {Map} date-hover-background [color: ('gray', 900, .1)] - The :hover background color of a date.
+/// @prop {Map} date-focus-background [color: ('gray', 900, .1)] - The :focus background color of date.
+/// @prop {Map} date-current-foreground [color: ('gray', 900)] - The foreground color of the current date.
+/// @prop {Map} date-disabled-foreground [color: ('gray', 500)] - The foreground color of disabled dates.
+/// @prop {Color} date-current-border-color [color: ('primary', 400)] - The border color of the current date.
+/// @prop {Color} date-current-hover-border-color [color: ('primary', 300)] - The :hover border color of the current date.
+/// @prop {Color} date-current-focus-border-color [color: ('primary', 300)] - The :focus border color of the current date.
+///
+/// @prop {Map} date-special-foreground [color: ('primary', 600)] - The foreground color of a special date.
+/// @prop {Map} date-special-background [color: ('primary', 50)] - The background color of a special date.
+/// @prop {Map} date-special-hover-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
+/// @prop {Map} date-special-hover-background [color: ('primary', 600)] - The background color of a special date.
+/// @prop {Map} date-special-focus-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
+/// @prop {Map} date-special-focus-background [color: ('primary', 600)] - The background color of a special date.
 /// @requires $indigo-calendar
-$dark-indigo-calendar: $indigo-calendar;
+$dark-indigo-calendar: extend(
+    $indigo-calendar,
+    (
+        header-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        picker-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        content-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        date-hover-background: (
+            color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
+        date-focus-background: (
+            color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
+        date-current-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        date-disabled-foreground: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+        date-current-border-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        date-current-hover-border-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        date-current-focus-border-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        date-special-foreground: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+        date-special-background: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+        date-special-hover-foreground: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+        date-special-hover-background: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+        date-special-focus-foreground: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+        date-special-focus-background: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+    )
+);
