@@ -17,6 +17,7 @@
 /// @prop {Map} header-icon-color [color: ('gray', 800)] - The panel header icon color.
 /// @prop {Map} body-color [color: ('gray', 900)] - The panel body text color.
 /// @prop {Map} disabled-color [color: ('gray', 500)] - The panel disabled text color.
+/// @prop {Map} disabled-description-color [color: ('gray', 500)] - The panel disabled header description text color.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(16px))] - The border radius used for expansion-panel.
 /// @prop {Number} expanded-margin [8px] - The expansion panel margin in expanded state when positioned inside accordion.
 $light-expansion-panel: (
@@ -74,6 +75,13 @@ $light-expansion-panel: (
         ),
     ),
 
+    disabled-description-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+
     expanded-margin: rem(8px),
     border-radius: (
         rem(0),
@@ -91,6 +99,7 @@ $material-expansion-panel: $light-expansion-panel;
 /// @type {Map}
 /// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.
 /// @prop {Map} disabled-color [color: ('gray', 400)] - The panel disabled text color.
+/// @prop {Map} disabled-description-color [color: ('gray', 400)] - The panel disabled header description text color.
 /// @requires {Map} $light-expansion-panel
 $fluent-expansion-panel: extend(
     $light-expansion-panel,
@@ -103,6 +112,13 @@ $fluent-expansion-panel: extend(
         ),
 
         disabled-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        disabled-description-color: (
             color: (
                 'gray',
                 400,
@@ -137,19 +153,32 @@ $bootstrap-expansion-panel: extend(
 
 // Generates an indigo expansion panel schema.
 /// @type {Map}
-/// @prop {Map} header-focus-background [color: ('primary', 500, .15)] - The panel header focus background color.
-/// @prop {Map} header-description-color [color: ('gray', 500)] - The panel header description text color.
+/// @prop {Color} header-background [transparent] - The panel header background color.
+/// @prop {Color} body-background [transparent] - The panel body background color.
+/// @prop {Color} header-focus-background [transparent] - The panel header focus background color.
+/// @prop {Map} header-title-color [color: ('gray', 800)] - The panel header title text color.
+/// @prop {Map} header-description-color [color: ('gray', 600)] - The panel header description text color.
 /// @prop {Map} header-icon-color [color: ('gray', 600)] - The panel header icon color.
-/// @prop {Map} disabled-color [color: ('gray', 400)] - The panel disabled text color.
-/// @prop {List} border-radius [(rem(3px), rem(0), rem(16px))] - The border radius used for expansion-panel.
+/// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.
+/// @prop {Map} disabled-color [color: ('gray', 900, 0.2)] - The panel disabled text color.
+/// @prop {Map} disabled-description-color [color: ('gray', 900, 0.15)] - The panel disabled header description text color.
 /// @requires {Map} $light-expansion-panel
 $indigo-expansion-panel: extend(
     $light-expansion-panel,
     (
+        header-background: transparent,
+        body-background: transparent,
+        header-focus-background: transparent,
+        header-title-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
         header-description-color: (
             color: (
                 'gray',
-                500,
+                600,
             ),
         ),
 
@@ -160,26 +189,26 @@ $indigo-expansion-panel: extend(
             ),
         ),
 
-        header-focus-background: (
+        body-color: (
             color: (
-                'primary',
-                500,
-                0.15,
+                'gray',
+                700,
             ),
         ),
 
         disabled-color: (
             color: (
                 'gray',
-                400,
+                900,
+                0.2,
             ),
         ),
 
-        border-radius: (
-            border-radius: (
-                rem(3px),
-                rem(0),
-                rem(16px),
+        disabled-description-color: (
+            color: (
+                'gray',
+                900,
+                0.15,
             ),
         ),
     )
