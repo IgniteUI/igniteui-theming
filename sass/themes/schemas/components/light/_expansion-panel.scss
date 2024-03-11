@@ -16,7 +16,7 @@
 /// @prop {Map} header-description-color [color: ('gray', 700)] - The panel header description text color.
 /// @prop {Map} header-icon-color [color: ('gray', 800)] - The panel header icon color.
 /// @prop {Map} body-color [color: ('gray', 900)] - The panel body text color.
-/// @prop {Map} disabled-color [color: ('gray', 500)] - The panel disabled text color.
+/// @prop {Map} disabled-text-color [color: ('gray', 500)] - The panel disabled text color.
 /// @prop {Map} disabled-description-color [color: ('gray', 500)] - The panel disabled header description text color.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(16px))] - The border radius used for expansion-panel.
 /// @prop {Number} expanded-margin [8px] - The expansion panel margin in expanded state when positioned inside accordion.
@@ -68,7 +68,7 @@ $light-expansion-panel: (
         ),
     ),
 
-    disabled-color: (
+    disabled-text-color: (
         color: (
             'gray',
             500,
@@ -98,7 +98,7 @@ $material-expansion-panel: $light-expansion-panel;
 /// Generates a fluent expansion panel schema.
 /// @type {Map}
 /// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.
-/// @prop {Map} disabled-color [color: ('gray', 400)] - The panel disabled text color.
+/// @prop {Map} disabled-text-color [color: ('gray', 400)] - The panel disabled text color.
 /// @prop {Map} disabled-description-color [color: ('gray', 400)] - The panel disabled header description text color.
 /// @requires {Map} $light-expansion-panel
 $fluent-expansion-panel: extend(
@@ -111,7 +111,7 @@ $fluent-expansion-panel: extend(
             ),
         ),
 
-        disabled-color: (
+        disabled-text-color: (
             color: (
                 'gray',
                 400,
@@ -160,7 +160,7 @@ $bootstrap-expansion-panel: extend(
 /// @prop {Map} header-description-color [color: ('gray', 600)] - The panel header description text color.
 /// @prop {Map} header-icon-color [color: ('gray', 600)] - The panel header icon color.
 /// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.
-/// @prop {Map} disabled-color [color: ('gray', 900, 0.2)] - The panel disabled text color.
+/// @prop {Map} disabled-text-color [color: ('gray', 900, 0.2)] - The panel disabled text color.
 /// @prop {Map} disabled-description-color [color: ('gray', 900, 0.15)] - The panel disabled header description text color.
 /// @requires {Map} $light-expansion-panel
 $indigo-expansion-panel: extend(
@@ -196,7 +196,7 @@ $indigo-expansion-panel: extend(
             ),
         ),
 
-        disabled-color: (
+        disabled-text-color: (
             color: (
                 'gray',
                 900,

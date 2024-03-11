@@ -65,7 +65,7 @@ $dark-bootstrap-expansion-panel: extend(
 /// @prop {Map} header-description-color [contrast-color: ('gray', 50, 0.7)] - The panel header description text color.
 /// @prop {Map} header-icon-color [contrast-color: ('gray', 50, 0.8)] - The panel header icon color.
 /// @prop {Map} body-color [contrast-color: ('gray', 50, 0.8)] - The panel body text color.
-/// @prop {Map} disabled-color [contrast-color: ('gray', 50, 0.2)] - The panel disabled text color.
+/// @prop {Map} disabled-text-color [contrast-color: ('gray', 50, 0.2)] - The panel disabled text color.
 /// @prop {Map} disabled-description-color [contrast-color: ('gray', 50, 0.2)] - The panel disabled header description text color.
 /// @requires $indigo-expansion-panel
 $dark-indigo-expansion-panel: extend(
@@ -102,7 +102,7 @@ $dark-indigo-expansion-panel: extend(
             ),
         ),
 
-        disabled-color: (
+        disabled-text-color: (
             contrast-color: (
                 'gray',
                 50,

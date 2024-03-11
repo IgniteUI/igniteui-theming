@@ -687,7 +687,7 @@ $bootstrap-button-group: extend(
 /// @prop {Map} item-selected-hover-icon-color [contrast-color: ('primary', 500)] - The icon color for a selected item in hover state in the button group.
 /// @prop {Map} disabled-background-color [contrast-color: ('gray', 900)] - The background color for a disabled item in the button group.
 /// @prop {Map} disabled-text-color [color: ('gray', 900, .2)] - The text/icon color for a disabled item in the button group.
-/// @prop {Map} item-disabled-border [color: ('gray', 900, .15)] - The border color for a disabled item in the button group.
+/// @prop {Map} item-disabled-border [color: ('gray', 300)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-background [color: ('primary', 400, .5)] - The disabled background color for a selected item in the button group.
 /// @prop {Map} disabled-selected-text-color [contrast-color: ('primary', 500, .4)] - The disabled text color for a selected item in the button group.
 /// @prop {Map} disabled-selected-icon-color [contrast-color: ('primary', 500, .3)] - The disabled icon color for a selected item in the button group.
@@ -818,8 +818,7 @@ $indigo-button-group: extend(
         item-disabled-border: (
             color: (
                 'gray',
-                900,
-                0.15,
+                300,
             ),
         ),
 
