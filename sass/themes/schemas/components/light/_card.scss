@@ -10,7 +10,7 @@
 
 /// Generates a light card schema.
 /// @type {Map}
-/// @prop {Map} background [color: 'surface']- The card background color.
+/// @prop {Map} background [color: 'surface'] - The card background color.
 /// @prop {Map} header-text-color [color: ('gray', 900)] - The text color of the card title.
 /// @prop {Map} subtitle-text-color [color: ('gray', 700)] - The text color of the card subtitle.
 /// @prop {Map} content-text-color [color: ('gray', 700)] - The text color of the card content.
@@ -111,7 +111,7 @@ $fluent-card: extend(
 
 /// Generates a bootstrap card schema.
 /// @type {Map}
-/// @prop {Map} background [contrast-color: ('gray', 900)]- The card background color.
+/// @prop {Map} background [contrast-color: ('gray', 900)] - The card background color.
 /// @prop {Map} outline-color [color: ('gray', 300)] - The outline color of an outlined type card.
 /// @prop {Map} subtitle-text-color [color: ('gray', 800)] - The text color of the card subtitle.
 /// @prop {Map} content-text-color [color: ('gray', 800)] - The text color of the card content.
@@ -159,14 +159,23 @@ $bootstrap-card: extend(
 
 /// Generates an indigo card schema.
 /// @type {Map}
+/// @prop {Map} background [contrast-color: ('gray', 900)] - The card background color.
 /// @prop {Map} outline-color [color: ('gray', 400)] - The outline color of an outlined type card.
-/// @prop {Map} subtitle-text-color [color: ('gray', 500)] - The text color of the card subtitle.
+/// @prop {Map} header-text-color [color: ('gray', 800)] - The text color of the card title.
+/// @prop {Map} subtitle-text-color [color: ('gray', 700)] - The text color of the card subtitle.
 /// @prop {Map} actions-text-color [color: ('gray', 600)] - The text color of the card buttons.
-/// @prop {List} border-radius [(rem(3px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {List} border-radius [(rem(6px), rem(0), rem(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 $indigo-card: extend(
     $light-card,
     (
+        background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
         outline-color: (
             color: (
                 'gray',
@@ -174,10 +183,17 @@ $indigo-card: extend(
             ),
         ),
 
+        header-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
         subtitle-text-color: (
             color: (
                 'gray',
-                500,
+                700,
             ),
         ),
 
@@ -190,7 +206,7 @@ $indigo-card: extend(
 
         border-radius: (
             border-radius: (
-                rem(3px),
+                rem(6px),
                 rem(0),
                 rem(24px),
             ),

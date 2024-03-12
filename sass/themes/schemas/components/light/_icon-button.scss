@@ -767,86 +767,100 @@ $bootstrap-icon-button: (
 /// Generates a base indigo icon button schema.
 /// @type {Map}
 /// @prop {Color} background [transparent] - The background color of the indigo icon button.
-/// @prop {Map} foreground [color: ('gray', 700)] - The idle text color of the indigo icon button.
-/// @prop {Color} hover-background [transparent] - The hover background color of the indigo icon button.
-/// @prop {Map} hover-foreground [color: ('gray', 900)] - The hover text color of the indigo icon button.
+/// @prop {Map} foreground [color: ('gray', 600)] - The idle text color of the indigo icon button.
+/// @prop {Map} hover-background [color: ('gray', 900, 0.5)] - The hover background color of the indigo icon button.
+/// @prop {Map} hover-foreground [color: ('gray', 700)] - The hover text color of the indigo icon button.
 /// @prop {Color} focus-background [transparent] - The focus background color of the indigo icon button.
-/// @prop {Map} focus-foreground [color: ('gray', 900)] - The focus text color of the indigo icon button.
-/// @prop {Color} focus-hover-background [transparent] - The background color on focus hovered state of the icon button.
-/// @prop {Map} focus-hover-foreground [color: ('gray', 900)] - The foreground color on focus hovered state of the icon button.
+/// @prop {Map} focus-foreground [color: ('gray', 600)] - The focus text color of the indigo icon button.
+/// @prop {Map} focus-hover-background [color: ('gray', 900, 0.5)] - The background color on focus hovered state of the icon button.
+/// @prop {Map} focus-hover-foreground [color: ('gray', 700)] - The foreground color on focus hovered state of the icon button.
 /// @prop {Color} active-background [transparent] - The active background color of the indigo icon button.
-/// @prop {Map} active-foreground [color: ('gray', 900)] - The active text color of the indigo icon button.
+/// @prop {Map} active-foreground [color: ('gray', 700)] - The active text color of the indigo icon button.
 /// @prop {Color} border-color [transparent] - The border color of the indigo icon button.
-/// @prop {Map} focus-border-color [color: ('gray', 300)] - The focus border color of the indigo icon button.
+/// @prop {Map} focus-border-color [color: ('gray', 900, 0.15)] - The focus border color of the indigo icon button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of the indigo icon button.
-/// @prop {Map} disabled-foreground [color: ('gray', 400)] - The disabled foreground color of the indigo icon button.
+/// @prop {Map} disabled-foreground [color: ('gray', 900, 0.20)] - The disabled foreground color of the indigo icon button.
 /// @prop {Color} disabled-border-color [transparent] - The disabled border color of the indigo icon button.
-/// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the indigo icon button.
-/// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size used for the indigo icon button.
+/// @prop {List} border-radius [(rem(40px), rem(0), rem(40px))] - The border radius used for the indigo icon button.
+/// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the indigo icon button.
 /// @prop {Number} default-size [2] - The default size used for the icon button.
 $indigo-base-icon-button: (
     background: transparent,
     foreground: (
         color: (
             'gray',
-            700,
+            600,
         ),
     ),
-    hover-background: transparent,
-    hover-foreground: (
+    hover-background: (
         color: (
             'gray',
             900,
+            0.05,
+        ),
+    ),
+    hover-foreground: (
+        color: (
+            'gray',
+            700,
         ),
     ),
     focus-background: transparent,
     focus-foreground: (
         color: (
             'gray',
-            900,
+            600,
         ),
     ),
-    focus-hover-background: transparent,
-    focus-hover-foreground: (
+    focus-hover-background: (
         color: (
             'gray',
             900,
+            0.05,
+        ),
+    ),
+    focus-hover-foreground: (
+        color: (
+            'gray',
+            700,
         ),
     ),
     active-background: transparent,
     active-foreground: (
         color: (
             'gray',
-            900,
+            700,
         ),
     ),
     border-color: transparent,
     focus-border-color: (
         color: (
             'gray',
-            300,
+            900,
+            0.15,
         ),
     ),
     disabled-background: transparent,
     disabled-foreground: (
         color: (
             'gray',
-            400,
+            900,
+            0.2,
         ),
     ),
     disabled-border-color: transparent,
     border-radius: (
         border-radius: (
-            rem(20px),
+            rem(40px),
             rem(0),
-            rem(20px),
+            rem(40px),
         ),
     ),
     size: (
         sizable: (
+            rem(24px),
             rem(28px),
             rem(32px),
-            rem(36px),
         ),
     ),
     default-size: 2,
@@ -854,16 +868,34 @@ $indigo-base-icon-button: (
 
 /// Generates an indigo flat icon button schema.
 /// @type {Map}
-/// @prop {Map} focus-foreground [color: ('gray', 900)] - The focus text color of the indigo flat icon button.
 /// @requires {Map} $indigo-base-icon-button
 $indigo-flat-icon-button: extend(
     $indigo-base-icon-button,
     (
         selector: '[igxIconButton="flat"], .igx-icon-button--flat',
-        focus-foreground: (
+    )
+);
+
+/// Generates an indigo outlined icon button schema.
+/// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 500)] - The border color of the indigo outlined icon button.
+/// @prop {Map} disabled-border-color [color: ('gray', 900, 0.15)] - The disabled border color of the indigo outlined icon button.
+/// @requires {Map} $indigo-base-icon-button
+$indigo-outlined-icon-button: extend(
+    $indigo-base-icon-button,
+    (
+        selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
+        border-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+        disabled-border-color: (
             color: (
                 'gray',
                 900,
+                0.15,
             ),
         ),
     )
@@ -872,17 +904,18 @@ $indigo-flat-icon-button: extend(
 /// Generates an indigo contained icon button schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('primary', 500)] - The background color of the indigo contained icon button.
-/// @prop {Map} foreground [contrast-color: ('primary', 600)] - The idle text color of the indigo contained icon button.
+/// @prop {Map} foreground [contrast-color: ('primary', 500, .8)] - The idle text color of the indigo contained icon button.
 /// @prop {Map} hover-background [color: ('primary', 400)] - The hover background color of the indigo contained icon button.
-/// @prop {Map} hover-foreground [contrast-color: ('primary', 600)] - The hover text color of the indigo contained icon button.
-/// @prop {Map} focus-background [color: ('primary', 400)] - The focus background color of the indigo contained icon button.
-/// @prop {Map} focus-foreground [contrast-color: ('primary', 600)] - The focus background color of the indigo contained icon button.
+/// @prop {Map} hover-foreground [contrast-color: ('primary', 500)] - The hover text color of the indigo contained icon button.
+/// @prop {Map} focus-background [color: ('primary', 500)] - The focus background color of the indigo contained icon button.
+/// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus background color of the indigo contained icon button.
+/// @prop {Map} focus-border-color [color: ('primary', 400, .5)] - The focus border color of the indigo icon button.
 /// @prop {Map} focus-hover-background [color: ('primary', 400)] - The background color on focus hovered state of the icon button.
-/// @prop {Map} focus-hover-foreground [color: ('primary', 800)] - The foreground color on focus hovered state of the icon button.
+/// @prop {Map} focus-hover-foreground [color: ('primary', 500)] - The foreground color on focus hovered state of the icon button.
 /// @prop {Map} active-background [color: ('primary', 400)] - The active background color of the indigo contained icon button.
-/// @prop {Map} active-foreground [contrast-color: ('primary', 600)] - The active background color of the indigo contained icon button.
-/// @prop {Map} focus-border-color [color: ('primary', 200, .5)] - The focus border color of the indigo contained icon button.
-/// @prop {Map} disabled-background [color: ('primary', 100)] - The disabled background color of the indigo contained icon button.
+/// @prop {Map} active-foreground [contrast-color: ('primary', 500)] - The active background color of the indigo contained icon button.
+/// @prop {Map} disabled-background [color: ('primary', 400, .5)] - The disabled background color of the indigo contained icon button.
+/// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, .3)] - The disabled foreground color of the indigo icon button.
 /// @requires {Map} $indigo-base-icon-button
 $indigo-contained-icon-button: extend(
     $indigo-base-icon-button,
@@ -897,7 +930,8 @@ $indigo-contained-icon-button: extend(
         foreground: (
             contrast-color: (
                 'primary',
-                600,
+                500,
+                0.8,
             ),
         ),
         hover-background: (
@@ -909,19 +943,26 @@ $indigo-contained-icon-button: extend(
         hover-foreground: (
             contrast-color: (
                 'primary',
-                600,
+                500,
             ),
         ),
         focus-background: (
             color: (
                 'primary',
-                400,
+                500,
             ),
         ),
         focus-foreground: (
             contrast-color: (
                 'primary',
-                600,
+                500,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'primary',
+                400,
+                0.5,
             ),
         ),
         focus-hover-background: (
@@ -931,9 +972,9 @@ $indigo-contained-icon-button: extend(
             ),
         ),
         focus-hover-foreground: (
-            color: (
+            contrast-color: (
                 'primary',
-                600,
+                500,
             ),
         ),
         active-background: (
@@ -945,64 +986,21 @@ $indigo-contained-icon-button: extend(
         active-foreground: (
             contrast-color: (
                 'primary',
-                600,
-            ),
-        ),
-        focus-border-color: (
-            color: (
-                'primary',
-                200,
+                500,
             ),
         ),
         disabled-background: (
             color: (
-                'gray',
-                100,
+                'primary',
+                400,
+                0.5,
             ),
         ),
-    )
-);
-
-/// Generates an indigo outlined icon button schema.
-/// @type {Map}
-/// @prop {Map} border-color [color: ('gray', 500)] - The border color of the indigo outlined icon button.
-/// @prop {Map} hover-background [color: ('gray', 100)] - The hover background color of the indigo outlined icon button.
-/// @prop {Map} active-background [color: ('gray', 100)] - The active background color of the indigo outlined icon button.
-/// @prop {Map} focus-border-color [color: ('gray', 300)] - The focus border color of the indigo outlined icon button.
-/// @prop {Map} disabled-border-color [color: ('gray', 500)] - The disabled border color of the indigo outlined icon button.
-/// @requires {Map} $indigo-base-icon-button
-$indigo-outlined-icon-button: extend(
-    $indigo-base-icon-button,
-    (
-        selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
-        border-color: (
-            color: (
-                'gray',
+        disabled-foreground: (
+            contrast-color: (
+                'primary',
                 500,
-            ),
-        ),
-        hover-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        active-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        focus-border-color: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-        disabled-border-color: (
-            color: (
-                'gray',
-                500,
+                0.3,
             ),
         ),
     )
