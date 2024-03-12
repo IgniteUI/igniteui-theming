@@ -1,5 +1,6 @@
 @use '../../../../utils/map' as *;
 @use '../light/dialog' as *;
+@use '../elevation/dialog' as *;
 
 ////
 /// @package theming
@@ -50,6 +51,19 @@ $dark-bootstrap-dialog: extend(
 
 /// Generates a dark indigo dialog schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('gray', 50)] - The dialog background color.
+/// @prop {Number} elevation [23] - The elevation level, between 0-24, to be used for the dialog.
 /// @requires $indigo-dialog
-/// @requires $base-dark-dialog
-$dark-indigo-dialog: extend($indigo-dialog, $base-dark-dialog);
+/// @requires $dark-indigo-elevation-dialog
+$dark-indigo-dialog: extend(
+    $indigo-dialog,
+    $dark-indigo-elevation-dialog,
+    (
+        background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+    )
+);
