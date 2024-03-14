@@ -4,7 +4,7 @@ This folder contains a generator files that can be used by the `src/buildJSON.mj
 
 The `generators.scss` file contains declarations for how each of the JSON files should be generated, where each file should be placed and what its contents are. 
 
-To achieve this a small [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) on top of CSS is used. A tiny [parser](scripts/parser.mjs) handles the transformation of this custom CSS into JSON.
+To achieve this a small [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) on top of CSS is used. A tiny [parser](../../scripts/parser.mjs) handles the transformation of this custom CSS into JSON.
 
 From this point on, this document explains the syntax of the DSL.
 
