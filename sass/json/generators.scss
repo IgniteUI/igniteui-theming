@@ -22,9 +22,6 @@ palette {
     }
 }
 
-/*
-* @outputDir - /colors/meta
-*/
 multipliers {
     @each $variant in ('color', 'grayscale') {
         $multipliers: meta.module-variables(multipliers);
