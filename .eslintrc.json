@@ -1,7 +1,7 @@
 {
   "root": true,
   "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:import/recommended"],
-  "plugins": ["import", "@typescript-eslint", "prettier"],
+  "plugins": ["import", "prettier"],
   "env": {
     "browser": false
   },
@@ -21,7 +21,7 @@
       "error",
       {
         "groups": ["builtin", "external", "internal", ["sibling", "parent"], "index", "unknown"],
-        "newlines-between": "always",
+        "newlines-between": "never",
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true

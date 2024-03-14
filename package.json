@@ -16,7 +16,7 @@
     "serve:docs": "npx http-server ./docs",
     "preview:palette": "node scripts/previewPalette.mjs",
     "lint": "npm run lint:styles && npm run lint:prettier",
-    "lint:styles": "stylelint ./sass/**/*.scss",
+    "lint:styles": "stylelint ./sass/**/*.scss --fix",
     "lint:prettier": "prettier \"./sass/**/*.scss\" --check --ignore-path .gitignore",
     "test": "jest",
     "format": "stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
