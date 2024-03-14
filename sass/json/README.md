@@ -1,6 +1,6 @@
 # What is this?
 
-This folder contains a generator files that can be used by the `src/buildJSON.mjs` script to produce JSON files containing serialized information about various parts of the theming package (ex. palettes, typography, elevations, etc.);
+This folder contains generator files that can be used by the `src/buildJSON.mjs` script to produce JSON files containing serialized information about various parts of the theming package (ex. palettes, typography, elevations, etc.);
 
 The `generators.scss` file contains declarations for how each of the JSON files should be generated, where each file should be placed and what its contents are. 
 
