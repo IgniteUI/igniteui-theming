@@ -34,7 +34,7 @@ To generate a new JSON file, you need to add a new `scss` document in this folde
 
 ### Specifying output directory for the JSON file
 
-The output directory is specified using a comment directly above the declaration body with a string marker of `@outputDir` separated by a `-` followed by the desired location of the generated JSON file relative to the `json` directory located at the root of this project. See the example above. If no comment is specified, the last existing comment specifying an `@outputDir` will be used. If there's no other comment above the declaration specifying an `@outputDir`, the declaration is ignored and no output file is generated.
+The output directory is specified using a comment directly above the declaration body with a string marker of `@outputDir` separated by a `-` followed by the desired location of the generated JSON file relative to the `json` directory located at the root of this project(see the example above). If no comment is specified, the last existing comment specifying an `@outputDir` will be used. If there's no other comment above the declaration specifying an `@outputDir`, the declaration is ignored and no output file is generated.
 
 ### JSON declaration
 
@@ -44,7 +44,7 @@ example {
 }
 ```
 
-Given the above snippet, the first present selector i.e. `example` will be used as the name of the JSON file. Any custom property declaration in the body of the selector, in this case `--content`, will be used to generate a key within the generated JSON file. The opening `{` and closing `}` braces define the scope of the JSON object. The value that will be assigned to the `content` key is anything to the right of the `:`.
+Given the above snippet, the first present selector, i.e. `example`, will be used as the name of the JSON file. Any custom property declaration in the body of the selector, in this case `--content`, will be used to generate a key within the generated JSON file. The opening `{` and closing `}` braces define the scope of the JSON object. The value that will be assigned to the `content` key is anything to the right of the `:`.
 
 ##### Grouping several keys together into an object:
 
@@ -77,7 +77,7 @@ The declaration above produces the following JSON:
 }
 ```
 
-The `>` operator defines a nested structures within the current JSON object. If the parser encounters commond denominators like `group` it will group the statements, in this case `x` and `y`, together in the `group` object.
+The `>` operator defines nested structures within the current JSON object. If the parser encounters common denominators like `group` it will group the statements, in this case `x` and `y`, together in the `group` object.
 
 ##### Handling array-like objects
 
