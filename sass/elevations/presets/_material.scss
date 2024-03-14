@@ -48,9 +48,6 @@ $_22: box-shadow((0 10px 14px -6px $color-1, 0 22px 35px 3px $color-2, 0 8px 42p
 $_23: box-shadow((0 11px 14px -7px $color-1, 0 23px 36px 3px $color-2, 0 9px 44px 8px $color-3));
 $_24: box-shadow((0 11px 15px -7px $color-1, 0 24px 38px 3px $color-2, 0 9px 46px 8px $color-3));
 
-/**
- * @sass-export-section="material"
- */
 /// А map of 24 shadow elevations with the umbra, penumbra and ambient shadows.
 /// @type Map
 /// @access private
@@ -81,5 +78,3 @@ $elevations: (
     23: $_23,
     24: $_24,
 );
-
-// @end-sass-export-section
