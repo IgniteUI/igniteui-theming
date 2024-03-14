@@ -97,4 +97,4 @@ example {
 }
 ```
 
-!!! note The array-like only supports simple values (strings and numbers). You can't pass in an object block and expect to get a valid JSON.
+**NOTE**: The array-like only supports simple values (strings and numbers). You can't pass in an object block and expect to get a valid JSON.
