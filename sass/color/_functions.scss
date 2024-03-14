@@ -145,7 +145,10 @@ $_enhanced-accessibility: false;
             to-fixed(color.saturation($color) * $sx),
             to-fixed(color.lightness($color) * $lx)
         );
-        $hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})};
+        $hsl:
+            #{$h,
+            calc(#{$s} * #{$sx}),
+            calc(#{$l} * #{$lx})};
 
         @return (raw: $raw, hsl: $hsl);
     }
