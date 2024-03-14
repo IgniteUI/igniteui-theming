@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:import/recommended"],
+  "plugins": ["import", "prettier"],
+  "env": {
+    "browser": false
+  },
+  "rules": {
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": true
+      }
+    ],
+    "import/no-unresolved": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", ["sibling", "parent"], "index", "unknown"],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/extensions": ["error", "ignorePackages"],
+    "no-prototype-builtins": "off"
+  }
+}

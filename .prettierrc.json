@@ -1,6 +1,15 @@
 {
-  "tabWidth": 4,
+  "tabWidth": 2,
   "singleQuote": true,
   "bracketSpacing": false,
-  "printWidth": 120
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": ["*.scss"],
+      "options": {
+        "tabWidth": 4,
+        "parser": "scss"
+      }
+    }
+  ]
 }

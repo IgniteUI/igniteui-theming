@@ -6,9 +6,6 @@
 /// @access public
 ////
 
-/**
- * @sass-export-section="dark-indigo"
- */
 /// Generates the dark indigo palette.
 /// @type Map
 /// @name dark-indigo-palette
@@ -21,7 +18,7 @@
 /// @prop {Color} error [#cf1a2b] - The 500 variant of the error color.
 /// @prop {Color} surface [#1e1f24] - The surface color.
 $palette: (
-    primary: (
+    'primary': (
         50: to-hsl(#c5cdff),
         '50-contrast': black,
         100: to-hsl(#a3aff6),
@@ -51,7 +48,7 @@ $palette: (
         'A700': to-hsl(#262851),
         'A700-contrast': white,
     ),
-    secondary: (
+    'secondary': (
         50: to-hsl(#c5cdff),
         '50-contrast': black,
         100: to-hsl(#a3aff6),
@@ -81,7 +78,7 @@ $palette: (
         'A700': to-hsl(#262851),
         'A700-contrast': white,
     ),
-    gray: (
+    'gray': (
         50: to-hsl(#24252c),
         '50-contrast': white,
         100: to-hsl(#3b3d47),
@@ -103,7 +100,7 @@ $palette: (
         900: to-hsl(#fcfcfd),
         '900-contrast': black,
     ),
-    info: (
+    'info': (
         50: to-hsl(#f1c3ff),
         '50-contrast': black,
         100: to-hsl(#e89eff),
@@ -133,7 +130,7 @@ $palette: (
         'A700': to-hsl(#5c056b),
         'A700-contrast': white,
     ),
-    success: (
+    'success': (
         50: to-hsl(#edf3e7),
         '50-contrast': black,
         100: to-hsl(#d2e2c3),
@@ -163,7 +160,7 @@ $palette: (
         'A700': to-hsl(#316109),
         'A700-contrast': white,
     ),
-    warn: (
+    'warn': (
         50: to-hsl(#fed7b7),
         '50-contrast': black,
         100: to-hsl(#ffc696),
@@ -193,7 +190,7 @@ $palette: (
         'A700': to-hsl(#d22900),
         'A700-contrast': white,
     ),
-    error: (
+    'error': (
         50: to-hsl(#ffebf0),
         '50-contrast': black,
         100: to-hsl(#ffb0b7),
@@ -223,7 +220,7 @@ $palette: (
         'A700': to-hsl(#9f000f),
         'A700-contrast': white,
     ),
-    surface: (
+    'surface': (
         500: to-hsl(#1e1f24),
         '500-contrast': white,
     ),
