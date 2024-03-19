@@ -605,6 +605,8 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-special-hover-background [color: ('primary', 600)] - The background color of a special date.
 /// @prop {Map} date-special-focus-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('primary', 600)] - The background color of a special date.
+/// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
+/// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -711,6 +713,18 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 600,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'primary',
+                300,
             ),
         ),
     )
