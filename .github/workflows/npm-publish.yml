@@ -32,8 +32,14 @@ jobs:
 
       - name: Define NPM tag
         run: |
-            if [[ ${VERSION} == *"alpha"* || ${VERSION} == *"beta"* || ${VERSION} == *"rc"* ]]; then echo "NPM_TAG=next"; else echo "NPM_TAG=latest"; fi >> $GITHUB_ENV
-            echo ${NPM_TAG}
+          if [[ ${VERSION} == *"alpha"* || ${VERSION} == *"beta"* || ${VERSION} == *"rc"* ]]; then
+            echo "NPM_TAG=next"
+          elif [[ ${VERSION} == *"patch"* ]]; then
+            echo "NPM_TAG=patch"
+          else
+            echo "NPM_TAG=latest"
+          fi >> $GITHUB_ENV
+          echo ${NPM_TAG}
       - name: Create package version
         run: npm version ${VERSION} --no-git-tag-version --save --allow-same-version
         working-directory: ./

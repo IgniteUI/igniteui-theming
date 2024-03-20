@@ -31,9 +31,9 @@
     ]
   },
   "files": [
-    "/sass",
-    "/json",
-    "/_index.scss"
+    "sass/",
+    "json/",
+    "_index.scss"
   ],
   "repository": {
     "type": "git",
@@ -66,7 +66,13 @@
     "./functions": {
       "sass": "./sass/_functions.scss"
     },
-    "./sass/**/*.*": "./sass/**/*.*"
+    "./sass/**/*.*": "./sass/**/*.*",
+    "./json/colors/meta/multipliers.json": "./json/colors/meta/multipliers.json",
+    "./json/colors/meta/palette.json": "./json/colors/meta/palette.json",
+    "./json/colors/presets/palettes.json": "./json/colors/presets/palettes.json",
+    "./json/elevations/indigo.json": "./json/elevations/indigo.json",
+    "./json/elevations/material.json": "./json/elevations/material.json",
+    "./json/typography/presets/typescales.json": "./json/typography/presets/typescales.json"
   },
   "devDependencies": {
     "globby": "^13.1.4",
