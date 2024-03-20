@@ -145,6 +145,8 @@ $_enhanced-accessibility: false;
             to-fixed(color.saturation($color) * $sx),
             to-fixed(color.lightness($color) * $lx)
         );
+
+        // prettier-ignore
         $hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})};
 
         @return (raw: $raw, hsl: $hsl);
@@ -185,7 +187,13 @@ $_enhanced-accessibility: false;
         @return if($contrast, $_mix-alpha, $_hsl-alpha);
     }
 
-    @return rgba(map.get($c, $variant), $alpha: $_alpha);
+    $_shade: map.get($c, $variant);
+
+    @if meta.type-of($_shade) == 'list' and list.length($_shade) == 3 {
+        $_shade: hsl($_shade...);
+    }
+
+    @return rgba($_shade, $alpha: $_alpha);
 }
 
 /// Retrieves a contrast text color for a given color variant from a color palette.

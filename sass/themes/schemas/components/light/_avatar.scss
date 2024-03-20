@@ -10,7 +10,8 @@
 /// Generates a light avatar schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 400, .54)]- The background color of the avatar.
-/// @prop {Map} color [color: ('gray', 800, .96)] - The text/icon color of the avatar.
+/// @prop {Map} color [color: ('gray', 800, .96)] - The text color of the avatar.
+/// @prop {Map} icon-color [color: ('gray', 800, .96)] - The icon color of the avatar.
 /// @prop {Number} border-radius [rem(8px)] - The border radius for rounded avatar.
 /// @prop {List} size [(rem(40px), rem(64px), rem(88px))] - The size used for the avatar width and height.
 /// @prop {Number} default-size [1] - The default size used for the avatar component.
@@ -23,6 +24,13 @@ $light-avatar: (
         ),
     ),
     color: (
+        color: (
+            'gray',
+            800,
+            0.96,
+        ),
+    ),
+    icon-color: (
         color: (
             'gray',
             800,
@@ -53,7 +61,8 @@ $fluent-avatar: $light-avatar;
 /// Generates a bootstrap avatar schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 400)]- The background color of the avatar.
-/// @prop {Map} color [contrast-color: ('gray', 400)] - The text/icon color of the avatar.
+/// @prop {Map} color [contrast-color: ('gray', 400)] - The text color of the avatar.
+/// @prop {Map} icon-color [contrast-color: ('gray', 400)] - The icon color of the avatar.
 /// @prop {Number} border-radius [rem(4px)] - The border radius for rounded avatar.
 /// @requires {Map} $light-avatar
 $bootstrap-avatar: extend(
@@ -71,11 +80,53 @@ $bootstrap-avatar: extend(
                 400,
             ),
         ),
+        icon-color: (
+            contrast-color: (
+                'gray',
+                400,
+            ),
+        ),
         border-radius: rem(4px),
     )
 );
 
 /// Generates an indigo avatar schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('gray', 300)]- The background color of the avatar.
+/// @prop {Map} color [color: ('gray', 700)] - The text color of the avatar.
+/// @prop {Map} icon-color [color: ('gray', 600)] - The icon color of the avatar.
+/// @prop {Number} border-radius [rem(4px)] - The border radius for rounded avatar.
+/// @prop {List} size [(rem(20px), rem(28px), rem(36px))] - The size used for the avatar width and height.
+/// @prop {Number} default-size [1] - The default size used for the avatar component.
 /// @requires {Map} $light-avatar
-$indigo-avatar: $light-avatar;
+$indigo-avatar: extend(
+    $light-avatar,
+    (
+        background: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        border-radius: rem(4px),
+        size: (
+            sizable: (
+                rem(20px),
+                rem(28px),
+                rem(36px),
+            ),
+        ),
+    )
+);

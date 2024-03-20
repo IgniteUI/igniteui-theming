@@ -7,6 +7,26 @@
 /// @access public
 ////
 
+/// Generates a base dark card schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 50)] - The card background color.
+/// @prop {Map} outline-color [color: ('gray', 100)] - The outline color of an outlined type card.
+$dark-base-card: (
+    background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
+
+    outline-color: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+);
+
 /// Generates a dark material card schema.
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 400, .38)] - The outline color of an outlined type card.
@@ -31,40 +51,33 @@ $dark-fluent-card: $fluent-card;
 
 /// Generates a dark bootstrap card schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 50)]- The card background color.
-/// @prop {Map} outline-color [color: ('gray', 100)] - The outline color of an outlined type card.
 /// @requires $bootstrap-card
-$dark-bootstrap-card: extend(
-    $bootstrap-card,
-    (
-        background: (
-            color: (
-                'gray',
-                50,
-            ),
-        ),
-
-        outline-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-    )
-);
+/// @requires $dark-base-card
+$dark-bootstrap-card: extend($bootstrap-card, $dark-base-card);
 
 /// Generates a dark indigo card schema.
 /// @type {Map}
-/// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
+/// @prop {Map} header-text-color [contrast-color: ('gray', 50, .9)] - The text color of the card title.
+/// @prop {Map} subtitle-text-color [contrast-color: ('gray', 50, .8)] - The text color of the card subtitle.
 /// @requires $indigo-card
+/// @requires $dark-base-card
 $dark-indigo-card: extend(
     $indigo-card,
+    $dark-base-card,
     (
-        outline-color: (
-            color: (
+        header-text-color: (
+            contrast-color: (
                 'gray',
-                200,
-                0.54,
+                50,
+                0.9,
+            ),
+        ),
+
+        subtitle-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
             ),
         ),
     )

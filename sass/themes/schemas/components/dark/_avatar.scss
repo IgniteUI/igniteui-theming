@@ -20,7 +20,8 @@ $dark-fluent-avatar: $fluent-avatar;
 /// Generates a dark bootstrap avatar schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 200)]- The background color of the avatar.
-/// @prop {Map} color [contrast-color: ('gray', 200)] - The text/icon color of the avatar.
+/// @prop {Map} color [contrast-color: ('gray', 200)] - The text color of the avatar.
+/// @prop {Map} icon-color [contrast-color: ('gray', 200)] - The icon color of the avatar.
 /// @requires $bootstrap-avatar
 $dark-bootstrap-avatar: extend(
     $bootstrap-avatar,
@@ -37,10 +38,34 @@ $dark-bootstrap-avatar: extend(
                 200,
             ),
         ),
+        icon-color: (
+            contrast-color: (
+                'gray',
+                200,
+            ),
+        ),
     )
 );
 
 /// Generates a dark indigo avatar schema.
 /// @type {Map}
+/// @prop {Map} color [contrast-color: ('gray', 300)] - The text color of the avatar.
+/// @prop {Map} icon-color [contrast-color: ('gray', 300)] - The icon color of the avatar.
 /// @requires $indigo-avatar
-$dark-indigo-avatar: $indigo-avatar;
+$dark-indigo-avatar: extend(
+    $indigo-avatar,
+    (
+        color: (
+            contrast-color: (
+                'gray',
+                300,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);

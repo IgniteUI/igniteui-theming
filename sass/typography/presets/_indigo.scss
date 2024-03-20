@@ -6,114 +6,111 @@
 /// @group Typography
 ////
 
-/**
- * @sass-export-section="indigo"
- */
 $typeface: "'Nunito Sans', sans-serif";
 $h1: type-style(
-    $font-size: rem(96px),
-    $font-weight: 200,
-    $letter-spacing: rem(-1.5px),
-    $line-height: rem(112px),
-    $text-transform: none,
-    $margin-top: 0,
-    $margin-bottom: 0,
-);
-$h2: type-style(
-    $font-size: rem(60px),
-    $font-weight: 200,
-    $letter-spacing: rem(-0.5px),
-    $line-height: rem(72px),
-    $text-transform: none,
-    $margin-top: 0,
-    $margin-bottom: 0,
-);
-$h3: type-style(
-    $font-size: rem(48px),
-    $font-weight: 200,
-    $letter-spacing: 0,
-    $line-height: rem(56px),
-    $text-transform: none,
-    $margin-top: 0,
-    $margin-bottom: 0,
-);
-$h4: type-style(
     $font-size: rem(36px),
-    $font-weight: 200,
-    $letter-spacing: rem(0.25px),
+    $font-weight: 300,
+    $letter-spacing: 0,
     $line-height: rem(42px),
     $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0,
 );
-$h5: type-style(
-    $font-size: rem(24px),
-    $font-weight: 200,
+$h2: type-style(
+    $font-size: rem(28px),
+    $font-weight: 400,
     $letter-spacing: 0,
-    $line-height: rem(28px),
+    $line-height: rem(36px),
     $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0,
 );
-$h6: type-style(
+$h3: type-style(
+    $font-size: rem(24px),
+    $font-weight: 400,
+    $letter-spacing: 0,
+    $line-height: rem(32px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$h4: type-style(
     $font-size: rem(20px),
     $font-weight: 600,
-    $letter-spacing: rem(0.15px),
+    $letter-spacing: 0,
     $line-height: rem(26px),
     $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0,
 );
-$body-1: type-style(
-    $font-size: rem(16px),
-    $font-weight: 400,
-    $letter-spacing: rem(0.5px),
-    $line-height: rem(20px),
-    $text-transform: none,
-    $margin-top: 0,
-    $margin-bottom: 0,
-);
-$body-2: type-style(
-    $font-size: rem(14px),
-    $font-weight: 400,
-    $letter-spacing: rem(0.25px),
-    $line-height: rem(20px),
-    $text-transform: none,
-    $margin-top: 0,
-    $margin-bottom: 0,
-);
-$subtitle-1: type-style(
+$h5: type-style(
     $font-size: rem(16px),
     $font-weight: 600,
-    $letter-spacing: rem(0.15px),
+    $letter-spacing: 0,
     $line-height: rem(22px),
     $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0,
 );
-$subtitle-2: type-style(
+$h6: type-style(
     $font-size: rem(14px),
-    $font-weight: 700,
-    $letter-spacing: rem(0.1px),
+    $font-weight: 600,
+    $letter-spacing: 0,
     $line-height: rem(20px),
     $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0,
 );
-$button: type-style(
+$body-1: type-style(
+    $font-size: rem(13px),
+    $font-weight: 400,
+    $letter-spacing: 0,
+    $line-height: rem(18px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$body-2: type-style(
     $font-size: rem(12px),
+    $font-weight: 400,
+    $letter-spacing: 0,
+    $line-height: rem(16px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$subtitle-1: type-style(
+    $font-size: rem(13px),
+    $font-weight: 600,
+    $letter-spacing: 0,
+    $line-height: rem(18px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$subtitle-2: type-style(
+    $font-size: rem(12px),
+    $font-weight: 600,
+    $letter-spacing: 0,
+    $line-height: rem(16px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$button: type-style(
+    $font-size: rem(11px),
     $font-weight: 700,
-    $letter-spacing: rem(0.75px),
-    $line-height: normal,
+    $letter-spacing: 0,
+    $line-height: rem(15px),
     $text-transform: uppercase,
     $margin-top: 0,
     $margin-bottom: 0,
 );
 $caption: type-style(
-    $font-size: rem(12px),
+    $font-size: rem(11px),
     $font-weight: 400,
-    $letter-spacing: rem(0.4px),
-    $line-height: rem(16px),
+    $letter-spacing: 0,
+    $line-height: rem(15px),
     $text-transform: normal,
     $margin-top: 0,
     $margin-bottom: 0,
@@ -121,9 +118,27 @@ $caption: type-style(
 $overline: type-style(
     $font-size: rem(10px),
     $font-weight: 700,
-    $letter-spacing: rem(0.2px),
+    $letter-spacing: 0,
     $line-height: rem(14px),
     $text-transform: uppercase,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$detail-1: type-style(
+    $font-size: rem(12px),
+    $font-weight: 400,
+    $letter-spacing: 0,
+    $line-height: rem(16px),
+    $text-transform: none,
+    $margin-top: 0,
+    $margin-bottom: 0,
+);
+$detail-2: type-style(
+    $font-size: rem(12px),
+    $font-weight: 600,
+    $letter-spacing: 0,
+    $line-height: rem(16px),
+    $text-transform: none,
     $margin-top: 0,
     $margin-bottom: 0,
 );

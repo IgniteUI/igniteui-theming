@@ -19,9 +19,9 @@ $dark-fluent-banner: $fluent-banner;
 
 /// Generates a dark bootstrap banner schema.
 /// @type {Map}
-/// @prop {Map} banner-background [color: ('surface')] - The background color used banner background.
-/// @prop {Map} banner-message-color [color: ('gray', 600)] - The color used for banner label.
-/// @prop {Map} banner-illustration-color [color: ('gray', 600)] - The color used banner illustration.
+/// @prop {Map} banner-background [color: ('surface')] - The color used for the banner background.
+/// @prop {Map} banner-message-color [color: ('gray', 600)] - The color used for the banner label.
+/// @prop {Map} banner-illustration-color [color: ('gray', 600)] - The color used for the banner illustration.
 /// @requires $bootstrap-banner
 $dark-bootstrap-banner: extend(
     $bootstrap-banner,
@@ -50,5 +50,24 @@ $dark-bootstrap-banner: extend(
 
 /// Generates a dark indigo banner schema.
 /// @type {Map}
+/// @prop {Map} banner-background [color: ('gray', 50)] - The color used for the banner background.
+/// @prop {Map} banner-border-color [color: ('gray', 100)] - The color used for the banner border.
 /// @requires $indigo-banner
-$dark-indigo-banner: $indigo-banner;
+$dark-indigo-banner: extend(
+    $indigo-banner,
+    (
+        banner-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        banner-border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+    )
+);
