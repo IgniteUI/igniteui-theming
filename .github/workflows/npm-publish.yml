@@ -41,7 +41,7 @@ jobs:
           fi >> $GITHUB_ENV
           echo ${NPM_TAG}
       - name: Create package version
-        run: npm version ${VERSION/-*/} --no-git-tag-version --save --allow-same-version
+        run: npm version ${VERSION/-patch/} --no-git-tag-version --save --allow-same-version
         working-directory: ./
 
       - name: Publish igniteui-theming
