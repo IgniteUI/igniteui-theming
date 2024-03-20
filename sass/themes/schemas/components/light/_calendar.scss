@@ -455,7 +455,7 @@ $light-calendar: (
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
-/// @prop {List} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
 /// @requires $light-calendar
 $material-calendar: extend(
     $light-calendar,
@@ -918,7 +918,7 @@ $material-calendar: extend(
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size of the days, months, and years views.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
-/// @prop {List} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $light-calendar
 $fluent-calendar: extend(
     $light-calendar,
@@ -1540,7 +1540,7 @@ $fluent-calendar: extend(
 /// @prop {Map} date-selected-current-border-color [color: ('gray', 900)] - The border color of the selected current date.
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
-/// @prop {List} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
+/// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $light-calendar
 $bootstrap-calendar: extend(
     $light-calendar,
@@ -2167,7 +2167,7 @@ $bootstrap-calendar: extend(
 /// @prop {Map} selected-current-hover-outline-color [contrast-color: ('gray', 900, .6)] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-focus-outline-color [contrast-color: ('gray', 900, .6)] - The :focus outline color of the selected current year/month in year/month views.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
-/// @prop {List} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
+/// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $light-calendar
 $indigo-calendar: extend(
     $light-calendar,

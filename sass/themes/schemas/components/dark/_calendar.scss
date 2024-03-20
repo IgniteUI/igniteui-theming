@@ -20,6 +20,7 @@
 /// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the selected range.
 /// @prop {Map} picker-hover-foreground [color: 'secondary' 200] - The :hover foreground color of the month and year pickers.
 /// @prop {Map} picker-focus-foreground [color: 'secondary' 200] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @type {Map}
 /// @requires $material-calendar
 $dark-material-calendar: extend(
@@ -104,6 +105,12 @@ $dark-material-calendar: extend(
                 200,
             ),
         ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
     )
 );
 
@@ -147,6 +154,7 @@ $dark-material-calendar: extend(
 /// @prop {Map} date-special-range-border-color [color: ('primary', 50)] - The outline color around a special date in a range selection.
 /// @prop {Map} header-foreground [contrast-color: ('primary', 200)] - The header foreground color.
 /// @prop {Map} header-background [color: ('primary', 200)] - The background color of the month and year pickers.
+/// @prop {Мap} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @requires $fluent-calendar
 $dark-fluent-calendar: extend(
     $fluent-calendar,
@@ -379,6 +387,12 @@ $dark-fluent-calendar: extend(
                 300,
             ),
         ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
     )
 );
 
@@ -510,6 +524,7 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-special-focus-background [color: ('primary', 600)] - The background color of a special date.
 /// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
+/// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -628,6 +643,12 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 300,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )
