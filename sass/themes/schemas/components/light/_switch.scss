@@ -411,6 +411,7 @@ $bootstrap-switch: extend(
 /// @prop {Map} label-disabled-color [color: ('gray', 300)] - The color of the switch label when the switch is disabled
 /// @prop {Map} error-color [color: ('gray', 500)] - The border and thumb color in invalid state.
 /// @prop {Map} error-color-hover [color: ('gray', 300)] - The border and thumb color in invalid state on hover.
+/// @prop {Color} track-error-color [transparent] - The color of the track in invalid state when the switch is off.
 /// @prop {List} border-radius-track [(rem(8px), rem(0), rem(8px))] - The border radius used for switch track.
 /// @prop {Map} focus-outline-color [color: ('gray', 300)] - The focus outlined color.
 /// @prop {Map} focus-outline-color-focused [color: ('primary', 200)] - The focus outlined color for focused state.
@@ -472,6 +473,7 @@ $indigo-switch: extend(
                 300,
             ),
         ),
+        track-error-color: transparent,
         thumb-disabled-color: (
             color: (
                 'gray',
