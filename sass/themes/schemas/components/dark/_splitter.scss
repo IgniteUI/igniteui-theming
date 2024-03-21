@@ -57,12 +57,31 @@ $dark-bootstrap-splitter: $bootstrap-splitter;
 $dark-indigo-splitter: extend(
     $indigo-splitter,
     (
+        bar-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        focus-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
         handle-color: (
-            color: 'surface',
+            color: (
+                'gray',
+                600,
+            ),
         ),
 
         expander-color: (
-            color: 'surface',
+            color: (
+                'gray',
+                600,
+            ),
         ),
     )
 );
