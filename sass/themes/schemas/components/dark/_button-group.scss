@@ -104,9 +104,31 @@ $base-dark-button-group: (
 
 /// Generates a dark material button-group schema based on a mix of $light-button-group and $base-dark-button-group
 /// @type {Map}
+/// @prop {Map} item-focused-hover-background [color: ('gray', 500, .3)] - The focused & hover background color for button group items.
+/// @prop {Map} item-selected-focus-hover-background [color: ('gray', 400, .8)] - The background color for a selected item in focused & hover state in the button group.
 /// @requires $material-button-group
 /// @requires $base-dark-button-group
-$dark-material-button-group: extend($material-button-group, $base-dark-button-group);
+$dark-material-button-group: extend(
+    $material-button-group,
+    $base-dark-button-group,
+    (
+        item-focused-hover-background: (
+            color: (
+                'gray',
+                500,
+                0.3,
+            ),
+        ),
+
+        item-selected-focus-hover-background: (
+            color: (
+                'gray',
+                400,
+                0.8,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent button-group schema based on a mix of $fluent-button-group and $base-dark-button-group
 /// @type {Map}
