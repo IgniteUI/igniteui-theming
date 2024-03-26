@@ -10,12 +10,32 @@
 /// Generates a dark material time-picker schema.
 /// @type {Map}
 /// @requires $material-time-picker
-$dark-material-time-picker: $material-time-picker;
+$dark-material-time-picker: extend(
+    $material-time-picker,
+    (
+        divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent time-picker schema.
 /// @type {Map}
 /// @requires $fluent-time-picker
-$dark-fluent-time-picker: $fluent-time-picker;
+$dark-fluent-time-picker: extend(
+    $fluent-time-picker,
+    (
+        divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark bootstrap time-picker schema.
 /// @type {Map}
@@ -24,30 +44,55 @@ $dark-bootstrap-time-picker: $bootstrap-time-picker;
 
 /// Generates a dark indigo time-picker schema.
 /// @type {Map}
-/// @prop {Map} text-color [contrast-color: ('surface')] - The text color of an open time picker.
-/// @prop {Map} selected-text-color [color: ('primary', 300)] -  The text color of a selected item in time picker.
-/// @prop {Map} hover-text-color [color: ('primary', 300)] - The hover text color of an open time picker.
+/// @prop {Map} background-color [color: ('gray', 50)] - The time-picker panel background color.
+/// @prop {Map} header-background [color: ('gray', 50)] - The header background color of a time picker.
+/// @prop {Map} selected-text-color [color: ('primary', 200)] -  The text color of a selected item in time picker.
+/// @prop {Map} hover-text-color [color: ('primary', 200)] - The hover text color of an open time picker.
+/// @prop {Color} border-color [color: ('gray', 100)] - The border-color of the time picker.
+/// @prop {Color} divider-color [color: ('gray', 100)] - The divider color of the time picker.
 /// @requires $indigo-time-picker
 $dark-indigo-time-picker: extend(
     $indigo-time-picker,
     (
-        text-color: (
-            contrast-color: (
-                'surface',
+        background-color: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        header-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
 
         hover-text-color: (
             color: (
                 'primary',
-                300,
+                200,
             ),
         ),
 
         selected-text-color: (
             color: (
                 'primary',
-                300,
+                200,
+            ),
+        ),
+
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        divider-color: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )
