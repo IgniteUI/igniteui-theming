@@ -525,6 +525,9 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @prop {Map} picker-hover-foreground [color: 'primary' 300] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: 'primary' 300] - The :focus foreground color of the month and year pickers.
+
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -649,6 +652,18 @@ $dark-indigo-calendar: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+        picker-hover-foreground: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'primary',
+                300,
             ),
         ),
     )

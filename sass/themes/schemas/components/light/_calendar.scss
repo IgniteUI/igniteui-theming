@@ -2065,8 +2065,8 @@ $bootstrap-calendar: extend(
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color.
 /// @prop {Map} picker-foreground [color: 'gray' 700] - The foreground color of the month and year pickers.
 /// @prop {Map} picker-background [contrast-color: ('gray', 900)] - The background color of the month and year pickers.
-/// @prop {Map} picker-hover-foreground [color: 'gray' 900] - The :hover foreground color of the month and year pickers.
-/// @prop {Map} picker-focus-foreground [color: 'gray' 900] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: 'primary' 500] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: 'primary' 500] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} navigation-color [color: ('gray', 600)] - the color of the buttons responsible for navigation.
 /// @prop {Map} navigation-hover-color [color: ('primary', 500)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 500)] - The :focus color of the icon button responsible for month navigation.
@@ -2195,14 +2195,14 @@ $indigo-calendar: extend(
         ),
         picker-hover-foreground: (
             color: (
-                'gray',
-                900,
+                'primary',
+                500,
             ),
         ),
         picker-focus-foreground: (
             color: (
-                'gray',
-                900,
+                'primary',
+                500,
             ),
         ),
         navigation-color: (
