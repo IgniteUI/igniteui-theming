@@ -808,6 +808,8 @@ $material-calendar: extend(
 /// @prop {Map} date-special-foreground [color: ('gray', 900)] - The foreground color of a special date.
 /// @prop {Map} date-special-hover-foreground [color: ('gray', 900)] - The foreground color of a special date.
 /// @prop {Map} date-special-focus-foreground [color: ('gray', 900)] - The foreground color of a special date.
+/// @prop {Map} date-special-hover-background [color: ('gray', 200)] - The background color of a special date.
+/// @prop {Map} date-special-focus-background [color: ('gray', 200)] - The background color of a special date.
 /// @prop {Map} date-selected-current-border-color [color: ('gray', 700)] - The border color of the selected current date.
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 700)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 700)] - The :focus border color of the selected current date.
@@ -855,7 +857,7 @@ $material-calendar: extend(
 /// @prop {Map} date-current-focus-foreground [contrast-color: ('primary', 600)] - The :focus foreground color of the current date.
 /// @prop {Map} date-current-focus-background [color: ('gray', 200)] - The :focus background color of the current date.
 /// @prop {Map} date-selected-current-foreground [contrast-color: ('primary', 600)] - The foreground color of the selected current date.
-/// @prop {Color} date-selected-current-background [transparent] - The background color of the selected current date.
+/// @prop {Map} date-selected-current-background [color: ('gray', 100)] - The background color of the selected current date.
 /// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('primary', 600)] - The :hover foreground color of the selected current date.
 /// @prop {Map} date-selected-current-hover-background [color: ('gray', 200)] - The :hover background color of the selected current date.
 /// @prop {Map} date-selected-current-focus-foreground [contrast-color: ('primary', 600)] - The :focus foreground color of the selected current date.
@@ -965,6 +967,18 @@ $fluent-calendar: extend(
             ),
         ),
         date-special-current-border-color: transparent,
+        date-special-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        date-special-focus-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         header-foreground: (
             contrast-color: (
                 'primary',
@@ -1141,7 +1155,12 @@ $fluent-calendar: extend(
                 600,
             ),
         ),
-        date-selected-current-background: transparent,
+        date-selected-current-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
         date-selected-current-hover-foreground: (
             contrast-color: (
                 'primary',
@@ -1227,9 +1246,9 @@ $fluent-calendar: extend(
             ),
         ),
         date-hover-foreground: (
-            contrast-color: (
+            color: (
                 'gray',
-                200,
+                900,
             ),
         ),
         date-hover-background: (
