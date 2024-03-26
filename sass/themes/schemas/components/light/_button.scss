@@ -190,7 +190,7 @@ $material-base-button: $light-base-button;
 /// @prop {Map} focus-hover-foreground [color: ('secondary', 500)] - The text color on focus hovered state of the button.
 /// @prop {Map} focus-visible-background ['secondary', 400, .24)] - The focus-visible background color of a flat button.
 /// @prop {Map} focus-visible-foreground ['secondary', 500)] - The focus-visible text color of a flat button.
-/// @prop {Map} active-background [color: ('secondary', 400, .12)] - The active background color of a flat button.
+/// @prop {Map} ground [color: ('secondary', 400, .12)] - The active background color of a flat button.
 /// @prop {Map} active-foreground [color: ('secondary', 500)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color a flat button.
 /// @requires {Map} $material-base-button
@@ -570,7 +570,7 @@ $fluent-base-button: extend(
 
 /// @type {Map}
 /// @prop {Map} hover-background [color: ('gray', 200)] - The hover background color of a flat button.
-/// @prop {Color} active-background [transparent] - The active background color of a contained button.
+/// @prop {Map} active-background [color: ('gray', 200)] - The active background color of a contained button.
 /// @prop {Map} active-foreground [color: ('gray', 900)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
 /// @requires {Map} $material-flat-button
@@ -586,7 +586,12 @@ $fluent-flat-button: extend(
                 200,
             ),
         ),
-        active-background: transparent,
+        active-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         active-foreground: (
             color: (
                 'gray',
@@ -846,7 +851,7 @@ $fluent-button: (
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the button.
 /// @prop {Map} disabled-icon-color [color: ('primary', 200)] - The disabled icon color of the button.
-/// @prop {Map} shadow-color [color: ('primary', 200, .5)] - The shadow color of an outlined button.
+/// @prop {Map} shadow-color [color: ('primary', 600, .5)] - The shadow color of the button.
 /// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the button.
 /// @prop {Number} default-size [2] - The default size used for the button component.
 /// @requires {Map} $light-base-button
@@ -876,7 +881,7 @@ $bootstrap-base-button: extend(
         shadow-color: (
             color: (
                 'primary',
-                200,
+                600,
                 0.5,
             ),
         ),
@@ -1451,10 +1456,10 @@ $indigo-outlined-button: extend(
 /// @prop {Map} focus-visible-foreground [contrast-color: ('primary', 500)] - The focus-visible text color of a contained button.
 /// @prop {Map} active-background [color: ('primary', 400)] - The active background color of a contained button.
 /// @prop {Map} active-foreground [contrast-color: ('primary', 500)] - The active text color of a flat button.
-/// @prop {Map} shadow-color [color: ('primary', 400, 0.50)] - The shadow color of a contained button.
+/// @prop {Map} shadow-color [color: ('primary', 400, 0.5)] - The shadow color of a contained button.
 /// @prop {Map} disabled-background [color: ('primary', 400, 0.50)] - The disabled background color of a flat button.
-/// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.40)] - The disabled foreground color of the button.
-/// @prop {Map} disabled-icon-color [contrast-color: ('primary', 500, 0.30)] - The disabled icon color of the button.
+/// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.4)] - The disabled foreground color of the button.
+/// @prop {Map} disabled-icon-color [contrast-color: ('primary', 500, 0.3)] - The disabled icon color of the button.
 /// @requires {Map} $light-contained-button
 /// @requires {Map} $indigo-base-button
 $indigo-contained-button: extend(
