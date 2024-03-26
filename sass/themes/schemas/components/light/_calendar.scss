@@ -63,7 +63,7 @@
 /// @prop {Color} date-selected-focus-border-color [transparent] - The :focus border color of the selected date.
 /// @prop {Color} date-range-border-color [transparent] - The border color of range selection.
 /// @prop {Map} date-range-preview-border-color [color: ('gray', 300)] - The border color of the range selection in preview state(visible before selecting the end of the range).
-/// @prop {Map} date-disabled-foreground [color: ('gray', 500)] - The foreground color of disabled dates.
+/// @prop {Map} date-disabled-foreground [color: ('gray', 500, .5)] - The foreground color of disabled dates.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
 /// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] -The border radius used for the date in range selection.
@@ -361,6 +361,7 @@ $light-calendar: (
         color: (
             'gray',
             500,
+            0.5,
         ),
     ),
 );
