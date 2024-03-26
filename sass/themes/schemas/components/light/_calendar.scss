@@ -1501,6 +1501,8 @@ $fluent-calendar: extend(
 
 /// Generates a bootstrap calendar schema.
 /// @type {Map}
+/// @prop {Map} date-special-hover-background [color: ('gray', 200)] - The background color of a special date.
+/// @prop {Map} date-special-focus-background [color: ('gray', 200)] - The background color of a special date.
 /// @prop {Map} date-special-foreground [color: ('gray', 900)] - The foreground color of a special date.
 /// @prop {Map} date-special-focus-foreground [color: ('gray', 900)] - The foreground color of a special date.
 /// @prop {Map} date-special-hover-foreground [color: ('gray', 900)] - The foreground color of a special date.
@@ -1601,6 +1603,18 @@ $fluent-calendar: extend(
 $bootstrap-calendar: extend(
     $light-calendar,
     (
+        date-special-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        date-special-focus-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         date-special-foreground: (
             color: (
                 'gray',
