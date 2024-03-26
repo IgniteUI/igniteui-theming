@@ -123,6 +123,10 @@ $dark-material-calendar: extend(
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
+/// @prop {Map} picker-hover-foreground [color: 'primary' 200] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: 'primary' 200] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-hover-color [color: ('primary', 200)] - The :hover color of the buttons responsible for navigation.
+/// @prop {Map} navigation-focus-color [color: ('primary', 200)] - The :focus color of the buttons responsible for navigation.
 /// @prop {Map} year-selected-background [color: ('primary', 900)]- The background color of the selected year in years view.
 /// @prop {Map} year-selected-hover-foreground [contrast-color: ('primary', 800)] - The :hover foreground color of the selected year in years view.
 /// @prop {Map} year-selected-hover-background [color: ('primary' 800)] - The :hover background color of the selected year in years view.
@@ -167,6 +171,30 @@ $dark-material-calendar: extend(
 $dark-fluent-calendar: extend(
     $fluent-calendar,
     (
+        picker-hover-foreground: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
         header-foreground: (
             contrast-color: (
                 'primary',
