@@ -145,7 +145,7 @@ $dark-material-calendar: extend(
 /// @prop {Map} date-current-foreground [contrast-color: ('gray', 900)] - The foreground color of the current date.
 /// @prop {Map} date-current-background [color: ('primary', 200)] - The background color of the current date.
 /// @prop {Map} date-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date.
-/// @prop {Map} date-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date.
+/// @prop {Map} date-current-focus-foreground [contrast-color: ('gray', 900)] - The :focus foreground color of the current date.
 /// @prop {Map} date-selected-current-foreground [contrast-color: ('gray', 900)] - The foreground color of the selected current date.
 /// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the selected current date.
 /// @prop {Map} date-selected-current-focus-foreground [contrast-color: ('gray', 900)] - The :focus foreground color of the selected current date.
@@ -519,12 +519,25 @@ $dark-bootstrap-calendar: extend(
 
 /// Generates a dark indigo calendar schema.
 /// @type {Map}
+/// @prop {Map} date-special-range-foreground [contrast-color: 'gray', 50] - The foreground color of a special date in rage selection.
+/// @prop {Map} date-hover-foreground [contrast-color: 'gray', 900] - The :hover foreground color of a date.
+/// @prop {Map} date-focus-foreground [contrast-color: 'gray', 900] - The :focus foreground color of a date.
+/// @prop {Map} date-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date.
+/// @prop {Map} date-current-focus-foreground [contrast-color: ('gray', 900)] - The :focus foreground color of the current date.
+/// @prop {Map} month-hover-foreground [contrast-color: ('gray', 900)] -  The :hover foreground color of the month inside the months view.
+/// @prop {Map} month-hover-background [contrast-color: ('gray', 900, .1)] - The :hover background color of the month inside the months view.
+/// @prop {Map} month-current-hover-foreground [contrast-color: ('gray', 900)]- The :hover foreground color of the current month in month view.
+/// @prop {Map} month-current-hover-background [contrast-color: ('gray', 900, .1)]- The :hover background color of the current month in month view.
+/// @prop {Map} year-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the year in years view.
+/// @prop {Map} year-hover-background [contrast-color: ('grey', 900, .1)]- The :hover background color of the year in years view.
+/// @prop {Map} year-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current year in years view.
+/// @prop {Map} date-selected-current-range-hover-background [contrast-color: ('gray', 900, .1)] - The :hover background color of the current date in the selected range.
 /// @prop {Map} header-background [(color: 'gray', 50)] - The header background color.
 /// @prop {Map} content-background [(color: 'gray', 50)] - The background color of the days, months and years views.
 /// @prop {Map} picker-background [(color: 'gray', 50)] - The background color of the month and year pickers.
 /// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
-/// @prop {Map} date-hover-background [color: ('gray', 900, .1)] - The :hover background color of a date.
-/// @prop {Map} date-focus-background [color: ('gray', 900, .1)] - The :focus background color of date.
+/// @prop {Map} date-hover-background [contrast-color: ('gray', 900, .1)] - The :hover background color of a date.
+/// @prop {Map} date-focus-background [contrast-color: ('gray', 900, .1)] - The :focus background color of date.
 /// @prop {Map} date-current-foreground [color: ('gray', 900)] - The foreground color of the current date.
 /// @prop {Map} date-disabled-foreground [color: ('gray', 500)] - The foreground color of disabled dates.
 /// @prop {Map} date-disabled-range-foreground [color: ('gray', 500)] - The foreground color of disabled dates.
@@ -532,9 +545,9 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-current-hover-border-color [color: ('primary', 300)] - The :hover border color of the current date.
 /// @prop {Map} date-current-focus-border-color [color: ('primary', 300)] - The :focus border color of the current date.
 /// @prop {Map} date-special-foreground [color: ('primary', 600)] - The foreground color of a special date.
-/// @prop {Map} date-special-background [color: ('primary', 50)] - The background color of a special date.
+/// @prop {Map} date-special-background [color: ('primary', 600, .4)] - The background color of a special date.
 /// @prop {Map} date-special-hover-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
-/// @prop {Map} date-special-hover-background [color: ('primary', 600)] - The background color of a special date.
+/// @prop {Map} date-special-hover-background [color: ('primary', 400, .7)] - The background color of a special date.
 /// @prop {Map} date-special-focus-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('primary', 600)] - The background color of a special date.
 /// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
@@ -542,11 +555,99 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @prop {Map} picker-hover-foreground [color: 'primary' 300] - The :hover foreground color of the month and year pickers.
 /// @prop {Map} picker-focus-foreground [color: 'primary' 300] - The :focus foreground color of the month and year pickers.
-
+/// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
+/// @prop {Map} week-number-background [color: ('gray', 900, .05)] - The background color of the week number column.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
     (
+        date-special-range-foreground: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+        date-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        date-focus-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        date-current-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        date-current-focus-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        month-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        month-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+        month-current-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        month-current-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+
+        year-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        year-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+
+        year-current-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        date-selected-current-range-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+
         header-background: (
             color: (
                 'gray',
@@ -572,16 +673,16 @@ $dark-indigo-calendar: extend(
             ),
         ),
         date-hover-background: (
-            color: (
+            contrast-color: (
                 'gray',
-                900,
+                50,
                 0.1,
             ),
         ),
         date-focus-background: (
-            color: (
+            contrast-color: (
                 'gray',
-                900,
+                50,
                 0.1,
             ),
         ),
@@ -631,6 +732,7 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 600,
+                0.4,
             ),
         ),
         date-special-hover-foreground: (
@@ -642,7 +744,8 @@ $dark-indigo-calendar: extend(
         date-special-hover-background: (
             color: (
                 'primary',
-                600,
+                400,
+                0.7,
             ),
         ),
         date-special-focus-foreground: (
@@ -685,6 +788,19 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 300,
+            ),
+        ),
+        week-number-foreground: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+        week-number-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
             ),
         ),
     )

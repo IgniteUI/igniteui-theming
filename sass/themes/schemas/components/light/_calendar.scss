@@ -2212,7 +2212,7 @@ $bootstrap-calendar: extend(
 /// @prop {Color} date-special-hover-border-color [transparent] - The outline color around a special date.
 /// @prop {Map} year-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the year in years view.
 /// @prop {Map} year-hover-background [color: ('grey', 900, .05)] - The :hover background color of the year in years view.
-/// @prop {Map} year-current-foreground [color: ('gray', 900)] - The foreground color of the current year.
+/// @prop {Map} year-current-foreground [color: ('gray', 800)] - The foreground color of the current year.
 /// @prop {Color} year-current-background [transparent]- The background color of the current year in years view.
 /// @prop {Map} year-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current year in years view.
 /// @prop {Map} year-current-hover-background [color: ('grey', 900, .05)] - The :hover background color of the current year in years view.
@@ -2226,7 +2226,7 @@ $bootstrap-calendar: extend(
 /// @prop {Map} year-selected-current-hover-background [color: ('primary', 400)] - The :hover background color of the current/selected year.
 /// @prop {Map} month-hover-foreground [color: ('gray', 900)] -  The :hover foreground color of the month inside the months view.
 /// @prop {Map} month-hover-background [color: ('gray', 900, .05)] - The :hover background color of the month inside the months view.
-/// @prop {Map} month-current-foreground [color: ('gray', 900)] - The foreground color of the current month in month view.
+/// @prop {Map} month-current-foreground [color: ('gray', 800)] - The foreground color of the current month in month view.
 /// @prop {Color} month-current-background [transparent] - The background color of the current month in month view.
 /// @prop {Map} month-current-hover-foreground [color: ('gray', 900)]- The :hover foreground color of the current month in month view.
 /// @prop {Map} month-current-hover-background [color: ('gray', 900, .05)]- The :hover background color of the current month in month view.
@@ -2245,6 +2245,7 @@ $bootstrap-calendar: extend(
 /// @prop {Map} selected-current-hover-outline-color [contrast-color: ('gray', 900, .6)] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-focus-outline-color [contrast-color: ('gray', 900, .6)] - The :focus outline color of the selected current year/month in year/month views.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
+/// @prop {List} border-radius [(rem(8px), rem(0), rem(8px))] - The border radius used for calendar.
 /// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $light-calendar
 $indigo-calendar: extend(
@@ -2341,6 +2342,13 @@ $indigo-calendar: extend(
                 rem(4px),
                 rem(0),
                 rem(8px),
+            ),
+        ),
+        border-radius: (
+            border-radius: (
+                rem(6px),
+                rem(0),
+                rem(6px),
             ),
         ),
         date-hover-background: (
@@ -2597,7 +2605,7 @@ $indigo-calendar: extend(
         year-current-foreground: (
             color: (
                 'gray',
-                900,
+                800,
             ),
         ),
         year-current-background: transparent,
@@ -2678,7 +2686,7 @@ $indigo-calendar: extend(
         month-current-foreground: (
             color: (
                 'gray',
-                900,
+                800,
             ),
         ),
         month-current-background: transparent,
