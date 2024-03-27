@@ -11,8 +11,8 @@
 /// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Map} date-special-foreground [color: ('secondary', 200)] - The foreground color of a special date.
-/// @prop {Map} date-special-hover-foreground [color: ('secondary', 200)] - The :hover foreground color of a special date.
-/// @prop {Map} date-special-focus-foreground [color: ('secondary', 200)] - The :focus foreground color of a special date.
+/// @prop {Map} date-special-hover-foreground [color: ('secondary', 100)] - The :hover foreground color of a special date.
+/// @prop {Map} date-special-focus-foreground [color: ('secondary', 100)] - The :focus foreground color of a special date.
 /// @prop {Map} date-special-range-foreground [color: ('secondary', 200)] - The foreground color of a special date in a range selection.
 /// @prop {Map} date-special-border-color [color: ('secondary', 200)] - The outline color around a special date.
 /// @prop {Map} date-special-hover-border-color [color: ('secondary', 100)] - The outline color around a special date.
@@ -48,13 +48,13 @@ $dark-material-calendar: extend(
         date-special-hover-foreground: (
             color: (
                 'secondary',
-                200,
+                100,
             ),
         ),
         date-special-focus-foreground: (
             color: (
                 'secondary',
-                200,
+                100,
             ),
         ),
         date-special-range-foreground: (
@@ -391,6 +391,10 @@ $dark-fluent-calendar: extend(
 
 /// Generates a dark bootstrap calendar schema.
 /// @type {Map}
+/// @prop {Map} year-hover-background [color: ('grey', 100)]- The :hover background color of the year in years view.
+/// @prop {Map} year-current-hover-background [color: ('gray' 100)] - The :hover background color of the current year in years view.
+/// @prop {Map} month-hover-background [color: ('grey', 100)]- The :hover background color of the month in months view.
+/// @prop {Map} month-current-hover-background [color: ('gray', 100)] - The :hover background color of the current month in months view.
 /// @prop {Map} date-special-hover-background [color: ('gray', 100)] - The background color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('gray', 100)] - The background color of a special date.
 /// @prop {Map} date-hover-background [color: 'gray', 100] - The :hover background color of a date.
@@ -412,6 +416,30 @@ $dark-fluent-calendar: extend(
 $dark-bootstrap-calendar: extend(
     $bootstrap-calendar,
     (
+        year-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        year-current-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        month-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        month-current-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
         date-special-hover-background: (
             color: (
                 'gray',
@@ -557,6 +585,7 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} picker-focus-foreground [color: 'primary' 300] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [color: ('gray', 900, .05)] - The background color of the week number column.
+/// @prop {Map} date-selected-range-background [color: ('primary', 400, .2)] - The background color of the selected range.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -801,6 +830,13 @@ $dark-indigo-calendar: extend(
                 'gray',
                 50,
                 0.05,
+            ),
+        ),
+        date-selected-range-background: (
+            color: (
+                'primary',
+                400,
+                0.2,
             ),
         ),
     )

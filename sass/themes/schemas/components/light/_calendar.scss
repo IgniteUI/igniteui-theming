@@ -1546,6 +1546,8 @@ $fluent-calendar: extend(
 /// @prop {Map} picker-background [color: ('gray', 100)] - The background color of the month and year pickers.
 /// @prop {Map} year-current-foreground [color: ('gray', 900)] - The foreground color of the current year.
 /// @prop {Color} year-current-background [transparent]- The background color of the current year in years view.
+/// @prop {Map} year-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the year in years view.
+/// @prop {Map} year-hover-background [color: ('grey', 200)]- The :hover background color of the year in years view.
 /// @prop {Map} year-current-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the current year in years view.
 /// @prop {Map} year-current-hover-background [color: ('gray' 200)] - The :hover background color of the current year in years view.
 /// @prop {Map} year-selected-foreground [contrast-color: ('primary', 900)] - The foreground color of the selected year.
@@ -1556,6 +1558,8 @@ $fluent-calendar: extend(
 /// @prop {Map} year-selected-current-background [color: ('primary', 500)] - The foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected year.
 /// @prop {Map} year-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the current/selected year.
+/// @prop {Map} month-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the month in months view.
+/// @prop {Map} month-hover-background [color: ('grey', 200)]- The :hover background color of the month in months view.
 /// @prop {Map} month-current-foreground [color: ('gray', 900)] - The foreground color of the current selected month.
 /// @prop {Color} month-current-background [transparent] - The background color of the current selected month.
 /// @prop {Map} month-current-hover-foreground [contrast-color: ('gray', 200)] - The :hover foreground color of the current month in months view.
@@ -1722,6 +1726,18 @@ $bootstrap-calendar: extend(
                 500,
             ),
         ),
+        year-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        year-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         year-current-foreground: (
             color: (
                 'gray',
@@ -1730,9 +1746,9 @@ $bootstrap-calendar: extend(
         ),
         year-current-background: transparent,
         year-current-hover-foreground: (
-            contrast-color: (
+            color: (
                 'gray',
-                200,
+                900,
             ),
         ),
         year-current-hover-background: (
@@ -1787,6 +1803,18 @@ $bootstrap-calendar: extend(
             color: (
                 'primary',
                 600,
+            ),
+        ),
+        month-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        month-hover-background: (
+            color: (
+                'gray',
+                200,
             ),
         ),
         month-current-foreground: (
@@ -2230,7 +2258,7 @@ $bootstrap-calendar: extend(
 /// @prop {Map} date-selected-current-hover-border-color [contrast-color: ('primary', 900, .6)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [contrast-color: ('primary', 900,. 6)] - The :focus border color of the selected current date.
 /// @prop {Map} date-selected-range-foreground [color: ('gray', 800)] - The foreground color of the selected range.
-/// @prop {Map} date-selected-range-background [color: ('secondary', 50)] - The background color of the selected range.
+/// @prop {Map} date-selected-range-background [color: ('primary', 300, .2)] - The background color of the selected range.
 /// @prop {Map} date-selected-range-hover-background [color: ('secondary', 100)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('secondary', 100)] - The :focus background color of the selected range.
 /// @prop {Color} date-selected-current-range-background [transparent] - The background color of the current date in the selected range.
