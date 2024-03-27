@@ -15,7 +15,7 @@
 /// @prop {Map} picker-hover-foreground [color: 'secondary' 500] - The :hover foreground color of the month and year pickers.
 /// @prop {Map} picker-focus-foreground [color: 'secondary' 500] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} weekday-color [color: ('gray', 500)] - The foreground color of the weekday labels.
-/// @prop {Map} weekend-color [contrast-color: 'surface'] - The foreground color of the weekend days.
+/// @prop {Map} weekend-color [color: ('gray', 900)] - The foreground color of the weekend days.
 /// @prop {Map} inactive-color [color: ('gray', 500)] - The foreground color of the previous and next month dates.
 /// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [color: ('gray', 200)] - The background color of the week number column.
@@ -312,7 +312,10 @@ $light-calendar: (
         ),
     ),
     weekend-color: (
-        contrast-color: 'surface',
+        color: (
+            'gray',
+            900,
+        ),
     ),
     border-radius: (
         border-radius: (
@@ -368,7 +371,8 @@ $light-calendar: (
     date-disabled-range-foreground: (
         color: (
             'gray',
-            500,
+            900,
+            0.5,
         ),
     ),
 );
@@ -949,7 +953,7 @@ $material-calendar: extend(
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size of the days, months, and years views.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
 /// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
-/// @prop {Map} date-disabled-range-foreground [color: ('gray', 900)] - The foreground color of disabled dates in range selection.
+
 /// @requires {Map} $light-calendar
 $fluent-calendar: extend(
     $light-calendar,
@@ -1519,12 +1523,6 @@ $fluent-calendar: extend(
                 200,
             ),
         ),
-        date-disabled-range-foreground: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
     )
 );
 
@@ -1617,7 +1615,6 @@ $fluent-calendar: extend(
 /// @prop {Map} selected-current-focus-outline-color [color: ('gray', 900)] - The :focus outline color of the selected current year/month in year/month views.
 /// @prop {Map} border-color [color: ('gray', 300)] - The calendar border color.
 /// @prop {Map} weekday-color [color: 'info', 300] - The foreground color for weekday labels.
-/// @prop {Map} weekend-color [color: ('gray', 900)] - The foreground color of the weekend days.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(0))] - The border radius used for the date outline in range selection.
@@ -2160,12 +2157,6 @@ $bootstrap-calendar: extend(
                 300,
             ),
         ),
-        weekend-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
         week-number-background: transparent,
         month-year-border-radius: (
             border-radius: (
@@ -2215,6 +2206,7 @@ $bootstrap-calendar: extend(
 /// Generates an indigo calendar schema.
 /// @type {Map}
 /// @prop {Map} content-foreground [color: ('gray', 800)] - The foreground color of the days, months and years views.
+/// @prop {Map} weekend-color [color: ('gray', 800)] - The foreground color of the weekend days.
 /// @prop {Map} content-background [contrast-color: ('gray', 900)] - The background color of the days, months and years views.
 /// @prop {Map} header-foreground [color: ('gray', 800)] - The header foreground color.
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color.
@@ -2316,6 +2308,12 @@ $indigo-calendar: extend(
             ),
         ),
         content-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        weekend-color: (
             color: (
                 'gray',
                 800,
