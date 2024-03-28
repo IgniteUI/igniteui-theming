@@ -586,6 +586,10 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [color: ('gray', 900, .05)] - The background color of the week number column.
 /// @prop {Map} date-selected-range-background [color: ('primary', 400, .2)] - The background color of the selected range.
+/// @prop {Map} selected-current-outline-color [contrast-color: ('gray', 50, .6)] - The outline color of the selected current year/month in year/month views.
+/// @prop {Map} selected-current-hover-outline-color [contrast-color: ('gray', 50, .6)] - The :hover outline color of the selected current year/month in year/month views.
+/// @prop {Map} selected-current-focus-outline-color [contrast-color: ('gray', 50, .6)] - The :focus outline color of the selected current year/month in year/month views.
+
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -722,15 +726,17 @@ $dark-indigo-calendar: extend(
             ),
         ),
         date-disabled-foreground: (
-            color: (
+            contrast-color: (
                 'gray',
-                500,
+                50,
+                0.4,
             ),
         ),
         date-disabled-range-foreground: (
-            color: (
+            contrast-color: (
                 'gray',
-                500,
+                50,
+                0.4,
             ),
         ),
         date-current-border-color: (
@@ -837,6 +843,27 @@ $dark-indigo-calendar: extend(
                 'primary',
                 400,
                 0.2,
+            ),
+        ),
+        selected-current-outline-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+        selected-current-outline-hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+        selected-current-outline-focus-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
             ),
         ),
     )

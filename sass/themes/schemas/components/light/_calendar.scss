@@ -64,7 +64,7 @@
 /// @prop {Color} date-range-border-color [transparent] - The border color of range selection.
 /// @prop {Map} date-range-preview-border-color [color: ('gray', 300)] - The border color of the range selection in preview state(visible before selecting the end of the range).
 /// @prop {Map} date-disabled-foreground [color: ('gray', 500, .5)] - The foreground color of disabled dates.
-/// @prop {Map} date-disabled-range-foreground [color: ('gray', 500)] - The foreground color of disabled dates in range selection.
+/// @prop {Map} date-disabled-range-foreground [color: ('gray', 900, .38)] - The foreground color of disabled dates in range selection.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
 /// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] -The border radius used for the date in range selection.
@@ -372,7 +372,7 @@ $light-calendar: (
         color: (
             'gray',
             900,
-            0.5,
+            0.38,
         ),
     ),
 );
@@ -2593,7 +2593,7 @@ $indigo-calendar: extend(
         date-selected-range-foreground: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
         date-selected-range-background: (
@@ -2660,7 +2660,7 @@ $indigo-calendar: extend(
         year-current-foreground: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
         year-current-background: transparent,
@@ -2741,7 +2741,7 @@ $indigo-calendar: extend(
         month-current-foreground: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
         month-current-background: transparent,
