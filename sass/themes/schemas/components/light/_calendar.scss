@@ -41,7 +41,6 @@
 /// @prop {Color} date-special-background [transparent] - The background color of a special date.
 /// @prop {Map} date-special-hover-background [color: ('gray', 100)] - The background color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('gray', 100)] - The background color of a special date.
-/// @prop {Map} date-special-range-foreground [color: ('secondary', 900)] - The foreground color of a special date in rage selection.
 /// @prop {Color} date-special-range-background [transparent] - The background color of a special date in range selection.
 /// @prop {Map} date-special-range-border-color [color: ('secondary', 900)] - The outline color around a special date in range selection.
 /// @prop {Color} date-selected-current-outline [transparent] - The outline color of the current selected date.
@@ -268,12 +267,6 @@ $light-calendar: (
             100,
         ),
     ),
-    date-special-range-foreground: (
-        color: (
-            'secondary',
-            900,
-        ),
-    ),
     date-special-range-background: transparent,
     date-special-range-border-color: (
         color: (
@@ -451,6 +444,7 @@ $light-calendar: (
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} date-special-range-foreground [color: ('secondary', 900)] - The foreground color of a special date in rage selection.
 /// @requires $light-calendar
 $material-calendar: extend(
     $light-calendar,
@@ -848,6 +842,12 @@ $material-calendar: extend(
                 200,
             ),
         ),
+        date-special-range-foreground: (
+            color: (
+                'secondary',
+                900,
+            ),
+        ),
     )
 );
 
@@ -953,7 +953,7 @@ $material-calendar: extend(
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size of the days, months, and years views.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
 /// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
-
+/// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
 /// @requires {Map} $light-calendar
 $fluent-calendar: extend(
     $light-calendar,
@@ -1523,6 +1523,12 @@ $fluent-calendar: extend(
                 200,
             ),
         ),
+        date-special-range-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
     )
 );
 
@@ -1629,6 +1635,8 @@ $fluent-calendar: extend(
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
+/// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
+
 /// @requires {Map} $light-calendar
 $bootstrap-calendar: extend(
     $light-calendar,
@@ -2200,6 +2208,12 @@ $bootstrap-calendar: extend(
                 300,
             ),
         ),
+        date-special-range-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
     )
 );
 
@@ -2296,6 +2310,8 @@ $bootstrap-calendar: extend(
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
 /// @prop {List} border-radius [(rem(8px), rem(0), rem(8px))] - The border radius used for calendar.
 /// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
+/// @prop {Map} date-special-range-foreground [color: ('primary', 500)] - The foreground color of a special date in rage selection.
+/// @prop {Map} date-special-range-background [(color: 'primary', 50, .7)] - The background color of a special date in range selection.
 /// @requires {Map} $light-calendar
 $indigo-calendar: extend(
     $light-calendar,
@@ -2465,6 +2481,19 @@ $indigo-calendar: extend(
             ),
         ),
         date-special-background: (
+            color: (
+                'primary',
+                50,
+                0.7,
+            ),
+        ),
+        date-special-range-foreground: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        date-special-range-background: (
             color: (
                 'primary',
                 50,
