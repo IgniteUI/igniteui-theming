@@ -341,6 +341,8 @@ $dark-fluent-calendar: extend(
 /// @prop {Map} month-current-hover-background [color: ('gray', 100)] - The :hover background color of the current month in months view.
 /// @prop {Map} date-special-hover-background [color: ('gray', 100)] - The background color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('gray', 100)] - The background color of a special date.
+/// @prop {Map} date-special-range-hover-background [color: ('gray', 100)] - The :hover background color of a special date in range selection.
+/// @prop {Map} date-special-range-focus-background [color: ('gray', 100)] - The :focus background color of a special date in range selection.
 /// @prop {Map} date-hover-background [color: 'gray', 100] - The :hover background color of a date.
 /// @prop {Map} date-focus-background [color: 'gray', 100] - The :focus background color of a date.
 /// @prop {Map} picker-hover-foreground [color: ('secondary', 200)]- The :hover foreground color of the month and year pickers.
@@ -391,6 +393,18 @@ $dark-bootstrap-calendar: extend(
             ),
         ),
         date-special-focus-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        date-special-range-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        date-special-range-focus-background: (
             color: (
                 'gray',
                 100,
@@ -526,6 +540,8 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-special-hover-background [color: ('primary', 600, .7)] - The background color of a special date.
 /// @prop {Map} date-special-focus-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('primary', 600, .7)] - The background color of a special date.
+/// @prop {Map} date-special-range-hover-background [color: ('primary', 600, .7)] - The :hover background color of a special date in range selection.
+/// @prop {Map} date-special-range-focus-background [color: ('primary', 600, .7)] - The :focus background color of a special date in range selection.
 /// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
