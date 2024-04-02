@@ -2325,6 +2325,7 @@ $bootstrap-calendar: extend(
 /// @prop {Map} date-selected-current-hover-border-color [contrast-color: ('primary', 900, .6)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [contrast-color: ('primary', 900,. 6)] - The :focus border color of the selected current date.
 /// @prop {Map} date-selected-range-foreground [color: ('gray', 800)] - The foreground color of the selected range.
+/// @prop {Map} date-selected-current-range-foreground [color: ('gray', 800)] - The foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-range-background [color: ('primary', 300, .2)] - The background color of the selected range.
 /// @prop {Map} date-selected-range-hover-background [color: ('secondary', 100)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [color: ('secondary', 100)] - The :focus background color of the selected range.
@@ -2700,6 +2701,12 @@ $indigo-calendar: extend(
                 'primary',
                 900,
                 0.6,
+            ),
+        ),
+        date-selected-current-range-foreground: (
+            color: (
+                'gray',
+                800,
             ),
         ),
         date-selected-range-foreground: (

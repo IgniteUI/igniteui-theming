@@ -537,11 +537,11 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-special-foreground [color: ('primary', 50)] - The foreground color of a special date.
 /// @prop {Map} date-special-background [color: ('primary', 600, .4)] - The background color of a special date.
 /// @prop {Map} date-special-hover-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
-/// @prop {Map} date-special-hover-background [color: ('primary', 600, .7)] - The background color of a special date.
+/// @prop {Map} date-special-hover-background [color: ('primary', 600, .4)] - The background color of a special date.
 /// @prop {Map} date-special-focus-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
-/// @prop {Map} date-special-focus-background [color: ('primary', 600, .7)] - The background color of a special date.
-/// @prop {Map} date-special-range-hover-background [color: ('primary', 600, .7)] - The :hover background color of a special date in range selection.
-/// @prop {Map} date-special-range-focus-background [color: ('primary', 600, .7)] - The :focus background color of a special date in range selection.
+/// @prop {Map} date-special-focus-background [color: ('primary', 600, .4)] - The background color of a special date.
+/// @prop {Map} date-special-range-hover-background [color: ('primary', 600, .4)] - The :hover background color of a special date in range selection.
+/// @prop {Map} date-special-range-focus-background [color: ('primary', 600, .4)] - The :focus background color of a special date in range selection.
 /// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
@@ -556,6 +556,10 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} selected-current-hover-outline-color [contrast-color: ('gray', 50, .6)] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-focus-outline-color [contrast-color: ('gray', 50, .6)] - The :focus outline color of the selected current year/month in year/month views.
 /// @prop {Map} date-current-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the current date.
+/// @prop {Map} date-selected-range-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the selected range.
+/// @prop {Map} date-selected-range-focus-background [contrast-color: ('gray', 50, .1)] - The :focus background color of the selected range.
+/// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of the selected range.
+/// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the selected range.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -697,7 +701,7 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 600,
-                0.7,
+                0.4,
             ),
         ),
         date-special-focus-foreground: (
@@ -710,7 +714,7 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 600,
-                0.7,
+                0.4,
             ),
         ),
         date-special-range-foreground: (
@@ -730,14 +734,14 @@ $dark-indigo-calendar: extend(
             color: (
                 'primary',
                 600,
-                0.7,
+                0.4,
             ),
         ),
         date-special-range-focus-background: (
             color: (
                 'primary',
                 600,
-                0.7,
+                0.4,
             ),
         ),
         navigation-hover-color: (
@@ -835,6 +839,32 @@ $dark-indigo-calendar: extend(
                 'gray',
                 900,
                 0.38,
+            ),
+        ),
+        date-selected-range-hover-foreground: (
+            contrast-color: (
+                'secondary',
+                900,
+            ),
+        ),
+        date-selected-range-focus-foreground: (
+            contrast-color: (
+                'secondary',
+                900,
+            ),
+        ),
+        date-selected-range-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+        date-selected-range-focus-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
             ),
         ),
     )
