@@ -24,6 +24,8 @@
 /// @prop {Color} border-color [transparent] - The border-color of the time picker.
 /// @prop {Number} dropdown-elevation [8] - The elevation level, between 0-24, to be used for the time picker in dropdown mode.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
+/// @prop {List} border-radius [(rem(28px), rem(32px), rem(36px))] - The height of the time item.
+/// @prop {Number} default-size [(rem(28px), rem(32px), rem(36px))] - The height of the time item.
 /// @requires {Map} $default-elevation-time-picker
 $light-time-picker: extend(
     $default-elevation-time-picker,
@@ -106,6 +108,16 @@ $light-time-picker: extend(
         ),
 
         border-color: transparent,
+
+        time-item-size: (
+            sizable: (
+                rem(28px),
+                rem(32px),
+                rem(36px),
+            ),
+        ),
+
+        default-size: 2,
     )
 );
 
@@ -140,6 +152,7 @@ $material-time-picker: extend(
 /// @type {Map}
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} active-item-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
+/// @prop {Number} default-size [(rem(28px), rem(32px), rem(40px))] - The height of the time item.
 /// @prop {Color} divider-color [color: ('gray', 200)] - The divider color of the time picker.
 /// @requires $light-time-picker
 $fluent-time-picker: extend(
@@ -159,11 +172,17 @@ $fluent-time-picker: extend(
                 rem(20px),
             ),
         ),
-
         divider-color: (
             color: (
                 'gray',
                 200,
+            ),
+        ),
+        time-item-size: (
+            sizable: (
+                rem(28px),
+                rem(32px),
+                rem(40px),
             ),
         ),
     )
@@ -303,7 +322,7 @@ $indigo-time-picker: extend(
 
         border-radius: (
             border-radius: (
-                rem(3px),
+                rem(6px),
                 rem(0),
                 rem(20px),
             ),
