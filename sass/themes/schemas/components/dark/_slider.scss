@@ -22,7 +22,6 @@ $dark-material-slider: $material-slider;
 /// @prop {Map} track-color [color: ('gray', 600)] - The color of the track.
 /// @prop {Map} track-hover-color [color: ('primary', 300)] - The color of the track on hover.
 /// @prop {Map} thumb-border-color [color: ('gray', 400)] - The thumb border color.
-/// @prop {Map} thumb-border-hover-color [color: ('gray', 400)] - The thumb border color.
 /// @prop {Map} thumb-focus-color [color: ('primary', 100)] - The focus outline color of the thumb.
 /// @prop {Map} thumb-disabled-border-color [color: ('gray', 200)] - The thumb border color when it's disabled.
 /// @prop {Map} disabled-base-track-color [color: ('gray', 100)] - The base background color of the track when is disabled.
@@ -56,12 +55,6 @@ $dark-fluent-slider: extend(
             ),
         ),
         thumb-border-color: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-        thumb-border-hover-color: (
             color: (
                 'gray',
                 400,
@@ -121,90 +114,22 @@ $dark-bootstrap-slider: extend(
 
 /// Generates a dark indigo slider schema.
 /// @type {Map}
-/// @prop {Map} track-step-color [contrast-color: ('gray', 50, 0.3)] - The color of the track steps.
-/// @prop {Map} base-track-color [contrast-color: ('gray', 50, 0.3)] - The base background color of the track.
-/// @prop {Map} base-track-hover-color [contrast-color: ('gray', 50, 0.4)] - The base background color of the track on hover.
-/// @prop {Map} track-color [color: ('primary', 400)] - The color of the track.
-/// @prop {Map} track-hover-color [color: ('primary', 300)] - The color of the track on hover.
-/// @prop {Map} thumb-color [color: 'surface'] - The color of the thumb.
-/// @prop {Map} thumb-border-color [color: ('primary', 400)] - The thumb border color.
-/// @prop {Map} thumb-border-hover-color [color: ('primary', 300)] - The thumb border color when hovered.
-/// @prop {Map} disabled-thumb-color [color: 'surface'] - The thumb color when its disabled.
-/// @prop {Map} thumb-disabled-border-color [color: ('primary', 800)] - The thumb border color when it's disabled.
-/// @prop {Map} disabled-base-track-color [contrast-color: ('gray', 50, 0.15)] - The base background color of the track when is disabled.
-/// @prop {Map} disabled-fill-track-color [color: ('primary', 800)] - The background color of the fill track when is disabled.
+/// @prop {Map} base-track-color [color: ('gray', 200)] - The base background color of the track.
+/// @prop {Map} base-track-hover-color [color: ('gray', 400)] - The base background color of the track on hover.
 /// @requires $indigo-slider
 $dark-indigo-slider: extend(
     $indigo-slider,
     (
-        track-step-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.3,
-            ),
-        ),
         base-track-color: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.3,
+                200,
             ),
         ),
         base-track-hover-color: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.4,
-            ),
-        ),
-        track-color: (
-            color: (
-                'primary',
                 400,
-            ),
-        ),
-        track-hover-color: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-        thumb-color: (
-            color: 'surface',
-        ),
-        thumb-border-color: (
-            color: (
-                'primary',
-                400,
-            ),
-        ),
-        thumb-border-hover-color: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-        disabled-thumb-color: (
-            color: 'surface',
-        ),
-        thumb-disabled-border-color: (
-            color: (
-                'primary',
-                800,
-            ),
-        ),
-        disabled-base-track-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.15,
-            ),
-        ),
-        disabled-fill-track-color: (
-            color: (
-                'primary',
-                800,
             ),
         ),
     )
