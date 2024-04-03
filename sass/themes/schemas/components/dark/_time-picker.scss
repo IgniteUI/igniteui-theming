@@ -1,5 +1,6 @@
 @use '../../../../utils/map' as *;
 @use '../light/time-picker' as *;
+@use '../elevation/time-picker' as *;
 
 ////
 /// @package theming
@@ -53,6 +54,7 @@ $dark-bootstrap-time-picker: $bootstrap-time-picker;
 /// @requires $indigo-time-picker
 $dark-indigo-time-picker: extend(
     $indigo-time-picker,
+    $dark-indigo-elevation-time-picker,
     (
         background-color: (
             color: (
