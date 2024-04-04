@@ -73,9 +73,9 @@ $bootstrap-splitter: $light-splitter;
 /// Generates an indigo splitter schema.
 /// @type {Map}
 /// @prop {Map} bar-color [color: ('gray', 400)] - The background color of the bar.
-/// @prop {Map} focus-color [color: ('gray', 500)] - The color used for focused splitter bar.
-/// @prop {Map} handle-color [color: ('gray', 700)] - The color for the bar drag handle.
-/// @prop {Map} expander-color [color: ('gray', 700)] - The color for the bar drag handle.
+/// @prop {Map} handle-color [color: ('surface')] - The color for the bar drag handle.
+/// @prop {Map} expander-color [color: ('surface')] - The color for the bar drag handle.
+/// @prop {Map} focus-color [color: ('primary', 500)] - The color used for focused splitter bar.
 /// @requires {Map} $light-splitter
 $indigo-splitter: extend(
     $light-splitter,
@@ -89,22 +89,20 @@ $indigo-splitter: extend(
 
         focus-color: (
             color: (
-                'gray',
+                'primary',
                 500,
             ),
         ),
 
         handle-color: (
             color: (
-                'gray',
-                700,
+                'surface',
             ),
         ),
 
         expander-color: (
             color: (
-                'gray',
-                700,
+                'surface',
             ),
         ),
     )
