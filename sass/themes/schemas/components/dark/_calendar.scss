@@ -19,8 +19,8 @@
 /// @prop {Map} date-special-range-border-color [color: ('secondary', 200)] - The outline color around a special date in a range selection.
 /// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('secondary', 900)] - The :focus foreground color of the selected range.
 /// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the selected range.
-/// @prop {Map} picker-hover-foreground [color: 'secondary' 200] - The :hover foreground color of the month and year pickers.
-/// @prop {Map} picker-focus-foreground [color: 'secondary' 200] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('secondary' 200)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('secondary' 200)] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @type {Map}
 /// @requires $material-calendar
@@ -123,8 +123,8 @@ $dark-material-calendar: extend(
 
 /// Generates a dark fluent calendar schema.
 /// @type {Map}
-/// @prop {Map} picker-hover-foreground [color: 'primary' 200] - The :hover foreground color of the month and year pickers.
-/// @prop {Map} picker-focus-foreground [color: 'primary' 200] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('primary' 200)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('primary' 200)] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} navigation-hover-color [color: ('primary', 200)] - The :hover color of the buttons responsible for navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 200)] - The :focus color of the buttons responsible for navigation.
 /// @prop {Map} year-selected-background [color: ('primary', 800)]- The background color of the selected year in years view.
@@ -518,13 +518,13 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} year-hover-background [contrast-color: ('grey', 900, .1)]- The :hover background color of the year in years view.
 /// @prop {Map} year-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current year in years view.
 /// @prop {Map} date-selected-current-range-hover-background [contrast-color: ('gray', 900, .1)] - The :hover background color of the current date in the selected range.
-/// @prop {Map} header-background [(color: 'gray', 50)] - The header background color.
-/// @prop {Map} content-background [(color: 'gray', 50)] - The background color of the days, months and years views.
-/// @prop {Map} picker-background [(color: 'gray', 50)] - The background color of the month and year pickers.
+/// @prop {Map} header-background [color: ('gray', 50)] - The header background color.
+/// @prop {Map} content-background [color: ('gray', 50)] - The background color of the days, months and years views.
+/// @prop {Map} picker-background [color: ('gray', 50)] - The background color of the month and year pickers.
 /// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
-/// @prop {Map} date-hover-foreground [contrast-color: 'gray', 50] - The :hover foreground color of a date.
+/// @prop {Map} date-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of a date.
 /// @prop {Map} date-hover-background [contrast-color: ('gray', 900, .1)] - The :hover background color of a date.
-/// @prop {Map} date-focus-foreground [contrast-color: 'gray', 50] - The :focus foreground color of a date.
+/// @prop {Map} date-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of a date.
 /// @prop {Map} date-focus-background [contrast-color: ('gray', 900, .1)] - The :focus background color of date.
 /// @prop {Map} date-current-foreground [color: ('gray', 900)] - The foreground color of the current date.
 /// @prop {Map} date-disabled-foreground [color: ('gray', 500, .5)] - The foreground color of disabled dates.
@@ -532,8 +532,8 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-current-border-color [color: ('primary', 400)] - The border color of the current date.
 /// @prop {Map} date-current-hover-border-color [color: ('primary', 300)] - The :hover border color of the current date.
 /// @prop {Map} date-current-focus-border-color [color: ('primary', 300)] - The :focus border color of the current date.
-/// @prop {Map} date-special-range-foreground [(color: 'primary', 50)] - The foreground color of a special date in rage selection.
-/// @prop {Map} date-special-range-background [(color: 'primary', 600, .4)] - The background color of a special date in range selection.
+/// @prop {Map} date-special-range-foreground [color: ('primary', 50)] - The foreground color of a special date in rage selection.
+/// @prop {Map} date-special-range-background [color: ('primary', 600, .4)] - The background color of a special date in range selection.
 /// @prop {Map} date-special-foreground [color: ('primary', 50)] - The foreground color of a special date.
 /// @prop {Map} date-special-background [color: ('primary', 600, .4)] - The background color of a special date.
 /// @prop {Map} date-special-hover-foreground [contrast-color: ('primary', 600)] - The foreground color of a special date.
