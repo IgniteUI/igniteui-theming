@@ -321,7 +321,6 @@ $dark-fluent-calendar: extend(
 
 /// Generates a dark bootstrap calendar schema.
 /// @type {Map}
-/// @prop {Map} date-hover-foreground [color: 'gray', 900] - The :hover foreground color of a date.
 /// @prop {Map} year-hover-background [color: ('grey', 100)]- The :hover background color of the year in years view.
 /// @prop {Map} year-current-hover-background [color: ('gray' 100)] - The :hover background color of the current year in years view.
 /// @prop {Map} month-hover-background [color: ('grey', 100)]- The :hover background color of the month in months view.
@@ -330,8 +329,8 @@ $dark-fluent-calendar: extend(
 /// @prop {Map} date-special-focus-background [color: ('gray', 100)] - The background color of a special date.
 /// @prop {Map} date-special-range-hover-background [color: ('gray', 100)] - The :hover background color of a special date in range selection.
 /// @prop {Map} date-special-range-focus-background [color: ('gray', 100)] - The :focus background color of a special date in range selection.
-/// @prop {Map} date-hover-background [color: 'gray', 100] - The :hover background color of a date.
-/// @prop {Map} date-focus-background [color: 'gray', 100] - The :focus background color of a date.
+/// @prop {Map} date-hover-background [color: ('gray', 100)] - The :hover background color of a date.
+/// @prop {Map} date-focus-background [color: ('gray', 100)] - The :focus background color of a date.
 /// @prop {Map} picker-hover-foreground [color: ('secondary', 200)]- The :hover foreground color of the month and year pickers.
 /// @prop {Map} picker-focus-foreground [color: ('secondary', 200)]- The :focus foreground color of the month and year pickers.
 /// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the buttons responsible for navigation.
@@ -499,15 +498,10 @@ $dark-bootstrap-calendar: extend(
 /// Generates a dark indigo calendar schema.
 /// @type {Map}
 /// @prop {Map} content-foreground [color: ('gray', 900)] - The foreground color of the days, months and years views.
-/// @prop {Map} date-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current date.
 /// @prop {Map} date-current-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the current date.
-/// @prop {Map} month-hover-foreground [contrast-color: ('gray', 900)] -  The :hover foreground color of the month inside the months view.
 /// @prop {Map} month-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the month inside the months view.
-/// @prop {Map} month-current-hover-foreground [contrast-color: ('gray', 900)]- The :hover foreground color of the current month in month view.
 /// @prop {Map} month-current-hover-background [contrast-color: ('gray', 900, .1)]- The :hover background color of the current month in month view.
-/// @prop {Map} year-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the year in years view.
 /// @prop {Map} year-hover-background [contrast-color: ('grey', 50, .1)]- The :hover background color of the year in years view.
-/// @prop {Map} year-current-hover-foreground [contrast-color: ('gray', 900)] - The :hover foreground color of the current year in years view.
 /// @prop {Map} date-selected-current-range-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the current date in the selected range.
 /// @prop {Map} header-background [color: ('gray', 50)] - The header background color.
 /// @prop {Map} content-background [color: ('gray', 50)] - The background color of the days, months and years views.
@@ -536,8 +530,8 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
 /// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
 /// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
-/// @prop {Map} picker-hover-foreground [color: 'primary' 300] - The :hover foreground color of the month and year pickers.
-/// @prop {Map} picker-focus-foreground [color: 'primary' 300] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('primary' 300)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('primary' 300)] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [contrast-color: ('gray', 50, .05)] - The background color of the week number column.
 /// @prop {Map} date-selected-range-background [color: ('primary', 400, .2)] - The background color of the selected range.
