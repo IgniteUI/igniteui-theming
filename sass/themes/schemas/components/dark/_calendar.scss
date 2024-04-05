@@ -521,8 +521,10 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [contrast-color: ('gray', 50, .05)] - The background color of the week number column.
 /// @prop {Map} date-selected-range-background [color: ('primary', 400, .2)] - The background color of the selected range.
+/// @prop {Map} year-current-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the current year in years view.
 /// @prop {Map} current-outline-hover-color [color: ('primary', 300)] - The :hover outline color of the current year/month in year/month views.
 /// @prop {Map} current-outline-focus-color [color: ('primary', 300)] - The :focus outline color of the current year/month in year/month views.
+/// @prop {Map} current-outline-color [color: ('primary', 400)] - The outline color of the current year/month in year/month views.
 /// @prop {Map} selected-current-outline-color [contrast-color: ('gray', 50, .6)] - The outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-outline-hover-color [contrast-color: ('gray', 50, .6)] - The :hover outline color of the selected current year/month in year/month views.
 /// @prop {Map} selected-current-outline-focus-color [contrast-color: ('gray', 50, .6)] - The :focus outline color of the selected current year/month in year/month views.
@@ -765,11 +767,24 @@ $dark-indigo-calendar: extend(
                 0.2,
             ),
         ),
+        current-outline-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
         selected-current-outline-color: (
             contrast-color: (
                 'gray',
                 50,
                 0.6,
+            ),
+        ),
+        year-current-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
             ),
         ),
         current-outline-hover-color: (
