@@ -17,8 +17,6 @@
 /// @prop {Map} date-special-border-color [color: ('secondary', 200)] - The outline color around a special date.
 /// @prop {Map} date-special-hover-border-color [color: ('secondary', 100)] - The outline color around a special date.
 /// @prop {Map} date-special-range-border-color [color: ('secondary', 200)] - The outline color around a special date in a range selection.
-/// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('secondary', 900)] - The :focus foreground color of the selected range.
-/// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('secondary', 900)] - The :hover foreground color of the selected range.
 /// @prop {Map} picker-hover-foreground [color: ('secondary' 200)] - The :hover foreground color of the month and year pickers.
 /// @prop {Map} picker-focus-foreground [color: ('secondary' 200)] - The :focus foreground color of the month and year pickers.
 /// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
@@ -79,18 +77,6 @@ $dark-material-calendar: extend(
             color: (
                 'secondary',
                 200,
-            ),
-        ),
-        date-selected-range-hover-foreground: (
-            contrast-color: (
-                'secondary',
-                900,
-            ),
-        ),
-        date-selected-range-focus-foreground: (
-            contrast-color: (
-                'secondary',
-                900,
             ),
         ),
         picker-hover-foreground: (
