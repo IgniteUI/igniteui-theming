@@ -331,14 +331,14 @@ $material-outlined-button: extend(
 /// @prop {Map} icon-color [color: ('secondary', 500)] - The idle icon color of the button.
 /// @prop {Map} icon-color-hover [color: ('secondary', 500)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('secondary', 400)] - The hover background color of a flat button.
-/// @prop {Map} hover-foreground [contrast-color: ('secondary', 400)] - The hover text color of a contained button.
+/// @prop {Map} hover-foreground [contrast-color: ('secondary', 500)] - The hover text color of a contained button.
 /// @prop {Map} focus-background [color: ('secondary', 300)] - The focus background color of a flat button.
-/// @prop {Map} focus-foreground [contrast-color: ('secondary', 300)] - The focus text color of a contained button.
+/// @prop {Map} focus-foreground [contrast-color: ('secondary', 500)] - The focus text color of a contained button.
 /// @prop {Map} focus-visible-background [color: ('secondary', 300)] - The focus-visible background color of a contained button.
 /// @prop {Map} focus-hover-background [color: ('secondary', 400)] - The background color on focus hovered state of the button.
-/// @prop {Map} focus-hover-foreground [contrast-color: ('secondary', 400)] - The text color on focus hovered state of the button.
-/// @prop {Map} focus-visible-foreground [contrast-color: ('secondary', 300)] - The focus-visible text color of a contained button.
-/// @prop {Map} active-foreground [contrast-color: ('secondary', 300)] - The active text color of a contained button.
+/// @prop {Map} focus-hover-foreground [contrast-color: ('secondary', 500)] - The text color on focus hovered state of the button.
+/// @prop {Map} focus-visible-foreground [contrast-color: ('secondary', 500)] - The focus-visible text color of a contained button.
+/// @prop {Map} active-foreground [contrast-color: ('secondary', 500)] - The active text color of a contained button.
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
 /// @requires {Map} $light-contained-button
 /// @requires {Map} $material-base-button
@@ -373,7 +373,7 @@ $material-contained-button: extend(
         hover-foreground: (
             contrast-color: (
                 'secondary',
-                400,
+                500,
             ),
         ),
         focus-background: (
@@ -385,7 +385,7 @@ $material-contained-button: extend(
         focus-foreground: (
             contrast-color: (
                 'secondary',
-                300,
+                500,
             ),
         ),
         focus-hover-background: (
@@ -397,7 +397,7 @@ $material-contained-button: extend(
         focus-hover-foreground: (
             contrast-color: (
                 'secondary',
-                400,
+                500,
             ),
         ),
         focus-visible-background: (
@@ -409,13 +409,13 @@ $material-contained-button: extend(
         focus-visible-foreground: (
             contrast-color: (
                 'secondary',
-                300,
+                500,
             ),
         ),
         active-foreground: (
             contrast-color: (
                 'secondary',
-                300,
+                500,
             ),
         ),
         disabled-background: (
