@@ -533,6 +533,7 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-selected-range-focus-background [contrast-color: ('gray', 50, .1)] - The :focus background color of the selected range.
 /// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of the selected range.
 /// @prop {Map} date-selected-range-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the selected range.
+/// @prop {Map} date-selected-range-foreground [color: ('gray', 900)] - The foreground color of the selected range.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -851,6 +852,12 @@ $dark-indigo-calendar: extend(
                 'gray',
                 50,
                 0.1,
+            ),
+        ),
+        date-selected-range-foreground: (
+            color: (
+                'gray',
+                900,
             ),
         ),
     )
