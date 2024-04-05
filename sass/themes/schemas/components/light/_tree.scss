@@ -18,6 +18,7 @@
 /// @prop {Map} foreground [contrast-color: ('surface')] - The color used for the tree node content.
 /// @prop {Map} foreground-active [contrast-color: ('gray', 200)] - The color used for the content in active state of the tree node.
 /// @prop {Map} foreground-disabled [color: ('gray', 500)] - The color used for the content of the disabled tree node.
+/// @prop {Map} icon-color [contrast-color: ('surface')] - The color used for the tree node icon.
 /// @prop {Map} drop-area-color [color: ('secondary')] - The background color used for the tree node drop aria.
 /// @prop {Map} hover-color [color: ('gray', 900, .1)] - The background color used for the tree node on hover.
 /// @prop {Map} hover-selected-color [color: ('gray', 900, .1)] - The background color used for the selected tree node on hover.
@@ -30,6 +31,11 @@ $light-tree: (
         ),
     ),
     foreground: (
+        contrast-color: (
+            'surface',
+        ),
+    ),
+    icon-color: (
         contrast-color: (
             'surface',
         ),
@@ -223,61 +229,104 @@ $bootstrap-tree: extend(
 
 /// Generates a light indigo tree schema.
 /// @type {Map}
-/// @prop {Map} background-active [color: ('surface')] - The background color used for the active tree node.
-/// @prop {Map} foreground-active [contrast-color: ('primary')] - The color used for the content in active state of the tree node.
-/// @prop {Map} foreground-selected [contrast-color: ('primary')] - The color used for the content of the selected tree node.
-/// @prop {Map} background-active-selected [color: ('primary', 400)] - The background color used for the active selected tree node.
-/// @prop {Map} foreground-active-selected [contrast-color: ('primary', 400)] - The color used for the content of the active selected tree node.
-/// @prop {Map} border-color [color: ('primary', 300)] - The outline shadow color used for tree node in focus state.
-/// @prop {Map} hover-color [color: ('primary', 100)] - The background color used for the tree node on hover.
-/// @prop {Map} hover-selected-color [color: ('primary', 100)] - The background color used for the selected tree node on hover.
+/// @prop {Color} background [transparent] - The background color used for the tree node.
+/// @prop {Color} background-selected [transparent] - The background color used for the selected tree node.
+/// @prop {Map} background-active [color: ('primary', 300, 0.3)] - The background color used for the active tree node.
+/// @prop {Map} background-active-selected [color: ('primary', 300, 0.3)] - The background color used for the active selected tree node.
+/// @prop {Color} background-disabled [transparent] - The background color used for the tree node in disabled state.
+/// @prop {Map} foreground [color: ('gray', 800)] - The color used for the tree node content.
+/// @prop {Map} foreground-active [color: ('gray', 900)] - The color used for the content in active state of the tree node.
+/// @prop {Map} foreground-selected [color: ('gray', 900)] - The color used for the content of the selected tree node.
+/// @prop {Map} foreground-active-selected [color: ('gray', 900)] - The color used for the content of the active selected tree node.
+/// @prop {Map} foreground-disabled [color: ('gray', 900, 0.2)] - The color used for the content of the disabled tree node.
+/// @prop {Map} icon-color [color: ('gray', 600)] - The color used for the tree node icon.
+/// @prop {Map} border-color [color: ('primary', 400)] - The outline shadow color used for tree node in focus state.
+/// @prop {Map} hover-color [color: ('gray', 900, .05)] - The background color used for the tree node on hover.
+/// @prop {Map} hover-selected-color [color: ('primary', 300, 0.5)] - The background color used for the selected tree node on hover.
+/// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the tree node.
 /// @requires {Map} $light-tree
 $indigo-tree: extend(
     $light-tree,
     (
+        background: transparent,
+        foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        background-selected: transparent,
+        foreground-selected: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
         background-active: (
             color: (
-                'surface',
+                'primary',
+                300,
+                0.3,
             ),
         ),
         foreground-active: (
             color: (
-                'primary',
+                'gray',
+                900,
             ),
         ),
-        foreground-selected: (
-            contrast-color: (
-                'primary',
+        background-disabled: transparent,
+        foreground-disabled: (
+            color: (
+                'gray',
+                900,
+                0.2,
             ),
         ),
         background-active-selected: (
             color: (
                 'primary',
-                400,
+                300,
+                0.3,
             ),
         ),
         foreground-active-selected: (
-            contrast-color: (
-                'primary',
-                400,
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'gray',
+                600,
             ),
         ),
         border-color: (
             color: (
                 'primary',
-                300,
+                400,
             ),
         ),
         hover-color: (
             color: (
-                'primary',
-                100,
+                'gray',
+                900,
+                0.05,
             ),
         ),
         hover-selected-color: (
             color: (
                 'primary',
-                100,
+                300,
+                0.5,
+            ),
+        ),
+        size: (
+            sizable: (
+                rem(24px),
+                rem(28px),
+                rem(32px),
             ),
         ),
     )
