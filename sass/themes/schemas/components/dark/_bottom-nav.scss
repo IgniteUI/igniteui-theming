@@ -24,28 +24,41 @@ $dark-bootstrap-bottom-nav: $bootstrap-bottom-nav;
 
 /// Generates a dark indigo bottom-nav schema.
 /// @type {Map}
-/// @prop {Map} background [color: 'surface'] - The background color used for the bottom-nav.
-/// @prop {Color} active-item-color [color: ('gray', 700)] - The text-color used for the active color.
-/// @prop {Map} idle-item-color [color: ('gray', 400)] - The text-color used for the idle color.
+/// @prop {Map} icon-color [contrast-color: ('gray', 50, .6)] - The icon color in idle state.
+/// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
+/// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - The label color in idle state.
+/// @prop {Map} label-selected-color [color: ('primary', 200)] - The label color used for the selected item.
 /// @requires $indigo-bottom-nav
 $dark-indigo-bottom-nav: extend(
     $indigo-bottom-nav,
     (
-        background: (
-            color: 'surface',
-        ),
-
-        active-item-color: (
-            color: (
+        icon-color: (
+            contrast-color: (
                 'gray',
-                700,
+                50,
+                0.6,
             ),
         ),
 
-        idle-item-color: (
+        icon-selected-color: (
             color: (
+                'primary',
+                300,
+            ),
+        ),
+
+        label-color: (
+            contrast-color: (
                 'gray',
-                400,
+                50,
+                0.8,
+            ),
+        ),
+
+        label-selected-color: (
+            color: (
+                'primary',
+                200,
             ),
         ),
     )
