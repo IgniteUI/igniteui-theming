@@ -80,22 +80,22 @@ $bootstrap-bottom-nav: $light-bottom-nav;
 /// @requires {Map} $indigo-elevation-bottom-nav
 $indigo-bottom-nav: extend(
     $light-bottom-nav,
-    $indigo-elevation-bottom-nav
-        (
-            background: (
-                color: 'surface',
+    $indigo-elevation-bottom-nav,
+    (
+        background: (
+            color: 'surface',
+        ),
+        icon-color: (
+            color: (
+                'gray',
+                600,
             ),
-            icon-color: (
-                color: (
-                    'gray',
-                    600,
-                ),
+        ),
+        label-color: (
+            color: (
+                'gray',
+                800,
             ),
-            label-color: (
-                color: (
-                    'gray',
-                    800,
-                ),
-            ),
-        )
+        ),
+    )
 );
