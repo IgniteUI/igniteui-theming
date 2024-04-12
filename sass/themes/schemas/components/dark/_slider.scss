@@ -129,6 +129,10 @@ $dark-bootstrap-slider: extend(
 /// @prop {Map} thumb-color [color: 'surface'] - The color of the thumb.
 /// @prop {Map} thumb-border-color [color: ('primary', 400)] - The thumb border color.
 /// @prop {Map} thumb-border-hover-color [color: ('primary', 300)] - The thumb border color when hovered.
+/// @prop {Map} tick-color [contrast-color: ('gray', 50, 0.2)] - The background-color of the tick.
+/// @prop {Map} tick-label-color [contrast-color: ('gray', 50, 0.6)] - The color of the tick label.
+/// @prop {Map} label-background-color [color: ('gray', 300)] - The background color of the bubble label.
+/// @prop {Map} label-text-color [contrast-color: ('gray', 50)] - The text color of the bubble label.
 /// @prop {Map} disabled-thumb-color [color: 'surface'] - The thumb color when it's disabled.
 /// @prop {Map} thumb-disabled-border-color [color: ('primary', 800)] - The thumb border color when it's disabled.
 /// @prop {Map} disabled-base-track-color [contrast-color: ('gray', 50, 0.15)] - The base background color of the track when is disabled.
@@ -183,6 +187,32 @@ $dark-indigo-slider: extend(
             color: (
                 'primary',
                 300,
+            ),
+        ),
+        tick-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        tick-label-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+        label-background-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        label-text-color: (
+            contrast-color: (
+                'gray',
+                50,
             ),
         ),
         disabled-thumb-color: (
