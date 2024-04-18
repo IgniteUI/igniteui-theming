@@ -46,3 +46,11 @@
 
     @return $sign + $result;
 }
+
+/// Removes measurement units from variable.
+/// @access private
+/// @param {Number} $var - The variable to remove the unit of.
+/// @return {Number} - The given variable without units.
+@function unitless($var) {
+    @return math.div($var, $var * 0 + 1);
+}
