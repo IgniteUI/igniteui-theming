@@ -1,10 +1,14 @@
 @use '../../functions' as *;
+@use '../../types';
 
 ////
 /// @package theming
 /// @group palettes
 /// @access public
 ////
+
+$color-shades: types.$IColorShades;
+$surface-shades: shades('surface', #1e1f24, $color-shades);
 
 /// Generates the dark indigo palette.
 /// @type Map
@@ -220,10 +224,7 @@ $palette: (
         'A700': to-hsl(#9f000f),
         'A700-contrast': white,
     ),
-    'surface': (
-        500: to-hsl(#1e1f24),
-        '500-contrast': white,
-    ),
+    'surface': $surface-shades,
     _meta: (
         variant: 'indigo',
     ),
