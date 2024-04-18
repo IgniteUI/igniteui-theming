@@ -203,6 +203,7 @@ $fluent-navdrawer: extend(
 /// @type {Map}
 /// @prop {List} item-border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for the navdrawer items
 /// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The item's hover icon color.
+/// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
 /// @prop {Map} item-hover-background [color: ('gray', 200, .8)] - The item's hover background color.
 /// @prop {Map} item-text-color [color: ('gray', 900)] - The item's idle text color.
 /// @prop {Map} item-active-background [color: ('primary', 500)] - The item's active background color.
@@ -223,6 +224,12 @@ $bootstrap-navdrawer: extend(
             ),
         ),
         item-hover-icon-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-hover-text-color: (
             color: (
                 'gray',
                 900,
