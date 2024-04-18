@@ -111,17 +111,85 @@ $dark-bootstrap-tree: extend(
 
 /// Generates a dark indigo tree schema.
 /// @type {Map}
-/// @prop {Map} hover-color [color: ('primary', 200, .5)] - The background color used for the tree node on hover.
+/// @prop {Map} background-active [color: ('primary', 400, 0.3)] - The background color used for the active tree node.
+/// @prop {Map} background-active-selected [color: ('primary', 400, 0.3)] - The background color used for the active selected tree node.
+/// @prop {Map} foreground [contrast-color: ('gray', 50, 0.8)] - The color used for the tree node content.
+/// @prop {Map} foreground-active [contrast-color: ('gray', 50)] - The color used for the content in active state of the tree node.
+/// @prop {Map} foreground-selected [contrast-color: ('gray', 50)] - The color used for the content of the selected tree node.
+/// @prop {Map} foreground-active-selected [contrast-color: ('gray', 50)] - The color used for the content of the active selected tree node.
+/// @prop {Map} foreground-disabled [contrast-color: ('gray', 50, 0.2)] - The color used for the content of the disabled tree node.
+/// @prop {Map} icon-color [contrast-color: ('gray', 50, 0.8)] - The color used for the tree node icon.
+/// @prop {Map} hover-color [contrast-color: ('gray', 50, .1)] - The background color used for the tree node on hover.
+/// @prop {Map} hover-selected-color [color: ('primary', 400, 0.5)] - The background color used for the selected tree node on hover.
 /// @requires $indigo-tree
 /// @requires $base-dark-tree
 $dark-indigo-tree: extend(
     $indigo-tree,
-    $base-dark-tree,
     (
-        hover-color: (
+        foreground: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        foreground-selected: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        background-active: (
             color: (
                 'primary',
-                200,
+                400,
+                0.3,
+            ),
+        ),
+        foreground-active: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        background-active-selected: (
+            color: (
+                'primary',
+                400,
+                0.3,
+            ),
+        ),
+        foreground-active-selected: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        foreground-disabled: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+        hover-selected-color: (
+            color: (
+                'primary',
+                400,
                 0.5,
             ),
         ),
