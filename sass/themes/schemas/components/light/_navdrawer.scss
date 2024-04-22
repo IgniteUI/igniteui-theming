@@ -132,8 +132,10 @@ $material-navdrawer: extend(
 /// @prop {Map} item-icon-color [ color: ('primary', 700)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 800)] - The header's idle text color.
 /// @requires {Map} $light-navdrawer
+/// @requires {Map} $fluent-elevation-navdrawer
 $fluent-navdrawer: extend(
     $light-navdrawer,
+    $fluent-elevation-navdrawer,
     (
         item-border-radius: 0,
         item-hover-icon-color: (
