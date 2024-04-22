@@ -80,7 +80,7 @@ $dark-bootstrap-navdrawer: extend(
 
 /// Generates a dark indigo navdrawer schema.
 /// @type {Map}
-/// @prop {Map} item-header-text-color [color: ('gray', 700)] - The header's idle text color.
+/// @prop {Map} item-header-text-color [contrast-color: ('gray', 50, 0.6)] - The header's idle text color.
 /// @prop {Map} item-text-color [contrast-color: ('gray', 50, 0.8)] - The item's idle text color.
 /// @prop {Map} item-icon-color [contrast-color: ('gray', 50, 0.6)] - The item's icon color.
 /// @prop {Map} item-active-text-color [color: ('primary', 100)] - The item's active text color.
@@ -88,8 +88,7 @@ $dark-bootstrap-navdrawer: extend(
 /// @prop {Map} item-active-icon-color [color: ('primary', 200)] - The item's icon active color.
 /// @prop {Map} item-hover-background [contrast-color: ('gray', 50, 0.1)] - The item's hover background color.
 /// @prop {Map} item-hover-text-color [contrast-color: ('gray', 50)] - The item's hover text color.
-/// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50, 0.8)] - The item's hover icon color.
-/// @prop {Map} border-color [color: ('gray', 100)] - The navigation drawer right border color.
+/// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50)] - The item's hover icon color.
 /// @requires $indigo-navdrawer
 $dark-indigo-navdrawer: extend(
     $indigo-navdrawer,
@@ -102,9 +101,10 @@ $dark-indigo-navdrawer: extend(
         ),
 
         item-header-text-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                700,
+                50,
+                0.6,
             ),
         ),
 
