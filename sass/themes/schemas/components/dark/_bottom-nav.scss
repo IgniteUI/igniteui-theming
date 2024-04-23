@@ -24,14 +24,23 @@ $dark-bootstrap-bottom-nav: $bootstrap-bottom-nav;
 
 /// Generates a dark indigo bottom-nav schema.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 100)] - The border color of the bottom navigation.
 /// @prop {Map} icon-color [contrast-color: ('gray', 50, .6)] - The icon color in idle state.
 /// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
 /// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - The label color in idle state.
 /// @prop {Map} label-selected-color [color: ('primary', 200)] - The label color used for the selected item.
+/// @prop {Map} icon-disabled-color [contrast-color: ('gray', 50, .2)] - The disabled color of the icon.
+/// @prop {Map} label-disabled-color [contrast-color: ('gray', 50, .2)] - The disabled color of the label.
 /// @requires $indigo-bottom-nav
 $dark-indigo-bottom-nav: extend(
     $indigo-bottom-nav,
     (
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
         icon-color: (
             contrast-color: (
                 'gray',
@@ -39,14 +48,12 @@ $dark-indigo-bottom-nav: extend(
                 0.6,
             ),
         ),
-
         icon-selected-color: (
             color: (
                 'primary',
                 300,
             ),
         ),
-
         label-color: (
             contrast-color: (
                 'gray',
@@ -54,11 +61,24 @@ $dark-indigo-bottom-nav: extend(
                 0.8,
             ),
         ),
-
         label-selected-color: (
             color: (
                 'primary',
                 200,
+            ),
+        ),
+        icon-disabled-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        label-disabled-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
             ),
         ),
     )
