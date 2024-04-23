@@ -112,6 +112,8 @@ $light-switch: extend(
 /// @prop {Color} focus-outline-color [transparent] - The focus outlined color.
 /// @prop {Color} border-color [transparent] - The border color of the switch.
 /// @prop {Color} border-hover-color [transparent] - The border color of the switch on hover.
+/// @prop {Color} focus-fill-color [transparent] - The focus fill color.
+/// @prop {Color} focus-fill-hover-color [transparent] - The focus fill color on hover.
 /// @prop {Color} border-on-color [transparent] - The border color of the on-switch.
 /// @prop {Color} border-on-hover-color [transparent] - The border color of the  on-switch.
 /// @prop {Color} border-disabled-color [transparent] - The border color of the disabled switch.
@@ -137,6 +139,8 @@ $material-switch: extend(
         focus-outline-color: transparent,
         border-color: transparent,
         border-hover-color: transparent,
+        focus-fill-color: transparent,
+        focus-fill-hover-color: transparent,
         border-on-color: transparent,
         border-on-hover-color: transparent,
         border-disabled-color: transparent,
@@ -208,6 +212,8 @@ $material-switch: extend(
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 700)] - The border color of the switch.
 /// @prop {Map} border-hover-color [color: ('gray', 900)] - The border color of the switch on hover.
+/// @prop {Map} focus-fill-color [color: ('gray', 700)] - The focus fill color.
+/// @prop {Map} focus-fill-hover-color [color: ('gray', 900)] - The focus fill color on hover.
 /// @prop {Map} border-disabled-color [color: ('gray', 400)] - The border color of the disabled switch.
 /// @prop {Map} border-on-hover-color [color: ('primary', 800)] - The border color of the on-switch.
 /// @prop {Map} thumb-off-color [color: ('gray', 700)] - The color of the thumb when the switch is off.
@@ -244,6 +250,18 @@ $fluent-switch: extend(
             ),
         ),
         border-hover-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        focus-fill-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        focus-fill-hover-color: (
             color: (
                 'gray',
                 900,
@@ -324,7 +342,7 @@ $fluent-switch: extend(
 /// @prop {Map} track-on-hover-color [color: ('primary', 600)] - The color of the track when the switch is on and hovered.
 /// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outlined color.
 /// @prop {Map} focus-fill-color [color: ('primary', 200)] - The focus fill color.
-/// @prop {Map} focus-fill-hover-color [color: ('primary', 300)] - The focus fill color.
+/// @prop {Map} focus-fill-hover-color [color: ('primary', 300)] - The focus fill color on hover.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color of the switch.
 /// @prop {Map} border-hover-color [color: ('gray', 500)] - The border color of the switch on hover.
 /// @prop {Map} border-on-hover-color [color: ('primary', 600)] - The border color of the on-switch.
@@ -456,6 +474,8 @@ $bootstrap-switch: extend(
 /// @prop {Map} thumb-disabled-color [color: ('gray', 300)] - The color of the thumb when the switch is disabled.
 /// @prop {Map} border-color [color: ('gray', 600)] - The border color of the switch.
 /// @prop {Map} border-hover-color [color: ('gray', 600)] - The border color of the switch on hover.
+/// @prop {Map} focus-fill-color [color: ('gray', 600)] - The focus fill color.
+/// @prop {Map} focus-fill-hover-color [color: ('gray', 600)] - The focus fill color on hover.
 /// @prop {Map} border-disabled-color [color: ('gray', 300)] - The border color of the disabled switch.
 /// @prop {Map} border-on-hover-color [color: ('primary', 500)] - The border color of the  on-switch.
 /// @prop {Map} label-disabled-color [color: ('gray', 300)] - The color of the switch label when the switch is disabled
@@ -488,6 +508,18 @@ $indigo-switch: extend(
             ),
         ),
         border-hover-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+        focus-fill-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+        focus-fill-hover-color: (
             color: (
                 'gray',
                 500,
