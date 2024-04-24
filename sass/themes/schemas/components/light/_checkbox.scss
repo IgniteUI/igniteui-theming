@@ -15,7 +15,6 @@
 /// @prop {Map} label-color [color: ('gray', 900)]- The text color used for the label text.
 /// @prop {Map} label-color-hover [color: ('gray', 900)]- The text color used for the label text on hover.
 /// @prop {Map} fill-color [color: ('primary', 500)] - The checked border and fill colors.
-/// @prop {Color} focus-outline-color-hovered [transparent] - The focus outlined color on hover.
 /// @prop {Color} focus-outline-color-focused [transparent] - The focus outlined color for focused state.
 /// @prop {Color} focus-outline-color-error [transparent] - The focus outlined color for focused invalid state.
 /// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled border and fill colors.
@@ -49,7 +48,6 @@ $light-checkbox: (
             500,
         ),
     ),
-    focus-outline-color-hovered: transparent,
     focus-outline-color-focused: transparent,
     focus-outline-color-error: transparent,
     disabled-color: (
@@ -220,7 +218,6 @@ $fluent-checkbox: extend(
 /// @prop {Map} disabled-color [color: ('gray', 300)] - The disabled border color.
 /// @prop {Map} disabled-indeterminate-color [color: ('primary', 200)] - The disabled border and fill colors.
 /// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outlined color.
-/// @prop {Map} focus-outline-color-hovered [color: ('primary', 300)] - The focus outlined color on hover.
 /// @prop {Map} focus-outline-color-error [color: ('error', 200, 0.5)] - The focus outlined color for focused invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 600)] - The focus outlined color in invalid state.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(10px))] - The border radius used for checkbox.
@@ -258,12 +255,6 @@ $bootstrap-checkbox: extend(
                 'primary',
                 200,
                 0.5,
-            ),
-        ),
-        focus-outline-color-hovered: (
-            color: (
-                'primary',
-                300,
             ),
         ),
         focus-outline-color-error: (
