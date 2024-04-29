@@ -135,4 +135,5 @@ $bootstrap-navbar: extend(
 /// @type {Map}
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the navbar.
 /// @requires {Map} $light-navbar
-$indigo-navbar: $light-navbar;
+/// @requires {Map} $indigo-elevation-navbar
+$indigo-navbar: extend($light-navbar, $indigo-elevation-navbar);
