@@ -132,10 +132,8 @@ $material-navdrawer: extend(
 /// @prop {Map} item-icon-color [ color: ('primary', 500)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 800)] - The header's idle text color.
 /// @requires {Map} $light-navdrawer
-/// @requires {Map} $fluent-elevation-navdrawer
 $fluent-navdrawer: extend(
     $light-navdrawer,
-    $fluent-elevation-navdrawer,
     (
         item-border-radius: 0,
         item-hover-icon-color: (
@@ -189,7 +187,7 @@ $fluent-navdrawer: extend(
         item-icon-color: (
             color: (
                 'primary',
-                700,
+                500,
             ),
         ),
         item-header-text-color: (
@@ -305,10 +303,8 @@ $bootstrap-navdrawer: extend(
 /// @prop {Color} border-color [transparent] - The navigation drawer right border color.
 /// @prop {List} item-border-radius [(rem(24px), rem(0), rem(24px))] - The border radius used for the navdrawer items.
 /// @requires {Map} $light-navdrawer
-/// @requires {Map} $indigo-elevation-navdrawer
 $indigo-navdrawer: extend(
     $light-navdrawer,
-    $indigo-elevation-navdrawer,
     (
         border-color: transparent,
 
