@@ -330,6 +330,7 @@ $indigo-base-icon-button-dark: (
 
 /// Generates a dark indigo flat icon button schema.
 /// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus text color of the indigo icon button.
+/// @prop {Map} shadow-color [contrast-color: ('primary', 500, 0.2)] - The shadow color of a flat button.
 /// @type {Map}
 /// @requires {Map} $indigo-flat-icon-button
 $indigo-flat-icon-button-dark: extend(
@@ -343,6 +344,13 @@ $indigo-flat-icon-button-dark: extend(
                 0.8,
             ),
         ),
+        shadow-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
+        ),
     )
 );
 
@@ -350,6 +358,7 @@ $indigo-flat-icon-button-dark: extend(
 /// @type {Map}
 /// @prop {Map} border-color [contrast-color: ('primary', 500, 0.6)] - The border color of the indigo outlined icon button.
 /// @prop {Map} disabled-border-color [contrast-color: ('primary', 500, 0.2)] - The disabled border color of the indigo outlined icon button.
+/// @prop {Map} shadow-color [contrast-color: ('primary', 500, 0.2)] - The shadow color of the indigo outlined icon button.
 /// @requires {Map} $indigo-outlined-icon-button
 $indigo-outlined-icon-button-dark: extend(
     $indigo-outlined-icon-button,
@@ -363,6 +372,13 @@ $indigo-outlined-icon-button-dark: extend(
             ),
         ),
         disabled-border-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
+        ),
+        shadow-color: (
             contrast-color: (
                 'primary',
                 500,
