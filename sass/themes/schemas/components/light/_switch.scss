@@ -324,6 +324,7 @@ $fluent-switch: extend(
 /// @prop {Map} focus-outline-color [color: ('primary', 100)] - The focus outlined color.
 /// @prop {Map} focus-fill-color [color: ('primary', 200)] - The focus fill color.
 /// @prop {Map} border-color [color('gray', 400)] - The border color of the switch.
+/// @prop {Map} border-hover-color [color: ('gray', 400)] - The border color of the switch on hover.
 /// @prop {Map} border-disabled-color [color: ('gray', 300)] - The border color of the disabled switch.
 /// @prop {Map} thumb-off-color [color: ('gray', 400)] - The color of the thumb when the switch is off.
 /// @prop {Map} thumb-disabled-color [color: ('gray', 300)] - The color of the thumb when the switch is disabled.
@@ -350,6 +351,12 @@ $bootstrap-switch: extend(
             ),
         ),
         border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        border-hover-color: (
             color: (
                 'gray',
                 400,
