@@ -128,7 +128,7 @@ $bootstrap-progress-linear: extend(
 /// @prop {Map} fill-color-warning [color: ('warn', 400)] - The track warning fill color.
 /// @prop {Map} fill-color-info [color: ('info', 400)] - The track info fill color.
 /// @prop {Map} fill-color-success [color: ('success', 400)] - The track success fill color.
-/// @prop {Map} stripes-color [color: ('gray', 50, .45)] - The track stripes color.
+/// @prop {Map} stripes-color [contrast-color: ('gray', 900, .3)] - The track stripes color.
 /// @requires $light-progress-linear
 $indigo-progress-linear: extend(
     $light-progress-linear,
@@ -184,10 +184,10 @@ $indigo-progress-linear: extend(
         ),
 
         stripes-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                50,
-                0.45,
+                900,
+                0.3,
             ),
         ),
     )
