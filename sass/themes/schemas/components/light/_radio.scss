@@ -180,9 +180,9 @@ $fluent-radio: extend(
 /// @prop {Map} disabled-color [color: ('gray', 300)] - The disabled border color.
 /// @prop {Map} disabled-fill-color [color: ('primary', 200)] - The disabled checked border and dot colors.
 /// @prop {Map} fill-color-hover [color: ('primary', 600)] - The checked border and dot colors on hover.
-/// @prop {Map} focus-outline-color [color: ('primary', 200)] - The focus outline color.
+/// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outline color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 200, 0.5)] - The focus outline color when radio is invalid.
-/// @prop {Map} error-color-hover [color: ('error', 100)] - The focus outlined color in invalid state.
+/// @prop {Map} error-color-hover [color: ('error', 600)] - The focus outlined color in invalid state.
 /// @requires {Map} $light-radio
 $bootstrap-radio: extend(
     $light-radio,
