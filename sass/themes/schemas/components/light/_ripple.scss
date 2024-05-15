@@ -7,7 +7,7 @@
 /// @access public
 ////
 
-/// Generates a light ripple schema.
+/// Generates a base light ripple schema.
 /// @type {Map}
 /// @prop {Map} color [color: ('gray', 800, .7)] - The color of the ripple.
 $light-ripple: (
@@ -19,6 +19,11 @@ $light-ripple: (
         ),
     ),
 );
+
+/// Generates a material ripple schema.
+/// @type {Map}
+/// @requires {Map} $light-ripple
+$material-ripple: $light-ripple;
 
 /// Generates a fluent ripple schema.
 /// @type {Map}

@@ -27,6 +27,12 @@ $dark-base-highlight: (
     ),
 );
 
+/// Generates a dark material highlight schema.
+/// @type {Map}
+/// @requires $material-highlight
+/// @requires $dark-base-highlight
+$dark-material-highlight: extend($material-highlight, $dark-base-highlight);
+
 /// Generates a dark highlight schema.
 /// @type {Map}
 /// @requires $light-highlight
