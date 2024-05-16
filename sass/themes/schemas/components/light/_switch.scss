@@ -17,7 +17,8 @@
 /// @prop {Color} track-off-color [transparent] - The color of the track when the switch is off.
 /// @prop {Map} thumb-on-disabled-color [color: ('secondary', 100)] - The color of the thumb when the switch is on and disabled.
 /// @prop {Color} track-disabled-color [transparent] - The color of the track when the switch is disabled.
-/// @prop {Map} label-color [color: ('gray', 900)] - The color of the switch label
+/// @prop {Map} label-color [color: ('gray', 900)] - The color of the switch label.
+/// @prop {Map} label-hover-color [color: ('gray', 900)] - The color of the switch label on hover.
 /// @prop {Map} label-disabled-color [color: ('gray', 500)] - The color of the switch label when the switch is disabled
 /// @prop {Map} border-on-color [color: ('primary', 500)] - The border color of the on-switch.
 /// @prop {Map} label-invalid-color [color: ('gray', 900)] - The color of the switch label in invalid state.
@@ -55,6 +56,12 @@ $light-switch: extend(
             ),
         ),
         label-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        label-hover-color: (
             color: (
                 'gray',
                 900,
@@ -115,7 +122,7 @@ $light-switch: extend(
 /// @prop {Color} focus-fill-color [transparent] - The focus fill color.
 /// @prop {Color} focus-fill-hover-color [transparent] - The focus fill color on hover.
 /// @prop {Color} border-on-color [transparent] - The border color of the on-switch.
-/// @prop {Color} border-on-hover-color [transparent] - The border color of the  on-switch.
+/// @prop {Color} border-on-hover-color [transparent] - The hover border color when the switch is on.
 /// @prop {Color} border-disabled-color [transparent] - The border color of the disabled switch.
 /// @prop {Map} thumb-on-color [color: ('secondary', 500)] - The color of the thumb when the switch is on.
 /// @prop {Map} thumb-off-color [color: ('gray', 50)] - The color of the thumb when the switch is off.
@@ -123,6 +130,7 @@ $light-switch: extend(
 /// @prop {Map} thumb-on-error-color [color: ('secondary', 500)] - The color of the thumb when the switch is on and invalid.
 /// @prop {Map} track-off-color [color: ('gray', 500)] - The color of the track when the switch is off.
 /// @prop {Map} track-on-color [color: ('secondary', 200)] - The color of the track when the switch is on.
+/// @prop {Map} track-on-hover-color [color: ('secondary', 200)] - The color of the track when the switch is on and hovered.
 /// @prop {Map} track-disabled-color [color: ('gray', 300)] - The color of the track when the switch is disabled.
 /// @prop {Map} error-color [color: ('gray', 50)] - The color of the thumb in invalid state.
 /// @prop {Map} error-color-hover [color: ('gray', 500)] - The border color in invalid state on hover.
@@ -175,6 +183,12 @@ $material-switch: extend(
             ),
         ),
         track-on-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        track-on-hover-color: (
             color: (
                 'secondary',
                 200,
@@ -470,35 +484,86 @@ $bootstrap-switch: extend(
 
 /// Generates an indigo switch schema.
 /// @type {Map}
-/// @prop {Map} thumb-off-color [color: ('gray', 600)] - The color of the thumb when the switch is off.
-/// @prop {Map} thumb-disabled-color [color: ('gray', 300)] - The color of the thumb when the switch is disabled.
-/// @prop {Map} border-color [color: ('gray', 600)] - The border color of the switch.
+/// @prop {Map} label-color [color: ('gray', 800)] - The color of the switch label.
+/// @prop {Map} label-invalid-color [color: ('gray', 800)] - The color of the switch label in invalid state.
+/// @prop {Map} label-disabled-color [color: ('gray', 900, .2)] - The color of the switch label when the switch is disabled
+/// @prop {Map} thumb-on-color [contrast-color: ('gray', 900)] - The color of the thumb when the switch is on.
+/// @prop {Map} track-on-hover-color [color: ('primary', 400)] - The color of the track when the switch is on and hovered.
+/// @prop {Map} thumb-off-color [color: ('gray', 500)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-disabled-color [color: ('gray', 900, .15)] - The color of the thumb when the switch is disabled.
+/// @prop {Map} thumb-on-disabled-color [contrast-color: ('gray', 900, .4)] - The color of the thumb when the switch is on and disabled.
+/// @prop {Map} track-on-disabled-color [color: ('primary', 400, .5)] - The color of the track when the switch is on and disabled.
+/// @prop {Map} border-color [color: ('gray', 500)] - The border color of the switch.
 /// @prop {Map} border-hover-color [color: ('gray', 600)] - The border color of the switch on hover.
-/// @prop {Map} focus-fill-color [color: ('gray', 600)] - The focus fill color.
-/// @prop {Map} focus-fill-hover-color [color: ('gray', 600)] - The focus fill color on hover.
-/// @prop {Map} border-disabled-color [color: ('gray', 300)] - The border color of the disabled switch.
-/// @prop {Map} border-on-hover-color [color: ('primary', 500)] - The border color of the  on-switch.
-/// @prop {Map} label-disabled-color [color: ('gray', 300)] - The color of the switch label when the switch is disabled
+/// @prop {Map} border-disabled-color [color: ('gray', 900, .15)] - The border color of the disabled switch.
+/// @prop {Map} border-on-hover-color [color: ('primary', 400)] - The hover border color when the switch is on.
 /// @prop {Map} error-color [color: ('gray', 500)] - The border and thumb color in invalid state.
 /// @prop {Map} error-color-hover [color: ('gray', 300)] - The border and thumb color in invalid state on hover.
 /// @prop {Color} track-error-color [transparent] - The color of the track in invalid state when the switch is off.
 /// @prop {List} border-radius-track [(rem(8px), rem(0), rem(8px))] - The border radius used for switch track.
-/// @prop {Map} focus-outline-color [color: ('gray', 300)] - The focus outlined color.
-/// @prop {Map} focus-outline-color-focused [color: ('primary', 200)] - The focus outlined color for focused state.
+/// @prop {Map} focus-outline-color [color: ('gray', 900, .15)] - The focus outlined color.
+/// @prop {Map} focus-outline-color-focused [color: ('primary', 400, .5)] - The focus outlined color for focused state.
 /// @requires $light-switch
 $indigo-switch: extend(
     $light-switch,
     (
+        label-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        label-invalid-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        label-disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        thumb-on-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        thumb-on-disabled-color: (
+            contrast-color: (
+                'gray',
+                900,
+                0.4,
+            ),
+        ),
+        track-on-hover-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        track-on-disabled-color: (
+            color: (
+                'primary',
+                400,
+                0.5,
+            ),
+        ),
         focus-outline-color: (
             color: (
                 'gray',
-                300,
+                900,
+                0.15,
             ),
         ),
         focus-outline-color-focused: (
             color: (
                 'primary',
-                200,
+                400,
+                0.5,
             ),
         ),
         border-color: (
@@ -510,7 +575,7 @@ $indigo-switch: extend(
         border-hover-color: (
             color: (
                 'gray',
-                500,
+                600,
             ),
         ),
         focus-fill-color: (
@@ -528,19 +593,20 @@ $indigo-switch: extend(
         border-disabled-color: (
             color: (
                 'gray',
-                300,
+                900,
+                0.15,
             ),
         ),
         border-on-hover-color: (
             color: (
                 'primary',
-                500,
+                400,
             ),
         ),
         thumb-off-color: (
             color: (
                 'gray',
-                600,
+                500,
             ),
         ),
         error-color: (
@@ -559,13 +625,8 @@ $indigo-switch: extend(
         thumb-disabled-color: (
             color: (
                 'gray',
-                300,
-            ),
-        ),
-        label-disabled-color: (
-            color: (
-                'gray',
-                300,
+                900,
+                0.15,
             ),
         ),
         border-radius-track: (
