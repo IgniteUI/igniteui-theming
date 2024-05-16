@@ -14,3 +14,23 @@ $color-2: rgba(0 0 0 / 12%) !default;
 $color-3: rgba(0 0 0 / 8%) !default;
 
 @forward './material' as material-* with($color-1: $color-1, $color-2: $color-2, $color-3: $color-3);
+@forward './indigo' as indigo-* with($color-1: $color-1, $color-2: $color-2, $color-3: $color-3);
+
+/// Configures shadow colors for the elevations.
+/// @access public
+/// @param {Color} $color-1 - The umbra shadow color.
+/// @param {Color} $color-2 - The penumbra shadow color.
+/// @param {Color} $color-3 - The ambiant shadow color.
+@mixin configure($color-1, $color-2, $color-3) {
+    @if $color-1 {
+        $color-1: $color-1 !global;
+    }
+
+    @if $color-2 {
+        $color-2: $color-2 !global;
+    }
+
+    @if $color-3 {
+        $color-3: $color-3 !global;
+    }
+}

@@ -1,0 +1,98 @@
+// stylelint-disable selector-type-no-unknown, max-nesting-depth
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../color' as *;
+@use '../color/multipliers' as multipliers;
+@use '../color/presets/light' as light-palettes;
+@use '../color/presets/dark' as dark-palettes;
+@use '../typography/presets' as typography;
+@use '../elevations/presets' as elevations;
+@use '../themes/mixins' as *;
+
+$themes: (bootstrap, material, fluent, indigo);
+
+/*
+* @outputDir - /colors/meta
+*/
+palette {
+    @each $key, $value in map.remove($IPalette, '_meta') {
+        --#{$key}: [#{$value}];
+    }
+}
+
+multipliers {
+    @each $variant in ('color', 'grayscale') {
+        $multipliers: meta.module-variables(multipliers);
+
+        > #{$variant} {
+            @each $multiplier, $props in map.get($multipliers, $variant) {
+                > #{$multiplier} {
+                    @each $key, $value in $props {
+                        --#{$key}: '#{$value}';
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+* @outputDir - /colors/presets
+*/
+palettes {
+    @each $theme in $themes {
+        @each $variant in ('light', 'dark') {
+            $name: #{$variant}-#{$theme}-palette;
+            $palettes: meta.module-variables(#{$variant}-palettes);
+            $palette: map.get($palettes, $name);
+
+            > #{$name} {
+                @each $color in map.remove($IPalette, '_meta') {
+                    $name: list.nth($color, 1);
+
+                    --#{$name}: '#{color($palette, #{$name})}';
+                }
+            }
+        }
+    }
+}
+
+/*
+* @outputDir - /typography/presets
+*/
+typescales {
+    $type-styles: meta.module-variables(typography);
+
+    @each $theme in $themes {
+        $typeface: map.get($type-styles, #{$theme}-typeface);
+        $type-scale: map.remove(map.get($type-styles, #{$theme}-type-scale), '_meta');
+
+        > #{'' + $theme} {
+            --typeface: '#{$typeface}';
+
+            @each $style, $props in $type-scale {
+                > #{$style} {
+                    @each $key, $value in $props {
+                        --#{$key}: #{$value};
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+* @outputDir - /elevations
+*/
+@each $theme in ('material', 'indigo') {
+    $elevations: map.get(meta.module-variables(elevations), #{$theme}-elevations);
+    #{$theme} {
+        > elevations {
+            @each $level, $value in $elevations {
+                --#{$level}: #{$value};
+            }
+        }
+    }
+}

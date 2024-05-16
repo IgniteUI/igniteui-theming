@@ -308,6 +308,15 @@ $_palette: palette(
             }
         }
 
+        @include it('should properly get the hex value from handmade palettes') {
+            $_palette: mocks.$handmade-palette;
+            $_hex: color($_palette, primary, 800);
+            $_ref: color(null, primary, 800);
+
+            @include assert-equal($_hex, #316ec9);
+            @include assert-equal($_ref, hsla(var(--ig-primary-800), var(--ig-primary-a)));
+        }
+
         @include it('should convert a color to a list of HSL values') {
             @include assert-equal(to-hsl(black), (0deg, 0%, 0%));
         }

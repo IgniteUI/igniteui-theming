@@ -47,50 +47,77 @@ $dark-bootstrap-checkbox: extend(
 
 /// Generates a dark indigo checkbox schema.
 /// @type {Map}
-/// @prop {Map} fill-color [color: ('gray', 900)] - The checked border and fill colors.
-/// @prop {Map} fill-color-hover [color: ('gray', 900)] - The checked border and fill colors on hover.
-/// @prop {Map} empty-color [color: ('gray', 700)] - The unchecked border color.
-/// @prop {Map} disabled-color [color: ('gray', 400)] - The disabled border and fill colors.
-/// @prop {Map} disabled-color-label [color: ('gray', 400)] - The disabled label color.
-/// @prop {Map} disabled-indeterminate-color [color: ('gray', 200)] - The disabled border and fill colors in checked/indeterminate state.
+/// @prop {Map} label-color [color: ('gray', 900, .8)]- The text color used for the label text.
+/// @prop {Map} label-color-hover [color: ('gray', 900)]- The text color used for the label text on hover.
+/// @prop {Map} focus-outline-color [color: ('gray', 900, .2)] - The focus outlined color.
+/// @prop {Map} empty-color [color: ('gray', 900, .6)] - The unchecked border color.
+/// @prop {Map} empty-color-hover [color: ('gray', 900, .8)] - The unchecked border color on hover.
+/// @prop {Map} error-color [color: ('error', 400)] - The border and fill colors in invalid state.
+/// @prop {Map} error-color-hover [color: ('error', 300)] - The border and fill colors in invalid state on hover.
+/// @prop {Map} disabled-color [color: ('gray', 900, .2)] - The disabled border and fill colors.
+/// @prop {Map} disabled-color-label [color: ('gray', 900, .2)] - The disabled label color.
 /// @requires $indigo-checkbox
 $dark-indigo-checkbox: extend(
     $indigo-checkbox,
     (
-        fill-color: (
-            color: (
+        label-color: (
+            contrast-color: (
                 'gray',
-                900,
+                50,
+                0.8,
             ),
         ),
-        fill-color-hover: (
-            color: (
+        label-color-hover: (
+            contrast-color: (
                 'gray',
-                900,
+                50,
+            ),
+        ),
+        focus-outline-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
             ),
         ),
         empty-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                700,
+                50,
+                0.6,
+            ),
+        ),
+        empty-color-hover: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        error-color: (
+            color: (
+                'error',
+                400,
+            ),
+        ),
+        error-color-hover: (
+            color: (
+                'error',
+                300,
             ),
         ),
         disabled-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                400,
+                50,
+                0.2,
             ),
         ),
         disabled-color-label: (
-            color: (
+            contrast-color: (
                 'gray',
-                400,
-            ),
-        ),
-        disabled-indeterminate-color: (
-            color: (
-                'gray',
-                200,
+                50,
+                0.2,
             ),
         ),
     )

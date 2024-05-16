@@ -17,10 +17,15 @@
 /// @prop {Map} button-arrow-color [color: ('gray', 700)] - The previous/next buttons idle arrow color.
 /// @prop {Map} button-hover-arrow-color [color: ('gray', 900)] - The previous/next buttons hover arrow color.
 /// @prop {Map} button-disabled-arrow-color [color: ('gray' 400)] - The previous/next buttons disabled color.
+/// @prop {Color} button-border-color [transparent] - The previous/next buttons idle border color.
+/// @prop {Color} button-hover-border-color [transparent] - The previous/next buttons hover border color.
+/// @prop {Color} button-disabled-border-color [transparent] - The previous/next buttons disabled border color.
 /// @prop {Color} indicator-dot-color [transparent] - The idle indicator dot color.
+/// @prop {Color} indicator-hover-dot-color [transparent] - The hover indicator dot color.
 /// @prop {Map} indicator-border-color [color: ('gray', 50)] - The idle indicator border color.
 /// @prop {Map} indicator-active-dot-color [color: ('gray', 50)] - The active indicator dot color.
 /// @prop {Map} indicator-active-border-color [color: ('gray', 50)] - The active indicator border color.
+/// @prop {Map} indicator-active-hover-dot-color [color: ('gray', 50)] - The active indicator dot color on hover.
 /// @prop {Number} button-elevation [1] - The elevation level, between 0-24, to be used for the carousel buttons.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(36px))] - The border radius used for carousel.
 /// @requires {Map} $default-elevation-carousel
@@ -71,10 +76,14 @@ $light-carousel: extend(
 
         button-disabled-arrow-color: (
             color: (
-                'gray' 400,
+                'gray',
+                400,
             ),
         ),
 
+        button-border-color: transparent,
+        button-hover-border-color: transparent,
+        button-disabled-border-color: transparent,
         indicator-dot-color: transparent,
 
         indicator-border-color: (
@@ -92,6 +101,13 @@ $light-carousel: extend(
         ),
 
         indicator-active-border-color: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        indicator-active-hover-dot-color: (
             color: (
                 'gray',
                 50,
@@ -144,14 +160,17 @@ $bootstrap-carousel: extend(
 
 /// Generates an indigo carousel schema.
 /// @type {Map}
-/// @prop {Map} button-background [color: ('surface', 500, .4)] - The previous/next buttons idle background color.
-/// @prop {Map} button-hover-background [color: ('surface', 500, .65)] - The previous/next buttons hover background color.
-/// @prop {Color} button-disabled-background [transparent] - The previous/next buttons disabled background color.
-/// @prop {Map} button-arrow-color [color: ('gray', 100)] - The previous/next buttons idle arrow color.
+/// @prop {Map} button-arrow-color [color: ('gray', 600)] - The previous/next buttons idle arrow color.
+/// @prop {Map} button-hover-background [color: ('gray', 200)] - The previous/next buttons hover background color.
 /// @prop {Map} button-hover-arrow-color [color: ('gray', 700)] - The previous/next buttons hover arrow color.
-/// @prop {Map} button-disabled-arrow-color [color: ('gray' 400)] - The previous/next buttons disabled color.
-/// @prop {Map} indicator-dot-color [color: ('surface', 500, .6)] - The idle indicator dot color.
-/// @prop {Map} indicator-active-dot-color [color: 'surface'] - The active indicator dot color.
+/// @prop {Map} button-border-color [color: ('gray', 400)] - The previous/next buttons idle border color.
+/// @prop {Map} button-hover-border-color [color: ('gray', 500)] - The previous/next buttons hover border color.
+/// @prop {Map} button-disabled-border-color [color: ('gray', 300)] - The previous/next buttons disabled border color.
+/// @prop {Map} button-disabled-background [color: ('gray', 50)] - The previous/next buttons disabled background color.
+/// @prop {Map} indicator-dot-color [color: ('gray', 500)] - The idle indicator dot color.
+/// @prop {Map} indicator-hover-dot-color [color: ('gray', 600)] - The hover indicator dot color.
+/// @prop {Map} indicator-active-dot-color [color: ('primary', 500)] - The active indicator dot color.
+/// @prop {Map} indicator-active-hover-dot-color [color: ('primary', 400)] - The active indicator dot color on hover.
 /// @prop {Number} button-elevation [0] - The elevation level, between 0-24, to be used for the carousel buttons.
 /// @requires {Map} $light-carousel
 /// @requires {Map} $indigo-elevation-carousel
@@ -159,26 +178,17 @@ $indigo-carousel: extend(
     $light-carousel,
     $indigo-elevation-carousel,
     (
-        button-background: (
-            color: (
-                'surface',
-                500,
-                0.4,
-            ),
-        ),
-
         button-arrow-color: (
             color: (
                 'gray',
-                100,
+                600,
             ),
         ),
 
         button-hover-background: (
             color: (
-                'surface',
-                500,
-                0.65,
+                'gray',
+                200,
             ),
         ),
 
@@ -189,24 +199,60 @@ $indigo-carousel: extend(
             ),
         ),
 
-        button-disabled-background: transparent,
-
-        button-disabled-arrow-color: (
+        button-border-color: (
             color: (
-                'gray' 400,
+                'gray',
+                400,
+            ),
+        ),
+
+        button-hover-border-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+
+        button-disabled-border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        button-disabled-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
 
         indicator-dot-color: (
             color: (
-                'surface',
+                'gray',
                 500,
-                0.6,
+            ),
+        ),
+
+        indicator-hover-dot-color: (
+            color: (
+                'gray',
+                600,
             ),
         ),
 
         indicator-active-dot-color: (
-            color: 'surface',
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        indicator-active-hover-dot-color: (
+            color: (
+                'primary',
+                400,
+            ),
         ),
     )
 );

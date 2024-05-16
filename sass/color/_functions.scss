@@ -104,7 +104,11 @@ $_enhanced-accessibility: false;
             $result,
             (
                 $variant: map.get($shade, 'raw'),
-                #{$variant}-contrast: text-contrast(map.get($shade, 'raw')),
+                #{$variant}-contrast:
+                    text-contrast(
+                        $background: map.get($shade, 'raw'),
+                        $contrast: 'AA',
+                    ),
                 #{$variant}-hsl: map.get($shade, 'hsl'),
             )
         );
@@ -195,7 +199,13 @@ $_enhanced-accessibility: false;
       @return if($contrast, $_mix-alpha, $_hsl-alpha);
     }
 
-    @return rgba(map.get($c, $variant), $alpha: $_alpha);
+    $_shade: map.get($c, $variant);
+
+    @if meta.type-of($_shade) == 'list' and list.length($_shade) == 3 {
+        $_shade: hsl($_shade...);
+    }
+
+    @return rgba($_shade, $alpha: $_alpha);
 }
 
 /// Retrieves a contrast text color for a given color variant from a color palette.

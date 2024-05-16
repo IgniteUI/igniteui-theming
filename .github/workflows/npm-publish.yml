@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -32,10 +32,16 @@ jobs:
 
       - name: Define NPM tag
         run: |
-            if [[ ${VERSION} == *"alpha"* || ${VERSION} == *"beta"* || ${VERSION} == *"rc"* ]]; then echo "NPM_TAG=next"; else echo "NPM_TAG=latest"; fi >> $GITHUB_ENV
-            echo ${NPM_TAG}
+          if [[ ${VERSION} == *"alpha"* || ${VERSION} == *"beta"* || ${VERSION} == *"rc"* ]]; then
+            echo "NPM_TAG=next"
+          elif [[ ${VERSION} == *"patch"* ]]; then
+            echo "NPM_TAG=patch"
+          else
+            echo "NPM_TAG=latest"
+          fi >> $GITHUB_ENV
+          echo ${NPM_TAG}
       - name: Create package version
-        run: npm version ${VERSION} --no-git-tag-version --save --allow-same-version
+        run: npm version ${VERSION/-patch/} --no-git-tag-version --save --allow-same-version
         working-directory: ./
 
       - name: Publish igniteui-theming
