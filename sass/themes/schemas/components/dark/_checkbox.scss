@@ -50,8 +50,6 @@ $dark-bootstrap-checkbox: extend(
 /// @prop {Map} label-color [color: ('gray', 900, .8)]- The text color used for the label text.
 /// @prop {Map} label-color-hover [color: ('gray', 900)]- The text color used for the label text on hover.
 /// @prop {Map} focus-outline-color [color: ('gray', 900, .2)] - The focus outlined color.
-/// @prop {Map} fill-color [color: ('primary', 400)] - The checked border and fill colors.
-/// @prop {Map} fill-color-hover [color: ('primary', 300)] - The checked border and fill colors on hover.
 /// @prop {Map} empty-color [color: ('gray', 900, .6)] - The unchecked border color.
 /// @prop {Map} empty-color-hover [color: ('gray', 900, .8)] - The unchecked border color on hover.
 /// @prop {Map} error-color [color: ('error', 400)] - The border and fill colors in invalid state.
@@ -80,18 +78,6 @@ $dark-indigo-checkbox: extend(
                 'gray',
                 50,
                 0.2,
-            ),
-        ),
-        fill-color: (
-            color: (
-                'primary',
-                400,
-            ),
-        ),
-        fill-color-hover: (
-            color: (
-                'primary',
-                300,
             ),
         ),
         empty-color: (
