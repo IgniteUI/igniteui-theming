@@ -10,9 +10,14 @@
 
 /// Generates a light bottom navigation scheme.
 /// @type {Map}
-/// @prop {Color} background [color: ('gray', 50))] - The background color used for the toast.
-/// @prop {Map} idle-item-color [color: ('gray', 700)] - The text-color used for the idle color.
-/// @prop {Map} active-item-color [color: ('primary', 500)] - The text-color used for the active color.
+/// @prop {Map} background [color: ('gray', 50)] - The background color used for the bottom nav.
+/// @prop {Map} icon-color [color: ('gray', 700)] - The icon color used in idle state.
+/// @prop {Map} icon-selected-color [color: ('primary', 500)] - The icon color used for the selected item.
+/// @prop {Map} label-color [color: ('gray', 700)] - The label color used in idle state.
+/// @prop {Map} icon-disabled-color [color: ('gray', 700)] - The disabled color of the icon.
+/// @prop {Map} label-disabled-color [color: ('gray', 700)] - The disabled color of the label.
+/// @prop {Map} label-selected-color [color: ('primary', 500)] - The label color used for the selected item.
+/// @prop {Color} border-color [transparent] - The border color of the bottom navigation.
 /// @prop {Number} elevation [8] - The elevation level, between 0-24, to be used for the bottom nav.
 /// @requires {Map} $default-elevation-bottom-nav
 $light-bottom-nav: extend(
@@ -24,20 +29,43 @@ $light-bottom-nav: extend(
                 50,
             ),
         ),
-
-        idle-item-color: (
+        icon-color: (
             color: (
                 'gray',
                 700,
             ),
         ),
-
-        active-item-color: (
+        icon-selected-color: (
             color: (
                 'primary',
                 500,
             ),
         ),
+        label-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        label-selected-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        icon-disabled-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        label-disabled-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        border-color: transparent,
     )
 );
 
@@ -60,7 +88,53 @@ $bootstrap-bottom-nav: $light-bottom-nav;
 
 /// Generates an indigo bottom navigation schema.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 300)] - The border color of the bottom navigation.
+/// @prop {Map} background [color: 'surface'] - The background color used for the bottom nav.
+/// @prop {Map} icon-color [color: ('gray', 600)] - The icon color used in idle state.
+/// @prop {Map} label-color [color: ('gray', 800)] - The label color used in idle state.
+/// @prop {Map} icon-disabled-color [color: ('gray', 900, .2)] - The disabled color of the icon.
+/// @prop {Map} label-disabled-color [color: ('gray', 900, .2)] - The disabled color of the label.
 /// @prop {Number} elevation [4] - The elevation level, between 0-24, to be used for the bottom nav.
 /// @requires {Map} $light-bottom-nav
 /// @requires {Map} $indigo-elevation-bottom-nav
-$indigo-bottom-nav: extend($light-bottom-nav, $indigo-elevation-bottom-nav);
+$indigo-bottom-nav: extend(
+    $light-bottom-nav,
+    $indigo-elevation-bottom-nav,
+    (
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        background: (
+            color: 'surface',
+        ),
+        icon-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        label-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        icon-disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        label-disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+    )
+);

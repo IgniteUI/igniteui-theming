@@ -151,9 +151,6 @@ $dark-bootstrap-radio: extend(
 /// @prop {Map} label-color-hover [contrast-color: ('primary', 500)] - The text color used for the label text on hover.
 /// @prop {Map} hover-color [contrast-color: ('primary', 500, 0.8)] - The text color used for the label text.
 /// @prop {Map} focus-outline-color [contrast-color: ('primary', 500, 0.2)] - The focus outlined color.
-/// @prop {Map} fill-color [color: ('primary', 400)] - The checked border and dot colors.
-/// @prop {Map} fill-hover-border-color [color: ('primary', 300)] - The text color used for the label text.
-/// @prop {Map} fill-color-hover [color: ('primary', 300)] - The checked border and dot colors on hover.
 /// @prop {Map} empty-color [contrast-color: ('primary', 500, 0.6)] - The unchecked border color.
 /// @prop {Map} disabled-color [contrast-color: ('primary', 500, 0.2)] - The disabled border and dot colors.
 /// @prop {Map} disabled-label-color [contrast-color: ('primary', 500, 0.2)] - The disabled label color.
@@ -189,24 +186,6 @@ $dark-indigo-radio: extend(
                 'primary',
                 500,
                 0.2,
-            ),
-        ),
-        fill-color: (
-            color: (
-                'primary',
-                400,
-            ),
-        ),
-        fill-hover-border-color: (
-            color: (
-                'primary',
-                300,
-            ),
-        ),
-        fill-color-hover: (
-            color: (
-                'primary',
-                300,
             ),
         ),
         error-color: (
