@@ -89,15 +89,31 @@ $dark-bootstrap-list: extend(
 
 /// Generates a dark indigo list schema.
 /// @type {Map}
-/// @prop {Map} header-text-color [contrast-color: 'surface'] - The list header text color.
+/// @prop {Map} header-text-color [contrast-color: ('gray', 50, .6)] - The list header text color.
 /// @prop {Map} item-background-hover [color: ('primary', 500, .5)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('primary')] - The active list item background color.
+/// @prop {Map} item-text-color [contrast-color: ('gray', 50, .9)] - The list item text color.
+/// @prop {Map} item-text-color-hover [contrast-color: ('gray', 50)] - The list item text color.
+/// @prop {Map} item-text-color-active [contrast-color: ('gray', 50)] - The active list item text color.
+/// @prop {Map} item-subtitle-color [contrast-color: ('gray', 50, .7)] - The list item subtitle color.
+/// @prop {Map} item-subtitle-color-hover [contrast-color: ('gray', 50, .8)] - The list item subtitle hover color.
+/// @prop {Map} item-subtitle-color-active [contrast-color: ('gray', 50, .8)] - The list item subtitle active color.
+/// @prop {Map} item-thumbnail-color [contrast-color: ('gray', 50, .6)] - The list item thumbnail color.
+/// @prop {Map} item-thumbnail-color-hover [contrast-color: ('gray', 50, .8)] - The list item thumbnail hover color.
+/// @prop {Map} item-thumbnail-color-active [contrast-color: ('gray', 50, .8)] - The list item thumbnail active color.
+/// @prop {Map} item-action-color [contrast-color: ('gray', 50, .6)] - The list item action color.
+/// @prop {Map} item-action-color-hover [contrast-color: ('gray', 50, .8)] - The list item action hover color.
+/// @prop {Map} item-action-color-active [contrast-color: ('gray', 50, .8)] - The list item action active color.
 /// @requires $indigo-list
 $dark-indigo-list: extend(
     $indigo-list,
     (
         header-text-color: (
-            contrast-color: 'surface',
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
         ),
 
         item-background-hover: (
@@ -111,6 +127,100 @@ $dark-indigo-list: extend(
         item-background-active: (
             color: (
                 'primary',
+            ),
+        ),
+
+        item-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.9,
+            ),
+        ),
+
+        item-text-color-hover: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        item-text-color-active: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        item-subtitle-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.7,
+            ),
+        ),
+
+        item-subtitle-color-hover: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-subtitle-color-active: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-thumbnail-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+
+        item-thumbnail-color-hover: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-thumbnail-color-active: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-action-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+
+        item-action-color-hover: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-action-color-active: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
             ),
         ),
     )
