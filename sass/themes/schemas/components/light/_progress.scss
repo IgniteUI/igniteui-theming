@@ -121,16 +121,73 @@ $bootstrap-progress-linear: extend(
 
 /// Generates an indigo progress-linear schema.
 /// @type {Map}
-/// @prop {Map} stripes-color [color: ('gray', 50, .45)] - The track stripes color.
+/// @prop {Map} text-color [color: ('gray', 600)] - The track value text color.
+/// @prop {Map} track-color [color: ('gray', 900, .15)] - The main track color.
+/// @prop {Map} fill-color-default [color: ('primary', 400)] - The track default fill color.
+/// @prop {Map} fill-color-danger [color: ('error', 400)] - The track danger fill color.
+/// @prop {Map} fill-color-warning [color: ('warn', 400)] - The track warning fill color.
+/// @prop {Map} fill-color-info [color: ('info', 400)] - The track info fill color.
+/// @prop {Map} fill-color-success [color: ('success', 400)] - The track success fill color.
+/// @prop {Map} stripes-color [contrast-color: ('gray', 900, .3)] - The track stripes color.
 /// @requires $light-progress-linear
 $indigo-progress-linear: extend(
     $light-progress-linear,
     (
-        stripes-color: (
+        text-color: (
             color: (
                 'gray',
-                50,
-                0.45,
+                600,
+            ),
+        ),
+
+        track-color: (
+            color: (
+                'gray',
+                900,
+                0.15,
+            ),
+        ),
+
+        fill-color-default: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+
+        fill-color-danger: (
+            color: (
+                'error',
+                400,
+            ),
+        ),
+
+        fill-color-warning: (
+            color: (
+                'warn',
+                400,
+            ),
+        ),
+
+        fill-color-info: (
+            color: (
+                'info',
+                400,
+            ),
+        ),
+
+        fill-color-success: (
+            color: (
+                'success',
+                400,
+            ),
+        ),
+
+        stripes-color: (
+            contrast-color: (
+                'gray',
+                900,
+                0.3,
             ),
         ),
     )
@@ -186,5 +243,29 @@ $bootstrap-progress-circular: $light-progress-circular;
 
 /// Generates an indigo progress-circular schema.
 /// @type {Map}
-/// @requires {Map} $light-progress-circular
-$indigo-progress-circular: $light-progress-circular;
+/// @prop {Map} base-circle-color [color: ('gray', 900, .15)] - The base circle fill color.
+/// @prop {Map} progress-circle-color [color: ('primary', 400)] - The progress circle fill color.
+/// @prop {Map} text-color [color: ('gray', 600)] - The value text color.
+$indigo-progress-circular: (
+    base-circle-color: (
+        color: (
+            'gray',
+            900,
+            0.15,
+        ),
+    ),
+
+    progress-circle-color: (
+        color: (
+            'primary',
+            400,
+        ),
+    ),
+
+    text-color: (
+        color: (
+            'gray',
+            600,
+        ),
+    ),
+);
