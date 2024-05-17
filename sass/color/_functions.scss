@@ -196,7 +196,7 @@ $_enhanced-accessibility: false;
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
     @if not($palette) or not($meta) {
-      @return if($contrast, $_mix-alpha, $_hsl-alpha);
+        @return if($contrast, $_mix-alpha, $_hsl-alpha);
     }
 
     $_shade: map.get($c, $variant);
