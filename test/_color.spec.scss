@@ -314,7 +314,7 @@ $_palette: palette(
             $_ref: color(null, primary, 800);
 
             @include assert-equal($_hex, #316ec9);
-            @include assert-equal($_ref, hsla(var(--ig-primary-800), var(--ig-primary-a)));
+            @include assert-equal($_ref, hsl(from var(--ig-primary-800) h s l / var(--ig-primary-a)));
         }
 
         @include it('should convert a color to a list of HSL values') {
