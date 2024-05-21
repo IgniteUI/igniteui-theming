@@ -61,7 +61,7 @@ $dark-fluent-navdrawer: extend(
 
 /// Generates a dark bootstrap navdrawer schema.
 /// @type {Map}
-/// @prop {Map} item-hover-background [color: ('gray', 100)] - The item's hover background color.
+/// @prop {Map} item-hover-background [color: ('gray', 200, .8)] - The item's hover background color.
 /// @requires $bootstrap-navdrawer
 $dark-bootstrap-navdrawer: extend(
     $bootstrap-navdrawer,
@@ -69,7 +69,8 @@ $dark-bootstrap-navdrawer: extend(
         item-hover-background: (
             color: (
                 'gray',
-                100,
+                200,
+                0.8,
             ),
         ),
     )
