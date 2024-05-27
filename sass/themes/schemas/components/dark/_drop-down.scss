@@ -118,6 +118,7 @@ $dark-bootstrap-drop-down: extend(
 /// @prop {Map} hover-item-text-color [contrast-color: ('gray', 50)] - The drop-down item hover text color.
 /// @prop {Map} hover-item-icon-color [contrast-color: ('gray', 50, .8)] - The drop-down item hover icon color.
 /// @prop {Color} focused-item-background [transparent] - The drop-down focused item background color.
+/// @prop {Map} focused-item-text-color [contrast-color: ('gray', 50, .8)] - The drop-down focused item text color.
 /// @prop {Map} selected-item-background [color: ('primary', 400,  .3)] - The drop-down selected item background color.
 /// @prop {Map} selected-item-text-color [contrast-color: ('gray', 50)] - The drop-down selected item text color.
 /// @prop {Map} selected-item-icon-color [contrast-color: ('gray', 50, .8)] - The drop-down selected item icon color.
@@ -184,6 +185,13 @@ $dark-indigo-drop-down: extend(
             ),
         ),
         focused-item-background: transparent,
+        focused-item-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
         selected-item-background: (
             color: (
                 'primary',
