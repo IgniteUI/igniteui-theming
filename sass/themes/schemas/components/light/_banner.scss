@@ -24,7 +24,7 @@ $light-banner: (
 /// @type {Map}
 /// @prop {Map} banner-message-color [color: ('gray', 900)] - The color used for the banner label.
 /// @prop {Map} banner-illustration-color [color: ('gray', 900)] - The color used for the banner illustration.
-/// @prop {Map} banner-border-color [color: ('gray', 400)] - The color used for the banner border.
+/// @prop {Map} banner-border-color [color: ('gray', 300)] - The color used for the banner border.
 /// @requires {Map} $light-banner
 $material-banner: extend(
     $light-banner,
@@ -32,7 +32,7 @@ $material-banner: extend(
         banner-border-color: (
             color: (
                 'gray',
-                400,
+                300,
             ),
         ),
 
