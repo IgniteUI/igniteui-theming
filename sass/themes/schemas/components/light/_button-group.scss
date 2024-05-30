@@ -132,6 +132,7 @@ $light-button-group: extend(
 /// @prop {Map} disabled-selected-icon-color [color: ('gray', 400)] - The disabled icon color for a selected item in the button group.
 /// @prop {Map} disabled-selected-border-color [color: ('gray', 400)] - The disabled border color for a selected item from the button group.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for button-group component.
+/// @prop {Number} default-size [3] - The default size used for the button-group component.
 /// @requires {Map} $light-button-group
 /// @requires {Map} $default-elevation-button-group
 $material-button-group: extend(
@@ -297,6 +298,8 @@ $material-button-group: extend(
                 400,
             ),
         ),
+
+        default-size: 3,
     )
 );
 
