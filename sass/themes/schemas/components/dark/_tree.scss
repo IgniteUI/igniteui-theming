@@ -115,7 +115,7 @@ $dark-bootstrap-tree: extend(
 /// @prop {Map} background-active-selected [color: ('primary', 400, 0.3)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground [contrast-color: ('gray', 50, 0.8)] - The color used for the tree node content.
 /// @prop {Map} foreground-active [contrast-color: ('gray', 50)] - The color used for the content in active state of the tree node.
-/// @prop {Map} foreground-selected [contrast-color: ('gray', 50)] - The color used for the content of the selected tree node.
+/// @prop {Map} foreground-selected [contrast-color: ('gray', 50, 0.8)] - The color used for the content of the selected tree node.
 /// @prop {Map} foreground-active-selected [contrast-color: ('gray', 50)] - The color used for the content of the active selected tree node.
 /// @prop {Map} foreground-disabled [contrast-color: ('gray', 50, 0.2)] - The color used for the content of the disabled tree node.
 /// @prop {Map} icon-color [contrast-color: ('gray', 50, 0.8)] - The color used for the tree node icon.
@@ -137,6 +137,7 @@ $dark-indigo-tree: extend(
             contrast-color: (
                 'gray',
                 50,
+                0.8,
             ),
         ),
         background-active: (
