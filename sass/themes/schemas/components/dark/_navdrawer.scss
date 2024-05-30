@@ -36,15 +36,15 @@ $base-dark-navdrawer: extend(
 /// @requires $material-navdrawer
 $dark-material-navdrawer: extend(
     $material-navdrawer,
-    $base-dark-navdrawer
-        (
-            item-disabled-text-color: (
-                color: (
-                    'gray',
-                    300,
-                ),
+    $base-dark-navdrawer,
+    (
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                300,
             ),
-        )
+        ),
+    )
 );
 
 /// Generates a dark fluent navdrawer schema.
