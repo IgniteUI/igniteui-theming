@@ -12,7 +12,7 @@
 /// @prop {Map} item-disabled-text-color [color: ('gray', 200)] - The item's disabled text color.
 /// @prop {Map} item-disabled-icon-color [color: ('gray', 200)] - The item's disabled icon color.
 /// @requires $material-navdrawer
-$base-dark-navdrawer: extend(
+$dark-base-navdrawer: extend(
     $light-navdrawer,
     (
         item-disabled-text-color: (
@@ -36,7 +36,7 @@ $base-dark-navdrawer: extend(
 /// @requires $material-navdrawer
 $dark-material-navdrawer: extend(
     $material-navdrawer,
-    $base-dark-navdrawer,
+    $dark-base-navdrawer,
     (
         item-disabled-text-color: (
             color: (
@@ -58,7 +58,7 @@ $dark-material-navdrawer: extend(
 /// @requires $fluent-navdrawer
 $dark-fluent-navdrawer: extend(
     $fluent-navdrawer,
-    $base-dark-navdrawer,
+    $dark-base-navdrawer,
     (
         item-hover-icon-color: (
             color: (
@@ -101,7 +101,7 @@ $dark-fluent-navdrawer: extend(
 /// @requires $bootstrap-navdrawer
 $dark-bootstrap-navdrawer: extend(
     $bootstrap-navdrawer,
-    $base-dark-navdrawer,
+    $dark-base-navdrawer,
     (
         item-hover-background: (
             color: (
