@@ -11,6 +11,8 @@
 /// Generates a base light navdrawer schema.
 /// @type {Map}
 /// @prop {Map} background [color: 'surface'] - The navigation drawer background color.
+/// @prop {Map} item-disabled-text-color [color: ('gray', 400)] - The item's disabled text color.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 400)] - The item's disabled icon color.
 /// @prop {Map} elevation [16] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(36px))] - The border radius used for the navdrawer component.
 /// @requires {Map} $default-elevation-navdrawer
@@ -19,6 +21,18 @@ $light-navdrawer: extend(
     (
         background: (
             color: 'surface',
+        ),
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                400,
+            ),
         ),
         border-radius: (
             border-radius: (
@@ -43,6 +57,7 @@ $light-navdrawer: extend(
 /// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @prop {Map} item-icon-color [ color: ('gray', 700)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 700)] - The header's idle text color.
+/// @prop {Map} item-disabled-text-color [color: ('gray', 500)] - The item's disabled text color.
 /// @requires {Map} $light-navdrawer
 $material-navdrawer: extend(
     $light-navdrawer,
@@ -113,6 +128,12 @@ $material-navdrawer: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                500,
             ),
         ),
     )
@@ -298,6 +319,8 @@ $bootstrap-navdrawer: extend(
 /// @prop {Map} item-hover-background [color: ('gray', 900, 0.05)] - The item's hover background color.
 /// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 700)] - The item's hover icon color.
+/// @prop {Map} item-disabled-text-color [color: ('gray', 900, 0.2)] - The item's disabled text color.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 900, 0.2)] - The item's disabled icon color.
 /// @prop {Map} elevation [0] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @prop {List} item-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the navdrawer items.
@@ -374,6 +397,21 @@ $indigo-navdrawer: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
             ),
         ),
 
