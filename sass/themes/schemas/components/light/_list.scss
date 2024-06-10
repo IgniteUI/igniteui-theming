@@ -232,7 +232,7 @@ $bootstrap-list: extend(
 /// @prop {Map} item-thumbnail-color [color: ('gray', 600)] - The list item thumbnail color.
 /// @prop {Map} item-thumbnail-color-hover [color: ('gray', 600)] - The list item thumbnail hover color.
 /// @prop {Map} item-thumbnail-color-active [color: ('gray', 700)] - The list item thumbnail active color.
-/// @prop {Number} item-border-radius [0] - The border radius used for list item.
+/// @prop {Number} item-border-radius [rem(4px)] - The border radius used for list item.
 /// @requires {Map} $light-list
 $indigo-list: extend(
     $light-list,
@@ -276,7 +276,7 @@ $indigo-list: extend(
         item-text-color-hover: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
 
@@ -350,6 +350,6 @@ $indigo-list: extend(
             ),
         ),
 
-        item-border-radius: 0,
+        item-border-radius: rem(4px),
     )
 );
