@@ -82,7 +82,6 @@ $base-stepper: (
             900,
         ),
     ),
-
     invalid-indicator-color: (
         color: (
             'gray',
@@ -151,33 +150,206 @@ $dark-bootstrap-stepper: extend(
 
 /// Generates a dark indigo stepper schema.
 /// @type {Map}
-/// @prop {Map} indicator-color [color: ('gray', 900)] - The text color of the incomplete step indicator.
-/// @prop {Map} indicator-outline [color: ('gray', 600)] - The outline color of the incomplete step indicator.
-/// @prop {Map} disabled-indicator-outline [color: ('gray', 300)] - The outline color of the disabled step indicator.
+/// @prop {Map} content-foreground [contrast-color: ('gray', 50, .8)] - The foreground of the step content.
+/// @prop {Map} indicator-color [color: ('gray', 50)] - The text color of the incomplete step indicator.
+/// @prop {Map} indicator-background [contrast-color: ('gray', 50, .8)] - The background color of the incomplete step indicator.
+/// @prop {Map} title-color [contrast-color: ('gray', 50)] - The text color of the step title.
+/// @prop {Map} title-hover-color [contrast-color: ('gray', 50)] - The text color of the step title on hover.
+/// @prop {Map} title-focus-color [contrast-color: ('gray', 50)] - The text color of the step title on focus.
+/// @prop {Map} subtitle-color [contrast-color: ('gray', 50, .8)] - The text color of the step subtitle.
+/// @prop {Map} subtitle-hover-color [contrast-color: ('gray', 50, .8)] - The text color of the step subtitle on hover.
+/// @prop {Map} subtitle-focus-color [contrast-color: ('gray', 50, .8)] - The text color of the step subtitle on focus.
+/// @prop {Map} step-hover-background [contrast-color: ('gray', 50, .15)] - The background of the step header on hover.
+/// @prop {Map} step-focus-background [contrast-color: ('gray', 50, .15)] - The background of the step header on hover.
+/// @prop {Map} current-step-hover-background [contrast-color: ('gray', 50, .15)] - The background of the current step header on hover.
+/// @prop {Map} current-step-focus-background [contrast-color: ('gray', 50, .15)] - The background of the current step header on focus.
+/// @prop {Map} complete-step-hover-background [contrast-color: ('gray', 50, .15)] - The background of the complete step header on hover.
+/// @prop {Map} complete-step-focus-background [contrast-color: ('gray', 50, .15)] - The background of the complete step header on focus.
+/// @prop {Map} invalid-step-hover-background [contrast-color: ('gray', 50, .15)] - The background of the invalid step header on hover.
+/// @prop {Map} invalid-step-focus-background [contrast-color: ('gray', 50, .15)] - The background of the invalid step header on focus.
+/// @prop {Map} complete-indicator-background [contrast-color: ('gray', 50, .15)] - The background color of the completed step indicator.
+/// @prop {Map} complete-indicator-color [contrast-color: ('gray', 50, .8)] - The color of the completed step indicator.
+/// @prop {Map} disabled-indicator-color [contrast-color: ('gray', 50, .2)] - The color of the disabled step indicator, title, and subtitle.
+/// @prop {Map} disabled-indicator-background [contrast-color: ('gray', 50, .1)] - The background color of the disabled step indicator.
+/// @prop {Map} disabled-title-color [contrast-color: ('gray', 50, .2)] - The title color of the disabled step.
+/// @prop {Map} disabled-subtitle-color [contrast-color: ('gray', 50, .2)] - The subtitle color of the disabled step.
+/// @prop {Map} step-separator-color [contrast-color: ('gray', 50, .3)] - The separator border-color of between the steps.
+/// @prop {Map} complete-step-separator-color [contrast-color: ('gray', 50, .3)] - The separator border-color between the completed steps.
 /// @requires $indigo-stepper
 /// @requires $base-stepper
 $dark-indigo-stepper: extend(
     $indigo-stepper,
     $base-stepper,
     (
+        content-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
         indicator-color: (
             color: (
                 'gray',
-                900,
+                50,
             ),
         ),
-
-        indicator-outline: (
-            color: (
+        indicator-background: (
+            contrast-color: (
                 'gray',
-                600,
+                50,
+                0.8,
             ),
         ),
-
-        disabled-indicator-outline: (
-            color: (
+        title-color: (
+            contrast-color: (
                 'gray',
-                300,
+                50,
+            ),
+        ),
+        title-hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        title-focus-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        subtitle-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        subtitle-hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        subtitle-focus-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        step-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        step-focus-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        current-step-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        current-step-focus-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        complete-step-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        complete-step-focus-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        invalid-step-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        invalid-step-focus-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        complete-indicator-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        complete-indicator-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        disabled-indicator-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        disabled-indicator-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+        disabled-title-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        disabled-subtitle-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        step-separator-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.3,
+            ),
+        ),
+        complete-step-separator-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.3,
             ),
         ),
     )
