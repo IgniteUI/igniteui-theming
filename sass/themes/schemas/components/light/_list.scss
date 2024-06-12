@@ -214,51 +214,62 @@ $bootstrap-list: extend(
 
 /// Generates an indigo list schema.
 /// @type {Map}
-/// @prop {Map} header-text-color [color: ('primary', 500)] - The list header text color.
-/// @prop {Map} item-background-hover [color: ('primary', 400)] - The list item hover background.
-/// @prop {Map} item-background-active [ color: ('primary', 400)] - The active list item background color.
-/// @prop {Map} item-text-color [color: ('gray', 900)] - The list item text color.
+/// @prop {Color} background [transparent] - The list background color.
+/// @prop {Color} header-background [transparent] - The list header background color.
+/// @prop {Map} header-text-color [color: ('gray', 600)] - The list header text color.
+/// @prop {Color} item-background [transparent] - The list item background color.
+/// @prop {Map} item-background-hover [color: ('primary', 300, .3)] - The list item hover background.
+/// @prop {Map} item-background-active [ color: ('primary', 300, .3)] - The active list item background color.
+/// @prop {Map} item-text-color [color: ('gray', 800)] - The list item text color.
 /// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color.
-/// @prop {Map} item-text-color-active [color: ('gray', 900)] - The active list item text color.
-/// @prop {Color} item-subtitle-color [color: ('gray', 800)] - The list item subtitle color.
-/// @prop {Color} item-subtitle-color-hover [color: ('gray', 800)] - The list item subtitle hover color.
-/// @prop {Color} item-subtitle-color-active [color: ('gray', 800)] - The list item subtitle active color.
-/// @prop {Color} item-action-color [color: ('gray', 600)] - The list item action color.
-/// @prop {Color} item-action-color-hover [color: ('gray', 600)] - The list item action hover color.
-/// @prop {Color} item-action-color-active [color: ('gray', 600)] - The list item action active color.
-/// @prop {Color} item-thumbnail-color [color: ('gray', 600)] - The list item thumbnail color.
-/// @prop {Color} item-thumbnail-color-hover [color: ('gray', 600)] - The list item thumbnail hover color.
-/// @prop {Color} item-thumbnail-color-active [color: ('gray', 600)] - The list item thumbnail active color.
-/// @prop {List} item-border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for list item.
+/// @prop {Map} item-text-color-active [color: ('gray', 800)] - The active list item text color.
+/// @prop {Map} item-subtitle-color [color: ('gray', 600)] - The list item subtitle color.
+/// @prop {Map} item-subtitle-color-hover [color: ('gray', 700)] - The list item subtitle hover color.
+/// @prop {Map} item-subtitle-color-active [color: ('gray', 700)] - The list item subtitle active color.
+/// @prop {Map} item-action-color [color: ('gray', 600)] - The list item action color.
+/// @prop {Map} item-action-color-hover [color: ('gray', 700)] - The list item action hover color.
+/// @prop {Map} item-action-color-active [color: ('gray', 700)] - The list item action active color.
+/// @prop {Map} item-thumbnail-color [color: ('gray', 600)] - The list item thumbnail color.
+/// @prop {Map} item-thumbnail-color-hover [color: ('gray', 700)] - The list item thumbnail hover color.
+/// @prop {Map} item-thumbnail-color-active [color: ('gray', 700)] - The list item thumbnail active color.
+/// @prop {Number} item-border-radius [rem(4px)] - The border radius used for list item.
 /// @requires {Map} $light-list
 $indigo-list: extend(
     $light-list,
     (
+        background: transparent,
+
+        header-background: transparent,
+
         header-text-color: (
             color: (
-                'primary',
-                500,
+                'gray',
+                600,
             ),
         ),
+
+        item-background: transparent,
 
         item-background-hover: (
             color: (
                 'primary',
-                50,
+                300,
+                0.3,
             ),
         ),
 
         item-background-active: (
             color: (
                 'primary',
-                50,
+                300,
+                0.3,
             ),
         ),
 
         item-text-color: (
             color: (
                 'gray',
-                900,
+                800,
             ),
         ),
 
@@ -286,35 +297,35 @@ $indigo-list: extend(
         item-action-color-hover: (
             color: (
                 'gray',
-                600,
+                700,
             ),
         ),
 
         item-action-color-active: (
             color: (
                 'gray',
-                600,
+                700,
             ),
         ),
 
         item-subtitle-color: (
             color: (
                 'gray',
-                800,
+                600,
             ),
         ),
 
         item-subtitle-color-hover: (
             color: (
                 'gray',
-                800,
+                700,
             ),
         ),
 
         item-subtitle-color-active: (
             color: (
                 'gray',
-                800,
+                700,
             ),
         ),
 
@@ -328,23 +339,17 @@ $indigo-list: extend(
         item-thumbnail-color-hover: (
             color: (
                 'gray',
-                600,
+                700,
             ),
         ),
 
         item-thumbnail-color-active: (
             color: (
                 'gray',
-                600,
+                700,
             ),
         ),
 
-        item-border-radius: (
-            border-radius: (
-                rem(2px),
-                rem(0),
-                rem(24px),
-            ),
-        ),
+        item-border-radius: rem(4px),
     )
 );
