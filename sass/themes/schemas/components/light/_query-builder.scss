@@ -124,6 +124,8 @@ $bootstrap-query-builder: extend(
 /// @prop {Map} header-border [color: ('gray', 300)] - The border color of the query builder header.
 /// @prop {Map} background-and [color: ('primary', 400)] - The background color of advanced filtering "AND" condition.
 /// @prop {Map} background-or [color: ('success', 500)] - The background color of advanced filtering "OR" condition.
+/// @prop {Map} background-and--focus [color: ('primary', 300)] - The background color on focus/selected of advanced filtering "AND" condition.
+/// @prop {Map} background-or--focus [color: ('secondary', 400)] - The background color on focus/selected of advanced filtering "OR" condition.
 /// @requires {Map} $light-query-builder
 $indigo-query-builder: extend(
     $light-query-builder,
@@ -149,29 +151,29 @@ $indigo-query-builder: extend(
             ),
         ),
 
-        // background-and: (
-        //     color: (
-        //         'primary',
-        //         400,
-        //     ),
-        // ),
-        // background-and--focus: (
-        //     color: (
-        //         'primary',
-        //         400,
-        //     ),
-        // ),
-        // background-or: (
-        //     color: (
-        //         'success',
-        //         500,
-        //     ),
-        // ),
-        // background-or--focus: (
-        //     color: (
-        //         'success',
-        //         500,
-        //     ),
-        // ),
+        background-and: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        background-and--focus: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        background-or: (
+            color: (
+                'success',
+                500,
+            ),
+        ),
+        background-or--focus: (
+            color: (
+                'success',
+                400,
+            ),
+        ),
     )
 );
