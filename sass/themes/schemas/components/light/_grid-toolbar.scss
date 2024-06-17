@@ -108,23 +108,18 @@ $bootstrap-grid-toolbar: $light-grid-toolbar;
 
 /// Generates an indigo grid-toolbar schema.
 /// @type {Map}
-/// @prop {Map} background-color [color: ('gray', 100)] - The toolbar background color.
-/// @prop {Map} title-text-color [color: ('primary', 500)] - The toolbar title text color.
+/// @prop {Color} background-color [transparent] - The toolbar background color.
+/// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
 /// @requires {Map} $light-grid-toolbar
 $indigo-grid-toolbar: extend(
     $light-grid-toolbar,
     (
-        background-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
+        background-color: transparent,
 
         title-text-color: (
             color: (
-                'primary',
-                500,
+                'gray',
+                700,
             ),
         ),
     )
