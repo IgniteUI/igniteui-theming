@@ -25,7 +25,7 @@ $dark-bootstrap-tooltip: $bootstrap-tooltip;
 
 /// Generates a dark indigo tooltip schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 300)] - The background color of the tooltip.
+/// @prop {Map} background [color: ('gray', 300, .9)] - The background color of the tooltip.
 /// @prop {Map} text-color [contrast-color: ('gray', 50)] - The text color of the tooltip.
 /// @prop {Number} elevation [9] - The elevation level, between 0-24, to be used for the tooltip.
 /// @requires {Map} $indigo-tooltip
@@ -38,6 +38,7 @@ $dark-indigo-tooltip: extend(
             color: (
                 'gray',
                 300,
+                0.9,
             ),
         ),
         text-color: (

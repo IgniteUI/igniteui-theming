@@ -108,7 +108,7 @@ $bootstrap-tooltip: extend(
 
 /// Generates an indigo tooltip schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 600)] - The background color of the tooltip.
+/// @prop {Map} background [color: ('gray', 600, .9)] - The background color of the tooltip.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for tooltip.
 /// @prop {Number} elevation [8] - The elevation level, between 0-24, to be used for the tooltip.
 /// @requires {Map} $light-tooltip
@@ -121,6 +121,7 @@ $indigo-tooltip: extend(
             color: (
                 'gray',
                 600,
+                0.9,
             ),
         ),
 
