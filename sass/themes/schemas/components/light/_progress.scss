@@ -95,7 +95,7 @@ $fluent-progress-linear: $light-progress-linear;
 
 /// Generates a bootstrap progress-linear schema.
 /// @type {Map}
-/// @prop {Map} stripes-color [color: ('gray', 50, .15)] - The track stripes color.
+/// @prop {Map} stripes-color [color: ('gray', 50, .2)] - The track stripes color.
 /// @prop {List} track-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the progress bar track.
 /// @requires $light-progress-linear
 $bootstrap-progress-linear: extend(
@@ -105,7 +105,7 @@ $bootstrap-progress-linear: extend(
             color: (
                 'gray',
                 50,
-                0.15,
+                0.2,
             ),
         ),
 

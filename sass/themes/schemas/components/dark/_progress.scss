@@ -42,8 +42,20 @@ $dark-fluent-progress-linear: extend($fluent-progress-linear, $dark-base-progres
 
 /// Generates a dark bootstrap progress-linear schema.
 /// @type {Map}
+/// @prop {Map} stripes-color [color: ('gray', 900, .2)] - The track stripes color.
 /// @requires $bootstrap-progress-linear
-$dark-bootstrap-progress-linear: $bootstrap-progress-linear;
+$dark-bootstrap-progress-linear: extend(
+    $bootstrap-progress-linear,
+    (
+        stripes-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark indigo progress-linear schema.
 /// @type {Map}
