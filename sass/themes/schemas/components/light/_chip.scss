@@ -411,9 +411,9 @@ $bootstrap-chip: extend(
 /// @prop {Map} hover-background [color: ('gray', 200)] - The chip hover background color.
 /// @prop {Map} focus-background [color: ('surface')] The focused chip background color.
 /// @prop {Map} selected-text-color [contrast-color: ('primary', 500)] - The selected chip text color.
-/// @prop {Map} hover-selected-text-color [contrast-color: ('primary', 400)] - The selected chip hover text color.
+/// @prop {Map} hover-selected-text-color [contrast-color: ('primary', 500)] - The selected chip hover text color.
 /// @prop {Map} hover-selected-background [color: ('primary', 400)] - The selected chip hover background color.
-/// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 400)] - The selected chip text focus color.
+/// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 500)] - The selected chip text focus color.
 /// @prop {Map} focus-selected-background [color: ('primary', 400)] - The selected chip focus background color.
 /// @prop {Map} focus-outline-color [color: ('gray', 300)] - The chip focus outline color.
 /// @prop {Map} focus-selected-outline-color [color: ('primary', 200)] - The selected chip focus outline color.
@@ -505,7 +505,7 @@ $indigo-chip: extend(
         hover-selected-text-color: (
             contrast-color: (
                 'primary',
-                400,
+                500,
             ),
         ),
 
