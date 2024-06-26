@@ -662,6 +662,12 @@ $bootstrap-stepper: extend(
 /// @prop {Color} current-indicator-outline [transparent] - The outline color of the current step indicator.
 /// @prop {Map} content-foreground [color: ('gray', 700)] - The foreground of the step content.
 /// @prop {Color} invalid-indicator-outline [transparent] - The outline color of the invalid step indicator.
+/// @prop {Map} invalid-title-color [color: ('gray', 900)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('gray', 900)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('gray', 900)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('gray', 700)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('gray', 700)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('gray', 700)] - The color of the invalid step subtitle on focus.
 /// @requires $light-stepper
 $indigo-stepper: extend(
     $light-stepper,
@@ -801,5 +807,41 @@ $indigo-stepper: extend(
         border-radius-step-header: rem(4px),
         current-indicator-outline: transparent,
         invalid-indicator-outline: transparent,
+        invalid-title-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
     )
 );
