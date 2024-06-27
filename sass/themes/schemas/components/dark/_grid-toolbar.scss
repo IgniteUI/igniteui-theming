@@ -23,6 +23,18 @@ $dark-fluent-grid-toolbar: $fluent-grid-toolbar;
 $dark-bootstrap-grid-toolbar: $bootstrap-grid-toolbar;
 
 /// Generates a dark indigo grid-toolbar schema.
+/// @prop {Map} border-color [contrast-color: ('gray', 50, .3)] - The toolbar border-bottom color.
 /// @type {Map}
 /// @requires $indigo-grid-toolbar
-$dark-indigo-grid-toolbar: $indigo-grid-toolbar;
+$dark-indigo-grid-toolbar: extend(
+    $indigo-grid-toolbar,
+    (
+        border-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.3,
+            ),
+        ),
+    )
+);
