@@ -7,37 +7,33 @@
 /// @access public
 ////
 
-/// Generates a base dark divider schema.
-/// @type {Map}
-/// @property {Map} color [color: ('gray', 100)] - The color used for the divider.
-$base-dark-divider: (
-    color: (
-        color: (
-            'gray',
-            100,
-        ),
-    ),
-);
-
 /// Generates a dark material divider schema.
 /// @type {Map}
 /// @requires $material-divider
-/// @requires $base-dark-divider
-$dark-material-divider: extend($material-divider, $base-dark-divider);
+$dark-material-divider: $material-divider;
 
 /// Generates a dark fluent divider schema.
 /// @type {Map}
 /// @requires $fluent-divider
-$dark-fluent-divider: extend($fluent-divider, $base-dark-divider);
+$dark-fluent-divider: $fluent-divider;
 
 /// Generates a dark bootstrap divider schema.
 /// @type {Map}
 /// @requires $bootstrap-divider
-/// @requires $base-dark-divider
-$dark-bootstrap-divider: extend($bootstrap-divider, $base-dark-divider);
+$dark-bootstrap-divider: $bootstrap-divider;
 
 /// Generates a dark indigo divider schema.
 /// @type {Map}
+/// @prop {Map} color [color: ('gray', 100)] - The color used for the divider.
 /// @requires $indigo-divider
-/// @requires $base-dark-divider
-$dark-indigo-divider: extend($indigo-divider, $base-dark-divider);
+$dark-indigo-divider: extend(
+    $indigo-divider,
+    (
+        color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+    )
+);
