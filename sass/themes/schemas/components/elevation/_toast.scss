@@ -5,13 +5,25 @@
 ////
 
 /// @type Map
-/// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the toast.
+/// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the default toast.
 $default-elevation-toast: (
     elevation: 0,
 );
 
 /// @type Map
-/// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the toast.
+/// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the bootstrap toast.
 $bootstrap-elevation-toast: (
     elevation: 10,
+);
+
+/// @type Map
+/// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the indigo toast.
+$indigo-elevation-toast: (
+    elevation: 10,
+);
+
+/// @type Map
+/// @prop {Number} elevation [11] - The elevation level, between 0-24, to be used for the dark indigo toast.
+$dark-indigo-elevation-toast: (
+    elevation: 11,
 );

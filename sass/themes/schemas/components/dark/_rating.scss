@@ -56,6 +56,57 @@ $dark-fluent-rating: extend(
 $dark-bootstrap-rating: $bootstrap-rating;
 
 /// Generates a dark indigo rating schema.
+/// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - sets the color for the label.
+/// @prop {Map} value-label [contrast-color: ('gray', 50, .8)] - sets the color for the value label.
+/// @prop {Map} symbol-empty-color [color: ('gray', 300)] - sets the idle color for the symbol when it is a plane text.
+/// @prop {Map} disabled-label-color [color: ('contrast-color', 50, .2)] - sets the color for the label in disabled state.
+/// @prop {Map} disabled-value-label [color: ('contrast-color', 50, .2)] - sets the color for the value in disabled state.
+/// @prop {Map} disabled-empty-symbol-color [color: ('gray', 300, .4)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @type {Map}
 /// @requires $indigo-rating
-$dark-indigo-rating: $indigo-rating;
+$dark-indigo-rating: extend(
+    $indigo-rating,
+    (
+        label-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        value-label: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        symbol-empty-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        disabled-label-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        disabled-value-label: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        disabled-empty-symbol-color: (
+            color: (
+                'gray',
+                300,
+                0.4,
+            ),
+        ),
+    )
+);
