@@ -485,12 +485,11 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [contrast-color: ('gray', 50, .05)] - The background color of the week number column.
 /// @prop {Map} date-selected-range-background [color: ('primary', 400, .2)] - The background color of the selected range.
-/// @prop {Map} ym-current-outline-hover-color [color: ('primary', 300)] - The :hover outline color of the current month/year.
-/// @prop {Map} ym-current-outline-focus-color [color: ('primary', 300)] - The :focus outline color of the current month/year.
-/// @prop {Map} ym-current-outline-color [color: ('primary', 400)] - The outline color of the current month/year.
-/// @prop {Map} ym-selected-current-outline-color [contrast-color: ('gray', 50, .6)] - The outline color of the selected current month/year.
-/// @prop {Map} ym-selected-current-outline-hover-color [contrast-color: ('gray', 50, .6)] - The :hover outline color of the selected current month/year.
-/// @prop {Map} ym-selected-current-outline-focus-color [contrast-color: ('gray', 50, .6)] - The :focus outline color of the selected current month/year.
+/// @prop {Map} ym-current-background [color: ('primary', 700, .5)] - The background color of the current month/year.
+/// @prop {Map} ym-current-hover-background [color: (color: ('primary', 700)] - The :hover background color of the current month/year.
+/// @prop {Map} ym-current-outline-hover-color [color: ('primary', 200)] - The :hover outline color of the current month/year.
+/// @prop {Map} ym-current-outline-focus-color [color: ('primary', 200)] - The :focus outline color of the current month/year.
+/// @prop {Map} ym-current-outline-color [color: ('primary', 300)] - The outline color of the current month/year.
 /// @prop {Map} date-selected-range-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the selected range.
 /// @prop {Map} date-selected-range-focus-background [contrast-color: ('gray', 50, .1)] - The :focus background color of the selected range.
 /// @prop {Map} date-selected-range-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of the selected range.
@@ -753,43 +752,35 @@ $dark-indigo-calendar: extend(
                 0.2,
             ),
         ),
+        ym-current-background: (
+            color: (
+                'primary',
+                700,
+                0.5,
+            ),
+        ),
+        ym-current-hover-background: (
+            color: (
+                'primary',
+                700,
+            ),
+        ),
         ym-current-outline-color: (
             color: (
                 'primary',
-                400,
-            ),
-        ),
-        ym-selected-current-outline-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.6,
+                300,
             ),
         ),
         ym-current-outline-hover-color: (
             color: (
                 'primary',
-                300,
+                200,
             ),
         ),
         ym-current-outline-focus-color: (
             color: (
                 'primary',
-                300,
-            ),
-        ),
-        ym-selected-current-outline-hover-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.6,
-            ),
-        ),
-        ym-selected-current-outline-focus-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.6,
+                200,
             ),
         ),
         date-disabled-foreground: (

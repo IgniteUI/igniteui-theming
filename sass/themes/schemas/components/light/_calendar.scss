@@ -1964,9 +1964,9 @@ $bootstrap-calendar: extend(
 /// @prop {Map} ym-hover-foreground [color: ('gray', 900)] -  The :hover foreground color of the month/year.
 /// @prop {Map} ym-hover-background [color: ('gray', 900, .05)] - The :hover background color of the month/year.
 /// @prop {Map} ym-current-foreground [color: ('gray', 900)] - The foreground color of the current month/year.
-/// @prop {Color} ym-current-background [transparent] - The background color of the current month/year.
+/// @prop {Map} ym-current-background [color: ('primary', 50, .5)] - The background color of the current month/year.
 /// @prop {Map} ym-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current month/year.
-/// @prop {Map} ym-current-hover-background [color: ('gray', 900, .05)] - The :hover background color of the current month/year.
+/// @prop {Map} ym-current-hover-background [color: (color: ('primary', 50)] - The :hover background color of the current month/year.
 /// @prop {Map} ym-selected-foreground [contrast-color: ('primary', 500)] - The foreground color of the selected month/year.
 /// @prop {Map} ym-selected-background [color: ('primary', 500)] - The background color of the selected month in month/year.
 /// @prop {Map} ym-selected-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected month/year.
@@ -1975,12 +1975,12 @@ $bootstrap-calendar: extend(
 /// @prop {Map} ym-selected-current-background [color: ('primary', 500)] - The background color of the current/selected month/year.
 /// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected month/year.
 /// @prop {Map} ym-selected-current-hover-background [color: ('primary', 400)] - The :hover background color of the current/selected month/year.
-/// @prop {Map} ym-current-outline-color [color: ('primary', 500)] - The outline color of the current month/year.
-/// @prop {Map} ym-current-outline-hover-color [color: ('primary', 400)] - The :hover outline color of the current month/year.
-/// @prop {Map} ym-current-outline-focus-color [color: ('primary', 400)] - The :focus outline color of the current month/year.
-/// @prop {Map} ym-selected-current-outline-color [contrast-color: ('gray', 900, .6)] - The outline color of the selected current month/year.
-/// @prop {Map} ym-selected-current-outline-hover-color [contrast-color: ('gray', 900, .6)] - The :hover outline color of the selected current month/year.
-/// @prop {Map} ym-selected-current-outline-focus-color [contrast-color: ('gray', 900, .6)] - The :focus outline color of the selected current month/year.
+/// @prop {Map} ym-current-outline-color [color: ('primary', 100)] - The outline color of the current month/year.
+/// @prop {Map} ym-current-outline-hover-color [color: ('primary', 200)] - The :hover outline color of the current month/year.
+/// @prop {Map} ym-current-outline-focus-color [color: ('primary', 200)] - The :focus outline color of the current month/year.
+/// @prop {Map} ym-selected-current-outline-color [color: ('primary', 100)] - The outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-hover-color [color: ('primary', 200)] - The :hover outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-focus-color [color: ('primary', 200)] - The :focus outline color of the selected current month/year.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(6px))] - The border radius used for calendar.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the week numbers column.
@@ -2435,7 +2435,13 @@ $indigo-calendar: extend(
                 900,
             ),
         ),
-        ym-current-background: transparent,
+        ym-current-background: (
+            color: (
+                'primary',
+                50,
+                0.5,
+            ),
+        ),
         ym-current-hover-foreground: (
             color: (
                 'gray',
@@ -2444,9 +2450,8 @@ $indigo-calendar: extend(
         ),
         ym-current-hover-background: (
             color: (
-                'gray',
-                900,
-                0.05,
+                'primary',
+                50,
             ),
         ),
         ym-selected-foreground: (
@@ -2488,40 +2493,37 @@ $indigo-calendar: extend(
         ym-current-outline-color: (
             color: (
                 'primary',
-                500,
+                100,
             ),
         ),
         ym-current-outline-hover-color: (
             color: (
                 'primary',
-                400,
+                200,
             ),
         ),
         ym-current-outline-focus-color: (
             color: (
                 'primary',
-                400,
+                200,
             ),
         ),
         ym-selected-current-outline-color: (
-            contrast-color: (
-                'gray',
-                900,
-                0.6,
+            color: (
+                'primary',
+                100,
             ),
         ),
         ym-selected-current-outline-hover-color: (
-            contrast-color: (
-                'gray',
-                900,
-                0.6,
+            color: (
+                'primary',
+                200,
             ),
         ),
         ym-selected-current-outline-focus-color: (
-            contrast-color: (
-                'gray',
-                900,
-                0.6,
+            color: (
+                'primary',
+                200,
             ),
         ),
         actions-divider-color: (
