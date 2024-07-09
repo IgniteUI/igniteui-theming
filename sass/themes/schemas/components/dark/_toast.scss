@@ -1,5 +1,6 @@
 @use '../../../../utils/map' as *;
 @use '../light/toast' as *;
+@use '../elevation/toast' as *;
 
 ////
 /// @package theming
@@ -72,6 +73,26 @@ $dark-bootstrap-toast: extend(
 
 /// Generates a dark indigo toast schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('gray', 300)] - The background color used for the toast.
+/// @prop {Map} text-color [contrast-color: ('gray', 50)] - The text-color used for the toast.
 /// @requires $indigo-toast
-/// @requires $dark-base-toast
-$dark-indigo-toast: extend($indigo-toast, $dark-base-toast);
+/// @requires $dark-indigo-elevation-toast
+$dark-indigo-toast: extend(
+    $indigo-toast,
+    $dark-indigo-elevation-toast,
+    (
+        background: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        text-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+    )
+);
