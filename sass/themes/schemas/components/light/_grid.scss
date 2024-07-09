@@ -1085,7 +1085,8 @@ $bootstrap-grid: extend(
 /// @prop {Map} grouparea-color [color: 'primary'] - The grid group area color.
 /// @prop {Map} drop-area-text-color [contrast-color: ('gray', 200)] - The drop area text color.
 /// @prop {Map} drop-area-icon-color [contrast-color: ('gray', 200)] - The drop area icon color.
-/// @prop {Map} root-summaries-background [color: ('gray', 100)] - The background color of the summary groups located the footer.
+/// @prop {Map} root-summaries-background [color: ('surface')] - The background color of the summary groups located the footer.
+/// @prop {Map} root-summaries-text-color [color: ('gray', 800)] - The text color of the summary groups located the footer.
 /// @prop {Map} group-row-background [color: ('gray', 100)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-background [color: ('primary', 300)] - The grid group row cont badge background color.
@@ -1339,8 +1340,14 @@ $indigo-grid: extend(
 
         root-summaries-background: (
             color: (
+                'surface',
+            ),
+        ),
+
+        root-summaries-text-color: (
+            color: (
                 'gray',
-                100,
+                800,
             ),
         ),
 
