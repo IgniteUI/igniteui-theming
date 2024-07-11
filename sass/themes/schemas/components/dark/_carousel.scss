@@ -8,55 +8,24 @@
 ////
 
 /// Generates the base dark carousel schema.
-/// @prop {Map} button-arrow-color [color: ('gray', 400)] - The previous/next buttons idle arrow color.
-/// @prop {Map} button-hover-arrow-color [color: ('gray', 700)] - The previous/next buttons hover arrow color.
-/// @prop {Color} indicator-border-color [color: ('gray', 600)] - The idle indicator border color.
-/// @prop {Color} indicator-active-dot-color [color: ('gray', 600)] - The active indicator dot color.
-/// @prop {Color} indicator-active-border-color [color: ('gray', 600)] - The active indicator border color.
-/// @prop {Map} indicator-active-hover-dot-color [color: ('gray', 600)] - The active indicator dot color on hover.
 /// @type {Map}
+/// @prop {Map} indicator-focus-color [color: ('secondary', 200)] - The indicators border and dot color on focus.
+/// @prop {Map} button-focus-border-color [color: ('secondary', 200)] - The navigation buttons border color on focus.
+/// @requires $light-carousel
 $base-dark-carousel: extend(
     $light-carousel,
     (
-        button-arrow-color: (
+        indicator-focus-color: (
             color: (
-                'gray',
-                400,
+                'secondary',
+                200,
             ),
         ),
 
-        button-hover-arrow-color: (
+        button-focus-border-color: (
             color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        indicator-border-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
-        indicator-active-dot-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
-        indicator-active-border-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
-        indicator-active-hover-dot-color: (
-            color: (
-                'gray',
-                600,
+                'secondary',
+                200,
             ),
         ),
     )
@@ -70,15 +39,59 @@ $dark-material-carousel: extend($material-carousel, $base-dark-carousel);
 
 /// Generates a dark fluent carousel schema based on a mix of $fluent-carousel and $base-dark-carousel
 /// @type {Map}
+/// @prop {Map} button-disabled-background [color: ('gray', 50)] - The previous/next buttons disabled background color.
+/// @prop {Map} button-disabled-arrow-color [color: ('gray' 200)] - The previous/next buttons disabled color.
+/// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
+/// @prop {Map} button-focus-border-color [color: ('gray', 400)] - The navigation buttons border color on focus.
 /// @requires $fluent-carousel
-/// @requires $base-dark-carousel
-$dark-fluent-carousel: extend($fluent-carousel, $base-dark-carousel);
+$dark-fluent-carousel: extend(
+    $fluent-carousel,
+    (
+        button-disabled-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        button-disabled-arrow-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        indicator-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        button-focus-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark bootstrap carousel schema based on a mix of $bootstrap-carousel and $base-dark-carousel
 /// @type {Map}
+/// @prop {Map} indicator-focus-color [color: ('primary', 300)] - The buttons/indicators border color on focus.
 /// @requires $bootstrap-carousel
-/// @requires $base-dark-carousel
-$dark-bootstrap-carousel: extend($bootstrap-carousel, $base-dark-carousel);
+$dark-bootstrap-carousel: extend(
+    $bootstrap-carousel,
+    (
+        indicator-focus-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark indigo carousel schema based on a mix of $indigo-carousel and $base-dark-carousel
 /// @type {Map}
