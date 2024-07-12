@@ -1396,6 +1396,9 @@ $fluent-calendar: extend(
 /// @prop {Map} date-special-border-color [color: ('primary', 800)] - The outline color around a special date.
 /// @prop {Map} date-special-hover-border-color [color: ('primary', 800)] - The outline color around a special date.
 /// @prop {Map} date-special-range-border-color [color: ('primary', 800)] - The outline color around a special date in a range selection.
+/// @prop {Map} date-selected-special-border-color [contrast-color: ('primary', 900)] - The border color of the selected special date.
+/// @prop {Map} date-selected-special-hover-border-color [contrast-color: ('primary', 900)] - The :hover border color of the selected special date.
+/// @prop {Map} date-selected-special-focus-border-color [contrast-color: ('primary', 900)] - The :focus border color of the selected special date.
 /// @prop {Map} header-foreground [contrast-color: ('gray', 100)] - The header foreground color.
 /// @prop {Map} header-background [color: ('gray', 100)] - The header background color.
 /// @prop {Map} picker-foreground [color: ('gray', 900)] - The foreground color of the month and year pickers.
@@ -1749,6 +1752,24 @@ $bootstrap-calendar: extend(
             color: (
                 'gray',
                 200,
+            ),
+        ),
+        date-selected-special-border-color: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        date-selected-special-hover-border-color: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        date-selected-special-focus-border-color: (
+            contrast-color: (
+                'primary',
+                900,
             ),
         ),
         date-selected-range-foreground: (
