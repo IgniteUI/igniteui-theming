@@ -79,7 +79,7 @@ $dark-fluent-carousel: extend(
 
 /// Generates a dark bootstrap carousel schema based on a mix of $bootstrap-carousel and $base-dark-carousel
 /// @type {Map}
-/// @prop {Map} indicator-focus-color [color: ('primary', 300)] - The buttons/indicators border color on focus.
+/// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
 /// @requires $bootstrap-carousel
 $dark-bootstrap-carousel: extend(
     $bootstrap-carousel,
@@ -87,7 +87,7 @@ $dark-bootstrap-carousel: extend(
         indicator-focus-color: (
             color: (
                 'primary',
-                300,
+                200,
             ),
         ),
     )
