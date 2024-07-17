@@ -127,6 +127,9 @@ $dark-material-calendar: extend(
 /// @prop {Map} header-foreground [contrast-color: ('primary', 200)] - The header foreground color.
 /// @prop {Map} header-background [color: ('primary', 200)] - The background color of the month and year pickers.
 /// @prop {Мap} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @prop {Map} date-selected-special-border-color [color: ('primary', 50)] - The border color of the selected special date.
+/// @prop {Map} date-selected-special-hover-border-color [color: ('primary', 50)] - The :hover border color of the selected special date.
+/// @prop {Map} date-selected-special-focus-border-color [color: ('primary', 50)] - The :focus border color of the selected special date.
 /// @requires $fluent-calendar
 $dark-fluent-calendar: extend(
     $fluent-calendar,
@@ -273,6 +276,24 @@ $dark-fluent-calendar: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+        date-selected-special-border-color: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+        date-selected-special-hover-border-color: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+        date-selected-special-focus-border-color: (
+            color: (
+                'primary',
+                50,
             ),
         ),
     )
