@@ -19,14 +19,14 @@
 /// @prop {Map} header-border-color [color: ('gray', 400, .38)] - The color used for header borders.
 /// @prop {Map} ghost-header-text-color [color: ('gray', 700)] - The dragged header text color.
 /// @prop {Map} ghost-header-icon-color [color: ('gray', 600)] - The dragged header icon color.
-/// @prop {Color} ghost-header-background [color: ('gray', 50)] - The dragged header background color.
-/// @prop {Color} content-background [color: ('gray', 50)] - The table body background color.
+/// @prop {Map} ghost-header-background [color: ('gray', 50)] - The dragged header background color.
+/// @prop {Map} content-background [color: ('gray', 50)] - The table body background color.
 /// @prop {Map} content-text-color [color: ('gray', 800)] - The table body text color.
-/// @prop {Color} row-odd-background [color: ('gray', 50)] - The background color of odd rows.
-/// @prop {Color} row-even-background [color: ('gray', 50)] - The background color of even rows.
+/// @prop {Map} row-odd-background [color: ('gray', 50)] - The background color of odd rows.
+/// @prop {Map} row-even-background [color: ('gray', 50)] - The background color of even rows.
 /// @prop {Color} row-odd-text-color [inherit] - The text color of odd rows.
 /// @prop {Color} row-even-text-color [inherit] - The text color of even rows.
-/// @prop {Color} tree-selected-filtered-row-text-color [color: ('primary', 400)] - The selected filtered row text color of the tree.
+/// @prop {Map} tree-selected-filtered-row-text-color [color: ('primary', 400)] - The selected filtered row text color of the tree.
 /// @prop {Map} row-selected-text-color [contrast-color: ('secondary', 50)] - The selected row text color.
 /// @prop {Map} row-hover-background [color: ('gray', 200)] - The hover row background color.
 /// @prop {Map} row-hover-text-color [contrast-color: ('gray', 200)] - The hover row text color.
@@ -38,7 +38,7 @@
 /// @prop {Map} cell-active-border-color [color: ('primary', 500)] - The active(focused) cell border color.
 /// @prop {Map} cell-selected-background [color: ('gray', 200)] - The selected cell background color.
 /// @prop {Map} cell-selected-text-color [contrast-color: ('gray', 200)] - The selected cell text color.
-/// @prop {Color} cell-editing-background [color: ('gray', 50)] - The editing background color of a cell.
+/// @prop {Map} cell-editing-background [color: ('gray', 50)] - The editing background color of a cell.
 /// @prop {Map} cell-editing-foreground [color: ('gray', 900)] - The cell text color in edit mode
 /// @prop {Map} cell-editing-focus-foreground [color: ('gray', 900)] - The cell text color in edit mode on focus.
 /// @prop {Map} edit-mode-color [color: ('secondary', 500)] - The color applied around the row/cell when in editing mode.
@@ -68,13 +68,13 @@
 /// @prop {Map} drop-area-background [color: ('gray', 200)] - The drop area background color.
 /// @prop {Map} drop-area-on-drop-background [color: ('gray', 200)] - The drop area background on drop color.
 /// @prop {Map} tree-filtered-text-color [color: ('gray', 500)] - grouping row background color on focus.
-/// @prop {Color} filtering-header-background [color: ('gray', 50)] - The background color of the filtered column header.
+/// @prop {Map} filtering-header-background [color: ('gray', 50)] - The background color of the filtered column header.
 /// @prop {Map} filtering-header-text-color [color: ('gray', 800)] - The text color of the filtered column header.
 /// @prop {Map} filtering-background-and [color: ('primary', 300)] - The background color of advanced filtering "AND" condition.
 /// @prop {Map} filtering-background-and--focus [color: ('primary', 700)] - The background color on focus/selected of advanced filtering "AND" condition.
 /// @prop {Map} filtering-background-or [color: ('secondary', 300)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} filtering-background-or--focus [color: ('secondary', 700)] - The background color on focus/selected of advanced filtering "OR" condition.
-/// @prop {Color} filtering-row-background [color: 'gray', 50)] - The background color of the filtering row.
+/// @prop {Map} filtering-row-background [color: 'gray', 50)] - The background color of the filtering row.
 /// @prop {Map} filtering-row-text-color [color: ('gray', 800)] - The text color of the filtering row.
 /// @prop {Map} excel-filtering-header-foreground [color: ('gray', 700)] - The text color of the header in the excel style filtering.
 /// @prop {Map} excel-filtering-subheader-foreground [color: ('gray', 700)] - The text color of the sorting and moving headers in the excel style filtering.
@@ -643,7 +643,7 @@ $light-grid: extend(
 /// @prop {Map} header-selected-background [color: ('secondary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 100)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('secondary', 50)] - The selected row background color.
-/// @prop {Color} tree-selected-filtered-row-text-color [color: ('secondary', 300)] - The selected filtered row text color of the tree.
+/// @prop {Map} tree-selected-filtered-row-text-color [color: ('secondary', 300)] - The selected filtered row text color of the tree.
 /// @prop {Map} cell-selected-within-background [color: ('secondary', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('secondary', 200)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-background [color: ('secondary', 100)] - The selected row hover background.
@@ -752,7 +752,7 @@ $material-grid: extend(
 /// @prop {List} drop-area-border-radius [(rem(2px), rem(0), rem(16px))] - The border radius used for drop-area.
 /// @prop {Map} filtering-background-or [color: ('error', .5)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} filtering-background-or--focus [color: ('error')] - The background color on focus/selected of advanced filtering "OR" condition.
-/// @prop {Color} tree-selected-filtered-row-text-color [color: ('primary', 400)] - The selected filtered row text color of the tree.
+/// @prop {Map} tree-selected-filtered-row-text-color [color: ('primary', 400)] - The selected filtered row text color of the tree.
 /// @prop {Map} cell-selected-within-background [color: ('gray', 300)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 300)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 300)] - The selected row hover text color.
@@ -924,8 +924,8 @@ $fluent-grid: extend(
 /// Generates a bootstrap grid schema.
 /// @type {Map}
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
-/// @prop {Color} header-background [color: 'surface'] - The table header background color.
-/// @prop {Color} header-text-color [contrast-color: 'surface'] - The table header text color.
+/// @prop {Map} header-background [color: 'surface'] - The table header background color.
+/// @prop {Map} header-text-color [contrast-color: 'surface'] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 50)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('primary', 50)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-highlight [color: ('primary', 500)] - The grid row highlight color.
@@ -1056,49 +1056,72 @@ $bootstrap-grid: extend(
 
 /// Generates an indigo grid schema.
 /// @type {Map}
-/// @prop {Color} header-text-color [color: 'primary'] - The table header text color.
+/// @prop {Map} content-background [color: ('surface')] - The table body background color.
+/// @prop {Map} header-background [color: ('surface')] - The table header background color.
+/// @prop {Map} header-text-color [color: ('gray', 800)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [color: 'primary'] - The table header text color when selected (ex. column selection).
-/// @prop {Map} header-border-color [color: ('primary', 500, .24)] - The color used for header borders.
+/// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
+/// @prop {Map} filtering-row-background [color: 'surface'] - The background color of the filtering row.
 /// @prop {Map} filtering-header-text-color [color: ('primary', 900)] - The text color of the filtered column header.
 /// @prop {Map} filtering-background-or [color: ('warn', 500, .72)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} filtering-background-or--focus [color: 'warn'] - The background color on focus/selected of advanced filtering "OR" condition.
-/// @prop {Map} edited-row-indicator [color: 'primary'] - The indicator's color of edited row.
-/// @prop {Map} cell-selected-background [color: ('primary', 100)] - The selected cell background color.
-/// @prop {Color} ghost-header-background [color: 'primary'] - The dragged header background color.
+/// @prop {Map} edited-row-indicator [color: ('primary', 400)] - The indicator's color of edited row.
+/// @prop {Map} cell-selected-background [color: ('gray', 200)] - The selected cell background color.
+/// @prop {Map} ghost-header-background [color: 'primary'] - The dragged header background color.
 /// @prop {Map} ghost-header-text-color [contrast-color: 'primary'] - The dragged header text color.
 /// @prop {Map} ghost-header-icon-color [contrast-color: 'primary'] - The dragged header icon color.
-/// @prop {Map} row-border-color [color: ('primary', 50)] - The row bottom border color.
+/// @prop {Map} row-odd-background [color: ('surface')] - The background color of odd rows.
+/// @prop {Map} row-even-background [color: ('surface')] - The background color of even rows.
+/// @prop {Map} row-odd-text-color [color: ('gray', 800)] - The text color of odd rows.
+/// @prop {Map} row-even-text-color [color: ('gray', 800)] - The text color of even rows.
+/// @prop {Map} row-border-color [color: ('gray', 300)] - The row bottom border color.
 /// @prop {Map} row-highlight [color: 'primary'] - The grid row highlight color.
 /// @prop {Map} row-hover-background [color: ('primary', 50)] - The hover row background color.
-/// @prop {Map} sorted-header-icon-color [color: 'primary'] - The sorted table header icon color.
+/// @prop {Map} sorted-header-icon-color [color: ('primary', 400)] - The sorted table header icon color.
 /// @prop {Map} sortable-header-icon-hover-color [color: 'primary'] - The icon color on hover in grid header when the column is sortable.
-/// @prop {Map} row-selected-background [color: ('primary', 100)] - The selected row background color.
+/// @prop {Map} row-selected-background [color: ('primary', 50)] - The selected row background color.
 /// @prop {Map} row-selected-hover-background [color: ('primary', 100)] - The selected row hover background.
-/// @prop {Map} pinned-border-color [color: ('primary', 200)] - The color of the pinned border.
-/// @prop {Map} resize-line-color [color: 'primary'] - The table header resize line color.
-/// @prop {Map} drop-indicator-color [color: 'primary'] - The color of the drop indicator.
+/// @prop {Map} pinned-border-color [color: ('gray', 400)] - The color of the pinned border.
+/// @prop {Map} resize-line-color [color: ('primary', 400)] - The table header resize line color.
+/// @prop {Map} drop-indicator-color [color: ('primary', 400)] - The color of the drop indicator.
 /// @prop {Map} edit-mode-color [color: 'primary'] - The text color in edit mode.
 /// @prop {Map} grouparea-color [color: 'primary'] - The grid group area color.
-/// @prop {Map} drop-area-text-color [contrast-color: ('gray', 200)] - The drop area text color.
+/// @prop {Map} drop-area-text-color [color: ('gray', 600)] - The drop area text color.
 /// @prop {Map} drop-area-icon-color [contrast-color: ('gray', 200)] - The drop area icon color.
 /// @prop {Map} root-summaries-background [color: ('gray', 100)] - The background color of the summary groups located the footer.
 /// @prop {Map} group-row-background [color: ('gray', 100)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-background [color: ('primary', 300)] - The grid group row cont badge background color.
 /// @prop {Map} group-count-text-color [contrast-color: ('primary', 500)] - The grid group row cont badge text color.
-/// @prop {Map} expand-icon-color [color: ('primary', 200)] - The grid row expand icon color.
+/// @prop {Map} expand-icon-color [color: ('gray', 600)] - The grid row expand icon color.
+/// @prop {Map} cell-selected-text-color [color: ('gray', 800)] - The selected cell text color.
 /// @prop {Map} cell-selected-within-background [color: ('primary', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('primary', 200)] - The color of the selected cell inside a selected row/column.
+/// @prop {Map} cell-active-border-color [color: ('primary', 400)] - The active(focused) cell border color.
+/// @prop {Map} cell-editing-background [color: 'surface'] - The background for the cell in editing mode.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('primary', 50)] - The selected row hover text color.
+/// @prop {Map} active-expand-icon-color [color: ('gray', 600)] - The drop area background on drop color.
 /// @requires {Map} $light-grid
 $indigo-grid: extend(
     $light-grid,
     (
+        content-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
+        header-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
         header-text-color: (
             color: (
-                'primary',
-                500,
+                'gray',
+                800,
             ),
         ),
 
@@ -1118,10 +1141,13 @@ $indigo-grid: extend(
 
         header-border-color: (
             color: (
-                'primary',
-                500,
-                0.24,
+                'gray',
+                400,
             ),
+        ),
+
+        filtering-row-background: (
+            color: 'surface',
         ),
 
         filtering-header-text-color: (
@@ -1146,14 +1172,14 @@ $indigo-grid: extend(
         edited-row-indicator: (
             color: (
                 'primary',
-                500,
+                400,
             ),
         ),
 
         cell-selected-background: (
             color: (
-                'primary',
-                100,
+                'gray',
+                200,
             ),
         ),
 
@@ -1165,9 +1191,9 @@ $indigo-grid: extend(
         ),
 
         cell-selected-text-color: (
-            contrast-color: (
-                'primary',
-                100,
+            color: (
+                'gray',
+                800,
             ),
         ),
 
@@ -1194,8 +1220,8 @@ $indigo-grid: extend(
 
         row-border-color: (
             color: (
-                'primary',
-                50,
+                'gray',
+                300,
             ),
         ),
 
@@ -1216,7 +1242,7 @@ $indigo-grid: extend(
         sorted-header-icon-color: (
             color: (
                 'primary',
-                500,
+                400,
             ),
         ),
 
@@ -1230,22 +1256,26 @@ $indigo-grid: extend(
         row-selected-background: (
             color: (
                 'primary',
-                100,
+                50,
             ),
         ),
 
         cell-selected-within-background: (
             color: (
                 'primary',
-                200,
+                100,
             ),
         ),
 
         cell-selected-within-text-color: (
             contrast-color: (
                 'primary',
-                200,
+                100,
             ),
+        ),
+
+        cell-editing-background: (
+            color: 'surface',
         ),
 
         row-selected-hover-background: (
@@ -1264,22 +1294,22 @@ $indigo-grid: extend(
 
         pinned-border-color: (
             color: (
-                'primary',
-                300,
+                'gray',
+                400,
             ),
         ),
 
         resize-line-color: (
             color: (
                 'primary',
-                500,
+                400,
             ),
         ),
 
         drop-indicator-color: (
             color: (
                 'primary',
-                500,
+                400,
             ),
         ),
 
@@ -1298,9 +1328,9 @@ $indigo-grid: extend(
         ),
 
         drop-area-text-color: (
-            contrast-color: (
+            color: (
                 'gray',
-                200,
+                600,
             ),
         ),
 
@@ -1349,7 +1379,47 @@ $indigo-grid: extend(
         expand-icon-color: (
             color: (
                 'primary',
-                200,
+                600,
+            ),
+        ),
+
+        cell-active-border-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+
+        row-odd-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
+        row-even-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
+        row-odd-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
+        row-even-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
+        active-expand-icon-color: (
+            color: (
+                'gray',
+                600,
             ),
         ),
     )
