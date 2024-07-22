@@ -9,52 +9,86 @@
 
 /// Generates a base dark navdrawer schema.
 /// @type {Map}
-/// @prop {Map} item-hover-background [color: ('gray', 100, .5)] - The item's hover background color.
-$dark-base-navdrawer: (
-    item-hover-background: (
-        color: (
-            'gray',
-            100,
-            0.5,
+/// @prop {Map} item-disabled-text-color [color: ('gray', 200)] - The item's disabled text color.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 200)] - The item's disabled icon color.
+/// @requires $material-navdrawer
+$dark-base-navdrawer: extend(
+    $light-navdrawer,
+    (
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                200,
+            ),
         ),
-    ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+    )
 );
 
 /// Generates a dark material navdrawer schema.
 /// @type {Map}
+/// @prop {Map} item-disabled-text-color [color: ('gray', 300)] - The item's disabled text color.
 /// @requires $material-navdrawer
-/// @requires $dark-base-navdrawer
-$dark-material-navdrawer: extend($material-navdrawer, $dark-base-navdrawer);
+$dark-material-navdrawer: extend(
+    $material-navdrawer,
+    $dark-base-navdrawer,
+    (
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent navdrawer schema.
 /// @type {Map}
+/// @prop {Map} item-hover-icon-color [color: ('primary', 100)] - The item's hover icon color.
+/// @prop {Map} item-icon-color [color: ('primary', 200)] - The item's icon color.
+/// @prop {Map} item-hover-background [color: ('gray', 200, .12)] - The item's hover background color.
 /// @prop {Map} item-active-text-color [color: ('primary', 200)] - The item's active text color.
 /// @prop {Map} item-active-icon-color [color: ('primary', 100)] - The item's icon active color.
-/// @prop {Map} item-active-background [color: ('primary', 400, .12)] - The item's active background color.
+/// @prop {Map} item-active-background [color: ('primary', 300, .12)] - The item's active background color.
 /// @requires $fluent-navdrawer
-/// @requires $dark-base-navdrawer
 $dark-fluent-navdrawer: extend(
     $fluent-navdrawer,
     $dark-base-navdrawer,
     (
-        item-active-text-color: (
-            color: (
-                'primary',
-                200,
-            ),
-        ),
-
-        item-active-icon-color: (
+        item-hover-icon-color: (
             color: (
                 'primary',
                 100,
             ),
         ),
-
-        item-active-background: (
+        item-icon-color: (
             color: (
                 'primary',
-                400,
+                200,
+            ),
+        ),
+        item-hover-background: (
+            color: (
+                'gray',
+                200,
+                0.12,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+        item-active-background: (
+            color: (
+                'gray',
+                300,
                 0.12,
             ),
         ),
@@ -63,9 +97,8 @@ $dark-fluent-navdrawer: extend(
 
 /// Generates a dark bootstrap navdrawer schema.
 /// @type {Map}
-/// @prop {Map} item-hover-background [color: ('gray', 100)] - The item's hover background color.
+/// @prop {Map} item-hover-background [color: ('gray', 200, .8)] - The item's hover background color.
 /// @requires $bootstrap-navdrawer
-/// @requires $dark-base-navdrawer
 $dark-bootstrap-navdrawer: extend(
     $bootstrap-navdrawer,
     $dark-base-navdrawer,
@@ -73,7 +106,8 @@ $dark-bootstrap-navdrawer: extend(
         item-hover-background: (
             color: (
                 'gray',
-                100,
+                200,
+                0.8,
             ),
         ),
     )
@@ -90,6 +124,8 @@ $dark-bootstrap-navdrawer: extend(
 /// @prop {Map} item-hover-background [contrast-color: ('gray', 50, 0.1)] - The item's hover background color.
 /// @prop {Map} item-hover-text-color [contrast-color: ('gray', 50)] - The item's hover text color.
 /// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50, 0.8)] - The item's hover icon color.
+/// @prop {Map} item-disabled-text-color [contrast-color: ('gray', 50, 0.2)] - The item's disabled text color.
+/// @prop {Map} item-disabled-icon-color [contrast-color: ('gray', 50, 0.2)] - The item's disabled icon color.
 /// @prop {Map} border-color [color: ('gray', 100)] - The navigation drawer right border color.
 /// @requires $indigo-navdrawer
 $dark-indigo-navdrawer: extend(
@@ -168,6 +204,22 @@ $dark-indigo-navdrawer: extend(
                 'gray',
                 50,
                 0.8,
+            ),
+        ),
+
+        item-disabled-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        item-disabled-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
             ),
         ),
     )

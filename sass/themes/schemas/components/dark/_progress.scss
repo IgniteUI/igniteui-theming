@@ -42,29 +42,42 @@ $dark-fluent-progress-linear: extend($fluent-progress-linear, $dark-base-progres
 
 /// Generates a dark bootstrap progress-linear schema.
 /// @type {Map}
+/// @prop {Map} stripes-color [color: ('gray', 900, .2)] - The track stripes color.
 /// @requires $bootstrap-progress-linear
-$dark-bootstrap-progress-linear: $bootstrap-progress-linear;
+$dark-bootstrap-progress-linear: extend(
+    $bootstrap-progress-linear,
+    (
+        stripes-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark indigo progress-linear schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 100)] - The main track color.
-/// @prop {Map} stripes-color [color: ('gray', 50, .35)] - The track stripes color.
+/// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The track value text color.
+/// @prop {Map} track-color [contrast-color: ('gray', 50, .2)] - The main track color.
 /// @requires $indigo-progress-linear
 $dark-indigo-progress-linear: extend(
     $indigo-progress-linear,
     (
-        track-color: (
-            color: (
+        text-color: (
+            contrast-color: (
                 'gray',
-                100,
+                50,
+                0.8,
             ),
         ),
 
-        stripes-color: (
-            color: (
+        track-color: (
+            contrast-color: (
                 'gray',
                 50,
-                0.35,
+                0.2,
             ),
         ),
     )
@@ -102,6 +115,26 @@ $dark-bootstrap-progress-circular: extend($bootstrap-progress-circular, $dark-ba
 
 /// Generates a dark indigo progress-circular schema.
 /// @type {Map}
+/// @prop {Map} base-circle-color [contrast-color: ('gray', 50, .2)] - The base circle fill color.
+/// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The value text color.
 /// @requires $indigo-progress-circular
-/// @requires $dark-base-progress-circular
-$dark-indigo-progress-circular: extend($indigo-progress-circular, $dark-base-progress-circular);
+$dark-indigo-progress-circular: extend(
+    $indigo-progress-circular,
+    (
+        base-circle-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+    )
+);

@@ -11,19 +11,10 @@
 /// Generates a base light navdrawer schema.
 /// @type {Map}
 /// @prop {Map} background [color: 'surface'] - The navigation drawer background color.
-/// @prop {Map} border-color [color: ('gray', 900, .14)] - The navigation drawer right border color.
-/// @prop {Map} item-header-text-color [color: ('gray', 800)] - The header's idle text color.
-/// @prop {Map} item-text-color [color: ('gray', 700)] - The item's idle text color.
-/// @prop {Map} item-icon-color [ color: ('gray', 700)] - The item's icon color.
-/// @prop {Map} item-active-text-color [color: ('primary', 500)] - The item's active text color.
-/// @prop {Map} item-active-background [color: ('primary', 500, .12)] - The item's active background color.
-/// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The item's icon active color.
-/// @prop {Map} item-hover-background [color: ('gray', 200, .8)] - The item's hover background color.
-/// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
-/// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The item's hover icon color.
+/// @prop {Map} item-disabled-text-color [color: ('gray', 400)] - The item's disabled text color.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 400)] - The item's disabled icon color.
 /// @prop {Map} elevation [16] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(36px))] - The border radius used for the navdrawer component.
-/// @prop {List} item-border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for the navdrawer items.
 /// @requires {Map} $default-elevation-navdrawer
 $light-navdrawer: extend(
     $default-elevation-navdrawer,
@@ -31,80 +22,18 @@ $light-navdrawer: extend(
         background: (
             color: 'surface',
         ),
-
-        border-color: (
+        item-disabled-text-color: (
             color: (
                 'gray',
-                900,
-                0.14,
+                400,
             ),
         ),
-
-        item-header-text-color: (
+        item-disabled-icon-color: (
             color: (
                 'gray',
-                800,
+                400,
             ),
         ),
-
-        item-text-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        item-icon-color: (
-            color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        item-active-text-color: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-
-        item-active-background: (
-            color: (
-                'primary',
-                500,
-                0.12,
-            ),
-        ),
-
-        item-hover-background: (
-            color: (
-                'gray',
-                200,
-                0.8,
-            ),
-        ),
-
-        item-hover-text-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        item-active-icon-color: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-
-        item-hover-icon-color: (
-            color: (
-                'gray',
-                900,
-            ),
-        ),
-
         border-radius: (
             border-radius: (
                 rem(0),
@@ -112,6 +41,27 @@ $light-navdrawer: extend(
                 rem(36px),
             ),
         ),
+    )
+);
+
+/// Generates a material navdrawer schema.
+/// @type {Map}
+/// @prop {List} item-border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for the navdrawer items
+/// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The item's hover icon color.
+/// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
+/// @prop {Map} item-hover-background [color: ('gray', 200)] - The item's hover background color.
+/// @prop {Map} item-text-color [color: ('gray', 900)] - The item's idle text color.
+/// @prop {Map} item-active-background [color: ('primary', 500, .12)] - The item's active background color.
+/// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The item's icon active color.
+/// @prop {Map} item-active-text-color [color: ('primary', 500)] - The item's active text color.
+/// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
+/// @prop {Map} item-icon-color [ color: ('gray', 700)] - The item's icon color.
+/// @prop {Map} item-header-text-color [color: ('gray', 700)] - The header's idle text color.
+/// @prop {Map} item-disabled-text-color [color: ('gray', 500)] - The item's disabled text color.
+/// @requires {Map} $light-navdrawer
+$material-navdrawer: extend(
+    $light-navdrawer,
+    (
         item-border-radius: (
             border-radius: (
                 rem(4px),
@@ -119,30 +69,240 @@ $light-navdrawer: extend(
                 rem(24px),
             ),
         ),
-    )
-);
-
-/// Generates a material navdrawer schema.
-/// @type {Map}
-/// @requires {Map} $light-navdrawer
-$material-navdrawer: $light-navdrawer;
-
-/// Generates a fluent navdrawer schema.
-/// @type {Map}
-/// @requires {Map} $light-navdrawer
-$fluent-navdrawer: $light-navdrawer;
-
-/// Generates a bootstrap navdrawer schema.
-/// @type {Map}
-/// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
-/// @requires {Map} $light-navdrawer
-$bootstrap-navdrawer: extend(
-    $light-navdrawer,
-    (
+        item-hover-icon-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-hover-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        item-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-active-background: (
+            color: (
+                'primary',
+                500,
+                0.12,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-text-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
         border-color: (
             color: (
                 'gray',
                 300,
+            ),
+        ),
+        item-icon-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        item-header-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+    )
+);
+
+/// Generates a fluent navdrawer schema.
+/// @type {Map}
+/// @prop {Number} item-border-radius [0] - The border radius used for the navdrawer items.
+/// @prop {Map} item-hover-icon-color [color: ('primary', 600)] - The item's hover icon color.
+/// @prop {Map} item-hover-text-color [color: ('gray', 800)] - The item's hover text color.
+/// @prop {Map} item-hover-background [color: ('gray', 100)] - The item's hover background color.
+/// @prop {Map} item-text-color [color: ('gray', 800)] - The item's idle text color.
+/// @prop {Map} item-active-background [color: ('gray', 200)] - The item's active background color.
+/// @prop {Map} item-active-icon-color [color: ('primary', 700)] - The item's icon active color.
+/// @prop {Map} item-active-text-color [color: ('gray', 900)] - The item's active text color.
+/// @prop {Map} border-color [color: ('gray', 200)] - The navigation drawer right border color.
+/// @prop {Map} item-icon-color [ color: ('primary', 500)] - The item's icon color.
+/// @prop {Map} item-header-text-color [color: ('gray', 800)] - The header's idle text color.
+/// @requires {Map} $light-navdrawer
+$fluent-navdrawer: extend(
+    $light-navdrawer,
+    (
+        item-border-radius: 0,
+        item-hover-icon-color: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+        item-hover-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        item-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        item-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        item-active-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'primary',
+                700,
+            ),
+        ),
+        item-active-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        item-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-header-text-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+    )
+);
+
+/// Generates a bootstrap navdrawer schema.
+/// @type {Map}
+/// @prop {List} item-border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for the navdrawer items
+/// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The item's hover icon color.
+/// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
+/// @prop {Map} item-hover-background [color: ('gray', 200, .8)] - The item's hover background color.
+/// @prop {Map} item-text-color [color: ('gray', 900)] - The item's idle text color.
+/// @prop {Map} item-active-background [color: ('primary', 500)] - The item's active background color.
+/// @prop {Map} item-active-icon-color [contrast-color: ('primary', 900)] - The item's icon active color.
+/// @prop {Map} item-active-text-color [contrast-color: ('primary', 900)] - The item's active text color.
+/// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
+/// @prop {Map} item-icon-color [ color: ('gray', 900)] - The item's icon color.
+/// @prop {Map} item-header-text-color [color: ('gray', 900)] - The header's idle text color.
+/// @requires {Map} $light-navdrawer
+$bootstrap-navdrawer: extend(
+    $light-navdrawer,
+    (
+        item-border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(24px),
+            ),
+        ),
+        item-hover-icon-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-hover-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-hover-background: (
+            color: (
+                'gray',
+                200,
+                0.8,
+            ),
+        ),
+        item-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-active-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-icon-color: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        item-active-text-color: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        item-icon-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        item-header-text-color: (
+            color: (
+                'gray',
+                900,
             ),
         ),
     )
@@ -159,14 +319,14 @@ $bootstrap-navdrawer: extend(
 /// @prop {Map} item-hover-background [color: ('gray', 900, 0.05)] - The item's hover background color.
 /// @prop {Map} item-hover-text-color [color: ('gray', 900)] - The item's hover text color.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 700)] - The item's hover icon color.
+/// @prop {Map} item-disabled-text-color [color: ('gray', 900, 0.2)] - The item's disabled text color.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 900, 0.2)] - The item's disabled icon color.
 /// @prop {Map} elevation [0] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @prop {List} item-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the navdrawer items.
 /// @requires {Map} $light-navdrawer
-/// @requires {Map} $indigo-elevation-navdrawer
 $indigo-navdrawer: extend(
     $light-navdrawer,
-    $indigo-elevation-navdrawer,
     (
         border-color: (
             color: (
@@ -237,6 +397,21 @@ $indigo-navdrawer: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+
+        item-disabled-text-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
             ),
         ),
 

@@ -14,22 +14,22 @@
 /// @prop {Color} shadow-color [transparent] - The shadow color of the material icon button.
 /// @prop {Color} background [transparent] - The background color of the material icon button.
 /// @prop {Map} foreground [color: ('gray', 900)] - The idle text color of the material icon button.
-/// @prop {Color} hover-background [transparent] - The hover background color of the material icon button.
+/// @prop {Map} hover-background [color: ('gray', 500, .08)] - The hover background color of the material icon button.
 /// @prop {Map} hover-foreground [color: ('gray', 900)] - The hover text color of the material icon button.
-/// @prop {Map} focus-background [color: ('gray', 200)] - The focus background color of the material icon button.
+/// @prop {Map} focus-background [color: ('gray', 500, .16)] - The focus background color of the material icon button.
 /// @prop {Map} focus-foreground [color: ('gray', 900)] - The focus text color of the material icon button.
-/// @prop {Map} focus-hover-background [color: ('gray', 200)] - The background color on focus hovered state of the icon button.
+/// @prop {Map} focus-hover-background [color: ('gray', 500, .24)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [color: ('gray', 900)] - The foreground color on focus hovered state of the icon button.
-/// @prop {Map} active-background [color: ('gray', 200)] - The active background color of the material icon button.
+/// @prop {Map} active-background [color: ('gray', 500, .32)] - The active background color of the material icon button.
 /// @prop {Map} active-foreground [color: ('gray', 900)] - The active text color of the material icon button.
 /// @prop {Color} border-color [transparent] - The border color of the material icon button.
-/// @prop {Map} focus-border-color [color: ('gray', 400)] - The focus border color of the material icon button.
-/// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the material icon button.
+/// @prop {Color} focus-border-color [transparent] - The focus border color of the material icon button.
+/// @prop {Color} disabled-background [transparent] - The disabled background color of the material icon button.
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the material icon button.
-/// @prop {Map} disabled-border-color [color: ('gray', 100)] - The disabled border color of the material icon button.
+/// @prop {Color} disabled-border-color [transparent] - The disabled border color of the material icon button.
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the material icon button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the material icon button.
-/// @prop {Number} default-size [2] - The default size used for the icon button.
+/// @prop {Number} default-size [3] - The default size used for the icon button.
 $material-base-icon-button: (
     shadow-color: transparent,
     background: transparent,
@@ -39,7 +39,13 @@ $material-base-icon-button: (
             900,
         ),
     ),
-    hover-background: transparent,
+    hover-background: (
+        color: (
+            'gray',
+            500,
+            0.08,
+        ),
+    ),
     hover-foreground: (
         color: (
             'gray',
@@ -49,7 +55,8 @@ $material-base-icon-button: (
     focus-background: (
         color: (
             'gray',
-            200,
+            500,
+            0.16,
         ),
     ),
     focus-foreground: (
@@ -61,7 +68,8 @@ $material-base-icon-button: (
     focus-hover-background: (
         color: (
             'gray',
-            200,
+            500,
+            0.24,
         ),
     ),
     focus-hover-foreground: (
@@ -73,7 +81,8 @@ $material-base-icon-button: (
     active-background: (
         color: (
             'gray',
-            200,
+            500,
+            0.32,
         ),
     ),
     active-foreground: (
@@ -83,30 +92,15 @@ $material-base-icon-button: (
         ),
     ),
     border-color: transparent,
-    focus-border-color: (
-        color: (
-            'gray',
-            400,
-        ),
-    ),
-    disabled-background: (
-        color: (
-            'gray',
-            100,
-        ),
-    ),
+    focus-border-color: transparent,
+    disabled-background: transparent,
     disabled-foreground: (
         color: (
             'gray',
             500,
         ),
     ),
-    disabled-border-color: (
-        color: (
-            'gray',
-            100,
-        ),
-    ),
+    disabled-border-color: transparent,
     border-radius: (
         border-radius: (
             rem(20px),
@@ -121,36 +115,27 @@ $material-base-icon-button: (
             rem(36px),
         ),
     ),
-    default-size: 2,
+    default-size: 3,
 );
 
 /// Generates a material flat icon button schema.
 /// @type {Map}
-/// @prop {Map} hover-background [color: ('gray', 100)] - The hover background color of the material icon button.
-/// @prop {Color} disabled-background [transparent] - The disabled background color the material flat icon button.
-/// @prop {Color} disabled-border-color [transparent] - The disabled border color of the material flat icon button.
 /// @requires {Map} $material-base-icon-button
 $material-flat-icon-button: extend(
     $material-base-icon-button,
     (
         selector: '[igxIconButton="flat"], .igx-icon-button--flat',
-        hover-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        disabled-background: transparent,
-        disabled-border-color: transparent,
     )
 );
 
 /// Generates a material contained icon button schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 200)] - The background color of the material contained icon button.
-/// @prop {Map} hover-background [color: ('gray', 200)] - The hover background color of the material contained icon button.
-/// @prop {Map} focus-background [color: ('gray', 300)] - The focus background color of the material contained icon button.
-/// @prop {Map} active-background [color: ('gray', 300)] - The active background color of the material contained icon button.
+/// @prop {Map} background [color: ('gray', 900, .08)] - The background color of the material contained icon button.
+/// @prop {Map} hover-background [color: ('gray', 900, .12)] - The hover background color of the material contained icon button.
+/// @prop {Map} focus-background [color: ('gray', 900, .16)] - The focus background color of the material contained icon button.
+/// @prop {Map} focus-hover-background [color: ('gray', 900, .20)] - The background color on focus hovered state of the material contained icon button.
+/// @prop {Map} active-background [color: ('gray', 900, .24)] - The active background color of the material contained icon button.
+/// @prop {Map} disabled-background [color: ('gray', 900, .04)] - The disabled background color of the material contained icon button.
 /// @requires {Map} $material-base-icon-button
 $material-contained-icon-button: extend(
     $material-base-icon-button,
@@ -159,25 +144,43 @@ $material-contained-icon-button: extend(
         background: (
             color: (
                 'gray',
-                200,
+                900,
+                0.08,
             ),
         ),
         hover-background: (
             color: (
                 'gray',
-                200,
+                900,
+                0.12,
             ),
         ),
         focus-background: (
             color: (
                 'gray',
-                300,
+                900,
+                0.16,
+            ),
+        ),
+        focus-hover-background: (
+            color: (
+                'gray',
+                900,
+                0.2,
             ),
         ),
         active-background: (
             color: (
                 'gray',
-                300,
+                900,
+                0.24,
+            ),
+        ),
+        disabled-background: (
+            color: (
+                'gray',
+                900,
+                0.04,
             ),
         ),
     )
@@ -186,7 +189,8 @@ $material-contained-icon-button: extend(
 /// Generates a material outlined icon button schema.
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color of the material outlined icon button.
-/// @prop {Map} disabled-border-color [color: ('gray', 100)] - The disabled border color of the material outlined icon button.
+/// @prop {Map} focus-border-color [color: ('gray', 300)] - The focus border color of the material outlined icon button.
+/// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled border color of the material outlined icon button.
 /// @requires {Map} $material-base-icon-button
 $material-outlined-icon-button: extend(
     $material-base-icon-button,
@@ -198,10 +202,16 @@ $material-outlined-icon-button: extend(
                 300,
             ),
         ),
+        focus-border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
         disabled-border-color: (
             color: (
                 'gray',
-                100,
+                300,
             ),
         ),
     )
@@ -232,7 +242,7 @@ $material-icon-button: (
 /// @prop {Map} focus-hover-background [color: ('gray', 200)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [color: ('primary', 600)] - The foreground color on focus hovered state of the icon button.
 /// @prop {Map} active-background [color: ('gray', 300)] - The active background color of the fluent icon button.
-/// @prop {Map} active-foreground [color: ('primary', 500)] - The active text color of the fluent icon button.
+/// @prop {Map} active-foreground [color: ('primary', 800)] - The active text color of the fluent icon button.
 /// @prop {Color} border-color [transparent] - The border color of the fluent icon button.
 /// @prop {Map} focus-border-color [color: ('gray', 700)] - The focus border color of the fluent icon button.
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the fluent icon button.
@@ -290,7 +300,7 @@ $fluent-base-icon-button: (
     active-foreground: (
         color: (
             'primary',
-            500,
+            800,
         ),
     ),
     border-color: transparent,
@@ -435,7 +445,6 @@ $fluent-contained-icon-button: extend(
 /// @prop {Color} focus-background [transparent] - The focus background color of the fluent outlined icon button.
 /// @prop {Map} focus-foreground [color: ('gray', 900)] - The focus text color of the fluent outlined icon button.
 /// @prop {Map} focus-hover-foreground [color: ('gray', 900)] - The foreground color on focus hovered state of the icon button.
-/// @prop {Map} active-background [color: ('gray', 200)] - The active background color of the fluent outlined icon button.
 /// @prop {Map} active-foreground [color: ('gray', 900)] - The active text color of the fluent outlined icon button.
 /// @prop {Map} focus-border-color [color: ('gray', 700)] - The focus border color of the fluent outlined icon button.
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled border color of the fluent outlined icon button.
@@ -473,12 +482,6 @@ $fluent-outlined-icon-button: extend(
             color: (
                 'gray',
                 900,
-            ),
-        ),
-        active-background: (
-            color: (
-                'gray',
-                200,
             ),
         ),
         active-foreground: (
@@ -522,12 +525,12 @@ $fluent-icon-button: (
 /// @prop {Map} foreground [color: ('primary', 500)] - The idle text color of the bootstrap icon button.
 /// @prop {Map} hover-background [color: ('primary', 600)] - The hover background color of the bootstrap icon button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 600)] - The hover text color of the bootstrap icon button.
-/// @prop {Color} focus-background [transparent] - The focus background color of the bootstrap icon button.
+/// @prop {Map} focus-background [color: ('primary', 500)] - The focus background color of the bootstrap flat icon button.
 /// @prop {Map} focus-foreground [contrast-color: ('primary', 600)] - The focus text color of the bootstrap icon button.
 /// @prop {Map} focus-hover-background [color: ('primary', 600)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [contrast-color: ('primary', 600)] - The foreground color on focus hovered state of the icon button.
-/// @prop {Map} active-background [color: ('primary', 600)] - The active background color of the bootstrap icon button.
-/// @prop {Map} active-foreground [contrast-color: ('primary', 600)] - The active text color of the bootstrap icon button.
+/// @prop {Map} active-background [color: ('primary', 800)] - The active background color of the bootstrap icon button.
+/// @prop {Map} active-foreground [contrast-color: ('primary', 800)] - The active text color of the bootstrap icon button.
 /// @prop {Color} border-color [transparent] - The border color of the bootstrap icon button.
 /// @prop {Map} focus-border-color [transparent] - The focus border color of the bootstrap icon button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of the bootstrap icon button.
@@ -563,7 +566,12 @@ $bootstrap-base-icon-button: (
             600,
         ),
     ),
-    focus-background: transparent,
+    focus-background: (
+        color: (
+            'primary',
+            500,
+        ),
+    ),
     focus-foreground: (
         contrast-color: (
             'primary',
@@ -585,13 +593,13 @@ $bootstrap-base-icon-button: (
     active-background: (
         color: (
             'primary',
-            600,
+            800,
         ),
     ),
     active-foreground: (
         contrast-color: (
             'primary',
-            600,
+            800,
         ),
     ),
     border-color: transparent,
@@ -624,13 +632,13 @@ $bootstrap-base-icon-button: (
 /// Generates a bootstrap flat icon button schema.
 /// @type {Map}
 /// @prop {Color} hover-background [transparent] - The hover background color of the bootstrap flat icon button.
-/// @prop {Map} hover-foreground [color: ('primary', 800)] - The hover text color of the bootstrap flat icon button.
-/// @prop {Map} focus-background [color: ('gray', 100)] - The focus background color of the bootstrap flat icon button.
+/// @prop {Map} hover-foreground [color: ('primary', 600)] - The hover text color of the bootstrap flat icon button.
+/// @prop {Color} focus-background [transparent] - The focus background color of the bootstrap flat icon button.
 /// @prop {Map} focus-foreground [color: ('primary', 500)] - The focus text color of the bootstrap flat icon button.
 /// @prop {Color} focus-hover-background [transparent] - The background color on focus hovered state of the icon button.
-/// @prop {Map} focus-hover-foreground [color: ('primary', 800)] - The foreground color on focus hovered state of the icon button.
-/// @prop {Map} active-background [color: ('gray', 100)] - The active background color of the bootstrap flat icon button.
-/// @prop {Map} active-foreground [color: ('primary', 600)] - The active text color of the bootstrap flat icon button.
+/// @prop {Map} focus-hover-foreground [color: ('primary', 600)] - The foreground color on focus hovered state of the icon button.
+/// @prop {Color} active-background [transparent] - The active background color of the bootstrap flat icon button.
+/// @prop {Map} active-foreground [color: ('primary', 800)] - The active text color of the bootstrap flat icon button.
 /// @requires {Map} $bootstrap-base-icon-button
 $bootstrap-flat-icon-button: extend(
     $bootstrap-base-icon-button,
@@ -640,9 +648,10 @@ $bootstrap-flat-icon-button: extend(
         hover-foreground: (
             color: (
                 'primary',
-                800,
+                600,
             ),
         ),
+        focus-background: transparent,
         focus-foreground: (
             color: (
                 'primary',
@@ -653,19 +662,14 @@ $bootstrap-flat-icon-button: extend(
         focus-hover-foreground: (
             color: (
                 'primary',
-                800,
+                600,
             ),
         ),
-        active-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
+        active-background: transparent,
         active-foreground: (
             color: (
                 'primary',
-                600,
+                800,
             ),
         ),
     )
@@ -675,7 +679,6 @@ $bootstrap-flat-icon-button: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('primary', 500)] - The background color of the bootstrap contained icon button.
 /// @prop {Map} foreground [contrast-color: ('primary', 600)] - The idle text color of the bootstrap contained icon button.
-/// @prop {Map} focus-background [color: ('primary', 500)] - The focus background color of the bootstrap flat icon button.
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the bootstrap contained icon button.
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the bootstrap contained icon button.
 /// @requires {Map} $bootstrap-base-icon-button
@@ -693,12 +696,6 @@ $bootstrap-contained-icon-button: extend(
             contrast-color: (
                 'primary',
                 600,
-            ),
-        ),
-        focus-background: (
-            color: (
-                'primary',
-                500,
             ),
         ),
         disabled-background: (
@@ -719,11 +716,9 @@ $bootstrap-contained-icon-button: extend(
 /// Generates a bootstrap outlined icon button schema.
 /// @type {Map}
 /// @prop {Map} border-color [color: ('primary', 500)] - The border color of the bootstrap outlined icon button.
-/// @prop {Map} focus-background [color: ('primary', 600)] - The focus background color of the bootstrap outlined icon button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 600)] - The hover text color of the bootstrap outlined icon button.
-/// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus text color of the bootstrap outlined icon button.
-/// @prop {Map} focus-border-color [color: ('primary', 500)] - The focus border color of the bootstrap outlined icon button.
-/// @prop {Map} disabled-border-color [color: ('primary', 100)] - The disabled border color of the bootstrap outlined icon button.
+/// @prop {Map} focus-border-color [color: ('primary', 800)] - The focus border color of the bootstrap outlined icon button.
+/// @prop {Map} disabled-border-color [color: ('primary', 50)] - The disabled border color of the bootstrap outlined icon button.
 /// @requires {Map} $bootstrap-base-icon-button
 $bootstrap-outlined-icon-button: extend(
     $bootstrap-base-icon-button,
@@ -741,22 +736,16 @@ $bootstrap-outlined-icon-button: extend(
                 600,
             ),
         ),
-        focus-foreground: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
         focus-border-color: (
             color: (
                 'primary',
-                500,
+                800,
             ),
         ),
         disabled-border-color: (
             color: (
                 'primary',
-                100,
+                50,
             ),
         ),
     )
@@ -786,7 +775,7 @@ $bootstrap-icon-button: (
 /// @prop {Map} focus-foreground [color: ('gray', 600)] - The focus text color of the indigo icon button.
 /// @prop {Map} focus-hover-background [color: ('gray', 900, 0.5)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [color: ('gray', 700)] - The foreground color on focus hovered state of the icon button.
-/// @prop {Color} active-background [transparent] - The active background color of the indigo icon button.
+/// @prop {Map} active-background [color: ('gray', 900, 0.5)] - The active background color of the indigo icon button.
 /// @prop {Map} active-foreground [color: ('gray', 700)] - The active text color of the indigo icon button.
 /// @prop {Color} border-color [transparent] - The border color of the indigo icon button.
 /// @prop {Map} focus-border-color [color: ('gray', 900, 0.15)] - The focus border color of the indigo icon button.
@@ -844,7 +833,13 @@ $indigo-base-icon-button: (
             700,
         ),
     ),
-    active-background: transparent,
+    active-background: (
+        color: (
+            'gray',
+            900,
+            0.05,
+        ),
+    ),
     active-foreground: (
         color: (
             'gray',
@@ -928,7 +923,7 @@ $indigo-outlined-icon-button: extend(
 /// @prop {Map} hover-background [color: ('primary', 400)] - The hover background color of the indigo contained icon button.
 /// @prop {Map} hover-foreground [contrast-color: ('primary', 500)] - The hover text color of the indigo contained icon button.
 /// @prop {Map} focus-background [color: ('primary', 500)] - The focus background color of the indigo contained icon button.
-/// @prop {Map} focus-foreground [contrast-color: ('primary', 500)] - The focus background color of the indigo contained icon button.
+/// @prop {Map} focus-foreground [contrast-color: ('primary', 500, .8)] - The focus background color of the indigo contained icon button.
 /// @prop {Map} focus-border-color [color: ('primary', 400, .5)] - The focus border color of the indigo icon button.
 /// @prop {Map} focus-hover-background [color: ('primary', 400)] - The background color on focus hovered state of the icon button.
 /// @prop {Map} focus-hover-foreground [color: ('primary', 500)] - The foreground color on focus hovered state of the icon button.
@@ -983,6 +978,7 @@ $indigo-contained-icon-button: extend(
             contrast-color: (
                 'primary',
                 500,
+                0.8,
             ),
         ),
         focus-border-color: (
