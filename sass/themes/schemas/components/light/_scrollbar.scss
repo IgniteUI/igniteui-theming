@@ -9,25 +9,63 @@
 
 /// Generates a base light scrollbar schema.
 /// @type {Map}
-/// @property {Color} thumb-background [color: ('gray', 400)] - The background color used for the thumb.
-/// @property {Color} track-background [color: ('gray', 100)] - The background color used for the track.
-/// @property {String | Number} scrollbar-size [16px] - The size of the track.
+/// @prop {String | Number} sb-size [16px] - The size of the scrollbar.
+/// @prop {String | Number} sb-thumb-min-height [rem(32px)] - The min-height of the thumb.
+/// @prop {Map} sb-thumb-bg-color [color: ('gray', 400)] - The background color of the thumb.
+/// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 400)] - The :hover background color of the thumb.
+/// @prop {Color} sb-thumb-border-color [transparent] - The border color of the thumb.
+/// @prop {String | Number} sb-thumb-border-size [0] - The border size of the thumb.
+/// @prop {String | Number} sb-thumb-border-radius [0] - The border radius of the thumb.
+/// @prop {Map} sb-track-bg-color [color: ('gray', 100)] - The background color of the track.
+/// @prop {Map} sb-track-bg-color-hover [color: ('gray', 100)] - The :hover background color of the track.
+/// @prop {Color} sb-track-border-color [transparent] - The border color of the track.
+/// @prop {String | Number} sb-track-border-size [0] - The border size of the track.
+/// @prop {Map} sb-corner-bg [color: ('gray', 100)] - The background color of the corner.
+/// @prop {Color} sb-corner-border-color [transparent] - The border color of the corner.
+/// @prop {String | Number} sb-corner-border-size [0] - The border size of the corner.
 $light-scrollbar: (
-    scrollbar-size: 16px,
+    sb-size: 16px,
 
-    thumb-background: (
+    sb-thumb-min-height: rem(32px),
+    sb-thumb-bg-color: (
         color: (
             'gray',
             400,
         ),
     ),
+    sb-thumb-bg-color-hover: (
+        color: (
+            'gray',
+            400,
+        ),
+    ),
+    sb-thumb-border-color: transparent,
+    sb-thumb-border-size: 0,
+    sb-thumb-border-radius: 0,
 
-    track-background: (
+    sb-track-bg-color: (
         color: (
             'gray',
             100,
         ),
     ),
+    sb-track-bg-color-hover: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+    sb-track-border-color: transparent,
+    sb-track-border-size: 0,
+
+    sb-corner-bg: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+    sb-corner-border-color: transparent,
+    sb-corner-border-size: 0,
 );
 
 /// Generates a material scrollbar schema.
@@ -37,12 +75,19 @@ $material-scrollbar: $light-scrollbar;
 
 /// Generates a fluent scrollbar schema.
 /// @type {Map}
-/// @property {Color} thumb-background [color: ('gray', 300)] - The background color used for the thumb.
+/// @prop {Color} sb-thumb-bg-color [color: ('gray', 300)] - The background color used for the thumb.
+/// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 300)] - The :hover background color of the thumb.
 /// @requires {Map} $light-scrollbar
 $fluent-scrollbar: extend(
     $light-scrollbar,
     (
-        thumb-background: (
+        sb-thumb-bg-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        sb-thumb-bg-color-hover: (
             color: (
                 'gray',
                 300,
@@ -58,12 +103,19 @@ $bootstrap-scrollbar: $light-scrollbar;
 
 /// Generates an indigo scrollbar schema.
 /// @type {Map}
-/// @property {Color} track-background [color: ('gray', 200)] - The background color used for the track.
+/// @prop {Map} sb-track-bg-color [color: ('gray', 200)] - The background color used for the track.
+/// @prop {Map} sb-track-bg-color-hover [color: ('gray', 100)] - The :hover background color of the track.
 /// @requires {Map} $light-scrollbar
 $indigo-scrollbar: extend(
     $light-scrollbar,
     (
-        track-background: (
+        sb-track-bg-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        sb-track-bg-color-hover: (
             color: (
                 'gray',
                 200,
