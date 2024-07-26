@@ -9,7 +9,7 @@
 
 /// Generates a base light scrollbar schema.
 /// @type {Map}
-/// @prop {String | Number} sb-size [16px] - The size of the scrollbar.
+/// @prop {String | Number} sb-size [rem(16px)] - The size of the scrollbar.
 /// @prop {String | Number} sb-thumb-min-height [rem(32px)] - The min-height of the thumb.
 /// @prop {Map} sb-thumb-bg-color [color: ('gray', 400)] - The background color of the thumb.
 /// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 400)] - The :hover background color of the thumb.
@@ -24,8 +24,7 @@
 /// @prop {Color} sb-corner-border-color [transparent] - The border color of the corner.
 /// @prop {String | Number} sb-corner-border-size [0] - The border size of the corner.
 $light-scrollbar: (
-    sb-size: 16px,
-
+    sb-size: rem(16px),
     sb-thumb-min-height: rem(32px),
     sb-thumb-bg-color: (
         color: (
