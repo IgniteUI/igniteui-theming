@@ -20,6 +20,7 @@
 /// @property {Color} plot-area-background [color: ('surface', 500)] - Sets the brush used as the background for the current Chart object's plot area.
 /// @property {String} title-horizontal-alignment [null] - The horizontal alignment to use for the title.
 /// @property {String} subtitle-horizontal-alignment [null] - The horizontal alignment to use for the subtitle.
+/// @property {Color} axis-label-text-color [color: (gray, 700)] - The horizontal alignment to use for the subtitle.
 $material-data-chart: (
     'margin': null,
     'title-text-color': (
@@ -48,6 +49,12 @@ $material-data-chart: (
     ),
     'title-horizontal-alignment': null,
     'subtitle-horizontal-alignment': null,
+    'axis-label-text-color': (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
 );
 
 /// Generates a fluent data-chart schema.
