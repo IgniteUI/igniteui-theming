@@ -1,5 +1,6 @@
 @use '../../../../utils/map' as *;
 @use '../light/tooltip' as *;
+@use '../elevation/tooltip' as *;
 
 ////
 /// @package theming
@@ -24,20 +25,27 @@ $dark-bootstrap-tooltip: $bootstrap-tooltip;
 
 /// Generates a dark indigo tooltip schema.
 /// @type {Map}
-/// @prop {Map} background [contrast-color: ('surface')] - The background color of the tooltip.
-/// @prop {Map} text-color [text-color: (color: 'surface')] - The text color of the tooltip.
-/// @requires $indigo-tooltip
+/// @prop {Map} background [color: ('gray', 300, .9)] - The background color of the tooltip.
+/// @prop {Map} text-color [contrast-color: ('gray', 50)] - The text color of the tooltip.
+/// @prop {Number} elevation [9] - The elevation level, between 0-24, to be used for the tooltip.
+/// @requires {Map} $indigo-tooltip
+/// @requires {Map} $dark-indigo-elevation-tooltip
 $dark-indigo-tooltip: extend(
     $indigo-tooltip,
+    $dark-indigo-elevation-tooltip,
     (
         background: (
-            contrast-color: (
-                'surface',
+            color: (
+                'gray',
+                300,
+                0.9,
             ),
         ),
-
         text-color: (
-            color: 'surface',
+            contrast-color: (
+                'gray',
+                50,
+            ),
         ),
     )
 );

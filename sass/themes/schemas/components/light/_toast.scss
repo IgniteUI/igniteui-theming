@@ -117,14 +117,34 @@ $bootstrap-toast: extend(
 
 /// Generates an indigo toast schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(24px), rem(0), rem(26px))] - The border radius used for toast.
-/// @requires {Map} $light-toast
+/// @prop {Map} background [color: ('gray', 200)] - The background color used for the toast.
+/// @prop {Color} border-color [transparent] - The border color used for the toast.
+/// @prop {Map} text-color [color: ('gray', 700)] - The text-color used for the toast.
+/// @prop {List} border-radius [(rem(6px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the toast.
+/// @requires {Map} $indigo-elevation-toast
 $indigo-toast: extend(
-    $light-toast,
+    $indigo-elevation-toast,
     (
+        background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        border-color: transparent,
+
+        text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         border-radius: (
             border-radius: (
-                rem(24px),
+                rem(6px),
                 rem(0),
                 rem(26px),
             ),
