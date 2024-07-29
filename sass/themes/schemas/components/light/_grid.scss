@@ -1062,7 +1062,6 @@ $bootstrap-grid: extend(
 /// @prop {Map} header-selected-background [color: ('primary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [color: 'primary'] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
-/// @prop {Map} filtering-row-background [color: 'surface'] - The background color of the filtering row.
 /// @prop {Map} filtering-header-text-color [color: ('primary', 900)] - The text color of the filtered column header.
 /// @prop {Map} filtering-row-background [contrast-color: ('gray', 900)] - The background color of the filtering row.
 /// @prop {Map} filtering-background-and [color: ('primary', 400)] - The background color of advanced filtering "AND" condition.
@@ -1148,10 +1147,6 @@ $indigo-grid: extend(
                 'gray',
                 400,
             ),
-        ),
-
-        filtering-row-background: (
-            color: 'surface',
         ),
 
         filtering-header-text-color: (
