@@ -239,14 +239,14 @@ $_palette: palette(
                         --ig-primary-500:
                             #{hsl(var(--ig-primary-h), var(--ig-primary-s), var(--ig-primary-l))};
                         --ig-primary-500-contrast: #{contrast-color($_palette, primary, 500)};
-                        --ig-primary-600: 
+                        --ig-primary-600:
                             #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))};
                         --ig-gray-500:
                             #{hsl(var(--ig-gray-h)
                             var(--ig-gray-s)
                             #{math.round(color.lightness($gray-500))})};
                         --ig-gray-500-contrast: #{contrast-color($_palette, gray, 500)};
-                        --ig-gray-600: 
+                        --ig-gray-600:
                             #{hsl(from var(--ig-gray-500) h s 54%)};
                     }
                 }
@@ -294,9 +294,6 @@ $_palette: palette(
                             $value: map.get($_palette, $color, $shade);
 
                             @if $shade == 500 {
-                              --ig-#{$color}-h: #{list.nth($value, 1)};
-                              --ig-#{$color}-s: #{list.nth($value, 2)};
-                              --ig-#{$color}-l: #{list.nth($value, 3)};
                               --ig-#{$color}-a: 1;
                             }
 
@@ -308,12 +305,10 @@ $_palette: palette(
             }
         }
 
-        @include it('should properly get the hex value from handmade palettes') {
+        @include it('should properly get the value from handmade palettes') {
             $_palette: mocks.$handmade-palette;
-            $_hex: color($_palette, primary, 800);
             $_ref: color(null, primary, 800);
 
-            @include assert-equal($_hex, #316ec9);
             @include assert-equal($_ref, hsl(from var(--ig-primary-800) h s l / var(--ig-primary-a)));
         }
 

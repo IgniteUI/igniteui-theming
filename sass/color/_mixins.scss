@@ -40,7 +40,6 @@
     $_shade: meta.type-of($shade) == 'string';
     $_hsl: if($_shade, string.index($shade, 'hsl'), false);
     $_contrast: if($_shade, string.index($shade, 'contrast'), false);
-    $_variant: if($_shade, string.index($shade, 'variant'), false);
     $_color: '' + $color;
 
     @if $_hsl {
@@ -49,7 +48,7 @@
         --ig-#{$_color}-#{$variant}: #{$value};
     }
 
-    @if not($_hsl) and not($_contrast) and not($_variant) {
+    @if not($_hsl) and not($_contrast) and not($variant) {
         --ig-#{$_color}-#{$shade}: #{$value};
     }
 
