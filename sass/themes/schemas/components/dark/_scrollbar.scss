@@ -19,36 +19,21 @@ $dark-fluent-scrollbar: $fluent-scrollbar;
 
 /// Generates a dark bootstrap scrollbar schema.
 /// @type {Map}
-/// @prop {Map} sb-thumb-bg-color [color: ('gray', 200, .5)] - The background color used for the thumb.
-/// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 200, .5)] - The :hover background color of the thumb.
-/// @prop {Map} sb-track-bg-color [color: ('gray', 100, .5)] - The background color used for the track.
-/// @prop {Map} sb-track-bg-color-hover [color: ('gray', 100, .5)] - The :hover background color of the track.
+/// @prop {Map} thumb-background [color: ('gray', 200, .5)] - The background color used for the thumb.
+/// @prop {Color} track-background [color: ('gray', 100, .5)] - The background color used for the track.
 /// @requires $bootstrap-scrollbar
 $dark-bootstrap-scrollbar: extend(
     $bootstrap-scrollbar,
     (
-        sb-thumb-bg-color: (
+        thumb-background: (
             color: (
                 'gray',
                 200,
                 0.5,
             ),
         ),
-        sb-thumb-bg-color-hover: (
-            color: (
-                'gray',
-                200,
-                0.5,
-            ),
-        ),
-        sb-track-bg-color: (
-            color: (
-                'gray',
-                100,
-                0.5,
-            ),
-        ),
-        sb-track-bg-color-hover: (
+
+        track-background: (
             color: (
                 'gray',
                 100,
@@ -60,34 +45,20 @@ $dark-bootstrap-scrollbar: extend(
 
 /// Generates a dark indigo scrollbar schema.
 /// @type {Map}
-/// @prop {Map} sb-thumb-bg-color [color: ('gray', 100)] - The background color used for the thumb.
-/// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 100)] - The :hover background color of the thumb.
-
-/// @prop {Map} sb-track-bg-color [color: ('gray', 50)] - The background color used for the track.
-/// @prop {Map} sb-track-bg-color-hover [color: ('gray', 50)] - The :hover background color of the track.
+/// @prop {Map} thumb-background [color: ('gray', 100)] - The background color used for the thumb.
+/// @prop {Color} track-background [color: ('gray', 50)] - The background color used for the track.
 /// @requires $indigo-scrollbar
 $dark-indigo-scrollbar: extend(
     $indigo-scrollbar,
     (
-        sb-thumb-bg-color: (
+        thumb-background: (
             color: (
                 'gray',
                 100,
             ),
         ),
-        sb-thumb-bg-color-hover: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        sb-track-bg-color: (
-            color: (
-                'gray',
-                50,
-            ),
-        ),
-        sb-track-bg-color-hover: (
+
+        track-background: (
             color: (
                 'gray',
                 50,
