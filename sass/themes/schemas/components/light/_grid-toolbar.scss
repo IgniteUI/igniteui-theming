@@ -18,6 +18,7 @@
 /// @prop {Map} item-focus-background [color: ('gray', 100)] - The toolbar drop-down item focus background color.
 /// @prop {Map} item-focus-text-color [color: ('gray', 600)] - The toolbar drop-down item focus text color.
 /// @prop {List} size [(rem(44px), rem(52px), rem(58px))] - The size used for the grid toolbar min-height.
+/// @prop {Map} border-color [color: ('gray', 300)] - The toolbar border-bottom color.
 $light-grid-toolbar: (
     background-color: (
         color: (
@@ -81,6 +82,13 @@ $light-grid-toolbar: (
             rem(58px),
         ),
     ),
+
+    border-color: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
 );
 
 /// Generates a material grid-toolbar schema.
@@ -102,29 +110,43 @@ $fluent-grid-toolbar: extend(
 );
 
 /// Generates a bootstrap grid-toolbar schema.
+/// @prop {Map} border-color [color: ('gray', 100)] - The toolbar border-bottom color.
 /// @type {Map}
 /// @requires {Map} $light-grid-toolbar
-$bootstrap-grid-toolbar: $light-grid-toolbar;
-
-/// Generates an indigo grid-toolbar schema.
-/// @type {Map}
-/// @prop {Map} background-color [color: ('gray', 100)] - The toolbar background color.
-/// @prop {Map} title-text-color [color: ('primary', 500)] - The toolbar title text color.
-/// @requires {Map} $light-grid-toolbar
-$indigo-grid-toolbar: extend(
+$bootstrap-grid-toolbar: extend(
     $light-grid-toolbar,
     (
-        background-color: (
+        border-color: (
             color: (
                 'gray',
                 100,
             ),
         ),
+    )
+);
+
+/// Generates an indigo grid-toolbar schema.
+/// @type {Map}
+/// @prop {Color} background-color [transparent] - The toolbar background color.
+/// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
+/// @prop {Map} border-color [color: ('gray', 900, .3)] - The toolbar border-bottom color.
+/// @requires {Map} $light-grid-toolbar
+$indigo-grid-toolbar: extend(
+    $light-grid-toolbar,
+    (
+        background-color: transparent,
 
         title-text-color: (
             color: (
-                'primary',
-                500,
+                'gray',
+                700,
+            ),
+        ),
+        border-color: (
+            color: (
+                'gray',
+                900,
+                0.3,
             ),
         ),
     )
