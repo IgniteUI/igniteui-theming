@@ -36,10 +36,11 @@
 
 // Generates CSS variables for a shade color
 // @access private
-@mixin _shade($color, $shade, $value, $contrast) {
+@mixin _shade($color, $shade, $value, $contrast, $variant) {
     $_shade: meta.type-of($shade) == 'string';
     $_hsl: if($_shade, string.index($shade, 'hsl'), false);
     $_contrast: if($_shade, string.index($shade, 'contrast'), false);
+    $_variant: if($_shade, string.index($shade, 'variant'), false);
     $_color: '' + $color;
 
     @if $_hsl {
@@ -48,7 +49,7 @@
         --ig-#{$_color}-#{$variant}: #{$value};
     }
 
-    @if not($_hsl) and not($_contrast) {
+    @if not($_hsl) and not($_contrast) and not($_variant) {
         --ig-#{$_color}-#{$shade}: #{$value};
     }
 
@@ -68,12 +69,13 @@
 /// @require {function} is-root
 @mixin palette($palette, $contrast: true) {
     $scope: if(is-root(), ':root', '&');
+    $variant: map.get($palette, '_meta', 'variant');
 
     #{$scope} {
         @each $color, $shades in map.remove($palette, '_meta') {
             @each $shade, $value in $shades {
                 @include _base($color, $shade, $value);
-                @include _shade($color, $shade, $value, $contrast);
+                @include _shade($color, $shade, $value, $contrast, $variant);
             }
         }
     }
