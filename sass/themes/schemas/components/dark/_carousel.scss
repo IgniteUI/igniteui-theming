@@ -104,7 +104,6 @@ $dark-bootstrap-carousel: extend(
 /// @prop {Map} button-disabled-arrow-color [contrast-color: ('gray' 50, .2)] - The previous/next buttons disabled color.
 /// @prop {Map} indicator-dot-color [color: ('gray', 400)] - The idle indicator dot color.
 /// @prop {Map} indicator-hover-dot-color [color: ('gray', 500)] - The hover indicator dot color.
-/// @prop {Map} button-focus-border-color [color: ('primary', 400)] - The navigation buttons border color on focus.
 /// @requires $indigo-carousel
 $dark-indigo-carousel: extend(
     $indigo-carousel,
@@ -172,13 +171,6 @@ $dark-indigo-carousel: extend(
             color: (
                 'gray',
                 500,
-            ),
-        ),
-
-        button-focus-border-color: (
-            color: (
-                'primary',
-                400,
             ),
         ),
     )
