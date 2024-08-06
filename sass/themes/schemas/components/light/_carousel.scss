@@ -23,6 +23,7 @@
 /// @prop {Map} indicator-focus-color [color: ('secondary', 600)] - The indicators border and dot color on focus.
 /// @prop {Map} button-focus-border-color [color: ('secondary', 600)] - The navigation buttons border color on focus.
 /// @prop {Map} indicator-background [color: ('gray', 50)] - The indicators container background color.
+/// @prop {Map} label-indicator-background [color: ('gray', 50, .8)] - The label indicator container background color.
 /// @prop {Map} indicator-label [color: ('gray', 700)] - The indicators label color.
 /// @prop {Color} indicator-dot-color [transparent] - The idle indicator dot color.
 /// @prop {Color} indicator-hover-dot-color [transparent] - The hover indicator dot color.
@@ -109,6 +110,14 @@ $light-carousel: extend(
             color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        label-indicator-background: (
+            color: (
+                'gray',
+                50,
+                0.8,
             ),
         ),
 
