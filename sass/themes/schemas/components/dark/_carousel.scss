@@ -8,55 +8,24 @@
 ////
 
 /// Generates the base dark carousel schema.
-/// @prop {Map} button-arrow-color [color: ('gray', 400)] - The previous/next buttons idle arrow color.
-/// @prop {Map} button-hover-arrow-color [color: ('gray', 700)] - The previous/next buttons hover arrow color.
-/// @prop {Color} indicator-border-color [color: ('gray', 600)] - The idle indicator border color.
-/// @prop {Color} indicator-active-dot-color [color: ('gray', 600)] - The active indicator dot color.
-/// @prop {Color} indicator-active-border-color [color: ('gray', 600)] - The active indicator border color.
-/// @prop {Map} indicator-active-hover-dot-color [color: ('gray', 600)] - The active indicator dot color on hover.
 /// @type {Map}
+/// @prop {Map} indicator-focus-color [color: ('secondary', 200)] - The indicators border and dot color on focus.
+/// @prop {Map} button-focus-border-color [color: ('secondary', 200)] - The navigation buttons border color on focus.
+/// @requires $light-carousel
 $base-dark-carousel: extend(
     $light-carousel,
     (
-        button-arrow-color: (
+        indicator-focus-color: (
             color: (
-                'gray',
-                400,
+                'secondary',
+                200,
             ),
         ),
 
-        button-hover-arrow-color: (
+        button-focus-border-color: (
             color: (
-                'gray',
-                700,
-            ),
-        ),
-
-        indicator-border-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
-        indicator-active-dot-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
-        indicator-active-border-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
-        indicator-active-hover-dot-color: (
-            color: (
-                'gray',
-                600,
+                'secondary',
+                200,
             ),
         ),
     )
@@ -70,15 +39,59 @@ $dark-material-carousel: extend($material-carousel, $base-dark-carousel);
 
 /// Generates a dark fluent carousel schema based on a mix of $fluent-carousel and $base-dark-carousel
 /// @type {Map}
+/// @prop {Map} button-disabled-background [color: ('gray', 50)] - The previous/next buttons disabled background color.
+/// @prop {Map} button-disabled-arrow-color [color: ('gray' 200)] - The previous/next buttons disabled color.
+/// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
+/// @prop {Map} button-focus-border-color [color: ('gray', 400)] - The navigation buttons border color on focus.
 /// @requires $fluent-carousel
-/// @requires $base-dark-carousel
-$dark-fluent-carousel: extend($fluent-carousel, $base-dark-carousel);
+$dark-fluent-carousel: extend(
+    $fluent-carousel,
+    (
+        button-disabled-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        button-disabled-arrow-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        indicator-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        button-focus-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark bootstrap carousel schema based on a mix of $bootstrap-carousel and $base-dark-carousel
 /// @type {Map}
+/// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
 /// @requires $bootstrap-carousel
-/// @requires $base-dark-carousel
-$dark-bootstrap-carousel: extend($bootstrap-carousel, $base-dark-carousel);
+$dark-bootstrap-carousel: extend(
+    $bootstrap-carousel,
+    (
+        indicator-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark indigo carousel schema based on a mix of $indigo-carousel and $base-dark-carousel
 /// @type {Map}
@@ -87,12 +100,10 @@ $dark-bootstrap-carousel: extend($bootstrap-carousel, $base-dark-carousel);
 /// @prop {Map} button-hover-arrow-color [color: ('gray', 50)] - The previous/next buttons hover arrow color.
 /// @prop {Map} button-border-color [color: ('gray', 200)] - The previous/next buttons idle border color.
 /// @prop {Map} button-hover-border-color [color: ('gray', 300)] - The previous/next buttons hover border color.
-/// @prop {Map} button-disabled-border-color [color: ('gray', 100)] - The previous/next buttons disabled border color.
+/// @prop {Map} button-disabled-border-color [contrast-color: ('gray', 50, .15)] - The previous/next buttons disabled border color.
 /// @prop {Map} button-disabled-arrow-color [contrast-color: ('gray' 50, .2)] - The previous/next buttons disabled color.
 /// @prop {Map} indicator-dot-color [color: ('gray', 400)] - The idle indicator dot color.
 /// @prop {Map} indicator-hover-dot-color [color: ('gray', 500)] - The hover indicator dot color.
-/// @prop {Map} indicator-active-dot-color [color: ('primary', 400)] - The active indicator dot color.
-/// @prop {Map} indicator-active-hover-dot-color [color: ('primary', 300)] - The active indicator dot color on hover.
 /// @requires $indigo-carousel
 $dark-indigo-carousel: extend(
     $indigo-carousel,
@@ -142,9 +153,10 @@ $dark-indigo-carousel: extend(
         ),
 
         button-disabled-border-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                100,
+                50,
+                0.15,
             ),
         ),
 
@@ -159,20 +171,6 @@ $dark-indigo-carousel: extend(
             color: (
                 'gray',
                 500,
-            ),
-        ),
-
-        indicator-active-dot-color: (
-            color: (
-                'primary',
-                400,
-            ),
-        ),
-
-        indicator-active-hover-dot-color: (
-            color: (
-                'primary',
-                300,
             ),
         ),
     )
