@@ -198,6 +198,7 @@ $indigo-progress-linear: extend(
 /// @prop {Map} base-circle-color [color: ('gray', 300)] - The base circle fill color.
 /// @prop {Map} progress-circle-color [color: ('primary', 500)] - The progress circle fill color.
 /// @prop {Map} text-color [color: ('gray', 700)] - The value text color.
+/// @prop {Number} diameter [rem(32px)] - The progress circle diameter.
 /// @prop {List} track-border-radius [rem(0)] - The border radius used for the progress bar track.
 $light-progress-circular: extend(
     (
@@ -222,6 +223,7 @@ $light-progress-circular: extend(
             ),
         ),
 
+        diameter: rem(32px),
         track-border-radius: rem(0),
     )
 );
@@ -238,14 +240,21 @@ $fluent-progress-circular: $light-progress-circular;
 
 /// Generates a bootstrap progress-circular schema.
 /// @type {Map}
+/// @prop {Number} diameter [rem(54px)] - The progress circle diameter.
 /// @requires {Map} $light-progress-circular
-$bootstrap-progress-circular: $light-progress-circular;
+$bootstrap-progress-circular: extend(
+    $light-progress-circular,
+    (
+        diameter: rem(54px),
+    )
+);
 
 /// Generates an indigo progress-circular schema.
 /// @type {Map}
 /// @prop {Map} base-circle-color [color: ('gray', 900, .15)] - The base circle fill color.
 /// @prop {Map} progress-circle-color [color: ('primary', 400)] - The progress circle fill color.
 /// @prop {Map} text-color [color: ('gray', 600)] - The value text color.
+/// @prop {Number} diameter [rem(48px)] - The progress circle diameter.
 $indigo-progress-circular: (
     base-circle-color: (
         color: (
@@ -268,4 +277,6 @@ $indigo-progress-circular: (
             600,
         ),
     ),
+
+    diameter: rem(48px),
 );
