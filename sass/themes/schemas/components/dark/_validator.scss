@@ -1,0 +1,41 @@
+@use '../../../../utils/map' as *;
+@use '../light/validator' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a base dark validator schema.
+/// @type {Map}
+/// @requires $light-validator
+$dark-material-validator: $light-validator;
+
+/// Generates a dark fluent validator schema.
+/// @type {Map}
+/// @requires $light-validator
+$dark-fluent-validator: $light-validator;
+
+/// Generates a dark bootstrap validator schema.
+/// @type {Map}
+/// @requires $light-validator
+$dark-bootstrap-validator: $light-validator;
+
+/// Generates a dark indigo validator schema.
+/// @type {Map}
+/// @prop {Map} text-error-color [contrast-color: ('gray', 50, .8)] - The color used for the error message.
+/// @requires $indigo-validator
+/// @requires $dark-validator
+$dark-indigo-validator: extend(
+    $indigo-validator,
+    (
+        text-error-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+    )
+);
