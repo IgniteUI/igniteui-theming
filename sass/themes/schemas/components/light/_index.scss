@@ -56,6 +56,7 @@
 @use './toast' as *;
 @use './tooltip' as *;
 @use './tree' as *;
+@use './validator' as *;
 @use './watermark' as *;
 
 /// Used to create material component themes.
@@ -115,6 +116,7 @@ $light-material-schema: (
     toast: $material-toast,
     tooltip: $material-tooltip,
     tree: $material-tree,
+    validator: $material-validator,
     watermark: $material-watermark,
     _meta: (
         theme: 'material',
@@ -179,6 +181,7 @@ $light-fluent-schema: (
     toast: $fluent-toast,
     tooltip: $fluent-tooltip,
     tree: $fluent-tree,
+    validator: $fluent-validator,
     watermark: $fluent-watermark,
     _meta: (
         theme: 'fluent',
@@ -243,6 +246,7 @@ $light-bootstrap-schema: (
     toast: $bootstrap-toast,
     tooltip: $bootstrap-tooltip,
     tree: $bootstrap-tree,
+    validator: $bootstrap-validator,
     watermark: $bootstrap-watermark,
     _meta: (
         theme: 'bootstrap',
@@ -307,6 +311,7 @@ $light-indigo-schema: (
     toast: $indigo-toast,
     tooltip: $indigo-tooltip,
     tree: $indigo-tree,
+    validator: $indigo-validator,
     watermark: $indigo-watermark,
     _meta: (
         theme: 'indigo',
