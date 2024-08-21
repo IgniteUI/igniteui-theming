@@ -463,6 +463,7 @@ $dark-bootstrap-calendar: extend(
 
 /// Generates a dark indigo calendar schema.
 /// @type {Map}
+/// @prop {Map} header-foreground [contrast-color: ('gray', 50)] - The header foreground color.
 /// @prop {Map} content-foreground [color: ('gray', 900)] - The foreground color of the days, months and years views.
 /// @prop {Map} weekend-color [color: ('gray', 900)] - The foreground color of the weekend days.
 /// @prop {Map} ym-hover-background [contrast-color: ('gray', 50, .1)] - The :hover background color of the month/year.
@@ -526,8 +527,6 @@ $dark-bootstrap-calendar: extend(
 /// @prop {Map} date-selected-current-range-foreground [color: ('gray', 900)] - The foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the current date in the selected range.
-/// @prop {Map} date-selected-special-hover-border-color [color: ('primary', 50)] - The :hover border color of the selected special date.
-/// @prop {Map} date-selected-special-focus-border-color [color: ('primary', 50)] - The :focus border color of the selected special date.
 /// @requires $indigo-calendar
 $dark-indigo-calendar: extend(
     $indigo-calendar,
@@ -785,7 +784,7 @@ $dark-indigo-calendar: extend(
         ym-current-hover-foreground: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
         ym-current-background: (
@@ -902,18 +901,6 @@ $dark-indigo-calendar: extend(
                 900,
             ),
         ),
-        date-selected-special-hover-border-color: (
-            color: (
-                'primary',
-                50,
-            ),
-        ),
-        date-selected-special-focus-border-color: (
-            color: (
-                'primary',
-                50,
-            ),
-        ),
         date-selected-current-range-hover-foreground: (
             contrast-color: (
                 'gray',
@@ -930,6 +917,12 @@ $dark-indigo-calendar: extend(
             color: (
                 'gray',
                 900,
+            ),
+        ),
+        header-foreground: (
+            contrast-color: (
+                'gray',
+                50,
             ),
         ),
     )
