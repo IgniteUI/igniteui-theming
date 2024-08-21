@@ -27,29 +27,40 @@ $dark-bootstrap-select: $bootstrap-select;
 
 /// Generates a dark indigo select schema.
 /// @type {Map}
-/// @prop {Map} toggle-button-foreground [color: ('gray', 600)] - The select toggle button foreground color.
-/// @prop {Map} toggle-button-foreground-focus [color: ('gray', 600)] - The select toggle button foreground color when the select is focused.
-/// @prop {Map} toggle-button-foreground-filled [color: ('gray', 600)] - The select toggle button foreground color when the select is focused.
+/// @prop {Map} toggle-button-foreground [contrast-color: ('gray', 100, .6)] - The select toggle button foreground color.
+/// @prop {Map} toggle-button-foreground-focus [contrast-color: ('gray', 100, .6)] - The select toggle button foreground color when the select is focused.
+/// @prop {Map} toggle-button-foreground-filled [contrast-color: ('gray', 100, .8)] - The select toggle button foreground color when the select is focused.
+/// @prop {Map} toggle-button-foreground-disabled [contrast-color: ('gray', 100, .2)] - The select toggle button foreground color when the select is disabled.
 /// @requires $indigo-select
 $dark-indigo-select: extend(
     $indigo-select,
     (
         toggle-button-foreground: (
-            color: (
+            contrast-color: (
                 'gray',
-                600,
-            ),
-        ),
-        toggle-button-foreground-focus: (
-            color: (
-                'gray',
-                600,
+                100,
+                0.6,
             ),
         ),
         toggle-button-foreground-filled: (
-            color: (
+            contrast-color: (
                 'gray',
-                600,
+                100,
+                0.6,
+            ),
+        ),
+        toggle-button-foreground-focus: (
+            contrast-color: (
+                'gray',
+                100,
+                0.8,
+            ),
+        ),
+        toggle-button-foreground-disabled: (
+            contrast-color: (
+                'gray',
+                100,
+                0.2,
             ),
         ),
     )
