@@ -151,11 +151,14 @@ $bootstrap-select: extend(
 
 /// Generates an indigo select schema.
 /// @type {Map}
+/// @prop {Map} toggle-button-foreground [color: ('gray', 600)] - The select toggle button foreground color.
+/// @prop {Map} toggle-button-foreground-filled [color: ('gray', 600)] - The select toggle button foreground color when the select is filled.
+/// @prop {Map} toggle-button-foreground-focus [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
 /// @prop {Map} toggle-button-background [transparent] - The select toggle button background color.
 /// @prop {Map} toggle-button-background-focus [transparent] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-background-focus--border [transparent] - The select toggle button background color when the select is focused.
 /// @prop {Color} toggle-button-background-disabled [transparent] - The select toggle button background color when the select is disabled.
-/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 300)] - The select toggle button foreground color when the select is disabled.
+/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 900, .2)] - The select toggle button foreground color when the select is disabled.
 /// @requires {Map} $light-select
 $indigo-select: extend(
     $light-select,
@@ -164,10 +167,29 @@ $indigo-select: extend(
         toggle-button-background-focus: transparent,
         toggle-button-background-focus--border: transparent,
         toggle-button-background-disabled: transparent,
+        toggle-button-foreground: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        toggle-button-foreground-filled: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        toggle-button-foreground-focus: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         toggle-button-foreground-disabled: (
             color: (
                 'gray',
-                300,
+                900,
+                0.2,
             ),
         ),
     )
