@@ -39,6 +39,7 @@ $dark-bootstrap-grid-summary: extend(
 /// @prop {Map} label-hover-color [color: ('primary', 200)] - The summaries hover label color.
 /// @prop {Map} result-color [contrast-color: 'surface'] - The summaries value/result color.
 /// @prop {Map} border-color [color: ('gray', 200)] - The summaries border color.
+/// @prop {Map} pinned-border-color [color: ('gray', 200)] - The border color of the summary panel.
 /// @requires $indigo-grid-summary
 $dark-indigo-grid-summary: extend(
     $indigo-grid-summary,
@@ -69,6 +70,13 @@ $dark-indigo-grid-summary: extend(
         ),
 
         border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        pinned-border-color: (
             color: (
                 'gray',
                 200,
