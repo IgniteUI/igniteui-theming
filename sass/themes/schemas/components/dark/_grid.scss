@@ -369,19 +369,18 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} content-text-color [contrast-color: ('gray', 50, .8)] - The table body text color.
 /// @prop {Map} header-border-color [color: ('gray', 200)] - The color used for header borders.
 /// @prop {MAp} header-text-color [contrast-color: ('gray', 50, .9)] - The table header text color.
-/// @prop {Map} header-selected-background [color: 'primary'] - The table header background color when selected (ex. column selection).
-/// @prop {Map} header-selected-text-color [contrast-color: 'primary'] - The table header text color when selected (ex. column selection).
+/// @prop {Map} header-selected-background [color: ('primary', 900)] - The table header background color when selected (ex. column selection).
+/// @prop {Map} header-selected-text-color [contrast-color: ('gray' 50)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} sorted-header-icon-color [contrast-color: ('gray', 50, .8)] - The sorted table header icon color.
 /// @prop {Map} sortable-header-icon-hover-color [contrast-color: ('gray', 50)] - The icon color on hover in grid header when the column is sortable.
 /// @prop {Map} filtering-header-background [color: ('gray', 100)] - The background color of the filtered column header.
 /// @prop {Map} filtering-header-text-color [contrast-color: ('gray', 50, .9)] - The text color color of the filtered column header.
 /// @prop {Map} pinned-border-color [color: ('gray', 200)] - The color of the pinned border.
-/// @prop {Map} drop-area-background [color: ('gray', 200)] - The drop area background color.
 /// @prop {Map} drop-area-text-color [contrast-color: ('gray', 50, .6)] - The drop area text color.
-/// @prop {Map} drop-area-icon-color [contrast-color: ('gray', 200)] - The drop area icon color.
-/// @prop {Map} row-border-color [color: ('gray', 50, .24)] - The row bottom border color.
+/// @prop {Map} drop-area-icon-color [contrast-color: ('gray', 50, .6)] - The drop area icon color.
+/// @prop {Map} row-border-color [color: ('gray', 100)] - The row bottom border color.
 /// @prop {Map} row-hover-background [color: ('primary', 100)] - The hover row background color.
-/// @prop {Map} row-hover-text-color [contrast-color: ('gray', 100)] - The hover row text color.
+/// @prop {Map} row-hover-text-color [contrast-color: ('gray', 50)] - The hover row text color.
 /// @prop {Map} row-selected-background [color: ('primary', 900)] - The selected row background color.
 /// @prop {Map} row-selected-text-color [contrast-color: ('primary', 900)] - The selected row text color.
 /// @prop {Map} row-selected-hover-background [color: ('primary', 700)] - The selected row hover background.
@@ -394,10 +393,8 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} group-label-text [color: ('gray', 700)] - The grid group row text color.
 /// @prop {Map} cell-selected-within-background [color: ('primary', 700)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('primary', 900)] - The color of the selected cell inside a selected row/column.
-/// @prop {Map} cell-selected-background [color: ('gray', 100)] - The selected cell background color.
-/// @prop {Map} cell-selected-text-color [contrast-color: ('gray', 100), to-opaque: (color: 'surface'), text-contrast: ()] - The selected cell text color.
-/// @prop {Map} cell-active-border-color [color: ('primary', 400)] - The active(focused) cell border color.
-/// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
+/// @prop {Map} cell-selected-background [color: ('primary', 900)] - The selected cell background color.
+/// @prop {Map} cell-selected-text-color [contrast-color: ('primary', 900)] - The selected cell text color.
 /// @prop {Map} grouparea-color [contrast-color: 'surface'] - The grid group area color.
 /// @prop {Map} root-summaries-background [color: 'surface'] - The background color of the summary groups located the footer.
 /// @prop {Map} root-summaries-text-color [contrast-color: 'surface'] - The text color of the summary groups located the footer.
@@ -408,11 +405,23 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} row-odd-text-color [contrast-color: ('gray', 50, .8)] - The text color of odd rows.
 /// @prop {Map} row-even-text-color [contrast-color: ('gray', 50, .8)] - The text color of even rows.
 /// @prop {Map} active-expand-icon-color [contrast-color: ('gray', 50, .8)] - The drop area background on drop color.
+/// @prop {Map} drop-area-on-drop-background [color: ('gray', 100)] - The drop area background on drop color.
+/// @prop {Map} header-background [color: ('surface', 500)] - The table header background color.
+/// @prop {Map} content-background [color: ('surface', 500)] - The table body background color.
+/// @prop {Map} cell-editing-background [color: ('gray' 100)] - The background for the cell in editing mode.
+/// @prop {Map} cell-editing-foreground [contrast-color: ('gray', 50)] - The cell text color in edit mode
 ///
 /// @requires $indigo-grid
 $dark-indigo-grid: extend(
     $indigo-grid,
     (
+        content-background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+
         content-text-color: (
             contrast-color: (
                 'gray',
@@ -437,11 +446,17 @@ $dark-indigo-grid: extend(
         ),
 
         header-selected-background: (
-            color: 'primary',
+            color: (
+                'primary',
+                900,
+            ),
         ),
 
         header-selected-text-color: (
-            contrast-color: 'primary',
+            contrast-color: (
+                'gray',
+                50,
+            ),
         ),
 
         active-expand-icon-color: (
@@ -489,13 +504,6 @@ $dark-indigo-grid: extend(
             ),
         ),
 
-        drop-area-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
         drop-area-text-color: (
             contrast-color: (
                 'gray',
@@ -507,7 +515,8 @@ $dark-indigo-grid: extend(
         drop-area-icon-color: (
             contrast-color: (
                 'gray',
-                200,
+                50,
+                0.6,
             ),
         ),
 
@@ -515,7 +524,6 @@ $dark-indigo-grid: extend(
             color: (
                 'gray',
                 100,
-                0.24,
             ),
         ),
 
@@ -529,7 +537,7 @@ $dark-indigo-grid: extend(
         row-hover-text-color: (
             contrast-color: (
                 'gray',
-                100,
+                50,
             ),
         ),
 
@@ -614,26 +622,15 @@ $dark-indigo-grid: extend(
         cell-selected-background: (
             color: (
                 'primary',
-                400,
+                900,
             ),
         ),
 
         cell-selected-text-color: (
             contrast-color: (
                 'primary',
-                400,
+                900,
             ),
-        ),
-
-        cell-active-border-color: (
-            color: (
-                'primary',
-                400,
-            ),
-        ),
-
-        grouparea-background: (
-            color: 'surface',
         ),
 
         grouparea-color: (
@@ -684,6 +681,34 @@ $dark-indigo-grid: extend(
                 'gray',
                 50,
                 0.8,
+            ),
+        ),
+
+        drop-area-on-drop-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        header-background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+
+        cell-editing-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        cell-editing-foreground: (
+            contrast-color: (
+                'gray',
+                50,
             ),
         ),
     )
