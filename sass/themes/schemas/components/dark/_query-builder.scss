@@ -7,27 +7,41 @@
 /// @access public
 ////
 
+/// Generates a base dark query builder schema.
+/// @type {Map}
+/// @prop {Color} query-background [contrast-color: ('gray', 900)] - The background color of the query block.
+$dark-query-builder: (
+    query-background: (
+        contrast-color: (
+            'gray',
+            900,
+        ),
+    ),
+);
+
 /// Generates a dark material query builder schema.
 /// @type {Map}
 /// @see $material-query-builder
 /// @requires $material-query-builder
-$dark-material-query-builder: $material-query-builder;
+$dark-material-query-builder: extend($material-query-builder, $dark-query-builder);
 
 /// Generates a dark fluent query builder schema.
 /// @see $fluent-query-builder
 /// @requires $fluent-query-builder
-$dark-fluent-query-builder: $fluent-query-builder;
+$dark-fluent-query-builder: extend($fluent-query-builder, $dark-query-builder);
 
 /// Generates a dark bootstrap query builder schema.
-$dark-bootstrap-query-builder: $bootstrap-query-builder;
+$dark-bootstrap-query-builder: extend($bootstrap-query-builder, $dark-query-builder);
 
 /// Generates a dark indigo query builder schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 50)] - The background color of the filtering row.
 /// @prop {Map} header-border [color: ('gray', 100)] - The border color of the query builder header.
+/// @prop {Map} query-border-color [contrast-color: ('gray', 900)] - The border color of the query block.
 /// @requires $indigo-query-builder
 $dark-indigo-query-builder: extend(
     $indigo-query-builder,
+    $dark-query-builder,
     (
         background: (
             color: (
@@ -40,6 +54,13 @@ $dark-indigo-query-builder: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        query-border-color: (
+            contrast-color: (
+                'gray',
+                900,
             ),
         ),
     )
