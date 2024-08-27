@@ -18,6 +18,11 @@
 /// @prop {Map} background-and--focus [color: ('primary', 700)] - The background color on focus/selected of advanced filtering "AND" condition.
 /// @prop {Map} background-or [color: ('secondary', 300)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} background-or--focus [color: ('secondary', 700)] - The background color on focus/selected of advanced filtering "OR" condition.
+/// @prop {Map} border-color [color: ('gray', 300)] - The border color of the query builder.
+/// @prop {Number} border-radius [rem(4px)] - The border radius of the query builder.
+/// @prop {Map} query-background [color: ('surface')] - The background color of the query block.
+/// @prop {Map} query-border-color [color: ('gray', 300)] - The border color of the query block.
+/// @prop {Number} query-border-radius [rem(8px)] - The border radius of the query block.
 $light-query-builder: (
     background: (
         color: (
@@ -69,6 +74,27 @@ $light-query-builder: (
             700,
         ),
     ),
+
+    border-color: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+
+    border-radius: rem(4px),
+    query-background: (
+        color: 'surface',
+    ),
+
+    query-border-color: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+
+    query-border-radius: rem(8px),
 );
 
 /// Generates a material query builder schema.
@@ -80,6 +106,7 @@ $material-query-builder: $light-query-builder;
 /// @type {Map}
 /// @prop {Map} background-or [color: ('error', 500, .5)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} background-or--focus [color: ('error')] - The background color on focus/selected of advanced filtering "OR" condition.
+/// @prop {Number} border-radius [rem(2px)] - The border radius of the query builder.
 /// @requires {Map} $light-query-builder
 $fluent-query-builder: extend(
     $light-query-builder,
@@ -97,12 +124,17 @@ $fluent-query-builder: extend(
                 'error',
             ),
         ),
+
+        border-radius: rem(2px),
     )
 );
 
 /// Generates a bootstrap query builder schema.
 /// @type {Map}
 /// @prop {Map} header-background [color: ('gray', 100, .5)] - The background color of the query builder header.
+/// @prop {Map} query-background [contrast-color: ('gray', 900)] - The background color of the query block.
+/// @prop {Map} border-color [color: ('gray', 100)] - The border color of the query builder.
+/// @prop {Map} query-border-color [color: ('gray', 100)] - The border color of the query block.
 /// @requires {Map} $light-query-builder
 $bootstrap-query-builder: extend(
     $light-query-builder,
@@ -112,6 +144,27 @@ $bootstrap-query-builder: extend(
                 'gray',
                 100,
                 0.5,
+            ),
+        ),
+
+        query-background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        query-border-color: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )
@@ -126,6 +179,7 @@ $bootstrap-query-builder: extend(
 /// @prop {Map} background-or [color: ('success', 500)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} background-and--focus [color: ('primary', 300)] - The background color on focus/selected of advanced filtering "AND" condition.
 /// @prop {Map} background-or--focus [color: ('secondary', 400)] - The background color on focus/selected of advanced filtering "OR" condition.
+/// @prop {Number} border-radius [rem(10px)] - The border radius of the query builder.
 /// @requires {Map} $light-query-builder
 $indigo-query-builder: extend(
     $light-query-builder,
@@ -170,5 +224,7 @@ $indigo-query-builder: extend(
                 400,
             ),
         ),
+
+        border-radius: rem(10px),
     )
 );
