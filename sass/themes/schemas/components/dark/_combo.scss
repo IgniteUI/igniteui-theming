@@ -26,6 +26,8 @@ $dark-fluent-combo: $fluent-combo;
 $dark-bootstrap-combo: $bootstrap-combo;
 
 /// Generates a dark indigo combo schema.
+/// @prop {Map} clear-button-foreground [contrast-color: ('gray', 100, .6)] - The combo toggle clear foreground color.
+/// @prop {Map} clear-button-foreground-focus [contrast-color: ('gray', 100, .6)] - The combo clear button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground [contrast-color: ('gray', 100, .6)] - The combo toggle button foreground color.
 /// @prop {Map} toggle-button-foreground-focus [contrast-color: ('gray', 100, .8)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground-filled [contrast-color: ('gray', 100, .6)] - The combo toggle button foreground color when the combo is focused.
@@ -35,6 +37,20 @@ $dark-bootstrap-combo: $bootstrap-combo;
 $dark-indigo-combo: extend(
     $indigo-combo,
     (
+        clear-button-foreground: (
+            contrast-color: (
+                'gray',
+                100,
+                0.6,
+            ),
+        ),
+        clear-button-foreground-focus: (
+            contrast-color: (
+                'gray',
+                100,
+                0.6,
+            ),
+        ),
         toggle-button-foreground: (
             contrast-color: (
                 'gray',
