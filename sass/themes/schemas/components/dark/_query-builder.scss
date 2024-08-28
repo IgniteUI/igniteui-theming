@@ -9,9 +9,9 @@
 
 /// Generates a base dark query builder schema.
 /// @type {Map}
-/// @prop {Color} query-background [contrast-color: ('gray', 900)] - The background color of the query block.
+/// @prop {Color} tree-background [contrast-color: ('gray', 900)] - The background color of the query block.
 $dark-query-builder: (
-    query-background: (
+    tree-background: (
         contrast-color: (
             'gray',
             900,
@@ -36,7 +36,7 @@ $dark-bootstrap-query-builder: extend($bootstrap-query-builder, $dark-query-buil
 /// Generates a dark indigo query builder schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 50)] - The background color of the filtering row.
-/// @prop {Map} query-border-color [contrast-color: ('gray', 900)] - The border color of the query block.
+/// @prop {Map} tree-border-color [contrast-color: ('gray', 900)] - The border color of the query block.
 /// @requires $indigo-query-builder
 $dark-indigo-query-builder: extend(
     $indigo-query-builder,
@@ -49,7 +49,7 @@ $dark-indigo-query-builder: extend(
             ),
         ),
 
-        query-border-color: (
+        tree-border-color: (
             contrast-color: (
                 'gray',
                 900,

@@ -19,9 +19,9 @@
 /// @prop {Map} background-or--focus [color: ('secondary', 700)] - The background color on focus/selected of advanced filtering "OR" condition.
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color of the query builder.
 /// @prop {Number} border-radius [rem(4px)] - The border radius of the query builder.
-/// @prop {Map} query-background [color: ('surface')] - The background color of the query block.
-/// @prop {Map} query-border-color [color: ('gray', 300)] - The border color of the query block.
-/// @prop {Number} query-border-radius [rem(8px)] - The border radius of the query block.
+/// @prop {Map} tree-background [color: ('surface')] - The background color of the query block.
+/// @prop {Map} tree-border-color [color: ('gray', 300)] - The border color of the query block.
+/// @prop {Number} tree-border-radius [rem(8px)] - The border radius of the query block.
 $light-query-builder: (
     background: (
         color: (
@@ -80,18 +80,18 @@ $light-query-builder: (
     ),
 
     border-radius: rem(4px),
-    query-background: (
+    tree-background: (
         color: 'surface',
     ),
 
-    query-border-color: (
+    tree-border-color: (
         color: (
             'gray',
             300,
         ),
     ),
 
-    query-border-radius: rem(8px),
+    tree-border-radius: rem(8px),
 );
 
 /// Generates a material query builder schema.
@@ -129,9 +129,9 @@ $fluent-query-builder: extend(
 /// Generates a bootstrap query builder schema.
 /// @type {Map}
 /// @prop {Color} header-background [color: ('gray', 100, .5)] - The background color of the query builder header.
-/// @prop {Map} query-background [contrast-color: ('gray', 900)] - The background color of the query block.
+/// @prop {Map} tree-background [contrast-color: ('gray', 900)] - The background color of the query block.
 /// @prop {Map} border-color [color: ('gray', 100)] - The border color of the query builder.
-/// @prop {Map} query-border-color [color: ('gray', 100)] - The border color of the query block.
+/// @prop {Map} tree-border-color [color: ('gray', 100)] - The border color of the query block.
 /// @requires {Map} $light-query-builder
 $bootstrap-query-builder: extend(
     $light-query-builder,
@@ -144,7 +144,7 @@ $bootstrap-query-builder: extend(
             ),
         ),
 
-        query-background: (
+        tree-background: (
             contrast-color: (
                 'gray',
                 900,
@@ -158,7 +158,7 @@ $bootstrap-query-builder: extend(
             ),
         ),
 
-        query-border-color: (
+        tree-border-color: (
             color: (
                 'gray',
                 100,
