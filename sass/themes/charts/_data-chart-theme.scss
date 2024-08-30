@@ -28,6 +28,24 @@
 /// @param {Color} $plot-area-background [null] - Sets the brush used as the background for the current Chart object's plot area.
 /// @param {String} $title-horizontal-alignment [null] - The horizontal alignment to use for the title. Valid options are 'left', 'center', and 'right';
 /// @param {String} $subtitle-horizontal-alignment [null] - The horizontal alignment to use for the subtitle. Valid options are 'left', 'center', and 'right';
+/// @param {List} $axis-label-margin [null] - Sets the margin (top, right, bottom, left) of labels on the both axes.
+/// @param {Color} $axis-label-text-color [null] - Sets the color of labels on both axes.
+/// @param {String} $axis-label-text-style [null] - Sets the CSS font property for labels on both axes.
+/// @param {String} $axis-label-vertical-alignment [null] - Sets the vertical alignment of X-axis labels.
+/// @param {Color} $axis-major-stroke [null] - Sets the color to apply to major gridlines along both axes.
+/// @param {Number} $axis-major-stroke-thickness [null] - Sets the thickness to apply to major gridlines on both axes.
+/// @param {Color} $axis-minor-stroke [null] - Sets the color to apply to minor gridlines along  both axes.
+/// @param {Number} $axis-minor-stroke-thickness [null] - Sets the thickness to apply to minor gridlines along both axes.
+/// @param {Color} $axis-strip [null] - Sets the color to apply to stripes along both axes.
+/// @param {Color} $axis-stroke [null] - Sets the color to apply to both axes.
+/// @param {Number} $axis-stroke-thickness [null] - Sets the thickness to apply to both axes.
+/// @param {Number} $axis-tick-length [null] - Sets the length of tickmarks along both axes.
+/// @param {Color} $axis-tick-stroke [null] - Sets the color to apply to tickmarks along both axes.
+/// @param {Number} $axis-tick-stroke-thickness [null] - Sets the thickness to apply to tickmarks along both axes.
+/// @param {String} $axis-title-alignment [null] - Sets the horizontal alignment of both axes.
+/// @param {List} $axis-title-margin [null] - Sets the margin (top, right, bottom, left) of a title on both axes.
+/// @param {Color} $axis-title-text-color [null] - Sets the color of the title on the X-axis.
+/// @param {String} $axis-title-text-style [null] - Sets the CSS font property for the title on both axes.
 /// @requires $light-material-schema
 /// @requires extend
 ///
@@ -50,7 +68,20 @@
     $marker-outlines: null,
     $plot-area-background: null,
     $title-horizontal-alignment: null,
-    $subtitle-horizontal-alignment: null
+    $subtitle-horizontal-alignment: null,
+    $axis-label-margin: null,
+    $axis-label-text-color: null,
+    $axis-label-text-style: null,
+    $axis-label-vertical-alignment: null,
+    $axis-major-stroke-thickness: null,
+    $axis-minor-stroke-thickness: null,
+    $axis-stroke: null,
+    $axis-stroke-thickness: null,
+    $axis-tick-length: null,
+    $axis-tick-stroke-thickness: null,
+    $axis-title-alignment: null,
+    $axis-title-margin: null,
+    $axis-title-text-style: null
 ) {
     $name: 'data-chart';
     $selector: map.get(
