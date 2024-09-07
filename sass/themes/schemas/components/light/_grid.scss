@@ -1057,13 +1057,14 @@ $bootstrap-grid: extend(
 
 /// Generates an indigo grid schema.
 /// @type {Map}
+/// @prop {Map} content-text-color [color: ('gray', 900)] - The table body text color.
 /// @prop {Map} content-background [color: ('surface')] - The table body background color.
 /// @prop {Map} header-background [color: ('surface')] - The table header background color.
 /// @prop {Map} header-text-color [color: ('gray', 800)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 50)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [color: 'gray', 900] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
-/// @prop {Map} filtering-row-background [color: ('surface', 500)] - The background color of the filtering row.
+/// @prop {Map} filtering-row-background [contrast-color: ('gray', 900)] - The background color of the filtering row.
 /// @prop {Map} filtering-background-and [color: ('primary', 400)] - The background color of advanced filtering "AND" condition.
 /// @prop {Map} filtering-background-and--focus [color: ('primary', 300)] - The background color on focus/selected of advanced filtering "AND" condition.
 /// @prop {Map} filtering-background-or [color: ('success', 500)] - The background color of advanced filtering "OR" condition.
@@ -1074,8 +1075,6 @@ $bootstrap-grid: extend(
 /// @prop {Map} ghost-header-icon-color [color: 'gray', 600] - The dragged header icon color.
 /// @prop {Map} row-odd-background [color: ('surface')] - The background color of odd rows.
 /// @prop {Map} row-even-background [color: ('surface')] - The background color of even rows.
-/// @prop {Map} row-odd-text-color [color: ('gray', 800)] - The text color of odd rows.
-/// @prop {Map} row-even-text-color [color: ('gray', 800)] - The text color of even rows.
 /// @prop {Map} row-border-color [color: ('gray', 300)] - The row bottom border color.
 /// @prop {Map} row-highlight [color: ('primary', 400)] - The grid row highlight color.
 /// @prop {Map} row-hover-background [color: ('gray', 200)] - The hover row background color.
@@ -1095,9 +1094,9 @@ $bootstrap-grid: extend(
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-background [color: ('primary', 400)] - The grid group row cont badge background color.
 /// @prop {Map} group-count-text-color [contrast-color: ('primary', 500)] - The grid group row cont badge text color.
-/// @prop {Map} cell-selected-text-color [color: ('gray', 800)] - The selected cell text color.
+/// @prop {Map} cell-selected-text-color [color: ('gray', 900)] - The selected cell text color.
 /// @prop {Map} cell-selected-within-background [color: ('primary', 100)] - The background of the selected cell inside a selected row/column.
-/// @prop {Map} cell-selected-within-text-color [color: ('gray', 800)] - The color of the selected cell inside a selected row/column.
+/// @prop {Map} cell-selected-within-text-color [color: ('gray', 900)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} cell-active-border-color [color: ('primary', 400)] - The active(focused) cell border color.
 /// @prop {Map} cell-editing-background [color: ('gray' 200)] - The background for the cell in editing mode.
 /// @prop {Map} row-selected-hover-text-color [color: ('gray', 900)] - The selected row hover text color.
@@ -1175,9 +1174,9 @@ $indigo-grid: extend(
         ),
 
         filtering-row-background: (
-            color: (
-                'surface',
-                500,
+            contrast-color: (
+                'gray',
+                900,
             ),
         ),
 
@@ -1233,7 +1232,7 @@ $indigo-grid: extend(
         cell-selected-text-color: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
 
@@ -1303,7 +1302,7 @@ $indigo-grid: extend(
         cell-selected-within-text-color: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
 
@@ -1430,20 +1429,6 @@ $indigo-grid: extend(
             ),
         ),
 
-        row-odd-text-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
-        row-even-text-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
         active-expand-icon-color: (
             color: (
                 'gray',
@@ -1516,6 +1501,13 @@ $indigo-grid: extend(
                 'gray',
                 900,
                 0.2,
+            ),
+        ),
+
+        content-text-color: (
+            color: (
+                'gray',
+                900,
             ),
         ),
     )

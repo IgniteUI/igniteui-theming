@@ -398,8 +398,6 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} body-summaries-text-color [contrast-color: 'surface'] - The text color of the summary groups located the body.
 /// @prop {Map} expand-icon-color [contrast-color: ('gray', 50, .8)] - The grid row expand icon color.
 /// @prop {Map} expand-icon-hover-color [contrast-color: ('gray', 50)] - The grid row expand icon hover color.
-/// @prop {Map} row-odd-text-color [contrast-color: ('gray', 50, .8)] - The text color of odd rows.
-/// @prop {Map} row-even-text-color [contrast-color: ('gray', 50, .8)] - The text color of even rows.
 /// @prop {Map} active-expand-icon-color [contrast-color: ('gray', 50, .8)] - The drop area background on drop color.
 /// @prop {Map} drop-area-on-drop-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} header-background [color: ('surface', 500)] - The table header background color.
@@ -409,6 +407,7 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} cell-edited-value-color [contrast-color: ('gray', 50)] - The color of cell edited value.
 /// @prop {Map} cell-disabled-color [contrast-color: ('gray', 50, .2)] - The text color of a disabled cell.
 /// @prop {Map} drop-area-background [color: ('gray', 100)] - The drop area background color.
+/// @prop {Map} filtering-row-background [color: ('gray', 50)] - The background color of the filtering row.
 /// @requires $indigo-grid
 $dark-indigo-grid: extend(
     $indigo-grid,
@@ -654,22 +653,6 @@ $dark-indigo-grid: extend(
             ),
         ),
 
-        row-odd-text-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.8,
-            ),
-        ),
-
-        row-even-text-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.8,
-            ),
-        ),
-
         drop-area-on-drop-background: (
             color: (
                 'gray',
@@ -717,6 +700,13 @@ $dark-indigo-grid: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        filtering-row-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
     )
