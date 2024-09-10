@@ -120,7 +120,7 @@ $bootstrap-query-builder: extend(
 /// Generates an indigo query builder schema.
 /// @type {Map}
 /// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the filtering row.
-/// @prop {Map} header-background [contrast-color: ('gray', 900)] - The background color of the query builder header.
+/// @prop {Color} header-background [transparent] - The background color of the query builder header.
 /// @prop {Map} header-border [color: ('gray', 300)] - The border color of the query builder header.
 /// @prop {Map} background-and [color: ('primary', 400)] - The background color of advanced filtering "AND" condition.
 /// @prop {Map} background-or [color: ('success', 500)] - The background color of advanced filtering "OR" condition.
@@ -137,12 +137,7 @@ $indigo-query-builder: extend(
             ),
         ),
 
-        header-background: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
+        header-background: transparent,
 
         header-border: (
             color: (
