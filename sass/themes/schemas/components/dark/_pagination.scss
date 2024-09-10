@@ -37,16 +37,15 @@ $dark-bootstrap-pagination: $bootstrap-pagination;
 
 /// Generates a dark indigo pagination schema.
 /// @type {Map}
-/// @prop {Map} border-color [contrast-color: ('gray', 50, .3)] - The border color of the paging panel.
+/// @prop {Map} border-color [color: ('gray', 200)] - The border color of the paging panel.
 /// @requires $indigo-pagination
 $dark-indigo-pagination: extend(
     $indigo-pagination,
     (
         border-color: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.3,
+                200,
             ),
         ),
     )

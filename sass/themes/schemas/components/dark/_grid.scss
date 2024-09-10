@@ -407,7 +407,6 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} cell-edited-value-color [contrast-color: ('gray', 50)] - The color of cell edited value.
 /// @prop {Map} cell-disabled-color [contrast-color: ('gray', 50, .2)] - The text color of a disabled cell.
 /// @prop {Map} drop-area-background [color: ('gray', 100)] - The drop area background color.
-/// @prop {Map} filtering-row-background [color: ('gray', 50)] - The background color of the filtering row.
 /// @requires $indigo-grid
 $dark-indigo-grid: extend(
     $indigo-grid,
@@ -700,13 +699,6 @@ $dark-indigo-grid: extend(
             color: (
                 'gray',
                 100,
-            ),
-        ),
-
-        filtering-row-background: (
-            color: (
-                'gray',
-                50,
             ),
         ),
     )

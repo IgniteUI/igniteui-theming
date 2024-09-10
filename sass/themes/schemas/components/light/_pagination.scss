@@ -88,24 +88,23 @@ $bootstrap-pagination: extend(
 
 /// Generates an indigo pagination schema.
 /// @type {Map}
-/// @prop {Map} background-color [contrast-color: ('gray', 900)] - The background color of the paging panel.
-/// @prop {Map} border-color [color: ('gray', 900, .3)] - The border color of the paging panel.
+/// @prop {Map} background-color [color: ('surface', 500)] - The background color of the paging panel.
+/// @prop {Map} border-color [color: ('gray', 400)] - The border color of the paging panel.
 /// @requires {Map} $light-pagination
 $indigo-pagination: extend(
     $light-pagination,
     (
         background-color: (
-            contrast-color: (
-                'gray',
-                900,
+            color: (
+                'surface',
+                500,
             ),
         ),
 
         border-color: (
             color: (
                 'gray',
-                900,
-                0.3,
+                400,
             ),
         ),
     )
