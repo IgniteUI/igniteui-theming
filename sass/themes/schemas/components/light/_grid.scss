@@ -1113,6 +1113,9 @@ $bootstrap-grid: extend(
 /// @prop {Map} cell-disabled-color [color: ('gray', 900, .2)] - The text color of a disabled cell.
 /// @prop {Map} filtering-header-background [color: ('gray', 200)] - The background color of the filtered column header.
 /// @prop {Map} filtering-header-text-color [color: ('gray', 900)] - The text color of the filtered column header.
+/// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 800)] - The text color of the excel style filtering options.
+/// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 900)] - The text color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 900, .2)] - The text color of the excel style filtering options in disabled state.
 /// @requires {Map} $light-grid
 $indigo-grid: extend(
     $light-grid,
@@ -1496,6 +1499,28 @@ $indigo-grid: extend(
         ),
 
         cell-disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+
+        excel-filtering-actions-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+
+        excel-filtering-actions-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        excel-filtering-actions-disabled-foreground: (
             color: (
                 'gray',
                 900,

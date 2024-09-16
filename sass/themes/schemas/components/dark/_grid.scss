@@ -390,7 +390,7 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} cell-selected-within-background [color: ('primary', 700)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('primary', 900)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-background [color: ('primary', 900)] - The selected cell background color.
-/// @prop {Map} cell-selected-text-color [contrast-color: ('primary', 900, .8)] - The selected cell text color.
+/// @prop {Map} cell-selected-text-color [contrast-color: ('primary', 900)] - The selected cell text color.
 /// @prop {Map} root-summaries-background [color: 'surface'] - The background color of the summary groups located the footer.
 /// @prop {Map} root-summaries-text-color [contrast-color: 'surface'] - The text color of the summary groups located the footer.
 /// @prop {Map} body-summaries-background [color: 'surface'] - The background color of the summary groups located the body.
@@ -406,6 +406,9 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} cell-edited-value-color [contrast-color: ('gray', 50)] - The color of cell edited value.
 /// @prop {Map} cell-disabled-color [contrast-color: ('gray', 50, .2)] - The text color of a disabled cell.
 /// @prop {Map} drop-area-background [color: ('gray', 100)] - The drop area background color.
+/// @prop {Map} excel-filtering-actions-foreground [contrast-color: ('gray', 50, .9)] - The text color of the excel style filtering options.
+/// @prop {Map} excel-filtering-actions-hover-foreground [contrast-color: ('gray', 50)] - The text color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-disabled-foreground [contrast-color: ('gray', 50, .2)] - The text color of the excel style filtering options in disabled state.
 /// @requires $indigo-grid
 $dark-indigo-grid: extend(
     $indigo-grid,
@@ -609,7 +612,6 @@ $dark-indigo-grid: extend(
             contrast-color: (
                 'primary',
                 900,
-                0.8,
             ),
         ),
 
@@ -691,6 +693,29 @@ $dark-indigo-grid: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        excel-filtering-actions-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+                0.9,
+            ),
+        ),
+
+        excel-filtering-actions-hover-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        excel-filtering-actions-disabled-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
             ),
         ),
     )
