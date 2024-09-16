@@ -103,13 +103,13 @@ $_enhanced-accessibility: false;
         $result: map.merge(
             $result,
             (
-                $variant: map.get($shade, 'raw'),
+                #{$variant}-hsl: map.get($shade, 'hsl'),
                 #{$variant}-contrast:
                     text-contrast(
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                #{$variant}-hsl: map.get($shade, 'hsl'),
+                $variant: map.get($shade, 'raw')
             )
         );
     }

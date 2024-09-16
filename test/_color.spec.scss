@@ -284,20 +284,23 @@ $_palette: palette(
 
             @include assert() {
                 @include output($selector: false) {
-                    @include palette($_palette);
+                    .handmade {
+                        @include palette($_palette);
+                    }
                 }
 
                 @include contains($selector: false) {
-                    :root {
+                    .handmade {
                         @each $color, $shades in map.remove($IPalette, '_meta') {
                           @each $shade in $shades {
                             $value: map.get($_palette, $color, $shade);
 
                             @if $shade == 500 {
+                              --ig-#{$color}-h: #{math.round(color.hue($value))};
+                              --ig-#{$color}-s: #{math.round(color.saturation($value))};
+                              --ig-#{$color}-l: #{math.round(color.lightness($value))};
                               --ig-#{$color}-a: 1;
                             }
-
-                            --ig-#{$color}-#{$shade}: #{$value};
                           }
                         }
                     }
