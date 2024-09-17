@@ -103,13 +103,12 @@ $_enhanced-accessibility: false;
         $result: map.merge(
             $result,
             (
-                #{$variant}-hsl: map.get($shade, 'hsl'),
+                $variant: map.get($shade, 'hsl'),
                 #{$variant}-contrast:
                     text-contrast(
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                $variant: map.get($shade, 'raw')
             )
         );
     }
@@ -143,7 +142,7 @@ $_enhanced-accessibility: false;
         $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
 
         @if #{$shade} == '500' {
-            $hsl: hsl($h $s $l);
+            $hsl: $raw;
         }
 
         @return (raw: $raw, hsl: $hsl);
@@ -158,7 +157,7 @@ $_enhanced-accessibility: false;
         $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
 
         @if #{$shade} == '500' {
-            $hsl: hsl($h $s $l);
+            $hsl: $color;
         }
 
         @return (raw: $raw, hsl: $hsl);
@@ -186,26 +185,13 @@ $_enhanced-accessibility: false;
 ///      background: color($my-palette, 'primary', 200, .5);
 ///    }
 @function color($palette: null, $color: 'primary', $variant: 500, $opacity: null) {
-    $c: map.get($palette or types.$IPalette, #{$color});
-    $a: var(--ig-#{$color}-a);
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
-    $meta: if($palette, map.get($palette, '_meta'), null);
     $_alpha: if($opacity, $opacity, 1);
-    $_hsl-alpha: hsl(from $s h s l/ if($opacity, $opacity, $a));
+    $_hsl-alpha: hsl(from $s h s l / $_alpha);
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
-    @if not($palette) or not($meta) {
-        @return if($contrast, $_mix-alpha, $_hsl-alpha);
-    }
-
-    $_shade: map.get($c, $variant);
-
-    @if meta.type-of($_shade) == 'list' and list.length($_shade) == 3 {
-        $_shade: hsl($_shade...);
-    }
-
-    @return rgba($_shade, $alpha: $_alpha);
+    @return if($contrast, $_mix-alpha, $_hsl-alpha);
 }
 
 /// Retrieves a contrast text color for a given color variant from a color palette.
