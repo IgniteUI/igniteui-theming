@@ -406,22 +406,26 @@ $bootstrap-chip: extend(
 /// @type {Map}
 /// @prop {Number} ghost-elevation [1] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
 /// @prop {Map} text-color [color: ('gray', 700)] - The chip text color.
-/// @prop {Map} background [color: ('surface')] - The chip background color.
+/// @prop {Map} hover-text-color [color: ('gray', 900)] - The chip text hover color.
+/// @prop {Map} focus-text-color [color: ('gray', 700)] The focused chip text color.
+/// @prop {Map} $disabled-text-color [color: ('gray', 900, .2)] - The disabled chip text color.
+/// @prop {Map} background [color: ('gray', 50)] - The chip background color.
 /// @prop {Map} ghost-background [color: ('surface')] - The chip ghost background color.
 /// @prop {Map} hover-background [color: ('gray', 200)] - The chip hover background color.
-/// @prop {Map} focus-background [color: ('surface')] The focused chip background color.
-/// @prop {Map} selected-text-color [contrast-color: ('primary', 500)] - The selected chip text color.
-/// @prop {Map} hover-selected-text-color [contrast-color: ('primary', 500)] - The selected chip hover text color.
+/// @prop {Map} focus-background [color: ('gray', 50)] The focused chip background color.
+/// @prop {Map} selected-text-color [contrast-color: ('primary', 900)] - The selected chip text color.
+/// @prop {Map} hover-selected-text-color [contrast-color: ('primary', 900)] - The selected chip hover text color.
 /// @prop {Map} hover-selected-background [color: ('primary', 400)] - The selected chip hover background color.
-/// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 500)] - The selected chip text focus color.
+/// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 900)] - The selected chip text focus color.
 /// @prop {Map} focus-selected-background [color: ('primary', 400)] - The selected chip focus background color.
-/// @prop {Map} focus-outline-color [color: ('gray', 300)] - The chip focus outline color.
-/// @prop {Map} focus-selected-outline-color [color: ('primary', 200)] - The selected chip focus outline color.
+/// @prop {Map} focus-outline-color [color: ('gray', 900, .15)] - The chip focus outline color.
+/// @prop {Map} focus-selected-outline-color [color: ('primary', 400, .5)] - The selected chip focus outline color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The chip border color.
-/// @prop {Map} hover-border-color [color: ('gray', 400)] - The chip hover border color.
+/// @prop {Map} hover-border-color [color: ('gray', 500)] - The chip hover border color.
 /// @prop {Map} focus-border-color [color: ('gray', 400)] - The chip focus border color.
-/// @prop {Map} $disabled-background [color: ('surface')] - The disabled chip background color.
-/// @prop {Map} $disabled-border-color [ color: ('gray', 200)] - The disabled chip border color.
+/// @prop {Map} $disabled-background [contrast-color: ('gray', 900)] - The disabled chip background color.
+/// @prop {Map} $disabled-border-color [ color: ('gray', 300)] - The disabled chip border color.
+/// @prop {List} size [(rem(20px), rem(24px), rem(28px))] - The size used for the chip height.
 /// @requires {Map} $light-chip
 /// @requires {Map} $indigo-elevation-chip
 $indigo-chip: extend(
@@ -431,7 +435,8 @@ $indigo-chip: extend(
         focus-outline-color: (
             color: (
                 'gray',
-                300,
+                900,
+                0.15,
             ),
         ),
 
@@ -442,16 +447,32 @@ $indigo-chip: extend(
             ),
         ),
 
+        hover-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        focus-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         focus-selected-outline-color: (
             color: (
                 'primary',
-                200,
+                400,
+                0.5,
             ),
         ),
 
         background: (
             color: (
-                'surface',
+                'gray',
+                50,
             ),
         ),
 
@@ -470,7 +491,8 @@ $indigo-chip: extend(
 
         focus-background: (
             color: (
-                'surface',
+                'gray',
+                50,
             ),
         ),
 
@@ -484,7 +506,7 @@ $indigo-chip: extend(
         hover-border-color: (
             color: (
                 'gray',
-                400,
+                500,
             ),
         ),
 
@@ -498,14 +520,14 @@ $indigo-chip: extend(
         selected-text-color: (
             contrast-color: (
                 'primary',
-                500,
+                900,
             ),
         ),
 
         hover-selected-text-color: (
             contrast-color: (
                 'primary',
-                500,
+                900,
             ),
         ),
 
@@ -519,7 +541,7 @@ $indigo-chip: extend(
         focus-selected-text-color: (
             contrast-color: (
                 'primary',
-                500,
+                900,
             ),
         ),
 
@@ -530,16 +552,33 @@ $indigo-chip: extend(
             ),
         ),
 
-        disabled-background: (
+        disabled-text-color: (
             color: (
-                'surface',
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+
+        disabled-background: (
+            contrast-color: (
+                'gray',
+                900,
             ),
         ),
 
         disabled-border-color: (
             color: (
                 'gray',
-                200,
+                300,
+            ),
+        ),
+
+        size: (
+            sizable: (
+                rem(20px),
+                rem(24px),
+                rem(28px),
             ),
         ),
     )
