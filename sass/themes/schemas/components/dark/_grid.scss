@@ -409,6 +409,7 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-foreground [contrast-color: ('gray', 50, .9)] - The text color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-foreground [contrast-color: ('gray', 50)] - The text color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [contrast-color: ('gray', 50, .2)] - The text color of the excel style filtering options in disabled state.
+/// @prop {Map} row-ghost-background [color: ('gray', 100)] - The background color of the dragged row.
 /// @requires $indigo-grid
 $dark-indigo-grid: extend(
     $indigo-grid,
@@ -716,6 +717,13 @@ $dark-indigo-grid: extend(
                 'gray',
                 50,
                 0.2,
+            ),
+        ),
+
+        row-ghost-background: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )

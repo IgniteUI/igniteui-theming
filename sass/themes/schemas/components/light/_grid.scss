@@ -92,6 +92,7 @@
 /// @prop {List} header-size [(rem(32px), rem(40px), rem(50px))] - The size used for the grid header.
 /// @prop {List} drop-area-size [(rem(24px), rem(24px), rem(32px))] - The size used for the grid drop area.
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
+/// @prop {Map} row-ghost-background [color: 'primary', 50] - The background color of the dragged row.
 /// @requires {Map} $default-elevation-grid
 $light-grid: extend(
     $default-elevation-grid,
@@ -594,13 +595,6 @@ $light-grid: extend(
             color: (
                 'primary',
                 50,
-            ),
-        ),
-
-        row-drag-color: (
-            color: (
-                'gray',
-                200,
             ),
         ),
 
@@ -1116,6 +1110,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 800)] - The text color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 900)] - The text color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 900, .2)] - The text color of the excel style filtering options in disabled state.
+/// @prop {Map} row-drag-color [color: ('gray', 800, .75))] - The color of the drag handle.
 /// @requires {Map} $light-grid
 $indigo-grid: extend(
     $light-grid,
@@ -1525,6 +1520,21 @@ $indigo-grid: extend(
                 'gray',
                 900,
                 0.2,
+            ),
+        ),
+
+        row-drag-color: (
+            color: (
+                'gray',
+                800,
+                0.75,
+            ),
+        ),
+
+        row-ghost-background: (
+            color: (
+                'gray',
+                200,
             ),
         ),
     )
