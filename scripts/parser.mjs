@@ -52,8 +52,6 @@ async function parseCSS(css) {
     const result = await postcss().process(css, {parser: safeParser, from: undefined});
     let comment = '';
 
-    report.log('Parsing CSS 🏗️');
-
     result.root.walk((node) => {
       if (node.type === 'comment') {
         comment = node.text;
