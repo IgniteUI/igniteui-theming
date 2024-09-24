@@ -361,9 +361,9 @@ $bootstrap-tabs: extend(
 /// @prop {Map} indicator-color [color: ('primary', 400)] - The color used for the tabs borders.
 /// @prop {Map} border-color [color: ('gray', 900, .15)] - The color used for the tab items bottom border.
 /// @prop {Color} button-background [transparent] - The color used for the button background.
-/// @prop {Color} button-hover-background [transparent] - The color used for the button background on hover.
+/// @prop {Map} button-hover-background [color: ('gray', 900, .05)] - The color used for the button background on hover.
 /// @prop {Map} button-color [color: ('gray', 600)] - The color used for the button icon/text color.
-/// @prop {Map} button-hover-color TBD???
+/// @prop {Map} button-hover-color [color: ('gray', 700)] - The color used for the button icon/text color on hover.
 /// @prop {Map} button-disabled-color [color: ('gray', 900, .2)] - The color used for the disabled button icon/text.
 /// @requires {Map} $light-tabs
 $indigo-tabs: extend(
@@ -430,11 +430,23 @@ $indigo-tabs: extend(
             ),
         ),
         button-background: transparent,
-        button-hover-background: transparent,
+        button-hover-background: (
+            color: (
+                'gray',
+                900,
+                0.05,
+            ),
+        ),
         button-color: (
             color: (
                 'gray',
                 600,
+            ),
+        ),
+        button-hover-color: (
+            color: (
+                'gray',
+                700,
             ),
         ),
         button-disabled-color: (
