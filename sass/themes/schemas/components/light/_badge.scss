@@ -70,10 +70,8 @@ $fluent-badge: $light-badge;
 /// @prop {Number} border-width [1px] - The border width of the badge component.
 /// @prop {Number} border-radius [rem(4px)] - The border radius used for badge.
 /// @requires {Map} $light-badge
-/// @requires {Map} $bootstrap-elevation-badge
 $bootstrap-badge: extend(
     $light-badge,
-    $bootstrap-elevation-badge,
     (
         border-width: 1px,
 
@@ -84,4 +82,5 @@ $bootstrap-badge: extend(
 /// Generates an indigo badge schema.
 /// @type {Map}
 /// @requires {Map} $light-badge
-$indigo-badge: $light-badge;
+/// @requires {Map} $indigo-elevation-badge
+$indigo-badge: extend($indigo-elevation-badge, $light-badge);
