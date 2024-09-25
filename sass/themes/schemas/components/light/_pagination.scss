@@ -12,7 +12,7 @@
 /// @prop {Map} text-color [color: ('gray', 800)] - The text color.
 /// @prop {Map} background-color [color: ('gray', 100)] - The background color of the paging panel.
 /// @prop {Map} border-color [color: ('gray', 200)] - The border color of the paging panel.
-/// @prop {List} size [(rem(40px), rem(48px), rem(56px))] - The size used for the paginator.
+/// @prop {List} size [(rem(44px), rem(48px), rem(56px))] - The size used for the paginator.
 $light-pagination: (
     text-color: (
         color: (
@@ -34,6 +34,7 @@ $light-pagination: (
             200,
         ),
     ),
+
     size: (
         sizable: (
             rem(44px),
@@ -87,23 +88,23 @@ $bootstrap-pagination: extend(
 
 /// Generates an indigo pagination schema.
 /// @type {Map}
-/// @prop {Map} text-color [color: ('gray', 700)] - The text color.
-/// @prop {Map} border-color [color: ('gray', 100)] - The border color of the paging panel.
+/// @prop {Map} background-color [color: ('surface', 500)] - The background color of the paging panel.
+/// @prop {Map} border-color [color: ('gray', 400)] - The border color of the paging panel.
 /// @requires {Map} $light-pagination
 $indigo-pagination: extend(
     $light-pagination,
     (
-        text-color: (
+        background-color: (
             color: (
-                'gray',
-                700,
+                'surface',
+                500,
             ),
         ),
 
         border-color: (
             color: (
                 'gray',
-                100,
+                400,
             ),
         ),
     )
