@@ -20,7 +20,24 @@
 /// @property {Color} plot-area-background [color: ('surface', 500)] - Sets the brush used as the background for the current Chart object's plot area.
 /// @property {String} title-horizontal-alignment [null] - The horizontal alignment to use for the title.
 /// @property {String} subtitle-horizontal-alignment [null] - The horizontal alignment to use for the subtitle.
-/// @property {Color} axis-label-text-color [color: (gray, 700)] - The horizontal alignment to use for the subtitle.
+/// @param {List} axis-label-margin [null] - Sets the margin (top, right, bottom, left) of labels on the both axes.
+/// @param {Color} axis-label-text-color [color: ('gray', 700)] - Sets the color of labels on both axes.
+/// @param {String} axis-label-text-style [null] - Sets the CSS font property for labels on both axes.
+/// @param {String} axis-label-vertical-alignment [null] - Sets the vertical alignment of X-axis labels.
+/// @param {Color} axis-major-stroke [null] - Sets the color to apply to major gridlines along both axes.
+/// @param {Number} axis-major-stroke-thickness [null] - Sets the thickness to apply to major gridlines on both axes.
+/// @param {Color} axis-minor-stroke [null] - Sets the color to apply to minor gridlines along  both axes.
+/// @param {Number} axis-minor-stroke-thickness [null] - Sets the thickness to apply to minor gridlines along both axes.
+/// @param {Color} axis-strip [null] - Sets the color to apply to stripes along both axes.
+/// @param {Color} axis-stroke [color: ('gray', 500)] - Sets the color to apply to both axes.
+/// @param {Number} axis-stroke-thickness [null] - Sets the thickness to apply to both axes.
+/// @param {Number} axis-tick-length [null] - Sets the length of tickmarks along both axes.
+/// @param {Color} axis-tick-stroke [color: ('gray', 500)] - Sets the color to apply to tickmarks along both axes.
+/// @param {Number} axis-tick-stroke-thickness [null] - Sets the thickness to apply to tickmarks along both axes.
+/// @param {String} axis-title-alignment [null] - Sets the horizontal alignment of both axes.
+/// @param {List} axis-title-margin [null] - Sets the margin (top, right, bottom, left) of a title on both axes.
+/// @param {Color} axis-title-text-color [color: ('gray', 900)] - Sets the color of the title on the X-axis.
+/// @param {String} axis-title-text-style [null] - Sets the CSS font property for the title on both axes.
 $material-data-chart: (
     'margin': null,
     'title-text-color': (
@@ -49,12 +66,54 @@ $material-data-chart: (
     ),
     'title-horizontal-alignment': null,
     'subtitle-horizontal-alignment': null,
+    'axis-label-margin': (
+        expand-shorthand: (
+            null,
+        ),
+        map-keys-prefix: 'axis-label',
+    ),
     'axis-label-text-color': (
         color: (
             'gray',
             700,
         ),
     ),
+    'axis-label-text-style': null,
+    'axis-label-vertical-alignment': null,
+    'axis-stroke': (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    'axis-stroke-thickness': null,
+    'axis-major-stroke': null,
+    'axis-major-stroke-thickness': null,
+    'axis-minor-stroke': null,
+    'axis-minor-stroke-thickness': null,
+    'axis-strip': null,
+    'axis-tick-length': null,
+    'axis-tick-stroke': (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    'axis-tick-stroke-thickness': null,
+    'axis-title-alignment': null,
+    'axis-title-margin': (
+        expand-shorthand: (
+            null,
+        ),
+        map-keys-prefix: 'axis-title',
+    ),
+    'axis-title-text-color': (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    'axis-title-text-style': null,
 );
 
 /// Generates a fluent data-chart schema.
