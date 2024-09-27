@@ -109,6 +109,7 @@ $_enhanced-accessibility: false;
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
+                raw: map.get($shade, 'raw'),
             )
         );
     }
@@ -190,6 +191,12 @@ $_enhanced-accessibility: false;
     $_alpha: if($opacity, $opacity, 1);
     $_hsl-alpha: hsl(from $s h s l / $_alpha);
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
+
+    @if $palette and not($contrast) {
+        $s: map.get($palette, $color);
+
+        @return if($variant == 500, rgba(map.get($s, $variant), $_alpha), rgba(map.get($s, raw), $_alpha));
+    }
 
     @return if($contrast, $_mix-alpha, $_hsl-alpha);
 }

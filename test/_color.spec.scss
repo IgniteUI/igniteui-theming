@@ -101,24 +101,22 @@ $_palette: palette(
     }
 
     @include describe('palette') {
-        @include it('should return a shade of type string w/ palette as only argument') {
+        @include it('should return a shade of type color w/ palette as only argument') {
             $value: color($_palette);
 
-            @include assert-equal(type-of($value), string);
+            @include assert-equal(type-of($value), color);
         }
 
-        @include it('should return a shade of type string w/ palette and color as only arguments') {
+        @include it('should return a shade of type color string w/ palette and color as only arguments') {
             $value: color($_palette, secondary);
-            $expected: hsl(from var(--ig-secondary-500) h s l / 1);
 
-            @include assert-equal($value, $expected);
+            @include assert-equal($value, $_secondary);
         }
 
         @include it('should return a shade of type string w/ all arguments passed') {
             $value: color($_palette, secondary, 500);
-            $expected: hsl(from var(--ig-secondary-500) h s l / 1);
 
-            @include assert-equal($value, $expected);
+            @include assert-equal($value, $_secondary);
         }
 
         @include it('should return a shade as CSS variable w/o arguments') {
