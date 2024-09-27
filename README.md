@@ -106,7 +106,7 @@ npm run serve:docs
 ## Testing and Debugging
 
 ### Preview Palettes
-To preview a palette you can pass the palette (`material`, `bootstrap`, `fluent`, `indigo`) and variant to the (`light` or `dark`) to the `palette` and `variant` arguments respectively. If you want to output the result to a file in the `./dist` folder add the `out` option.
+To preview a palette you can pass the palette (`material`, `bootstrap`, `fluent`, `indigo`) and variant (`light` or `dark`) to the `palette` and `variant` arguments respectively. If you want to output the result to a file in the `./dist` folder add the `out` option.
 
 ```
 npm run preview:palette -- --palette=material --variant=light --out
