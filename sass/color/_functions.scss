@@ -194,8 +194,10 @@ $_enhanced-accessibility: false;
 
     @if $palette and not($contrast) {
         $s: map.get($palette, $color);
+        $base: map.get($s, $variant);
+        $raw: map.get($s, raw);
 
-        @return if($variant == 500, rgba(map.get($s, $variant), $_alpha), rgba(map.get($s, raw), $_alpha));
+        @return if($raw and $variant != 500, rgba($raw, $_alpha), rgba($base, $_alpha));
     }
 
     @return if($contrast, $_mix-alpha, $_hsl-alpha);
