@@ -61,5 +61,118 @@ $dark-bootstrap-tabs: extend(
 
 /// Generates a dark indigo tabs schema.
 /// @type {Map}
+/// @prop {Map} item-hover-background [contrast-color: ('gray', 50, .1)] - The background used for the tabs on hover.
+/// @prop {Map} item-text-color [contrast-color: ('gray', 50, .8)] - The color used for the tab text color.
+/// @prop {Map} item-hover-color [contrast-color: ('gray', 50)] - The text color used for the tabs on hover.
+/// @prop {Map} item-active-color [contrast-color: ('gray', 50)] - The color used for the active tabs text.
+/// @prop {Map} item-disabled-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled tabs text.
+/// @prop {Map} item-icon-color [contrast-color: ('gray', 50, .6)] - The color used for the tab icon.
+/// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50, .8)] - The color used for the tab icon on hover.
+/// @prop {Map} item-active-icon-color [contrast-color: ('gray', 50, .8)] - The color used for the active tab icon.
+/// @prop {Map} item-disabled-icon-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled tab icon.
+/// @prop {Map} border-color [contrast-color: ('gray', 50, .15)] - The color used for the tab items bottom border.
+/// @prop {Map} button-color [contrast-color: ('gray', 50, .8)] - The color used for the button icon/text color.
+/// @prop {Map} button-hover-color [contrast-color: ('gray', 50)] - The color used for the button icon/text color on hover.
+/// @prop {Map} button-disabled-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled button icon/text.
+/// @prop {Map} button-hover-background [contrast-color: ('gray', 50, .1)] - The color used for the button background on hover.
 /// @requires $indigo-tabs
-$dark-indigo-tabs: $indigo-tabs;
+$dark-indigo-tabs: extend(
+    $indigo-tabs,
+    (
+        item-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+        item-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        item-hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        item-active-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        item-disabled-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        item-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+        item-hover-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        item-active-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        item-disabled-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        border-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        button-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        button-hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        button-disabled-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        button-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+    )
+);

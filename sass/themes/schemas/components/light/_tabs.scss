@@ -26,10 +26,10 @@
 /// @prop {Map} button-color [color: ('gray', 700)] - The color used for the button icon/text color.
 /// @prop {Map} button-hover-color [color: ('gray', 900)] - The color used for the button icon/text color on hover.
 /// @prop {Map} button-disabled-color [color: ('gray', 500)] - The color used for the disabled button icon/text.
-/// @prop {Color} button-background [color: ('surface')] - The color used for the button background.
+/// @prop {Map} button-background [color: ('surface')] - The color used for the button background.
 /// @prop {Map} button-hover-background [color: ('gray', 100)] - The color used for the button background on hover.
-/// @prop {Map} border-color [transparent] - The color used for the tab items bottom border.
-/// @prop {Map} border-color--hover [transparent] - The color used for the tab items bottom border on hover.
+/// @prop {Color} border-color [transparent] - The color used for the tab items bottom border.
+/// @prop {Color} border-color--hover [transparent] - The color used for the tab items bottom border on hover.
 /// @prop {Map} tab-ripple-color [color: ('gray', 100)] - The color used for the button background.
 /// @prop {Map} button-ripple-color [color: ('gray', 100)] - The color used for the button background on hover.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(6px))] - The border radius used for tabs.
@@ -350,25 +350,38 @@ $bootstrap-tabs: extend(
 /// Generates an indigo tabs schema.
 /// @type {Map}
 /// @prop {Color} item-background [transparent] - The background color used for the tabs header.
-/// @prop {Color} item-hover-background [transparent] - The background used for the tabs on hover.
+/// @prop {Map} item-hover-background [color: ('gray', 900, .05)] - The background used for the tabs on hover.
 /// @prop {Color} item-active-background [transparent] - The color used for the active/focused tab background.
-/// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The color used for the tab icon on hover.
+/// @prop {Map} item-text-color [color: ('gray', 800)] - The color used for the tab text color.
 /// @prop {Map} item-active-color [color: ('gray', 900)] - The color used for the active tabs text.
-/// @prop {Map} item-active-icon-color [color: ('primary', 400)] - The color used for the active tabs icon.
+/// @prop {Map} item-disabled-color [color: ('gray', 900, .2)] - The color used for the disabled tabs text.
+/// @prop {Map} item-icon-color [color: ('gray', 600)] - The color used for the tab icon.
+/// @prop {Map} item-active-icon-color [color: ('gray', 700)] - The color used for the active tab icon.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 900, .2)] - The color used for the disabled tab icon.
 /// @prop {Map} indicator-color [color: ('primary', 400)] - The color used for the tabs borders.
+/// @prop {Map} border-color [color: ('gray', 900, .15)] - The color used for the tab items bottom border.
 /// @prop {Color} button-background [transparent] - The color used for the button background.
-/// @prop {Color} button-hover-background [transparent] - The color used for the button background on hover.
+/// @prop {Map} button-hover-background [color: ('gray', 900, .05)] - The color used for the button background on hover.
+/// @prop {Map} button-color [color: ('gray', 600)] - The color used for the button icon/text color.
+/// @prop {Map} button-hover-color [color: ('gray', 700)] - The color used for the button icon/text color on hover.
+/// @prop {Map} button-disabled-color [color: ('gray', 900, .2)] - The color used for the disabled button icon/text.
 /// @requires {Map} $light-tabs
 $indigo-tabs: extend(
     $light-tabs,
     (
         item-background: transparent,
-        item-hover-background: transparent,
-        item-active-background: transparent,
-        item-hover-icon-color: (
+        item-hover-background: (
             color: (
                 'gray',
                 900,
+                0.05,
+            ),
+        ),
+        item-active-background: transparent,
+        item-text-color: (
+            color: (
+                'gray',
+                800,
             ),
         ),
         item-active-color: (
@@ -377,10 +390,30 @@ $indigo-tabs: extend(
                 900,
             ),
         ),
+        item-disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        item-icon-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
         item-active-icon-color: (
             color: (
-                'primary',
-                400,
+                'gray',
+                700,
+            ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
             ),
         ),
         indicator-color: (
@@ -389,7 +422,39 @@ $indigo-tabs: extend(
                 400,
             ),
         ),
+        border-color: (
+            color: (
+                'gray',
+                900,
+                0.15,
+            ),
+        ),
         button-background: transparent,
-        button-hover-background: transparent,
+        button-hover-background: (
+            color: (
+                'gray',
+                900,
+                0.05,
+            ),
+        ),
+        button-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        button-hover-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        button-disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
     )
 );
