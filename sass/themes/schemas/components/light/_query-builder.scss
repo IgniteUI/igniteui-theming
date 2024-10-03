@@ -107,6 +107,7 @@ $material-query-builder: $light-query-builder;
 /// @prop {Map} background-or [color: ('error', 500, .5)] - The background color of advanced filtering "OR" condition.
 /// @prop {Map} background-or--focus [color: ('error')] - The background color on focus/selected of advanced filtering "OR" condition.
 /// @prop {Number} border-radius [rem(2px)] - The border radius of the query builder.
+/// @prop {Number} tree-border-radius [rem(4px)] - The border radius of the query block.
 /// @requires {Map} $light-query-builder
 $fluent-query-builder: extend(
     $light-query-builder,
@@ -126,6 +127,7 @@ $fluent-query-builder: extend(
         ),
 
         border-radius: rem(2px),
+        tree-border-radius: rem(4px),
     )
 );
 
