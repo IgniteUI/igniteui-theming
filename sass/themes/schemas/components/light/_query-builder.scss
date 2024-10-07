@@ -182,6 +182,7 @@ $bootstrap-query-builder: extend(
 /// @prop {Map} background-and--focus [color: ('primary', 300)] - The background color on focus/selected of advanced filtering "AND" condition.
 /// @prop {Map} background-or--focus [color: ('secondary', 400)] - The background color on focus/selected of advanced filtering "OR" condition.
 /// @prop {Number} border-radius [rem(10px)] - The border radius of the query builder.
+/// @prop {Map} tree-background [color: ('gray', 50)] - The background color of the query block.
 /// @requires {Map} $light-query-builder
 $indigo-query-builder: extend(
     $light-query-builder,
@@ -228,5 +229,11 @@ $indigo-query-builder: extend(
         ),
 
         border-radius: rem(10px),
+        tree-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
     )
 );
