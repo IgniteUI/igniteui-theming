@@ -1,5 +1,5 @@
 import path from 'path';
-import sass from 'sass';
+import * as sass from 'sass';
 import {exec as _exec} from 'child_process';
 import {mkdirSync as makeDir} from 'fs';
 import {writeFile} from 'fs/promises';

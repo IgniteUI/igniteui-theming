@@ -103,8 +103,8 @@ $schema: (
             $theme: (
                 variant: 'material',
                 type: 'light',
-                background: hsla(var(--ig-primary-400), var(--ig-primary-a)),
-                hover-background: hsla(var(--ig-secondary-700), .26),
+                background: hsl(from var(--ig-primary-400) h s l / 1),
+                hover-background: hsl(from var(--ig-secondary-700) h s l / .26),
                 foreground: color-mix(in oklch, var(--ig-primary-400-contrast) 100%, transparent),
                 hover-foreground: color-mix(in oklch, var(--ig-secondary-700-contrast) 100%, transparent),
                 border-style: solid,
