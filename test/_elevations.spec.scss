@@ -3,7 +3,11 @@
 @use 'sass:list';
 @use '../node_modules/sass-true/' as *;
 @use '../sass/elevations/' as *;
-@use '../sass/elevations/presets' as * with ($color-1: red, $color-2: green, $color-3: blue);
+@use '../sass/elevations/presets' as * with (
+    $color-1: red,
+    $color-2: green,
+    $color-3: blue
+);
 
 @include describe('Elevations') {
     @include it('should return an empty list for a list of non box-shadow values') {
@@ -39,9 +43,9 @@
 
     @include it('should produce CSS variables for a map of shadows') {
         $shadows: (
-            small: box-shadow(0 .125rem .25rem rgba(0 0 0 / 75%)),
-            medium: box-shadow(0 .25rem .5rem rgba(0 0 0 / 85%)),
-            large: box-shadow(0 .75rem 1rem rgba(0 0 0 / 95%)),
+            small: box-shadow(0 0.125rem 0.25rem rgba(0 0 0 / 0.75)),
+            medium: box-shadow(0 0.25rem 0.5rem rgba(0 0 0 / 0.85)),
+            large: box-shadow(0 0.75rem 1rem rgba(0 0 0 / 0.95)),
         );
 
         @include assert() {

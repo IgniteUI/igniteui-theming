@@ -103,13 +103,13 @@ $_enhanced-accessibility: false;
         $result: map.merge(
             $result,
             (
-                $variant: map.get($shade, 'raw'),
+                $variant: map.get($shade, 'hsl'),
                 #{$variant}-contrast:
                     text-contrast(
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                #{$variant}-hsl: map.get($shade, 'hsl'),
+                raw: map.get($shade, 'raw'),
             )
         );
     }
@@ -139,8 +139,14 @@ $_enhanced-accessibility: false;
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), $shade);
         $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
+        $raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l);
+        $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
 
-        @return (raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l), hsl: #{$h, $s, $l});
+        @if #{$shade} == '500' {
+            $hsl: $raw;
+        }
+
+        @return (raw: $raw, hsl: $hsl);
     } @else {
         $sx: map.get(multipliers.$color, 's', $shade);
         $lx: map.get(multipliers.$color, 'l', $shade);
@@ -149,9 +155,11 @@ $_enhanced-accessibility: false;
             to-fixed(color.saturation($color) * $sx),
             to-fixed(color.lightness($color) * $lx)
         );
+        $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
 
-        // prettier-ignore
-        $hsl: #{$h, calc(#{$s} * #{$sx}), calc(#{$l} * #{$lx})};
+        @if #{$shade} == '500' {
+            $hsl: $color;
+        }
 
         @return (raw: $raw, hsl: $hsl);
     }
@@ -178,26 +186,21 @@ $_enhanced-accessibility: false;
 ///      background: color($my-palette, 'primary', 200, .5);
 ///    }
 @function color($palette: null, $color: 'primary', $variant: 500, $opacity: null) {
-    $c: map.get($palette or types.$IPalette, #{$color});
-    $a: var(--ig-#{$color}-a);
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
-    $meta: if($palette, map.get($palette, '_meta'), null);
     $_alpha: if($opacity, $opacity, 1);
-    $_hsl-alpha: hsla($s, if($opacity, $opacity, $a));
+    $_hsl-alpha: hsl(from $s h s l / $_alpha);
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
-    @if not($palette) or not($meta) {
-        @return if($contrast, $_mix-alpha, $_hsl-alpha);
+    @if $palette and not($contrast) {
+        $s: map.get($palette, $color);
+        $base: map.get($s, $variant);
+        $raw: map.get($s, raw);
+
+        @return if($raw and $variant != 500, rgba($raw, $_alpha), rgba($base, $_alpha));
     }
 
-    $_shade: map.get($c, $variant);
-
-    @if meta.type-of($_shade) == 'list' and list.length($_shade) == 3 {
-        $_shade: hsl($_shade...);
-    }
-
-    @return rgba($_shade, $alpha: $_alpha);
+    @return if($contrast, $_mix-alpha, $_hsl-alpha);
 }
 
 /// Retrieves a contrast text color for a given color variant from a color palette.
