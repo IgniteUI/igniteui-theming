@@ -45,21 +45,21 @@ $dark-material-tabs: extend($material-tabs, $base-dark-tabs);
 /// @requires $base-dark-tabs
 $dark-fluent-tabs: extend(
     $fluent-tabs,
-    $base-dark-tabs
-        (
-            item-disabled-color: (
-                color: (
-                    'gray',
-                    300,
-                ),
+    $base-dark-tabs,
+    (
+        item-disabled-color: (
+            color: (
+                'gray',
+                300,
             ),
-            item-disabled-icon-color: (
-                color: (
-                    'gray',
-                    300,
-                ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                300,
             ),
-        )
+        ),
+    )
 );
 
 /// Generates a dark bootstrap tabs schema.
