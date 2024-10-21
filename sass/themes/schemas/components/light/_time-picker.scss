@@ -109,7 +109,6 @@ $light-time-picker: extend(
 /// @type {Map}
 /// @prop {Map} header-background [color: ('secondary', 500)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [contrast-color: ('secondary', 500)] - The header hour text color of a time picker.
-/// @prop {Map} header-time-period-color [contrast-color: ('secondary', 500)] - The header AM/PM text color of a time picker.
 /// @prop {Map} hover-text-color [color: ('secondary', 500)] - The hover text color of an open time picker.
 /// @prop {Map} selected-text-color [color: ('secondary', 500)] -  The text color of a selected item in time picker.
 /// @prop {Map} active-item-foreground [contrast-color: ('secondary', 500)] - The foreground color for current item in focused column inside the time picker.
@@ -127,13 +126,6 @@ $material-time-picker: extend(
         ),
 
         header-hour-text-color: (
-            contrast-color: (
-                'secondary',
-                500,
-            ),
-        ),
-
-        header-time-period-color: (
             contrast-color: (
                 'secondary',
                 500,
@@ -182,7 +174,6 @@ $material-time-picker: extend(
 /// @type {Map}
 /// @prop {Map} header-background [color: ('primary', 500)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [contrast-color: ('primary', 500)] - The header hour text color of a time picker.
-/// @prop {Map} header-time-period-color [contrast-color: ('primary', 500)] - The header AM/PM text color of a time picker.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} active-item-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @prop {List} time-item-size [(rem(28px), rem(32px), rem(40px))] - The height of the time item.
@@ -198,13 +189,6 @@ $fluent-time-picker: extend(
         ),
 
         header-hour-text-color: (
-            contrast-color: (
-                'primary',
-                500,
-            ),
-        ),
-
-        header-time-period-color: (
             contrast-color: (
                 'primary',
                 500,
@@ -243,7 +227,6 @@ $fluent-time-picker: extend(
 /// @prop {Map} hover-text-color [color: ('primary', 600)] - The hover text color of an open time picker.
 /// @prop {Map} header-background [color: ('gray', 100)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [contrast-color: ('gray', 100)] - The header hour text color of a time picker.
-/// @prop {Map} header-time-period-color [contrast-color: ('gray', 100)] - The header AM/PM text color of a time picker.
 /// @prop {Map} border-color [color: ('gray', 300)] - The border-color of the time picker.
 /// @prop {Map} divider-color [color: ('gray', 300)] - The divider color of the time picker.
 /// @prop {List} active-item-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
@@ -273,13 +256,6 @@ $bootstrap-time-picker: extend(
         ),
 
         header-hour-text-color: (
-            contrast-color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        header-time-period-color: (
             contrast-color: (
                 'gray',
                 100,
@@ -318,7 +294,6 @@ $bootstrap-time-picker: extend(
 /// @prop {Map} background-color [contrast-color: ('gray', 900)] - The time-picker panel background color.
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [color: ('gray', 800)] - The header hour text color of a time picker.
-/// @prop {Map} header-time-period-color [color: ('gray', 800)] - The header AM/PM text color of a time picker.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} active-item-border-radius [(rem(32px), rem(0), rem(32px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border-color of the time picker.
@@ -364,13 +339,6 @@ $indigo-time-picker: extend(
         ),
 
         header-hour-text-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
-        header-time-period-color: (
             color: (
                 'gray',
                 800,
