@@ -38,10 +38,29 @@ $base-dark-tabs: (
 $dark-material-tabs: extend($material-tabs, $base-dark-tabs);
 
 /// Generates a dark fluent tabs schema.
+/// @prop {Map} item-disabled-color [color: ('gray', 300)] - The color used for the disabled tabs text.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 300)] - The color used for the disabled tab icon.
 /// @type {Map}
 /// @requires $fluent-tabs
 /// @requires $base-dark-tabs
-$dark-fluent-tabs: extend($fluent-tabs, $base-dark-tabs);
+$dark-fluent-tabs: extend(
+    $fluent-tabs,
+    $base-dark-tabs
+        (
+            item-disabled-color: (
+                color: (
+                    'gray',
+                    300,
+                ),
+            ),
+            item-disabled-icon-color: (
+                color: (
+                    'gray',
+                    300,
+                ),
+            ),
+        )
+);
 
 /// Generates a dark bootstrap tabs schema.
 /// @type {Map}
@@ -74,7 +93,6 @@ $dark-bootstrap-tabs: extend(
 /// @prop {Map} button-color [contrast-color: ('gray', 50, .8)] - The color used for the button icon/text color.
 /// @prop {Map} button-hover-color [contrast-color: ('gray', 50)] - The color used for the button icon/text color on hover.
 /// @prop {Map} button-disabled-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled button icon/text.
-/// @prop {Map} button-hover-background [contrast-color: ('gray', 50, .1)] - The color used for the button background on hover.
 /// @requires $indigo-tabs
 $dark-indigo-tabs: extend(
     $indigo-tabs,
@@ -165,13 +183,6 @@ $dark-indigo-tabs: extend(
                 'gray',
                 50,
                 0.2,
-            ),
-        ),
-        button-hover-background: (
-            contrast-color: (
-                'gray',
-                50,
-                0.1,
             ),
         ),
     )
