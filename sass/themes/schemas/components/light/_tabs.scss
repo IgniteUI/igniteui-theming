@@ -12,7 +12,7 @@
 /// Generates a base light tabs schema.
 /// @type {Map}
 /// @prop {Map} item-text-color [color: ('gray', 700)] - The color used for the tab text color.
-/// @prop {Color} item-background [color: ('surface')] - The background color used for the tabs header.
+/// @prop {Map} item-background [color: ('surface')] - The background color used for the tabs header.
 /// @prop {Map} item-hover-background [color: ('gray', 200)] - The background used for the tabs on hover.
 /// @prop {Map} item-hover-color [color: ('gray', 900)] - The text color used for the tabs on hover.
 /// @prop {Map} item-icon-color [color: ('gray', 700)] - The color used for the tab icon.
@@ -164,7 +164,7 @@ $light-tabs: (
 $material-tabs: extend(
     $light-tabs,
     (
-        item-hover-background: (
+        item-hover-color: (
             color: (
                 'gray',
                 700,
@@ -175,10 +175,13 @@ $material-tabs: extend(
 
 /// Generates a fluent tabs schema.
 /// @type {Map}
-/// @prop {Map} item-text-color [color: ('gray', 900)] - The color used for the tab text color.
+/// @prop {Map} item-text-color [color: ('gray', 800)] - The color used for the tab text color.
 /// @prop {Map} button-color [color: ('gray', 500)] - The color used for the button icon/text color.
 /// @prop {Map} button-hover-color [color: ('gray', 600)] - The color used for the button icon/text color on hover.
 /// @prop {Map} button-disabled-color [color: ('gray', 400)] - The color used for the disabled button icon/text.
+/// @prop {Map} item-active-color [color: ('primary', 800)] - The color used for the active tabs text.
+/// @prop {Map} item-active-icon-color [color: ('primary', 800)] - The color used for the active tab icon.
+/// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The color used for the tab icon on hover.
 /// @requires {Map} $light-tabs
 $fluent-tabs: extend(
     $light-tabs,
@@ -186,7 +189,7 @@ $fluent-tabs: extend(
         item-text-color: (
             color: (
                 'gray',
-                900,
+                800,
             ),
         ),
         button-color: (
@@ -205,6 +208,24 @@ $fluent-tabs: extend(
             color: (
                 'gray',
                 400,
+            ),
+        ),
+        item-active-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        item-hover-icon-color: (
+            color: (
+                'gray',
+                900,
             ),
         ),
     )
@@ -424,7 +445,8 @@ $indigo-tabs: extend(
         button-hover-background: (
             color: (
                 'gray',
-                50,
+                900,
+                0.5,
             ),
         ),
         button-color: (
