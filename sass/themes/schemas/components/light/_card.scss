@@ -69,7 +69,6 @@ $light-card: extend(
 /// Generates a material card schema.
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 400, .54)] - The outline color of an outlined type card.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 $material-card: extend(
     $light-card,
@@ -87,7 +86,7 @@ $material-card: extend(
 /// Generates a fluent card schema.
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {List} border-radius [(rem(0px), rem(0), rem(24px))] - The border radius used for card.
 /// @requires {Map} $light-card
 $fluent-card: extend(
     $light-card,
@@ -101,7 +100,7 @@ $fluent-card: extend(
 
         border-radius: (
             border-radius: (
-                rem(2px),
+                rem(0),
                 rem(0),
                 rem(24px),
             ),
