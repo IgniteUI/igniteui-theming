@@ -109,7 +109,7 @@ $_enhanced-accessibility: false;
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                raw: map.get($shade, 'raw'),
+                #{$variant}-raw: map.get($shade, 'raw'),
             )
         );
     }
@@ -195,7 +195,7 @@ $_enhanced-accessibility: false;
     @if $palette and not($contrast) {
         $s: map.get($palette, $color);
         $base: map.get($s, $variant);
-        $raw: map.get($s, raw);
+        $raw: map.get($s, #{$variant}-raw);
 
         @return if($raw and $variant != 500, rgba($raw, $_alpha), rgba($base, $_alpha));
     }
