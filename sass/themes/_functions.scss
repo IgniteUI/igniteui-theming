@@ -75,7 +75,7 @@
             }
         }
 
-        @if $util {
+        @if $util and not($color) {
             $func: meta.get-function($fn, $module: utils);
 
             @if $fn != 'map-keys-prefix' {
