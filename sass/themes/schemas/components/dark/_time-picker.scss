@@ -107,6 +107,7 @@ $dark-fluent-time-picker: extend(
 /// Generates a dark bootstrap time-picker schema.
 /// @type {Map}
 /// @prop {Map} hover-text-color [color: ('primary', 300)] - The hover text color of an open time picker.
+/// @prop {Map} active-item-background [color: ('primary', 500)] - The background color for current item in focused column inside the time picker.
 /// @prop {Map} selected-text-color [color: ('primary', 300)] -  The text color of a selected item in time picker.
 /// @requires $bootstrap-time-picker
 $dark-bootstrap-time-picker: extend(
@@ -116,6 +117,13 @@ $dark-bootstrap-time-picker: extend(
             color: (
                 'primary',
                 300,
+            ),
+        ),
+
+        active-item-background: (
+            color: (
+                'primary',
+                500,
             ),
         ),
 

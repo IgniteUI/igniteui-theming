@@ -229,6 +229,7 @@ $fluent-time-picker: extend(
 /// @prop {Map} header-hour-text-color [contrast-color: ('gray', 100)] - The header hour text color of a time picker.
 /// @prop {Map} border-color [color: ('gray', 300)] - The border-color of the time picker.
 /// @prop {Map} divider-color [color: ('gray', 300)] - The divider color of the time picker.
+/// @prop {Map} active-item-background [color: ('primary', 600)] - The background color for current item in focused column inside the time picker.
 /// @prop {List} active-item-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @requires $light-time-picker
 $bootstrap-time-picker: extend(
@@ -276,6 +277,13 @@ $bootstrap-time-picker: extend(
             ),
         ),
 
+        active-item-background: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
         active-item-border-radius: (
             border-radius: (
                 rem(4px),
@@ -289,7 +297,6 @@ $bootstrap-time-picker: extend(
 /// Generates an indigo time-picker schema.
 /// @type {Map}
 /// @prop {Map} text-color [color: ('gray', 800)] - The text color of an open time picker.
-/// @prop {Map} active-item-background [color: ('primary', 500)] - The background color for current item in focused column inside the time picker.
 /// @prop {Map} active-item-foreground [contrast-color: ('primary', 900)] - The foreground color for current item in focused column inside the time picker.
 /// @prop {Map} background-color [contrast-color: ('gray', 900)] - The time-picker panel background color.
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color of a time picker.
@@ -314,13 +321,6 @@ $indigo-time-picker: extend(
             contrast-color: (
                 'primary',
                 900,
-            ),
-        ),
-
-        active-item-background: (
-            color: (
-                'primary',
-                500,
             ),
         ),
 
