@@ -58,6 +58,9 @@ $dark-material-tabs: extend(
 /// Generates a dark fluent tabs schema.
 /// @prop {Map} item-disabled-color [color: ('gray', 300)] - The color used for the disabled tabs text.
 /// @prop {Map} item-disabled-icon-color [color: ('gray', 300)] - The color used for the disabled tab icon.
+/// @prop {Map} item-hover-background [color: ('gray', 50)] - The background used for the tabs on hover.
+/// @prop {Map} item-active-background [color: ('gray', 50)] - The color used for the active/focused tab background.
+/// @prop {Map} button-disabled-color [color: ('gray', 200)] - The color used for the disabled button icon/text.
 /// @type {Map}
 /// @requires $fluent-tabs
 /// @requires $base-dark-tabs
@@ -75,6 +78,25 @@ $dark-fluent-tabs: extend(
             color: (
                 'gray',
                 300,
+            ),
+        ),
+
+        item-hover-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        item-active-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        button-disabled-color: (
+            color: (
+                'gray',
+                200,
             ),
         ),
     )
