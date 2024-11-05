@@ -61,6 +61,7 @@ $dark-material-tabs: extend(
 /// @prop {Map} item-hover-background [color: ('gray', 50)] - The background used for the tabs on hover.
 /// @prop {Map} item-active-background [color: ('gray', 50)] - The color used for the active/focused tab background.
 /// @prop {Map} button-disabled-color [color: ('gray', 200)] - The color used for the disabled button icon/text.
+/// @prop {Map} indicator-color [color: ('primary', 300)] - The color used for the active tab indicator.
 /// @type {Map}
 /// @requires $fluent-tabs
 /// @requires $base-dark-tabs
@@ -97,6 +98,12 @@ $dark-fluent-tabs: extend(
             color: (
                 'gray',
                 200,
+            ),
+        ),
+        indicator-color: (
+            color: (
+                'primary',
+                300,
             ),
         ),
     )
