@@ -10,19 +10,17 @@
 
 /// Generates a base light time-picker schema.
 /// @type {Map}
-/// @prop {Map} text-color [color: ('gray', 500)] - The text color of an open time picker.
-/// @prop {Map} hover-text-color [color: ('secondary', 500)] - The hover text color of an open time picker.
-/// @prop {Map} selected-text-color [color: ('secondary', 500)] -  The text color of a selected item in time picker.
-/// @prop {Map} active-item-foreground [color: ('gray', 500)] - The foreground color for current item in focused column inside the time picker.
-/// @prop {Map} active-item-background [color: ('gray', 100)] - The background color for current item in focused column inside the time picker.
+/// @prop {Map} text-color [color: ('gray', 900)] - The text color of an open time picker.
+/// @prop {Map} hover-text-color [color: ('primary', 500)] - The hover text color of an open time picker.
+/// @prop {Map} selected-text-color [color: ('primary', 500)] -  The text color of a selected item in time picker.
+/// @prop {Map} active-item-foreground [contrast-color: ('primary', 500)] - The foreground color for current item in focused column inside the time picker.
+/// @prop {Map} active-item-background [color: ('primary', 500)] - The background color for current item in focused column inside the time picker.
 /// @prop {Map} disabled-text-color [color: ('gray', 400)] - The text color for disabled values.
 /// @prop {Color} disabled-item-background [transparent] - The background color for disabled values .
-/// @prop {Map} header-background [color: ('secondary', 500)] - The header background color of a time picker.
-/// @prop {Map} header-hour-text-color [contrast-color: ('secondary', 500)] - The header hour text color of a time picker.
-/// @prop {Map} header-time-period-color [contrast-color: ('secondary', 500, .8)] - The header AM/PM text color of a time picker.
 /// @prop {Map} background-color [color: 'surface'] - The time-picker panel background color.
+/// @prop {Map} divider-color [color: ('gray', 200)] - The divider color of the time picker.
 /// @prop {Color} border-color [transparent] - The border-color of the time picker.
-/// @prop {Number} dropdown-elevation [8] - The elevation level, between 0-24, to be used for the time picker in dropdown mode.
+/// @prop {Number} dropdown-elevation [3] - The elevation level, between 0-24, to be used for the time picker in dropdown mode.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} time-item-size [(rem(28px), rem(32px), rem(36px))] - The height of the time item.
 /// @prop {Number} default-size [2] - the default size.
@@ -33,35 +31,35 @@ $light-time-picker: extend(
         text-color: (
             color: (
                 'gray',
-                500,
+                900,
             ),
         ),
 
         hover-text-color: (
             color: (
-                'secondary',
+                'primary',
                 500,
             ),
         ),
 
         selected-text-color: (
             color: (
-                'secondary',
+                'primary',
                 500,
             ),
         ),
 
         active-item-foreground: (
-            color: (
-                'gray',
+            contrast-color: (
+                'primary',
                 500,
             ),
         ),
 
         active-item-background: (
             color: (
-                'gray',
-                100,
+                'primary',
+                500,
             ),
         ),
 
@@ -74,29 +72,17 @@ $light-time-picker: extend(
 
         disabled-item-background: transparent,
 
-        header-background: (
-            color: (
-                'secondary',
-                500,
-            ),
-        ),
-
-        header-hour-text-color: (
-            contrast-color: (
-                'secondary',
-                500,
-            ),
-        ),
-
-        header-time-period-color: (
-            contrast-color: (
-                'secondary',
-                500,
-            ),
-        ),
-
         background-color: (
             color: 'surface',
+        ),
+
+        border-color: transparent,
+
+        divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
         ),
 
         border-radius: (
@@ -106,8 +92,6 @@ $light-time-picker: extend(
                 rem(20px),
             ),
         ),
-
-        border-color: transparent,
 
         time-item-size: (
             sizable: (
@@ -123,12 +107,59 @@ $light-time-picker: extend(
 
 /// Generates a light material time-picker schema.
 /// @type {Map}
+/// @prop {Map} header-background [color: ('secondary', 500)] - The header background color of a time picker.
+/// @prop {Map} header-hour-text-color [contrast-color: ('secondary', 500)] - The header hour text color of a time picker.
+/// @prop {Map} hover-text-color [color: ('secondary', 500)] - The hover text color of an open time picker.
+/// @prop {Map} selected-text-color [color: ('secondary', 500)] -  The text color of a selected item in time picker.
+/// @prop {Map} active-item-foreground [contrast-color: ('secondary', 500)] - The foreground color for current item in focused column inside the time picker.
+/// @prop {Map} active-item-background [color: ('secondary', 500)] - The background color for current item in focused column inside the time picker.
 /// @prop {List} active-item-border-radius [(rem(15px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
-/// @prop {Map} divider-color [color: ('gray', 200)] - The divider color of the time picker.
 /// @requires {Map} $light-time-picker
 $material-time-picker: extend(
     $light-time-picker,
     (
+        header-background: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        header-hour-text-color: (
+            contrast-color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        hover-text-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        selected-text-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        active-item-foreground: (
+            contrast-color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        active-item-background: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
         active-item-border-radius: (
             border-radius: (
                 rem(15px),
@@ -136,33 +167,42 @@ $material-time-picker: extend(
                 rem(20px),
             ),
         ),
-
-        divider-color: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
     )
 );
 
 /// Generates a fluent time-picker schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
+/// @prop {Map} header-background [color: ('primary', 500)] - The header background color of a time picker.
+/// @prop {Map} header-hour-text-color [contrast-color: ('primary', 500)] - The header hour text color of a time picker.
+/// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} active-item-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @prop {List} time-item-size [(rem(28px), rem(32px), rem(40px))] - The height of the time item.
-/// @prop {Map} divider-color [color: ('gray', 200)] - The divider color of the time picker.
 /// @requires $light-time-picker
 $fluent-time-picker: extend(
     $light-time-picker,
     (
+        header-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        header-hour-text-color: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
+        ),
+
         border-radius: (
             border-radius: (
-                rem(2px),
+                rem(0),
                 rem(0),
                 rem(20px),
             ),
         ),
+
         active-item-border-radius: (
             border-radius: (
                 rem(2px),
@@ -170,12 +210,7 @@ $fluent-time-picker: extend(
                 rem(20px),
             ),
         ),
-        divider-color: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
+
         time-item-size: (
             sizable: (
                 rem(28px),
@@ -188,10 +223,13 @@ $fluent-time-picker: extend(
 
 /// Generates a bootstrap time-picker schema.
 /// @type {Map}
-/// @prop {Map} selected-text-color [color: ('primary', 500)] -  The text color of a selected item in time picker.
+/// @prop {Map} selected-text-color [color: ('primary', 600)] -  The text color of a selected item in time picker.
 /// @prop {Map} hover-text-color [color: ('primary', 600)] - The hover text color of an open time picker.
-/// @prop {Map} header-background [color: ('primary', 500)] - The header background color of a time picker.
+/// @prop {Map} header-background [color: ('gray', 100)] - The header background color of a time picker.
+/// @prop {Map} header-hour-text-color [contrast-color: ('gray', 100)] - The header hour text color of a time picker.
+/// @prop {Map} border-color [color: ('gray', 300)] - The border-color of the time picker.
 /// @prop {Map} divider-color [color: ('gray', 300)] - The divider color of the time picker.
+/// @prop {Map} active-item-background [color: ('primary', 600)] - The background color for current item in focused column inside the time picker.
 /// @prop {List} active-item-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @requires $light-time-picker
 $bootstrap-time-picker: extend(
@@ -200,7 +238,7 @@ $bootstrap-time-picker: extend(
         selected-text-color: (
             color: (
                 'primary',
-                500,
+                600,
             ),
         ),
 
@@ -213,8 +251,36 @@ $bootstrap-time-picker: extend(
 
         header-background: (
             color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        header-hour-text-color: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        divider-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        active-item-background: (
+            color: (
                 'primary',
-                500,
+                600,
             ),
         ),
 
@@ -225,32 +291,20 @@ $bootstrap-time-picker: extend(
                 rem(20px),
             ),
         ),
-
-        divider-color: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
     )
 );
 
 /// Generates an indigo time-picker schema.
 /// @type {Map}
 /// @prop {Map} text-color [color: ('gray', 800)] - The text color of an open time picker.
-/// @prop {Map} hover-text-color [color: ('primary', 500)] - The hover text color of an open time picker.
-/// @prop {Map} selected-text-color [color: ('primary', 500)] -  The text color of a selected item in time picker.
-/// @prop {Map} active-item-background [color: ('primary', 500)] - The background color for current item in focused column inside the time picker.
 /// @prop {Map} active-item-foreground [contrast-color: ('primary', 900)] - The foreground color for current item in focused column inside the time picker.
 /// @prop {Map} background-color [contrast-color: ('gray', 900)] - The time-picker panel background color.
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [color: ('gray', 800)] - The header hour text color of a time picker.
-/// @prop {Map} header-time-period-color [color: ('gray', 800)] - The header AM/PM text color of a time picker.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} active-item-border-radius [(rem(32px), rem(0), rem(32px))] - The border radius used for the highlight of the active item in the time-picker.
-/// @prop {Color} border-color [color: ('gray', 400)] - The border-color of the time picker.
+/// @prop {Map} border-color [color: ('gray', 400)] - The border-color of the time picker.
 /// @prop {Map} divider-color [color: ('gray', 400)] - The divider color of the time picker.
-///
 /// @requires $light-time-picker
 $indigo-time-picker: extend(
     $light-time-picker,
@@ -263,31 +317,10 @@ $indigo-time-picker: extend(
             ),
         ),
 
-        hover-text-color: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-
-        selected-text-color: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
-
         active-item-foreground: (
             contrast-color: (
                 'primary',
                 900,
-            ),
-        ),
-
-        active-item-background: (
-            color: (
-                'primary',
-                500,
             ),
         ),
 
@@ -306,13 +339,6 @@ $indigo-time-picker: extend(
         ),
 
         header-hour-text-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
-        header-time-period-color: (
             color: (
                 'gray',
                 800,
