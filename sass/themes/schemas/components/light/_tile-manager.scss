@@ -1,0 +1,121 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../elevation/tile-manager' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light base tile manager schema.
+/// @type {Map}
+/// @prop {Map} tile-manager-background [color: ('gray', 100)] - The background color of the tile manager component.
+/// @prop {Map} tile-background [color: ('surface', 500)] - The background color of the tile component inside the tile manager.
+/// @prop {Map} title-color [color: ('gray', 900)] - The title color of the tile component.
+/// @prop {Color} content-background [transparent] - The background color of the tile component content.
+/// @prop {Map} content-color [color: ('gray', 700)] - The text color of the tile component content.
+/// @prop {Color} border-color [transparent] - The border color of the tile component.
+/// @prop {Map} hover-border-color [color: ('gray', 400)] - The border color of the tile component on hover.
+/// @prop {Map} placeholder-background [color: ('primary', 100, .3)] - The background color of the ghost element that appears during drag and drop and while resizing.
+/// @prop {Map} overlay-background [color: ('primary', 100, .6)] - The background color of the ghost element that appears on top of the tile that will be swapped.
+/// @prop {Map} ghost-border [color: ('primary', 500)] - The border color of the ghost element that appears during drag and drop and while resizing.
+/// @prop {Number} border-radius [rem(4px)] - The border radius of the tile component.
+/// @prop {Number} default-size [2] - The default size used for the tile manager component.
+/// @requires {Map} $default-elevation-tile
+$light-tile-manager: extend(
+    $default-elevation-tile,
+    (
+        tile-manager-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        tile-background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+
+        title-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        content-background: transparent,
+
+        content-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        border-color: transparent,
+
+        hover-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        resize-indicator: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        placeholder-background: (
+            color: (
+                'primary',
+                100,
+                0.3,
+            ),
+        ),
+
+        overlay-background: (
+            color: (
+                'primary',
+                100,
+                0.6,
+            ),
+        ),
+
+        ghost-border: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        border-radius: rem(4px),
+        default-size: 2,
+    )
+);
+
+/// Generates a material tile manager schema.
+/// @type {Map}
+/// @requires {Map} $light-tile-manager
+$material-tile-manager: $light-tile-manager;
+
+/// Generates a fluent tile manager schema.
+/// @type {Map}
+/// @requires {Map} $light-tile-manager
+$fluent-tile-manager: $light-tile-manager;
+
+/// Generates a bootstrap tile manager schema.
+/// @type {Map}
+/// @requires {Map} $light-tile-manager
+$bootstrap-tile-manager: $light-tile-manager;
+
+/// Generates an indigo tile manager schema.
+/// @type {Map}
+/// @requires {Map} $light-tile-manager
+$indigo-tile-manager: $light-tile-manager;

@@ -52,6 +52,7 @@
 @use './stepper' as *;
 @use './switch' as *;
 @use './tabs' as *;
+@use './tile-manager' as *;
 @use './time-picker' as *;
 @use './toast' as *;
 @use './tooltip' as *;
@@ -112,6 +113,7 @@ $light-material-schema: (
     stepper: $material-stepper,
     switch: $material-switch,
     tabs: $material-tabs,
+    tile-manager: $material-tile-manager,
     time-picker: $material-time-picker,
     toast: $material-toast,
     tooltip: $material-tooltip,
@@ -177,6 +179,7 @@ $light-fluent-schema: (
     stepper: $fluent-stepper,
     switch: $fluent-switch,
     tabs: $fluent-tabs,
+    tile-manager: $fluent-tile-manager,
     time-picker: $fluent-time-picker,
     toast: $fluent-toast,
     tooltip: $fluent-tooltip,
@@ -242,6 +245,7 @@ $light-bootstrap-schema: (
     stepper: $bootstrap-stepper,
     switch: $bootstrap-switch,
     tabs: $bootstrap-tabs,
+    tile-manager: $bootstrap-tile-manager,
     time-picker: $bootstrap-time-picker,
     toast: $bootstrap-toast,
     tooltip: $bootstrap-tooltip,
@@ -307,6 +311,7 @@ $light-indigo-schema: (
     stepper: $indigo-stepper,
     switch: $indigo-switch,
     tabs: $indigo-tabs,
+    tile-manager: $indigo-tile-manager,
     time-picker: $indigo-time-picker,
     toast: $indigo-toast,
     tooltip: $indigo-tooltip,

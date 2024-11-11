@@ -1,0 +1,64 @@
+@use '../../../../utils/map' as *;
+@use '../light/tile-manager' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark material tile manager schema.
+/// @type {Map}
+/// @prop {Map} hover-border-color [color: ('gray', 200)] - The border color of the tile component on hover.
+/// @prop {Map} placeholder-background [color: ('primary', 700, .15)] - The background color of the ghost element that appears during drag and drop and while resizing.
+/// @prop {Map} overlay-background [color: ('primary', 700, .5)] - The background color of the ghost element that appears on top of the tile that will be swapped.
+/// @requires {Map} $material-tile-manager
+$dark-material-tile-manager: extend(
+    $material-tile-manager,
+    (
+        hover-border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        resize-indicator: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        placeholder-background: (
+            color: (
+                'primary',
+                700,
+                0.15,
+            ),
+        ),
+
+        overlay-background: (
+            color: (
+                'primary',
+                700,
+                0.5,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark fluent tile manager schema.
+/// @type {Map}
+/// @requires {Map} $fluent-tile-manager
+$dark-fluent-tile-manager: $fluent-tile-manager;
+
+/// Generates a dark bootstrap tile manager schema.
+/// @type {Map}
+/// @requires {Map} $bootstrap-tile-manager
+$dark-bootstrap-tile-manager: $bootstrap-tile-manager;
+
+/// Generates a dark indigo tile manager schema.
+/// @type {Map}
+/// @requires {Map} $indigo-tile-manager
+$dark-indigo-tile-manager: $indigo-tile-manager;
