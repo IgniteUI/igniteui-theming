@@ -10,8 +10,8 @@
 
 /// Generates a light badge schema.
 /// @type {Map}
-/// @prop {Map} icon-color [contrast-color: ('primary', 500)] - The icon color used.
-/// @prop {Map} text-color [contrast-color: ('primary', 500)] - The text color used.
+/// @prop {Map} icon-color [contrast-color: ('primary', 900)] - The icon color used.
+/// @prop {Map} text-color [contrast-color: ('primary', 900)] - The text color used.
 /// @prop {Map} border-color [color: ('gray', 50)] - The border color used.
 /// @prop {Map} background-color [color: ('primary', 500)] - The background color used.
 /// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the badge shadow.
@@ -23,14 +23,14 @@ $light-badge: extend(
         icon-color: (
             contrast-color: (
                 'primary',
-                500,
+                900,
             ),
         ),
 
         text-color: (
             contrast-color: (
                 'primary',
-                500,
+                900,
             ),
         ),
 
@@ -64,17 +64,45 @@ $fluent-badge: $light-badge;
 
 /// Generates a bootstrap badge schema.
 /// @type {Map}
+/// @prop {Map} icon-color [contrast-color: ('primary', 100)] - The icon color used.
+/// @prop {Map} text-color [contrast-color: ('primary', 100)] - The text color used.
 /// @prop {Number} border-radius [rem(4px)] - The border radius used for badge.
 /// @requires {Map} $light-badge
 $bootstrap-badge: extend(
     $light-badge,
     (
+        icon-color: (
+            contrast-color: (
+                'primary',
+                100,
+            ),
+        ),
+
+        text-color: (
+            contrast-color: (
+                'primary',
+                100,
+            ),
+        ),
+
         border-radius: rem(4px),
     )
 );
 
 /// Generates an indigo badge schema.
 /// @type {Map}
+/// @prop {Map} background-color [color: ('primary', 400)] - The background color used.
 /// @requires {Map} $light-badge
 /// @requires {Map} $indigo-elevation-badge
-$indigo-badge: extend($light-badge, $indigo-elevation-badge);
+$indigo-badge: extend(
+    $light-badge,
+    $indigo-elevation-badge,
+    (
+        background-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+    )
+);
