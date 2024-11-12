@@ -109,7 +109,7 @@ $_enhanced-accessibility: false;
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                raw: map.get($shade, 'raw'),
+                #{$variant}-raw: map.get($shade, 'raw'),
             )
         );
     }
@@ -192,10 +192,10 @@ $_enhanced-accessibility: false;
     $_hsl-alpha: hsl(from $s h s l / $_alpha);
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
-    @if $palette and not($contrast) {
+    @if $palette {
         $s: map.get($palette, $color);
         $base: map.get($s, $variant);
-        $raw: map.get($s, raw);
+        $raw: if($contrast, map.get($s, #{$variant}-contrast), map.get($s, #{$variant}-raw));
 
         @return if($raw and $variant != 500, rgba($raw, $_alpha), rgba($base, $_alpha));
     }

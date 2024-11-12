@@ -114,9 +114,11 @@ $_palette: palette(
         }
 
         @include it('should return a shade of type string w/ all arguments passed') {
-            $value: color($_palette, secondary, 500);
+            $value-500: color($_palette, secondary, 500);
+            $value-800: color($_palette, secondary, 800);
 
-            @include assert-equal($value, $_secondary);
+            @include assert-equal($value-500, $_secondary);
+            @include assert-unequal($value-500, $value-800);
         }
 
         @include it('should return a shade as CSS variable w/o arguments') {
@@ -140,10 +142,11 @@ $_palette: palette(
             @include assert-equal($value, hsl(from (var(--ig-secondary-A400)) h s l / 1));
         }
 
-        @include it('should return a contrast shade of type string w/ palette as only argument') {
+        @include it('should return a contrast shade of type color w/ palette as only argument') {
             $value: contrast-color($_palette, $opacity: .5);
-            $expected: color-mix(in oklch, var(--ig-primary-500-contrast) 50%, transparent);
+            $expected: rgba(0 0 0 / .5);
 
+            @include assert-equal(type-of($value), color);
             @include assert-equal($expected, $value);
         }
 

@@ -43,8 +43,10 @@ $_added: () !default;
 
     #{$scope} {
         @each $color, $shades in map.remove($palette, '_meta') {
-            @each $shade, $value in map.remove($shades, 'raw') {
-                @include _shade($color, $shade, $value, $contrast);
+            @each $shade, $value in $shades {
+                @if not(string.index(to-string($shade), raw)) {
+                    @include _shade($color, $shade, $value, $contrast);
+                }
             }
         }
     }
