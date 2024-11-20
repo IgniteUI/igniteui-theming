@@ -1,4 +1,4 @@
-/* stylelint-disable max-nesting-depth */
+// stylelint-disable max-nesting-depth
 @use '../node_modules/sass-true/' as *;
 @use '../sass/utils/' as *;
 @use 'sass:meta';
@@ -106,7 +106,7 @@
 
     @include describe('math') {
         @include it('returns a number to a fixed floating point') {
-            /* stylelint-disable-next-line number-max-precision */
+            // stylelint-disable-next-line number-max-precision
             $pi: 3.141592653589793;
             $fixed: to-fixed($pi, 2);
 
