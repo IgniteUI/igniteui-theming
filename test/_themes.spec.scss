@@ -109,7 +109,7 @@ $schema: (
                 hover-foreground: color-mix(in oklch, var(--ig-secondary-700-contrast) 100%, transparent),
                 border-style: solid,
                 border-radius: .125rem,
-                brushes: #{chart-brushes()},
+                brushes: var(--chart-brushes),
                 resting-elevation: var(--ig-elevation-2),
                 _meta: (
                     version: 1
