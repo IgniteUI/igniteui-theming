@@ -1,4 +1,5 @@
 @use '../mixins' as *;
+@use '../../color/functions' as color;
 @use './category-chart-theme' as *;
 @use './data-chart-theme' as *;
 @use './doughnut-chart-theme' as *;
@@ -12,6 +13,15 @@
 @use './sparkline-theme' as *;
 
 @mixin chart-themes($schema, $target: 'angular') {
+    :root {
+        @include css-vars-from-theme(
+            (
+                chart-brushes: color.chart-brushes(),
+            ),
+            'ig'
+        );
+    }
+
     @include css-vars(category-chart-theme($schema: $schema, $target: $target));
     @include css-vars(data-chart-theme($schema: $schema, $target: $target));
     @include css-vars(doughnut-chart-theme($schema: $schema, $target: $target));
