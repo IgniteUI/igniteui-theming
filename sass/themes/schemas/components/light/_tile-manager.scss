@@ -13,7 +13,7 @@
 /// @prop {Map} tile-manager-background [color: ('gray', 100)] - The background color of the tile manager component.
 /// @prop {Map} tile-background [color: ('surface', 500)] - The background color of the tile component inside the tile manager.
 /// @prop {Map} title-color [color: ('gray', 900)] - The title color of the tile component.
-/// @prop {Color} content-background [transparent] - The background color of the tile component content.
+/// @prop {Map} content-background [color: ('surface', 500)] - The background color of the tile component content.
 /// @prop {Map} content-color [color: ('gray', 700)] - The text color of the tile component content.
 /// @prop {Color} border-color [transparent] - The border color of the tile component.
 /// @prop {Map} hover-border-color [color: ('gray', 400)] - The border color of the tile component on hover.
@@ -47,7 +47,12 @@ $light-tile-manager: extend(
             ),
         ),
 
-        content-background: transparent,
+        content-background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
 
         content-color: (
             color: (
@@ -107,13 +112,76 @@ $material-tile-manager: $light-tile-manager;
 
 /// Generates a fluent tile manager schema.
 /// @type {Map}
+/// @prop {Map} placeholder-background [color: ('primary', 100, .2)] - The background color of the ghost element that appears during drag and drop and while resizing.
+/// @prop {Map} overlay-background [color: ('primary', 100, .5)] - The background color of the ghost element that appears on top of the tile that will be swapped.
+/// @prop {Number} border-radius [0] - The border radius of the tile component.
 /// @requires {Map} $light-tile-manager
-$fluent-tile-manager: $light-tile-manager;
+$fluent-tile-manager: extend(
+    $light-tile-manager,
+    $default-elevation-tile,
+    (
+        placeholder-background: (
+            color: (
+                'primary',
+                100,
+                0.2,
+            ),
+        ),
+
+        overlay-background: (
+            color: (
+                'primary',
+                100,
+                0.5,
+            ),
+        ),
+
+        border-radius: 0,
+    )
+);
 
 /// Generates a bootstrap tile manager schema.
 /// @type {Map}
+/// @prop {Map} tile-manager-background [color: ('gray', 200)] - The background color of the tile manager component.
+/// @prop {Map} border-color [color: ('gray', 300)] - The border color of the tile component.
+/// @prop {Map} placeholder-background [color: ('primary', 300, .15)] - The background color of the ghost element that appears during drag and drop and while resizing.
+/// @prop {Map} overlay-background [color: ('primary', 300, .4)] - The background color of the ghost element that appears on top of the tile that will be swapped.
 /// @requires {Map} $light-tile-manager
-$bootstrap-tile-manager: $light-tile-manager;
+$bootstrap-tile-manager: extend(
+    $light-tile-manager,
+    $default-elevation-tile,
+    (
+        tile-manager-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        placeholder-background: (
+            color: (
+                'primary',
+                300,
+                0.15,
+            ),
+        ),
+
+        overlay-background: (
+            color: (
+                'primary',
+                300,
+                0.4,
+            ),
+        ),
+    )
+);
 
 /// Generates an indigo tile manager schema.
 /// @type {Map}
