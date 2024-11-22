@@ -18,12 +18,12 @@
 /// @prop {Map} item-text-color [color: ('gray', 700)] - The list item text color.
 /// @prop {Map} item-text-color-hover [color: ('gray', 700)] - The list item text color.
 /// @prop {Map} item-text-color-active [color: ('gray', 700)] - The active list item text color.
-/// @prop {Color} item-title-color ["'currentColor'"] - The list item title color.
-/// @prop {Color} item-title-color-hover ["'currentColor'"] - The list item title hover color.
-/// @prop {Color} item-title-color-active ["'currentColor'"] - The list item title active color.
-/// @prop {Color} item-subtitle-color ["'currentColor'"] - The list item subtitle color.
-/// @prop {Color} item-subtitle-color-hover ["'currentColor'"] - The list item subtitle hover color.
-/// @prop {Color} item-subtitle-color-active ["'currentColor'"] - The list item subtitle active color.
+/// @prop {Map} item-title-color [color: ('gray', 900)] - The list item title color.
+/// @prop {Map} item-title-color-hover [color: ('gray', 900)] - The list item title hover color.
+/// @prop {Map} item-title-color-active [color: ('gray', 900)] - The list item title active color.
+/// @prop {Map} item-subtitle-color [color: ('gray', 700)] - The list item subtitle color.
+/// @prop {Map} item-subtitle-color-hover [color: ('gray', 700)] - The list item subtitle hover color.
+/// @prop {Map} item-subtitle-color-active [color: ('gray', 700)] - The list item subtitle active color.
 /// @prop {Color} item-action-color ["'currentColor'"] - The list item action color.
 /// @prop {Color} item-action-color-hover ["'currentColor'"] - The list item action hover color.
 /// @prop {Color} item-action-color-active ["'currentColor'"] - The list item action active color.
@@ -32,8 +32,8 @@
 /// @prop {Color} item-thumbnail-color-active ["'currentColor'"] - The list item thumbnail active color.
 /// @prop {List} border-radius [()] - The border radius used for list component.
 /// @prop {List} item-border-radius [()] - The border radius used for list item.
-/// @prop {Number} border-color [transparent] - The list border color.
-/// @prop {Color} border-width [0] - The list border width.
+/// @prop {Color} border-color [transparent] - The list border color.
+/// @prop {Number} border-width [0] - The list border width.
 /// @prop {Number} default-size [2] - The default size used for the list component.
 $light-list: (
     background: (
@@ -90,11 +90,26 @@ $light-list: (
         ),
     ),
 
-    item-title-color: "'currentColor'",
+    item-title-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
 
-    item-title-color-hover: "'currentColor'",
+    item-title-color-hover: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
 
-    item-title-color-active: "'currentColor'",
+    item-title-color-active: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
 
     item-action-color: "'currentColor'",
 
@@ -102,11 +117,26 @@ $light-list: (
 
     item-action-color-active: "'currentColor'",
 
-    item-subtitle-color: "'currentColor'",
+    item-subtitle-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
 
-    item-subtitle-color-hover: "'currentColor'",
+    item-subtitle-color-hover: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
 
-    item-subtitle-color-active: "'currentColor'",
+    item-subtitle-color-active: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
 
     item-thumbnail-color: "'currentColor'",
 
@@ -142,8 +172,21 @@ $material-list: $light-list;
 
 /// Generates a fluent list schema.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 200)] - The list border color.
+/// @prop {Number} border-width [rem(1px)] - The list border width.
 /// @requires {Map} $light-list
-$fluent-list: $light-list;
+$fluent-list: extend(
+    $light-list,
+    (
+        border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        border-width: rem(1px),
+    )
+);
 
 /// Generates a bootstrap list schema.
 /// @type {Map}
@@ -153,8 +196,8 @@ $fluent-list: $light-list;
 /// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color.
 /// @prop {Map} item-text-color-active [color: ('gray', 900)] - The active list item text color.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for list component.
-/// @prop {Number} border-color [color: ('gray', 300)] - The list border color.
-/// @prop {Color} border-width [rem(1px)] - The list border width.
+/// @prop {Map} border-color [color: ('gray', 300)] - The list border color.
+/// @prop {Number} border-width [rem(1px)] - The list border width.
 /// @requires {Map} $light-list
 $bootstrap-list: extend(
     $light-list,
