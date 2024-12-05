@@ -10,7 +10,7 @@
 /// Generates a dark base tile manager schema.
 /// @type {Map}
 /// @prop {Map} hover-border-color [color: ('gray', 200)] - The border color of the tile component on hover.
-/// @prop {Map} resize-idnicator [color: ('gray', 200)] - The color of the tile resize indicator.
+/// @prop {Map} resize-indicator [color: ('gray', 200)] - The color of the tile resize indicator.
 /// @prop {Map} placeholder-background [color: ('primary', 700, .15)] - The background color of the ghost element that appears during drag and drop and while resizing.
 /// @prop {Map} overlay-background [color: ('primary', 700, .5)] - The background color of the ghost element that appears on top of the tile that will be swapped.
 $dark-base-tile-manager: (
@@ -62,7 +62,7 @@ $dark-fluent-tile-manager: extend($fluent-tile-manager, $dark-base-tile-manager)
 /// @prop {Map} tile-manager-background [color: ('gray', 100)] - The background color of the tile manager component.
 /// @prop {Map} border-color [color: ('gray', 200)] - The border color of the tile component on hover.
 /// @prop {Map} hover-border-color [color: ('gray', 300)] - The border color of the tile component on hover.
-/// @prop {Map} resize-idnicator [color: ('gray', 300)] - The color of the tile resize indicator.
+/// @prop {Map} resize-indicator [color: ('gray', 300)] - The color of the tile resize indicator.
 /// @prop {Map} placeholder-background [color: ('primary', 700, .15)] - The background color of the ghost element that appears during drag and drop and while resizing.
 /// @prop {Map} overlay-background [color: ('primary', 700, .4)] - The background color of the ghost element that appears on top of the tile that will be swapped.
 /// @requires {Map} $bootstrap-tile-manager
@@ -119,13 +119,14 @@ $dark-bootstrap-tile-manager: extend(
 /// @type {Map}
 /// @prop {Map} tile-background [color: ('gray', 50)] - The background color of the tile component inside the tile manager.
 /// @prop {Map} title-color [contrast-color: ('gray', 50, .9)] - The title color of the tile component.
+/// @prop {Map} header-background [color: ('gray', 50)] - The background color of the tile header component.
 /// @prop {Map} content-background [color: ('gray', 50)] - The background color of the tile component content.
 /// @prop {Map} border-color [color: ('gray', 100)] - The border color of the tile component.
 /// @prop {Map} hover-border-color [color: ('gray', 200)] - The border color of the tile component on hover.
 /// @prop {Map} placeholder-background [color: ('primary', 500, .15)] - The background color of the ghost element that appears during drag and drop and while resizing.
 /// @prop {Map} overlay-background [color: ('primary', 700, .5)] - The background color of the ghost element that appears on top of the tile that will be swapped.
 /// @prop {Map} ghost-border [color: ('primary', 300)] - The border color of the ghost element that appears during drag and drop and while resizing.
-/// @prop {Map} resize-idnicator [color: ('gray', 200)] - The color of the tile resize indicator.
+/// @prop {Map} resize-indicator [color: ('gray', 200)] - The color of the tile resize indicator.
 /// @requires {Map} $indigo-tile-manager
 $dark-indigo-tile-manager: extend(
     $indigo-tile-manager,
@@ -142,6 +143,13 @@ $dark-indigo-tile-manager: extend(
                 'gray',
                 50,
                 0.9,
+            ),
+        ),
+
+        header-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
 
@@ -166,7 +174,7 @@ $dark-indigo-tile-manager: extend(
             ),
         ),
 
-        resize-idnicator: (
+        resize-indicator: (
             color: (
                 'gray',
                 200,
