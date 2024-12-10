@@ -185,7 +185,7 @@ $_enhanced-accessibility: false;
 ///   .my-component-2 {
 ///      background: color($my-palette, 'primary', 200, .5);
 ///    }
-@function color($palette: null, $color: 'primary', $variant: 500, $opacity: null) {
+@function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $_alpha: if($opacity, $opacity, 1);
@@ -193,7 +193,7 @@ $_enhanced-accessibility: false;
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
     @if $palette {
-        $s: map.get($palette, $color);
+        $s: map.get($palette, #{$color});
         $base: map.get($s, $variant);
         $raw: if($contrast, map.get($s, #{$variant}-contrast), map.get($s, #{$variant}-raw));
 
