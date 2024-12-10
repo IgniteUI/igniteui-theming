@@ -290,6 +290,16 @@ $_palette: palette(
             $_ref: color(null, primary, 800);
 
             @include assert-equal($_ref, hsl(from var(--ig-primary-800) h s l / 1));
+
+            @include assert() {
+                @include output() {
+                    color: color($_palette, gray, 100);
+                }
+
+                @include contains() {
+                    color: #fafafa;
+                }
+            }
         }
 
         @include it('should convert a color to a list of HSL values') {
