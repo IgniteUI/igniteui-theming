@@ -139,7 +139,7 @@ $_enhanced-accessibility: false;
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), $shade);
         $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
-        $raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l);
+        $raw: hsl(to-fixed(color.channel($color, 'hue', hsl)), to-fixed(color.channel($color, 'saturation', hsl)), $l);
         $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
 
         @if #{$shade} == '500' {
@@ -151,9 +151,9 @@ $_enhanced-accessibility: false;
         $sx: map.get(multipliers.$color, 's', $shade);
         $lx: map.get(multipliers.$color, 'l', $shade);
         $raw: hsl(
-            to-fixed(color.hue($color)),
-            to-fixed(color.saturation($color) * $sx),
-            to-fixed(color.lightness($color) * $lx)
+            to-fixed(color.channel($color, 'hue', hsl)),
+            to-fixed(color.channel($color, 'saturation', hsl) * $sx),
+            to-fixed(color.channel($color, 'lightness', hsl) * $lx)
         );
         $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
 
@@ -289,9 +289,9 @@ $_enhanced-accessibility: false;
 /// @return {Color} - The color representation of the rgba value.
 @function to-opaque($color-1, $color-2: #fff) {
     @if meta.type-of($color-1) == color and meta.type-of($color-2) == color {
-        $red: color.red($color-1);
-        $green: color.green($color-1);
-        $blue: color.blue($color-1);
+        $red: color.channel($color-1, 'red', rgb);
+        $green: color.channel($color-1, 'green', rgb);
+        $blue: color.channel($color-1, 'blue', rgb);
         $a: color.alpha($color-1);
         $r: math.floor($a * $red + (1 - $a) * color.red($color-2));
         $g: math.floor($a * $green + (1 - $a) * color.green($color-2));
@@ -342,9 +342,9 @@ $_enhanced-accessibility: false;
 /// @returns {Number | String} - The calculated luminance of a given color
 @function luminance($color) {
     @if meta.type-of($color) == 'color' {
-        $r: math.div(color.red($color), 255);
-        $g: math.div(color.green($color), 255);
-        $b: math.div(color.blue($color), 255);
+        $r: math.div(color.channel($color, 'red', rgb), 255);
+        $g: math.div(color.channel($color, 'green', rgb), 255);
+        $b: math.div(color.channel($color, 'red', rgb), 255);
 
         @return 0.2126 * _lcv($r) + 0.7152 * _lcv($g) + 0.0722 * _lcv($b);
     }
