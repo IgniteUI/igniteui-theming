@@ -248,7 +248,7 @@ $_palette: palette(
                     // Test if each shade exists
                     @include assert-true(map.get($_palette, $color, $shade));
 
-                    @if $shade != variant{
+                    @if $shade != variant {
                         // Test if each contrast shade exits
                         @include assert-true(map.get($_palette, $color, #{$shade}-contrast));
 

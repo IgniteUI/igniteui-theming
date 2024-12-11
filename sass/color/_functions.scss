@@ -137,7 +137,7 @@ $_enhanced-accessibility: false;
         $color: if($color, $color, if($lum > 0.5, #000, #fff));
         $lmap: map.get(multipliers.$grayscale, 'l');
         $len: list.length($lmap);
-        $i: list.index(map.keys($lmap), $shade);
+        $i: list.index(map.keys($lmap), #{$shade});
         $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
         $raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l);
         $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
@@ -148,8 +148,8 @@ $_enhanced-accessibility: false;
 
         @return (raw: $raw, hsl: $hsl);
     } @else {
-        $sx: map.get(multipliers.$color, 's', $shade);
-        $lx: map.get(multipliers.$color, 'l', $shade);
+        $sx: map.get(multipliers.$color, 's', #{$shade});
+        $lx: map.get(multipliers.$color, 'l', #{$shade});
         $raw: hsl(
             to-fixed(color.hue($color)),
             to-fixed(color.saturation($color) * $sx),
@@ -194,10 +194,10 @@ $_enhanced-accessibility: false;
 
     @if $palette {
         $s: map.get($palette, #{$color});
-        $base: map.get($s, $variant);
+        $base: map.get($s, #{$variant});
         $raw: if($contrast, map.get($s, #{$variant}-contrast), map.get($s, #{$variant}-raw));
 
-        @return if($raw and $variant != 500, rgba($raw, $_alpha), rgba($base, $_alpha));
+        @return if($raw and $variant != '500', rgba($raw, $_alpha), rgba($base, $_alpha));
     }
 
     @return if($contrast, $_mix-alpha, $_hsl-alpha);
