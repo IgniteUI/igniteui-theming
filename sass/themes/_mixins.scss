@@ -49,7 +49,6 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 /// @access public
 /// @group themes
 /// @param {map} $theme - The component theme to be used.
-/// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
 /// @requires {mixin} css-vars-from-theme
 /// @example scss Convert grid theme colors to css variables
 ///   $my-grid-theme grid-theme(
@@ -59,7 +58,22 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 ///   .my-grid {
 ///     @include css-vars($my-grid-theme);
 ///   }
-@mixin css-vars($theme, $scope: null) {
+@mixin css-vars($args...) {
+    $_themes: meta.keywords($args);
+    $_is-list: list.length($_themes) > 0;
+
+    @if not($_is-list) {
+        $_theme: if(list.length($args) >= 1, list.nth($args, 1), null);
+
+        @include _css-vars($_theme, null);
+    } @else {
+        @each $_scope, $_theme in $args {
+            @include _css-vars($_theme, $_scope);
+        }
+    }
+}
+
+@mixin _css-vars($theme, $scope) {
     $s: map.get($theme, 'selector');
     $n: map.get($theme, 'name');
     $name: if($scope, $scope, $s or $n);
