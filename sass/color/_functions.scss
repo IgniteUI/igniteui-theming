@@ -104,12 +104,12 @@ $_enhanced-accessibility: false;
             $result,
             (
                 $variant: map.get($shade, 'hsl'),
-                #{$variant}-contrast:
+                '#{$variant}-contrast':
                     text-contrast(
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                #{$variant}-raw: map.get($shade, 'raw'),
+                '#{$variant}-raw': map.get($shade, 'raw'),
             )
         );
     }

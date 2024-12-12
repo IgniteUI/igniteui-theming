@@ -157,6 +157,17 @@ $_palette: palette(
             @include assert-equal($value, color-mix(in oklch, var(--ig-secondary-A400-contrast) 25%, transparent));
         }
 
+        @include it('should retrieve colors from a palette regadless of type of key') {
+            @include assert-true(color($_palette, primary, 500));
+            @include assert-equal(color($_palette, primary, 500), $_primary);
+            @include assert-true(color($_palette, 'primary', '500'));
+            @include assert-equal(color($_palette, 'primary', '500'), $_primary);
+            @include assert-true(contrast-color($_palette, primary, 500));
+            @include assert-equal(contrast-color($_palette, primary, 500), black);
+            @include assert-true(contrast-color($_palette, 'primary', '500'));
+            @include assert-equal(contrast-color($_palette, 'primary', '500'), black);
+        }
+
         @include it('should generate an HSL color shade from a given base color') {
             $color: primary;
             $variant: 600;
