@@ -114,7 +114,7 @@
 
         @return if($fallback, var($p, $fallback), var($p));
     } @else {
-        @error 'The theme for #{map.get($map, 'name')} does not contain #{$key}';
+        @error 'The #{map.get($theme, name)} theme does \not contain property "#{$property}".';
     }
 }
 

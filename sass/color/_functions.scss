@@ -104,12 +104,12 @@ $_enhanced-accessibility: false;
             $result,
             (
                 $variant: map.get($shade, 'hsl'),
-                #{$variant}-contrast:
+                '#{$variant}-contrast':
                     text-contrast(
                         $background: map.get($shade, 'raw'),
                         $contrast: 'AA',
                     ),
-                #{$variant}-raw: map.get($shade, 'raw'),
+                '#{$variant}-raw': map.get($shade, 'raw'),
             )
         );
     }
@@ -137,7 +137,7 @@ $_enhanced-accessibility: false;
         $color: if($color, $color, if($lum > 0.5, #000, #fff));
         $lmap: map.get(multipliers.$grayscale, 'l');
         $len: list.length($lmap);
-        $i: list.index(map.keys($lmap), $shade);
+        $i: list.index(map.keys($lmap), #{$shade});
         $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
         $raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l);
         $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
@@ -148,8 +148,8 @@ $_enhanced-accessibility: false;
 
         @return (raw: $raw, hsl: $hsl);
     } @else {
-        $sx: map.get(multipliers.$color, 's', $shade);
-        $lx: map.get(multipliers.$color, 'l', $shade);
+        $sx: map.get(multipliers.$color, 's', #{$shade});
+        $lx: map.get(multipliers.$color, 'l', #{$shade});
         $raw: hsl(
             to-fixed(color.hue($color)),
             to-fixed(color.saturation($color) * $sx),
@@ -185,7 +185,7 @@ $_enhanced-accessibility: false;
 ///   .my-component-2 {
 ///      background: color($my-palette, 'primary', 200, .5);
 ///    }
-@function color($palette: null, $color: 'primary', $variant: 500, $opacity: null) {
+@function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $_alpha: if($opacity, $opacity, 1);
@@ -193,11 +193,11 @@ $_enhanced-accessibility: false;
     $_mix-alpha: color-mix(in oklch, $s #{$_alpha * 100%}, transparent);
 
     @if $palette {
-        $s: map.get($palette, $color);
-        $base: map.get($s, $variant);
+        $s: map.get($palette, #{$color});
+        $base: map.get($s, #{$variant});
         $raw: if($contrast, map.get($s, #{$variant}-contrast), map.get($s, #{$variant}-raw));
 
-        @return if($raw and $variant != 500, rgba($raw, $_alpha), rgba($base, $_alpha));
+        @return if($raw and $variant != '500', rgba($raw, $_alpha), rgba($base, $_alpha));
     }
 
     @return if($contrast, $_mix-alpha, $_hsl-alpha);
