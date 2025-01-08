@@ -63,8 +63,12 @@
 ///   }
 /// @return {number} - Returns the relative value converted to pixels.
 @function px($num, $context: $base-font-size) {
+    @if math.is-unitless($context) {
+        $context: $context * 1px;
+    }
+
     @if meta.type-of($num) == 'number' {
-        @return math.div($num, $num * 0 + 1) * 16px;
+        @return math.div($num, $num * 0 + 1) * $context;
     }
 
     @return $num;
