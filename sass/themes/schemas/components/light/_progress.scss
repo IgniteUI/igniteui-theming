@@ -18,6 +18,7 @@
 /// @prop {Map} stripes-color [color: ('gray', 50, .7)] - The track stripes color.
 /// @prop {Map} text-color [color: ('gray', 700)] - The track value text color.
 /// @prop {List} track-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the progress bar track.
+/// @prop {Map} typography [label: (value: 'subtitle-2')] - The typography styles used for the component.
 $light-progress-linear: extend(
     (
         track-color: (
@@ -78,6 +79,12 @@ $light-progress-linear: extend(
                 rem(0),
                 rem(0),
                 rem(8px),
+            ),
+        ),
+
+        typography: (
+            label: (
+                value: 'subtitle-2',
             ),
         ),
     )

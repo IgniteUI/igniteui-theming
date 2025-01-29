@@ -11,6 +11,7 @@
 /// @type {Map}
 /// @prop {Map} title-color [color: ('primary', 500)]- The text color used for the title of the list.
 /// @prop {Map} background-color [color: ('surface')] - The background color of the panel.
+/// @prop {Map} typography [title: (value: 'subtitle-1')] - The typography styles used for the component.
 $light-column-actions: (
     background-color: (
         color: (
@@ -22,6 +23,12 @@ $light-column-actions: (
         color: (
             'primary',
             500,
+        ),
+    ),
+
+    typography: (
+        title: (
+            value: 'subtitle-1',
         ),
     ),
 );

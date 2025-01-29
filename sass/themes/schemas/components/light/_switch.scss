@@ -27,6 +27,7 @@
 /// @prop {Map} thumb-on-error-color [color: ('gray', 50)] - The color of the thumb when the switch is on and invalid.
 /// @prop {List} border-radius-thumb [(rem(10px), rem(0), rem(10px))] - The border radius used for switch thumb.
 /// @prop {List} border-radius-ripple [(rem(24px), rem(0), rem(24px))] - The border radius used for switch ripple.
+/// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 $light-switch: extend(
     (
         border-on-color: (
@@ -111,6 +112,11 @@ $light-switch: extend(
                 rem(24px),
             ),
         ),
+        typography: (
+            label: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -138,6 +144,7 @@ $light-switch: extend(
 /// @prop {Number} resting-elevation [1] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [1] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} disabled-elevation [1] - The elevation level, between 0-24, to be used for the disabled state.
+/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @requires {Map} $light-switch
 /// @requires {Map} $default-elevation-switch
 $material-switch: extend(
@@ -217,6 +224,11 @@ $material-switch: extend(
                 rem(7px),
                 rem(0),
                 rem(7px),
+            ),
+        ),
+        typography: (
+            label: (
+                value: 'subtitle-1',
             ),
         ),
     )
@@ -370,6 +382,7 @@ $fluent-switch: extend(
 /// @prop {Map} error-color-hover [color: ('primary', 200)] - The border and thumb color in invalid state on hover.
 /// @prop {List} border-radius-track [(rem(32px), rem(0), rem(32px))] - The border radius used for switch track.
 /// @prop {List} border-radius-thumb [(rem(32px), rem(0), rem(32px))] - The border radius used for switch thumb.
+/// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 /// @requires {Map} $fluent-switch
 $bootstrap-switch: extend(
     $fluent-switch,
@@ -477,6 +490,11 @@ $bootstrap-switch: extend(
                 rem(32px),
                 rem(0),
                 rem(32px),
+            ),
+        ),
+        typography: (
+            label: (
+                value: 'body-2',
             ),
         ),
     )

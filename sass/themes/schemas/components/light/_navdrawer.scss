@@ -58,6 +58,10 @@ $light-navdrawer: extend(
 /// @prop {Map} item-icon-color [ color: ('gray', 700)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 700)] - The header's idle text color.
 /// @prop {Map} item-disabled-text-color [color: ('gray', 500)] - The item's disabled text color.
+/// @prop {Map} typography [
+///   item: (value: 'subtitle-2'),
+///   header: (value: 'subtitle-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-navdrawer
 $material-navdrawer: extend(
     $light-navdrawer,
@@ -136,6 +140,14 @@ $material-navdrawer: extend(
                 500,
             ),
         ),
+        typography: (
+            item: (
+                value: 'subtitle-2',
+            ),
+            header: (
+                value: 'subtitle-1',
+            ),
+        ),
     )
 );
 
@@ -152,6 +164,10 @@ $material-navdrawer: extend(
 /// @prop {Map} border-color [color: ('gray', 200)] - The navigation drawer right border color.
 /// @prop {Map} item-icon-color [ color: ('primary', 500)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 800)] - The header's idle text color.
+/// @prop {Map} typography [
+///   item: (value: 'body-2'),
+///   header: (value: 'subtitle-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-navdrawer
 $fluent-navdrawer: extend(
     $light-navdrawer,
@@ -217,6 +233,14 @@ $fluent-navdrawer: extend(
                 800,
             ),
         ),
+        typography: (
+            item: (
+                value: 'body-2',
+            ),
+            header: (
+                value: 'subtitle-1',
+            ),
+        ),
     )
 );
 
@@ -233,6 +257,10 @@ $fluent-navdrawer: extend(
 /// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @prop {Map} item-icon-color [ color: ('gray', 900)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 900)] - The header's idle text color.
+/// @prop {Map} typography [
+///   item: (value: 'body-2'),
+///   header: (value: 'caption')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-navdrawer
 $bootstrap-navdrawer: extend(
     $light-navdrawer,
@@ -305,6 +333,14 @@ $bootstrap-navdrawer: extend(
                 900,
             ),
         ),
+        typography: (
+            item: (
+                value: 'body-2',
+            ),
+            header: (
+                value: 'caption',
+            ),
+        ),
     )
 );
 
@@ -324,6 +360,10 @@ $bootstrap-navdrawer: extend(
 /// @prop {Map} elevation [0] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @prop {List} item-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the navdrawer items.
+/// @prop {Map} typography [
+///   item: (value: 'subtitle-2'),
+///   header: (value: 'overline')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-navdrawer
 $indigo-navdrawer: extend(
     $light-navdrawer,
@@ -420,6 +460,15 @@ $indigo-navdrawer: extend(
                 rem(4px),
                 rem(0),
                 rem(4px),
+            ),
+        ),
+
+        typography: (
+            item: (
+                value: 'subtitle-2',
+            ),
+            header: (
+                value: 'overline',
             ),
         ),
     )

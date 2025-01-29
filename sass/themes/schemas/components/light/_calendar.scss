@@ -364,6 +364,15 @@ $light-calendar: (
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'overline'),
+///     date: (value: 'h4')
+///   ),
+///   weekday-label: (value: 'body-1'),
+///   picker-date: (value: 'subtitle-1'),
+///   content: (value: 'body-1')
+/// ] - The typography styles used for the component.
 /// @requires $light-calendar
 $material-calendar: extend(
     $light-calendar,
@@ -758,6 +767,26 @@ $material-calendar: extend(
                 900,
             ),
         ),
+        typography: (
+            header: (
+                year: (
+                    value: 'overline',
+                ),
+
+                date: (
+                    value: 'h4',
+                ),
+            ),
+            weekday-label: (
+                value: 'body-1',
+            ),
+            picker-date: (
+                value: 'subtitle-1',
+            ),
+            content: (
+                value: 'body-1',
+            ),
+        ),
     )
 );
 
@@ -856,6 +885,15 @@ $material-calendar: extend(
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
 /// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
 /// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'overline'),
+///     date: (value: 'h4')
+///   ),
+///   weekday-label: (value: 'body-1'),
+///   picker-date: (value: 'subtitle-2'),
+///   content: (value: 'body-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-calendar
 $fluent-calendar: extend(
     $light-calendar,
@@ -1382,6 +1420,26 @@ $fluent-calendar: extend(
                 900,
             ),
         ),
+        typography: (
+            header: (
+                year: (
+                    value: 'overline',
+                ),
+
+                date: (
+                    value: 'h4',
+                ),
+            ),
+            weekday-label: (
+                value: 'body-1',
+            ),
+            picker-date: (
+                value: 'subtitle-2',
+            ),
+            content: (
+                value: 'body-1',
+            ),
+        ),
     )
 );
 
@@ -1467,6 +1525,16 @@ $fluent-calendar: extend(
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
 /// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'body-2'),
+///     date: (value: 'h4')
+///   ),
+///   weekday-label: (value: 'body-2'),
+///   picker-date: (value: 'subtitle-1'),
+///   content: (value: 'body-1')
+/// ] - The typography styles used for the component.
+
 /// @requires {Map} $light-calendar
 $bootstrap-calendar: extend(
     $light-calendar,
@@ -1913,6 +1981,26 @@ $bootstrap-calendar: extend(
                 900,
             ),
         ),
+        typography: (
+            header: (
+                year: (
+                    value: 'body-2',
+                ),
+
+                date: (
+                    value: 'h4',
+                ),
+            ),
+            weekday-label: (
+                value: 'body-2',
+            ),
+            picker-date: (
+                value: 'subtitle-1',
+            ),
+            content: (
+                value: 'body-1',
+            ),
+        ),
     )
 );
 
@@ -2008,6 +2096,15 @@ $bootstrap-calendar: extend(
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the week numbers column.
 /// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
 /// @prop {Map} date-special-range-foreground [color: ('primary', 500)] - The foreground color of a special date in rage selection.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'body-2'),
+///     date: (value: 'h5')
+///   ),
+///   weekday-label: (value: 'body-2'),
+///   picker-date: (value: 'subtitle-2'),
+///   content: (value: 'body-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-calendar
 $indigo-calendar: extend(
     $light-calendar,
@@ -2555,6 +2652,26 @@ $indigo-calendar: extend(
                 'gray',
                 600,
                 0.38,
+            ),
+        ),
+        typography: (
+            header: (
+                year: (
+                    value: 'body-2',
+                ),
+
+                date: (
+                    value: 'h5',
+                ),
+            ),
+            weekday-label: (
+                value: 'body-2',
+            ),
+            picker-date: (
+                value: 'subtitle-2',
+            ),
+            content: (
+                value: 'body-1',
             ),
         ),
     )

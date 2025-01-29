@@ -13,6 +13,7 @@
 /// @prop {Map} background [color: ('gray', 700, .9)] - The background color of the tooltip.
 /// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text color of the tooltip.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @prop {Map} typography [tooltip-text: (value: null)] - The typography styles used for the tooltip.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the tooltip.
 /// @requires {Map} $default-elevation-tooltip
 $light-tooltip: extend(
@@ -38,6 +39,12 @@ $light-tooltip: extend(
                 rem(4px),
                 rem(0),
                 rem(16px),
+            ),
+        ),
+
+        typography: (
+            tooltip-text: (
+                value: null,
             ),
         ),
     )
@@ -110,6 +117,7 @@ $bootstrap-tooltip: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 600, .9)] - The background color of the tooltip.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for tooltip.
+/// @prop {Map} typography [tooltip-text: (value: 'subtitle-2')] - The typography styles used for the tooltip.
 /// @prop {Number} elevation [8] - The elevation level, between 0-24, to be used for the tooltip.
 /// @requires {Map} $light-tooltip
 /// @requires {Map} $indigo-elevation-tooltip
@@ -130,6 +138,12 @@ $indigo-tooltip: extend(
                 rem(4px),
                 rem(0),
                 rem(16px),
+            ),
+        ),
+
+        typography: (
+            tooltip-text: (
+                value: 'subtitle-2',
             ),
         ),
     )

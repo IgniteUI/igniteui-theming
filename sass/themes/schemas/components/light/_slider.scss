@@ -19,6 +19,10 @@
 /// @prop {Map} label-text-color [contrast-color: ('gray', 700)] - The text color of the bubble label.
 /// @prop {Map} tick-label-color [color: ('gray', 500)] - The color of the tick label.
 /// @prop {Map} tick-color [color: ('gray', 500)] - The background-color of the tick.
+/// @prop {Map} typography [
+///   ticks-label: (value: 'caption'),
+///   thumb-label: (value: 'caption')
+/// ] - The typography styles used for the component.
 $light-slider: (
     track-color: (
         color: (
@@ -56,6 +60,14 @@ $light-slider: (
         color: (
             'gray',
             500,
+        ),
+    ),
+    typography: (
+        ticks-label: (
+            value: 'caption',
+        ),
+        thumb-label: (
+            value: 'caption',
         ),
     ),
 );
@@ -338,6 +350,10 @@ $bootstrap-slider: extend(
 /// @prop {Map} thumb-disabled-border-color [color: ('primary', 50)] - The thumb border color when it's disabled.
 /// @prop {Map} disabled-base-track-color [color: ('gray', 900, 0.15)] - The base background color of the track when is disabled.
 /// @prop {Map} disabled-fill-track-color [color: ('primary', 50)] - The background color of the fill track when is disabled.
+/// @prop {Map} typography [
+///   ticks-label: (value: 'body-2'),
+///   thumb-label: (value: 'subtitle-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-slider
 $indigo-slider: extend(
     $light-slider,
@@ -452,6 +468,14 @@ $indigo-slider: extend(
             color: (
                 'primary',
                 50,
+            ),
+        ),
+        typography: (
+            ticks-label: (
+                value: 'body-2',
+            ),
+            thumb-label: (
+                value: 'subtitle-2',
             ),
         ),
     )

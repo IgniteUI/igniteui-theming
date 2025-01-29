@@ -10,11 +10,18 @@
 /// Generates a light date-range-picker schema.
 /// @type {Map}
 /// @prop {Map} label-color [color: ('gray', 500)] - The Color for date range separator label.
+/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 $light-date-range-picker: (
     label-color: (
         color: (
             'gray',
             500,
+        ),
+    ),
+
+    typography: (
+        label: (
+            value: 'subtitle-1',
         ),
     ),
 );

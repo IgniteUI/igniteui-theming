@@ -15,6 +15,7 @@
 /// @prop {Map} text-color [contrast-color: ('primary', 400)] - The navbar text color.
 /// @prop {Map} idle-icon-color [color: ('gray', 900)] - The navbar idle icon color.
 /// @prop {Map} hover-icon-color [color: ('gray', 900)] - The navbar hover icon color.
+/// @prop {Map} typography [title: (value: 'h5')] - The typography styles used for the component.
 /// @prop {Number} elevation [4] - The elevation level, between 0-24, to be used for the navbar.
 /// @requires {Map} $default-elevation-navbar
 $light-navbar: extend(
@@ -45,13 +46,28 @@ $light-navbar: extend(
             ),
         ),
         border-color: transparent,
+        typography: (
+            title: (
+                value: 'h5',
+            ),
+        ),
     )
 );
 
 /// Generates a material navbar schema.
 /// @type {Map}
+/// @prop {Map} typography [title: (value: 'h6')] - The typography styles used for the component.
 /// @requires {Map} $light-navbar
-$material-navbar: $light-navbar;
+$material-navbar: extend(
+    $light-navbar,
+    (
+        typography: (
+            title: (
+                value: 'h6',
+            ),
+        ),
+    )
+);
 
 /// Generates a fluent navbar schema.
 /// @type {Map}
@@ -59,6 +75,7 @@ $material-navbar: $light-navbar;
 /// @prop {Map} text-color [color: ('gray', 900)] - The navbar text color.
 /// @prop {Map} idle-icon-color [color: ('primary', 500)] - The navbar idle icon color.
 /// @prop {Map} hover-icon-color [color: ('primary', 500)] - The navbar hover icon color.
+/// @prop {Map} typography [title: (value: 'subtitle-2')] - The typography styles used for the component.
 /// @requires {Map} $light-navbar
 $fluent-navbar: extend(
     $light-navbar,
@@ -82,6 +99,11 @@ $fluent-navbar: extend(
             color: (
                 'primary',
                 500,
+            ),
+        ),
+        typography: (
+            title: (
+                value: 'subtitle-2',
             ),
         ),
     )

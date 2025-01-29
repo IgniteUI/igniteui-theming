@@ -69,6 +69,14 @@ $light-card: extend(
 /// Generates a material card schema.
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 400, .54)] - The outline color of an outlined type card.
+/// @prop {Map} typography [
+///   title: (
+///     value: 'h6',
+///     small: (value: 'subtitle-2')
+///   ),
+///   subtitle: (value: 'subtitle-2'),
+///   content: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-card
 $material-card: extend(
     $light-card,
@@ -80,6 +88,21 @@ $material-card: extend(
                 0.54,
             ),
         ),
+        typography: (
+            title: (
+                value: 'h6',
+
+                small: (
+                    value: 'subtitle-2',
+                ),
+            ),
+            subtitle: (
+                value: 'subtitle-2',
+            ),
+            content: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -87,6 +110,14 @@ $material-card: extend(
 /// @type {Map}
 /// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
 /// @prop {List} border-radius [(rem(0px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {Map} typography [
+///   title: (
+///     value: 'subtitle-1',
+///     small: (value: 'subtitle-2')
+///   ),
+///   subtitle: (value: 'body-2'),
+///   content: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-card
 $fluent-card: extend(
     $light-card,
@@ -105,6 +136,22 @@ $fluent-card: extend(
                 rem(24px),
             ),
         ),
+
+        typography: (
+            title: (
+                value: 'subtitle-1',
+
+                small: (
+                    value: 'subtitle-2',
+                ),
+            ),
+            subtitle: (
+                value: 'body-2',
+            ),
+            content: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -115,6 +162,14 @@ $fluent-card: extend(
 /// @prop {Map} subtitle-text-color [color: ('gray', 800)] - The text color of the card subtitle.
 /// @prop {Map} content-text-color [color: ('gray', 800)] - The text color of the card content.
 /// @prop {Map} actions-text-color [color: ('gray', 900)] - The text color of the card buttons.
+/// @prop {Map} typography [
+///   title: (
+///     value: 'h5',
+///     small: (value: 'subtitle-2')
+///   ),
+///   subtitle: (value: 'body-1'),
+///   content: (value: 'body-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-card
 $bootstrap-card: extend(
     $light-card,
@@ -153,6 +208,22 @@ $bootstrap-card: extend(
                 900,
             ),
         ),
+
+        typography: (
+            title: (
+                value: 'h5',
+
+                small: (
+                    value: 'subtitle-2',
+                ),
+            ),
+            subtitle: (
+                value: 'body-1',
+            ),
+            content: (
+                value: 'body-1',
+            ),
+        ),
     )
 );
 
@@ -164,6 +235,14 @@ $bootstrap-card: extend(
 /// @prop {Map} subtitle-text-color [color: ('gray', 700)] - The text color of the card subtitle.
 /// @prop {Map} actions-text-color [color: ('gray', 600)] - The text color of the card buttons.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(24px))] - The border radius used for card.
+/// @prop {Map} typography [
+///   title: (
+///     value: 'h6',
+///     small: (value: 'body-2')
+///   ),
+///   subtitle: (value: 'body-2'),
+///   content: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-card
 $indigo-card: extend(
     $light-card,
@@ -208,6 +287,22 @@ $indigo-card: extend(
                 rem(6px),
                 rem(0),
                 rem(24px),
+            ),
+        ),
+
+        typography: (
+            title: (
+                value: 'h6',
+
+                small: (
+                    value: 'body-2',
+                ),
+            ),
+            subtitle: (
+                value: 'body-2',
+            ),
+            content: (
+                value: 'body-2',
             ),
         ),
     )

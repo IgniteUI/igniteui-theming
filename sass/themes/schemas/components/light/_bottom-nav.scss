@@ -18,6 +18,7 @@
 /// @prop {Map} label-disabled-color [color: ('gray', 700)] - The disabled color of the label.
 /// @prop {Map} label-selected-color [color: ('primary', 500)] - The label color used for the selected item.
 /// @prop {Color} border-color [transparent] - The border color of the bottom navigation.
+/// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
 /// @prop {Number} elevation [8] - The elevation level, between 0-24, to be used for the bottom nav.
 /// @requires {Map} $default-elevation-bottom-nav
 $light-bottom-nav: extend(
@@ -66,6 +67,11 @@ $light-bottom-nav: extend(
             ),
         ),
         border-color: transparent,
+        typography: (
+            label: (
+                value: 'caption',
+            ),
+        ),
     )
 );
 

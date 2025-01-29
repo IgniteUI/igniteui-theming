@@ -25,6 +25,7 @@
 /// @prop {Map} error-color [color: ('error', 500)] - The border and fill colors in invalid state.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(10px))] - The border radius used for checkbox.
 /// @prop {List} border-radius-ripple [(rem(24px), rem(0), rem(24px))] - The border radius used for checkbox ripple.
+/// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 $light-checkbox: (
     tick-color: (
         color: (
@@ -97,6 +98,12 @@ $light-checkbox: (
             rem(24px),
         ),
     ),
+
+    typography: (
+        label: (
+            value: 'body-2',
+        ),
+    ),
 );
 
 /// Generates a material checkbox schema.
@@ -108,6 +115,7 @@ $light-checkbox: (
 /// @prop {Map} fill-color-hover [color: ('secondary', 500)] - The checked border and fill colors on hover.
 /// @prop {Color} focus-outline-color [transparent] - The focus outlined color.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and fill colors in invalid state on hover.
+/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @requires {Map} $light-checkbox
 $material-checkbox: extend(
     $light-checkbox,
@@ -153,6 +161,12 @@ $material-checkbox: extend(
             color: (
                 'error',
                 500,
+            ),
+        ),
+
+        typography: (
+            label: (
+                value: 'subtitle-1',
             ),
         ),
     )
@@ -233,6 +247,7 @@ $fluent-checkbox: extend(
 /// @prop {Map} error-color-hover [color: ('error', 600)] - The focus outlined color in invalid state.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(10px))] - The border radius used for checkbox.
 /// @prop {List} border-radius-ripple [(rem(4px), rem(0), rem(24px))] - The border radius used for checkbox ripple.
+/// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @requires {Map} $light-checkbox
 $bootstrap-checkbox: extend(
     $light-checkbox,
@@ -323,6 +338,12 @@ $bootstrap-checkbox: extend(
                 rem(4px),
                 rem(0),
                 rem(24px),
+            ),
+        ),
+
+        typography: (
+            label: (
+                value: 'body-1',
             ),
         ),
     )

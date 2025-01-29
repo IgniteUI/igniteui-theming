@@ -30,6 +30,11 @@
 /// @prop {List} item-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the drop-down items.
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size used for the dropdown item height.
 /// @prop {Number} default-size [2] - The default size used for the drop down component.
+/// @prop {Map} typography [
+///   header: (value: 'overline'),
+///   item: (value: 'body-2'),
+///   select-item: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-drop-down
 $light-drop-down: extend(
     $default-elevation-drop-down,
@@ -116,6 +121,17 @@ $light-drop-down: extend(
             ),
         ),
         default-size: 2,
+        typography: (
+            header: (
+                value: 'overline',
+            ),
+            item: (
+                value: 'body-2',
+            ),
+            select-item: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -218,6 +234,11 @@ $material-drop-down: extend(
 /// @prop {Map} disabled-item-text-color [color: ('gray', 500)] - The drop-down disabled item text color.
 /// @prop {Number} elevation [4] - The elevation level, between 0-24, to be used for the drop-down shadow.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for drop-down component.
+/// @prop {Map} typography [
+///   header: (value: 'subtitle-2'),
+///   item: (value: 'body-2'),
+///   select-item: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-drop-down
 /// @requires {Map} $fluent-elevation-drop-down
 $fluent-drop-down: extend(
@@ -300,6 +321,17 @@ $fluent-drop-down: extend(
                 rem(2px),
                 rem(0),
                 rem(20px),
+            ),
+        ),
+        typography: (
+            header: (
+                value: 'subtitle-2',
+            ),
+            item: (
+                value: 'body-2',
+            ),
+            select-item: (
+                value: 'body-2',
             ),
         ),
     )

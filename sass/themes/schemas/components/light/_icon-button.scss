@@ -30,6 +30,7 @@
 /// @prop {List} border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the material icon button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the material icon button.
 /// @prop {Number} default-size [3] - The default size used for the icon button.
+/// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 $material-base-icon-button: (
     shadow-color: transparent,
     background: transparent,
@@ -116,6 +117,11 @@ $material-base-icon-button: (
         ),
     ),
     default-size: 3,
+    typography: (
+        text: (
+            value: 'button',
+        ),
+    ),
 );
 
 /// Generates a material flat icon button schema.
@@ -785,6 +791,7 @@ $bootstrap-icon-button: (
 /// @prop {List} border-radius [(rem(40px), rem(0), rem(40px))] - The border radius used for the indigo icon button.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the indigo icon button.
 /// @prop {Number} default-size [2] - The default size used for the icon button.
+/// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 $indigo-base-icon-button: (
     shadow-color: (
         color: (
@@ -878,6 +885,11 @@ $indigo-base-icon-button: (
         ),
     ),
     default-size: 2,
+    typography: (
+        text: (
+            value: 'button',
+        ),
+    ),
 );
 
 /// Generates an indigo flat icon button schema.

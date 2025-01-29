@@ -18,12 +18,23 @@ $light-label: (
 
 /// Generates a light material label schema.
 /// @type {Map}
+/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @requires {Map} $light-label
-$material-label: $light-label;
+$material-label: extend(
+    $light-label,
+    (
+        typography: (
+            label: (
+                value: 'subtitle-1',
+            ),
+        ),
+    )
+);
 
 /// Generates a light fluent label schema.
 /// @type {Map}
 /// @prop {Color} color [color: ('gray', 900)] - The label color.
+/// @prop {Map} typography [label: (value: 'subtitle-2')] - The typography styles used for the component.
 $fluent-label: (
     color: (
         color: (
@@ -31,21 +42,42 @@ $fluent-label: (
             900,
         ),
     ),
+    typography: (
+        label: (
+            value: 'subtitle-2',
+        ),
+    ),
 );
 
 /// Generates a light bootstrap label schema.
 /// @type {Map}
+/// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @requires {Map} $light-label
-$bootstrap-label: $light-label;
+$bootstrap-label: extend(
+    $light-label,
+    (
+        typography: (
+            label: (
+                value: 'body-1',
+            ),
+        ),
+    )
+);
 
 /// Generates a light indigo label schema.
 /// @type {Map}
 /// @prop {Color} color [color: ('gray', 900)] - The label color.
+/// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
 $indigo-label: (
     color: (
         color: (
             'gray',
             900,
+        ),
+    ),
+    typography: (
+        label: (
+            value: 'caption',
         ),
     ),
 );
