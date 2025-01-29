@@ -167,13 +167,43 @@ $light-list: (
 
 /// Generates a material list schema.
 /// @type {Map}
+/// @prop {Map} typography [
+///   header: (value: 'overline'),
+///   item: (value: 'subtitle-1'),
+///   title: (value: 'subtitle-1'),
+///   subtitle: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-list
-$material-list: $light-list;
+$material-list: extend(
+    $light-list,
+    (
+        typography: (
+            header: (
+                value: 'overline',
+            ),
+            item: (
+                value: 'subtitle-1',
+            ),
+            title: (
+                value: 'subtitle-1',
+            ),
+            subtitle: (
+                value: 'body-2',
+            ),
+        ),
+    )
+);
 
 /// Generates a fluent list schema.
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 200)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
+/// @prop {Map} typography [
+///   header: (value: 'overline'),
+///   item: (value: 'caption'),
+///   title: (value: 'caption'),
+///   subtitle: (value: 'caption')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-list
 $fluent-list: extend(
     $light-list,
@@ -185,6 +215,20 @@ $fluent-list: extend(
             ),
         ),
         border-width: rem(1px),
+        typography: (
+            header: (
+                value: 'overline',
+            ),
+            item: (
+                value: 'caption',
+            ),
+            title: (
+                value: 'caption',
+            ),
+            subtitle: (
+                value: 'caption',
+            ),
+        ),
     )
 );
 
@@ -198,6 +242,12 @@ $fluent-list: extend(
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for list component.
 /// @prop {Map} border-color [color: ('gray', 300)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
+/// @prop {Map} typography [
+///   header: (value: 'overline'),
+///   item: (value: 'body-2'),
+///   title: (value: 'body-1'),
+///   subtitle: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-list
 $bootstrap-list: extend(
     $light-list,
@@ -252,6 +302,21 @@ $bootstrap-list: extend(
                 rem(24px),
             ),
         ),
+
+        typography: (
+            header: (
+                value: 'overline',
+            ),
+            item: (
+                value: 'body-2',
+            ),
+            title: (
+                value: 'body-1',
+            ),
+            subtitle: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -276,6 +341,12 @@ $bootstrap-list: extend(
 /// @prop {Map} item-thumbnail-color-hover [color: ('gray', 700)] - The list item thumbnail hover color.
 /// @prop {Map} item-thumbnail-color-active [color: ('gray', 700)] - The list item thumbnail active color.
 /// @prop {Number} item-border-radius [rem(4px)] - The border radius used for list item.
+/// @prop {Map} typography [
+///   header: (value: 'overline'),
+///   item: (value: 'body-2'),
+///   title: (value: 'body-2'),
+///   subtitle: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-list
 $indigo-list: extend(
     $light-list,
@@ -394,5 +465,19 @@ $indigo-list: extend(
         ),
 
         item-border-radius: rem(4px),
+        typography: (
+            header: (
+                value: 'overline',
+            ),
+            item: (
+                value: 'body-2',
+            ),
+            title: (
+                value: 'body-2',
+            ),
+            subtitle: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
