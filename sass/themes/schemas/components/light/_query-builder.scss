@@ -136,6 +136,9 @@ $fluent-query-builder: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('surface', 50)] - The background color of the filtering row.
 /// @prop {Map} header-background [color: ('surface', 50)] - The background color of the query builder header.
+/// @prop {Map} header-border [color: ('gray', 300)] - The border color of the query builder header.
+/// @prop {Color} shadow-color-and [hsl(291deg 76% 36% / 0.5)] - The shadow color of advanced filtering "AND" condition button.
+/// @prop {Color} shadow-color-or [hsl(164deg 100% 22% / 0.5)] - The shadow color of advanced filtering "OR" condition button.
 /// @requires {Map} $light-query-builder
 $bootstrap-query-builder: extend(
     $light-query-builder,
@@ -154,6 +157,13 @@ $bootstrap-query-builder: extend(
             ),
         ),
 
+        header-border: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
         shadow-color-and: hsl(291deg 76% 36% / 0.5),
         shadow-color-or: hsl(164deg 100% 22% / 0.5),
     )
@@ -162,6 +172,7 @@ $bootstrap-query-builder: extend(
 /// Generates an indigo query builder schema.
 /// @type {Map}
 /// @prop {Number} border-radius [rem(10px)] - The border radius of the query builder.
+/// @prop {Map} shadow-color-and [color: ('gray', 900)] - The shadow color of advanced filtering "AND" condition button.
 /// @requires {Map} $light-query-builder
 $indigo-query-builder: extend(
     $light-query-builder,

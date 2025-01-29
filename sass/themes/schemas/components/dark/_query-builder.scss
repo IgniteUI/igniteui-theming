@@ -113,8 +113,8 @@ $dark-bootstrap-query-builder: extend(
 
 /// Generates a dark indigo query builder schema.
 /// @type {Map}
-/// @prop {Color} shadow-color-and [transparent] - The shadow color of advanced filtering "AND" condition button.
-/// @prop {Color} shadow-color-or [transparent] - The shadow color of advanced filtering "OR" condition button.
+/// @prop {Map} shadow-color-and [contrast-color: ('primary', 500, .2)] - The shadow color of advanced filtering "AND" condition button.
+/// @prop {Map} shadow-color-or [contrast-color: ('primary', 500, .2)] - The shadow color of advanced filtering "OR" condition button.
 /// @see $indigo-query-builder
 /// @requires $indigo-query-builder
 /// @requires $dark-query-builder
