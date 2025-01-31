@@ -9,38 +9,12 @@
 
 /// Generates a base dark query builder schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('surface', 500)] - The background color of the query builder.
-/// @prop {Map} header-background [contrast-color: ('surface', 500)] - The background color of the query builder header.
 /// @prop {Map} subquery-background [color: ('gray', 50)] - The background color of the subquery block.
 /// @prop {Map} subquery-border-color [color: ('gray', 200)] - The border color of the query block.
 /// @prop {Map} separator-color [color: ('gray', 200)] - The separator color of the query block.
-/// @prop {Color} color-and [hsl(286, 100%, 70%)] - The color of advanced filtering "AND" condition.
-/// @prop {Color} foreground-and [hsl(286, 100%, 70%)] - The foreground color of advanced filtering "AND" condition button.
-/// @prop {Color} background-and [transparent] - The background color of advanced filtering "AND" condition button.
-/// @prop {Color} background-and--hover [hsla(286, 100%, 70%, .08)] - The background color on hover of advanced filtering "AND" condition button.
-/// @prop {Color} background-and--focus [hsla(286, 100%, 70%, .16)] - The background color on focus of advanced filtering "AND" condition button.
-/// @prop {Color} background-and--focus-hover [hsla(286, 100%, 70%, .24)] - The background color on focus/hover of advanced filtering "AND" condition button.
-/// @prop {Color} color-or [hsl(164, 82%, 34%)] - The color of advanced filtering "OR" condition.
-/// @prop {Color} foreground-or [hsl(164, 82%, 34%)] - The foreground color of advanced filtering "OR" condition button.
-/// @prop {Color} background-or [transparent] - The background color of advanced filtering "OR" condition button.
-/// @prop {Color} background-or--hover [hsla(164, 82%, 34%, .08)] - The background color on hover of advanced filtering "OR" condition button.
-/// @prop {Color} background-or--focus [hsla(164, 82%, 34%, .16)] - The background color on focus of advanced filtering "OR" condition button.
-/// @prop {Color} background-or--focus-hover [hsla(164, 82%, 34%, .24)] - The background color on focus/hover of advanced filtering "OR" condition button.
+/// @prop {Color} color-expression-group-and [#DA64FF] - The color of advanced filtering "AND" condition group.
+/// @prop {Color} color-expression-group-or [#19AD87] - The color of advanced filtering "OR" condition group.
 $dark-query-builder: (
-    background: (
-        color: (
-            'surface',
-            500,
-        ),
-    ),
-
-    header-background: (
-        color: (
-            'surface',
-            500,
-        ),
-    ),
-
     subquery-background: (
         color: (
             'gray',
@@ -62,20 +36,8 @@ $dark-query-builder: (
         ),
     ),
 
-    // AND
-    color-and: hsl(286, 100%, 70%),
-    foreground-and: hsl(286, 100%, 70%),
-    background-and: transparent,
-    background-and--hover: hsla(286, 100%, 70%, 0.08),
-    background-and--focus: hsla(286, 100%, 70%, 0.16),
-    background-and--focus-hover: hsla(286, 100%, 70%, 0.24),
-    // OR
-    color-or: hsl(164, 82%, 34%),
-    foreground-or: hsl(164, 82%, 34%),
-    background-or: transparent,
-    background-or--hover: hsla(164, 82%, 34%, 0.08),
-    background-or--focus: hsla(164, 82%, 34%, 0.16),
-    background-or--focus-hover: hsla(164, 82%, 34%, 0.24),
+    color-expression-group-and: #da64ff,
+    color-expression-group-or: #19ad87,
 );
 
 /// Generates a dark material query builder schema.
@@ -111,8 +73,10 @@ $dark-bootstrap-query-builder: extend(
 
 /// Generates a dark indigo query builder schema.
 /// @type {Map}
-/// @prop {Map} shadow-color-and [contrast-color: ('primary', 500, .2)] - The shadow color of advanced filtering "AND" condition button.
-/// @prop {Map} shadow-color-or [contrast-color: ('primary', 500, .2)] - The shadow color of advanced filtering "OR" condition button.
+/// @prop {Map} background [color: ('gray', 50)] - The background color of the query builder.
+/// @prop {Map} header-background [color: ('gray', 50)] - The background color of the query builder header.
+/// @prop {Map} subquery-background [contrast: ('gray', 50, .05)] - The background color of the subquery block.
+/// @prop {Map} subquery-border-color [color: ('gray', 100)] - The border color of the query block.
 /// @see $indigo-query-builder
 /// @requires $indigo-query-builder
 /// @requires $dark-query-builder
@@ -120,18 +84,29 @@ $dark-indigo-query-builder: extend(
     $indigo-query-builder,
     $dark-query-builder,
     (
-        shadow-color-and: (
-            contrast-color: (
-                'primary',
-                500,
-                0.2,
+        background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
-        shadow-color-or: (
+        header-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        subquery-background: (
             contrast-color: (
-                'primary',
-                500,
-                0.2,
+                'gray',
+                50,
+                0.05,
+            ),
+        ),
+        subquery-border-color: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )
