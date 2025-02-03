@@ -88,8 +88,27 @@ $light-query-builder: extend(
 
 /// Generates a material query builder schema.
 /// @type {Map}
+/// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the query builder.
+/// @prop {Map} header-background [contrast-color: ('surface', 900)] - The background color of the query builder header.
 /// @requires {Map} $light-query-builder
-$material-query-builder: $light-query-builder;
+$material-query-builder: extend(
+    $light-query-builder,
+    (
+        background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        header-background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+    )
+);
 
 /// Generates a fluent query builder schema.
 /// @type {Map}

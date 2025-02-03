@@ -42,10 +42,29 @@ $dark-query-builder: (
 
 /// Generates a dark material query builder schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('surface', 500)] - The background color of the query builder.
+/// @prop {Map} header-background [color: ('surface', 500)] - The background color of the query builder header.
 /// @see $material-query-builder
 /// @requires $material-query-builder
 /// @requires $dark-query-builder
-$dark-material-query-builder: extend($material-query-builder, $dark-query-builder);
+$dark-material-query-builder: extend(
+    $material-query-builder,
+    $dark-query-builder,
+    (
+        background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+        header-background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent query builder schema.
 /// @see $fluent-query-builder
