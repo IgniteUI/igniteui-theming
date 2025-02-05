@@ -17,7 +17,7 @@
 /// @prop {Color} header-border [transparent] - The border color of the query builder header.
 /// @prop {Map} label-foreground [color: ('gray', 700)] - The color for query builder labels "from" & "select".
 /// @prop {Map} separator-color [color: ('gray', 300)] - The separator color of the query builder tree block.
-/// @prop {Map} subquery-background [color: ('gray, 100')] - The background color of the subquery block.
+/// @prop {Map} subquery-header-background [color: ('gray, 100')] - The background color of the subquery header.
 /// @prop {Map} subquery-border-color [color: ('gray', 300)] - The border color of the subquery block.
 /// @prop {Color} color-expression-group-and [#DA64FF] - The color of advanced filtering "AND" condition group.
 /// @prop {Color} color-expression-group-or [#048261] - The color of advanced filtering "OR" condition group.
@@ -55,7 +55,7 @@ $light-query-builder: extend(
         color-expression-group-or: #007254,
 
         border-radius: rem(4px),
-        subquery-background: (
+        subquery-header-background: (
             color: (
                 'gray',
                 100,
@@ -88,27 +88,8 @@ $light-query-builder: extend(
 
 /// Generates a material query builder schema.
 /// @type {Map}
-/// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the query builder.
-/// @prop {Map} header-background [contrast-color: ('surface', 900)] - The background color of the query builder header.
 /// @requires {Map} $light-query-builder
-$material-query-builder: extend(
-    $light-query-builder,
-    (
-        background: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-
-        header-background: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
-    )
-);
+$material-query-builder: $light-query-builder;
 
 /// Generates a fluent query builder schema.
 /// @type {Map}

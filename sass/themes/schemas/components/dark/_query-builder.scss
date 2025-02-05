@@ -9,13 +9,13 @@
 
 /// Generates a base dark query builder schema.
 /// @type {Map}
-/// @prop {Map} subquery-background [color: ('gray', 50)] - The background color of the subquery block.
+/// @prop {Map} subquery-header-background [color: ('gray', 50)] - The background color of the subquery header.
 /// @prop {Map} subquery-border-color [color: ('gray', 200)] - The border color of the query block.
 /// @prop {Map} separator-color [color: ('gray', 200)] - The separator color of the query block.
 /// @prop {Color} color-expression-group-and [#DA64FF] - The color of advanced filtering "AND" condition group.
 /// @prop {Color} color-expression-group-or [#19AD87] - The color of advanced filtering "OR" condition group.
 $dark-query-builder: (
-    subquery-background: (
+    subquery-header-background: (
         color: (
             'gray',
             50,
@@ -42,29 +42,10 @@ $dark-query-builder: (
 
 /// Generates a dark material query builder schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('surface', 500)] - The background color of the query builder.
-/// @prop {Map} header-background [color: ('surface', 500)] - The background color of the query builder header.
 /// @see $material-query-builder
 /// @requires $material-query-builder
 /// @requires $dark-query-builder
-$dark-material-query-builder: extend(
-    $material-query-builder,
-    $dark-query-builder,
-    (
-        background: (
-            color: (
-                'surface',
-                500,
-            ),
-        ),
-        header-background: (
-            color: (
-                'surface',
-                500,
-            ),
-        ),
-    )
-);
+$dark-material-query-builder: extend($material-query-builder, $dark-query-builder);
 
 /// Generates a dark fluent query builder schema.
 /// @see $fluent-query-builder
@@ -94,7 +75,7 @@ $dark-bootstrap-query-builder: extend(
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 50)] - The background color of the query builder.
 /// @prop {Map} header-background [color: ('gray', 50)] - The background color of the query builder header.
-/// @prop {Map} subquery-background [contrast: ('gray', 50, .05)] - The background color of the subquery block.
+/// @prop {Map} subquery-header-background [contrast: ('gray', 50, .05)] - The background color of the subquery header.
 /// @prop {Map} subquery-border-color [color: ('gray', 100)] - The border color of the query block.
 /// @see $indigo-query-builder
 /// @requires $indigo-query-builder
@@ -115,7 +96,7 @@ $dark-indigo-query-builder: extend(
                 50,
             ),
         ),
-        subquery-background: (
+        subquery-header-background: (
             contrast-color: (
                 'gray',
                 50,
