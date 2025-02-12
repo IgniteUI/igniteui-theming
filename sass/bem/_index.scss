@@ -1,8 +1,10 @@
+// stylelint-disable scss/operator-no-newline-after
 // stylelint-disable max-line-length
 @use 'sass:string';
 @use 'sass:meta';
 @use 'sass:list';
 @use 'sass:selector';
+@use 'sass:map';
 
 ////
 /// @group bem
@@ -22,6 +24,10 @@ $bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
 /// @type String - The Modifier Value separator used. Default '-'.
 /// @access private
 $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val, '-');
+
+/// Cache for modifier string conversions
+/// @type Map
+$_bem-mod-cache: () !default;
 
 /// Converts a passed selector value into plain string.
 /// @access private
@@ -43,16 +49,21 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
     @return if($first == '.', $x, string.insert($x, '.', -100));
 }
 
-/// Converts a key-value map into a modifier string.
+/// Converts a key-value map into a modifier string
 /// @access private
+/// @param {String|Map} $m - The modifier to convert
+/// @return {String} The converted modifier string
 @function bem--mod-str($m) {
-    @if meta.type-of($m) == 'map' {
-        $mm: list.nth($m, 1);
+    $cache-key: meta.inspect($m);
 
-        @return list.nth($mm, 1) + $bem--sep-mod-val + list.nth($mm, 2);
-    } @else {
-        @return $m;
+    @if map.has-key($_bem-mod-cache, $cache-key) {
+        @return map.get($_bem-mod-cache, $cache-key);
     }
+
+    $result: if(meta.type-of($m) == 'map', list.nth($m, 1) + $bem--sep-mod-val + list.nth($m, 2), $m);
+    $_bem-mod-cache: map.set($_bem-mod-cache, $cache-key, $result) !global;
+
+    @return $result;
 }
 
 /// Prefixes the block name to an element selector string,
@@ -128,6 +139,55 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
     @return string.slice($x, 1, $eow);
 }
 
+@function bem--validate-elem-context($context, $elem) {
+    @if $context == '' {
+        @error 'Detected an Element that is not inside a Block: #{$elem}';
+    }
+
+    @if bem--contains-elem($context) {
+        @error 'Detected a multi-level nested Element (#{$context} #{$elem})! ' +
+            'Bem doesn\'t support nested elements because they do not have BEM nature ' +
+            '(www.getbem.com/faq/#css-nested-elements). ' +
+            'If you must do it, use a hardcoded selector like &__subsubelem';
+    }
+
+    @return true;
+}
+
+/// Generates a list of modifiers for an element
+/// @access private
+@function bem--generate-mod-list($block, $elem, $mods) {
+    $mod-list: ();
+
+    @if $mods != null and meta.type-of($mods) == 'list' {
+        @each $mod in $mods {
+            $mod-list: list.append($mod-list, #{bem-selector($block, $e: ($elem, $mod))});
+        }
+    }
+
+    @return $mod-list;
+}
+
+/// Generates the appropriate selector for a BEM element
+/// @access private
+/// @param {String} $block - The block name
+/// @param {String} $elem - The element name
+/// @param {String|Map} $mod - Optional modifier
+/// @param {String} $first - Optional first selector for nesting
+/// @return {String} The generated selector
+/// @throw {Error} If invalid parameter types are provided
+@function bem--generate-elem-selector($block, $elem, $mod, $first: null) {
+    @if $first and not meta.type-of($first) == 'string' {
+        @error 'First selector must be a string, got #{meta.type-of($first)}';
+    }
+
+    @if $first {
+        @return $first + ' ' + bem-selector($block, $e: ($elem, $mod));
+    }
+
+    @return bem-selector($block, $e: ($elem, $mod));
+}
+
 /// Generates a full BEM selector.
 /// @access private
 /// @param {String} $block - Required. A string block name.
@@ -146,6 +206,7 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 ///   @include bem-selector(block, $m:(mod:val)); // outputs .block--mod-val
 /// @example scss Include block modifier followed by block sub-element
 ///   @include bem-selector(block, $m:mod, $e:elem); // outputs .block--mod .block__elem
+/// @return {String} The generated BEM selector string
 @function bem-selector($block, $e: null, $elem: null, $m: null, $mod: null, $mods: null) {
     $block: bem--with-dot($block);
     $elem: $e or $elem;
@@ -190,6 +251,75 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
     @return $bemcls;
 }
 
+/// Wraps content with :not selector if needed
+/// @access private
+@mixin bem--apply-not($not, $block, $selector, $elem: null) {
+    @if $not {
+        $not-selectors: ();
+
+        @if meta.type-of($not) == 'list' {
+            @each $n in $not {
+                $not-selectors: list.append(
+                    $not-selectors,
+                    if($elem, bem-selector($block, $e: ($elem, $n)), bem-selector($block, $m: $n)),
+                    $separator: comma
+                );
+            }
+        } @else {
+            $not-selectors: if($elem, bem-selector($block, $e: ($elem, $not)), bem-selector($block, $m: $not));
+        }
+
+        #{$selector}:not(#{$not-selectors}) {
+            @content;
+        }
+    } @else {
+        #{$selector} {
+            @content;
+        }
+    }
+}
+
+/// Returns a BEM element selector string. If a modifier is provided, it will be appended to the element selector.
+/// @access public
+/// @param {String} $block - The block name.
+/// @param {String} $elem - The element name.
+/// @param {String} $mod - Optional. The modifier name.
+/// @return {String} The BEM element selector string.
+/// @example scss
+///   elem('button', 'icon')        // returns '.button__icon'
+///   elem('button', 'icon', 'big') // returns '.button__icon--big'
+@function elem($block, $elem, $mod: null) {
+    @if not meta.type-of($block) == 'string' {
+        @error 'Block must be a string, got #{meta.type-of($block)}';
+    }
+
+    @if not meta.type-of($elem) == 'string' {
+        @error 'Element must be a string, got #{meta.type-of($elem)}';
+    }
+
+    @if $mod and not meta.type-of($mod) == 'string' {
+        @error 'Modifier must be a string, got #{meta.type-of($mod)}';
+    }
+
+    @if $mod {
+        @return bem-selector(bem-selector($block, $e: $elem), $m: $mod);
+    }
+
+    @return bem-selector($block, $e: $elem);
+}
+
+/// Returns a BEM modifier selector string for a block.
+/// @access public
+/// @param {String} $block - The block name.
+/// @param {String} $mod - The modifier name.
+/// @return {String} The BEM modifier selector string.
+/// @example scss
+///   mod('button', 'primary') // returns '.button--primary'
+///   mod('card', 'outlined') // returns '.card--outlined'
+@function mod($block, $mod) {
+    @return bem-selector($block, $m: $mod);
+}
+
 /// Simply unrolls into a class-selector. The main purpose of using this mixin
 /// is to clearly denote the start of a BEM block.
 /// @access public scss
@@ -225,55 +355,40 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 ///   }
 ///   // Return
 ///   .block__element { background: blue; }
-@mixin bem-elem($elem, $m: null, $mod: null, $mods: null) {
-    $this: bem--selector-to-string(&);
-    $block: bem--extract-block($this);
-    $first: bem--extract-first-selector($this);
-    $nested: bem--contains-pseudo($this) or bem--contains-mod($this);
+@mixin bem-elem($elem, $m: null, $mod: null, $mods: null, $not: null) {
+    // Setup and validation
+    $context: bem--selector-to-string(&);
+    $block: bem--extract-block($context);
+    $first: bem--extract-first-selector($context);
+    $nested: bem--contains-pseudo($context) or bem--contains-mod($context);
     $mod: $m or $mod;
-    $mx: ();
 
-    @if $this == '' {
-        @error 'Detected an Element that is not inside a Block: #{$elem}';
-    }
+    // Validate context
+    $valid: bem--validate-elem-context($context, $elem);
 
-    @if bem--contains-elem($this) {
-        @error 'Detected a multi-level nested Element (#{$this} #{$elem})! Bem doesn\'t support nested ' + 'elements because they do not have BEM nature (www.getbem.com/faq/#css-nested-elements). ' + 'If you must do it, use a hardcoded selector like &__subsubelem ';
-    }
+    // Generate modifier list if needed
+    $mod-list: bem--generate-mod-list($block, $elem, $mods);
 
-    @if $mods != null and meta.type-of($mods) == 'list' {
-        @each $i in $mods {
-            $mx: list.append($mx, #{bem-selector($block, $e: ($elem, $i))});
-        }
-    }
-
-    @if not($nested) {
-        // Normal case, no pseudo-selector present or mod, so no nesting.
-        // .block__elem { ... }
-        @at-root {
+    @at-root {
+        @if not($nested) {
+            // Simple case - no nesting
             @if not($mods) {
-                #{bem-selector($block, $e: ($elem, $mod))} {
+                @include bem--apply-not($not, $block, bem--generate-elem-selector($block, $elem, $mod), $elem) {
                     @content;
                 }
             } @else {
-                #{selector.append($mx...)} {
+                @include bem--apply-not($not, $block, selector.append($mod-list...), $elem) {
                     @content;
                 }
             }
-        }
-    } @else {
-        // pseudo-element or mod present, so we have nesting.
-        // .block:active .block__elem { ... }
-        // .block--mod .block__elem { ... }
-        @at-root {
-            $selector: $first + ' ' + bem-selector($block, $e: ($elem, $mod));
-
+        } @else {
+            // Nested case with pseudo or modifier
             @if not($mods) {
-                #{$selector} {
+                @include bem--apply-not($not, $block, bem--generate-elem-selector($block, $elem, $mod, $first), $elem) {
                     @content;
                 }
             } @else {
-                #{$first} #{selector.append($mx...)} {
+                @include bem--apply-not($not, $block, $first + ' ' + selector.append($mod-list...), $elem) {
                     @content;
                 }
             }
@@ -281,21 +396,21 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
     }
 }
 
-/// Unrolls into a BEM block-modifier selector.
-/// This mixin does not generate element-modifiers, the bem-elem mixin instead.
-/// Nesting bem-mod inside a pseudo-selector is not supported, because what
-/// that should mean isn't clear.
+/// Generates selectors for multiple block modifiers with optional exclusions
 /// @access public
-/// @param {String} $mod - The modifier name.
+/// @param {List} $mods - List of modifier names
+/// @param {Map} $options - Optional configuration map
+/// @param {String|List} $options.not - Modifier(s) to exclude with :not()
+/// @throw {Error} If used outside a block context
+/// @throw {Error} If used inside an element or pseudo-selector
 /// @example scss
-///   @include bem-block(block) {
-///      @include bem-mod(modifier) {
-///        background: red;
-///      }
+///   @include bem-block(card) {
+///     @include bem-mods(large, primary, (not: outline)) {
+///       // Applies to .card--large, .card--primary
+///       // but not when .card--outline is present
+///     }
 ///   }
-///   // Return
-///   .block--modifier { background: red; }
-@mixin bem-mod($mod) {
+@mixin bem-mod($mod, $not: null) {
     $skip: false;
     $this: bem--selector-to-string(&);
 
@@ -313,7 +428,13 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 
     @at-root {
         #{bem-selector($this, $m: $mod)} {
-            @content;
+            @if $not {
+                &:not(#{bem-selector($this, $m: $not)}) {
+                    @content;
+                }
+            } @else {
+                @content;
+            }
         }
     }
 }
@@ -338,6 +459,33 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 @mixin bem-mods($mods...) {
     $this: bem--selector-to-string(&);
     $mod-classes: ();
+    $not: null;
+    $not-selectors: ();
+
+    // Check if the last argument is a map with a 'not' key
+    @if meta.type-of(list.nth($mods, -1)) == 'map' {
+        $last: list.nth($mods, -1);
+
+        @if map.has-key($last, 'not') {
+            $not: map.get($last, 'not');
+            $new-mods: ();
+
+            @for $i from 1 through list.length($mods) - 1 {
+                $new-mods: list.append($new-mods, list.nth($mods, $i));
+            }
+
+            $mods: $new-mods;
+
+            // Handle both single and list of negative modifiers
+            @if meta.type-of($not) == 'list' {
+                @each $n in $not {
+                    $not-selectors: list.append($not-selectors, bem-selector($this, $m: $n), $separator: comma);
+                }
+            } @else {
+                $not-selectors: bem-selector($this, $m: $not);
+            }
+        }
+    }
 
     @each $mod in $mods {
         @if $this == '' {
@@ -363,7 +511,13 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 
     @at-root {
         #{selector.append($mod-classes...)} {
-            @content;
+            @if $not {
+                &:not(#{$not-selectors}) {
+                    @content;
+                }
+            } @else {
+                @content;
+            }
         }
     }
 }
@@ -386,16 +540,16 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 
 /// @alias bem-elem
 /// @see bem-elem
-@mixin elem($elem, $m: null, $mod: null, $mods: null) {
-    @include bem-elem($elem, $m: $m, $mod: $mod, $mods: $mods) {
+@mixin elem($elem, $m: null, $mod: null, $mods: null, $not: null) {
+    @include bem-elem($elem, $m: $m, $mod: $mod, $mods: $mods, $not: $not) {
         @content;
     }
 }
 
 /// @alias bem-mod
 /// @see bem-mod
-@mixin mod($mod) {
-    @include bem-mod($mod) {
+@mixin mod($mod, $not: null) {
+    @include bem-mod($mod, $not) {
         @content;
     }
 }
@@ -418,16 +572,16 @@ $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val,
 
 /// @alias bem-elem
 /// @see bem-elem
-@mixin e($elem, $m: null, $mod: null, $mods: null) {
-    @include bem-elem($elem, $m: $m, $mod: $mod, $mods: $mods) {
+@mixin e($elem, $m: null, $mod: null, $mods: null, $not: null) {
+    @include bem-elem($elem, $m: $m, $mod: $mod, $mods: $mods, $not: $not) {
         @content;
     }
 }
 
 /// @alias bem-mod
 /// @see bem-mod
-@mixin m($mod) {
-    @include bem-mod($mod) {
+@mixin m($mod, $not: null) {
+    @include bem-mod($mod, $not) {
         @content;
     }
 }
