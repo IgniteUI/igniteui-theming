@@ -245,4 +245,34 @@
             }
         }
     }
+
+    @include it('should be able to use element classes in modifier body rules') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    $this: bem--selector-to-string(&);
+
+                    @include e(element, $mod: circle) {
+                        border-radius: 50%;
+                    }
+
+                    @include m(checked) {
+                        &:has(#{elem($this, element, circle)}) {
+                            background: pink;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block__element--circle {
+                    border-radius: 50%;
+                }
+
+                .block--checked:has(.block__element--circle) {
+                    background: pink;
+                }
+            }
+        }
+    }
 }
