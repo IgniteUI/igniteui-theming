@@ -12,7 +12,7 @@
 
 /// A list of ignored keywords to be excluded when generating CSS variables for a theme.
 /// @access private
-$ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
+$ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', '_meta');
 
 /// Parses a map of key value pairs from component themes to css variables.
 /// @access private
@@ -28,6 +28,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
 @mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
     $themes: map.get($theme, 'themes');
     $prefix: map.get($theme, 'prefix');
+    $t: map.get($theme, 'theme');
 
     // This is here only because the button theme consists of 4 nested themes.
     @if $themes and meta.type-of($themes) == 'map' {
@@ -42,6 +43,10 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', '_meta');
         @if meta.type-of($value) != 'map' and $key != 'prefix' {
             --#{$variable}: var(--#{$name}-#{$key}, #{$value});
         }
+    }
+
+    @if $t and meta.type-of($t) == 'string' {
+        --ig-theme: #{$t};
     }
 }
 

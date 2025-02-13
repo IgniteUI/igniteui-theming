@@ -9,7 +9,6 @@
 @use '../index' as *;
 
 $schema: (
-    variant: 'material',
     type: 'light',
     background: (
         color: (primary, 400)
@@ -25,6 +24,7 @@ $schema: (
     border-radius: rem(2px),
     brushes: series,
     resting-elevation: 2,
+    theme: material,
     _meta: (
         version: 1,
     ),
@@ -101,7 +101,6 @@ $schema: (
 
         @include it('should output theme maps from schema definitions') {
             $theme: (
-                variant: 'material',
                 type: 'light',
                 background: hsl(from var(--ig-primary-400) h s l / 1),
                 hover-background: hsl(from var(--ig-secondary-700) h s l / .26),
@@ -111,6 +110,7 @@ $schema: (
                 border-radius: .125rem,
                 brushes: var(--chart-brushes),
                 resting-elevation: var(--ig-elevation-2),
+                theme: material,
                 _meta: (
                     version: 1
                 )
@@ -157,6 +157,8 @@ $schema: (
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
                         --#{$key}: var(--#{$name}-#{$key}, #{$value});
                     }
+
+                    --ig-theme: material;
                 }
             }
         }
@@ -201,11 +203,13 @@ $schema: (
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
                         --#{$key}: var(--#{$name}-#{$key}, #{$value});
                     }
+
+                    --ig-theme: test;
                 }
             }
         }
 
-        @include it('should scope theme CSS variables to correctly') {
+        @include it('should scope theme CSS variables correctly') {
             $name: 'igc-avatar';
             $theme: map.merge(digest-schema($schema), (name: $name));
 
@@ -220,6 +224,8 @@ $schema: (
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             --#{$key}: var(--#{$name}-#{$key}, #{$value});
                         }
+
+                        --ig-theme: material;
                     }
                 }
             }
@@ -238,6 +244,8 @@ $schema: (
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             --#{$key}: var(--#{$name}-#{$key}, #{$value});
                         }
+
+                        --ig-theme: material;
                     }
                 }
             }
@@ -258,6 +266,8 @@ $schema: (
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             --#{$key}: var(--#{$name}-#{$key}, #{$value});
                         }
+
+                        --ig-theme: material;
                     }
                 }
             }
@@ -276,6 +286,8 @@ $schema: (
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             --#{$key}: var(--#{$name}-#{$key}, #{$value});
                         }
+
+                        --ig-theme: material;
                     }
                 }
             }
