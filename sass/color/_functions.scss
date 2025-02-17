@@ -106,7 +106,7 @@ $_enhanced-accessibility: false;
                 $variant: map.get($shade, 'hsl'),
                 '#{$variant}-contrast':
                     text-contrast(
-                        $background: map.get($shade, 'raw'),
+                        $background: #{var(--ig-#{$name}-#{$variant})},
                         $contrast: 'AA',
                     ),
                 '#{$variant}-raw': map.get($shade, 'raw'),
@@ -195,9 +195,14 @@ $_enhanced-accessibility: false;
     @if $palette {
         $s: map.get($palette, #{$color});
         $base: map.get($s, #{$variant});
-        $raw: if($contrast, map.get($s, #{$variant}-contrast), map.get($s, #{$variant}-raw));
+        $raw: map.get($s, #{$variant}-raw);
+        $var: var(--ig-#{$color}-#{$variant});
 
-        @return if($raw and $variant != '500', rgba($raw, $_alpha), rgba($base, $_alpha));
+        @return if(
+            $contrast,
+            if($opacity, $_mix-alpha, $var),
+            if($raw and $variant != '500', rgba($raw, $_alpha), $base)
+        );
     }
 
     @return if($contrast, $_mix-alpha, $_hsl-alpha);
@@ -237,48 +242,17 @@ $_enhanced-accessibility: false;
 ///      background: #09f
 ///      color: text-contrast(#09f)
 ///    }
-@function text-contrast($background, $foreground: white, $contrast: 'AAA') {
-    @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
-        @return $background;
-    }
+@function text-contrast($background, $contrast: 'AAA') {
+    $contrast: string.to-lower-case($contrast);
 
-    $level: map.get(
-        (
-            'a': 3,
-            'aa': 4.5,
-            'aaa': 7,
-        ),
-        string.to-lower-case($contrast)
-    );
-
-    @if not($level) {
+    @if not($contrast == 'a' or $contrast == 'aa' or $contrast == 'aaa') {
         @error '$contrast must be \'A\', \'AA\', or \'AAA\'';
     }
 
-    $candidates: ();
+    $level: var(--ig-contrast-#{string.to-lower-case($contrast)});
+    $l: clamp(0, (l / $level - 1) * -infinity, 1);
 
-    @each $color in $foreground {
-        @if meta.type-of($color) != 'color' {
-            @return $background;
-        }
-
-        $candidates: list.append($candidates, contrast($background, $color));
-    }
-
-    $foreground: list.nth($foreground, list.index($candidates, math.max($candidates...)));
-
-    @if contrast($background, $foreground) >= $level {
-        @return $foreground;
-    } @else {
-        $lightContrast: contrast($background, white);
-        $darkContrast: contrast($background, black);
-
-        @if $lightContrast > $darkContrast {
-            @return white;
-        } @else {
-            @return black;
-        }
-    }
+    @return #{oklch(from $background $l 0 h)};
 }
 
 /// Mixes two colors to produce an opaque color.

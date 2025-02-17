@@ -57,46 +57,44 @@ $_palette: palette(
     }
 
     @include describe('contrast') {
-        @include it('should return the passed background value if no valid colors are provided') {
-            $value: 'not a color';
-
-            @include assert-equal(text-contrast($value), $value);
-        }
-
-        @include it('should return black for a white background') {
+        @include it('should return contrast value of a hex color') {
             $background: #fff;
 
-            @include assert-equal(text-contrast($background), #000);
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
         }
 
-        @include it('should return white for a black background') {
-            $background: #000;
+        @include it('should return contrast value of an hsl color') {
+            $background: hsl(0deg 0% 0%);
 
-            @include assert-equal(text-contrast($background), #fff);
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
+        }
+
+        @include it('should return a contrast color of a relative syntax color') {
+            $background: oklch(from #09f l c h);
+
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
+        }
+
+        @include it('should return a contrast color of a CSS variable reference'){
+            $background: var(--ig-primary-500);
+
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
         }
 
         @include it('should return a contrasting color for a given background regardless of level case') {
-            $test-color: #000;
+            $test-color: oklch(from #09f clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h);
 
-            @include assert-equal(text-contrast($_primary, $test-color, 'AAA'), $test-color);
-            @include assert-equal(text-contrast($_primary, $test-color, 'aaa'), $test-color);
-            @include assert-equal(text-contrast($_primary, $test-color, 'Aaa'), $test-color);
-        }
-
-        @include it('returns the best contrast color from a list of candidates') {
-            @include assert-equal(text-contrast($_primary, #fff #222 #333, 'AA'), #222);
-        }
-
-        @include it('should return an AAA contrasting color for a given background') {
-            $test-color: #000;
-
-            @include assert-equal(text-contrast($_primary, $test-color, 'AAA'), $test-color);
+            @include assert-equal(text-contrast($_primary, $contrast: 'AAA'), $test-color);
+            @include assert-equal(text-contrast($_primary, $contrast: 'aaa'), $test-color);
+            @include assert-equal(text-contrast($_primary, $contrast: 'Aaa'), $test-color);
         }
 
         @include it('should return an AA contrasting color for a given background') {
-            $test-color: #222;
+            @include assert-equal(text-contrast($_primary, $contrast: 'AA'), oklch(from #09f clamp(0, (l / var(--ig-contrast-aa) - 1) * -infinity, 1) 0 h));
+        }
 
-            @include assert-equal(text-contrast($_primary, $test-color, 'AA'), $test-color);
+        @include it('should return an A contrasting color for a given background') {
+            @include assert-equal(text-contrast($_primary, $contrast: 'A'), oklch(from #09f clamp(0, (l / var(--ig-contrast-a) - 1) * -infinity, 1) 0 h));
         }
     }
 
@@ -142,11 +140,10 @@ $_palette: palette(
             @include assert-equal($value, hsl(from (var(--ig-secondary-A400)) h s l / 1));
         }
 
-        @include it('should return a contrast shade of type color w/ palette as only argument') {
+        @include it('should return a contrast shade of type string w/ palette as only argument') {
             $value: contrast-color($_palette, $opacity: .5);
-            $expected: rgba(0 0 0 / .5);
+            $expected: color-mix(in oklch, var(--ig-primary-500-contrast) 50%, transparent);
 
-            @include assert-equal(type-of($value), color);
             @include assert-equal($expected, $value);
         }
 
@@ -163,9 +160,9 @@ $_palette: palette(
             @include assert-true(color($_palette, 'primary', '500'));
             @include assert-equal(color($_palette, 'primary', '500'), $_primary);
             @include assert-true(contrast-color($_palette, primary, 500));
-            @include assert-equal(contrast-color($_palette, primary, 500), black);
+            @include assert-equal(contrast-color($_palette, primary, 500), var(--ig-primary-500-contrast));
             @include assert-true(contrast-color($_palette, 'primary', '500'));
-            @include assert-equal(contrast-color($_palette, 'primary', '500'), black);
+            @include assert-equal(contrast-color($_palette, 'primary', '500'), var(--ig-primary-500-contrast));
         }
 
         @include it('should generate an HSL color shade from a given base color') {
