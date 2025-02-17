@@ -12,7 +12,7 @@
 /// Generates a base light select schema.
 /// @type {Map}
 /// @prop {Map} toggle-button-background [color: ('gray', 300)] - The select toggle button background color.
-/// @prop {Map} toggle-button-background-focus [color: ('gray', 400, .3)] - The select toggle button background color when the select is focused.
+/// @prop {Map} toggle-button-background-focus [color: ('gray', 400)] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-foreground [color: ('gray', 700)] - The select toggle button foreground color.
 /// @prop {Map} toggle-button-foreground-focus [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 900)] - The select toggle button foreground color when the select is filled.
@@ -37,7 +37,6 @@ $light-select: (
         color: (
             'gray',
             400,
-            0.3,
         ),
     ),
     toggle-button-foreground: (

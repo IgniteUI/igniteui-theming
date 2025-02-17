@@ -12,8 +12,26 @@
 
 /// Generates a dark material combo schema.
 /// @type {Map}
+/// @prop {Map} toggle-button-background [color: ('gray', 100)] - The combo toggle button background color.
+/// @prop {Map} toggle-button-background-focus [color: ('gray', 200)] - The combo toggle button background color when the combo is focused.
 /// @requires $material-combo
-$dark-material-combo: $material-combo;
+$dark-material-combo: extend(
+    $material-combo,
+    (
+        toggle-button-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        toggle-button-background-focus: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent combo schema.
 /// @type {Map}
