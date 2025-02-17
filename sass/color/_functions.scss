@@ -107,7 +107,6 @@ $_enhanced-accessibility: false;
                 '#{$variant}-contrast':
                     text-contrast(
                         $background: #{var(--ig-#{$name}-#{$variant})},
-                        $contrast: 'AA',
                     ),
                 '#{$variant}-raw': map.get($shade, 'raw'),
             )
@@ -229,27 +228,25 @@ $_enhanced-accessibility: false;
 /// Returns a contrast color for a passed color.
 /// @access public
 /// @group Color
-/// @param {Color} $background - The background color used to return a contrast/forground color for.
-/// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors
-/// that can be used with the provided background.
-/// @param {AAA | AA | A} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
+/// @param {Color} $background - The background color used to return a contrast/foreground color for.
+/// @param {default| AAA | AA | A} $contrast [default] - The contrast level according to WCAG 2.0 standards.
 /// @require {function} contrast
-/// @returns {Color} - Returns either white, black, or the provided foreground
-/// color if it meets the required contrast level.
+/// @returns {string} - Returns a relative syntax OKLCH color where the luminance is adjusted
+/// based on the specified contrast level, resulting in either black or white.
 /// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
 /// @example scss
 ///   .my-component {
 ///      background: #09f
 ///      color: text-contrast(#09f)
 ///    }
-@function text-contrast($background, $contrast: 'AAA') {
+@function text-contrast($background, $contrast: 'default') {
     $contrast: string.to-lower-case($contrast);
 
-    @if not($contrast == 'a' or $contrast == 'aa' or $contrast == 'aaa') {
-        @error '$contrast must be \'A\', \'AA\', or \'AAA\'';
+    @if not($contrast == 'default' or $contrast == 'a' or $contrast == 'aa' or $contrast == 'aaa') {
+        @error '$contrast must be \'default\',\'A\', \'AA\', or \'AAA\'';
     }
 
-    $level: var(--ig-contrast-#{string.to-lower-case($contrast)});
+    $level: if($contrast == 'default', var(--ig-contrast-level), var(--ig-contrast-#{string.to-lower-case($contrast)}));
     $l: clamp(0, (l / $level - 1) * -infinity, 1);
 
     @return #{oklch(from $background $l 0 h)};
@@ -286,24 +283,6 @@ $_enhanced-accessibility: false;
 /// @return {List} - This list of HSL values.
 @function to-hsl($color) {
     @return (math.round(color.hue($color)), math.round(color.saturation($color)), math.round(color.lightness($color)));
-}
-
-/// Calculates the contrast ratio between two colors.
-/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
-/// @access public
-/// @group Color
-/// @param {Color} $background - The background color.
-/// @param {Color} $foreground - The foreground color.
-/// @require {function} luminance
-/// @require {function} to-fixed
-/// @example scss
-///   contrast(#09f, #000);
-/// @returns {Number} - The contrast ratio between the background and foreground colors.
-@function contrast($background, $foreground) {
-    $backLum: luminance($background) + 0.05;
-    $foreLum: luminance($foreground) + 0.05;
-
-    @return to-fixed(math.div(math.max($backLum, $foreLum), math.min($backLum, $foreLum)));
 }
 
 /// Calculates the luminance for a given color.

@@ -38,10 +38,12 @@ $_added: () !default;
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
 /// @require {function} is-root
-@mixin palette($palette, $contrast: true) {
+@mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
     $scope: if(is-root(), ':root', '&');
 
     #{$scope} {
+        --ig-contrast-level: var(--ig-contrast-#{$contrast-level});
+
         @each $color, $shades in map.remove($palette, '_meta') {
             @each $shade, $value in $shades {
                 @if not(string.index(to-string($shade), raw)) {

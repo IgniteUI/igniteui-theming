@@ -30,10 +30,6 @@ $_palette: palette(
 
 @include describe('Color') {
     @include describe('base') {
-        @include it('should calculate the contrast ratio between two colors') {
-            @include assert-equal(contrast($_primary, $_secondary), 1.19);
-        }
-
         @include it('should mix two colors to produce an opaque color') {
             @include assert-equal(to-opaque(rgba(255, 255, 255, .32), #fff), #fff);
             @include assert-equal(to-opaque(rgba(233, 233, 233, .32), rgba(255, 255, 255, 0)), #f7f7f7);
@@ -60,25 +56,25 @@ $_palette: palette(
         @include it('should return contrast value of a hex color') {
             $background: #fff;
 
-            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1) 0 h));
         }
 
         @include it('should return contrast value of an hsl color') {
             $background: hsl(0deg 0% 0%);
 
-            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1) 0 h));
         }
 
         @include it('should return a contrast color of a relative syntax color') {
             $background: oklch(from #09f l c h);
 
-            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1) 0 h));
         }
 
         @include it('should return a contrast color of a CSS variable reference'){
             $background: var(--ig-primary-500);
 
-            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-aaa) - 1) * -infinity, 1) 0 h));
+            @include assert-equal(text-contrast($background), oklch(from $background clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1) 0 h));
         }
 
         @include it('should return a contrasting color for a given background regardless of level case') {
