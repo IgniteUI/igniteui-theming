@@ -43,6 +43,7 @@ $_added: () !default;
 
     #{$scope} {
         --ig-contrast-level: var(--ig-contrast-#{$contrast-level});
+        --l: clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1);
 
         @each $color, $shades in map.remove($palette, '_meta') {
             @each $shade, $value in $shades {
