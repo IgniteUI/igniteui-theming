@@ -105,7 +105,7 @@ $_enhanced-accessibility: false;
             (
                 $variant: map.get($shade, 'hsl'),
                 '#{$variant}-contrast':
-                    accessible-colors(
+                    adaptive-contrast(
                         $background: #{var(--ig-#{$name}-#{$variant})},
                     ),
                 '#{$variant}-raw': map.get($shade, 'raw'),
@@ -225,19 +225,19 @@ $_enhanced-accessibility: false;
     @return color($palette, $color, #{$variant}-contrast, $opacity);
 }
 
-/// Returns black or white color for a passed color.
+/// Returns a CSS runtime calculated relative color(black or white) for a given color.
 /// @access public
 /// @group Color
-/// @param {Color} $background - The background color used to return a contrast/foreground color for.
-/// @returns {string} - Returns a relative syntax OKLCH color where the luminance is adjusted
+/// @param {Color} $color - The base color used in the calculation.
+/// @returns {string} - Returns a relative syntax OKLCH color where the lightness is adjusted
 /// based on the specified contrast level, resulting in either black or white.
 /// @example scss
 ///   .my-component {
-///      background: #09f
-///      color: accessible-colors(#09f)
+///      background: #09f;
+///      color: accessible-colors(#09f);
 ///    }
-@function accessible-colors($background) {
-    @return #{oklch(from $background var(--l) 0 h)};
+@function adaptive-contrast($color) {
+    @return #{oklch(from $color var(--l) 0 h)};
 }
 
 /// Returns a contrast color for a passed color.
@@ -300,24 +300,6 @@ $_enhanced-accessibility: false;
     }
 }
 
-/// Calculates the contrast ratio between two colors.
-/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
-/// @access public
-/// @group Color
-/// @param {Color} $background - The background color.
-/// @param {Color} $foreground - The foreground color.
-/// @require {function} luminance
-/// @require {function} to-fixed
-/// @example scss
-///   contrast(#09f, #000);
-/// @returns {Number} - The contrast ratio between the background and foreground colors.
-@function contrast($background, $foreground) {
-    $backLum: luminance($background) + 0.05;
-    $foreLum: luminance($foreground) + 0.05;
-
-    @return to-fixed(math.div(math.max($backLum, $foreLum), math.min($backLum, $foreLum)));
-}
-
 /// Mixes two colors to produce an opaque color.
 /// @access private
 /// @group Color
@@ -349,6 +331,24 @@ $_enhanced-accessibility: false;
 /// @return {List} - This list of HSL values.
 @function to-hsl($color) {
     @return (math.round(color.hue($color)), math.round(color.saturation($color)), math.round(color.lightness($color)));
+}
+
+/// Calculates the contrast ratio between two colors.
+/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+/// @access public
+/// @group Color
+/// @param {Color} $background - The background color.
+/// @param {Color} $foreground - The foreground color.
+/// @require {function} luminance
+/// @require {function} to-fixed
+/// @example scss
+///   contrast(#09f, #000);
+/// @returns {Number} - The contrast ratio between the background and foreground colors.
+@function contrast($background, $foreground) {
+    $backLum: luminance($background) + 0.05;
+    $foreLum: luminance($foreground) + 0.05;
+
+    @return to-fixed(math.div(math.max($backLum, $foreLum), math.min($backLum, $foreLum)));
 }
 
 /// Calculates the luminance for a given color.
