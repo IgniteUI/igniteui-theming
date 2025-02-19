@@ -93,6 +93,10 @@
 /// @prop {List} drop-area-size [(rem(24px), rem(24px), rem(32px))] - The size used for the grid drop area.
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
 /// @prop {Map} row-ghost-background [color: 'primary', 50] - The background color of the dragged row.
+/// @prop {Map} typography [
+///  header: (comfortable: (value: 'overline'),
+///  compact: (value: 'subtitle-1'))
+/// ] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-grid
 $light-grid: extend(
     $default-elevation-grid,
@@ -634,6 +638,18 @@ $light-grid: extend(
                 rem(41px),
                 rem(49px),
                 rem(57px),
+            ),
+        ),
+
+        typography: (
+            header: (
+                comfortable: (
+                    value: 'overline',
+                ),
+
+                compact: (
+                    value: 'subtitle-1',
+                ),
             ),
         ),
     )
