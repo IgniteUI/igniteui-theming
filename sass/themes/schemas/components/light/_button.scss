@@ -23,6 +23,7 @@
 /// @prop {Map} disabled-icon-color [color: ('gray', 500)] - The disabled icon color of the button.
 /// @prop {List} size [(rem(24px), rem(30px), rem(36px))] - The size used for the button.
 /// @prop {Number} default-size [3] - The default size used for the button component.
+/// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 $light-base-button: (
     shadow-color: transparent,
     border-color: transparent,
@@ -57,6 +58,11 @@ $light-base-button: (
         ),
     ),
     default-size: 3,
+    typography: (
+        text: (
+            value: 'button',
+        ),
+    ),
 );
 
 /// @type {Map}
