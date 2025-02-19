@@ -66,6 +66,10 @@
 /// @prop {Color} input-suffix-background--focused [inherit] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(40px), rem(48px), rem(56px))] - The size used for the input group.
 /// @prop {Number} default-size [2] - The default size used for the input group component.
+/// @prop {Map} typography [
+///   helper-text: (value: 'caption'),
+///   input-text: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-input-group
 $light-input-group: extend(
     $default-elevation-input-group,
@@ -339,6 +343,14 @@ $light-input-group: extend(
             ),
         ),
         default-size: 2,
+        typography: (
+            helper-text: (
+                value: 'caption',
+            ),
+            input-text: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -346,6 +358,10 @@ $light-input-group: extend(
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 600)] - The border color for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 500)] - The disabled border color for input groups of type border and fluent.
+/// @prop {Map} typography [
+///   helper-text: (value: 'caption'),
+///   input-text: (value: 'subtitle-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-input-group
 $material-input-group: extend(
     $light-input-group,
@@ -360,6 +376,14 @@ $material-input-group: extend(
             color: (
                 'gray',
                 500,
+            ),
+        ),
+        typography: (
+            helper-text: (
+                value: 'caption',
+            ),
+            input-text: (
+                value: 'subtitle-1',
             ),
         ),
     )
@@ -543,6 +567,10 @@ $fluent-input-group: extend(
 /// @prop {Map} input-suffix-background-filled [color: ('gray', 300)] - The background color of an input suffix in the filled state.
 /// @prop {Map} input-suffix-background--focused [color: ('gray', 300)] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the input group.
+/// @prop {Map} typography [
+///   helper-text: (value: 'body-2'),
+///   input-text: (value: 'body-1')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-input-group
 $bootstrap-input-group: extend(
     $light-input-group,
@@ -631,6 +659,14 @@ $bootstrap-input-group: extend(
                 rem(31px),
                 rem(38px),
                 rem(48px),
+            ),
+        ),
+        typography: (
+            helper-text: (
+                value: 'body-2',
+            ),
+            input-text: (
+                value: 'body-1',
             ),
         ),
     )

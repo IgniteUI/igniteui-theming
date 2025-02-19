@@ -34,6 +34,7 @@
 /// @prop {Map} $disabled-border-color [color: ('gray', 200)] - The disabled chip border color.
 /// @prop {List} size [(rem(20px), rem(24px), rem(32px))] - The size used for the chip height.
 /// @prop {Number} default-size [2] - The default size used for the chip component.
+/// @prop {Map} typography [text: (value: 'body-2')] - The typography styles used for the component.
 /// @prop {Map} $default-elevation-chip
 $light-chip: extend(
     $default-elevation-chip,
@@ -157,7 +158,14 @@ $light-chip: extend(
                 rem(32px),
             ),
         ),
+
         default-size: 2,
+
+        typography: (
+            text: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -232,6 +240,7 @@ $material-chip: extend(
 /// @prop {Map} hover-selected-background [color: ('primary', 600)] - The selected chip hover background color.
 /// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 700)] - The selected chip text focus color.
 /// @prop {Map} focus-selected-background [color: ('primary', 500)] - The selected chip focus background color.
+/// @prop {Map} typography [text: (value: 'subtitle-2')] - The typography styles used for the component.
 /// @prop {Number} ghost-elevation [2] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
 /// @requires {Map} $light-chip
 /// @requires {Map} $fluent-elevation-chip
@@ -313,6 +322,12 @@ $fluent-chip: extend(
             color: (
                 'primary',
                 800,
+            ),
+        ),
+
+        typography: (
+            text: (
+                value: 'subtitle-2',
             ),
         ),
     )

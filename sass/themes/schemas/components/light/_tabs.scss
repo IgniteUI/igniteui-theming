@@ -33,6 +33,7 @@
 /// @prop {Map} tab-ripple-color [color: ('gray', 100)] - The color used for the button background.
 /// @prop {Map} button-ripple-color [color: ('gray', 100)] - The color used for the button background on hover.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(6px))] - The border radius used for tabs.
+/// @prop {Map} typography [label: (value: 'button')] - The typography styles used for the component.
 $light-tabs: (
     item-text-color: (
         color: (
@@ -155,6 +156,11 @@ $light-tabs: (
             rem(6px),
         ),
     ),
+    typography: (
+        label: (
+            value: 'button',
+        ),
+    ),
 );
 
 /// Generates a material tabs schema.
@@ -183,6 +189,7 @@ $material-tabs: extend(
 /// @prop {Map} item-active-icon-color [color: ('gray', 800)] - The color used for the active tab icon.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 900)] - The color used for the tab icon on hover.
 /// @prop {Map} item-icon-color [color: ('gray', 800)] - The color used for the tab icon.
+/// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 /// @requires {Map} $light-tabs
 $fluent-tabs: extend(
     $light-tabs,
@@ -233,6 +240,11 @@ $fluent-tabs: extend(
             color: (
                 'gray',
                 800,
+            ),
+        ),
+        typography: (
+            label: (
+                value: 'body-2',
             ),
         ),
     )
@@ -379,6 +391,7 @@ $bootstrap-tabs: extend(
 /// @prop {Map} button-color [color: ('gray', 600)] - The color used for the button icon/text color.
 /// @prop {Map} button-hover-color [color: ('gray', 700)] - The color used for the button icon/text color on hover.
 /// @prop {Map} button-disabled-color [color: ('gray', 900, .2)] - The color used for the disabled button icon/text.
+/// @prop {Map} typography [label: (value: 'subtitle-2')] - The typography styles used for the component.
 /// @requires {Map} $light-tabs
 $indigo-tabs: extend(
     $light-tabs,
@@ -468,6 +481,11 @@ $indigo-tabs: extend(
                 'gray',
                 900,
                 0.2,
+            ),
+        ),
+        typography: (
+            label: (
+                value: 'subtitle-2',
             ),
         ),
     )
