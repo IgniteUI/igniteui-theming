@@ -344,7 +344,8 @@ $light-input-group: extend(
 
 /// Generates a material input-group schema.
 /// @type {Map}
-/// @prop {Map} border-color [color: ('gray', 600)] - The border color for input groups of type border and fluent.
+/// @prop {Map} border-color [color: ('gray', 500)] - The border color for input groups of type border and fluent.
+/// @prop {Map} hover-border-color [color: ('gray', 800)] - The hover input border for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 500)] - The disabled border color for input groups of type border and fluent.
 /// @requires {Map} $light-input-group
 $material-input-group: extend(
@@ -353,7 +354,13 @@ $material-input-group: extend(
         border-color: (
             color: (
                 'gray',
-                600,
+                500,
+            ),
+        ),
+        hover-border-color: (
+            color: (
+                'gray',
+                800,
             ),
         ),
         disabled-border-color: (
