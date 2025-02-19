@@ -233,8 +233,9 @@ $_enhanced-accessibility: false;
 /// based on the specified contrast level, resulting in either black or white.
 /// @example scss
 ///   .my-component {
-///      background: #09f;
-///      color: accessible-colors(#09f);
+///      --bg: #09f;
+///      background: var(--bg);
+///      color: adaptive-contrast(var(--bg));
 ///    }
 @function adaptive-contrast($color) {
     @return #{oklch(from $color var(--l) 0 h)};
