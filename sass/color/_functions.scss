@@ -104,10 +104,7 @@ $_enhanced-accessibility: false;
             $result,
             (
                 $variant: map.get($shade, 'hsl'),
-                '#{$variant}-contrast':
-                    adaptive-contrast(
-                        $background: #{var(--ig-#{$name}-#{$variant})},
-                    ),
+                '#{$variant}-contrast': adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}),
                 '#{$variant}-raw': map.get($shade, 'raw'),
             )
         );
