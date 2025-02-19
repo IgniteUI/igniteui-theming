@@ -20,6 +20,11 @@
 /// @prop {Map} disabled-description-color [color: ('gray', 500)] - The panel disabled header description text color.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(16px))] - The border radius used for expansion-panel.
 /// @prop {Number} expanded-margin [8px] - The expansion panel margin in expanded state when positioned inside accordion.
+/// @prop {Map} typography [
+///   title: (value: 'h5'),
+///   description: (value: 'subtitle-2'),
+///   body: (value: 'body-2')
+/// ] - The typography styles used for the component.
 $light-expansion-panel: (
     header-background: (
         color: (
@@ -88,6 +93,18 @@ $light-expansion-panel: (
         rem(0),
         rem(16px),
     ),
+
+    typography: (
+        title: (
+            value: 'h5',
+        ),
+        description: (
+            value: 'subtitle-2',
+        ),
+        body: (
+            value: 'body-2',
+        ),
+    ),
 );
 
 /// Generates a material expansion panel schema.
@@ -100,6 +117,11 @@ $material-expansion-panel: $light-expansion-panel;
 /// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.
 /// @prop {Map} disabled-text-color [color: ('gray', 400)] - The panel disabled text color.
 /// @prop {Map} disabled-description-color [color: ('gray', 400)] - The panel disabled header description text color.
+/// @prop {Map} typography [
+///   title: (value: 'subtitle-1'),
+///   description: (value: 'body-2'),
+///   body: (value: 'caption')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-expansion-panel
 $fluent-expansion-panel: extend(
     $light-expansion-panel,
@@ -122,6 +144,18 @@ $fluent-expansion-panel: extend(
             color: (
                 'gray',
                 400,
+            ),
+        ),
+
+        typography: (
+            title: (
+                value: 'subtitle-1',
+            ),
+            description: (
+                value: 'body-2',
+            ),
+            body: (
+                value: 'caption',
             ),
         ),
     )
@@ -162,6 +196,11 @@ $bootstrap-expansion-panel: extend(
 /// @prop {Map} body-color [color: ('gray', 700)] - The panel body text color.
 /// @prop {Map} disabled-text-color [color: ('gray', 900, 0.2)] - The panel disabled text color.
 /// @prop {Map} disabled-description-color [color: ('gray', 900, 0.15)] - The panel disabled header description text color.
+/// @prop {Map} typography [
+///   title: (value: 'body-2'),
+///   description: (value: 'body-2'),
+///   body: (value: 'body-2')
+/// ] - The typography styles used for the component.
 /// @requires {Map} $light-expansion-panel
 $indigo-expansion-panel: extend(
     $light-expansion-panel,
@@ -209,6 +248,18 @@ $indigo-expansion-panel: extend(
                 'gray',
                 900,
                 0.15,
+            ),
+        ),
+
+        typography: (
+            title: (
+                value: 'body-2',
+            ),
+            description: (
+                value: 'body-2',
+            ),
+            body: (
+                value: 'body-2',
             ),
         ),
     )
