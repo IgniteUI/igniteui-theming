@@ -20,6 +20,7 @@
 /// @prop {Map} error-color [color: ('error', 500)] - The label, border and dot color in invalid state.
 /// @prop {Color} focus-outline-color-filled [transparent] - The focus outline color when radio is filled.
 /// @prop {Color} focus-outline-color-error [transparent] - The focus outline color when radio is filled and invalid.
+/// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 $light-radio: (
     empty-fill-color: transparent,
     hover-color: transparent,
@@ -67,6 +68,11 @@ $light-radio: (
     ),
     focus-outline-color-filled: transparent,
     focus-outline-color-error: transparent,
+    typography: (
+        label: (
+            value: 'body-2',
+        ),
+    ),
 );
 
 /// Generates a material radio schema.
@@ -77,6 +83,7 @@ $light-radio: (
 /// @prop {Map} fill-color [color: ('secondary', 500)] - The checked border and dot colors.
 /// @prop {Map} fill-color-hover [color: ('secondary', 500)] - The checked border and dot colors on hover.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and dot color in invalid state on hover.
+/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @requires {Map} $light-radio
 $material-radio: extend(
     $light-radio,
@@ -115,6 +122,12 @@ $material-radio: extend(
             color: (
                 'error',
                 500,
+            ),
+        ),
+
+        typography: (
+            label: (
+                value: 'subtitle-1',
             ),
         ),
     )
@@ -183,6 +196,7 @@ $fluent-radio: extend(
 /// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outline color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 200, 0.5)] - The focus outline color when radio is invalid.
 /// @prop {Map} error-color-hover [color: ('error', 600)] - The focus outlined color in invalid state.
+/// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @requires {Map} $light-radio
 $bootstrap-radio: extend(
     $light-radio,
@@ -247,6 +261,11 @@ $bootstrap-radio: extend(
             color: (
                 'error',
                 600,
+            ),
+        ),
+        typography: (
+            label: (
+                value: 'body-1',
             ),
         ),
     )

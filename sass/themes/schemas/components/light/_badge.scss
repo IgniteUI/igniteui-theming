@@ -16,6 +16,7 @@
 /// @prop {Map} background-color [color: ('primary', 500)] - The background color used.
 /// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the badge shadow.
 /// @prop {Number} border-radius [0] - The border radius used for badge.
+/// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-badge
 $light-badge: extend(
     $default-elevation-badge,
@@ -49,6 +50,12 @@ $light-badge: extend(
         ),
 
         border-radius: 0,
+
+        typography: (
+            text: (
+                value: 'caption',
+            ),
+        ),
     )
 );
 
@@ -92,6 +99,7 @@ $bootstrap-badge: extend(
 /// Generates an indigo badge schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('primary', 400)] - The background color used.
+/// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 /// @requires {Map} $light-badge
 /// @requires {Map} $indigo-elevation-badge
 $indigo-badge: extend(
@@ -102,6 +110,12 @@ $indigo-badge: extend(
             color: (
                 'primary',
                 400,
+            ),
+        ),
+
+        typography: (
+            text: (
+                value: 'button',
             ),
         ),
     )
