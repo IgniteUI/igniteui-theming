@@ -214,6 +214,10 @@
 
                     @include m(disabled, $not: checked) {
                         background: gray;
+
+                        @include e(element) {
+                            color: darkgray;
+                        }
                     }
 
                     @include mods(
@@ -260,6 +264,10 @@
 
                 .block--disabled:not(.block--checked) {
                     background: gray;
+                }
+
+                .block--disabled:not(.block--checked) .block__element {
+                    color: darkgray;
                 }
 
                 .block--disabled.block--checked:not(.block--indeterminate) {
