@@ -134,7 +134,8 @@ $_bem-mod-cache: () !default;
 /// Returns the first selector of a nested selector string.
 /// @access private
 @function bem--extract-first-selector($x) {
-    $eow: string.index($x, ' ') or -1;
+    $parens: string.index($x, '(');
+    $eow: if($parens, string.index($x, ')'), string.index($x, ' ') or -1);
 
     @return string.slice($x, 1, $eow);
 }

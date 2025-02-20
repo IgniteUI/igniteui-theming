@@ -216,12 +216,39 @@
                         background: gray;
                     }
 
-                    @include mods(disabled, checked, ('not': 'indeterminate')) {
+                    @include mods(
+                        disabled,
+                        checked,
+                        (
+                            'not': 'indeterminate',
+                        )
+                    ) {
                         background: darkgray;
                     }
 
-                    @include mods(disabled, checked, ('not': ('indeterminate', 'invalid'))) {
+                    @include mods(
+                        disabled,
+                        checked,
+                        (
+                            'not': (
+                                'indeterminate',
+                                'invalid',
+                            ),
+                        )
+                    ) {
                         background: black;
+
+                        @include e(element) {
+                            color: red;
+                        }
+
+                        @include e(element, $m: orange) {
+                            color: orange;
+                        }
+
+                        @include e(element, $mods: (rebecca, purple)) {
+                            color: rebeccapurple;
+                        }
                     }
                 }
             }
@@ -241,6 +268,19 @@
 
                 .block--disabled.block--checked:not(.block--indeterminate, .block--invalid) {
                     background: black;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid) .block__element {
+                    color: red;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid) .block__element--orange {
+                    color: orange;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid)
+                    .block__element--rebecca.block__element--purple {
+                    color: rebeccapurple;
                 }
             }
         }
