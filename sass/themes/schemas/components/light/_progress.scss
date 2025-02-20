@@ -18,8 +18,8 @@
 /// @prop {Map} stripes-color [color: ('gray', 50, .7)] - The track stripes color.
 /// @prop {Map} text-color [color: ('gray', 700)] - The track value text color.
 /// @prop {List} track-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the progress bar track.
-/// @prop {Number} track-height [rem(4px)] - The linear progress bar height.
-/// @prop {Number} strip-size [rem(16px)] - The linear progress bar stripes width.
+/// @prop {Number} track-height [rem(4px)] - The linear progress bar track height.
+/// @prop {Number} strip-size [rem(16px)] - The linear progress bar strip size.
 /// @prop {Map} typography [label: (value: 'subtitle-2')] - The typography styles used for the component.
 $light-progress-linear: extend(
     (
@@ -101,7 +101,7 @@ $material-progress-linear: $light-progress-linear;
 
 /// Generates a fluent progress-linear schema.
 /// @type {Map}
-/// @prop {Number} track-height [rem(2px)] - The linear progress bar height.
+/// @prop {Number} track-height [rem(2px)] - The linear progress bar track height.
 /// @requires $light-progress-linear
 $fluent-progress-linear: extend(
     $light-progress-linear,
@@ -114,8 +114,8 @@ $fluent-progress-linear: extend(
 /// @type {Map}
 /// @prop {Map} stripes-color [color: ('gray', 50, .2)] - The track stripes color.
 /// @prop {List} track-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the progress bar track.
-/// @prop {Number} track-height [rem(16px)] - The linear progress bar height.
-/// @prop {Number} strip-size [rem(5px)] - The linear progress bar stripes width.
+/// @prop {Number} track-height [rem(16px)] - The linear progress bar track height.
+/// @prop {Number} strip-size [rem(5px)] - The linear progress bar strip size.
 /// @requires $light-progress-linear
 $bootstrap-progress-linear: extend(
     $light-progress-linear,
