@@ -15,6 +15,7 @@
 /// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text-color used for the toast.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the toast.
 /// @prop {List} border-radius [(rem(26px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Map} typography [text: (value: 'body-2')] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-toast
 $light-toast: extend(
     $default-elevation-toast,
@@ -48,6 +49,12 @@ $light-toast: extend(
                 rem(26px),
             ),
         ),
+
+        typography: (
+            text: (
+                value: 'body-2',
+            ),
+        ),
     )
 );
 
@@ -59,6 +66,7 @@ $material-toast: $light-toast;
 /// Generates a fluent toast schema.
 /// @type {Map}
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
 /// @requires $light-toast
 $fluent-toast: extend(
     $light-toast,
@@ -68,6 +76,12 @@ $fluent-toast: extend(
                 rem(2px),
                 rem(0),
                 rem(26px),
+            ),
+        ),
+
+        typography: (
+            text: (
+                value: 'caption',
             ),
         ),
     )
