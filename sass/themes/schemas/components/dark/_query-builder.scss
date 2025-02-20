@@ -12,8 +12,8 @@
 /// @prop {Map} subquery-header-background [color: ('gray', 50)] - The background color of the subquery header.
 /// @prop {Map} subquery-border-color [color: ('gray', 200)] - The border color of the query block.
 /// @prop {Map} separator-color [color: ('gray', 200)] - The separator color of the query block.
-/// @prop {Color} color-expression-group-and [#DA64FF] - The color of advanced filtering "AND" condition group.
-/// @prop {Color} color-expression-group-or [#19AD87] - The color of advanced filtering "OR" condition group.
+/// @prop {Color} color-expression-group-and [#da64ff] - The color of advanced filtering "AND" condition group.
+/// @prop {Color} color-expression-group-or [#19ad87] - The color of advanced filtering "OR" condition group.
 $dark-query-builder: (
     subquery-header-background: (
         color: (
@@ -37,6 +37,7 @@ $dark-query-builder: (
     ),
 
     color-expression-group-and: #da64ff,
+
     color-expression-group-or: #19ad87,
 );
 
@@ -90,12 +91,14 @@ $dark-indigo-query-builder: extend(
                 50,
             ),
         ),
+
         header-background: (
             color: (
                 'gray',
                 50,
             ),
         ),
+
         subquery-header-background: (
             contrast-color: (
                 'gray',
@@ -103,6 +106,7 @@ $dark-indigo-query-builder: extend(
                 0.05,
             ),
         ),
+
         subquery-border-color: (
             color: (
                 'gray',
