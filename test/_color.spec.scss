@@ -54,21 +54,21 @@ $_palette: palette(
 
     @include describe('contrast') {
         @include it('should return an OKLCH color with relative color syntax from a hex value'){
-            $background: #09f;
+            $color: #09f;
 
-            @include assert-equal(adaptive-contrast($background), oklch(from #09f var(--l) 0 h));
+            @include assert-equal(adaptive-contrast($color), oklch(from #09f var(--l) 0 h));
         }
 
         @include it('should return an OKLCH color with relative color syntax from an hsl value'){
-            $background: hsl(204deg 100% 50%);
+            $color: hsl(204deg 100% 50%);
 
-            @include assert-equal(adaptive-contrast($background), oklch(from hsl(204deg 100% 50%) var(--l) 0 h));
+            @include assert-equal(adaptive-contrast($color), oklch(from hsl(204deg 100% 50%) var(--l) 0 h));
         }
 
         @include it('should return an OKLCH color with relative color syntax from a CSS variable value'){
-            $background: var(--ig-primary-500);
+            $color: var(--ig-primary-500);
 
-            @include assert-equal(adaptive-contrast($background), oklch(from var(--ig-primary-500) var(--l) 0 h));
+            @include assert-equal(adaptive-contrast($color), oklch(from var(--ig-primary-500) var(--l) 0 h));
         }
 
         @include it('should return the passed background value if no valid colors are provided') {

@@ -29,6 +29,40 @@ $_added: () !default;
     }
 }
 
+/// Sets up CSS custom properties for WCAG contrast calculations.
+/// These properties are used to determine the appropriate text color contrast
+/// based on WCAG accessibility guidelines.
+/// @access public
+/// @group Color
+/// @param {String} $level ['aa'] - WCAG contrast level ('a', 'aa', or 'aaa')
+/// @example scss - Using the mixin with default AA level
+///   .my-component {
+///     @include adaptive-contrast();
+///   }
+/// @example scss - Using the mixin with AAA level
+///   .my-component {
+///     @include adaptive-contrast('aaa');
+///   }
+/// @example scss - Generated CSS custom properties
+///   :root {
+///     --ig-wcga-a: 0.7;    // Level A threshold
+///     --ig-wcga-aa: 0.6;   // Level AA threshold
+///     --ig-wcga-aaa: 0.5;  // Level AAA threshold
+///     --ig-contrast-level: var(--ig-wcga-aaa);
+///     --l: clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1);
+///   }
+@mixin adaptive-contrast($level: 'aaa') {
+    $scope: if(is-root(), ':root', '&');
+
+    #{$scope} {
+        --ig-wcga-a: 0.38;
+        --ig-wcga-aa: 0.54;
+        --ig-wcga-aaa: 0.6;
+        --ig-contrast-level: var(--ig-wcga-#{$level});
+        --l: clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1);
+    }
+}
+
 /// Generates CSS variables for a given palette.
 /// @access public
 /// @group Palettes
@@ -38,12 +72,13 @@ $_added: () !default;
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
 /// @require {function} is-root
-@mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
+@mixin palette($palette, $contrast: true, $contrast-level: 'aaa') {
     $scope: if(is-root(), ':root', '&');
 
     #{$scope} {
-        --ig-contrast-level: var(--ig-contrast-#{$contrast-level}, var(--ig-contrast-aa));
-        --l: clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1);
+        @if $contrast {
+            @include adaptive-contrast($contrast-level);
+        }
 
         @each $color, $shades in map.remove($palette, '_meta') {
             @each $shade, $value in $shades {
