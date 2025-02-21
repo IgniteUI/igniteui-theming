@@ -235,7 +235,9 @@ $_enhanced-accessibility: false;
 ///      color: adaptive-contrast(var(--bg));
 ///    }
 @function adaptive-contrast($color) {
-    @return #{oklch(from $color var(--l) 0 h)};
+    $fn: meta.get-function('color', $css: true);
+
+    @return meta.call($fn, from $color var(--y-contrast));
 }
 
 /// Returns a contrast color for a passed color.

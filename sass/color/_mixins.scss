@@ -51,15 +51,16 @@ $_added: () !default;
 ///     --ig-contrast-level: var(--ig-wcga-aaa);
 ///     --l: clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1);
 ///   }
-@mixin adaptive-contrast($level: 'aaa') {
+@mixin adaptive-contrast($level: 'aa') {
     $scope: if(is-root(), ':root', '&');
 
     #{$scope} {
-        --ig-wcga-a: 0.38;
-        --ig-wcga-aa: 0.54;
-        --ig-wcga-aaa: 0.6;
-        --ig-contrast-level: var(--ig-wcga-#{$level});
-        --l: clamp(0, (l / var(--ig-contrast-level) - 1) * -infinity, 1);
+        --ig-wcag-a: 0.31;
+        --ig-wcag-aa: 0.185;
+        --ig-wcag-aaa: 0.178;
+        --ig-contrast-level: var(--ig-wcag-#{$level});
+        --y: clamp(0, (y / var(--ig-contrast-level) - 1) * -infinity, 1);
+        --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
     }
 }
 
@@ -72,7 +73,7 @@ $_added: () !default;
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
 /// @require {function} is-root
-@mixin palette($palette, $contrast: true, $contrast-level: 'aaa') {
+@mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
     $scope: if(is-root(), ':root', '&');
 
     #{$scope} {
