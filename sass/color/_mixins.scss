@@ -76,11 +76,11 @@ $_added: () !default;
 @mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
     $scope: if(is-root(), ':root', '&');
 
-    #{$scope} {
-        @if $contrast {
-            @include adaptive-contrast($contrast-level);
-        }
+    @if $contrast {
+        @include adaptive-contrast($contrast-level);
+    }
 
+    #{$scope} {
         @each $color, $shades in map.remove($palette, '_meta') {
             @each $shade, $value in $shades {
                 @if not(string.index(to-string($shade), raw)) {
