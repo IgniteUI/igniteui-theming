@@ -7,27 +7,83 @@
 /// @access public
 ////
 
+/// Generates a base dark query builder schema.
+/// @type {Map}
+/// @prop {Map} subquery-header-background [color: ('gray', 50)] - The background color of the subquery header.
+/// @prop {Map} subquery-border-color [color: ('gray', 200)] - The border color of the query block.
+/// @prop {Map} separator-color [color: ('gray', 300)] - The separator color of the query block.
+/// @prop {Color} color-expression-group-and [#da64ff] - The color of advanced filtering "AND" condition group.
+/// @prop {Color} color-expression-group-or [#19ad87] - The color of advanced filtering "OR" condition group.
+$dark-query-builder: (
+    subquery-header-background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
+
+    subquery-border-color: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+
+    separator-color: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+
+    color-expression-group-and: #da64ff,
+
+    color-expression-group-or: #19ad87,
+);
+
 /// Generates a dark material query builder schema.
 /// @type {Map}
 /// @see $material-query-builder
 /// @requires $material-query-builder
-$dark-material-query-builder: $material-query-builder;
+/// @requires $dark-query-builder
+$dark-material-query-builder: extend($material-query-builder, $dark-query-builder);
 
 /// Generates a dark fluent query builder schema.
 /// @see $fluent-query-builder
 /// @requires $fluent-query-builder
-$dark-fluent-query-builder: $fluent-query-builder;
+/// @requires $dark-query-builder
+$dark-fluent-query-builder: extend($fluent-query-builder, $dark-query-builder);
 
 /// Generates a dark bootstrap query builder schema.
-$dark-bootstrap-query-builder: $bootstrap-query-builder;
+/// @prop {Map} header-border [color: ('gray', 300)] - The border color of the query builder header.
+/// @see $bootstrap-query-builder
+/// @requires $bootstrap-query-builder
+/// @requires $dark-query-builder
+$dark-bootstrap-query-builder: extend(
+    $bootstrap-query-builder,
+    $dark-query-builder,
+    (
+        header-border: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark indigo query builder schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 50)] - The background color of the filtering row.
-/// @prop {Map} header-border [color: ('gray', 100)] - The border color of the query builder header.
+/// @prop {Map} background [color: ('gray', 50)] - The background color of the query builder.
+/// @prop {Map} header-background [color: ('gray', 50)] - The background color of the query builder header.
+/// @prop {Map} subquery-header-background [contrast-color: ('gray', 50, .05)] - The background color of the subquery header.
+/// @prop {Map} subquery-border-color [color: ('gray', 100)] - The border color of the query block.
+/// @see $indigo-query-builder
 /// @requires $indigo-query-builder
+/// @requires $dark-query-builder
 $dark-indigo-query-builder: extend(
     $indigo-query-builder,
+    $dark-query-builder,
     (
         background: (
             color: (
@@ -36,7 +92,22 @@ $dark-indigo-query-builder: extend(
             ),
         ),
 
-        header-border: (
+        header-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        subquery-header-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
+            ),
+        ),
+
+        subquery-border-color: (
             color: (
                 'gray',
                 100,
