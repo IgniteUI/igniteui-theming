@@ -25,18 +25,14 @@ $_palette: palette(
     $info: $_info,
     $warn: $_warn,
     $error: $_error,
-    $variant: 'material'
+    $variant: 'material',
 );
 
 @include describe('Color') {
     @include describe('base') {
-        @include it('should calculate the contrast ratio between two colors') {
-            @include assert-equal(contrast($_primary, $_secondary), 1.19);
-        }
-
         @include it('should mix two colors to produce an opaque color') {
-            @include assert-equal(to-opaque(rgba(255, 255, 255, .32), #fff), #fff);
-            @include assert-equal(to-opaque(rgba(233, 233, 233, .32), rgba(255, 255, 255, 0)), #f7f7f7);
+            @include assert-equal(to-opaque(rgba(255, 255, 255, 0.32), #fff), #fff);
+            @include assert-equal(to-opaque(rgba(233, 233, 233, 0.32), rgba(255, 255, 255, 0)), #f7f7f7);
         }
 
         @include it('converts a color to a list of HSL values') {
@@ -57,6 +53,35 @@ $_palette: palette(
     }
 
     @include describe('contrast') {
+        $fn: meta.get-function('color', $css: true);
+
+        @include it('should return an adaptive contrast color from a hex value') {
+            $color: #09f;
+
+            @include assert-equal(
+                adaptive-contrast($color),
+                hsl(from meta.call($fn, from #09f var(--y-contrast)) h 0 l)
+            );
+        }
+
+        @include it('should return an adaptive contrast color from an hsl value') {
+            $color: hsl(204deg 100% 50%);
+
+            @include assert-equal(
+                adaptive-contrast($color),
+                hsl(from meta.call($fn, from hsl(204deg 100% 50%) var(--y-contrast)) h 0 l)
+            );
+        }
+
+        @include it('should return an adaptive contrast color from a CSS variable value') {
+            $color: var(--ig-primary-500);
+
+            @include assert-equal(
+                adaptive-contrast($color),
+                hsl(from meta.call($fn, from var(--ig-primary-500) var(--y-contrast)) h 0 l)
+            );
+        }
+
         @include it('should return the passed background value if no valid colors are provided') {
             $value: 'not a color';
 
@@ -125,36 +150,44 @@ $_palette: palette(
             $value: color();
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsl(from (var(--ig-primary-500)) h s l / 1));
+            @include assert-equal($value, var(--ig-primary-500));
         }
 
         @include it('should return a shade as CSS variable w/ color as only argument') {
-            $value: color($color: secondary);
+            $value: color(
+                $color: secondary,
+            );
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsl(from (var(--ig-secondary-500)) h s l / 1));
+            @include assert-equal($value, var(--ig-secondary-500));
         }
 
         @include it('should return a shade of type string as CSS var w/ color and variant as only arguments') {
-            $value: color($color: secondary, $variant: 'A400');
+            $value: color(
+                $color: secondary,
+                $variant: 'A400',
+            );
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsl(from (var(--ig-secondary-A400)) h s l / 1));
+            @include assert-equal($value, var(--ig-secondary-A400));
         }
 
-        @include it('should return a contrast shade of type color w/ palette as only argument') {
-            $value: contrast-color($_palette, $opacity: .5);
-            $expected: rgba(0 0 0 / .5);
+        @include it('should return a contrast shade w/ palette as only argument') {
+            $value: contrast-color($_palette, $opacity: 0.5);
+            $expected: hsl(from var(--ig-primary-500-contrast) h s l / 0.5);
 
-            @include assert-equal(type-of($value), color);
             @include assert-equal($expected, $value);
         }
 
         @include it('should return a contrast shade of type string as CSS var w/ color and variant as only arguments') {
-            $value: contrast-color($color: secondary, $variant: 'A400', $opacity: .25);
+            $value: contrast-color(
+                $color: secondary,
+                $variant: 'A400',
+                $opacity: 0.25,
+            );
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, color-mix(in oklch, var(--ig-secondary-A400-contrast) 25%, transparent));
+            @include assert-equal($value, hsl(from var(--ig-secondary-A400-contrast) h s l / 0.25));
         }
 
         @include it('should retrieve colors from a palette regadless of type of key') {
@@ -163,9 +196,15 @@ $_palette: palette(
             @include assert-true(color($_palette, 'primary', '500'));
             @include assert-equal(color($_palette, 'primary', '500'), $_primary);
             @include assert-true(contrast-color($_palette, primary, 500));
-            @include assert-equal(contrast-color($_palette, primary, 500), black);
+            @include assert-equal(
+                contrast-color($_palette, primary, 500),
+                var(--ig-primary-500-contrast)
+            );
             @include assert-true(contrast-color($_palette, 'primary', '500'));
-            @include assert-equal(contrast-color($_palette, 'primary', '500'), black);
+            @include assert-equal(
+                contrast-color($_palette, 'primary', '500'),
+                var(--ig-primary-500-contrast)
+            );
         }
 
         @include it('should generate an HSL color shade from a given base color') {
@@ -174,7 +213,7 @@ $_palette: palette(
             $shade: shade($color, $_primary, $variant, null);
             $expected: (
                 raw: hsl(204deg 100% 44.5%),
-                hsl: #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))}
+                hsl: #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))},
             );
 
             @include assert-equal($shade, $expected);
@@ -187,7 +226,7 @@ $_palette: palette(
             $shade: shade($color, null, $variant, $surface);
             $expected: (
                 raw: hsl(0deg 0% 98%),
-                hsl: #{hsl(from var(--ig-gray-500) h s 98%)}
+                hsl: #{hsl(from var(--ig-gray-500) h s 98%)},
             );
 
             // $surface is bright, return a darker shade of gray
@@ -195,10 +234,12 @@ $_palette: palette(
 
             $surface: #444;
             $shade: shade($color, null, $variant, $surface);
-            $expected: #{var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%};
+            $expected: #{var(--ig-#{$color}-h),
+                var(--ig-#{$color}-s),
+                13%};
             $expected: (
                 raw: hsl(0deg 0% 13%),
-                hsl: #{hsl(from var(--ig-gray-500) h s 13%)}
+                hsl: #{hsl(from var(--ig-gray-500) h s 13%)},
             );
 
             // $surface is dark, return a lighter shade of gray
@@ -237,11 +278,11 @@ $_palette: palette(
                 @include contains($selector: false) {
                     :root {
                         @each $color, $shades in map.remove($IPalette, '_meta') {
-                          @each $shade in $shades {
-                            $value: map.get($_palette, $color, $shade);
+                            @each $shade in $shades {
+                                $value: map.get($_palette, $color, $shade);
 
-                            --ig-#{$color}-#{$shade}: #{$value};
-                          }
+                                --ig-#{$color}-#{$shade}: #{$value};
+                            }
                         }
                     }
                 }
@@ -285,11 +326,11 @@ $_palette: palette(
                 @include contains($selector: false) {
                     :root {
                         @each $color, $shades in map.remove($IPalette, '_meta') {
-                          @each $shade in $shades {
-                            $value: map.get($_palette, $color, $shade);
+                            @each $shade in $shades {
+                                $value: map.get($_palette, $color, $shade);
 
-                            --ig-#{$color}-#{$shade}: #{$value};
-                          }
+                                --ig-#{$color}-#{$shade}: #{$value};
+                            }
                         }
                     }
                 }
@@ -300,7 +341,7 @@ $_palette: palette(
             $_palette: mocks.$handmade-palette;
             $_ref: color(null, primary, 800);
 
-            @include assert-equal($_ref, hsl(from var(--ig-primary-800) h s l / 1));
+            @include assert-equal($_ref, var(--ig-primary-800));
 
             @include assert() {
                 @include output() {
@@ -315,6 +356,25 @@ $_palette: palette(
 
         @include it('should convert a color to a list of HSL values') {
             @include assert-equal(to-hsl(black), (0deg, 0%, 0%));
+        }
+
+        @include it('should include all necessarry CSS custom properties for adaptive contrast to work') {
+            @include assert() {
+                @include output($selector: false) {
+                    @include adaptive-contrast('aaa');
+                }
+
+                @include contains($selector: false) {
+                    :root {
+                        --ig-wcag-a: 0.31;
+                        --ig-wcag-aa: 0.185;
+                        --ig-wcag-aaa: 0.178;
+                        --ig-contrast-level: var(--ig-wcag-aaa);
+                        --y: clamp(0, (y / var(--ig-contrast-level) - 1) * -infinity, 1);
+                        --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
+                    }
+                }
+            }
         }
     }
 }

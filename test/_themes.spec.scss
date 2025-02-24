@@ -102,10 +102,10 @@ $schema: (
         @include it('should output theme maps from schema definitions') {
             $theme: (
                 type: 'light',
-                background: hsl(from var(--ig-primary-400) h s l / 1),
+                background:  var(--ig-primary-400),
                 hover-background: hsl(from var(--ig-secondary-700) h s l / .26),
-                foreground: color-mix(in oklch, var(--ig-primary-400-contrast) 100%, transparent),
-                hover-foreground: color-mix(in oklch, var(--ig-secondary-700-contrast) 100%, transparent),
+                foreground: var(--ig-primary-400-contrast),
+                hover-foreground: var(--ig-secondary-700-contrast),
                 border-style: solid,
                 border-radius: .125rem,
                 brushes: var(--chart-brushes),
