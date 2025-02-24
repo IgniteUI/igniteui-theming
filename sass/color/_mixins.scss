@@ -29,6 +29,42 @@ $_added: () !default;
     }
 }
 
+/// Sets up CSS custom properties for WCAG contrast calculations.
+/// These properties are used to determine the appropriate text color contrast
+/// based on WCAG accessibility guidelines.
+/// @access public
+/// @group Color
+/// @param {String} $level ['aa'] - WCAG contrast level ('a', 'aa', or 'aaa')
+/// @example scss - Using the mixin with default AA level
+///   .my-component {
+///     @include adaptive-contrast();
+///   }
+/// @example scss - Using the mixin with AAA level
+///   .my-component {
+///     @include adaptive-contrast('aaa');
+///   }
+/// @example scss - Generated CSS custom properties
+///   :root {
+///     --ig-wcag-a: 0.31;    // Level A threshold
+///     --ig-wcag-aa: 0.185;   // Level AA threshold
+///     --ig-wcag-aaa: 0.178;  // Level AAA threshold
+///     --ig-contrast-level: var(--ig-wcag-aa);
+///     --y: clamp(0, (y / var(--ig-contrast-level) - 1) * -infinity, 1);
+///     --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
+///   }
+@mixin adaptive-contrast($level: 'aa') {
+    $scope: if(is-root(), ':root', '&');
+
+    #{$scope} {
+        --ig-wcag-a: 0.31;
+        --ig-wcag-aa: 0.185;
+        --ig-wcag-aaa: 0.178;
+        --ig-contrast-level: var(--ig-wcag-#{$level});
+        --y: clamp(0, (y / var(--ig-contrast-level) - 1) * -infinity, 1);
+        --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
+    }
+}
+
 /// Generates CSS variables for a given palette.
 /// @access public
 /// @group Palettes
@@ -38,8 +74,12 @@ $_added: () !default;
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
 /// @require {function} is-root
-@mixin palette($palette, $contrast: true) {
+@mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
     $scope: if(is-root(), ':root', '&');
+
+    @if $contrast {
+        @include adaptive-contrast($contrast-level);
+    }
 
     #{$scope} {
         @each $color, $shades in map.remove($palette, '_meta') {
