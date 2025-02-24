@@ -4,7 +4,7 @@
 @use '../sass/bem' as *;
 
 @include describe('BEM') {
-    @include it('creates block__element classes using the respective mixins') {
+    @include it('creates block__element classes') {
         @include assert() {
             @include output($selector: false) {
                 @include b(block) {
@@ -100,6 +100,24 @@
         }
     }
 
+    @include it('creates negating block__element--modifier classes') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    @include e(element, $m: small, $not: circle) {
+                        background: blue;
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block__element--small:not(.block__element--circle) {
+                    background: blue;
+                }
+            }
+        }
+    }
+
     @include it('creates multiple element modifier classes using the element mixin') {
         @include assert() {
             @include output($selector: false) {
@@ -119,6 +137,26 @@
                 }
 
                 .block__element--small.block__element--pink {
+                    color: pink;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    @include it('creates multiple negating element modifier classes') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    @include e(element, $mods: (small, pink), $not: (circle, large)) {
+                        color: pink;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block__element--small.block__element--pink:not(.block__element--circle, .block__element--large) {
                     color: pink;
                     font-size: 12px;
                 }
@@ -161,6 +199,126 @@
 
                 .block--error .block__element {
                     color: white;
+                }
+            }
+        }
+    }
+
+    @include it('creates negating modifier classes using the mod and mods mixins') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    @include m(checked, $not: (disabled, indeterminate)) {
+                        background: pink;
+                    }
+
+                    @include m(disabled, $not: checked) {
+                        background: gray;
+
+                        @include e(element) {
+                            color: darkgray;
+                        }
+                    }
+
+                    @include mods(
+                        disabled,
+                        checked,
+                        (
+                            'not': 'indeterminate',
+                        )
+                    ) {
+                        background: darkgray;
+                    }
+
+                    @include mods(
+                        disabled,
+                        checked,
+                        (
+                            'not': (
+                                'indeterminate',
+                                'invalid',
+                            ),
+                        )
+                    ) {
+                        background: black;
+
+                        @include e(element) {
+                            color: red;
+                        }
+
+                        @include e(element, $m: orange) {
+                            color: orange;
+                        }
+
+                        @include e(element, $mods: (rebecca, purple)) {
+                            color: rebeccapurple;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block--checked:not(.block--disabled, .block--indeterminate) {
+                    background: pink;
+                }
+
+                .block--disabled:not(.block--checked) {
+                    background: gray;
+                }
+
+                .block--disabled:not(.block--checked) .block__element {
+                    color: darkgray;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate) {
+                    background: darkgray;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid) {
+                    background: black;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid) .block__element {
+                    color: red;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid) .block__element--orange {
+                    color: orange;
+                }
+
+                .block--disabled.block--checked:not(.block--indeterminate, .block--invalid)
+                    .block__element--rebecca.block__element--purple {
+                    color: rebeccapurple;
+                }
+            }
+        }
+    }
+
+    @include it('should be able to use element classes in modifier body rules') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    $this: bem--selector-to-string(&);
+
+                    @include e(element, $mod: circle) {
+                        border-radius: 50%;
+                    }
+
+                    @include m(checked) {
+                        &:has(#{elem($this, element, circle)}) {
+                            background: pink;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block__element--circle {
+                    border-radius: 50%;
+                }
+
+                .block--checked:has(.block__element--circle) {
+                    background: pink;
                 }
             }
         }
