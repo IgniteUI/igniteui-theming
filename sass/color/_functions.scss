@@ -185,7 +185,7 @@ $_enhanced-accessibility: false;
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $_alpha: if($opacity, $opacity, 1);
-    $_relative-color: hsl(from $s h s l / $_alpha);
+    $_relative-color: if($opacity, hsl(from $s h s l / $opacity), $s);
 
     @if $palette {
         $s: map.get($palette, #{$color});

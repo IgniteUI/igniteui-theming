@@ -150,7 +150,7 @@ $_palette: palette(
             $value: color();
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsl(from (var(--ig-primary-500)) h s l / 1));
+            @include assert-equal($value, var(--ig-primary-500));
         }
 
         @include it('should return a shade as CSS variable w/ color as only argument') {
@@ -159,7 +159,7 @@ $_palette: palette(
             );
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsl(from (var(--ig-secondary-500)) h s l / 1));
+            @include assert-equal($value, var(--ig-secondary-500));
         }
 
         @include it('should return a shade of type string as CSS var w/ color and variant as only arguments') {
@@ -169,7 +169,7 @@ $_palette: palette(
             );
 
             @include assert-equal(type-of($value), string);
-            @include assert-equal($value, hsl(from (var(--ig-secondary-A400)) h s l / 1));
+            @include assert-equal($value, var(--ig-secondary-A400));
         }
 
         @include it('should return a contrast shade w/ palette as only argument') {
@@ -198,12 +198,12 @@ $_palette: palette(
             @include assert-true(contrast-color($_palette, primary, 500));
             @include assert-equal(
                 contrast-color($_palette, primary, 500),
-                hsl(from var(--ig-primary-500-contrast) h s l / 1)
+                var(--ig-primary-500-contrast)
             );
             @include assert-true(contrast-color($_palette, 'primary', '500'));
             @include assert-equal(
                 contrast-color($_palette, 'primary', '500'),
-                hsl(from var(--ig-primary-500-contrast) h s l / 1)
+                var(--ig-primary-500-contrast)
             );
         }
 
@@ -341,7 +341,7 @@ $_palette: palette(
             $_palette: mocks.$handmade-palette;
             $_ref: color(null, primary, 800);
 
-            @include assert-equal($_ref, hsl(from var(--ig-primary-800) h s l / 1));
+            @include assert-equal($_ref, var(--ig-primary-800));
 
             @include assert() {
                 @include output() {
