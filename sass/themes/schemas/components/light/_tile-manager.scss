@@ -18,7 +18,6 @@
 /// @prop {Map} content-color [color: ('gray', 700)] - The text color of the tile component content.
 /// @prop {Color} border-color [transparent] - The border color of the tile component.
 /// @prop {Map} hover-border-color [color: ('gray', 400)] - The border color of the tile component on hover.
-/// @prop {Map} resize-indicator [color: ('gray', 400)] - The color of the tile resize indicator.
 /// @prop {Map} placeholder-background [color: ('primary', 100, .3)] - The background color of the ghost element that appears during drag and drop and while resizing.
 /// @prop {Map} overlay-background [color: ('primary', 100, .6)] - The background color of the ghost element that appears on top of the tile that will be swapped.
 /// @prop {Map} ghost-border [color: ('primary', 500)] - The border color of the ghost element that appears during drag and drop and while resizing.
@@ -74,13 +73,6 @@ $light-tile-manager: extend(
         border-color: transparent,
 
         hover-border-color: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-
-        resize-indicator: (
             color: (
                 'gray',
                 400,
@@ -204,7 +196,6 @@ $bootstrap-tile-manager: extend(
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color of the tile component.
 /// @prop {Map} hover-border-color [color: ('gray', 500)] - The border color of the tile component on hover.
 /// @prop {Map} placeholder-background [color: ('primary', 100, .2)] - The background color of the ghost element that appears during drag and drop and while resizing.
-/// @prop {Map} resize-indicator [color: ('gray', 500)] - The color of the tile resize indicator.
 /// @prop {Number} border-radius [rem(6px)] - The border radius of the tile component.
 /// @requires {Map} $light-tile-manager
 $indigo-tile-manager: extend(
@@ -265,13 +256,6 @@ $indigo-tile-manager: extend(
                 'primary',
                 100,
                 0.2,
-            ),
-        ),
-
-        resize-indicator: (
-            color: (
-                'gray',
-                500,
             ),
         ),
 
