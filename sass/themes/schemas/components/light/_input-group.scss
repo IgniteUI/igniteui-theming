@@ -348,6 +348,7 @@ $light-input-group: (
 /// @prop {Number} search-hover-elevation [2] - The elevation level, between 0-24, to be used for the hover state of the search input.
 /// @prop {Number} search-disabled-elevation [1] - The elevation level, between 0-24, to be used for the disabled state of the search input.
 /// @prop {Map} search-background [color: 'surface'] - The background color of an input group of type search.
+/// @prop {Map} search-disabled-background [color: 'surface'] - The background color of an input group of type search in the disabled state.
 /// @prop {Map} border-color [color: ('gray', 500)] - The border color for input groups of type border and fluent.
 /// @prop {Map} hover-border-color [color: ('gray', 800)] - The hover input border for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 500)] - The disabled border color for input groups of type border and fluent.
@@ -362,6 +363,9 @@ $material-input-group: extend(
     $default-elevation-input-group,
     (
         search-background: (
+            color: 'surface',
+        ),
+        search-disabled-background: (
             color: 'surface',
         ),
         border-color: (

@@ -14,6 +14,7 @@
 /// @type {Map}
 /// @prop {Map} toggle-button-background [color: ('gray', 100)] - The combo toggle button background color.
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 200)] - The combo toggle button background color when the combo is focused.
+/// @prop {Map} toggle-button-background-focus--border [color: ('gray', 100)] The combo toggle button background color when the combo is focused in border and line variants.
 /// @requires $material-combo
 $dark-material-combo: extend(
     $material-combo,
@@ -28,6 +29,12 @@ $dark-material-combo: extend(
             color: (
                 'gray',
                 200,
+            ),
+        ),
+        toggle-button-background-focus--border: (
+            color: (
+                'gray',
+                100,
             ),
         ),
     )
