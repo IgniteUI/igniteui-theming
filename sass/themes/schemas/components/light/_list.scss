@@ -277,6 +277,7 @@ $fluent-list: extend(
 /// @prop {Map} item-text-color [color: ('gray', 900)] - The list item text color.
 /// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color on hover.
 /// @prop {Map} item-text-color-active [color: ('gray', 900)] - The active list item text color.
+/// @prop {Map} item-text-color-selected [color: ('gray', 900)] - The selected list item text color.
 /// @prop {Map} border-radius [border-radius: (rem(4px), rem(0), rem(24px))] - The border radius used for list component.
 /// @prop {Map} border-color [color: ('gray', 300)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
@@ -327,6 +328,13 @@ $bootstrap-list: extend(
         ),
 
         item-text-color-active: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        item-text-color-selected: (
             color: (
                 'gray',
                 900,
