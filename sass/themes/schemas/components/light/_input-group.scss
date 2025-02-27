@@ -34,17 +34,14 @@
 /// @prop {Map} hover-border-color [color: ('gray', 900)] - The hover input border for input groups of type border and fluent.
 /// @prop {Map} focused-border-color [color: ('primary', 500)] - The focused input border color for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled border color for input groups of type border and fluent.
-/// @prop {Map} box-background [color: ('gray', 100)] - The background color of an input group of type box.
+/// @prop {Map} box-background [color: ('gray', 200)] - The background color of an input group of type box.
 /// @prop {Map} box-background-hover [color: ('gray', 200)] - The background color of an input group of type box on hover.
-/// @prop {Map} box-background-focus [color: ('gray', 200)] - The background color of an input group of type box on focus.
+/// @prop {Map} box-background-focus [color: ('gray', 300)] - The background color of an input group of type box on focus.
 /// @prop {Map} box-disabled-background [color: ('gray', 100)] - The background color of an input group of type box in the disabled state.
 /// @prop {Color} border-background [transparent] - The background color of an input group of type border.
 /// @prop {Color} border-disabled-background [transparent] - The background color of an input group of type border in the disabled state.
-/// @prop {Map} search-background [color: ('gray', 50)] - The background color of an input group of type search.
+/// @prop {Color} search-background [transparent] - The background color of an input group of type search.
 /// @prop {Map} search-disabled-background [color: ('gray', 100)] - The background color of an input group of type search in the disabled state.
-/// @prop {Number} search-resting-elevation [1] - The elevation level, between 0-24, to be used for the resting state of the search input.
-/// @prop {Number} search-hover-elevation [2] - The elevation level, between 0-24, to be used for the hover state of the search input.
-/// @prop {Number} search-disabled-elevation [0] - The elevation level, between 0-24, to be used for the disabled state of the search input.
 /// @prop {Map} success-secondary-color [color: ('success')] - The success color used in the valid state.
 /// @prop {Map} warning-secondary-color [color: ('warn')] - The warning color used in the warning state.
 /// @prop {Map} error-secondary-color [color: ('error')] - The error color used in the error state.
@@ -70,306 +67,317 @@
 ///   helper-text: (value: 'caption'),
 ///   input-text: (value: 'body-2')
 /// ] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-input-group
-$light-input-group: extend(
-    $default-elevation-input-group,
-    (
-        helper-text-color: (
+$light-input-group: (
+    helper-text-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    input-prefix-background: transparent,
+    input-prefix-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    input-prefix-background--filled: inherit,
+    input-prefix-color--filled: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    input-prefix-background--focused: inherit,
+    input-prefix-color--focused: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    input-suffix-background: transparent,
+    input-suffix-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    input-suffix-background--filled: inherit,
+    input-suffix-color--filled: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    input-suffix-background--focused: inherit,
+    input-suffix-color--focused: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    // Text colors
+    idle-text-color:
+        (
             color: (
                 'gray',
                 700,
             ),
         ),
-        input-prefix-background: transparent,
-        input-prefix-color: (
+    filled-text-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    filled-text-hover-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    focused-text-color: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    disabled-text-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    // State colors
+    idle-secondary-color:
+        (
             color: (
                 'gray',
                 700,
             ),
         ),
-        input-prefix-background--filled: inherit,
-        input-prefix-color--filled: (
-            color: (
-                'gray',
-                900,
-            ),
+    filled-secondary-color: (
+        color: (
+            'gray',
+            600,
         ),
-        input-prefix-background--focused: inherit,
-        input-prefix-color--focused: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    focused-secondary-color: (
+        color: (
+            'primary',
+            500,
         ),
-        input-suffix-background: transparent,
-        input-suffix-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    idle-bottom-line-color: (
+        color: (
+            'gray',
+            500,
         ),
-        input-suffix-background--filled: inherit,
-        input-suffix-color--filled: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    hover-bottom-line-color: (
+        color: (
+            'gray',
+            800,
         ),
-        input-suffix-background--focused: inherit,
-        input-suffix-color--focused: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    focused-bottom-line-color: (
+        color: (
+            'primary',
+            500,
         ),
-        // Text colors
-        idle-text-color:
-            (
-                color: (
-                    'gray',
-                    700,
-                ),
-            ),
-        filled-text-color: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    interim-bottom-line-color: (
+        color: (
+            'primary',
+            500,
+            0.12,
         ),
-        filled-text-hover-color: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    disabled-bottom-line-color: (
+        color: (
+            'gray',
+            500,
         ),
-        focused-text-color: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    disabled-border-color: (
+        color: (
+            'gray',
+            300,
         ),
-        disabled-text-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    border-color: (
+        color: (
+            'gray',
+            400,
         ),
-        // State colors
-        idle-secondary-color:
-            (
-                color: (
-                    'gray',
-                    700,
-                ),
-            ),
-        filled-secondary-color: (
-            color: (
-                'gray',
-                600,
-            ),
+    ),
+    hover-border-color: (
+        color: (
+            'gray',
+            900,
         ),
-        focused-secondary-color: (
-            color: (
-                'primary',
-                500,
-            ),
+    ),
+    focused-border-color: (
+        color: (
+            'primary',
+            500,
         ),
-        idle-bottom-line-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    border-background: transparent,
+    border-disabled-background: transparent,
+    search-background: transparent,
+    search-disabled-background: (
+        color: (
+            'gray',
+            100,
         ),
-        hover-bottom-line-color: (
-            color: (
-                'gray',
-                800,
-            ),
+    ),
+    success-secondary-color: (
+        color: (
+            'success',
         ),
-        focused-bottom-line-color: (
-            color: (
-                'primary',
-                500,
-            ),
+    ),
+    warning-secondary-color: (
+        color: (
+            'warn',
         ),
-        interim-bottom-line-color: (
-            color: (
-                'primary',
-                500,
-                0.12,
-            ),
+    ),
+    error-secondary-color: (
+        color: (
+            'error',
         ),
-        disabled-bottom-line-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    placeholder-color: (
+        color: (
+            'gray',
+            700,
         ),
-        disabled-border-color: (
-            color: (
-                'gray',
-                300,
-            ),
+    ),
+    hover-placeholder-color: (
+        color: (
+            'gray',
+            700,
         ),
-        border-color: (
-            color: (
-                'gray',
-                400,
-            ),
+    ),
+    disabled-placeholder-color: (
+        color: (
+            'gray',
+            500,
         ),
-        hover-border-color: (
-            color: (
-                'gray',
-                900,
-            ),
+    ),
+    box-background: (
+        color: (
+            'gray',
+            200,
         ),
-        focused-border-color: (
-            color: (
-                'primary',
-                500,
-            ),
+    ),
+    box-background-hover: (
+        color: (
+            'gray',
+            200,
         ),
-        border-background: transparent,
-        border-disabled-background: transparent,
-        search-background: (
-            color: (
-                'gray',
-                50,
-            ),
+    ),
+    box-background-focus: (
+        color: (
+            'gray',
+            300,
         ),
-        search-disabled-background: (
-            color: (
-                'gray',
-                100,
-            ),
+    ),
+    box-disabled-background: (
+        color: (
+            'gray',
+            100,
         ),
-        success-secondary-color: (
-            color: (
-                'success',
-            ),
+    ),
+    box-border-radius: (
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(20px),
         ),
-        warning-secondary-color: (
-            color: (
-                'warn',
-            ),
+    ),
+    border-border-radius: (
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(20px),
         ),
-        error-secondary-color: (
-            color: (
-                'error',
-            ),
+    ),
+    search-border-radius: (
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(20px),
         ),
-        placeholder-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    success-shadow-color: (
+        color: (
+            'success',
+            500,
+            0.38,
         ),
-        hover-placeholder-color: (
-            color: (
-                'gray',
-                700,
-            ),
+    ),
+    error-shadow-color: (
+        color: (
+            'error',
+            500,
+            0.38,
         ),
-        disabled-placeholder-color: (
-            color: (
-                'gray',
-                500,
-            ),
+    ),
+    size: (
+        sizable: (
+            rem(40px),
+            rem(48px),
+            rem(56px),
         ),
-        box-background: (
-            color: (
-                'gray',
-                200,
-            ),
+    ),
+    default-size: 2,
+    typography: (
+        helper-text: (
+            value: 'caption',
         ),
-        box-background-hover: (
-            color: (
-                'gray',
-                200,
-            ),
+        input-text: (
+            value: 'body-2',
         ),
-        box-background-focus: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-        box-disabled-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        box-border-radius: (
-            border-radius: (
-                rem(4px),
-                rem(0),
-                rem(20px),
-            ),
-        ),
-        border-border-radius: (
-            border-radius: (
-                rem(4px),
-                rem(0),
-                rem(20px),
-            ),
-        ),
-        search-border-radius: (
-            border-radius: (
-                rem(4px),
-                rem(0),
-                rem(20px),
-            ),
-        ),
-        success-shadow-color: (
-            color: (
-                'success',
-                500,
-                0.38,
-            ),
-        ),
-        error-shadow-color: (
-            color: (
-                'error',
-                500,
-                0.38,
-            ),
-        ),
-        size: (
-            sizable: (
-                rem(40px),
-                rem(48px),
-                rem(56px),
-            ),
-        ),
-        default-size: 2,
-        typography: (
-            helper-text: (
-                value: 'caption',
-            ),
-            input-text: (
-                value: 'body-2',
-            ),
-        ),
-    )
+    ),
 );
 
 /// Generates a material input-group schema.
 /// @type {Map}
-/// @prop {Map} border-color [color: ('gray', 600)] - The border color for input groups of type border and fluent.
+/// @prop {Number} search-resting-elevation [1] - The elevation level, between 0-24, to be used for the resting state of the search input.
+/// @prop {Number} search-hover-elevation [2] - The elevation level, between 0-24, to be used for the hover state of the search input.
+/// @prop {Number} search-disabled-elevation [1] - The elevation level, between 0-24, to be used for the disabled state of the search input.
+/// @prop {Map} search-background [color: 'surface'] - The background color of an input group of type search.
+/// @prop {Map} search-disabled-background [color: 'surface'] - The background color of an input group of type search in the disabled state.
+/// @prop {Map} border-color [color: ('gray', 500)] - The border color for input groups of type border and fluent.
+/// @prop {Map} hover-border-color [color: ('gray', 800)] - The hover input border for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 500)] - The disabled border color for input groups of type border and fluent.
 /// @prop {Map} typography [
 ///   helper-text: (value: 'caption'),
 ///   input-text: (value: 'subtitle-1')
 /// ] - The typography styles used for the component.
 /// @requires {Map} $light-input-group
+/// @requires {Map} $default-elevation-input-group
 $material-input-group: extend(
     $light-input-group,
+    $default-elevation-input-group,
     (
+        search-background: (
+            color: 'surface',
+        ),
+        search-disabled-background: (
+            color: 'surface',
+        ),
         border-color: (
             color: (
                 'gray',
-                600,
+                500,
+            ),
+        ),
+        hover-border-color: (
+            color: (
+                'gray',
+                800,
             ),
         ),
         disabled-border-color: (
@@ -549,6 +557,9 @@ $fluent-input-group: extend(
 
 /// Generates a bootstrap input-group schema.
 /// @type {Map}
+/// @prop {Number} search-resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state of the search input.
+/// @prop {Number} search-hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state of the search input.
+/// @prop {Number} search-disabled-elevation [0] - The elevation level, between 0-24, to be used for the disabled state of the search input.
 /// @prop {Map} border-disabled-background [color: ('gray', 100)] - The background color of an input group of type border in the disabled state.
 /// @prop {Map} focused-secondary-color [color: ('primary', 500, .38)] - The label color in the focused state.
 /// @prop {Map} disabled-text-color [color: ('gray', 400)] - The input text color in the disabled state.
@@ -572,8 +583,10 @@ $fluent-input-group: extend(
 ///   input-text: (value: 'body-1')
 /// ] - The typography styles used for the component.
 /// @requires {Map} $light-input-group
+/// @requires {Map} $bootstrap-elevation-input-group
 $bootstrap-input-group: extend(
     $light-input-group,
+    $bootstrap-elevation-input-group,
     (
         interim-bottom-line-color: (
             color: (
@@ -688,7 +701,6 @@ $bootstrap-input-group: extend(
 /// @prop {Map} disabled-bottom-line-color [color: ('gray', 900, .05)] - The bottom line and border colors in the disabled state.
 /// @prop {Color} box-background [transparent] - The background color of an input group of type box.
 /// @prop {Color} box-disabled-background [transparent] - The background color of an input group in the disabled state.
-/// @prop {Color} search-background [transparent] - The background color of an input group of type search.
 /// @prop {Color} search-disabled-background [transparent] - The background color of an input group of type search in the disabled state.
 /// @prop {Map} box-background-hover [color: ('gray', 900, .05)] - The background color of an input group of type box on hover.
 /// @prop {Map} idle-text-color [color: ('gray', 800)] - The input text color in the idle state.
@@ -786,7 +798,6 @@ $indigo-input-group: extend(
         ),
         box-background: transparent,
         box-disabled-background: transparent,
-        search-background: transparent,
         search-disabled-background: transparent,
         box-background-hover: (
             color: (

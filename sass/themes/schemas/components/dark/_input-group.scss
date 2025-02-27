@@ -11,16 +11,33 @@
 
 /// Generates a dark material input-group schema.
 /// @type {Map}
-/// @prop {Map} box-background-focus [color: ('gray', 100)] - The background color of an input group of type box on focus.
+/// @prop {Map} box-background [color: ('gray', 200, .38)] - The background color of an input group of type box.
+/// @prop {Map} box-background-hover [color: ('gray', 200, .38)] - The background color of an input group of type box on hover.
+/// @prop {Map} box-background-focus [color: ('gray', 300, .38)] - The background color of an input group of type box on focus.
 /// @prop {Map} hover-bottom-line-color [color: ('gray', 800)] - The bottom line and border colors in the hover state.
 /// @requires $material-input-group
 $dark-material-input-group: extend(
     $material-input-group,
     (
+        box-background: (
+            color: (
+                'gray',
+                200,
+                0.38,
+            ),
+        ),
+        box-background-hover: (
+            color: (
+                'gray',
+                200,
+                0.38,
+            ),
+        ),
         box-background-focus: (
             color: (
                 'gray',
-                100,
+                300,
+                0.38,
             ),
         ),
         hover-bottom-line-color: (
