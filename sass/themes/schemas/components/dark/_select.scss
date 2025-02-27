@@ -12,8 +12,33 @@
 
 /// Generates a dark material select schema.
 /// @type {Map}
+/// @prop {Map} toggle-button-background [color: ('gray', 100)] - The select toggle button background color.
+/// @prop {Map} toggle-button-background-focus [color: ('gray', 200)] - The select toggle button background color when the select is focused.
+/// @prop {Map} toggle-button-background-focus--border [color: ('gray', 100)] - The select toggle button background color when the select is focused in material border and line variants.
 /// @requires $material-select
-$dark-material-select: $material-select;
+$dark-material-select: extend(
+    $material-select,
+    (
+        toggle-button-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        toggle-button-background-focus: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        toggle-button-background-focus--border: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark fluent select schema.
 /// @type {Map}

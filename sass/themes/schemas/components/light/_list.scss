@@ -15,23 +15,29 @@
 /// @prop {Map} item-background [color: 'surface'] - The list item background color.
 /// @prop {Map} item-background-hover [color: ('gray', 200)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('gray', 200)] - The active list item background color.
+/// @prop {Map} item-background-selected [color: ('gray', 200)] - The selected list item background color.
 /// @prop {Map} item-text-color [color: ('gray', 700)] - The list item text color.
-/// @prop {Map} item-text-color-hover [color: ('gray', 700)] - The list item text color.
+/// @prop {Map} item-text-color-hover [color: ('gray', 700)] - The list item text color on hover.
 /// @prop {Map} item-text-color-active [color: ('gray', 700)] - The active list item text color.
+/// @prop {Map} item-text-color-selected [color: ('gray', 700)] - The selected list item text color.
 /// @prop {Map} item-title-color [color: ('gray', 900)] - The list item title color.
 /// @prop {Map} item-title-color-hover [color: ('gray', 900)] - The list item title hover color.
 /// @prop {Map} item-title-color-active [color: ('gray', 900)] - The list item title active color.
+/// @prop {Map} item-title-color-selected [color: ('gray', 900)] - The list item title selected color.
 /// @prop {Map} item-subtitle-color [color: ('gray', 700)] - The list item subtitle color.
 /// @prop {Map} item-subtitle-color-hover [color: ('gray', 700)] - The list item subtitle hover color.
 /// @prop {Map} item-subtitle-color-active [color: ('gray', 700)] - The list item subtitle active color.
-/// @prop {Color} item-action-color ["'currentColor'"] - The list item action color.
-/// @prop {Color} item-action-color-hover ["'currentColor'"] - The list item action hover color.
-/// @prop {Color} item-action-color-active ["'currentColor'"] - The list item action active color.
-/// @prop {Color} item-thumbnail-color ["'currentColor'"] - The list item thumbnail color.
-/// @prop {Color} item-thumbnail-color-hover ["'currentColor'"] - The list item thumbnail hover color.
-/// @prop {Color} item-thumbnail-color-active ["'currentColor'"] - The list item thumbnail active color.
-/// @prop {List} border-radius [()] - The border radius used for list component.
-/// @prop {List} item-border-radius [()] - The border radius used for list item.
+/// @prop {Map} item-subtitle-color-selected [color: ('gray', 700)] - The list item subtitle selected color.
+/// @prop {String} item-action-color ["'currentColor'"] - The list item action color.
+/// @prop {String} item-action-color-hover ["'currentColor'"] - The list item action hover color.
+/// @prop {String} item-action-color-active ["'currentColor'"] - The list item action active color.
+/// @prop {String} item-action-color-selected ["'currentColor'"] - The list item action selected color.
+/// @prop {String} item-thumbnail-color ["'currentColor'"] - The list item thumbnail color.
+/// @prop {String} item-thumbnail-color-hover ["'currentColor'"] - The list item thumbnail hover color.
+/// @prop {String} item-thumbnail-color-active ["'currentColor'"] - The list item thumbnail active color.
+/// @prop {String} item-thumbnail-color-selected ["'currentColor'"] - The list item thumbnail selected color.
+/// @prop {Map} border-radius [border-radius: (rem(0), rem(0), rem(24px))] - The border radius used for list component.
+/// @prop {Map} item-border-radius [border-radius: (rem(0), rem(0), rem(24px))] - The border radius used for list item.
 /// @prop {Color} border-color [transparent] - The list border color.
 /// @prop {Number} border-width [0] - The list border width.
 /// @prop {Number} default-size [2] - The default size used for the list component.
@@ -69,6 +75,13 @@ $light-list: (
         ),
     ),
 
+    item-background-selected: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+
     item-text-color: (
         color: (
             'gray',
@@ -84,6 +97,13 @@ $light-list: (
     ),
 
     item-text-color-active: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    item-text-color-selected: (
         color: (
             'gray',
             700,
@@ -111,11 +131,20 @@ $light-list: (
         ),
     ),
 
+    item-title-color-selected: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+
     item-action-color: "'currentColor'",
 
     item-action-color-hover: "'currentColor'",
 
     item-action-color-active: "'currentColor'",
+
+    item-action-color-selected: "'currentColor'",
 
     item-subtitle-color: (
         color: (
@@ -138,11 +167,20 @@ $light-list: (
         ),
     ),
 
+    item-subtitle-color-selected: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
     item-thumbnail-color: "'currentColor'",
 
     item-thumbnail-color-hover: "'currentColor'",
 
     item-thumbnail-color-active: "'currentColor'",
+
+    item-thumbnail-color-selected: "'currentColor'",
 
     border-color: transparent,
 
@@ -237,9 +275,10 @@ $fluent-list: extend(
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The list header background color.
 /// @prop {Map} item-background [contrast-color: ('gray', 900)] - The list item background color.
 /// @prop {Map} item-text-color [color: ('gray', 900)] - The list item text color.
-/// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color.
+/// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color on hover.
 /// @prop {Map} item-text-color-active [color: ('gray', 900)] - The active list item text color.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for list component.
+/// @prop {Map} item-text-color-selected [color: ('gray', 900)] - The selected list item text color.
+/// @prop {Map} border-radius [border-radius: (rem(4px), rem(0), rem(24px))] - The border radius used for list component.
 /// @prop {Map} border-color [color: ('gray', 300)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
 /// @prop {Map} typography [
@@ -295,6 +334,13 @@ $bootstrap-list: extend(
             ),
         ),
 
+        item-text-color-selected: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
         border-radius: (
             border-radius: (
                 rem(4px),
@@ -327,19 +373,24 @@ $bootstrap-list: extend(
 /// @prop {Map} header-text-color [color: ('gray', 600)] - The list header text color.
 /// @prop {Color} item-background [transparent] - The list item background color.
 /// @prop {Map} item-background-hover [color: ('primary', 300, .3)] - The list item hover background.
-/// @prop {Map} item-background-active [ color: ('primary', 300, .3)] - The active list item background color.
+/// @prop {Map} item-background-active [color: ('primary', 300, .3)] - The active list item background color.
+/// @prop {Map} item-background-selected [color: ('primary', 300, .3)] - The selected list item background color.
 /// @prop {Map} item-text-color [color: ('gray', 800)] - The list item text color.
-/// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color.
-/// @prop {Map} item-text-color-active [color: ('gray', 800)] - The active list item text color.
+/// @prop {Map} item-text-color-hover [color: ('gray', 900)] - The list item text color on hover.
+/// @prop {Map} item-text-color-active [color: ('gray', 900)] - The active list item text color.
+/// @prop {Map} item-text-color-selected [color: ('gray', 900)] - The selected list item text color.
 /// @prop {Map} item-subtitle-color [color: ('gray', 600)] - The list item subtitle color.
 /// @prop {Map} item-subtitle-color-hover [color: ('gray', 700)] - The list item subtitle hover color.
 /// @prop {Map} item-subtitle-color-active [color: ('gray', 700)] - The list item subtitle active color.
+/// @prop {Map} item-subtitle-color-selected [color: ('gray', 700)] - The list item subtitle selected color.
 /// @prop {Map} item-action-color [color: ('gray', 600)] - The list item action color.
 /// @prop {Map} item-action-color-hover [color: ('gray', 700)] - The list item action hover color.
 /// @prop {Map} item-action-color-active [color: ('gray', 700)] - The list item action active color.
+/// @prop {Map} item-action-color-selected [color: ('gray', 700)] - The list item action selected color.
 /// @prop {Map} item-thumbnail-color [color: ('gray', 600)] - The list item thumbnail color.
 /// @prop {Map} item-thumbnail-color-hover [color: ('gray', 700)] - The list item thumbnail hover color.
 /// @prop {Map} item-thumbnail-color-active [color: ('gray', 700)] - The list item thumbnail active color.
+/// @prop {Map} item-thumbnail-color-selected [color: ('gray', 700)] - The list item thumbnail selected color.
 /// @prop {Number} item-border-radius [rem(4px)] - The border radius used for list item.
 /// @prop {Map} typography [
 ///   header: (value: 'overline'),
@@ -380,6 +431,14 @@ $indigo-list: extend(
             ),
         ),
 
+        item-background-selected: (
+            color: (
+                'primary',
+                300,
+                0.3,
+            ),
+        ),
+
         item-text-color: (
             color: (
                 'gray',
@@ -395,6 +454,13 @@ $indigo-list: extend(
         ),
 
         item-text-color-active: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        item-text-color-selected: (
             color: (
                 'gray',
                 900,
@@ -422,6 +488,13 @@ $indigo-list: extend(
             ),
         ),
 
+        item-action-color-selected: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         item-subtitle-color: (
             color: (
                 'gray',
@@ -443,6 +516,13 @@ $indigo-list: extend(
             ),
         ),
 
+        item-subtitle-color-selected: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         item-thumbnail-color: (
             color: (
                 'gray',
@@ -458,6 +538,13 @@ $indigo-list: extend(
         ),
 
         item-thumbnail-color-active: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        item-thumbnail-color-selected: (
             color: (
                 'gray',
                 700,

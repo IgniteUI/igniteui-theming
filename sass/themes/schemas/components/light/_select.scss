@@ -12,9 +12,9 @@
 /// Generates a base light select schema.
 /// @type {Map}
 /// @prop {Map} toggle-button-background [color: ('gray', 300)] - The select toggle button background color.
-/// @prop {Map} toggle-button-background-focus [color: ('gray', 400, .3)] - The select toggle button background color when the select is focused.
+/// @prop {Map} toggle-button-background-focus [color: ('gray', 400)] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-foreground [color: ('gray', 700)] - The select toggle button foreground color.
-/// @prop {Map} toggle-button-foreground-focus [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
+/// @prop {Map} toggle-button-foreground-focus [color: ('gray', 900)] - The select toggle button foreground color when the select is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 900)] - The select toggle button foreground color when the select is filled.
 /// @prop {Map} toggle-button-background-disabled [color: ('gray', 100] - The select toggle button background color when the select is disabled.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 400)] - The select toggle button foreground color when the select is disabled.
@@ -37,7 +37,6 @@ $light-select: (
         color: (
             'gray',
             400,
-            0.3,
         ),
     ),
     toggle-button-foreground: (
@@ -49,7 +48,7 @@ $light-select: (
     toggle-button-foreground-focus: (
         color: (
             'gray',
-            700,
+            900,
         ),
     ),
     toggle-button-foreground-filled: (
@@ -93,6 +92,7 @@ $material-select: extend(
 /// @type {Map}
 /// @prop {Map} toggle-button-background [color: ('gray', 100)] - The select toggle button background color.
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 100)] - The select toggle button background color when the select is focused.
+/// @prop {Map} toggle-button-foreground-focus [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 700)] - The select toggle button foreground color when the select is focused.
 /// @requires {Map} $light-select
 $fluent-select: extend(
@@ -108,6 +108,12 @@ $fluent-select: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+        toggle-button-foreground-focus: (
+            color: (
+                'gray',
+                700,
             ),
         ),
         toggle-button-foreground-filled: (
