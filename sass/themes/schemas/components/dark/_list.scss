@@ -11,6 +11,7 @@
 /// @type {Map}
 /// @prop {Map} item-background-hover [color: ('gray', 100)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('gray', 100)] - The active list item background color.
+/// @prop {Map} item-background-selected [color: ('gray', 100)] - The selected list item background color.
 $base-dark-list: (
     item-background-hover: (
         color: (
@@ -20,6 +21,13 @@ $base-dark-list: (
     ),
 
     item-background-active: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    item-background-selected: (
         color: (
             'gray',
             100,
@@ -45,6 +53,7 @@ $dark-fluent-list: extend($fluent-list, $base-dark-list);
 /// @prop {Map} item-background [color: ('gray', 50)] - The list item background color.
 /// @prop {Map} item-background-hover [color: ('gray', 100)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('gray', 100)] - The active list item background color.
+/// @prop {Map} item-background-selected [color: ('gray', 100)] - The selected list item background color.
 /// @prop {Map} header-background [color: ('gray', 50)] - The list header background color.
 /// @requires $bootstrap-list
 $dark-bootstrap-list: extend(
@@ -78,6 +87,13 @@ $dark-bootstrap-list: extend(
             ),
         ),
 
+        item-background-selected: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         header-background: (
             color: (
                 'gray',
@@ -92,18 +108,23 @@ $dark-bootstrap-list: extend(
 /// @prop {Map} header-text-color [contrast-color: ('gray', 50, .6)] - The list header text color.
 /// @prop {Map} item-background-hover [color: ('primary', 400, .3)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('primary')] - The active list item background color.
+/// @prop {Map} item-background-selected [color: ('primary')] - The selected list item background color.
 /// @prop {Map} item-text-color [contrast-color: ('gray', 50, .9)] - The list item text color.
 /// @prop {Map} item-text-color-hover [contrast-color: ('gray', 50)] - The list item text color.
 /// @prop {Map} item-text-color-active [contrast-color: ('gray', 50)] - The active list item text color.
+/// @prop {Map} item-text-color-selected [contrast-color: ('gray', 50)] - The selected list item text color.
 /// @prop {Map} item-subtitle-color [contrast-color: ('gray', 50, .7)] - The list item subtitle color.
 /// @prop {Map} item-subtitle-color-hover [contrast-color: ('gray', 50, .8)] - The list item subtitle hover color.
 /// @prop {Map} item-subtitle-color-active [contrast-color: ('gray', 50, .8)] - The list item subtitle active color.
+/// @prop {Map} item-subtitle-color-selected [contrast-color: ('gray', 50, .8)] - The list item subtitle selected color.
 /// @prop {Map} item-thumbnail-color [contrast-color: ('gray', 50, .6)] - The list item thumbnail color.
 /// @prop {Map} item-thumbnail-color-hover [contrast-color: ('gray', 50, .8)] - The list item thumbnail hover color.
 /// @prop {Map} item-thumbnail-color-active [contrast-color: ('gray', 50, .8)] - The list item thumbnail active color.
+/// @prop {Map} item-thumbnail-color-selected [contrast-color: ('gray', 50, .8)] - The list item thumbnail selected color.
 /// @prop {Map} item-action-color [contrast-color: ('gray', 50, .6)] - The list item action color.
 /// @prop {Map} item-action-color-hover [contrast-color: ('gray', 50, .8)] - The list item action hover color.
 /// @prop {Map} item-action-color-active [contrast-color: ('gray', 50, .8)] - The list item action active color.
+/// @prop {Map} item-action-color-selected [contrast-color: ('gray', 50, .8)] - The list item action selected color.
 /// @requires $indigo-list
 $dark-indigo-list: extend(
     $indigo-list,
@@ -125,6 +146,12 @@ $dark-indigo-list: extend(
         ),
 
         item-background-active: (
+            color: (
+                'primary',
+            ),
+        ),
+
+        item-background-selected: (
             color: (
                 'primary',
             ),
@@ -152,6 +179,13 @@ $dark-indigo-list: extend(
             ),
         ),
 
+        item-text-color-selected: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
         item-subtitle-color: (
             contrast-color: (
                 'gray',
@@ -169,6 +203,14 @@ $dark-indigo-list: extend(
         ),
 
         item-subtitle-color-active: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-subtitle-color-selected: (
             contrast-color: (
                 'gray',
                 50,
@@ -200,6 +242,14 @@ $dark-indigo-list: extend(
             ),
         ),
 
+        item-thumbnail-color-selected: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
         item-action-color: (
             contrast-color: (
                 'gray',
@@ -217,6 +267,14 @@ $dark-indigo-list: extend(
         ),
 
         item-action-color-active: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        item-action-color-selected: (
             contrast-color: (
                 'gray',
                 50,
