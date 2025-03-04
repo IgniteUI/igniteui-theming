@@ -1,0 +1,45 @@
+@use '../../../../utils/map' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light base resize indicator schema.
+/// @prop {Map} resize-indicator [color: ('gray', 400)] - The color of the resize indicator.
+$light-resize-indicator: (
+    resize-indicator: (
+        color: (
+            'gray',
+            400,
+        ),
+    ),
+);
+
+/// Generates a material resize indicator schema.
+/// @type {Map}
+/// @requires {Map} $light-resize-indicator
+$material-resize-indicator: $light-resize-indicator;
+
+/// Generates a fluent resize indicator schema.
+/// @type {Map}
+/// @requires {Map} $light-resize-indicator
+$fluent-resize-indicator: $light-resize-indicator;
+
+/// Generates a bootstrap resize indicator schema.
+/// @type {Map}
+/// @requires {Map} $light-resize-indicator
+$bootstrap-resize-indicator: $light-resize-indicator;
+
+/// Generates an indigo resize indicator schema.
+/// @type {Map}
+/// @prop {Map} resize-indicator [color: ('gray', 500)] - The color of the resize indicator.
+$indigo-resize-indicator: (
+    resize-indicator: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+);
