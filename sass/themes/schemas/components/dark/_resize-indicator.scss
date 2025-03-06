@@ -8,15 +8,9 @@
 ////
 
 /// Generates a dark base resize indicator schema.
-/// @prop {Map} resize-indicator [color: ('gray', 200)] - The color of the resize indicator.
-$dark-base-resize-indicator: (
-    resize-indicator: (
-        color: (
-            'gray',
-            200,
-        ),
-    ),
-);
+/// @type {Map}
+/// @requires {Map} $light-resize-indicator
+$dark-base-resize-indicator: $light-resize-indicator;
 
 /// Generates a dark material resize indicator schema.
 /// @type {Map}
@@ -30,17 +24,17 @@ $dark-fluent-resize-indicator: $dark-base-resize-indicator;
 
 /// Generates a dark bootstrap resize indicator schema.
 /// @type {Map}
-/// @prop {Map} resize-indicator [color: ('gray', 300)] - The color of the resize indicator.
-$dark-bootstrap-resize-indicator: (
+/// @requires {Map} $dark-base-resize-indicator
+$dark-bootstrap-resize-indicator: $dark-base-resize-indicator;
+
+/// Generates a dark indigo resize indicator schema.
+/// @type {Map}
+/// @prop {Map} resize-indicator [color: ('primary', 300)] - The color of the resize indicator.
+$dark-indigo-resize-indicator: (
     resize-indicator: (
         color: (
-            'gray',
+            'primary',
             300,
         ),
     ),
 );
-
-/// Generates a dark indigo resize indicator schema.
-/// @type {Map}
-/// @requires {Map} $dark-base-resize-indicator
-$dark-indigo-resize-indicator: $dark-base-resize-indicator;

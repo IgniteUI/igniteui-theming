@@ -7,12 +7,12 @@
 ////
 
 /// Generates a light base resize indicator schema.
-/// @prop {Map} resize-indicator [color: ('gray', 400)] - The color of the resize indicator.
+/// @prop {Map} resize-indicator [color: ('primary', 500)] - The color of the resize indicator.
 $light-resize-indicator: (
     resize-indicator: (
         color: (
-            'gray',
-            400,
+            'primary',
+            500,
         ),
     ),
 );
@@ -34,12 +34,5 @@ $bootstrap-resize-indicator: $light-resize-indicator;
 
 /// Generates an indigo resize indicator schema.
 /// @type {Map}
-/// @prop {Map} resize-indicator [color: ('gray', 500)] - The color of the resize indicator.
-$indigo-resize-indicator: (
-    resize-indicator: (
-        color: (
-            'gray',
-            500,
-        ),
-    ),
-);
+/// @requires {Map} $light-resize-indicator
+$indigo-resize-indicator: $light-resize-indicator;
