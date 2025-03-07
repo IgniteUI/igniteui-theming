@@ -58,17 +58,41 @@ $light-splitter: (
 /// Generates a material splitter schema.
 /// @type {Map}
 /// @requires {Map} $light-splitter
-$material-splitter: $light-splitter;
+$material-splitter: extend(
+    $light-splitter,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent splitter schema.
 /// @type {Map}
 /// @requires {Map} $light-splitter
-$fluent-splitter: $light-splitter;
+$fluent-splitter: extend(
+    $light-splitter,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap splitter schema.
 /// @type {Map}
 /// @requires {Map} $light-splitter
-$bootstrap-splitter: $light-splitter;
+$bootstrap-splitter: extend(
+    $light-splitter,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo splitter schema.
 /// @type {Map}
@@ -106,6 +130,11 @@ $indigo-splitter: extend(
                 'gray',
                 700,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

@@ -307,6 +307,11 @@ $material-button-group: extend(
         ),
 
         default-size: 3,
+
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
     )
 );
 
@@ -528,6 +533,11 @@ $fluent-button-group: extend(
                 rem(0),
                 rem(20px),
             ),
+        ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -776,6 +786,11 @@ $bootstrap-button-group: extend(
                 100,
             ),
         ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -986,6 +1001,11 @@ $indigo-button-group: extend(
                 400,
                 0.5,
             ),
+        ),
+
+        _meta: (
+            theme: 'material',
+            variant: 'indigo',
         ),
     )
 );

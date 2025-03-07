@@ -70,7 +70,15 @@ $light-scrollbar: (
 /// Generates a material scrollbar schema.
 /// @type {Map}
 /// @requires {Map} $light-scrollbar
-$material-scrollbar: $light-scrollbar;
+$material-scrollbar: extend(
+    $light-scrollbar,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent scrollbar schema.
 /// @type {Map}
@@ -92,13 +100,25 @@ $fluent-scrollbar: extend(
                 300,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
 /// Generates a bootstrap scrollbar schema.
 /// @type {Map}
 /// @requires {Map} $light-scrollbar
-$bootstrap-scrollbar: $light-scrollbar;
+$bootstrap-scrollbar: extend(
+    $light-scrollbar,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo scrollbar schema.
 /// @type {Map}
@@ -119,6 +139,10 @@ $indigo-scrollbar: extend(
                 'gray',
                 200,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

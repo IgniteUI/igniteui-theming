@@ -23,7 +23,15 @@ $light-overlay: (
 /// Generates a material overlay schema.
 /// @type {Map}
 /// @requires {Map} $light-overlay
-$material-overlay: $light-overlay;
+$material-overlay: extend(
+    $light-overlay,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent overlay schema.
 /// @type {Map}
@@ -33,15 +41,35 @@ $fluent-overlay: extend(
     $light-overlay,
     (
         background-color: rgb(255 255 255 / 0.4),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
 /// Generates a bootstrap overlay schema.
 /// @type {Map}
 /// @requires {Map} $light-overlay
-$bootstrap-overlay: $light-overlay;
+$bootstrap-overlay: extend(
+    $light-overlay,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo overlay schema.
 /// @type {Map}
 /// @requires {Map} $light-overlay
-$indigo-overlay: $light-overlay;
+$indigo-overlay: extend(
+    $light-overlay,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

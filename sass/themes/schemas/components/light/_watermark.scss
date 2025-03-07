@@ -44,7 +44,15 @@ $light-watermark: extend(
 /// Generates a light material watermark schema.
 /// @type {Map}
 /// @requires {Map} $light-watermark
-$material-watermark: $light-watermark;
+$material-watermark: extend(
+    $light-watermark,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a light fluent watermark schema.
 /// @type {Map}
@@ -59,6 +67,10 @@ $fluent-watermark: extend(
                 rem(0),
                 rem(16px),
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -76,6 +88,10 @@ $bootstrap-watermark: extend(
                 rem(0),
                 rem(16px),
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -101,6 +117,10 @@ $indigo-watermark: extend(
                 rem(0),
                 rem(16px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

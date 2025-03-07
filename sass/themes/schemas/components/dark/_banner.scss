@@ -10,17 +10,41 @@
 /// Generates a dark material banner schema.
 /// @type {Map}
 /// @requires $material-banner
-$dark-material-banner: $material-banner;
+$dark-material-banner: extend(
+    $material-banner,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent banner schema.
 /// @type {Map}
 /// @requires $fluent-banner
-$dark-fluent-banner: $fluent-banner;
+$dark-fluent-banner: extend(
+    $fluent-banner,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap banner schema.
 /// @type {Map}
 /// @requires $bootstrap-banner
-$dark-bootstrap-banner: $bootstrap-banner;
+$dark-bootstrap-banner: extend(
+    $bootstrap-banner,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo banner schema.
 /// @type {Map}
@@ -42,6 +66,10 @@ $dark-indigo-banner: extend(
                 'gray',
                 100,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

@@ -29,19 +29,51 @@ $light-date-range-picker: (
 /// Generates a material date-range-picker schema.
 /// @type {Map}
 /// @requires {Map} $light-date-range-picker
-$material-date-range-picker: $light-date-range-picker;
+$material-date-range-picker: extend(
+    $light-date-range-picker,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent date-range-picker schema.
 /// @type {Map}
 /// @requires {Map} $light-date-range-picker
-$fluent-date-range-picker: $light-date-range-picker;
+$fluent-date-range-picker: extend(
+    $light-date-range-picker,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap date-range-picker schema.
 /// @type {Map}
 /// @requires {Map} $light-date-range-picker
-$bootstrap-date-range-picker: $light-date-range-picker;
+$bootstrap-date-range-picker: extend(
+    $light-date-range-picker,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo date-range-picker schema.
 /// @type {Map}
 /// @requires {Map} $light-date-range-picker
-$indigo-date-range-picker: $light-date-range-picker;
+$indigo-date-range-picker: extend(
+    $light-date-range-picker,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

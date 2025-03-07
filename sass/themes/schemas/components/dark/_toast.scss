@@ -40,13 +40,31 @@ $dark-base-toast: (
 /// @type {Map}
 /// @requires $material-toast
 /// @requires $dark-base-toast
-$dark-material-toast: extend($material-toast, $dark-base-toast);
+$dark-material-toast: extend(
+    $material-toast,
+    $dark-base-toast,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent toast schema.
 /// @type {Map}
 /// @requires $fluent-toast
 /// @requires $dark-base-toast
-$dark-fluent-toast: extend($fluent-toast, $dark-base-toast);
+$dark-fluent-toast: extend(
+    $fluent-toast,
+    $dark-base-toast,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap toast schema.
 /// @type {Map}
@@ -67,6 +85,10 @@ $dark-bootstrap-toast: extend(
                 'gray',
                 900,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -93,6 +115,10 @@ $dark-indigo-toast: extend(
                 'gray',
                 50,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

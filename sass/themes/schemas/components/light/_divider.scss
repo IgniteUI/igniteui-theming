@@ -24,17 +24,49 @@ $light-divider: (
 /// Generates a material divider schema.
 /// @type {Map}
 /// @requires {Map} $light-divider
-$material-divider: $light-divider;
+$material-divider: extend(
+    $light-divider,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent divider schema.
 /// @type {Map}
 /// @requires {Map} $light-divider
-$fluent-divider: $light-divider;
+$fluent-divider: extend(
+    $light-divider,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap divider schema.
 /// @type {Map}
-$bootstrap-divider: $light-divider;
+$bootstrap-divider: extend(
+    $light-divider,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo divider schema.
 /// @type {Map}
-$indigo-divider: $light-divider;
+$indigo-divider: extend(
+    $light-divider,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

@@ -29,17 +29,41 @@ $light-icon: (
 /// Generates a material icon schema.
 /// @type {Map}
 /// @requires {Map} $light-icon
-$material-icon: $light-icon;
+$material-icon: extend(
+    $light-icon,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent icon schema.
 /// @type {Map}
 /// @requires {Map} $light-icon
-$fluent-icon: $light-icon;
+$fluent-icon: extend(
+    $light-icon,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap icon schema.
 /// @type {Map}
 /// @requires {Map} $light-icon
-$bootstrap-icon: $light-icon;
+$bootstrap-icon: extend(
+    $light-icon,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo icon schema.
 /// @type {Map}
@@ -60,6 +84,10 @@ $indigo-icon: extend(
                 rem(16px),
                 rem(24px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );
