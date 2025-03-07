@@ -1458,14 +1458,14 @@ $indigo-base-button: extend(
 /// @requires {Map} $indigo-base-button
 $indigo-flat-button: extend(
     $light-flat-button,
-    $indigo-base-button
-        (
-            _meta: (
-                theme: 'indigo',
-                variant: 'light',
-                type: 'flat',
-            ),
-        )
+    $indigo-base-button,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'flat',
+        ),
+    )
 );
 
 /// @type {Map}
