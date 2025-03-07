@@ -10,7 +10,15 @@
 /// Generates a dark material overlay schema.
 /// @type {Map}
 /// @requires $material-overlay
-$dark-material-overlay: $material-overlay;
+$dark-material-overlay: extend(
+    $material-overlay,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent overlay schema.
 /// @type {Map}
@@ -20,15 +28,35 @@ $dark-fluent-overlay: extend(
     $fluent-overlay,
     (
         background-color: rgb(0 0 0 / 0.4),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
 /// Generates a dark bootstrap overlay schema.
 /// @type {Map}
 /// @requires $bootstrap-overlay
-$dark-bootstrap-overlay: $bootstrap-overlay;
+$dark-bootstrap-overlay: extend(
+    $bootstrap-overlay,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo overlay schema.
 /// @type {Map}
 /// @requires $indigo-overlay
-$dark-indigo-overlay: $indigo-overlay;
+$dark-indigo-overlay: extend(
+    $indigo-overlay,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

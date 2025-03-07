@@ -46,17 +46,41 @@ $light-highlight: (
 /// Generates a material highlight schema.
 /// @type {Map}
 /// @requires {Map} $light-highlight
-$material-highlight: $light-highlight;
+$material-highlight: extend(
+    $light-highlight,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent highlight schema.
 /// @type {Map}
 /// @requires {Map} $light-highlight
-$fluent-highlight: $light-highlight;
+$fluent-highlight: extend(
+    $light-highlight,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap highlight schema.
 /// @type {Map}
 /// @requires {Map} $light-highlight
-$bootstrap-highlight: $light-highlight;
+$bootstrap-highlight: extend(
+    $light-highlight,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo highlight schema.
 /// @type {Map}
@@ -86,6 +110,10 @@ $indigo-highlight: extend(
                 'gray',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

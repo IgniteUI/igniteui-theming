@@ -37,18 +37,38 @@ $dark-material-combo: extend(
                 100,
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
     )
 );
 
 /// Generates a dark fluent combo schema.
 /// @type {Map}
 /// @requires $fluent-combo
-$dark-fluent-combo: $fluent-combo;
+$dark-fluent-combo: extend(
+    $fluent-combo,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap combo schema.
 /// @type {Map}
 /// @requires $bootstrap-combo
-$dark-bootstrap-combo: $bootstrap-combo;
+$dark-bootstrap-combo: extend(
+    $bootstrap-combo,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo combo schema.
 /// @prop {Map} clear-button-foreground [contrast-color: ('gray', 100, .6)] - The combo toggle clear foreground color.
@@ -103,6 +123,10 @@ $dark-indigo-combo: extend(
                 100,
                 0.2,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

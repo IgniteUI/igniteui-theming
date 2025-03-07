@@ -43,6 +43,11 @@ $material-flat-button-dark: extend(
     $material-base-button-dark,
     (
         disabled-background: transparent,
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+            type: 'flat',
+        ),
     )
 );
 
@@ -61,16 +66,41 @@ $material-outlined-button-dark: extend(
             ),
         ),
         disabled-background: transparent,
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+            type: 'outlined',
+        ),
     )
 );
 
 /// @requires {Map} $material-contained-button
 /// @requires {Map} $material-base-button-dark
-$material-contained-button-dark: extend($material-contained-button, $material-base-button-dark);
+$material-contained-button-dark: extend(
+    $material-contained-button,
+    $material-base-button-dark,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+            type: 'contained',
+        ),
+    )
+);
 
 /// @requires {Map} $material-fab-button
 /// @requires {Map} $material-base-button-dark
-$material-fab-button-dark: extend($material-fab-button, $material-base-button-dark);
+$material-fab-button-dark: extend(
+    $material-fab-button,
+    $material-base-button-dark,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+            type: 'fab',
+        ),
+    )
+);
 
 /// Generates a dark material button schema.
 /// @type {Map}
@@ -154,6 +184,11 @@ $fluent-flat-button-dark: extend(
     $fluent-base-button-dark,
     (
         disabled-background: transparent,
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+            type: 'flat',
+        ),
     )
 );
 
@@ -197,6 +232,11 @@ $fluent-outlined-button-dark: extend(
                 'gray',
                 100,
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+            type: 'outlined',
         ),
     )
 );
@@ -313,6 +353,11 @@ $fluent-contained-button-dark: extend(
                 300,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+            type: 'contained',
+        ),
     )
 );
 
@@ -428,6 +473,11 @@ $fluent-fab-button-dark: extend(
                 'primary',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+            type: 'fab',
         ),
     )
 );
@@ -582,6 +632,11 @@ $indigo-flat-button-dark: extend(
                 0.2,
             ),
         ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+            type: 'flat',
+        ),
     )
 );
 
@@ -680,18 +735,43 @@ $indigo-outlined-button-dark: extend(
                 0.2,
             ),
         ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+            type: 'outlined',
+        ),
     )
 );
 
 /// @type {Map}
 /// @requires {Map} $indigo-contained-button
 /// @requires {Map} $indigo-base-button-dark
-$indigo-contained-button-dark: extend($indigo-contained-button, $indigo-base-button-dark);
+$indigo-contained-button-dark: extend(
+    $indigo-contained-button,
+    $indigo-base-button-dark,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+            type: 'contained',
+        ),
+    )
+);
 
 /// @type {Map}
 /// @requires {Map} $indigo-fab-button
 /// @requires {Map} $indigo-base-button-dark
-$indigo-fab-button-dark: extend($indigo-fab-button, $indigo-base-button-dark);
+$indigo-fab-button-dark: extend(
+    $indigo-fab-button,
+    $indigo-base-button-dark,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+            type: 'fab',
+        ),
+    )
+);
 
 /// Generates a dark indigo button schema.
 /// @type {Map}

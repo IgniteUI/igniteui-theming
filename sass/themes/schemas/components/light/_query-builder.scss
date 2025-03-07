@@ -89,7 +89,15 @@ $light-query-builder: extend(
 /// Generates a material query builder schema.
 /// @type {Map}
 /// @requires {Map} $light-query-builder
-$material-query-builder: $light-query-builder;
+$material-query-builder: extend(
+    $light-query-builder,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent query builder schema.
 /// @type {Map}
@@ -99,6 +107,10 @@ $fluent-query-builder: extend(
     $light-query-builder,
     (
         border-radius: rem(2px),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -114,6 +126,10 @@ $bootstrap-query-builder: extend(
                 'gray',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -140,5 +156,9 @@ $indigo-query-builder: extend(
             ),
         ),
         border-radius: rem(10px),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
     )
 );

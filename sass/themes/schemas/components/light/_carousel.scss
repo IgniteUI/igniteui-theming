@@ -170,7 +170,15 @@ $light-carousel: extend(
 /// Generates a material carousel schema.
 /// @type {Map}
 /// @requires {Map} $light-carousel
-$material-carousel: $light-carousel;
+$material-carousel: extend(
+    $light-carousel,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent carousel schema.
 /// @type {Map}
@@ -218,6 +226,11 @@ $fluent-carousel: extend(
                 rem(36px),
             ),
         ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -254,6 +267,11 @@ $bootstrap-carousel: extend(
                 rem(0),
                 rem(36px),
             ),
+        ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -380,6 +398,11 @@ $indigo-carousel: extend(
                 'primary',
                 500,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

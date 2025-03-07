@@ -61,7 +61,15 @@ $light-toast: extend(
 /// Generates a light material toast schema.
 /// @type {Map}
 /// @requires {Map} $light-toast
-$material-toast: $light-toast;
+$material-toast: extend(
+    $light-toast,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent toast schema.
 /// @type {Map}
@@ -83,6 +91,10 @@ $fluent-toast: extend(
             text: (
                 value: 'caption',
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -126,6 +138,10 @@ $bootstrap-toast: extend(
                 rem(26px),
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -162,6 +178,10 @@ $indigo-toast: extend(
                 rem(0),
                 rem(26px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

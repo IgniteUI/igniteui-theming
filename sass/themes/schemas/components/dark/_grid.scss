@@ -223,7 +223,16 @@ $base-dark-grid: (
 /// @type {Map}
 /// @requires $material-grid
 /// @requires $base-dark-grid
-$dark-material-grid: extend($material-grid, $base-dark-grid);
+$dark-material-grid: extend(
+    $material-grid,
+    $base-dark-grid,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent grid schema based on a mix of $fluent-grid and $base-dark-grid.
 /// @prop {Map} header-selected-background [color: ('gray', 200)] - The table header background color when selected (ex. column selection).
@@ -305,6 +314,10 @@ $dark-fluent-grid: extend(
                 0.5,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -359,6 +372,10 @@ $dark-bootstrap-grid: extend(
                 100,
                 0.5,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -725,6 +742,11 @@ $dark-indigo-grid: extend(
                 'gray',
                 100,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

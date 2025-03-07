@@ -169,6 +169,11 @@ $material-checkbox: extend(
                 value: 'subtitle-1',
             ),
         ),
+
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
     )
 );
 
@@ -227,6 +232,10 @@ $fluent-checkbox: extend(
                 rem(0),
                 rem(24px),
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -340,11 +349,14 @@ $bootstrap-checkbox: extend(
                 rem(24px),
             ),
         ),
-
         typography: (
             label: (
                 value: 'body-1',
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -475,6 +487,10 @@ $indigo-checkbox: extend(
                 rem(0),
                 rem(24px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

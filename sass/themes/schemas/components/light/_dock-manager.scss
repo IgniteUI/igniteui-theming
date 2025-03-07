@@ -226,6 +226,11 @@ $material-dock-manager: extend(
         tab-background: null,
         tab-text: null,
         tab-text-active: null,
+
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
     )
 );
 
@@ -329,6 +334,11 @@ $fluent-dock-manager: extend(
         tab-text-active: (
             color: 'primary',
         ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -423,6 +433,11 @@ $bootstrap-dock-manager: extend(
         tab-text: (
             color: 'primary',
         ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -514,6 +529,11 @@ $indigo-dock-manager: extend(
                 'gray',
                 900,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

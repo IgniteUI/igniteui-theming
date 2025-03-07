@@ -11,7 +11,15 @@
 /// Generates a dark material rating schema.
 /// @type {Map}
 /// @requires $material-rating
-$dark-material-rating: $material-rating;
+$dark-material-rating: extend(
+    $material-rating,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent rating schema.
 /// @type {Map}
@@ -47,13 +55,25 @@ $dark-fluent-rating: extend(
                 900,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
 /// Generates a dark bootstrap rating schema.
 /// @type {Map}
 /// @requires $bootstrap-rating
-$dark-bootstrap-rating: $bootstrap-rating;
+$dark-bootstrap-rating: extend(
+    $bootstrap-rating,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo rating schema.
 /// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - sets the color for the label.
@@ -107,6 +127,10 @@ $dark-indigo-rating: extend(
                 300,
                 0.4,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

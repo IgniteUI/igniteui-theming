@@ -17,22 +17,58 @@ $dark-watermark: (
 /// @type {Map}
 /// @requires $material-watermark
 /// @requires $dark-watermark
-$dark-material-watermark: extend($material-watermark, $dark-watermark);
+$dark-material-watermark: extend(
+    $material-watermark,
+    $dark-watermark,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent watermark schema.
 /// @type {Map}
 /// @requires $fluent-watermark
 /// @requires $dark-watermark
-$dark-fluent-watermark: extend($fluent-watermark, $dark-watermark);
+$dark-fluent-watermark: extend(
+    $fluent-watermark,
+    $dark-watermark,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap watermark schema.
 /// @type {Map}
 /// @requires $bootstrap-watermark
 /// @requires $dark-watermark
-$dark-bootstrap-watermark: extend($bootstrap-watermark, $dark-watermark);
+$dark-bootstrap-watermark: extend(
+    $bootstrap-watermark,
+    $dark-watermark,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo watermark schema.
 /// @type {Map}
 /// @requires $indigo-watermark
 /// @requires $dark-watermark
-$dark-indigo-watermark: extend($indigo-watermark, $dark-watermark);
+$dark-indigo-watermark: extend(
+    $indigo-watermark,
+    $dark-watermark,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

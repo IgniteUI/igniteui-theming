@@ -10,7 +10,15 @@
 /// Generates a dark material action-strip schema.
 /// @type {Map}
 /// @requires $material-action-strip
-$dark-material-action-strip: $material-action-strip;
+$dark-material-action-strip: extend(
+    $material-action-strip,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent action strip schema.
 /// @type {Map}
@@ -24,6 +32,10 @@ $dark-fluent-action-strip: extend(
                 'gray',
                 600,
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
         ),
     )
 );
@@ -41,10 +53,22 @@ $dark-bootstrap-action-strip: extend(
                 100,
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
     )
 );
 
 /// Generates a dark indigo action strip schema.
 /// @type {Map}
 /// @requires $indigo-action-strip
-$dark-indigo-action-strip: $indigo-action-strip;
+$dark-indigo-action-strip: extend(
+    $indigo-action-strip,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

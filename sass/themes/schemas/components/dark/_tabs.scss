@@ -52,6 +52,10 @@ $dark-material-tabs: extend(
                 100,
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -106,13 +110,25 @@ $dark-fluent-tabs: extend(
                 300,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
 /// Generates a dark bootstrap tabs schema.
 /// @type {Map}
 /// @requires $bootstrap-tabs
-$dark-bootstrap-tabs: extend($bootstrap-tabs);
+$dark-bootstrap-tabs: extend(
+    $bootstrap-tabs,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo tabs schema.
 /// @type {Map}
@@ -228,6 +244,10 @@ $dark-indigo-tabs: extend(
                 50,
                 0.1,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

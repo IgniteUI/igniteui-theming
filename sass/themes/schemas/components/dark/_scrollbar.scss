@@ -10,12 +10,28 @@
 /// Generates a dark material scrollbar schema.
 /// @type {Map}
 /// @requires $material-scrollbar
-$dark-material-scrollbar: $material-scrollbar;
+$dark-material-scrollbar: extend(
+    $material-scrollbar,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent scrollbar schema.
 /// @type {Map}
 /// @requires $fluent-scrollbar
-$dark-fluent-scrollbar: $fluent-scrollbar;
+$dark-fluent-scrollbar: extend(
+    $fluent-scrollbar,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap scrollbar schema.
 /// @type {Map}
@@ -55,6 +71,10 @@ $dark-bootstrap-scrollbar: extend(
                 0.5,
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -92,6 +112,10 @@ $dark-indigo-scrollbar: extend(
                 'gray',
                 50,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

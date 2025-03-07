@@ -47,7 +47,15 @@ $light-pagination: (
 /// Generates a material pagination schema.
 /// @type {Map}
 /// @requires {Map} $light-pagination
-$material-pagination: $light-pagination;
+$material-pagination: extend(
+    $light-pagination,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent pagination schema.
 /// @type {Map}
@@ -67,6 +75,10 @@ $fluent-pagination: extend(
                 100,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -82,6 +94,10 @@ $bootstrap-pagination: extend(
                 'gray',
                 50,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -106,6 +122,10 @@ $indigo-pagination: extend(
                 'gray',
                 400,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

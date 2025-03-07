@@ -56,6 +56,11 @@ $material-banner: extend(
                 900,
             ),
         ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
     )
 );
 
@@ -95,6 +100,11 @@ $fluent-banner: extend(
                 value: 'caption',
             ),
         ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -126,6 +136,11 @@ $bootstrap-banner: extend(
                 'gray',
                 800,
             ),
+        ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -167,4 +182,8 @@ $indigo-banner: (
     ),
 
     border-radius: rem(6px),
+    _meta: (
+        theme: 'indigo',
+        variant: 'light',
+    ),
 );

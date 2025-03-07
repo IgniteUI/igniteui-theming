@@ -48,12 +48,28 @@ $light-avatar: (
 /// Generates a material avatar schema.
 /// @type {Map}
 /// @requires {Map} $light-avatar
-$material-avatar: $light-avatar;
+$material-avatar: extend(
+    $light-avatar,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent avatar schema.
 /// @type {Map}
 /// @requires {Map} $light-avatar
-$fluent-avatar: $light-avatar;
+$fluent-avatar: extend(
+    $light-avatar,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap avatar schema.
 /// @type {Map}
@@ -63,6 +79,10 @@ $bootstrap-avatar: extend(
     $light-avatar,
     (
         border-radius: rem(4px),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -103,6 +123,10 @@ $indigo-avatar: extend(
                 rem(28px),
                 rem(36px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

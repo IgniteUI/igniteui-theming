@@ -131,6 +131,11 @@ $material-flat-icon-button: extend(
     $material-base-icon-button,
     (
         selector: '[igxIconButton="flat"], .igx-icon-button--flat',
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -189,6 +194,11 @@ $material-contained-icon-button: extend(
                 0.04,
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -219,6 +229,11 @@ $material-outlined-icon-button: extend(
                 'gray',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'outlined',
         ),
     )
 );
@@ -353,6 +368,11 @@ $fluent-flat-icon-button: extend(
     $fluent-base-icon-button,
     (
         selector: '[igxIconButton="flat"], .igx-icon-button--flat',
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -440,6 +460,11 @@ $fluent-contained-icon-button: extend(
                 600,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -507,6 +532,11 @@ $fluent-outlined-icon-button: extend(
                 'gray',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'outlined',
         ),
     )
 );
@@ -678,6 +708,11 @@ $bootstrap-flat-icon-button: extend(
                 800,
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -716,6 +751,11 @@ $bootstrap-contained-icon-button: extend(
                 200,
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -753,6 +793,11 @@ $bootstrap-outlined-icon-button: extend(
                 'primary',
                 50,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'outlined',
         ),
     )
 );
@@ -899,6 +944,11 @@ $indigo-flat-icon-button: extend(
     $indigo-base-icon-button,
     (
         selector: '[igxIconButton="flat"], .igx-icon-button--flat',
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -923,6 +973,11 @@ $indigo-outlined-icon-button: extend(
                 900,
                 0.15,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'outlined',
         ),
     )
 );
@@ -1037,6 +1092,11 @@ $indigo-contained-icon-button: extend(
                 500,
                 0.3,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'contained',
         ),
     )
 );

@@ -31,7 +31,16 @@ $dark-base-highlight: (
 /// @type {Map}
 /// @requires $material-highlight
 /// @requires $dark-base-highlight
-$dark-material-highlight: extend($material-highlight, $dark-base-highlight);
+$dark-material-highlight: extend(
+    $material-highlight,
+    $dark-base-highlight,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark highlight schema.
 /// @type {Map}
@@ -43,7 +52,16 @@ $dark-highlight: extend($light-highlight, $dark-base-highlight);
 /// @type {Map}
 /// @requires $fluent-highlight
 /// @requires $dark-base-highlight
-$dark-fluent-highlight: extend($fluent-highlight, $dark-base-highlight);
+$dark-fluent-highlight: extend(
+    $fluent-highlight,
+    $dark-base-highlight,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap highlight schema.
 /// @type {Map}
@@ -68,6 +86,10 @@ $dark-bootstrap-highlight: extend(
                 'A100',
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -75,4 +97,13 @@ $dark-bootstrap-highlight: extend(
 /// @type {Map}
 /// @requires $indigo-highlight
 /// @requires $dark-base-highlight
-$dark-indigo-highlight: extend($indigo-highlight, $dark-base-highlight);
+$dark-indigo-highlight: extend(
+    $indigo-highlight,
+    $dark-base-highlight,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

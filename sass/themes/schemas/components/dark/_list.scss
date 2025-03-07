@@ -39,13 +39,31 @@ $base-dark-list: (
 /// @type {Map}
 /// @requires $material-list
 /// @requires $base-dark-list
-$dark-material-list: extend($material-list, $base-dark-list);
+$dark-material-list: extend(
+    $material-list,
+    $base-dark-list,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent list schema.
 /// @type {Map}
 /// @requires $fluent-list
 /// @requires $base-dark-list
-$dark-fluent-list: extend($fluent-list, $base-dark-list);
+$dark-fluent-list: extend(
+    $fluent-list,
+    $base-dark-list,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap list schema.
 /// @type {Map}
@@ -99,6 +117,10 @@ $dark-bootstrap-list: extend(
                 'gray',
                 50,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -280,6 +302,10 @@ $dark-indigo-list: extend(
                 50,
                 0.8,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

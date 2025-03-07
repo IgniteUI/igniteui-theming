@@ -10,19 +10,51 @@
 /// Generates a dark material date-range-picker schema.
 /// @type {Map}
 /// @requires $material-date-range-picker
-$dark-material-date-range-picker: $material-date-range-picker;
+$dark-material-date-range-picker: extend(
+    $material-date-range-picker,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent date-range-picker schema.
 /// @type {Map}
 /// @requires $fluent-date-range-picker
-$dark-fluent-date-range-picker: $fluent-date-range-picker;
+$dark-fluent-date-range-picker: extend(
+    $fluent-date-range-picker,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap date-range-picker schema.
 /// @type {Map}
 /// @requires $bootstrap-date-range-picker
-$dark-bootstrap-date-range-picker: $bootstrap-date-range-picker;
+$dark-bootstrap-date-range-picker: extend(
+    $bootstrap-date-range-picker,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo date-range-picker schema.
 /// @type {Map}
 /// @requires $indigo-date-range-picker
-$dark-indigo-date-range-picker: $indigo-date-range-picker;
+$dark-indigo-date-range-picker: extend(
+    $indigo-date-range-picker,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

@@ -11,7 +11,15 @@
 /// Generates a dark material icon schema.
 /// @type {Map}
 /// @requires $material-icon
-$dark-material-icon: $material-icon;
+$dark-material-icon: extend(
+    $material-icon,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent icon schema.
 /// @type {Map}
@@ -26,15 +34,35 @@ $dark-fluent-icon: extend(
                 500,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
 /// Generates a dark bootstrap icon schema.
 /// @type {Map}
 /// @requires $bootstrap-icon
-$dark-bootstrap-icon: $bootstrap-icon;
+$dark-bootstrap-icon: extend(
+    $bootstrap-icon,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo icon schema.
 /// @type {Map}
 /// @requires $indigo-icon
-$dark-indigo-icon: $indigo-icon;
+$dark-indigo-icon: extend(
+    $indigo-icon,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

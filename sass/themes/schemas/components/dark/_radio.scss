@@ -11,7 +11,15 @@
 /// Generates a dark material radio schema.
 /// @type {Map}
 /// @requires $material-radio
-$dark-material-radio: $material-radio;
+$dark-material-radio: extend(
+    $material-radio,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent radio schema.
 /// @type {Map}
@@ -89,6 +97,10 @@ $dark-fluent-radio: extend(
                 300,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -141,6 +153,10 @@ $dark-bootstrap-radio: extend(
                 'gray',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -220,6 +236,10 @@ $dark-indigo-radio: extend(
                 500,
                 0.2,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

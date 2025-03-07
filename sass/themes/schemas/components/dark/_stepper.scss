@@ -94,7 +94,16 @@ $base-stepper: (
 /// @type {Map}
 /// @requires $material-stepper
 /// @requires $base-stepper
-$dark-material-stepper: extend($material-stepper, $base-stepper);
+$dark-material-stepper: extend(
+    $material-stepper,
+    $base-stepper,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent stepper schema
 /// @type {Map}
@@ -110,6 +119,10 @@ $dark-fluent-stepper: extend(
                 'gray',
                 100,
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
         ),
     )
 );
@@ -144,6 +157,10 @@ $dark-bootstrap-stepper: extend(
                 'gray',
                 300,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -501,6 +518,10 @@ $dark-indigo-stepper: extend(
                 'gray',
                 50,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

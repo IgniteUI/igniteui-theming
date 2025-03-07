@@ -30,6 +30,10 @@ $material-label: extend(
                 value: 'subtitle-1',
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
     )
 );
 
@@ -49,6 +53,10 @@ $fluent-label: (
             value: 'subtitle-2',
         ),
     ),
+    _meta: (
+        theme: 'fluent',
+        variant: 'light',
+    ),
 );
 
 /// Generates a light bootstrap label schema.
@@ -62,6 +70,10 @@ $bootstrap-label: extend(
             label: (
                 value: 'body-1',
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -81,5 +93,9 @@ $indigo-label: (
         label: (
             value: 'caption',
         ),
+    ),
+    _meta: (
+        theme: 'indigo',
+        variant: 'light',
     ),
 );

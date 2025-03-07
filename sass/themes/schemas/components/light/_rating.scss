@@ -95,6 +95,10 @@ $material-rating: extend(
                 700,
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
     )
 );
 
@@ -132,13 +136,25 @@ $fluent-rating: extend(
                 100,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
 /// Generates a bootstrap rating schema.
 /// @type {Map}
 /// @requires {Map} $light-rating
-$bootstrap-rating: $light-rating;
+$bootstrap-rating: extend(
+    $light-rating,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo rating schema.
 /// @prop {Map} label-color [color: ('gray', 800)] - sets the color for the label.
@@ -205,6 +221,10 @@ $indigo-rating: extend(
                 300,
                 0.4,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

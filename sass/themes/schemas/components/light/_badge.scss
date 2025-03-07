@@ -62,12 +62,28 @@ $light-badge: extend(
 /// Generates a material badge schema.
 /// @type {Map}
 /// @requires {Map} $light-badge
-$material-badge: $light-badge;
+$material-badge: extend(
+    $light-badge,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent badge schema.
 /// @type {Map}
 /// @requires {Map} $light-badge
-$fluent-badge: $light-badge;
+$fluent-badge: extend(
+    $light-badge,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap badge schema.
 /// @type {Map}
@@ -93,6 +109,10 @@ $bootstrap-badge: extend(
         ),
 
         border-radius: rem(4px),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -117,6 +137,11 @@ $indigo-badge: extend(
             text: (
                 value: 'button',
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

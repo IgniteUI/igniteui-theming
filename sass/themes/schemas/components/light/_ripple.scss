@@ -23,19 +23,51 @@ $light-ripple: (
 /// Generates a material ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$material-ripple: $light-ripple;
+$material-ripple: extend(
+    $light-ripple,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$fluent-ripple: $light-ripple;
+$fluent-ripple: extend(
+    $light-ripple,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$bootstrap-ripple: $light-ripple;
+$bootstrap-ripple: extend(
+    $light-ripple,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo ripple schema.
 /// @type {Map}
 /// @requires {Map} $light-ripple
-$indigo-ripple: $light-ripple;
+$indigo-ripple: extend(
+    $light-ripple,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

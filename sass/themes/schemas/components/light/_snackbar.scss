@@ -61,7 +61,15 @@ $light-snackbar: extend(
 /// Generates a material snackbar schema.
 /// @type {Map}
 /// @requires $light-snackbar
-$material-snackbar: $light-snackbar;
+$material-snackbar: extend(
+    $light-snackbar,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent snackbar schema.
 /// @type {Map}
@@ -82,6 +90,10 @@ $fluent-snackbar: extend(
             text: (
                 value: 'caption',
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -115,6 +127,10 @@ $bootstrap-snackbar: extend(
                 'primary',
                 500,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -158,6 +174,10 @@ $indigo-snackbar: extend(
                 rem(0),
                 rem(24px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );
