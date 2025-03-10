@@ -64,7 +64,15 @@ $light-grid-summary: (
 /// Generates a material grid-summary schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-summary
-$material-grid-summary: $light-grid-summary;
+$material-grid-summary: extend(
+    $light-grid-summary,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent grid-summary schema.
 /// @type {Map}
@@ -94,13 +102,26 @@ $fluent-grid-summary: extend(
                 300,
             ),
         ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
 /// Generates a bootstrap grid-summary schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-summary
-$bootstrap-grid-summary: $light-grid-summary;
+$bootstrap-grid-summary: extend(
+    $light-grid-summary,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo grid-summary schema.
 /// @type {Map}
@@ -129,6 +150,11 @@ $indigo-grid-summary: extend(
                 'gray',
                 400,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

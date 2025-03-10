@@ -10,19 +10,51 @@
 /// Generates a dark material column actions schema.
 /// @type {Map}
 /// @requires $material-column-actions
-$dark-material-column-actions: $material-column-actions;
+$dark-material-column-actions: extend(
+    $material-column-actions,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent column actions schema.
 /// @type {Map}
 /// @requires $fluent-column-actions
-$dark-fluent-column-actions: $fluent-column-actions;
+$dark-fluent-column-actions: extend(
+    $fluent-column-actions,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap column actions schema.
 /// @type {Map}
 /// @requires $bootstrap-column-actions
-$dark-bootstrap-column-actions: $bootstrap-column-actions;
+$dark-bootstrap-column-actions: extend(
+    $bootstrap-column-actions,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo column actions schema.
 /// @type {Map}
 /// @requires $indigo-column-actions
-$dark-indigo-column-actions: $indigo-column-actions;
+$dark-indigo-column-actions: extend(
+    $indigo-column-actions,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);

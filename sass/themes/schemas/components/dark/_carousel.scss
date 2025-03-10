@@ -35,7 +35,16 @@ $base-dark-carousel: extend(
 /// @type {Map}
 /// @requires $material-carousel
 /// @requires $base-dark-carousel
-$dark-material-carousel: extend($material-carousel, $base-dark-carousel);
+$dark-material-carousel: extend(
+    $material-carousel,
+    $base-dark-carousel,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent carousel schema based on a mix of $fluent-carousel and $base-dark-carousel
 /// @type {Map}
@@ -74,6 +83,11 @@ $dark-fluent-carousel: extend(
                 400,
             ),
         ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -89,6 +103,10 @@ $dark-bootstrap-carousel: extend(
                 'primary',
                 200,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -172,6 +190,11 @@ $dark-indigo-carousel: extend(
                 'gray',
                 500,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

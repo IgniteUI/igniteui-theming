@@ -10,17 +10,41 @@
 /// Generates a dark material bottom-nav schema.
 /// @type {Map}
 /// @requires $material-bottom-nav
-$dark-material-bottom-nav: $material-bottom-nav;
+$dark-material-bottom-nav: extend(
+    $material-bottom-nav,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent bottom-nav schema.
 /// @type {Map}
 /// @requires $fluent-bottom-nav
-$dark-fluent-bottom-nav: $fluent-bottom-nav;
+$dark-fluent-bottom-nav: extend(
+    $fluent-bottom-nav,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap bottom-nav schema.
 /// @type {Map}
 /// @requires $bootstrap-bottom-nav
-$dark-bootstrap-bottom-nav: $bootstrap-bottom-nav;
+$dark-bootstrap-bottom-nav: extend(
+    $bootstrap-bottom-nav,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo bottom-nav schema.
 /// @type {Map}
@@ -80,6 +104,10 @@ $dark-indigo-bottom-nav: extend(
                 50,
                 0.2,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

@@ -53,7 +53,15 @@ $light-tooltip: extend(
 /// Generates a light material tooltip schema.
 /// @type {Map}
 /// @requires {Map} $light-tooltip
-$material-tooltip: $light-tooltip;
+$material-tooltip: extend(
+    $light-tooltip,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a light fluent tooltip schema.
 /// @type {Map}
@@ -86,6 +94,10 @@ $fluent-tooltip: extend(
                 rem(16px),
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -109,6 +121,10 @@ $bootstrap-tooltip: extend(
                 'gray',
                 900,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -145,6 +161,10 @@ $indigo-tooltip: extend(
             tooltip-text: (
                 value: 'subtitle-2',
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

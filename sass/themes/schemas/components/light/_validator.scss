@@ -38,17 +38,41 @@ $light-validator: extend(
 /// Generates a light material validator schema.
 /// @type {Map}
 /// @requires {Map} $light-validator
-$material-validator: $light-validator;
+$material-validator: extend(
+    $light-validator,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a light fluent validator schema.
 /// @type {Map}
 /// @requires {Map} $light-validator
-$fluent-validator: $light-validator;
+$fluent-validator: extend(
+    $light-validator,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap validator schema.
 /// @type {Map}
 /// @requires {Map} $light-validator
-$bootstrap-validator: $light-validator;
+$bootstrap-validator: extend(
+    $light-validator,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo validator schema.
 /// @type {Map}
@@ -62,6 +86,10 @@ $indigo-validator: extend(
                 'gray',
                 700,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

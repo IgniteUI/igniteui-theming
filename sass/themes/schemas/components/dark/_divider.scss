@@ -10,17 +10,41 @@
 /// Generates a dark material divider schema.
 /// @type {Map}
 /// @requires $material-divider
-$dark-material-divider: $material-divider;
+$dark-material-divider: extend(
+    $material-divider,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent divider schema.
 /// @type {Map}
 /// @requires $fluent-divider
-$dark-fluent-divider: $fluent-divider;
+$dark-fluent-divider: extend(
+    $fluent-divider,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap divider schema.
 /// @type {Map}
 /// @requires $bootstrap-divider
-$dark-bootstrap-divider: $bootstrap-divider;
+$dark-bootstrap-divider: extend(
+    $bootstrap-divider,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo divider schema.
 /// @type {Map}
@@ -34,6 +58,10 @@ $dark-indigo-divider: extend(
                 'gray',
                 100,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

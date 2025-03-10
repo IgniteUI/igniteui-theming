@@ -84,19 +84,51 @@ $light-grid-filtering: (
 /// Generates a material grid-filtering schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-filtering
-$material-grid-filtering: $light-grid-filtering;
+$material-grid-filtering: extend(
+    $light-grid-filtering,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent grid-filtering schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-filtering
-$fluent-grid-filtering: $light-grid-filtering;
+$fluent-grid-filtering: extend(
+    $light-grid-filtering,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap grid-filtering schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-filtering
-$bootstrap-grid-filtering: $light-grid-filtering;
+$bootstrap-grid-filtering: extend(
+    $light-grid-filtering,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo grid-filtering schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-filtering
-$indigo-grid-filtering: $light-grid-filtering;
+$indigo-grid-filtering: extend(
+    $light-grid-filtering,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);
