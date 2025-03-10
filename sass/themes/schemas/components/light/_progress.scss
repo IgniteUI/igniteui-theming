@@ -97,7 +97,15 @@ $light-progress-linear: extend(
 /// Generates a material progress-linear schema.
 /// @type {Map}
 /// @requires $light-progress-linear
-$material-progress-linear: $light-progress-linear;
+$material-progress-linear: extend(
+    $light-progress-linear,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent progress-linear schema.
 /// @type {Map}
@@ -107,6 +115,10 @@ $fluent-progress-linear: extend(
     $light-progress-linear,
     (
         track-height: rem(2px),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -138,6 +150,10 @@ $bootstrap-progress-linear: extend(
 
         track-height: rem(16px),
         strip-size: rem(5px),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -212,6 +228,10 @@ $indigo-progress-linear: extend(
                 0.3,
             ),
         ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
     )
 );
 
@@ -281,12 +301,28 @@ $light-progress-circular: extend(
 /// Generates a material progress-circular schema.
 /// @type {Map}
 /// @requires {Map} $light-progress-circular
-$material-progress-circular: $light-progress-circular;
+$material-progress-circular: extend(
+    $light-progress-circular,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent progress-circular schema.
 /// @type {Map}
 /// @requires {Map} $light-progress-circular
-$fluent-progress-circular: $light-progress-circular;
+$fluent-progress-circular: extend(
+    $light-progress-circular,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap progress-circular schema.
 /// @type {Map}
@@ -296,6 +332,10 @@ $bootstrap-progress-circular: extend(
     $light-progress-circular,
     (
         diameter: rem(54px),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
     )
 );
 
@@ -361,4 +401,8 @@ $indigo-progress-circular: (
     ),
 
     diameter: rem(48px),
+    _meta: (
+        theme: 'indigo',
+        variant: 'light',
+    ),
 );

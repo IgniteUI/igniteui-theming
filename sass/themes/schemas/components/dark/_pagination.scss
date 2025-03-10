@@ -22,18 +22,44 @@ $base-dark-pagination: (
 /// @type {Map}
 /// @requires $material-pagination
 /// @requires $base-dark-pagination
-$dark-material-pagination: extend($material-pagination, $base-dark-pagination);
+$dark-material-pagination: extend(
+    $material-pagination,
+    $base-dark-pagination,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent pagination schema.
 /// @type {Map}
 /// @requires $fluent-pagination
 /// @requires $base-dark-pagination
-$dark-fluent-pagination: extend($fluent-pagination, $base-dark-pagination);
+$dark-fluent-pagination: extend(
+    $fluent-pagination,
+    $base-dark-pagination,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap pagination schema.
 /// @type {Map}
 /// @requires $bootstrap-pagination
-$dark-bootstrap-pagination: $bootstrap-pagination;
+$dark-bootstrap-pagination: extend(
+    $bootstrap-pagination,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo pagination schema.
 /// @type {Map}
@@ -47,6 +73,10 @@ $dark-indigo-pagination: extend(
                 'gray',
                 200,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

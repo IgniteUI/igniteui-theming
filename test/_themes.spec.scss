@@ -9,7 +9,6 @@
 @use '../index' as *;
 
 $schema: (
-    type: 'light',
     background: (
         color: (primary, 400)
     ),
@@ -24,9 +23,9 @@ $schema: (
     border-radius: rem(2px),
     brushes: series,
     resting-elevation: 2,
-    theme: material,
     _meta: (
-        version: 1,
+        theme: 'material',
+        variant: 'light'
     ),
 );
 
@@ -101,7 +100,6 @@ $schema: (
 
         @include it('should output theme maps from schema definitions') {
             $theme: (
-                type: 'light',
                 background:  var(--ig-primary-400),
                 hover-background: hsl(from var(--ig-secondary-700) h s l / .26),
                 foreground: var(--ig-primary-400-contrast),
@@ -110,9 +108,9 @@ $schema: (
                 border-radius: .125rem,
                 brushes: var(--chart-brushes),
                 resting-elevation: var(--ig-elevation-2),
-                theme: material,
                 _meta: (
-                    version: 1
+                    theme: 'material',
+                    variant: 'light'
                 )
             );
 
@@ -121,7 +119,6 @@ $schema: (
 
         @include it('should resolve the border-radius function from schema definitions') {
             $schema: (
-                variant: 'material',
                 border-radius: (
                   border-radius: (
                     12px,
@@ -129,7 +126,6 @@ $schema: (
                     20px
                   )
                 ),
-                type: 'light',
             );
 
             @include assert-equal(
@@ -203,8 +199,6 @@ $schema: (
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
                         --#{$key}: var(--#{$name}-#{$key}, #{$value});
                     }
-
-                    --ig-theme: test;
                 }
             }
         }

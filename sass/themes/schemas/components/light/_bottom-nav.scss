@@ -78,19 +78,44 @@ $light-bottom-nav: extend(
 /// Generates a material bottom navigation schema.
 /// @type {Map}
 /// @requires {Map} $light-bottom-nav
-$material-bottom-nav: $light-bottom-nav;
+$material-bottom-nav: extend(
+    $light-bottom-nav,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent bottom navigation schema.
 /// @type {Map}
 /// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the bottom nav.
 /// @requires {Map} $light-bottom-nav
 /// @requires {Map} $fluent-elevation-bottom-nav
-$fluent-bottom-nav: extend($light-bottom-nav, $fluent-elevation-bottom-nav);
+$fluent-bottom-nav: extend(
+    $light-bottom-nav,
+    $fluent-elevation-bottom-nav,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap bottom navigation schema.
 /// @type {Map}
 /// @requires {Map} $light-bottom-nav
-$bootstrap-bottom-nav: $light-bottom-nav;
+$bootstrap-bottom-nav: extend(
+    $light-bottom-nav,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo bottom navigation schema.
 /// @type {Map}
@@ -141,6 +166,10 @@ $indigo-bottom-nav: extend(
                 900,
                 0.2,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

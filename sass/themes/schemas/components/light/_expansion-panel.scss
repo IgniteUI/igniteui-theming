@@ -110,7 +110,15 @@ $light-expansion-panel: (
 /// Generates a material expansion panel schema.
 /// @type {Map}
 /// @requires {Map} $light-expansion-panel
-$material-expansion-panel: $light-expansion-panel;
+$material-expansion-panel: extend(
+    $light-expansion-panel,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent expansion panel schema.
 /// @type {Map}
@@ -158,6 +166,11 @@ $fluent-expansion-panel: extend(
                 value: 'caption',
             ),
         ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -181,6 +194,11 @@ $bootstrap-expansion-panel: extend(
                 'gray',
                 600,
             ),
+        ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -261,6 +279,11 @@ $indigo-expansion-panel: extend(
             body: (
                 value: 'body-2',
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

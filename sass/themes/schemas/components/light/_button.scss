@@ -283,6 +283,11 @@ $material-flat-button: extend(
             ),
         ),
         disabled-background: transparent,
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -329,6 +334,11 @@ $material-outlined-button: extend(
             ),
         ),
         disabled-background: transparent,
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'outlined',
+        ),
     )
 );
 
@@ -430,6 +440,11 @@ $material-contained-button: extend(
                 100,
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -456,6 +471,11 @@ $material-fab-button: extend(
                 rem(12px),
                 rem(28px),
             ),
+        ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+            type: 'fab',
         ),
     )
 );
@@ -610,6 +630,11 @@ $fluent-flat-button: extend(
     $fluent-base-button,
     (
         disabled-background: transparent,
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -661,6 +686,11 @@ $fluent-outlined-button: extend(
                 rem(0),
                 rem(20px),
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'outlined',
         ),
     )
 );
@@ -789,6 +819,11 @@ $fluent-contained-button: extend(
                 rem(20px),
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -818,6 +853,11 @@ $fluent-fab-button: extend(
                 rem(40px),
                 rem(48px),
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+            type: 'fab',
         ),
     )
 );
@@ -959,6 +999,11 @@ $bootstrap-flat-button: extend(
             ),
         ),
         disabled-background: transparent,
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'flat',
+        ),
     )
 );
 
@@ -1104,6 +1149,11 @@ $bootstrap-outlined-button: extend(
             ),
         ),
         disabled-background: transparent,
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'outlined',
+        ),
     )
 );
 
@@ -1212,6 +1262,11 @@ $bootstrap-contained-button: extend(
                 800,
             ),
         ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -1232,6 +1287,11 @@ $bootstrap-fab-button: extend(
                 rem(12px),
                 rem(28px),
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+            type: 'fab',
         ),
     )
 );
@@ -1396,7 +1456,17 @@ $indigo-base-button: extend(
 /// @type {Map}
 /// @requires {Map} $light-flat-button
 /// @requires {Map} $indigo-base-button
-$indigo-flat-button: extend($light-flat-button, $indigo-base-button);
+$indigo-flat-button: extend(
+    $light-flat-button,
+    $indigo-base-button,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'flat',
+        ),
+    )
+);
 
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 500)] - The border color of an outlined button.
@@ -1447,6 +1517,11 @@ $indigo-outlined-button: extend(
                 900,
                 0.15,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'outlined',
         ),
     )
 );
@@ -1589,6 +1664,11 @@ $indigo-contained-button: extend(
                 0.3,
             ),
         ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'contained',
+        ),
     )
 );
 
@@ -1617,6 +1697,11 @@ $indigo-fab-button: extend(
                 rem(32px),
                 rem(36px),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+            type: 'fab',
         ),
     )
 );

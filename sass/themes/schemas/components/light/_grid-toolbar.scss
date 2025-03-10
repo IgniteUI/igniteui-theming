@@ -94,7 +94,15 @@ $light-grid-toolbar: (
 /// Generates a material grid-toolbar schema.
 /// @type {Map}
 /// @requires {Map} $light-grid-toolbar
-$material-grid-toolbar: $light-grid-toolbar;
+$material-grid-toolbar: extend(
+    $light-grid-toolbar,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent grid-toolbar schema.
 /// @type {Map}
@@ -105,6 +113,10 @@ $fluent-grid-toolbar: extend(
     (
         background-color: (
             color: 'surface',
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
         ),
     )
 );
@@ -121,6 +133,10 @@ $bootstrap-grid-toolbar: extend(
                 'gray',
                 100,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -153,6 +169,10 @@ $indigo-grid-toolbar: extend(
                 'gray',
                 400,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

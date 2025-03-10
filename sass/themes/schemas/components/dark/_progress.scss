@@ -32,13 +32,31 @@ $dark-base-progress-linear: (
 /// @type {Map}
 /// @requires $material-progress-linear
 /// @requires $dark-base-progress-linear
-$dark-material-progress-linear: extend($material-progress-linear, $dark-base-progress-linear);
+$dark-material-progress-linear: extend(
+    $material-progress-linear,
+    $dark-base-progress-linear,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent progress-linear schema.
 /// @type {Map}
 /// @requires $fluent-progress-linear
 /// @requires $dark-base-progress-linear
-$dark-fluent-progress-linear: extend($fluent-progress-linear, $dark-base-progress-linear);
+$dark-fluent-progress-linear: extend(
+    $fluent-progress-linear,
+    $dark-base-progress-linear,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap progress-linear schema.
 /// @type {Map}
@@ -53,6 +71,10 @@ $dark-bootstrap-progress-linear: extend(
                 900,
                 0.2,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -80,6 +102,10 @@ $dark-indigo-progress-linear: extend(
                 0.2,
             ),
         ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -99,19 +125,46 @@ $dark-base-progress-circular: (
 /// @type {Map}
 /// @requires $material-progress-circular
 /// @requires $dark-base-progress-circular
-$dark-material-progress-circular: extend($material-progress-circular, $dark-base-progress-circular);
+$dark-material-progress-circular: extend(
+    $material-progress-circular,
+    $dark-base-progress-circular,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent progress-circular schema.
 /// @type {Map}
 /// @requires $fluent-progress-circular
 /// @requires $dark-base-progress-circular
-$dark-fluent-progress-circular: extend($fluent-progress-circular, $dark-base-progress-circular);
+$dark-fluent-progress-circular: extend(
+    $fluent-progress-circular,
+    $dark-base-progress-circular,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap progress-circular schema.
 /// @type {Map}
 /// @requires $bootstrap-progress-circular
 /// @requires $dark-base-progress-circular
-$dark-bootstrap-progress-circular: extend($bootstrap-progress-circular, $dark-base-progress-circular);
+$dark-bootstrap-progress-circular: extend(
+    $bootstrap-progress-circular,
+    $dark-base-progress-circular,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo progress-circular schema.
 /// @type {Map}
@@ -135,6 +188,10 @@ $dark-indigo-progress-circular: extend(
                 50,
                 0.8,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

@@ -66,6 +66,10 @@ $material-navbar: extend(
                 value: 'h6',
             ),
         ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
     )
 );
 
@@ -106,6 +110,10 @@ $fluent-navbar: extend(
                 value: 'subtitle-2',
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
     )
 );
 
@@ -140,6 +148,10 @@ $bootstrap-navbar: extend(
         ),
         hover-icon-color: (
             contrast-color: 'surface',
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
         ),
     )
 );
@@ -185,6 +197,10 @@ $indigo-navbar: extend(
                 'primary',
                 500,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
         ),
     )
 );

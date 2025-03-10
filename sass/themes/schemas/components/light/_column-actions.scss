@@ -36,19 +36,51 @@ $light-column-actions: (
 /// Generates a material column actions schema.
 /// @type {Map}
 /// @requires {map} $light-column-actions
-$material-column-actions: $light-column-actions;
+$material-column-actions: extend(
+    $light-column-actions,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent column actions schema.
 /// @type {Map}
 /// @requires {map} $light-column-actions
-$fluent-column-actions: $light-column-actions;
+$fluent-column-actions: extend(
+    $light-column-actions,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap column actions schema.
 /// @type {Map}
 /// @requires {map} $light-column-actions
-$bootstrap-column-actions: $light-column-actions;
+$bootstrap-column-actions: extend(
+    $light-column-actions,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo column actions schema.
 /// @type {Map}
 /// @requires {map} $light-column-actions
-$indigo-column-actions: $light-column-actions;
+$indigo-column-actions: extend(
+    $light-column-actions,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

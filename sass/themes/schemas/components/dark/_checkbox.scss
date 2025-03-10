@@ -11,7 +11,15 @@
 /// Generates a dark material checkbox schema.
 /// @type {Map}
 /// @requires $material-checkbox
-$dark-material-checkbox: $material-checkbox;
+$dark-material-checkbox: extend(
+    $material-checkbox,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent checkbox schema.
 /// @type {Map}
@@ -75,6 +83,10 @@ $dark-fluent-checkbox: extend(
                 50,
             ),
         ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -127,6 +139,10 @@ $dark-bootstrap-checkbox: extend(
                 'error',
                 400,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -205,6 +221,10 @@ $dark-indigo-checkbox: extend(
                 50,
                 0.2,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );

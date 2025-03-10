@@ -10,12 +10,28 @@
 /// Generates a dark material grid-summary schema.
 /// @type {Map}
 /// @requires $material-grid-summary
-$dark-material-grid-summary: $material-grid-summary;
+$dark-material-grid-summary: extend(
+    $material-grid-summary,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent grid-summary schema.
 /// @type {Map}
 /// @requires $fluent-grid-summary
-$dark-fluent-grid-summary: $fluent-grid-summary;
+$dark-fluent-grid-summary: extend(
+    $fluent-grid-summary,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap grid-summary schema.
 /// @type {Map}
@@ -28,6 +44,10 @@ $dark-bootstrap-grid-summary: extend(
                 'gray',
                 100,
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -81,6 +101,10 @@ $dark-indigo-grid-summary: extend(
                 'gray',
                 200,
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );
