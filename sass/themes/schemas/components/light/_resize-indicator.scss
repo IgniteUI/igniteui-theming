@@ -20,19 +20,51 @@ $light-resize-indicator: (
 /// Generates a material resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $light-resize-indicator
-$material-resize-indicator: $light-resize-indicator;
+$material-resize-indicator: extend(
+    $light-resize-indicator,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a fluent resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $light-resize-indicator
-$fluent-resize-indicator: $light-resize-indicator;
+$fluent-resize-indicator: extend(
+    $light-resize-indicator,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates a bootstrap resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $light-resize-indicator
-$bootstrap-resize-indicator: $light-resize-indicator;
+$bootstrap-resize-indicator: extend(
+    $light-resize-indicator,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
 
 /// Generates an indigo resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $light-resize-indicator
-$indigo-resize-indicator: $light-resize-indicator;
+$indigo-resize-indicator: extend(
+    $light-resize-indicator,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

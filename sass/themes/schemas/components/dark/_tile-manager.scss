@@ -41,17 +41,35 @@ $dark-base-tile-manager: (
 /// @type {Map}
 /// @requires {Map} $material-tile-manager
 /// @requires {Map} $dark-base-tile-manager
-$dark-material-tile-manager: extend($material-tile-manager, $dark-base-tile-manager);
+$dark-material-tile-manager: extend(
+    $material-tile-manager,
+    $dark-base-tile-manager,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark fluent tile manager schema.
 /// @type {Map}
 /// @requires {Map} $fluent-tile-manager
 /// @requires {Map} $dark-base-tile-manager
-$dark-fluent-tile-manager: extend($fluent-tile-manager, $dark-base-tile-manager);
+$dark-fluent-tile-manager: extend(
+    $fluent-tile-manager,
+    $dark-base-tile-manager,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark bootstrap tile manager schema.
 /// @type {Map}
-/// @prop {Map} tile-manager-background [color: ('gray', 100)] - The background color of the tile manager component.
+/// @prop {Map} background [color: ('gray', 100)] - The background color of the tile manager component.
 /// @prop {Map} border-color [color: ('gray', 200)] - The border color of the tile component on hover.
 /// @prop {Map} hover-border-color [color: ('gray', 300)] - The border color of the tile component on hover.
 /// @prop {Map} placeholder-background [color: ('primary', 700, .15)] - The background color of the ghost element that appears during drag and drop and while resizing.
@@ -60,7 +78,7 @@ $dark-fluent-tile-manager: extend($fluent-tile-manager, $dark-base-tile-manager)
 $dark-bootstrap-tile-manager: extend(
     $bootstrap-tile-manager,
     (
-        tile-manager-background: (
+        background: (
             color: (
                 'gray',
                 100,
@@ -95,6 +113,11 @@ $dark-bootstrap-tile-manager: extend(
                 700,
                 0.4,
             ),
+        ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
         ),
     )
 );
@@ -178,6 +201,11 @@ $dark-indigo-tile-manager: extend(
                 'primary',
                 300,
             ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
         ),
     )
 );
