@@ -43,6 +43,7 @@
 @use './query-builder' as *;
 @use './radio' as *;
 @use './rating' as *;
+@use './resize-indicator' as *;
 @use './ripple' as *;
 @use './scrollbar' as *;
 @use './select' as *;
@@ -52,6 +53,7 @@
 @use './stepper' as *;
 @use './switch' as *;
 @use './tabs' as *;
+@use './tile-manager' as *;
 @use './time-picker' as *;
 @use './toast' as *;
 @use './tooltip' as *;
@@ -103,6 +105,7 @@ $light-material-schema: (
     query-builder: $material-query-builder,
     radio: $material-radio,
     rating: $material-rating,
+    resize-indicator: $material-resize-indicator,
     ripple: $material-ripple,
     scrollbar: $material-scrollbar,
     select: $material-select,
@@ -112,6 +115,7 @@ $light-material-schema: (
     stepper: $material-stepper,
     switch: $material-switch,
     tabs: $material-tabs,
+    tile-manager: $material-tile-manager,
     time-picker: $material-time-picker,
     toast: $material-toast,
     tooltip: $material-tooltip,
@@ -168,6 +172,7 @@ $light-fluent-schema: (
     query-builder: $fluent-query-builder,
     radio: $fluent-radio,
     rating: $fluent-rating,
+    resize-indicator: $fluent-resize-indicator,
     ripple: $fluent-ripple,
     scrollbar: $fluent-scrollbar,
     select: $fluent-select,
@@ -177,6 +182,7 @@ $light-fluent-schema: (
     stepper: $fluent-stepper,
     switch: $fluent-switch,
     tabs: $fluent-tabs,
+    tile-manager: $fluent-tile-manager,
     time-picker: $fluent-time-picker,
     toast: $fluent-toast,
     tooltip: $fluent-tooltip,
@@ -233,6 +239,7 @@ $light-bootstrap-schema: (
     query-builder: $bootstrap-query-builder,
     radio: $bootstrap-radio,
     rating: $bootstrap-rating,
+    resize-indicator: $bootstrap-resize-indicator,
     ripple: $bootstrap-ripple,
     scrollbar: $bootstrap-scrollbar,
     select: $bootstrap-select,
@@ -242,6 +249,7 @@ $light-bootstrap-schema: (
     stepper: $bootstrap-stepper,
     switch: $bootstrap-switch,
     tabs: $bootstrap-tabs,
+    tile-manager: $bootstrap-tile-manager,
     time-picker: $bootstrap-time-picker,
     toast: $bootstrap-toast,
     tooltip: $bootstrap-tooltip,
@@ -298,6 +306,7 @@ $light-indigo-schema: (
     query-builder: $indigo-query-builder,
     radio: $indigo-radio,
     rating: $indigo-rating,
+    resize-indicator: $indigo-resize-indicator,
     ripple: $indigo-ripple,
     scrollbar: $indigo-scrollbar,
     select: $indigo-select,
@@ -307,6 +316,7 @@ $light-indigo-schema: (
     stepper: $indigo-stepper,
     switch: $indigo-switch,
     tabs: $indigo-tabs,
+    tile-manager: $indigo-tile-manager,
     time-picker: $indigo-time-picker,
     toast: $indigo-toast,
     tooltip: $indigo-tooltip,
