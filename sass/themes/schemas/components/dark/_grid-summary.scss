@@ -9,10 +9,26 @@
 
 /// Generates a dark material grid-summary schema.
 /// @type {Map}
-/// @requires $material-grid-summary
+/// @prop {Map} background-color [color: ('gray', 50)] - The summaries background color.
+/// @prop {Map} result-color [contrast-color: ('gray', 50)] - The summaries value/result color.
+/// @requires {Map} $material-grid-summary
 $dark-material-grid-summary: extend(
     $material-grid-summary,
     (
+        background-color: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        result-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -22,7 +38,7 @@ $dark-material-grid-summary: extend(
 
 /// Generates a dark fluent grid-summary schema.
 /// @type {Map}
-/// @requires $fluent-grid-summary
+/// @requires {Map} $fluent-grid-summary
 $dark-fluent-grid-summary: extend(
     $fluent-grid-summary,
     (
@@ -35,7 +51,9 @@ $dark-fluent-grid-summary: extend(
 
 /// Generates a dark bootstrap grid-summary schema.
 /// @type {Map}
-/// @requires $bootstrap-grid-summary
+/// @prop {Map} background-color [color: ('gray', 100)] - The summaries background color.
+/// @prop {Map} result-color [contrast-color: ('gray', 100)] - The summaries value/result color.
+/// @requires {Map} $bootstrap-grid-summary
 $dark-bootstrap-grid-summary: extend(
     $bootstrap-grid-summary,
     (
@@ -45,6 +63,14 @@ $dark-bootstrap-grid-summary: extend(
                 100,
             ),
         ),
+
+        result-color: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',
@@ -54,16 +80,23 @@ $dark-bootstrap-grid-summary: extend(
 
 /// Generates a dark indigo grid-summary schema.
 /// @type {Map}
+/// @prop {Map} background-color [color: ('surface')] - The summaries background color.
 /// @prop {Map} focus-background-color [color: ('gray', 100)] - The background color when a summary item is on focus.
 /// @prop {Map} label-color [color: ('primary', 200)] - The summaries label color.
 /// @prop {Map} label-hover-color [color: ('primary', 200)] - The summaries hover label color.
 /// @prop {Map} result-color [contrast-color: 'surface'] - The summaries value/result color.
 /// @prop {Map} border-color [color: ('gray', 200)] - The summaries border color.
 /// @prop {Map} pinned-border-color [color: ('gray', 200)] - The border color of the summary panel.
-/// @requires $indigo-grid-summary
+/// @requires {Map} $indigo-grid-summary
 $dark-indigo-grid-summary: extend(
     $indigo-grid-summary,
     (
+        background-color: (
+            color: (
+                'surface',
+            ),
+        ),
+
         focus-background-color: (
             color: (
                 'gray',

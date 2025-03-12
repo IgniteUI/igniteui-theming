@@ -753,6 +753,7 @@ $material-grid: extend(
 /// @prop {Map} cell-selected-within-background [color: ('gray', 300)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 300)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 300)] - The selected row hover text color.
+/// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires {Map} $light-grid
 /// @requires {Map} $fluent-elevation-grid
 $fluent-grid: extend(
@@ -1123,6 +1124,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 900)] - The text color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 900, .2)] - The text color of the excel style filtering options in disabled state.
 /// @prop {Map} row-drag-color [color: ('gray', 800, .75))] - The color of the drag handle.
+/// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires {Map} $light-grid
 $indigo-grid: extend(
     $light-grid,
