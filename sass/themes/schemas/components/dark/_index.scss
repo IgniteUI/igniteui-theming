@@ -43,6 +43,7 @@
 @use './query-builder' as *;
 @use './radio' as *;
 @use './rating' as *;
+@use './resize-indicator' as *;
 @use './ripple' as *;
 @use './scrollbar' as *;
 @use './select' as *;
@@ -52,6 +53,7 @@
 @use './stepper' as *;
 @use './switch' as *;
 @use './tabs' as *;
+@use './tile-manager' as *;
 @use './time-picker' as *;
 @use './toast' as *;
 @use './tooltip' as *;
@@ -103,6 +105,7 @@ $dark-material-schema: (
     query-builder: $dark-material-query-builder,
     radio: $dark-material-radio,
     rating: $dark-material-rating,
+    resize-indicator: $dark-material-resize-indicator,
     ripple: $dark-material-ripple,
     scrollbar: $dark-material-scrollbar,
     select: $dark-material-select,
@@ -112,6 +115,7 @@ $dark-material-schema: (
     stepper: $dark-material-stepper,
     switch: $dark-material-switch,
     tabs: $dark-material-tabs,
+    tile-manager: $dark-material-tile-manager,
     time-picker: $dark-material-time-picker,
     toast: $dark-material-toast,
     tooltip: $dark-material-tooltip,
@@ -168,6 +172,7 @@ $dark-fluent-schema: (
     query-builder: $dark-fluent-query-builder,
     radio: $dark-fluent-radio,
     rating: $dark-fluent-rating,
+    resize-indicator: $dark-fluent-resize-indicator,
     ripple: $dark-fluent-ripple,
     scrollbar: $dark-fluent-scrollbar,
     select: $dark-fluent-select,
@@ -177,6 +182,7 @@ $dark-fluent-schema: (
     stepper: $dark-fluent-stepper,
     switch: $dark-fluent-switch,
     tabs: $dark-fluent-tabs,
+    tile-manager: $dark-fluent-tile-manager,
     time-picker: $dark-fluent-time-picker,
     toast: $dark-fluent-toast,
     tooltip: $dark-fluent-tooltip,
@@ -233,6 +239,7 @@ $dark-bootstrap-schema: (
     query-builder: $dark-bootstrap-query-builder,
     radio: $dark-bootstrap-radio,
     rating: $dark-bootstrap-rating,
+    resize-indicator: $dark-bootstrap-resize-indicator,
     ripple: $dark-bootstrap-ripple,
     scrollbar: $dark-bootstrap-scrollbar,
     select: $dark-bootstrap-select,
@@ -242,6 +249,7 @@ $dark-bootstrap-schema: (
     stepper: $dark-bootstrap-stepper,
     switch: $dark-bootstrap-switch,
     tabs: $dark-bootstrap-tabs,
+    tile-manager: $dark-bootstrap-tile-manager,
     time-picker: $dark-bootstrap-time-picker,
     toast: $dark-bootstrap-toast,
     tooltip: $dark-bootstrap-tooltip,
@@ -298,6 +306,7 @@ $dark-indigo-schema: (
     query-builder: $dark-indigo-query-builder,
     radio: $dark-indigo-radio,
     rating: $dark-indigo-rating,
+    resize-indicator: $dark-indigo-resize-indicator,
     ripple: $dark-indigo-ripple,
     scrollbar: $dark-indigo-scrollbar,
     select: $dark-indigo-select,
@@ -307,6 +316,7 @@ $dark-indigo-schema: (
     stepper: $dark-indigo-stepper,
     switch: $dark-indigo-switch,
     tabs: $dark-indigo-tabs,
+    tile-manager: $dark-indigo-tile-manager,
     time-picker: $dark-indigo-time-picker,
     toast: $dark-indigo-toast,
     tooltip: $dark-indigo-tooltip,
