@@ -1,0 +1,13 @@
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// @type Map
+/// @prop {Number} resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state.
+/// @prop {Number} drag-elevation [5] - The elevation level, between 0-24, to be used for the drag state.
+$default-elevation-tile: (
+    resting-elevation: 0,
+    drag-elevation: 5,
+);
