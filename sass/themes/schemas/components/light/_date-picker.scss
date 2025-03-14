@@ -1,0 +1,89 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use 'calendar/base' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a material date-picker schema.
+/// @type {Map}
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $material-base
+$material-date-picker: extend(
+    $material-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a fluent date-picker schema.
+/// @type {Map}
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $fluent-base
+$fluent-date-picker: extend(
+    $fluent-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a bootstrap date-picker schema.
+/// @type {Map}
+/// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $bootstrap-base
+$bootstrap-date-picker: extend(
+    $bootstrap-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates an indigo date-picker schema.
+/// @type {Map}
+/// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $indigo-base
+$indigo-date-picker: extend(
+    $indigo-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

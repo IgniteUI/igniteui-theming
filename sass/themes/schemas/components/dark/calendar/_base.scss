@@ -4,18 +4,10 @@
 
 /// Generates a base dark material calendar schema.
 /// @type {Map}
-/// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $material-base
 $dark-material-base: extend(
     $material-base,
     (
-        actions-divider-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -27,7 +19,6 @@ $dark-material-base: extend(
 /// @type {Map}
 /// @prop {Map} header-foreground [contrast-color: ('primary', 200)] - The header foreground color.
 /// @prop {Map} header-background [color: ('primary', 200)] - The background color of the month and year pickers.
-/// @prop {Мap} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $fluent-base
 $dark-fluent-base: extend(
     $fluent-base,
@@ -42,12 +33,6 @@ $dark-fluent-base: extend(
             color: (
                 'primary',
                 200,
-            ),
-        ),
-        actions-divider-color: (
-            color: (
-                'gray',
-                100,
             ),
         ),
 
@@ -77,7 +62,6 @@ $dark-bootstrap-base: extend(
 /// @prop {Map} content-foreground [color: ('gray', 900)] - The foreground color of the days, months and years views.
 /// @prop {Map} content-background [color: ('gray', 50)] - The background color of the days, months and years views.
 /// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
-/// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @type {Map}
 /// @requires {Map} $indigo-base
 $dark-indigo-base: extend(
@@ -108,12 +92,6 @@ $dark-indigo-base: extend(
             ),
         ),
         border-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-        actions-divider-color: (
             color: (
                 'gray',
                 100,
