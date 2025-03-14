@@ -81,10 +81,6 @@
 /// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 700)] - The text color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 700)] - The text color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 400)] - The text color of the excel style filtering options in disabled state.
-/// @prop {Map} body-summaries-background [color: ('gray', 100)] - The background color of the summary groups located the body.
-/// @prop {Map} body-summaries-text-color [contrast-color: ('gray', 100)] - The text color of the summary groups located the body.
-/// @prop {Map} root-summaries-background [color: ('gray', 300)] - The background color of the summary groups located the footer.
-/// @prop {Map} root-summaries-text-color [contrast-color: ('gray', 300)] - The text color of the summary groups located the footer.
 /// @prop {Map} row-drag-color [color: ('gray', 200))] - The color of the drag handle.
 /// @prop {Number} grid-elevation [2] - The elevation level, between 0-24, to be used for the grid.
 /// @prop {Number} drag-elevation [5] - The elevation level, between 0-24, to be used for movable elements (ex. column header).
@@ -93,6 +89,7 @@
 /// @prop {List} drop-area-size [(rem(24px), rem(24px), rem(32px))] - The size used for the grid drop area.
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
 /// @prop {Map} row-ghost-background [color: 'primary', 50] - The background color of the dragged row.
+/// @prop {Map} summaries-patch-background [color: ('gray', 300)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @prop {Map} typography [
 ///  header: (comfortable: (value: 'overline'),
 ///  compact: (value: 'subtitle-1'))
@@ -567,34 +564,6 @@ $light-grid: extend(
             ),
         ),
 
-        body-summaries-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        body-summaries-text-color: (
-            contrast-color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        root-summaries-background: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-
-        root-summaries-text-color: (
-            contrast-color: (
-                'gray',
-                300,
-            ),
-        ),
-
         row-highlight: (
             color: (
                 'secondary',
@@ -638,6 +607,13 @@ $light-grid: extend(
                 rem(41px),
                 rem(49px),
                 rem(57px),
+            ),
+        ),
+
+        summaries-patch-background: (
+            color: (
+                'gray',
+                300,
             ),
         ),
 
@@ -767,7 +743,6 @@ $material-grid: extend(
 /// @prop {Map} group-row-background [color: ('gray', 50)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} filtering-header-text-color [color: ('gray', 900)] - The text color of the filtered column header.
-/// @prop {Map} root-summaries-background [color: 'surface'] - The background color of the summary groups located the footer.
 /// @prop {Map} row-ghost-background [color: 'surface'] - The background color of the dragged row.
 /// @prop {number} grid-elevation [0] - The elevation level, between 0-24, to be used for the grid.
 /// @prop {number} drag-elevation [1] - The elevation level, between 0-24, to be used for movable elements (ex. column header).
@@ -778,6 +753,7 @@ $material-grid: extend(
 /// @prop {Map} cell-selected-within-background [color: ('gray', 300)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 300)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 300)] - The selected row hover text color.
+/// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires {Map} $light-grid
 /// @requires {Map} $fluent-elevation-grid
 $fluent-grid: extend(
@@ -925,10 +901,6 @@ $fluent-grid: extend(
             ),
         ),
 
-        root-summaries-background: (
-            color: 'surface',
-        ),
-
         row-ghost-background: (
             color: 'surface',
         ),
@@ -940,6 +912,13 @@ $fluent-grid: extend(
                 rem(16px),
             ),
         ),
+
+        summaries-patch-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'light',
@@ -1077,6 +1056,7 @@ $bootstrap-grid: extend(
                 rem(16px),
             ),
         ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'light',
@@ -1116,8 +1096,6 @@ $bootstrap-grid: extend(
 /// @prop {Map} edit-mode-color [color: ('primary', 400)] - The text color in edit mode.
 /// @prop {Map} drop-area-text-color [color: ('gray', 600)] - The drop area text color.
 /// @prop {Map} drop-area-icon-color [color: ('gray', 600)] - The drop area icon color.
-/// @prop {Map} root-summaries-background [color: ('surface')] - The background color of the summary groups located the footer.
-/// @prop {Map} root-summaries-text-color [color: ('gray', 800)] - The text color of the summary groups located the footer.
 /// @prop {Map} group-row-background [color: ('surface', 500)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-background [color: ('primary', 400)] - The grid group row cont badge background color.
@@ -1146,6 +1124,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 900)] - The text color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 900, .2)] - The text color of the excel style filtering options in disabled state.
 /// @prop {Map} row-drag-color [color: ('gray', 800, .75))] - The color of the drag handle.
+/// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires {Map} $light-grid
 $indigo-grid: extend(
     $light-grid,
@@ -1401,19 +1380,6 @@ $indigo-grid: extend(
             ),
         ),
 
-        root-summaries-background: (
-            color: (
-                'surface',
-            ),
-        ),
-
-        root-summaries-text-color: (
-            color: (
-                'gray',
-                800,
-            ),
-        ),
-
         group-row-background: (
             color: (
                 'surface',
@@ -1572,6 +1538,13 @@ $indigo-grid: extend(
                 200,
             ),
         ),
+
+        summaries-patch-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
         _meta: (
             theme: 'indigo',
             variant: 'light',
