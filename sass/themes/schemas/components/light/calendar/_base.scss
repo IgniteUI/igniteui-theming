@@ -1,0 +1,280 @@
+@use '../../../../../utils/map' as *;
+@use '../../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light base calendar schema.
+/// @type {Map}
+/// @prop {Number} default-size [2] - The default size used for the calendar component.
+/// @prop {Color} border-color [transparent] - The calendar border color.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for calendar.
+/// @prop {Map} content-foreground [color: ('gray', 900)] - The foreground color of the days, months and years views.
+/// @prop {Map} content-background [color: 'surface'] - The background color of the days, months and years views.
+$calendar-base: (
+    default-size: 2,
+    content-foreground: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    content-background: (
+        color: 'surface',
+    ),
+    border-color: transparent,
+    border-radius: (
+        border-radius: (
+            rem(4px),
+            rem(0),
+            rem(20px),
+        ),
+    ),
+);
+
+/// Generates a base material calendar schema.
+/// @type {Map}
+/// @prop {Map} header-foreground [contrast-color: ('secondary', 900)] - The header foreground color.
+/// @prop {Map} header-background [color: ('secondary', 500)] - The header background color.
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'overline'),
+///     date: (value: 'h4')
+///   )
+/// ] - The typography styles used for the component.
+/// @requires $calendar-base
+$material-base: extend(
+    $calendar-base,
+    (
+        header-foreground: (
+            contrast-color: (
+                'secondary',
+                900,
+            ),
+        ),
+        header-background: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        typography: (
+            header: (
+                year: (
+                    value: 'overline',
+                ),
+
+                date: (
+                    value: 'h4',
+                ),
+            ),
+        ),
+    )
+);
+
+/// Generates a light base fluent base calendar schema.
+/// @type {Map}
+/// @prop {Map} header-foreground [contrast-color: ('primary', 600)] - The header foreground color.
+/// @prop {Map} header-background [color: ('primary', 500)] - The background color of the month and year pickers.
+/// @prop {List} border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for calendar.
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'overline'),
+///     date: (value: 'h4')
+///   )
+/// ] - The typography styles used for the component.
+/// @requires $calendar-base
+$fluent-base: extend(
+    $calendar-base,
+    (
+        border-radius: (
+            border-radius: (
+                rem(0),
+                rem(0),
+                rem(25px),
+            ),
+        ),
+        header-foreground: (
+            contrast-color: (
+                'primary',
+                600,
+            ),
+        ),
+        header-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        typography: (
+            header: (
+                year: (
+                    value: 'overline',
+                ),
+
+                date: (
+                    value: 'h4',
+                ),
+            ),
+        ),
+    )
+);
+
+/// Generates a light base bootstrap base calendar schema.
+/// @type {Map}
+/// @prop {Map} header-foreground [contrast-color: ('gray', 100)] - The header foreground color.
+/// @prop {Map} header-background [color: ('gray', 100)] - The header background color.
+/// @prop {Map} border-color [color: ('gray', 300)] - The calendar border color.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
+/// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'body-2'),
+///     date: (value: 'h4')
+///   )
+/// ] - The typography styles used for the component.
+/// @requires $calendar-base
+$bootstrap-base: extend(
+    $calendar-base,
+    (
+        border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+        header-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        header-foreground: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        typography: (
+            header: (
+                year: (
+                    value: 'body-2',
+                ),
+
+                date: (
+                    value: 'h4',
+                ),
+            ),
+        ),
+    )
+);
+
+/// Generates a light base indigo base calendar schema.
+/// @type {Map}
+/// @prop {Map} content-foreground [color: ('gray', 800)] - The foreground color of the days, months and years views.
+/// @prop {Map} content-background [contrast-color: ('gray', 900)] - The background color of the days, months and years views.
+/// @prop {Map} header-foreground [color: ('gray', 800)] - The header foreground color.
+/// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color.
+/// @prop {Map} border-color [color: ('gray', 400)] - The calendar border color.
+/// @prop {List} border-radius [(rem(6px), rem(0), rem(6px))] - The border radius used for calendar.
+/// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
+/// @prop {Map} typography [
+///   header: (
+///     year: (value: 'body-2'),
+///     date: (value: 'h5')
+///   )
+/// ] - The typography styles used for the component.
+/// @requires $calendar-base
+$indigo-base: extend(
+    $calendar-base,
+    (
+        border-radius: (
+            border-radius: (
+                rem(6px),
+                rem(0),
+                rem(6px),
+            ),
+        ),
+        border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        content-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        content-background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        header-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        header-background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        typography: (
+            header: (
+                year: (
+                    value: 'body-2',
+                ),
+
+                date: (
+                    value: 'h5',
+                ),
+            ),
+        ),
+    )
+);
