@@ -39,6 +39,7 @@ $calendar-base: (
 /// @type {Map}
 /// @prop {Map} header-foreground [contrast-color: ('secondary', 900)] - The header foreground color.
 /// @prop {Map} header-background [color: ('secondary', 500)] - The header background color.
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
 /// @prop {Map} typography [
 ///   header: (
 ///     year: (value: 'overline'),
@@ -49,6 +50,12 @@ $calendar-base: (
 $material-base: extend(
     $calendar-base,
     (
+        actions-divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
         header-foreground: (
             contrast-color: (
                 'secondary',
@@ -81,6 +88,7 @@ $material-base: extend(
 /// @prop {Map} header-background [color: ('primary', 500)] - The background color of the month and year pickers.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for calendar.
 /// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
+/// @prop {Map} actions-divider-color [color: ('gray', 200)] - The border color used for the date-picker actions divider.
 /// @prop {Map} typography [
 ///   header: (
 ///     year: (value: 'overline'),
@@ -110,6 +118,12 @@ $fluent-base: extend(
                 500,
             ),
         ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
 
         typography: (
             header: (
@@ -132,6 +146,8 @@ $fluent-base: extend(
 /// @prop {Map} border-color [color: ('gray', 300)] - The calendar border color.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
 /// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
+/// @prop {Map} actions-divider-color [color: ('gray', 300)] - The border color used for the date-picker actions divider.
+
 /// @prop {Map} typography [
 ///   header: (
 ///     year: (value: 'body-2'),
@@ -167,6 +183,12 @@ $bootstrap-base: extend(
                 100,
             ),
         ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
 
         typography: (
             header: (
@@ -190,6 +212,7 @@ $bootstrap-base: extend(
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The header background color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The calendar border color.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(6px))] - The border radius used for calendar.
+/// @prop {Map} actions-divider-color [color: ('gray', 400)] - The border color used for the date-picker actions divider.
 /// @prop {Map} typography [
 ///   header: (
 ///     year: (value: 'body-2'),
@@ -235,6 +258,12 @@ $indigo-base: extend(
             contrast-color: (
                 'gray',
                 900,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                400,
             ),
         ),
 
