@@ -13,8 +13,10 @@
 /// @prop {Map} date-special-hover-border-color [color: ('secondary', 100)] - The outline color around a special date.
 /// @prop {Map} date-special-range-border-color [color: ('secondary', 200)] - The outline color around a special date in a range selection.
 /// @requires {Map} $material-days-view
+/// @requires {Map} $dark-material-base
 $dark-material-days-view: extend(
     $material-days-view,
+    $dark-material-base,
     (
         date-special-foreground: (
             color: (
@@ -85,8 +87,10 @@ $dark-material-days-view: extend(
 /// @prop {Map} date-selected-special-hover-border-color [color: ('primary', 50)] - The :hover border color of the selected special date.
 /// @prop {Map} date-selected-special-focus-border-color [color: ('primary', 50)] - The :focus border color of the selected special date.
 /// @requires {Map} $fluent-days-view
+/// @requires {Map} $dark-fluent-base
 $dark-fluent-days-view: extend(
     $fluent-days-view,
+    $dark-fluent-base,
     (
         date-special-border-color: (
             color: (
@@ -210,8 +214,10 @@ $dark-fluent-days-view: extend(
 /// @prop {Map} date-selected-current-range-focus-background [color: ('gray', 100)] - The :focus background color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-background [color: ('gray', 100)] - The :hover background color of the current date in the selected range.
 /// @requires {Map} $bootstrap-days-view
+/// @requires {Map} $dark-bootstrap-base
 $dark-bootstrap-days-view: extend(
     $bootstrap-days-view,
+    $dark-bootstrap-base,
     (
         date-hover-foreground: (
             color: (
@@ -361,9 +367,11 @@ $dark-bootstrap-days-view: extend(
 /// @prop {Map} date-selected-current-range-foreground [color: ('gray', 900)] - The foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-foreground [contrast-color: ('gray', 50)] - The :hover foreground color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-focus-foreground [contrast-color: ('gray', 50)] - The :focus foreground color of the current date in the selected range.
-/// @requires {Map} $indigo-days-view
+/// @requires {Map} $indigo-days-view,
+/// @requires {Map} $dark-indigo-base
 $dark-indigo-days-view: extend(
     $indigo-days-view,
+    $dark-indigo-base,
     (
         weekend-color: (
             color: (

@@ -6,8 +6,10 @@
 /// Generates a dark material year/month schema.
 /// @type {Map}
 /// @requires {Map} $material-year-month
+/// @requires {Map} $dark-material-base
 $dark-material-year-month: extend(
     $material-year-month,
+    $dark-material-base,
     (
         _meta: (
             theme: 'material',
@@ -24,8 +26,10 @@ $dark-material-year-month: extend(
 /// @prop {Map} ym-selected-current-background [color: ('primary', 800)]- The background color of the current/selected month/year.
 /// @prop {Map} ym-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the current/selected month/year.
 /// @requires {Map} $fluent-year-month
+/// @requires {Map} $dark-fluent-base
 $dark-fluent-year-month: extend(
     $fluent-year-month,
+    $dark-fluent-base,
     (
         ym-selected-current-hover-background: (
             color: (
@@ -63,8 +67,10 @@ $dark-fluent-year-month: extend(
 /// @prop {Map} ym-hover-background [color: ('gray', 100)] - The :hover background color of the month/year.
 /// @prop {Map} ym-current-hover-background [color: ('gray', 100)] - The :hover background color of the current month/year.
 /// @requires {Map} $bootstrap-year-month
+/// @requires {Map} $dark-bootstrap-base,
 $dark-bootstrap-year-month: extend(
     $bootstrap-year-month,
+    $dark-bootstrap-base,
     (
         ym-hover-background: (
             color: (
@@ -100,8 +106,10 @@ $dark-bootstrap-year-month: extend(
 /// @prop {Map} ym-current-outline-color [color: ('primary', 300)] - The outline color of the current month/year.
 /// @prop {Map} ym-hover-foreground [color: ('gray', 900)] -  The :hover foreground color of the month/year.
 /// @requires {Map} $indigo-year-month
+/// @requires {Map} $dark-indigo-base
 $dark-indigo-year-month: extend(
     $indigo-year-month,
+    $dark-indigo-base,
     (
         ym-hover-background: (
             contrast-color: (
