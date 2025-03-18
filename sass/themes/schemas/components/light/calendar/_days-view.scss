@@ -262,8 +262,10 @@ $light-days-view: extend(
 ///   content: (value: 'body-1')
 /// ] - The typography styles used for the component.
 /// @requires $light-days-view
+/// @requires $material-base
 $material-days-view: extend(
     $light-days-view,
+    $material-base,
     (
         date-hover-background: (
             color: (
@@ -611,8 +613,10 @@ $material-days-view: extend(
 ///   content: (value: 'body-1')
 /// ] - The typography styles used for the component.
 /// @requires $light-days-view
+/// @requires $fluent-base
 $fluent-days-view: extend(
     $light-days-view,
+    $fluent-base,
     (
         size: (
             sizable: (
@@ -1042,6 +1046,7 @@ $fluent-days-view: extend(
 ///   content: (value: 'body-1')
 /// ] - The typography styles used for the component.
 /// @requires $light-days-view
+/// @requires $bootstrap-base
 $bootstrap-days-view: extend(
     $light-days-view,
     $bootstrap-base,
@@ -1416,6 +1421,7 @@ $bootstrap-days-view: extend(
 ///   content: (value: 'body-1')
 /// ] - The typography styles used for the component.
 /// @requires $light-days-view
+/// @requires $indigo-base
 $indigo-days-view: extend(
     $light-days-view,
     $indigo-base,

@@ -86,8 +86,10 @@ $light-year-month: extend(
 /// @prop {Map} typography [
 ///   content: (value: 'body-1')
 /// @requires $light-year-month
+/// @requires $material-base
 $material-year-month: extend(
     $light-year-month,
+    $material-base,
     (
         ym-selected-current-hover-foreground: (
             contrast-color: (
@@ -235,8 +237,10 @@ $material-year-month: extend(
 /// @prop {Map} typography [
 ///   content: (value: 'body-1')
 /// @requires $light-year-month
+/// @requires $fluent-base
 $fluent-year-month: extend(
     $light-year-month,
+    $fluent-base,
     (
         size: (
             sizable: (
@@ -408,8 +412,10 @@ $fluent-year-month: extend(
 /// @prop {Map} typography [
 ///   content: (value: 'body-1')
 /// @requires $light-year-month
+/// @requires $bootstrap-base
 $bootstrap-year-month: extend(
     $light-year-month,
+    $bootstrap-base,
     (
         ym-border-radius: (
             border-radius: (
@@ -560,8 +566,10 @@ $bootstrap-year-month: extend(
 /// @prop {Map} typography [
 ///   content: (value: 'body-1')
 /// @requires $light-year-month
+/// @requires $indigo-base
 $indigo-year-month: extend(
     $light-year-month,
+    $indigo-base,
     (
         inner-size: (
             sizable: (
