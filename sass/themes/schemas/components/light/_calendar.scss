@@ -28,10 +28,10 @@ $light-calendar: extend($calendar-base, $light-picker, $light-days-view, $light-
 /// @requires {Map} $material-year-month
 $material-calendar: extend(
     $light-calendar,
-    $material-base,
     $material-picker,
     $material-days-view,
-    $material-year-month
+    $material-year-month,
+    $material-base
 );
 
 /// Generates a fluent calendar schema.
@@ -41,7 +41,7 @@ $material-calendar: extend(
 /// @requires {Map} $fluent-picker
 /// @requires {Map} $fluent-days-view
 /// @requires {Map} $fluent-year-month
-$fluent-calendar: extend($light-calendar, $fluent-base, $fluent-picker, $fluent-days-view, $fluent-year-month);
+$fluent-calendar: extend($light-calendar, $fluent-picker, $fluent-days-view, $fluent-year-month, $fluent-base);
 
 /// Generates a bootstrap calendar schema.
 /// @type {Map}
@@ -52,10 +52,10 @@ $fluent-calendar: extend($light-calendar, $fluent-base, $fluent-picker, $fluent-
 /// @requires {Map} $bootstrap-year-month
 $bootstrap-calendar: extend(
     $light-calendar,
-    $bootstrap-base,
     $bootstrap-picker,
     $bootstrap-days-view,
-    $bootstrap-year-month
+    $bootstrap-year-month,
+    $bootstrap-base
 );
 
 /// Generates an indigo calendar schema.
@@ -65,4 +65,4 @@ $bootstrap-calendar: extend(
 /// @requires {Map} $indigo-picker
 /// @requires {Map} $indigo-days-view
 /// @requires {Map} $indigo-year-month
-$indigo-calendar: extend($light-calendar, $indigo-base, $indigo-picker, $indigo-days-view, $indigo-year-month);
+$indigo-calendar: extend($light-calendar, $indigo-picker, $indigo-days-view, $indigo-year-month, $indigo-base);

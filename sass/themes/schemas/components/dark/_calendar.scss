@@ -20,10 +20,10 @@
 /// @requires {Map} $dark-material-year-month
 $dark-material-calendar: extend(
     $material-calendar,
-    $dark-material-base,
     $dark-material-picker,
     $dark-material-days-view,
-    $dark-material-year-month
+    $dark-material-year-month,
+    $dark-material-base
 );
 
 /// Generates a dark fluent calendar schema.
@@ -35,10 +35,10 @@ $dark-material-calendar: extend(
 /// @requires {Map} $dark-fluent-year-month
 $dark-fluent-calendar: extend(
     $fluent-calendar,
-    $dark-fluent-base,
     $dark-fluent-picker,
     $dark-fluent-days-view,
-    $dark-fluent-year-month
+    $dark-fluent-year-month,
+    $dark-fluent-base
 );
 
 /// Generates a dark bootstrap calendar schema.
@@ -50,10 +50,10 @@ $dark-fluent-calendar: extend(
 /// @requires {Map} $dark-bootstrap-year-month
 $dark-bootstrap-calendar: extend(
     $bootstrap-calendar,
-    $dark-bootstrap-base,
     $dark-bootstrap-picker,
     $dark-bootstrap-days-view,
-    $dark-bootstrap-year-month
+    $dark-bootstrap-year-month,
+    $dark-bootstrap-base
 );
 
 /// Generates a dark indigo calendar schema.
@@ -65,8 +65,8 @@ $dark-bootstrap-calendar: extend(
 /// @requires {Map} $dark-indigo-year-month
 $dark-indigo-calendar: extend(
     $indigo-calendar,
-    $dark-indigo-base,
     $dark-indigo-picker,
     $dark-indigo-days-view,
-    $dark-indigo-year-month
+    $dark-indigo-year-month,
+    $dark-indigo-base
 );

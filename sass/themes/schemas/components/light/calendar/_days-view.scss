@@ -1043,8 +1043,8 @@ $fluent-days-view: extend(
 /// ] - The typography styles used for the component.
 /// @requires $light-days-view
 $bootstrap-days-view: extend(
-    $bootstrap-base,
     $light-days-view,
+    $bootstrap-base,
     (
         date-border-radius: (
             border-radius: (
@@ -1418,6 +1418,7 @@ $bootstrap-days-view: extend(
 /// @requires $light-days-view
 $indigo-days-view: extend(
     $light-days-view,
+    $indigo-base,
     (
         inner-size: (
             sizable: (
