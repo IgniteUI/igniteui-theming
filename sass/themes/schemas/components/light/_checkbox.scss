@@ -114,6 +114,7 @@ $light-checkbox: (
 /// @prop {Map} fill-color [color: ('secondary', 500)] - The checked border and fill colors.
 /// @prop {Map} fill-color-hover [color: ('secondary', 500)] - The checked border and fill colors on hover.
 /// @prop {Color} focus-outline-color [transparent] - The focus outlined color.
+/// @prop {Map} focus-border-color [color: ('gray', 600)] - The focus border color.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and fill colors in invalid state on hover.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @requires {Map} $light-checkbox
@@ -157,6 +158,13 @@ $material-checkbox: extend(
 
         focus-outline-color: transparent,
 
+        focus-border-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         error-color-hover: (
             color: (
                 'error',
@@ -184,6 +192,7 @@ $material-checkbox: extend(
 /// @prop {Map} empty-color-hover [color: ('gray', 900)] - The unchecked border color on hover.
 /// @prop {Map} fill-color-hover [color: ('primary', 800)] - The checked border and fill colors on hover.
 /// @prop {Map} focus-outline-color [color: ('gray', 700)] - The focus outlined color.
+/// @prop {Map} focus-border-color [color: ('gray', 900)] - The focus border color.
 /// @prop {Map} error-color-hover [color: ('error', 700)] - The border and fill colors in invalid state on hover.
 /// @prop {List} border-radius-ripple [(rem(2px), rem(0), rem(24px))] - The border radius used for checkbox ripple.
 /// @requires {Map} $light-checkbox
@@ -200,6 +209,12 @@ $fluent-checkbox: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'gray',
+                900,
             ),
         ),
         empty-color: (
@@ -251,6 +266,7 @@ $fluent-checkbox: extend(
 /// @prop {Map} disabled-color [color: ('gray', 300)] - The disabled border color.
 /// @prop {Map} disabled-tick-color [contrast-color: ('primary', 900)] - The checked mark color in disabled state.
 /// @prop {Map} disabled-indeterminate-color [color: ('primary', 200)] - The disabled border and fill colors.
+/// @prop {Map} focus-border-color [color: ('primary', 200)] - The focus border color.
 /// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outlined color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 200, 0.5)] - The focus outlined color for focused invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 600)] - The focus outlined color in invalid state.
@@ -289,6 +305,12 @@ $bootstrap-checkbox: extend(
             contrast-color: (
                 'gray',
                 900,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'primary',
+                200,
             ),
         ),
         focus-outline-color: (
@@ -375,6 +397,7 @@ $bootstrap-checkbox: extend(
 /// @prop {Map} disabled-color-label [color: ('gray', 900, .2)] - The disabled label color.
 /// @prop {Map} focus-outline-color [color: ('gray', 900, .15)] - The focus outlined color.
 /// @prop {Map} focus-outline-color-focused [color: ('primary', 400, .5)] - The focus outlined color for focused state.
+/// @prop {Map} focus-border-color [color: ('gray', 500)] - The focus border color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 400, 0.5)] - The focus outlined color for focused invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 400)] - The focus outlined color in invalid state.
 /// @prop {List} border-radius [(rem(3px), rem(0), rem(10px))] - The border radius used for checkbox.
@@ -401,6 +424,12 @@ $indigo-checkbox: extend(
                 'primary',
                 400,
                 0.5,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'gray',
+                500,
             ),
         ),
         focus-outline-color-error: (

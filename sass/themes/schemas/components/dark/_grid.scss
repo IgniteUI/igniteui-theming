@@ -31,10 +31,6 @@
 /// @prop {Map} grouparea-background [color: ('gray', 50)] - The grid group area background color.
 /// @prop {Map} group-row-background [color: ('gray', 50)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
-/// @prop {Map} body-summaries-background [color: ('gray', 100)] - The background color of the summary groups located the body.
-/// @prop {Map} body-summaries-text-color [contrast-color: ('gray', 100)] - The text color of the summary groups located the body.
-/// @prop {Map} root-summaries-background [color: ('gray', 50)] - The background color of the summary groups located the footer.
-/// @prop {Map} root-summaries-text-color [contrast-color: ('gray', 200)] - The text color of the summary groups located the footer.
 $base-dark-grid: (
     content-background: (
         color: 'surface',
@@ -189,44 +185,24 @@ $base-dark-grid: (
             100,
         ),
     ),
-
-    body-summaries-background: (
-        color: (
-            'gray',
-            50,
-        ),
-    ),
-
-    body-summaries-text-color: (
-        contrast-color: (
-            'gray',
-            50,
-        ),
-    ),
-
-    root-summaries-background: (
-        color: (
-            'gray',
-            50,
-        ),
-    ),
-
-    root-summaries-text-color: (
-        contrast-color: (
-            'gray',
-            50,
-        ),
-    ),
 );
 
 /// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
 /// @type {Map}
+/// @prop {Map} summaries-patch-background [color: ('gray', 50)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires $material-grid
 /// @requires $base-dark-grid
 $dark-material-grid: extend(
     $material-grid,
     $base-dark-grid,
     (
+        summaries-patch-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -330,20 +306,13 @@ $dark-fluent-grid: extend(
 /// @prop {Map} drop-area-background [color: ('gray', 100, .5)] - The drop area background color.
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
 /// @prop {Map} grouparea-color [contrast-color: 'surface'] - The grid group area color.
-/// @prop {Map} root-summaries-background [color: ('gray', 100)] - The background color of the summary groups located the footer.
+/// @prop {Map} summaries-patch-background [color: ('gray', 100)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires $bootstrap-grid
 /// @requires $base-dark-grid
 $dark-bootstrap-grid: extend(
     $bootstrap-grid,
     $base-dark-grid,
     (
-        root-summaries-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
         group-row-background: (
             color: 'surface',
         ),
@@ -373,6 +342,14 @@ $dark-bootstrap-grid: extend(
                 0.5,
             ),
         ),
+
+        summaries-patch-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',
@@ -408,10 +385,6 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('primary', 900)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-background [color: ('primary', 900)] - The selected cell background color.
 /// @prop {Map} cell-selected-text-color [contrast-color: ('primary', 900)] - The selected cell text color.
-/// @prop {Map} root-summaries-background [color: 'surface'] - The background color of the summary groups located the footer.
-/// @prop {Map} root-summaries-text-color [contrast-color: 'surface'] - The text color of the summary groups located the footer.
-/// @prop {Map} body-summaries-background [color: 'surface'] - The background color of the summary groups located the body.
-/// @prop {Map} body-summaries-text-color [contrast-color: 'surface'] - The text color of the summary groups located the body.
 /// @prop {Map} expand-icon-color [contrast-color: ('gray', 50, .8)] - The grid row expand icon color.
 /// @prop {Map} expand-icon-hover-color [contrast-color: ('gray', 50)] - The grid row expand icon hover color.
 /// @prop {Map} active-expand-icon-color [contrast-color: ('gray', 50, .8)] - The drop area background on drop color.
@@ -631,22 +604,6 @@ $dark-indigo-grid: extend(
                 'primary',
                 900,
             ),
-        ),
-
-        root-summaries-background: (
-            color: 'surface',
-        ),
-
-        root-summaries-text-color: (
-            contrast-color: 'surface',
-        ),
-
-        body-summaries-background: (
-            color: 'surface',
-        ),
-
-        body-summaries-text-color: (
-            contrast-color: 'surface',
         ),
 
         expand-icon-color: (
