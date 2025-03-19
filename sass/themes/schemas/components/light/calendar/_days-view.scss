@@ -44,8 +44,8 @@
 /// @prop {Map} date-disabled-range-foreground [color: ('gray', 900, .38)] - The foreground color of disabled dates in range selection.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
 /// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] -The border radius used for the date in range selection.
-/// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size of the days, months, and years views..
-/// @prop {List} inner-size [(rem(24px), rem(26px), rem(30px))] - The size of the inner element of a date(often used to outline the special date)
+/// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - Small, medium, and large sizes for dates (days view), months (months view), and years (years view).
+/// @prop {List} inner-size [(rem(24px), rem(26px), rem(30px))] - Small, medium, and large sizes for the inner circle of a selected special dates.
 /// @prop {Number} default-size [2] - The default size used for the calendar component.
 /// @requires $calendar-base
 $light-days-view: extend(
@@ -605,8 +605,8 @@ $material-days-view: extend(
 /// @prop {List} date-border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for the date outline
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for the date outline in range selection.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
-/// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size of the days, months, and years views.
-/// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
+/// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - Small, medium, and large sizes for dates (days view), months (months view), and years (years view).
+/// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] -Small, medium, and large sizes for the inner circle of a selected special dates.
 /// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
 /// @prop {Map} typography [
 ///   weekday-label: (value: 'body-1'),
@@ -1412,7 +1412,7 @@ $bootstrap-days-view: extend(
 /// @prop {Map} date-special-hover-border-color [color: ('primary', 600)] - The :hover outline color around a special date.
 /// @prop {Map} date-disabled-foreground [color: ('gray', 600, .38)] - The foreground color of disabled dates.
 /// @prop {Map} date-disabled-range-foreground [color: ('gray', 600, .38)] - The foreground color of disabled dates in range selection.
-/// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - The size of the inner element of a date(often used to outline the special date)
+/// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - Small, medium, and large sizes for the inner circle of a selected special dates.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(6px))] - The border radius used for calendar.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the week numbers column.
 /// @prop {Map} date-special-range-foreground [color: ('primary', 500)] - The foreground color of a special date in rage selection.
