@@ -1,0 +1,178 @@
+@use '../../../../../utils/map' as *;
+@use '../../../../../typography/functions' as *;
+@use '../../light/calendar/picker' as *;
+
+/// Generates a dark material month/year picker schema.
+/// @type {Map}
+/// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the icon button responsible for month navigation.
+/// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the icon button responsible for month navigation.
+/// @prop {Map} picker-hover-foreground [color: ('secondary', 200)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('secondary', 200)] - The :focus foreground color of the month and year pickers.
+/// @requires {Map} $material-picker
+$dark-material-picker: extend(
+    $material-picker,
+    (
+        navigation-hover-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        picker-hover-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark fluent month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-hover-foreground [color: ('primary', 200)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('primary', 200)] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-hover-color [color: ('primary', 200)] - The :hover color of the buttons responsible for navigation.
+/// @prop {Map} navigation-focus-color [color: ('primary', 200)] - The :focus color of the buttons responsible for navigation.
+/// @requires {Map} $fluent-picker
+$dark-fluent-picker: extend(
+    $fluent-picker,
+    (
+        picker-hover-foreground: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark bootstrap month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-hover-foreground [color: ('secondary', 200)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('secondary', 200)] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-hover-color [color: ('secondary', 200)] - The :hover color of the buttons responsible for navigation.
+/// @prop {Map} navigation-focus-color [color: ('secondary', 200)] - The :focus color of the buttons responsible for navigation.
+/// @requires {Map} $bootstrap-picker
+$dark-bootstrap-picker: extend(
+    $bootstrap-picker,
+    (
+        picker-hover-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark indigo month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-background [color: ('gray', 50)] - The background color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('primary', 300)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('primary', 300)] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-hover-color [color: ('primary', 300)] - The :hover color of the icon button responsible for month navigation.
+/// @prop {Map} navigation-focus-color [color: ('primary', 300)] - The :focus color of the icon button responsible for month navigation.
+/// @requires {Map} $indigo-picker
+$dark-indigo-picker: extend(
+    $indigo-picker,
+    (
+        picker-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        picker-hover-foreground: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);
