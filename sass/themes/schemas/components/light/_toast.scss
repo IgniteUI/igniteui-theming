@@ -10,11 +10,11 @@
 
 /// Generates a base light toast schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 700, .9)] - The background color used for the toast.
-/// @prop {Map} border-color [color: ('gray', 700, .9)] - The border color used for the toast.
+/// @prop {Map} background [color: ('gray', 700)] - The background color used for the toast.
+/// @prop {Map} border-color [color: ('gray', 700)] - The border color used for the toast.
 /// @prop {Map} text-color [contrast-color: ('gray', 700)] - The text-color used for the toast.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the toast.
-/// @prop {List} border-radius [(rem(26px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Map} border-radius [border-radius: (rem(26px), rem(0), rem(26px))] - The border radius used for toast.
 /// @prop {Map} typography [text: (value: 'body-2')] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-toast
 $light-toast: extend(
@@ -24,14 +24,13 @@ $light-toast: extend(
             color: (
                 'gray',
                 700,
-                0.9,
             ),
         ),
+
         border-color: (
             color: (
                 'gray',
                 700,
-                0.9,
             ),
         ),
 
@@ -73,12 +72,36 @@ $material-toast: extend(
 
 /// Generates a fluent toast schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(2px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Map} background [color: ('gray', 100)] - The background color used for the toast.
+/// @prop {Map} border-color [color: ('gray', 100)] - The border color used for the toast.
+/// @prop {Map} text-color [contrast-color: ('gray', 100)] - The text-color used for the toast.
+/// @prop {Map} border-radius [border-radius: (rem(2px), rem(0), rem(26px))] - The border radius used for toast.
 /// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
-/// @requires $light-toast
+/// @requires {Map} $light-toast
 $fluent-toast: extend(
     $light-toast,
     (
+        background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        text-color: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+
         border-radius: (
             border-radius: (
                 rem(2px),
@@ -92,6 +115,7 @@ $fluent-toast: extend(
                 value: 'caption',
             ),
         ),
+
         _meta: (
             theme: 'fluent',
             variant: 'light',
@@ -101,11 +125,11 @@ $fluent-toast: extend(
 
 /// Generates a bootstrap toast schema.
 /// @type {Map}
-/// @prop {Map} background [color: (color: ('surface')] - The background color used for the toast.
+/// @prop {Map} background [color: ('surface')] - The background color used for the toast.
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color used for the toast.
-/// @prop {Map} text-color [color: ('gray', 600)] - The text-color used for the toast.
+/// @prop {Map} text-color [color: ('gray', 900)] - The text-color used for the toast.
 /// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the toast.
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Map} border-radius [border-radius: (rem(4px), rem(0), rem(26px))] - The border radius used for toast.
 /// @requires {Map} $light-toast
 /// @requires {Map} $bootstrap-elevation-toast
 $bootstrap-toast: extend(
@@ -117,6 +141,7 @@ $bootstrap-toast: extend(
                 'surface',
             ),
         ),
+
         border-color: (
             color: (
                 'gray',
@@ -127,7 +152,7 @@ $bootstrap-toast: extend(
         text-color: (
             color: (
                 'gray',
-                600,
+                900,
             ),
         ),
 
@@ -138,6 +163,7 @@ $bootstrap-toast: extend(
                 rem(26px),
             ),
         ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'light',
@@ -150,8 +176,9 @@ $bootstrap-toast: extend(
 /// @prop {Map} background [color: ('gray', 200)] - The background color used for the toast.
 /// @prop {Color} border-color [transparent] - The border color used for the toast.
 /// @prop {Map} text-color [color: ('gray', 700)] - The text-color used for the toast.
-/// @prop {List} border-radius [(rem(6px), rem(0), rem(26px))] - The border radius used for toast.
+/// @prop {Map} border-radius [border-radius: (rem(6px), rem(0), rem(26px))] - The border radius used for toast.
 /// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the toast.
+/// @requires {Map} $light-toast
 /// @requires {Map} $indigo-elevation-toast
 $indigo-toast: extend(
     $indigo-elevation-toast,
