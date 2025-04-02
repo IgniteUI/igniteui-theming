@@ -274,12 +274,14 @@ $fluent-slider: extend(
 /// @type {Map}
 /// @prop {Map} base-track-color [color: ('secondary', 500, .24)] - The base background color of the track.
 /// @prop {Map} base-track-hover-color [color: ('secondary', 500, .24)] - The base background color of the track on hover.
+/// @prop {Map} label-background-color [color: ('gray', 700)] - The background color of the bubble label.
 /// @prop {Map} thumb-color [color: ('primary', 500)] - The color of the thumb.
 /// @prop {Map} thumb-border-color [color: ('primary', 500)] - The thumb border color.
 /// @prop {Map} thumb-border-hover-color [color: ('primary', 500)] - The thumb border color when hovered.
 /// @prop {Map} thumb-border-focus-color [color: ('surface', 500)] - The thumb border color when focused.
 /// @prop {Map} thumb-focus-color [color: ('primary', 200)] - The focus outline color of the thumb.
 /// @prop {Map} disabled-thumb-color [color: ('gray', 400)] - The thumb color when its disabled.
+/// @prop {Map} disabled-base-track-color [color: ('gray', 200)] - The base background color of the track when is disabled.
 /// @requires {Map} $light-slider
 $bootstrap-slider: extend(
     $fluent-slider,
@@ -296,6 +298,12 @@ $bootstrap-slider: extend(
                 'secondary',
                 500,
                 0.24,
+            ),
+        ),
+        label-background-color: (
+            color: (
+                'gray',
+                700,
             ),
         ),
         thumb-color: (
@@ -332,6 +340,12 @@ $bootstrap-slider: extend(
             color: (
                 'gray',
                 400,
+            ),
+        ),
+        disabled-base-track-color: (
+            color: (
+                'gray',
+                200,
             ),
         ),
         _meta: (
