@@ -1,0 +1,230 @@
+@use '../../../../../utils/map' as *;
+@use '../../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a base light month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-background [color: 'surface'] - The background color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('secondary', 500)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('secondary', 500)] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-color [color: ('gray', 800)] - the color of the buttons responsible for navigation.
+/// @prop {Map} navigation-hover-color [color: ('secondary', 500)] - The :hover color of the buttons responsible for navigation.
+/// @prop {Map} navigation-focus-color [color: ('secondary', 500)] - The :focus color of the buttons responsible for navigation.
+$light-picker: (
+    default-size: 2,
+    picker-background: (
+        color: 'surface',
+    ),
+    picker-hover-foreground: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+    picker-focus-foreground: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+    navigation-color: (
+        color: (
+            'gray',
+            800,
+        ),
+    ),
+    navigation-hover-color: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+    navigation-focus-color: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+);
+
+/// Generates a light material month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-foreground [color: ('gray', 900)] - The foreground color of the month and year pickers.
+/// @prop {Map} typography [
+///   picker-date: (value: 'subtitle-1')
+/// ] - The typography styles used for the component.
+/// @requires $light-picker
+$material-picker: extend(
+    $light-picker,
+    (
+        picker-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        typography: (
+            picker-date: (
+                value: 'subtitle-1',
+            ),
+        ),
+    )
+);
+
+/// Generates a light fluent month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-foreground [color: ('gray', 900)] - The foreground color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('primary', 500)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('primary', 500)] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-hover-color [color: ('primary', 500)] - The :hover color of the buttons responsible for navigation.
+/// @prop {Map} navigation-focus-color [color: ('primary', 500)] - The :focus color of the buttons responsible for navigation.
+/// @prop {Map} typography [
+///   picker-date: (value: 'subtitle-2')
+/// ] - The typography styles used for the component.
+/// @requires $light-picker
+$fluent-picker: extend(
+    $light-picker,
+    (
+        picker-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        picker-hover-foreground: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        typography: (
+            picker-date: (
+                value: 'subtitle-2',
+            ),
+        ),
+    )
+);
+
+/// Generates a light bootstrap month/year picker schema.
+/// @type {Map}
+/// @prop {Map} picker-foreground [color: ('gray', 900)] - The foreground color of the month and year pickers.
+/// @prop {Map} picker-background [color: ('gray', 100)] - The background color of the month and year pickers.
+/// @prop {Map} typography [
+///   picker-date: (value: 'subtitle-1')
+/// ] - The typography styles used for the component.
+/// @requires $light-picker
+$bootstrap-picker: extend(
+    $light-picker,
+    (
+        picker-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        picker-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        typography: (
+            picker-date: (
+                value: 'subtitle-1',
+            ),
+        ),
+    )
+);
+
+/// Generates a light indigo month/year picker schema.
+/// @prop {Map} picker-foreground [color: ('gray', 700)] - The foreground color of the month and year pickers.
+/// @prop {Map} picker-background [contrast-color: ('gray', 900)] - The background color of the month and year pickers.
+/// @prop {Map} picker-hover-foreground [color: ('primary', 500)] - The :hover foreground color of the month and year pickers.
+/// @prop {Map} picker-focus-foreground [color: ('primary', 500)] - The :focus foreground color of the month and year pickers.
+/// @prop {Map} navigation-color [color: ('gray', 600)] - the color of the buttons responsible for navigation.
+/// @prop {Map} navigation-hover-color [color: ('primary', 500)] - The :hover color of the icon button responsible for month navigation.
+/// @prop {Map} navigation-focus-color [color: ('primary', 500)] - The :focus color of the icon button responsible for month navigation.
+/// @type {Map}
+/// @prop {Map} typography [
+///   picker-date: (value: 'subtitle-2')
+/// ] - The typography styles used for the component.
+/// @requires $light-picker
+$indigo-picker: extend(
+    $light-picker,
+    (
+        picker-foreground: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        picker-background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        picker-hover-foreground: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        picker-focus-foreground: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        navigation-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        navigation-hover-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        navigation-focus-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        typography: (
+            picker-date: (
+                value: 'subtitle-2',
+            ),
+        ),
+    )
+);

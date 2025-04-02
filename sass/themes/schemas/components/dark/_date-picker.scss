@@ -1,0 +1,83 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use 'calendar/base' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark material date-picker schema.
+/// @type {Map}
+/// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $dark-material-base
+$dark-material-date-picker: extend(
+    $dark-material-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a dark fluent date-picker schema.
+/// @type {Map}
+/// @prop {Мap} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $dark-fluent-base
+$dark-fluent-date-picker: extend(
+    $dark-fluent-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a dark bootstrap date-picker schema.
+/// @type {Map}
+/// @requires {Map} $dark-bootstrap-base
+$dark-bootstrap-date-picker: extend(
+    $dark-bootstrap-base,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates an dark indigo date-picker schema.
+/// @type {Map}
+/// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $dark-indigo-base
+$dark-indigo-date-picker: extend(
+    $dark-indigo-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

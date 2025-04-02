@@ -1,0 +1,719 @@
+@use '../../../../../utils/map' as *;
+@use '../../../../../typography/functions' as *;
+@use 'base' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a base light year/month views schema.
+/// @type {Map}
+/// @prop {Number} default-size [2] - The default size used for the calendar component.
+/// @prop {Map} ym-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the current month/year.
+/// @prop {Map} ym-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the current month/year.
+/// @prop {Color} ym-selected-outline-color [transparent] - The outline color of the selected month/year.
+/// @prop {Color} ym-selected-hover-outline-color [transparent] - The :hover outline color of the selected month/year.
+/// @prop {Color} ym-selected-focus-outline-color [transparent] - The :focus outline color of the selected month/year.
+/// @prop {List} ym-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the month/year.
+/// @requires $calendar-base
+$light-year-month: extend(
+    $calendar-base,
+    (
+        default-size: 2,
+        size: (
+            sizable: (
+                rem(28px),
+                rem(32px),
+                rem(36px),
+            ),
+        ),
+        inner-size: (
+            sizable: (
+                rem(24px),
+                rem(26px),
+                rem(30px),
+            ),
+        ),
+        ym-current-outline-hover-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-outline-focus-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-outline-color: transparent,
+        ym-selected-hover-outline-color: transparent,
+        ym-selected-focus-outline-color: transparent,
+        ym-border-radius: (
+            border-radius: (
+                rem(20px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+    )
+);
+
+/// Generates a light material year/month views schema.
+/// @type {Map}
+/// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('secondary', 700)] - The :hover foreground color of the current/selected year/month.
+/// @prop {Map} ym-selected-current-hover-background [color: ('secondary', 700)] - The :hover background color of the current/selected year.
+/// @prop {Map} ym-hover-foreground [color: ('gray', 900)] -  The :hover foreground color of the month/year.
+/// @prop {Map} ym-hover-background [color: ('gray', 100)] - The :hover background color of the month/year.
+/// @prop {Map} ym-current-foreground [color: ('gray', 900)] - The foreground color of the current month/year.
+/// @prop {Map} ym-current-background [color: ('surface')] - The background color of the current month/year.
+/// @prop {Map} ym-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current month/year.
+/// @prop {Map} ym-current-hover-background [color: ('gray', 100)] - The :hover background color of the current month/year.
+/// @prop {Map} ym-selected-foreground [contrast-color: ('secondary', 600)] - The foreground color of the selected month/year.
+/// @prop {Map} ym-selected-background [color: ('secondary', 500)] - The background color of the selected month/year.
+/// @prop {Map} ym-selected-hover-foreground [contrast-color: ('secondary', 700)] - The :hover foreground color of the selected month/year.
+/// @prop {Map} ym-selected-hover-background [color: ('secondary', 700)] - The :hover background color of the selected month/year.
+/// @prop {Map} ym-selected-current-foreground [contrast-color: ('secondary', 500)] - The foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-background [color: ('secondary', 500)] - The background color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('secondary', 700)] - The :hover foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-background [color: ('secondary', 700)] - The :hover background color of the current/selected month/year.
+/// @prop {Map} ym-current-outline-color [color: ('gray', 900)] - The outline color of the current month/year.
+/// @prop {Map} ym-selected-current-outline-color [color: ('gray', 900)] - The outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the selected current month/year.
+/// @prop {Map} typography [
+///   content: (value: 'body-1')
+/// ]
+/// @requires $light-year-month
+/// @requires $material-base
+$material-year-month: extend(
+    $light-year-month,
+    $material-base,
+    (
+        ym-selected-current-hover-foreground: (
+            contrast-color: (
+                'secondary',
+                700,
+            ),
+        ),
+        ym-selected-current-hover-background: (
+            color: (
+                'secondary',
+                700,
+            ),
+        ),
+        ym-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        ym-current-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-background: (
+            color: 'surface',
+        ),
+        ym-current-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        ym-selected-foreground: (
+            contrast-color: (
+                'secondary',
+                600,
+            ),
+        ),
+        ym-selected-background: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        ym-selected-hover-foreground: (
+            contrast-color: (
+                'secondary',
+                700,
+            ),
+        ),
+        ym-selected-hover-background: (
+            color: (
+                'secondary',
+                700,
+            ),
+        ),
+        ym-selected-current-foreground: (
+            contrast-color: (
+                'secondary',
+                500,
+            ),
+        ),
+        ym-selected-current-background: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        ym-selected-current-outline-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-outline-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-outline-hover-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-outline-focus-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        typography: (
+            content: (
+                value: 'body-1',
+            ),
+        ),
+
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light fluent year/month views schema.
+/// @type {Map}
+/// @prop {Map} ym-hover-background [color: ('gray', 200)] - The :hover background color of the month/year.
+/// @prop {Map} ym-selected-current-hover-foreground [color: ('gray', 900)] - The foreground color of the current/selected month/year on :hover.
+/// @prop {Map} ym-selected-current-hover-background [color: ('primary', 100, .5)] - The background color of the current/selected month/year on :hover.
+/// @prop {Map} ym-hover-foreground [color: ('gray', 900)] -  The :hover foreground color of the month/year.
+/// @prop {Map} ym-current-foreground [color: ('gray', 900)] - The foreground color of the current month/year.
+/// @prop {Map} ym-current-background [color: ('gray', 100)] - The background color of the current month/year.
+/// @prop {Map} ym-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current.
+/// @prop {Map} ym-current-hover-background [color: ('gray', 200)] - The :hover background color of the current.
+/// @prop {Map} ym-selected-foreground [color: ('gray', 900)] - The foreground color of the selected month/year.
+/// @prop {Map} ym-selected-background [color: ('primary', 50, .3)] - The background color of the selected month/year.
+/// @prop {Map} ym-selected-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the selected month/year.
+/// @prop {Map} ym-selected-hover-background [color: ('gray', 100, .5)] - The :hover background color of the selected month/year.
+/// @prop {Map} ym-selected-current-foreground [color: ('gray', 900)] - The foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-background [color: ('primary', 50, .3)] - The background color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-background [color: ('primary', 100, .5)] - The :hover background color of the current/selected month/year.
+/// @prop {Color} ym-current-outline-color [transparent] - The outline color of the current month/year.
+/// @prop {Color} ym-current-outline-hover-color [transparent] - The :hover outline color of the current month/year.
+/// @prop {Color} ym-current-outline-focus-color [transparent] - The :focus outline color of the current month/year.
+/// @prop {Map} ym-selected-current-outline-color [color: ('gray', 700)] - The outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-hover-color [color: ('gray', 700)] - The :hover outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-focus-color [color: ('gray', 700)] - The :focus outline color of the selected current month/year.
+/// @prop {List} ym-border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for the month/year.
+/// @prop {Map} typography [
+///   content: (value: 'body-1')
+/// ]
+/// @requires $light-year-month
+/// @requires $fluent-base
+$fluent-year-month: extend(
+    $light-year-month,
+    $fluent-base,
+    (
+        size: (
+            sizable: (
+                rem(28px),
+                rem(32px),
+                rem(40px),
+            ),
+        ),
+        inner-size: (
+            sizable: (
+                rem(24px),
+                rem(28px),
+                rem(32px),
+            ),
+        ),
+        ym-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        ym-selected-current-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-hover-background: (
+            color: (
+                'primary',
+                100,
+                0.5,
+            ),
+        ),
+        ym-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        ym-current-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        ym-selected-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-background: (
+            color: (
+                'primary',
+                50,
+                0.3,
+            ),
+        ),
+        ym-selected-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-hover-background: (
+            color: (
+                'primary',
+                100,
+                0.5,
+            ),
+        ),
+        ym-selected-current-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-background: (
+            color: (
+                'primary',
+                50,
+                0.3,
+            ),
+        ),
+        ym-current-outline-color: transparent,
+        ym-current-outline-hover-color: transparent,
+        ym-current-outline-focus-color: transparent,
+        ym-selected-current-outline-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        ym-selected-current-outline-hover-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        ym-selected-current-outline-focus-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        ym-border-radius: (
+            border-radius: (
+                rem(0),
+                rem(2px),
+                rem(25px),
+            ),
+        ),
+
+        typography: (
+            content: (
+                value: 'body-1',
+            ),
+        ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light bootstrap year/month views schema.
+/// @type {Map}
+/// @prop {Map} ym-current-outline-color [color: ('gray', 900)] - The outline color of the current month/year.
+/// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the current/selected month/year.
+/// @prop {Map} ym-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the month/year.
+/// @prop {Map} ym-hover-background [color: ('gray', 200)] - The :hover background color of the month/year.
+/// @prop {Map} ym-current-foreground [color: ('gray', 900)] - The foreground color of the current month/year.
+/// @prop {Color} ym-current-background [transparent] - The background color of the current month/year.
+/// @prop {Map} ym-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current month/year.
+/// @prop {Map} ym-current-hover-background [color: ('gray', 200)] - The :hover background color of the current month/year.
+/// @prop {Map} ym-selected-foreground [contrast-color: ('primary', 900)] - The foreground color of the selected month/year.
+/// @prop {Map} ym-selected-background [color: ('primary', 500)] - The background color of the selected month/year.
+/// @prop {Map} ym-selected-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected month/year.
+/// @prop {Map} ym-selected-hover-background [color: ('primary', 600)] - The :hover background color of the selected month/year.
+/// @prop {Map} ym-selected-current-foreground [contrast-color: ('primary', 900)] - The foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-background [color: ('primary', 500)] - The background color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-background [color: ('primary', 600] - The :hover background color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-outline-color [color: ('gray', 900)] - The outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the selected current month/year.
+/// @prop {List} ym-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the month/year.
+/// @prop {Map} typography [
+///   content: (value: 'body-1')
+/// ]
+/// @requires $light-year-month
+/// @requires $bootstrap-base
+$bootstrap-year-month: extend(
+    $light-year-month,
+    $bootstrap-base,
+    (
+        ym-border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+        ym-selected-current-hover-foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        ym-selected-current-hover-background: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+        ym-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        ym-current-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-background: transparent,
+        ym-current-hover-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-current-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        ym-selected-foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        ym-selected-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        ym-selected-hover-foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        ym-selected-hover-background: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+        ym-selected-current-foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        ym-selected-current-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        ym-current-outline-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-outline-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-outline-hover-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        ym-selected-current-outline-focus-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        typography: (
+            content: (
+                value: 'body-1',
+            ),
+        ),
+
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light indigo year/month views schema.
+/// @type {Map}
+/// @prop {Map} ym-hover-foreground [color: ('gray', 800)] -  The :hover foreground color of the month/year.
+/// @prop {Map} ym-hover-background [color: ('gray', 900, .05)] - The :hover background color of the month/year.
+/// @prop {Map} ym-current-foreground [color: ('gray', 800)] - The foreground color of the current month/year.
+/// @prop {Map} ym-current-background [color: ('primary', 50, .5)] - The background color of the current month/year.
+/// @prop {Map} ym-current-hover-foreground [color: ('gray', 800)] - The :hover foreground color of the current month/year.
+/// @prop {Map} ym-current-hover-background [color: ('primary', 50)] - The :hover background color of the current month/year.
+/// @prop {Map} ym-selected-foreground [contrast-color: ('primary', 500)] - The foreground color of the selected month/year.
+/// @prop {Map} ym-selected-background [color: ('primary', 500)] - The background color of the selected month in month/year.
+/// @prop {Map} ym-selected-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected month/year.
+/// @prop {Map} ym-selected-hover-background [color: ('primary', 400)] - The :hover background color of the selected month/year.
+/// @prop {Map} ym-selected-current-foreground [contrast-color: ('primary', 500)] - The foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-background [color: ('primary', 500)] - The background color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected month/year.
+/// @prop {Map} ym-selected-current-hover-background [color: ('primary', 400)] - The :hover background color of the current/selected month/year.
+/// @prop {Map} ym-current-outline-color [color: ('primary', 100)] - The outline color of the current month/year.
+/// @prop {Map} ym-current-outline-hover-color [color: ('primary', 200)] - The :hover outline color of the current month/year.
+/// @prop {Map} ym-current-outline-focus-color [color: ('primary', 200)] - The :focus outline color of the current month/year.
+/// @prop {Map} ym-selected-current-outline-color [color: ('primary', 100)] - The outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-hover-color [color: ('primary', 200)] - The :hover outline color of the selected current month/year.
+/// @prop {Map} ym-selected-current-outline-focus-color [color: ('primary', 200)] - The :focus outline color of the selected current month/year.
+/// @prop {Map} typography [
+///   content: (value: 'body-1')
+/// ]
+/// @requires $light-year-month
+/// @requires $indigo-base
+$indigo-year-month: extend(
+    $light-year-month,
+    $indigo-base,
+    (
+        inner-size: (
+            sizable: (
+                rem(24px),
+                rem(28px),
+                rem(32px),
+            ),
+        ),
+        ym-selected-current-hover-foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        ym-selected-current-hover-background: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        ym-hover-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        ym-hover-background: (
+            color: (
+                'gray',
+                900,
+                0.05,
+            ),
+        ),
+        ym-current-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        ym-current-background: (
+            color: (
+                'primary',
+                50,
+                0.5,
+            ),
+        ),
+        ym-current-hover-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        ym-current-hover-background: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+        ym-selected-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
+        ),
+        ym-selected-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        ym-selected-hover-foreground: (
+            contrast-color: (
+                'primary',
+                900,
+            ),
+        ),
+        ym-selected-hover-background: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        ym-selected-current-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
+        ),
+        ym-selected-current-background: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        ym-current-outline-color: (
+            color: (
+                'primary',
+                100,
+            ),
+        ),
+        ym-current-outline-hover-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        ym-current-outline-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        ym-selected-current-outline-color: (
+            color: (
+                'primary',
+                100,
+            ),
+        ),
+        ym-selected-current-outline-hover-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        ym-selected-current-outline-focus-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        typography: (
+            content: (
+                value: 'body-1',
+            ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);

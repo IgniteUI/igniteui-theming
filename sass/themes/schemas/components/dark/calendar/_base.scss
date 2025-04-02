@@ -1,0 +1,127 @@
+@use '../../../../../utils/map' as *;
+@use '../../../../../typography/functions' as *;
+@use '../../light/calendar/base' as *;
+
+/// Generates a base dark material calendar schema.
+/// @type {Map}
+/// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $material-base
+$dark-material-base: extend(
+    $material-base,
+    (
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a base dark fluent calendar schema.
+/// @type {Map}
+/// @prop {Map} header-foreground [contrast-color: ('primary', 200)] - The header foreground color.
+/// @prop {Map} header-background [color: ('primary', 200)] - The background color of the month and year pickers.
+/// @prop {Мap} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @requires {Map} $fluent-base
+$dark-fluent-base: extend(
+    $fluent-base,
+    (
+        header-foreground: (
+            contrast-color: (
+                'primary',
+                200,
+            ),
+        ),
+        header-background: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a base dark bootstrap calendar schema.
+/// @type {Map}
+/// @requires {Map} $bootstrap-base
+$dark-bootstrap-base: extend(
+    $bootstrap-base,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a base dark indigo calendar schema.
+/// @prop {Map} header-foreground [contrast-color: ('gray', 50)] - The header foreground color.
+/// @prop {Map} header-background [color: ('gray', 50)] - The header background color.
+/// @prop {Map} content-foreground [color: ('gray', 900)] - The foreground color of the days, months and years views.
+/// @prop {Map} content-background [color: ('gray', 50)] - The background color of the days, months and years views.
+/// @prop {Map} border-color [color: ('gray', 100)] - The calendar border color.
+/// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
+/// @type {Map}
+/// @requires {Map} $indigo-base
+$dark-indigo-base: extend(
+    $indigo-base,
+    (
+        content-foreground: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        content-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        header-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        header-foreground: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        actions-divider-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);
