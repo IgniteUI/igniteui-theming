@@ -20,7 +20,7 @@
 /// @prop {Color} date-current-background [transparent] - The background color of the current date.
 /// @prop {Map} date-current-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the current date.
 /// @prop {Map} date-current-focus-foreground [color: ('gray', 900)] - The :focus foreground color of the current date.
-/// @prop {Map} date-current-focus-background [color: ('gray', 100)] - The :focus background color of the current date.
+/// @prop {Map} date-current-focus-background [color: ('gray', 100)] - The :focus background color of a date.
 /// @prop {Map} date-selected-range-hover-foreground [color: ('gray', 900)] - The :hover foreground color of the selected range.
 /// @prop {Map} date-selected-range-focus-foreground [color: ('gray', 900)] - The :focus foreground color of the selected range.
 /// @prop {Map} date-selected-current-range-foreground [color: ('gray', 900)] - The foreground color of the current date in the selected range.
@@ -40,10 +40,10 @@
 /// @prop {Color} date-selected-focus-border-color [transparent] - The :focus border color of the selected date.
 /// @prop {Color} date-range-border-color [transparent] - The border color of range selection.
 /// @prop {Map} date-range-preview-border-color [color: ('gray', 300)] - The border color of the range selection in preview state(visible before selecting the end of the range).
-/// @prop {Map} date-disabled-foreground [color: ('gray', 500, .5)] - The foreground color of disabled dates.
-/// @prop {Map} date-disabled-range-foreground [color: ('gray', 900, .38)] - The foreground color of disabled dates in range selection.
+/// @prop {Map} date-disabled-foreground [color: ('gray', 500, 0.5)] - The foreground color of disabled dates.
+/// @prop {Map} date-disabled-range-foreground [color: ('gray', 900, 0.38)] - The foreground color of disabled dates in range selection.
 /// @prop {List} date-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date.
-/// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] -The border radius used for the date in range selection.
+/// @prop {List} date-range-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the date in range selection.
 /// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - Small, medium, and large sizes for dates (days view), months (months view), and years (years view).
 /// @prop {List} inner-size [(rem(24px), rem(26px), rem(30px))] - Small, medium, and large sizes for the inner circle of a selected special dates.
 /// @prop {Number} default-size [2] - The default size used for the calendar component.
@@ -238,15 +238,15 @@ $light-days-view: extend(
 /// @prop {Map} date-selected-current-range-hover-background [color: ('gray', 100)] - The :hover background color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-focus-background [color: ('gray', 100)] - The :focus background color of the current date in the selected range.
 /// @prop {Map} date-special-foreground [color: ('secondary', 500)] - The foreground color of a special date.
-/// @prop {Map} date-special-hover-foreground [color: ('secondary', 700)] - The foreground color of a special date.
-/// @prop {Map} date-special-focus-foreground [color: ('secondary', 700)] - The foreground color of a special date.
+/// @prop {Map} date-special-hover-foreground [color: ('secondary', 700)] - The :hover foreground color of a special date.
+/// @prop {Map} date-special-focus-foreground [color: ('secondary', 700)] - The :focus foreground color of a special date.
 /// @prop {Map} date-special-hover-background [color: ('gray', 100)] - The background color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('gray', 100)] - The background color of a special date.
-/// @prop {Map} date-special-range-foreground [color: ('secondary', 900)] - The foreground color of a special date in rage selection.
+/// @prop {Map} date-special-range-foreground [color: ('secondary', 900)] - The foreground color of a special date in range selection.
 /// @prop {Map} date-special-range-hover-background [color: ('gray', 100)] - The :hover background color of a special date in range selection.
 /// @prop {Map} date-special-range-focus-background [color: ('gray', 100)] - The :focus background color of a special date in range selection.
 /// @prop {Map} date-special-border-color [color: ('secondary', 500)] - The outline color around a special date.
-/// @prop {Map} date-special-hover-border-color [color: ('secondary', 700)] - The outline color around a special date.
+/// @prop {Map} date-special-hover-border-color [color: ('secondary', 700)] - The :hover outline color around a special date.
 /// @prop {Map} date-selected-special-border-color [contrast-color: ('secondary', 900)] - The border color of the selected special date.
 /// @prop {Map} date-selected-special-hover-border-color [contrast-color: ('secondary', 900)] - The :hover border color of the selected special date.
 /// @prop {Map} date-selected-special-focus-border-color [contrast-color: ('secondary', 900)] - The :focus border color of the selected special date.
@@ -607,7 +607,7 @@ $material-days-view: extend(
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - Small, medium, and large sizes for dates (days view), months (months view), and years (years view).
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] -Small, medium, and large sizes for the inner circle of a selected special dates.
-/// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
+/// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in range selection.
 /// @prop {Map} typography [
 ///   weekday-label: (value: 'body-1'),
 ///   content: (value: 'body-1')
@@ -1013,7 +1013,7 @@ $fluent-days-view: extend(
 /// @prop {Map} date-selected-current-background [color: ('primary', 500)] - The background color of the selected current date.
 /// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected current date.
 /// @prop {Map} date-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the selected current date.
-/// @prop {Map} date-selected-current-focus-foreground [date-selected-current-focus-foreground: ('primary', 900)] - The :focus foreground color of the selected current date.
+/// @prop {Map} date-selected-current-focus-foreground [contrast-color: ('primary', 900)] - The :focus foreground color of the selected current date.
 /// @prop {Map} date-selected-current-focus-background [color: ('primary', 600)] - The :focus background color of the selected current date.
 /// @prop {Color} date-selected-current-range-background [transparent] - The background color of the current date in the selected range.
 /// @prop {Map} date-selected-current-range-hover-background [color: ('gray', 200)] - The :hover background color of the current date in the selected range.
@@ -1034,7 +1034,7 @@ $fluent-days-view: extend(
 /// @prop {Map} date-selected-current-border-color [color: ('gray', 900)] - The border color of the selected current date.
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
-/// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in rage selection.
+/// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in range selection.
 /// @prop {Map} weekday-color [color: ('info', 300)] - The foreground color for weekday labels.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
@@ -1384,7 +1384,7 @@ $bootstrap-days-view: extend(
 /// @prop {Map} date-special-range-border-color [color: ('primary', 500)] - The outline color around a special date in range selection.
 /// @prop {Map} date-selected-special-border-color [contrast-color: ('primary', 900, .8)] - The border color of the selected special date.
 /// @prop {Map} date-selected-special-hover-border-color [contrast-color: ('primary', 900, .8)] - The :hover border color of the selected special date.
-/// @prop {Map} date-selected-special-focus-border-color [contrast-color: ('primary', 900,. 8)] - The :focus border color of the selected special date.
+/// @prop {Map} date-selected-special-focus-border-color [contrast-color: ('primary', 900, 0.8)] - The :focus border color of the selected special date.
 /// @prop {Map} date-selected-foreground [contrast-color: ('primary', 500)] - The foreground color of the selected date.
 /// @prop {Map} date-selected-background [color: ('primary', 500)] - The background color of the selected date.
 /// @prop {Map} date-selected-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the selected date.
@@ -1415,11 +1415,8 @@ $bootstrap-days-view: extend(
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - Small, medium, and large sizes for the inner circle of a selected special dates.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(6px))] - The border radius used for calendar.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the week numbers column.
-/// @prop {Map} date-special-range-foreground [color: ('primary', 500)] - The foreground color of a special date in rage selection.
-/// @prop {Map} typography [
-///   weekday-label: (value: 'body-2'),
-///   content: (value: 'body-1')
-/// ] - The typography styles used for the component.
+/// @prop {Map} date-special-range-foreground [color: ('primary', 500)] - The foreground color of a special date in range selection.
+/// @prop {Map} typography [weekday-label: (value: 'body-2'), content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-days-view
 /// @requires $indigo-base
 $indigo-days-view: extend(

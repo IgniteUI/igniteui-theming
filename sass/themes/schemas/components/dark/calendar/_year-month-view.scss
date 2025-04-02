@@ -1,7 +1,7 @@
 @use '../../../../../utils/map' as *;
 @use '../../../../../typography/functions' as *;
 @use 'base' as *;
-@use '../../light/calendar/year-mont-view' as *;
+@use '../../light/calendar/year-month-view' as *;
 
 /// Generates a dark material year/month schema.
 /// @type {Map}
@@ -24,7 +24,6 @@ $dark-material-year-month: extend(
 /// @prop {Map} ym-selected-background [color: ('primary', 800)] - The background color of the selected month/year.
 /// @prop {Map} ym-selected-hover-background [color: ('primary', 600)]- The :hover background color of the selected month/year.
 /// @prop {Map} ym-selected-current-background [color: ('primary', 800)]- The background color of the current/selected month/year.
-/// @prop {Map} ym-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the current/selected month/year.
 /// @requires {Map} $fluent-year-month
 /// @requires {Map} $dark-fluent-base
 $dark-fluent-year-month: extend(
