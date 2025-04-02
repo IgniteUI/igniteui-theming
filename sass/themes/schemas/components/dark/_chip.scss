@@ -35,10 +35,60 @@ $dark-fluent-chip: extend(
 
 /// Generates a dark bootstrap chip schema.
 /// @type {Map}
+/// @prop {Map} hover-background [color: ('gray', 100)] - The chip hover background color.
+/// @prop {Map} hover-text-color [contrast-color: ('gray', 100)] - The chip text hover color.
+/// @prop {Map} hover-selected-background [color: ('gray', 100)] - The selected chip hover background color.
+/// @prop {Map} hover-selected-text-color [contrast-color: ('gray', 100)] - The selected chip hover text color.
+/// @prop {Map} focus-outline-color [color: ('gray', 300, 0.38)] - The chip focus outline color.
+/// @prop {Map} focus-selected-outline-color [color: ('gray', 300, 0.38)] - The selected chip focus outline color.
 /// @requires $bootstrap-chip
 $dark-bootstrap-chip: extend(
     $bootstrap-chip,
     (
+        hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        hover-text-color: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        hover-selected-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        hover-selected-text-color: (
+            contrast-color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        focus-outline-color: (
+            color: (
+                'gray',
+                300,
+                0.38,
+            ),
+        ),
+
+        focus-selected-outline-color: (
+            color: (
+                'gray',
+                300,
+                0.38,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',

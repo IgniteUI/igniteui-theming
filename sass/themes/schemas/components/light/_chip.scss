@@ -17,7 +17,7 @@
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 400)] - The chip text hover color.
 /// @prop {Map} hover-background [color: ('gray', 400)] - The chip hover background color.
 /// @prop {Color} hover-border-color [transparent] - The chip hover border color.
-/// @prop {Map} selected-text-color [color: ('gray', 700)] - The selected chip text color.
+/// @prop {Map} selected-text-color [contrast-color: ('gray', 300)] - The selected chip text color.
 /// @prop {Map} selected-background [color: ('primary', 500)] - The selected chip background color.
 /// @prop {Color} selected-border-color [transparent] The selected chip border color.
 /// @prop {Map} focus-text-color [contrast-color: ('gray', 500)] The focused chip text color.
@@ -345,14 +345,15 @@ $fluent-chip: extend(
 /// @type {Map}
 /// @prop {Map} text-color [contrast-color: ('gray', 200)] - The chip text color.
 /// @prop {Map} selected-background [color: ('gray', 200)] - The selected chip background color.
-/// @prop {Map} focus-text-color [contrast-color: ('gray', 400)] The focused chip text color.
-/// @prop {Map} focus-background [color: ('gray', 400)] The focused chip background color.
-/// @prop {Map} focus-selected-background [color: ('gray', 400)] - The selected chip focus background color.
-/// @prop {Map} focus-selected-text-color [contrast-color: ('gray', 400)] - The selected chip text focus color.
+/// @prop {Map} selected-text-color [contrast-color: ('gray', 200)] - The selected chip text color.
+/// @prop {Map} focus-text-color [contrast-color: ('gray', 200)] The focused chip text color.
+/// @prop {Map} focus-background [color: ('gray', 200)] The focused chip background color.
+/// @prop {Map} focus-selected-background [color: ('gray', 200)] - The selected chip focus background color.
+/// @prop {Map} focus-selected-text-color [contrast-color: ('gray', 200)] - The selected chip text focus color.
 /// @prop {Number} ghost-elevation [0] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for chip.
-/// @prop {Map} focus-outline-color [color: ('gray', 200)] - The chip focus outline color.
-/// @prop {Map} focus-selected-outline-color [color: ('primary', 200)] - The selected chip focus outline color.
+/// @prop {Map} focus-outline-color [color: ('gray', 500, 0.38)] - The chip focus outline color.
+/// @prop {Map} focus-selected-outline-color [color: ('gray', 500, 0.38)] - The selected chip focus outline color.
 /// @requires {Map} $light-chip
 /// @requires {Map} $bootstrap-elevation-chip
 $bootstrap-chip: extend(
@@ -369,28 +370,30 @@ $bootstrap-chip: extend(
         focus-text-color: (
             contrast-color: (
                 'gray',
-                400,
+                200,
             ),
         ),
 
         focus-background: (
             color: (
                 'gray',
-                400,
+                200,
             ),
         ),
 
         focus-outline-color: (
             color: (
                 'gray',
-                200,
+                500,
+                0.38,
             ),
         ),
 
         focus-selected-outline-color: (
             color: (
                 'gray',
-                200,
+                500,
+                0.38,
             ),
         ),
 
@@ -401,17 +404,24 @@ $bootstrap-chip: extend(
             ),
         ),
 
+        selected-text-color: (
+            contrast-color: (
+                'gray',
+                200,
+            ),
+        ),
+
         focus-selected-background: (
             color: (
                 'gray',
-                400,
+                200,
             ),
         ),
 
         focus-selected-text-color: (
             contrast-color: (
                 'gray',
-                400,
+                200,
             ),
         ),
 
