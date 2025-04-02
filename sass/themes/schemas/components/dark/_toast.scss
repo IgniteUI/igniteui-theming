@@ -9,32 +9,8 @@
 ////
 
 /// Generates a dark base toast schema.
-/// @type {Map}
-/// @prop {Map} background [color: ('gray', 500, .9)] - The background color used for the toast.
-/// @prop {Map} border-color [color: ('gray', 500, .9)] - The border color used for the toast.
-/// @prop {Map} text-color [contrast-color: ('gray', 500)] - The text-color used for the toast.
-$dark-base-toast: (
-    background: (
-        color: (
-            'gray',
-            500,
-            0.9,
-        ),
-    ),
-    border-color: (
-        color: (
-            'gray',
-            500,
-            0.9,
-        ),
-    ),
-    text-color: (
-        contrast-color: (
-            'gray',
-            500,
-        ),
-    ),
-);
+/// @see $light-toast
+$dark-base-toast: $light-toast;
 
 /// Generates a dark material toast schema.
 /// @type {Map}
@@ -42,7 +18,6 @@ $dark-base-toast: (
 /// @requires $dark-base-toast
 $dark-material-toast: extend(
     $material-toast,
-    $dark-base-toast,
     (
         _meta: (
             theme: 'material',
@@ -57,7 +32,6 @@ $dark-material-toast: extend(
 /// @requires $dark-base-toast
 $dark-fluent-toast: extend(
     $fluent-toast,
-    $dark-base-toast,
     (
         _meta: (
             theme: 'fluent',
@@ -67,25 +41,11 @@ $dark-fluent-toast: extend(
 );
 
 /// Generates a dark bootstrap toast schema.
-/// @type {Map}
-/// @prop {Map} background [contrast-color: ('surface')] - The background color used for the toast.
-/// @prop {Map} text-color [contrast-color: ('gray', 600)] - The text-color used for the toast.
+/// @see $bootstrap-toast
 /// @requires $bootstrap-toast
 $dark-bootstrap-toast: extend(
     $bootstrap-toast,
     (
-        background: (
-            contrast-color: (
-                'surface',
-            ),
-        ),
-
-        text-color: (
-            contrast-color: (
-                'gray',
-                900,
-            ),
-        ),
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',
@@ -116,6 +76,7 @@ $dark-indigo-toast: extend(
                 50,
             ),
         ),
+
         _meta: (
             theme: 'indigo',
             variant: 'dark',
