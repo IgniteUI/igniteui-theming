@@ -33,12 +33,20 @@ $base-dark-carousel: extend(
 
 /// Generates a dark material carousel schema based on a mix of $material-carousel and $base-dark-carousel
 /// @type {Map}
+/// @prop {Map} button-focus-arrow-color [color: ('secondary', 200)] - The previous/next buttons focus arrow color.
 /// @requires $material-carousel
 /// @requires $base-dark-carousel
 $dark-material-carousel: extend(
     $material-carousel,
     $base-dark-carousel,
     (
+        button-focus-arrow-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -48,6 +56,7 @@ $dark-material-carousel: extend(
 
 /// Generates a dark fluent carousel schema based on a mix of $fluent-carousel and $base-dark-carousel
 /// @type {Map}
+/// @prop {Map} button-focus-arrow-color [color: ('primary', 200)] - The previous/next buttons focus arrow color.
 /// @prop {Map} button-disabled-background [color: ('gray', 50)] - The previous/next buttons disabled background color.
 /// @prop {Map} button-disabled-arrow-color [color: ('gray' 200)] - The previous/next buttons disabled color.
 /// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
@@ -56,6 +65,13 @@ $dark-material-carousel: extend(
 $dark-fluent-carousel: extend(
     $fluent-carousel,
     (
+        button-focus-arrow-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
         button-disabled-background: (
             color: (
                 'gray',
@@ -116,6 +132,7 @@ $dark-bootstrap-carousel: extend(
 /// @prop {Map} button-hover-background [color: ('gray', 100)] - The previous/next buttons hover background color.
 /// @prop {Map} button-arrow-color [contrast-color: ('gray', 50, .8)] - The previous/next buttons idle arrow color.
 /// @prop {Map} button-hover-arrow-color [color: ('gray', 50)] - The previous/next buttons hover arrow color.
+/// @prop {Map} button-focus-arrow-color [contrast-color: ('gray', 50, .8)] - The previous/next buttons focus arrow color.
 /// @prop {Map} button-border-color [color: ('gray', 200)] - The previous/next buttons idle border color.
 /// @prop {Map} button-hover-border-color [color: ('gray', 300)] - The previous/next buttons hover border color.
 /// @prop {Map} button-disabled-border-color [contrast-color: ('gray', 50, .15)] - The previous/next buttons disabled border color.
@@ -145,6 +162,14 @@ $dark-indigo-carousel: extend(
             contrast-color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        button-focus-arrow-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
             ),
         ),
 

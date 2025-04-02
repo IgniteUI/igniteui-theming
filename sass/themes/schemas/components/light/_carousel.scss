@@ -24,7 +24,6 @@
 /// @prop {Map} button-focus-border-color [color: ('secondary', 600)] - The navigation buttons border color on focus.
 /// @prop {Map} indicator-background [color: ('gray', 50)] - The indicators container background color.
 /// @prop {Map} label-indicator-background [color: ('gray', 50, .8)] - The label indicator container background color.
-/// @prop {Map} indicator-label [color: ('gray', 700)] - The indicators label color.
 /// @prop {Color} indicator-dot-color [transparent] - The idle indicator dot color.
 /// @prop {Color} indicator-hover-dot-color [transparent] - The hover indicator dot color.
 /// @prop {Map} indicator-border-color [color: ('gray', 900, .7)] - The idle indicator border color.
@@ -169,10 +168,18 @@ $light-carousel: extend(
 
 /// Generates a material carousel schema.
 /// @type {Map}
+/// @prop {Map} button-focus-arrow-color [color: ('secondary', 600)] - The previous/next buttons focus arrow color.
 /// @requires {Map} $light-carousel
 $material-carousel: extend(
     $light-carousel,
     (
+        button-focus-arrow-color: (
+            color: (
+                'secondary',
+                600,
+            ),
+        ),
+
         _meta: (
             theme: 'material',
             variant: 'light',
@@ -182,6 +189,7 @@ $material-carousel: extend(
 
 /// Generates a fluent carousel schema.
 /// @type {Map}
+/// @prop {Map} button-focus-arrow-color [color: ('primary', 600)] - The previous/next buttons focus arrow color.
 /// @prop {Map} button-disabled-background [color: ('gray', 300)] - The previous/next buttons disabled background color.
 /// @prop {Map} button-disabled-arrow-color [color: ('gray' 500)] - The previous/next buttons disabled color.
 /// @prop {Map} indicator-focus-color [color: ('primary', 600)] - The buttons/indicators border color on focus.
@@ -191,6 +199,13 @@ $material-carousel: extend(
 $fluent-carousel: extend(
     $light-carousel,
     (
+        button-focus-arrow-color: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
         button-disabled-background: (
             color: (
                 'gray',
@@ -236,6 +251,7 @@ $fluent-carousel: extend(
 
 /// Generates a bootstrap carousel schema.
 /// @type {Map}
+/// @prop {Map} button-focus-arrow-color [color: ('gray', 700)] - The previous/next buttons focus arrow color.
 /// @prop {Map} indicator-focus-color [color: ('primary', 600)] - The buttons/indicators border color on focus.
 /// @prop {Map} button-focus-border-color [color: ('primary', 600, .5)] - The navigation buttons border color on focus.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(36px))] - The border radius used for carousel.
@@ -246,6 +262,13 @@ $bootstrap-carousel: extend(
     $light-carousel,
     $bootstrap-elevation-carousel,
     (
+        button-focus-arrow-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         indicator-focus-color: (
             color: (
                 'primary',
@@ -281,6 +304,7 @@ $bootstrap-carousel: extend(
 /// @prop {Map} button-arrow-color [color: ('gray', 600)] - The previous/next buttons idle arrow color.
 /// @prop {Map} button-hover-background [color: ('gray', 200)] - The previous/next buttons hover background color.
 /// @prop {Map} button-hover-arrow-color [color: ('gray', 700)] - The previous/next buttons hover arrow color.
+/// @prop {Map} button-focus-arrow-color [color: ('gray', 600)] - The previous/next buttons focus arrow color.
 /// @prop {Map} button-border-color [color: ('gray', 400)] - The previous/next buttons idle border color.
 /// @prop {Map} button-hover-border-color [color: ('gray', 500)] - The previous/next buttons hover border color.
 /// @prop {Map} button-disabled-border-color [color: ('gray', 900, .15)] - The previous/next buttons disabled border color.
@@ -317,6 +341,13 @@ $indigo-carousel: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+
+        button-focus-arrow-color: (
+            color: (
+                'gray',
+                600,
             ),
         ),
 
