@@ -35,10 +35,6 @@
 /// @prop {Map} date-selected-current-range-focus-foreground [color: ('gray', 900)] - The :focus foreground color of the current date in the selected range.
 /// @prop {Color} date-special-background [transparent] - The background color of a special date.
 /// @prop {Color} date-special-range-background [transparent] - The background color of a special date in range selection.
-/// @prop {Map} date-special-current-border-color [color: ('secondary', 500)] - The outline color around a special date.
-/// @prop {Color} date-selected-current-outline [transparent] - The outline color of the current selected date.
-/// @prop {Color} date-selected-current-hover-outline [transparent] - The :hover outline color of the current selected date.
-/// @prop {Color} date-selected-current-focus-outline [transparent] - The :focus outline color of the current selected date.
 /// @prop {Map} ym-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the current month/year.
 /// @prop {Map} ym-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the current month/year.
 /// @prop {Color} ym-selected-outline-color [transparent] - The outline color of the selected month/year.
@@ -199,12 +195,6 @@ $light-calendar: (
     ),
     date-special-background: transparent,
     date-special-range-background: transparent,
-    date-special-current-border-color: (
-        color: (
-            'secondary',
-            500,
-        ),
-    ),
     week-number-foreground: (
         color: (
             'gray',
@@ -263,9 +253,6 @@ $light-calendar: (
             rem(20px),
         ),
     ),
-    date-selected-current-outline: transparent,
-    date-selected-current-hover-outline: transparent,
-    date-selected-current-focus-outline: transparent,
     date-border-color: transparent,
     date-hover-border-color: transparent,
     date-focus-border-color: transparent,
@@ -876,7 +863,6 @@ $material-calendar: extend(
 /// @prop {Map} date-special-border-color [color: ('primary', 900)] - The outline color around a special date.
 /// @prop {Map} date-special-hover-border-color [color: ('primary', 900)] - The outline color around a special date.
 /// @prop {Map} date-special-range-border-color [color: ('primary', 900)] - The outline color around a special date in a range selection.
-/// @prop {Color} date-special-current-border-color [transparent] - The outline color around a special date.
 /// @prop {Color} date-current-border-color [transparent] - The border color of the current date.
 /// @prop {Color} date-current-hover-border-color [transparent] - The :hover border color of the current date.
 /// @prop {Color} date-current-focus-border-color [transparent] - The :focus border color of the current date.
@@ -1018,7 +1004,6 @@ $fluent-calendar: extend(
                 900,
             ),
         ),
-        date-special-current-border-color: transparent,
         date-special-hover-background: (
             color: (
                 'gray',
