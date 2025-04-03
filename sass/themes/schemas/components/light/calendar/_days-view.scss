@@ -28,10 +28,6 @@
 /// @prop {Map} date-selected-current-range-focus-foreground [color: ('gray', 900)] - The :focus foreground color of the current date in the selected range.
 /// @prop {Color} date-special-background [transparent] - The background color of a special date.
 /// @prop {Color} date-special-range-background [transparent] - The background color of a special date in range selection.
-/// @prop {Map} date-special-current-border-color [color: ('secondary', 500)] - The outline color around a special date.
-/// @prop {Color} date-selected-current-outline [transparent] - The outline color of the current selected date.
-/// @prop {Color} date-selected-current-hover-outline [transparent] - The :hover outline color of the current selected date.
-/// @prop {Color} date-selected-current-focus-outline [transparent] - The :focus outline color of the current selected date.
 /// @prop {Color} date-border-color [transparent] - The border color around a date.
 /// @prop {Color} date-hover-border-color [transparent] - The :hover border color around a date.
 /// @prop {Color} date-focus-border-color [transparent] - The :focus border color around a date.
@@ -173,15 +169,6 @@ $light-days-view: extend(
         ),
         date-special-background: transparent,
         date-special-range-background: transparent,
-        date-special-current-border-color: (
-            color: (
-                'secondary',
-                500,
-            ),
-        ),
-        date-selected-current-outline: transparent,
-        date-selected-current-hover-outline: transparent,
-        date-selected-current-focus-outline: transparent,
         date-border-color: transparent,
         date-hover-border-color: transparent,
         date-focus-border-color: transparent,
@@ -725,7 +712,6 @@ $fluent-days-view: extend(
                 900,
             ),
         ),
-        date-special-current-border-color: transparent,
         date-special-hover-background: (
             color: (
                 'gray',
