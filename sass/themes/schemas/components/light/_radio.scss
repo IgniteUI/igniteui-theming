@@ -18,6 +18,7 @@
 /// @prop {Map} disabled-fill-color [color: ('gray', 400)] - The disabled checked border and dot colors.
 /// @prop {Map} disabled-label-color [color: ('gray', 500)] - The disabled label color.
 /// @prop {Map} error-color [color: ('error', 500)] - The label, border and dot color in invalid state.
+/// @prop {Color} focus-border-color [transparent] - The focus border color.
 /// @prop {Color} focus-outline-color-filled [transparent] - The focus outline color when radio is filled.
 /// @prop {Color} focus-outline-color-error [transparent] - The focus outline color when radio is filled and invalid.
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
@@ -66,6 +67,7 @@ $light-radio: (
             500,
         ),
     ),
+    focus-border-color: transparent,
     focus-outline-color-filled: transparent,
     focus-outline-color-error: transparent,
     typography: (
@@ -201,6 +203,7 @@ $fluent-radio: extend(
 /// @prop {Map} disabled-color [color: ('gray', 300)] - The disabled border color.
 /// @prop {Map} disabled-fill-color [color: ('primary', 200)] - The disabled checked border and dot colors.
 /// @prop {Map} fill-color-hover [color: ('primary', 600)] - The checked border and dot colors on hover.
+/// @prop {Map} focus-border-color [color: ('primary', 200)] - The focus border color.
 /// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outline color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 200, 0.5)] - The focus outline color when radio is invalid.
 /// @prop {Map} error-color-hover [color: ('error', 600)] - The focus outlined color in invalid state.
@@ -249,6 +252,12 @@ $bootstrap-radio: extend(
             color: (
                 'primary',
                 600,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'primary',
+                200,
             ),
         ),
         focus-outline-color: (
