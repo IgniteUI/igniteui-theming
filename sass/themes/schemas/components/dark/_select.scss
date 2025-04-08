@@ -46,10 +46,52 @@ $dark-material-select: extend(
 
 /// Generates a dark fluent select schema.
 /// @type {Map}
+/// @prop {Map} toggle-button-background [color: ('gray', 50)] - The select toggle button background color.
+/// @prop {Map} toggle-button-background-focus [color: ('gray', 50)] - The select toggle button background color when the select is focused.
+/// @prop {Map} toggle-button-foreground [color: ('gray', 400)] - The select toggle button foreground color.
+/// @prop {Map} toggle-button-foreground-focus [color: ('gray', 400)] - The select toggle button foreground color when the select is focused.
+/// @prop {Map} toggle-button-foreground-filled [color: ('gray', 400)] - The select toggle button foreground color when the select is filled.
+/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 300)] - The select toggle button foreground color when the select is disabled.
 /// @requires $fluent-select
 $dark-fluent-select: extend(
     $fluent-select,
     (
+        toggle-button-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        toggle-button-background-focus: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        toggle-button-foreground: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        toggle-button-foreground-focus: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        toggle-button-foreground-filled: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        toggle-button-foreground-disabled: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'dark',

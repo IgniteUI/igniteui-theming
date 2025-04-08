@@ -20,7 +20,7 @@
 /// @prop {Map} toggle-button-foreground-focus [color: ('gray', 900)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 900)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-background-disabled [color: ('gray', 100)] - The combo toggle button background color when the combo is disabled.
-/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 400)] - The combo toggle button foreground color when the combo is disabled.
+/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The combo toggle button foreground color when the combo is disabled.
 /// @prop {Map} toggle-button-background-focus--border [color: ('gray', 300)] The combo toggle button background color when the combo is focused in border and line variants.
 /// @prop {Color} clear-button-background [transparent] - The combo clear button background color.
 /// @prop {Map} clear-button-foreground [color: ('gray', 900)] - The combo toggle clear foreground color.
@@ -114,7 +114,7 @@ $light-combo: (
     toggle-button-foreground-disabled: (
         color: (
             'gray',
-            400,
+            500,
         ),
     ),
     default-size: 2,
@@ -124,7 +124,6 @@ $light-combo: (
 /// @type {Map}
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 400)] - The combo toggle button background color when the combo is focused.
 /// @prop {Color} clear-button-background-focus [transparent] - The combo clear button background color when the combo is focused.
-/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 500)] - The combo toggle button foreground color when the combo is disabled.
 /// @requires {Map} $light-combo
 $material-combo: extend(
     $light-combo,
@@ -136,12 +135,6 @@ $material-combo: extend(
             ),
         ),
         clear-button-background-focus: transparent,
-        toggle-button-foreground-disabled: (
-            color: (
-                'gray',
-                500,
-            ),
-        ),
         _meta: (
             theme: 'material',
             variant: 'light',
@@ -216,6 +209,7 @@ $fluent-combo: extend(
 /// @prop {Map} toggle-button-foreground [color: ('gray', 800)] - The combo toggle button foreground color.
 /// @prop {Map} toggle-button-foreground-focus [color: ('gray', 800)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 800)] - The combo toggle button foreground color when the combo is focused.
+/// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 400)] - The combo toggle button foreground color when the combo is disabled.
 /// @prop {Map} empty-list-background [color: ('surface')] - The combo list background color.
 /// @prop {Map} search-separator-border-color [color: ('gray', 400)] - The combo search box separator color.
 /// @prop {Map} empty-list-placeholder-color [color: ('gray', 600)] - The combo placeholder text color.
@@ -284,6 +278,12 @@ $bootstrap-combo: extend(
             color: (
                 'gray',
                 800,
+            ),
+        ),
+        toggle-button-foreground-disabled: (
+            color: (
+                'gray',
+                400,
             ),
         ),
         _meta: (
