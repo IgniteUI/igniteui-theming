@@ -222,7 +222,6 @@ $material-drop-down: extend(
 
 /// Generates a fluent drop-down schema.
 /// @type {Map}
-/// @prop {Map} hover-item-background [color: ('gray', 100)] - The drop-down hover item background color.
 /// @prop {Map} focused-item-background [color: 'surface'] - The drop-down focused item background color.
 /// @prop {Map} selected-item-background [color: ('gray', 200)] - The drop-down selected item background color.
 /// @prop {Map} selected-item-text-color [color: ('gray', 900)] - The drop-down selected item text color.
@@ -246,12 +245,6 @@ $fluent-drop-down: extend(
     $light-drop-down,
     $fluent-elevation-drop-down,
     (
-        hover-item-background: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
         focused-item-background: (
             color: (
                 'surface',
@@ -339,6 +332,8 @@ $fluent-drop-down: extend(
 /// Generates a bootstrap drop-down schema.
 /// @type {Map}
 /// @prop {Map} header-text-color [color: ('gray', 700)] - The drop-down header text color.
+/// @prop {Map} hover-item-background [color: ('gray', 200)] - The drop-down hover item background color.
+/// @prop {Map} focused-item-background [color: ('gray', 200)] - The drop-down focused item background color.
 /// @prop {Map} selected-item-text-color [contrast-color('primary', 600)] - The drop-down selected item text color.
 /// @prop {Map} selected-item-icon-color [contrast-color('primary', 600)] - The drop-down selected item icon color.
 /// @prop {Map} selected-hover-item-background [color: ('primary', 600)] - The drop-down selected item hover background color.
@@ -359,6 +354,18 @@ $bootstrap-drop-down: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+        hover-item-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        focus-item-background: (
+            color: (
+                'gray',
+                200,
             ),
         ),
         selected-item-text-color: (
