@@ -13,7 +13,6 @@
 /// @type {Map}
 /// @prop {Map} label-color [color: ('gray', 900)] - sets the color for the label.
 /// @prop {Map} value-label [color: ('gray', 900)] - sets the color for the value label.
-/// @prop {Number} symbol-size [rem(36px)] - the size of the symbols.
 /// @prop {Map} symbol-empty-color [color: ('gray', 600)] - sets the idle color for the symbol when it is a plane text.
 /// @prop {Map} symbol-full-color [color: ('warn')] - sets the color in selected state for the symbol when it is a plane text.
 /// @prop {Function} symbol-empty-filter [grayscale(100%) opacity(50%)] - the filter(s) used for the empty symbol.
@@ -22,10 +21,9 @@
 /// @prop {Map} disabled-value-label [color: ('gray', 400)] - sets the color for the value in disabled state.
 /// @prop {Map} disabled-empty-symbol-color [color: ('gray', 400)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} disabled-full-symbol-color [color: ('gray', 600)] - sets the color for the symbol in selected/disabled state when it is a plane text.
+/// @prop {List} symbol-size [(rem(18px), rem(24px), rem(36px))] - the size of the symbols.
 /// @prop {Number} default-size [2] - The default size used for the rating component.
 $light-rating: (
-    symbol-size: null,
-
     label-color: (
         color: (
             'gray',
@@ -77,6 +75,13 @@ $light-rating: (
         color: (
             'warn',
             200,
+        ),
+    ),
+    symbol-size: (
+        sizable: (
+            rem(18px),
+            rem(24px),
+            rem(36px),
         ),
     ),
     default-size: 2,
@@ -157,6 +162,7 @@ $bootstrap-rating: extend(
 );
 
 /// Generates an indigo rating schema.
+/// @type {Map}
 /// @prop {Map} label-color [color: ('gray', 800)] - sets the color for the label.
 /// @prop {Map} value-label [color: ('gray', 800)] - sets the color for the value label.
 /// @prop {Map} symbol-empty-color [color: ('gray', 500)] - sets the idle color for the symbol when it is a plane text.
@@ -165,7 +171,7 @@ $bootstrap-rating: extend(
 /// @prop {Map} disabled-value-label [color: ('gray', 900, .2)] - sets the color for the value in disabled state.
 /// @prop {Map} disabled-empty-symbol-color [color: ('gray', 500, .4)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} disabled-full-symbol-color [color: ('warn', 300, .4)] - sets the color for the symbol in selected/disabled state when it is a plane text.
-/// @type {Map}
+/// @prop {List} symbol-size [(rem(18px), rem(24px), rem(30px))] - the size of the symbols.
 /// @requires {Map} $light-rating
 $indigo-rating: extend(
     $light-rating,
@@ -220,6 +226,13 @@ $indigo-rating: extend(
                 'warn',
                 300,
                 0.4,
+            ),
+        ),
+        symbol-size: (
+            sizable: (
+                rem(18px),
+                rem(24px),
+                rem(30px),
             ),
         ),
         _meta: (
