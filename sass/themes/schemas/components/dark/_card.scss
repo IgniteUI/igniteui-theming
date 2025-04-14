@@ -9,16 +9,8 @@
 
 /// Generates a base dark card schema.
 /// @type {Map}
-/// @prop {Map} background [color: ('gray', 50)] - The card background color.
 /// @prop {Map} outline-color [color: ('gray', 100)] - The outline color of an outlined type card.
 $dark-base-card: (
-    background: (
-        color: (
-            'gray',
-            50,
-        ),
-    ),
-
     outline-color: (
         color: (
             'gray',
@@ -50,10 +42,18 @@ $dark-material-card: extend(
 
 /// Generates a dark fluent card schema.
 /// @type {Map}
+/// @prop {Map} actions-text-color [color: ('primary', 300)] - The text color of the card buttons.
 /// @requires $fluent-card
 $dark-fluent-card: extend(
     $fluent-card,
     (
+        actions-text-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -64,10 +64,8 @@ $dark-fluent-card: extend(
 /// Generates a dark bootstrap card schema.
 /// @type {Map}
 /// @requires $bootstrap-card
-/// @requires $dark-base-card
 $dark-bootstrap-card: extend(
     $bootstrap-card,
-    $dark-base-card,
     (
         _meta: (
             theme: 'bootstrap',
@@ -78,14 +76,23 @@ $dark-bootstrap-card: extend(
 
 /// Generates a dark indigo card schema.
 /// @type {Map}
+/// @prop {Map} background [color: ('gray', 50)] - The card background color.
 /// @prop {Map} header-text-color [contrast-color: ('gray', 50, .9)] - The text color of the card title.
 /// @prop {Map} subtitle-text-color [contrast-color: ('gray', 50, .8)] - The text color of the card subtitle.
+/// @prop {Map} actions-text-color [contrast-color: ('gray', 50, .8)] - The text color of the card buttons.
 /// @requires $indigo-card
 /// @requires $dark-base-card
 $dark-indigo-card: extend(
     $indigo-card,
     $dark-base-card,
     (
+        background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
         header-text-color: (
             contrast-color: (
                 'gray',
@@ -101,6 +108,15 @@ $dark-indigo-card: extend(
                 0.8,
             ),
         ),
+
+        actions-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
         _meta: (
             theme: 'indigo',
             variant: 'dark',
