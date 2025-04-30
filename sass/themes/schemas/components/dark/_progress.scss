@@ -9,13 +9,13 @@
 
 /// Generates a base dark progress-linear schema.
 /// @type {Map}
-/// @prop {Map} track-color [color: ('gray', 100)] - The main track color.
+/// @prop {Map} track-color [color: ('gray', 300)] - The main track color.
 /// @prop {Map} stripes-color [color: ('gray', 900, .7)] - The track stripes color.
 $dark-base-progress-linear: (
     track-color: (
         color: (
             'gray',
-            100,
+            300,
         ),
     ),
 
@@ -111,12 +111,12 @@ $dark-indigo-progress-linear: extend(
 
 /// Generates a base dark progress-circular schema.
 /// @type {Map}
-/// @prop {Map} base-circle-color [color: ('gray', 100)] - The main track color.
+/// @prop {Map} base-circle-color [color: ('gray', 300)] - The base circle fill color.
 $dark-base-progress-circular: (
     base-circle-color: (
         color: (
             'gray',
-            100,
+            300,
         ),
     ),
 );
