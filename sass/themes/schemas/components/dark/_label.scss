@@ -22,10 +22,24 @@ $dark-material-label: extend(
 
 /// Generates a dark fluent label schema.
 /// @type {Map}
+/// @prop {Map} color [color: ('gray', 800)] - The label color.
+/// @prop {Map} disabled-color [color: ('gray', 300)] - The label color in disabled state.
 /// @requires $fluent-label
 $dark-fluent-label: extend(
     $fluent-label,
     (
+        color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        disabled-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -48,11 +62,21 @@ $dark-bootstrap-label: extend(
 
 /// Generates a dark indigo label schema.
 /// @type {Map}
-/// @prop {Color} color [contrast-color: ('surface')] - The label color.
+/// @prop {Map} color [contrast-color: ('primary', 500, .6)] - The label color.
+/// @prop {Map} disabled-color [contrast-color: ('primary', 500, .2)] - The label color in disabled state.
 $dark-indigo-label: (
     color: (
         contrast-color: (
-            'surface',
+            'primary',
+            500,
+            0.6,
+        ),
+    ),
+    disabled-color: (
+        contrast-color: (
+            'primary',
+            500,
+            0.2,
         ),
     ),
     _meta: (
