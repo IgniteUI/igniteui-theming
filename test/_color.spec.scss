@@ -60,7 +60,7 @@ $_palette: palette(
 
             @include assert-equal(
                 adaptive-contrast($color),
-                hsl(from meta.call($fn, from #09f var(--y-contrast)) h 0 l)
+                hsla(from meta.call($fn, from #09f var(--y-contrast)) h 0 l / 1)
             );
         }
 
@@ -69,7 +69,7 @@ $_palette: palette(
 
             @include assert-equal(
                 adaptive-contrast($color),
-                hsl(from meta.call($fn, from hsl(204deg 100% 50%) var(--y-contrast)) h 0 l)
+                hsla(from meta.call($fn, from hsl(204deg 100% 50%) var(--y-contrast)) h 0 l / 1)
             );
         }
 
@@ -78,7 +78,7 @@ $_palette: palette(
 
             @include assert-equal(
                 adaptive-contrast($color),
-                hsl(from meta.call($fn, from var(--ig-primary-500) var(--y-contrast)) h 0 l)
+                hsla(from meta.call($fn, from var(--ig-primary-500) var(--y-contrast)) h 0 l / 1)
             );
         }
 
