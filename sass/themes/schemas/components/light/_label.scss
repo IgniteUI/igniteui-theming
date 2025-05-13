@@ -8,12 +8,19 @@
 
 /// Generates a base light label schema.
 /// @type {Map}
-/// @prop {Color} color [color: ('gray', 700)] - The label color.
+/// @prop {Map} color [color: ('gray', 700)] - The label color.
+/// @prop {Map} disabled-color [color: ('gray', 500)] - The label color in disabled state.
 $light-label: (
     color: (
         color: (
             'gray',
             700,
+        ),
+    ),
+    disabled-color: (
+        color: (
+            'gray',
+            500,
         ),
     ),
 );
@@ -39,33 +46,44 @@ $material-label: extend(
 
 /// Generates a light fluent label schema.
 /// @type {Map}
-/// @prop {Color} color [color: ('gray', 900)] - The label color.
+/// @prop {Map} color [color: ('gray', 900)] - The label color.
 /// @prop {Map} typography [label: (value: 'subtitle-2')] - The typography styles used for the component.
-$fluent-label: (
-    color: (
+/// @requires {Map} $light-label
+$fluent-label: extend(
+    $light-label,
+    (
         color: (
-            'gray',
-            900,
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    typography: (
-        label: (
-            value: 'subtitle-2',
+        typography: (
+            label: (
+                value: 'subtitle-2',
+            ),
         ),
-    ),
-    _meta: (
-        theme: 'fluent',
-        variant: 'light',
-    ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
 );
 
 /// Generates a light bootstrap label schema.
 /// @type {Map}
+/// @prop {Map} disabled-color [color: ('gray', 400)] - The label color in disabled state.
 /// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @requires {Map} $light-label
 $bootstrap-label: extend(
     $light-label,
     (
+        disabled-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
         typography: (
             label: (
                 value: 'body-1',
@@ -80,13 +98,21 @@ $bootstrap-label: extend(
 
 /// Generates a light indigo label schema.
 /// @type {Map}
-/// @prop {Color} color [color: ('gray', 900)] - The label color.
+/// @prop {Map} color [color: ('gray', 600)] - The label color.
+/// @prop {Map} disabled-color [color: ('gray', 900, .2)] - The label color in disabled state.
 /// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
 $indigo-label: (
     color: (
         color: (
             'gray',
+            600,
+        ),
+    ),
+    disabled-color: (
+        color: (
+            'gray',
             900,
+            0.2,
         ),
     ),
     typography: (

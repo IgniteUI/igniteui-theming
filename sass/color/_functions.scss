@@ -231,7 +231,7 @@ $_enhanced-accessibility: false;
 @function adaptive-contrast($color) {
     $fn: meta.get-function('color', $css: true);
 
-    @return hsl(from meta.call($fn, from $color var(--y-contrast)) h 0 l);
+    @return hsla(from meta.call($fn, from $color var(--y-contrast)) h 0 l / 1);
 }
 
 /// Returns a contrast color for a passed color.
