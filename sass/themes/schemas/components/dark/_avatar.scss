@@ -7,11 +7,25 @@
 /// @access public
 ////
 
+/// Generates a base dark avatar schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('gray', 200)] - The background color of the avatar.
+$dark-base-avatar: (
+    background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+);
+
 /// Generates a dark material avatar schema.
 /// @type {Map}
 /// @requires $material-avatar
+/// @requires $dark-base-avatar
 $dark-material-avatar: extend(
     $material-avatar,
+    $dark-base-avatar,
     (
         _meta: (
             theme: 'material',
@@ -23,8 +37,10 @@ $dark-material-avatar: extend(
 /// Generates a dark fluent avatar schema.
 /// @type {Map}
 /// @requires $fluent-avatar
+/// @requires $dark-base-avatar
 $dark-fluent-avatar: extend(
     $fluent-avatar,
+    $dark-base-avatar,
     (
         _meta: (
             theme: 'fluent',
@@ -36,8 +52,10 @@ $dark-fluent-avatar: extend(
 /// Generates a dark bootstrap avatar schema.
 /// @type {Map}
 /// @requires $bootstrap-avatar
+/// @requires $dark-base-avatar
 $dark-bootstrap-avatar: extend(
     $bootstrap-avatar,
+    $dark-base-avatar,
     (
         _meta: (
             theme: 'bootstrap',
