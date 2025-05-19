@@ -19,6 +19,12 @@
 ///   .my-component {
 ///     margin: em(10px) em(5px);
 ///   }
+///
+///   // Output
+///   .my-component {
+///     margin: 0.625em 0.3125em;
+///   }
+///
 /// @return {number} - Returns the pixels value converted to em.
 @function em($pixels, $context: $base-font-size) {
     @if math.is-unitless($pixels) {
@@ -40,6 +46,12 @@
 ///   .my-component {
 ///     margin: rem(10px) rem(5px);
 ///   }
+///
+///   // Output
+///   .my-component {
+///     margin: 0.625rem 0.3125rem;
+///   }
+///
 /// @return {number} - Returns the pixels value converted to rem.
 @function rem($pixels, $context: $base-font-size) {
     @if math.is-unitless($pixels) {
@@ -59,8 +71,14 @@
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
 /// @example
 ///   .my-component {
-///     margin: px(3.23rem);
+///     margin: px(3rem);
 ///   }
+///
+///   // Output
+///   .my-component {
+///     margin: 48px;
+///   }
+///
 /// @return {number} - Returns the relative value converted to pixels.
 @function px($num, $context: $base-font-size) {
     @if math.is-unitless($context) {
@@ -78,10 +96,10 @@
 /// @access public
 /// @param {String} $font-family [var(--ig-font-family)] - The font family of the type style.
 /// @param {String} $font-size - The font size of the type style.
-/// @param {Number|String} $font-weight [normal] - The font weight of the type style.
+/// @param {Number} $font-weight [normal] - The font weight of the type style.
 /// @param {String} $font-style [normal] - The font style of the type style.
-/// @param {Number|String} $line-height [normal] - The line height of the type style.
-/// @param {Number|String} $letter-spacing [normal] - The letter spacing of the type style.
+/// @param {Number} $line-height [normal] - The line height of the type style.
+/// @param {Number} $letter-spacing [normal] - The letter spacing of the type style.
 /// @param {String} $text-transform [none] - The text-transform property of the type style.
 /// @param {Number} $margin-top [0] - The margin-top property of the type style.
 /// @param {Number} $margin-bottom [0] - The margin-bottom property of the type style.
