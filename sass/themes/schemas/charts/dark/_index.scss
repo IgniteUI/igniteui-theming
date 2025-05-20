@@ -10,15 +10,6 @@
 @use './shape-chart' as *;
 @use './sparkline' as *;
 
-////
-/// @package theming
-/// @group schemas
-/// @access public
-/// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
-////
-
-/// Generates the global charts dark material schema.
-/// @type {Map}
 $dark-material-schema: (
     category-chart: $dark-material-category-chart,
     data-chart: $dark-material-data-chart,
@@ -33,9 +24,6 @@ $dark-material-schema: (
     shape-chart: $dark-material-shape-chart,
     sparkline: $dark-material-sparkline,
 );
-
-/// Generates the global charts dark bootstrap schema.
-/// @type {Map}
 $dark-bootstrap-schema: (
     category-chart: $dark-bootstrap-category-chart,
     data-chart: $dark-bootstrap-data-chart,
@@ -50,9 +38,6 @@ $dark-bootstrap-schema: (
     shape-chart: $dark-bootstrap-shape-chart,
     sparkline: $dark-bootstrap-sparkline,
 );
-
-/// Generates the global charts dark fluent schema.
-/// @type {Map}
 $dark-fluent-schema: (
     category-chart: $dark-fluent-category-chart,
     data-chart: $dark-fluent-data-chart,
@@ -67,9 +52,6 @@ $dark-fluent-schema: (
     shape-chart: $dark-fluent-shape-chart,
     sparkline: $dark-fluent-sparkline,
 );
-
-/// Generates the global charts dark indigo schema.
-/// @type {Map}
 $dark-indigo-schema: (
     category-chart: $dark-indigo-category-chart,
     data-chart: $dark-indigo-data-chart,
