@@ -81,7 +81,6 @@ $dark-bootstrap-grid-summary: extend(
 /// Generates a dark indigo grid-summary schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('surface')] - The summaries background color.
-/// @prop {Map} focus-background-color [color: ('gray', 100)] - The background color when a summary item is on focus.
 /// @prop {Map} label-color [color: ('primary', 200)] - The summaries label color.
 /// @prop {Map} label-hover-color [color: ('primary', 200)] - The summaries hover label color.
 /// @prop {Map} result-color [contrast-color: 'surface'] - The summaries value/result color.
@@ -94,13 +93,6 @@ $dark-indigo-grid-summary: extend(
         background-color: (
             color: (
                 'surface',
-            ),
-        ),
-
-        focus-background-color: (
-            color: (
-                'gray',
-                100,
             ),
         ),
 

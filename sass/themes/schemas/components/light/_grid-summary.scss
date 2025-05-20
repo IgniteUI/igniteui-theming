@@ -10,7 +10,6 @@
 /// Generates a light grid-summary schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('gray', 300)] - The summaries background color.
-/// @prop {Map} focus-background-color [color: ('gray', 100)] - The background color when a summary item is on focus.
 /// @prop {Map} label-color [color: ('primary', 500)] - The summaries label color.
 /// @prop {Map} label-hover-color [color: ('primary', 700)] - The summaries hover label color.
 /// @prop {Map} result-color [contrast-color: ('gray', 300)] - The summaries value/result color.
@@ -23,13 +22,6 @@ $light-grid-summary: (
         color: (
             'gray',
             300,
-        ),
-    ),
-
-    focus-background-color: (
-        color: (
-            'gray',
-            100,
         ),
     ),
 
