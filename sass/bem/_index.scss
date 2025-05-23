@@ -14,19 +14,53 @@
 ////
 
 /// @type String - The Element separator used. Default '__'.
-/// @access private
+/// @access public
+/// @example scss - Change the element separator from '__' to '-'
+///   $bem--sep-elem: '-';
+///
+///   @include b(block) {
+///      @include e(element) {
+///        background: blue;
+///      }
+///   }
+///
+///   // Generated CSS
+///   .block-element { background: blue; }
 $bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
 
 /// @type String - The Modifier separator used. Default '--'.
-/// @access private
+/// @access public
+/// @example scss - Change the modifier separator from '--' to '---'
+///   $bem--sep-mod: '---';
+///
+///   @include b(block) {
+///      @include m(modifier) {
+///        background: red;
+///      }
+///   }
+///
+///   // Generated CSS
+///   .block---modifier { background: red; }
 $bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
 
 /// @type String - The Modifier Value separator used. Default '-'.
-/// @access private
+/// @access public
+/// @example scss - Change the modifier value separator from '-' to '_'
+///   $bem--sep-mod-val: '_';
+///
+///   @include b(block) {
+///      @include m(modifier, value) {
+///        background: red;
+///      }
+///   }
+///
+///   // Generated CSS
+///   .block--modifier_value { background: red; }
 $bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val, '-');
 
 /// Cache for modifier string conversions
 /// @type Map
+/// @access private
 $_bem-mod-cache: () !default;
 
 /// Converts a passed selector value into plain string.
@@ -190,23 +224,31 @@ $_bem-mod-cache: () !default;
 }
 
 /// Generates a full BEM selector.
-/// @access private
-/// @param {String} $block - Required. A string block name.
-/// @param {String|List} $elem - Optional. A sub-element name. If `$mod` is not present, it is
+/// @access public
+/// @param {String} $block - A string block name. Required.
+/// @param {String|List} $elem [null] - A sub-element name. If `$mod` is not present, it is
 /// joined with $block. If $mod is present, it is nested under `$block--$mod`.
-/// @param {String|Map} $mod - Optional. A block modifier.
+/// @param {String|Map} $mod [null] - A block modifier.
+/// @param {List} $mods [null] - A list of block modifiers.
+///
 /// @example scss Include a block
-///   @include bem-selector(block); // outputs .block
+///   $selector: bem-selector(block); // returns .block
+///
 /// @example scss Include a block and an element
-///   @include bem-selector(block, $e:elem); // outputs .block__elem
+///   $selector: bem-selector(block, $elem: elem); // returns .block__elem
+///
 /// @example scss Include block, element, and element modifier
-///   @include bem-selector(block, $e:(elem, $mod); // outputs .block__elem-emod
+///   $selector: bem-selector(block, $elem: (elem, mod); // returns .block__elem--mod
+///
 /// @example scss Include block and block modifier
-///   @include bem-selector(block, $m:mod) // outputs .block--mod
-/// @example scss Include block and modifier value
-///   @include bem-selector(block, $m:(mod:val)); // outputs .block--mod-val
+///   $selector: bem-selector(block, $mod: mod) // returns .block--mod
+///
+/// @example scss Include block and multiple block modifiers
+///   $selector: bem-selector(block, $mods: (mod-1, mod-2)) // returns .block--mod-1.block--mod-2
+///
 /// @example scss Include block modifier followed by block sub-element
-///   @include bem-selector(block, $m:mod, $e:elem); // outputs .block--mod .block__elem
+///   $selector: bem-selector(block, $m: mod, $e: elem); // returns .block--mod .block__elem
+///
 /// @return {String} The generated BEM selector string
 @function bem-selector($block, $e: null, $elem: null, $m: null, $mod: null, $mods: null) {
     $block: bem--with-dot($block);
@@ -284,11 +326,11 @@ $_bem-mod-cache: () !default;
 /// @access public
 /// @param {String} $block - The block name.
 /// @param {String} $elem - The element name.
-/// @param {String} $mod - Optional. The modifier name.
+/// @param {String} $mod [null] - The modifier name. Optional.
 /// @return {String} The BEM element selector string.
 /// @example scss
-///   elem('button', 'icon')        // returns '.button__icon'
-///   elem('button', 'icon', 'big') // returns '.button__icon--big'
+///   $selector: elem('button', 'icon') // returns '.button__icon'
+///   $selector: elem('button', 'icon', 'big') // returns '.button__icon--big'
 @function elem($block, $elem, $mod: null) {
     @if not meta.type-of($block) == 'string' {
         @error 'Block must be a string, got #{meta.type-of($block)}';
@@ -315,21 +357,22 @@ $_bem-mod-cache: () !default;
 /// @param {String} $mod - The modifier name.
 /// @return {String} The BEM modifier selector string.
 /// @example scss
-///   mod('button', 'primary') // returns '.button--primary'
-///   mod('card', 'outlined') // returns '.card--outlined'
+///   $selector: mod('button', 'primary') // returns '.button--primary'
+///   $selector: mod('card', 'outlined') // returns '.card--outlined'
 @function mod($block, $mod) {
     @return bem-selector($block, $m: $mod);
 }
 
 /// Simply unrolls into a class-selector. The main purpose of using this mixin
 /// is to clearly denote the start of a BEM block.
-/// @access public scss
+/// @access public
 /// @param {String} $block - The block name.
 /// @example
 ///   @include bem-block(block) {
 ///      background: green;
 ///   }
-///   // Return
+///
+///   // Output
 ///   .block { background: green; }
 @mixin bem-block($block) {
     @at-root {
@@ -523,72 +566,137 @@ $_bem-mod-cache: () !default;
     }
 }
 
-/// @alias bem-selector
-/// @see bem-selector
+/// Generates a full BEM rule.
+/// @access public
+/// @param {String} $block - A string block name. Required.
+/// @param {String|List} $elem [null] - A sub-element name. If `$mod` is not present, it is
+/// joined with $block. If $mod is present, it is nested under `$block--$mod`.
+/// @param {String|Map} $mod [null] - A block modifier.
+/// @param {String|Map} $mods [null] - A list of block modifiers.
+///
+/// @example scss - Include a block
+///   @include bem(block) {
+///     background: blue;
+///   };
+///
+///   // Output
+///   .block {
+///     background: blue;
+///   }
+///
+/// @example scss - Include a block and an element
+///   @include bem(block, $elem: elem) {
+///     background: blue;
+///   }
+///
+///  // Output
+///   .block__elem {
+///     background: blue;
+///   }
+///
+/// @example scss - Include block, element, and element modifier
+///   @include bem(block, $elem: (elem, mod)) {
+///     background: blue;
+///   }
+///
+///   // Output
+///   .block__elem--mod {
+///     background: blue;
+///   }
+///
+/// @example scss - Include block and block modifier
+///   @include bem(block, $mod: mod) {
+///     background: blue;
+///   }
+///
+///   // Output
+///   .block--mod {
+///     background: blue;
+///   }
+///
+/// @example scss - Include block with multiple modifiers
+///  @include bem(block, $mods: (mod-1, mod-2)) {
+///     background: blue;
+///   }
+///
+///   // Output
+///   .block--mod-1.block--mod-2 {
+///     background: blue;
+///   }
+///
+/// @example scss - Include block modifier followed by block sub-element
+///   @include bem(block, $m:mod, $e:elem) {
+///     background: blue;
+///   }
+///
+///   // Output
+///   .block--mod .block__elem {
+///     background: blue;
+///   }
 @mixin bem($block, $e: null, $elem: null, $m: null, $mod: null, $mods: null) {
     #{bem-selector($block, $e: $e, $elem: $elem, $m: $m, $mod: $mod, $mods: $mods)} {
         @content;
     }
 }
 
+/// The same as bem-block.
 /// @alias bem-block
-/// @see bem-block
 @mixin block($block) {
     @include bem-block($block) {
         @content;
     }
 }
 
+/// The same as bem-elem.
 /// @alias bem-elem
-/// @see bem-elem
 @mixin elem($elem, $m: null, $mod: null, $mods: null, $not: null) {
     @include bem-elem($elem, $m: $m, $mod: $mod, $mods: $mods, $not: $not) {
         @content;
     }
 }
 
+/// The same as bem-mod.
 /// @alias bem-mod
-/// @see bem-mod
 @mixin mod($mod, $not: null) {
     @include bem-mod($mod, $not) {
         @content;
     }
 }
 
+/// The same as bem-mods.
 /// @alias bem-mods
-/// @see bem-mods
 @mixin mods($mods...) {
     @include bem-mods($mods...) {
         @content;
     }
 }
 
+/// The same as bem-block.
 /// @alias bem-block
-/// @see bem-block
 @mixin b($block) {
     @include bem-block($block) {
         @content;
     }
 }
 
+/// The same as bem-elem.
 /// @alias bem-elem
-/// @see bem-elem
 @mixin e($elem, $m: null, $mod: null, $mods: null, $not: null) {
     @include bem-elem($elem, $m: $m, $mod: $mod, $mods: $mods, $not: $not) {
         @content;
     }
 }
 
+/// The same as bem-mod.
 /// @alias bem-mod
-/// @see bem-mod
 @mixin m($mod, $not: null) {
     @include bem-mod($mod, $not) {
         @content;
     }
 }
 
+/// The same as bem-mods.
 /// @alias bem-mods
-/// @see bem-mods
 @mixin mx($mods...) {
     @include bem-mods($mods...) {
         @content;

@@ -8,17 +8,20 @@
 
 /// A list consisting of all generated gray shades
 /// @type Map
-/// @access private
+/// @access public
 $IGrayShades: ('50', '100', '200', '300', '400', '500', '600', '700', '800', '900');
 
 /// A list consisting of all generated shades for palette colors
 /// @type Map
-/// @access private
+/// @access public
+/// @requires $IGrayShades
 $IColorShades: list.join($IGrayShades, ('A100', 'A200', 'A400', 'A700'));
 
 /// All palette colors mapped with corresponding color shades
 /// @type Map
-/// @access private
+/// @access public
+/// @requires $IColorShades
+/// @requires $IGrayShades
 $IPaletteColors: (
     'primary': $IColorShades,
     'secondary': $IColorShades,
@@ -40,6 +43,7 @@ $IPaletteMeta: (
 /// A map with all palette colors and palette meta
 /// @type Map
 /// @access private
+/// @requires $IPaletteColors
 $IPalette: map.merge(
     $IPaletteColors,
     (

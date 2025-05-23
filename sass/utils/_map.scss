@@ -3,10 +3,11 @@
 
 ////
 /// @package theming
+/// @group utilities
 ////
 
 /// Removes all null key-value pairs from a map
-/// @access private
+/// @access public
 /// @param {Map} $map - The target map to be cleaned.
 /// @returns {Map} - Returns a map with null key-value pairs removed.
 @function clean($map) {
@@ -22,7 +23,6 @@
 }
 
 /// Extends a Map with the values of another Map, disregarding null values in the process.
-/// @group utilities
 /// @access public
 /// @param {Map...} $maps - The maps to get extended.
 /// @requires {function} clean
@@ -38,7 +38,6 @@
 }
 
 /// Extracts the differences between two or more maps, comparing the first map against the rest.
-/// @group utilities
 /// @access public
 /// @param {Map...} $maps - A list of maps that will be diffed.
 /// @example scss Pull out the unique properties of the second map when compared to the first.
