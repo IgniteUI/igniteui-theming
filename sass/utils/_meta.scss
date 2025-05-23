@@ -2,10 +2,11 @@
 
 ////
 /// @package theming
+/// @group utilities
 ////
 
 /// Returns true if the scope where it's called is the root of the document.
-/// @access private
+/// @access public
 /// @example scss Check if the current scope is root
 ///   @mixin smart-mixin() {
 ///     $scope: if(is-root(), ':root', '&');
@@ -22,7 +23,7 @@
 }
 
 /// Returns true if the scope where it's called is :host.
-/// @access private
+/// @access public
 /// @example scss Check if the current scope is :root
 ///   @mixin smart-mixin() {
 ///     $host: is-host();

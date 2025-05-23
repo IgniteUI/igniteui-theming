@@ -18,11 +18,12 @@ $_enhanced-accessibility: false;
 /// Configures the color module.
 /// @access public
 /// @group color
-/// @param {Boolean} $enhanced-accessibility [null] - Enables features like color blind palettes.
+/// @param {Boolean} $enhanced-accessibility [null] - Enables features like color blind brushes for chart themes.
 /// @example scss
 ///   .enhanced-accessibility {
 ///      @include configure-colors(true);
 ///    }
+/// @see $brushes-color-blind
 @mixin configure-colors($enhanced-accessibility: null) {
     @if $enhanced-accessibility {
         $_enhanced-accessibility: $enhanced-accessibility !global;
@@ -44,8 +45,15 @@ $_enhanced-accessibility: false;
 /// @requires {function} shades
 /// @returns {Map} - A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
 /// @example scss
-///   // $primary, $secondary, $surface are required parameters.
-///   $my-palette: palette($primary: #09f,$secondary #222, $surface: #fff);
+///   // Pass the required colors
+///   $my-palette: palette(
+///     $primary: rebeccapurple,
+///     $secondary: orange,
+///     $surface: white,
+///   );
+///
+///   // Include the generated palette colors as CSS variables.
+///   @include palette($my-palette);
 @function palette(
     $primary,
     $secondary,
@@ -83,18 +91,26 @@ $_enhanced-accessibility: false;
     );
 }
 
-/// Generates a Material-like color palette from a base color.
+/// Generates color shades for a given color.
 /// @access public
 /// @group Palettes
 /// @param {String} $name - The name of the color.
-/// @param {Color} $color - The base color used to generate the palette.
-/// @param {List} $shades - The list of shades.
-/// @param {Color} $surface [null] - The surface color. Useful when generating shades of gray (optional).
-/// @requires {function} shade
-/// @requires {function} text-contrast
-/// @returns {Map} - A map consisting of hsla color shades and their respective contrast colors.
+/// @param {Color} $color - The base color used to generate the shades.
+/// @param {List} $shades - The list of shade variants.
+/// @param {Color} $surface [null] - The surface color. Useful if generating shades of gray (optional).
+/// @requires {function} adaptive-contrast
+/// @returns {Map} - A map consisting of color shades and their respective contrast colors.
+///
 /// @example scss
-///   $special-color-shades: shades('accent', #09f, (50,100,200,300,400,500,600,700,800,900))
+///   $color-name: 'accent';
+///
+///   // Include the generated palette colors as CSS variables.
+///   @include palette(
+///     (
+///       #{$color-name}: shades($color-name, #a57865, $IColorShades),
+///     )
+///   );
+/// @see $IColorShades
 @function shades($name, $color, $shades, $surface: null) {
     $result: ();
 
@@ -161,9 +177,6 @@ $_enhanced-accessibility: false;
     }
 }
 
-// $special-color-shades: shades('accent', #09f, (50,100,200,300,400,500,600,700,800,900));
-// @debug $special-color-shades;
-
 /// Retrieves a color from a color palette.
 /// @access public
 /// @group Palettes
@@ -172,14 +185,26 @@ $_enhanced-accessibility: false;
 /// @param {Number | String} $variant [500] - The target color shade from the color palette.
 /// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
 /// @returns {Color | String} - The raw color shade or CSS variable reference from the palette.
-/// @example scss
-///   // No palette
+///
+/// @example scss - Getting a color from the palette
+///   // Without providing a palette
 ///   .my-component-1 {
-///      background: color($color: 'primary', $variant: 200);
+///      background: color($color: primary, $variant: 200); // var(--ig-primary-200)
 ///    }
-///    // Using certain palette and adding .5% opacity to the color variant
+///
+///    // With a specific palette
 ///   .my-component-2 {
-///      background: color($my-palette, 'primary', 200, .5);
+///      background: color($my-palette, primary, 200); // #88c0e5
+///    }
+///
+/// @example scss - Getting a color with opacity
+///   .my-component-1 {
+///      background: color($color: primary, $variant: 200, $opacity: 0.5); // hsl(from var(--ig-primary-200) h s l/0.5)
+///    }
+///
+///    // With a specific palette
+///   .my-component-2 {
+///      background: color($my-palette, primary, 200, $opacity: 0.5); // rgba(136, 192, 229, 0.5)
 ///    }
 @function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
     $s: #{var(--ig-#{$color}-#{$variant})};
@@ -198,7 +223,7 @@ $_enhanced-accessibility: false;
     @return $_relative-color;
 }
 
-/// Retrieves a contrast text color for a given color variant from a color palette.
+/// Retrieves a contrast color for a given color variant from a color palette. Works similarly to the color function.
 /// @access public
 /// @group Palettes
 /// @param {Map} $palette [null] - The source palette map (optional).
@@ -207,11 +232,13 @@ $_enhanced-accessibility: false;
 /// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
 /// @requires {function} color
 /// @returns {Color | String} - The raw contrast color shade or CSS variable from the palette.
+///
 /// @example scss without passing a palette
 ///   .my-component {
 ///      background: color($color: 'primary', $variant: 200);
 ///      color: contrast-color($color: 'primary', $variant: 200);
 ///    }
+///
 @function contrast-color($palette: null, $color: primary, $variant: 500, $opacity: null) {
     @return color($palette, $color, #{$variant}-contrast, $opacity);
 }
@@ -220,13 +247,14 @@ $_enhanced-accessibility: false;
 /// @access public
 /// @group Color
 /// @param {Color} $color - The base color used in the calculation.
-/// @returns {string} - Returns a relative syntax OKLCH color where the lightness is adjusted
+/// @returns {string} - Returns a relative HSL color where the lightness is adjusted
 /// based on the specified contrast level, resulting in either black or white.
+///
 /// @example scss
 ///   .my-component {
 ///      --bg: #09f;
 ///      background: var(--bg);
-///      color: adaptive-contrast(var(--bg));
+///      color: adaptive-contrast(var(--bg)); // hsl(from color(from var(--bg) var(--y-contrast)) h 0 l)
 ///    }
 @function adaptive-contrast($color) {
     $fn: meta.get-function('color', $css: true);
@@ -235,6 +263,7 @@ $_enhanced-accessibility: false;
 }
 
 /// Returns a contrast color for a passed color.
+/// @deprecated Use adaptive-contrast instead.
 /// @access public
 /// @group Color
 /// @param {Color} $background - The background color used to return a contrast/forground color for.
@@ -244,12 +273,15 @@ $_enhanced-accessibility: false;
 /// @require {function} contrast
 /// @returns {Color} - Returns either white, black, or the provided foreground
 /// color if it meets the required contrast level.
-/// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+///
 /// @example scss
 ///   .my-component {
-///      background: #09f
-///      color: text-contrast(#09f)
+///      background: #09f;
+///      color: text-contrast(#09f);
 ///    }
+///
+/// @see {function} adaptive-contrast
+/// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html WCAG 2.0 Contrast
 @function text-contrast($background, $foreground: white, $contrast: 'AAA') {
     @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
         @return $background;
@@ -295,6 +327,7 @@ $_enhanced-accessibility: false;
 }
 
 /// Mixes two colors to produce an opaque color.
+/// @deprecated Switch to CSS color-mix.
 /// @access private
 /// @group Color
 /// @param {Color} $color-1 - The first color, usually transparent.
@@ -317,6 +350,7 @@ $_enhanced-accessibility: false;
 }
 
 /// Retruns a comma separated list of hue, saturation, and lightness values for a given color.
+/// @deprecated Not needed anymore and will be removed in the future.
 /// @access public
 /// @group Color
 /// @param {Color} $color - The color to be converted to an HSL list of values.
@@ -328,16 +362,18 @@ $_enhanced-accessibility: false;
 }
 
 /// Calculates the contrast ratio between two colors.
-/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
 /// @access public
 /// @group Color
 /// @param {Color} $background - The background color.
 /// @param {Color} $foreground - The foreground color.
+///
+/// @example scss
+///   $conrast: contrast(#09f, #000); // 7
+///
+/// @returns {Number} - The contrast ratio between the background and foreground colors.
 /// @require {function} luminance
 /// @require {function} to-fixed
-/// @example scss
-///   contrast(#09f, #000);
-/// @returns {Number} - The contrast ratio between the background and foreground colors.
+/// @link https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests WCAG 2.0 Contrast Ratio
 @function contrast($background, $foreground) {
     $backLum: luminance($background) + 0.05;
     $foreLum: luminance($foreground) + 0.05;
@@ -346,13 +382,17 @@ $_enhanced-accessibility: false;
 }
 
 /// Calculates the luminance for a given color.
-/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests.
 /// @access public
 /// @group Color
 /// @param {Color} $color - The color to calculate luminance for.
+///
 /// @example scss
-///   luminance(#09f);
+///   $white: luminance(#fff); // 1
+///   $blue: luminance(#09f); // 0.3
+///   $black: luminance(#000); // 0
+///
 /// @returns {Number | String} - The calculated luminance of a given color
+/// @link https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests. WCAG 2.0 Contrast Ratio
 @function luminance($color) {
     @if meta.type-of($color) == 'color' {
         $r: math.div(color.red($color), 255);
@@ -375,10 +415,13 @@ $_enhanced-accessibility: false;
     @return if($value < 0.03928, math.div($value, 12.92), math.pow(math.div($value + 0.055, 1.055), 2.4));
 }
 
-/// Returns a list of colors to be used as chart brushes.
+/// Returns a list of colors to be used as chart brushes. The return value depends on the value of enhanced-accessibility.
 /// @access public
 /// @group Palettes
 /// @returns { List } - A list of colors to be used as chart brushes.
+/// @see {mixin} configure-colors
+/// @see $brushes-regular
+/// @see $brushes-color-blind
 @function chart-brushes() {
     @return if($_enhanced-accessibility, charts.$brushes-color-blind, charts.$brushes-regular);
 }
