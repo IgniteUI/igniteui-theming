@@ -48,12 +48,20 @@ $dark-bootstrap-validator: extend(
 
 /// Generates a dark indigo validator schema.
 /// @type {Map}
+/// @prop {Map} helper-text-color [contrast-color: ('gray', 50, .8)] - The color used for helper text.
 /// @prop {Map} text-error-color [contrast-color: ('gray', 50, .8)] - The color used for the error message.
 /// @requires $indigo-validator
 /// @requires $dark-validator
 $dark-indigo-validator: extend(
     $indigo-validator,
     (
+        helper-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
         text-error-color: (
             contrast-color: (
                 'gray',
