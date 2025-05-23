@@ -9,19 +9,32 @@
 
 /// Generates a light date-range-picker schema.
 /// @type {Map}
-/// @prop {Map} label-color [color: ('gray', 500)] - The Color for date range separator label.
-/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
+/// @prop {Map} label-color [color: ('gray', 700)] - The color for date range separator label.
+/// @prop {Map} ranges-background [color: 'surface'] - The background color for the predefined ranges area.
+/// @prop {Map} ranges-border [color: ('gray', 200)] - The border color for the predefined ranges area.
+/// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
 $light-date-range-picker: (
     label-color: (
         color: (
             'gray',
-            500,
+            700,
+        ),
+    ),
+
+    ranges-background: (
+        color: 'surface',
+    ),
+
+    ranges-border: (
+        color: (
+            'gray',
+            200,
         ),
     ),
 
     typography: (
         label: (
-            value: 'subtitle-1',
+            value: 'caption',
         ),
     ),
 );
@@ -54,10 +67,25 @@ $fluent-date-range-picker: extend(
 
 /// Generates a bootstrap date-range-picker schema.
 /// @type {Map}
+/// @prop {Map} ranges-border [color: ('gray', 300)] - The border color for the predefined ranges area.
+/// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @requires {Map} $light-date-range-picker
 $bootstrap-date-range-picker: extend(
     $light-date-range-picker,
     (
+        ranges-border: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        typography: (
+            label: (
+                value: 'body-1',
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'light',
@@ -67,10 +95,34 @@ $bootstrap-date-range-picker: extend(
 
 /// Generates an indigo date-range-picker schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('gray', 600)] - The color for date range separator label.
+/// @prop {Map} ranges-background [contrast-color: ('primary', 500)] - The background color for the predefined ranges area.
+/// @prop {Map} ranges-border [color: ('gray', 400)] - The border color for the predefined ranges area.
 /// @requires {Map} $light-date-range-picker
 $indigo-date-range-picker: extend(
     $light-date-range-picker,
     (
+        label-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
+        ranges-background: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        ranges-border: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
         _meta: (
             theme: 'indigo',
             variant: 'light',

@@ -9,10 +9,17 @@
 
 /// Generates a dark material date-range-picker schema.
 /// @type {Map}
+/// @prop {Map} ranges-border [color: ('gray', 100)] - The border color for the predefined ranges area.
 /// @requires $material-date-range-picker
 $dark-material-date-range-picker: extend(
     $material-date-range-picker,
     (
+        ranges-border: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -22,10 +29,17 @@ $dark-material-date-range-picker: extend(
 
 /// Generates a dark fluent date-range-picker schema.
 /// @type {Map}
+/// @prop {Map} ranges-border [color: ('gray', 100)] - The border color for the predefined ranges area.
 /// @requires $fluent-date-range-picker
 $dark-fluent-date-range-picker: extend(
     $fluent-date-range-picker,
     (
+        ranges-border: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -48,10 +62,35 @@ $dark-bootstrap-date-range-picker: extend(
 
 /// Generates a dark indigo date-range-picker schema.
 /// @type {Map}
+/// @prop {Map} label-color [contrast-color: ('primary', 500, 0.6)] - The color for date range separator label.
+/// @prop {Map} ranges-background [color: ('gray', 50)] - The background color for the predefined ranges area.
+/// @prop {Map} ranges-border [color: ('gray', 100)] - The border color for the predefined ranges area.
 /// @requires $indigo-date-range-picker
 $dark-indigo-date-range-picker: extend(
     $indigo-date-range-picker,
     (
+        label-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.6,
+            ),
+        ),
+
+        ranges-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        ranges-border: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         _meta: (
             theme: 'indigo',
             variant: 'dark',
