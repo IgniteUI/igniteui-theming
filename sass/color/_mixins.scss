@@ -30,19 +30,22 @@ $_added: () !default;
 }
 
 /// Sets up CSS custom properties for WCAG contrast calculations.
-/// These properties are used to determine the appropriate text color contrast
+/// These properties are used to determine the appropriate text contrast color
 /// based on WCAG accessibility guidelines.
 /// @access public
 /// @group Color
 /// @param {String} $level ['aa'] - WCAG contrast level ('a', 'aa', or 'aaa')
+///
 /// @example scss - Using the mixin with default AA level
 ///   .my-component {
 ///     @include adaptive-contrast();
 ///   }
+///
 /// @example scss - Using the mixin with AAA level
 ///   .my-component {
 ///     @include adaptive-contrast('aaa');
 ///   }
+///
 /// @example scss - Generated CSS custom properties
 ///   :root {
 ///     --ig-wcag-a: 0.31;    // Level A threshold
@@ -70,10 +73,14 @@ $_added: () !default;
 /// @group Palettes
 /// @param {Map} $palette - The palette used to generate CSS variables.
 /// @param {Boolean} $contrast [true] - Specify if contrast colors should be included.
+///
 /// @example scss Generate css variables for a palette
 ///    $palette: palette($primary: red, $secondary: blue, $gray: #000);
 ///    @include palette($palette);
+///
 /// @require {function} is-root
+/// @require {function} to-string
+/// @require {mixin} adaptive-contrast
 @mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
     $scope: if(is-root(), ':root', '&');
 

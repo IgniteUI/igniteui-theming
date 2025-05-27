@@ -142,6 +142,7 @@ $dark-bootstrap-tabs: extend(
 /// @prop {Map} item-active-icon-color [contrast-color: ('gray', 50, .8)] - The color used for the active tab icon.
 /// @prop {Map} item-disabled-icon-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled tab icon.
 /// @prop {Map} border-color [contrast-color: ('gray', 50, .15)] - The color used for the tab items bottom border.
+/// @prop {Map} border-color--hover [contrast-color: ('gray', 50, .15)] - The color used for the tab items bottom border on hover/focus.
 /// @prop {Map} button-color [contrast-color: ('gray', 50, .8)] - The color used for the button icon/text color.
 /// @prop {Map} button-hover-color [contrast-color: ('gray', 50)] - The color used for the button icon/text color on hover.
 /// @prop {Map} button-disabled-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled button icon/text.
@@ -212,6 +213,13 @@ $dark-indigo-tabs: extend(
             ),
         ),
         border-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.15,
+            ),
+        ),
+        border-color--hover: (
             contrast-color: (
                 'gray',
                 50,

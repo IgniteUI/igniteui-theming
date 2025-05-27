@@ -18,6 +18,7 @@
 /// @example scss Add the `h1` styles to custom CSS selector.
 ///   .fancy-h1 {
 ///      @include type-style('h1');
+///
 ///      color: mediumvioletred;
 ///   }
 @mixin type-style($category, $check: true) {
@@ -56,6 +57,10 @@
 }
 
 /// Styles all native elements that match the IElementCategories map.
+/// @example scss - Add type styles to all native elements.
+///   .ig-typography {
+///     @include type-style-elements();
+///   }
 /// @requires {mixin} type-style
 /// @requires $ITypeScale
 /// @requires $IElementCategories
@@ -75,6 +80,10 @@
 }
 
 /// Creates CSS classes with style rules for all categories in the ITypeScale map.
+/// @example scss - Create CSS classes for all type styles.
+///   .ig-typography {
+///     @include type-style-classes();
+///   }
 /// @requires {mixin} type-style
 /// @requires $ITypeScale
 @mixin type-style-classes() {
@@ -114,12 +123,15 @@
 /// @access public
 /// @param {String} $font-family - The font family to be used across all typographic elements.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
+/// @example scss
+///   @include typography('Roboto', $my-type-scale);
+///
 /// @requires {function} is-root
 /// @requires {mixin} type-style-vars
 /// @requires {mixin} type-style-classes
 /// @requires {mixin} type-style-elements
-/// @example scss
-///   @include typography('Roboto', $my-type-scale);
+/// @requires {function} is-root
+/// @requires {function} is-host
 @mixin typography($font-family, $type-scale) {
     $root: is-root();
     $host: is-host();

@@ -53,11 +53,16 @@ $factor: var(--ig-elevation-factor, 1);
 /// @access public
 /// @param {List} $shadows - A list of shadow values.
 /// @example scss
-///   box-shadow((0 0 2px 3px black, 0 6px 9px orange));
-///   // Return
-///   box-shadow:
-///      0 0 calc(--ig-elevation-factor * 2px) calc(--ig-elevation-factor * 3px) black,
-///      0 calc(--ig-elevation-factor * 6px) calc(--ig-elevation-factor * 9px) orange;
+///   .my-component {
+///     box-shadow: box-shadow((0 0 2px 3px black, 0 6px 9px orange));
+///   }
+///
+///   // Output
+///   .my-component {
+///     box-shadow:
+///         0 0 calc(--ig-elevation-factor * 2px) calc(--ig-elevation-factor * 3px) black,
+///         0 calc(--ig-elevation-factor * 6px) calc(--ig-elevation-factor * 9px) orange;
+///   }
 /// @return {List} - The transformed shadow list.
 /// @requires {function} _is-shadow
 /// @requires {function} _transform-shadow
@@ -90,8 +95,8 @@ $factor: var(--ig-elevation-factor, 1);
 /// @access public
 /// @param {String} $name - The name of the shadow.
 /// @example scss
-///   .my-class {
-///     box-shadow: elevation(5);
+///   .my-component {
+///     box-shadow: elevation(5); // var(--ig-elevation-5)
 ///   }
 /// @return {String} - The CSS elevation variable
 @function elevation($name) {
