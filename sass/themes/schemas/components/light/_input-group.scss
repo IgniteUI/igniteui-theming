@@ -28,7 +28,6 @@
 /// @prop {Map} idle-bottom-line-color [color: ('gray', 500)] - The bottom line and border colors in the idle state.
 /// @prop {Map} hover-bottom-line-color [color: ('gray', 900)] - The bottom line and border colors in the hover state.
 /// @prop {Map} focused-bottom-line-color [color: ('primary', 500)] - The bottom line and border colors in the focused state.
-/// @prop {Map} interim-bottom-line-color [color: ('primary', 500, .12)] - The bottom line and border colors during the to-focused transition.
 /// @prop {Map} disabled-bottom-line-color [color: ('gray', 500)] - The bottom line and border colors in the disabled state.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color for input groups of type border and fluent.
 /// @prop {Map} hover-border-color [color: ('gray', 900)] - The hover input border for input groups of type border and fluent.
@@ -184,13 +183,6 @@ $light-input-group: (
         color: (
             'primary',
             500,
-        ),
-    ),
-    interim-bottom-line-color: (
-        color: (
-            'primary',
-            500,
-            0.12,
         ),
     ),
     disabled-bottom-line-color: (
@@ -589,12 +581,6 @@ $bootstrap-input-group: extend(
     $light-input-group,
     $bootstrap-elevation-input-group,
     (
-        interim-bottom-line-color: (
-            color: (
-                'primary',
-                500,
-            ),
-        ),
         border-disabled-background: (
             color: (
                 'gray',
