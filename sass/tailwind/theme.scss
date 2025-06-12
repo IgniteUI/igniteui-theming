@@ -20,17 +20,9 @@
     }
 }
 
-@mixin generate-typography-vars {
-    @each $type in $ITypeScale {
-        --text-#{$type}: var(--ig-#{$type}-font-size);
-        --font-weight-#{$type}: var(--ig-#{$type}-font-weight);
-    }
-}
-
 @theme {
     @include generate-color-vars();
     @include generate-shadow-vars();
-    @include generate-typography-vars();
 
     --font-ig: var(--ig-font-family);
     --text-base: var(--ig-base-font-size);
