@@ -1,0 +1,202 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// @prop {Map} file-names-background [transparent] - The file names container background color.
+/// @prop {Map} file-names-background--focus [transparent] - The file names container background color when the file input is focused.
+/// @prop {Map} file-names-background--fill [transparent] - The file names container background color when the file input is filled.
+/// @prop {Map} file-names-background--disable [transparent] - The file names container background color when the file input is disabled.
+/// @prop {Map} file-selector-button-background [transparent] - The file input selector button background color.
+/// @prop {Map} file-selector-button-background--focus [transparent] - The selector button background color when the file input is focused.
+/// @prop {Map} file-selector-button-background--fill [transparent] - The selector button background color when the file input is filled.
+/// @prop {Map} file-selector-button-background--disable [transparent] - The selector button background color when the file input is disabled.
+/// @prop {Map} file-selector-button-foreground [color: ('gray', 900)] - The file input selector button foreground color.
+/// @prop {Map} file-selector-button-foreground--focus [color: ('gray', 900)] - The selector button foreground color when the file input is focused.
+/// @prop {Map} file-selector-button-foreground--fill [color: ('gray', 900)] - The selector button foreground color when the file input is filled.
+/// @prop {Map} file-selector-button-foreground--disable [color: ('gray', 500)] - The selector button foreground color when the file input is disabled.
+$light-file-input: (
+    file-names-background: transparent,
+    file-names-background--focus: transparent,
+    file-names-background--fill: transparent,
+    file-names-background--disable: transparent,
+    file-selector-button-background: transparent,
+    file-selector-button-background--focus: transparent,
+    file-selector-button-background--fill: transparent,
+    file-selector-button-background--disable: transparent,
+    file-selector-button-foreground: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    file-selector-button-foreground--focus: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    file-selector-button-foreground--fill: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    file-selector-button-foreground--disable: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+);
+
+/// Generates a light fluent file input schema.
+/// @type {Map}
+/// @requires $light-file-input
+$fluent-file-input: extend(
+    $light-file-input,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
+
+/// @prop {Map} file-names-background--disable [color: ('gray', 100)] - The file names container background color when the file input is disabled.
+/// @prop {Map} file-selector-button-background [color: ('gray', 300)] - The file input selector button background color.
+/// @prop {Map} file-selector-button-background--focus [color: ('gray', 300)] - The selector button background color when the file input is focused.
+/// @prop {Map} file-selector-button-background--fill [color: ('gray', 300)] - The selector button background color when the file input is filled.
+/// @prop {Map} file-selector-button-background--disable [color: ('gray', 100)] - The selector button background color when the file input is disabled.
+/// @prop {Map} file-selector-button-foreground [color: ('gray', 800)] - The file input selector button foreground color.
+/// @prop {Map} file-selector-button-foreground--focus [color: ('gray', 900)] - The selector button foreground color when the file input is focused.
+/// @prop {Map} file-selector-button-foreground--fill [color: ('gray', 900)] - The selector button foreground color when the file input is filled.
+/// @prop {Map} file-selector-button-foreground--disable [color: ('gray', 400)] - The selector button foreground color when the file input is disabled.
+/// @requires $light-file-input
+$bootstrap-file-input: extend(
+    $light-file-input,
+    (
+        file-names-background--disable: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        file-selector-button-background: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        file-selector-button-background--focus: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        file-selector-button-background--fill: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        file-selector-button-background--disable: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        file-selector-button-foreground: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        file-selector-button-foreground--disable: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
+
+/// @prop {Map} file-selector-button-foreground [color: ('gray', 700)] - The file input selector button foreground color.
+/// @prop {Map} file-selector-button-foreground--focus [color: ('gray', 700)] - The selector button foreground color when the file input is focused.
+/// @prop {Map} file-selector-button-foreground--fill [color: ('gray', 700)] - The selector button foreground color when the file input is filled.
+/// @prop {Map} file-selector-button-foreground--disable [color: ('gray', 900, .2)] - The selector button foreground color when the file input is disabled.
+/// @requires $light-file-input
+$indigo-file-input: extend(
+    $light-file-input,
+    (
+        file-selector-button-foreground: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        file-selector-button-foreground--focus: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        file-selector-button-foreground--fill: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        file-selector-button-foreground--disable: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);
+
+/// @prop {Map} file-selector-button-foreground [color: ('secondary', 500)] - The file input selector button foreground color.
+/// @prop {Map} file-selector-button-foreground--focus [color: ('secondary', 500)] - The selector button foreground color when the file input is focused.
+/// @prop {Map} file-selector-button-foreground--fill [color: ('secondary', 500)] - The selector button foreground color when the file input is filled.
+/// @requires $light-file-input
+$material-file-input: extend(
+    $light-file-input,
+    (
+        file-selector-button-foreground: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        file-selector-button-foreground--focus: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        file-selector-button-foreground--fill: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
