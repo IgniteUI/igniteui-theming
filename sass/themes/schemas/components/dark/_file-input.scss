@@ -1,0 +1,83 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../light/file-input' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark fluent combo schema.
+/// @type {Map}
+/// @prop {Map} file-selector-button-foreground--disabled [color: ('gray', 200)] - The selector button foreground color when the file input is disabled.
+/// @requires $fluent-file-input
+$dark-fluent-file-input: extend(
+    $fluent-file-input,
+    (
+        file-selector-button-foreground--disabled: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark bootstrap combo schema.
+/// @type {Map}
+/// @requires $bootstrap-file-input
+$dark-bootstrap-file-input: extend(
+    $bootstrap-file-input,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark indigo combo schema.
+/// @type {Map}
+/// @prop {Map} file-selector-button-foreground [color: ('primary', 500)] - The file input selector button foreground color.
+/// @prop {Map} file-selector-button-foreground--disabled [color: ('gray', 200)] - The selector button foreground color when the file input is disabled.
+/// @requires $indigo-file-input
+$dark-indigo-file-input: extend(
+    $indigo-file-input,
+    (
+        file-selector-button-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
+        ),
+        file-selector-button-foreground--disabled: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark material combo schema.
+/// @type {Map}
+/// @requires $material-file-input
+$dark-material-file-input: extend(
+    $material-file-input,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
