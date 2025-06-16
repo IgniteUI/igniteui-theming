@@ -29,10 +29,9 @@
     --text-base: var(--ig-base-font-size);
 }
 
-@mixin generate-typography-classes {
+@mixin generate-typography-utilities {
     @each $type in $ITypeScale {
-        .type-style-#{$type},
-        .ig-typography .type-style-#{$type} {
+        @utility type-style-#{$type} {
             @each $prop, $_ in $ITypeStyle {
                 #{$prop}: var(--ig-#{$type}-#{$prop});
             }
@@ -40,4 +39,4 @@
     }
 }
 
-@include generate-typography-classes();
+@include generate-typography-utilities();
