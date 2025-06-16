@@ -10,6 +10,7 @@
     @each $colorName, $shades in $IPaletteColors {
         @each $shade in $shades {
             --color-#{$colorName}-#{$shade}: var(--ig-#{$colorName}-#{$shade});
+            --color-#{$colorName}-#{$shade}-contrast: var(--ig-#{$colorName}-#{$shade}-contrast);
         }
     }
 }
@@ -28,9 +29,10 @@
     --text-base: var(--ig-base-font-size);
 }
 
-@mixin generate-typography-utilities {
+@mixin generate-typography-classes {
     @each $type in $ITypeScale {
-        @utility styles-#{$type} {
+        .type-style-#{$type},
+        .ig-typography .type-style-#{$type} {
             @each $prop, $_ in $ITypeStyle {
                 #{$prop}: var(--ig-#{$type}-#{$prop});
             }
@@ -38,4 +40,4 @@
     }
 }
 
-@include generate-typography-utilities();
+@include generate-typography-classes();
