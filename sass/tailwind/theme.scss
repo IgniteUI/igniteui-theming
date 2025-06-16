@@ -1,0 +1,42 @@
+/* stylelint-disable scss/operator-no-unspaced */
+/* stylelint-disable scss/at-rule-no-unknown */
+@use 'sass:string';
+@use 'sass:map';
+@use '../color/types' as *;
+@use '../typography/types' as *;
+@use '../elevations/presets/material' as *;
+
+@mixin generate-color-vars {
+    @each $colorName, $shades in $IPaletteColors {
+        @each $shade in $shades {
+            --color-#{$colorName}-#{$shade}: var(--ig-#{$colorName}-#{$shade});
+            --color-#{$colorName}-#{$shade}-contrast: var(--ig-#{$colorName}-#{$shade}-contrast);
+        }
+    }
+}
+
+@mixin generate-shadow-vars {
+    @each $level, $shadow in $elevations {
+        --shadow-elevation-#{$level}: var(--ig-elevation-#{$level});
+    }
+}
+
+@theme {
+    @include generate-color-vars();
+    @include generate-shadow-vars();
+
+    --font-ig: var(--ig-font-family);
+    --text-base: var(--ig-base-font-size);
+}
+
+@mixin generate-typography-utilities {
+    @each $type in $ITypeScale {
+        @utility type-style-#{$type} {
+            @each $prop, $_ in $ITypeStyle {
+                #{$prop}: var(--ig-#{$type}-#{$prop});
+            }
+        }
+    }
+}
+
+@include generate-typography-utilities();
