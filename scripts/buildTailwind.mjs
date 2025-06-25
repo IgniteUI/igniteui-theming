@@ -1,45 +1,47 @@
 import { compile } from 'sass';
 import path from 'path';
-import { mkdirSync, writeFileSync, readdirSync } from 'fs';
+import { mkdirSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
+import { globby } from 'globby';
+import report from './report.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Define input and output
+// Paths
 const inputFile = path.resolve(__dirname, '../sass/tailwind/theme.scss');
 const outputDir = path.resolve(__dirname, '../tailwind');
 const outputFile = path.join(outputDir, 'theme.css');
 
-// Ensure output directory exists
+const presetsInputDir = path.resolve(__dirname, '../sass/tailwind/presets');
+const presetsOutputDir = path.resolve(__dirname, '../tailwind/presets');
+
+// Ensure output directories exist
 mkdirSync(outputDir, { recursive: true });
+mkdirSync(presetsOutputDir, { recursive: true });
 
 // Compile main theme.scss
 const { css } = compile(inputFile, {
   loadPaths: ['sass'],
-  style: 'expanded',
+  style: 'compressed',
 });
 writeFileSync(outputFile, css, 'utf-8');
-console.log(`✅ compiled tailwind theme`);
+report.success('compiled tailwind theme');
 
 // Compile all presets
-const presetsInputDir = path.resolve(__dirname, '../sass/tailwind/presets');
-const presetsOutputDir = path.resolve(__dirname, '../tailwind/presets');
+const presetFiles = await globby(`${presetsInputDir}/**/*.scss`);
 
-// Ensure output directory exists
-mkdirSync(presetsOutputDir, { recursive: true });
+for (const file of presetFiles) {
+  const relativePath = path.relative(presetsInputDir, file);
+  const outputPath = path.join(presetsOutputDir, relativePath.replace(/\.scss$/, '.css'));
 
-// Get all .scss files in presets folder
-const presetFiles = readdirSync(presetsInputDir).filter(file => file.endsWith('.scss'));
+  // Ensure output subfolder exists
+  mkdirSync(path.dirname(outputPath), { recursive: true });
 
-presetFiles.forEach(file => {
-  const inputPath = path.join(presetsInputDir, file);
-  const outputPath = path.join(presetsOutputDir, file.replace(/\.scss$/, '.css'));
-
-  const { css } = compile(inputPath, {
+  const { css } = compile(file, {
     loadPaths: ['sass'],
-    style: 'expanded',
+    style: 'compressed',
   });
 
   writeFileSync(outputPath, css, 'utf-8');
-});
+}
