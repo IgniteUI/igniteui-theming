@@ -16,7 +16,7 @@ $factor: var(--ig-elevation-factor, 1);
 @function _is-shadow($shadow) {
     $lastIndex: list.length($shadow);
 
-    @if type-of($shadow) != list {
+    @if meta.type-of($shadow) != list {
         @return false;
     }
 
