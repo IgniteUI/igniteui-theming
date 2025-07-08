@@ -244,6 +244,9 @@ $light-days-view: extend(
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
+/// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
+/// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
+
 /// @prop {Map} typography [
 ///   weekday-label: (value: 'body-1'),
 ///   content: (value: 'body-1')
@@ -254,6 +257,20 @@ $material-days-view: extend(
     $light-days-view,
     $material-base,
     (
+        date-current-border-radius: (
+            border-radius: (
+                rem(20px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+        date-special-border-radius: (
+            border-radius: (
+                rem(20px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
         date-hover-background: (
             color: (
                 'gray',
@@ -590,6 +607,8 @@ $material-days-view: extend(
 /// @prop {List} border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for calendar.
 /// @prop {List} date-border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for the date outline
 /// @prop {List} date-range-border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for the date outline in range selection.
+/// @prop {List} date-current-border-radius [(rem(25px), rem(0), rem(25px))] - The border radius used for the current date selection.
+/// @prop {List} date-special-border-radius [(rem(25px), rem(0), rem(25px))] - The border radius used for the special date selection.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - Small, medium, and large sizes for dates (days view), months (months view), and years (years view).
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] -Small, medium, and large sizes for the inner circle of a selected special dates.
@@ -628,6 +647,20 @@ $fluent-days-view: extend(
         date-range-border-radius: (
             border-radius: (
                 rem(0),
+                rem(0),
+                rem(25px),
+            ),
+        ),
+        date-current-border-radius: (
+            border-radius: (
+                rem(25px),
+                rem(0),
+                rem(25px),
+            ),
+        ),
+        date-special-border-radius: (
+            border-radius: (
+                rem(25px),
                 rem(0),
                 rem(25px),
             ),
@@ -1024,6 +1057,8 @@ $fluent-days-view: extend(
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline in range selection.
+/// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
+/// @prop {List} date-special-border-radius [(rem(30px), rem(0), rem(30px))] - The border radius used for the special date selection.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {Map} typography [
@@ -1046,6 +1081,20 @@ $bootstrap-days-view: extend(
         date-range-border-radius: (
             border-radius: (
                 rem(4px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+        date-current-border-radius: (
+            border-radius: (
+                rem(20px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+        date-special-border-radius: (
+            border-radius: (
+                rem(20px),
                 rem(0),
                 rem(20px),
             ),
@@ -1398,8 +1447,9 @@ $bootstrap-days-view: extend(
 /// @prop {Map} date-disabled-foreground [color: ('gray', 600, .38)] - The foreground color of disabled dates.
 /// @prop {Map} date-disabled-range-foreground [color: ('gray', 600, .38)] - The foreground color of disabled dates in range selection.
 /// @prop {List} inner-size [(rem(24px), rem(28px), rem(32px))] - Small, medium, and large sizes for the inner circle of a selected special dates.
-/// @prop {List} border-radius [(rem(6px), rem(0), rem(6px))] - The border radius used for calendar.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the week numbers column.
+/// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
+/// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
 /// @prop {Map} date-special-range-foreground [color: ('primary', 500)] - The foreground color of a special date in range selection.
 /// @prop {Map} typography [weekday-label: (value: 'body-2'), content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-days-view
@@ -1408,6 +1458,20 @@ $indigo-days-view: extend(
     $light-days-view,
     $indigo-base,
     (
+        date-current-border-radius: (
+            border-radius: (
+                rem(20px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
+        date-special-border-radius: (
+            border-radius: (
+                rem(20px),
+                rem(0),
+                rem(20px),
+            ),
+        ),
         inner-size: (
             sizable: (
                 rem(24px),
