@@ -157,6 +157,8 @@
 /// @param {List} $border-radius [null] - The border radius used for the calendar.
 /// @param {List} $date-border-radius [null] - The border radius used for the date.
 /// @param {List} $date-range-border-radius [null] - The border radius used for the date range selection.
+/// @param {List} $date-current-border-radius [null] - The border radius used for the current date .
+/// @param {List} $date-special-border-radius [null] - The border radius used for the special date.
 /// @param {List} $ym-border-radius [null] - The border radius used for the month/year.
 ///
 /// @param {Color} $actions-divider-color [null] - The border color used for the date-picker actions divider.
@@ -310,6 +312,8 @@
     $date-border-radius: null,
     $week-number-border-radius: null,
     $date-range-border-radius: null,
+    $date-current-border-radius: null,
+    $date-special-border-radius: null,
     $ym-border-radius: null,
 
     $actions-divider-color: null,
@@ -329,6 +333,22 @@
 
     $theme: digest-schema($calendar-schema);
     $variant: map.get($schema, '_meta', 'theme');
+
+    @if not($date-range-border-radius) and $date-border-radius {
+        $date-range-border-radius: $date-border-radius;
+    }
+
+    @if not($date-border-radius) and $date-range-border-radius {
+        $date-border-radius: $date-range-border-radius;
+    }
+
+    @if not($date-current-border-radius) and $date-border-radius {
+        $date-current-border-radius: $date-border-radius;
+    }
+
+    @if not($date-special-border-radius) and $date-border-radius {
+        $date-special-border-radius: $date-border-radius;
+    }
 
     // base start
     @if not($header-foreground) and $header-background {
@@ -1052,6 +1072,8 @@
             border-radius: $border-radius,
             date-border-radius: $date-border-radius,
             date-range-border-radius: $date-range-border-radius,
+            date-current-border-radius: $date-current-border-radius,
+            date-special-border-radius: $date-special-border-radius,
             ym-border-radius: $ym-border-radius,
             week-number-border-radius: $week-number-border-radius,
             date-border-color: $date-border-color,
