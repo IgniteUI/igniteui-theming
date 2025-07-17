@@ -796,14 +796,6 @@
         @if not($ym-selected-current-outline-color) and $ym-selected-current-foreground {
             $ym-selected-current-outline-color: var(--ym-selected-current-foreground);
         }
-
-        @if not($ym-selected-foreground) and $content-foreground {
-            $ym-selected-foreground: var(--content-foreground);
-        }
-
-        @if not($ym-selected-hover-foreground) and $ym-selected-foreground {
-            $ym-selected-hover-foreground: var(--content-foreground);
-        }
     }
 
     @if not($ym-selected-current-background) and $ym-selected-background {
@@ -820,6 +812,14 @@
 
     @if not($ym-current-hover-foreground) and $ym-current-hover-background {
         $ym-current-hover-foreground: adaptive-contrast(var(--ym-current-hover-background));
+    }
+
+    @if not($ym-selected-foreground) and $ym-selected-background {
+        $ym-selected-foreground: adaptive-contrast(var(--ym-selected-background));
+    }
+
+    @if not($ym-selected-hover-foreground) and $ym-selected-hover-background {
+        $ym-selected-hover-foreground: adaptive-contrast(var(--ym-selected-hover-background));
     }
 
     @if not($ym-selected-current-foreground) and $ym-selected-current-background {
