@@ -182,30 +182,16 @@
         $focus-border-color: var(--border-color);
     }
 
-    @if not($selected-border-color) and $border-color {
-        $selected-border-color: var(--border-color);
+    @if not($selected-border-color) and $selected-background {
+        $selected-border-color: var(--selected-background);
     }
 
-    @if not($hover-selected-border-color) and $border-color {
-        $hover-selected-border-color: var(--border-color);
+    @if not($hover-selected-border-color) and $hover-selected-background {
+        $hover-selected-border-color: var(--hover-selected-background);
     }
 
-    @if not($focus-selected-border-color) and $border-color {
-        $focus-selected-border-color: var(--border-color);
-    }
-
-    @if $variant == 'indigo' {
-        @if not($selected-border-color) and $selected-background {
-            $selected-border-color: var(--selected-background);
-        }
-
-        @if not($hover-selected-border-color) and $hover-selected-background {
-            $hover-selected-border-color: var(--hover-selected-background);
-        }
-
-        @if not($focus-selected-border-color) and $focus-selected-background {
-            $focus-selected-border-color: var(--focus-selected-background);
-        }
+    @if not($focus-selected-border-color) and $focus-selected-background {
+        $focus-selected-border-color: var(--focus-selected-background);
     }
 
     @if $variant == 'bootstrap' or $variant == 'indigo' {
