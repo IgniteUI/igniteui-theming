@@ -150,6 +150,10 @@
         }
     }
 
+    @if not($track-step-color) and $base-track-color {
+        $track-step-color: adaptive-contrast(var(--base-track-color));
+    }
+
     @if not($disabled-base-track-color) and $base-track-color {
         $disabled-base-track-color: hsla(from var(--base-track-color) h s l / 0.5);
     }
