@@ -1,0 +1,100 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light chat component schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('surface', 500)] - The background color of the chat component.
+/// @prop {Map} message-background [color: ('gray', 200)] - The background color of the sent message bubble.
+/// @prop {Map} message-color [color: ('gray', 800)] - The text color of the chat messages.
+/// @prop {Map} image-background [color: ('gray', 100)] - The background color of the image message container.
+/// @prop {Map} image-border [color: ('gray', 300)] - The border color of the image message container.
+$light-chat: (
+    background: (
+        color: (
+            'surface',
+            500,
+        ),
+    ),
+    message-background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    message-color: (
+        color: (
+            'gray',
+            800,
+        ),
+    ),
+    image-background: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+    image-border: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+);
+
+/// Generates a light material chat schema.
+/// @type {Map}
+/// @requires {Map} $light-chat
+$material-chat: extend(
+    $light-chat,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light fluent chat schema.
+/// @type {Map}
+/// @requires {Map} $light-chat
+$fluent-chat: extend(
+    $light-chat,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light bootstrap chat schema.
+/// @type {Map}
+/// @requires {Map} $light-chat
+$bootstrap-chat: extend(
+    $light-chat,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light indigo chat schema.
+/// @type {Map}
+/// @requires {Map} $light-chat
+$indigo-chat: extend(
+    $light-chat,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);
