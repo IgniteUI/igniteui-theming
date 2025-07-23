@@ -61,6 +61,7 @@
 @use './tree' as *;
 @use './validator' as *;
 @use './watermark' as *;
+@use './file-input' as *;
 
 /// Used to create material component themes.
 /// Use in combination with dark palettes.
@@ -124,6 +125,7 @@ $dark-material-schema: (
     tree: $dark-material-tree,
     validator: $dark-material-validator,
     watermark: $dark-material-watermark,
+    file-input: $dark-material-file-input,
     _meta: (
         theme: 'material',
         variant: 'dark',
@@ -192,6 +194,7 @@ $dark-fluent-schema: (
     tree: $dark-fluent-tree,
     validator: $dark-fluent-validator,
     watermark: $dark-fluent-watermark,
+    file-input: $dark-fluent-file-input,
     _meta: (
         theme: 'fluent',
         variant: 'dark',
@@ -260,6 +263,7 @@ $dark-bootstrap-schema: (
     tree: $dark-bootstrap-tree,
     validator: $dark-bootstrap-validator,
     watermark: $dark-bootstrap-watermark,
+    file-input: $dark-bootstrap-file-input,
     _meta: (
         theme: 'bootstrap',
         variant: 'dark',
@@ -328,6 +332,7 @@ $dark-indigo-schema: (
     tree: $dark-indigo-tree,
     validator: $dark-indigo-validator,
     watermark: $dark-indigo-watermark,
+    file-input: $dark-indigo-file-input,
     _meta: (
         theme: 'indigo',
         variant: 'dark',

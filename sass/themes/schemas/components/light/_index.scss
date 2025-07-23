@@ -61,6 +61,7 @@
 @use './tree' as *;
 @use './validator' as *;
 @use './watermark' as *;
+@use './file-input' as *;
 
 /// Used to create material component themes.
 /// Use in combination with light palettes.
@@ -124,6 +125,7 @@ $light-material-schema: (
     tree: $material-tree,
     validator: $material-validator,
     watermark: $material-watermark,
+    file-input: $material-file-input,
     _meta: (
         theme: 'material',
         variant: 'light',
@@ -192,6 +194,7 @@ $light-fluent-schema: (
     tree: $fluent-tree,
     validator: $fluent-validator,
     watermark: $fluent-watermark,
+    file-input: $fluent-file-input,
     _meta: (
         theme: 'fluent',
         variant: 'light',
@@ -260,6 +263,7 @@ $light-bootstrap-schema: (
     tree: $bootstrap-tree,
     validator: $bootstrap-validator,
     watermark: $bootstrap-watermark,
+    file-input: $bootstrap-file-input,
     _meta: (
         theme: 'bootstrap',
         variant: 'light',
@@ -328,6 +332,7 @@ $light-indigo-schema: (
     tree: $indigo-tree,
     validator: $indigo-validator,
     watermark: $indigo-watermark,
+    file-input: $indigo-file-input,
     _meta: (
         theme: 'indigo',
         variant: 'light',
