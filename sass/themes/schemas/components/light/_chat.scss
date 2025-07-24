@@ -10,6 +10,9 @@
 /// Generates a light chat component schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('surface', 500)] - The background color of the chat component.
+/// @prop {Map} header-background [color: ('surface', 500)] - The background color of the chat header.
+/// @prop {Map} header-color [contrast-color: ('surface', 500)] - The text color of the chat header.
+/// @prop {Map} message-background [color: ('gray', 200)] - The background color of the sent message bubble.
 /// @prop {Map} message-background [color: ('gray', 200)] - The background color of the sent message bubble.
 /// @prop {Map} message-color [color: ('gray', 800)] - The text color of the chat messages.
 /// @prop {Map} image-background [color: ('gray', 100)] - The background color of the image message container.
@@ -17,6 +20,18 @@
 $light-chat: (
     background: (
         color: (
+            'surface',
+            500,
+        ),
+    ),
+    header-background: (
+        color: (
+            'surface',
+            500,
+        ),
+    ),
+    header-color: (
+        contrast-color: (
             'surface',
             500,
         ),
