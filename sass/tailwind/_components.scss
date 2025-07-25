@@ -1,0 +1,543 @@
+/* stylelint-disable scss/at-rule-no-unknown */
+/* stylelint-disable scss/operator-no-unspaced */
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../index' as *;
+@use '../themes/schemas/' as *;
+
+$themes-schemas: (
+    material: $light-material-schema,
+    fluent: $light-fluent-schema,
+    bootstrap: $light-bootstrap-schema,
+    indigo: $light-indigo-schema,
+    dark-material: $dark-material-schema,
+    dark-fluent: $dark-fluent-schema,
+    dark-bootstrap: $dark-bootstrap-schema,
+    dark-indigo: $dark-indigo-schema,
+);
+
+// avatar
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-avatar-background-* {
+        $theme: avatar-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// badge
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-badge-background-* {
+        $theme: badge-theme(
+            $schema: $schema-value,
+            $background-color: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// bottom nav
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-bottom-nav-background-* {
+        $theme: bottom-nav-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// button-group
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-button-group-color-* {
+        $theme: button-group-theme(
+            $schema: $schema-value,
+            $item-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// flat button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-flat-button-color-* {
+        $theme: flat-button-theme(
+            $schema: $schema-value,
+            $foreground: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// contained button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-contained-button-color-* {
+        $theme: contained-button-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// outlined button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-outlined-button-color-* {
+        $theme: outlined-button-theme(
+            $schema: $schema-value,
+            $foreground: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// fab button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-fab-button-color-* {
+        $theme: fab-button-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// card
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-card-background-* {
+        $theme: card-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// chip
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-chip-color-* {
+        $theme: chip-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// carousel
+@each $schema-name, $schema-value in $themes-schemas {
+    $carousel-schema: digest-schema(map.get($schema-value, carousel));
+
+    @utility #{"" + $schema-name}-carousel-button-background-* {
+        $theme: carousel-theme(
+            $schema: $schema-value,
+            $button-background: --value([string.unquote('*')]),
+            $indicator-background: map.get($carousel-schema, 'indicator-background'),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+
+    @utility #{"" + $schema-name}-carousel-indicator-background-* {
+        $theme: carousel-theme(
+            $schema: $schema-value,
+            $indicator-background: --value([string.unquote('*')]),
+            $button-background: map.get($carousel-schema, 'button-background'),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// calendar
+@each $schema-name, $schema-value in $themes-schemas {
+    $calendar-schema: digest-schema(map.get($schema-value, calendar));
+
+    @utility #{"" + $schema-name}-calendar-accent-color-* {
+        $theme: calendar-theme(
+            $schema: $schema-value,
+            $header-background: --value([string.unquote('*')]),
+            $content-background: map.get($calendar-schema, 'content-background'),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+
+    @utility #{"" + $schema-name}-calendar-background-* {
+        $theme: calendar-theme(
+            $schema: $schema-value,
+            $content-background: --value([string.unquote('*')]),
+            $header-background: map.get($calendar-schema, 'header-background'),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// checkbox
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-checkbox-color-* {
+        $theme: checkbox-theme(
+            $schema: $schema-value,
+            $empty-color: --value([string.unquote('*')]),
+            $fill-color: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// combo
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-combo-toggle-button-* {
+        $theme: combo-theme(
+            $schema: $schema-value,
+            $toggle-button-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// expansion panel
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-expansion-panel-header-background-* {
+        $expansion-panel-schema: map.get($schema-value, expansion-panel);
+        $theme: expansion-panel-theme(
+            $schema: $schema-value,
+            $header-background: --value([string.unquote('*')]),
+            $body-background: map.get($expansion-panel-schema, 'body-background'),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// grid
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-grid-background-* {
+        $theme: grid-theme(
+            $schema: $schema-value,
+            $content-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// icon
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-icon-color-* {
+        $theme: icon-theme(
+            $schema: $schema-value,
+            $color: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// flat icon-button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-flat-icon-button-color-* {
+        $theme: flat-icon-button-theme(
+            $schema: $schema-value,
+            $foreground: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// contained icon-button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-contained-icon-button-color-* {
+        $theme: contained-icon-button-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// outlined icon-button
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-outlined-icon-button-color-* {
+        $theme: outlined-icon-button-theme(
+            $schema: $schema-value,
+            $foreground: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// input
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-input-box-background-* {
+        $theme: input-group-theme(
+            $schema: $schema-value,
+            $box-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-input-border-color-* {
+        $theme: input-group-theme(
+            $schema: $schema-value,
+            $border-color: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-input-search-background-* {
+        $theme: input-group-theme(
+            $schema: $schema-value,
+            $search-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// list
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-list-background-* {
+        $theme: list-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-list-item-background-* {
+        $theme: list-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// navbar
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-navbar-background-* {
+        $theme: navbar-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// navdrawer
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-navdrawer-background-* {
+        $theme: navdrawer-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// query builder
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-query-builder-background-* {
+        $theme: query-builder-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// radio
+
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-radio-color-* {
+        $theme: radio-theme(
+            $schema: $schema-value,
+            $empty-color: --value([string.unquote('*')]),
+            $fill-color: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// select
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-select-toggle-button-* {
+        $theme: select-theme(
+            $schema: $schema-value,
+            $toggle-button-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// slider
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-slider-color-* {
+        $slider-schema: digest-schema(map.get($schema-value, slider));
+        $theme: '';
+
+        @if $schema-name == 'material' or $schema-name == 'dark-material' {
+            $theme: slider-theme(
+                $schema: $schema-value,
+                $thumb-color: --value([string.unquote('*')]),
+            );
+        } @else if $schema-name == 'bootstrap' or $schema-name == 'dark-bootstrap' {
+            $theme: slider-theme(
+                $schema: $schema-value,
+                $thumb-color: --value([string.unquote('*')]),
+                $base-track-color: map.get($slider-schema, 'base-track-color'),
+            );
+        } @else {
+            $theme: slider-theme(
+                $schema: $schema-value,
+                $track-color: --value([string.unquote('*')]),
+                $base-track-color: map.get($slider-schema, 'base-track-color'),
+            );
+        }
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// snackbar
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-snackbar-background-* {
+        $theme: snackbar-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// splitter
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-splitter-color-* {
+        $theme: splitter-theme(
+            $schema: $schema-value,
+            $bar-color: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// stepper
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-stepper-step-background-* {
+        $theme: stepper-theme(
+            $schema: $schema-value,
+            $step-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// switch
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-switch-color-* {
+        $switch-schema: digest-schema(map.get($schema-value, switch));
+        $theme: '';
+
+        @if $schema-name == 'material' or $schema-name == 'dark-material' {
+            $theme: switch-theme(
+                $schema: $schema-value,
+                $track-off-color: --value([string.unquote('*')]),
+                $track-on-color: --value([string.unquote('*')]),
+            );
+        } @else {
+            $theme: switch-theme(
+                $schema: $schema-value,
+                $thumb-off-color: map.get($switch-schema, 'thumb-off-color'),
+                $track-on-color: --value([string.unquote('*')]),
+            );
+        }
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// tabs
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-tabs-background-* {
+        $theme: tabs-theme(
+            $schema: $schema-value,
+            $item-background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// toast
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-toast-background-* {
+        $theme: toast-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// tooltip
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-tooltip-background-* {
+        $theme: tooltip-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
+
+// tree (should be placed on the tree-node, not on the igx-tree
+@each $schema-name, $schema-value in $themes-schemas {
+    @utility #{"" + $schema-name}-tree-background-* {
+        $theme: tree-theme(
+            $schema: $schema-value,
+            $background: --value([string.unquote('*')]),
+        );
+
+        @include css-vars-from-theme($theme, map.get($theme, 'name'));
+    }
+}
