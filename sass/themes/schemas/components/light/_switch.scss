@@ -111,6 +111,7 @@ $light-switch: extend(
 /// @prop {Color} border-disabled-color [transparent] - The border color of the disabled switch.
 /// @prop {Map} thumb-on-color [color: ('secondary', 500)] - The color of the thumb when the switch is on.
 /// @prop {Map} thumb-off-color [color: ('gray', 50)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-off-hover-color [color: ('gray', 50)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} thumb-disabled-color [color: ('gray', 200)] - The color of the thumb when the switch is disabled.
 /// @prop {Map} track-off-color [color: ('gray', 500)] - The color of the track when the switch is off.
 /// @prop {Map} track-on-color [color: ('secondary', 200)] - The color of the track when the switch is on.
@@ -142,6 +143,12 @@ $material-switch: extend(
             ),
         ),
         thumb-off-color: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        thumb-off-hover-color: (
             color: (
                 'gray',
                 50,
@@ -205,6 +212,7 @@ $material-switch: extend(
 /// @prop {Map} border-disabled-color [color: ('gray', 400)] - The border color of the disabled switch.
 /// @prop {Map} border-on-hover-color [color: ('primary', 800)] - The border color of the on-switch.
 /// @prop {Map} thumb-off-color [color: ('gray', 700)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-off-hover-color [color: ('gray', 900)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} track-disabled-color [contrast-color: ('primary', 800)] - The color of the track when the switch is disabled.
 /// @prop {Map} track-on-hover-color [color: ('primary', 800)] - The color of the track when the switch is on and hovered.
 /// @prop {Map} track-on-disabled-color [color: ('gray', 400)] - The color of the track when the switch is on and disabled.
@@ -233,6 +241,12 @@ $fluent-switch: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+        thumb-off-hover-color: (
+            color: (
+                'gray',
+                900,
             ),
         ),
         border-hover-color: (
@@ -327,6 +341,7 @@ $fluent-switch: extend(
 /// @prop {Map} border-disabled-color [color: ('gray', 300)] - The border color of the disabled switch.
 /// @prop {Map} thumb-on-color [contrast-color: ('primary', 800)] - The color of the thumb when the switch is on.
 /// @prop {Map} thumb-off-color [color: ('gray', 400)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-off-hover-color [color: ('gray', 500)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} thumb-disabled-color [color: ('gray', 300)] - The color of the thumb when the switch is disabled.
 /// @prop {Map} track-on-disabled-color [color: ('primary', 200)] - The color of the track when the switch is on and disabled.
 /// @prop {Map} thumb-on-disabled-color [contrast-color: ('primary', 800)] - The color of the thumb when the switch is on and disabled.
@@ -398,6 +413,12 @@ $bootstrap-switch: extend(
                 400,
             ),
         ),
+        thumb-off-hover-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
         thumb-disabled-color: (
             color: (
                 'gray',
@@ -449,6 +470,7 @@ $bootstrap-switch: extend(
 /// @prop {Map} thumb-on-color [contrast-color: ('gray', 900)] - The color of the thumb when the switch is on.
 /// @prop {Map} track-on-hover-color [color: ('primary', 400)] - The color of the track when the switch is on and hovered.
 /// @prop {Map} thumb-off-color [color: ('gray', 500)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-off-hover-color [color: ('gray', 600)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} thumb-disabled-color [color: ('gray', 900, .15)] - The color of the thumb when the switch is disabled.
 /// @prop {Map} thumb-on-disabled-color [contrast-color: ('gray', 900, .4)] - The color of the thumb when the switch is on and disabled.
 /// @prop {Map} track-on-disabled-color [color: ('primary', 400, .5)] - The color of the track when the switch is on and disabled.
@@ -557,6 +579,12 @@ $indigo-switch: extend(
             color: (
                 'gray',
                 500,
+            ),
+        ),
+        thumb-off-hover-color: (
+            color: (
+                'gray',
+                600,
             ),
         ),
         thumb-disabled-color: (

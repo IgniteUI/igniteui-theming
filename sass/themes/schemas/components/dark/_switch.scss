@@ -12,12 +12,19 @@
 /// Generates a dark material switch schema.
 /// @type {Map}
 /// @prop {Map} thumb-off-color [color: ('gray', 100)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-off-hover-color [color: ('gray', 100)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} thumb-disabled-color [color: ('gray', 200)] - The color of the thumb when the switch is disabled.
 /// @requires $material-switch
 $dark-material-switch: extend(
     $material-switch,
     (
         thumb-off-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        thumb-off-hover-color: (
             color: (
                 'gray',
                 100,
@@ -199,6 +206,7 @@ $dark-bootstrap-switch: extend(
 /// @prop {Map} label-hover-color [contrast-color: ('gray', 50)] - The color of the switch label on hover.
 /// @prop {Map} label-disabled-color [contrast-color: ('gray', 50, .2)] - The color of the switch label when the switch is disabled.
 /// @prop {Map} thumb-off-color [contrast-color: ('gray', 50, .6)] - The color of the thumb when the switch is off.
+/// @prop {Map} thumb-off-hover-color [contrast-color: ('gray', 50, .8)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} thumb-on-color [contrast-color: ('gray', 50)] - The color of the thumb when the switch is on.
 /// @prop {Map} thumb-disabled-color [contrast-color: ('gray', 50, .2)] - The color of the thumb when the switch is disabled.
 /// @prop {Map} thumb-on-disabled-color [contrast-color: ('gray', 50, .2)] - The color of the thumb when the switch is on and disabled.
@@ -235,6 +243,13 @@ $dark-indigo-switch: extend(
                 'gray',
                 50,
                 0.6,
+            ),
+        ),
+        thumb-off-hover-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
             ),
         ),
         thumb-on-color: (
