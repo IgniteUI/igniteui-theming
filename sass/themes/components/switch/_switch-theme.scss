@@ -17,6 +17,7 @@
 /// @param {Color} $track-on-color [null] - The color of the track when the switch is on.
 /// @param {Color} $track-on-hover-color [null] - The color of the track when the switch is on and hovered.
 /// @param {Color} $thumb-off-color [null] - The color of the thumb when the switch is off.
+/// @param {Color} $thumb-off-hover-color [null] - The color of the thumb when the switch is off and hovered.
 /// @param {Color} $track-off-color [null] - The color of the track when the switch is off.
 /// @param {Color} $thumb-disabled-color [null] - The color of the thumb when the switch is disabled.
 /// @param {Color} $thumb-on-disabled-color [null] - The color of the thumb when the switch is on and disabled.
@@ -54,6 +55,7 @@
     $track-on-hover-color: null,
 
     $thumb-off-color: null,
+    $thumb-off-hover-color: null,
     $track-off-color: null,
 
     $track-disabled-color: null,
@@ -141,6 +143,10 @@
 
         @if not($border-hover-color) and $border-color {
             $border-hover-color: hsl(from var(--border-color) h s calc(l * 0.8));
+        }
+
+        @if not($thumb-off-hover-color) and $thumb-off-color {
+            $thumb-off-hover-color: hsla(from var(--thumb-off-color) h s l / 0.9);
         }
 
         @if not($thumb-on-color) and $track-on-color {
@@ -241,6 +247,7 @@
             track-on-hover-color: $track-on-hover-color,
 
             thumb-off-color: $thumb-off-color,
+            thumb-off-hover-color: $thumb-off-hover-color,
             track-off-color: $track-off-color,
 
             track-disabled-color: $track-disabled-color,
