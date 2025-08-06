@@ -394,13 +394,13 @@ $schema: (
                         padding:
                             max(
                                 calc(
-                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-large, var(--ig-spacing, --ig-spacing))
+                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing, var(--ig-spacing, var(--ig-spacing-large)))
                                 ),
                                 calc(
-                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-medium, var(--ig-spacing, --ig-spacing))
+                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing, var(--ig-spacing, var(--ig-spacing-medium)))
                                 ),
                                 calc(
-                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-small, var(--ig-spacing, --ig-spacing))
+                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing, var(--ig-spacing, var(--ig-spacing-small)))
                                 )
                             );
                     }
@@ -419,13 +419,13 @@ $schema: (
                         padding-inline:
                             max(
                                 calc(
-                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-large, var(--ig-spacing-inline, --ig-spacing))
+                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing, var(--ig-spacing-inline, var(--ig-spacing-inline-large)))
                                 ),
                                 calc(
-                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-medium, var(--ig-spacing-inline, --ig-spacing))
+                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing, var(--ig-spacing-inline, var(--ig-spacing-inline-medium)))
                                 ),
                                 calc(
-                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-small, var(--ig-spacing-inline, --ig-spacing))
+                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing, var(--ig-spacing-inline, var(--ig-spacing-inline-small)))
                                 )
                             );
                     }
@@ -446,13 +446,13 @@ $schema: (
                         padding-block:
                             max(
                                 calc(
-                                    var(--is-large, 1) * max(#{$lg}, -1 * #{$lg}) * var(--ig-spacing-block-large, var(--ig-spacing-block, --ig-spacing))
+                                    var(--is-large, 1) * max(#{$lg}, -1 * #{$lg}) * var(--ig-spacing, var(--ig-spacing-block, var(--ig-spacing-block-large)))
                                 ),
                                 calc(
-                                    var(--is-medium, 1) * max(#{$md}, -1 * #{$md}) * var(--ig-spacing-block-medium, var(--ig-spacing-block, --ig-spacing))
+                                    var(--is-medium, 1) * max(#{$md}, -1 * #{$md}) * var(--ig-spacing, var(--ig-spacing-block, var(--ig-spacing-block-medium)))
                                 ),
                                 calc(
-                                    var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}) * var(--ig-spacing-block-small, var(--ig-spacing-block, --ig-spacing))
+                                    var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}) * var(--ig-spacing, var(--ig-spacing-block, var(--ig-spacing-block-small)))
                                 )
                             );
                     }
