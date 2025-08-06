@@ -172,9 +172,9 @@
     $lg: max(#{$lg}, -1 * #{$lg});
 
     @return max(
-        calc(var(--is-large, 1) * #{$lg} * var(--ig-spacing, var(#{$spacing}, var(#{$spacing}-large)))),
-        calc(var(--is-medium, 1) * #{$md} * var(--ig-spacing, var(#{$spacing}, var(#{$spacing}-medium)))),
-        calc(var(--is-small, 1) * #{$sm} * var(--ig-spacing, var(#{$spacing}, var(#{$spacing}-small))))
+        calc(var(--is-large, 1) * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, var(--ig-spacing)))),
+        calc(var(--is-medium, 1) * #{$md} * var(#{$spacing}-medium, var(#{$spacing}, var(--ig-spacing)))),
+        calc(var(--is-small, 1) * #{$sm} * var(#{$spacing}-small, var(#{$spacing}, var(--ig-spacing))))
     );
 }
 

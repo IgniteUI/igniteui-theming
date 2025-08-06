@@ -169,28 +169,13 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 @mixin spacing() {
     $scope: if(is-root(), ':root', '&');
 
-    @property --ig-spacing-small {
-        syntax: '<number> | <integer>';
-        initial-value: 1;
-        inherits: true;
-    }
-
-    @property --ig-spacing-medium {
-        syntax: '<number> | <integer>';
-        initial-value: 1;
-        inherits: true;
-    }
-
-    @property --ig-spacing-large {
+    @property --ig-spacing {
         syntax: '<number> | <integer>';
         initial-value: 1;
         inherits: true;
     }
 
     #{$scope} {
-        --ig-spacing-small: var(--ig-spacing, 1);
-        --ig-spacing-medium: var(--ig-spacing, 1);
-        --ig-spacing-large: var(--ig-spacing, 1);
         --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
         --ig-spacing-inline-medium: var(--ig-spacing-inline, var(--ig-spacing-medium));
         --ig-spacing-inline-large: var(--ig-spacing-inline, var(--ig-spacing-large));
