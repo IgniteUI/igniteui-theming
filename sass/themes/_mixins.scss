@@ -162,3 +162,25 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
     );
     --is-small: clamp(0, var(--ig-size-medium) - var(--component-size, 1), 1);
 }
+
+/// Adds spacing CSS variables to the scope.
+/// @group themes
+/// @access private
+@mixin spacing() {
+    $scope: if(is-root(), ':root', '&');
+
+    @property --ig-spacing {
+        syntax: '<number> | <integer>';
+        initial-value: 1;
+        inherits: true;
+    }
+
+    #{$scope} {
+        --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
+        --ig-spacing-inline-medium: var(--ig-spacing-inline, var(--ig-spacing-medium));
+        --ig-spacing-inline-large: var(--ig-spacing-inline, var(--ig-spacing-large));
+        --ig-spacing-block-small: var(--ig-spacing-block, var(--ig-spacing-small));
+        --ig-spacing-block-medium: var(--ig-spacing-block, var(--ig-spacing-medium));
+        --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
+    }
+}
