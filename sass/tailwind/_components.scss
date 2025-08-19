@@ -380,7 +380,6 @@ $themes-schemas: (
 }
 
 // radio
-
 @each $schema-name, $schema-value in $themes-schemas {
     @utility #{"" + $schema-name}-radio-color-* {
         $theme: radio-theme(
