@@ -16,6 +16,7 @@
 /// @prop {Map} message-background [color: ('gray', 200)] - The background color of the sent message bubble.
 /// @prop {Map} message-color [color: ('gray', 800)] - The text color of the chat messages.
 /// @prop {Map} message-actions-color [color: ('gray', 700)] - The icon color of the chat message actions.
+/// @prop {Map} file-background [contrast-color: ('gray', 900)] - The background color of the image message container.
 /// @prop {Map} image-background [color: ('gray', 100)] - The background color of the image message container.
 /// @prop {Map} image-border [color: ('gray', 300)] - The border color of the image message container.
 /// @prop {Map} chat-input-border [color: ('gray', 400)] - The border color of the chat input area.
@@ -60,6 +61,12 @@ $light-chat: (
         color: (
             'gray',
             700,
+        ),
+    ),
+    file-background: (
+        contrast-color: (
+            'gray',
+            900,
         ),
     ),
     image-background: (
@@ -166,6 +173,7 @@ $bootstrap-chat: extend(
 /// @type {Map}
 /// @prop {Map} header-color [color: ('gray', 800)] - The text color of the chat header.
 /// @prop {Map} header-border [color: ('primary', 500)] - The color used for the chat header border.
+/// @prop {Map} file-background [color: ('gray', 100)] - The background color of the image message container.
 /// @prop {Map} message-actions-color [color: ('gray', 600)] - The icon color of the chat message actions.
 /// @prop {Map} progress-indicator-color [color: ('info', 500)] - The color of the progress indicator in the chat component.
 /// @requires {Map} $light-chat
@@ -182,6 +190,12 @@ $indigo-chat: extend(
             color: (
                 'primary',
                 500,
+            ),
+        ),
+        file-background: (
+            color: (
+                'gray',
+                100,
             ),
         ),
         message-actions-color: (
