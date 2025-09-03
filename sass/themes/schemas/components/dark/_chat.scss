@@ -1,0 +1,60 @@
+@use '../../../../utils/map' as *;
+@use '../light/chat' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a dark material chat schema.
+/// @type {Map}
+/// @requires $material-chat
+$dark-material-chat: extend(
+    $material-chat,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark fluent chat schema.
+/// @type {Map}
+/// @requires $fluent-chat
+$dark-fluent-chat: extend(
+    $fluent-chat,
+    (
+        _meta: (
+            theme: 'fluent',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark bootstrap chat schema.
+/// @type {Map}
+/// @requires $bootstrap-chat
+$dark-bootstrap-chat: extend(
+    $bootstrap-chat,
+    (
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'dark',
+        ),
+    )
+);
+
+/// Generates a dark indigo chat schema.
+/// @type {Map}
+/// @requires $indigo-chat
+$dark-indigo-chat: extend(
+    $indigo-chat,
+    (
+        _meta: (
+            theme: 'indigo',
+            variant: 'dark',
+        ),
+    )
+);
