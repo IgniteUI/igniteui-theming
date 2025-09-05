@@ -17,11 +17,13 @@
 /// @prop {Map} message-color [color: ('gray', 800)] - The text color of the chat messages.
 /// @prop {Map} message-actions-color [color: ('gray', 700)] - The icon color of the chat message actions.
 /// @prop {Map} file-background [contrast-color: ('gray', 900)] - The background color of the image message container.
+/// @prop {Map} file-icon-color [color: ('gray', 500)] - The color of the attached file icon.
+/// @prop {Map} file-icon-accent-color [color: ('gray', 600)] - The accent color of the attached file icon.
 /// @prop {Map} image-background [color: ('gray', 100)] - The background color of the image message container.
 /// @prop {Map} image-border [color: ('gray', 300)] - The border color of the image message container.
+/// @prop {Map} image-attachment-icon [color: ('gray', 900)] - The color of the message attachment icon.
 /// @prop {Map} chat-input-border [color: ('gray', 400)] - The border color of the chat input area.
 /// @prop {Map} progress-indicator-color [color: ('secondary', 500)] - The color of the progress indicator in the chat component.
-/// @prop {Map} attachment-icon [color: ('gray', 900)] - The color of the message attachment icon.
 $light-chat: (
     background: (
         color: (
@@ -70,6 +72,18 @@ $light-chat: (
             900,
         ),
     ),
+    file-icon-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    file-icon-accent-color: (
+        color: (
+            'gray',
+            600,
+        ),
+    ),
     image-background: (
         color: (
             'gray',
@@ -82,6 +96,12 @@ $light-chat: (
             300,
         ),
     ),
+    image-attachment-icon: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
     chat-input-border: (
         color: (
             'gray',
@@ -92,12 +112,6 @@ $light-chat: (
         color: (
             'secondary',
             500,
-        ),
-    ),
-    attachment-icon: (
-        color: (
-            'gray',
-            900,
         ),
     ),
 );
@@ -183,7 +197,7 @@ $bootstrap-chat: extend(
 /// @prop {Map} file-background [color: ('gray', 100)] - The background color of the image message container.
 /// @prop {Map} message-actions-color [color: ('gray', 600)] - The icon color of the chat message actions.
 /// @prop {Map} progress-indicator-color [color: ('info', 500)] - The color of the progress indicator in the chat component.
-/// @prop {Map} attachment-icon [color: ('info', 500)] - The color of the message attachment icon.
+/// @prop {Map} image-attachment-icon [color: ('info', 500)] - The color of the message attachment icon.
 /// @requires {Map} $light-chat
 $indigo-chat: extend(
     $light-chat,
@@ -218,7 +232,7 @@ $indigo-chat: extend(
                 500,
             ),
         ),
-        attachment-icon: (
+        image-attachment-icon: (
             color: (
                 'info',
                 500,
