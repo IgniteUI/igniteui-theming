@@ -1,0 +1,246 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light chat component schema.
+/// @type {Map}
+/// @prop {Map} background [color: ('surface', 500)] - The background color of the chat component.
+/// @prop {Map} header-background [color: ('surface', 500)] - The background color of the chat header.
+/// @prop {Map} header-color [contrast-color: ('surface', 500)] - The text color of the chat header.
+/// @prop {Color} header-border [transparent] - The color used for the chat header border.
+/// @prop {Map} message-background [color: ('gray', 200)] - The background color of the sent message bubble.
+/// @prop {Map} message-color [color: ('gray', 800)] - The text color of the chat messages.
+/// @prop {Map} message-actions-color [color: ('gray', 700)] - The icon color of the chat message actions.
+/// @prop {Map} file-background [contrast-color: ('gray', 900)] - The background color of the image message container.
+/// @prop {Map} file-icon-color [color: ('gray', 500)] - The color of the attached file icon.
+/// @prop {Map} file-icon-accent-color [color: ('gray', 600)] - The accent color of the attached file icon.
+/// @prop {Map} image-background [color: ('gray', 100)] - The background color of the image message container.
+/// @prop {Map} image-border [color: ('gray', 300)] - The border color of the image message container.
+/// @prop {Map} image-attachment-icon [color: ('gray', 900)] - The color of the message attachment icon.
+/// @prop {Map} chat-input-border [color: ('gray', 400)] - The border color of the chat input area.
+/// @prop {Map} progress-indicator-color [color: ('secondary', 500)] - The color of the progress indicator in the chat component.
+$light-chat: (
+    background: (
+        color: (
+            'surface',
+            500,
+        ),
+    ),
+    header-background: (
+        color: (
+            'surface',
+            500,
+        ),
+    ),
+    header-color: (
+        contrast-color: (
+            'surface',
+            500,
+        ),
+    ),
+    header-border: (
+        color: (
+            'transparent',
+        ),
+    ),
+    message-background: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    message-color: (
+        color: (
+            'gray',
+            800,
+        ),
+    ),
+    message-actions-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+    file-background: (
+        contrast-color: (
+            'gray',
+            900,
+        ),
+    ),
+    file-icon-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+    file-icon-accent-color: (
+        color: (
+            'gray',
+            600,
+        ),
+    ),
+    image-background: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+    image-border: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+    image-attachment-icon: (
+        color: (
+            'gray',
+            900,
+        ),
+    ),
+    chat-input-border: (
+        color: (
+            'gray',
+            400,
+        ),
+    ),
+    progress-indicator-color: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+);
+
+/// Generates a light material chat schema.
+/// @type {Map}
+/// @requires {Map} $light-chat
+$material-chat: extend(
+    $light-chat,
+    (
+        _meta: (
+            theme: 'material',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light fluent chat schema.
+/// @type {Map}
+/// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the chat component.
+/// @prop {Map} header-color [color: ('gray', 900)] - The text color of the chat header.
+/// @prop {Map} message-actions-color [color: ('primary', 500)] - The icon color of the chat message actions.
+/// @requires {Map} $light-chat
+$fluent-chat: extend(
+    $light-chat,
+    (
+        background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        header-color: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+        message-actions-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        _meta: (
+            theme: 'fluent',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light bootstrap chat schema.
+/// @type {Map}
+/// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the chat component.
+/// @prop {Map} header-border [color: ('gray', 300)] - The color used for the chat header border.
+/// @requires {Map} $light-chat
+$bootstrap-chat: extend(
+    $light-chat,
+    (
+        background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        header-border: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
+            variant: 'light',
+        ),
+    )
+);
+
+/// Generates a light indigo chat schema.
+/// @type {Map}
+/// @prop {Map} header-color [color: ('gray', 800)] - The text color of the chat header.
+/// @prop {Map} header-border [color: ('primary', 500)] - The color used for the chat header border.
+/// @prop {Map} file-background [color: ('gray', 100)] - The background color of the image message container.
+/// @prop {Map} message-actions-color [color: ('gray', 600)] - The icon color of the chat message actions.
+/// @prop {Map} progress-indicator-color [color: ('info', 500)] - The color of the progress indicator in the chat component.
+/// @prop {Map} image-attachment-icon [color: ('info', 500)] - The color of the message attachment icon.
+/// @requires {Map} $light-chat
+$indigo-chat: extend(
+    $light-chat,
+    (
+        header-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        header-border: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        file-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        message-actions-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        progress-indicator-color: (
+            color: (
+                'info',
+                500,
+            ),
+        ),
+        image-attachment-icon: (
+            color: (
+                'info',
+                500,
+            ),
+        ),
+        _meta: (
+            theme: 'indigo',
+            variant: 'light',
+        ),
+    )
+);
