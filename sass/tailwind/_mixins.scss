@@ -1,0 +1,85 @@
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../index' as *;
+@use '../elevations/presets/material' as *;
+
+$theme-schemas: () !default;
+
+@mixin generate-color-vars {
+    @each $colorName, $shades in $IPaletteColors {
+        @each $shade in $shades {
+            --color-#{$colorName}-#{$shade}: var(--ig-#{$colorName}-#{$shade});
+            --color-#{$colorName}-#{$shade}-contrast: var(--ig-#{$colorName}-#{$shade}-contrast);
+        }
+    }
+}
+
+@mixin generate-shadow-vars {
+    @each $level, $shadow in $elevations {
+        --shadow-elevation-#{$level}: var(--ig-elevation-#{$level});
+    }
+}
+
+@mixin generate-typography-utilities {
+    @each $type in $ITypeScale {
+        @utility type-style-#{$type} {
+            @each $prop, $_ in $ITypeStyle {
+                #{$prop}: var(--ig-#{$type}-#{$prop});
+            }
+        }
+    }
+}
+
+@mixin tailwind-theme($theme, $overrides: ()) {
+    $has-theme: meta.function-exists($theme);
+
+    @if $has-theme {
+        $fn: meta.get-function($theme);
+        $_overrides: ();
+
+        @each $prop in $overrides {
+            $_overrides: map.merge(
+                $_overrides,
+                (
+                    $prop: --value([#{string.unquote('*')}]),
+                )
+            );
+        }
+
+        @each $_, $value in $theme-schemas {
+            $_theme: meta.call($fn, $schema: $value, $_overrides...);
+            $_t: ();
+
+            @each $k in $overrides {
+                @if map.has-key($_theme, $k) {
+                    $_t: map.merge(
+                        $_t,
+                        (
+                            $k: map.get($_theme, $k),
+                        )
+                    );
+                }
+            }
+
+            @if $_theme {
+                @content (
+                    $_theme,
+                    $_t,
+                    map.get($_theme, name),
+                    #{"" + map.get($_theme, _meta, theme)},
+                    map.get($_theme, _meta, variant),
+                    $value
+                );
+            }
+        }
+    }
+}
+
+@mixin tailwind-utility($component, $property: default, $theme-name, $theme-variant) {
+    $prop: if($property == default, theme, '#{$property}-*');
+
+    @utility #{$theme-variant}-#{$component}-#{$prop} {
+        @content;
+    }
+}

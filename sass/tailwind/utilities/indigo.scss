@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use '../../themes/schemas';
+@use '../../themes/mixins' as *;
+@use '../../themes/functions' as *;
+@use '../mixins' as * with (
+    $theme-schemas: (
+        light: schemas.$light-indigo-schema,
+        dark: schemas.$dark-indigo-schema,
+    )
+);
+@use 'common' as *;
+
+// Common tailwind utilites
+@include tailwind-themes();
+
+// Theme specific utilities
+// Slider
+@include tailwind-theme(slider-theme, ('track-color', 'base-track-color')) using ($t, $pt, $c, $n, $v, $s) {
+    $base-track-color: map.get(digest-schema(map.get($s, 'slider')), 'base-track-color');
+
+    @include tailwind-utility(slider, 'color', $n, $v) {
+        @include css-vars-from-theme(
+            map.merge(
+                $t,
+                (
+                    'base-track-color': $base-track-color,
+                )
+            ),
+            $c
+        );
+    }
+}
+
+// Switch
+@include tailwind-theme(switch-theme, ('thumb-off-color', 'track-on-color')) using ($t, $pt, $c, $n, $v, $s) {
+    $thumb-off-color: map.get(digest-schema(map.get($s, 'switch')), 'thumb-off-color');
+
+    @include tailwind-utility(switch, 'color', $n, $v) {
+        @include css-vars-from-theme(
+            map.merge(
+                $t,
+                (
+                    'thumb-off-color': $thumb-off-color,
+                )
+            ),
+            $c
+        );
+    }
+}

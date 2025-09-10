@@ -1,0 +1,28 @@
+@use '../../themes/schemas';
+@use '../../themes/mixins' as *;
+@use '../../themes/functions' as *;
+@use '../mixins' as * with (
+    $theme-schemas: (
+        light: schemas.$light-material-schema,
+        dark: schemas.$dark-material-schema,
+    )
+);
+@use 'common' as *;
+
+// Common tailwind utilites
+@include tailwind-themes();
+
+// Theme specific utilities
+// Slider
+@include tailwind-theme(slider-theme, ('thumb-color')) using ($t, $pt, $c, $n, $v, $s) {
+    @include tailwind-utility(slider, 'color', $n, $v) {
+        @include css-vars-from-theme($t, $c);
+    }
+}
+
+// Switch
+@include tailwind-theme(switch-theme, ('track-off-color', 'track-on-color')) using ($t, $pt, $c, $n, $v, $s) {
+    @include tailwind-utility(switch, 'color', $n, $v) {
+        @include css-vars-from-theme($t, $c);
+    }
+}

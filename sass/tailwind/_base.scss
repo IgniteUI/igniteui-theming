@@ -1,32 +1,5 @@
-/* stylelint-disable scss/at-rule-no-unknown */
 @use 'sass:map';
-@use '../index' as *;
-@use '../elevations/presets/material' as *;
-
-@mixin generate-color-vars {
-    @each $colorName, $shades in $IPaletteColors {
-        @each $shade in $shades {
-            --color-#{$colorName}-#{$shade}: var(--ig-#{$colorName}-#{$shade});
-            --color-#{$colorName}-#{$shade}-contrast: var(--ig-#{$colorName}-#{$shade}-contrast);
-        }
-    }
-}
-
-@mixin generate-shadow-vars {
-    @each $level, $shadow in $elevations {
-        --shadow-elevation-#{$level}: var(--ig-elevation-#{$level});
-    }
-}
-
-@mixin generate-typography-utilities {
-    @each $type in $ITypeScale {
-        @utility type-style-#{$type} {
-            @each $prop, $_ in $ITypeStyle {
-                #{$prop}: var(--ig-#{$type}-#{$prop});
-            }
-        }
-    }
-}
+@use './mixins' as *;
 
 @theme {
     @include generate-color-vars();

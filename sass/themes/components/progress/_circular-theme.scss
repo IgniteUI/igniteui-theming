@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:list';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -37,7 +38,7 @@
     $text-color: null,
     $diameter: null
 ) {
-    $name: 'igx-circular-bar';
+    $name: #{config.prefix() + '-' + 'circular-bar'};
     $circular-bar-schema: ();
 
     @if map.has-key($schema, 'circular-bar') {

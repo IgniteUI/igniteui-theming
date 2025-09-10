@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -44,7 +45,7 @@
     $resting-shadow: null,
     $hover-shadow: null
 ) {
-    $name: 'igx-card';
+    $name: #{config.prefix() + '-' + 'card'};
     $card-schema: ();
 
     @if map.has-key($schema, 'card') {

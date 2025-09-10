@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -15,8 +16,7 @@
 /// @param {Map} $color [null] - The text color.
 /// @param {Map} $disabled-color [null] - The disabled text color.
 @function label-theme($schema: $light-material-schema, $color: null, $disabled-color: null) {
-    $name: 'igx-label';
-    $selector: '[igxLabel]';
+    $name: #{config.prefix() + '-' + 'label'};
     $label-schema: ();
 
     @if map.has-key($schema, 'label') {
@@ -31,7 +31,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             color: $color,
             disabled-color: $disabled-color,
         )

@@ -1,0 +1,391 @@
+@use 'sass:map';
+@use '../../themes/mixins' as *;
+@use '../../themes/functions' as *;
+@use '../_mixins.scss' as *;
+
+$theme-schemas: () !default;
+
+@mixin tailwind-themes() {
+    // Avatar
+    @include tailwind-theme(avatar-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(avatar, background, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Badge
+    @include tailwind-theme(badge-theme, ('background-color')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(badge, background, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Bottom Navigation
+    @include tailwind-theme(bottom-nav-theme, (background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(bottom-nav, background, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Button Group
+    @include tailwind-theme(button-group-theme, (item-background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(button-group, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Flat Button
+    @include tailwind-theme(flat-button-theme, (foreground)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(flat-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Contained Button
+    @include tailwind-theme(contained-button-theme, (background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(contained-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Outlined Button
+    @include tailwind-theme(outlined-button-theme, (foreground)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(outlined-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // FAB Button
+    @include tailwind-theme(fab-button-theme, (background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(fab-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Card
+    @include tailwind-theme(card-theme, (background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(card, background, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Chip
+    @include tailwind-theme(chip-theme, (background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(chip, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Carousel
+    @include tailwind-theme(carousel-theme, (button-background, indicator-background)) using ($t, $pt, $c, $n, $v, $s) {
+        $indicator-background: map.get(digest-schema(map.get($s, carousel)), 'indicator-background');
+        $button-background: map.get(digest-schema(map.get($s, carousel)), 'button-background');
+        $theme: map.merge(
+            $t,
+            (
+                'indicator-background': $indicator-background,
+                'button-background': $button-background,
+            )
+        );
+
+        @include tailwind-utility(carousel, default, $n, $v) {
+            @include css-vars-from-theme($theme, $c);
+        }
+
+        @include tailwind-utility(carousel, button-background, $n, $v) {
+            @include css-vars-from-theme(
+                map.merge(
+                    $pt,
+                    (
+                        'indicator-background': $indicator-background,
+                    )
+                ),
+                $c
+            );
+        }
+
+        @include tailwind-utility(carousel, indicator-background, $n, $v) {
+            @include css-vars-from-theme(
+                map.merge(
+                    $pt,
+                    (
+                        'button-background': $button-background,
+                    )
+                ),
+                $c
+            );
+        }
+    }
+
+    // Calendar
+    @include tailwind-theme(calendar-theme, (header-background, content-background)) using ($t, $pt, $c, $n, $v, $s) {
+        $content-background: map.get(digest-schema(map.get($s, calendar)), content-background);
+        $header-background: map.get(digest-schema(map.get($s, calendar)), header-background);
+        $theme: map.merge(
+            $t,
+            (
+                'content-background': $content-background,
+                'header-background': $header-background,
+            )
+        );
+
+        @include tailwind-utility(calendar, default, $n, $v) {
+            @include css-vars-from-theme($theme, $c);
+        }
+
+        @include tailwind-utility(calendar, accent-color, $n, $v) {
+            @include css-vars-from-theme(
+                map.merge(
+                    $pt,
+                    (
+                        'content-background': $content-background,
+                    )
+                ),
+                $c
+            );
+        }
+
+        @include tailwind-utility(calendar, background, $n, $v) {
+            @include css-vars-from-theme(
+                map.merge(
+                    $pt,
+                    (
+                        'header-background': $header-background,
+                    )
+                ),
+                $c
+            );
+        }
+    }
+
+    // Checkbox
+    @include tailwind-theme(checkbox-theme, (empty-color, fill-color)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(checkbox, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Combo
+    @include tailwind-theme(combo-theme, (toggle-button-background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(combo, toggle-button, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Expansion Panel
+    @include tailwind-theme(expansion-panel-theme, (header-background, body-background)) using ($t, $pt, $c, $n, $v, $s) {
+        $header-background: map.get(digest-schema(map.get($s, expansion-panel)), 'header-background');
+        $body-background: map.get(digest-schema(map.get($s, expansion-panel)), 'body-background');
+        $theme: map.merge(
+            $t,
+            (
+                'header-background': $header-background,
+                'body-background': $body-background,
+            )
+        );
+
+        @include tailwind-utility(expansion-panel, default, $n, $v) {
+            @include css-vars-from-theme($theme, $c);
+        }
+
+        @include tailwind-utility(expansion-panel, 'header-background', $n, $v) {
+            @include css-vars-from-theme(
+                map.merge(
+                    $pt,
+                    (
+                        'body-background': $body-background,
+                    )
+                ),
+                $c
+            );
+        }
+
+        @include tailwind-utility(expansion-panel, 'body-background', $n, $v) {
+            @include css-vars-from-theme(
+                map.merge(
+                    $pt,
+                    (
+                        'header-background': $header-background,
+                    )
+                ),
+                $c
+            );
+        }
+    }
+
+    // Grid
+    @include tailwind-theme(grid-theme, (content-background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(grid, background, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Icon
+    @include tailwind-theme(icon-theme, (color)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(icon, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Flat Icon Button
+    @include tailwind-theme(flat-icon-button-theme, (foreground)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(flat-icon-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Contained Icon Button
+    @include tailwind-theme(contained-icon-button-theme, (background)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(contained-icon-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Outlined Icon Button
+    @include tailwind-theme(outlined-icon-button-theme, (foreground)) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(outlined-icon-button, color, $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Input Group
+    @include tailwind-theme(input-group-theme, ('box-background', 'search-background', 'border-color')) using
+        ($t, $pt, $c, $n, $v, $s) {
+        $box-background: map.get(digest-schema(map.get($s, input-group)), 'box-background');
+        $search-background: map.get(digest-schema(map.get($s, input-group)), 'search-background');
+        $border-color: map.get(digest-schema(map.get($s, input-group)), 'border-color');
+        $theme: map.merge(
+            $t,
+            (
+                'box-background': $box-background,
+                'seach-background': $search-background,
+                'border-color': $border-color,
+            )
+        );
+
+        @include tailwind-utility(input-group, default, $n, $v) {
+            @include css-vars-from-theme($theme, $c);
+        }
+
+        @include tailwind-utility(input, 'box-background', $n, $v) {
+            @include css-vars-from-theme(map.remove($pt, 'search-background', 'border-color'), $c);
+        }
+
+        @include tailwind-utility(input, 'search-background', $n, $v) {
+            @include css-vars-from-theme(map.remove($pt, 'box-background', 'border-color'), $c);
+        }
+
+        @include tailwind-utility(input, 'border-color', $n, $v) {
+            @include css-vars-from-theme(map.remove($pt, 'box-background', 'search-background'), $c);
+        }
+    }
+
+    // List
+    @include tailwind-theme(list-theme, ('background', 'item-background')) using ($t, $pt, $c, $n, $v, $s) {
+        $background: map.get(digest-schema(map.get($s, 'list')), 'background');
+        $item-background: map.get(digest-schema(map.get($s, 'list')), 'item-background');
+        $theme: map.merge(
+            $t,
+            (
+                'background': $background,
+                'item-background': $item-background,
+            )
+        );
+
+        @include tailwind-utility(list, 'default', $n, $v) {
+            @include css-vars-from-theme($theme, $c);
+        }
+
+        @include tailwind-utility(list, 'background', $n, $v) {
+            @include css-vars-from-theme(map.remove($pt, 'item-background'), $c);
+        }
+
+        @include tailwind-utility(list, 'item-background', $n, $v) {
+            @include css-vars-from-theme(map.remove($pt, 'background'), $c);
+        }
+    }
+
+    // Navbar
+    @include tailwind-theme(navbar-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(navbar, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Navdrawer
+    @include tailwind-theme(navdrawer-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(navdrawer, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Query Builder
+    @include tailwind-theme(query-builder-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(query-builder, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Radio
+    @include tailwind-theme(radio-theme, ('empty-color', 'fill-color')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(radio, 'color', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Select
+    @include tailwind-theme(select-theme, ('toggle-button-background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(select, 'toggle-button', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Snackbar
+    @include tailwind-theme(snackbar-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(snackbar, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Splitter
+    @include tailwind-theme(splitter-theme, ('bar-color')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(splitter, 'color', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Stepper
+    @include tailwind-theme(stepper-theme, ('step-background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(stepper, 'step-background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Tabs
+    @include tailwind-theme(tabs-theme, ('item-background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(tabs, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Toast
+    @include tailwind-theme(toast-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(toast, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Tooltip
+    @include tailwind-theme(tooltip-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(tooltip, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+
+    // Tree - use with tree-node, not tree directly
+    @include tailwind-theme(tree-theme, ('background')) using ($t, $pt, $c, $n, $v, $s) {
+        @include tailwind-utility(tree, 'background', $n, $v) {
+            @include css-vars-from-theme($t, $c);
+        }
+    }
+}
