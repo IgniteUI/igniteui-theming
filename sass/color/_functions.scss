@@ -177,6 +177,36 @@ $_enhanced-accessibility: false;
     }
 }
 
+/// Calculates a dynamic shade of a color by adjusting its lightness in LCH color space.
+/// @access public
+/// @param {Color} $color - The base color to shade.
+/// @param {Number} $lightness [50] - The target lightness value to move toward.
+/// @param {Number} $percentage [0.1] - The percentage to move toward the target lightness.
+/// @param {Number} $offset [10] - The offset added or subtracted based on direction.
+/// @returns {Color} - The dynamically shaded color in LCH color space
+@function dynamic-shade($color, $lightness: 50, $factor: 0.1, $offset: 10) {
+    @return lch(from $color calc(l + ($lightness - l) * $factor + sign($lightness - l) * $offset) c h);
+}
+
+/// Normalizes a color value to ensure consistent format output.
+/// This fixes issues with newer Sass versions that return RGB format with floating point precision.
+/// @access private
+/// @group Color
+/// @param {Color} $color - The color to normalize.
+/// @returns {Color} - The normalized color in hex format.
+@function _normalize-color($color) {
+    @if meta.type-of($color) == 'color' {
+        // Round RGB channels to integers to maintain backward compatibility with older Sass behavior
+        $r: math.round(color.channel($color, 'red', $space: rgb));
+        $g: math.round(color.channel($color, 'green', $space: rgb));
+        $b: math.round(color.channel($color, 'blue', $space: rgb));
+
+        @return rgb($r, $g, $b);
+    }
+
+    @return $color;
+}
+
 /// Retrieves a color from a color palette.
 /// @access public
 /// @group Palettes
