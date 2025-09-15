@@ -7,11 +7,32 @@
 /// @access public
 ////
 
+/// /// Generates a base dark chat schema.
+/// @type {Map}
+/// @prop {Map} chat-input-border [color: ('gray', 200)] - The border color of the chat input area.
+/// @prop {Map} code-border [color: ('gray', 200)] - The border color of the code snippets in the chat component.
+$dark-base-chat: (
+    chat-input-border: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+    code-border: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+);
+
 /// Generates a dark material chat schema.
 /// @type {Map}
 /// @requires $material-chat
+/// @requires $dark-base-chat
 $dark-material-chat: extend(
     $material-chat,
+    $dark-base-chat,
     (
         _meta: (
             theme: 'material',
@@ -23,8 +44,10 @@ $dark-material-chat: extend(
 /// Generates a dark fluent chat schema.
 /// @type {Map}
 /// @requires $fluent-chat
+/// @requires $dark-base-chat
 $dark-fluent-chat: extend(
     $fluent-chat,
+    $dark-base-chat,
     (
         _meta: (
             theme: 'fluent',
@@ -36,8 +59,10 @@ $dark-fluent-chat: extend(
 /// Generates a dark bootstrap chat schema.
 /// @type {Map}
 /// @requires $bootstrap-chat
+/// @requires $dark-base-chat
 $dark-bootstrap-chat: extend(
     $bootstrap-chat,
+    $dark-base-chat,
     (
         _meta: (
             theme: 'bootstrap',
@@ -49,8 +74,10 @@ $dark-bootstrap-chat: extend(
 /// Generates a dark indigo chat schema.
 /// @type {Map}
 /// @requires $indigo-chat
+/// @requires $dark-base-chat
 $dark-indigo-chat: extend(
     $indigo-chat,
+    $dark-base-chat,
     (
         _meta: (
             theme: 'indigo',
