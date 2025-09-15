@@ -217,7 +217,7 @@ $_enhanced-accessibility: false;
         $base: map.get($s, #{$variant});
         $raw: map.get($s, #{$variant}-raw);
 
-        @return if($contrast, $_relative-color, if($raw and $variant != '500', rgba($raw, $_alpha), $base));
+        @return if($contrast, $_relative-color, if($raw, rgba($raw, $_alpha), $base));
     }
 
     @return $_relative-color;
