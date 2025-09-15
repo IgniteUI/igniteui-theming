@@ -16,9 +16,9 @@ const SASS_CONFIG = {
 
 const BUILD_CONFIGS = [
   {
-    name: 'presets',
-    inputDir: path.resolve(__dirname, '../sass/tailwind/presets'),
-    outputDir: path.resolve(__dirname, '../tailwind/presets'),
+    name: 'themes',
+    inputDir: path.resolve(__dirname, '../sass/tailwind/themes'),
+    outputDir: path.resolve(__dirname, '../tailwind/themes'),
   },
   {
     name: 'utilities',
