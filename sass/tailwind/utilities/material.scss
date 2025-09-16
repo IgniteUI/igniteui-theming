@@ -9,20 +9,23 @@
 );
 @use 'common' as *;
 
-// Common tailwind utilites
+// Common tailwind utility themes
 @include tailwind-themes();
 
 // Theme specific utilities
 // Slider
-@include tailwind-theme(slider-theme, ('thumb-color')) using ($t, $pt, $c, $n, $v, $s) {
-    @include tailwind-utility(slider, 'color', $n, $v) {
-        @include css-vars-from-theme($t, $c);
-    }
-}
+@include tailwind-theme(
+    $component: slider,
+    $props: (
+        thumb-color,
+    )
+);
 
-// Switch
-@include tailwind-theme(switch-theme, ('track-off-color', 'track-on-color')) using ($t, $pt, $c, $n, $v, $s) {
-    @include tailwind-utility(switch, 'color', $n, $v) {
-        @include css-vars-from-theme($t, $c);
-    }
-}
+// // Switch
+@include tailwind-theme(
+    $component: switch,
+    $props: (
+        track-off-color,
+        track-on-color,
+    )
+);

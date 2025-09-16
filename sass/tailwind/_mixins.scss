@@ -31,55 +31,32 @@ $theme-schemas: () !default;
     }
 }
 
-@mixin tailwind-theme($theme, $overrides: ()) {
-    $has-theme: meta.function-exists($theme);
+@mixin tailwind-theme($component, $props: ()) {
+    $has-theme: meta.function-exists(#{$component}-theme);
 
     @if $has-theme {
-        $fn: meta.get-function($theme);
-        $_overrides: ();
+        $fn: meta.get-function(#{$component}-theme);
 
-        @each $prop in $overrides {
-            $_overrides: map.merge(
-                $_overrides,
-                (
-                    $prop: --value([#{string.unquote('*')}]),
-                )
-            );
-        }
+        @each $_, $schema in $theme-schemas {
+            $_theme: meta.call($fn, $schema: $schema);
+            $_defaults: ();
 
-        @each $_, $value in $theme-schemas {
-            $_theme: meta.call($fn, $schema: $value, $_overrides...);
-            $_t: ();
-
-            @each $k in $overrides {
-                @if map.has-key($_theme, $k) {
-                    $_t: map.merge(
-                        $_t,
-                        (
-                            $k: map.get($_theme, $k),
-                        )
-                    );
-                }
-            }
-
-            @if $_theme {
-                @content (
-                    $_theme,
-                    $_t,
-                    map.get($_theme, name),
-                    #{"" + map.get($_theme, _meta, theme)},
-                    map.get($_theme, _meta, variant),
-                    $value
+            @each $prop in $props {
+                $_defaults: map.merge(
+                    $_defaults,
+                    (
+                        $prop: map.get($_theme, $prop),
+                    )
                 );
             }
+
+            $_t: meta.call($fn, $schema: $schema, $_defaults...);
+            $_name: map.get($_t, name);
+            $_variant: map.get($_t, _meta, variant);
+
+            @utility #{$_variant}-#{$component} {
+                @include css-vars-from-theme($_t, $_name);
+            }
         }
-    }
-}
-
-@mixin tailwind-utility($component, $property: default, $theme-name, $theme-variant) {
-    $prop: if($property == default, theme, '#{$property}-*');
-
-    @utility #{$theme-variant}-#{$component}-#{$prop} {
-        @content;
     }
 }

@@ -15,35 +15,19 @@
 
 // Theme specific utilities
 // Slider
-@include tailwind-theme(slider-theme, ('thumb-color', 'base-track-color')) using ($t, $pt, $c, $n, $v, $s) {
-    $base-track-color: map.get(digest-schema(map.get($s, 'slider')), 'base-track-color');
-
-    @include tailwind-utility(slider, 'color', $n, $v) {
-        @include css-vars-from-theme(
-            map.merge(
-                $t,
-                (
-                    'base-track-color': $base-track-color,
-                )
-            ),
-            $c
-        );
-    }
-}
+@include tailwind-theme(
+    $component: slider,
+    $props: (
+        thumb-color,
+        base-track-color,
+    )
+);
 
 // Switch
-@include tailwind-theme(switch-theme, ('thumb-off-color', 'track-on-color')) using ($t, $pt, $c, $n, $v, $s) {
-    $thumb-off-color: map.get(digest-schema(map.get($s, 'switch')), 'thumb-off-color');
-
-    @include tailwind-utility(switch, 'color', $n, $v) {
-        @include css-vars-from-theme(
-            map.merge(
-                $t,
-                (
-                    'thumb-off-color': $thumb-off-color,
-                )
-            ),
-            $c
-        );
-    }
-}
+@include tailwind-theme(
+    $component: switch,
+    $props: (
+        thumb-off-color,
+        track-on-color,
+    )
+);
