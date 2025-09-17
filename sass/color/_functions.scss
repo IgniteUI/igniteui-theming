@@ -151,7 +151,11 @@ $_enhanced-accessibility: false;
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), #{$shade});
         $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
-        $raw: hsl(to-fixed(color.hue($color)), to-fixed(color.saturation($color)), $l);
+        $raw: hsl(
+            to-fixed(color.channel($color, 'hue', $space: hsl)),
+            to-fixed(color.channel($color, 'saturation', $space: hsl)),
+            $l
+        );
         $hsl: #{hsl(from var(--ig-#{$name}-500) h s $l)};
 
         @if #{$shade} == '500' {
@@ -160,17 +164,21 @@ $_enhanced-accessibility: false;
 
         @return (raw: $raw, hsl: $hsl);
     } @else {
-        $sx: map.get(multipliers.$color, 's', #{$shade});
-        $lx: map.get(multipliers.$color, 'l', #{$shade});
-        $raw: hsl(
-            to-fixed(color.hue($color)),
-            to-fixed(color.saturation($color) * $sx),
-            to-fixed(color.lightness($color) * $lx)
-        );
-        $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
+        $hsl: null;
+        $raw: null;
 
         @if #{$shade} == '500' {
             $hsl: $color;
+            $raw: $color;
+        } @else {
+            $sx: map.get(multipliers.$color, 's', #{$shade});
+            $lx: map.get(multipliers.$color, 'l', #{$shade});
+            $raw: hsl(
+                to-fixed(color.channel($color, 'hue', $space: hsl)),
+                to-fixed(color.channel($color, 'saturation', $space: hsl) * $sx),
+                to-fixed(color.channel($color, 'lightness', $space: hsl) * $lx)
+            );
+            $hsl: #{hsl(from var(--ig-#{$name}-500) h calc(s * $sx) calc(l * $lx))};
         }
 
         @return (raw: $raw, hsl: $hsl);
@@ -247,7 +255,11 @@ $_enhanced-accessibility: false;
         $base: map.get($s, #{$variant});
         $raw: map.get($s, #{$variant}-raw);
 
-        @return if($contrast, $_relative-color, if($raw and $variant != '500', rgba($raw, $_alpha), $base));
+        @return if(
+            $contrast,
+            $_relative-color,
+            if($raw and $variant != '500', rgba($raw, $_alpha), _normalize-color($base))
+        );
     }
 
     @return $_relative-color;
@@ -365,13 +377,13 @@ $_enhanced-accessibility: false;
 /// @return {Color} - The color representation of the rgba value.
 @function to-opaque($color-1, $color-2: #fff) {
     @if meta.type-of($color-1) == color and meta.type-of($color-2) == color {
-        $red: color.red($color-1);
-        $green: color.green($color-1);
-        $blue: color.blue($color-1);
-        $a: color.alpha($color-1);
-        $r: math.floor($a * $red + (1 - $a) * color.red($color-2));
-        $g: math.floor($a * $green + (1 - $a) * color.green($color-2));
-        $b: math.floor($a * $blue + (1 - $a) * color.blue($color-2));
+        $red: color.channel($color-1, 'red', $space: rgb);
+        $green: color.channel($color-1, 'green', $space: rgb);
+        $blue: color.channel($color-1, 'blue', $space: rgb);
+        $a: color.channel($color-1, 'alpha');
+        $r: math.floor($a * $red + (1 - $a) * color.channel($color-2, 'red', $space: rgb));
+        $g: math.floor($a * $green + (1 - $a) * color.channel($color-2, 'green', $space: rgb));
+        $b: math.floor($a * $blue + (1 - $a) * color.channel($color-2, 'blue', $space: rgb));
 
         @return rgb($r, $g, $b);
     }
@@ -388,7 +400,11 @@ $_enhanced-accessibility: false;
 ///   $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
 /// @return {List} - This list of HSL values.
 @function to-hsl($color) {
-    @return (math.round(color.hue($color)), math.round(color.saturation($color)), math.round(color.lightness($color)));
+    @return (
+        math.round(color.channel($color, 'hue', $space: hsl)),
+        math.round(color.channel($color, 'saturation', $space: hsl)),
+        math.round(color.channel($color, 'lightness', $space: hsl))
+    );
 }
 
 /// Calculates the contrast ratio between two colors.
@@ -425,9 +441,9 @@ $_enhanced-accessibility: false;
 /// @link https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests. WCAG 2.0 Contrast Ratio
 @function luminance($color) {
     @if meta.type-of($color) == 'color' {
-        $r: math.div(color.red($color), 255);
-        $g: math.div(color.green($color), 255);
-        $b: math.div(color.blue($color), 255);
+        $r: math.div(color.channel($color, 'red', $space: rgb), 255);
+        $g: math.div(color.channel($color, 'green', $space: rgb), 255);
+        $b: math.div(color.channel($color, 'blue', $space: rgb), 255);
 
         @return 0.2126 * _lcv($r) + 0.7152 * _lcv($g) + 0.0722 * _lcv($b);
     }

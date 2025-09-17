@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -33,7 +34,7 @@
     $focus-color: null,
     $size: null
 ) {
-    $name: 'igx-splitter';
+    $name: #{config.prefix() + '-' + 'splitter'};
     $splitter-schema: ();
 
     @if map.has-key($schema, 'splitter') {

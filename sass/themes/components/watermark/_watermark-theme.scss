@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -36,7 +37,7 @@
     $border-color: null,
     $border-radius: null
 ) {
-    $name: 'igx-watermark';
+    $name: #{config.prefix() + '-' + 'watermark'};
     $watermark-schema: ();
 
     @if map.has-key($schema, 'watermark') {

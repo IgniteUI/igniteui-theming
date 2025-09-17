@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -68,7 +69,7 @@
     $border-color: null,
     $border-color--hover: null
 ) {
-    $name: 'igx-tabs';
+    $name: #{config.prefix() + '-' + 'tabs'};
     $tabs-schema: ();
 
     @if map.has-key($schema, 'tabs') {

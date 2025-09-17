@@ -1,0 +1,62 @@
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../index' as *;
+@use '../elevations/presets/material' as *;
+
+$theme-schemas: () !default;
+
+@mixin generate-color-vars {
+    @each $colorName, $shades in $IPaletteColors {
+        @each $shade in $shades {
+            --color-#{$colorName}-#{$shade}: var(--ig-#{$colorName}-#{$shade});
+            --color-#{$colorName}-#{$shade}-contrast: var(--ig-#{$colorName}-#{$shade}-contrast);
+        }
+    }
+}
+
+@mixin generate-shadow-vars {
+    @each $level, $shadow in $elevations {
+        --shadow-elevation-#{$level}: var(--ig-elevation-#{$level});
+    }
+}
+
+@mixin generate-typography-utilities {
+    @each $type in $ITypeScale {
+        @utility type-style-#{$type} {
+            @each $prop, $_ in $ITypeStyle {
+                #{$prop}: var(--ig-#{$type}-#{$prop});
+            }
+        }
+    }
+}
+
+@mixin tailwind-theme($component, $props: ()) {
+    $has-theme: meta.function-exists(#{$component}-theme);
+
+    @if $has-theme {
+        $fn: meta.get-function(#{$component}-theme);
+
+        @each $_, $schema in $theme-schemas {
+            $_theme: meta.call($fn, $schema: $schema);
+            $_defaults: ();
+
+            @each $prop in $props {
+                $_defaults: map.merge(
+                    $_defaults,
+                    (
+                        $prop: map.get($_theme, $prop),
+                    )
+                );
+            }
+
+            $_t: meta.call($fn, $schema: $schema, $_defaults...);
+            $_name: map.get($_t, name);
+            $_variant: map.get($_t, _meta, variant);
+
+            @utility #{$_variant}-#{$component} {
+                @include css-vars-from-theme($_t, $_name);
+            }
+        }
+    }
+}

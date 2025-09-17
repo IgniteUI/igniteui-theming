@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -19,8 +20,7 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-ripple-theme);
 @function ripple-theme($schema: $light-material-schema, $color: null) {
-    $name: 'igx-ripple';
-    $selector: '[igxRipple]';
+    $name: #{config.prefix() + '-' + 'ripple'};
     $ripple-schema: ();
 
     @if map.has-key($schema, 'ripple') {
@@ -35,7 +35,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             color: $color,
         )
     );

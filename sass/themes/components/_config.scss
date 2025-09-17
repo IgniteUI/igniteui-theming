@@ -1,0 +1,11 @@
+$_prefix: null !default;
+
+@mixin configure-prefix($value) {
+    @if $value {
+        $_prefix: $value !global;
+    }
+}
+
+@function prefix() {
+    @return $_prefix or 'ig';
+}

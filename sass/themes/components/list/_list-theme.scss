@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -84,7 +85,7 @@
     $border-color: null,
     $border-width: null
 ) {
-    $name: 'igx-list';
+    $name: #{config.prefix() + '-' + 'list'};
     $list-schema: ();
 
     @if map.has-key($schema, 'list') {

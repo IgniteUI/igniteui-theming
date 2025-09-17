@@ -1,5 +1,5 @@
 import path from 'path';
-import * as sass from 'sass';
+import * as sass from 'sass-embedded';
 import {exec as _exec} from 'child_process';
 import {mkdirSync as makeDir} from 'fs';
 import {writeFile} from 'fs/promises';
@@ -15,14 +15,16 @@ const DEST_DIR = path.join.bind(null, path.resolve(__dirname, '../json'));
 
 (async () => {
   const start = performance.now();
+  const compiler = await sass.initAsyncCompiler();
 
   await exec('npm run clean:json');
   report.info('Building JSON files...');
 
   // Generate JSON files from Sass
   for (const src of await globby(['sass/json/*.scss'])) {
-    const {css} = sass.compile(src, {
+    const {css} = await compiler.compileAsync(src, {
       loadPaths: ['sass'],
+      silenceDeprecations: ['color-functions'],
     });
 
     for (const [out, data] of Object.entries(await parseCSS(css))) {
@@ -33,4 +35,5 @@ const DEST_DIR = path.join.bind(null, path.resolve(__dirname, '../json'));
   }
 
   report.success(`Built JSON in ${((performance.now() - start) / 1000).toFixed(2)}s`);
+  compiler.dispose();
 })();

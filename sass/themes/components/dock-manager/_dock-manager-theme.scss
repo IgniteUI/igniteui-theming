@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:meta';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -55,7 +56,7 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-dock-manager-theme);
 @function dock-manager-theme($schema: $light-material-schema, $rest...) {
-    $name: 'igc-dockmanager';
+    $name: #{config.prefix() + '-' + 'dockmanager'};
     $dock-manager-schema: ();
 
     @if map.has-key($schema, 'dockmanager') {
