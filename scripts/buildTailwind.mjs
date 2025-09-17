@@ -1,47 +1,66 @@
-import { compile } from 'sass';
 import path from 'path';
-import { mkdirSync, writeFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { globby } from 'globby';
+import * as sass from 'sass-embedded';
+import {mkdirSync, writeFileSync} from 'fs';
+import {fileURLToPath} from 'url';
+import {globby} from 'globby';
 import report from './report.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Paths
-const inputFile = path.resolve(__dirname, '../sass/tailwind/theme.scss');
-const outputDir = path.resolve(__dirname, '../tailwind');
-const outputFile = path.join(outputDir, 'theme.css');
-
-const presetsInputDir = path.resolve(__dirname, '../sass/tailwind/presets');
-const presetsOutputDir = path.resolve(__dirname, '../tailwind/presets');
-
-// Ensure output directories exist
-mkdirSync(outputDir, { recursive: true });
-mkdirSync(presetsOutputDir, { recursive: true });
-
-// Compile main theme.scss
-const { css } = compile(inputFile, {
+const SASS_CONFIG = {
   loadPaths: ['sass'],
   style: 'compressed',
-});
-writeFileSync(outputFile, css, 'utf-8');
-report.success('compiled tailwind theme');
+  silenceDeprecations: ['color-functions'],
+};
 
-// Compile all presets
-const presetFiles = await globby(`${presetsInputDir}/**/*.scss`);
+const BUILD_CONFIGS = [
+  {
+    name: 'themes',
+    inputDir: path.resolve(__dirname, '../sass/tailwind/themes'),
+    outputDir: path.resolve(__dirname, '../tailwind/themes'),
+  },
+  {
+    name: 'utilities',
+    inputDir: path.resolve(__dirname, '../sass/tailwind/utilities'),
+    outputDir: path.resolve(__dirname, '../tailwind/utilities'),
+  },
+];
 
-for (const file of presetFiles) {
-  const relativePath = path.relative(presetsInputDir, file);
-  const outputPath = path.join(presetsOutputDir, relativePath.replace(/\.scss$/, '.css'));
+/**
+ * Compiles all SCSS files in a directory, excluding files starting with underscore
+ */
+async function compileSass(inputDir, outputDir) {
+  mkdirSync(outputDir, {recursive: true});
 
-  // Ensure output subfolder exists
-  mkdirSync(path.dirname(outputPath), { recursive: true });
+  const files = await globby([`${inputDir}/**/*.scss`, `!${inputDir}/**/_*.scss`]);
+  const compiler = await sass.initAsyncCompiler();
 
-  const { css } = compile(file, {
-    loadPaths: ['sass'],
-    style: 'compressed',
-  });
+  for (const file of files) {
+    const relativePath = path.relative(inputDir, file);
+    const outputPath = path.join(outputDir, relativePath.replace(/\.scss$/, '.css'));
 
-  writeFileSync(outputPath, css, 'utf-8');
+    const {css} = await compiler.compileAsync(file, SASS_CONFIG);
+
+    mkdirSync(path.dirname(outputPath), {recursive: true});
+    writeFileSync(outputPath, css, 'utf-8');
+  }
+
+  compiler.dispose();
+  return files.length;
 }
+
+async function build() {
+  for (const config of BUILD_CONFIGS) {
+    try {
+      const start = performance.now();
+      const filesCompiled = await compileSass(config.inputDir, config.outputDir);
+      report.success(`Built ${filesCompiled} tailwind ${config.name} files in ${((performance.now() - start) / 1000).toFixed(2)}s`);
+    } catch (error) {
+      report.error(`Failed to build ${config.name}: ${error.message}`);
+      process.exit(1);
+    }
+  }
+}
+
+await build();

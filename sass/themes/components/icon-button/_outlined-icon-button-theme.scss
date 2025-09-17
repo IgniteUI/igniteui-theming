@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -34,7 +35,7 @@
 
     $size: null
 ) {
-    $name: 'igx-outlined-icon-button';
+    $name: #{config.prefix() + '-' + 'outlined-icon-button'};
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {

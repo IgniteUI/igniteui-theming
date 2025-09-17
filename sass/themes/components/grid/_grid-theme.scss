@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -204,8 +205,7 @@
     $cell-selected-within-background: null,
     $cell-selected-within-text-color: null
 ) {
-    $name: 'igx-grid';
-    $selector: 'igx-grid, igx-hierarchical-grid, igx-pivot-grid, igx-tree-grid, igx-advanced-filtering-dialog, igx-grid-excel-style-filtering, .igx-excel-filter__secondary';
+    $name: #{config.prefix() + '-' + 'grid'};
     $grid-schema: ();
 
     @if map.has-key($schema, 'grid') {
@@ -464,7 +464,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
 
             header-background: $header-background,
             header-text-color: $header-text-color,

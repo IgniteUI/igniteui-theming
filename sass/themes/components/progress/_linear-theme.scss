@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -45,7 +46,7 @@
     $track-height: null,
     $strip-size: null
 ) {
-    $name: 'igx-linear-bar';
+    $name: #{config.prefix() + '-' + 'linear-bar'};
     $linear-bar-schema: ();
     $linear-bar-schema: if(map.has-key($schema, 'linear-bar'), map.get($schema, 'linear-bar'), $schema);
     $theme: digest-schema($linear-bar-schema);

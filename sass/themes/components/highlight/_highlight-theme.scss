@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -29,8 +30,7 @@
     $active-background: null,
     $active-color: null
 ) {
-    $name: 'igx-highlight';
-    $selector: '.igx-highlight';
+    $name: #{config.prefix() + '-' + 'highlight'};
     $highlight-schema: ();
 
     @if map.has-key($schema, 'highlight') {
@@ -53,7 +53,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             resting-background: $resting-background,
             resting-color: $resting-color,
             active-background: $active-background,
