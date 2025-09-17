@@ -1,5 +1,6 @@
 // stylelint-disable max-line-length
 @use 'sass:map';
+@use 'sass:meta';
 @use '../mixins' as *;
 @use '../functions' as *;
 @use '../schemas/charts' as *;
@@ -65,7 +66,7 @@
 
     @return extend(
         $theme,
-        keywords($rest),
+        meta.keywords($rest),
         (
             name: $name,
             selector: $selector,
@@ -120,7 +121,7 @@
 
     @return extend(
         $theme,
-        keywords($rest),
+        meta.keywords($rest),
         (
             name: $name,
             selector: $selector,
