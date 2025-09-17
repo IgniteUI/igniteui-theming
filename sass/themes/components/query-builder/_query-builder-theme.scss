@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -44,8 +45,7 @@
     $separator-color: null,
     $label-foreground: null
 ) {
-    $name: 'igx-query-builder';
-    $selector: 'igx-query-builder';
+    $name: #{config.prefix() + '-' + 'query-builder'};
     $query-builder-schema: ();
 
     @if map.has-key($schema, 'query-builder') {
@@ -91,7 +91,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             background: $background,
             header-background: $header-background,
             header-foreground: $header-foreground,

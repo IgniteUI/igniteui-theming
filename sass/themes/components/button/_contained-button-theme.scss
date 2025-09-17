@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -99,7 +100,7 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: 'igx-contained-button';
+    $name: #{config.prefix() + '-' + 'contained-button'};
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {

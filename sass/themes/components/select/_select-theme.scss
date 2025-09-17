@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -37,8 +38,7 @@
     $toggle-button-foreground-filled: null,
     $toggle-button-background-focus--border: null
 ) {
-    $name: 'igx-select';
-    $selector: 'igx-select';
+    $name: #{config.prefix() + '-' + 'select'};
     $select-schema: ();
 
     @if map.has-key($schema, 'select') {
@@ -86,7 +86,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             toggle-button-background: $toggle-button-background,
             toggle-button-background-focus: $toggle-button-background-focus,
             toggle-button-background-disabled: $toggle-button-background-disabled,

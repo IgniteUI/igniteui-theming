@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -28,7 +29,7 @@
     $title-color: null,
     $background-color: null
 ) {
-    $name: 'igx-column-actions';
+    $name: #{config.prefix() + '-' + 'column-actions'};
     $column-actions-schema: ();
 
     @if map.has-key($schema, 'column-actions') {
