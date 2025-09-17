@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -35,7 +36,7 @@
     $hover-icon-color: null,
     $disable-shadow: false
 ) {
-    $name: 'igx-navbar';
+    $name: #{config.prefix() + '-' + 'navbar'};
     $navbar-schema: ();
 
     @if map.has-key($schema, 'navbar') {

@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -41,7 +42,7 @@
     $background-color: null,
     $shadow: null
 ) {
-    $name: 'igx-badge';
+    $name: #{config.prefix() + '-' + 'badge'};
     $badge-schema: ();
 
     @if map.has-key($schema, 'badge') {

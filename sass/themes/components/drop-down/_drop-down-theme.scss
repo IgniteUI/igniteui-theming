@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -82,8 +83,7 @@
     $shadow: null,
     $size: null
 ) {
-    $name: 'igx-drop-down';
-    $selector: '.igx-drop-down__list, .igx-grid-toolbar__dd-list';
+    $name: #{config.prefix() + '-' + 'drop-down'};
     $drop-down-schema: ();
 
     @if map.has-key($schema, 'drop-down') {
@@ -186,7 +186,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             background-color: $background-color,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,

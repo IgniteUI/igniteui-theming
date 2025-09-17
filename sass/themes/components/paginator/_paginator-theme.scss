@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -31,7 +32,7 @@
     $background-color: null,
     $border-color: null
 ) {
-    $name: 'igx-paginator';
+    $name: #{config.prefix() + '-' + 'paginator'};
     $grid-paginator-schema: ();
 
     @if map.has-key($schema, 'paginator') {

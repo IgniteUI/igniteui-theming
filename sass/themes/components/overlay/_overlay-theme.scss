@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -20,8 +21,7 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-overlay-theme);
 @function overlay-theme($schema: $light-material-schema, $background-color: null) {
-    $name: 'igx-overlay';
-    $selector: '.igx-overlay__wrapper--modal, .igx-overlay__content--modal';
+    $name: #{config.prefix() + '-' + 'overlay'};
     $overlay-schema: ();
 
     @if map.has-key($schema, 'overlay') {
@@ -36,7 +36,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             background-color: $background-color,
         )
     );

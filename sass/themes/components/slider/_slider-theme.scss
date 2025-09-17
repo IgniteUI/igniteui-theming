@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -62,7 +63,7 @@
     $tick-label-color: null,
     $tick-color: null
 ) {
-    $name: 'igx-slider';
+    $name: #{config.prefix() + '-' + 'slider'};
     $slider-schema: ();
 
     @if map.has-key($schema, 'slider') {

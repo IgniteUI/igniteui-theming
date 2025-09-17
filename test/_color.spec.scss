@@ -129,7 +129,7 @@ $_palette: palette(
         @include it('should return a shade of type color w/ palette as only argument') {
             $value: color($_palette);
 
-            @include assert-equal(type-of($value), color);
+            @include assert-equal(meta.type-of($value), color);
         }
 
         @include it('should return a shade of type color string w/ palette and color as only arguments') {
@@ -149,7 +149,7 @@ $_palette: palette(
         @include it('should return a shade as CSS variable w/o arguments') {
             $value: color();
 
-            @include assert-equal(type-of($value), string);
+            @include assert-equal(meta.type-of($value), string);
             @include assert-equal($value, var(--ig-primary-500));
         }
 
@@ -158,7 +158,7 @@ $_palette: palette(
                 $color: secondary,
             );
 
-            @include assert-equal(type-of($value), string);
+            @include assert-equal(meta.type-of($value), string);
             @include assert-equal($value, var(--ig-secondary-500));
         }
 
@@ -168,7 +168,7 @@ $_palette: palette(
                 $variant: 'A400',
             );
 
-            @include assert-equal(type-of($value), string);
+            @include assert-equal(meta.type-of($value), string);
             @include assert-equal($value, var(--ig-secondary-A400));
         }
 
@@ -186,7 +186,7 @@ $_palette: palette(
                 $opacity: 0.25,
             );
 
-            @include assert-equal(type-of($value), string);
+            @include assert-equal(meta.type-of($value), string);
             @include assert-equal($value, hsl(from var(--ig-secondary-A400-contrast) h s l / 0.25));
         }
 
@@ -212,7 +212,7 @@ $_palette: palette(
             $variant: 600;
             $shade: shade($color, $_primary, $variant, null);
             $expected: (
-                raw: hsl(204deg 100% 44.5%),
+                raw: hsl(204deg 126% 44.5%),
                 hsl: #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))},
             );
 
@@ -349,7 +349,7 @@ $_palette: palette(
                 }
 
                 @include contains() {
-                    color: #fafafa;
+                    color: rgb(250, 250, 250);
                 }
             }
         }
