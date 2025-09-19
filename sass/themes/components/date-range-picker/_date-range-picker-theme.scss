@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -12,7 +13,7 @@
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {color} $label-color [null] - The color for date range separator label.
 @function date-range-picker-theme($schema: $light-material-schema, $label-color: null) {
-    $name: 'igx-date-range-picker';
+    $name: #{config.prefix() + '-' + 'date-range-picker'};
     $date-range-schema: ();
 
     @if map.has-key($schema, 'date-range') {

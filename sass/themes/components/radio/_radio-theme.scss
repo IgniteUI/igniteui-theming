@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -60,7 +61,7 @@
     $error-color-hover: null,
     $focus-outline-color-error: null
 ) {
-    $name: 'igx-radio';
+    $name: #{config.prefix() + '-' + 'radio'};
     $radio-schema: ();
 
     @if map.has-key($schema, 'radio') {

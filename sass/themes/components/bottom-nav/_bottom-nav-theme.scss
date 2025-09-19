@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -41,7 +42,7 @@
     $border-color: null,
     $shadow: null
 ) {
-    $name: 'igx-bottom-nav';
+    $name: #{config.prefix() + '-' + 'bottom-nav'};
     $bottom-nav-schema: ();
 
     @if map.has-key($schema, 'bottom-nav') {

@@ -24,6 +24,8 @@
 /// @prop {Map} image-attachment-icon [color: ('gray', 900)] - The color of the message attachment icon.
 /// @prop {Map} chat-input-border [color: ('gray', 400)] - The border color of the chat input area.
 /// @prop {Map} progress-indicator-color [color: ('secondary', 500)] - The color of the progress indicator in the chat component.
+/// @prop {Map} code-background [color: ('gray', 50)] - The background color of the code snippets in the chat component.
+/// @prop {Map} code-border [color: ('gray', 300)] - The border color of the code snippets in the chat component.
 $light-chat: (
     background: (
         color: (
@@ -114,6 +116,18 @@ $light-chat: (
             500,
         ),
     ),
+    code-background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
+    code-border: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
 );
 
 /// Generates a light material chat schema.
@@ -167,6 +181,7 @@ $fluent-chat: extend(
 /// @type {Map}
 /// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the chat component.
 /// @prop {Map} header-border [color: ('gray', 300)] - The color used for the chat header border.
+/// @prop {Map} code-border [color: ('gray', 400)] - The border color of the code snippets in the chat component.
 /// @requires {Map} $light-chat
 $bootstrap-chat: extend(
     $light-chat,
@@ -181,6 +196,12 @@ $bootstrap-chat: extend(
             color: (
                 'gray',
                 300,
+            ),
+        ),
+        code-border: (
+            color: (
+                'gray',
+                400,
             ),
         ),
         _meta: (
@@ -198,6 +219,7 @@ $bootstrap-chat: extend(
 /// @prop {Map} message-actions-color [color: ('gray', 600)] - The icon color of the chat message actions.
 /// @prop {Map} progress-indicator-color [color: ('info', 500)] - The color of the progress indicator in the chat component.
 /// @prop {Map} image-attachment-icon [color: ('info', 500)] - The color of the message attachment icon.
+/// @prop {Map} code-border [color: ('gray', 400)] - The border color of the code snippets in the chat component.
 /// @requires {Map} $light-chat
 $indigo-chat: extend(
     $light-chat,
@@ -236,6 +258,12 @@ $indigo-chat: extend(
             color: (
                 'info',
                 500,
+            ),
+        ),
+        code-border: (
+            color: (
+                'gray',
+                400,
             ),
         ),
         _meta: (

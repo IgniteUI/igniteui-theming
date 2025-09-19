@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -110,8 +111,7 @@
     $disabled-selected-background: null,
     $disabled-selected-border-color: null
 ) {
-    $name: 'igx-button-group';
-    $selector: 'igx-buttongroup';
+    $name: #{config.prefix() + '-' + 'button-group'};
     $button-group-schema: ();
 
     @if map.has-key($schema, 'button-group') {
@@ -259,7 +259,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             item-text-color: $item-text-color,
             item-icon-color: $item-icon-color,
             item-background: $item-background,

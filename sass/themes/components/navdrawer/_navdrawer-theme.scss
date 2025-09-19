@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -64,7 +65,7 @@
     $item-disabled-icon-color: null,
     $shadow: null
 ) {
-    $name: 'igx-nav-drawer';
+    $name: #{config.prefix() + '-' + 'nav-drawer'};
     $navdrawer-schema: ();
 
     @if map.has-key($schema, 'nav-drawer') {

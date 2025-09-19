@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -35,8 +36,7 @@
     $background: null,
     $text-color: null
 ) {
-    $name: 'igx-tooltip';
-    $selector: '.igx-tooltip';
+    $name: #{config.prefix() + '-' + 'toolptip'};
     $tooltip-schema: ();
 
     @if map.has-key($schema, 'tooltip') {
@@ -60,7 +60,6 @@
         $theme,
         (
             name: $name,
-            selector: $selector,
             background: $background,
             text-color: $text-color,
             border-radius: $border-radius,
