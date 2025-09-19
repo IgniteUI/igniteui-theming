@@ -113,7 +113,7 @@
     }
 
     @if not($item-background-hover) and $item-background {
-        $item-background-hover: hsl(from var(--item-background) h s calc(l * 0.9));
+        $item-background-hover: dynamic-shade(var(--item-background));
     }
 
     @if not($item-background-active) and $item-background-hover {
@@ -132,20 +132,20 @@
         $item-text-color: adaptive-contrast(var(--item-background));
     }
 
-    @if not($item-title-color) and $item-background {
-        $item-title-color: adaptive-contrast(var(--item-background));
+    @if not($item-title-color) and $item-text-color {
+        $item-title-color: var(--item-text-color);
     }
 
-    @if not($item-action-color) and $item-background {
-        $item-action-color: adaptive-contrast(var(--item-background));
+    @if not($item-action-color) and $item-text-color {
+        $item-action-color: var(--item-text-color);
     }
 
-    @if not($item-thumbnail-color) and $item-background {
-        $item-thumbnail-color: adaptive-contrast(var(--item-background));
+    @if not($item-thumbnail-color) and $item-text-color {
+        $item-thumbnail-color: var(--item-text-color);
     }
 
-    @if not($item-subtitle-color) and $item-background {
-        $item-subtitle-color: hsla(from adaptive-contrast(var(--item-background)) h s l / 0.74);
+    @if not($item-subtitle-color) and $item-text-color {
+        $item-subtitle-color: hsla(from var(--item-text-color) h s l / 0.74);
     }
 
     @if not($item-subtitle-color) and $item-text-color {
@@ -156,24 +156,20 @@
         $item-text-color-hover: adaptive-contrast(var(--item-background-hover));
     }
 
-    @if not($item-title-color-hover) and $item-background-hover {
-        $item-title-color-hover: adaptive-contrast(var(--item-background-hover));
+    @if not($item-title-color-hover) and $item-text-color-hover {
+        $item-title-color-hover: var(--item-text-color-hover);
     }
 
-    @if not($item-action-color-hover) and $item-background-hover {
-        $item-action-color-hover: adaptive-contrast(var(--item-background-hover));
+    @if not($item-action-color-hover) and $item-text-color-hover {
+        $item-action-color-hover: var(--item-text-color-hover);
     }
 
-    @if not($item-thumbnail-color-hover) and $item-background-hover {
-        $item-thumbnail-color-hover: adaptive-contrast(var(--item-background-hover));
-    }
-
-    @if not($item-subtitle-color-hover) and $item-background-hover {
-        $item-subtitle-color-hover: hsla(from adaptive-contrast(var(--item-background-hover)) h s l / 0.74);
+    @if not($item-thumbnail-color-hover) and $item-text-color-hover {
+        $item-thumbnail-color-hover: var(--item-text-color-hover);
     }
 
     @if not($item-subtitle-color-hover) and $item-text-color-hover {
-        $item-subtitle-color-hover: var(--item-text-color-hover);
+        $item-subtitle-color-hover: hsla(from var(--item-text-color-hover) h s l / 0.74);
     }
 
     @if not($item-text-color-active) and $item-background-active {
@@ -184,36 +180,36 @@
         $item-text-color-selected: adaptive-contrast(var(--item-background-selected));
     }
 
-    @if not($item-title-color-active) and $item-background-active {
-        $item-title-color-active: adaptive-contrast(var(--item-background-active));
+    @if not($item-title-color-active) and $item-text-color-active {
+        $item-title-color-active: var(--item-text-color-active);
     }
 
-    @if not($item-title-color-selected) and $item-background-selected {
-        $item-title-color-selected: adaptive-contrast(var(--item-background-selected));
+    @if not($item-title-color-selected) and $item-text-color-selected {
+        $item-title-color-selected: var(--item-text-color-selected);
     }
 
-    @if not($item-action-color-active) and $item-background-active {
-        $item-action-color-active: adaptive-contrast(var(--item-background-active));
+    @if not($item-action-color-active) and $item-text-color-active {
+        $item-action-color-active: var(--item-text-color-active);
     }
 
-    @if not($item-action-color-selected) and $item-background-selected {
-        $item-action-color-selected: adaptive-contrast(var(--item-background-selected));
+    @if not($item-action-color-selected) and $item-text-color-selected {
+        $item-action-color-selected: var(--item-text-color-selected);
     }
 
-    @if not($item-thumbnail-color-active) and $item-background-active {
-        $item-thumbnail-color-active: adaptive-contrast(var(--item-background-active));
+    @if not($item-thumbnail-color-active) and $item-text-color-active {
+        $item-thumbnail-color-active: var(--item-text-color-active);
     }
 
-    @if not($item-thumbnail-color-selected) and $item-background-selected {
-        $item-thumbnail-color-selected: adaptive-contrast(var(--item-background-selected));
+    @if not($item-thumbnail-color-selected) and $item-text-color-selected {
+        $item-thumbnail-color-selected: var(--item-text-color-selected);
     }
 
-    @if not($item-subtitle-color-active) and $item-background-active {
-        $item-subtitle-color-active: hsla(from adaptive-contrast(var(--item-background-active)) h s l / 0.74);
+    @if not($item-subtitle-color-active) and $item-text-color-active {
+        $item-subtitle-color-active: hsla(from var(--item-text-color-active) h s l / 0.74);
     }
 
-    @if not($item-subtitle-color-selected) and $item-background-selected {
-        $item-subtitle-color-selected: hsla(from adaptive-contrast(var(--item-background-selected)) h s l / 0.74);
+    @if not($item-subtitle-color-selected) and $item-text-color-selected {
+        $item-subtitle-color-selected: hsla(from var(--item-text-color-selected) h s l / 0.74);
     }
 
     @if not($item-subtitle-color-active) and $item-text-color-active {
