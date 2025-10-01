@@ -110,11 +110,22 @@ $schema: (
                 resting-elevation: var(--ig-elevation-2),
                 _meta: (
                     theme: 'material',
-                    variant: 'light'
+                    variant: 'light',
+                    element-prefix: prefix()
                 )
             );
 
             @include assert-equal(digest-schema($schema), $theme);
+        }
+
+        @include it('should allow configuration of _meta element prefix') {
+            $prefix: 'custom';
+
+            @include configure-prefix($prefix);
+
+            $meta-prefix: map.get(digest-schema($schema), '_meta', 'element-prefix');
+
+            @include assert-equal($meta-prefix, $prefix);
         }
 
         @include it('should resolve the border-radius function from schema definitions') {
