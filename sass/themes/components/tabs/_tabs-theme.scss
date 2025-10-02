@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -69,7 +69,8 @@
     $border-color: null,
     $border-color--hover: null
 ) {
-    $name: #{config.prefix() + '-' + 'tabs'};
+    $name: #{config.variable-prefix() + '-' + 'tabs'};
+    $selector: #{config.element-prefix() + '-' + 'tabs'};
     $tabs-schema: ();
 
     @if map.has-key($schema, 'tabs') {
@@ -242,6 +243,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             item-text-color: $item-text-color,
             item-background: $item-background,
             item-hover-color: $item-hover-color,

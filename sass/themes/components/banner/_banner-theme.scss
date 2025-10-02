@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -36,7 +36,8 @@
     $banner-illustration-color: null,
     $border-radius: null
 ) {
-    $name: #{config.prefix() + '-' + 'banner'};
+    $name: #{config.variable-prefix() + '-' + 'banner'};
+    $selector: (#{config.element-prefix() + '-' + 'banner'}, #{'.' + config.element-prefix() + '-' + 'banner'});
     $banner-schema: ();
 
     @if map.has-key($schema, 'banner') {
@@ -59,6 +60,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             banner-background: $banner-background,
             banner-message-color: $banner-message-color,
             banner-border-color: $banner-border-color,

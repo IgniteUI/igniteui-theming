@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -45,7 +45,8 @@
     $resting-shadow: null,
     $hover-shadow: null
 ) {
-    $name: #{config.prefix() + '-' + 'card'};
+    $name: #{config.variable-prefix() + '-' + 'card'};
+    $selector: #{config.element-prefix() + '-' + 'card'};
     $card-schema: ();
 
     @if map.has-key($schema, 'card') {
@@ -86,6 +87,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             outline-color: $outline-color,
             border-radius: $border-radius,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -35,7 +35,8 @@
     $button-color: null,
     $shadow: null
 ) {
-    $name: #{config.prefix() + '-' + 'snackbar'};
+    $name: #{config.variable-prefix() + '-' + 'snackbar'};
+    $selector: #{config.element-prefix() + '-' + 'snackbar'};
     $snackbar-schema: ();
 
     @if map.has-key($schema, 'snackbar') {
@@ -63,6 +64,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             border-radius: $border-radius,
             background: $background,
             text-color: $text-color,

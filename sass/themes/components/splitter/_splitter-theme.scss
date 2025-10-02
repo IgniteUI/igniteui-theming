@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -34,7 +34,8 @@
     $focus-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'splitter'};
+    $name: #{config.variable-prefix() + '-' + 'splitter'};
+    $selector: #{config.element-prefix() + '-' + 'splitter'};
     $splitter-schema: ();
 
     @if map.has-key($schema, 'splitter') {
@@ -68,6 +69,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             bar-color: $bar-color,
             handle-color: $handle-color,
             expander-color: $expander-color,

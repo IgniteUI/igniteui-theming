@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -53,6 +53,7 @@
     $sb-corner-border-size: null
 ) {
     $name: 'ig-scrollbar';
+    $selector: '.ig-scrollbar';
     $scrollbar-schema: ();
 
     @if map.has-key($schema, 'scrollbar') {
@@ -67,6 +68,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
 
             sb-thumb-min-height: $sb-thumb-min-height,
             sb-thumb-bg-color: $sb-thumb-bg-color,

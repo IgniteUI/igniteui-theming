@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -61,7 +61,8 @@
     $error-color-hover: null,
     $focus-outline-color-error: null
 ) {
-    $name: #{config.prefix() + '-' + 'radio'};
+    $name: #{config.variable-prefix() + '-' + 'radio'};
+    $selector: #{config.element-prefix() + '-' + 'radio'};
     $radio-schema: ();
 
     @if map.has-key($schema, 'radio') {
@@ -123,6 +124,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             label-color: $label-color,
             label-color-hover: $label-color-hover,
             empty-color: $empty-color,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -100,7 +100,12 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'fab-button'};
+    $name: #{config.variable-prefix() + '-' + 'fab-button'};
+    $selector: (
+        #{'[' + config.element-prefix() + 'Button="fab"]'},
+        #{config.element-prefix() + '-' + 'button[variant="fab"]'},
+        #{'.' + config.element-prefix() + '-' + 'button--fab'}
+    );
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -242,6 +247,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             icon-color: $icon-color,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -52,7 +52,8 @@
     $clear-button-foreground-focus: null,
     $toggle-button-foreground-filled: null
 ) {
-    $name: #{config.prefix() + '-' + 'combo'};
+    $name: #{config.variable-prefix() + '-' + 'combo'};
+    $selector: (#{config.element-prefix() + '-' + 'combo'}, #{config.element-prefix() + '-' + 'simple-combo'});
     $combo-schema: ();
 
     @if map.has-key($schema, 'combo') {
@@ -110,6 +111,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             search-separator-border-color: $search-separator-border-color,
             empty-list-placeholder-color: $empty-list-placeholder-color,
             empty-list-background: $empty-list-background,

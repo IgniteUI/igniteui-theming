@@ -31,11 +31,11 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
     $t: map.get($theme, '_meta', 'theme');
 
     // This is here only because the button theme consists of 4 nested themes.
-    @if $themes and meta.type-of($themes) == 'map' {
-        @each $theme in $themes {
-            @include css-vars(list.nth($theme, 2));
-        }
-    }
+    // @if $themes and meta.type-of($themes) == 'map' {
+    //     @each $theme in $themes {
+    //         @include css-vars(list.nth($theme, 2));
+    //     }
+    // }
 
     @each $key, $value in map.remove($theme, $ignored...) {
         $variable: if($prefix, #{$prefix}-#{$key}, #{$key});
