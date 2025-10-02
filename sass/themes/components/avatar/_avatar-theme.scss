@@ -34,7 +34,8 @@
     $border-radius: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'avatar'};
+    $name: #{config.variable-prefix() + '-' + 'avatar'};
+    $selector: #{config.element-prefix() + '-' + 'avatar'};
     $avatar-schema: ();
 
     @if map.has-key($schema, 'avatar') {
@@ -57,6 +58,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             color: $color,
             icon-color: $icon-color,

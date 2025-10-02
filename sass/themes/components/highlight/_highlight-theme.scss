@@ -30,7 +30,8 @@
     $active-background: null,
     $active-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'highlight'};
+    $name: #{config.variable-prefix() + '-' + 'highlight'};
+    $selector: (#{config.element-prefix() + '-' + 'highlight'}, '.igx-highlight');
     $highlight-schema: ();
 
     @if map.has-key($schema, 'highlight') {
@@ -53,6 +54,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             resting-background: $resting-background,
             resting-color: $resting-color,
             active-background: $active-background,

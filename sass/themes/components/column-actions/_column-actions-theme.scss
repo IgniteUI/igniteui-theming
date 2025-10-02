@@ -29,7 +29,8 @@
     $title-color: null,
     $background-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'column-actions'};
+    $name: #{config.variable-prefix() + '-' + 'column-actions'};
+    $selector: #{config.element-prefix() + '-' + 'column-actions'};
     $column-actions-schema: ();
 
     @if map.has-key($schema, 'column-actions') {
@@ -48,6 +49,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             title-color: $title-color,
             background-color: $background-color,
         )

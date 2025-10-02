@@ -63,7 +63,8 @@
     $tick-label-color: null,
     $tick-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'slider'};
+    $name: #{config.variable-prefix() + '-' + 'slider'};
+    $selector: #{config.element-prefix() + '-' + 'slider'};
     $slider-schema: ();
 
     @if map.has-key($schema, 'slider') {
@@ -175,6 +176,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             track-color: $track-color,
             track-step-color: $track-step-color,
             track-step-size: $track-step-size,

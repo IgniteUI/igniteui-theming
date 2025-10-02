@@ -37,7 +37,8 @@
     $border-color: null,
     $border-radius: null
 ) {
-    $name: #{config.prefix() + '-' + 'watermark'};
+    $name: #{config.variable-prefix() + '-' + 'watermark'};
+    $selector: 'igc-trial-watermark';
     $watermark-schema: ();
 
     @if map.has-key($schema, 'watermark') {
@@ -56,7 +57,7 @@
         $theme,
         (
             name: $name,
-            selector: 'igc-trial-watermark',
+            selector: $selector,
             base-color: $base-color,
             image-color: $image-color,
             image-opacity: $image-opacity,

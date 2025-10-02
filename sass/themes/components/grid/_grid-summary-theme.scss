@@ -42,7 +42,8 @@
     $pinned-border-color: null,
     $label-hover-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'grid-summary'};
+    $name: #{config.variable-prefix() + '-' + 'grid-summary'};
+    $selector: #{'.' + config.element-prefix() + '-' + 'grid-summary'};
     $grid-summary-schema: ();
 
     @if map.has-key($schema, 'grid-summary') {
@@ -77,6 +78,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background-color: $background-color,
             label-color: $label-color,
             result-color: $result-color,

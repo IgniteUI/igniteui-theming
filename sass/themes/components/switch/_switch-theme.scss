@@ -85,7 +85,8 @@
     $focus-fill-color: null,
     $focus-fill-hover-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'switch'};
+    $name: #{config.variable-prefix() + '-' + 'switch'};
+    $selector: #{config.element-prefix() + '-' + 'switch'};
     $switch-schema: ();
 
     @if map.has-key($schema, 'switch') {
@@ -242,6 +243,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
 
             thumb-on-color: $thumb-on-color,
             track-on-color: $track-on-color,

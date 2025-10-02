@@ -45,7 +45,8 @@
     $separator-color: null,
     $label-foreground: null
 ) {
-    $name: #{config.prefix() + '-' + 'query-builder'};
+    $name: #{config.variable-prefix() + '-' + 'query-builder'};
+    $selector: #{config.element-prefix() + '-' + 'query-builder'};
     $query-builder-schema: ();
 
     @if map.has-key($schema, 'query-builder') {
@@ -91,6 +92,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             header-background: $header-background,
             header-foreground: $header-foreground,

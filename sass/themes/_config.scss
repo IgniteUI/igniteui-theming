@@ -1,11 +1,22 @@
-$_prefix: null !default;
+$_variable-prefix: null !default;
+$_element-prefix: null !default;
 
-@mixin configure-prefix($value) {
+@mixin configure-variable-prefix($value) {
     @if $value {
         $_prefix: $value !global;
     }
 }
 
-@function prefix() {
-    @return $_prefix or 'igx';
+@mixin configure-element-prefix($value) {
+    @if $value {
+        $_prefix: $value !global;
+    }
+}
+
+@function variable-prefix() {
+    @return $_variable-prefix or 'igx';
+}
+
+@function element-prefix() {
+    @return $_element-prefix or 'igx';
 }

@@ -42,7 +42,8 @@
     $border-color: null,
     $shadow: null
 ) {
-    $name: #{config.prefix() + '-' + 'bottom-nav'};
+    $name: #{config.variable-prefix() + '-' + 'bottom-nav'};
+    $selector: #{config.element-prefix() + '-' + 'bottom-nav'};
     $bottom-nav-schema: ();
 
     @if map.has-key($schema, 'bottom-nav') {
@@ -94,6 +95,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             icon-color: $icon-color,
             icon-selected-color: $icon-selected-color,

@@ -45,7 +45,8 @@
     $disabled-description-color: null,
     $expanded-margin: null
 ) {
-    $name: #{config.prefix() + '-' + 'expansion-panel'};
+    $name: #{config.variable-prefix() + '-' + 'expansion-panel'};
+    $selector: #{config.element-prefix() + '-' + 'expansion-panel'};
     $expansion-panel-schema: ();
 
     @if map.has-key($schema, 'expansion-panel') {
@@ -88,6 +89,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             header-background: $header-background,
             border-radius: $border-radius,
             header-focus-background: $header-focus-background,

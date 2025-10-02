@@ -21,7 +21,12 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-overlay-theme);
 @function overlay-theme($schema: $light-material-schema, $background-color: null) {
-    $name: #{config.prefix() + '-' + 'overlay'};
+    $name: #{config.variable-prefix() + '-' + 'overlay'};
+    $selector: (
+        #{config.element-prefix() + '-' + 'overlay'},
+        '.igx-overlay__wrapper--modal',
+        '.igx-overlay__content--modal'
+    );
     $overlay-schema: ();
 
     @if map.has-key($schema, 'overlay') {
@@ -36,6 +41,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background-color: $background-color,
         )
     );

@@ -44,7 +44,7 @@
 
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'icon-button'};
+    $name: #{config.variable-prefix() + '-' + 'icon-button'};
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {

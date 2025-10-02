@@ -36,7 +36,8 @@
     $hover-icon-color: null,
     $disable-shadow: false
 ) {
-    $name: #{config.prefix() + '-' + 'navbar'};
+    $name: #{config.variable-prefix() + '-' + 'navbar'};
+    $selector: #{config.element-prefix() + '-' + 'navbar'};
     $navbar-schema: ();
 
     @if map.has-key($schema, 'navbar') {
@@ -87,6 +88,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             border-color: $border-color,
             text-color: $text-color,

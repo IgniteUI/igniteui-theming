@@ -111,7 +111,8 @@
     $disabled-selected-background: null,
     $disabled-selected-border-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'button-group'};
+    $name: #{config.variable-prefix() + '-' + 'button-group'};
+    $selector: (#{config.element-prefix() + '-' + 'buttongroup'}, #{config.element-prefix() + '-' + 'button-group'});
     $button-group-schema: ();
 
     @if map.has-key($schema, 'button-group') {
@@ -259,6 +260,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             item-text-color: $item-text-color,
             item-icon-color: $item-icon-color,
             item-background: $item-background,

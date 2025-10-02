@@ -40,7 +40,8 @@
     $text-color: null,
     $shadow: null
 ) {
-    $name: #{config.prefix() + '-' + 'toast'};
+    $name: #{config.variable-prefix() + '-' + 'toast'};
+    $selector: #{config.element-prefix() + '-' + 'toast'};
     $toast-schema: ();
 
     @if map.has-key($schema, 'toast') {
@@ -68,6 +69,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             border-radius: $border-radius,
             text-color: $text-color,

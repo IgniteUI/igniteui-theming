@@ -83,7 +83,8 @@
     $shadow: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'drop-down'};
+    $name: #{config.variable-prefix() + '-' + 'drop-down'};
+    $selector: (#{config.element-prefix() + '-' + 'drop-down'}, '.igx-drop-down__list, .igx-grid-toolbar__dd-list');
     $drop-down-schema: ();
 
     @if map.has-key($schema, 'drop-down') {
@@ -186,6 +187,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background-color: $background-color,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,

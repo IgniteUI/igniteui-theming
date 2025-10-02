@@ -96,7 +96,8 @@
     $remove-icon-color-focus: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'chip'};
+    $name: #{config.variable-prefix() + '-' + 'chip'};
+    $selector: (#{config.element-prefix() + '-' + 'chip'}, '.igx-chip__ghost');
     $chip-schema: ();
 
     @if map.has-key($schema, 'chip') {
@@ -213,6 +214,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             border-radius: $border-radius,
 
             text-color: $text-color,

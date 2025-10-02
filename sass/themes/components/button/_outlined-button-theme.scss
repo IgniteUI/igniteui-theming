@@ -99,7 +99,12 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'outlined-button'};
+    $name: #{config.variable-prefix() + '-' + 'outlined-button'};
+    $selector: (
+        #{'[' + config.element-prefix() + 'Button="outlined"]'},
+        #{config.element-prefix() + '-' + 'button[variant="outlined"]'},
+        #{'.' + config.element-prefix() + '-' + 'button--outlined'}
+    );
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -367,6 +372,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             icon-color: $icon-color,

@@ -100,7 +100,12 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'contained-button'};
+    $name: #{config.variable-prefix() + '-' + 'contained-button'};
+    $selector: (
+        #{'[' + config.element-prefix() + 'Button="contained"]'},
+        #{config.element-prefix() + '-' + 'button[variant="contained"]'},
+        #{'.' + config.element-prefix() + '-' + 'button--contained'}
+    );
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -266,6 +271,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             icon-color: $icon-color,

@@ -36,7 +36,8 @@
     $background: null,
     $text-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'toolptip'};
+    $name: #{config.variable-prefix() + '-' + 'tooltip'};
+    $selector: (#{config.element-prefix() + '-' + 'tooltip'}, #{'.' + config.element-prefix() + '-' + 'tooltip'});
     $tooltip-schema: ();
 
     @if map.has-key($schema, 'tooltip') {
@@ -60,6 +61,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             text-color: $text-color,
             border-radius: $border-radius,

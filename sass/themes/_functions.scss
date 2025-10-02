@@ -3,7 +3,6 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use 'sass:math';
-@use 'config';
 @use '../typography/functions' as *;
 @use '../elevations/functions' as *;
 @use '../color/functions' as color;
@@ -38,16 +37,6 @@
             $result: map.merge($result, (#{$key}: $value));
         }
 
-        // Enrich _meta key if present with additional information
-        @if meta.type-of($value) == 'map' and $key == '_meta' {
-            $result: map.merge(
-                $result,
-                (
-                    _meta: enrich-meta($value),
-                )
-            );
-        }
-
         // Special case for chart elevation literals
         @if string.index($key, 'elevation') {
             $result: map.merge($result, (#{$key}: #{elevation($value)}));
@@ -60,15 +49,6 @@
     }
 
     @return $result;
-}
-
-@function enrich-meta($meta) {
-    @return map.merge(
-        $meta,
-        (
-            'element-prefix': config.prefix(),
-        )
-    );
 }
 
 /// Resolves schema values, where the keys of the passed value map are the names
