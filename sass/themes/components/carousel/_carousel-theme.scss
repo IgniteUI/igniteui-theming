@@ -91,15 +91,15 @@
 
     @if $variant == 'indigo' {
         @if not($button-hover-background) and $button-background {
-            $button-hover-background: hsl(from var(--button-background) h s calc(l * 0.9));
+            $button-hover-background: dynamic-shade(var(--button-background));
         }
 
         @if not($button-border-color) and $button-background {
-            $button-border-color: hsl(from var(--button-background) h s calc(l * 0.9));
+            $button-border-color: dynamic-shade(var(--button-background));
         }
 
         @if not($button-hover-border-color) and $button-border-color {
-            $button-hover-border-color: hsl(from var(--button-border-color) h s calc(l * 0.9));
+            $button-hover-border-color: dynamic-shade(var(--button-border-color));
         }
 
         @if not($indicator-active-dot-color) and not($indicator-background) and $button-background {
@@ -149,11 +149,11 @@
     }
 
     @if not($indicator-active-dot-color) and $indicator-background {
-        $indicator-active-dot-color: hsl(from adaptive-contrast(var(--indicator-background)) h s calc(l * 0.9));
+        $indicator-active-dot-color: dynamic-shade(adaptive-contrast(var(--indicator-background)));
     }
 
     @if not($indicator-active-hover-dot-color) and $indicator-active-dot-color {
-        $indicator-active-hover-dot-color: hsl(from var(--indicator-active-dot-color) h s calc(l * 1.1));
+        $indicator-active-hover-dot-color: dynamic-shade(var(--indicator-active-dot-color));
     }
 
     @if not($indicator-active-border-color) and $indicator-active-dot-color {

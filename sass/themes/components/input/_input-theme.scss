@@ -151,7 +151,7 @@
         }
 
         @if not($box-background-focus) and $box-background {
-            $box-background-focus: hsl(from var(--box-background) h s calc(l * 0.9));
+            $box-background-focus: dynamic-shade(var(--box-background));
         }
 
         @if not($placeholder-color) and $box-background {
@@ -246,7 +246,7 @@
     @if $variant == 'material' or $variant == 'indigo' {
         // bottom line color
         @if not($hover-bottom-line-color) and $idle-bottom-line-color {
-            $hover-bottom-line-color: hsl(from var(--idle-bottom-line-color) h s calc(l * 0.8));
+            $hover-bottom-line-color: dynamic-shade(var(--idle-bottom-line-color), $offset: 10);
         }
 
         @if not($focused-bottom-line-color) and $hover-bottom-line-color {
@@ -267,7 +267,7 @@
     // border-color
     @if $variant == 'bootstrap' {
         @if not($focused-border-color) and $border-color {
-            $focused-border-color: hsl(from var(--border-color) h s calc(l * 0.8));
+            $focused-border-color: dynamic-shade(var(--border-color), $offset: 10);
         }
 
         @if not($focused-secondary-color) and $focused-border-color {
@@ -275,7 +275,7 @@
         }
     } @else {
         @if not($hover-border-color) and $border-color {
-            $hover-border-color: hsl(from var(--border-color) h s calc(l * 0.8));
+            $hover-border-color: dynamic-shade(var(--border-color), $offset: 10);
         }
 
         @if not($focused-border-color) and $hover-border-color {

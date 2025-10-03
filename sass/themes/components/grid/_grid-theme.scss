@@ -229,7 +229,7 @@
     }
 
     @if not($header-selected-background) and $header-background {
-        $header-selected-background: hsl(from var(--header-background) h s calc(l * 0.9));
+        $header-selected-background: dynamic-shade(var(--header-background));
     }
 
     @if not($header-selected-text-color) and $header-selected-background {
@@ -261,7 +261,7 @@
     }
 
     @if not($row-hover-background) and $content-background {
-        $row-hover-background: hsl(from var(--content-background) h s calc(l * 0.85));
+        $row-hover-background: dynamic-shade(var(--content-background), $offset: 7);
     }
 
     @if not($row-hover-text-color) and $row-hover-background {
@@ -269,7 +269,7 @@
     }
 
     @if not($cell-selected-background) and $content-background {
-        $cell-selected-background: hsl(from var(--content-background) h s calc(l * 0.9));
+        $cell-selected-background: dynamic-shade(var(--content-background));
     }
 
     @if not($cell-selected-text-color) and $cell-selected-background {
@@ -277,7 +277,7 @@
     }
 
     @if not($row-selected-background) and $content-background {
-        $row-selected-background: hsl(from var(--content-background) h s calc(l * 0.9));
+        $row-selected-background: dynamic-shade(var(--content-background));
     }
 
     @if not($row-selected-text-color) and $row-selected-background {
@@ -285,7 +285,7 @@
     }
 
     @if not($row-selected-hover-background) and $row-selected-background {
-        $row-selected-hover-background: hsl(from var(--row-selected-background) h s calc(l * 0.85));
+        $row-selected-hover-background: dynamic-shade(var(--row-selected-background), $offset: 7);
     }
 
     @if not($row-selected-hover-text-color) and $row-selected-hover-background {
@@ -297,7 +297,7 @@
     }
 
     @if not($cell-selected-within-background) and $row-selected-background {
-        $cell-selected-within-background: hsl(from var(--row-selected-background) h s calc(l * 0.85));
+        $cell-selected-within-background: dynamic-shade(var(--row-selected-background), $offset: 7);
     }
 
     @if not($cell-selected-within-text-color) and $cell-selected-within-background {
@@ -333,7 +333,7 @@
     }
 
     @if not($group-row-selected-background) and $group-row-background {
-        $group-row-selected-background: hsl(from var(--group-row-background) h s calc(l * 0.8));
+        $group-row-selected-background: dynamic-shade(var(--group-row-background), $offset: 10);
     }
 
     @if not($group-label-text) and $group-row-selected-background {
