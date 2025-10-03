@@ -56,7 +56,7 @@
 
     @if $variant != 'indigo' {
         @if not($focus-color) and $bar-color {
-            $focus-color: hsl(from var(--bar-color) h s calc(l * 0.7));
+            $focus-color: dynamic-shade(var(--bar-color), $offset: 10);
         }
     } @else {
         @if not($focus-color) and $bar-color {

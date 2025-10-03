@@ -89,7 +89,7 @@
     }
 
     @if not($item-hover-background) and $background {
-        $item-hover-background: dynamic-shade($background);
+        $item-hover-background: dynamic-shade(var(--background));
     }
 
     @if not($item-hover-text-color) and $background {
@@ -101,7 +101,7 @@
     }
 
     @if not($item-active-background) and $background {
-        $item-active-background: dynamic-shade($background, $offset: 10);
+        $item-active-background: dynamic-shade(var(--background), $offset: 10);
     }
 
     @if not($item-active-text-color) and $item-active-background {

@@ -191,11 +191,11 @@
 
     // default step
     @if not($step-hover-background) and $step-background {
-        $step-hover-background: hsl(from var(--step-background) h s calc(l * 0.8));
+        $step-hover-background: dynamic-shade(var(--step-background), $offset: 10);
     }
 
     @if not($step-focus-background) and $step-background {
-        $step-focus-background: hsl(from var(--step-background) h s calc(l * 0.9));
+        $step-focus-background: dynamic-shade(var(--step-background));
     }
 
     @if not($indicator-background) and $step-background {
@@ -240,15 +240,15 @@
     }
 
     @if not($current-step-hover-background) and $current-step-background {
-        $current-step-hover-background: hsl(from var(--current-step-background) h s calc(l * 0.8));
+        $current-step-hover-background: dynamic-shade(var(--current-step-background), $offset: 10);
     }
 
     @if not($current-step-focus-background) and $current-step-background {
-        $current-step-focus-background: hsl(from var(--current-step-background) h s calc(l * 0.9));
+        $current-step-focus-background: dynamic-shade(var(--current-step-background));
     }
 
     @if not($current-indicator-background) and $current-step-background {
-        $current-indicator-background: hsl(from var(--current-step-background) h s calc(l * 0.6));
+        $current-indicator-background: dynamic-shade(var(--current-step-background), $offset: 20);
     }
 
     @if not($current-indicator-outline) and $current-indicator-background {
@@ -289,11 +289,11 @@
     }
 
     @if not($invalid-step-hover-background) and $invalid-step-background {
-        $invalid-step-hover-background: hsl(from var(--invalid-step-background) h s calc(l * 0.8));
+        $invalid-step-hover-background: dynamic-shade(var(--invalid-step-background), $offset: 8);
     }
 
     @if not($invalid-step-focus-background) and $invalid-step-background {
-        $invalid-step-focus-background: hsl(from var(--invalid-step-background) h s calc(l * 0.9));
+        $invalid-step-focus-background: dynamic-shade(var(--invalid-step-background));
     }
 
     @if not($invalid-indicator-background) and not($step-background) and $invalid-step-background {
@@ -338,11 +338,11 @@
     }
 
     @if not($complete-step-hover-background) and $complete-step-background {
-        $complete-step-hover-background: hsl(from var(--complete-step-background) h s calc(l * 0.8));
+        $complete-step-hover-background: dynamic-shade(var(--complete-step-background), $offset: 8);
     }
 
     @if not($complete-step-focus-background) and $complete-step-background {
-        $complete-step-focus-background: hsl(from var(--complete-step-background) h s calc(l * 0.9));
+        $complete-step-focus-background: dynamic-shade(var(--complete-step-background));
     }
 
     @if not($complete-indicator-background) and $complete-step-background {

@@ -70,15 +70,15 @@
     }
 
     @if not($subquery-header-background) and $header-background {
-        $subquery-header-background: hsl(from var(--header-background) h s calc(l * 0.9));
+        $subquery-header-background: dynamic-shade(var(--header-background));
     }
 
     @if not($subquery-border-color) and $subquery-header-background {
-        $subquery-border-color: hsl(from var(--subquery-header-background) h s calc(l * 0.9));
+        $subquery-border-color: dynamic-shade(var(--subquery-header-background));
     }
 
     @if not($separator-color) and $subquery-border-color {
-        $separator-color: hsl(from var(--subquery-border-color) h s calc(l * 0.9));
+        $separator-color: dynamic-shade(var(--subquery-border-color));
     }
 
     @if $variant == 'bootstrap' {

@@ -69,7 +69,7 @@
     }
 
     @if not($header-focus-background) and $header-background {
-        $header-focus-background: hsl(from var(--header-background) h s calc(l * 1.1));
+        $header-focus-background: dynamic-shade(var(--header-background));
     }
 
     @if not($body-color) and $body-background {

@@ -70,7 +70,7 @@
     }
 
     @if not($background-selected) and $background {
-        $background-selected: hsl(from var(--background) h s calc(l * 0.9));
+        $background-selected: dynamic-shade(var(--background));
     }
 
     @if not($hover-color) and $background {
@@ -78,7 +78,7 @@
     }
 
     @if not($hover-selected-color) and $background-selected {
-        $hover-selected-color: hsl(from var(--background-selected) h s calc(l * 0.9));
+        $hover-selected-color: dynamic-shade(var(--background-selected));
     }
 
     @if not($foreground-selected) and $background-selected {
@@ -86,7 +86,7 @@
     }
 
     @if not($background-active) and $background {
-        $background-active: hsl(from var(--background) h s calc(l * 0.9));
+        $background-active: dynamic-shade(var(--background));
     }
 
     @if not($foreground-active) and $background-active {
@@ -94,7 +94,7 @@
     }
 
     @if not($background-active-selected) and $background-active {
-        $background-active-selected: hsl(from var(--background-active) h s calc(l * 0.9));
+        $background-active-selected: dynamic-shade(var(--background-active));
     }
 
     @if not($foreground-active-selected) and $background-active-selected {
