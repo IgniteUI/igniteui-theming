@@ -164,7 +164,7 @@
     }
 
     @if not($disabled-thumb-color) and $thumb-color {
-        $disabled-thumb-color: hsl(dynamic-shade(var(--thumb-color), $offset: 10) h calc(s * 0.5) l);
+        $disabled-thumb-color: hsl(from dynamic-shade(var(--thumb-color), $offset: 10) h calc(s * 0.5) l);
     }
 
     @if not($thumb-disabled-border-color) and $thumb-border-color {
