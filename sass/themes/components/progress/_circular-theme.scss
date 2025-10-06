@@ -8,8 +8,13 @@
 @use '../../../color/functions' as *;
 @use '../../../elevations/' as *;
 
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-///
 /// @param {Color} $base-circle-color [null] - The base circle fill color.
 /// @param {Color | List<Color>} $fill-color-default [null] - The progress circle fill color.
 /// @param {Color} $fill-color-danger [null] - The track danger fill color.
