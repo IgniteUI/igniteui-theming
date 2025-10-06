@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -46,7 +46,8 @@
     $track-height: null,
     $strip-size: null
 ) {
-    $name: #{config.prefix() + '-' + 'linear-bar'};
+    $name: #{config.variable-prefix() + '-' + 'linear-bar'};
+    $selector: (#{config.element-prefix() + '-' + 'linear-bar'}, #{config.element-prefix() + '-' + 'linear-progress'});
     $linear-bar-schema: ();
     $linear-bar-schema: if(map.has-key($schema, 'linear-bar'), map.get($schema, 'linear-bar'), $schema);
     $theme: digest-schema($linear-bar-schema);
@@ -59,6 +60,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             track-color: $track-color,
             fill-color-default: $fill-color-default,
             fill-color-danger: $fill-color-danger,

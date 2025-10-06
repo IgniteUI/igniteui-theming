@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -54,7 +54,8 @@
     $hover-selected-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'tree'};
+    $name: #{config.variable-prefix() + '-' + 'tree'};
+    $selector: (#{config.element-prefix() + '-' + 'tree-node'}, #{config.element-prefix() + '-' + 'tree-item'});
     $tree-schema: ();
 
     @if map.has-key($schema, 'tree') {
@@ -113,6 +114,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             icon-color: $icon-color,

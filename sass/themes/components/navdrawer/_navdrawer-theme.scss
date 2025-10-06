@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -65,7 +65,8 @@
     $item-disabled-icon-color: null,
     $shadow: null
 ) {
-    $name: #{config.prefix() + '-' + 'nav-drawer'};
+    $name: #{config.variable-prefix() + '-' + 'nav-drawer'};
+    $selector: #{config.element-prefix() + '-' + 'nav-drawer'};
     $navdrawer-schema: ();
 
     @if map.has-key($schema, 'nav-drawer') {
@@ -129,6 +130,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,
             background: $background,
