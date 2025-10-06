@@ -7,13 +7,12 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified,
-/// the idle item color will be assigned automatically to a contrasting color.
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $item-text-color [null] - The color used for the tab text color.
 /// @param {Color} $item-background [null] - The background color used for the tabs header.
