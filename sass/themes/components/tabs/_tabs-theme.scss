@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,13 +7,12 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified,
-/// the idle item color will be assigned automatically to a contrasting color.
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $item-text-color [null] - The color used for the tab text color.
 /// @param {Color} $item-background [null] - The background color used for the tabs header.
@@ -69,7 +68,8 @@
     $border-color: null,
     $border-color--hover: null
 ) {
-    $name: #{config.prefix() + '-' + 'tabs'};
+    $name: #{config.variable-prefix() + '-' + 'tabs'};
+    $selector: #{config.element-prefix() + '-' + 'tabs'};
     $tabs-schema: ();
 
     @if map.has-key($schema, 'tabs') {
@@ -242,6 +242,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             item-text-color: $item-text-color,
             item-background: $item-background,
             item-hover-color: $item-hover-color,

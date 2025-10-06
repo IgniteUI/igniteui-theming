@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,10 +7,9 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
-/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
-/// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
@@ -46,7 +45,8 @@
     $track-height: null,
     $strip-size: null
 ) {
-    $name: #{config.prefix() + '-' + 'linear-bar'};
+    $name: #{config.variable-prefix() + '-' + 'linear-bar'};
+    $selector: (#{config.element-prefix() + '-' + 'linear-bar'}, #{config.element-prefix() + '-' + 'linear-progress'});
     $linear-bar-schema: ();
     $linear-bar-schema: if(map.has-key($schema, 'linear-bar'), map.get($schema, 'linear-bar'), $schema);
     $theme: digest-schema($linear-bar-schema);
@@ -59,6 +59,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             track-color: $track-color,
             fill-color-default: $fill-color-default,
             fill-color-danger: $fill-color-danger,

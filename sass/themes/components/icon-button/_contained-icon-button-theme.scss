@@ -1,11 +1,40 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
 @use '../../../color/functions' as *;
 @use '../../../elevations/' as *;
 
+////
+/// @package theming
+/// @group themes
+/// @access public
+/// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
+////
+
+/// Generates a theme map for the contained variant of the icon button component.
+/// @param {Map} $schema [$light-material-schema] - The schema map or icon-button schema to use.
+/// @param {Color} $background [null] - Background color for the contained icon button.
+/// @param {Color} $foreground [null] - Foreground (icon) color.
+/// @param {Color} $shadow-color [null] - Shadow color for the icon button.
+/// @param {Color} $hover-background [null] - Background color on hover.
+/// @param {Color} $hover-foreground [null] - Foreground color on hover.
+/// @param {Color} $focus-background [null] - Background color on focus.
+/// @param {Color} $focus-foreground [null] - Foreground color on focus.
+/// @param {Color} $focus-hover-background [null] - Background color on focus + hover.
+/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover.
+/// @param {Color} $active-background [null] - Background color when active.
+/// @param {Color} $active-foreground [null] - Foreground color when active.
+/// @param {Length} $border-radius [null] - Border radius for the icon button.
+/// @param {Color} $border-color [null] - Border color.
+/// @param {Color} $focus-border-color [null] - Border color on focus.
+/// @param {Color} $disabled-background [null] - Background color when disabled.
+/// @param {Color} $disabled-foreground [null] - Foreground color when disabled.
+/// @param {Color} $disabled-border-color [null] - Border color when disabled.
+/// @param {Length} $size [null] - Size of the icon button.
+/// @requires $light-material-schema
+/// @return {Map} - A map containing the theme name, selector, and theme values for the contained icon button.
 @function contained-icon-button-theme(
     $schema: $light-material-schema,
 
@@ -35,7 +64,12 @@
 
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'contained-icon-button'};
+    $name: #{config.variable-prefix() + '-' + 'contained-icon-button'};
+    $selector: (
+        #{'[' + config.element-prefix() + 'IconButton="contained"]'},
+        #{config.element-prefix() + '-' + 'icon-button[variant="contained"]'},
+        '.' + #{config.element-prefix() + '-' + 'icon-button--contained'}
+    );
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {
@@ -173,6 +207,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             shadow-color: $shadow-color,

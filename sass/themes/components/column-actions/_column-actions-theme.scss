@@ -1,10 +1,11 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -29,7 +30,8 @@
     $title-color: null,
     $background-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'column-actions'};
+    $name: #{config.variable-prefix() + '-' + 'column-actions'};
+    $selector: #{config.element-prefix() + '-' + 'column-actions'};
     $column-actions-schema: ();
 
     @if map.has-key($schema, 'column-actions') {
@@ -48,6 +50,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             title-color: $title-color,
             background-color: $background-color,
         )

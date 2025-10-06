@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -205,7 +206,16 @@
     $cell-selected-within-background: null,
     $cell-selected-within-text-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'grid'};
+    $name: #{config.variable-prefix() + '-' + 'grid'};
+    $selector: (
+        #{config.element-prefix() + '-' + 'grid'},
+        #{config.element-prefix() + '-' + 'hierarchical-grid'},
+        #{config.element-prefix() + '-' + 'tree-grid'},
+        #{config.element-prefix() + '-' + 'pivot-grid'},
+        #{config.element-prefix() + '-' + 'advanced-filtering-dialog'},
+        #{config.element-prefix() + '-' + 'grid-excel-style-filtering'},
+        '.igx-excel-filter__secondary'
+    );
     $grid-schema: ();
 
     @if map.has-key($schema, 'grid') {
@@ -464,6 +474,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
 
             header-background: $header-background,
             header-text-color: $header-text-color,

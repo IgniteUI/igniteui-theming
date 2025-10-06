@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
@@ -45,7 +46,8 @@
     $size: null,
     $border-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'grid-toolbar'};
+    $name: #{config.variable-prefix() + '-' + 'grid-toolbar'};
+    $selector: (#{config.element-prefix() + '-' + 'grid-toolbar'}, '.igx-grid-toolbar__dd-list');
     $grid-toolbar-schema: ();
 
     @if map.has-key($schema, 'grid-toolbar') {
@@ -84,6 +86,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background-color: $background-color,
             title-text-color: $title-text-color,
             item-text-color: $item-text-color,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 /////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -77,7 +78,8 @@
     $indicator-active-border-color: null,
     $indicator-active-hover-dot-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'carousel'};
+    $name: #{config.variable-prefix() + '-' + 'carousel'};
+    $selector: #{config.element-prefix() + '-' + 'carousel'};
     $carousel-schema: ();
 
     @if map.has-key($schema, 'carousel') {
@@ -194,6 +196,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
 
             slide-background: $slide-background,
 

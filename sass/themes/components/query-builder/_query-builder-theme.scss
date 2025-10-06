@@ -1,13 +1,17 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
 @use '../../../color/functions' as *;
 @use '../../../elevations/' as *;
 
-//// @group themes
+////
+/// @package theming
+/// @group themes
 /// @access public
+////
+
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} background [null] - The background color of the filtering row.
 /// @param {Color} header-background [null] - The background color of the query builder header.
@@ -45,7 +49,8 @@
     $separator-color: null,
     $label-foreground: null
 ) {
-    $name: #{config.prefix() + '-' + 'query-builder'};
+    $name: #{config.variable-prefix() + '-' + 'query-builder'};
+    $selector: #{config.element-prefix() + '-' + 'query-builder'};
     $query-builder-schema: ();
 
     @if map.has-key($schema, 'query-builder') {
@@ -91,6 +96,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             header-background: $header-background,
             header-foreground: $header-foreground,

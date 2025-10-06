@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
@@ -111,7 +112,8 @@
     $disabled-selected-background: null,
     $disabled-selected-border-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'button-group'};
+    $name: #{config.variable-prefix() + '-' + 'button-group'};
+    $selector: (#{config.element-prefix() + '-' + 'buttongroup'}, #{config.element-prefix() + '-' + 'button-group'});
     $button-group-schema: ();
 
     @if map.has-key($schema, 'button-group') {
@@ -259,6 +261,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             item-text-color: $item-text-color,
             item-icon-color: $item-icon-color,
             item-background: $item-background,

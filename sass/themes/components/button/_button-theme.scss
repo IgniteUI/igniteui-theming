@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -11,6 +11,7 @@
 @forward './fab-button-theme';
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
@@ -104,7 +105,7 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'button'};
+    $name: #{config.variable-prefix() + '-' + 'button'};
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {

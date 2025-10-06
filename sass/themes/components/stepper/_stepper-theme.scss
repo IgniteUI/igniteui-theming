@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
@@ -178,7 +179,8 @@
     $border-radius-indicator: null,
     $border-radius-step-header: null
 ) {
-    $name: #{config.prefix() + '-' + 'stepper'};
+    $name: #{config.variable-prefix() + '-' + 'stepper'};
+    $selector: #{config.element-prefix() + '-' + 'stepper'};
     $stepper-schema: ();
 
     @if map.has-key($schema, 'stepper') {
@@ -418,6 +420,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
 
             content-foreground: $content-foreground,
 

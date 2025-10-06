@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use 'sass:meta';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -8,6 +8,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -56,7 +57,8 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-dock-manager-theme);
 @function dock-manager-theme($schema: $light-material-schema, $rest...) {
-    $name: #{config.prefix() + '-' + 'dockmanager'};
+    $name: #{config.variable-prefix() + '-' + 'dockmanager'};
+    $selector: 'igc-dockmanager';
     $dock-manager-schema: ();
 
     @if map.has-key($schema, 'dockmanager') {
@@ -71,7 +73,7 @@
         $theme,
         (
             name: $name,
-            prefix: 'igc',
+            selector: $selector,
         ),
         meta.keywords($rest)
     );

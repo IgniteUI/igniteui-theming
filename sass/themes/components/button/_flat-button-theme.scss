@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
@@ -99,7 +100,12 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'flat-button'};
+    $name: #{config.variable-prefix() + '-' + 'flat-button'};
+    $selector: (
+        #{'[' + config.element-prefix() + 'Button="flat"]'},
+        #{config.element-prefix() + '-' + 'button[variant="flat"]'},
+        #{'.' + config.element-prefix() + '-' + 'button--flat'}
+    );
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -301,6 +307,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             icon-color: $icon-color,

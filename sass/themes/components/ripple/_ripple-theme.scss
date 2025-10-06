@@ -1,11 +1,12 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -20,7 +21,8 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-ripple-theme);
 @function ripple-theme($schema: $light-material-schema, $color: null) {
-    $name: #{config.prefix() + '-' + 'ripple'};
+    $name: #{config.variable-prefix() + '-' + 'ripple'};
+    $selector: (#{config.element-prefix() + '-' + 'ripple'}, #{'[' + config.element-prefix() + 'Ripple]'});
     $ripple-schema: ();
 
     @if map.has-key($schema, 'ripple') {
@@ -35,6 +37,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             color: $color,
         )
     );

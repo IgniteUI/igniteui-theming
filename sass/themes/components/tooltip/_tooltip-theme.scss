@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,23 +7,20 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// Returns a map containing all style properties related to the theming the tooltip directive.
+/// Returns a map containing all style properties related to the theming of the tooltip.
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-///
 /// @param {Color} $background [null] - The background color of the tooltip.
 /// @param {Color} $text-color [null] - The text color of the tooltip.
-///
 /// @param {List} $border-radius [null] - The border radius used for the tooltip component.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the tooltip component.
-///
 /// @requires $light-material-schema
-///
 /// @example scss Change the tooltip background
 ///   $my-tooltip-theme: tooltip-theme($background: magenta);
 ///   // Pass the theme to the css-vars() mixin
@@ -36,7 +33,8 @@
     $background: null,
     $text-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'toolptip'};
+    $name: #{config.variable-prefix() + '-' + 'tooltip'};
+    $selector: (#{config.element-prefix() + '-' + 'tooltip'}, #{'.' + config.element-prefix() + '-' + 'tooltip'});
     $tooltip-schema: ();
 
     @if map.has-key($schema, 'tooltip') {
@@ -60,6 +58,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             text-color: $text-color,
             border-radius: $border-radius,

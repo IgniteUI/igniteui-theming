@@ -1,11 +1,12 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
 @use '../../../color/functions' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -21,7 +22,8 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-divider-theme);
 @function divider-theme($schema: $light-material-schema, $color: null, $inset: null) {
-    $name: #{config.prefix() + '-' + 'divider'};
+    $name: #{config.variable-prefix() + '-' + 'divider'};
+    $selector: #{config.element-prefix() + '-' + 'divider'};
     $divider-schema: ();
 
     @if map.has-key($schema, 'divider') {
@@ -36,6 +38,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             color: $color,
             inset: $inset,
         )

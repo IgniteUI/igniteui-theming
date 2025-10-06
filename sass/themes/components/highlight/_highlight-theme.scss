@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -30,7 +31,8 @@
     $active-background: null,
     $active-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'highlight'};
+    $name: #{config.variable-prefix() + '-' + 'highlight'};
+    $selector: (#{config.element-prefix() + '-' + 'highlight'}, '.igx-highlight');
     $highlight-schema: ();
 
     @if map.has-key($schema, 'highlight') {
@@ -53,6 +55,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             resting-background: $resting-background,
             resting-color: $resting-color,
             active-background: $active-background,

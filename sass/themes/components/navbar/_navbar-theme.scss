@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -7,6 +7,7 @@
 @use '../../../elevations/' as *;
 
 ////
+/// @package theming
 /// @group themes
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
@@ -36,7 +37,8 @@
     $hover-icon-color: null,
     $disable-shadow: false
 ) {
-    $name: #{config.prefix() + '-' + 'navbar'};
+    $name: #{config.variable-prefix() + '-' + 'navbar'};
+    $selector: #{config.element-prefix() + '-' + 'navbar'};
     $navbar-schema: ();
 
     @if map.has-key($schema, 'navbar') {
@@ -87,6 +89,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             border-color: $border-color,
             text-color: $text-color,

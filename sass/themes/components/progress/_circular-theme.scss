@@ -1,15 +1,20 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:list';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
 @use '../../../color/functions' as *;
 @use '../../../elevations/' as *;
 
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-///
 /// @param {Color} $base-circle-color [null] - The base circle fill color.
 /// @param {Color | List<Color>} $fill-color-default [null] - The progress circle fill color.
 /// @param {Color} $fill-color-danger [null] - The track danger fill color.
@@ -38,7 +43,11 @@
     $text-color: null,
     $diameter: null
 ) {
-    $name: #{config.prefix() + '-' + 'circular-bar'};
+    $name: #{config.variable-prefix() + '-' + 'circular-bar'};
+    $selector: (
+        #{config.element-prefix() + '-' + 'circular-bar'},
+        #{config.element-prefix() + '-' + 'circular-progress'}
+    );
     $circular-bar-schema: ();
 
     @if map.has-key($schema, 'circular-bar') {
@@ -65,6 +74,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             base-circle-color: $base-circle-color,
             fill-color-default: $fill-color-default,
             fill-color-default-start: $fill-color-default-start,
