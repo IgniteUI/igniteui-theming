@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -85,7 +85,8 @@
     $border-color: null,
     $border-width: null
 ) {
-    $name: #{config.prefix() + '-' + 'list'};
+    $name: #{config.variable-prefix() + '-' + 'list'};
+    $selector: #{config.element-prefix() + '-' + 'list'};
     $list-schema: ();
 
     @if map.has-key($schema, 'list') {
@@ -231,6 +232,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,
             background: $background,

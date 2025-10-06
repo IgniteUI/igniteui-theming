@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -130,7 +130,13 @@
     $input-suffix-background--focused: null,
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'input-group'};
+    $name: #{config.variable-prefix() + '-' + 'input-group'};
+    $selector: (
+        #{config.element-prefix() + '-' + 'input-group'},
+        #{config.element-prefix() + '-' + 'date-range-start'},
+        #{config.element-prefix() + '-' + 'date-range-end'},
+        #{config.element-prefix() + '-' + 'date-time-input'}
+    );
     $input-group-schema: ();
 
     @if map.has-key($schema, 'input-group') {
@@ -476,6 +482,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             idle-text-color: $idle-text-color,
             filled-text-color: $filled-text-color,
             filled-text-hover-color: $filled-text-hover-color,

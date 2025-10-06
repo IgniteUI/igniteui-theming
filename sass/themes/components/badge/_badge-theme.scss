@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -42,7 +42,8 @@
     $background-color: null,
     $shadow: null
 ) {
-    $name: #{config.prefix() + '-' + 'badge'};
+    $name: #{config.variable-prefix() + '-' + 'badge'};
+    $selector: #{config.element-prefix() + '-' + 'badge'};
     $badge-schema: ();
 
     @if map.has-key($schema, 'badge') {
@@ -70,6 +71,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             icon-color: $icon-color,
             text-color: $text-color,
             border-color: $border-color,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -63,7 +63,11 @@
     $divider-color: null,
     $time-item-size: null
 ) {
-    $name: #{config.prefix() + '-' + 'time-picker'};
+    $name: #{config.variable-prefix() + '-' + 'time-picker'};
+    $selector: (
+        #{config.element-prefix() + '-' + 'time-picker'},
+        #{'.' + config.element-prefix() + '-' + 'time-picker'}
+    );
     $time-picker-schema: ();
 
     @if map.has-key($schema, 'time-picker') {
@@ -140,6 +144,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             text-color: $text-color,
             hover-text-color: $hover-text-color,
             selected-text-color: $selected-text-color,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -32,7 +32,8 @@
     $background-color: null,
     $border-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'paginator'};
+    $name: #{config.variable-prefix() + '-' + 'paginator'};
+    $selector: #{config.element-prefix() + '-' + 'paginator'};
     $grid-paginator-schema: ();
 
     @if map.has-key($schema, 'paginator') {
@@ -51,6 +52,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             text-color: $text-color,
             background-color: $background-color,
             border-color: $border-color,

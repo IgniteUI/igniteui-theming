@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -29,7 +29,8 @@
     $size: null,
     $disabled-color: null
 ) {
-    $name: #{config.prefix() + '-' + 'icon'};
+    $name: #{config.variable-prefix() + '-' + 'icon'};
+    $selector: #{config.element-prefix() + '-' + 'icon'};
     $icon-schema: ();
 
     @if map.has-key($schema, 'icon') {
@@ -44,6 +45,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             color: $color,
             size: $size,
             disabled-color: $disabled-color,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -323,7 +323,14 @@
     $size: null,
     $inner-size: null
 ) {
-    $name: #{config.prefix() + '-' + 'calendar'};
+    $name: #{config.variable-prefix() + '-' + 'calendar'};
+    $selector: (
+        #{config.element-prefix() + '-' + 'calendar'},
+        #{config.element-prefix() + '-' + 'date-picker'},
+        #{config.element-prefix() + '-' + 'month-picker'},
+        '.igx-days-view--standalone',
+        '.igx-calendar-view--standalone'
+    );
     $calendar-schema: ();
 
     @if map.has-key($schema, 'calendar') {
@@ -957,6 +964,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
 
             content-background: $content-background,
             content-foreground: $content-foreground,

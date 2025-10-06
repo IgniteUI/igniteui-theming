@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../config';
+@use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
 @use '../../../utils/map' as *;
@@ -35,7 +35,12 @@
 
     $size: null
 ) {
-    $name: #{config.prefix() + '-' + 'flat-icon-button'};
+    $name: #{config.variable-prefix() + '-' + 'flat-icon-button'};
+    $selector: (
+        #{'[' + config.element-prefix() + 'IconButton="flat"]'},
+        #{config.element-prefix() + '-' + 'icon-button[variant="flat"]'},
+        '.' + #{config.element-prefix() + '-' + 'icon-button--flat'}
+    );
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {
@@ -165,6 +170,7 @@
         $theme,
         (
             name: $name,
+            selector: $selector,
             background: $background,
             foreground: $foreground,
             shadow-color: $shadow-color,
