@@ -138,16 +138,22 @@
         $button-disabled-arrow-color: hsla(from adaptive-contrast(var(--button-disabled-background)) h s l / 0.4);
     }
 
-    @if not($indicator-dot-color) and $indicator-background {
-        $indicator-dot-color: hsla(from adaptive-contrast(var(--indicator-background)) h s l / 0.8);
-    }
+    @if $variant == 'indigo' {
+        @if not($indicator-dot-color) and $indicator-background {
+            $indicator-dot-color: hsla(from adaptive-contrast(var(--indicator-background)) h s l / 0.8);
+        }
 
-    @if not($indicator-hover-dot-color) and $indicator-dot-color {
-        $indicator-hover-dot-color: hsla(from var(--indicator-dot-color) h s l / 1);
-    }
+        @if not($indicator-hover-dot-color) and $indicator-dot-color {
+            $indicator-hover-dot-color: hsla(from var(--indicator-dot-color) h s l / 1);
+        }
 
-    @if not($indicator-border-color) and $indicator-dot-color {
-        $indicator-border-color: var(--indicator-dot-color);
+        @if not($indicator-border-color) and $indicator-dot-color {
+            $indicator-border-color: var(--indicator-dot-color);
+        }
+    } @else {
+        @if not($indicator-border-color) action-strip-theme() and $indicator-background {
+            $indicator-border-color: hsla(from adaptive-contrast(var(--indicator-background)) h s l / 0.8);
+        }
     }
 
     @if not($indicator-active-dot-color) and $indicator-background {
