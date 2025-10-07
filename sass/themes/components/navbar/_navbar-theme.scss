@@ -55,7 +55,7 @@
     }
 
     @if not($hover-icon-color) and $idle-icon-color {
-        $hover-icon-color: hsl(from (var(--idle-icon-color)) h s calc(l * 1.1));
+        $hover-icon-color: dynamic-shade(var(--idle-icon-color));
     }
 
     @if not($idle-icon-color) and $background {

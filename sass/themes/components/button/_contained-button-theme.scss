@@ -154,24 +154,8 @@
         $icon-color: adaptive-contrast(var(--background));
     }
 
-    @if $variant == 'indigo' {
-        @if not($hover-background) and $background {
-            $hover-background: hsl(from var(--background) h s calc(l * 1.08));
-        }
-    } @else {
-        @if not($hover-background) and $background {
-            $hover-background: hsl(from var(--background) h s calc(l * 1.05));
-        }
-    }
-
-    @if $variant == 'indigo' {
-        @if not($focus-background) and $background {
-            $focus-background: var(--background);
-        }
-    } @else {
-        @if not($focus-background) and $background {
-            $focus-background: hsl(from var(--background) h s calc(l * 1.1));
-        }
+    @if not($hover-background) and $background {
+        $hover-background: dynamic-shade(var(--background));
     }
 
     @if not($hover-foreground) and $hover-background {
@@ -182,10 +166,6 @@
         $icon-color-hover: adaptive-contrast(var(--hover-background));
     }
 
-    @if not($focus-foreground) and $focus-background {
-        $focus-foreground: adaptive-contrast(var(--focus-background));
-    }
-
     @if not($focus-hover-background) and $hover-background {
         $focus-hover-background: var(--hover-background);
     }
@@ -194,8 +174,28 @@
         $focus-hover-foreground: adaptive-contrast(var(--focus-hover-background));
     }
 
-    @if not($focus-visible-background) and $focus-background {
-        $focus-visible-background: var(--focus-background);
+    @if $variant != 'indigo' {
+        @if not($focus-background) and $background {
+            $focus-background: dynamic-shade(var(--background), $offset: 10);
+        }
+    } @else {
+        @if not($focus-background) and $focus-hover-background {
+            $focus-background: var(--focus-hover-background);
+        }
+    }
+
+    @if $variant == 'fluent' or $variant == 'indigo' {
+        @if not($focus-visible-background) and $background {
+            $focus-visible-background: var(--background);
+        }
+    } @else {
+        @if not($focus-visible-background) and $focus-background {
+            $focus-visible-background: var(--focus-background);
+        }
+    }
+
+    @if not($focus-foreground) and $focus-background {
+        $focus-foreground: adaptive-contrast(var(--focus-background));
     }
 
     @if not($focus-visible-foreground) and $focus-visible-background {
@@ -210,7 +210,7 @@
 
     @if $variant == 'fluent' or $variant == 'bootstrap' {
         @if not($active-background) and $background {
-            $active-background: hsl(from var(--background) h s calc(l * 0.9));
+            $active-background: dynamic-shade(var(--background), $offset: 10);
         }
     } @else if $variant == 'material' {
         @if not($active-background) and $focus-background {

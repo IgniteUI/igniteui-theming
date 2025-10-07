@@ -76,11 +76,11 @@
     $variant: map.get($theme, '_meta', 'theme');
 
     @if not($hover-color) and $empty-color {
-        $hover-color: hsl(from var(--empty-color) h s calc(l * 0.9));
+        $hover-color: dynamic-shade(var(--empty-color));
     }
 
     @if not($fill-color-hover) and $fill-color {
-        $fill-color-hover: hsl(from var(--fill-color) h s calc(l * 0.9));
+        $fill-color-hover: dynamic-shade(var(--fill-color));
     }
 
     @if $variant != 'bootstrap' {
@@ -90,11 +90,11 @@
     }
 
     @if not($label-color-hover) and $label-color {
-        $label-color-hover: hsl(from var(--label-color) h s calc(l * 0.9));
+        $label-color-hover: dynamic-shade(var(--label-color));
     }
 
     @if not($error-color-hover) and $error-color {
-        $error-color-hover: hsl(from var(--error-color) h s calc(l * 0.9));
+        $error-color-hover: dynamic-shade(var(--error-color));
     }
 
     @if not($focus-outline-color-error) and $error-color {
