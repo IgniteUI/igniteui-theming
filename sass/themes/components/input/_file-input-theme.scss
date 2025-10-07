@@ -63,6 +63,66 @@
 
     $theme: digest-schema($file-input-schema);
 
+    @if $file-names-background != transparent {
+        @if not($file-names-background--focused) and $file-names-background {
+            $file-names-background--focused: dynamic-shade(var(--file-names-background));
+        }
+
+        @if not($file-names-background--filled) and $file-names-background {
+            $file-names-background--filled: $file-names-background;
+        }
+
+        @if not($file-names-background--disabled) and $file-names-background {
+            $file-names-background--disabled: hsla(from $file-names-background h s l / 0.4);
+        }
+
+        @if not($file-names-foreground) and $file-names-background {
+            $file-names-foreground: adaptive-contrast($file-names-background);
+        }
+
+        @if not($file-names-foreground--focused) and $file-names-background--focused {
+            $file-names-foreground--focused: adaptive-contrast($file-names-background--focused);
+        }
+
+        @if not($file-names-foreground--filled) and $file-names-background--filled {
+            $file-names-foreground--filled: adaptive-contrast($file-names-background--filled);
+        }
+
+        @if not($file-names-foreground--disabled) and $file-names-background--disabled {
+            $file-names-foreground--disabled: adaptive-contrast($file-names-background--disabled);
+        }
+    }
+
+    @if $file-selector-button-background != transparent {
+        @if not($file-selector-button-background--focused) and $file-selector-button-background {
+            $file-selector-button-background--focused: dynamic-shade(var(--file-selector-button-background));
+        }
+
+        @if not($file-selector-button-background--filled) and $file-selector-button-background {
+            $file-selector-button-background--filled: $file-selector-button-background;
+        }
+
+        @if not($file-selector-button-background--disabled) and $file-selector-button-background {
+            $file-selector-button-background--disabled: hsla(from $file-selector-button-background h s l / 0.4);
+        }
+
+        @if not($file-selector-button-foreground) and $file-selector-button-background {
+            $file-selector-button-foreground: adaptive-contrast($file-selector-button-background);
+        }
+
+        @if not($file-selector-button-foreground--focused) and $file-selector-button-background--focused {
+            $file-selector-button-foreground--focused: adaptive-contrast($file-selector-button-background--focused);
+        }
+
+        @if not($file-selector-button-foreground--filled) and $file-selector-button-background--filled {
+            $file-selector-button-foreground--filled: adaptive-contrast($file-selector-button-background--filled);
+        }
+
+        @if not($file-selector-button-foreground--disabled) and $file-selector-button-background--disabled {
+            $file-selector-button-foreground--disabled: adaptive-contrast($file-selector-button-background--disabled);
+        }
+    }
+
     @return extend(
         $theme,
         (
