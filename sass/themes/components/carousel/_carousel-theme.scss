@@ -151,7 +151,7 @@
             $indicator-border-color: var(--indicator-dot-color);
         }
     } @else {
-        @if not($indicator-border-color) action-strip-theme() and $indicator-background {
+        @if not($indicator-border-color) and $indicator-background {
             $indicator-border-color: hsla(from adaptive-contrast(var(--indicator-background)) h s l / 0.8);
         }
     }
