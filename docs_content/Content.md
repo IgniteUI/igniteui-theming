@@ -226,7 +226,7 @@
 
   After creating a palette map with your design system colors, you can include it using the palette mixin. This will generate CSS variables based on the map.
 
-  [CSS Variables](./CSS_Variables.png)
+  [CSS Variables](./images/CSS_Variables.png)
 
   When the palette is passed to the mixin, it first checks whether it was included inside a selector. This is handled by the custom [is-root()](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/utilities/#function-is-root) function. If the mixin isn't inside a selector, the CSS variables are declared at the `:root` level.
 
@@ -254,7 +254,7 @@
   
   If you want to change the [WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html) contrast level, you can use the `$contrast-level` parameter and pass one of the three levels (in lowercase): 'a', 'aa', or 'aaa'. For example, if you set the level to AAA ('aaa'), all colors in this scope calculated with `adaptive-contrast()` will be recalculated to meet the AAA requirement.
 
-  [WCAG Levels](./WCAG_Levels.png)
+  [WCAG Levels](./images/WCAG_Levels.png)
 
   To learn more about the `adaptive-contrast()` function, you can check out the [Adaptive contrast](#adaptive-contrasts) section.
 
@@ -491,7 +491,7 @@
   As you can see we have all of the 14 variants for the color groups `($color)`, and the 9 variants for the gray color `($grayscale)`.
   
   After reviewing the map, let’s see how the variants are actually generated. Let’s take the **600 variant** as an example.
-  [Generated variables](./Generated_variables.png)
+  [Generated variables](./images/Generated_variables.png)
 
   First, as you can see the `--ig-primary-500` uses the value we passed to our palette function, in this case, #f34e4e.
 
@@ -499,7 +499,7 @@
 
   The same process is applied for all other color variants, the only difference is the predefined multiplier values for each variant.
 
-  [Multipliers](./Multipliers.png)
+  [Multipliers](./images/Multipliers.png)
 
   [!NOTE] (Unfortunately, at the moment the type lists (`$IGrayShades`, `$IColorShades`) and multiplier maps (`$colors`, `$grayscale`) cannot be customized to produce variables based on your own template and multiplier values. We plan to add this functionality to the Ignite UI Theming very soon.)
 
@@ -544,9 +544,9 @@
 
   The whole calculation is done by a few clever CSS functions and a little bit of math. We drew inspiration from Lea Verou and her article about [Contrast colors](https://lea.verou.me/blog/2024/contrast-color/#using-rcs-to-automatically-compute-a-contrasting-text-color) and especially from the [Lloyd Kupchanko demo](https://lea.verou.me/blog/2024/contrast-color/#addendum)
 
-  [WCAG Levels](./WCAG_Levels.png)
+  [WCAG Levels](./images/WCAG_Levels.png)
 
-  [Contrast calculations](./Contrast_calculations.png)
+  [Contrast calculations](./images/Contrast_calculations.png)
 
 
   ### Scoping
@@ -600,7 +600,7 @@
 
   This means all color variants of a given type can be recalculated simply by updating the 500 variant color.
 
-  [Runtime change](./Runtime_change.gif)
+  [Runtime change](./images/Runtime_change.gif)
   
 
   ## Typography
@@ -649,7 +649,7 @@
 
   Each type style has a default value, which will be applied even if you don’t explicitly set it when including the typography.
 
-  Let's say that you have the following typography in your design system: [Typography Sample](/Design_system_typography.png)
+  Let's say that you have the following typography in your design system: [Typography Sample](./images/Design_system_typography.png)
 
   The easiest way to convert the typography design system into a usable one is the following: 
 
@@ -756,7 +756,7 @@
 
   The result is a list of CSS variables that look like this:
 
-  [Typography variables](./Typography_variables.png)
+  [Typography variables](./images/Typography_variables.png)
 
 
   ### Setting the CSS variables to elements
@@ -784,7 +784,7 @@
 
   Which will result in the following: 
 
-  [Type_style](./Type_style_mixin.png)
+  [Type_style](./images/Type_style_mixin.png)
 
   Except for the `$category` parameter, the mixin also accepts a `$check` parameter, which by default is set to `true`. 
    
@@ -868,9 +868,9 @@
 
   That way, when we include the `type-style-elements()` mixin, the three elements (`h1`, `h3`, and `p`) will each get their corresponding generated CSS variables.
 
-  [Type_elements_3](./Type_elements_3.png)
-  [Type_elements_2](./Type_elements_2.png)
-  [Type_elements_1](./Type_elements_1.png)
+  [Type_elements_3](./images/Type_elements_3.png)
+  [Type_elements_2](./images/Type_elements_2.png)
+  [Type_elements_1](./images/Type_elements_1.png)
 
   **The type-style-classes()**
 
@@ -933,7 +933,7 @@
 
   Now only the first `p` element will have the new generated `body` CSS variables applied to it.
 
-  [Type_classes](./Type-style-classes.png)
+  [Type_classes](./images/Type-style-classes.png)
 
 
   ## Elevations
@@ -952,7 +952,7 @@
 
   This way, managing shadows becomes easier, more scalable, and always aligned with your design system.
 
-  Let's say that you have the following elevations in your design system: [Elevations Sample](./Design_elevations.png)
+  Let's say that you have the following elevations in your design system: [Elevations Sample](./images/Design_elevations.png)
 
   The easiest way to convert the elevation design system into a usable one is the following: 
 
@@ -1011,7 +1011,7 @@
 
   The final result looks like this: 
 
-  [Elevation vars](./Elevation_vars.png)
+  [Elevation vars](./images/Elevation_vars.png)
 
   ### Using the elevations CSS variables
 
@@ -1076,7 +1076,7 @@
 
   [Note] ( The `box-shadow()` function doesn’t always need to be used in the elevation map. You can use it everywhere in your application. Everywhere it's used, it will still be linked to the `--ig-elevation-factor` variable and it will be changed when the `--ig-elevation-factor` changes, that way we can make some of our application elements to change easily.)
 
-  [Elevation calculations](./Elevation_calcs.png)
+  [Elevation calculations](./images/Elevation_calcs.png)
 
   Here, with `--ig-elevation-factor: 2`, the applied box-shadow becomes `0 4px 8px 0 black`. If the factor had not been changed (default `1`), the box-shadow would remain `0 2px 4px 0 black`.
 
@@ -1420,7 +1420,7 @@
   }
   ```
 
-  [Radius factor](./Radius_factor_calculations.png) 
+  [Radius factor](./images/Radius_factor_calculations.png) 
   
 
 # Utility concepts
@@ -1464,7 +1464,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
 
   This will result in the following output:
    
-  [Px convert](./Convert_px.png)
+  [Px convert](./images/Convert_px.png)
 
   ### To rem 
 
@@ -1487,7 +1487,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
 
   The above example will result in the following output in the application:
 
-  [Rem convert](./Convert_rem.png)
+  [Rem convert](./images/Convert_rem.png)
 
   ### To em
 
@@ -1506,7 +1506,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
 
   This will result in the following output:
 
-  [Em convert](./Convert_em.png)
+  [Em convert](./images/Convert_em.png)
 
   ## Animations
 
@@ -1526,7 +1526,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
 
   All predefined Ignite UI animations are stored as mixins, making them easy to include and reuse. When you include one of these animation mixins, it automatically calls another mixin - `keyframes`, which defines the `@keyframes` rule and sets up all the specific animation styles and values.
 
-  [Keyframes](./Keyframes.png)
+  [Keyframes](./images/Keyframes.png)
 
   The predefined list of animations includes groups such as `fade`, `slide`, `rotate`, `bounce`, and many more. Each group contains several different animations with unique styles. You can find the complete list here: [animations](http://infragistics.com/products/ignite-ui-angular/docs/sass/latest/animations/#mixin-animation)
    
@@ -1537,7 +1537,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
 
   All of the values are combined into a list and applied as the value of the CSS animation property.
 
-  [Animations](./Animations.png)
+  [Animations](./images/Animations.png)
    
   You can also stack multiple animations in a single include:
 
@@ -1600,8 +1600,8 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
    }
   ```
 
-  [New animation](./New_animation.png)
-  [New animation keyframes](./New_animation_keyframes.png)
+  [New animation](./images/New_animation.png)
+  [New animation keyframes](./images/New_animation_keyframes.png)
 
   ## BEM
 
@@ -1629,7 +1629,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
    </div>
   ```
 
-  [BEM](./Bem.png)
+  [BEM](./images/Bem.png)
 
   As you can see, with both the `bem-selector()` function and the `bem` mixin, you only need to provide the names for the block, element, and modifier parts of the class, and the selector is generated automatically. This isn’t the only way to use these functions and mixins, for example, you can also create multiple block modifiers using the same mixin and function.
 
@@ -1653,7 +1653,7 @@ These utilities are lightweight, fast, and easy to use. They help you avoid repe
    </div>
   ```
 
-  [Two modifiers](./Two_modifiers.png)
+  [Two modifiers](./images/Two_modifiers.png)
 
   There are many more possibilities and ways to create more advanced selectors with these and the other BEM functions and mixins that Ignite UI Theming offers. You can check them all out here:
   [BEM](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/bem/#function-bem-selector)
