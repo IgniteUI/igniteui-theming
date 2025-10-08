@@ -138,6 +138,10 @@
         $button-disabled-arrow-color: hsla(from adaptive-contrast(var(--button-disabled-background)) h s l / 0.4);
     }
 
+    @if not($indicator-hover-dot-color) and $indicator-dot-color {
+        $indicator-hover-dot-color: dynamic-shade(var(--indicator-dot-color));
+    }
+
     @if $variant == 'indigo' {
         @if not($indicator-dot-color) and $indicator-background {
             $indicator-dot-color: hsla(from adaptive-contrast(var(--indicator-background)) h s l / 0.8);
@@ -156,12 +160,13 @@
         }
     }
 
-    @if not($indicator-active-dot-color) and $indicator-background {
-        $indicator-active-dot-color: hsl(from adaptive-contrast(var(--indicator-background)) h s calc(l * 0.9));
+    @if not($indicator-active-hover-dot-color) and $indicator-active-dot-color {
+        $indicator-active-hover-dot-color: dynamic-shade(var(--indicator-active-dot-color));
     }
 
-    @if not($indicator-active-hover-dot-color) and $indicator-active-dot-color {
-        $indicator-active-hover-dot-color: hsl(from var(--indicator-active-dot-color) h s calc(l * 1.1));
+    @if not($indicator-active-dot-color) and $indicator-background {
+        $indicator-active-dot-color: adaptive-contrast(var(--indicator-background));
+        $indicator-active-hover-dot-color: var(--indicator-active-dot-color);
     }
 
     @if not($indicator-active-border-color) and $indicator-active-dot-color {
