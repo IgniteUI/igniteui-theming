@@ -103,6 +103,50 @@ To start the docs in your browser, run
 npm run serve:docs
 ```
 
+## MCP Server
+
+The repository includes an MCP (Model Context Protocol) server that enables AI assistants and developer tools to generate CSS from igniteui-theming presets. This makes it easy to implement design system CSS as handed off from design tools like Figma and Sketch.
+
+### Features
+
+The MCP server provides tools for generating:
+- Color palette CSS variables (material, bootstrap, fluent, indigo themes with light/dark variants)
+- Typography definitions and utility classes
+- Elevation (box-shadow) definitions
+- Sizing and spacing utilities
+- Complete theme CSS bundles
+
+### Installation
+
+```bash
+cd mcp-server
+npm install
+```
+
+### Usage
+
+Run the MCP server:
+
+```bash
+cd mcp-server
+npm start
+```
+
+Configure in your MCP client (e.g., Claude Desktop, Cline):
+
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/path/to/igniteui-theming/mcp-server/index.js"]
+    }
+  }
+}
+```
+
+For more details, see [mcp-server/README.md](mcp-server/README.md).
+
 ## Testing and Debugging
 
 ### Preview Palettes
