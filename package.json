@@ -25,7 +25,8 @@
     "prepare": "husky install"
   },
   "jest": {
-    "testEnvironment": "jest-environment-node-single-context"
+    "testEnvironment": "jest-environment-node-single-context",
+    "testPathIgnorePatterns": ["/node_modules/", "/mcp-server/"]
   },
   "lint-staged": {
     "sass/**/*.{scss,css}": [

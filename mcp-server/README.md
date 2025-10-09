@@ -123,6 +123,33 @@ Or using the binary directly:
 node index.js
 ```
 
+### Using the CLI
+
+For direct command-line usage and testing:
+
+```bash
+# Generate color palette
+node cli.js palette --theme=material --variant=light
+
+# Generate typography
+node cli.js typography --theme=bootstrap
+
+# Generate elevations
+node cli.js elevations --theme=material
+
+# Generate sizing and spacing
+node cli.js spacing
+
+# Save output to file
+node cli.js palette --theme=fluent --variant=dark --output=fluent-dark-palette.css
+```
+
+CLI Options:
+- `--theme=<name>`: Theme name (material, bootstrap, fluent, indigo)
+- `--variant=<type>`: Variant type (light, dark) - for palette only
+- `--output=<file>`: Output file path (optional, prints to stdout if not specified)
+
+
 ### Configuration for MCP Clients
 
 Add to your MCP client configuration (e.g., Claude Desktop, Cline):
