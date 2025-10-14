@@ -13,9 +13,12 @@
 /// @prop {Map} icon-color [contrast-color: ('primary', 900)] - The icon color used.
 /// @prop {Map} text-color [contrast-color: ('primary', 900)] - The text color used.
 /// @prop {Map} border-color [color: ('gray', 50)] - The border color used.
+/// @prop {Map} outline-color [color: ('gray', 50)] - The outline color used.
 /// @prop {Map} background-color [color: ('primary', 500)] - The background color used.
 /// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the badge shadow.
 /// @prop {Number} border-radius [0] - The border radius used for badge.
+/// @prop {List} size [(rem(16px), rem(20px), rem(24px))] - The size used for the badge (small, medium, large).
+/// @prop {Number} default-size [2] - The default size used for the badge component (medium).
 /// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-badge
 $light-badge: extend(
@@ -42,6 +45,13 @@ $light-badge: extend(
             ),
         ),
 
+        outline-color: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
         background-color: (
             color: (
                 'primary',
@@ -50,6 +60,16 @@ $light-badge: extend(
         ),
 
         border-radius: 0,
+
+        size: (
+            sizable: (
+                rem(16px),
+                rem(20px),
+                rem(24px),
+            ),
+        ),
+
+        default-size: 2,
 
         typography: (
             text: (
@@ -61,10 +81,18 @@ $light-badge: extend(
 
 /// Generates a material badge schema.
 /// @type {Map}
+/// @prop {List} border-radius [(rem(12px), rem(0), rem(12px))] - The border radius used for badge.
 /// @requires {Map} $light-badge
 $material-badge: extend(
     $light-badge,
     (
+        border-radius: (
+            border-radius: (
+                rem(12px),
+                rem(0),
+                rem(12px),
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'light',
@@ -74,10 +102,18 @@ $material-badge: extend(
 
 /// Generates a fluent badge schema.
 /// @type {Map}
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(12px))] - The border radius used for badge.
 /// @requires {Map} $light-badge
 $fluent-badge: extend(
     $light-badge,
     (
+        border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(12px),
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'light',
@@ -89,7 +125,7 @@ $fluent-badge: extend(
 /// @type {Map}
 /// @prop {Map} icon-color [contrast-color: ('primary', 100)] - The icon color used.
 /// @prop {Map} text-color [contrast-color: ('primary', 100)] - The text color used.
-/// @prop {Number} border-radius [rem(4px)] - The border radius used for badge.
+/// @prop {List} border-radius [(rem(4px), rem(0), rem(12px))] - The border radius used for badge.
 /// @requires {Map} $light-badge
 $bootstrap-badge: extend(
     $light-badge,
@@ -108,7 +144,13 @@ $bootstrap-badge: extend(
             ),
         ),
 
-        border-radius: rem(4px),
+        border-radius: (
+            border-radius: (
+                rem(4px),
+                rem(0),
+                rem(12px),
+            ),
+        ),
         _meta: (
             theme: 'bootstrap',
             variant: 'light',
@@ -119,6 +161,7 @@ $bootstrap-badge: extend(
 /// Generates an indigo badge schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('primary', 400)] - The background color used.
+/// @prop {List} border-radius [(rem(8px), rem(0), rem(12px))] - The border radius used for badge.
 /// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 /// @requires {Map} $light-badge
 /// @requires {Map} $indigo-elevation-badge
@@ -130,6 +173,14 @@ $indigo-badge: extend(
             color: (
                 'primary',
                 400,
+            ),
+        ),
+
+        border-radius: (
+            border-radius: (
+                rem(8px),
+                rem(0),
+                rem(12px),
             ),
         ),
 
