@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IgniteUI Theming MCP Server Demo</title>
+    <style>
+        /* Generated CSS from MCP server can be included here */
+        
+        /* Example: Material Light Palette */
+        :root {
+            --ig-primary-500: #0099ff;
+            --ig-secondary-500: #df1b74;
+            --ig-surface-500: white;
+            --ig-font-family: 'Titillium Web', sans-serif;
+        }
+        
+        body {
+            font-family: var(--ig-font-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: var(--ig-surface-500);
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--ig-primary-500), var(--ig-secondary-500));
+            color: white;
+            padding: 3rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            margin: 0 0 1rem 0;
+            font-size: 3rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            margin: 0 0 1rem 0;
+            color: var(--ig-primary-500);
+        }
+        
+        .button {
+            background: var(--ig-primary-500);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .button-secondary {
+            background: var(--ig-secondary-500);
+        }
+        
+        .button:hover {
+            opacity: 0.9;
+        }
+        
+        .color-swatch {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .swatch-primary { background: var(--ig-primary-500); }
+        .swatch-secondary { background: var(--ig-secondary-500); }
+        
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="hero">
+            <h1>🎨 IgniteUI Theming MCP Server</h1>
+            <p>Generate production-ready CSS from design system presets</p>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <h2>Color Palettes</h2>
+                <p>Generate comprehensive color palettes with all shades and contrast colors.</p>
+                <div>
+                    <div class="color-swatch swatch-primary" title="Primary"></div>
+                    <div class="color-swatch swatch-secondary" title="Secondary"></div>
+                </div>
+                <p><strong>Themes:</strong> Material, Bootstrap, Fluent, Indigo</p>
+                <p><strong>Variants:</strong> Light, Dark</p>
+            </div>
+            
+            <div class="card">
+                <h2>Typography</h2>
+                <p>Generate typography scales with font families, sizes, weights, and spacing.</p>
+                <p><strong>Includes:</strong></p>
+                <ul>
+                    <li>Headings (H1-H6)</li>
+                    <li>Body text</li>
+                    <li>Buttons & captions</li>
+                    <li>Utility classes</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>Elevations</h2>
+                <p>Generate box-shadow definitions for Material Design elevations.</p>
+                <p><strong>Levels:</strong> 0-24</p>
+                <p>Perfect for cards, modals, and layered UI components.</p>
+            </div>
+            
+            <div class="card">
+                <h2>Spacing & Sizing</h2>
+                <p>Generate responsive spacing and sizing utilities.</p>
+                <p><strong>Sizes:</strong> Small, Medium, Large</p>
+                <p><strong>Spacing modes:</strong> Compact, Cosy, Comfortable</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Quick Start</h2>
+            <p>Install and run the MCP server:</p>
+            <pre><code>cd mcp-server
+npm install
+npm start</code></pre>
+            
+            <p>Or use the CLI directly:</p>
+            <pre><code>node cli.js palette --theme=material --variant=light
+node cli.js typography --theme=bootstrap
+node cli.js elevations --theme=material</code></pre>
+            
+            <h3>Available Tools</h3>
+            <ul>
+                <li><code>generate_color_palette</code> - Color variables for all themes</li>
+                <li><code>generate_typography</code> - Typography definitions and classes</li>
+                <li><code>generate_elevations</code> - Box-shadow definitions</li>
+                <li><code>generate_sizing_spacing</code> - Sizing and spacing utilities</li>
+                <li><code>generate_complete_theme</code> - Complete theme bundle</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>Try It Out</h2>
+            <p>Generate CSS for your design system:</p>
+            <button class="button">Material Light</button>
+            <button class="button button-secondary">Bootstrap Dark</button>
+            <button class="button">Fluent Light</button>
+            <button class="button button-secondary">Indigo Dark</button>
+        </div>
+    </div>
+</body>
+</html>
