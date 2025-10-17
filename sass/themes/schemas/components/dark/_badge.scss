@@ -36,18 +36,11 @@ $dark-fluent-badge: extend(
 /// Generates a dark bootstrap badge schema.
 /// @type {Map}
 /// @prop {Map} border-color [contrast-color: ('gray', 50)] - The border color used.
-/// @prop {Map} outline-color [contrast-color: ('gray', 50)] - The outline color used.
 /// @requires $bootstrap-badge
 $dark-bootstrap-badge: extend(
     $bootstrap-badge,
     (
         border-color: (
-            contrast-color: (
-                'gray',
-                50,
-            ),
-        ),
-        outline-color: (
             contrast-color: (
                 'gray',
                 50,
