@@ -25,6 +25,7 @@
 /// @param {Color} $fill-color-hover [null] - The checked border and fill colors on hover.
 /// @param {Color} $tick-color [null] - The checked mark color.
 /// @param {Color} $tick-color-hover [null] - The checked mark color on hover.
+/// @param {Number} $tick-width [null] - The checked mark width.
 /// @param {Color} $disabled-color [null] - The disabled border and fill colors.
 /// @param {Color} $disabled-tick-color [null] - The checked mark color in disabled state.
 /// @param {Color} $disabled-indeterminate-color [null] - The disabled border and fill colors in indeterminate state.
@@ -58,6 +59,7 @@
     $fill-color-hover: null,
     $tick-color: null,
     $tick-color-hover: null,
+    $tick-width: null,
     $disabled-color: null,
     $disabled-tick-color: null,
     $disabled-indeterminate-color: null,
@@ -145,6 +147,7 @@
             fill-color-hover: $fill-color-hover,
             tick-color: $tick-color,
             tick-color-hover: $tick-color-hover,
+            tick-width: $tick-width,
             disabled-color: $disabled-color,
             disabled-tick-color: $disabled-tick-color,
             disabled-indeterminate-color: $disabled-indeterminate-color,

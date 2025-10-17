@@ -12,6 +12,7 @@
 /// Generates a light checkbox schema.
 /// @type {Map}
 /// @prop {Map} tick-color [color: ('gray', 50)] - The checked mark color.
+/// @prop {Number} tick-width [3] - The checked mark width.
 /// @prop {Map} label-color [color: ('gray', 900)]- The text color used for the label text.
 /// @prop {Map} label-color-hover [color: ('gray', 900)]- The text color used for the label text on hover.
 /// @prop {Color} empty-fill-color [transparent] - The unchecked fill color.
@@ -33,6 +34,7 @@ $light-checkbox: (
             50,
         ),
     ),
+    tick-width: 3,
     label-color: (
         color: (
             'gray',
@@ -188,6 +190,7 @@ $material-checkbox: extend(
 /// Generates a fluent checkbox schema.
 /// @type {Map}
 /// @prop {Map} tick-color-hover [color: ('gray', 700)] - The checked mark color on hover when the control in unchecked.
+/// @prop {Number} tick-width [1] - The checked mark width.
 /// @prop {Map} empty-color [color: ('gray', 900)] - The unchecked border color.
 /// @prop {Map} empty-color-hover [color: ('gray', 900)] - The unchecked border color on hover.
 /// @prop {Map} fill-color-hover [color: ('primary', 800)] - The checked border and fill colors on hover.
@@ -205,6 +208,7 @@ $fluent-checkbox: extend(
                 700,
             ),
         ),
+        tick-width: 1,
         focus-outline-color: (
             color: (
                 'gray',
