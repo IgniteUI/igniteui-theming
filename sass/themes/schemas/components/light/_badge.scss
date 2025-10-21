@@ -176,6 +176,7 @@ $bootstrap-badge: extend(
 /// @prop {List} size [(rem(14px), rem(18px), rem(22px))] - The size used for the badge.
 /// @prop {List} dot-size [(rem(6px), rem(8px), rem(10px))] - The size used for the dot type badge.
 /// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
+/// @prop {Number} default-size [3] - The default size used for the badge component (large).
 /// @requires {Map} $light-badge
 /// @requires {Map} $indigo-elevation-badge
 $indigo-badge: extend(
@@ -204,6 +205,8 @@ $indigo-badge: extend(
                 rem(10px),
             ),
         ),
+
+        default-size: 3,
 
         typography: (
             text: (
