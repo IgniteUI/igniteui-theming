@@ -12,6 +12,7 @@
 /// @prop {Map} label-color [color: ('gray', 700)] - The color for date range separator label.
 /// @prop {Map} ranges-background [color: 'surface'] - The background color for the predefined ranges area.
 /// @prop {Map} ranges-border [color: ('gray', 200)] - The border color for the predefined ranges area.
+/// @prop {Number} default-size [2] - The default size used for the input group component.
 /// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
 $light-date-range-picker: (
     label-color: (
@@ -32,6 +33,8 @@ $light-date-range-picker: (
         ),
     ),
 
+    default-size: 2,
+
     typography: (
         label: (
             value: 'caption',
@@ -41,10 +44,18 @@ $light-date-range-picker: (
 
 /// Generates a material date-range-picker schema.
 /// @type {Map}
+/// @prop {List} size [(rem(40px), rem(48px), rem(56px))] - The size used for the input group.
 /// @requires {Map} $light-date-range-picker
 $material-date-range-picker: extend(
     $light-date-range-picker,
     (
+        size: (
+            sizable: (
+                rem(40px),
+                rem(48px),
+                rem(56px),
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'light',
@@ -54,10 +65,19 @@ $material-date-range-picker: extend(
 
 /// Generates a fluent date-range-picker schema.
 /// @type {Map}
+/// @prop {List} size [(rem(32px), rem(40px), rem(48px))] - The size used for the input group.
 /// @requires {Map} $light-date-range-picker
 $fluent-date-range-picker: extend(
     $light-date-range-picker,
     (
+        size: (
+            sizable: (
+                rem(32px),
+                rem(40px),
+                rem(48px),
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'light',
@@ -68,6 +88,7 @@ $fluent-date-range-picker: extend(
 /// Generates a bootstrap date-range-picker schema.
 /// @type {Map}
 /// @prop {Map} ranges-border [color: ('gray', 300)] - The border color for the predefined ranges area.
+/// @prop {List} size [(rem(32px), rem(38px), rem(48px))] - The size used for the input group.
 /// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @requires {Map} $light-date-range-picker
 $bootstrap-date-range-picker: extend(
@@ -77,6 +98,14 @@ $bootstrap-date-range-picker: extend(
             color: (
                 'gray',
                 300,
+            ),
+        ),
+
+        size: (
+            sizable: (
+                rem(32px),
+                rem(38px),
+                rem(48px),
             ),
         ),
 
@@ -98,6 +127,7 @@ $bootstrap-date-range-picker: extend(
 /// @prop {Map} label-color [color: ('gray', 600)] - The color for date range separator label.
 /// @prop {Map} ranges-background [contrast-color: ('primary', 500)] - The background color for the predefined ranges area.
 /// @prop {Map} ranges-border [color: ('gray', 400)] - The border color for the predefined ranges area.
+/// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the input group.
 /// @requires {Map} $light-date-range-picker
 $indigo-date-range-picker: extend(
     $light-date-range-picker,
@@ -120,6 +150,14 @@ $indigo-date-range-picker: extend(
             color: (
                 'gray',
                 400,
+            ),
+        ),
+
+        size: (
+            sizable: (
+                rem(24px),
+                rem(28px),
+                rem(32px),
             ),
         ),
 
