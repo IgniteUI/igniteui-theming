@@ -10,13 +10,13 @@
 
 /// Generates a light badge schema.
 /// @type {Map}
-/// @prop {Map} icon-color [contrast-color: ('primary', 900)] - The icon color used.
-/// @prop {Map} text-color [contrast-color: ('primary', 900)] - The text color used.
-/// @prop {Map} border-color [color: ('gray', 50)] - The border color used.
-/// @prop {Map} background-color [color: ('primary', 500)] - The background color used.
+/// @prop {Map} icon-color [contrast-color: ('primary', 900)] - The icon color used for the badge component.
+/// @prop {Map} text-color [contrast-color: ('primary', 900)] - The text color used for the badge component.
+/// @prop {Map} border-color [contrast-color: ('gray', 900)] - The border color used for the badge component.
+/// @prop {Map} background-color [color: ('primary', 500)] - The background color used for the badge component.
 /// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the badge shadow.
-/// @prop {Number} border-radius [0] - The border radius used for badge.
-/// @prop {List} size [(rem(16px), rem(20px), rem(24px))] - The size used for the badge (small, medium, large).
+/// @prop {Number} border-radius [0] - The border-radius used for the badge component.
+/// @prop {List} size [(rem(16px), rem(22px), rem(26px))] - The size used for the badge.
 /// @prop {Number} default-size [2] - The default size used for the badge component (medium).
 /// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
 /// @requires {Map} $default-elevation-badge
@@ -38,9 +38,9 @@ $light-badge: extend(
         ),
 
         border-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                50,
+                900,
             ),
         ),
 
@@ -56,8 +56,8 @@ $light-badge: extend(
         size: (
             sizable: (
                 rem(16px),
-                rem(20px),
-                rem(24px),
+                rem(22px),
+                rem(26px),
             ),
         ),
 
@@ -73,18 +73,27 @@ $light-badge: extend(
 
 /// Generates a material badge schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(12px), rem(0), rem(12px))] - The border radius used for badge.
+/// @prop {Map} background-color [color: ('primary', 800)] - The background color used for the badge component.
+/// @prop {List} dot-size [(rem(8px), rem(10px), rem(12px))] - The size used for the dot type badge.
 /// @requires {Map} $light-badge
 $material-badge: extend(
     $light-badge,
     (
-        border-radius: (
-            border-radius: (
-                rem(12px),
-                rem(0),
+        background-color: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+
+        dot-size: (
+            sizable: (
+                rem(8px),
+                rem(10px),
                 rem(12px),
             ),
         ),
+
         _meta: (
             theme: 'material',
             variant: 'light',
@@ -94,18 +103,19 @@ $material-badge: extend(
 
 /// Generates a fluent badge schema.
 /// @type {Map}
-/// @prop {List} border-radius [(rem(4px), rem(0), rem(12px))] - The border radius used for badge.
+/// @prop {List} dot-size [(rem(6px), rem(10px), rem(12px))] - The size used for the dot type badge.
 /// @requires {Map} $light-badge
 $fluent-badge: extend(
     $light-badge,
     (
-        border-radius: (
-            border-radius: (
-                rem(4px),
-                rem(0),
+        dot-size: (
+            sizable: (
+                rem(6px),
+                rem(10px),
                 rem(12px),
             ),
         ),
+
         _meta: (
             theme: 'fluent',
             variant: 'light',
@@ -118,6 +128,7 @@ $fluent-badge: extend(
 /// @prop {Map} icon-color [contrast-color: ('primary', 100)] - The icon color used.
 /// @prop {Map} text-color [contrast-color: ('primary', 100)] - The text color used.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(12px))] - The border radius used for badge.
+/// @prop {List} dot-size [(rem(6px), rem(10px), rem(14px))] - The size used for the dot type badge.
 /// @requires {Map} $light-badge
 $bootstrap-badge: extend(
     $light-badge,
@@ -137,12 +148,21 @@ $bootstrap-badge: extend(
         ),
 
         border-radius: (
-            border-radius: (
+            sizable: (
+                rem(2px),
                 rem(4px),
-                rem(0),
-                rem(12px),
+                rem(4px),
             ),
         ),
+
+        dot-size: (
+            sizable: (
+                rem(6px),
+                rem(10px),
+                rem(14px),
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'light',
@@ -152,8 +172,9 @@ $bootstrap-badge: extend(
 
 /// Generates an indigo badge schema.
 /// @type {Map}
-/// @prop {Map} background-color [color: ('primary', 400)] - The background color used.
-/// @prop {List} border-radius [(rem(8px), rem(0), rem(12px))] - The border radius used for badge.
+/// @prop {Map} border-color [color: ('gray', 100)] - The border color used for the badge component.
+/// @prop {List} size [(rem(14px), rem(18px), rem(22px))] - The size used for the badge.
+/// @prop {List} dot-size [(rem(6px), rem(8px), rem(10px))] - The size used for the dot type badge.
 /// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 /// @requires {Map} $light-badge
 /// @requires {Map} $indigo-elevation-badge
@@ -161,18 +182,26 @@ $indigo-badge: extend(
     $light-badge,
     $indigo-elevation-badge,
     (
-        background-color: (
+        border-color: (
             color: (
-                'primary',
-                400,
+                'gray',
+                100,
             ),
         ),
 
-        border-radius: (
-            border-radius: (
+        size: (
+            sizable: (
+                rem(14px),
+                rem(18px),
+                rem(22px),
+            ),
+        ),
+
+        dot-size: (
+            sizable: (
+                rem(6px),
                 rem(8px),
-                rem(0),
-                rem(12px),
+                rem(10px),
             ),
         ),
 
