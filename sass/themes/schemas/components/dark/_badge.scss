@@ -35,17 +35,10 @@ $dark-fluent-badge: extend(
 
 /// Generates a dark bootstrap badge schema.
 /// @type {Map}
-/// @prop {Map} border-color [contrast-color: ('gray', 50)] - The border color used.
 /// @requires $bootstrap-badge
 $dark-bootstrap-badge: extend(
     $bootstrap-badge,
     (
-        border-color: (
-            contrast-color: (
-                'gray',
-                50,
-            ),
-        ),
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',
@@ -55,10 +48,26 @@ $dark-bootstrap-badge: extend(
 
 /// Generates a dark indigo badge schema.
 /// @type {Map}
+/// @prop {Map} background-color [color: ('primary', 400)] - The background color used for the badge component.
+/// @prop {Map} border-color [contrast-color: ('gray', 900)] - The border color used for the badge component.
 /// @requires $indigo-badge
 $dark-indigo-badge: extend(
     $indigo-badge,
     (
+        background-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+
+        border-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
         _meta: (
             theme: 'indigo',
             variant: 'dark',
