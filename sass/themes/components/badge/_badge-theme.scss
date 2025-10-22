@@ -24,7 +24,8 @@
 /// @param {Color} $background-color [null] - The background color used.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the badge.
 /// @param {Number} $border-radius [null] - The border radius used for badge component.
-///
+/// @param {Number} $size [null] - The size of the badge component.
+/// @param {Number} $dot-size [null] - The size of the dot type badge.
 /// @requires $light-material-schema
 ///
 /// @example scss Change the text and icon colors in a badge
@@ -41,7 +42,9 @@
     $border-radius: null,
 
     $background-color: null,
-    $shadow: null
+    $shadow: null,
+    $size: null,
+    $dot-size: null
 ) {
     $name: #{config.variable-prefix() + '-' + 'badge'};
     $selector: #{config.element-prefix() + '-' + 'badge'};
@@ -79,6 +82,8 @@
             border-radius: $border-radius,
             background-color: $background-color,
             shadow: $shadow,
+            size: $size,
+            dot-size: $dot-size,
         )
     );
 }
