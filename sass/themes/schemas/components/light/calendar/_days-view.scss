@@ -1194,7 +1194,7 @@ $fluent-days-view: extend(
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline in range selection.
-/// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
+/// @prop {List} date-current-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the current date selection.
 /// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
@@ -1224,7 +1224,7 @@ $bootstrap-days-view: extend(
         ),
         date-current-border-radius: (
             border-radius: (
-                rem(20px),
+                rem(4px),
                 rem(0),
                 rem(20px),
             ),
