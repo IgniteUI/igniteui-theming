@@ -87,12 +87,12 @@
         }
 
         @if not($thumb-border-hover-color) and $thumb-border-color {
-            $thumb-border-hover-color: hsl(from var(--thumb-border-color) h s calc(l * 1.1));
+            $thumb-border-hover-color: dynamic-shade(var(--thumb-border-color));
         }
 
         @if $variant == 'fluent' {
             @if not($thumb-focus-color) and $thumb-border-color {
-                $thumb-focus-color: hsl(from var(--thumb-border-color) h s calc(l * 1.2));
+                $thumb-focus-color: dynamic-shade(var(--thumb-border-color), $offset: 10);
             }
         } @else {
             @if not($thumb-focus-color) and $thumb-border-color {
@@ -126,7 +126,7 @@
     }
 
     @if not($track-hover-color) and $track-color {
-        $track-hover-color: hsl(from var(--track-color) h s calc(l * 1.1));
+        $track-hover-color: dynamic-shade(var(--track-color));
     }
 
     @if $variant != 'bootstrap' {
@@ -149,7 +149,7 @@
         }
     } @else {
         @if not($base-track-hover-color) and $base-track-color {
-            $base-track-hover-color: hsl(from var(--base-track-color) h s calc(l * 0.8));
+            $base-track-hover-color: dynamic-shade(var(--base-track-color), $offset: 10);
         }
     }
 
@@ -166,7 +166,7 @@
     }
 
     @if not($disabled-thumb-color) and $thumb-color {
-        $disabled-thumb-color: hsl(from var(--thumb-color) h calc(s * 0.5) calc(l * 1.2));
+        $disabled-thumb-color: hsl(from dynamic-shade(var(--thumb-color), $offset: 10) h calc(s * 0.5) l);
     }
 
     @if not($thumb-disabled-border-color) and $thumb-border-color {

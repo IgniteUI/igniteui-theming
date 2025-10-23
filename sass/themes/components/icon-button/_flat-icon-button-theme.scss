@@ -161,7 +161,7 @@
 
     @if $variant == 'bootstrap' or $variant == 'indigo' {
         @if not($hover-foreground) and $foreground {
-            $hover-foreground: hsl(from var(--foreground) h s calc(l * 0.9));
+            $hover-foreground: dynamic-shade(var(--foreground));
         }
 
         @if not($focus-foreground) and $foreground {
@@ -178,7 +178,7 @@
 
         @if $variant == 'bootstrap' {
             @if not($active-foreground) and $foreground {
-                $active-foreground: hsl(from var(--foreground) h s calc(l * 0.7));
+                $active-foreground: dynamic-shade(var(--foreground), $offset: 10);
             }
 
             @if not($shadow-color) and $foreground {
