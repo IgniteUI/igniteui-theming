@@ -10,7 +10,6 @@
 /// @package theming
 /// @group themes
 /// @access public
-/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
 /// Chat Theme
@@ -78,53 +77,17 @@
     $theme: digest-schema($chat-schema);
     $variant: map.get($theme, '_meta', 'theme');
 
-    // @if not($empty-color-hover) and $empty-color {
-    //     $empty-color-hover: hsl(from var(--empty-color) h s calc(l * 0.9));
-    // }
+    @if not($header-color) and $header-background {
+        $header-color: adaptive-contrast(var(--header-background));
+    }
 
-    // @if not($fill-color-hover) and $fill-color {
-    //     $fill-color-hover: hsl(from var(--fill-color) h s calc(l * 0.9));
-    // }
+    @if not($message-color) and $message-background {
+        $message-color: adaptive-contrast(var(--message-background));
+    }
 
-    // @if not($tick-color) and $fill-color {
-    //     $tick-color: adaptive-contrast(var(--fill-color));
-    // }
-
-    // @if not($label-color-hover) and $label-color {
-    //     $label-color-hover: hsl(from var(--label-color) h s calc(l * 0.9));
-    // }
-
-    // @if not($focus-border-color) and $fill-color {
-    //     $focus-border-color: var(--fill-color);
-    // }
-
-    // @if not($disabled-indeterminate-color) and $fill-color {
-    //     $disabled-indeterminate-color: hsla(from var(--fill-color) h s l / 0.5);
-    // }
-
-    // @if not($error-color-hover) and $error-color {
-    //     $error-color-hover: hsl(from var(--error-color) h s calc(l * 0.9));
-    // }
-
-    // @if not($focus-outline-color-error) and $error-color {
-    //     $focus-outline-color-error: hsla(from var(--error-color) h s l / 0.5);
-    // }
-
-    // @if $variant == 'bootstrap' {
-    //     @if not($focus-outline-color) and $fill-color {
-    //         $focus-outline-color: hsla(from var(--fill-color) h s l / 0.5);
-    //     }
-    // }
-
-    // @if $variant == 'indigo' {
-    //     @if not($focus-outline-color) and $empty-color {
-    //         $focus-outline-color: hsla(from var(--empty-color) h s l / 0.5);
-    //     }
-
-    //     @if not($focus-outline-color-focused) and $fill-color {
-    //         $focus-outline-color-focused: hsla(from var(--fill-color) h s l / 0.5);
-    //     }
-    // }
+    @if not($message-actions-color) and $message-background {
+        $message-actions-color: adaptive-contrast(var(--message-color));
+    }
 
     @return extend(
         $theme,
