@@ -54,7 +54,11 @@
     $toggle-button-foreground-filled: null
 ) {
     $name: #{config.variable-prefix() + '-' + 'combo'};
-    $selector: (#{config.element-prefix() + '-' + 'combo'}, #{config.element-prefix() + '-' + 'simple-combo'});
+    $selector: (
+        #{config.element-prefix() + '-' + 'combo'},
+        #{config.element-prefix() + '-' + 'simple-combo'},
+        .igx-drop-down__list
+    );
     $combo-schema: ();
 
     @if map.has-key($schema, 'combo') {
