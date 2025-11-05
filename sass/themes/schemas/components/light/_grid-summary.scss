@@ -78,6 +78,7 @@ $material-grid-summary: extend(
 
 /// Generates a fluent grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 600)] - The summaries label color.
 /// @prop {Map} background-color [color: ('surface')] - The summaries background color.
 /// @prop {Map} border-color [color: ('gray', 100)] - The summaries border color.
 /// @prop {Map} result-color [contrast-color: ('surface')] - The summaries value/result color.
@@ -86,6 +87,13 @@ $material-grid-summary: extend(
 $fluent-grid-summary: extend(
     $light-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
         background-color: (
             color: (
                 'surface',

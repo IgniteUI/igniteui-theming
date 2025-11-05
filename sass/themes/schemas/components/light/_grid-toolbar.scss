@@ -107,6 +107,7 @@ $material-grid-toolbar: extend(
 /// Generates a fluent grid-toolbar schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: 'surface'] - The toolbar background color.
+/// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
 /// @requires {Map} $light-grid-toolbar
 $fluent-grid-toolbar: extend(
     $light-grid-toolbar,
@@ -114,6 +115,14 @@ $fluent-grid-toolbar: extend(
         background-color: (
             color: 'surface',
         ),
+
+        title-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'light',

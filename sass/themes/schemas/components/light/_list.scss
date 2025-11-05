@@ -238,6 +238,7 @@ $material-list: extend(
 
 /// Generates a fluent list schema.
 /// @type {Map}
+/// @prop {Map} header-text-color [color: ('secondary', 700)] - The list header text color.
 /// @prop {Map} border-color [color: ('gray', 200)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
 /// @prop {Map} typography [
@@ -250,6 +251,12 @@ $material-list: extend(
 $fluent-list: extend(
     $light-list,
     (
+        header-text-color: (
+            color: (
+                'secondary',
+                700,
+            ),
+        ),
         border-color: (
             color: (
                 'gray',
