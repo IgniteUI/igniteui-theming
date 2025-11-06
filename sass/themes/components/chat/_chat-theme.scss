@@ -1,0 +1,122 @@
+@use 'sass:map';
+@use '../../config';
+@use '../../functions' as *;
+@use '../../schemas/' as *;
+@use '../../../utils/map' as *;
+@use '../../../color/functions' as *;
+@use '../../../elevations/' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
+/// Chat Theme
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @prop {Color} background [null] - The background color of the chat component.
+/// @prop {Color} header-background [null] - The background color of the chat header.
+/// @prop {Color} header-color [null] - The text color of the chat header.
+/// @prop {Color} header-border [null] - The color used for the chat header border.
+/// @prop {Color} message-background [null] - The background color of the sent message bubble.
+/// @prop {Color} message-color [null] - The text color of the chat messages.
+/// @prop {Color} message-actions-color [null] - The icon color of the chat message actions.
+/// @prop {Color} file-background [null] - The background color of the image message container.
+/// @prop {Color} file-icon-color [null] - The color of the attached file icon.
+/// @prop {Color} file-icon-accent-color [null] - The accent color of the attached file icon.
+/// @prop {Color} image-background [null] - The background color of the image message container.
+/// @prop {Color} image-border [null] - The border color of the image message container.
+/// @prop {Color} image-attachment-icon [null] - The color of the message attachment icon.
+/// @prop {Color} chat-input-border [null] - The border color of the chat input area.
+/// @prop {Color} progress-indicator-color [null] - The color of the progress indicator in the chat component.
+/// @prop {Color} code-background [null] - The background color of the code snippets in the chat component.
+/// @prop {Color} code-border [null] - The border color of the code snippets in the chat component.
+/// @requires $light-material-schema
+///
+/// @example scss Change background color
+///   $my-chat-theme: chat-theme($background: blue);
+///   // Pass the theme to the css-vars mixin
+///   @include css-vars($my-chat-theme);
+@function chat-theme(
+    $schema: $light-material-schema,
+
+    $background: null,
+
+    $header-background: null,
+    $header-color: null,
+    $header-border: null,
+
+    $message-background: null,
+    $message-color: null,
+    $message-actions-color: null,
+
+    $file-background: null,
+    $file-icon-color: null,
+    $file-icon-accent-color: null,
+
+    $image-background: null,
+    $image-border: null,
+    $image-attachment-icon: null,
+
+    $chat-input-border: null,
+    $progress-indicator-color: null,
+
+    $code-background: null,
+    $code-border: null
+) {
+    $name: #{config.variable-prefix() + '-' + 'chat'};
+    $selector: #{config.element-prefix() + '-' + 'chat'};
+    $chat-schema: ();
+
+    @if map.has-key($schema, 'chat') {
+        $chat-schema: map.get($schema, 'chat');
+    } @else {
+        $chat-schema: $schema;
+    }
+
+    $theme: digest-schema($chat-schema);
+    $variant: map.get($theme, '_meta', 'theme');
+
+    @if not($header-color) and $header-background {
+        $header-color: adaptive-contrast(var(--header-background));
+    }
+
+    @if not($message-color) and $message-background {
+        $message-color: adaptive-contrast(var(--message-background));
+    }
+
+    @if not($message-actions-color) and $message-background {
+        $message-actions-color: adaptive-contrast(var(--message-color));
+    }
+
+    @return extend(
+        $theme,
+        (
+            name: $name,
+            selector: $selector,
+            background: $background,
+
+            header-background: $header-background,
+            header-color: $header-color,
+            header-border: $header-border,
+
+            message-background: $message-background,
+            message-color: $message-color,
+            message-actions-color: $message-actions-color,
+
+            file-background: $file-background,
+            file-icon-color: $file-icon-color,
+            file-icon-accent-color: $file-icon-accent-color,
+
+            image-background: $image-background,
+            image-border: $image-border,
+            image-attachment-icon: $image-attachment-icon,
+
+            chat-input-border: $chat-input-border,
+            progress-indicator-color: $progress-indicator-color,
+
+            code-background: $code-background,
+            code-border: $code-border,
+        )
+    );
+}

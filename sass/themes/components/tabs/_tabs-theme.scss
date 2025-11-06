@@ -82,7 +82,7 @@
     $variant: map.get($theme, '_meta', 'theme');
 
     @if not($item-active-background) and $item-background {
-        $item-active-background: hsl(from var(--item-background) h s calc(l * 0.9));
+        $item-active-background: dynamic-shade(var(--item-background));
     }
 
     @if not($item-background) {
@@ -150,7 +150,7 @@
     }
 
     @if not($item-hover-background) and $item-background {
-        $item-hover-background: hsl(from var(--item-background) h s calc(l * 0.9));
+        $item-hover-background: dynamic-shade(var(--item-background));
     }
 
     @if $variant == 'bootstrap' {
@@ -188,7 +188,7 @@
         }
 
         @if not($button-hover-background) and $item-background {
-            $button-hover-background: hsl(from var(--item-background) h s calc(l * 0.9));
+            $button-hover-background: dynamic-shade(var(--item-background));
         }
     } @else if not($button-background) {
         @if $variant != 'material' {
@@ -197,7 +197,7 @@
             }
 
             @if not($button-hover-color) and $button-color {
-                $button-hover-color: hsl(from var(--button-color) h s calc(l * 0.9));
+                $button-hover-color: dynamic-shade(var(--button-color));
             }
 
             @if not($button-disabled-color) and $button-color {
@@ -208,7 +208,7 @@
 
     @if $button-background {
         @if not($button-hover-background) and $button-background {
-            $button-hover-background: hsl(from var(--button-background) h s calc(l * 0.9));
+            $button-hover-background: dynamic-shade(var(--button-background));
         }
     }
 

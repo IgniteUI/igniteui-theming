@@ -54,7 +54,11 @@
     $toggle-button-foreground-filled: null
 ) {
     $name: #{config.variable-prefix() + '-' + 'combo'};
-    $selector: (#{config.element-prefix() + '-' + 'combo'}, #{config.element-prefix() + '-' + 'simple-combo'});
+    $selector: (
+        #{config.element-prefix() + '-' + 'combo'},
+        #{config.element-prefix() + '-' + 'simple-combo'},
+        '.igx-drop-down__list'
+    );
     $combo-schema: ();
 
     @if map.has-key($schema, 'combo') {
@@ -76,7 +80,7 @@
 
     @if $variant == 'material' {
         @if not($toggle-button-background-focus) and $toggle-button-background {
-            $toggle-button-background-focus: hsl(from var(--toggle-button-background) h s calc(l * 0.9));
+            $toggle-button-background-focus: dynamic-shade(var(--toggle-button-background));
         }
     } @else {
         @if not($toggle-button-background-focus) and $toggle-button-background {

@@ -67,11 +67,11 @@
     }
 
     @if not($content-text-color) and $background {
-        $content-text-color: hsl(from adaptive-contrast(var(--background)) h s calc(l * 0.85));
+        $content-text-color: dynamic-shade(adaptive-contrast(var(--background)), $offset: 7);
     }
 
     @if not($subtitle-text-color) and $background {
-        $subtitle-text-color: hsl(from adaptive-contrast(var(--background)) h s calc(l * 0.85));
+        $subtitle-text-color: dynamic-shade(adaptive-contrast(var(--background)), $offset: 7);
     }
 
     @if not($resting-shadow) {
