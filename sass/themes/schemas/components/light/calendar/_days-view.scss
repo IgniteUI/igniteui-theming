@@ -258,6 +258,8 @@ $light-days-view: extend(
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
 /// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
 /// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
+/// @prop {Map} weekday-color [color: ('gray', 700)] - The foreground color of the weekday labels.
+/// @prop {Map} week-number-foreground [color: ('gray', 700)] - The foreground color of the week number column.
 /// @prop {Map} typography [
 ///   weekday-label: (value: 'body-1'),
 ///   content: (value: 'body-1')
@@ -609,6 +611,18 @@ $material-days-view: extend(
                 rem(8px),
             ),
         ),
+        weekday-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        week-number-foreground: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         typography: (
             weekday-label: (
                 value: 'body-1',
@@ -636,9 +650,9 @@ $material-days-view: extend(
 /// @prop {Map} date-selected-special-border-color [color: ('primary', 900)] - The border color of the selected special date.
 /// @prop {Map} date-selected-special-hover-border-color [color: ('primary', 900)] - The :hover border color of the selected special date.
 /// @prop {Map} date-selected-special-focus-border-color [color: ('primary', 900)] - The :focus border color of the selected special date.
-/// @prop {Map} date-selected-current-border-color [color: ('gray', 700)] - The border color of the selected current date.
-/// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 700)] - The :hover border color of the selected current date.
-/// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 700)] - The :focus border color of the selected current date.
+/// @prop {Map} date-selected-current-border-color [color: ('primary', 500)] - The border color of the selected current date.
+/// @prop {Map} date-selected-current-hover-border-color [color: ('primary', 500)] - The :hover border color of the selected current date.
+/// @prop {Map} date-selected-current-focus-border-color [color: ('primary', 500)] - The :focus border color of the selected current date.
 /// @prop {Map} date-hover-background [color: ('gray', 900)] - The :hover background color of date.
 /// @prop {Map} date-focus-background [color: ('gray', 200)] - The :focus background color of a date.
 /// @prop {Map} date-selected-foreground [color: ('gray', 900)] - The foreground color of the selected date.
@@ -701,6 +715,9 @@ $material-days-view: extend(
 /// @prop {Map} date-special-range-hover-foreground [color: ('gray', 900)] - The :hover foreground color of a special date in range selection.
 /// @prop {Map} date-special-range-focus-foreground [color: ('gray', 900)] - The :focus foreground color of a special date in range selection.
 /// @prop {Color} date-special-range-background [transparent] - The background color of a special date in range selection.
+/// @prop {Map} weekday-color [color: ('gray', 700)] - The foreground color of the weekday labels.
+/// @prop {Map} week-number-foreground [color: ('gray', 700)] - The foreground color of the week number column.
+/// @prop {Map} inactive-color [color: ('gray', 700)] - The foreground color of the previous and next month dates.
 /// @prop {Map} typography [
 ///   weekday-label: (value: 'body-1'),
 ///   content: (value: 'body-1')
@@ -762,20 +779,20 @@ $fluent-days-view: extend(
         ),
         date-selected-current-border-color: (
             color: (
-                'gray',
-                700,
+                'primary',
+                500,
             ),
         ),
         date-selected-current-hover-border-color: (
             color: (
-                'gray',
-                700,
+                'primary',
+                500,
             ),
         ),
         date-selected-current-focus-border-color: (
             color: (
-                'gray',
-                700,
+                'primary',
+                500,
             ),
         ),
         date-selected-special-border-color: (
@@ -1147,6 +1164,24 @@ $fluent-days-view: extend(
                 900,
             ),
         ),
+        week-number-foreground: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        weekday-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+        inactive-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         typography: (
             weekday-label: (
                 value: 'body-1',
@@ -1221,7 +1256,8 @@ $fluent-days-view: extend(
 /// @prop {Map} date-special-range-foreground [color: ('gray', 900)] - The foreground color of a special date in range selection.
 /// @prop {Map} date-special-range-hover-foreground [color: ('gray', 900)] - The :hover foreground color of a special date in range selection.
 /// @prop {Map} date-special-range-focus-foreground [color: ('gray', 900)] - The :focus foreground color of a special date in range selection.
-/// @prop {Map} weekday-color [color: ('info', 300)] - The foreground color for weekday labels.
+/// @prop {Map} weekday-color [color: ('primary', 900)] - The foreground color for weekday labels.
+/// @prop {Map} week-number-foreground [color: ('primary', 600)] - The foreground color of the week number column.
 /// @prop {Color} week-number-background [transparent] - The background color of the week number column.
 /// @prop {List} date-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline.
 /// @prop {List} date-range-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the date outline in range selection.
@@ -1276,8 +1312,14 @@ $bootstrap-days-view: extend(
         ),
         weekday-color: (
             color: (
-                'info',
-                300,
+                'primary',
+                900,
+            ),
+        ),
+        week-number-foreground: (
+            color: (
+                'primary',
+                600,
             ),
         ),
         week-number-background: transparent,
