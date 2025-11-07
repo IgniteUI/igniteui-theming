@@ -65,10 +65,24 @@ $light-grid-summary: (
 
 /// Generates a material grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 900)] - The summaries label color.
+/// @prop {Map} label-hover-color [color: ('primary', 900)] - The summaries hover label color.
 /// @requires {Map} $light-grid-summary
 $material-grid-summary: extend(
     $light-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                900,
+            ),
+        ),
+        label-hover-color: (
+            color: (
+                'primary',
+                900,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'light',

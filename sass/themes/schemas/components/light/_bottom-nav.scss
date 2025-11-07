@@ -77,10 +77,24 @@ $light-bottom-nav: extend(
 
 /// Generates a material bottom navigation schema.
 /// @type {Map}
+/// @prop {Map} icon-selected-color [color: ('primary', 800)] - The icon color used for the selected item.
+/// @prop {Map} label-selected-color [color: ('primary', 800)] - The label color used for the selected item.
 /// @requires {Map} $light-bottom-nav
 $material-bottom-nav: extend(
     $light-bottom-nav,
     (
+        icon-selected-color: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+        label-selected-color: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'light',

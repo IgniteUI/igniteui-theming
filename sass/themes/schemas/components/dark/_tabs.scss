@@ -33,8 +33,11 @@ $base-dark-tabs: (
 
 /// Generates a dark material tabs schema.
 /// @type {Map}
-/// @prop {Map} item-hover-background [color: ('gray', 100)] - The background used for the tabs on hover.
-/// @prop {Map} item-active-background [color: ('gray', 100)] - The color used for the active/focused tab background.
+/// @prop {Map} item-hover-background [color: ('gray', 100, 0.3)] - The background used for the tabs on hover.
+/// @prop {Map} item-active-background [color: ('gray', 100, 0.3)] - The color used for the active/focused tab background.
+/// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The color used for the active tab icon.
+/// @prop {Map} item-active-color [color: ('primary', 500)] - The color used for the active tabs text.
+/// @prop {Map} indicator-color [color: ('primary', 500)] - The color used for the active tab indicator.
 /// @requires $material-tabs
 /// @requires $base-dark-tabs
 $dark-material-tabs: extend(
@@ -44,12 +47,32 @@ $dark-material-tabs: extend(
             color: (
                 'gray',
                 100,
+                0.3,
             ),
         ),
         item-active-background: (
             color: (
                 'gray',
                 100,
+                0.3,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        indicator-color: (
+            color: (
+                'primary',
+                500,
             ),
         ),
         _meta: (
