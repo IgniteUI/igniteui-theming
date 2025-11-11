@@ -38,6 +38,8 @@ $base-dark-tabs: (
 /// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The color used for the active tab icon.
 /// @prop {Map} item-active-color [color: ('primary', 500)] - The color used for the active tabs text.
 /// @prop {Map} indicator-color [color: ('primary', 500)] - The color used for the active tab indicator.
+/// @prop {Map} item-disabled-color [color: ('gray', 200)] - The color used for the disabled tabs text.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 200)] - The color used for the disabled tab icon.
 /// @requires $material-tabs
 /// @requires $base-dark-tabs
 $dark-material-tabs: extend(
@@ -73,6 +75,18 @@ $dark-material-tabs: extend(
             color: (
                 'primary',
                 500,
+            ),
+        ),
+        item-disabled-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                200,
             ),
         ),
         _meta: (
