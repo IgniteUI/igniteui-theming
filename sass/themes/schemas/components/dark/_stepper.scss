@@ -129,9 +129,13 @@ $dark-fluent-stepper: extend(
 
 /// Generates a dark bootstrap stepper schema.
 /// @type {Map}
-/// @prop {Map} indicator-outline [color: (color: ('gray', 200)] - The outline color of the incomplete step indicator.
-/// @prop {Map} disabled-indicator-outline [color: ('gray', 300)] - The outline color of the disabled step indicator.
 /// @prop {Map} step-separator-color [color: ('gray', 100)] - The separator border-color of between the steps.
+/// @prop {Map} invalid-title-color [color: ('error')] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error')] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error')] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error')] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error')] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error')] - The color of the invalid step subtitle on focus.
 /// @requires $bootstrap-stepper
 /// @requires $base-stepper
 $dark-bootstrap-stepper: extend(
@@ -145,19 +149,42 @@ $dark-bootstrap-stepper: extend(
             ),
         ),
 
-        indicator-outline: (
+        invalid-title-color: (
             color: (
-                'gray',
-                200,
+                'error',
             ),
         ),
 
-        disabled-indicator-outline: (
+        invalid-title-hover-color: (
             color: (
-                'gray',
-                300,
+                'error',
             ),
         ),
+
+        invalid-title-focus-color: (
+            color: (
+                'error',
+            ),
+        ),
+
+        invalid-subtitle-color: (
+            color: (
+                'error',
+            ),
+        ),
+
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+            ),
+        ),
+
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',

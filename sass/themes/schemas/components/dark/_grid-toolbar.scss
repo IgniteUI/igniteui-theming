@@ -35,10 +35,18 @@ $dark-fluent-grid-toolbar: extend(
 
 /// Generates a dark bootstrap grid-toolbar schema.
 /// @type {Map}
+/// @prop {Map} title-text-color [color: ('gray', 600)] - The toolbar title text color.
 /// @requires $bootstrap-grid-toolbar
 $dark-bootstrap-grid-toolbar: extend(
     $bootstrap-grid-toolbar,
     (
+        title-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',
