@@ -15,7 +15,7 @@
 /// @prop {Map} date-special-range-border-color [color: ('secondary', 200)] - The outline color around a special date in a range selection.
 /// @prop {Map} date-special-range-hover-border-color [color: ('secondary', 200)] - The :hover outline color around a special date in a range selection.
 /// @prop {Map} date-special-range-focus-border-color [color: ('secondary', 200)] - The :focus outline color around a special date in a range selection.
-/// @prop {Map} weekday-color [color: ('gray', 600)] - The foreground color of the weekday labels.
+/// @prop {Map} weekday-color [color: ('gray', 500)] - The foreground color of the weekday labels.
 /// @prop {Map} week-number-foreground [color: ('gray', 600)] - The foreground color of the week number column.
 /// @prop {Map} date-special-range-hover-foreground [color: ('secondary', 100)] - The :hover foreground color of a special date in range selection.
 /// @prop {Map} date-special-range-focus-foreground [color: ('secondary', 100)] - The :focus foreground color of a special date in range selection.
@@ -100,7 +100,7 @@ $dark-material-days-view: extend(
         weekday-color: (
             color: (
                 'gray',
-                600,
+                500,
             ),
         ),
         week-number-foreground: (
@@ -152,6 +152,7 @@ $dark-material-days-view: extend(
 /// @prop {Map} date-selected-current-border-color [color: ('primary', 200)] - The border color of the selected current date.
 /// @prop {Map} date-selected-current-hover-border-color [color: ('primary', 200)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('primary', 200)] - The :focus border color of the selected current date.
+/// @prop {Map} week-number-foreground [color: ('gray', 500)] - The foreground color of the week number column.
 /// @requires {Map} $fluent-days-view
 /// @requires {Map} $dark-fluent-base
 $dark-fluent-days-view: extend(
@@ -354,6 +355,12 @@ $dark-fluent-days-view: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+        week-number-foreground: (
+            color: (
+                'gray',
+                500,
             ),
         ),
         _meta: (
