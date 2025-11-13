@@ -216,7 +216,6 @@ $light-days-view: extend(
 /// @prop {Map} date-selected-special-hover-background [color: ('secondary', 700)] - The :hover background color of the selected + special date.
 /// @prop {Map} date-selected-special-focus-foreground [contrast-color: ('secondary', 700)] - The :focus foreground color of the selected + special date.
 /// @prop {Map} date-selected-special-focus-background [color: ('secondary', 700)] - The :focus background color of the selected + special date.
-/// @prop {Map} date-current-hover-background [color: ('gray', 100)] - The :hover background color of the current date.
 /// @prop {Map} date-selected-current-foreground [contrast-color: ('secondary', 900)] - The foreground color of the selected current date.
 /// @prop {Map} date-selected-current-background [color: ('secondary', 500)] - The background color of the selected current date.
 /// @prop {Map} date-selected-current-hover-foreground [contrast-color: ('secondary', 700)] - The :hover foreground color of the selected current date.
@@ -246,18 +245,19 @@ $light-days-view: extend(
 /// @prop {Map} date-special-border-color [color: ('secondary', 500)] - The outline color around a special date.
 /// @prop {Map} date-special-hover-border-color [color: ('secondary', 700)] - The :hover outline color around a special date.
 /// @prop {Map} date-special-focus-border-color [color: ('secondary', 700)] - The :focus outline color around a special date.
+/// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
 /// @prop {Map} date-selected-special-border-color [contrast-color: ('secondary', 900)] - The border color of the selected special date.
 /// @prop {Map} date-selected-special-hover-border-color [contrast-color: ('secondary', 900)] - The :hover border color of the selected special date.
 /// @prop {Map} date-selected-special-focus-border-color [contrast-color: ('secondary', 900)] - The :focus border color of the selected special date.
-/// @prop {Map} date-current-border-color [color: ('gray', 900)] - The border color of the current date.
-/// @prop {Map} date-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the current date.
-/// @prop {Map} date-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the current date.
 /// @prop {Map} date-selected-current-border-color [color: ('gray', 900)] - The border color of the selected current date.
 /// @prop {Map} date-selected-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the selected current date.
 /// @prop {Map} date-selected-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the selected current date.
 /// @prop {List} week-number-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius used for the week numbers column.
+/// @prop {Map} date-current-border-color [color: ('gray', 900)] - The border color of the current date.
+/// @prop {Map} date-current-hover-border-color [color: ('gray', 900)] - The :hover border color of the current date.
+/// @prop {Map} date-current-focus-border-color [color: ('gray', 900)] - The :focus border color of the current date.
+/// @prop {Map} date-current-hover-background [color: ('gray', 100)] - The :hover background color of the current date.
 /// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
-/// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
 /// @prop {Map} weekday-color [color: ('gray', 700)] - The foreground color of the weekday labels.
 /// @prop {Map} week-number-foreground [color: ('gray', 700)] - The foreground color of the week number column.
 /// @prop {Map} typography [
