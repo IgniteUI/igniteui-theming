@@ -13,7 +13,7 @@
 /// Generates a base dark tabs schema.
 /// @type {Map}
 /// @prop {Map} item-hover-background [color: ('gray', 100, .5)] - The background used for the tabs on hover.
-/// @prop {Map} item-active-background [color: ('gray', 100, .5)] - The color used for the active/focused tab background.
+/// @prop {Map} item-active-hover-background [color: ('gray', 100, .5)] - The color used for the active tab background on hover and focus.
 $base-dark-tabs: (
     item-hover-background: (
         color: (
@@ -22,7 +22,7 @@ $base-dark-tabs: (
             0.5,
         ),
     ),
-    item-active-background: (
+    item-active-hover-background: (
         color: (
             'gray',
             100,
@@ -34,7 +34,7 @@ $base-dark-tabs: (
 /// Generates a dark material tabs schema.
 /// @type {Map}
 /// @prop {Map} item-hover-background [color: ('gray', 100)] - The background used for the tabs on hover.
-/// @prop {Map} item-active-background [color: ('gray', 100)] - The color used for the active/focused tab background.
+/// @prop {Map} item-active-hover-background [color: ('gray', 100)] - The color used for the active tab background on hover and focus.
 /// @requires $material-tabs
 /// @requires $base-dark-tabs
 $dark-material-tabs: extend(
@@ -46,7 +46,7 @@ $dark-material-tabs: extend(
                 100,
             ),
         ),
-        item-active-background: (
+        item-active-hover-background: (
             color: (
                 'gray',
                 100,
@@ -63,7 +63,7 @@ $dark-material-tabs: extend(
 /// @prop {Map} item-disabled-color [color: ('gray', 300)] - The color used for the disabled tabs text.
 /// @prop {Map} item-disabled-icon-color [color: ('gray', 300)] - The color used for the disabled tab icon.
 /// @prop {Map} item-hover-background [color: ('gray', 50)] - The background used for the tabs on hover.
-/// @prop {Map} item-active-background [color: ('gray', 50)] - The color used for the active/focused tab background.
+/// @prop {Map} item-active-hover-background [color: ('gray', 50)] - The color used for the active tab background on hover and focus.
 /// @prop {Map} button-disabled-color [color: ('gray', 200)] - The color used for the disabled button icon/text.
 /// @prop {Map} indicator-color [color: ('primary', 300)] - The color used for the active tab indicator.
 /// @type {Map}
@@ -92,7 +92,7 @@ $dark-fluent-tabs: extend(
                 50,
             ),
         ),
-        item-active-background: (
+        item-active-hover-background: (
             color: (
                 'gray',
                 50,
@@ -133,13 +133,16 @@ $dark-bootstrap-tabs: extend(
 /// Generates a dark indigo tabs schema.
 /// @type {Map}
 /// @prop {Map} item-hover-background [contrast-color: ('gray', 50, .1)] - The background used for the tabs on hover.
+/// @prop {Map} item-active-hover-background [contrast-color: ('gray', 50, .1)] - The color used for the active tab background on hover and focus.
 /// @prop {Map} item-text-color [contrast-color: ('gray', 50, .8)] - The color used for the tab text color.
 /// @prop {Map} item-hover-color [contrast-color: ('gray', 50)] - The text color used for the tabs on hover.
 /// @prop {Map} item-active-color [contrast-color: ('gray', 50)] - The color used for the active tabs text.
+/// @prop {Map} item-active-hover-color [contrast-color: ('gray', 50)] - The color used for the active tabs text on hover and focus.
 /// @prop {Map} item-disabled-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled tabs text.
 /// @prop {Map} item-icon-color [contrast-color: ('gray', 50, .6)] - The color used for the tab icon.
 /// @prop {Map} item-hover-icon-color [contrast-color: ('gray', 50, .8)] - The color used for the tab icon on hover.
 /// @prop {Map} item-active-icon-color [contrast-color: ('gray', 50, .8)] - The color used for the active tab icon.
+/// @prop {Map} item-active-hover-icon-color [contrast-color: ('gray', 50, .8)] - The color used for the active tab icon on hover and focus.
 /// @prop {Map} item-disabled-icon-color [contrast-color: ('gray', 50, .2)] - The color used for the disabled tab icon.
 /// @prop {Map} border-color [contrast-color: ('gray', 50, .15)] - The color used for the tab items bottom border.
 /// @prop {Map} border-color--hover [contrast-color: ('gray', 50, .15)] - The color used for the tab items bottom border on hover/focus.
@@ -152,6 +155,13 @@ $dark-indigo-tabs: extend(
     $indigo-tabs,
     (
         item-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+        item-active-hover-background: (
             contrast-color: (
                 'gray',
                 50,
@@ -172,6 +182,12 @@ $dark-indigo-tabs: extend(
             ),
         ),
         item-active-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        item-active-hover-color: (
             contrast-color: (
                 'gray',
                 50,
@@ -199,6 +215,13 @@ $dark-indigo-tabs: extend(
             ),
         ),
         item-active-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+        item-active-hover-icon-color: (
             contrast-color: (
                 'gray',
                 50,
