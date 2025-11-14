@@ -211,6 +211,7 @@ $dark-material-grid: extend(
 );
 
 /// Generates a dark fluent grid schema based on a mix of $fluent-grid and $base-dark-grid.
+/// @type {Map}
 /// @prop {Map} header-selected-background [color: ('gray', 200)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray', 200)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('gray', 100)] - The selected row background color.
@@ -218,8 +219,9 @@ $dark-material-grid: extend(
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 200)] - The selected row hover text color.
 /// @prop {Map} cell-selected-within-background [color: ('gray', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 200)] - The color of the selected cell inside a selected row/column.
+/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 100, .5)] - The grid group row background color.
-///
+/// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
 /// @requires $fluent-grid
 /// @requires $base-dark-grid
 $dark-fluent-grid: extend(
@@ -283,6 +285,13 @@ $dark-fluent-grid: extend(
             ),
         ),
 
+        grouparea-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+
         group-row-background: (
             color: (
                 'gray',
@@ -290,6 +299,14 @@ $dark-fluent-grid: extend(
                 0.5,
             ),
         ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',
