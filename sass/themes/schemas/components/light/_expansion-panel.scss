@@ -177,7 +177,6 @@ $fluent-expansion-panel: extend(
 /// Generates a bootstrap expansion panel schema.
 /// @type {Map}
 /// @prop {Map} header-title-color [color: ('gray', 800)] - The panel header title text color.
-/// @prop {Map} header-description-color [color: ('gray', 600)] - The panel header description text color.
 /// @requires {Map} $light-expansion-panel
 $bootstrap-expansion-panel: extend(
     $light-expansion-panel,
@@ -186,13 +185,6 @@ $bootstrap-expansion-panel: extend(
             color: (
                 'gray',
                 800,
-            ),
-        ),
-
-        header-description-color: (
-            color: (
-                'gray',
-                600,
             ),
         ),
 

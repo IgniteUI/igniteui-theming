@@ -121,10 +121,18 @@ $fluent-grid-summary: extend(
 
 /// Generates a bootstrap grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 700)] - The summaries label color.
 /// @requires {Map} $light-grid-summary
 $bootstrap-grid-summary: extend(
     $light-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                700,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'light',

@@ -106,6 +106,7 @@ $dark-fluent-tree: extend(
 /// Generates a dark bootstrap tree schema.
 /// @type {Map}
 /// @prop {Map} hover-color [color: ('gray', 500, .3)] - The background color used for the tree node on hover.
+/// @prop {Map} foreground-active [contrast-color: ('surface')] - The color used for the content in active state of the tree node.
 /// @requires $bootstrap-tree
 /// @requires $base-dark-tree
 $dark-bootstrap-tree: extend(
@@ -117,6 +118,11 @@ $dark-bootstrap-tree: extend(
                 'gray',
                 500,
                 0.3,
+            ),
+        ),
+        foreground-active: (
+            contrast-color: (
+                'surface',
             ),
         ),
         _meta: (

@@ -200,7 +200,7 @@ $fluent-tree: extend(
 
 /// Generates a light bootstrap tree schema.
 /// @type {Map}
-/// @prop {Map} foreground-active [contrast-color: ('primary')] - The color used for the content in active state of the tree node.
+/// @prop {Map} foreground-active [color: ('primary', 800)] - The color used for the content in active state of the tree node.
 /// @prop {Map} foreground-selected [contrast-color: ('primary', 600)] - The color used for the content of the selected tree node.
 /// @prop {Map} background-active-selected [color: ('primary', 600)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground-active-selected [contrast-color: ('primary', 600)] - The color used for the content of the active selected tree node.
@@ -212,6 +212,7 @@ $bootstrap-tree: extend(
         foreground-active: (
             color: (
                 'primary',
+                800,
             ),
         ),
         foreground-selected: (
