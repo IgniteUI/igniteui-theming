@@ -20,10 +20,13 @@
 /// @param {Color} $item-hover-color [null] - The text color used for the tabs on hover.
 /// @param {Color} $item-icon-color [null] - The color used for the tab icon.
 /// @param {Color} $item-active-icon-color [null] - The color used for the active tab icon.
+/// @param {Color} $item-active-hover-icon-color [null] - The color used for the active tab icon on hover and focus.
 /// @param {Color} $item-hover-icon-color [null] - The color used for the tab icon on hover.
 /// @param {Color} $item-disabled-icon-color [null] - The color used for the disabled tab icon.
 /// @param {Color} $item-active-color [null] - The color used for the active tabs text.
-/// @param {Color} $item-active-background [null] - The color used for the active/focused tab background.
+/// @param {Color} $item-active-hover-color [null] - The color used for the active tabs text on hover and focus.
+/// @param {Color} $item-active-background [null] - The color used for the active tab background.
+/// @param {Color} $item-active-hover-background [null] - The color used for the active tab background on hover and focus.
 /// @param {Color} $item-disabled-color [null] - The color used for the disabled tabs text.
 /// @param {Color} $indicator-color [null] - The color used for the active tab indicator.
 /// @param {Color} $button-color [null] - The color used for the button icon/text color.
@@ -51,10 +54,13 @@
     $item-hover-color: null,
     $item-icon-color: null,
     $item-active-icon-color: null,
+    $item-active-hover-icon-color: null,
     $item-hover-icon-color: null,
     $item-disabled-icon-color: null,
     $item-active-color: null,
+    $item-active-hover-color: null,
     $item-active-background: null,
+    $item-active-hover-background: null,
     $item-disabled-color: null,
     $indicator-color: null,
     $button-color: null,
@@ -82,7 +88,11 @@
     $variant: map.get($theme, '_meta', 'theme');
 
     @if not($item-active-background) and $item-background {
-        $item-active-background: dynamic-shade(var(--item-background));
+        $item-active-background: var(--item-background);
+    }
+
+    @if not($item-active-hover-background) and $item-active-background {
+        $item-active-hover-background: dynamic-shade(var(--item-active-background));
     }
 
     @if not($item-background) {
@@ -103,8 +113,24 @@
         }
     }
 
+    @if not($item-active-icon-color) and $item-active-color {
+        $item-active-icon-color: var(--item-active-color);
+    }
+
+    @if not($item-active-color) and $item-active-icon-color {
+        $item-active-color: var(--item-active-icon-color);
+    }
+
+    @if not($item-active-hover-color) and $item-active-color {
+        $item-active-hover-color: var(--item-active-color);
+    }
+
+    @if not($item-active-hover-icon-color) and $item-active-icon-color {
+        $item-active-hover-icon-color: var(--item-active-icon-color);
+    }
+
     @if not($item-active-background) {
-        @if $variant != 'bootstrap' {
+        @if $variant != 'bootstrap' and $variant != 'material' {
             @if not($item-active-icon-color) and $item-icon-color {
                 $item-active-icon-color: var(--item-icon-color);
             }
@@ -114,20 +140,20 @@
             }
         }
     } @else {
-        @if not($item-active-icon-color) and $item-active-color {
-            $item-active-icon-color: var(--item-active-color);
-        }
-
-        @if not($item-active-color) and $item-active-icon-color {
-            $item-active-color: var(--item-active-icon-color);
-        }
-
         @if not($item-active-icon-color) and $item-active-background {
             $item-active-icon-color: adaptive-contrast(var(--item-active-background));
         }
 
         @if not($item-active-color) and $item-active-background {
             $item-active-color: adaptive-contrast(var(--item-active-background));
+        }
+
+        @if not($item-active-hover-icon-color) and $item-active-hover-background {
+            $item-active-hover-icon-color: adaptive-contrast(var(--item-active-hover-background));
+        }
+
+        @if not($item-active-hover-color) and $item-active-hover-background {
+            $item-active-hover-color: adaptive-contrast(var(--item-active-hover-background));
         }
     }
 
@@ -162,13 +188,9 @@
             $border-color--hover: var(--border-color);
         }
     } @else {
-        @if not($item-background) {
-            @if not($indicator-color) and $item-text-color {
-                $indicator-color: var(--item-text-color);
-            }
-
-            @if not($indicator-color) and $item-icon-color {
-                $indicator-color: var(--item-icon-color);
+        @if not($item-active-background) {
+            @if not($indicator-color) and $item-active-color {
+                $indicator-color: var(--item-active-color);
             }
         } @else {
             @if not($indicator-color) and $item-active-color {
@@ -176,7 +198,7 @@
             }
 
             @if not($indicator-color) {
-                $indicator-color: adaptive-contrast(var(--item-background));
+                $indicator-color: adaptive-contrast(var(--item-active-background));
             }
         }
     }
@@ -249,10 +271,13 @@
             item-hover-background: $item-hover-background,
             item-icon-color: $item-icon-color,
             item-active-icon-color: $item-active-icon-color,
+            item-active-hover-icon-color: $item-active-hover-icon-color,
             item-hover-icon-color: $item-hover-icon-color,
             item-disabled-icon-color: $item-disabled-icon-color,
             item-active-color: $item-active-color,
+            item-active-hover-color: $item-active-hover-color,
             item-active-background: $item-active-background,
+            item-active-hover-background: $item-active-hover-background,
             item-disabled-color: $item-disabled-color,
             indicator-color: $indicator-color,
             button-color: $button-color,

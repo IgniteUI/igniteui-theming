@@ -1,5 +1,6 @@
 @use '../../../../utils/map' as *;
 @use '../light/input-group' as *;
+@use './validator' as *;
 
 // stylelint-disable max-line-length
 
@@ -257,9 +258,13 @@ $dark-bootstrap-input-group: extend(
 /// @prop {Map} placeholder-color [contrast-color: ('gray', 50, .6)] - The placeholder color of an input group.
 /// @prop {Map} hover-placeholder-color [contrast-color: ('gray', 50, .8)] - The placeholder color of an input group on hover.
 /// @prop {Map} disabled-placeholder-color [contrast-color: ('gray', 50, .2)] - The disabled placeholder color of an input group.
+/// @prop {Map} helper-text-color [contrast-color: ('gray', 50, .8)] - The color used for helper text.
+/// @prop {Map} text-error-color [contrast-color: ('gray', 50, .8)] - The color used for the error message.
 /// @requires $indigo-input-group
+/// @requires {Map} $dark-indigo-validator
 $dark-indigo-input-group: extend(
     $indigo-input-group,
+    $dark-indigo-validator,
     (
         input-prefix-color: (
             contrast-color: (
