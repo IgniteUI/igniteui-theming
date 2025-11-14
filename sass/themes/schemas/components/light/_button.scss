@@ -187,17 +187,17 @@ $material-base-button: $light-base-button;
 /// @type {Map}
 /// @prop {Map} foreground [color: ('secondary', 500)] - The idle text color of a flat button.
 /// @prop {Map} icon-color [color: ('secondary', 500)] - The idle icon color of the button.
-/// @prop {Map} icon-color-hover [color: ('secondary', 500)] - The hover icon color of the button.
+/// @prop {Map} icon-color-hover [color: ('secondary', 800)] - The hover icon color of the button.
 /// @prop {Map} hover-background [color: ('secondary', 500, .08)] - The hover background color of a flat button.
-/// @prop {Map} hover-foreground [color: ('secondary', 500)] - The hover text color of a flat button.
+/// @prop {Map} hover-foreground [color: ('secondary', 800)] - The hover text color of a flat button.
 /// @prop {Map} focus-background [color: ('secondary', 500, .32)] - The background color of a flat button when focused with click and keyboard.
-/// @prop {Map} focus-foreground [color: ('secondary', 500)] - The text color of a flat button when focused with click and keyboard.
+/// @prop {Map} focus-foreground [color: ('secondary', 900)] - The text color of a flat button when focused with click and keyboard.
 /// @prop {Map} focus-hover-background [color: ('secondary', 500, .24)] - The background color on focus hovered state of the button.
-/// @prop {Map} focus-hover-foreground [color: ('secondary', 500)] - The text color on focus hovered state of the button.
+/// @prop {Map} focus-hover-foreground [color: ('secondary', 800)] - The text color on focus hovered state of the button.
 /// @prop {Map} focus-visible-background [color: ('secondary', 500, .16)] - The focus-visible background color of a flat button.
-/// @prop {Map} focus-visible-foreground [color: ('secondary', 500)] - The focus-visible text color of a flat button.
+/// @prop {Map} focus-visible-foreground [color: ('secondary', 800)] - The focus-visible text color of a flat button.
 /// @prop {Map} active-background [color: ('secondary', 500, .16)] - The active background color of a flat button.
-/// @prop {Map} active-foreground [color: ('secondary', 500)] - The active text color of a flat button.
+/// @prop {Map} active-foreground [color: ('secondary', 800)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $light-flat-button
@@ -220,7 +220,7 @@ $material-flat-button: extend(
         icon-color-hover: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         hover-background: (
@@ -233,7 +233,7 @@ $material-flat-button: extend(
         hover-foreground: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         focus-background: (
@@ -241,6 +241,12 @@ $material-flat-button: extend(
                 'secondary',
                 500,
                 0.32,
+            ),
+        ),
+        focus-foreground: (
+            color: (
+                'secondary',
+                900,
             ),
         ),
         focus-visible-background: (
@@ -260,13 +266,13 @@ $material-flat-button: extend(
         focus-hover-foreground: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         focus-visible-foreground: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         active-background: (
@@ -279,7 +285,7 @@ $material-flat-button: extend(
         active-foreground: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         disabled-background: transparent,
@@ -292,17 +298,24 @@ $material-flat-button: extend(
 );
 
 /// @type {Map}
+/// @prop {Map} focus-foreground [color: ('secondary', 900)] - The text color of an outlined button when focused with click and keyboard.
 /// @prop {Map} border-color [color: ('secondary', 500)] - The outline color of an outlined button.
-/// @prop {Map} hover-border-color [color: ('secondary', 500)] - The hover border color of an outlined button.
-/// @prop {Map} focus-border-color [color: ('secondary', 500)] - The focus border color of an outlined button.
-/// @prop {Map} focus-visible-border-color [color: ('secondary', 500)] - The focus-visible border color of an outlined button.
-/// @prop {Map} active-border-color [color: ('secondary', 500)] - The active border color of an outlined button.
+/// @prop {Map} hover-border-color [color: ('secondary', 800)] - The hover border color of an outlined button.
+/// @prop {Map} focus-border-color [color: ('secondary', 900)] - The focus border color of an outlined button.
+/// @prop {Map} focus-visible-border-color [color: ('secondary', 800)] - The focus-visible border color of an outlined button.
+/// @prop {Map} active-border-color [color: ('secondary', 800)] - The active border color of an outlined button.
 /// @requires {Map} $material-base-button
 /// @requires {Map} $light-outlined-button
 $material-outlined-button: extend(
     $material-flat-button,
     $light-outlined-button,
     (
+        focus-foreground: (
+            color: (
+                'secondary',
+                900,
+            ),
+        ),
         border-color: (
             color: (
                 'secondary',
@@ -312,25 +325,25 @@ $material-outlined-button: extend(
         hover-border-color: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         focus-border-color: (
             color: (
                 'secondary',
-                500,
+                900,
             ),
         ),
         focus-visible-border-color: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         active-border-color: (
             color: (
                 'secondary',
-                500,
+                800,
             ),
         ),
         disabled-background: transparent,

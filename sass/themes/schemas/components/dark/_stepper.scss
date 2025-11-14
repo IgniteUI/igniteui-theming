@@ -92,12 +92,75 @@ $base-stepper: (
 
 /// Generates a dark material stepper schema.
 /// @type {Map}
+/// @prop {Map} invalid-indicator-color [contrast-color: ('gray', 900)] - The color of the invalid step indicator.
+/// @prop {Map} invalid-indicator-background [color: ('error', 500)] - The background color of the invalid step indicator.
+/// @prop {Map} invalid-indicator-outline [color: ('error', 500)] - The outline color of the invalid step indicator.
+/// @prop {Map} invalid-title-color [color: ('error', 500)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 500)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 300)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 500)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 500)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 300)] - The color of the invalid step subtitle on focus.
 /// @requires $material-stepper
 /// @requires $base-stepper
 $dark-material-stepper: extend(
     $material-stepper,
     $base-stepper,
     (
+        invalid-indicator-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        invalid-indicator-background: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-indicator-outline: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-title-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',

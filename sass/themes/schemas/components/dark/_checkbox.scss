@@ -10,10 +10,24 @@
 
 /// Generates a dark material checkbox schema.
 /// @type {Map}
+/// @prop {Map} error-color [color: ('error', 500)] - The border and fill colors in invalid state.
+/// @prop {Map} error-color-hover [color: ('error', 500)] - The border and fill colors in invalid state on hover.
 /// @requires $material-checkbox
 $dark-material-checkbox: extend(
     $material-checkbox,
     (
+        error-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        error-color-hover: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',

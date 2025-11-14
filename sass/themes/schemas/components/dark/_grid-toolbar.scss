@@ -9,10 +9,17 @@
 
 /// Generates a dark material grid-toolbar schema.
 /// @type {Map}
+/// @prop {Map} title-text-color [color: ('gray', 600)] - The toolbar title text color.
 /// @requires $material-grid-toolbar
 $dark-material-grid-toolbar: extend(
     $material-grid-toolbar,
     (
+        title-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -47,8 +54,8 @@ $dark-bootstrap-grid-toolbar: extend(
 );
 
 /// Generates a dark indigo grid-toolbar schema.
-/// @prop {Map} border-color [color: ('gray', 200)] - The toolbar border-bottom color.
 /// @type {Map}
+/// @prop {Map} border-color [color: ('gray', 200)] - The toolbar border-bottom color.
 /// @requires $indigo-grid-toolbar
 $dark-indigo-grid-toolbar: extend(
     $indigo-grid-toolbar,

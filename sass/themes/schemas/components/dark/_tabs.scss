@@ -33,8 +33,15 @@ $base-dark-tabs: (
 
 /// Generates a dark material tabs schema.
 /// @type {Map}
-/// @prop {Map} item-hover-background [color: ('gray', 100)] - The background used for the tabs on hover.
-/// @prop {Map} item-active-hover-background [color: ('gray', 100)] - The color used for the active tab background on hover and focus.
+/// @prop {Map} item-hover-background [color: ('gray', 100, 0.3)] - The background used for the tabs on hover.
+/// @prop {Map} item-active-hover-background [color: ('gray', 100, 0.3)] - The color used for the active tab background on hover and focus.
+/// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The color used for the active tab icon.
+/// @prop {Map} item-active-hover-icon-color [color: ('primary', 500)] - The color used for the active tab icon on hover and focus.
+/// @prop {Map} item-active-color [color: ('primary', 500)] - The color used for the active tabs text.
+/// @prop {Map} item-active-hover-color [color: ('primary', 500)] - The color used for the active tabs text on hover and focus.
+/// @prop {Map} indicator-color [color: ('primary', 500)] - The color used for the active tab indicator.
+/// @prop {Map} item-disabled-color [color: ('gray', 200)] - The color used for the disabled tabs text.
+/// @prop {Map} item-disabled-icon-color [color: ('gray', 200)] - The color used for the disabled tab icon.
 /// @requires $material-tabs
 /// @requires $base-dark-tabs
 $dark-material-tabs: extend(
@@ -44,12 +51,56 @@ $dark-material-tabs: extend(
             color: (
                 'gray',
                 100,
+                0.3,
             ),
         ),
         item-active-hover-background: (
             color: (
                 'gray',
                 100,
+                0.3,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-hover-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-hover-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        indicator-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-disabled-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        item-disabled-icon-color: (
+            color: (
+                'gray',
+                200,
             ),
         ),
         _meta: (
@@ -60,13 +111,13 @@ $dark-material-tabs: extend(
 );
 
 /// Generates a dark fluent tabs schema.
+/// @type {Map}
 /// @prop {Map} item-disabled-color [color: ('gray', 300)] - The color used for the disabled tabs text.
 /// @prop {Map} item-disabled-icon-color [color: ('gray', 300)] - The color used for the disabled tab icon.
 /// @prop {Map} item-hover-background [color: ('gray', 50)] - The background used for the tabs on hover.
 /// @prop {Map} item-active-hover-background [color: ('gray', 50)] - The color used for the active tab background on hover and focus.
 /// @prop {Map} button-disabled-color [color: ('gray', 200)] - The color used for the disabled button icon/text.
 /// @prop {Map} indicator-color [color: ('primary', 300)] - The color used for the active tab indicator.
-/// @type {Map}
 /// @requires $fluent-tabs
 /// @requires $base-dark-tabs
 $dark-fluent-tabs: extend(

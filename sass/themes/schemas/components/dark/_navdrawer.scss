@@ -32,12 +32,26 @@ $dark-base-navdrawer: extend(
 
 /// Generates a dark material navdrawer schema.
 /// @type {Map}
+/// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The item's icon active color.
+/// @prop {Map} item-active-text-color [color: ('primary', 500)] - The item's active text color.
 /// @prop {Map} item-disabled-text-color [color: ('gray', 300)] - The item's disabled text color.
 /// @requires $material-navdrawer
 $dark-material-navdrawer: extend(
     $material-navdrawer,
     $dark-base-navdrawer,
     (
+        item-active-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        item-active-text-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
         item-disabled-text-color: (
             color: (
                 'gray',

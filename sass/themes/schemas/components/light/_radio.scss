@@ -84,7 +84,8 @@ $light-radio: (
 /// @prop {Map} empty-color [color: ('gray', 600)] - The unchecked border color.
 /// @prop {Map} fill-color [color: ('secondary', 500)] - The checked border and dot colors.
 /// @prop {Map} fill-color-hover [color: ('secondary', 500)] - The checked border and dot colors on hover.
-/// @prop {Map} error-color-hover [color: ('error', 500)] - The border and dot color in invalid state on hover.
+/// @prop {Map} error-color [color: ('error', 800)] - The label, border and dot color in invalid state.
+/// @prop {Map} error-color-hover [color: ('error', 800)] - The border and dot color in invalid state on hover.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @requires {Map} $light-radio
 $material-radio: extend(
@@ -120,10 +121,17 @@ $material-radio: extend(
             ),
         ),
 
+        error-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+
         error-color-hover: (
             color: (
                 'error',
-                500,
+                800,
             ),
         ),
 

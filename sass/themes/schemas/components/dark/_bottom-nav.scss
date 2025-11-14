@@ -9,10 +9,24 @@
 
 /// Generates a dark material bottom-nav schema.
 /// @type {Map}
+/// @prop {Map} icon-selected-color [color: ('primary', 500)] - The icon color used for the selected item.
+/// @prop {Map} label-selected-color [color: ('primary', 500)] - The label color used for the selected item.
 /// @requires $material-bottom-nav
 $dark-material-bottom-nav: extend(
     $material-bottom-nav,
     (
+        icon-selected-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        label-selected-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',

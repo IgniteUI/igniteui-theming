@@ -35,6 +35,12 @@ $material-base-button-dark: (
 );
 
 /// @type {Map}
+/// @prop {Map} icon-color-hover [color: ('secondary', 300)] - The hover icon color of the button.
+/// @prop {Map} hover-foreground [color: ('secondary', 300)] - The hover text color of a flat button.
+/// @prop {Map} focus-foreground [color: ('secondary', 200)] - The text color of a flat button when focused with click and keyboard.
+/// @prop {Map} focus-hover-foreground [color: ('secondary', 300)] - The text color on focus hovered state of the button.
+/// @prop {Map} focus-visible-foreground [color: ('secondary', 300)] - The focus-visible text color of a flat button.
+/// @prop {Map} active-foreground [color: ('secondary', 300)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color a flat button.
 /// @requires {Map} $material-base-button-dark
 /// @requires {Map} $material-flat-button
@@ -42,6 +48,42 @@ $material-flat-button-dark: extend(
     $material-flat-button,
     $material-base-button-dark,
     (
+        icon-color-hover: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        hover-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        focus-hover-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        focus-visible-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        active-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
         disabled-background: transparent,
         _meta: (
             theme: 'material',
@@ -51,14 +93,85 @@ $material-flat-button-dark: extend(
     )
 );
 
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-base-button-dark
+/// @type {Map}
+/// @prop {Map} icon-color-hover [color: ('secondary', 300)] - The hover icon color of the button.
+/// @prop {Map} hover-foreground [color: ('secondary', 300)] - The hover text color of a flat button.
+/// @prop {Map} focus-foreground [color: ('secondary', 200)] - The text color of a flat button when focused with click and keyboard.
+/// @prop {Map} focus-hover-foreground [color: ('secondary', 300)] - The text color on focus hovered state of the button.
+/// @prop {Map} focus-visible-foreground [color: ('secondary', 300)] - The focus-visible text color of a flat button.
+/// @prop {Map} active-foreground [color: ('secondary', 300)] - The active text color of a flat button.
+/// @prop {Map} hover-border-color [color: ('secondary', 300)] - The hover border color of an outlined button.
+/// @prop {Map} focus-border-color [color: ('secondary', 200)] - The focus border color of an outlined button.
+/// @prop {Map} focus-visible-border-color [color: ('secondary', 300)] - The focus-visible border color of an outlined button.
+/// @prop {Map} active-border-color [color: ('secondary', 300)] - The active border color of an outlined button.
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled focused border color of an outlined button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color an outlined button.
+/// @requires {Map} $material-outlined-button
+/// @requires {Map} $material-base-button-dark
 $material-outlined-button-dark: extend(
     $material-outlined-button,
     $material-base-button-dark,
     (
+        icon-color-hover: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        hover-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        focus-foreground: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        focus-hover-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        focus-visible-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        active-foreground: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        hover-border-color: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'secondary',
+                200,
+            ),
+        ),
+        focus-visible-border-color: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
+        active-border-color: (
+            color: (
+                'secondary',
+                300,
+            ),
+        ),
         disabled-border-color: (
             color: (
                 'gray',

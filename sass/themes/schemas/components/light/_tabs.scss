@@ -186,6 +186,11 @@ $light-tabs: (
 /// Generates a material tabs schema.
 /// @type {Map}
 /// @prop {Map} item-hover-color [color: ('gray', 700)] - The text color used for the tabs on hover.
+/// @prop {Map} item-active-icon-color [color: ('primary', 900)] - The color used for the active tab icon.
+/// @prop {Map} item-active-hover-icon-color [color: ('primary', 900)] - The color used for the active tab icon on hover and focus.
+/// @prop {Map} item-active-color [color: ('primary', 900)] - The color used for the active tabs text.
+/// @prop {Map} item-active-hover-color [color: ('primary', 900)] - The color used for the active tabs text on hover and focus.
+/// @prop {Map} indicator-color [color: ('primary', 900)] - The color used for the active tab indicator.
 /// @requires {Map} $light-tabs
 $material-tabs: extend(
     $light-tabs,
@@ -194,6 +199,36 @@ $material-tabs: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+        item-active-icon-color: (
+            color: (
+                'primary',
+                900,
+            ),
+        ),
+        item-active-hover-icon-color: (
+            color: (
+                'primary',
+                900,
+            ),
+        ),
+        item-active-color: (
+            color: (
+                'primary',
+                900,
+            ),
+        ),
+        item-active-hover-color: (
+            color: (
+                'primary',
+                900,
+            ),
+        ),
+        indicator-color: (
+            color: (
+                'primary',
+                900,
             ),
         ),
         _meta: (
