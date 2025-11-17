@@ -92,6 +92,7 @@ $base-stepper: (
 
 /// Generates a dark material stepper schema.
 /// @type {Map}
+/// @prop {Map} current-indicator-color [contrast-color: ('gray', 50)] - The color of the current step indicator.
 /// @prop {Map} invalid-indicator-color [contrast-color: ('gray', 900)] - The color of the invalid step indicator.
 /// @prop {Map} invalid-indicator-background [color: ('error', 500)] - The background color of the invalid step indicator.
 /// @prop {Map} invalid-indicator-outline [color: ('error', 500)] - The outline color of the invalid step indicator.
@@ -107,6 +108,12 @@ $dark-material-stepper: extend(
     $material-stepper,
     $base-stepper,
     (
+        current-indicator-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
         invalid-indicator-color: (
             contrast-color: (
                 'gray',
