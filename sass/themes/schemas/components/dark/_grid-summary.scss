@@ -54,10 +54,18 @@ $dark-material-grid-summary: extend(
 
 /// Generates a dark fluent grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 300)] - The summaries label color.
 /// @requires {Map} $fluent-grid-summary
 $dark-fluent-grid-summary: extend(
     $fluent-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',

@@ -52,12 +52,20 @@ $dark-material-list: extend(
 
 /// Generates a dark fluent list schema.
 /// @type {Map}
+/// @prop {Map} header-text-color [color: ('secondary', 500)] - The list header text color.
 /// @requires $fluent-list
 /// @requires $base-dark-list
 $dark-fluent-list: extend(
     $fluent-list,
     $base-dark-list,
     (
+        header-text-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',

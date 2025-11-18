@@ -740,8 +740,10 @@ $material-grid: extend(
 /// @prop {Map} pinned-border-color [color: ('gray', 200)] - The color of the pinned border.
 /// @prop {Map} cell-active-border-color [color: ('primary', 100)] - The active(focused) cell border color.
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
+/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 50)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
+/// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @prop {Map} filtering-header-text-color [color: ('gray', 900)] - The text color of the filtered column header.
 /// @prop {Map} row-ghost-background [color: 'surface'] - The background color of the dragged row.
 /// @prop {number} grid-elevation [0] - The elevation level, between 0-24, to be used for the grid.
@@ -836,6 +838,13 @@ $fluent-grid: extend(
             color: 'surface',
         ),
 
+        grouparea-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         group-row-background: (
             color: (
                 'gray',
@@ -847,6 +856,13 @@ $fluent-grid: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                700,
             ),
         ),
 

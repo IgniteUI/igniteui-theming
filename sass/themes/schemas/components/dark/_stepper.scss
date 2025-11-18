@@ -15,10 +15,10 @@
 /// @prop {Map} invalid-step-hover-background [color: ('gray', 100, .3)] - The background of the invalid step header on hover.
 /// @prop {Map} current-step-hover-background [color: ('gray', 100, .3)] - The background of the current step header on hover.
 /// @prop {Map} complete-step-hover-background [color: ('gray', 100, .3)] - The background of the complete step header on hover.
-/// @prop {Map} step-focus-background [color: ('gray', 100, .5)] - The background of the step header on hover.
-/// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .5)] - The background of the invalid step header on hover.
-/// @prop {Map} current-step-focus-background [color: ('gray', 100, .5)] - The background of the current step header on hover.
-/// @prop {Map} complete-step-focus-background [color: ('gray', 100, .5)] - The background of the complete step header on hover.
+/// @prop {Map} step-focus-background [color: ('gray', 100, .5)] - The background of the step header on focus.
+/// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .5)] - The background of the invalid step header on focus.
+/// @prop {Map} current-step-focus-background [color: ('gray', 100, .5)] - The background of the current step header on focus.
+/// @prop {Map} complete-step-focus-background [color: ('gray', 100, .5)] - The background of the complete step header on focus.
 $base-stepper: (
     step-hover-background: (
         color: (
@@ -178,6 +178,16 @@ $dark-material-stepper: extend(
 /// Generates a dark fluent stepper schema
 /// @type {Map}
 /// @prop {Map} complete-indicator-background [color: ('gray', 100)] - The background color of the completed step indicator.
+/// @prop {Map} step-focus-background [color: ('gray', 100, .4)] - The background of the step header on focus.
+/// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .4)] - The background of the invalid step header on focus.
+/// @prop {Map} current-step-focus-background [color: ('gray', 100, .4)] - The background of the current step header on focus.
+/// @prop {Map} complete-step-focus-background [color: ('gray', 100, .4)] - The background of the complete step header on focus.
+/// @prop {Map} invalid-title-color [color: ('error', 50)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 50)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 50)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 700)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 50)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 50)] - The color of the invalid step subtitle on focus.
 /// @requires $fluent-stepper
 /// @requires $base-stepper
 $dark-fluent-stepper: extend(
@@ -188,6 +198,70 @@ $dark-fluent-stepper: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+        step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        complete-step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        current-step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        invalid-step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        invalid-title-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                50,
             ),
         ),
         _meta: (

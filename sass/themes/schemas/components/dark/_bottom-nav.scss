@@ -36,10 +36,24 @@ $dark-material-bottom-nav: extend(
 
 /// Generates a dark fluent bottom-nav schema.
 /// @type {Map}
+/// @prop {Map} label-selected-color [color: ('primary', 300)] - The label color used for the selected item.
+/// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
 /// @requires $fluent-bottom-nav
 $dark-fluent-bottom-nav: extend(
     $fluent-bottom-nav,
     (
+        label-selected-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-selected-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'dark',
