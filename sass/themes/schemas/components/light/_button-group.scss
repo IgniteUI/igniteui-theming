@@ -127,12 +127,12 @@ $light-button-group: extend(
 /// @prop {Map} item-selected-text-color [color: ('gray', 800)] - The text color for a selected item in the button group.
 /// @prop {Map} item-selected-icon-color [color: ('gray', 800)] - The icon color for a selected item in the button group.
 /// @prop {Map} item-selected-border-color [color: ('gray', 500)] - The border color for a selected item from the button group.
-/// @prop {Map} item-selected-hover-background [color: ('gray', 500, .8)] - The background color for a selected item in hover state in the button group.
+/// @prop {Map} item-selected-hover-background [color: ('gray', 500, .4)] - The background color for a selected item in hover state in the button group.
 /// @prop {Map} item-selected-focus-background [color: ('gray', 700, .5)] - The background color for a selected item in focus state in the button group.
 /// @prop {Map} item-selected-focus-hover-background [color: ('gray', 600, .7)] - The background color for a selected item in focused & hover state in the button group.
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 500)] - The border color for a selected item in hover state in the button group.
-/// @prop {Map} item-selected-hover-text-color [color: ('gray', 800)] - The text color for a selected item in hover state in the button group.
-/// @prop {Map} item-selected-hover-icon-color [color: ('gray', 800)] - The icon color for a selected item in hover state in the button group.
+/// @prop {Map} item-selected-hover-text-color [color: ('gray', 900)] - The text color for a selected item in hover state in the button group.
+/// @prop {Map} item-selected-hover-icon-color [color: ('gray', 900)] - The icon color for a selected item in hover state in the button group.
 /// @prop {Map} disabled-text-color [color: ('gray', 400)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 400)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-text-color [color: ('gray', 400)] - The disabled text color for a selected item in the button group.
@@ -229,14 +229,14 @@ $material-button-group: extend(
         item-selected-hover-text-color: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
 
         item-selected-hover-icon-color: (
             color: (
                 'gray',
-                800,
+                900,
             ),
         ),
 
@@ -251,7 +251,7 @@ $material-button-group: extend(
             color: (
                 'gray',
                 500,
-                0.8,
+                0.4,
             ),
         ),
 

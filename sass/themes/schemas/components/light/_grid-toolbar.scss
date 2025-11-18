@@ -10,7 +10,7 @@
 /// Generates a light grid-toolbar schema.
 /// @type {Map}
 /// @prop {Map} background-color [color: ('gray', 50)] - The toolbar background color.
-/// @prop {Map} title-text-color [color: ('gray', 600)] - The toolbar title text color.
+/// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
 /// @prop {Map} dropdown-background [color: ('surface')] - The toolbar drop-down background color.
 /// @prop {Map} item-text-color [color: ('gray', 600)] - The toolbar drop-down item text color.
 /// @prop {Map} item-hover-background [color: ('gray', 100)] - The toolbar drop-down item hover background color.
@@ -30,7 +30,7 @@ $light-grid-toolbar: (
     title-text-color: (
         color: (
             'gray',
-            600,
+            700,
         ),
     ),
 
@@ -131,12 +131,19 @@ $fluent-grid-toolbar: extend(
 );
 
 /// Generates a bootstrap grid-toolbar schema.
-/// @prop {Map} border-color [color: ('gray', 100)] - The toolbar border-bottom color.
 /// @type {Map}
+/// @prop {Map} title-text-color [color: ('gray', 600)] - The toolbar title text color.
+/// @prop {Map} border-color [color: ('gray', 100)] - The toolbar border-bottom color.
 /// @requires {Map} $light-grid-toolbar
 $bootstrap-grid-toolbar: extend(
     $light-grid-toolbar,
     (
+        title-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
         border-color: (
             color: (
                 'gray',
@@ -153,7 +160,6 @@ $bootstrap-grid-toolbar: extend(
 /// Generates an indigo grid-toolbar schema.
 /// @type {Map}
 /// @prop {Color} background-color [color: ('surface', 500)] - The toolbar background color.
-/// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The toolbar border-bottom color.
 /// @requires {Map} $light-grid-toolbar
 $indigo-grid-toolbar: extend(
@@ -163,13 +169,6 @@ $indigo-grid-toolbar: extend(
             color: (
                 'surface',
                 500,
-            ),
-        ),
-
-        title-text-color: (
-            color: (
-                'gray',
-                700,
             ),
         ),
 

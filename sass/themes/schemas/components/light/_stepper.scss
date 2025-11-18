@@ -333,19 +333,29 @@ $light-stepper: (
 /// Generates a material stepper schema.
 /// @type {Map}
 /// @prop {Map} indicator-background [color: ('gray', 400)] - The background color of the incomplete step indicator.
-/// @prop {Map} indicator-color [color: (contrast-color: ('gray', 400)] - The text color of the incomplete step indicator.
+/// @prop {Map} indicator-color [contrast-color: ('gray', 400)] - The text color of the incomplete step indicator.
 /// @prop {Map} complete-indicator-background [color: ('gray', 900)] - The background color of the completed step indicator.
 /// @prop {Map} complete-indicator-outline [color: ('gray', 900)] - The outline color of the completed step indicator.
 /// @prop {Map} complete-indicator-color [contrast-color: ('gray', 900)] - The color of the completed step indicator.
 /// @prop {Map} complete-step-separator-color [color: ('gray', 900)] - The separator border-color between the completed steps.
-/// @prop {Map} step-hover-background [color: ('gray', 200)] - The background of the step header on hover.
-/// @prop {Map} invalid-step-hover-background [color: ('gray', 200)] - The background of the invalid step header on hover.
-/// @prop {Map} current-step-hover-background [color: ('gray', 200)] - The background of the current step header on hover.
-/// @prop {Map} complete-step-hover-background [color: ('gray', 200)] - The background of the complete step header on hover.
-/// @prop {Map} step-focus-background [color: ('gray', 100)] - The background of the step header on hover.
-/// @prop {Map} invalid-step-focus-background [color: ('gray', 100)] - The background of the invalid step header on hover.
-/// @prop {Map} current-step-focus-background [color: ('gray', 100)] - The background of the current step header on hover.
-/// @prop {Map} complete-step-focus-background [color: ('gray', 100)] - The background of the complete step header on hover.
+/// @prop {Map} step-hover-background [color: ('gray', 100)] - The background of the step header on hover.
+/// @prop {Map} invalid-step-hover-background [color: ('gray', 100)] - The background of the invalid step header on hover.
+/// @prop {Map} invalid-title-color [color: ('error', 700)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 700)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 800)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 700)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 700)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 800)] - The color of the invalid step subtitle on focus.
+/// @prop {Map} invalid-indicator-background [color: ('error', 700)] - The background color of the invalid step indicator.
+/// @prop {Map} invalid-indicator-outline [color: ('error', 700)] - The outline color of the invalid step indicator.
+/// @prop {Map} current-indicator-background [color: ('primary', 800)] - The background color of the current step indicator.
+/// @prop {Map} current-indicator-outline [color: ('primary', 800)] - The outline color of the current step indicator.
+/// @prop {Map} current-step-hover-background [color: ('gray', 100)] - The background of the current step header on hover.
+/// @prop {Map} complete-step-hover-background [color: ('gray', 100)] - The background of the complete step header on hover.
+/// @prop {Map} step-focus-background [color: ('gray', 200)] - The background of the step header on hover.
+/// @prop {Map} invalid-step-focus-background [color: ('gray', 200)] - The background of the invalid step header on hover.
+/// @prop {Map} current-step-focus-background [color: ('gray', 200)] - The background of the current step header on hover.
+/// @prop {Map} complete-step-focus-background [color: ('gray', 200)] - The background of the complete step header on hover.
 /// @prop {Map} disabled-indicator-background [color: ('gray', 200)] - The background color of the disabled step indicator.
 /// @requires {Map} $light-stepper
 $material-stepper: extend(
@@ -390,49 +400,109 @@ $material-stepper: extend(
         step-hover-background: (
             color: (
                 'gray',
-                200,
+                100,
             ),
         ),
         complete-step-hover-background: (
             color: (
                 'gray',
-                200,
+                100,
             ),
         ),
         current-step-hover-background: (
             color: (
                 'gray',
-                200,
+                100,
             ),
         ),
         invalid-step-hover-background: (
             color: (
                 'gray',
-                200,
+                100,
+            ),
+        ),
+        invalid-title-color: (
+            color: (
+                'error',
+                700,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'error',
+                700,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                700,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                700,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-indicator-background: (
+            color: (
+                'error',
+                700,
+            ),
+        ),
+        invalid-indicator-outline: (
+            color: (
+                'error',
+                700,
+            ),
+        ),
+        current-indicator-background: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+        current-indicator-outline: (
+            color: (
+                'primary',
+                800,
             ),
         ),
         step-focus-background: (
             color: (
                 'gray',
-                100,
+                200,
             ),
         ),
         complete-step-focus-background: (
             color: (
                 'gray',
-                100,
+                200,
             ),
         ),
         current-step-focus-background: (
             color: (
                 'gray',
-                100,
+                200,
             ),
         ),
         invalid-step-focus-background: (
             color: (
                 'gray',
-                100,
+                200,
             ),
         ),
         disabled-indicator-background: (
