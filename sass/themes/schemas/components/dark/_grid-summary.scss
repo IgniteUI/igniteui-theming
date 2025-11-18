@@ -9,12 +9,28 @@
 
 /// Generates a dark material grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 500)] - The summaries label color.
+/// @prop {Map} label-hover-color [color: ('primary', 500)] - The summaries hover label color.
 /// @prop {Map} background-color [color: ('gray', 50)] - The summaries background color.
 /// @prop {Map} result-color [contrast-color: ('gray', 50)] - The summaries value/result color.
 /// @requires {Map} $material-grid-summary
 $dark-material-grid-summary: extend(
     $material-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        label-hover-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
         background-color: (
             color: (
                 'gray',
