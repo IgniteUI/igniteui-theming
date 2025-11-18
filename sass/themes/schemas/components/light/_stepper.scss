@@ -638,13 +638,19 @@ $fluent-stepper: extend(
 
 /// Generates a bootstrap stepper schema.
 /// @type {Map}
-/// @prop {Map} indicator-outline [color: ('gray', 300)] - The outline color of the incomplete step indicator.
+/// @prop {Map} indicator-outline [color: ('gray', 400)] - The outline color of the incomplete step indicator.
 /// @prop {Map} disabled-indicator-outline [color: ('gray', 300)] - The outline color of the disabled step indicator.
 /// @prop {Map} complete-indicator-background [color: ('gray', 300)] - The background color of the completed step indicator.
-/// @prop {Map} complete-indicator-outline [color: ('gray', 300)] - The outline color of the completed step indicator.
+/// @prop {Map} complete-indicator-outline [color: ('gray', 400)] - The outline color of the completed step indicator.
 /// @prop {Map} complete-indicator-color [color: ('gray', 300)] - The text color of the completed step indicator.
 /// @prop {String} step-separator-style ['solid'] - The separator border-style of between the steps.
 /// @prop {Map} step-hover-background [color: ('gray', 300, .5)] - The background of the step header on hover.
+/// @prop {Map} invalid-title-color [color: ('error', 800)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 800)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 800)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 800)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 800)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 800)] - The color of the invalid step subtitle on focus.
 /// @prop {Map} invalid-step-hover-background [color: ('gray', 300, .5)] - The background of the invalid step header on hover.
 /// @prop {Map} current-step-hover-background [color: ('gray', 300, .5)] - The background of the current step header on hover.
 /// @prop {Map} complete-step-hover-background [color: ('gray', 300, .5)] - The background of the complete step header on hover.
@@ -684,6 +690,42 @@ $bootstrap-stepper: extend(
                 'gray',
                 300,
                 0.5,
+            ),
+        ),
+        invalid-title-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                800,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                800,
             ),
         ),
         step-focus-background: (

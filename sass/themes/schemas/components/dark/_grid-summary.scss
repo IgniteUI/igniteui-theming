@@ -67,12 +67,20 @@ $dark-fluent-grid-summary: extend(
 
 /// Generates a dark bootstrap grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 200)] - The summaries label color.
 /// @prop {Map} background-color [color: ('gray', 100)] - The summaries background color.
 /// @prop {Map} result-color [contrast-color: ('gray', 100)] - The summaries value/result color.
 /// @requires {Map} $bootstrap-grid-summary
 $dark-bootstrap-grid-summary: extend(
     $bootstrap-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
         background-color: (
             color: (
                 'gray',
