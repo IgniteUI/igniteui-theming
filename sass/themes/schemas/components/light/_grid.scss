@@ -601,7 +601,7 @@ $light-grid: extend(
 
 /// Generates a material grid schema.
 /// @type {Map}
-/// @prop {Map} header-text-color [color: ('gray', 800)] - The table header text color.
+/// @prop {Map} header-text-color [color: ('gray', 800, .8)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('secondary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 100)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('secondary', 50)] - The selected row background color.
@@ -611,6 +611,10 @@ $light-grid: extend(
 /// @prop {Map} row-selected-hover-background [color: ('secondary', 100)] - The selected row hover background.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('secondary', 100)] - The selected row hover text color.
 /// @prop {Map} cell-active-border-color [color: ('secondary', 500)] - The active(focused) cell border color.
+/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
+/// @prop {Map} group-label-column-name-text [color: ('primary', 800)] - The grid group row column name text color.
+/// @prop {Map} group-label-icon [color: ('primary', 800)] - The grid group row icon color.
+/// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @requires {Map} $light-grid
 /// @requires {Map} $default-elevation-grid
 $material-grid: extend(
@@ -621,7 +625,7 @@ $material-grid: extend(
             color: (
                 'gray',
                 800,
-                0.7,
+                0.8,
             ),
         ),
 
@@ -685,6 +689,34 @@ $material-grid: extend(
             color: (
                 'secondary',
                 500,
+            ),
+        ),
+
+        grouparea-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
+        group-label-column-name-text: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+
+        group-label-icon: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                700,
             ),
         ),
         _meta: (

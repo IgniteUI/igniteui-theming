@@ -122,12 +122,19 @@ $fluent-grid-toolbar: extend(
 );
 
 /// Generates a bootstrap grid-toolbar schema.
-/// @prop {Map} border-color [color: ('gray', 100)] - The toolbar border-bottom color.
 /// @type {Map}
+/// @prop {Map} title-text-color [color: ('gray', 600)] - The toolbar title text color.
+/// @prop {Map} border-color [color: ('gray', 100)] - The toolbar border-bottom color.
 /// @requires {Map} $light-grid-toolbar
 $bootstrap-grid-toolbar: extend(
     $light-grid-toolbar,
     (
+        title-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
         border-color: (
             color: (
                 'gray',
@@ -144,7 +151,6 @@ $bootstrap-grid-toolbar: extend(
 /// Generates an indigo grid-toolbar schema.
 /// @type {Map}
 /// @prop {Color} background-color [color: ('surface', 500)] - The toolbar background color.
-/// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The toolbar border-bottom color.
 /// @requires {Map} $light-grid-toolbar
 $indigo-grid-toolbar: extend(
@@ -154,13 +160,6 @@ $indigo-grid-toolbar: extend(
             color: (
                 'surface',
                 500,
-            ),
-        ),
-
-        title-text-color: (
-            color: (
-                'gray',
-                700,
             ),
         ),
 
