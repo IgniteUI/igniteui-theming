@@ -15,10 +15,10 @@
 /// @prop {Map} invalid-step-hover-background [color: ('gray', 100, .3)] - The background of the invalid step header on hover.
 /// @prop {Map} current-step-hover-background [color: ('gray', 100, .3)] - The background of the current step header on hover.
 /// @prop {Map} complete-step-hover-background [color: ('gray', 100, .3)] - The background of the complete step header on hover.
-/// @prop {Map} step-focus-background [color: ('gray', 100, .5)] - The background of the step header on hover.
-/// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .5)] - The background of the invalid step header on hover.
-/// @prop {Map} current-step-focus-background [color: ('gray', 100, .5)] - The background of the current step header on hover.
-/// @prop {Map} complete-step-focus-background [color: ('gray', 100, .5)] - The background of the complete step header on hover.
+/// @prop {Map} step-focus-background [color: ('gray', 100, .5)] - The background of the step header on focus.
+/// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .5)] - The background of the invalid step header on focus.
+/// @prop {Map} current-step-focus-background [color: ('gray', 100, .5)] - The background of the current step header on focus.
+/// @prop {Map} complete-step-focus-background [color: ('gray', 100, .5)] - The background of the complete step header on focus.
 $base-stepper: (
     step-hover-background: (
         color: (
@@ -92,12 +92,82 @@ $base-stepper: (
 
 /// Generates a dark material stepper schema.
 /// @type {Map}
+/// @prop {Map} current-indicator-color [contrast-color: ('gray', 50)] - The color of the current step indicator.
+/// @prop {Map} invalid-indicator-color [contrast-color: ('gray', 900)] - The color of the invalid step indicator.
+/// @prop {Map} invalid-indicator-background [color: ('error', 500)] - The background color of the invalid step indicator.
+/// @prop {Map} invalid-indicator-outline [color: ('error', 500)] - The outline color of the invalid step indicator.
+/// @prop {Map} invalid-title-color [color: ('error', 500)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 500)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 300)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 500)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 500)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 300)] - The color of the invalid step subtitle on focus.
 /// @requires $material-stepper
 /// @requires $base-stepper
 $dark-material-stepper: extend(
     $material-stepper,
     $base-stepper,
     (
+        current-indicator-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+        invalid-indicator-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+        invalid-indicator-background: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-indicator-outline: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-title-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -108,6 +178,16 @@ $dark-material-stepper: extend(
 /// Generates a dark fluent stepper schema
 /// @type {Map}
 /// @prop {Map} complete-indicator-background [color: ('gray', 100)] - The background color of the completed step indicator.
+/// @prop {Map} step-focus-background [color: ('gray', 100, .4)] - The background of the step header on focus.
+/// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .4)] - The background of the invalid step header on focus.
+/// @prop {Map} current-step-focus-background [color: ('gray', 100, .4)] - The background of the current step header on focus.
+/// @prop {Map} complete-step-focus-background [color: ('gray', 100, .4)] - The background of the complete step header on focus.
+/// @prop {Map} invalid-title-color [color: ('error', 50)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 50)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 50)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 700)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 50)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 50)] - The color of the invalid step subtitle on focus.
 /// @requires $fluent-stepper
 /// @requires $base-stepper
 $dark-fluent-stepper: extend(
@@ -120,6 +200,70 @@ $dark-fluent-stepper: extend(
                 100,
             ),
         ),
+        step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        complete-step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        current-step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        invalid-step-focus-background: (
+            color: (
+                'gray',
+                100,
+                0.4,
+            ),
+        ),
+        invalid-title-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-title-hover-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-title-focus-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                50,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -129,9 +273,14 @@ $dark-fluent-stepper: extend(
 
 /// Generates a dark bootstrap stepper schema.
 /// @type {Map}
-/// @prop {Map} indicator-outline [color: (color: ('gray', 200)] - The outline color of the incomplete step indicator.
-/// @prop {Map} disabled-indicator-outline [color: ('gray', 300)] - The outline color of the disabled step indicator.
 /// @prop {Map} step-separator-color [color: ('gray', 100)] - The separator border-color of between the steps.
+/// @prop {Map} invalid-title-color [color: ('error', 400)] - The color of the invalid step title.
+/// @prop {Map} invalid-title-hover-color [color: ('error', 400)] - The color of the invalid step title on hover.
+/// @prop {Map} invalid-title-focus-color [color: ('error', 300)] - The color of the invalid step title on focus.
+/// @prop {Map} invalid-subtitle-color [color: ('error', 400)] - The text of the invalid step subtitle.
+/// @prop {Map} invalid-subtitle-hover-color [color: ('error', 400)] - The color of the invalid step subtitle on hover.
+/// @prop {Map} invalid-subtitle-focus-color [color: ('error', 300)] - The color of the invalid step subtitle on focus.
+/// @prop {Map} invalid-indicator-color [contrast-color: ('gray', 900)] - The color of the invalid step indicator.
 /// @requires $bootstrap-stepper
 /// @requires $base-stepper
 $dark-bootstrap-stepper: extend(
@@ -145,19 +294,55 @@ $dark-bootstrap-stepper: extend(
             ),
         ),
 
-        indicator-outline: (
+        invalid-title-color: (
             color: (
-                'gray',
-                200,
+                'error',
+                400,
             ),
         ),
 
-        disabled-indicator-outline: (
+        invalid-title-hover-color: (
             color: (
-                'gray',
+                'error',
+                400,
+            ),
+        ),
+
+        invalid-title-focus-color: (
+            color: (
+                'error',
                 300,
             ),
         ),
+
+        invalid-subtitle-color: (
+            color: (
+                'error',
+                400,
+            ),
+        ),
+
+        invalid-subtitle-hover-color: (
+            color: (
+                'error',
+                400,
+            ),
+        ),
+
+        invalid-subtitle-focus-color: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
+
+        invalid-indicator-color: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',

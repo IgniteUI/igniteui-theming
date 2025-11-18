@@ -104,19 +104,45 @@ $base-dark-button-group: (
 
 /// Generates a dark material button-group schema based on a mix of $light-button-group and $base-dark-button-group
 /// @type {Map}
-/// @prop {Map} item-focused-hover-background [color: ('gray', 500, .3)] - The focused & hover background color for button group items.
-/// @prop {Map} item-selected-focus-hover-background [color: ('gray', 400, .8)] - The background color for a selected item in focused & hover state in the button group.
+/// @prop {Map} item-selected-background [color: ('gray', 100)] - The background color for a selected item in the button group.
+/// @prop {Map} item-focused-hover-background [color: ('gray', 400, .5)] - The focused & hover background color for button group items.
+/// @prop {Map} item-selected-hover-background [color: ('gray', 300, .4)] - The background color for a selected item in hover state in the button group.
+/// @prop {Map} item-selected-focus-background [color: ('gray', 700, .28)] - The background color for a selected item in focus state in the button group.
+/// @prop {Map} item-selected-focus-hover-background [color: ('gray', 400, .5)] - The background color for a selected item in focused & hover state in the button group.
 /// @requires $material-button-group
 /// @requires $base-dark-button-group
 $dark-material-button-group: extend(
     $material-button-group,
     $base-dark-button-group,
     (
+        item-selected-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         item-focused-hover-background: (
             color: (
                 'gray',
-                500,
-                0.3,
+                400,
+                0.5,
+            ),
+        ),
+
+        item-selected-hover-background: (
+            color: (
+                'gray',
+                300,
+                0.4,
+            ),
+        ),
+
+        item-selected-focus-background: (
+            color: (
+                'gray',
+                700,
+                0.28,
             ),
         ),
 
@@ -124,7 +150,7 @@ $dark-material-button-group: extend(
             color: (
                 'gray',
                 400,
-                0.8,
+                0.5,
             ),
         ),
         _meta: (

@@ -53,6 +53,7 @@ $dark-fluent-expansion-panel: extend(
 /// Generates a dark bootstrap expansion panel schema based on a mix of $bootstrap-expansion-panel and $base-dark-expansion-panel.
 /// @type {Map}
 /// @prop {Map} header-background [color: ('gray', 50)] - The panel header background color.
+/// @prop {Map} header-description-color [color: ('gray', 600)] - The panel header description text color.
 /// @prop {Map} body-background [color: ('gray', 50)] - The panel body background color.
 /// @requires $bootstrap-expansion-panel
 /// @requires $base-dark-expansion-panel
@@ -64,6 +65,13 @@ $dark-bootstrap-expansion-panel: extend(
             color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        header-description-color: (
+            color: (
+                'gray',
+                600,
             ),
         ),
 

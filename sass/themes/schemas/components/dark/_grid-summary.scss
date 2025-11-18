@@ -9,12 +9,28 @@
 
 /// Generates a dark material grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 500)] - The summaries label color.
+/// @prop {Map} label-hover-color [color: ('primary', 500)] - The summaries hover label color.
 /// @prop {Map} background-color [color: ('gray', 50)] - The summaries background color.
 /// @prop {Map} result-color [contrast-color: ('gray', 50)] - The summaries value/result color.
 /// @requires {Map} $material-grid-summary
 $dark-material-grid-summary: extend(
     $material-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        label-hover-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
         background-color: (
             color: (
                 'gray',
@@ -38,10 +54,18 @@ $dark-material-grid-summary: extend(
 
 /// Generates a dark fluent grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 300)] - The summaries label color.
 /// @requires {Map} $fluent-grid-summary
 $dark-fluent-grid-summary: extend(
     $fluent-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -51,12 +75,20 @@ $dark-fluent-grid-summary: extend(
 
 /// Generates a dark bootstrap grid-summary schema.
 /// @type {Map}
+/// @prop {Map} label-color [color: ('primary', 200)] - The summaries label color.
 /// @prop {Map} background-color [color: ('gray', 100)] - The summaries background color.
 /// @prop {Map} result-color [contrast-color: ('gray', 100)] - The summaries value/result color.
 /// @requires {Map} $bootstrap-grid-summary
 $dark-bootstrap-grid-summary: extend(
     $bootstrap-grid-summary,
     (
+        label-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
         background-color: (
             color: (
                 'gray',
