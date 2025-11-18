@@ -81,6 +81,7 @@ $dark-fluent-list: extend(
 /// @prop {Map} item-background-active [color: ('gray', 100)] - The active list item background color.
 /// @prop {Map} item-background-selected [color: ('gray', 100)] - The selected list item background color.
 /// @prop {Map} header-background [color: ('gray', 50)] - The list header background color.
+/// @prop {Map} header-text-color [color: ('secondary', 400)] - The list header text color.
 /// @requires $bootstrap-list
 $dark-bootstrap-list: extend(
     $bootstrap-list,
@@ -124,6 +125,13 @@ $dark-bootstrap-list: extend(
             color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        header-text-color: (
+            color: (
+                'secondary',
+                400,
             ),
         ),
         _meta: (

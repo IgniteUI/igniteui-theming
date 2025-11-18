@@ -929,6 +929,9 @@ $fluent-grid: extend(
 /// Generates a bootstrap grid schema.
 /// @type {Map}
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
+/// @prop {Map} group-label-icon [color: ('primary', 600)] - The grid group row icon color.
+/// @prop {Map} group-label-column-name-text [color: ('primary', 600)] - The grid group row column name text color.
+/// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @prop {Map} header-background [color: 'surface'] - The table header background color.
 /// @prop {Map} header-text-color [contrast-color: 'surface'] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 50)] - The table header background color when selected (ex. column selection).
@@ -946,6 +949,27 @@ $fluent-grid: extend(
 $bootstrap-grid: extend(
     $light-grid,
     (
+        group-count-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        group-label-icon: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
+        group-label-column-name-text: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
         grouparea-background: (
             color: 'surface',
         ),
