@@ -601,7 +601,7 @@ $light-grid: extend(
 
 /// Generates a material grid schema.
 /// @type {Map}
-/// @prop {Map} header-text-color [color: ('gray', 800)] - The table header text color.
+/// @prop {Map} header-text-color [color: ('gray', 800, .8)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('secondary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 100)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('secondary', 50)] - The selected row background color.
@@ -611,6 +611,10 @@ $light-grid: extend(
 /// @prop {Map} row-selected-hover-background [color: ('secondary', 100)] - The selected row hover background.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('secondary', 100)] - The selected row hover text color.
 /// @prop {Map} cell-active-border-color [color: ('secondary', 500)] - The active(focused) cell border color.
+/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
+/// @prop {Map} group-label-column-name-text [color: ('primary', 800)] - The grid group row column name text color.
+/// @prop {Map} group-label-icon [color: ('primary', 800)] - The grid group row icon color.
+/// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @requires {Map} $light-grid
 /// @requires {Map} $default-elevation-grid
 $material-grid: extend(
@@ -621,7 +625,7 @@ $material-grid: extend(
             color: (
                 'gray',
                 800,
-                0.7,
+                0.8,
             ),
         ),
 
@@ -687,6 +691,34 @@ $material-grid: extend(
                 500,
             ),
         ),
+
+        grouparea-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
+        group-label-column-name-text: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+
+        group-label-icon: (
+            color: (
+                'primary',
+                800,
+            ),
+        ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'light',
@@ -708,8 +740,10 @@ $material-grid: extend(
 /// @prop {Map} pinned-border-color [color: ('gray', 200)] - The color of the pinned border.
 /// @prop {Map} cell-active-border-color [color: ('primary', 100)] - The active(focused) cell border color.
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
+/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 50)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
+/// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @prop {Map} filtering-header-text-color [color: ('gray', 900)] - The text color of the filtered column header.
 /// @prop {Map} row-ghost-background [color: 'surface'] - The background color of the dragged row.
 /// @prop {number} grid-elevation [0] - The elevation level, between 0-24, to be used for the grid.
@@ -804,6 +838,13 @@ $fluent-grid: extend(
             color: 'surface',
         ),
 
+        grouparea-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         group-row-background: (
             color: (
                 'gray',
@@ -815,6 +856,13 @@ $fluent-grid: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                700,
             ),
         ),
 
@@ -881,6 +929,9 @@ $fluent-grid: extend(
 /// Generates a bootstrap grid schema.
 /// @type {Map}
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
+/// @prop {Map} group-label-icon [color: ('primary', 600)] - The grid group row icon color.
+/// @prop {Map} group-label-column-name-text [color: ('primary', 600)] - The grid group row column name text color.
+/// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @prop {Map} header-background [color: 'surface'] - The table header background color.
 /// @prop {Map} header-text-color [contrast-color: 'surface'] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 50)] - The table header background color when selected (ex. column selection).
@@ -898,6 +949,27 @@ $fluent-grid: extend(
 $bootstrap-grid: extend(
     $light-grid,
     (
+        group-count-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        group-label-icon: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
+        group-label-column-name-text: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+
         grouparea-background: (
             color: 'surface',
         ),

@@ -9,10 +9,24 @@
 
 /// Generates a dark material bottom-nav schema.
 /// @type {Map}
+/// @prop {Map} icon-selected-color [color: ('primary', 500)] - The icon color used for the selected item.
+/// @prop {Map} label-selected-color [color: ('primary', 500)] - The label color used for the selected item.
 /// @requires $material-bottom-nav
 $dark-material-bottom-nav: extend(
     $material-bottom-nav,
     (
+        icon-selected-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+        label-selected-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
         _meta: (
             theme: 'material',
             variant: 'dark',
@@ -22,10 +36,24 @@ $dark-material-bottom-nav: extend(
 
 /// Generates a dark fluent bottom-nav schema.
 /// @type {Map}
+/// @prop {Map} label-selected-color [color: ('primary', 300)] - The label color used for the selected item.
+/// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
 /// @requires $fluent-bottom-nav
 $dark-fluent-bottom-nav: extend(
     $fluent-bottom-nav,
     (
+        label-selected-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-selected-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -35,10 +63,26 @@ $dark-fluent-bottom-nav: extend(
 
 /// Generates a dark bootstrap bottom-nav schema.
 /// @type {Map}
+/// @prop {Map} label-selected-color [color: ('primary', 300)] - The label color used for the selected item.
+/// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
 /// @requires $bootstrap-bottom-nav
 $dark-bootstrap-bottom-nav: extend(
     $bootstrap-bottom-nav,
     (
+        label-selected-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
+        icon-selected-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
             variant: 'dark',

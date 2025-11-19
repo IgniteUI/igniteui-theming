@@ -52,12 +52,20 @@ $dark-material-list: extend(
 
 /// Generates a dark fluent list schema.
 /// @type {Map}
+/// @prop {Map} header-text-color [color: ('secondary', 500)] - The list header text color.
 /// @requires $fluent-list
 /// @requires $base-dark-list
 $dark-fluent-list: extend(
     $fluent-list,
     $base-dark-list,
     (
+        header-text-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -73,6 +81,7 @@ $dark-fluent-list: extend(
 /// @prop {Map} item-background-active [color: ('gray', 100)] - The active list item background color.
 /// @prop {Map} item-background-selected [color: ('gray', 100)] - The selected list item background color.
 /// @prop {Map} header-background [color: ('gray', 50)] - The list header background color.
+/// @prop {Map} header-text-color [color: ('secondary', 400)] - The list header text color.
 /// @requires $bootstrap-list
 $dark-bootstrap-list: extend(
     $bootstrap-list,
@@ -116,6 +125,13 @@ $dark-bootstrap-list: extend(
             color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        header-text-color: (
+            color: (
+                'secondary',
+                400,
             ),
         ),
         _meta: (

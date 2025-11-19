@@ -189,6 +189,11 @@ $base-dark-grid: (
 
 /// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
 /// @type {Map}
+/// @prop {Map} header-text-color [color: ('gray', 800, .7)] - The table header text color.
+/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
+/// @prop {Map} group-label-column-name-text [color: ('primary', 500)] - The grid group row column name text color.
+/// @prop {Map} group-label-icon [color: ('primary', 500)] - The grid group row icon color.
+/// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
 /// @prop {Map} summaries-patch-background [color: ('gray', 50)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires $material-grid
 /// @requires $base-dark-grid
@@ -196,6 +201,42 @@ $dark-material-grid: extend(
     $material-grid,
     $base-dark-grid,
     (
+        header-text-color: (
+            color: (
+                'gray',
+                800,
+                0.7,
+            ),
+        ),
+
+        grouparea-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+
+        group-label-column-name-text: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        group-label-icon: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         summaries-patch-background: (
             color: (
                 'gray',
@@ -211,6 +252,7 @@ $dark-material-grid: extend(
 );
 
 /// Generates a dark fluent grid schema based on a mix of $fluent-grid and $base-dark-grid.
+/// @type {Map}
 /// @prop {Map} header-selected-background [color: ('gray', 200)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray', 200)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('gray', 100)] - The selected row background color.
@@ -218,8 +260,9 @@ $dark-material-grid: extend(
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 200)] - The selected row hover text color.
 /// @prop {Map} cell-selected-within-background [color: ('gray', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 200)] - The color of the selected cell inside a selected row/column.
+/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 100, .5)] - The grid group row background color.
-///
+/// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
 /// @requires $fluent-grid
 /// @requires $base-dark-grid
 $dark-fluent-grid: extend(
@@ -283,6 +326,13 @@ $dark-fluent-grid: extend(
             ),
         ),
 
+        grouparea-color: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+
         group-row-background: (
             color: (
                 'gray',
@@ -290,6 +340,14 @@ $dark-fluent-grid: extend(
                 0.5,
             ),
         ),
+
+        group-count-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         _meta: (
             theme: 'fluent',
             variant: 'dark',
@@ -299,6 +357,9 @@ $dark-fluent-grid: extend(
 
 /// Generates a dark bootstrap grid schema based on a mix of $bootstrap-grid and $base-dark-grid.
 /// @type {Map}
+/// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
+/// @prop {Map} group-label-icon [color: ('primary', 300)] - The grid group row icon color.
+/// @prop {Map} group-label-column-name-text [color: ('primary', 300)] - The grid group row column name text color.
 /// @prop {Map} group-row-background [color: 'surface'] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: 'surface'] - The drop area background on drop color.
 /// @prop {Map} header-background [color: ('gray', 50)] - The table header background color.
@@ -313,6 +374,27 @@ $dark-bootstrap-grid: extend(
     $bootstrap-grid,
     $base-dark-grid,
     (
+        group-count-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
+        group-label-icon: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
+        group-label-column-name-text: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+
         group-row-background: (
             color: 'surface',
         ),
