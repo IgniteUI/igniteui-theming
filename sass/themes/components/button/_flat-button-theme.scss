@@ -39,10 +39,6 @@
 /// @param {Color} $focus-visible-border-color [null] - The focus-visible border color of the button.
 /// @param {Color} $active-border-color [null] - The active border color of the button.
 /// @param {Color} $shadow-color [null] - The shadow color of the button.
-/// @param {Color} $resting-shadow [null] - The shadow of the button in its idle state.
-/// @param {Color} $hover-shadow [null] - The shadow of the button in its hover state.
-/// @param {Color} $focus-shadow [null] - The shadow of the button in its focus state.
-/// @param {Color} $active-shadow [null] - The shadow of the button in its focus state.
 /// @param {Color} $disabled-background [null] - The disabled background color of the button.
 /// @param {Color} $disabled-foreground [null] - The disabled text color of the button.
 /// @param {Color} $disabled-icon-color [null] - The disabled icon color of the button.
@@ -88,11 +84,6 @@
     $active-border-color: null,
 
     $shadow-color: null,
-
-    $resting-shadow: null,
-    $hover-shadow: null,
-    $focus-shadow: null,
-    $active-shadow: null,
 
     $disabled-background: null,
     $disabled-foreground: null,
@@ -283,26 +274,6 @@
         }
     }
 
-    @if not($resting-shadow) {
-        $resting-elevation: map.get($button-schema, 'resting-elevation');
-        $resting-shadow: elevation($resting-elevation);
-    }
-
-    @if not($hover-shadow) {
-        $hover-elevation: map.get($button-schema, 'hover-elevation');
-        $hover-shadow: elevation($hover-elevation);
-    }
-
-    @if not($focus-shadow) {
-        $focus-elevation: map.get($button-schema, 'focus-elevation');
-        $focus-shadow: elevation($focus-elevation);
-    }
-
-    @if not($active-shadow) {
-        $active-elevation: map.get($button-schema, 'active-elevation');
-        $active-shadow: elevation($active-elevation);
-    }
-
     @return extend(
         $theme,
         (
@@ -329,10 +300,6 @@
             focus-visible-border-color: $focus-visible-border-color,
             active-border-color: $active-border-color,
             shadow-color: $shadow-color,
-            resting-elevation: $resting-shadow,
-            hover-elevation: $hover-shadow,
-            focus-elevation: $focus-shadow,
-            active-elevation: $active-shadow,
             disabled-background: $disabled-background,
             disabled-foreground: $disabled-foreground,
             disabled-icon-color: $disabled-icon-color,
