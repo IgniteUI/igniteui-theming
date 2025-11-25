@@ -35,12 +35,10 @@ $material-overlay: extend(
 
 /// Generates a fluent overlay schema.
 /// @type {Map}
-/// @prop {Color} background-color [rgba(255, 255, 255, .4)] - The background color used for modal overlays.
 /// @requires {Map} $light-overlay
 $fluent-overlay: extend(
     $light-overlay,
     (
-        background-color: rgb(255 255 255 / 0.4),
         _meta: (
             theme: 'fluent',
             variant: 'light',
