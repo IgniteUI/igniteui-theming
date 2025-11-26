@@ -16,7 +16,6 @@
 /// @prop {Map} subtitle-color [color: ('gray', 700)] - The text color of the step subtitle.
 /// @prop {Map} subtitle-hover-color [color: ('gray', 700)] - The text color of the step subtitle on hover.
 /// @prop {Map} subtitle-focus-color [color: ('gray', 700)] - The text color of the step subtitle on focus.
-/// @prop {Map} indicator-color [color: ('primary', 500)] - The text color of the incomplete step indicator.
 /// @prop {Color} indicator-background [transparent] - The background color of the incomplete step indicator.
 /// @prop {Map} indicator-outline [color: ('gray', 400)] - The outline color of the incomplete step indicator.
 /// @prop {Color} invalid-step-background [transparent] - The background of the invalid step header.
@@ -73,12 +72,6 @@ $light-stepper: (
         color: (
             'gray',
             300,
-        ),
-    ),
-    indicator-color: (
-        color: (
-            'primary',
-            500,
         ),
     ),
     title-color: (
@@ -638,6 +631,7 @@ $fluent-stepper: extend(
 
 /// Generates a bootstrap stepper schema.
 /// @type {Map}
+/// @prop {Map} indicator-color [color: ('primary', 600)] - The text color of the incomplete step indicator.
 /// @prop {Map} indicator-outline [color: ('gray', 400)] - The outline color of the incomplete step indicator.
 /// @prop {Map} disabled-indicator-outline [color: ('gray', 300)] - The outline color of the disabled step indicator.
 /// @prop {Map} complete-indicator-background [color: ('gray', 300)] - The background color of the completed step indicator.
@@ -664,6 +658,18 @@ $fluent-stepper: extend(
 $bootstrap-stepper: extend(
     $light-stepper,
     (
+        indicator-color: (
+            color: (
+                'primary',
+                600,
+            ),
+        ),
+        indicator-outline: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
         step-hover-background: (
             color: (
                 'gray',
@@ -756,13 +762,6 @@ $bootstrap-stepper: extend(
                 0.5,
             ),
         ),
-        indicator-outline: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-
         // Complete
         complete-indicator-background:
             (

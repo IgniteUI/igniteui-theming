@@ -273,6 +273,7 @@ $dark-fluent-stepper: extend(
 
 /// Generates a dark bootstrap stepper schema.
 /// @type {Map}
+/// @prop {Map} indicator-color [color: ('primary', 300)] - The text color of the incomplete step indicator.
 /// @prop {Map} step-separator-color [color: ('gray', 100)] - The separator border-color of between the steps.
 /// @prop {Map} invalid-title-color [color: ('error', 400)] - The color of the invalid step title.
 /// @prop {Map} invalid-title-hover-color [color: ('error', 400)] - The color of the invalid step title on hover.
@@ -287,6 +288,12 @@ $dark-bootstrap-stepper: extend(
     $bootstrap-stepper,
     $base-stepper,
     (
+        indicator-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
         step-separator-color: (
             color: (
                 'gray',
