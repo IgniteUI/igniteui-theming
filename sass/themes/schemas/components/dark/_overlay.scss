@@ -22,12 +22,10 @@ $dark-material-overlay: extend(
 
 /// Generates a dark fluent overlay schema.
 /// @type {Map}
-/// @property {Color} background-color [rgba(0, 0, 0, .4)] - The background color used for modal overlays.
 /// @requires $fluent-overlay
 $dark-fluent-overlay: extend(
     $fluent-overlay,
     (
-        background-color: rgb(0 0 0 / 0.4),
         _meta: (
             theme: 'fluent',
             variant: 'dark',
