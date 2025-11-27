@@ -14,7 +14,7 @@
 /// @prop {Map} title-color [color: ('gray', 900)] - The dialog title text color.
 /// @prop {Map} message-color [color: ('gray', 600)] - The dialog message text color.
 /// @prop {Color} border-color [transparent] - The border color for dialog component.
-/// @prop {Map} backdrop [color: ('gray', 50, .54)] - The dialog backdrop color.
+/// @prop {Map} backdrop [color: ('gray', 500, .54)] - The dialog backdrop color.
 /// @prop {Number} elevation [24] - The elevation level, between 0-24, to be used for the dialog.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(36px))] - The border radius used for dialog.
 /// @prop {Number} default-size [2] - The default size used for the dialog component.
@@ -102,7 +102,6 @@ $material-dialog: extend(
 
 /// Generates a fluent dialog schema.
 /// @type {Map}
-/// @prop {Map} backdrop [color: ('gray', 900, .4)] - The dialog backdrop color.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(36px))] - The border radius used for dialog.
 /// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
 /// @prop {Map} typography [
@@ -113,14 +112,6 @@ $material-dialog: extend(
 $fluent-dialog: extend(
     $light-dialog,
     (
-        backdrop: (
-            color: (
-                'gray',
-                900,
-                0.4,
-            ),
-        ),
-
         border-radius: (
             border-radius: (
                 rem(2px),
