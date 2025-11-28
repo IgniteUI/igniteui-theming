@@ -29,6 +29,7 @@
 /// @prop {Map} cell-selected-within-background [color: ('secondary', 'A400')] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('secondary', 'A400')] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} grouparea-background [color: ('gray', 50)] - The grid group area background color.
+/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 50)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 $base-dark-grid: (
@@ -172,6 +173,13 @@ $base-dark-grid: (
         ),
     ),
 
+    grouparea-color: (
+        color: (
+            'gray',
+            500,
+        ),
+    ),
+
     group-row-background: (
         color: (
             'gray',
@@ -190,7 +198,6 @@ $base-dark-grid: (
 /// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
 /// @type {Map}
 /// @prop {Map} header-text-color [color: ('gray', 800, .7)] - The table header text color.
-/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} group-label-column-name-text [color: ('primary', 500)] - The grid group row column name text color.
 /// @prop {Map} group-label-icon [color: ('primary', 500)] - The grid group row icon color.
 /// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
@@ -206,13 +213,6 @@ $dark-material-grid: extend(
                 'gray',
                 800,
                 0.7,
-            ),
-        ),
-
-        grouparea-color: (
-            color: (
-                'gray',
-                500,
             ),
         ),
 
@@ -260,7 +260,6 @@ $dark-material-grid: extend(
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 200)] - The selected row hover text color.
 /// @prop {Map} cell-selected-within-background [color: ('gray', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 200)] - The color of the selected cell inside a selected row/column.
-/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 100, .5)] - The grid group row background color.
 /// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
 /// @requires $fluent-grid
@@ -326,13 +325,6 @@ $dark-fluent-grid: extend(
             ),
         ),
 
-        grouparea-color: (
-            color: (
-                'gray',
-                500,
-            ),
-        ),
-
         group-row-background: (
             color: (
                 'gray',
@@ -366,7 +358,6 @@ $dark-fluent-grid: extend(
 /// @prop {Map} content-background [color: ('gray', 50)] - The table body background color.
 /// @prop {Map} drop-area-background [color: ('gray', 100, .5)] - The drop area background color.
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
-/// @prop {Map} grouparea-color [contrast-color: 'surface'] - The grid group area color.
 /// @prop {Map} summaries-patch-background [color: ('gray', 100)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires $bootstrap-grid
 /// @requires $base-dark-grid
