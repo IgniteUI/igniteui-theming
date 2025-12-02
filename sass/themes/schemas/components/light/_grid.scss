@@ -49,7 +49,7 @@
 /// @prop {Map} resize-line-color [color: ('secondary', 500)] - The table header resize line color.
 /// @prop {Map} drop-indicator-color [color: ('secondary', 500)] - The color of the drop indicator.
 /// @prop {Map} grouparea-background [color: ('gray', 100)] - The grid group area background color.
-/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
+/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 100)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 200)] - The drop area background on drop color.
 /// @prop {Map} active-expand-icon-color [color: ('gray', 500)] - The drop area background on drop color.
@@ -97,7 +97,7 @@ $light-grid: extend(
         grouparea-color: (
             color: (
                 'gray',
-                500,
+                600,
             ),
         ),
 
@@ -611,7 +611,6 @@ $light-grid: extend(
 /// @prop {Map} row-selected-hover-background [color: ('secondary', 100)] - The selected row hover background.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('secondary', 100)] - The selected row hover text color.
 /// @prop {Map} cell-active-border-color [color: ('secondary', 500)] - The active(focused) cell border color.
-/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
 /// @prop {Map} group-label-column-name-text [color: ('primary', 800)] - The grid group row column name text color.
 /// @prop {Map} group-label-icon [color: ('primary', 800)] - The grid group row icon color.
 /// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
@@ -692,13 +691,6 @@ $material-grid: extend(
             ),
         ),
 
-        grouparea-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
         group-label-column-name-text: (
             color: (
                 'primary',
@@ -740,7 +732,6 @@ $material-grid: extend(
 /// @prop {Map} pinned-border-color [color: ('gray', 200)] - The color of the pinned border.
 /// @prop {Map} cell-active-border-color [color: ('primary', 100)] - The active(focused) cell border color.
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
-/// @prop {Map} grouparea-color [color: ('gray', 600)] - The grid group area color.
 /// @prop {Map} group-row-background [color: ('gray', 50)] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
@@ -836,13 +827,6 @@ $fluent-grid: extend(
 
         grouparea-background: (
             color: 'surface',
-        ),
-
-        grouparea-color: (
-            color: (
-                'gray',
-                600,
-            ),
         ),
 
         group-row-background: (
@@ -1127,6 +1111,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} cell-editing-background [color: ('gray' 200)] - The background for the cell in editing mode.
 /// @prop {Map} row-selected-hover-text-color [color: ('gray', 900)] - The selected row hover text color.
 /// @prop {Map} grouparea-background [color: ('surface', 500)] - The grid group area background color.
+/// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} drop-area-background [color: ('gray', 200)] - The drop area background color.
 /// @prop {Map} row-hover-text-color [color: ('gray', 900)] - The hover row text color.
 /// @prop {Map} row-selected-text-color [color: ('gray', 900)] - The selected row text color.
@@ -1429,6 +1414,13 @@ $indigo-grid: extend(
         grouparea-background: (
             color: (
                 'surface',
+                500,
+            ),
+        ),
+
+        grouparea-color: (
+            color: (
+                'gray',
                 500,
             ),
         ),
