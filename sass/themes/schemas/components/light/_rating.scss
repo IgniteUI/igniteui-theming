@@ -165,8 +165,8 @@ $bootstrap-rating: extend(
 /// @type {Map}
 /// @prop {Map} label-color [color: ('gray', 800)] - sets the color for the label.
 /// @prop {Map} value-label [color: ('gray', 800)] - sets the color for the value label.
-/// @prop {Map} symbol-empty-color [color: ('gray', 500)] - sets the idle color for the symbol when it is a plane text.
-/// @prop {Map} symbol-full-color [color: ('warn', 300)] - sets the color in selected state for the symbol when it is a plane text.
+/// @prop {Map} symbol-empty-color [color: ('gray', 600)] - sets the idle color for the symbol when it is a plane text.
+/// @prop {Map} symbol-full-color [color: ('warn', 600)] - sets the color in selected state for the symbol when it is a plane text.
 /// @prop {Map} disabled-label-color [color: ('gray', 900, .2)] - sets the color for the label in disabled state.
 /// @prop {Map} disabled-value-label [color: ('gray', 900, .2)] - sets the color for the value in disabled state.
 /// @prop {Map} disabled-empty-symbol-color [color: ('gray', 500, .4)] - sets the idle color for the symbol in disabled state when it is a plane text.
@@ -191,13 +191,13 @@ $indigo-rating: extend(
         symbol-empty-color: (
             color: (
                 'gray',
-                500,
+                600,
             ),
         ),
         symbol-full-color: (
             color: (
                 'warn',
-                300,
+                600,
             ),
         ),
         disabled-label-color: (
