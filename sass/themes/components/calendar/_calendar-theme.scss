@@ -358,7 +358,7 @@
     $name: #{config.variable-prefix() + '-' + 'calendar'};
     $selector: (
         #{config.element-prefix() + '-' + 'calendar'},
-        #{config.element-prefix() + '-' + 'date-picker'},
+        #{'.' + config.element-prefix() + '-' + 'date-picker'},
         #{config.element-prefix() + '-' + 'month-picker'},
         '.igx-days-view--standalone',
         '.igx-calendar-view--standalone'
