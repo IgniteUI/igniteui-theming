@@ -187,8 +187,7 @@
         $themes: map.merge(
             $themes,
             (
-                $_name:
-                    extend(
+                $_name: extend(
                         digest-schema($_schema),
                         (
                             name: $name,
