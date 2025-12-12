@@ -1,0 +1,680 @@
+# Ignite UI Theming MCP Server - Implementation Plan
+
+## Executive Summary
+
+This document outlines the architecture and implementation plan for a **goals-oriented Model Context Protocol (MCP) server** for the Ignite UI Theming framework. The server will enable AI coding assistants and design tools (including integrations with tools like the Figma MCP server) to generate professional, production-ready theming code in both Sass and CSS formats.
+
+### Goals-Oriented Philosophy
+
+Unlike API-based MCP servers that simply expose functions, this server is designed around **user goals**:
+
+| API-Based Approach                           | Goals-Oriented Approach                                    |
+| -------------------------------------------- | ---------------------------------------------------------- |
+| `createPalette(primary, secondary, surface)` | "Create a dark theme for a fintech app with blue branding" |
+| `setTypography(font, scale)`                 | "Set up modern, accessible typography for a mobile app"    |
+| `getElevation(level)`                        | "Make this card feel elevated and interactive"             |
+
+The server should understand context, make smart defaults, and guide users toward best practices.
+
+---
+
+## Architecture Overview
+
+### Technology Stack
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     MCP Server (TypeScript)                 │
+├─────────────────────────────────────────────────────────────┤
+│  Transport: STDIO (local) / Streamable HTTP (remote)        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │   Tools     │  │  Resources  │  │      Prompts        │  │
+│  │             │  │             │  │                     │  │
+│  │ • Theme     │  │ • Schemas   │  │ • Theme Creation    │  │
+│  │   Generator │  │ • Presets   │  │ • Color Selection   │  │
+│  │ • Palette   │  │ • Component │  │ • Typography Setup  │  │
+│  │   Creator   │  │   Catalog   │  │ • Troubleshooting   │  │
+│  │ • Validator │  │ • Examples  │  │                     │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│              Core Services Layer                            │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │ • SassGenerator - Generates valid Sass code          │   │
+│  │ • CssGenerator  - Generates CSS custom properties    │   │
+│  │ • Validator     - Validates via dart-sass (optional) │   │
+│  │ • SchemaEngine  - Processes theme schemas            │   │
+│  └──────────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────────┤
+│              Knowledge Base (Embedded)                      │
+│  • Color presets, multipliers, shade algorithms             │
+│  • Typography scales (Material, Bootstrap, Fluent, Indigo)  │
+│  • Elevation definitions                                    │
+│  • Component theme schemas                                  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Build System
+
+- **Vite** for building the TypeScript MCP server
+- **Output**: `mcp/` folder in the published package
+- **Entry point**: `mcp/index.js`
+
+---
+
+## MCP Primitives Design
+
+### 1. Tools (Model-Controlled Actions)
+
+Tools are the core of the MCP server - they perform actions and generate code.
+
+#### Tool Category 1: Theme Foundation
+
+| Tool Name           | Description                        | Input Schema                                                                         | Output                |
+| ------------------- | ---------------------------------- | ------------------------------------------------------------------------------------ | --------------------- |
+| `create_theme`      | Create a complete theme foundation | `{ designSystem?, primaryColor, secondaryColor?, surfaceColor?, variant?, name? }`   | Sass/CSS theme code   |
+| `create_palette`    | Generate a color palette           | `{ primary, secondary?, surface?, gray?, info?, success?, warn?, error?, variant? }` | Palette definition    |
+| `create_typography` | Set up typography system           | `{ fontFamily, designSystem?, baseFontSize?, customScale? }`                         | Typography setup code |
+| `create_elevations` | Configure elevation/shadow system  | `{ designSystem?, customColors? }`                                                   | Elevations setup code |
+
+#### Tool Category 2: Color Operations
+
+| Tool Name               | Description                          | Input Schema                        | Output                          |
+| ----------------------- | ------------------------------------ | ----------------------------------- | ------------------------------- |
+| `get_color`             | Retrieve a color from a palette      | `{ color, variant?, opacity? }`     | CSS variable reference or value |
+| `get_contrast_color`    | Get accessible contrast color        | `{ backgroundColor, wcagLevel? }`   | Contrast color value            |
+| `generate_color_shades` | Generate all shades for a color      | `{ baseColor, name }`               | Complete shade map              |
+| `suggest_palette`       | Suggest palette based on description | `{ description, mood?, industry? }` | Recommended colors              |
+
+#### Tool Category 3: Typography Operations
+
+| Tool Name                 | Description                | Input Schema                                                             | Output                |
+| ------------------------- | -------------------------- | ------------------------------------------------------------------------ | --------------------- |
+| `create_type_style`       | Create a custom type style | `{ fontSize, fontWeight?, lineHeight?, letterSpacing?, textTransform? }` | Type style definition |
+| `get_type_scale_category` | Get styles for a category  | `{ category, designSystem? }`                                            | Category styles       |
+| `convert_units`           | Convert between px/rem/em  | `{ value, to, context? }`                                                | Converted value       |
+
+#### Tool Category 4: Spacing & Sizing
+
+| Tool Name               | Description               | Input Schema                              | Output             |
+| ----------------------- | ------------------------- | ----------------------------------------- | ------------------ |
+| `create_spacing_system` | Define spacing scale      | `{ baseUnit?, scale? }`                   | Spacing variables  |
+| `get_sizable_value`     | Get responsive size value | `{ small, medium, large }`                | Sizable expression |
+| `get_padding`           | Get contextual padding    | `{ small?, medium?, large?, direction? }` | Padding expression |
+
+#### Tool Category 5: Component Theming (Extensible)
+
+| Tool Name                | Description                | Input Schema                        | Output               |
+| ------------------------ | -------------------------- | ----------------------------------- | -------------------- |
+| `create_component_theme` | Create a component theme   | `{ component, schema?, overrides }` | Component theme code |
+| `list_component_themes`  | List available components  | `{ category? }`                     | Component catalog    |
+| `get_component_schema`   | Get schema for a component | `{ component, designSystem? }`      | Schema definition    |
+
+#### Tool Category 6: Validation & Utilities
+
+| Tool Name          | Description                   | Input Schema                         | Output            |
+| ------------------ | ----------------------------- | ------------------------------------ | ----------------- |
+| `validate_theme`   | Validate generated theme code | `{ code, format }`                   | Validation result |
+| `check_contrast`   | Check WCAG contrast ratio     | `{ foreground, background, level? }` | Pass/fail + ratio |
+| `explain_function` | Explain a theming function    | `{ functionName }`                   | Documentation     |
+
+### 2. Resources (Application-Controlled Data)
+
+Resources provide read-only context that AI applications can use.
+
+#### Resource Category 1: Presets (Direct Resources)
+
+| URI                                | Description                           | MIME Type          |
+| ---------------------------------- | ------------------------------------- | ------------------ |
+| `theming://presets/palettes`       | All predefined palette configurations | `application/json` |
+| `theming://presets/palettes/light` | Light palette variants                | `application/json` |
+| `theming://presets/palettes/dark`  | Dark palette variants                 | `application/json` |
+| `theming://presets/typography`     | All typography presets                | `application/json` |
+| `theming://presets/elevations`     | Elevation definitions                 | `application/json` |
+| `theming://presets/easings`        | Animation easing functions            | `application/json` |
+
+#### Resource Category 2: Schemas (Direct Resources)
+
+| URI                                 | Description            | MIME Type          |
+| ----------------------------------- | ---------------------- | ------------------ |
+| `theming://schemas/light-material`  | Light Material schema  | `application/json` |
+| `theming://schemas/dark-material`   | Dark Material schema   | `application/json` |
+| `theming://schemas/light-bootstrap` | Light Bootstrap schema | `application/json` |
+| `theming://schemas/dark-bootstrap`  | Dark Bootstrap schema  | `application/json` |
+| `theming://schemas/light-fluent`    | Light Fluent schema    | `application/json` |
+| `theming://schemas/dark-fluent`     | Dark Fluent schema     | `application/json` |
+| `theming://schemas/light-indigo`    | Light Indigo schema    | `application/json` |
+| `theming://schemas/dark-indigo`     | Dark Indigo schema     | `application/json` |
+
+#### Resource Category 3: Component Catalog (Resource Templates)
+
+| URI Template                           | Description                         |
+| -------------------------------------- | ----------------------------------- |
+| `theming://components`                 | List all themeable components       |
+| `theming://components/{name}`          | Component theme schema & properties |
+| `theming://components/{name}/examples` | Usage examples for a component      |
+
+#### Resource Category 4: Documentation (Resource Templates)
+
+| URI Template                      | Description            |
+| --------------------------------- | ---------------------- |
+| `theming://docs/functions/{name}` | Function documentation |
+| `theming://docs/mixins/{name}`    | Mixin documentation    |
+| `theming://docs/variables/{name}` | Variable documentation |
+
+### 3. Prompts (User-Controlled Templates)
+
+Pre-built interaction templates for common theming tasks.
+
+| Prompt Name               | Description                                | Arguments                               |
+| ------------------------- | ------------------------------------------ | --------------------------------------- |
+| `create-app-theme`        | Guided theme creation for an application   | `appType`, `primaryColor?`, `variant?`  |
+| `brand-to-palette`        | Convert brand colors to a full palette     | `brandColors[]`, `style?`               |
+| `accessibility-audit`     | Check theme for accessibility issues       | `themeCode`                             |
+| `migrate-theme`           | Migrate from one design system to another  | `fromSystem`, `toSystem`, `currentCode` |
+| `dark-mode-variant`       | Create dark mode variant of existing theme | `lightThemeCode`                        |
+| `component-customization` | Guide through customizing a component      | `componentName`, `goals`                |
+
+---
+
+## Implementation Phases
+
+### Phase 1: Foundation (MVP)
+
+**Goal**: Core palette, typography, and elevation generation
+
+**Deliverables**:
+
+- MCP server scaffolding with STDIO transport
+- `create_theme` tool (basic)
+- `create_palette` tool
+- `create_typography` tool
+- `create_elevations` tool
+- Preset resources (palettes, typography, elevations)
+- Basic Sass and CSS code generation
+
+**Data to Embed**:
+
+- Color multipliers (`$color`, `$grayscale` from `_multipliers.scss`)
+- All 8 palette presets (light/dark x 4 design systems)
+- All 4 typography presets with type scales
+- Both elevation presets (material, indigo)
+- Shade generation algorithms
+
+### Phase 2: Color Intelligence
+
+**Goal**: Smart color operations and suggestions
+
+**Deliverables**:
+
+- `get_color` tool
+- `get_contrast_color` tool
+- `generate_color_shades` tool
+- `suggest_palette` tool (AI-friendly descriptions)
+- `check_contrast` tool
+- Schema resources
+
+**Data to Embed**:
+
+- WCAG contrast calculation algorithms
+- Color shade generation logic
+- Industry/mood color associations
+
+### Phase 3: Typography & Spacing
+
+**Goal**: Complete typography and spacing control
+
+**Deliverables**:
+
+- `create_type_style` tool
+- `get_type_scale_category` tool
+- `convert_units` tool
+- `create_spacing_system` tool
+- `get_sizable_value` tool
+- `get_padding` tool
+- Typography documentation resources
+
+### Phase 4: Validation & Intelligence
+
+**Goal**: Code validation and smart assistance
+
+**Deliverables**:
+
+- `validate_theme` tool (integrates dart-sass for validation)
+- `explain_function` tool
+- Documentation resources
+- All prompts
+
+**Optional Enhancement**:
+
+- Sass compilation service for validation
+- Error message interpretation
+
+### Phase 5: Component Themes (Extensible)
+
+**Goal**: Per-component theme generation
+
+**Deliverables**:
+
+- `create_component_theme` tool
+- `list_component_themes` tool
+- `get_component_schema` tool
+- Component catalog resources
+- Component examples resources
+
+**Strategy for Component Extensibility**:
+
+```typescript
+// Component registry pattern
+interface ComponentThemeDefinition {
+  name: string;
+  properties: PropertyDefinition[];
+  schema: Record<string, unknown>;
+  defaults: Record<DesignSystem, Record<string, unknown>>;
+  generator: (options: ThemeOptions) => string;
+}
+
+// Components can be added incrementally
+const componentRegistry = new Map<string, ComponentThemeDefinition>();
+```
+
+---
+
+## Data Extraction Strategy
+
+The MCP server needs embedded knowledge from the Sass source files.
+
+### Approach: Build-Time Extraction
+
+1. **Parse Sass files** during build to extract:
+
+   - Color presets and multipliers -> JSON
+   - Typography presets -> JSON
+   - Elevation presets -> JSON
+   - Component schemas -> JSON
+
+2. **Embed as TypeScript constants**:
+
+   ```typescript
+   // Generated from sass/color/presets/
+   export const PALETTES = {
+     'light-material': { primary: '#09f', secondary: '#df1b74', ... },
+     // ...
+   } as const;
+   ```
+
+3. **Existing JSON exports**: Leverage the existing `scripts/buildJSON.mjs` pipeline that already generates:
+   - `json/colors/presets/palettes.json`
+   - `json/colors/meta/multipliers.json`
+   - `json/typography/presets/typescales.json`
+   - `json/elevations/*.json`
+
+### Shade Generation Algorithm (To Embed)
+
+From `sass/color/_functions.scss`, the shade generation uses HSL manipulation with multipliers:
+
+```typescript
+// Simplified shade generation logic
+function generateShades(baseColor: string, multipliers: ShadeMultipliers): ShadeMap {
+  const hsl = parseToHSL(baseColor);
+  const shades: ShadeMap = {};
+
+  for (const [shade, factors] of Object.entries(multipliers)) {
+    shades[shade] = {
+      h: hsl.h,
+      s: clamp(hsl.s * factors.s, 0, 100),
+      l: clamp(hsl.l * factors.l, 0, 100),
+    };
+  }
+
+  return shades;
+}
+```
+
+---
+
+## Code Generation Templates
+
+### Sass Output Example
+
+```scss
+// Generated by Ignite UI Theming MCP Server
+@use 'igniteui-theming' as *;
+
+// Custom palette based on your brand colors
+$my-palette: palette(
+  $primary: #2563eb,
+  $secondary: #7c3aed,
+  $surface: #ffffff,
+  $gray: #64748b,
+);
+
+// Apply the palette
+@include palette($my-palette);
+
+// Typography setup
+@include typography($font-family: '"Inter", system-ui, sans-serif', $type-scale: $material-type-scale);
+
+// Elevations
+@include elevations($material-elevations);
+```
+
+### CSS Output Example
+
+```css
+/* Generated by Ignite UI Theming MCP Server */
+:root {
+  /* Primary Color Shades */
+  --ig-primary-50: hsl(217, 91%, 95%);
+  --ig-primary-100: hsl(217, 91%, 85%);
+  --ig-primary-200: hsl(217, 91%, 75%);
+  /* ... */
+  --ig-primary-500: hsl(217, 91%, 59%);
+  /* ... */
+
+  /* Typography */
+  --ig-font-family: 'Inter', system-ui, sans-serif;
+  --ig-h1-font-size: 6rem;
+  --ig-h1-font-weight: 300;
+  /* ... */
+
+  /* Elevations */
+  --ig-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  /* ... */
+}
+```
+
+---
+
+## File Structure
+
+```
+src/mcp/
+├── index.ts                 # Entry point, server initialization
+├── server.ts                # MCP server configuration
+├── transport/
+│   ├── stdio.ts             # STDIO transport
+│   └── http.ts              # HTTP transport (future)
+├── tools/
+│   ├── index.ts             # Tool registry
+│   ├── theme.ts             # create_theme, validate_theme
+│   ├── palette.ts           # Palette-related tools
+│   ├── typography.ts        # Typography-related tools
+│   ├── elevations.ts        # Elevation tools
+│   ├── spacing.ts           # Spacing & sizing tools
+│   └── components.ts        # Component theming tools
+├── resources/
+│   ├── index.ts             # Resource registry
+│   ├── presets.ts           # Preset resources
+│   ├── schemas.ts           # Schema resources
+│   ├── components.ts        # Component catalog
+│   └── docs.ts              # Documentation resources
+├── prompts/
+│   ├── index.ts             # Prompt registry
+│   └── templates.ts         # Prompt definitions
+├── generators/
+│   ├── sass.ts              # Sass code generation
+│   ├── css.ts               # CSS code generation
+│   └── templates/           # Code templates
+├── validators/
+│   ├── sass.ts              # Sass validation (dart-sass)
+│   └── contrast.ts          # WCAG contrast validation
+├── knowledge/
+│   ├── palettes.ts          # Embedded palette data
+│   ├── typography.ts        # Embedded typography data
+│   ├── elevations.ts        # Embedded elevation data
+│   ├── multipliers.ts       # Color multipliers
+│   └── components/          # Component schemas
+└── utils/
+    ├── color.ts             # Color manipulation utilities
+    ├── units.ts             # Unit conversion
+    └── types.ts             # TypeScript types
+```
+
+---
+
+## Build Configuration
+
+### Vite Configuration
+
+```typescript
+// vite.config.mcp.ts
+import {defineConfig} from 'vite';
+import {resolve} from 'path';
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/mcp/index.ts'),
+      formats: ['es'],
+      fileName: 'index',
+    },
+    outDir: 'mcp',
+    rollupOptions: {
+      external: ['@modelcontextprotocol/sdk'],
+    },
+  },
+});
+```
+
+### Package.json Updates
+
+```json
+{
+  "bin": {
+    "igniteui-theming-mcp": "./mcp/index.js"
+  },
+  "exports": {
+    "./mcp": {
+      "import": "./mcp/index.js"
+    }
+  },
+  "files": ["mcp/"],
+  "scripts": {
+    "build:mcp": "vite build --config vite.config.mcp.ts",
+    "mcp:dev": "tsx src/mcp/index.ts"
+  }
+}
+```
+
+---
+
+## Dependencies
+
+### Runtime Dependencies
+
+```json
+{
+  "@modelcontextprotocol/sdk": "^1.0.0",
+  "zod": "^3.0.0"
+}
+```
+
+### Optional Dependencies (for validation)
+
+```json
+{
+  "sass": "^1.92.0"
+}
+```
+
+### Dev Dependencies
+
+```json
+{
+  "vite": "^5.0.0",
+  "typescript": "^5.0.0",
+  "tsx": "^4.0.0"
+}
+```
+
+---
+
+## Usage Examples
+
+### Claude Desktop Configuration
+
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["igniteui-theming/mcp"]
+    }
+  }
+}
+```
+
+### Example Interaction
+
+**User**: "Create a dark theme for a healthcare app with a calming blue primary color"
+
+**AI uses `create_theme` tool**:
+
+```json
+{
+  "name": "create_theme",
+  "arguments": {
+    "designSystem": "material",
+    "primaryColor": "#0891b2",
+    "variant": "dark",
+    "name": "healthcare-dark"
+  }
+}
+```
+
+**Response**: Complete Sass/CSS code with accessible color palette optimized for healthcare applications.
+
+---
+
+## Success Metrics
+
+1. **Functional**: All Phase 1 tools working correctly
+2. **Quality**: Generated code compiles without errors
+3. **Accessibility**: Generated themes pass WCAG AA by default
+4. **Usability**: AI assistants can accomplish theming tasks in 1-2 tool calls
+5. **Extensibility**: New components can be added without modifying core code
+
+---
+
+## Open Questions
+
+1. **Sass Compilation for Validation**: Should we bundle dart-sass for runtime validation, or make it optional/lazy-loaded to reduce package size?
+
+2. **HTTP Transport**: Should Phase 1 include HTTP transport for remote hosting, or is STDIO sufficient for MVP?
+
+3. **Component Priority**: Which components should be prioritized for Phase 5? Suggest: button, card, input, grid (most commonly themed)
+
+4. **Caching**: Should validated themes be cached? What invalidation strategy?
+
+---
+
+## Appendix: Theming Framework API Reference
+
+### Color Module (`sass/color/`)
+
+#### Public Functions
+
+- `palette($primary, $secondary, $surface, ...)` - Generate complete color palette
+- `color($palette?, $color, $variant, $opacity?)` - Retrieve color from palette
+- `contrast-color($palette?, $color, $variant, $opacity?)` - Get contrast color
+- `adaptive-contrast($color)` - Runtime-calculated contrast color
+- `luminance($color)` - Calculate relative luminance
+- `contrast($background, $foreground)` - Calculate WCAG contrast ratio
+
+#### Public Mixins
+
+- `palette($palette, $contrast?, $contrast-level?)` - Generate CSS custom properties
+- `adaptive-contrast($level?)` - Set up WCAG contrast variables
+- `configure-colors($enhanced-accessibility?)` - Configure color module
+
+#### Presets
+
+- Light: `$light-material-palette`, `$light-bootstrap-palette`, `$light-fluent-palette`, `$light-indigo-palette`
+- Dark: `$dark-material-palette`, `$dark-bootstrap-palette`, `$dark-fluent-palette`, `$dark-indigo-palette`
+
+### Typography Module (`sass/typography/`)
+
+#### Public Functions
+
+- `rem($pixels, $context?)` - Convert to rem units
+- `em($pixels, $context?)` - Convert to em units
+- `px($num, $context?)` - Convert to pixels
+- `type-style(...)` - Create type style map
+- `type-scale(...)` - Create complete type scale
+- `type-scale-category($scale, $category)` - Get category from scale
+
+#### Public Mixins
+
+- `typography($font-family, $type-scale)` - Set up complete typography
+- `type-style($category, $check?)` - Apply type style
+- `type-style-vars($name, $type-style)` - Generate CSS variables
+
+#### Presets
+
+- `$material-typeface`, `$material-type-scale`
+- `$bootstrap-typeface`, `$bootstrap-type-scale`
+- `$fluent-typeface`, `$fluent-type-scale`
+- `$indigo-typeface`, `$indigo-type-scale`
+
+### Elevations Module (`sass/elevations/`)
+
+#### Public Functions
+
+- `elevation($name)` - Get elevation CSS variable reference
+- `box-shadow($shadows)` - Transform shadows with elevation factor
+
+#### Public Mixins
+
+- `elevations($elevations)` - Generate all elevation CSS variables
+- `elevation($name)` - Apply elevation to element
+
+#### Presets
+
+- `$material-elevations` - 25 levels (0-24)
+- `$indigo-elevations` - 25 levels (0-24)
+
+### Themes Module (`sass/themes/`)
+
+#### Public Functions
+
+- `sizable($sm, $md, $lg)` - Responsive sizing
+- `pad($sm, $md, $lg, $dir?)` - Contextual padding
+- `pad-inline($sm, $md, $lg)` - Inline padding
+- `pad-block($sm, $md, $lg)` - Block padding
+
+#### Public Mixins
+
+- `css-vars-from-theme($theme)` - Output CSS custom properties from theme
+- `sizable()` - Add size reactivity CSS properties
+- `ellipsis()` - Text overflow ellipsis
+- `line-clamp($lines, ...)` - Multi-line text truncation
+
+#### Design System Schemas
+
+- Light: `$light-material-schema`, `$light-bootstrap-schema`, `$light-fluent-schema`, `$light-indigo-schema`
+- Dark: `$dark-material-schema`, `$dark-bootstrap-schema`, `$dark-fluent-schema`, `$dark-indigo-schema`
+
+### Animations Module (`sass/animations/`)
+
+#### Public Mixins
+
+- `keyframes($name)` - Register keyframe animation
+- `animation($animate...)` - Apply animation
+
+#### Easing Variables
+
+- `$ease-in-quad`, `$ease-in-cubic`, `$ease-in-quart`, etc.
+- `$ease-out-quad`, `$ease-out-cubic`, `$ease-out-quart`, etc.
+- `$ease-in-out-quad`, `$ease-in-out-cubic`, etc.
+---
+
+## Next Steps
+
+1. Review and approve this plan
+2. Set up project scaffolding with Vite
+3. Implement Phase 1 tools
+4. Test with Claude Desktop/Code and other AI assistants
+5. Iterate based on feedback
