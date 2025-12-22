@@ -26,6 +26,7 @@
 /// @param {Color} $disabled-border-color [null] - The disabled chip border color.
 ///
 /// @param {Color} $ghost-background [null] - The chip ghost background color.
+/// @param {Color} $ghost-text-color [null] - The chip ghost text color.
 /// @param {box-shadow} $ghost-shadow [null] - The chip ghost shadow.
 ///
 /// @param {Color} $hover-text-color [null] - The chip text hover color.
@@ -65,6 +66,7 @@
     $background: null,
     $border-color: null,
     $ghost-background: null,
+    $ghost-text-color: null,
 
     $disabled-text-color: null,
     $disabled-background: null,
@@ -222,6 +224,7 @@
             background: $background,
             border-color: $border-color,
             ghost-background: $ghost-background,
+            ghost-text-color: $ghost-text-color,
 
             disabled-text-color: $disabled-text-color,
             disabled-background: $disabled-background,
