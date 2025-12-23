@@ -147,6 +147,19 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
     appearance: none;
 }
 
+/// Adds sizing CSS variables to the scope.
+/// @group themes
+/// @access private
+@mixin sizing() {
+    $scope: if(is-root(), ':root', '&');
+
+    #{$scope} {
+        --ig-size-small: 1;
+        --ig-size-medium: 2;
+        --ig-size-large: 3;
+    }
+}
+
 /// Adds the required CSS properties so that the scope can react to size changes.
 /// @group themes
 /// @access public
