@@ -112,6 +112,7 @@ $dark-bootstrap-chip: extend(
 /// @prop {Map} focus-outline-color [contrast-color: ('gray', 50, .2)] - The chip focus outline color.
 ///
 /// @prop {Map} ghost-background [color: ('gray', 100)] - The chip ghost background color.
+/// @prop {Map} ghost-text-color [contrast-color: ('gray', 100, .8)] - The chip ghost text color.
 ///
 /// @prop {Map} disabled-text-color [contrast-color: ('gray', 50, .2)] - The disabled chip text color.
 /// @prop {Map} disabled-background [contrast-color: ('gray', 50, .05)] - The disabled chip background color.
@@ -171,6 +172,14 @@ $dark-indigo-chip: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        ghost-text-color: (
+            contrast-color: (
+                'gray',
+                100,
+                0.8,
             ),
         ),
 

@@ -14,6 +14,7 @@
 /// @prop {Map} background [color: ('gray', 200)] - The chip background color.
 /// @prop {Color} border-color [transparent] - The chip border color.
 /// @prop {Map} ghost-background [color: ('gray', 400))] - The chip ghost background color.
+/// @prop {Map} ghost-text-color [contrast-color: ('gray', 400))] - The chip ghost text color.
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 400)] - The chip text hover color.
 /// @prop {Map} hover-background [color: ('gray', 400)] - The chip hover background color.
 /// @prop {Color} hover-border-color [transparent] - The chip hover border color.
@@ -58,6 +59,13 @@ $light-chip: extend(
 
         ghost-background: (
             color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        ghost-text-color: (
+            contrast-color: (
                 'gray',
                 400,
             ),
@@ -235,6 +243,7 @@ $material-chip: extend(
 /// @type {Map}
 /// @prop {Map} text-color [color: ('gray', 700)] - The chip text color.
 /// @prop {Map} ghost-background [color: ('primary', 500)] - The chip ghost background color.
+/// @prop {Map} ghost-text-color [contrast-color: ('primary', 500)] - The chip ghost text color.
 /// @prop {Map} hover-background [color: ('gray', 200)] - The chip hover background color.
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 200)] - The chip text hover color.
 /// @prop {Map} selected-text-color [contrast-color: ('primary', 700))] - The selected chip text color.
@@ -261,6 +270,13 @@ $fluent-chip: extend(
 
         ghost-background: (
             color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        ghost-text-color: (
+            contrast-color: (
                 'primary',
                 500,
             ),
@@ -468,6 +484,7 @@ $bootstrap-chip: extend(
 /// @prop {Map} focus-selected-outline-color [color: ('primary', 400, .5)] - The selected chip focus outline color.
 ///
 /// @prop {Map} ghost-background [color: ('gray', 200)] - The chip ghost background color.
+/// @prop {Map} ghost-text-color [color: ('gray', 700)] - The chip ghost text color.
 ///
 /// @prop {Map} disabled-text-color [color: ('gray', 900, .2)] - The disabled chip text color.
 /// @prop {Map} disabled-background [contrast-color: ('gray', 900)] - The disabled chip background color.
@@ -625,6 +642,13 @@ $indigo-chip: extend(
             color: (
                 'gray',
                 200,
+            ),
+        ),
+
+        ghost-text-color: (
+            color: (
+                'gray',
+                700,
             ),
         ),
 
