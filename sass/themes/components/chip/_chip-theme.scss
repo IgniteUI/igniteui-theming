@@ -116,6 +116,10 @@
         $text-color: adaptive-contrast(var(--background));
     }
 
+    @if not($ghost-text-color) and $ghost-background {
+        $ghost-text-color: adaptive-contrast(var(--ghost-background));
+    }
+
     @if not($border-color) and $background {
         $border-color: var(--background);
     }
