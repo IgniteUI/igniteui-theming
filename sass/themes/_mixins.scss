@@ -151,12 +151,22 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @group themes
 /// @access private
 @mixin sizing() {
-    $scope: if(is-root(), ':root', '&');
+    @property --ig-size-small {
+        syntax: '<number> | <integer>';
+        initial-value: 1;
+        inherits: true;
+    }
 
-    #{$scope} {
-        --ig-size-small: 1;
-        --ig-size-medium: 2;
-        --ig-size-large: 3;
+    @property --ig-size-medium {
+        syntax: '<number> | <integer>';
+        initial-value: 2;
+        inherits: true;
+    }
+
+    @property --ig-size-large {
+        syntax: '<number> | <integer>';
+        initial-value: 3;
+        inherits: true;
     }
 }
 
