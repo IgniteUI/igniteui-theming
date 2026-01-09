@@ -14,8 +14,13 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Rating Theme
 ///
+/// This theme has no automatic token derivation. All tokens are independent.
+/// Use symbol-empty-color and symbol-full-color for text-based symbols.
+/// Use symbol-empty-filter and symbol-full-filter for image/SVG-based symbols.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $label-color [null] - sets the color for the label.
 /// @param {Number} $symbol-size [null] - the size of the symbols.
 /// @param {Color} $symbol-empty-color [null] - sets the idle color for the symbol when it is a plane text.
