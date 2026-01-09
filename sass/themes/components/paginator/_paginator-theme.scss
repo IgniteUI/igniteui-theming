@@ -14,10 +14,16 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
-/// Grid Paging Theme
+/// Paginator Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$background-color` - The paginator background. Auto-derives: text-color.
+///
+/// Setting background-color automatically calculates a contrasting text color.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $text-color [currentColor] - The text color.
-/// @param {Color} $background-color [rgba(0, 0, 0, .04)] - The background color of the paging panel.
+/// @param {Color} $text-color [currentColor] - The text color. Auto-derived from background-color.
+/// @param {Color} $background-color [rgba(0, 0, 0, .04)] - The background color of the paging panel. PRIMARY - derives text-color.
 /// @param {Color} $border-color [rgba(0, 0, 0, .26)] - The border color of the paging panel.
 /// @requires $light-material-schema
 /// @example scss Change the stripes color

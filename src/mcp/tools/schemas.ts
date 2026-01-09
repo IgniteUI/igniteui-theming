@@ -236,3 +236,38 @@ export const createCustomPaletteSchema = z.object({
 });
 
 export type CreateCustomPaletteParams = z.infer<typeof createCustomPaletteSchema>;
+
+// ============================================================================
+// Component Theming Schemas
+// ============================================================================
+
+/**
+ * Schema for get_component_design_tokens tool.
+ */
+export const getComponentDesignTokensSchema = z.object({
+  component: z.string().describe(PARAM_DESCRIPTIONS.component),
+});
+
+/**
+ * Schema for token value in create_component_theme.
+ * Supports colors, numbers with units, and other Sass-compatible values.
+ */
+const tokenValueSchema = z.union([
+  colorSchema,
+  z.string().describe('CSS value (e.g., "8px", "1rem", "0 2px 4px rgba(0,0,0,0.1)")'),
+  z.number().describe('Numeric value'),
+]);
+
+/**
+ * Schema for create_component_theme tool.
+ */
+export const createComponentThemeSchema = z.object({
+  platform: platformSchema,
+  component: z.string().describe(PARAM_DESCRIPTIONS.componentTheme),
+  tokens: z.record(z.string(), tokenValueSchema).describe(PARAM_DESCRIPTIONS.tokens),
+  selector: z.string().optional().describe(PARAM_DESCRIPTIONS.selector),
+  name: z.string().optional().describe(PARAM_DESCRIPTIONS.themeName),
+});
+
+export type GetComponentDesignTokensParams = z.infer<typeof getComponentDesignTokensSchema>;
+export type CreateComponentThemeParams = z.infer<typeof createComponentThemeSchema>;

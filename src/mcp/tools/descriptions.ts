@@ -536,6 +536,157 @@ export const TOOL_DESCRIPTIONS = {
   - theming://platforms/react: React platform configuration
   - theming://platforms/blazor: Blazor platform configuration
 </related_resources>`,
+
+  // ---------------------------------------------------------------------------
+  // get_component_design_tokens - Discovery tool
+  // ---------------------------------------------------------------------------
+  get_component_design_tokens: `Discover available design tokens (themeable properties) for an Ignite UI component.
+
+<use_case>
+  ALWAYS call this tool FIRST before using create_component_theme. It returns the
+  exact token names that can be customized for a component, preventing hallucination
+  of invalid property names.
+</use_case>
+
+<workflow>
+  1. Provide the component name (e.g., "button", "avatar", "grid")
+  2. Receive list of all available tokens with their types and descriptions
+  3. Use the token names in create_component_theme
+</workflow>
+
+<important_notes>
+  COMPONENT NAMING:
+  - Basic components: Use simple names like "avatar", "badge", "card"
+  - Button variants: Use specific variant names like "flat-button", "contained-button",
+    "outlined-button", "fab-button" (NOT just "button")
+  - Icon button variants: "flat-icon-button", "contained-icon-button", "outlined-icon-button"
+  
+  COMPOUND COMPONENTS:
+  - Some components like "combo", "grid", "select" are compound - they use multiple
+    internal components that may also need theming
+  - The response includes hints about related themes for compound components
+  
+  VARIANTS INFO:
+  - If you query a base component that has variants (e.g., "button"), the response
+    lists available variants to help you choose the right one
+</important_notes>
+
+<output>
+  Returns:
+  - component: The component name
+  - themeFunctionName: The Sass function to use (e.g., "button-theme")
+  - description: Information about the component theme
+  - tokens: Array of { name, type, description } for each available token
+  - variants: (if applicable) List of variant-specific theme names
+  - compoundInfo: (if applicable) Related themes for compound components
+</output>
+
+<error_handling>
+  - Unknown component: Returns list of similar component names as suggestions
+  - Partial match: If query partially matches multiple components, returns all matches
+</error_handling>
+
+<example>
+  Get tokens for flat button:
+  {
+    "component": "flat-button"
+  }
+  
+  Returns tokens like: background, foreground, hover-background, border-radius, etc.
+</example>
+
+<related_tools>
+  - create_component_theme: Use the discovered tokens to create a custom theme
+</related_tools>`,
+
+  // ---------------------------------------------------------------------------
+  // create_component_theme - Theme generation tool
+  // ---------------------------------------------------------------------------
+  create_component_theme: `Generate Sass code to customize an Ignite UI component's appearance using design tokens.
+
+<use_case>
+  Use this tool AFTER calling get_component_design_tokens to customize specific
+  component styles. The generated code can be included in your theme file to
+  override default component appearances.
+</use_case>
+
+<workflow>
+  1. First call get_component_design_tokens to discover available tokens
+  2. Choose which tokens to customize based on your design requirements
+  3. Call this tool with component name and token values
+  4. Receive ready-to-use Sass code with the component theme
+</workflow>
+
+<important_notes>
+  TOKEN VALIDATION:
+  - All provided token names are validated against the component's schema
+  - Invalid tokens return an error with the list of valid token names
+  - You don't need to specify all tokens - only those you want to customize
+
+  TOKEN VALUE FORMATS:
+  - Colors: Any valid CSS color format (hex, rgb, hsl, named colors)
+  - Dimensions: Include units (e.g., "8px", "0.5rem", "2em")
+  - Border radius: Can be single value or shorthand ("8px" or "8px 8px 0 0")
+  - Shadows: Full box-shadow syntax ("0 2px 4px rgba(0,0,0,0.1)")
+
+  SELECTORS:
+  - Default selector is auto-detected based on platform and component
+  - Angular: Uses "igx-*" element selectors or attribute selectors
+  - Web Components: Uses "igc-*" element selectors
+  - Custom selectors supported for targeted styling (e.g., ".my-button")
+</important_notes>
+
+<output>
+  Returns:
+  - Generated Sass code with:
+    - Platform-specific @use import
+    - Theme function call with provided token values
+    - css-vars mixin to apply the theme to the selector
+  - Description of what was generated
+  - List of tokens used
+</output>
+
+<error_handling>
+  - Unknown component: Returns error with list of available components
+  - Invalid tokens: Returns error listing invalid tokens and valid alternatives
+  - Invalid color format: Returns error with format guidance
+</error_handling>
+
+<example>
+  Custom blue flat button with rounded corners (Angular):
+  {
+    "platform": "angular",
+    "component": "flat-button",
+    "tokens": {
+      "background": "#1976D2",
+      "foreground": "#FFFFFF",
+      "hover-background": "#1565C0",
+      "border-radius": "24px"
+    }
+  }
+
+  Generates:
+  \`\`\`scss
+  @use 'igniteui-angular/theming' as *;
+
+  $custom-flat-button-theme: flat-button-theme(
+    $background: #1976D2,
+    $foreground: #FFFFFF,
+    $hover-background: #1565C0,
+    $border-radius: 24px
+  );
+
+  :root {
+    @include css-vars($custom-flat-button-theme);
+  }
+  \`\`\`
+</example>
+
+<related_tools>
+  - get_component_design_tokens: MUST call first to discover valid tokens
+  - detect_platform: Run to auto-detect platform for correct imports
+  - create_theme: Use for full theme (palette + typography + elevations)
+</related_tools>`,
 } as const;
 
 // ============================================================================
@@ -613,4 +764,17 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   grayShades: `Object with all gray shade values. ${FRAGMENTS.GRAY_SHADES}. For light themes: 50=lightest, 900=darkest. For dark themes: 50=darkest, 900=lightest.`,
 
   contrastOverrides: `USUALLY OMIT THIS FIELD. Contrast colors are auto-generated using adaptive-contrast(). Only provide this if you have specific accessibility requirements with exact contrast values (rare). When omitted (recommended), the generated Sass code automatically includes adaptive-contrast(#shadeColor) for each shade, which auto-selects black or white for optimal readability.`,
+
+  // ---------------------------------------------------------------------------
+  // Component theming parameters
+  // ---------------------------------------------------------------------------
+  component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Call this tool to discover available tokens BEFORE using create_component_theme.`,
+
+  componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button".`,
+
+  tokens: `Object mapping token names to values. Token names must be valid for the component (use get_component_design_tokens to discover them). Values can be CSS colors, dimensions with units, or other Sass-compatible values. Example: { "background": "#1976D2", "border-radius": "8px" }`,
+
+  selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
+
+  themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
 } as const;

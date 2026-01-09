@@ -13,45 +13,58 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Input Group Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$box-background` - Box type input background. Auto-derives: text colors, prefix/suffix colors, placeholder colors, disabled background.
+/// - `$search-background` - Search type input background. Auto-derives: text colors, prefix/suffix colors, placeholder colors, disabled background.
+/// - `$border-color` - Border color for border/fluent types. Auto-derives: hover-border-color, focused-border-color, focused-secondary-color.
+/// - `$idle-bottom-line-color` - Bottom line color (material). Auto-derives: hover/focused bottom line colors, focused-secondary-color.
+/// - `$focused-border-color` - Focused state accent color. Auto-derives: focused-secondary-color.
+///
+/// For Material variant, set `$box-background` for box type inputs.
+/// For all variants, set `$search-background` for search type inputs.
+/// Text colors are automatically calculated for accessibility.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $idle-text-color [null] - The input text color in the idle state.
-/// @param {Color} $filled-text-color [null] - The input text color in the filled state.
+/// @param {Color} $idle-text-color [null] - The input text color in the idle state. Auto-derived from box/search-background.
+/// @param {Color} $filled-text-color [null] - The input text color in the filled state. Auto-derived from box/search-background.
 /// @param {Color} $filled-text-hover-color [null] - The input text color in the filled state on hover.
-/// @param {Color} $focused-text-color [null] - The input text color in the focused state.
-/// @param {Color} $disabled-text-color [null] - The input text color in the disabled state.
+/// @param {Color} $focused-text-color [null] - The input text color in the focused state. Auto-derived from box-background-focus or search-background.
+/// @param {Color} $disabled-text-color [null] - The input text color in the disabled state. Auto-derived from disabled background.
 /// @param {Color} $helper-text-color [null] - The helper text color.
 /// @param {Color} $text-error-color [null] - The color used for the error message.
 /// @param {Color} $icon-error-color [null] - The color used for the error icon.
-/// @param {Color} $input-prefix-color [null] - The input prefix color in the idle state.
-/// @param {Color} $input-prefix-background [null] - The background color of an input prefix in the idle state.
-/// @param {Color} $input-prefix-color--filled [null] - The input prefix color in the filled state.
+/// @param {Color} $input-prefix-color [null] - The input prefix color in the idle state. Auto-derived from box/search-background.
+/// @param {Color} $input-prefix-background [null] - The background color of an input prefix in the idle state. Synced with suffix-background.
+/// @param {Color} $input-prefix-color--filled [null] - The input prefix color in the filled state. Auto-derived from prefix-color or background.
 /// @param {Color} $input-prefix-background--filled] - The background color of an input prefix in the filled state.
-/// @param {Color} $input-prefix-color--focused [null] - The input prefix color in the focused state.
+/// @param {Color} $input-prefix-color--focused [null] - The input prefix color in the focused state. Auto-derived from prefix-color--filled or background.
 /// @param {Color} $input-prefix-background--focused [null] - The background color of an input prefix in the focused state.
-/// @param {Color} $input-suffix-color [null] - The input suffix color in the idle state.
-/// @param {Color} $input-suffix-background [null] - The background color of an input suffix in the idle state.
+/// @param {Color} $input-suffix-color [null] - The input suffix color in the idle state. Auto-derived from box/search-background. Synced with prefix-color.
+/// @param {Color} $input-suffix-background [null] - The background color of an input suffix in the idle state. Synced with prefix-background.
 /// @param {Color} $input-suffix-color--filled [null] - The input suffix color in the filled state.
 /// @param {Color} $input-suffix-background-filled [null] - The background color of an input suffix in the filled state.
 /// @param {Color} $input-suffix-color--focused [null] - The input suffix color in the focused state.
 /// @param {Color} $input-suffix-background--focused [null] - The background color of an input suffix in the focused state.
-/// @param {Color} $idle-secondary-color [null] - The label color in the idle state.
-/// @param {Color} $focused-secondary-color [null] - The label color in the focused state.
-/// @param {Color} $idle-bottom-line-color [null] - The bottom line and border colors in the idle state.
-/// @param {Color} $hover-bottom-line-color [null] - The bottom line and border colors in the hover state.
-/// @param {Color} $focused-bottom-line-color [null] - The bottom line and border colors in the focused state.
+/// @param {Color} $idle-secondary-color [null] - The label color in the idle state. Auto-derived from box-background or placeholder-color.
+/// @param {Color} $focused-secondary-color [null] - The label color in the focused state. Auto-derived from focused-bottom-line-color or focused-border-color.
+/// @param {Color} $idle-bottom-line-color [null] - The bottom line and border colors in the idle state. PRIMARY for material bottom line.
+/// @param {Color} $hover-bottom-line-color [null] - The bottom line and border colors in the hover state. Auto-derived from idle-bottom-line-color.
+/// @param {Color} $focused-bottom-line-color [null] - The bottom line and border colors in the focused state. Auto-derived from hover-bottom-line-color.
 /// @param {Color} $disabled-bottom-line-color [null] - The bottom line and border colors in the disabled state.
-/// @param {Color} $border-color [null] - The border color for input groups of type border and fluent.
-/// @param {Color} $hover-border-color [null] - The hover input border for input groups of type border and fluent.
-/// @param {Color} $focused-border-color [null] - The focused input border color for input groups of type border and fluent.
+/// @param {Color} $border-color [null] - The border color for input groups of type border and fluent. PRIMARY for border inputs.
+/// @param {Color} $hover-border-color [null] - The hover input border for input groups of type border and fluent. Auto-derived from border-color.
+/// @param {Color} $focused-border-color [null] - The focused input border color for input groups of type border and fluent. Auto-derived from hover-border-color.
 /// @param {Color} $disabled-border-color [null] - The disabled border color for input groups of type border and fluent.
-/// @param {Color} $box-background [null] - The background color of an input group of type box.
-/// @param {Color} $box-background-hover [null] - The background color on hover of an input group of type box.
-/// @param {Color} $box-background-focus [null] - The background color on focus of an input group of type box.
-/// @param {Color} $box-disabled-background [null] - The background color of an input group of type box in the disabled state.
+/// @param {Color} $box-background [null] - The background color of an input group of type box. PRIMARY for material box inputs.
+/// @param {Color} $box-background-hover [null] - The background color on hover of an input group of type box. Auto-derived from box-background.
+/// @param {Color} $box-background-focus [null] - The background color on focus of an input group of type box. Auto-derived from box-background.
+/// @param {Color} $box-disabled-background [null] - The background color of an input group of type box in the disabled state. Auto-derived from box-background.
 /// @param {Color} $border-background [null] - The background color of an input group of type border.
 /// @param {Color} $border-disabled-background [null] - The background color of an input group of type border in the disabled state.
-/// @param {Color} $search-background [null] - The background color of an input group of type search.
-/// @param {Color} $search-disabled-background [null] - The background color of an input group of type search in the disabled state.
+/// @param {Color} $search-background [null] - The background color of an input group of type search. PRIMARY for search inputs.
+/// @param {Color} $search-disabled-background [null] - The background color of an input group of type search in the disabled state. Auto-derived from search-background.
 /// @param {box-shadow} $search-resting-shadow [null] - The shadow color of an input group of type search in its resting state.
 /// @param {box-shadow} $search-hover-shadow [null] - The shadow color of an input group of type search in its hover state.
 /// @param {box-shadow} $search-disabled-shadow [null] - The shadow color of an input group of type search in its disabled state.
@@ -61,9 +74,9 @@
 /// @param {List} $box-border-radius [null] - The border radius used for box input.
 /// @param {List} $border-border-radius [null] - The border radius used for border input.
 /// @param {List} $search-border-radius [null] - The border radius used for search input.
-/// @param {Color} placeholder-color [null] - The placeholder color of an input group.
-/// @param {Color} hover-placeholder-color [null] - The placeholder color of an input group on hover.
-/// @param {Color} disabled-placeholder-color [null] - The disabled placeholder color of an input group.
+/// @param {Color} placeholder-color [null] - The placeholder color of an input group. Auto-derived from box/search-background.
+/// @param {Color} hover-placeholder-color [null] - The placeholder color of an input group on hover. Auto-derived from box-background-hover or placeholder-color.
+/// @param {Color} disabled-placeholder-color [null] - The disabled placeholder color of an input group. Auto-derived from disabled background.
 /// @example scss Change the focused border and label colors
 ///   $my-input-group-theme: input-group-theme($focused-secondary-color: pink, $focused-bottom-line-color: pink);
 ///   // Pass the theme to the css-vars() mixin

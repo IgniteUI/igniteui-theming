@@ -14,87 +14,98 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Grid Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$header-background` - The table header background color. Auto-derives: header-text-color, header-border-color, header-selected-background, sorted-header-icon-color, expand-all-icon-color, expand-all-icon-hover-color, group-row-background, grouparea-background, filtering-header-background, filtering-row-background.
+/// - `$content-background` - The table body background color. Auto-derives: content-text-color, row-odd-background, row-even-background, row-hover-background, row-border-color, row-selected-background, cell-selected-background, cell-editing-background, cell-active-border-color, pinned-border-color, edit-mode-color.
+/// - `$ghost-header-background` - The dragged header background color. Auto-derives: ghost-header-text-color, ghost-header-icon-color.
+/// - `$group-row-background` - The grid group row background color. Auto-derives: expand-icon-color, group-row-selected-background, group-label-text, group-count-background.
+/// - `$grouparea-background` - The grid group area background color. Auto-derives: grouparea-color, drop-area-background.
+///
+/// Setting header-background and content-background gives you comprehensive grid styling with automatic contrast calculations.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $header-background [null] - The table header background color.
-/// @param {Color} $header-text-color [null] - The table header text color.
+/// @param {Color} $header-background [null] - The table header background color. PRIMARY - derives header-text-color, header-border-color, and many more.
+/// @param {Color} $header-text-color [null] - The table header text color. Auto-derived from header-background.
 /// @param {String} $header-border-width [null] - The border width used for header borders.
 /// @param {String} $header-border-style [null] - The border style used for header borders.
-/// @param {Color} $header-border-color [null] - The color used for header borders.
-/// @param {Color} $header-selected-background [null] - The table header background color when selected (ex. column selection).
-/// @param {Color} $header-selected-text-color [null] - The table header text color when selected (ex. column selection).
-/// @param {Color} $sorted-header-icon-color [null] - The sort icon color when sorted.
-/// @param {color} $sortable-header-icon-hover-color [null] - The icon color on hover in grid header when the column is sortable.
-/// @param {Color} $content-background [null] - The table body background color.
-/// @param {Color} $content-text-color [null] - The table body text color.
-/// @param {Color} $ghost-header-text-color [null] - The dragged header text color.
-/// @param {Color} $ghost-header-icon-color [null] - The dragged header icon color.
-/// @param {Color} $ghost-header-background [null] - The dragged header background color.
-/// @param {Color} $row-odd-background [null] - The background color of odd rows.
-/// @param {Color} $row-even-background [null] - The background color of even rows.
-/// @param {Color} $row-odd-text-color [null] - The text color of odd rows.
-/// @param {Color} $row-even-text-color [null] - The text color of even rows.
-/// @param {Color} $row-selected-background [null] - The selected row background color.
-/// @param {Color} $row-selected-hover-background [null] - The selected row hover background color.
-/// @param {Color} $row-selected-text-color [null] - The selected row text color.
-/// @param {Color} $row-selected-hover-text-color [null] - The selected row hover text color.
-/// @param {Color} $row-hover-background [null] - The hover row background color.
-/// @param {Color} $row-hover-text-color [null] - The hover row text color.
-/// @param {Color} $row-border-color [null] - The row bottom border color.
+/// @param {Color} $header-border-color [null] - The color used for header borders. Auto-derived from header-background.
+/// @param {Color} $header-selected-background [null] - The table header background color when selected. Auto-derived from header-background.
+/// @param {Color} $header-selected-text-color [null] - The table header text color when selected. Auto-derived from header-selected-background.
+/// @param {Color} $sorted-header-icon-color [null] - The sort icon color when sorted. Auto-derived from header-background.
+/// @param {color} $sortable-header-icon-hover-color [null] - The icon color on hover when sortable. Auto-derived from sorted-header-icon-color.
+/// @param {Color} $content-background [null] - The table body background color. PRIMARY - derives content-text-color, row backgrounds, cell backgrounds, borders.
+/// @param {Color} $content-text-color [null] - The table body text color. Auto-derived from content-background.
+/// @param {Color} $ghost-header-text-color [null] - The dragged header text color. Auto-derived from ghost-header-background.
+/// @param {Color} $ghost-header-icon-color [null] - The dragged header icon color. Auto-derived from ghost-header-background.
+/// @param {Color} $ghost-header-background [null] - The dragged header background color. PRIMARY - derives ghost-header-text-color, ghost-header-icon-color.
+/// @param {Color} $row-odd-background [null] - The background color of odd rows. Auto-derived from content-background.
+/// @param {Color} $row-even-background [null] - The background color of even rows. Auto-derived from content-background.
+/// @param {Color} $row-odd-text-color [null] - The text color of odd rows. Auto-derived from row-odd-background.
+/// @param {Color} $row-even-text-color [null] - The text color of even rows. Auto-derived from row-even-background.
+/// @param {Color} $row-selected-background [null] - The selected row background color. Auto-derived from content-background.
+/// @param {Color} $row-selected-hover-background [null] - The selected row hover background color. Auto-derived from row-selected-background.
+/// @param {Color} $row-selected-text-color [null] - The selected row text color. Auto-derived from row-selected-background.
+/// @param {Color} $row-selected-hover-text-color [null] - The selected row hover text color. Auto-derived from row-selected-hover-background.
+/// @param {Color} $row-hover-background [null] - The hover row background color. Auto-derived from content-background.
+/// @param {Color} $row-hover-text-color [null] - The hover row text color. Auto-derived from row-hover-background.
+/// @param {Color} $row-border-color [null] - The row bottom border color. Auto-derived from content-background.
 /// @param {String} $pinned-border-width [null] - The border width of the pinned border.
 /// @param {String} $pinned-border-style [null] - The CSS border style of the pinned border.
-/// @param {Color} $pinned-border-color [null] - The color of the pinned border.
-/// @param {Color} $cell-active-border-color [null] - The border color for the currently active(focused) cell.
-/// @param {Color} $cell-selected-background [null] - The selected cell background color.
-/// @param {Color} $cell-selected-text-color [null] - The selected cell text color.
-/// @param {Color} $cell-editing-background [null] - The background color of the cell being edited.
-/// @param {Color} $cell-editing-foreground [null] - The cell text color in edit mode.
-/// @param {Color} $cell-editing-focus-foreground [null] - The cell text color in edit mode on focus.
-/// @param {Color} $cell-edited-value-color [null] - The text color of a cell that has been edited.
-/// @param {Color} $cell-new-color [null] - The text color of a new, unedited cell. Used when adding new row in a grid.
+/// @param {Color} $pinned-border-color [null] - The color of the pinned border. Auto-derived from content-background.
+/// @param {Color} $cell-active-border-color [null] - The border color for the active cell. Auto-derived from content-background.
+/// @param {Color} $cell-selected-background [null] - The selected cell background color. Auto-derived from content-background.
+/// @param {Color} $cell-selected-text-color [null] - The selected cell text color. Auto-derived from cell-selected-background.
+/// @param {Color} $cell-editing-background [null] - The background of the cell being edited. Auto-derived from content-background.
+/// @param {Color} $cell-editing-foreground [null] - The cell text color in edit mode. Auto-derived from cell-editing-background.
+/// @param {Color} $cell-editing-focus-foreground [null] - The cell text color in edit mode on focus. Auto-derived from cell-editing-background.
+/// @param {Color} $cell-edited-value-color [null] - The text color of an edited cell.
+/// @param {Color} $cell-new-color [null] - The text color of a new cell.
 /// @param {Color} $cell-disabled-color [null] - The text color of a disabled cell.
-/// @param {Color} $cell-selected-within-background [null] - The background of the selected cell inside a selected row/column.
-/// @param {Color} $cell-selected-within-text-color [null] - The color of the selected cell inside a selected row/column.
-/// @param {Color} $edit-mode-color [null] - The color applied around the row/cell when in editing mode.
-/// @param {Color} $edited-row-indicator [null] - The color applied to the edited row indicator line.
+/// @param {Color} $cell-selected-within-background [null] - The background of selected cell in selected row. Auto-derived from row-selected-background.
+/// @param {Color} $cell-selected-within-text-color [null] - The color of selected cell in selected row. Auto-derived from cell-selected-within-background.
+/// @param {Color} $edit-mode-color [null] - The color around the row/cell in edit mode. Auto-derived from content-background.
+/// @param {Color} $edited-row-indicator [null] - The edited row indicator line color.
 /// @param {Color} $resize-line-color [null] - The table header resize line color.
-/// @param {Color} $drop-indicator-color [null] - The color applied to the line between the columns when dragging a column.
-/// @param {Color} $grouparea-background [null] - The grid group area background color.
-/// @param {Color} $grouparea-color [null] - The grid group area color.
-/// @param {Color} $group-row-background [null] - The grid group row background color.
-/// @param {Color} $group-row-selected-background [null] - The drop area background on drop color.
+/// @param {Color} $drop-indicator-color [null] - The color of the column drag indicator line.
+/// @param {Color} $grouparea-background [null] - The grid group area background color. PRIMARY - derives grouparea-color, drop-area-background. Auto-derived from header-background.
+/// @param {Color} $grouparea-color [null] - The grid group area color. Auto-derived from grouparea-background.
+/// @param {Color} $group-row-background [null] - The grid group row background color. PRIMARY - derives expand-icon-color, group-row-selected-background, group-label-text, group-count-background. Auto-derived from header-background.
+/// @param {Color} $group-row-selected-background [null] - The group row selected background. Auto-derived from group-row-background.
 /// @param {Color} $group-label-column-name-text [null] - The grid group row column name text color.
 /// @param {Color} $group-label-icon [null] - The grid group row icon color.
-/// @param {Color} $group-label-text [null] - The grid group row text color.
-/// @param {Color} $expand-all-icon-color [null] - The grid header expand all group rows icon color.
-/// @param {Color} $expand-all-icon-hover-color [null] - The grid header expand all group rows icon hover color.
-/// @param {Color} $expand-icon-color [null] - The grid row expand icon color.
-/// @param {Color} $expand-icon-hover-color [null] - The grid row expand icon hover color.
-/// @param {Color} $active-expand-icon-color [null] - The drop area background on drop color.
-/// @param {Color} $active-expand-icon-hover-color [null] - The drop area background on drop color.
-/// @param {Color} $group-count-background [null] - The grid group row cont badge background color.
-/// @param {Color} $group-count-text-color [null] - The grid group row cont badge text color.
-/// @param {Color} $drop-area-text-color [null] - The drop area text color.
-/// @param {Color} $drop-area-icon-color [null] - The drop area icon color.
-/// @param {Color} $drop-area-background [null] - The drop area background color.
-/// @param {Color} $drop-area-on-drop-background [null] - The drop area background on drop color.
-/// @param {Color} $filtering-header-background [null] - The background color of the filtered column header.
-/// @param {Color} $filtering-header-text-color [null] - The text color of the filtered column header.
-/// @param {Color} $filtering-row-background [null] - The background color of the filtering row.
-/// @param {Color} $filtering-row-text-color [null] - The text color of the filtering row.
-/// @param {Color} $excel-filtering-header-foreground [null] - The text color of the header in the excel style filtering.
-/// @param {Color} $excel-filtering-subheader-foreground [null] - The text color of the sorting and moving headers in the excel style filtering.
-/// @param {Color} $excel-filtering-actions-foreground [null] - The text color of the excel style filtering options.
-/// @param {Color} $excel-filtering-actions-hover-foreground [null] - The text color of the excel style filtering options in hover/focus state.
-/// @param {Color} $excel-filtering-actions-disabled-foreground [null] - The text color of the excel style filtering options in disabled state.
+/// @param {Color} $group-label-text [null] - The grid group row text color. Auto-derived from group-row-background or group-row-selected-background.
+/// @param {Color} $expand-all-icon-color [null] - The header expand all icon color. Auto-derived from header-background.
+/// @param {Color} $expand-all-icon-hover-color [null] - The header expand all icon hover color. Auto-derived from header-background.
+/// @param {Color} $expand-icon-color [null] - The grid row expand icon color. Auto-derived from group-row-background or group-row-selected-background.
+/// @param {Color} $expand-icon-hover-color [null] - The grid row expand icon hover color. Auto-derived from expand-icon-color.
+/// @param {Color} $active-expand-icon-color [null] - The active expand icon color.
+/// @param {Color} $active-expand-icon-hover-color [null] - The active expand icon hover color.
+/// @param {Color} $group-count-background [null] - The group row count badge background. Auto-derived from group-row-background or group-row-selected-background.
+/// @param {Color} $group-count-text-color [null] - The group row count badge text color. Auto-derived from group-count-background.
+/// @param {Color} $drop-area-text-color [null] - The drop area text color. Auto-derived from drop-area-background.
+/// @param {Color} $drop-area-icon-color [null] - The drop area icon color. Auto-derived from drop-area-background.
+/// @param {Color} $drop-area-background [null] - The drop area background color. Auto-derived from grouparea-background.
+/// @param {Color} $drop-area-on-drop-background [null] - The drop area background on drop. Auto-derived from drop-area-background.
+/// @param {Color} $filtering-header-background [null] - The filtered column header background. Auto-derived from header-background.
+/// @param {Color} $filtering-header-text-color [null] - The filtered column header text color. Auto-derived from filtering-header-background.
+/// @param {Color} $filtering-row-background [null] - The filtering row background. Auto-derived from header-background.
+/// @param {Color} $filtering-row-text-color [null] - The filtering row text color. Auto-derived from filtering-row-background.
+/// @param {Color} $excel-filtering-header-foreground [null] - The excel filtering header text color. Auto-derived from filtering-row-background.
+/// @param {Color} $excel-filtering-subheader-foreground [null] - The excel filtering subheader text color. Auto-derived from filtering-row-background.
+/// @param {Color} $excel-filtering-actions-foreground [null] - The excel filtering actions text color. Auto-derived from filtering-row-background.
+/// @param {Color} $excel-filtering-actions-hover-foreground [null] - The excel filtering actions hover text color.
+/// @param {Color} $excel-filtering-actions-disabled-foreground [null] - The excel filtering actions disabled text color. Auto-derived from filtering-row-background.
 /// @param {Color} $tree-filtered-text-color [null] - Grouping row background color on focus.
-/// @param {Color} $summaries-patch-background [null] - The leading summaries patch backround. Used in hierarchical grids.
+/// @param {Color} $summaries-patch-background [null] - The leading summaries patch background.
 /// @param {Color} $row-highlight [null] - The grid row highlight indication color.
 /// @param {box-shadow} $grid-shadow [null] - The shadow of the grid.
-/// @param {box-shadow} $drag-shadow [null] - The shadow used for movable elements (ex. column headers).
+/// @param {box-shadow} $drag-shadow [null] - The shadow for movable elements.
 /// @param {color} $row-ghost-background [null] - The dragged row background color.
 /// @param {color} $row-drag-color [null] - The row drag handle color.
 /// @param {Color} $grid-border-color [null] - The color of the grid border.
-/// @param {List} $drop-area-border-radius [null] - The border radius used for column drop area.
+/// @param {List} $drop-area-border-radius [null] - The border radius for column drop area.
 /// @requires $light-material-schema
 /// @example scss Change the header background color
 ///   $my-grid-theme: grid-theme($header-background: black);

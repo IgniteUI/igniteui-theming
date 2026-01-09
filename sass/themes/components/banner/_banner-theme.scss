@@ -13,14 +13,18 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified, text/icon color
-/// will be assigned automatically to a contrasting color.
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Banner Theme
 ///
-/// @param {Color} $banner-background [null] - The color used for the banner background.
-/// @param {Color} $banner-message-color [null] - The color used for the banner label.
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$banner-background` - The banner background color. Auto-derives: banner-message-color, banner-illustration-color.
+///
+/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $banner-background [null] - The color used for the banner background. PRIMARY - derives message and illustration colors.
+/// @param {Color} $banner-message-color [null] - The color used for the banner label. Auto-derived from banner-background.
 /// @param {Color} $banner-border-color [null] - The color used for the banner border.
-/// @param {Color} $banner-illustration-color [null] - The color used for the banner illustration.
+/// @param {Color} $banner-illustration-color [null] - The color used for the banner illustration. Auto-derived from banner-background.
 /// @param {Number} $border-radius [null] - The border-radius for the banner.
 ///
 /// @requires $light-material-schema

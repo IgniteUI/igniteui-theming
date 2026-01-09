@@ -14,12 +14,18 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Snackbar Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$background` - The background color. Auto-derives: text-color, button-color.
+///
 /// If you specify a background color, but do not specify colors for either the
 /// button or the text, their colors will be set automatically to a contrasting color.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The background color used in the snackbar.
-/// @param {Color} $text-color [null] - The text color used in the snackbar.
-/// @param {Color} $button-color [null] - The button color used in the snackbar.
+/// @param {Color} $background [null] - The background color used in the snackbar. PRIMARY - derives text-color, button-color.
+/// @param {Color} $text-color [null] - The text color used in the snackbar. Auto-derived from background.
+/// @param {Color} $button-color [null] - The button color used in the snackbar. Auto-derived from background.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the snackbar.
 /// @param {List} $border-radius [null] - The border radius used for the snackbar component.
 /// @requires $light-material-schema

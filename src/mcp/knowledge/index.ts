@@ -126,5 +126,47 @@ export {
   TYPEFACES as TYPEFACE_PRESETS,
   TYPE_SCALES as TYPE_SCALE_PRESETS,
   PALETTES as PALETTES_PRESETS,
-  ELEVATIONS as ELEVATIONS_PRESETS
+  ELEVATIONS as ELEVATIONS_PRESETS,
 } from './platforms/common.js';
+
+// Component Themes
+export {
+  type ComponentToken,
+  type ComponentTheme,
+  COMPONENT_THEMES,
+  COMPONENT_NAMES,
+  getComponentTheme,
+  getTokenNames,
+  validateTokens,
+  searchComponents,
+} from './component-themes.js';
+
+// Component Selectors
+export {
+  type ComponentSelectors,
+  type CompoundComponentInfo,
+  type CompoundInnerSelectors,
+  COMPONENT_SELECTORS,
+  COMPONENT_VARIANTS,
+  VARIANT_THEME_NAMES,
+  COMPOUND_COMPONENTS,
+  getComponentSelector,
+  hasVariants,
+  getVariants,
+  isVariantTheme,
+  getCompoundComponentInfo,
+  isCompoundComponent,
+  getPartSelector,
+  getAngularInnerSelector,
+  getInnerSelector,
+  hasPartSelectors,
+  hasAngularInnerSelectors,
+  hasInnerSelectors,
+  getAllPartSelectors,
+  getAllAngularInnerSelectors,
+  getAllInnerSelectors,
+  // Platform availability
+  isComponentAvailable,
+  getComponentsForPlatform,
+  getComponentPlatformAvailability,
+} from './component-selectors.js';

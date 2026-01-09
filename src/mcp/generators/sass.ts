@@ -15,17 +15,14 @@ import type {
   GeneratedCode,
   DesignSystem,
   ThemeVariant,
+  Platform,
 } from '../utils/types.js';
-import {
-  quoteFontFamily,
-  generateUseStatement,
-  toVariableName,
-  generateHeader,
-} from '../utils/sass.js';
+import {quoteFontFamily, generateUseStatement, toVariableName, generateHeader} from '../utils/sass.js';
 import {
   TYPOGRAPHY_PRESETS,
   generateAngularThemeSass,
   generateWebComponentsThemeSass,
+  getComponentTheme,
 } from '../knowledge/index.js';
 
 // Re-export utilities for external use
@@ -169,7 +166,7 @@ export function generateTheme(input: CreateThemeInput): GeneratedCode {
 function generateAngularTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
-  variant: ThemeVariant
+  variant: ThemeVariant,
 ): GeneratedCode {
   const code = generateAngularThemeSass({
     designSystem,
@@ -208,7 +205,7 @@ function generateAngularTheme(
 function generateWebComponentsTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
-  variant: ThemeVariant
+  variant: ThemeVariant,
 ): GeneratedCode {
   const code = generateWebComponentsThemeSass({
     designSystem,
@@ -254,7 +251,7 @@ function generateWebComponentsTheme(
 function generateGenericTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
-  variant: ThemeVariant
+  variant: ThemeVariant,
 ): GeneratedCode {
   const themeName = input.name ? toVariableName(input.name) : `${variant}-${designSystem}`;
   const paletteVar = `$${themeName}-palette`;
@@ -318,5 +315,80 @@ function generateGenericTheme(
     code,
     description: `Generated complete ${variant} theme based on ${designSystem} design system (platform-agnostic)`,
     variables,
+  };
+}
+
+// ============================================================================
+// Component Theme Generator
+// ============================================================================
+
+/**
+ * Input for generating a component theme.
+ */
+export interface CreateComponentThemeInput {
+  /** Target platform */
+  platform?: Platform;
+  /** Component name (e.g., "flat-button", "avatar") */
+  component: string;
+  /** Token name-value pairs */
+  tokens: Record<string, string | number>;
+  /** Optional CSS selector to scope the theme */
+  selector?: string;
+  /** Optional custom variable name */
+  name?: string;
+}
+
+/**
+ * Generate Sass code for a component theme.
+ */
+export function generateComponentTheme(input: CreateComponentThemeInput): GeneratedCode {
+  const theme = getComponentTheme(input.component);
+
+  if (!theme) {
+    throw new Error(`Unknown component: ${input.component}`);
+  }
+
+  const themeFn = theme.themeFunctionName;
+  const themeName = input.name ? `$${toVariableName(input.name)}` : `$custom-${input.component}-theme`;
+
+  // Build token arguments
+  const tokenArgs: string[] = [];
+  for (const [tokenName, value] of Object.entries(input.tokens)) {
+    // Convert value to string if needed
+    const stringValue = typeof value === 'number' ? String(value) : value;
+    tokenArgs.push(`$${tokenName}: ${stringValue}`);
+  }
+
+  // Determine selector
+  let selector = input.selector || ':root';
+
+  // Generate the code
+  const sections: string[] = [
+    generateHeader(`Custom ${input.component} theme`),
+    generateUseStatement(input.platform),
+    '',
+    `// Custom ${input.component} theme`,
+    `${themeName}: ${themeFn}(`,
+  ];
+
+  // Add token arguments with proper indentation
+  if (tokenArgs.length > 0) {
+    sections.push(`  ${tokenArgs.join(',\n  ')}`);
+  }
+  sections.push(');');
+
+  // Add css-vars mixin to apply the theme
+  sections.push('');
+  sections.push(`// Apply the theme to ${selector}`);
+  sections.push(`${selector} {`);
+  sections.push(`  @include css-vars(${themeName});`);
+  sections.push('}');
+
+  const code = sections.join('\n') + '\n';
+
+  return {
+    code,
+    description: `Generated custom ${input.component} theme with ${Object.keys(input.tokens).length} token(s)`,
+    variables: [themeName],
   };
 }

@@ -12,13 +12,20 @@
 /// @access public
 ////
 
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Splitter Theme
 ///
-/// @param {Color} $bar-color [null] - The background color of the bar.
-/// @param {Color} $handle-color [null] - The color for the bar drag handle.
-/// @param {Color} $expander-color [null] - The color for the arrow expander's.
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$bar-color` - The bar background color. Auto-derives: handle-color, expander-color, focus-color.
+///
+/// Setting bar-color automatically calculates contrasting colors for handle and expander.
+/// Focus color behavior varies by variant (indigo uses same as bar-color, others use shaded version).
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $bar-color [null] - The background color of the bar. PRIMARY - derives handle, expander, focus colors.
+/// @param {Color} $handle-color [null] - The color for the bar drag handle. Auto-derived from bar-color.
+/// @param {Color} $expander-color [null] - The color for the arrow expander's. Auto-derived from bar-color.
 /// @param {List} $border-radius [null] - the border radios of the splitter bar drag handle
-/// @param {Color} $focus-color [null] - The color used for focused splitter bar.
+/// @param {Color} $focus-color [null] - The color used for focused splitter bar. Auto-derived from bar-color (variant-dependent).
 /// @param {Number} $size [null] - The size of the splitter, its width for vertical and height for horizontal splitter.
 /// @requires $light-material-schema
 /// @example scss Set a custom expander color

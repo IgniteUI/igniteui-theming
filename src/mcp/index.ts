@@ -16,12 +16,16 @@ import {
   createTypographySchema,
   createElevationsSchema,
   createThemeSchema,
+  getComponentDesignTokensSchema,
+  createComponentThemeSchema,
   handleDetectPlatform,
   handleCreatePalette,
   handleCreateCustomPalette,
   handleCreateTypography,
   handleCreateElevations,
   handleCreateTheme,
+  handleGetComponentDesignTokens,
+  handleCreateComponentTheme,
 } from './tools/index.js';
 import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
 
@@ -178,6 +182,42 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = createThemeSchema.parse(params);
       return await handleCreateTheme(validated);
+    },
+  );
+
+  // get_component_design_tokens tool
+  server.registerTool(
+    'get_component_design_tokens',
+    {
+      title: 'Get Component Design Tokens',
+      description: TOOL_DESCRIPTIONS.get_component_design_tokens,
+      inputSchema: {
+        component: getComponentDesignTokensSchema.shape.component,
+      },
+    },
+    async (params) => {
+      const validated = getComponentDesignTokensSchema.parse(params);
+      return await handleGetComponentDesignTokens(validated);
+    },
+  );
+
+  // create_component_theme tool
+  server.registerTool(
+    'create_component_theme',
+    {
+      title: 'Create Component Theme',
+      description: TOOL_DESCRIPTIONS.create_component_theme,
+      inputSchema: {
+        platform: createComponentThemeSchema.shape.platform,
+        component: createComponentThemeSchema.shape.component,
+        tokens: createComponentThemeSchema.shape.tokens,
+        selector: createComponentThemeSchema.shape.selector,
+        name: createComponentThemeSchema.shape.name,
+      },
+    },
+    async (params) => {
+      const validated = createComponentThemeSchema.parse(params);
+      return await handleCreateComponentTheme(validated);
     },
   );
 }

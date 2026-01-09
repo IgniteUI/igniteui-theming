@@ -13,23 +13,31 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified, text/icon color
-/// will be assigned automatically to a contrasting color.
+/// Time Picker Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$background-color` - The picker panel background. Auto-derives: text-color, selected-text-color, active-item-background, border-color.
+/// - `$selected-text-color` or `$active-item-background` - The selected/active accent color. These derive from each other and from header-background.
+/// - `$header-background` - The header background. Auto-derives: header-hour-text-color. Also derivable from selected-text-color or background-color.
+///
+/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
 /// Does ___not___ apply for disabled state colors.
+/// Selected-text-color and active-item-background are interconnected - setting one derives the other.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $text-color [null] - The text color of a open time picker.
-/// @param {Color} $hover-text-color [null] - The hover text color of a open time picker.
-/// @param {Color} $selected-text-color [null] -  The text color of a selected item in time picker.
-/// @param {Color} $active-item-background [null] - The background color for current item in focused column inside the time picker.
-/// @param {Color} $active-item-foreground [null] - The foreground color for current item in focused column inside the time picker.
-/// @param {Color} $disabled-text-color [null] - The text color for disabled values.
-/// @param {Color} $disabled-item-background [null] - The background color for disabled values .
-/// @param {Color} $header-background [null] - The header background color of a time picker.
-/// @param {Color} $header-hour-text-color [null] - The header hour text color of a time picker.
-/// @param {Color} $background-color [null] - The time-picker panel background color.
+/// @param {Color} $text-color [null] - The text color of a open time picker. Auto-derived from background-color.
+/// @param {Color} $hover-text-color [null] - The hover text color of a open time picker. Auto-derived from text-color.
+/// @param {Color} $selected-text-color [null] -  The text color of a selected item in time picker. Auto-derived from background-color or active-item-background.
+/// @param {Color} $active-item-background [null] - The background color for current item in focused column inside the time picker. Auto-derived from selected-text-color or background-color.
+/// @param {Color} $active-item-foreground [null] - The foreground color for current item in focused column inside the time picker. Auto-derived from active-item-background.
+/// @param {Color} $disabled-text-color [null] - The text color for disabled values. Auto-derived from disabled-item-background.
+/// @param {Color} $disabled-item-background [null] - The background color for disabled values.
+/// @param {Color} $header-background [null] - The header background color of a time picker. Auto-derived from selected-text-color or background-color.
+/// @param {Color} $header-hour-text-color [null] - The header hour text color of a time picker. Auto-derived from header-background.
+/// @param {Color} $background-color [null] - The time-picker panel background color. PRIMARY - derives text, selected, active, border colors.
 /// @param {Number} $time-item-size [null] - The height of the time item.
-/// @param {Color} $divider-color [null] - The color for the actions area divider.
-/// @param {Color} $border-color [null] - The border color around the time picker.
+/// @param {Color} $divider-color [null] - The color for the actions area divider. Auto-derived from border-color.
+/// @param {Color} $border-color [null] - The border color around the time picker. Auto-derived from background-color.
 /// @param {box-shadow} $modal-shadow [null] - The custom shadow to be used for the time picker in modal mode.
 /// @param {box-shadow} $dropdown-shadow [null] - The custom shadow to be used for the time picker in dropdown mode.
 /// @param {List} $border-radius [null] - The border radius used for the outline of the picker.

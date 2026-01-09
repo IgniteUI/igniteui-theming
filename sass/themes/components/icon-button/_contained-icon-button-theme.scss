@@ -13,24 +13,32 @@
 /// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
 ////
 
-/// Generates a theme map for the contained variant of the icon button component.
+/// Contained Icon Button Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$background` - Background color for the contained icon button. Auto-derives: foreground, hover-background, focus-background, active-background, and their foreground colors, plus shadow-color, disabled-background.
+/// - `$foreground` - Foreground (icon) color. Used as fallback for state foreground colors. Auto-derived from background.
+/// - `$border-color` - Border color. Auto-derives: focus-border-color.
+///
+/// Setting background automatically calculates a contrasting foreground color and derives all state backgrounds with their contrasting foreground colors. Derivation behavior varies by design variant (material, fluent, bootstrap, indigo).
+///
 /// @param {Map} $schema [$light-material-schema] - The schema map or icon-button schema to use.
-/// @param {Color} $background [null] - Background color for the contained icon button.
-/// @param {Color} $foreground [null] - Foreground (icon) color.
-/// @param {Color} $shadow-color [null] - Shadow color for the icon button.
-/// @param {Color} $hover-background [null] - Background color on hover.
-/// @param {Color} $hover-foreground [null] - Foreground color on hover.
-/// @param {Color} $focus-background [null] - Background color on focus.
-/// @param {Color} $focus-foreground [null] - Foreground color on focus.
-/// @param {Color} $focus-hover-background [null] - Background color on focus + hover.
-/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover.
-/// @param {Color} $active-background [null] - Background color when active.
-/// @param {Color} $active-foreground [null] - Foreground color when active.
+/// @param {Color} $background [null] - Background color for the contained icon button. PRIMARY - derives foreground, hover-background, focus-background, active-background.
+/// @param {Color} $foreground [null] - Foreground (icon) color. Auto-derived from background.
+/// @param {Color} $shadow-color [null] - Shadow color. Auto-derived from focus-background.
+/// @param {Color} $hover-background [null] - Background color on hover. Auto-derived from background.
+/// @param {Color} $hover-foreground [null] - Foreground color on hover. Auto-derived from foreground or hover-background.
+/// @param {Color} $focus-background [null] - Background color on focus. Auto-derived from background.
+/// @param {Color} $focus-foreground [null] - Foreground color on focus. Auto-derived from foreground or focus-background.
+/// @param {Color} $focus-hover-background [null] - Background color on focus + hover. Auto-derived from focus-background.
+/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover. Auto-derived from foreground or focus-hover-background.
+/// @param {Color} $active-background [null] - Background color when active. Auto-derived from background.
+/// @param {Color} $active-foreground [null] - Foreground color when active. Auto-derived from foreground or active-background.
 /// @param {Length} $border-radius [null] - Border radius for the icon button.
-/// @param {Color} $border-color [null] - Border color.
-/// @param {Color} $focus-border-color [null] - Border color on focus.
-/// @param {Color} $disabled-background [null] - Background color when disabled.
-/// @param {Color} $disabled-foreground [null] - Foreground color when disabled.
+/// @param {Color} $border-color [null] - Border color. PRIMARY - derives focus-border-color.
+/// @param {Color} $focus-border-color [null] - Border color on focus. Auto-derived from foreground or border-color.
+/// @param {Color} $disabled-background [null] - Background color when disabled. Auto-derived from background (bootstrap/indigo).
+/// @param {Color} $disabled-foreground [null] - Foreground color when disabled. Auto-derived from foreground or disabled-background.
 /// @param {Color} $disabled-border-color [null] - Border color when disabled.
 /// @param {Length} $size [null] - Size of the icon button.
 /// @requires $light-material-schema

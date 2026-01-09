@@ -9,6 +9,8 @@ export {
   createTypographySchema,
   createElevationsSchema,
   createThemeSchema,
+  getComponentDesignTokensSchema,
+  createComponentThemeSchema,
   platformSchema,
   type DetectPlatformParams,
   type CreatePaletteParams,
@@ -16,6 +18,8 @@ export {
   type CreateTypographyParams,
   type CreateElevationsParams,
   type CreateThemeParams,
+  type GetComponentDesignTokensParams,
+  type CreateComponentThemeParams,
   type Platform,
 } from './schemas.js';
 
@@ -26,4 +30,6 @@ export {
   handleCreateTypography,
   handleCreateElevations,
   handleCreateTheme,
+  handleGetComponentDesignTokens,
+  handleCreateComponentTheme,
 } from './handlers/index.js';
