@@ -1,6 +1,7 @@
 name: Npm.js deploy
 
 permissions:
+  id-token: write
   contents: read
 
 on:
@@ -50,5 +51,3 @@ jobs:
       - name: Publish igniteui-theming
         run: npm publish --tag ${NPM_TAG}
         working-directory: ./
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
