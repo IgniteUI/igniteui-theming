@@ -1,6 +1,7 @@
 name: Npm.js deploy
 
 permissions:
+  id-token: write
   contents: read
 
 on:
@@ -14,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -50,5 +51,3 @@ jobs:
       - name: Publish igniteui-theming
         run: npm publish --tag ${NPM_TAG}
         working-directory: ./
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
