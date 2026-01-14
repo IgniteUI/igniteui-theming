@@ -13,23 +13,32 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// Returns a map containing all style properties related to the theming of the tree component.
+/// Tree Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$background` - The node background. Auto-derives: foreground, all state backgrounds (selected, active, active-selected, disabled), hover colors.
+/// - `$background-selected` - The selected node background. Auto-derives: foreground-selected, hover-selected-color.
+/// - `$background-active` - The active node background. Auto-derives: foreground-active, background-active-selected.
+///
+/// Setting background cascades through all node states (selected, active, disabled).
+/// Each state derives its own foreground (text) color from its background.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} background [null] - The background color used for the tree node.
-/// @param {Color} foreground [null] - The color used for the tree node content.
+/// @param {Color} background [null] - The background color used for the tree node. PRIMARY - derives all state colors.
+/// @param {Color} foreground [null] - The color used for the tree node content. Auto-derived from background.
 /// @param {Color} icon-color [null] - The color used for the tree node icon.
-/// @param {Color} background-selected [null] - The background color used for the selected tree node.
-/// @param {Color} foreground-selected [null] - The color used for the content of the selected tree node.
-/// @param {Color} background-active [null] - The background color used for the active tree node.
-/// @param {Color} foreground-active [null] - The color used for the content of the active tree node.
-/// @param {Color} background-active-selected [null] - The background color used for the active selected tree node.
-/// @param {Color} foreground-active-selected [null] - The color used for the content of the active selected tree node.
-/// @param {Color} background-disabled [null] - The background color used for the tree node in disabled state.
-/// @param {Color} foreground-disabled [null] - The color used for the content of the disabled tree node.
+/// @param {Color} background-selected [null] - The background color used for the selected tree node. Auto-derived from background.
+/// @param {Color} foreground-selected [null] - The color used for the content of the selected tree node. Auto-derived from background-selected.
+/// @param {Color} background-active [null] - The background color used for the active tree node. Auto-derived from background.
+/// @param {Color} foreground-active [null] - The color used for the content of the active tree node. Auto-derived from background-active.
+/// @param {Color} background-active-selected [null] - The background color used for the active selected tree node. Auto-derived from background-active.
+/// @param {Color} foreground-active-selected [null] - The color used for the content of the active selected tree node. Auto-derived from background-active-selected.
+/// @param {Color} background-disabled [null] - The background color used for the tree node in disabled state. Auto-derived from background.
+/// @param {Color} foreground-disabled [null] - The color used for the content of the disabled tree node. Auto-derived from background-disabled.
 /// @param {Color} drop-area-color [null] - The background color used for the tree node drop aria.
 /// @param {Color} border-color [null] - The outline shadow color used for tree node in focus state.
-/// @param {Color} hover-color [null] - The background color used for the tree node on hover.
-/// @param {Color} hover-selected-color [null] - The background color used for the selected tree node on hover.
+/// @param {Color} hover-color [null] - The background color used for the tree node on hover. Auto-derived from background.
+/// @param {Color} hover-selected-color [null] - The background color used for the selected tree node on hover. Auto-derived from background-selected.
 /// @requires $light-material-schema
 ///
 /// @example scss Change the tree background

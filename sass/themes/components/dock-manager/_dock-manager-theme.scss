@@ -15,7 +15,12 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
+/// Dock Manager Theme
+///
+/// NOTE: This component uses a pass-through pattern with meta.keywords($rest).
+/// All tokens are directly passed to the schema without automatic derivation.
+/// Each token must be set individually for full customization.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $accent-color [null] - Sets the pinned header background color, the joystick background and border colors, as well as the context menu background color.
 /// @param {Color} $active-color [null] - Sets the active text and border colors for tabs, panes, and menus.
