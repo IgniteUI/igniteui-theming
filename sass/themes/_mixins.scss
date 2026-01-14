@@ -1,3 +1,4 @@
+// stylelint-disable value-no-vendor-prefix
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:meta';
@@ -145,6 +146,29 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
     pointer-events: none;
     overflow: hidden;
     appearance: none;
+}
+
+/// Adds sizing CSS variables to the scope.
+/// @group themes
+/// @access private
+@mixin sizing() {
+    @property --ig-size-small {
+        syntax: '<number> | <integer>';
+        initial-value: 1;
+        inherits: true;
+    }
+
+    @property --ig-size-medium {
+        syntax: '<number> | <integer>';
+        initial-value: 2;
+        inherits: true;
+    }
+
+    @property --ig-size-large {
+        syntax: '<number> | <integer>';
+        initial-value: 3;
+        inherits: true;
+    }
 }
 
 /// Adds the required CSS properties so that the scope can react to size changes.

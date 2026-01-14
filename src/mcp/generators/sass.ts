@@ -2,9 +2,11 @@
  * Sass code generator for Ignite UI Theming.
  * Generates valid Sass code that uses the igniteui-theming library.
  *
- * Supports two platforms:
+ * Supported platforms:
  * - Angular: Uses `igniteui-angular/theming` with `core()` and `theme()` mixins
  * - Web Components: Uses `igniteui-theming` directly with individual mixins
+ * - Blazor: Uses `igniteui-theming` directly with individual mixins
+ * - React: Uses `igniteui-theming` directly with individual mixins
  */
 
 import type {
