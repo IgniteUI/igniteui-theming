@@ -3,11 +3,13 @@
  */
 
 import {generatePalette} from '../../generators/sass.js';
+import {generatePaletteCss, formatCssOutput} from '../../generators/css.js';
 import type {CreatePaletteParams} from '../schemas.js';
 import {validatePaletteColors, formatValidationResult, generateWarningComments} from '../../validators/index.js';
 
 export async function handleCreatePalette(params: CreatePaletteParams) {
   const variant = params.variant ?? 'light';
+  const output = params.output ?? 'sass';
 
   // Validate surface and gray colors against the variant
   const validation = await validatePaletteColors({
@@ -16,6 +18,82 @@ export async function handleCreatePalette(params: CreatePaletteParams) {
     gray: params.gray,
   });
 
+  // Branch based on output format
+  if (output === 'css') {
+    return handleCssOutput(params, validation);
+  }
+
+  return handleSassOutput(params, validation);
+}
+
+/**
+ * Handle CSS output format - generates CSS custom properties directly.
+ */
+async function handleCssOutput(
+  params: CreatePaletteParams,
+  validation: Awaited<ReturnType<typeof validatePaletteColors>>,
+) {
+  try {
+    const result = await generatePaletteCss({
+      primary: params.primary,
+      secondary: params.secondary,
+      surface: params.surface,
+      gray: params.gray,
+      info: params.info,
+      success: params.success,
+      warn: params.warn,
+      error: params.error,
+      variant: params.variant,
+    });
+
+    const formattedCss = formatCssOutput(result.css, result.description);
+
+    // Build response text
+    const responseParts: string[] = [result.description];
+    responseParts.push('');
+    responseParts.push('Output format: CSS custom properties');
+
+    // Add validation warnings and tips
+    const validationText = formatValidationResult(validation);
+
+    if (validationText) {
+      responseParts.push('');
+      responseParts.push(validationText);
+    }
+
+    responseParts.push('');
+    responseParts.push('```css');
+    responseParts.push(formattedCss.trimEnd());
+    responseParts.push('```');
+
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: responseParts.join('\n'),
+        },
+      ],
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: `**Error generating CSS palette**\n\n${message}`,
+        },
+      ],
+    };
+  }
+}
+
+/**
+ * Handle Sass output format - generates Sass code using the palette() function.
+ */
+function handleSassOutput(
+  params: CreatePaletteParams,
+  validation: Awaited<ReturnType<typeof validatePaletteColors>>,
+) {
   // Generate the palette code
   const result = generatePalette({
     platform: params.platform,
@@ -58,6 +136,7 @@ export async function handleCreatePalette(params: CreatePaletteParams) {
 
   // Add validation warnings and tips
   const validationText = formatValidationResult(validation);
+
   if (validationText) {
     responseParts.push('');
     responseParts.push(validationText);

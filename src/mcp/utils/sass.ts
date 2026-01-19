@@ -125,7 +125,7 @@ export interface PaletteCodeOptions {
   /** Error state color */
   error?: string;
   /** Theme variant (affects surface default) */
-  variant?: ThemeVariant
+  variant?: ThemeVariant;
   /** Variable name for the palette (without $) */
   variableName?: string;
   /** Whether to use inline color values or reference Sass variables */
@@ -331,7 +331,8 @@ export function generateCustomPaletteCode(options: CustomPaletteCodeOptions): st
 
   for (let i = 0; i < colorGroups.length; i++) {
     const {name, def, shades, isGray} = colorGroups[i];
-    const isLast = i === colorGroups.length - 1;
+    // Always add comma after each color group since _meta comes last
+    const needsComma = true;
 
     if (def.mode === 'shades') {
       // Use shades() function
@@ -346,7 +347,7 @@ export function generateCustomPaletteCode(options: CustomPaletteCodeOptions): st
       } else {
         lines.push(`    (${shadesListStr})`);
       }
-      lines.push(`  )${isLast ? '' : ','}`);
+      lines.push(`  )${needsComma ? ',' : ''}`);
     } else {
       // Explicit shade map
       lines.push(`  '${name}': (`);
@@ -366,7 +367,7 @@ export function generateCustomPaletteCode(options: CustomPaletteCodeOptions): st
         lines.push(`    '${shade}-raw': ${color}${isLastShade ? '' : ','}`);
       }
 
-      lines.push(`  )${isLast ? '' : ','}`);
+      lines.push(`  )${needsComma ? ',' : ''}`);
     }
   }
 

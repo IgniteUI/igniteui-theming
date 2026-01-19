@@ -39,6 +39,14 @@ export const VARIANTS = ['light', 'dark'] as const;
 export const ELEVATION_PRESETS = ['material', 'indigo'] as const;
 
 /**
+ * Supported output formats for code generation.
+ *
+ * - sass: Generates Sass code using the igniteui-theming library functions
+ * - css: Generates CSS custom properties (variables) directly
+ */
+export const OUTPUT_FORMATS = ['sass', 'css'] as const;
+
+/**
  * Standard shade levels used in the theming system.
  */
 export const SHADE_LEVELS = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'] as const;
@@ -71,6 +79,11 @@ export type ThemeVariant = (typeof VARIANTS)[number];
  * Elevation preset type.
  */
 export type ElevationPreset = (typeof ELEVATION_PRESETS)[number];
+
+/**
+ * Output format for code generation.
+ */
+export type OutputFormat = (typeof OUTPUT_FORMATS)[number];
 
 /**
  * Standard shade level type.
@@ -215,7 +228,16 @@ export const ALL_COLOR_SHADES = [...SHADE_LEVELS, ...ACCENT_SHADE_LEVELS] as con
  * All palette color groups.
  * These are the color families that make up a complete palette.
  */
-export const PALETTE_COLOR_GROUPS = ['primary', 'secondary', 'gray', 'surface', 'info', 'success', 'warn', 'error'] as const;
+export const PALETTE_COLOR_GROUPS = [
+  'primary',
+  'secondary',
+  'gray',
+  'surface',
+  'info',
+  'success',
+  'warn',
+  'error',
+] as const;
 
 /**
  * Type for palette color group names.
@@ -227,7 +249,9 @@ export type PaletteColorGroup = (typeof PALETTE_COLOR_GROUPS)[number];
  * These groups use 14 shades (50-900, A100-A700).
  * Derived from PALETTE_COLOR_GROUPS to maintain single source of truth.
  */
-export const CHROMATIC_COLOR_GROUPS = PALETTE_COLOR_GROUPS.filter((g): g is Exclude<PaletteColorGroup, 'gray'> => g !== 'gray');
+export const CHROMATIC_COLOR_GROUPS = PALETTE_COLOR_GROUPS.filter(
+  (g): g is Exclude<PaletteColorGroup, 'gray'> => g !== 'gray',
+);
 
 /**
  * Type for chromatic color group names.

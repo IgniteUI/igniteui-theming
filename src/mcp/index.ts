@@ -28,6 +28,7 @@ import {
   handleCreateComponentTheme,
 } from './tools/index.js';
 import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
+import {withPreprocessing} from './utils/preprocessing.js';
 
 import {RESOURCE_DEFINITIONS, getResourceContent} from './resources/index.js';
 
@@ -77,6 +78,9 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_palette,
       inputSchema: {
         platform: createPaletteSchema.shape.platform,
+        variant: createPaletteSchema.shape.variant,
+        name: createPaletteSchema.shape.name,
+        output: createPaletteSchema.shape.output,
         primary: createPaletteSchema.shape.primary,
         secondary: createPaletteSchema.shape.secondary,
         surface: createPaletteSchema.shape.surface,
@@ -85,8 +89,6 @@ function registerTools(server: McpServer): void {
         success: createPaletteSchema.shape.success,
         warn: createPaletteSchema.shape.warn,
         error: createPaletteSchema.shape.error,
-        variant: createPaletteSchema.shape.variant,
-        name: createPaletteSchema.shape.name,
       },
     },
     async (params) => {
@@ -106,6 +108,7 @@ function registerTools(server: McpServer): void {
         variant: createCustomPaletteSchema.shape.variant,
         designSystem: createCustomPaletteSchema.shape.designSystem,
         name: createCustomPaletteSchema.shape.name,
+        output: createCustomPaletteSchema.shape.output,
         primary: createCustomPaletteSchema.shape.primary,
         secondary: createCustomPaletteSchema.shape.secondary,
         surface: createCustomPaletteSchema.shape.surface,
@@ -116,10 +119,7 @@ function registerTools(server: McpServer): void {
         error: createCustomPaletteSchema.shape.error,
       },
     },
-    async (params) => {
-      const validated = createCustomPaletteSchema.parse(params);
-      return await handleCreateCustomPalette(validated);
-    },
+    withPreprocessing(createCustomPaletteSchema, handleCreateCustomPalette),
   );
 
   // create_typography tool
@@ -132,13 +132,11 @@ function registerTools(server: McpServer): void {
         platform: createTypographySchema.shape.platform,
         fontFamily: createTypographySchema.shape.fontFamily,
         designSystem: createTypographySchema.shape.designSystem,
+        customScale: createTypographySchema.shape.customScale,
         name: createTypographySchema.shape.name,
       },
     },
-    async (params) => {
-      const validated = createTypographySchema.parse(params);
-      return handleCreateTypography(validated);
-    },
+    withPreprocessing(createTypographySchema, handleCreateTypography),
   );
 
   // create_elevations tool
@@ -215,10 +213,7 @@ function registerTools(server: McpServer): void {
         name: createComponentThemeSchema.shape.name,
       },
     },
-    async (params) => {
-      const validated = createComponentThemeSchema.parse(params);
-      return await handleCreateComponentTheme(validated);
-    },
+    withPreprocessing(createComponentThemeSchema, handleCreateComponentTheme),
   );
 }
 

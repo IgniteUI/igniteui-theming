@@ -9,7 +9,7 @@
  */
 
 import {describe, it, expect} from 'vitest';
-import {colorSchema} from '../../tools/schemas.js';
+import {colorSchema, createCustomPaletteSchema} from '../../tools/schemas.js';
 
 describe('colorSchema', () => {
   describe('hex colors', () => {
@@ -285,6 +285,173 @@ describe('colorSchema', () => {
     it('accepts calc() expressions inside color functions', () => {
       // While unusual, calc() can be used inside color functions
       expect(colorSchema.safeParse('rgb(calc(255 * 0.5) 0 0)').success).toBe(true);
+    });
+  });
+});
+
+describe('createCustomPaletteSchema', () => {
+  describe('color definition validation', () => {
+    it('rejects plain string colors for primary/secondary/surface', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: '#1976d2',
+        secondary: '#ff9800',
+        surface: '#fafafa',
+      });
+
+      expect(result.success).toBe(false);
+
+      if (!result.success) {
+        const paths = result.error.errors.map((e) => e.path.join('.'));
+
+        expect(paths).toContain('primary');
+        expect(paths).toContain('secondary');
+        expect(paths).toContain('surface');
+      }
+    });
+
+    it('accepts shades mode with baseColor', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'shades', baseColor: '#1976d2'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+      });
+
+      expect(result.success).toBe(true);
+    });
+
+    it('accepts explicit mode with all 14 shades for chromatic colors', () => {
+      const allShades = {
+        '50': '#e3f2fd',
+        '100': '#bbdefb',
+        '200': '#90caf9',
+        '300': '#64b5f6',
+        '400': '#42a5f5',
+        '500': '#2196f3',
+        '600': '#1e88e5',
+        '700': '#1976d2',
+        '800': '#1565c0',
+        '900': '#0d47a1',
+        A100: '#82b1ff',
+        A200: '#448aff',
+        A400: '#2979ff',
+        A700: '#2962ff',
+      };
+
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'explicit', shades: allShades},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+      });
+
+      expect(result.success).toBe(true);
+    });
+
+    it('rejects explicit mode with missing shades', () => {
+      const incompleteShades = {
+        '500': '#2196f3',
+        '700': '#1976d2',
+      };
+
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'explicit', shades: incompleteShades},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+      });
+
+      expect(result.success).toBe(false);
+    });
+
+    it('accepts gray with only 10 shades (no accent shades)', () => {
+      const grayShades = {
+        '50': '#fafafa',
+        '100': '#f5f5f5',
+        '200': '#eeeeee',
+        '300': '#e0e0e0',
+        '400': '#bdbdbd',
+        '500': '#9e9e9e',
+        '600': '#757575',
+        '700': '#616161',
+        '800': '#424242',
+        '900': '#212121',
+      };
+
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'shades', baseColor: '#1976d2'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+        gray: {mode: 'explicit', shades: grayShades},
+      });
+
+      expect(result.success).toBe(true);
+    });
+
+    it('rejects invalid mode value', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'invalid', baseColor: '#1976d2'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+      });
+
+      expect(result.success).toBe(false);
+    });
+
+    it('rejects shades mode without baseColor', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'shades'},
+        secondary: {mode: 'shades', baseColor: '#FF9800'},
+        surface: {mode: 'shades', baseColor: '#FAFAFA'},
+      });
+
+      expect(result.success).toBe(false);
+    });
+
+    it('rejects explicit mode without shades', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'explicit'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+      });
+
+      expect(result.success).toBe(false);
+    });
+  });
+
+  describe('optional parameters', () => {
+    it('accepts variant parameter', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'shades', baseColor: '#1976d2'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+        variant: 'dark',
+      });
+
+      expect(result.success).toBe(true);
+    });
+
+    it('accepts output parameter', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'shades', baseColor: '#1976d2'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+        output: 'css',
+      });
+
+      expect(result.success).toBe(true);
+    });
+
+    it('accepts all optional color groups', () => {
+      const result = createCustomPaletteSchema.safeParse({
+        primary: {mode: 'shades', baseColor: '#1976d2'},
+        secondary: {mode: 'shades', baseColor: '#ff9800'},
+        surface: {mode: 'shades', baseColor: '#fafafa'},
+        gray: {mode: 'shades', baseColor: '#9e9e9e'},
+        info: {mode: 'shades', baseColor: '#2196f3'},
+        success: {mode: 'shades', baseColor: '#4caf50'},
+        warn: {mode: 'shades', baseColor: '#ff9800'},
+        error: {mode: 'shades', baseColor: '#f44336'},
+      });
+
+      expect(result.success).toBe(true);
     });
   });
 });

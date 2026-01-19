@@ -11,7 +11,14 @@
 
 import {z} from 'zod';
 import {SHADE_LEVELS} from '../knowledge/index.js';
-import {PLATFORMS, DESIGN_SYSTEMS, VARIANTS, ELEVATION_PRESETS, ALL_COLOR_SHADES} from '../utils/types.js';
+import {
+  PLATFORMS,
+  DESIGN_SYSTEMS,
+  VARIANTS,
+  ELEVATION_PRESETS,
+  ALL_COLOR_SHADES,
+  OUTPUT_FORMATS,
+} from '../utils/types.js';
 import {PARAM_DESCRIPTIONS} from './descriptions.js';
 
 /**
@@ -66,6 +73,11 @@ export const designSystemSchema = z.enum(DESIGN_SYSTEMS).optional();
 export const elevationPresetSchema = z.enum(ELEVATION_PRESETS).optional();
 
 /**
+ * Output format schema - derived from OUTPUT_FORMATS constant.
+ */
+export const outputFormatSchema = z.enum(OUTPUT_FORMATS).optional();
+
+/**
  * Platform schema - derived from PLATFORMS constant.
  */
 export const platformSchema = z.enum(PLATFORMS).optional().describe(PARAM_DESCRIPTIONS.platform);
@@ -92,6 +104,7 @@ export const createPaletteSchema = z.object({
   error: colorSchema.optional().describe(PARAM_DESCRIPTIONS.error),
   variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 });
 
 /**
@@ -155,7 +168,7 @@ export type CreateElevationsParams = z.infer<typeof createElevationsSchema>;
 export type CreateThemeParams = z.infer<typeof createThemeSchema>;
 
 // Re-export canonical types from utils/types.ts for convenience
-export type {Platform, DesignSystem, ThemeVariant, ElevationPreset} from '../utils/types.js';
+export type {Platform, DesignSystem, ThemeVariant, ElevationPreset, OutputFormat} from '../utils/types.js';
 
 // ============================================================================
 // Custom Palette Schemas
@@ -221,6 +234,7 @@ export const createCustomPaletteSchema = z.object({
   variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 
   // Required colors - use colorDefinition description for detailed guidance
   primary: colorDefinitionSchema.describe(PARAM_DESCRIPTIONS.colorDefinition),

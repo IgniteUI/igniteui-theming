@@ -3,6 +3,7 @@
  */
 
 import {generateCustomPaletteCode, generateUseStatement, toVariableName, generateHeader} from '../../utils/sass.js';
+import {generateCustomPaletteCss, formatCssOutput} from '../../generators/css.js';
 import {PALETTE_PRESETS, type PalettePresetName} from '../../knowledge/palettes.js';
 import {validateCustomPalette, formatCustomPaletteValidation} from '../../validators/index.js';
 import type {CreateCustomPaletteParams} from '../schemas.js';
@@ -11,6 +12,7 @@ import type {ShadesBasedColor, ColorDefinition, GrayDefinition} from '../../util
 export async function handleCreateCustomPalette(params: CreateCustomPaletteParams) {
   const variant = params.variant ?? 'light';
   const designSystem = params.designSystem ?? 'material';
+  const output = params.output ?? 'sass';
   const presetName = `${variant}-${designSystem}-palette` as PalettePresetName;
   const preset = PALETTE_PRESETS[presetName];
 
@@ -77,11 +79,125 @@ export async function handleCreateCustomPalette(params: CreateCustomPaletteParam
     };
   }
 
+  // Branch based on output format
+  if (output === 'css') {
+    return handleCssOutput(params, variant, designSystem, surfaceColorForGray, colors, validation);
+  }
+
+  return handleSassOutput(params, variant, designSystem, surfaceColorForGray, colors, validation);
+}
+
+/**
+ * Handle CSS output format - generates CSS custom properties directly.
+ */
+async function handleCssOutput(
+  params: CreateCustomPaletteParams,
+  variant: string,
+  designSystem: string,
+  surfaceColorForGray: string,
+  colors: {
+    primary: ColorDefinition;
+    secondary: ColorDefinition;
+    surface: ColorDefinition;
+    gray: GrayDefinition;
+    info: ColorDefinition;
+    success: ColorDefinition;
+    warn: ColorDefinition;
+    error: ColorDefinition;
+  },
+  validation: Awaited<ReturnType<typeof validateCustomPalette>>,
+) {
+  try {
+    const result = await generateCustomPaletteCss({
+      variant: params.variant,
+      surfaceColor: surfaceColorForGray,
+      colors,
+    });
+
+    const formattedCss = formatCssOutput(result.css, result.description);
+
+    // Build response
+    const responseParts: string[] = [`**Custom Palette Generated (CSS)**`];
+    responseParts.push('');
+    responseParts.push(
+      `Created CSS custom properties for a custom ${variant} color palette based on ${designSystem} defaults.`,
+    );
+    responseParts.push('');
+    responseParts.push('Output format: CSS custom properties');
+
+    // Show which colors use which mode
+    const shadesMode = Object.entries(colors)
+      .filter(([_, def]) => def.mode === 'shades')
+      .map(([name]) => name);
+    const explicitMode = Object.entries(colors)
+      .filter(([_, def]) => def.mode === 'explicit')
+      .map(([name]) => name);
+
+    responseParts.push('');
+    if (shadesMode.length > 0) {
+      responseParts.push(`**Using shades() function:** ${shadesMode.join(', ')}`);
+    }
+    if (explicitMode.length > 0) {
+      responseParts.push(`**Using explicit shades:** ${explicitMode.join(', ')}`);
+    }
+
+    // Add warnings if any
+    if (validation.warnings.length > 0) {
+      responseParts.push('');
+      responseParts.push(formatCustomPaletteValidation(validation));
+    }
+
+    responseParts.push('');
+    responseParts.push('```css');
+    responseParts.push(formattedCss.trimEnd());
+    responseParts.push('```');
+
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: responseParts.join('\n'),
+        },
+      ],
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: `**Error generating CSS palette**\n\n${message}`,
+        },
+      ],
+    };
+  }
+}
+
+/**
+ * Handle Sass output format - generates Sass code with palette map structure.
+ */
+function handleSassOutput(
+  params: CreateCustomPaletteParams,
+  variant: string,
+  designSystem: string,
+  surfaceColorForGray: string,
+  colors: {
+    primary: ColorDefinition;
+    secondary: ColorDefinition;
+    surface: ColorDefinition;
+    gray: GrayDefinition;
+    info: ColorDefinition;
+    success: ColorDefinition;
+    warn: ColorDefinition;
+    error: ColorDefinition;
+  },
+  validation: Awaited<ReturnType<typeof validateCustomPalette>>,
+) {
   // Generate the Sass code
   const paletteName = params.name ? toVariableName(params.name) : `custom-${variant}`;
   const paletteLines = generateCustomPaletteCode({
     platform: params.platform,
-    variant,
+    variant: params.variant,
     variableName: paletteName,
     surfaceColor: surfaceColorForGray,
     colors,

@@ -111,10 +111,20 @@ export const TOOL_DESCRIPTIONS = {
   that will produce good automatic shade distribution.
 </use_case>
 
+<output_formats>
+  - "sass" (default): Generates Sass code using the palette() function. Requires Sass compilation.
+  - "css": Generates CSS custom properties (variables) directly. Ready to use in any CSS file.
+
+  Use "css" output when:
+  - Working with vanilla CSS projects without Sass
+  - You want immediately usable CSS variables
+  - Using CSS-in-JS or other non-Sass styling approaches
+</output_formats>
+
 <workflow>
   1. Validates input colors against the theme variant
   2. Analyzes color luminance for shade generation suitability
-  3. Generates Sass code using the palette() function
+  3. Generates Sass code OR compiles to CSS based on output parameter
   4. Adds warning comments to code if issues detected
   5. Returns validation warnings and tips in response
 </workflow>
@@ -134,10 +144,11 @@ export const TOOL_DESCRIPTIONS = {
 
 <output>
   Returns:
-  - Generated Sass code with palette() function call
-  - Platform-specific module imports
+  - Generated Sass code with palette() function call, OR
+  - Generated CSS with custom properties (:root { --ig-primary-50: ...; })
+  - Platform-specific module imports (Sass only)
   - Validation warnings (if any colors have issues)
-  - Variable name created (e.g., $my-palette)
+  - Variable name created (e.g., $my-palette) (Sass only)
 </output>
 
 <error_handling>
@@ -147,12 +158,21 @@ export const TOOL_DESCRIPTIONS = {
 </error_handling>
 
 <example>
-  Blue brand with orange accent on light theme:
+  Blue brand with orange accent on light theme (Sass output):
   {
     "primary": "#1976D2",
     "secondary": "#FF9800",
     "surface": "#FAFAFA",
     "variant": "light"
+  }
+
+  Same palette as CSS variables:
+  {
+    "primary": "#1976D2",
+    "secondary": "#FF9800",
+    "surface": "#FAFAFA",
+    "variant": "light",
+    "output": "css"
   }
 </example>
 
@@ -189,6 +209,17 @@ export const TOOL_DESCRIPTIONS = {
   - You have specific accessibility audit requirements with exact contrast color values (rare - auto-generated contrast is usually sufficient)
   - You want to mix auto-generated and manually specified color groups
 </use_case>
+
+<output_formats>
+  - "sass" (default): Generates Sass code with palette map structure. Requires Sass compilation.
+  - "css": Generates CSS custom properties (variables) directly. Ready to use in any CSS file.
+
+  Use "css" output when:
+  - Working with vanilla CSS projects without Sass
+  - You want immediately usable CSS variables
+  - Building prototypes or quick demos
+  - Using CSS-in-JS or other non-Sass styling approaches
+</output_formats>
 
 <workflow>
   1. For each color group, choose a mode:
@@ -259,9 +290,10 @@ export const TOOL_DESCRIPTIONS = {
 
 <output>
   Returns:
-  - Generated Sass code with color() map definitions
+  - Generated Sass code with color() map definitions, OR
+  - Generated CSS with custom properties (:root { --ig-primary-50: ...; })
   - Summary of which colors use shades() vs explicit values
-  - Variable name created (e.g., $custom-light-palette)
+  - Variable name created (e.g., $custom-light-palette) (Sass only)
   - Validation warnings (if any)
 </output>
 
@@ -560,12 +592,12 @@ export const TOOL_DESCRIPTIONS = {
   - Button variants: Use specific variant names like "flat-button", "contained-button",
     "outlined-button", "fab-button" (NOT just "button")
   - Icon button variants: "flat-icon-button", "contained-icon-button", "outlined-icon-button"
-  
+
   COMPOUND COMPONENTS:
   - Some components like "combo", "grid", "select" are compound - they use multiple
     internal components that may also need theming
   - The response includes hints about related themes for compound components
-  
+
   VARIANTS INFO:
   - If you query a base component that has variants (e.g., "button"), the response
     lists available variants to help you choose the right one
@@ -591,7 +623,7 @@ export const TOOL_DESCRIPTIONS = {
   {
     "component": "flat-button"
   }
-  
+
   Returns tokens like: background, foreground, hover-background, border-radius, etc.
 </example>
 
@@ -705,6 +737,7 @@ export const PARAM_DESCRIPTIONS = {
   variant: FRAGMENTS.VARIANT,
   designSystem: FRAGMENTS.DESIGN_SYSTEM,
   name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
+  output: `Output format: "sass" generates Sass code using igniteui-theming library functions. "css" generates CSS custom properties (variables) directly - useful for vanilla CSS projects or when you don't want Sass compilation. Defaults to "sass".`,
 
   // ---------------------------------------------------------------------------
   // detect_platform parameters
