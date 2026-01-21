@@ -211,6 +211,7 @@ function registerTools(server: McpServer): void {
         tokens: createComponentThemeSchema.shape.tokens,
         selector: createComponentThemeSchema.shape.selector,
         name: createComponentThemeSchema.shape.name,
+        output: createComponentThemeSchema.shape.output,
       },
     },
     withPreprocessing(createComponentThemeSchema, handleCreateComponentTheme),

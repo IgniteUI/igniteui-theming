@@ -45,16 +45,10 @@ export {
 } from './webcomponents.js';
 
 // React platform
-export {
-  REACT_PLATFORM,
-  REACT_USAGE_EXAMPLES,
-} from './react.js';
+export {REACT_PLATFORM, REACT_USAGE_EXAMPLES} from './react.js';
 
 // Blazor platform
-export {
-  BLAZOR_PLATFORM,
-  BLAZOR_USAGE_EXAMPLES,
-} from './blazor.js';
+export {BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES} from './blazor.js';
 
 // Re-export Platform type from canonical source
 export type {Platform} from '../../utils/types.js';
@@ -255,7 +249,7 @@ export function detectConfigFiles(projectRoot: string = '.'): ConfigFileSignal[]
 export function detectPlatformFromDependencies(
   dependencies: Record<string, string> = {},
   devDependencies: Record<string, string> = {},
-  projectRoot: string = '.'
+  projectRoot: string = '.',
 ): PlatformDetectionResult {
   const allDeps = {...dependencies, ...devDependencies};
   const signals: DetectionSignal[] = [];
@@ -356,7 +350,7 @@ export function detectPlatformFromDependencies(
 
   // Find the detected package for backward compatibility
   const detectedPackageSignal = signals.find(
-    (s) => s.type === 'ignite_package' && IGNITE_PACKAGE_PATTERNS[topPlatform]?.includes(s.package)
+    (s) => s.type === 'ignite_package' && IGNITE_PACKAGE_PATTERNS[topPlatform]?.includes(s.package),
   ) as PackageDetectionSignal | undefined;
 
   return {
@@ -371,6 +365,26 @@ export function detectPlatformFromDependencies(
 // ============================================================================
 // PLATFORM METADATA
 // ============================================================================
+
+/**
+ * CSS variable prefix for each platform.
+ * Angular uses 'igx-' prefix, all other platforms use 'ig-' prefix.
+ */
+export const PLATFORM_VARIABLE_PREFIX: Record<Platform, string> = {
+  angular: 'igx',
+  webcomponents: 'ig',
+  react: 'ig',
+  blazor: 'ig',
+};
+
+/**
+ * Get the CSS variable prefix for a given platform
+ * @param platform - The platform to get the prefix for
+ * @returns The CSS variable prefix (e.g., 'igx' for Angular, 'ig' for others)
+ */
+export function getVariablePrefix(platform: Platform): string {
+  return PLATFORM_VARIABLE_PREFIX[platform];
+}
 
 /**
  * Platform metadata for display purposes

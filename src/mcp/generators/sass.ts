@@ -25,6 +25,8 @@ import {
   generateAngularThemeSass,
   generateWebComponentsThemeSass,
   getComponentTheme,
+  getComponentSelector,
+  getVariablePrefix,
 } from '../knowledge/index.js';
 
 // Re-export utilities for external use
@@ -328,8 +330,8 @@ function generateGenericTheme(
  * Input for generating a component theme.
  */
 export interface CreateComponentThemeInput {
-  /** Target platform */
-  platform?: Platform;
+  /** Target platform (required) */
+  platform: Platform;
   /** Component name (e.g., "flat-button", "avatar") */
   component: string;
   /** Token name-value pairs */
@@ -361,8 +363,13 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
     tokenArgs.push(`$${tokenName}: ${stringValue}`);
   }
 
-  // Determine selector
-  let selector = input.selector || ':root';
+  // Determine selector - use platform-specific component selector as default
+  const defaultSelectors = getComponentSelector(input.component, input.platform);
+  const selector = input.selector || (defaultSelectors.length > 0 ? defaultSelectors[0] : input.component);
+
+  // Get variable prefix from platform
+  const prefix = getVariablePrefix(input.platform);
+  const varName = `${prefix}-${input.component}`;
 
   // Generate the code
   const sections: string[] = [
@@ -379,11 +386,11 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
   }
   sections.push(');');
 
-  // Add css-vars mixin to apply the theme
+  // Add css-vars-from-theme mixin to apply the theme
   sections.push('');
   sections.push(`// Apply the theme to ${selector}`);
   sections.push(`${selector} {`);
-  sections.push(`  @include css-vars(${themeName});`);
+  sections.push(`  @include css-vars-from-theme(${themeName}, '${varName}');`);
   sections.push('}');
 
   const code = sections.join('\n') + '\n';

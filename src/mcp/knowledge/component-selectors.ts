@@ -158,6 +158,11 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     angular: 'igx-date-range-picker',
     webcomponents: 'igc-date-range-picker',
   },
+  // TODO: this component uses the input-group theme, but has no dedicated theme function
+  'date-time-input': {
+    angular: null,
+    webcomponents: 'igc-date-time-input',
+  },
   dialog: {
     angular: 'igx-dialog',
     webcomponents: 'igc-dialog',
@@ -409,7 +414,10 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
       'chip',
       'input-group',
       'drop-down',
-      'button',
+      'flat-button',
+      'outlined-button',
+      'contained-button',
+      'fab-button',
       'icon-button',
       'calendar',
       'snackbar',
@@ -423,7 +431,10 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
         chip: 'igx-grid igx-chip',
         'input-group': 'igx-grid igx-input-group',
         'drop-down': 'igx-grid .igx-drop-down',
-        button: 'igx-grid .igx-button',
+        'flat-button': 'igx-grid .igx-button--flat',
+        'outlined-button': 'igx-grid .igx-button--outlined',
+        'contained-button': 'igx-grid .igx-button--contained',
+        'fab-button': 'igx-grid .igx-button--fab',
         'icon-button': 'igx-grid .igx-icon-button',
         calendar: 'igx-grid igx-calendar',
         snackbar: 'igx-grid igx-snackbar',
@@ -436,7 +447,10 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
         chip: 'TODO',
         'input-group': 'TODO',
         'drop-down': 'TODO',
-        button: 'TODO',
+        'flat-button': 'TODO',
+        'outlined-button': 'TODO',
+        'contained-button': 'TODO',
+        'fab-button': 'TODO',
         'icon-button': 'TODO',
         calendar: 'TODO',
         snackbar: 'TODO',
@@ -449,6 +463,8 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
   'query-builder': {
     description:
       'The query builder uses inputs, dropdowns, chips, and buttons, and button-groups for building query expressions.',
+    // TODO: 'button' and 'icon-button' are base variants - need to determine which specific variants
+    // (flat-button, outlined-button, etc.) are actually used and update relatedThemes accordingly
     relatedThemes: ['input-group', 'drop-down', 'chip', 'button', 'button-group', 'icon-button'],
     innerSelectors: {
       angular: {

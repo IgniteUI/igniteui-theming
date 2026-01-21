@@ -13,6 +13,7 @@ import {handleCreateTheme} from '../../../tools/handlers/theme.js';
 import {handleCreateTypography} from '../../../tools/handlers/typography.js';
 import {handleCreateElevations} from '../../../tools/handlers/elevations.js';
 import {handleCreateCustomPalette} from '../../../tools/handlers/custom-palette.js';
+import {handleCreateComponentTheme} from '../../../tools/handlers/component-theme.js';
 
 describe('handleCreatePalette', () => {
   it('returns MCP response format', async () => {
@@ -332,5 +333,181 @@ describe('handleCreateCustomPalette', () => {
 
     const text = result.content[0].text;
     expect(text).toContain('explicit shades');
+  });
+});
+
+describe('handleCreateComponentTheme', () => {
+  it('returns error when platform is not provided', async () => {
+    const result = await handleCreateComponentTheme({
+      component: 'avatar',
+      tokens: {
+        background: '#ff5722',
+      },
+    } as any);
+
+    expect(result.isError).toBe(true);
+    const text = result.content[0].text;
+    expect(text).toContain('Error');
+    expect(text).toContain('platform');
+    expect(text).toContain('required');
+  });
+
+  it('returns MCP response format for valid component', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    expect(result).toHaveProperty('content');
+    expect(result.content).toBeInstanceOf(Array);
+    expect(result.content[0]).toHaveProperty('type', 'text');
+    expect(result.content[0]).toHaveProperty('text');
+  });
+
+  it('generates Sass code by default with platform-specific selector', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('```scss');
+    expect(text).toContain('avatar-theme(');
+    expect(text).toContain('$background: #ff5722');
+    expect(text).toContain('igc-avatar'); // Platform-specific selector
+    expect(text).toContain('css-vars-from-theme'); // New mixin
+  });
+
+  it('generates CSS code when output is css', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {
+        background: '#ff5722',
+      },
+      output: 'css',
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('```css');
+    expect(text).toContain('--background: var(--ig-avatar-background'); // Correct prefix in var() fallback
+    expect(text).toContain('#ff5722');
+  });
+
+  it('returns error for base button component (has variants)', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'button',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(result.isError).toBe(true);
+    expect(text).toContain('Error');
+    expect(text).toContain('multiple variants');
+    expect(text).toContain('flat-button');
+    expect(text).toContain('contained-button');
+    expect(text).toContain('outlined-button');
+    expect(text).toContain('fab-button');
+  });
+
+  it('returns error for base icon-button component (has variants)', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'icon-button',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(result.isError).toBe(true);
+    expect(text).toContain('Error');
+    expect(text).toContain('multiple variants');
+    expect(text).toContain('flat-icon-button');
+    expect(text).toContain('contained-icon-button');
+    expect(text).toContain('outlined-icon-button');
+  });
+
+  it('works with specific button variant (flat-button)', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'flat-button',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(result.isError).not.toBe(true);
+    expect(text).toContain('```scss');
+    expect(text).toContain('flat-button-theme(');
+  });
+
+  it('works with components that have no variants (avatar)', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(result.isError).not.toBe(true);
+    expect(text).toContain('```scss');
+    expect(text).toContain('avatar-theme(');
+  });
+
+  it('validates tokens and returns error for invalid token', async () => {
+    const result = await handleCreateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {
+        invalidToken: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(result.isError).toBe(true);
+    expect(text).toContain('Error');
+    expect(text).toContain('invalidToken');
+  });
+
+  it('uses correct prefix for Angular platform', async () => {
+    const result = await handleCreateComponentTheme({
+      component: 'avatar',
+      platform: 'angular',
+      tokens: {
+        background: '#ff5722',
+      },
+      output: 'css',
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('igx-avatar'); // Angular selector
+    expect(text).toContain('--background: var(--igx-avatar-background'); // Angular prefix in var() fallback
+  });
+
+  it('includes platform-specific selector when platform is provided', async () => {
+    const result = await handleCreateComponentTheme({
+      component: 'avatar',
+      platform: 'webcomponents',
+      tokens: {
+        background: '#ff5722',
+      },
+      output: 'css',
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('igc-avatar');
   });
 });

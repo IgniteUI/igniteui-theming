@@ -117,6 +117,8 @@ export {
   detectPlatformFromDependencies,
   detectConfigFiles,
   PLATFORM_METADATA,
+  PLATFORM_VARIABLE_PREFIX,
+  getVariablePrefix,
 } from './platforms/index.js';
 
 export {

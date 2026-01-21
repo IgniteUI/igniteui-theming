@@ -169,3 +169,105 @@ export function formatCssOutput(css: string, description: string): string {
 `;
   return header + css;
 }
+
+/**
+ * Options for generating component theme CSS variables.
+ */
+export interface ComponentThemeCssOptions {
+  platform: 'angular' | 'webcomponents' | 'react' | 'blazor';
+  /** Component name (e.g., "button", "avatar") */
+  component: string;
+  /** Token name-value pairs */
+  tokens: Record<string, string | number>;
+  /** CSS selector to scope the theme (optional) */
+  selector?: string;
+  /** Custom variable name (optional) */
+  name?: string;
+  /** Internal testing parameter for load paths */
+  _loadPaths?: string[];
+}
+
+/**
+ * Result from generating component theme CSS.
+ */
+export interface CssComponentThemeResult {
+  css: string;
+  description: string;
+}
+
+/**
+ * Generate CSS custom properties for a component theme.
+ *
+ * This function compiles Sass code that uses the component theme function
+ * and @include css-vars-from-theme() mixin, then returns the compiled CSS output.
+ *
+ * @example
+ * const result = await generateComponentThemeCss({
+ *   platform: 'webcomponents',
+ *   component: 'button',
+ *   tokens: { background: '#1976d2', 'text-color': 'white' },
+ *   selector: 'igc-button'
+ * });
+ * // result.css contains: igc-button { --ig-button-background: var(--ig-button-background, #1976d2); ... }
+ */
+export async function generateComponentThemeCss(options: ComponentThemeCssOptions): Promise<CssComponentThemeResult> {
+  // Import functions we need (dynamic import to avoid circular dependencies)
+  const {getComponentTheme, getComponentSelector, getVariablePrefix} = await import('../knowledge/index.js');
+  const {toVariableName} = await import('../utils/sass.js');
+
+  // Validate component exists
+  const theme = getComponentTheme(options.component);
+
+  if (!theme) {
+    throw new Error(`Unknown component: ${options.component}`);
+  }
+
+  const themeFn = theme.themeFunctionName;
+  const themeName = options.name ? `$${toVariableName(options.name)}` : `$custom-${options.component}-theme`;
+
+  const tokenArgs: string[] = [];
+
+  for (const [tokenName, value] of Object.entries(options.tokens)) {
+    const stringValue = typeof value === 'number' ? String(value) : value;
+    tokenArgs.push(`$${tokenName}: ${stringValue}`);
+  }
+
+  // Determine selector - use platform-specific component selector as default
+  const defaultSelectors = getComponentSelector(options.component, options.platform);
+  const selector = options.selector || (defaultSelectors.length > 0 ? defaultSelectors[0] : options.component);
+
+  // Get variable prefix from platform
+  const prefix = getVariablePrefix(options.platform);
+  const varName = `${prefix}-${options.component}`;
+
+  // Generate Sass code
+  const sassCode = `
+@use 'sass/themes' as *;
+
+// Custom ${options.component} theme
+${themeName}: ${themeFn}(
+  ${tokenArgs.join(',\n  ')}
+);
+
+// Apply the theme to ${selector}
+${selector} {
+  @include css-vars-from-theme(${themeName}, '${varName}');
+}
+`;
+
+  try {
+    const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
+    const result = await sass.compileStringAsync(sassCode, {
+      loadPaths,
+      style: 'expanded',
+    });
+
+    return {
+      css: result.css,
+      description: `Generated CSS custom properties for ${options.component} component with ${Object.keys(options.tokens).length} token(s)`,
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to compile component theme CSS: ${message}`);
+  }
+}

@@ -12,12 +12,34 @@ import {
   getComponentSelector,
   isComponentAvailable,
   getComponentPlatformAvailability,
+  hasVariants,
+  getVariants,
 } from '../../knowledge/index.js';
 import type {CreateComponentThemeParams} from '../schemas.js';
 
 export async function handleCreateComponentTheme(params: CreateComponentThemeParams) {
-  const {platform, component, tokens, selector, name} = params;
+  const {platform, component, tokens, selector, name, output = 'sass'} = params;
   const normalizedComponent = component.toLowerCase().trim();
+
+  if (!platform) {
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: `**Error:** The \`platform\` parameter is required.
+
+**Valid platforms:**
+- \`angular\` - Ignite UI for Angular
+- \`webcomponents\` - Ignite UI for Web Components
+- \`react\` - Ignite UI for React
+- \`blazor\` - Ignite UI for Blazor
+
+Please specify which platform you're using to generate the correct variable prefixes and selectors.`,
+        },
+      ],
+      isError: true,
+    };
+  }
 
   // Validate component exists
   const theme = getComponentTheme(normalizedComponent);
@@ -35,6 +57,28 @@ ${suggestions.length > 0 ? '**Similar components:**' : '**Available components:*
 ${componentList.map((c) => `- ${c}`).join('\n')}
 
 **Tip:** Use \`get_component_design_tokens\` first to discover valid component names and their tokens.`,
+        },
+      ],
+      isError: true,
+    };
+  }
+
+  // Check if component is a base variant component (button, icon-button)
+  // These components require specific variants for theming
+  if (hasVariants(normalizedComponent)) {
+    const variants = getVariants(normalizedComponent);
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: `**Error:** The \`${component}\` component has multiple variants and requires a specific variant for theming.
+
+**Available variants:**
+${variants.map((v) => `- \`${v}\``).join('\n')}
+
+Please use \`create_component_theme\` with one of the specific variant names above.
+
+**Tip:** Use \`get_component_design_tokens\` with a specific variant (e.g., \`${variants[0]}\`) to see available tokens.`,
         },
       ],
       isError: true,
@@ -104,7 +148,75 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
     }
   }
 
-  // Generate the Sass code
+  if (output === 'css') {
+    try {
+      const {generateComponentThemeCss, formatCssOutput} = await import('../../generators/css.js');
+
+      const result = await generateComponentThemeCss({
+        platform,
+        component: normalizedComponent,
+        tokens,
+        selector: finalSelector,
+        name,
+      });
+
+      // Build response
+      const responseParts: string[] = [];
+
+      // Add platform warning if applicable (before the main content)
+      if (platformWarning) {
+        responseParts.push(platformWarning);
+        responseParts.push('');
+      }
+
+      responseParts.push(result.description);
+      responseParts.push('');
+
+      // Platform info
+      const platformNote = platform
+        ? `Platform: ${platform === 'angular' ? 'Ignite UI for Angular' : `Ignite UI for ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}`
+        : 'Platform: Not specified (generic output). Specify `platform` for optimized imports.';
+      responseParts.push(platformNote);
+
+      // Selector info
+      if (finalSelector) {
+        responseParts.push(`Selector: \`${finalSelector}\``);
+      }
+
+      responseParts.push('');
+      responseParts.push('```css');
+      responseParts.push(formatCssOutput(result.css, result.description).trimEnd());
+      responseParts.push('```');
+
+      // Add usage hint
+      responseParts.push('');
+      responseParts.push('---');
+      responseParts.push(
+        "**Usage:** Include this CSS in your stylesheet or add it to your application's global styles.",
+      );
+
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: responseParts.join('\n'),
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: `**Error generating CSS:** ${error instanceof Error ? error.message : String(error)}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+
+  // Generate the Sass code (original behavior)
   try {
     const result = generateComponentTheme({
       platform,

@@ -276,11 +276,12 @@ const tokenValueSchema = z.union([
  * Schema for create_component_theme tool.
  */
 export const createComponentThemeSchema = z.object({
-  platform: platformSchema,
+  platform: z.enum(PLATFORMS).describe(PARAM_DESCRIPTIONS.platform),
   component: z.string().describe(PARAM_DESCRIPTIONS.componentTheme),
   tokens: z.record(z.string(), tokenValueSchema).describe(PARAM_DESCRIPTIONS.tokens),
   selector: z.string().optional().describe(PARAM_DESCRIPTIONS.selector),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.themeName),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 });
 
 export type GetComponentDesignTokensParams = z.infer<typeof getComponentDesignTokensSchema>;
