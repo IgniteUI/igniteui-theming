@@ -8,6 +8,7 @@ import * as sass from 'sass-embedded';
 import * as path from 'path';
 import {fileURLToPath} from 'url';
 import type {ColorDefinition, GrayDefinition, ThemeVariant} from '../utils/types.js';
+import type {PLATFORMS} from '../utils/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,6 +20,14 @@ const PACKAGE_ROOT = path.resolve(__dirname, '..', '..', '..');
  * Result from generating CSS palette variables.
  */
 export interface CssPaletteResult {
+  css: string;
+  description: string;
+}
+
+/**
+ * Result from generating component theme CSS.
+ */
+export interface CssComponentThemeResult {
   css: string;
   description: string;
 }
@@ -174,7 +183,11 @@ export function formatCssOutput(css: string, description: string): string {
  * Options for generating component theme CSS variables.
  */
 export interface ComponentThemeCssOptions {
-  platform: 'angular' | 'webcomponents' | 'react' | 'blazor';
+  platform: (typeof PLATFORMS)[number];
+  /** Design system (defaults to 'material') */
+  designSystem?: string;
+  /** Theme variant - light or dark (defaults to 'light') */
+  variant?: string;
   /** Component name (e.g., "button", "avatar") */
   component: string;
   /** Token name-value pairs */
@@ -188,14 +201,6 @@ export interface ComponentThemeCssOptions {
 }
 
 /**
- * Result from generating component theme CSS.
- */
-export interface CssComponentThemeResult {
-  css: string;
-  description: string;
-}
-
-/**
  * Generate CSS custom properties for a component theme.
  *
  * This function compiles Sass code that uses the component theme function
@@ -204,6 +209,8 @@ export interface CssComponentThemeResult {
  * @example
  * const result = await generateComponentThemeCss({
  *   platform: 'webcomponents',
+ *   designSystem: 'bootstrap',
+ *   variant: 'light',
  *   component: 'button',
  *   tokens: { background: '#1976d2', 'text-color': 'white' },
  *   selector: 'igc-button'
@@ -212,7 +219,8 @@ export interface CssComponentThemeResult {
  */
 export async function generateComponentThemeCss(options: ComponentThemeCssOptions): Promise<CssComponentThemeResult> {
   // Import functions we need (dynamic import to avoid circular dependencies)
-  const {getComponentTheme, getComponentSelector, getVariablePrefix} = await import('../knowledge/index.js');
+  const {getComponentTheme, getComponentSelector, getVariablePrefix, SCHEMA_PRESETS} =
+    await import('../knowledge/index.js');
   const {toVariableName} = await import('../utils/sass.js');
 
   // Validate component exists
@@ -222,10 +230,17 @@ export async function generateComponentThemeCss(options: ComponentThemeCssOption
     throw new Error(`Unknown component: ${options.component}`);
   }
 
+  const designSystem = options.designSystem ?? 'material';
+  const variant = options.variant ?? 'light';
   const themeFn = theme.themeFunctionName;
   const themeName = options.name ? `$${toVariableName(options.name)}` : `$custom-${options.component}-theme`;
 
-  const tokenArgs: string[] = [];
+  // Get the schema variable based on design system and variant
+  const schemaVar =
+    SCHEMA_PRESETS[variant as 'light' | 'dark'][designSystem as 'material' | 'indigo' | 'bootstrap' | 'fluent'];
+
+  // Build token arguments - schema comes first
+  const tokenArgs: string[] = [`$schema: ${schemaVar}`];
 
   for (const [tokenName, value] of Object.entries(options.tokens)) {
     const stringValue = typeof value === 'number' ? String(value) : value;
@@ -243,6 +258,7 @@ export async function generateComponentThemeCss(options: ComponentThemeCssOption
   // Generate Sass code
   const sassCode = `
 @use 'sass/themes' as *;
+@use 'sass/themes/schemas' as *;
 
 // Custom ${options.component} theme
 ${themeName}: ${themeFn}(
@@ -264,7 +280,7 @@ ${selector} {
 
     return {
       css: result.css,
-      description: `Generated CSS custom properties for ${options.component} component with ${Object.keys(options.tokens).length} token(s)`,
+      description: `Generated CSS custom properties for ${options.component} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

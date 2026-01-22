@@ -277,6 +277,8 @@ const tokenValueSchema = z.union([
  */
 export const createComponentThemeSchema = z.object({
   platform: z.enum(PLATFORMS).describe(PARAM_DESCRIPTIONS.platform),
+  designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
+  variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   component: z.string().describe(PARAM_DESCRIPTIONS.componentTheme),
   tokens: z.record(z.string(), tokenValueSchema).describe(PARAM_DESCRIPTIONS.tokens),
   selector: z.string().optional().describe(PARAM_DESCRIPTIONS.selector),

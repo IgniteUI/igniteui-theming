@@ -18,7 +18,16 @@ import {
 import type {CreateComponentThemeParams} from '../schemas.js';
 
 export async function handleCreateComponentTheme(params: CreateComponentThemeParams) {
-  const {platform, component, tokens, selector, name, output = 'sass'} = params;
+  const {
+    platform,
+    component,
+    tokens,
+    selector,
+    name,
+    output = 'sass',
+    designSystem = 'material',
+    variant = 'light',
+  } = params;
   const normalizedComponent = component.toLowerCase().trim();
 
   if (!platform) {
@@ -43,6 +52,7 @@ Please specify which platform you're using to generate the correct variable pref
 
   // Validate component exists
   const theme = getComponentTheme(normalizedComponent);
+
   if (!theme) {
     const suggestions = searchComponents(normalizedComponent);
     const componentList = suggestions.length > 0 ? suggestions.slice(0, 10) : COMPONENT_NAMES.slice(0, 15);
@@ -158,6 +168,8 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
         tokens,
         selector: finalSelector,
         name,
+        designSystem,
+        variant,
       });
 
       // Build response
@@ -177,6 +189,9 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
         ? `Platform: ${platform === 'angular' ? 'Ignite UI for Angular' : `Ignite UI for ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}`
         : 'Platform: Not specified (generic output). Specify `platform` for optimized imports.';
       responseParts.push(platformNote);
+
+      // Design system info
+      responseParts.push(`Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant})`);
 
       // Selector info
       if (finalSelector) {
@@ -224,6 +239,8 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
       tokens,
       selector: finalSelector,
       name,
+      designSystem,
+      variant,
     });
 
     // Build response
@@ -243,6 +260,9 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
       ? `Platform: ${platform === 'angular' ? 'Ignite UI for Angular' : `Ignite UI for ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}`
       : 'Platform: Not specified (generic output). Specify `platform` for optimized imports.';
     responseParts.push(platformNote);
+
+    // Design system info
+    responseParts.push(`Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant})`);
 
     // Selector info
     if (finalSelector) {

@@ -207,6 +207,8 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_component_theme,
       inputSchema: {
         platform: createComponentThemeSchema.shape.platform,
+        designSystem: createComponentThemeSchema.shape.designSystem,
+        variant: createComponentThemeSchema.shape.variant,
         component: createComponentThemeSchema.shape.component,
         tokens: createComponentThemeSchema.shape.tokens,
         selector: createComponentThemeSchema.shape.selector,

@@ -355,6 +355,8 @@ describe('handleCreateComponentTheme', () => {
   it('returns MCP response format for valid component', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {
         background: '#ff5722',
@@ -370,6 +372,8 @@ describe('handleCreateComponentTheme', () => {
   it('generates Sass code by default with platform-specific selector', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {
         background: '#ff5722',
@@ -387,6 +391,8 @@ describe('handleCreateComponentTheme', () => {
   it('generates CSS code when output is css', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {
         background: '#ff5722',
@@ -403,6 +409,8 @@ describe('handleCreateComponentTheme', () => {
   it('returns error for base button component (has variants)', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'button',
       tokens: {
         background: '#ff5722',
@@ -422,6 +430,8 @@ describe('handleCreateComponentTheme', () => {
   it('returns error for base icon-button component (has variants)', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'icon-button',
       tokens: {
         background: '#ff5722',
@@ -440,6 +450,8 @@ describe('handleCreateComponentTheme', () => {
   it('works with specific button variant (flat-button)', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'flat-button',
       tokens: {
         background: '#ff5722',
@@ -455,6 +467,8 @@ describe('handleCreateComponentTheme', () => {
   it('works with components that have no variants (avatar)', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {
         background: '#ff5722',
@@ -470,6 +484,8 @@ describe('handleCreateComponentTheme', () => {
   it('validates tokens and returns error for invalid token', async () => {
     const result = await handleCreateComponentTheme({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {
         invalidToken: '#ff5722',
@@ -486,6 +502,8 @@ describe('handleCreateComponentTheme', () => {
     const result = await handleCreateComponentTheme({
       component: 'avatar',
       platform: 'angular',
+      designSystem: 'material',
+      variant: 'light',
       tokens: {
         background: '#ff5722',
       },
@@ -501,6 +519,8 @@ describe('handleCreateComponentTheme', () => {
     const result = await handleCreateComponentTheme({
       component: 'avatar',
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       tokens: {
         background: '#ff5722',
       },
@@ -509,5 +529,50 @@ describe('handleCreateComponentTheme', () => {
 
     const text = result.content[0].text;
     expect(text).toContain('igc-avatar');
+  });
+
+  it('includes design system and variant in response', async () => {
+    const result = await handleCreateComponentTheme({
+      component: 'avatar',
+      platform: 'webcomponents',
+      designSystem: 'bootstrap',
+      variant: 'dark',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('Bootstrap');
+    expect(text).toContain('dark');
+  });
+
+  it('defaults to material light when not specified', async () => {
+    const result = await handleCreateComponentTheme({
+      component: 'avatar',
+      platform: 'webcomponents',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('Material');
+    expect(text).toContain('light');
+  });
+
+  it('includes schema parameter in generated Sass code', async () => {
+    const result = await handleCreateComponentTheme({
+      component: 'avatar',
+      platform: 'webcomponents',
+      designSystem: 'bootstrap',
+      variant: 'light',
+      tokens: {
+        background: '#ff5722',
+      },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('$schema: $light-bootstrap-schema');
   });
 });

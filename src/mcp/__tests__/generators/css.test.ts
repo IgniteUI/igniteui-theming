@@ -228,6 +228,8 @@ describe('generateComponentThemeCss', () => {
 
     const result = await generateComponentThemeCss({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {background: '#ff5722'},
       selector: 'igc-avatar',
@@ -250,6 +252,8 @@ describe('generateComponentThemeCss', () => {
 
     const result = await generateComponentThemeCss({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {background: '#ff5722'},
       _loadPaths: TEST_LOAD_PATHS,
@@ -265,6 +269,8 @@ describe('generateComponentThemeCss', () => {
     const result = await generateComponentThemeCss({
       component: 'avatar',
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       tokens: {background: '#ff5722'},
       _loadPaths: TEST_LOAD_PATHS,
     });
@@ -278,6 +284,8 @@ describe('generateComponentThemeCss', () => {
 
     const result = await generateComponentThemeCss({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'badge',
       tokens: {
         'background-color': '#1976d2',
@@ -297,6 +305,8 @@ describe('generateComponentThemeCss', () => {
     await expect(
       generateComponentThemeCss({
         platform: 'webcomponents',
+        designSystem: 'material',
+        variant: 'light',
         component: 'unknown-component',
         tokens: {background: '#1976d2'},
         _loadPaths: TEST_LOAD_PATHS,
@@ -309,6 +319,8 @@ describe('generateComponentThemeCss', () => {
 
     const result = await generateComponentThemeCss({
       platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'light',
       component: 'avatar',
       tokens: {
         background: '#ff5722',
@@ -335,6 +347,8 @@ describe('generateComponentThemeCss', () => {
     const result = await generateComponentThemeCss({
       component: 'avatar',
       platform: 'angular',
+      designSystem: 'material',
+      variant: 'light',
       tokens: {background: '#ff5722'},
       _loadPaths: TEST_LOAD_PATHS,
     });
@@ -343,5 +357,53 @@ describe('generateComponentThemeCss', () => {
     expect(result.css).toMatch(/igx-avatar/);
     // Should use igx prefix for variables in var() fallback
     expect(result.css).toContain('--background: var(--igx-avatar-background');
+  });
+
+  it('should include schema parameter for bootstrap design system', async () => {
+    const {generateComponentThemeCss} = await import('../../generators/css.js');
+
+    const result = await generateComponentThemeCss({
+      component: 'avatar',
+      platform: 'webcomponents',
+      designSystem: 'bootstrap',
+      variant: 'light',
+      tokens: {background: '#ff5722'},
+      _loadPaths: TEST_LOAD_PATHS,
+    });
+
+    // Check the description includes bootstrap
+    expect(result.description).toContain('bootstrap');
+    expect(result.description).toContain('light');
+  });
+
+  it('should include schema parameter for dark variant', async () => {
+    const {generateComponentThemeCss} = await import('../../generators/css.js');
+
+    const result = await generateComponentThemeCss({
+      component: 'avatar',
+      platform: 'webcomponents',
+      designSystem: 'material',
+      variant: 'dark',
+      tokens: {background: '#ff5722'},
+      _loadPaths: TEST_LOAD_PATHS,
+    });
+
+    // Check the description includes dark
+    expect(result.description).toContain('dark');
+  });
+
+  it('should default to material light when not specified', async () => {
+    const {generateComponentThemeCss} = await import('../../generators/css.js');
+
+    const result = await generateComponentThemeCss({
+      component: 'avatar',
+      platform: 'webcomponents',
+      tokens: {background: '#ff5722'},
+      _loadPaths: TEST_LOAD_PATHS,
+    });
+
+    // Should default to material light
+    expect(result.description).toContain('material');
+    expect(result.description).toContain('light');
   });
 });

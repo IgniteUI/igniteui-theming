@@ -27,6 +27,7 @@ import {
   getComponentTheme,
   getComponentSelector,
   getVariablePrefix,
+  SCHEMA_PRESETS,
 } from '../knowledge/index.js';
 
 // Re-export utilities for external use
@@ -330,8 +331,11 @@ function generateGenericTheme(
  * Input for generating a component theme.
  */
 export interface CreateComponentThemeInput {
-  /** Target platform (required) */
   platform: Platform;
+  /** Design system (defaults to 'material') */
+  designSystem?: DesignSystem;
+  /** Theme variant - light or dark (defaults to 'light') */
+  variant?: ThemeVariant;
   /** Component name (e.g., "flat-button", "avatar") */
   component: string;
   /** Token name-value pairs */
@@ -352,11 +356,16 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
     throw new Error(`Unknown component: ${input.component}`);
   }
 
+  const designSystem: DesignSystem = input.designSystem ?? 'material';
+  const variant: ThemeVariant = input.variant ?? 'light';
   const themeFn = theme.themeFunctionName;
   const themeName = input.name ? `$${toVariableName(input.name)}` : `$custom-${input.component}-theme`;
 
-  // Build token arguments
-  const tokenArgs: string[] = [];
+  // Get the schema variable based on design system and variant
+  const schemaVar = SCHEMA_PRESETS[variant][designSystem];
+
+  // Build token arguments - schema comes first
+  const tokenArgs: string[] = [`$schema: ${schemaVar}`];
   for (const [tokenName, value] of Object.entries(input.tokens)) {
     // Convert value to string if needed
     const stringValue = typeof value === 'number' ? String(value) : value;
@@ -397,7 +406,7 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
 
   return {
     code,
-    description: `Generated custom ${input.component} theme with ${Object.keys(input.tokens).length} token(s)`,
+    description: `Generated custom ${input.component} theme with ${Object.keys(input.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
     variables: [themeName],
   };
 }

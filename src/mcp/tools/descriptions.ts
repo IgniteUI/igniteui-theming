@@ -645,11 +645,19 @@ export const TOOL_DESCRIPTIONS = {
 <workflow>
   1. First call get_component_design_tokens to discover available tokens
   2. Choose which tokens to customize based on your design requirements
-  3. Call this tool with component name and token values
-  4. Receive ready-to-use Sass code with the component theme
+  3. Specify designSystem and variant to match your theme (defaults to Material light)
+  4. Call this tool with component name and token values
+  5. Receive ready-to-use Sass code with the component theme
 </workflow>
 
 <important_notes>
+  DESIGN SYSTEM & VARIANT:
+  - designSystem: Choose "material" (default), "bootstrap", "fluent", or "indigo"
+  - variant: Choose "light" (default) or "dark"
+  - The correct schema (e.g., $light-bootstrap-schema, $dark-material-schema) is
+    automatically selected and passed to the component theme function
+  - This ensures component tokens inherit proper defaults from the design system
+
   TOKEN VALIDATION:
   - All provided token names are validated against the component's schema
   - Invalid tokens return an error with the list of valid token names
@@ -672,9 +680,10 @@ export const TOOL_DESCRIPTIONS = {
   Returns:
   - Generated Sass code with:
     - Platform-specific @use import
-    - Theme function call with provided token values
-    - css-vars mixin to apply the theme to the selector
+    - Theme function call with $schema parameter and provided token values
+    - css-vars-from-theme mixin to apply the theme to the selector
   - Description of what was generated
+  - Design system and variant used
   - List of tokens used
 </output>
 
@@ -685,9 +694,11 @@ export const TOOL_DESCRIPTIONS = {
 </error_handling>
 
 <example>
-  Custom blue flat button with rounded corners (Angular):
+  Custom blue flat button with rounded corners (Angular, Material Design):
   {
     "platform": "angular",
+    "designSystem": "material",
+    "variant": "light",
     "component": "flat-button",
     "tokens": {
       "background": "#1976D2",
@@ -702,14 +713,40 @@ export const TOOL_DESCRIPTIONS = {
   @use 'igniteui-angular/theming' as *;
 
   $custom-flat-button-theme: flat-button-theme(
+    $schema: $light-material-schema,
     $background: #1976D2,
     $foreground: #FFFFFF,
     $hover-background: #1565C0,
     $border-radius: 24px
   );
 
-  :root {
-    @include css-vars($custom-flat-button-theme);
+  igx-button[igxButton="flat"] {
+    @include css-vars-from-theme($custom-flat-button-theme, 'igx-button');
+  }
+  \`\`\`
+
+  Bootstrap dark theme example:
+  {
+    "platform": "webcomponents",
+    "designSystem": "bootstrap",
+    "variant": "dark",
+    "component": "avatar",
+    "tokens": {
+      "background": "#ff5722"
+    }
+  }
+
+  Generates:
+  \`\`\`scss
+  @use 'igniteui-theming' as *;
+
+  $custom-avatar-theme: avatar-theme(
+    $schema: $dark-bootstrap-schema,
+    $background: #ff5722
+  );
+
+  igc-avatar {
+    @include css-vars-from-theme($custom-avatar-theme, 'ig-avatar');
   }
   \`\`\`
 </example>
