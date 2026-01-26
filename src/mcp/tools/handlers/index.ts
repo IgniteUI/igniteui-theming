@@ -10,3 +10,4 @@ export {handleCreateElevations} from './elevations.js';
 export {handleCreateTheme} from './theme.js';
 export {handleGetComponentDesignTokens} from './component-tokens.js';
 export {handleCreateComponentTheme} from './component-theme.js';
+export {handleGetColor} from './color.js';

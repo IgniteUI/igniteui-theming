@@ -8,6 +8,7 @@
 
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
+import {z} from 'zod';
 
 import {
   detectPlatformSchema,
@@ -18,6 +19,7 @@ import {
   createThemeSchema,
   getComponentDesignTokensSchema,
   createComponentThemeSchema,
+  getColorSchema,
   handleDetectPlatform,
   handleCreatePalette,
   handleCreateCustomPalette,
@@ -26,9 +28,11 @@ import {
   handleCreateTheme,
   handleGetComponentDesignTokens,
   handleCreateComponentTheme,
+  handleGetColor,
 } from './tools/index.js';
 import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
 import {withPreprocessing} from './utils/preprocessing.js';
+import {PALETTE_COLOR_GROUPS, SHADE_LEVELS, ACCENT_SHADE_LEVELS} from './utils/types.js';
 
 import {RESOURCE_DEFINITIONS, getResourceContent} from './resources/index.js';
 
@@ -217,6 +221,25 @@ function registerTools(server: McpServer): void {
       },
     },
     withPreprocessing(createComponentThemeSchema, handleCreateComponentTheme),
+  );
+
+  // get_color tool
+  server.registerTool(
+    'get_color',
+    {
+      title: 'Get Palette Color',
+      description: TOOL_DESCRIPTIONS.get_color,
+      inputSchema: {
+        color: z.enum(PALETTE_COLOR_GROUPS as unknown as [string, ...string[]]),
+        variant: z.enum([...SHADE_LEVELS, ...ACCENT_SHADE_LEVELS] as unknown as [string, ...string[]]).optional(),
+        contrast: z.boolean().optional(),
+        opacity: z.number().min(0).max(1).optional(),
+      },
+    },
+    async (params) => {
+      const validated = getColorSchema.parse(params);
+      return handleGetColor(validated);
+    },
   );
 }
 

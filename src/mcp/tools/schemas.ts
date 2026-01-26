@@ -18,6 +18,8 @@ import {
   ELEVATION_PRESETS,
   ALL_COLOR_SHADES,
   OUTPUT_FORMATS,
+  PALETTE_COLOR_GROUPS,
+  ACCENT_SHADE_LEVELS,
 } from '../utils/types.js';
 import {PARAM_DESCRIPTIONS} from './descriptions.js';
 
@@ -288,3 +290,40 @@ export const createComponentThemeSchema = z.object({
 
 export type GetComponentDesignTokensParams = z.infer<typeof getComponentDesignTokensSchema>;
 export type CreateComponentThemeParams = z.infer<typeof createComponentThemeSchema>;
+
+// ============================================================================
+// Color Operations Schemas
+// ============================================================================
+
+/**
+ * Base schema for get_color tool input.
+ */
+const getColorBaseSchema = z.object({
+  color: z.enum(PALETTE_COLOR_GROUPS as unknown as [string, ...string[]]).describe(PARAM_DESCRIPTIONS.colorName),
+  variant: z
+    .enum([...SHADE_LEVELS, ...ACCENT_SHADE_LEVELS] as unknown as [string, ...string[]])
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.shadeVariant),
+  contrast: z.boolean().optional().describe(PARAM_DESCRIPTIONS.contrastFlag),
+  opacity: z.number().min(0).max(1).optional().describe(PARAM_DESCRIPTIONS.opacity),
+});
+
+/**
+ * Schema for get_color tool with validation.
+ * Retrieves palette colors as CSS variable references.
+ */
+export const getColorSchema = getColorBaseSchema.refine(
+  (data) => {
+    if (data.color === 'gray' && data.variant) {
+      return !ACCENT_SHADE_LEVELS.includes(data.variant as any);
+    }
+
+    return true;
+  },
+  {
+    message: 'Gray color does not support accent shades (A100, A200, A400, A700). Use standard shades: 50-900.',
+    path: ['variant'],
+  },
+);
+
+export type GetColorParams = z.infer<typeof getColorSchema>;

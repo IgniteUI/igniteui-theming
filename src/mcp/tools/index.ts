@@ -11,6 +11,7 @@ export {
   createThemeSchema,
   getComponentDesignTokensSchema,
   createComponentThemeSchema,
+  getColorSchema,
   platformSchema,
   type DetectPlatformParams,
   type CreatePaletteParams,
@@ -20,6 +21,7 @@ export {
   type CreateThemeParams,
   type GetComponentDesignTokensParams,
   type CreateComponentThemeParams,
+  type GetColorParams,
   type Platform,
 } from './schemas.js';
 
@@ -32,4 +34,5 @@ export {
   handleCreateTheme,
   handleGetComponentDesignTokens,
   handleCreateComponentTheme,
+  handleGetColor,
 } from './handlers/index.js';

@@ -23,7 +23,7 @@ The server should understand context, make smart defaults, and guide users towar
 The MCP server supports two target platforms for theme generation:
 
 | Platform        | Package                  | Theming Module             | Key Characteristics                                                                              |
-|-----------------|--------------------------|----------------------------|--------------------------------------------------------------------------------------------------|
+| --------------- | ------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------ |
 | `angular`       | `igniteui-angular`       | `igniteui-angular/theming` | Uses `core()` + `theme()` mixins, forwards igniteui-theming with overrides                       |
 | `webcomponents` | `igniteui-webcomponents` | `igniteui-theming`         | Uses individual mixins (`palette()`, `typography()`, `elevations()`), supports runtime switching |
 | `react`         | `igniteui-react`         | `igniteui-theming`         | Uses individual mixins (`palette()`, `typography()`, `elevations()`), supports runtime switching |
@@ -43,25 +43,20 @@ The server can detect the target platform through multiple methods:
 
 ```scss
 // Uses igniteui-angular/theming module
-@use "igniteui-angular/theming" as *;
+@use 'igniteui-angular/theming' as *;
 
 // Requires core() mixin first (Angular-specific)
 @include core();
 
 // Typography mixin (Angular overrides this)
-@include typography(
-  $font-family: $material-typeface,
-  $type-scale: $material-type-scale
-);
+@include typography($font-family: $material-typeface, $type-scale: $material-type-scale);
 
 // theme() mixin (Angular-specific, combines palette + schema + elevations)
-@include theme(
-  $palette: $light-material-palette,
-  $schema: $light-material-schema
-);
+@include theme($palette: $light-material-palette, $schema: $light-material-schema);
 ```
 
 **Angular-specific features:**
+
 - `core()` mixin with `$print-layout` and `$enhanced-accessibility` options
 - `theme()` mixin with `$exclude`, `$roundness`, `$elevation` options
 - Requires `ig-typography` CSS class on root element
@@ -89,6 +84,7 @@ The server can detect the target platform through multiple methods:
 ```
 
 **Web Components-specific features:**
+
 - No `core()` or `theme()` mixins - uses igniteui-theming directly
 - Ships precompiled CSS themes in `dist/themes/`
 - Supports runtime theme switching via `configureTheme()` JavaScript API
@@ -150,7 +146,7 @@ Tools are the core of the MCP server - they perform actions and generate code.
 #### Tool Category 1: Theme Foundation
 
 | Tool Name               | Description                         | Input Schema                                                                                                               | Output                |
-| -------------------     | ----------------------------------  | -------------------------------------------------------------------------------------------------------                    | --------------------- |
+| ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------- |
 | `detect_platform`       | Detect target platform from project | `{ packageJsonPath? }`                                                                                                     | Platform detection    |
 | `create_palette`        | Generate a color palette            | `{ platform, variant, designSystem?, name?, output?, primary, secondary, surface, gray?, info?, success?, warn?, error? }` | Palette definition    |
 | `create_custom_palette` | Generate a custom color palette     | `{ platform, variant, designSystem?, name?, output?, primary, secondary, surface, gray?, info?, success?, warn?, error? }` | Palette definition    |
@@ -160,12 +156,12 @@ Tools are the core of the MCP server - they perform actions and generate code.
 
 #### Tool Category 2: Color Operations
 
-| Tool Name               | Description                          | Input Schema                        | Output                          |
-| ----------------------- | ------------------------------------ | ----------------------------------- | ------------------------------- |
-| `get_color`             | Retrieve a color from a palette      | `{ color, variant?, opacity? }`     | CSS variable reference or value |
-| `get_contrast_color`    | Get accessible contrast color        | `{ backgroundColor, wcagLevel? }`   | Contrast color value            |
-| `generate_color_shades` | Generate all shades for a color      | `{ baseColor, name }`               | Complete shade map              |
-| `suggest_palette`       | Suggest palette based on description | `{ description, mood?, industry? }` | Recommended colors              |
+| Tool Name               | Description                          | Input Schema                               | Output                 |
+| ----------------------- | ------------------------------------ | ------------------------------------------ | ---------------------- |
+| `get_color`             | Retrieve a palette color as CSS var  | `{ color, variant?, contrast?, opacity? }` | CSS variable reference |
+| `suggest_palette`       | Suggest palette based on description | `{ description, mood?, industry? }`        | Recommended colors     |
+
+**Note:** `get_contrast_color` has been consolidated into `get_color` via the `contrast` parameter.
 
 #### Tool Category 3: Typography Operations
 
@@ -204,13 +200,13 @@ Resources provide read-only context that AI applications can use.
 
 #### Resource Category 1: Platform Information (Direct Resources)
 
-| URI                                  | Description                              | MIME Type          |
-| ------------------------------------ | ---------------------------------------- | ------------------ |
-| `theming://platforms`                | List of supported platforms              | `application/json` |
-| `theming://platforms/angular`        | Angular platform configuration & usage   | `application/json` |
-| `theming://platforms/webcomponents`  | Web Components platform config & usage   | `application/json` |
-| `theming://platforms/react`          | React platform config & usage            | `application/json` |
-| `theming://platforms/blazor`         | Blazor platform config & usage           | `application/json` |
+| URI                                 | Description                            | MIME Type          |
+| ----------------------------------- | -------------------------------------- | ------------------ |
+| `theming://platforms`               | List of supported platforms            | `application/json` |
+| `theming://platforms/angular`       | Angular platform configuration & usage | `application/json` |
+| `theming://platforms/webcomponents` | Web Components platform config & usage | `application/json` |
+| `theming://platforms/react`         | React platform config & usage          | `application/json` |
+| `theming://platforms/blazor`        | Blazor platform config & usage         | `application/json` |
 
 #### Resource Category 2: Presets (Direct Resources)
 
@@ -252,14 +248,15 @@ Resources provide read-only context that AI applications can use.
 | `theming://docs/variables/{name}` | Variable documentation |
 
 #### Category 7: Guidance (Direct Resources)
-| URI                                 | Description                                      | MIME Type          |
-| ----------------------------------- | ------------------------------------------------ | ------------------ |
-| `theming://guidance/colors`         | Color usage guidelines                           | `text/markdown`    |
-| `theming://guidance/colors/rules`   | Color Shades scaling guidance                    | `text/markdown`    |
-| `theming://guidance/colors/usage`   | Color Shades usage guidance                      | `text/markdown`    |
-| `theming://guidance/colors/roles`   | Color Shades roles guidance                      | `text/markdown`    |
-| `theming://guidance/colors/states`  | Color Shades in components states guidance       | `text/markdown`    |
-| `theming://guidance/colors/themes`  | How color shades are used across themes          | `text/markdown`    |
+
+| URI                                | Description                                | MIME Type       |
+| ---------------------------------- | ------------------------------------------ | --------------- |
+| `theming://guidance/colors`        | Color usage guidelines                     | `text/markdown` |
+| `theming://guidance/colors/rules`  | Color Shades scaling guidance              | `text/markdown` |
+| `theming://guidance/colors/usage`  | Color Shades usage guidance                | `text/markdown` |
+| `theming://guidance/colors/roles`  | Color Shades roles guidance                | `text/markdown` |
+| `theming://guidance/colors/states` | Color Shades in components states guidance | `text/markdown` |
+| `theming://guidance/colors/themes` | How color shades are used across themes    | `text/markdown` |
 
 ---
 
@@ -299,9 +296,7 @@ Resources provide read-only context that AI applications can use.
 
 - ✅ Color validation for surface/gray colors (validates against theme variant)
 - ✅ Color guidance resource (`theming://guidance/colors`)
-- `get_color` tool
-- `get_contrast_color` tool
-- `generate_color_shades` tool
+- ✅ `get_color` tool (includes contrast color retrieval via `contrast` parameter)
 - `suggest_palette` tool (AI-friendly descriptions)
 - `check_contrast` tool
 - Schema resources
@@ -310,14 +305,15 @@ Resources provide read-only context that AI applications can use.
 
 The `create_palette`, `create_custom_palette`, and `create_theme` tools validate surface and gray colors against the theme variant:
 
-| Variant | Surface Requirement | Gray Requirement |
-|---------|---------------------|------------------|
-| `light` | Light color (luminance > 0.5) | Dark color (luminance ≤ 0.5) |
-| `dark` | Dark color (luminance ≤ 0.5) | Light color (luminance > 0.5) |
+| Variant | Surface Requirement           | Gray Requirement              |
+| ------- | ----------------------------- | ----------------------------- |
+| `light` | Light color (luminance > 0.5) | Dark color (luminance ≤ 0.5)  |
+| `dark`  | Dark color (luminance ≤ 0.5)  | Light color (luminance > 0.5) |
 
 **Why is gray inverted?** The `palette()` function generates gray shades that need to contrast against the surface. Light themes need dark gray text, dark themes need light gray text.
 
 **Validation behavior:**
+
 - Warnings are shown but code is still generated (non-blocking)
 - Warning comments are added to generated Sass code
 - Tips suggest omitting gray parameter to let it auto-calculate
@@ -368,7 +364,6 @@ The MCP server needs embedded knowledge from the Sass source files.
 ### Approach: Build-Time Extraction
 
 1. **Parse Sass files** during build to extract:
-
    - Color presets and multipliers -> JSON
    - Typography presets -> JSON
    - Elevation presets -> JSON
@@ -424,7 +419,7 @@ The MCP server generates platform-specific Sass code based on the detected or sp
 // Generated by Ignite UI Theming MCP Server
 // Platform: Angular
 
-@use "igniteui-angular/theming" as *;
+@use 'igniteui-angular/theming' as *;
 
 // Initialize core styles (required for Angular)
 @include core();
@@ -438,19 +433,14 @@ $my-palette: palette(
 );
 
 // Typography setup
-@include typography(
-  $font-family: $material-typeface,
-  $type-scale: $material-type-scale
-);
+@include typography($font-family: $material-typeface, $type-scale: $material-type-scale);
 
 // Apply complete theme (palette + schema + elevations)
-@include theme(
-  $palette: $my-palette,
-  $schema: $light-material-schema
-);
+@include theme($palette: $my-palette, $schema: $light-material-schema);
 ```
 
 **Angular-specific notes:**
+
 - Uses `igniteui-angular/theming` module (forwards igniteui-theming with overrides)
 - Requires `core()` mixin to be called first
 - Uses unified `theme()` mixin instead of individual `palette()`, `elevations()` calls
@@ -463,10 +453,10 @@ $my-palette: palette(
 // Generated by Ignite UI Theming MCP Server
 // Platform: Web Components
 
-@use "igniteui-theming/sass/color/presets/light/material" as light-preset;
-@use "igniteui-theming" as *;
-@use "igniteui-theming/sass/typography/presets/material" as typography-preset;
-@use "igniteui-theming/sass/elevations/presets" as elevation-preset;
+@use 'igniteui-theming/sass/color/presets/light/material' as light-preset;
+@use 'igniteui-theming' as *;
+@use 'igniteui-theming/sass/typography/presets/material' as typography-preset;
+@use 'igniteui-theming/sass/elevations/presets' as elevation-preset;
 
 // Theme identification variables
 :root {
@@ -486,10 +476,7 @@ $my-palette: palette(
 @include palette($my-palette);
 
 // Typography setup
-@include typography(
-  $font-family: typography-preset.$typeface,
-  $type-scale: typography-preset.$type-scale
-);
+@include typography($font-family: typography-preset.$typeface, $type-scale: typography-preset.$type-scale);
 
 // Elevations
 @include elevations(elevation-preset.$material-elevations);
@@ -499,6 +486,7 @@ $my-palette: palette(
 ```
 
 **Web Components-specific notes:**
+
 - Uses `igniteui-theming` directly (not via Angular forwarding)
 - No `core()` or unified `theme()` mixins - uses individual mixins
 - Supports runtime theme switching via `configureTheme()` JavaScript API
@@ -688,6 +676,7 @@ export default defineConfig({
 ```
 
 **Response**:
+
 ```json
 {
   "platform": "angular",
@@ -748,13 +737,15 @@ export default defineConfig({
 
 ## Open Questions
 
-1. **HTTP Transport**: 
-  - Q: Will Phase 1 include HTTP transport for remote hosting, or is STDIO sufficient for MVP?
-  - A: No. Phase 1 will focus on STDIO. HTTP transport can be added in a later phase if needed.
+1. **HTTP Transport**:
+
+- Q: Will Phase 1 include HTTP transport for remote hosting, or is STDIO sufficient for MVP?
+- A: No. Phase 1 will focus on STDIO. HTTP transport can be added in a later phase if needed.
 
 2. **Caching**:
-  - Q: Should validated themes be cached? What invalidation strategy?
-  - A: Not in Phase 1. Caching can be considered in future phases based on performance needs.
+
+- Q: Should validated themes be cached? What invalidation strategy?
+- A: Not in Phase 1. Caching can be considered in future phases based on performance needs.
 
 ---
 

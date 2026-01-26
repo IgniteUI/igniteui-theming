@@ -756,6 +756,69 @@ export const TOOL_DESCRIPTIONS = {
   - detect_platform: Run to auto-detect platform for correct imports
   - create_theme: Use for full theme (palette + typography + elevations)
 </related_tools>`,
+
+  // ---------------------------------------------------------------------------
+  // get_color - Color retrieval tool
+  // ---------------------------------------------------------------------------
+  get_color: `Retrieve a palette color from Ignite UI Theming as a CSS variable reference.
+
+<use_case>
+  Use this tool when you need to reference a specific palette color in CSS or Sass code.
+  Returns CSS variable references that work in both Sass and CSS contexts.
+
+  Common scenarios:
+  - Setting component backgrounds/foregrounds using theme colors
+  - Creating hover/focus states with opacity variations
+  - Ensuring text contrast against colored backgrounds
+</use_case>
+
+<workflow>
+  1. Specify the color family (primary, secondary, gray, etc.)
+  2. Optionally specify a shade variant (50-900, A100-A700)
+  3. Optionally request the contrast color for text readability
+  4. Optionally apply opacity for transparency effects
+</workflow>
+
+<output_examples>
+  Basic color:
+    { color: "primary" }
+    → var(--ig-primary-500)
+
+  Specific shade:
+    { color: "primary", variant: "600" }
+    → var(--ig-primary-600)
+
+  Contrast color:
+    { color: "primary", variant: "600", contrast: true }
+    → var(--ig-primary-600-contrast)
+
+  With opacity:
+    { color: "primary", opacity: 0.5 }
+    → hsl(from var(--ig-primary-500) h s l / 0.5)
+
+  Contrast with opacity:
+    { color: "primary", contrast: true, opacity: 0.7 }
+    → hsl(from var(--ig-primary-500-contrast) h s l / 0.7)
+</output_examples>
+
+<important_notes>
+  CSS VARIABLE NAMING:
+  - Base colors: --ig-{color}-{variant} (e.g., --ig-primary-500)
+  - Contrast: --ig-{color}-{variant}-contrast (e.g., --ig-primary-500-contrast)
+
+  GRAY RESTRICTIONS:
+  - Gray only supports standard shades (50-900), not accent shades (A100-A700)
+
+  OPACITY HANDLING:
+  - Uses CSS relative color syntax: hsl(from <color> h s l / <opacity>)
+  - Works in modern browsers (CSS Color Level 4)
+  - For Sass projects, this syntax is passed through unchanged
+</important_notes>
+
+<related_tools>
+  - create_palette: Generate a complete palette with these colors
+  - create_component_theme: Use retrieved colors in component theming
+</related_tools>`,
 } as const;
 
 // ============================================================================
@@ -847,4 +910,15 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
 
   themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
+
+  // ---------------------------------------------------------------------------
+  // Color operations parameters (for get_color)
+  // ---------------------------------------------------------------------------
+  colorName: `Palette color family name: "primary" (brand color), "secondary" (accent), "gray" (neutrals), "surface" (backgrounds), "info" winformational), "success" (positive), "warn" (warnings), "error" (errors/destructive).`,
+
+  shadeVariant: `Color shade variant. Standard shades: 50 (lightest) through 900 (darkest). Accent shades: A100, A200, A400, A700 (more saturated). Default: "500" (base color). Note: Gray only supports standard shades (50-900).`,
+
+  contrastFlag: `If true, returns the contrast color for the specified shade instead of the shade itself. Contrast colors are pre-computed for optimal text readability. Default: false.`,
+
+  opacity: `Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).`,
 } as const;
