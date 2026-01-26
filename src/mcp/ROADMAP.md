@@ -1,4 +1,4 @@
-# Ignite UI Theming MCP Server - Implementation Plan
+# Ignite UI Theming MCP Server - ROADMAP
 
 ## Executive Summary
 
@@ -22,17 +22,19 @@ The server should understand context, make smart defaults, and guide users towar
 
 The MCP server supports two target platforms for theme generation:
 
-| Platform | Package | Theming Module | Key Characteristics |
-|----------|---------|----------------|---------------------|
-| `angular` | `igniteui-angular` | `igniteui-angular/theming` | Uses `core()` + `theme()` mixins, forwards igniteui-theming with overrides |
-| `webcomponents` | `igniteui-webcomponents` | `igniteui-theming` | Uses individual mixins (`palette()`, `typography()`, `elevations()`), supports runtime switching |
+| Platform        | Package                  | Theming Module             | Key Characteristics                                                                              |
+|-----------------|--------------------------|----------------------------|--------------------------------------------------------------------------------------------------|
+| `angular`       | `igniteui-angular`       | `igniteui-angular/theming` | Uses `core()` + `theme()` mixins, forwards igniteui-theming with overrides                       |
+| `webcomponents` | `igniteui-webcomponents` | `igniteui-theming`         | Uses individual mixins (`palette()`, `typography()`, `elevations()`), supports runtime switching |
+| `react`         | `igniteui-react`         | `igniteui-theming`         | Uses individual mixins (`palette()`, `typography()`, `elevations()`), supports runtime switching |
+| `blazor`        | `igniteui-blazor`        | `igniteui-theming`         | Uses individual mixins (`palette()`, `typography()`, `elevations()`), supports runtime switching |
 
 ### Platform Detection Strategy
 
 The server can detect the target platform through multiple methods:
 
 1. **Explicit Parameter**: User specifies `platform: 'angular'` or `platform: 'webcomponents'`
-2. **Automatic Detection**: `detect_platform` tool reads `package.json` to infer platform from dependencies
+2. **Automatic Detection**: `detect_platform` tool reads `package.json` and other platform-specific files to infer platform from dependencies
 3. **Fallback**: Generate platform-agnostic code when detection fails
 
 ### Key Platform Differences
@@ -65,12 +67,12 @@ The server can detect the target platform through multiple methods:
 - Requires `ig-typography` CSS class on root element
 - Typography module is overridden with Angular-specific implementation
 
-#### Ignite UI for Web Components
+#### Ignite UI for Web Components (et al.)
 
 ```scss
 // Uses igniteui-theming directly
-@use 'igniteui-theming/sass/color/presets/light/material' as *;
 @use 'igniteui-theming' as *;
+@use 'igniteui-theming/sass/color/presets/light/material' as *;
 @use 'igniteui-theming/sass/typography/presets/material' as *;
 @use 'igniteui-theming/sass/elevations/presets' as *;
 
@@ -120,8 +122,7 @@ The server can detect the target platform through multiple methods:
 │  ┌──────────────────────────────────────────────────────┐   │
 │  │ • SassGenerator - Generates valid Sass code          │   │
 │  │ • CssGenerator  - Generates CSS custom properties    │   │
-│  │ • Validator     - Validates via dart-sass (optional) │   │
-│  │ • SchemaEngine  - Processes theme schemas            │   │
+│  │ • Validator     - Validates via Sass                 │   │
 │  └──────────────────────────────────────────────────────┘   │
 ├─────────────────────────────────────────────────────────────┤
 │              Knowledge Base (Embedded)                      │
@@ -148,13 +149,14 @@ Tools are the core of the MCP server - they perform actions and generate code.
 
 #### Tool Category 1: Theme Foundation
 
-| Tool Name           | Description                        | Input Schema                                                                                            | Output                |
-| ------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------- |
-| `create_theme`      | Create a complete theme foundation | `{ platform?, designSystem?, primaryColor, secondaryColor?, surfaceColor?, variant?, name? }`           | Sass/CSS theme code   |
-| `create_palette`    | Generate a color palette           | `{ platform?, primary, secondary?, surface?, gray?, info?, success?, warn?, error?, variant? }`         | Palette definition    |
-| `create_typography` | Set up typography system           | `{ platform?, fontFamily, designSystem?, baseFontSize?, customScale? }`                                 | Typography setup code |
-| `create_elevations` | Configure elevation/shadow system  | `{ platform?, designSystem?, customColors? }`                                                           | Elevations setup code |
-| `detect_platform`   | Detect target platform from project| `{ packageJsonPath? }`                                                                                  | Platform detection    |
+| Tool Name               | Description                         | Input Schema                                                                                                               | Output                |
+| -------------------     | ----------------------------------  | -------------------------------------------------------------------------------------------------------                    | --------------------- |
+| `detect_platform`       | Detect target platform from project | `{ packageJsonPath? }`                                                                                                     | Platform detection    |
+| `create_palette`        | Generate a color palette            | `{ platform, variant, designSystem?, name?, output?, primary, secondary, surface, gray?, info?, success?, warn?, error? }` | Palette definition    |
+| `create_custom_palette` | Generate a custom color palette     | `{ platform, variant, designSystem?, name?, output?, primary, secondary, surface, gray?, info?, success?, warn?, error? }` | Palette definition    |
+| `create_typography`     | Set up typography system            | `{ platform, fontFamily, designSystem?, baseFontSize?, customScale? }`                                                     | Typography setup code |
+| `create_elevations`     | Configure elevation/shadow system   | `{ platform, designSystem?, customColors? }`                                                                               | Elevations setup code |
+| `create_theme`          | Create a complete theme foundation  | `{ platform?, designSystem?, primaryColor, secondaryColor?, surfaceColor?, variant?, name? }`                              | Sass/CSS theme code   |
 
 #### Tool Category 2: Color Operations
 
@@ -181,13 +183,12 @@ Tools are the core of the MCP server - they perform actions and generate code.
 | `get_sizable_value`     | Get responsive size value | `{ small, medium, large }`                | Sizable expression |
 | `get_padding`           | Get contextual padding    | `{ small?, medium?, large?, direction? }` | Padding expression |
 
-#### Tool Category 5: Component Theming (Extensible)
+#### Tool Category 5: Component Theming
 
-| Tool Name                | Description                | Input Schema                        | Output               |
-| ------------------------ | -------------------------- | ----------------------------------- | -------------------- |
-| `create_component_theme` | Create a component theme   | `{ component, schema?, overrides }` | Component theme code |
-| `list_component_themes`  | List available components  | `{ category? }`                     | Component catalog    |
-| `get_component_schema`   | Get schema for a component | `{ component, designSystem? }`      | Schema definition    |
+| Tool Name                     | Description                | Input Schema                                               | Output               |
+| ----------------------------- | -------------------------- | ---------------------------------------------------------- | -------------------- |
+| `create_component_theme`      | Create a component theme   | `{ platform, designSystem?, variant?, component, tokens }` | Component theme code |
+| `get_component_design_tokens` | Get schema for a component | `{ component }`                                            | Schema definition    |
 
 #### Tool Category 6: Validation & Utilities
 
@@ -208,6 +209,8 @@ Resources provide read-only context that AI applications can use.
 | `theming://platforms`                | List of supported platforms              | `application/json` |
 | `theming://platforms/angular`        | Angular platform configuration & usage   | `application/json` |
 | `theming://platforms/webcomponents`  | Web Components platform config & usage   | `application/json` |
+| `theming://platforms/react`          | React platform config & usage            | `application/json` |
+| `theming://platforms/blazor`         | Blazor platform config & usage           | `application/json` |
 
 #### Resource Category 2: Presets (Direct Resources)
 
@@ -218,7 +221,6 @@ Resources provide read-only context that AI applications can use.
 | `theming://presets/palettes/dark`  | Dark palette variants                 | `application/json` |
 | `theming://presets/typography`     | All typography presets                | `application/json` |
 | `theming://presets/elevations`     | Elevation definitions                 | `application/json` |
-| `theming://presets/easings`        | Animation easing functions            | `application/json` |
 
 #### Resource Category 4: Schemas (Direct Resources)
 
@@ -249,34 +251,35 @@ Resources provide read-only context that AI applications can use.
 | `theming://docs/mixins/{name}`    | Mixin documentation    |
 | `theming://docs/variables/{name}` | Variable documentation |
 
-### 3. Prompts (User-Controlled Templates)
-
-Pre-built interaction templates for common theming tasks.
-
-| Prompt Name               | Description                                | Arguments                               |
-| ------------------------- | ------------------------------------------ | --------------------------------------- |
-| `create-app-theme`        | Guided theme creation for an application   | `appType`, `primaryColor?`, `variant?`  |
-| `brand-to-palette`        | Convert brand colors to a full palette     | `brandColors[]`, `style?`               |
-| `accessibility-audit`     | Check theme for accessibility issues       | `themeCode`                             |
-| `migrate-theme`           | Migrate from one design system to another  | `fromSystem`, `toSystem`, `currentCode` |
-| `dark-mode-variant`       | Create dark mode variant of existing theme | `lightThemeCode`                        |
-| `component-customization` | Guide through customizing a component      | `componentName`, `goals`                |
+#### Category 7: Guidance (Direct Resources)
+| URI                                 | Description                                      | MIME Type          |
+| ----------------------------------- | ------------------------------------------------ | ------------------ |
+| `theming://guidance/colors`         | Color usage guidelines                           | `text/markdown`    |
+| `theming://guidance/colors/rules`   | Color Shades scaling guidance                    | `text/markdown`    |
+| `theming://guidance/colors/usage`   | Color Shades usage guidance                      | `text/markdown`    |
+| `theming://guidance/colors/roles`   | Color Shades roles guidance                      | `text/markdown`    |
+| `theming://guidance/colors/states`  | Color Shades in components states guidance       | `text/markdown`    |
+| `theming://guidance/colors/themes`  | How color shades are used across themes          | `text/markdown`    |
 
 ---
 
 ## Implementation Phases
 
-### Phase 1: Foundation (MVP)
+### Phase 1: Foundation (Done)
 
-**Goal**: Core palette, typography, and elevation generation
+**Goal**: Core palette, typography, and elevation generation, and per-component themes
 
 **Deliverables**:
 
 - MCP server scaffolding with STDIO transport
-- `create_theme` tool (basic)
+- `detect_platform` tool
+- `create_theme` tool
 - `create_palette` tool
+- `create_custom_palette` tool
 - `create_typography` tool
 - `create_elevations` tool
+- `get_component_design_tokens` tool
+- `create_component_theme` tool
 - Preset resources (palettes, typography, elevations)
 - Basic Sass and CSS code generation
 
@@ -288,7 +291,7 @@ Pre-built interaction templates for common theming tasks.
 - Both elevation presets (material, indigo)
 - Shade generation algorithms
 
-### Phase 2: Color Intelligence
+### Phase 2: Color Intelligence (Partially Done)
 
 **Goal**: Smart color operations, validation, and suggestions
 
@@ -305,7 +308,7 @@ Pre-built interaction templates for common theming tasks.
 
 **Implemented: Surface/Gray Color Validation**
 
-The `create_palette` and `create_theme` tools now validate surface and gray colors against the theme variant:
+The `create_palette`, `create_custom_palette`, and `create_theme` tools validate surface and gray colors against the theme variant:
 
 | Variant | Surface Requirement | Gray Requirement |
 |---------|---------------------|------------------|
@@ -319,15 +322,6 @@ The `create_palette` and `create_theme` tools now validate surface and gray colo
 - Warning comments are added to generated Sass code
 - Tips suggest omitting gray parameter to let it auto-calculate
 - Uses Sass `luminance()` function via `sass-embedded` for accurate calculation
-
-**New files:**
-- `src/mcp/utils/color.ts` - Sass-powered color analysis (luminance, contrast)
-- `src/mcp/validators/palette.ts` - Validation logic
-- `src/mcp/validators/index.ts` - Validators barrel export
-- `src/mcp/knowledge/colors.ts` - Color rules documentation
-
-**New resource:**
-- `theming://guidance/colors` - Markdown documentation about color rules
 
 **Data to Embed**:
 
@@ -364,34 +358,6 @@ The `create_palette` and `create_theme` tools now validate surface and gray colo
 
 - Sass compilation service for validation
 - Error message interpretation
-
-### Phase 5: Component Themes (Extensible)
-
-**Goal**: Per-component theme generation
-
-**Deliverables**:
-
-- `create_component_theme` tool
-- `list_component_themes` tool
-- `get_component_schema` tool
-- Component catalog resources
-- Component examples resources
-
-**Strategy for Component Extensibility**:
-
-```typescript
-// Component registry pattern
-interface ComponentThemeDefinition {
-  name: string;
-  properties: PropertyDefinition[];
-  schema: Record<string, unknown>;
-  defaults: Record<DesignSystem, Record<string, unknown>>;
-  generator: (options: ThemeOptions) => string;
-}
-
-// Components can be added incrementally
-const componentRegistry = new Map<string, ComponentThemeDefinition>();
-```
 
 ---
 
@@ -568,7 +534,7 @@ Both platforms generate similar CSS custom properties:
 
 ---
 
-## File Structure
+## File Structure (Initial Scaffolding)
 
 ```
 src/mcp/
@@ -674,15 +640,8 @@ export default defineConfig({
 ```json
 {
   "@modelcontextprotocol/sdk": "^1.0.0",
-  "zod": "^3.0.0"
-}
-```
-
-### Optional Dependencies (for validation)
-
-```json
-{
-  "sass": "^1.92.0"
+  "zod": "^3.0.0",
+  "sass-embedded": "^1.92.0"
 }
 ```
 
@@ -789,13 +748,13 @@ export default defineConfig({
 
 ## Open Questions
 
-1. **Sass Compilation for Validation**: Should we bundle dart-sass for runtime validation, or make it optional/lazy-loaded to reduce package size?
+1. **HTTP Transport**: 
+  - Q: Will Phase 1 include HTTP transport for remote hosting, or is STDIO sufficient for MVP?
+  - A: No. Phase 1 will focus on STDIO. HTTP transport can be added in a later phase if needed.
 
-2. **HTTP Transport**: Should Phase 1 include HTTP transport for remote hosting, or is STDIO sufficient for MVP?
-
-3. **Component Priority**: Which components should be prioritized for Phase 5? Suggest: button, card, input, grid (most commonly themed)
-
-4. **Caching**: Should validated themes be cached? What invalidation strategy?
+2. **Caching**:
+  - Q: Should validated themes be cached? What invalidation strategy?
+  - A: Not in Phase 1. Caching can be considered in future phases based on performance needs.
 
 ---
 
@@ -897,12 +856,3 @@ export default defineConfig({
 - `$ease-in-quad`, `$ease-in-cubic`, `$ease-in-quart`, etc.
 - `$ease-out-quad`, `$ease-out-cubic`, `$ease-out-quart`, etc.
 - `$ease-in-out-quad`, `$ease-in-out-cubic`, etc.
----
-
-## Next Steps
-
-1. Review and approve this plan
-2. Set up project scaffolding with Vite
-3. Implement Phase 1 tools
-4. Test with Claude Desktop/Code and other AI assistants
-5. Iterate based on feedback

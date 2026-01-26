@@ -645,7 +645,7 @@ export const TOOL_DESCRIPTIONS = {
 <workflow>
   1. First call get_component_design_tokens to discover available tokens
   2. Choose which tokens to customize based on your design requirements
-  3. Specify designSystem and variant to match your theme (defaults to Material light)
+  3. Specify designSystem and variant to match the global theme or the one explicitly requested (defaults to Material light)
   4. Call this tool with component name and token values
   5. Receive ready-to-use Sass code with the component theme
 </workflow>

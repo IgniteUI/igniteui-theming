@@ -410,6 +410,7 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
     description:
       'The grid is a complex compound component with many themeable parts including filtering, editing, and selection.',
     relatedThemes: [
+      'action-strip',
       'checkbox',
       'chip',
       'input-group',
@@ -427,6 +428,7 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
     ],
     innerSelectors: {
       angular: {
+        'action-strip': 'igx-grid igx-action-strip',
         checkbox: 'igx-grid igx-checkbox',
         chip: 'igx-grid igx-chip',
         'input-group': 'igx-grid igx-input-group',
@@ -443,6 +445,7 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
         'grid-toolbar': 'igx-grid igx-grid-toolbar',
       },
       webcomponents: {
+        'action-strip': 'TODO',
         checkbox: 'TODO',
         chip: 'TODO',
         'input-group': 'TODO',

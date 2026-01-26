@@ -28,7 +28,6 @@
     "lint:prettier": "prettier \"./sass/**/*.scss\" --check --ignore-path .gitignore",
     "format": "stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
     "prepare": "husky install",
-    "mcp:dev": "tsx src/mcp/index.ts",
     "mcp:inspector": "npx @modelcontextprotocol/inspector dist/mcp/index.js",
     "test": "vitest run",
     "coverage": "vitest run --coverage"
