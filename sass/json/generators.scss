@@ -30,7 +30,7 @@ multipliers {
             @each $multiplier, $props in map.get($multipliers, $variant) {
                 > #{$multiplier} {
                     @each $key, $value in $props {
-                        --#{$key}: '#{$value}';
+                        --#{$key}: #{$value};
                     }
                 }
             }
@@ -52,7 +52,7 @@ palettes {
                 @each $color in map.remove($IPalette, '_meta') {
                     $name: list.nth($color, 1);
 
-                    --#{$name}: '#{color($palette, #{$name})}';
+                    --#{$name}: #{color($palette, #{$name})};
                 }
             }
         }
