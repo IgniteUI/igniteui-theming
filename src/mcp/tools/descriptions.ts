@@ -834,6 +834,7 @@ export const PARAM_DESCRIPTIONS = {
   // Common parameters (used across multiple tools)
   // ---------------------------------------------------------------------------
   platform: FRAGMENTS.PLATFORM,
+  licensed: `Use licensed @infragistics package (Angular only). Set to true if using @infragistics/igniteui-angular from private ProGet registry. Defaults to false (uses open-source igniteui-angular from npm). Note: igniteui-theming is always free/OSS for all other platforms.`,
   variant: FRAGMENTS.VARIANT,
   designSystem: FRAGMENTS.DESIGN_SYSTEM,
   name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,

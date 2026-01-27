@@ -33,6 +33,7 @@ export async function handleCreateTheme(params: CreateThemeParams) {
   // Generate the theme code
   const result = generateTheme({
     platform: params.platform,
+    licensed: params.licensed,
     designSystem: params.designSystem,
     primaryColor: params.primaryColor,
     secondaryColor: params.secondaryColor,
@@ -75,7 +76,7 @@ export async function handleCreateTheme(params: CreateThemeParams) {
   const responseParts: string[] = [result.description];
 
   // Add platform hint if not specified
-  let platformNote = ''
+  let platformNote = '';
 
   switch (params.platform) {
     case 'angular':
@@ -91,8 +92,7 @@ export async function handleCreateTheme(params: CreateThemeParams) {
       platformNote = 'Platform: Ignite UI for Blazor';
       break;
     default:
-      platformNote =
-        'Platform: Not specified (generic output). Specify `platform` for optimized code.';
+      platformNote = 'Platform: Not specified (generic output). Specify `platform` for optimized code.';
       break;
   }
 

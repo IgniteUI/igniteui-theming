@@ -206,7 +206,7 @@ function handleSassOutput(
   const varName = `$${paletteName}-palette`;
 
   const code = `${generateHeader(`Custom ${variant} palette with explicit shade control`)}
-${generateUseStatement(params.platform)}
+${generateUseStatement(params.platform, params.licensed)}
 
 ${paletteLines.join('\n')}
 

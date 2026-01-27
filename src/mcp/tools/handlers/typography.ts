@@ -8,6 +8,7 @@ import type {CreateTypographyParams} from '../schemas.js';
 export function handleCreateTypography(params: CreateTypographyParams) {
   const result = generateTypography({
     platform: params.platform,
+    licensed: params.licensed,
     fontFamily: params.fontFamily,
     designSystem: params.designSystem,
     customScale: params.customScale,

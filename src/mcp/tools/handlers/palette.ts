@@ -90,13 +90,11 @@ async function handleCssOutput(
 /**
  * Handle Sass output format - generates Sass code using the palette() function.
  */
-function handleSassOutput(
-  params: CreatePaletteParams,
-  validation: Awaited<ReturnType<typeof validatePaletteColors>>,
-) {
+function handleSassOutput(params: CreatePaletteParams, validation: Awaited<ReturnType<typeof validatePaletteColors>>) {
   // Generate the palette code
   const result = generatePalette({
     platform: params.platform,
+    licensed: params.licensed,
     primary: params.primary,
     secondary: params.secondary,
     surface: params.surface,

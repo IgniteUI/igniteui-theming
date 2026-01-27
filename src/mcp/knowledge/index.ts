@@ -115,6 +115,7 @@ export {
   type FrameworkDetectionSignal,
   type PlatformAlternative,
   detectPlatformFromDependencies,
+  isLicensedPackage,
   detectConfigFiles,
   PLATFORM_METADATA,
   PLATFORM_VARIABLE_PREFIX,

@@ -235,6 +235,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
   try {
     const result = generateComponentTheme({
       platform,
+      licensed: params.licensed,
       component: normalizedComponent,
       tokens,
       selector: finalSelector,

@@ -18,6 +18,7 @@ import {resolve, dirname} from 'node:path';
 import {z} from 'zod';
 import {
   detectPlatformFromDependencies,
+  isLicensedPackage,
   PLATFORM_METADATA,
   type PlatformDetectionResult,
   type DetectionSignal,
@@ -46,6 +47,7 @@ export interface DetectPlatformResult {
     signals: DetectionSignal[];
   }>;
   detectedPackage?: string;
+  licensed?: boolean;
   signals?: DetectionSignal[];
   reason: string;
   platformInfo?: {
@@ -123,6 +125,8 @@ export async function handleDetectPlatform(params: DetectPlatformParams) {
 
   if (result.detectedPackage) {
     response.detectedPackage = result.detectedPackage;
+    // Determine if licensed package (only relevant for Angular)
+    response.licensed = isLicensedPackage(result.detectedPackage);
   }
 
   // Add platform info if detected
@@ -170,17 +174,28 @@ export async function handleDetectPlatform(params: DetectPlatformParams) {
 
     if (result.detectedPackage) {
       text += `**Detected Package:** ${result.detectedPackage}\n`;
+      const licensed = isLicensedPackage(result.detectedPackage);
+      if (result.platform === 'angular') {
+        text += `**Package Type:** ${licensed ? 'Licensed (@infragistics)' : 'Open Source (npm)'}\n`;
+      }
     }
 
     if (result.signals && result.signals.length > 0) {
       text += `**Detection Signals:** ${result.signals.map(formatSignal).join(', ')}\n`;
     }
 
-    text += `**Theming Module:** \`${metadata.themingModule}\`\n\n`;
+    const themingModule =
+      result.platform === 'angular' && response.licensed
+        ? (metadata as any).licensedThemingModule
+        : metadata.themingModule;
+    text += `**Theming Module:** \`${themingModule}\`\n\n`;
 
     text += `### Usage\n\n`;
-    text += `When generating theme code, use \`platform: '${result.platform}'\` to ensure `;
-    text += `the correct Sass syntax is generated for this platform.\n\n`;
+    text += `When generating theme code, use \`platform: '${result.platform}'\``;
+    if (result.platform === 'angular' && response.licensed) {
+      text += ` and \`licensed: true\``;
+    }
+    text += ` to ensure the correct Sass syntax is generated for this platform.\n\n`;
     text += `${metadata.description}`;
 
     // Add confidence-specific notes

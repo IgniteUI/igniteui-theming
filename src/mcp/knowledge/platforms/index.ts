@@ -387,6 +387,17 @@ export function getVariablePrefix(platform: Platform): string {
 }
 
 /**
+ * Determine if a detected package is a licensed @infragistics package.
+ * Only applies to Angular - other platforms always use the free igniteui-theming package.
+ *
+ * @param detectedPackage - The package name detected from package.json
+ * @returns True if the package is a licensed @infragistics package
+ */
+export function isLicensedPackage(detectedPackage?: string): boolean {
+  return detectedPackage?.startsWith('@infragistics/') ?? false;
+}
+
+/**
  * Platform metadata for display purposes
  */
 export const PLATFORM_METADATA = {
@@ -395,9 +406,11 @@ export const PLATFORM_METADATA = {
     name: 'Ignite UI for Angular',
     shortName: 'Angular',
     packageName: 'igniteui-angular',
+    licensedPackageName: '@infragistics/igniteui-angular',
     themingModule: 'igniteui-angular/theming',
+    licensedThemingModule: '@infragistics/igniteui-angular/theming',
     description:
-      'Uses core() and theme() mixins from igniteui-angular/theming module. Requires ig-typography CSS class on root element.',
+      'Uses core() and theme() mixins from igniteui-angular/theming module. Requires ig-typography CSS class on root element. Available as OSS (igniteui-angular) or licensed (@infragistics/igniteui-angular) package.',
   },
   webcomponents: {
     id: 'webcomponents',
@@ -406,7 +419,7 @@ export const PLATFORM_METADATA = {
     packageName: 'igniteui-webcomponents',
     themingModule: 'igniteui-theming',
     description:
-      'Uses igniteui-theming directly with palette(), typography(), and elevations() mixins. Supports runtime theme switching via configureTheme().',
+      'Uses igniteui-theming directly with palette(), typography(), and elevations() mixins. Supports runtime theme switching via configureTheme(). The igniteui-theming package is always free/OSS.',
   },
   react: {
     id: 'react',
@@ -415,7 +428,7 @@ export const PLATFORM_METADATA = {
     packageName: 'igniteui-react',
     themingModule: 'igniteui-theming',
     description:
-      'Uses igniteui-theming directly with palette(), typography(), and elevations() mixins. Common with Vite or Next.js projects.',
+      'Uses igniteui-theming directly with palette(), typography(), and elevations() mixins. Common with Vite or Next.js projects. The igniteui-theming package is always free/OSS.',
   },
   blazor: {
     id: 'blazor',
@@ -424,6 +437,6 @@ export const PLATFORM_METADATA = {
     packageName: 'IgniteUI.Blazor',
     themingModule: 'igniteui-theming',
     description:
-      'Uses igniteui-theming for Sass compilation in .NET Blazor projects. Theme styles are compiled to CSS and referenced in Blazor components.',
+      'Uses igniteui-theming for Sass compilation in .NET Blazor projects. Theme styles are compiled to CSS and referenced in Blazor components. The igniteui-theming package is always free/OSS.',
   },
 } as const;

@@ -70,7 +70,7 @@ export function generatePalette(input: CreatePaletteInput): GeneratedCode {
   if (input.error) paletteArgs.push(`$error: ${input.error}`);
 
   const code = `${generateHeader(`${variant} palette with primary color ${input.primary}`)}
-${generateUseStatement(input.platform)}
+${generateUseStatement(input.platform, input.licensed)}
 
 // Custom ${variant} palette
 ${varName}: palette(
@@ -100,7 +100,7 @@ export function generateTypography(input: CreateTypographyInput): GeneratedCode 
   const typeface = input.fontFamily || preset.typeface;
 
   const code = `${generateHeader(`Typography setup using ${designSystem} type scale`)}
-${generateUseStatement(input.platform)}
+${generateUseStatement(input.platform, input.licensed)}
 
 // Typography setup with ${designSystem} type scale
 @include typography(
@@ -124,7 +124,7 @@ export function generateElevations(input: CreateElevationsInput): GeneratedCode 
   const elevationsVar = `$${preset}-elevations`;
 
   const code = `${generateHeader(`Elevations setup using ${preset} preset`)}
-${generateUseStatement(input.platform)}
+${generateUseStatement(input.platform, input.licensed)}
 
 // Elevations setup with ${preset} shadows
 @include elevations(${elevationsVar});
@@ -278,7 +278,7 @@ function generateGenericTheme(
   const sections: string[] = [
     generateHeader(`Complete ${variant} theme based on ${designSystem} design system`),
     '// NOTE: Specify platform ("angular" or "webcomponents") for optimized output',
-    generateUseStatement(),
+    generateUseStatement(input.platform, input.licensed),
     '',
     `// ${themeName} palette`,
     `${paletteVar}: palette(`,
@@ -332,6 +332,8 @@ function generateGenericTheme(
  */
 export interface CreateComponentThemeInput {
   platform: Platform;
+  /** Whether to use licensed @infragistics package (Angular only, defaults to false) */
+  licensed?: boolean;
   /** Design system (defaults to 'material') */
   designSystem?: DesignSystem;
   /** Theme variant - light or dark (defaults to 'light') */
@@ -383,7 +385,7 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
   // Generate the code
   const sections: string[] = [
     generateHeader(`Custom ${input.component} theme`),
-    generateUseStatement(input.platform),
+    generateUseStatement(input.platform, input.licensed),
     '',
     `// Custom ${input.component} theme`,
     `${themeName}: ${themeFn}(`,

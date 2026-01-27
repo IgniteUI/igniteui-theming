@@ -94,13 +94,15 @@ export function generateHeader(description: string): string {
  * Uses platform-specific import paths when platform is specified.
  *
  * @param platform - Target platform (angular or webcomponents)
+ * @param licensed - Whether to use the licensed @infragistics package (Angular only, defaults to false)
  * @returns The appropriate @use statement for the platform
  */
-export function generateUseStatement(platform?: Platform): string {
+export function generateUseStatement(platform?: Platform, licensed?: boolean): string {
   if (platform === 'angular') {
-    return '@use "igniteui-angular/theming" as *;';
+    const packagePath = licensed ? '@infragistics/igniteui-angular' : 'igniteui-angular';
+    return `@use "${packagePath}/theming" as *;`;
   }
-  // Web Components or unspecified (default to igniteui-theming)
+  // Web Components, React, Blazor, or unspecified (always use igniteui-theming - it's free)
   return "@use 'igniteui-theming' as *;";
 }
 

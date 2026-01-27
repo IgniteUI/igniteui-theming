@@ -8,6 +8,7 @@ import type {CreateElevationsParams} from '../schemas.js';
 export function handleCreateElevations(params: CreateElevationsParams) {
   const result = generateElevations({
     platform: params.platform,
+    licensed: params.licensed,
     designSystem: params.designSystem,
     name: params.name,
   });

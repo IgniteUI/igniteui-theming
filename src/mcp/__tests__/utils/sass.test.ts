@@ -2,7 +2,7 @@
  * Tests for Sass utility functions.
  */
 
-import { describe, it, expect } from 'vitest';
+import {describe, it, expect} from 'vitest';
 import {
   toVariableName,
   generateHeader,
@@ -93,8 +93,18 @@ describe('generateUseStatement', () => {
     expect(result).toBe('@use "igniteui-angular/theming" as *;');
   });
 
+  it('generates licensed Angular import when licensed is true', () => {
+    const result = generateUseStatement('angular', true);
+    expect(result).toBe('@use "@infragistics/igniteui-angular/theming" as *;');
+  });
+
   it('generates generic import for webcomponents platform', () => {
     const result = generateUseStatement('webcomponents');
+    expect(result).toBe("@use 'igniteui-theming' as *;");
+  });
+
+  it('ignores licensed flag for webcomponents (always free)', () => {
+    const result = generateUseStatement('webcomponents', true);
     expect(result).toBe("@use 'igniteui-theming' as *;");
   });
 

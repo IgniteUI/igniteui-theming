@@ -85,6 +85,11 @@ export const outputFormatSchema = z.enum(OUTPUT_FORMATS).optional();
 export const platformSchema = z.enum(PLATFORMS).optional().describe(PARAM_DESCRIPTIONS.platform);
 
 /**
+ * Licensed package schema - for @infragistics prefixed packages.
+ */
+export const licensedSchema = z.boolean().optional().describe(PARAM_DESCRIPTIONS.licensed);
+
+/**
  * Schema for detect_platform tool.
  */
 export const detectPlatformSchema = z.object({
@@ -96,6 +101,7 @@ export const detectPlatformSchema = z.object({
  */
 export const createPaletteSchema = z.object({
   platform: platformSchema,
+  licensed: licensedSchema,
   primary: colorSchema.describe(PARAM_DESCRIPTIONS.primary),
   secondary: colorSchema.describe(PARAM_DESCRIPTIONS.secondary),
   surface: colorSchema.describe(PARAM_DESCRIPTIONS.surface),
@@ -128,6 +134,7 @@ export const typeStyleSchema = z.object({
  */
 export const createTypographySchema = z.object({
   platform: platformSchema,
+  licensed: licensedSchema,
   fontFamily: z.string().describe(PARAM_DESCRIPTIONS.fontFamily),
   designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
   customScale: z.record(typeStyleSchema).optional().describe(PARAM_DESCRIPTIONS.customScale),
@@ -139,6 +146,7 @@ export const createTypographySchema = z.object({
  */
 export const createElevationsSchema = z.object({
   platform: platformSchema,
+  licensed: licensedSchema,
   designSystem: elevationPresetSchema.describe(PARAM_DESCRIPTIONS.elevationPreset),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
 });
@@ -148,6 +156,7 @@ export const createElevationsSchema = z.object({
  */
 export const createThemeSchema = z.object({
   platform: platformSchema,
+  licensed: licensedSchema,
   designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
   primaryColor: colorSchema.describe(PARAM_DESCRIPTIONS.primaryColor),
   secondaryColor: colorSchema.describe(PARAM_DESCRIPTIONS.secondaryColor),
@@ -233,6 +242,7 @@ const grayDefinitionSchema = z.union([shadesBasedColorSchema, explicitGrayShades
  */
 export const createCustomPaletteSchema = z.object({
   platform: platformSchema,
+  licensed: licensedSchema,
   variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
@@ -279,6 +289,7 @@ const tokenValueSchema = z.union([
  */
 export const createComponentThemeSchema = z.object({
   platform: z.enum(PLATFORMS).describe(PARAM_DESCRIPTIONS.platform),
+  licensed: licensedSchema,
   designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
   variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   component: z.string().describe(PARAM_DESCRIPTIONS.componentTheme),

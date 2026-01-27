@@ -82,6 +82,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_palette,
       inputSchema: {
         platform: createPaletteSchema.shape.platform,
+        licensed: createPaletteSchema.shape.licensed,
         variant: createPaletteSchema.shape.variant,
         name: createPaletteSchema.shape.name,
         output: createPaletteSchema.shape.output,
@@ -109,6 +110,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_custom_palette,
       inputSchema: {
         platform: createCustomPaletteSchema.shape.platform,
+        licensed: createCustomPaletteSchema.shape.licensed,
         variant: createCustomPaletteSchema.shape.variant,
         designSystem: createCustomPaletteSchema.shape.designSystem,
         name: createCustomPaletteSchema.shape.name,
@@ -134,6 +136,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_typography,
       inputSchema: {
         platform: createTypographySchema.shape.platform,
+        licensed: createTypographySchema.shape.licensed,
         fontFamily: createTypographySchema.shape.fontFamily,
         designSystem: createTypographySchema.shape.designSystem,
         customScale: createTypographySchema.shape.customScale,
@@ -151,6 +154,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_elevations,
       inputSchema: {
         platform: createElevationsSchema.shape.platform,
+        licensed: createElevationsSchema.shape.licensed,
         designSystem: createElevationsSchema.shape.designSystem,
         name: createElevationsSchema.shape.name,
       },
@@ -169,6 +173,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_theme,
       inputSchema: {
         platform: createThemeSchema.shape.platform,
+        licensed: createThemeSchema.shape.licensed,
         designSystem: createThemeSchema.shape.designSystem,
         primaryColor: createThemeSchema.shape.primaryColor,
         secondaryColor: createThemeSchema.shape.secondaryColor,
@@ -211,6 +216,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.create_component_theme,
       inputSchema: {
         platform: createComponentThemeSchema.shape.platform,
+        licensed: createComponentThemeSchema.shape.licensed,
         designSystem: createComponentThemeSchema.shape.designSystem,
         variant: createComponentThemeSchema.shape.variant,
         component: createComponentThemeSchema.shape.component,

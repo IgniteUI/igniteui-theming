@@ -101,6 +101,8 @@ export type AccentShadeLevel = (typeof ACCENT_SHADE_LEVELS)[number];
 export interface CreatePaletteInput {
   /** Target platform for code generation */
   platform?: Platform;
+  /** Whether to use licensed @infragistics package (Angular only, defaults to false) */
+  licensed?: boolean;
   /** Primary brand color (hex, rgb, or hsl) */
   primary: string;
   /** Secondary/accent color (required by Sass palette function) */
@@ -129,6 +131,8 @@ export interface CreatePaletteInput {
 export interface CreateTypographyInput {
   /** Target platform for code generation */
   platform?: Platform;
+  /** Whether to use licensed @infragistics package (Angular only, defaults to false) */
+  licensed?: boolean;
   /** Font family string */
   fontFamily: string;
   /** Design system preset to use for type scale */
@@ -159,6 +163,8 @@ export interface TypeStyleInput {
 export interface CreateElevationsInput {
   /** Target platform for code generation */
   platform?: Platform;
+  /** Whether to use licensed @infragistics package (Angular only, defaults to false) */
+  licensed?: boolean;
   /** Design system preset to use (material or indigo) */
   designSystem?: 'material' | 'indigo';
   /** Custom name for the elevations variable */
@@ -171,6 +177,8 @@ export interface CreateElevationsInput {
 export interface CreateThemeInput {
   /** Target platform for code generation */
   platform?: Platform;
+  /** Whether to use licensed @infragistics package (Angular only, defaults to false) */
+  licensed?: boolean;
   /** Design system to base the theme on */
   designSystem?: DesignSystem;
   /** Primary brand color */
@@ -310,6 +318,8 @@ export type GrayDefinition = ShadesBasedColor | ExplicitGrayShades;
 export interface CreateCustomPaletteInput {
   /** Target platform for code generation */
   platform?: Platform;
+  /** Whether to use licensed @infragistics package (Angular only, defaults to false) */
+  licensed?: boolean;
   /** Theme variant (light or dark) */
   variant?: ThemeVariant;
   /** Design system to use for default color values */
