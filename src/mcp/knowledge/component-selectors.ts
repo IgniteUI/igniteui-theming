@@ -71,7 +71,7 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     webcomponents: 'igc-badge',
   },
   banner: {
-    angular: 'igx-banner',
+    angular: '.igx-banner',
     webcomponents: 'igc-banner',
   },
   'bottom-nav': {
@@ -347,8 +347,8 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
       },
       webcomponents: {
         'input-group': 'igc-combo::part(input)',
-        'drop-down': 'igc-combo::part(list)',
-        checkbox: 'igc-combo-item::part(checkbox)',
+        'drop-down': 'igc-combo::part(list-wrapper)',
+        checkbox: 'igc-combo::part(checkbox)',
       },
     },
   },
