@@ -13,12 +13,19 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Highlight Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$resting-background` - The resting state background. Auto-derives: resting-color.
+/// - `$active-background` - The active state background. Auto-derives: active-color.
+///
 /// If only background color(s) specified, text color(s) will be assigned automatically to a contrasting color.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $resting-background [null]- The background color used for the highlight in its resting state.
-/// @param {Color} $resting-color [null] - The text color used for the highlight in its resting state.
-/// @param {Color} $active-background [null] - The background color used for the highlight in its active state.
-/// @param {Color} $active-color [null] - The text color used for the highlight in its active state.
+/// @param {Color} $resting-background [null]- The background color used for the highlight in its resting state. PRIMARY - derives resting-color.
+/// @param {Color} $resting-color [null] - The text color used for the highlight in its resting state. Auto-derived from resting-background.
+/// @param {Color} $active-background [null] - The background color used for the highlight in its active state. PRIMARY - derives active-color.
+/// @param {Color} $active-color [null] - The text color used for the highlight in its active state. Auto-derived from active-background.
 /// @requires $light-material-schema
 /// @example scss Change the background and icon colors in icon highlight
 ///   $my-highlight-theme: highlight-theme($resting-background: black, $active-color: white);

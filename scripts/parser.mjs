@@ -2,9 +2,14 @@ import postcss from 'postcss';
 import safeParser from 'postcss-safe-parser';
 import report from './report.mjs';
 
-// Remove surrounding quotes from a string
+// Remove surrounding quotes from a string (both single and double quotes)
 function removeQuotes(string) {
+  // Remove double quotes
   if (string.startsWith('"') && string.endsWith('"')) {
+    return string.substring(1, string.length - 1);
+  }
+  // Remove single quotes
+  if (string.startsWith("'") && string.endsWith("'")) {
     return string.substring(1, string.length - 1);
   }
   return string;
