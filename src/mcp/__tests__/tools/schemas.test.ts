@@ -9,7 +9,13 @@
  */
 
 import {describe, it, expect} from 'vitest';
-import {colorSchema, createCustomPaletteSchema} from '../../tools/schemas.js';
+import {
+  colorSchema,
+  createCustomPaletteSchema,
+  setRoundnessSchema,
+  setSizeSchema,
+  setSpacingSchema,
+} from '../../tools/schemas.js';
 
 describe('colorSchema', () => {
   describe('hex colors', () => {
@@ -286,6 +292,34 @@ describe('colorSchema', () => {
       // While unusual, calc() can be used inside color functions
       expect(colorSchema.safeParse('rgb(calc(255 * 0.5) 0 0)').success).toBe(true);
     });
+  });
+});
+
+describe('layout schemas', () => {
+  it('accepts size keywords and numeric values', () => {
+    expect(setSizeSchema.safeParse({size: 'small'}).success).toBe(true);
+    expect(setSizeSchema.safeParse({size: 1}).success).toBe(true);
+    expect(setSizeSchema.safeParse({size: 2}).success).toBe(true);
+    expect(setSizeSchema.safeParse({size: 3}).success).toBe(true);
+    expect(setSizeSchema.safeParse({size: 1.5}).success).toBe(false);
+    expect(setSizeSchema.safeParse({size: 4}).success).toBe(false);
+  });
+
+  it('requires spacing for set_spacing', () => {
+    expect(setSpacingSchema.safeParse({spacing: 1}).success).toBe(true);
+    expect(setSpacingSchema.safeParse({inline: 0.5}).success).toBe(false);
+  });
+
+  it('rejects negative spacing values', () => {
+    expect(setSpacingSchema.safeParse({spacing: -0.5}).success).toBe(false);
+    expect(setSpacingSchema.safeParse({spacing: 1, inline: -0.5}).success).toBe(false);
+    expect(setSpacingSchema.safeParse({spacing: 1, block: -0.25}).success).toBe(false);
+  });
+
+  it('enforces radiusFactor between 0 and 1', () => {
+    expect(setRoundnessSchema.safeParse({radiusFactor: 0}).success).toBe(true);
+    expect(setRoundnessSchema.safeParse({radiusFactor: 1}).success).toBe(true);
+    expect(setRoundnessSchema.safeParse({radiusFactor: 1.1}).success).toBe(false);
   });
 });
 

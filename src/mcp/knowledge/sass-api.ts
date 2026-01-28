@@ -340,10 +340,19 @@ export const CSS_VARIABLE_PATTERNS = {
   themeVariant: '--ig-theme-variant',
   /** Component size levels */
   sizes: {
+    base: '--ig-size',
     small: '--ig-size-small',
     medium: '--ig-size-medium',
     large: '--ig-size-large',
   },
+  /** Spacing controls */
+  spacing: {
+    base: '--ig-spacing',
+    inline: '--ig-spacing-inline',
+    block: '--ig-spacing-block',
+  },
+  /** Roundness scaling */
+  roundness: '--ig-radius-factor',
   /** Scrollbar customization */
   scrollbar: {
     size: '--ig-scrollbar-size',

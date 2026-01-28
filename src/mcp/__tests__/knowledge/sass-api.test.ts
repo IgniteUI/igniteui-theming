@@ -176,9 +176,17 @@ describe('CSS_VARIABLE_PATTERNS', () => {
   });
 
   it('has correct size variables', () => {
+    expect(CSS_VARIABLE_PATTERNS.sizes.base).toBe('--ig-size');
     expect(CSS_VARIABLE_PATTERNS.sizes.small).toBe('--ig-size-small');
     expect(CSS_VARIABLE_PATTERNS.sizes.medium).toBe('--ig-size-medium');
     expect(CSS_VARIABLE_PATTERNS.sizes.large).toBe('--ig-size-large');
+  });
+
+  it('has correct spacing and roundness variables', () => {
+    expect(CSS_VARIABLE_PATTERNS.spacing.base).toBe('--ig-spacing');
+    expect(CSS_VARIABLE_PATTERNS.spacing.inline).toBe('--ig-spacing-inline');
+    expect(CSS_VARIABLE_PATTERNS.spacing.block).toBe('--ig-spacing-block');
+    expect(CSS_VARIABLE_PATTERNS.roundness).toBe('--ig-radius-factor');
   });
 
   it('has correct scrollbar variables', () => {

@@ -14,6 +14,7 @@ import {handleCreateTypography} from '../../../tools/handlers/typography.js';
 import {handleCreateElevations} from '../../../tools/handlers/elevations.js';
 import {handleCreateCustomPalette} from '../../../tools/handlers/custom-palette.js';
 import {handleCreateComponentTheme} from '../../../tools/handlers/component-theme.js';
+import {handleSetRoundness, handleSetSize, handleSetSpacing} from '../../../tools/handlers/layout.js';
 
 describe('handleCreatePalette', () => {
   it('returns MCP response format', async () => {
@@ -221,6 +222,43 @@ describe('handleCreateTypography', () => {
 
     const text = result.content[0].text;
     expect(text).toContain('$indigo-type-scale');
+  });
+});
+
+describe('layout handlers', () => {
+  it('set_size returns size override code', async () => {
+    const result = await handleSetSize({
+      size: 'small',
+      component: 'flat-button',
+      platform: 'webcomponents',
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('--ig-size: 1;');
+    expect(text).toContain('igc-button[variant="flat"]');
+  });
+
+  it('set_spacing requires spacing and returns override code', async () => {
+    const result = await handleSetSpacing({
+      spacing: 0.75,
+      scope: '.compact',
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('--ig-spacing: 0.75;');
+    expect(text).toContain('.compact');
+  });
+
+  it('set_roundness returns radius factor override', async () => {
+    const result = await handleSetRoundness({
+      radiusFactor: 0.8,
+      component: 'avatar',
+      platform: 'angular',
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('--ig-radius-factor: 0.8;');
+    expect(text).toContain('igx-avatar');
   });
 });
 

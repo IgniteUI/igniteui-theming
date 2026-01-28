@@ -27,6 +27,13 @@ import {
   TYPE_SCALE_PRESETS,
   ELEVATIONS_PRESETS,
   SCHEMA_PRESETS,
+  LAYOUT_OVERVIEW_DOC,
+  PAD_FUNCTION_DOC,
+  SIZABLE_FUNCTION_DOC,
+  BORDER_RADIUS_FUNCTION_DOC,
+  SPACING_MIXIN_DOC,
+  SIZING_MIXIN_DOC,
+  SIZABLE_MIXIN_DOC,
   REACT_PLATFORM,
   REACT_USAGE_EXAMPLES,
   BLAZOR_PLATFORM,
@@ -61,6 +68,14 @@ export const RESOURCE_URIS = {
   GUIDANCE_COLORS_ROLES: `${RESOURCE_SCHEME}://guidance/colors/roles`,
   GUIDANCE_COLORS_STATES: `${RESOURCE_SCHEME}://guidance/colors/states`,
   GUIDANCE_COLORS_THEMES: `${RESOURCE_SCHEME}://guidance/colors/themes`,
+  // Layout documentation resources
+  DOCS_LAYOUT_OVERVIEW: `${RESOURCE_SCHEME}://docs/spacing-and-sizing`,
+  DOCS_FUNCTION_PAD: `${RESOURCE_SCHEME}://docs/functions/pad`,
+  DOCS_FUNCTION_SIZABLE: `${RESOURCE_SCHEME}://docs/functions/sizable`,
+  DOCS_FUNCTION_BORDER_RADIUS: `${RESOURCE_SCHEME}://docs/functions/border-radius`,
+  DOCS_MIXIN_SPACING: `${RESOURCE_SCHEME}://docs/mixins/spacing`,
+  DOCS_MIXIN_SIZING: `${RESOURCE_SCHEME}://docs/mixins/sizing`,
+  DOCS_MIXIN_SIZABLE: `${RESOURCE_SCHEME}://docs/mixins/sizable`,
 } as const;
 
 /**
@@ -168,9 +183,51 @@ export const RESOURCE_DEFINITIONS = [
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS_THEMES,
     name: 'Design System Patterns',
-    description:
-      'Color usage characteristics specific to Material, Fluent, Bootstrap, and Indigo design systems.',
+    description: 'Color usage characteristics specific to Material, Fluent, Bootstrap, and Indigo design systems.',
     mimeType: 'application/json',
+  },
+  // Layout documentation resources
+  {
+    uri: RESOURCE_URIS.DOCS_LAYOUT_OVERVIEW,
+    name: 'Layout Scale Overview',
+    description: 'Overview of size, spacing, and roundness variables with examples for CSS and Sass.',
+    mimeType: 'text/markdown',
+  },
+  {
+    uri: RESOURCE_URIS.DOCS_FUNCTION_PAD,
+    name: 'pad() Function',
+    description: 'Documentation for the pad() spacing function and its usage.',
+    mimeType: 'text/markdown',
+  },
+  {
+    uri: RESOURCE_URIS.DOCS_FUNCTION_SIZABLE,
+    name: 'sizable() Function',
+    description: 'Documentation for the sizable() function and size-based values.',
+    mimeType: 'text/markdown',
+  },
+  {
+    uri: RESOURCE_URIS.DOCS_FUNCTION_BORDER_RADIUS,
+    name: 'border-radius() Function',
+    description: 'Documentation for the border-radius() function and roundness scaling.',
+    mimeType: 'text/markdown',
+  },
+  {
+    uri: RESOURCE_URIS.DOCS_MIXIN_SPACING,
+    name: 'spacing() Mixin',
+    description: 'Documentation for the spacing() mixin and spacing variables.',
+    mimeType: 'text/markdown',
+  },
+  {
+    uri: RESOURCE_URIS.DOCS_MIXIN_SIZING,
+    name: 'sizing() Mixin',
+    description: 'Documentation for the sizing() mixin and size custom properties.',
+    mimeType: 'text/markdown',
+  },
+  {
+    uri: RESOURCE_URIS.DOCS_MIXIN_SIZABLE,
+    name: 'sizable() Mixin',
+    description: 'Documentation for the sizable() mixin and size flags.',
+    mimeType: 'text/markdown',
   },
 ];
 
@@ -404,6 +461,56 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
     () => ({
       content: JSON.stringify(THEME_PATTERNS, null, 2),
       mimeType: 'application/json',
+    }),
+  ],
+  // Layout documentation resources
+  [
+    RESOURCE_URIS.DOCS_LAYOUT_OVERVIEW,
+    () => ({
+      content: LAYOUT_OVERVIEW_DOC,
+      mimeType: 'text/markdown',
+    }),
+  ],
+  [
+    RESOURCE_URIS.DOCS_FUNCTION_PAD,
+    () => ({
+      content: PAD_FUNCTION_DOC,
+      mimeType: 'text/markdown',
+    }),
+  ],
+  [
+    RESOURCE_URIS.DOCS_FUNCTION_SIZABLE,
+    () => ({
+      content: SIZABLE_FUNCTION_DOC,
+      mimeType: 'text/markdown',
+    }),
+  ],
+  [
+    RESOURCE_URIS.DOCS_FUNCTION_BORDER_RADIUS,
+    () => ({
+      content: BORDER_RADIUS_FUNCTION_DOC,
+      mimeType: 'text/markdown',
+    }),
+  ],
+  [
+    RESOURCE_URIS.DOCS_MIXIN_SPACING,
+    () => ({
+      content: SPACING_MIXIN_DOC,
+      mimeType: 'text/markdown',
+    }),
+  ],
+  [
+    RESOURCE_URIS.DOCS_MIXIN_SIZING,
+    () => ({
+      content: SIZING_MIXIN_DOC,
+      mimeType: 'text/markdown',
+    }),
+  ],
+  [
+    RESOURCE_URIS.DOCS_MIXIN_SIZABLE,
+    () => ({
+      content: SIZABLE_MIXIN_DOC,
+      mimeType: 'text/markdown',
     }),
   ],
 ]);

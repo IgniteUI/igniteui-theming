@@ -132,6 +132,17 @@ export {
   ELEVATIONS as ELEVATIONS_PRESETS,
 } from './platforms/common.js';
 
+// Layout docs
+export {
+  LAYOUT_OVERVIEW_DOC,
+  PAD_FUNCTION_DOC,
+  SIZABLE_FUNCTION_DOC,
+  BORDER_RADIUS_FUNCTION_DOC,
+  SPACING_MIXIN_DOC,
+  SIZING_MIXIN_DOC,
+  SIZABLE_MIXIN_DOC,
+} from './layout-docs.js';
+
 // Component Themes
 export {
   type ComponentToken,

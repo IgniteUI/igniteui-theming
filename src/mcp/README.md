@@ -163,10 +163,6 @@ For any other MCP-compatible client, use the STDIO transport configuration:
   - Local: `/absolute/path/to/igniteui-theming/dist/mcp/index.js`
   - Package: `igniteui-theming-mcp`
 
-````
-
----
-
 ## Tools Reference
 
 The MCP server provides tools for theme generation.
@@ -211,7 +207,7 @@ Generates a color palette with automatically calculated shade variations (50-900
 
 > "Create a color palette with blue as primary and orange as secondary for a light theme"
 
-> "Generate a dark theme palette using my brand colors: primary #6366F1, secondary #EC4899, surface #1E1E1E"
+> "Generate a dark theme palette using my brand colors: primary #6366f1, secondary #ec4899, surface #1e1e1e"
 
 > "I need a light palette with teal primary, purple secondary, and white surface"
 
@@ -251,7 +247,7 @@ Creates a palette with fine-grained control over individual shade values. Use th
 
 > "Our design system specifies exact colors for primary-500, primary-600, primary-700. Use those exact values and auto-generate the rest."
 
-> "Make a custom palette with explicit shades for primary (#3B82F6 as base) but let secondary auto-generate from #EC4899"
+> "Make a custom palette with explicit shades for primary (#3b82f6 as base) but let secondary auto-generate from #ec4899"
 
 ---
 
@@ -320,15 +316,77 @@ Generates a complete, production-ready theme with palette, typography, and eleva
 
 **Example prompts:**
 
-> "Create a complete Material Design dark theme for my Angular app with primary #3F51B5, secondary #FF4081, and a dark surface"
+> "Create a complete Material Design dark theme for my Angular app with primary #3f51b5, secondary #ff4081, and a dark surface"
 
-> "Generate a production-ready Bootstrap light theme using my brand colors: primary teal (#009688), secondary amber (#FFC107)"
+> "Generate a production-ready Bootstrap light theme using my brand colors: primary teal (#009688), secondary amber (#ffc107)"
 
 > "Create a Fluent theme for Web Components with Segoe UI font, blue primary, and orange accent colors"
 
-> "I need a dark Indigo theme for React with navy blue primary (#1E3A8A), warm orange secondary (#F97316), and charcoal surface (#18181B)"
+> "I need a dark Indigo theme for React with navy blue primary (#1e3a8a), warm orange secondary (#f97316), and charcoal surface (#18181B)"
 
-> "Make a light Material theme for Blazor using our brand: primary #7C3AED (purple), secondary #10B981 (green), with Inter font"
+> "Make a light Material theme for Blazor using our brand: primary #7c3aed (purple), secondary #10b981 (green), with Inter font"
+
+---
+
+### `set_size`
+
+Sets the size scale for all components or a specific component by updating `--ig-size`.
+
+| Parameter   | Type                                                        | Required | Description                                             |
+| ----------- | --------------------------------------                      | -------- | ------------------------------------------------------- |
+| `size`      | `"small"` \| `"medium"` \| `"large"` \| `1` \| `2` \| `3`   | Yes      | Size value (small/medium/large or 1/2/3)                |
+| `component` | string                                                      | No       | Component name to scope (e.g., `"flat-button"`)         |
+| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)                    |
+| `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                           |
+| `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                        |
+
+**Example prompts:**
+
+> "Make all components small"
+
+> "Make flat buttons medium"
+
+---
+
+### `set_spacing`
+
+Sets the spacing scale for all components or a specific component by updating `--ig-spacing`.
+
+| Parameter   | Type                                                        | Required | Description                                             |
+| ----------- | --------------------------------------                      | -------- | ------------------------------------------------------- |
+| `spacing`   | number                                                      | Yes      | Spacing scale (0 = none, 1 = default, 2 = double)       |
+| `inline`    | number                                                      | No       | Override inline spacing (`--ig-spacing-inline`)         |
+| `block`     | number                                                      | No       | Override block spacing (`--ig-spacing-block`)           |
+| `component` | string                                                      | No       | Component name to scope                                 |
+| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)                    |
+| `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                           |
+| `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                        |
+
+**Example prompts:**
+
+> "The calendar feels bloated, reduce its spacing"
+
+> "Tighten spacing in .compact sections"
+
+---
+
+### `set_roundness`
+
+Sets the roundness scale for all components or a specific component by updating `--ig-radius-factor`.
+
+| Parameter      | Type                                                        | Required | Description                                             |
+| -------------  | --------------------------------------                      | -------- | ------------------------------------------------------- |
+| `radiusFactor` | number                                                      | Yes      | Roundness factor (0 = min, 1 = max)                     |
+| `component`    | string                                                      | No       | Component name to scope                                 |
+| `scope`        | string                                                      | No       | CSS selector scope (default `:root`)                    |
+| `platform`     | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                           |
+| `output`       | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                        |
+
+**Example prompts:**
+
+> "Make flat buttons more round"
+
+> "Reduce the roundness globally"
 
 ---
 
@@ -379,11 +437,11 @@ Generates Sass code to customize a specific component's appearance using design 
 
 **Example prompts:**
 
-> "Create a button theme with a purple background (#8B5CF6) and white text"
+> "Create a button theme with a purple background (#8b5cf6) and white text"
 
 > "Style the card component with a light gray background and subtle shadow"
 
-> "Make the data grid header bold with a blue background (#1E40AF)"
+> "Make the data grid header bold with a blue background (#1e40af)"
 
 > "Customize the input component for dark mode with a dark background and bright border"
 
@@ -398,7 +456,7 @@ AI: First, let me check what design tokens are available for buttons.
 AI: Great! I can customize these properties: background, foreground, border-color,
 hover-background, and more. What are your brand colors?
 
-User: "Primary purple #8B5CF6, white text, and lighter purple #A78BFA on hover"
+User: "Primary purple #8b5cf6, white text, and lighter purple #a78bfa on hover"
 
 AI: Perfect! Let me create that theme for you.
 [calls create_component_theme with tokens]
@@ -439,6 +497,18 @@ The MCP server exposes read-only resources that provide reference data.
 | `theming://guidance/colors/states` | Color changes for interaction states       |
 | `theming://guidance/colors/themes` | Design system-specific color patterns      |
 
+### Layout Documentation Resources
+
+| URI                                      | Description                            |
+| ---------------------------------------- | -------------------------------------- |
+| `theming://docs/spacing-and-sizing`      | Layout scale overview                  |
+| `theming://docs/functions/pad`           | pad() function documentation           |
+| `theming://docs/functions/sizable`       | sizable() function documentation       |
+| `theming://docs/functions/border-radius` | border-radius() function documentation |
+| `theming://docs/mixins/spacing`          | spacing() mixin documentation          |
+| `theming://docs/mixins/sizing`           | sizing() mixin documentation           |
+| `theming://docs/mixins/sizable`          | sizable() mixin documentation          |
+
 ---
 
 ## Example Usage Scenarios
@@ -447,8 +517,8 @@ The MCP server exposes read-only resources that provide reference data.
 
 > "I'm starting a new Angular project with Ignite UI. Create a complete Material Design theme with:
 >
-> - Primary: our brand blue #2563EB
-> - Secondary: coral accent #F97316
+> - Primary: our brand blue #2563eb
+> - Secondary: coral accent #f97316
 > - Light theme
 > - Roboto font"
 
@@ -538,7 +608,7 @@ If you see warnings about color luminance, it means your chosen color may produc
 
 ### "Surface color doesn't match variant"
 
-For light themes, use light surface colors (high luminance like `#FAFAFA`).  
+For light themes, use light surface colors (high luminance like `#fafafa`).  
 For dark themes, use dark surface colors (low luminance like `#121212`).
 
 ### Generated code doesn't compile

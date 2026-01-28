@@ -20,6 +20,10 @@ import {
   getComponentDesignTokensSchema,
   createComponentThemeSchema,
   getColorSchema,
+  setSizeSchema,
+  setSpacingSchema,
+  setSpacingInputSchema,
+  setRoundnessSchema,
   handleDetectPlatform,
   handleCreatePalette,
   handleCreateCustomPalette,
@@ -29,6 +33,9 @@ import {
   handleGetComponentDesignTokens,
   handleCreateComponentTheme,
   handleGetColor,
+  handleSetSize,
+  handleSetSpacing,
+  handleSetRoundness,
 } from './tools/index.js';
 import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
 import {withPreprocessing} from './utils/preprocessing.js';
@@ -189,6 +196,68 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = createThemeSchema.parse(params);
       return await handleCreateTheme(validated);
+    },
+  );
+
+  // set_size tool
+  server.registerTool(
+    'set_size',
+    {
+      title: 'Set Size Scale',
+      description: TOOL_DESCRIPTIONS.set_size,
+      inputSchema: {
+        platform: setSizeSchema.shape.platform,
+        component: setSizeSchema.shape.component,
+        scope: setSizeSchema.shape.scope,
+        size: setSizeSchema.shape.size,
+        output: setSizeSchema.shape.output,
+      },
+    },
+    async (params) => {
+      const validated = setSizeSchema.parse(params);
+      return handleSetSize(validated);
+    },
+  );
+
+  // set_spacing tool
+  server.registerTool(
+    'set_spacing',
+    {
+      title: 'Set Spacing Scale',
+      description: TOOL_DESCRIPTIONS.set_spacing,
+      inputSchema: {
+        platform: setSpacingInputSchema.shape.platform,
+        component: setSpacingInputSchema.shape.component,
+        scope: setSpacingInputSchema.shape.scope,
+        spacing: setSpacingInputSchema.shape.spacing,
+        inline: setSpacingInputSchema.shape.inline,
+        block: setSpacingInputSchema.shape.block,
+        output: setSpacingInputSchema.shape.output,
+      },
+    },
+    async (params) => {
+      const validated = setSpacingSchema.parse(params);
+      return handleSetSpacing(validated);
+    },
+  );
+
+  // set_roundness tool
+  server.registerTool(
+    'set_roundness',
+    {
+      title: 'Set Roundness Scale',
+      description: TOOL_DESCRIPTIONS.set_roundness,
+      inputSchema: {
+        platform: setRoundnessSchema.shape.platform,
+        component: setRoundnessSchema.shape.component,
+        scope: setRoundnessSchema.shape.scope,
+        radiusFactor: setRoundnessSchema.shape.radiusFactor,
+        output: setRoundnessSchema.shape.output,
+      },
+    },
+    async (params) => {
+      const validated = setRoundnessSchema.parse(params);
+      return handleSetRoundness(validated);
     },
   );
 

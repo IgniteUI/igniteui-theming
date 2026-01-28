@@ -156,10 +156,10 @@ Tools are the core of the MCP server - they perform actions and generate code.
 
 #### Tool Category 2: Color Operations
 
-| Tool Name               | Description                          | Input Schema                               | Output                 |
-| ----------------------- | ------------------------------------ | ------------------------------------------ | ---------------------- |
-| `get_color`             | Retrieve a palette color as CSS var  | `{ color, variant?, contrast?, opacity? }` | CSS variable reference |
-| `suggest_palette`       | Suggest palette based on description | `{ description, mood?, industry? }`        | Recommended colors     |
+| Tool Name         | Description                          | Input Schema                               | Output                 |
+| ----------------- | ------------------------------------ | ------------------------------------------ | ---------------------- |
+| `get_color`       | Retrieve a palette color as CSS var  | `{ color, variant?, contrast?, opacity? }` | CSS variable reference |
+| `suggest_palette` | Suggest palette based on description | `{ description, mood?, industry? }`        | Recommended colors     |
 
 **Note:** `get_contrast_color` has been consolidated into `get_color` via the `contrast` parameter.
 
@@ -173,11 +173,11 @@ Tools are the core of the MCP server - they perform actions and generate code.
 
 #### Tool Category 4: Spacing & Sizing
 
-| Tool Name               | Description               | Input Schema                              | Output             |
-| ----------------------- | ------------------------- | ----------------------------------------- | ------------------ |
-| `create_spacing_system` | Define spacing scale      | `{ baseUnit?, scale? }`                   | Spacing variables  |
-| `get_sizable_value`     | Get responsive size value | `{ small, medium, large }`                | Sizable expression |
-| `get_padding`           | Get contextual padding    | `{ small?, medium?, large?, direction? }` | Padding expression |
+| Tool Name       | Description                            | Input Schema                                                           | Output                  |
+| --------------- | -------------------------------------- | ---------------------------------------------------------------------- | ----------------------- |
+| `set_size`      | Set size scale (global/component)      | `{ component?, scope?, size, platform?, output? }`                     | CSS/Sass variable block |
+| `set_spacing`   | Set spacing scale (global/component)   | `{ component?, scope?, spacing, inline?, block?, platform?, output? }` | CSS/Sass variable block |
+| `set_roundness` | Set roundness scale (global/component) | `{ component?, scope?, radiusFactor, platform?, output? }`             | CSS/Sass variable block |
 
 #### Tool Category 5: Component Theming
 
@@ -241,11 +241,12 @@ Resources provide read-only context that AI applications can use.
 
 #### Resource Category 6: Documentation (Resource Templates)
 
-| URI Template                      | Description            |
-| --------------------------------- | ---------------------- |
-| `theming://docs/functions/{name}` | Function documentation |
-| `theming://docs/mixins/{name}`    | Mixin documentation    |
-| `theming://docs/variables/{name}` | Variable documentation |
+| URI Template                        | Description            |
+| ----------------------------------- | ---------------------- |
+| `theming://docs/functions/{name}`   | Function documentation |
+| `theming://docs/mixins/{name}`      | Mixin documentation    |
+| `theming://docs/variables/{name}`   | Variable documentation |
+| `theming://docs/spacing-and-sizing` | Layout scale overview  |
 
 #### Category 7: Guidance (Direct Resources)
 
@@ -334,9 +335,9 @@ The `create_palette`, `create_custom_palette`, and `create_theme` tools validate
 - `create_type_style` tool
 - `get_type_scale_category` tool
 - `convert_units` tool
-- `create_spacing_system` tool
-- `get_sizable_value` tool
-- `get_padding` tool
+- `set_size` tool
+- `set_spacing` tool
+- `set_roundness` tool
 - Typography documentation resources
 
 ### Phase 4: Validation & Intelligence
@@ -519,131 +520,6 @@ Both platforms generate similar CSS custom properties:
   /* ... */
 }
 ```
-
----
-
-## File Structure (Initial Scaffolding)
-
-```
-src/mcp/
-├── index.ts                 # Entry point, server initialization
-├── server.ts                # MCP server configuration
-├── transport/
-│   ├── stdio.ts             # STDIO transport
-│   └── http.ts              # HTTP transport (future)
-├── tools/
-│   ├── index.ts             # Tool registry
-│   ├── handlers/            # Tool handler implementations
-│   │   ├── theme.ts         # create_theme handler
-│   │   ├── palette.ts       # create_palette handler
-│   │   ├── typography.ts    # create_typography handler
-│   │   ├── elevations.ts    # create_elevations handler
-│   │   └── platform.ts      # detect_platform handler
-│   └── schemas.ts           # Zod schemas for tool inputs
-├── resources/
-│   ├── index.ts             # Resource registry
-│   ├── presets.ts           # Preset resources
-│   ├── schemas.ts           # Schema resources
-│   ├── components.ts        # Component catalog
-│   └── docs.ts              # Documentation resources
-├── prompts/
-│   ├── index.ts             # Prompt registry
-│   └── templates.ts         # Prompt definitions
-├── generators/
-│   ├── sass.ts              # Sass code generation (platform-aware)
-│   ├── css.ts               # CSS code generation
-│   └── templates/           # Code templates
-├── validators/
-│   ├── sass.ts              # Sass validation (dart-sass)
-│   └── contrast.ts          # WCAG contrast validation
-├── knowledge/
-│   ├── index.ts             # Knowledge base exports
-│   ├── palettes.ts          # Embedded palette data
-│   ├── typography.ts        # Embedded typography data
-│   ├── elevations.ts        # Embedded elevation data
-│   ├── multipliers.ts       # Color multipliers
-│   ├── platforms/           # Platform-specific knowledge
-│   │   ├── index.ts         # Platform exports, detection
-│   │   ├── angular.ts       # Angular platform config & generator
-│   │   └── webcomponents.ts # Web Components platform config & generator
-│   └── components/          # Component schemas
-└── utils/
-    ├── color.ts             # Color manipulation utilities
-    ├── units.ts             # Unit conversion
-    └── types.ts             # TypeScript types
-```
-
----
-
-## Build Configuration
-
-### Vite Configuration
-
-```typescript
-// vite.config.mcp.ts
-import {defineConfig} from 'vite';
-import {resolve} from 'path';
-
-export default defineConfig({
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/mcp/index.ts'),
-      formats: ['es'],
-      fileName: 'index',
-    },
-    outDir: 'mcp',
-    rollupOptions: {
-      external: ['@modelcontextprotocol/sdk'],
-    },
-  },
-});
-```
-
-### Package.json Updates
-
-```json
-{
-  "bin": {
-    "igniteui-theming-mcp": "./mcp/index.js"
-  },
-  "exports": {
-    "./mcp": {
-      "import": "./mcp/index.js"
-    }
-  },
-  "files": ["mcp/"],
-  "scripts": {
-    "build:mcp": "vite build --config vite.config.mcp.ts",
-    "mcp:dev": "tsx src/mcp/index.ts"
-  }
-}
-```
-
----
-
-## Dependencies
-
-### Runtime Dependencies
-
-```json
-{
-  "@modelcontextprotocol/sdk": "^1.0.0",
-  "zod": "^3.0.0",
-  "sass-embedded": "^1.92.0"
-}
-```
-
-### Dev Dependencies
-
-```json
-{
-  "vite": "^5.0.0",
-  "typescript": "^5.0.0",
-  "tsx": "^4.0.0"
-}
-```
-
----
 
 ## Usage Examples
 

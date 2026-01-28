@@ -80,6 +80,11 @@ export const elevationPresetSchema = z.enum(ELEVATION_PRESETS).optional();
 export const outputFormatSchema = z.enum(OUTPUT_FORMATS).optional();
 
 /**
+ * Size keyword schema for layout tools.
+ */
+export const sizeKeywordSchema = z.enum(['small', 'medium', 'large']);
+
+/**
  * Platform schema - derived from PLATFORMS constant.
  */
 export const platformSchema = z.enum(PLATFORMS).optional().describe(PARAM_DESCRIPTIONS.platform);
@@ -338,3 +343,43 @@ export const getColorSchema = getColorBaseSchema.refine(
 );
 
 export type GetColorParams = z.infer<typeof getColorSchema>;
+
+// ============================================================================
+// Layout Tools Schemas
+// ============================================================================
+
+const sizeValueSchema = z
+  .union([sizeKeywordSchema, z.number().int().min(1).max(3)])
+  .describe(PARAM_DESCRIPTIONS.sizeValue);
+
+export const setSizeSchema = z.object({
+  platform: platformSchema,
+  component: z.string().optional().describe(PARAM_DESCRIPTIONS.layoutComponent),
+  scope: z.string().optional().describe(PARAM_DESCRIPTIONS.scope),
+  size: sizeValueSchema,
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
+});
+
+export const setSpacingInputSchema = z.object({
+  platform: platformSchema,
+  component: z.string().optional().describe(PARAM_DESCRIPTIONS.layoutComponent),
+  scope: z.string().optional().describe(PARAM_DESCRIPTIONS.scope),
+  spacing: z.number().min(0).describe(PARAM_DESCRIPTIONS.spacing),
+  inline: z.number().min(0).optional().describe(PARAM_DESCRIPTIONS.spacingInline),
+  block: z.number().min(0).optional().describe(PARAM_DESCRIPTIONS.spacingBlock),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
+});
+
+export const setSpacingSchema = setSpacingInputSchema;
+
+export const setRoundnessSchema = z.object({
+  platform: platformSchema,
+  component: z.string().optional().describe(PARAM_DESCRIPTIONS.layoutComponent),
+  scope: z.string().optional().describe(PARAM_DESCRIPTIONS.scope),
+  radiusFactor: z.number().min(0).max(1).describe(PARAM_DESCRIPTIONS.radiusFactor),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
+});
+
+export type SetSizeParams = z.infer<typeof setSizeSchema>;
+export type SetSpacingParams = z.infer<typeof setSpacingSchema>;
+export type SetRoundnessParams = z.infer<typeof setRoundnessSchema>;

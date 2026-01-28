@@ -559,7 +559,7 @@ export const TOOL_DESCRIPTIONS = {
   - create_elevations: Use if you only need elevation shadows
 </related_tools>
 
-<related_resources>
+  <related_resources>
   - theming://presets/palettes: View available preset palette colors
   - theming://guidance/colors: Color guidance overview
   - theming://guidance/colors/rules: Light/dark theme color rules
@@ -567,6 +567,129 @@ export const TOOL_DESCRIPTIONS = {
   - theming://platforms/webcomponents: Web Components platform configuration
   - theming://platforms/react: React platform configuration
   - theming://platforms/blazor: Blazor platform configuration
+  </related_resources>`,
+
+  // ---------------------------------------------------------------------------
+  // set_size - Layout tool
+  // ---------------------------------------------------------------------------
+  set_size: `Set global or component-specific sizing by updating --ig-size.
+
+<use_case>
+  Use this tool for requests like:
+  - "Make the calendar smaller"
+  - "The buttons feel too big"
+  - "Use the small size everywhere"
+</use_case>
+
+<behavior>
+  - Sets --ig-size in the chosen scope (defaults to :root)
+  - Accepts "small", "medium", "large" (mapped to 1, 2, 3) or numeric values
+</behavior>
+
+<sass_notes>
+  - Components map --ig-size to --component-size internally
+  - Styles using sizable() require @include sizable() in component styles
+</sass_notes>
+
+<example>
+  Make flat buttons medium:
+  {
+    "component": "flat-button",
+    "size": "medium"
+  }
+
+  Make everything small globally:
+  {
+    "size": "small"
+  }
+</example>
+
+<related_resources>
+  - theming://docs/spacing-and-sizing
+  - theming://docs/functions/sizable
+  - theming://docs/mixins/sizable
+</related_resources>`,
+
+  // ---------------------------------------------------------------------------
+  // set_spacing - Layout tool
+  // ---------------------------------------------------------------------------
+  set_spacing: `Set global or component-specific spacing by updating --ig-spacing.
+
+<use_case>
+  Use this tool for requests like:
+  - "The button feels bloated"
+  - "Tighten the spacing on the form"
+  - "Double the padding on cards"
+</use_case>
+
+<behavior>
+  - Sets --ig-spacing in the chosen scope (defaults to :root)
+  - Optional overrides for --ig-spacing-inline and --ig-spacing-block
+  - 0 = no spacing, 1 = default, 2 = double (fractions allowed)
+  - spacing is required; inline/block are optional overrides
+</behavior>
+
+<sass_notes>
+  - pad(), pad-inline(), pad-block() require @include spacing() once
+</sass_notes>
+
+<example>
+  Reduce calendar spacing:
+  {
+    "component": "calendar",
+    "spacing": 0.75
+  }
+
+  Override inline spacing:
+  {
+    "scope": ".compact",
+    "inline": 0.5,
+    "block": 0.75
+  }
+</example>
+
+<related_resources>
+  - theming://docs/spacing-and-sizing
+  - theming://docs/functions/pad
+  - theming://docs/mixins/spacing
+</related_resources>`,
+
+  // ---------------------------------------------------------------------------
+  // set_roundness - Layout tool
+  // ---------------------------------------------------------------------------
+  set_roundness: `Set global or component-specific roundness by updating --ig-radius-factor.
+
+<use_case>
+  Use this tool for requests like:
+  - "Make the flat buttons more round"
+  - "Square off the cards"
+</use_case>
+
+<behavior>
+  - Sets --ig-radius-factor in the chosen scope (defaults to :root)
+  - 0 = minimum radius, 1 = maximum radius, values between interpolate
+</behavior>
+
+<sass_notes>
+  - border-radius() responds to --ig-radius-factor without extra mixins
+</sass_notes>
+
+<example>
+  Round avatars more:
+  {
+    "component": "avatar",
+    "radiusFactor": 0.9
+  }
+
+  Globally reduce roundness:
+  {
+    "radiusFactor": 0.8
+  }
+</example>
+
+<related_resources>
+  - theming://docs/spacing-and-sizing
+  - theming://docs/functions/border-radius
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -838,7 +961,7 @@ export const PARAM_DESCRIPTIONS = {
   variant: FRAGMENTS.VARIANT,
   designSystem: FRAGMENTS.DESIGN_SYSTEM,
   name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
-  output: `Output format: "sass" generates Sass code using igniteui-theming library functions. "css" generates CSS custom properties (variables) directly - useful for vanilla CSS projects or when you don't want Sass compilation. Defaults to "sass".`,
+  output: `Output format: "sass" generates Sass code using igniteui-theming library functions. "css" generates CSS custom properties (variables) directly - useful for vanilla CSS projects or when you don't want Sass compilation. Defaults to tool-specific output ("sass" for theme generators, "css" for layout setters).`,
 
   // ---------------------------------------------------------------------------
   // detect_platform parameters
@@ -911,6 +1034,17 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
 
   themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
+
+  // ---------------------------------------------------------------------------
+  // Layout tool parameters
+  // ---------------------------------------------------------------------------
+  layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root.`,
+  scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
+  sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
+  spacing: `Spacing scale multiplier for --ig-spacing. 0 = none, 1 = default, 2 = double. Fractions allowed.`,
+  spacingInline: `Inline spacing scale multiplier for --ig-spacing-inline. Overrides inline spacing only.`,
+  spacingBlock: `Block spacing scale multiplier for --ig-spacing-block. Overrides block spacing only.`,
+  radiusFactor: `Roundness scale factor for --ig-radius-factor. 0 = minimum radius, 1 = maximum radius. Values must be between 0 and 1.`,
 
   // ---------------------------------------------------------------------------
   // Color operations parameters (for get_color)

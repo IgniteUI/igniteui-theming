@@ -12,6 +12,10 @@ export {
   getComponentDesignTokensSchema,
   createComponentThemeSchema,
   getColorSchema,
+  setSizeSchema,
+  setSpacingSchema,
+  setSpacingInputSchema,
+  setRoundnessSchema,
   platformSchema,
   type DetectPlatformParams,
   type CreatePaletteParams,
@@ -22,6 +26,9 @@ export {
   type GetComponentDesignTokensParams,
   type CreateComponentThemeParams,
   type GetColorParams,
+  type SetSizeParams,
+  type SetSpacingParams,
+  type SetRoundnessParams,
   type Platform,
 } from './schemas.js';
 
@@ -35,4 +42,7 @@ export {
   handleGetComponentDesignTokens,
   handleCreateComponentTheme,
   handleGetColor,
+  handleSetSize,
+  handleSetSpacing,
+  handleSetRoundness,
 } from './handlers/index.js';
