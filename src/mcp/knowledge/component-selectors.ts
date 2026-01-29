@@ -371,11 +371,12 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
   },
   'date-picker': {
     description: 'The date picker combines input and calendar components.',
-    relatedThemes: ['input-group', 'date-time-input', 'calendar'],
+    relatedThemes: ['flat-button', 'input-group', 'date-time-input', 'calendar'],
     innerSelectors: {
       angular: {
         'input-group': 'igx-date-picker igx-input-group',
-        calendar: '.igx-date-picker igx-calendar',
+        'flat-button': '.igx-date-picker__actions .igx-button--flat',
+        calendar: '.igx-date-picker, .igx-date-picker igx-calendar',
       },
       webcomponents: {
         'date-time-input': 'igc-date-time-input',
@@ -385,15 +386,17 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
   },
   'date-range-picker': {
     description: 'The date range picker combines input and calendar components.',
-    relatedThemes: ['date-range-start', 'date-range-end', 'date-time-input', 'calendar'],
+    relatedThemes: ['flat-button', 'date-range-start', 'date-range-end', 'date-time-input', 'calendar'],
     innerSelectors: {
       angular: {
         'date-range-start': 'igx-date-range-picker igx-date-range-start',
         'date-range-end': 'igx-date-range-picker igx-date-range-end',
+        'flat-button': '.igx-date-picker__actions .igx-button--flat',
         calendar: '.igx-date-picker igx-calendar',
       },
       webcomponents: {
         'date-time-input': 'igc-date-range-picker::part(date-time-input)',
+        'flat-button': 'igc-date-range-picker::part(cancel-button), igc-date-range-picker::part(done-button)',
         calendar: 'igc-date-range-picker::part(calendar)',
       },
     },
