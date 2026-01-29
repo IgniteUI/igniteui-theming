@@ -719,7 +719,11 @@ export const TOOL_DESCRIPTIONS = {
   COMPOUND COMPONENTS:
   - Some components like "combo", "grid", "select" are compound - they use multiple
     internal components that may also need theming
-  - The response includes hints about related themes for compound components
+  - The response includes a "Compound checklist (required)" listing related themes
+    with scoped selectors for Angular and Web Components
+  - For each checklist item: call get_component_design_tokens, then create_component_theme
+    using the scoped selector listed for the target platform
+  - Items with missing selectors are marked "skipped - selector missing"
 
   VARIANTS INFO:
   - If you query a base component that has variants (e.g., "button"), the response
@@ -734,6 +738,7 @@ export const TOOL_DESCRIPTIONS = {
   - tokens: Array of { name, type, description } for each available token
   - variants: (if applicable) List of variant-specific theme names
   - compoundInfo: (if applicable) Related themes for compound components
+  - compoundChecklist: (if applicable) Ordered list of related themes + selectors
 </output>
 
 <error_handling>
@@ -797,6 +802,11 @@ export const TOOL_DESCRIPTIONS = {
   - Angular: Uses "igx-*" element selectors or attribute selectors
   - Web Components: Uses "igc-*" element selectors
   - Custom selectors supported for targeted styling (e.g., ".my-button")
+
+  COMPOUND COMPLETENESS:
+  - If the user asks for a compound component AND selectors are available,
+    the response is incomplete unless related theme calls are also generated
+  - Use the compound checklist from get_component_design_tokens to drive the sequence
 </important_notes>
 
 <output>
@@ -873,6 +883,16 @@ export const TOOL_DESCRIPTIONS = {
   }
   \`\`\`
 </example>
+
+<compound_example>
+  Combo (compound) requires multiple calls using the scoped selectors from
+  get_component_design_tokens:
+  1) get_component_design_tokens { "component": "combo" }
+  2) create_component_theme { "component": "combo", ... }
+  3) create_component_theme { "component": "input-group", "selector": "igx-combo igx-input-group", ... }
+  4) create_component_theme { "component": "drop-down", "selector": ".igx-drop-down__list", ... }
+  5) create_component_theme { "component": "checkbox", "selector": "igx-combo-item igx-checkbox", ... }
+</compound_example>
 
 <related_tools>
   - get_component_design_tokens: MUST call first to discover valid tokens

@@ -189,19 +189,19 @@ Automatically detects whether your project uses Ignite UI for Angular or Web Com
 
 Generates a color palette with automatically calculated shade variations (50-900, A100-A700).
 
-| Parameter   | Type                             | Required | Description                                     |
-| ----------- | -------------------------------- | -------- | ----------------------------------------------- |
-| `platform`  | `angular` \| `webcomponents"`    | No       | Target platform                                 |
-| `primary`   | string                           | Yes      | Primary brand color (hex, rgb, hsl, or named)   |
-| `secondary` | string                           | Yes      | Secondary/accent color                          |
-| `surface`   | string                           | Yes      | Background/surface color                        |
-| `gray`      | string                           | No       | Gray/neutral color (auto-calculated if omitted) |
-| `info`      | string                           | No       | Info state color                                |
-| `success`   | string                           | No       | Success state color                             |
-| `warn`      | string                           | No       | Warning state color                             |
-| `error`     | string                           | No       | Error state color                               |
-| `variant`   | `"light"` \| `"dark"`            | No       | Theme variant (default: `"light"`)              |
-| `name`      | string                           | No       | Custom variable name                            |
+| Parameter   | Type                          | Required | Description                                     |
+| ----------- | ----------------------------- | -------- | ----------------------------------------------- |
+| `platform`  | `angular` \| `webcomponents"` | No       | Target platform                                 |
+| `primary`   | string                        | Yes      | Primary brand color (hex, rgb, hsl, or named)   |
+| `secondary` | string                        | Yes      | Secondary/accent color                          |
+| `surface`   | string                        | Yes      | Background/surface color                        |
+| `gray`      | string                        | No       | Gray/neutral color (auto-calculated if omitted) |
+| `info`      | string                        | No       | Info state color                                |
+| `success`   | string                        | No       | Success state color                             |
+| `warn`      | string                        | No       | Warning state color                             |
+| `error`     | string                        | No       | Error state color                               |
+| `variant`   | `"light"` \| `"dark"`         | No       | Theme variant (default: `"light"`)              |
+| `name`      | string                        | No       | Custom variable name                            |
 
 **Example prompts:**
 
@@ -332,13 +332,13 @@ Generates a complete, production-ready theme with palette, typography, and eleva
 
 Sets the size scale for all components or a specific component by updating `--ig-size`.
 
-| Parameter   | Type                                                        | Required | Description                                             |
-| ----------- | --------------------------------------                      | -------- | ------------------------------------------------------- |
-| `size`      | `"small"` \| `"medium"` \| `"large"` \| `1` \| `2` \| `3`   | Yes      | Size value (small/medium/large or 1/2/3)                |
-| `component` | string                                                      | No       | Component name to scope (e.g., `"flat-button"`)         |
-| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)                    |
-| `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                           |
-| `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                        |
+| Parameter   | Type                                                        | Required | Description                                     |
+| ----------- | ----------------------------------------------------------- | -------- | ----------------------------------------------- |
+| `size`      | `"small"` \| `"medium"` \| `"large"` \| `1` \| `2` \| `3`   | Yes      | Size value (small/medium/large or 1/2/3)        |
+| `component` | string                                                      | No       | Component name to scope (e.g., `"flat-button"`) |
+| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)            |
+| `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                   |
+| `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                |
 
 **Example prompts:**
 
@@ -352,15 +352,15 @@ Sets the size scale for all components or a specific component by updating `--ig
 
 Sets the spacing scale for all components or a specific component by updating `--ig-spacing`.
 
-| Parameter   | Type                                                        | Required | Description                                             |
-| ----------- | --------------------------------------                      | -------- | ------------------------------------------------------- |
-| `spacing`   | number                                                      | Yes      | Spacing scale (0 = none, 1 = default, 2 = double)       |
-| `inline`    | number                                                      | No       | Override inline spacing (`--ig-spacing-inline`)         |
-| `block`     | number                                                      | No       | Override block spacing (`--ig-spacing-block`)           |
-| `component` | string                                                      | No       | Component name to scope                                 |
-| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)                    |
-| `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                           |
-| `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                        |
+| Parameter   | Type                                                        | Required | Description                                       |
+| ----------- | ----------------------------------------------------------- | -------- | ------------------------------------------------- |
+| `spacing`   | number                                                      | Yes      | Spacing scale (0 = none, 1 = default, 2 = double) |
+| `inline`    | number                                                      | No       | Override inline spacing (`--ig-spacing-inline`)   |
+| `block`     | number                                                      | No       | Override block spacing (`--ig-spacing-block`)     |
+| `component` | string                                                      | No       | Component name to scope                           |
+| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)              |
+| `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                     |
+| `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                  |
 
 **Example prompts:**
 
@@ -374,13 +374,13 @@ Sets the spacing scale for all components or a specific component by updating `-
 
 Sets the roundness scale for all components or a specific component by updating `--ig-radius-factor`.
 
-| Parameter      | Type                                                        | Required | Description                                             |
-| -------------  | --------------------------------------                      | -------- | ------------------------------------------------------- |
-| `radiusFactor` | number                                                      | Yes      | Roundness factor (0 = min, 1 = max)                     |
-| `component`    | string                                                      | No       | Component name to scope                                 |
-| `scope`        | string                                                      | No       | CSS selector scope (default `:root`)                    |
-| `platform`     | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                           |
-| `output`       | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                        |
+| Parameter      | Type                                                        | Required | Description                          |
+| -------------- | ----------------------------------------------------------- | -------- | ------------------------------------ |
+| `radiusFactor` | number                                                      | Yes      | Roundness factor (0 = min, 1 = max)  |
+| `component`    | string                                                      | No       | Component name to scope              |
+| `scope`        | string                                                      | No       | CSS selector scope (default `:root`) |
+| `platform`     | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors        |
+| `output`       | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)     |
 
 **Example prompts:**
 
@@ -393,6 +393,8 @@ Sets the roundness scale for all components or a specific component by updating 
 ### `get_component_design_tokens`
 
 Discovers available design tokens (customizable properties) for a specific Ignite UI component. Use this tool **before** `create_component_theme` to see what tokens are available.
+
+For compound components (e.g., combo, select, grid), the response includes a **Compound checklist (required)** with scoped selectors. Follow the checklist by calling `get_component_design_tokens` and `create_component_theme` for each related theme. Items with missing selectors are marked as skipped.
 
 | Parameter   | Type   | Required | Description                                     |
 | ----------- | ------ | -------- | ----------------------------------------------- |
@@ -419,13 +421,15 @@ Discovers available design tokens (customizable properties) for a specific Ignit
     "disabled-foreground": "Text color when disabled"
   }
 }
-````
+```
 
 ---
 
 ### `create_component_theme`
 
 Generates Sass code to customize a specific component's appearance using design tokens. Call `get_component_design_tokens` first to discover available tokens.
+
+If the requested component is compound and selectors are available, include the related theme calls from the checklist. Otherwise the response is incomplete.
 
 | Parameter      | Type                                                        | Required | Description                           |
 | -------------- | ----------------------------------------------------------- | -------- | ------------------------------------- |
@@ -460,6 +464,19 @@ User: "Primary purple #8b5cf6, white text, and lighter purple #a78bfa on hover"
 
 AI: Perfect! Let me create that theme for you.
 [calls create_component_theme with tokens]
+```
+
+**Compound example (combo, Angular):**
+
+```
+AI: First, let me get compound selectors for combo.
+[calls get_component_design_tokens with component="combo"]
+
+AI: Now I will generate themes for combo and its related components.
+[calls create_component_theme with component="combo"]
+[calls create_component_theme with component="input-group" selector="igx-combo igx-input-group"]
+[calls create_component_theme with component="drop-down" selector=".igx-drop-down__list"]
+[calls create_component_theme with component="checkbox" selector="igx-combo-item igx-checkbox"]
 ```
 
 ---

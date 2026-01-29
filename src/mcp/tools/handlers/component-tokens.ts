@@ -85,11 +85,28 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
       responseParts.push('**Related themes for full customization:**');
       responseParts.push('');
 
-      // Check if we have inner selectors defined for either platform
-      const hasAngular = hasAngularInnerSelectors(normalizedName);
-      const hasWC = hasPartSelectors(normalizedName);
+      const formatSelector = (selector?: string) =>
+        selector && selector !== 'TODO' ? `\`${selector}\`` : '*(skipped - selector missing)*';
 
-      if ((hasAngular || hasWC) && compoundInfo.innerSelectors) {
+      responseParts.push('**Compound checklist (required):**');
+      responseParts.push(
+        'Call `get_component_design_tokens` then `create_component_theme` for each item below using the scoped selector.',
+      );
+      responseParts.push('');
+      responseParts.push(
+        compoundInfo.relatedThemes
+          .map((relatedTheme, index) => {
+            const angularSelector = compoundInfo.innerSelectors?.angular?.[relatedTheme];
+            const wcSelector = compoundInfo.innerSelectors?.webcomponents?.[relatedTheme];
+            const angularDisplay = formatSelector(angularSelector);
+            const wcDisplay = formatSelector(wcSelector);
+            return `${index + 1}. \`${relatedTheme}\`: Angular ${angularDisplay} | Web Components ${wcDisplay}`;
+          })
+          .join('\n'),
+      );
+      responseParts.push('');
+
+      if (compoundInfo.innerSelectors) {
         // Show table with both Angular and Web Components selectors
         responseParts.push('| Theme | Angular Selector | Web Components Selector |');
         responseParts.push('|-------|------------------|------------------------|');
@@ -98,8 +115,8 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
           const angularSelector = compoundInfo.innerSelectors.angular?.[relatedTheme];
           const wcSelector = compoundInfo.innerSelectors.webcomponents?.[relatedTheme];
 
-          const angularDisplay = angularSelector && angularSelector !== 'TODO' ? `\`${angularSelector}\`` : '*(TBD)*';
-          const wcDisplay = wcSelector && wcSelector !== 'TODO' ? `\`${wcSelector}\`` : '*(TBD)*';
+          const angularDisplay = formatSelector(angularSelector);
+          const wcDisplay = formatSelector(wcSelector);
 
           responseParts.push(`| \`${relatedTheme}\` | ${angularDisplay} | ${wcDisplay} |`);
         }

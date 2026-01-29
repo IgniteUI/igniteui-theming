@@ -97,11 +97,14 @@ Please use \`create_component_theme\` with one of the specific variant names abo
 
   // Check platform availability if platform is specified
   let platformWarning: string | null = null;
+
   if (platform) {
     const isAvailable = isComponentAvailable(normalizedComponent, platform);
+
     if (!isAvailable) {
       const availability = getComponentPlatformAvailability(normalizedComponent);
       const availablePlatforms: string[] = [];
+
       if (availability?.angular) availablePlatforms.push('Angular');
       if (availability?.webcomponents) availablePlatforms.push('Web Components');
 
@@ -111,6 +114,7 @@ Please use \`create_component_theme\` with one of the specific variant names abo
 
   // Validate tokens
   const tokenNames = Object.keys(tokens);
+
   if (tokenNames.length === 0) {
     return {
       content: [
@@ -126,6 +130,7 @@ Use \`get_component_design_tokens\` with component "${component}" to see availab
   }
 
   const validation = validateTokens(normalizedComponent, tokenNames);
+
   if (!validation.isValid) {
     return {
       content: [
@@ -149,6 +154,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
   // Determine the selector
   let finalSelector = selector;
+
   if (!finalSelector && platform) {
     // Get platform-specific default selector
     const selectors = getComponentSelector(normalizedComponent, platform);
