@@ -90,18 +90,21 @@ describe('Component Selectors Knowledge Base', () => {
       }
     });
 
-    it('innerSelectors keys should match relatedThemes when present', () => {
-      for (const [name, info] of Object.entries(COMPOUND_COMPONENTS)) {
+    it('relatedThemes should match innerSelectors keys when present', () => {
+      for (const [_, info] of Object.entries(COMPOUND_COMPONENTS)) {
         if (info.innerSelectors?.webcomponents) {
           const partsKeys = Object.keys(info.innerSelectors.webcomponents);
-          for (const theme of info.relatedThemes) {
-            expect(partsKeys, `${name}.innerSelectors.webcomponents should include key for ${theme}`).toContain(theme);
+
+          for (const key of partsKeys) {
+            expect(info.relatedThemes).toContain(key);
           }
         }
+
         if (info.innerSelectors?.angular) {
           const angularKeys = Object.keys(info.innerSelectors.angular);
-          for (const theme of info.relatedThemes) {
-            expect(angularKeys, `${name}.innerSelectors.angular should include key for ${theme}`).toContain(theme);
+
+          for (const key of angularKeys) {
+            expect(info.relatedThemes).toContain(key);
           }
         }
       }
@@ -409,10 +412,13 @@ describe('Component Selectors Knowledge Base', () => {
     it('should return all relatedThemes as keys when innerSelectors.webcomponents exists', () => {
       for (const [name, info] of Object.entries(COMPOUND_COMPONENTS)) {
         if (info.innerSelectors?.webcomponents) {
+          const partsKeys = Object.keys(info.innerSelectors!.webcomponents);
           const result = getAllPartSelectors(name);
+
           expect(result).toBeDefined();
-          for (const theme of info.relatedThemes) {
-            expect(result).toHaveProperty(theme);
+
+          for (const key of partsKeys) {
+            expect(result).toHaveProperty(key);
           }
         }
       }

@@ -158,7 +158,14 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     angular: 'igx-date-range-picker',
     webcomponents: 'igc-date-range-picker',
   },
-  // TODO: this component uses the input-group theme, but has no dedicated theme function
+  'date-range-start': {
+    angular: 'igx-date-range-start',
+    webcomponents: null,
+  },
+  'date-range-end': {
+    angular: 'igx-date-range-end',
+    webcomponents: null,
+  },
   'date-time-input': {
     angular: null,
     webcomponents: 'igc-date-time-input',
@@ -295,10 +302,6 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     angular: 'igx-tabs',
     webcomponents: 'igc-tabs',
   },
-  'time-picker': {
-    angular: 'igx-time-picker',
-    webcomponents: 'igc-date-time-input',
-  },
   toast: {
     angular: 'igx-toast',
     webcomponents: 'igc-toast',
@@ -367,42 +370,45 @@ export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
     },
   },
   'date-picker': {
-    description: 'The date picker combines input-group and calendar components.',
-    relatedThemes: ['input-group', 'calendar'],
+    description: 'The date picker combines input and calendar components.',
+    relatedThemes: ['input-group', 'date-time-input', 'calendar'],
     innerSelectors: {
       angular: {
         'input-group': 'igx-date-picker igx-input-group',
-        calendar: 'igx-date-picker igx-calendar',
+        calendar: '.igx-date-picker igx-calendar',
       },
       webcomponents: {
-        'input-group': 'igc-date-picker::part(input)',
-        calendar: 'igc-date-picker igc-calendar',
+        'date-time-input': 'igc-date-time-input',
+        calendar: 'igc-date-picker::part(calendar)',
       },
     },
   },
   'date-range-picker': {
-    description: 'The date range picker combines input-group and calendar components.',
-    relatedThemes: ['input-group', 'calendar'],
+    description: 'The date range picker combines input and calendar components.',
+    relatedThemes: ['date-range-start', 'date-range-end', 'date-time-input', 'calendar'],
     innerSelectors: {
       angular: {
-        'input-group': 'igx-date-range-picker igx-date-range-start, igx-date-picker igx-date-range-end',
-        calendar: 'igx-date-range-picker igx-calendar',
+        'date-range-start': 'igx-date-range-picker igx-date-range-start',
+        'date-range-end': 'igx-date-range-picker igx-date-range-end',
+        calendar: '.igx-date-picker igx-calendar',
       },
       webcomponents: {
-        'input-group': 'igc-date-range-picker::part(input)',
-        calendar: 'igc-date-range-picker igc-calendar',
+        'date-time-input': 'igc-date-range-picker::part(date-time-input)',
+        calendar: 'igc-date-range-picker::part(calendar)',
       },
     },
   },
   'time-picker': {
-    description: 'The time picker uses input-group internally.',
-    relatedThemes: ['input-group'],
+    description: 'The time picker combines input-group and time-picker components.',
+    relatedThemes: ['input-group', 'time-picker'],
     innerSelectors: {
       angular: {
         'input-group': 'igx-time-picker igx-input-group',
+        'time-picker': '.igx-time-picker',
       },
       webcomponents: {
-        'input-group': 'igc-date-time-input',
+        'input-group': '',
+        'time-picker': '',
       },
     },
   },

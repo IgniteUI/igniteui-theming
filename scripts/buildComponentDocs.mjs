@@ -2,6 +2,16 @@ import sassdoc from 'sassdoc';
 import {writeFile, mkdir} from 'fs/promises';
 import report from './report.mjs';
 
+function convertParamsToTokens(params = []) {
+  return params
+    .filter((p) => p.name !== 'schema')
+    .map((p) => ({
+      name: p.name,
+      type: p.type || 'unknown',
+      description: p.description || '',
+    }));
+}
+
 async function extractComponentThemes() {
   const data = await sassdoc.parse('./sass/themes/components/**/*-theme.scss', {
     verbose: false,
@@ -15,19 +25,23 @@ async function extractComponentThemes() {
   const components = {};
 
   for (const fn of themeFunctions) {
+    // This is an alias to another theme function;
+    // Get the parameters from the alias
+    if (!fn.parameter && fn.alias) {
+      const alias = data.find((item) => item.context.name === fn.alias);
+
+      if (alias) {
+        fn.parameter = alias.parameter;
+      }
+    }
+
     const componentName = fn.context.name.replace(/-theme$/, '');
 
     components[componentName] = {
       name: componentName,
       themeFunctionName: fn.context.name,
       description: fn.description || '',
-      tokens: (fn.parameter || [])
-        .filter((p) => p.name !== 'schema')
-        .map((p) => ({
-          name: p.name,
-          type: p.type || 'unknown',
-          description: p.description || '',
-        })),
+      tokens: convertParamsToTokens(fn.parameter),
     };
   }
 

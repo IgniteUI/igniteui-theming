@@ -95,9 +95,6 @@ Please use \`create_component_theme\` with one of the specific variant names abo
     };
   }
 
-  // Check platform availability if platform is specified
-  let platformWarning: string | null = null;
-
   if (platform) {
     const isAvailable = isComponentAvailable(normalizedComponent, platform);
 
@@ -108,7 +105,12 @@ Please use \`create_component_theme\` with one of the specific variant names abo
       if (availability?.angular) availablePlatforms.push('Angular');
       if (availability?.webcomponents) availablePlatforms.push('Web Components');
 
-      platformWarning = `**Warning:** The \`${component}\` component is not available on ${platform === 'angular' ? 'Ignite UI for Angular' : 'Ignite UI for Web Components'}. ${availablePlatforms.length > 0 ? `It is available on: ${availablePlatforms.join(', ')}.` : ''}`;
+      const error = `**Error:** The \`${component}\` component is not available on ${platform === 'angular' ? 'Ignite UI for Angular' : 'Ignite UI for Web Components'}. ${availablePlatforms.length > 0 ? `It is available on: ${availablePlatforms.join(', ')}.` : ''}`;
+
+      return {
+        content: [{type: 'text' as const, text: error}],
+        isError: true,
+      };
     }
   }
 
@@ -158,6 +160,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
   if (!finalSelector && platform) {
     // Get platform-specific default selector
     const selectors = getComponentSelector(normalizedComponent, platform);
+
     if (selectors.length > 0) {
       // Use the first selector as default
       finalSelector = selectors[0];
@@ -180,12 +183,6 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
       // Build response
       const responseParts: string[] = [];
-
-      // Add platform warning if applicable (before the main content)
-      if (platformWarning) {
-        responseParts.push(platformWarning);
-        responseParts.push('');
-      }
 
       responseParts.push(result.description);
       responseParts.push('');
@@ -252,12 +249,6 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
     // Build response
     const responseParts: string[] = [];
-
-    // Add platform warning if applicable (before the main content)
-    if (platformWarning) {
-      responseParts.push(platformWarning);
-      responseParts.push('');
-    }
 
     responseParts.push(result.description);
     responseParts.push('');
