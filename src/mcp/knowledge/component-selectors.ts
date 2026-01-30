@@ -171,7 +171,7 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     webcomponents: 'igc-date-time-input',
   },
   dialog: {
-    angular: 'igx-dialog',
+    angular: '.igx-dialog',
     webcomponents: 'igc-dialog',
   },
   divider: {
@@ -195,8 +195,8 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     webcomponents: 'igc-file-input',
   },
   grid: {
-    angular: ['igx-grid', 'igx-tree-grid', 'igx-hierarchical-grid', 'igx-pivot-grid'],
-    webcomponents: ['igc-grid', 'igc-tree-grid', 'igc-hierarchical-grid', 'igc-pivot-grid'],
+    angular: ['igx-grid', 'igx-grid-excel-style-filtering', 'igx-tree-grid', 'igx-hierarchical-grid', 'igx-pivot-grid'],
+    webcomponents: ['igc-grid', 'igc-grid-excel-style-filtering', 'igc-tree-grid', 'igc-hierarchical-grid', 'igc-pivot-grid'],
   },
   'grid-summary': {
     angular: 'igx-grid-summary',
@@ -311,7 +311,7 @@ export const COMPONENT_SELECTORS: Record<string, ComponentSelectors> = {
     webcomponents: 'igc-tooltip',
   },
   tree: {
-    angular: 'igx-tree',
+    angular: 'igx-tree-node',
     webcomponents: 'igc-tree',
   },
   watermark: {
@@ -338,6 +338,19 @@ export const VARIANT_THEME_NAMES = new Set(Object.values(COMPONENT_VARIANTS).fla
  * Compound components that require theming multiple sub-components for full customization.
  */
 export const COMPOUND_COMPONENTS: Record<string, CompoundComponentInfo> = {
+  banner: {
+    description:
+      'The banner component uses a flat button for the actions',
+    relatedThemes: ['flat-button'],
+    innerSelectors: {
+      angular: {
+        'flat-button': 'igx-banner .igx-button--flat',
+      },
+      webcomponents: {
+        'flat-button': 'igc-banner igc-icon-button[variant="flat"]',
+      },
+    },
+  },
   combo: {
     description:
       'The combo component uses an input-group for the input field, a drop-down for the selection list, and checkboxes for showing selected items.',
