@@ -1388,3 +1388,22 @@
         )
     );
 }
+
+/// Date Picker Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$header-background` - The main accent color. Auto-derives: header-foreground, date-selected colors,
+///   picker hover colors, year/month selected colors, date-special colors, navigation hover colors.
+/// - `$content-background` - The calendar body background. Auto-derives: content-foreground, inactive-color,
+///   weekday-color, date-hover colors, week-number colors.
+///
+/// Setting just `$header-background` will theme all accent/selection states consistently.
+/// Setting just `$content-background` will theme the calendar body with proper contrast.
+/// Text and icon colors are automatically calculated for accessibility.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+///
+/// @alias calendar-theme
+@function date-picker-theme($args...) {
+    @return calendar-theme($args...);
+}
