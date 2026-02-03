@@ -53,7 +53,7 @@ The MCP server uses STDIO transport and can be configured with any MCP-compatibl
 
 **Using local clone (for development):**
 
-Create or edit `.vscode/settings.json`:
+Create or edit `.vscode/mcp.json`:
 
 ```json
 {
