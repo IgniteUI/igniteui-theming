@@ -14,16 +14,25 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Select Theme
+///
+/// PRIMARY TOKENS (set these first for quick theming):
+/// - `$toggle-button-background` - The toggle button background. Auto-derives: toggle-button-foreground, toggle-button-background-focus, toggle-button-foreground-focus, toggle-button-foreground-filled.
+///
+/// Toggle button colors cascade from toggle-button-background through focus states.
+/// Behavior varies by variant (material uses shaded focus background, others use same as base).
+/// Bootstrap/indigo variants derive focus foreground from border variant background.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @requires $light-material-schema
-/// @param {Color} $toggle-button-background [null] - The select toggle button background color.
-/// @param {Color} $toggle-button-background-focus [null] - The select toggle button background color when the select is focused.
+/// @param {Color} $toggle-button-background [null] - The select toggle button background color. PRIMARY - derives all toggle button colors.
+/// @param {Color} $toggle-button-background-focus [null] - The select toggle button background color when the select is focused. Auto-derived from toggle-button-background (variant-dependent).
 /// @param {Color} $toggle-button-background-disabled [null] - The select toggle button background color when the select is disabled.
-/// @param {Color} $toggle-button-foreground [null] - The select toggle button foreground color.
-/// @param {Color} $toggle-button-foreground-focus [null] - The select toggle button foreground color when the select is focused.
+/// @param {Color} $toggle-button-foreground [null] - The select toggle button foreground color. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-foreground-focus [null] - The select toggle button foreground color when the select is focused. Auto-derived from toggle-button-background-focus (variant-dependent).
 /// @param {Color} $toggle-button-foreground-disabled [null] - The select toggle button foreground color when the select is disabled.
-/// @param {Color} $toggle-button-foreground-filled [null] - The select toggle button foreground color when the select is filled.
-/// @param {Color} $toggle-button-background-focus--border [null] - The select toggle button background color when the select is focused in material border variant.
+/// @param {Color} $toggle-button-foreground-filled [null] - The select toggle button foreground color when the select is filled. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-background-focus--border [null] - The select toggle button background color when the select is focused in material border variant. Auto-derived from toggle-button-background (bootstrap/indigo).
 /// @example scss Change the select empty list background
 ///   $my-select-theme: igx-select-theme($empty-list-background);
 ///   // Pass the theme to the css-vars mixin
