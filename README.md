@@ -132,10 +132,12 @@ The Model Context Protocol allows AI assistants (like Claude, GitHub Copilot, an
 
 ### Quick Start
 
-#### 1. Install and Build
+#### 1. Clone and Build
+
+Clone the repository and build the MCP server:
 
 ```bash
-npm install igniteui-theming
+npm install
 npm run build:mcp
 ```
 
@@ -146,7 +148,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
 <details>
 <summary><strong>VS Code</strong> (with MCP-compatible extensions)</summary>
 
-**For local development** - Create or edit `.vscode/settings.json`:
+**For local development** - Create or edit `.vscode/mcp.json`:
 
 ```json
 {
