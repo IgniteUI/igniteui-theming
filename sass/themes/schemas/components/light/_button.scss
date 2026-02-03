@@ -1,8 +1,7 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../../../../typography/functions' as *;
 @use '../elevation/button' as *;
-
-// stylelint-disable max-line-length
 
 ////
 /// @package theming
@@ -63,6 +62,53 @@ $light-base-button: (
             value: 'button',
         ),
     ),
+    _meta: (
+        variant: 'light',
+    ),
+);
+
+/// Flat button schema.
+/// @access private
+/// @type {Map}
+$flat-button: (
+    selector: '[igxButton="flat"], .igx-button--flat',
+    _meta: (
+        name: 'flat-button',
+        type: 'flat',
+    ),
+);
+
+/// Contained button schema.
+/// @access private
+/// @type {Map}
+$contained-button: (
+    selector: '[igxButton="contained"], .igx-button--contained',
+    _meta: (
+        name: 'contained-button',
+        type: 'contained',
+    ),
+);
+
+/// Outlined button schema.
+/// @access private
+/// @type {Map}
+$outlined-button: (
+    selector: '[igxButton="outlined"], .igx-button--outlined',
+    _meta: (
+        name: 'outlined-button',
+        type: 'outlined',
+    ),
+);
+
+/// Floating action button schema.
+/// @access private
+/// @type {Map}
+$fab-button: (
+    selector: '[igxButton="fab"], .igx-button--fab',
+    _meta: (
+        name: 'fab-button',
+        type: 'fab',
+    ),
 );
 
 /// @type {Map}
@@ -73,9 +119,9 @@ $light-base-button: (
 /// @requires {Map} $flat-elevation-button
 $light-flat-button: extend(
     $light-base-button,
+    $flat-button,
     $flat-elevation-button,
     (
-        selector: '[igxButton="flat"], .igx-button--flat',
         background: transparent,
         focus-foreground: (
             color: (
@@ -98,8 +144,8 @@ $light-flat-button: extend(
 /// @requires {Map} $light-flat-button
 $light-outlined-button: extend(
     $light-flat-button,
+    $outlined-button,
     (
-        selector: '[igxButton="outlined"], .igx-button--outlined',
         disabled-border-color: (
             color: (
                 'gray',
@@ -120,9 +166,9 @@ $light-outlined-button: extend(
 /// @requires {Map} $light-contained-elevation
 $light-contained-button: extend(
     $light-base-button,
+    $contained-button,
     $light-contained-elevation,
     (
-        selector: '[igxButton="contained"], .igx-button--contained',
         background: (
             color: (
                 'secondary',
@@ -154,9 +200,9 @@ $light-contained-button: extend(
 /// @requires {Map} $light-fab-elevation
 $light-fab-button: extend(
     $light-contained-button,
+    $fab-button,
     $light-fab-elevation,
     (
-        selector: '[igxButton="fab"], .igx-button--fab',
         size: (
             sizable: (
                 rem(32px),
@@ -182,7 +228,14 @@ $light-button: (
 
 /// @type {Map}
 /// @requires {Map} $light-base-button
-$material-base-button: $light-base-button;
+$material-base-button: extend(
+    $light-base-button,
+    (
+        _meta: (
+            theme: 'material',
+        ),
+    )
+);
 
 /// @type {Map}
 /// @prop {Map} foreground [color: ('secondary', 500)] - The idle text color of a flat button.
@@ -289,11 +342,6 @@ $material-flat-button: extend(
             ),
         ),
         disabled-background: transparent,
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'flat',
-        ),
     )
 );
 
@@ -347,11 +395,6 @@ $material-outlined-button: extend(
             ),
         ),
         disabled-background: transparent,
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -453,11 +496,6 @@ $material-contained-button: extend(
                 100,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -471,7 +509,6 @@ $material-fab-button: extend(
     $material-contained-button,
     $light-fab-button,
     (
-        selector: '[igxButton="fab"], .igx-button--fab',
         disabled-background: (
             color: (
                 'gray',
@@ -484,11 +521,6 @@ $material-fab-button: extend(
                 rem(12px),
                 rem(28px),
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'fab',
         ),
     )
 );
@@ -630,6 +662,9 @@ $fluent-base-button: extend(
             ),
         ),
         default-size: 2,
+        _meta: (
+            theme: 'fluent',
+        ),
     )
 );
 
@@ -643,11 +678,6 @@ $fluent-flat-button: extend(
     $fluent-base-button,
     (
         disabled-background: transparent,
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'flat',
-        ),
     )
 );
 
@@ -700,11 +730,6 @@ $fluent-outlined-button: extend(
                 rem(20px),
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -734,7 +759,6 @@ $fluent-contained-button: extend(
     $light-contained-button,
     $fluent-base-button,
     (
-        selector: '[igxButton="contained"], .igx-button--contained',
         focus-visible-border-color: (
             contrast-color: (
                 'primary',
@@ -832,11 +856,6 @@ $fluent-contained-button: extend(
                 rem(20px),
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -852,7 +871,6 @@ $fluent-fab-button: extend(
     $fluent-base-button,
     $fluent-contained-button,
     (
-        selector: '[igxButton="fab"], .igx-button--fab',
         border-radius: (
             border-radius: (
                 rem(14px),
@@ -866,11 +884,6 @@ $fluent-fab-button: extend(
                 rem(40px),
                 rem(48px),
             ),
-        ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'fab',
         ),
     )
 );
@@ -934,6 +947,9 @@ $bootstrap-base-button: extend(
             ),
         ),
         default-size: 2,
+        _meta: (
+            theme: 'bootstrap',
+        ),
     )
 );
 
@@ -1012,11 +1028,6 @@ $bootstrap-flat-button: extend(
             ),
         ),
         disabled-background: transparent,
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'flat',
-        ),
     )
 );
 
@@ -1162,11 +1173,6 @@ $bootstrap-outlined-button: extend(
             ),
         ),
         disabled-background: transparent,
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -1275,11 +1281,6 @@ $bootstrap-contained-button: extend(
                 800,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -1293,18 +1294,12 @@ $bootstrap-fab-button: extend(
     $bootstrap-base-button,
     $bootstrap-contained-button,
     (
-        selector: '[igxButton="fab"], .igx-button--fab',
         border-radius: (
             border-radius: (
                 rem(15px),
                 rem(12px),
                 rem(28px),
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'fab',
         ),
     )
 );
@@ -1463,23 +1458,16 @@ $indigo-base-button: extend(
             ),
         ),
         default-size: 2,
+        _meta: (
+            theme: 'indigo',
+        ),
     )
 );
 
 /// @type {Map}
 /// @requires {Map} $light-flat-button
 /// @requires {Map} $indigo-base-button
-$indigo-flat-button: extend(
-    $light-flat-button,
-    $indigo-base-button,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'flat',
-        ),
-    )
-);
+$indigo-flat-button: extend($light-flat-button, $indigo-base-button);
 
 /// @type {Map}
 /// @prop {Map} border-color [color: ('gray', 500)] - The border color of an outlined button.
@@ -1530,11 +1518,6 @@ $indigo-outlined-button: extend(
                 900,
                 0.15,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'outlined',
         ),
     )
 );
@@ -1677,11 +1660,6 @@ $indigo-contained-button: extend(
                 0.3,
             ),
         ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -1696,7 +1674,6 @@ $indigo-fab-button: extend(
     $indigo-base-button,
     $indigo-contained-button,
     (
-        selector: '[igxButton="fab"], .igx-button--fab',
         border-radius: (
             border-radius: (
                 rem(40px),
@@ -1710,11 +1687,6 @@ $indigo-fab-button: extend(
                 rem(32px),
                 rem(36px),
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'fab',
         ),
     )
 );

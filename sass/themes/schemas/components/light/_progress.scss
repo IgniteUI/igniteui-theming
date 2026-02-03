@@ -91,6 +91,10 @@ $light-progress-linear: extend(
                 value: 'subtitle-2',
             ),
         ),
+        _meta: (
+            name: 'linear-bar',
+            variant: 'light',
+        ),
     )
 );
 
@@ -102,7 +106,6 @@ $material-progress-linear: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -117,7 +120,6 @@ $fluent-progress-linear: extend(
         track-height: rem(2px),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -152,7 +154,6 @@ $bootstrap-progress-linear: extend(
         strip-size: rem(5px),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -230,7 +231,6 @@ $indigo-progress-linear: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );
@@ -295,6 +295,10 @@ $light-progress-circular: extend(
 
         diameter: rem(32px),
         track-border-radius: rem(0),
+        _meta: (
+            name: 'circular-bar',
+            variant: 'light',
+        ),
     )
 );
 
@@ -306,7 +310,6 @@ $material-progress-circular: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -319,7 +322,6 @@ $fluent-progress-circular: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -334,7 +336,6 @@ $bootstrap-progress-circular: extend(
         diameter: rem(54px),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -403,6 +404,5 @@ $indigo-progress-circular: (
     diameter: rem(48px),
     _meta: (
         theme: 'indigo',
-        variant: 'light',
     ),
 );

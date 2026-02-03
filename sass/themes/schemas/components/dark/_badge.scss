@@ -7,44 +7,29 @@
 /// @access public
 ////
 
+/// Generates a base dark badge schema.
+/// @access private
+/// @type {Map}
+$dark-base-badge: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material badge schema.
 /// @type {Map}
 /// @requires $material-badge
-$dark-material-badge: extend(
-    $material-badge,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-badge: extend($material-badge, $dark-base-badge);
 
 /// Generates a dark fluent badge schema.
 /// @type {Map}
 /// @requires $fluent-badge
-$dark-fluent-badge: extend(
-    $fluent-badge,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-badge: extend($fluent-badge, $dark-base-badge);
 
 /// Generates a dark bootstrap badge schema.
 /// @type {Map}
 /// @requires $bootstrap-badge
-$dark-bootstrap-badge: extend(
-    $bootstrap-badge,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-badge: extend($bootstrap-badge, $dark-base-badge);
 
 /// Generates a dark indigo badge schema.
 /// @type {Map}
@@ -53,6 +38,7 @@ $dark-bootstrap-badge: extend(
 /// @requires $indigo-badge
 $dark-indigo-badge: extend(
     $indigo-badge,
+    $dark-base-badge,
     (
         background-color: (
             color: (

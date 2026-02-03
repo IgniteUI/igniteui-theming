@@ -15,7 +15,7 @@
 
     @each $key, $value in $map {
         @if $value {
-            $result: map.merge($result, (#{$key}: $value));
+            $result: map.deep-merge($result, (#{$key}: $value));
         }
     }
 
@@ -31,7 +31,7 @@
     $result: ();
 
     @each $map in $maps {
-        $result: map.merge($result, clean($map));
+        $result: map.deep-merge($result, clean($map));
     }
 
     @return $result;

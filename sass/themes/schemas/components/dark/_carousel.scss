@@ -9,11 +9,23 @@
 
 /// Generates the base dark carousel schema.
 /// @type {Map}
+/// @requires $light-carousel
+$base-dark-carousel: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
+/// Generates a dark material carousel schema based on a mix of $material-carousel and $base-dark-carousel
+/// @type {Map}
+/// @prop {Map} button-focus-arrow-color [color: ('secondary', 200)] - The previous/next buttons focus arrow color.
 /// @prop {Map} indicator-focus-color [color: ('secondary', 200)] - The indicators border and dot color on focus.
 /// @prop {Map} button-focus-border-color [color: ('secondary', 200)] - The navigation buttons border color on focus.
-/// @requires $light-carousel
-$base-dark-carousel: extend(
-    $light-carousel,
+/// @requires $material-carousel
+/// @requires $base-dark-carousel
+$dark-material-carousel: extend(
+    $material-carousel,
+    $base-dark-carousel,
     (
         indicator-focus-color: (
             color: (
@@ -28,28 +40,12 @@ $base-dark-carousel: extend(
                 200,
             ),
         ),
-    )
-);
 
-/// Generates a dark material carousel schema based on a mix of $material-carousel and $base-dark-carousel
-/// @type {Map}
-/// @prop {Map} button-focus-arrow-color [color: ('secondary', 200)] - The previous/next buttons focus arrow color.
-/// @requires $material-carousel
-/// @requires $base-dark-carousel
-$dark-material-carousel: extend(
-    $material-carousel,
-    $base-dark-carousel,
-    (
         button-focus-arrow-color: (
             color: (
                 'secondary',
                 200,
             ),
-        ),
-
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -62,8 +58,10 @@ $dark-material-carousel: extend(
 /// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
 /// @prop {Map} button-focus-border-color [color: ('gray', 400)] - The navigation buttons border color on focus.
 /// @requires $fluent-carousel
+/// @requires $base-dark-carousel
 $dark-fluent-carousel: extend(
     $fluent-carousel,
+    $base-dark-carousel,
     (
         button-focus-arrow-color: (
             color: (
@@ -99,11 +97,6 @@ $dark-fluent-carousel: extend(
                 400,
             ),
         ),
-
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -111,18 +104,16 @@ $dark-fluent-carousel: extend(
 /// @type {Map}
 /// @prop {Map} indicator-focus-color [color: ('primary', 200)] - The buttons/indicators border color on focus.
 /// @requires $bootstrap-carousel
+/// @requires $base-dark-carousel
 $dark-bootstrap-carousel: extend(
     $bootstrap-carousel,
+    $base-dark-carousel,
     (
         indicator-focus-color: (
             color: (
                 'primary',
                 200,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -140,8 +131,10 @@ $dark-bootstrap-carousel: extend(
 /// @prop {Map} indicator-dot-color [color: ('gray', 400)] - The idle indicator dot color.
 /// @prop {Map} indicator-hover-dot-color [color: ('gray', 500)] - The hover indicator dot color.
 /// @requires $indigo-carousel
+/// @requires $base-dark-carousel
 $dark-indigo-carousel: extend(
     $indigo-carousel,
+    $base-dark-carousel,
     (
         button-hover-background: (
             color: (
@@ -215,11 +208,6 @@ $dark-indigo-carousel: extend(
                 'gray',
                 500,
             ),
-        ),
-
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );
