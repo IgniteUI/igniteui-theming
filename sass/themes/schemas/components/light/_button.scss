@@ -870,6 +870,7 @@ $fluent-contained-button: extend(
 $fluent-fab-button: extend(
     $fluent-base-button,
     $fluent-contained-button,
+    $light-fab-button,
     (
         border-radius: (
             border-radius: (
@@ -1290,9 +1291,9 @@ $bootstrap-contained-button: extend(
 /// @requires {Map} $bootstrap-base-button
 /// @requires {Map} $bootstrap-contained-button
 $bootstrap-fab-button: extend(
-    $light-fab-button,
     $bootstrap-base-button,
     $bootstrap-contained-button,
+    $light-fab-button,
     (
         border-radius: (
             border-radius: (
@@ -1670,9 +1671,9 @@ $indigo-contained-button: extend(
 /// @requires {Map} $indigo-base-button
 /// @requires {Map} $indigo-contained-button
 $indigo-fab-button: extend(
-    $light-fab-button,
     $indigo-base-button,
     $indigo-contained-button,
+    $light-fab-button,
     (
         border-radius: (
             border-radius: (

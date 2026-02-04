@@ -573,6 +573,22 @@ $dark-fluent-button: (
     fab: $fluent-fab-button-dark,
 );
 
+/// @type {Map}
+/// @requires {Map} $bootsrap-flat-button
+$bootstrap-flat-button-dark: extend($bootstrap-flat-button, $dark-base-button);
+
+/// @type {Map}
+/// @requires {Map} $bootsrap-outlined-button
+$bootstrap-outlined-button-dark: extend($bootstrap-outlined-button, $dark-base-button);
+
+/// @type {Map}
+/// @requires {Map} $bootsrap-contained-button
+$bootstrap-contained-button-dark: extend($bootstrap-contained-button, $dark-base-button);
+
+/// @type {Map}
+/// @requires {Map} $bootsrap-fab-button
+$bootstrap-fab-button-dark: extend($bootstrap-fab-button, $dark-base-button);
+
 /// Generates a dark bootstrap button schema.
 /// @type {Map}
 /// @requires {Map} $bootstrap-flat-button
@@ -580,10 +596,10 @@ $dark-fluent-button: (
 /// @requires {Map} $bootstrap-contained-button
 /// @requires {Map} $bootstrap-fab-button
 $dark-bootstrap-button: (
-    flat: extend($bootstrap-flat-button, $dark-base-button),
-    outlined: extend($bootstrap-outlined-button, $dark-base-button),
-    contained: extend($bootstrap-contained-button, $dark-base-button),
-    fab: extend($bootstrap-fab-button, $dark-base-button),
+    flat: $bootstrap-flat-button-dark,
+    outlined: $bootstrap-outlined-button-dark,
+    contained: $bootstrap-contained-button-dark,
+    fab: $bootstrap-fab-button-dark,
 );
 
 /// @type {Map}
