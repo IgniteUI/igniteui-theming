@@ -1,14 +1,22 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../light/input-group' as *;
 @use './validator' as *;
-
-// stylelint-disable max-line-length
 
 ////
 /// @package theming
 /// @group schemas
 /// @access public
 ////
+
+/// Generates a base dark input-group schema.
+/// @access private
+/// @type {Map}
+$dark-base-input-group: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
 
 /// Generates a dark material input-group schema.
 /// @type {Map}
@@ -19,6 +27,7 @@
 /// @requires $material-input-group
 $dark-material-input-group: extend(
     $material-input-group,
+    $dark-base-input-group,
     (
         box-background: (
             color: (
@@ -46,10 +55,6 @@ $dark-material-input-group: extend(
                 'gray',
                 800,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -81,6 +86,7 @@ $dark-material-input-group: extend(
 /// @requires $fluent-input-group
 $dark-fluent-input-group: extend(
     $fluent-input-group,
+    $dark-base-input-group,
     (
         idle-secondary-color: (
             color: (
@@ -214,25 +220,13 @@ $dark-fluent-input-group: extend(
                 100,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark bootstrap input-group schema.
 /// @type {Map}
 /// @requires $bootstrap-input-group
-$dark-bootstrap-input-group: extend(
-    $bootstrap-input-group,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-input-group: extend($bootstrap-input-group, $dark-base-input-group);
 
 /// Generates a dark indigo input-group schema,
 /// @type {Map}
@@ -265,6 +259,7 @@ $dark-bootstrap-input-group: extend(
 $dark-indigo-input-group: extend(
     $indigo-input-group,
     $dark-indigo-validator,
+    $dark-base-input-group,
     (
         input-prefix-color: (
             contrast-color: (
@@ -417,10 +412,6 @@ $dark-indigo-input-group: extend(
                 50,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

@@ -7,54 +7,31 @@
 /// @access public
 ////
 
+/// Generates a base dark grid-filtering schema.
+/// @access private
+/// @type {Map}
+$base-dark-grid-filtering: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material grid-filtering schema.
 /// @type {Map}
 /// @requires $material-grid-filtering
-$dark-material-grid-filtering: extend(
-    $material-grid-filtering,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-grid-filtering: extend($material-grid-filtering, $base-dark-grid-filtering);
 
 /// Generates a dark fluent grid-filtering schema.
 /// @type {Map}
 /// @requires $fluent-grid-filtering
-$dark-fluent-grid-filtering: extend(
-    $fluent-grid-filtering,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-grid-filtering: extend($fluent-grid-filtering, $base-dark-grid-filtering);
 
 /// Generates a dark bootstrap grid-filtering schema.
 /// @type {Map}
 /// @requires $bootstrap-grid-filtering
-$dark-bootstrap-grid-filtering: extend(
-    $bootstrap-grid-filtering,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-grid-filtering: extend($bootstrap-grid-filtering, $base-dark-grid-filtering);
 
 /// Generates a dark indigo grid-filtering schema.
 /// @type {Map}
 /// @requires $indigo-grid-filtering
-$dark-indigo-grid-filtering: extend(
-    $indigo-grid-filtering,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-indigo-grid-filtering: extend($indigo-grid-filtering, $base-dark-grid-filtering);

@@ -43,22 +43,16 @@ $base-dark-tree: (
             0.1,
         ),
     ),
+    _meta: (
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material tree schema.
 /// @type {Map}
 /// @requires $material-tree
 /// @requires $base-dark-tree
-$dark-material-tree: extend(
-    $material-tree,
-    $base-dark-tree,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-tree: extend($material-tree, $base-dark-tree);
 
 /// Generates a dark fluent tree schema.
 /// @type {Map}
@@ -96,10 +90,6 @@ $dark-fluent-tree: extend(
                 900,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -125,10 +115,6 @@ $dark-bootstrap-tree: extend(
                 'surface',
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -148,6 +134,7 @@ $dark-bootstrap-tree: extend(
 /// @requires $base-dark-tree
 $dark-indigo-tree: extend(
     $indigo-tree,
+    $base-dark-tree,
     (
         foreground: (
             contrast-color: (
@@ -216,10 +203,6 @@ $dark-indigo-tree: extend(
                 400,
                 0.5,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

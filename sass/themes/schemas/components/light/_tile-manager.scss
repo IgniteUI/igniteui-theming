@@ -105,6 +105,10 @@ $light-tile-manager: extend(
         divider-color: transparent,
         border-radius: rem(4px),
         default-size: 2,
+        _meta: (
+            name: 'tile-manager',
+            variant: 'light',
+        ),
     )
 );
 
@@ -116,7 +120,6 @@ $material-tile-manager: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -151,7 +154,6 @@ $fluent-tile-manager: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -199,7 +201,6 @@ $bootstrap-tile-manager: extend(
 
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -280,7 +281,6 @@ $indigo-tile-manager: extend(
         border-radius: rem(6px),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

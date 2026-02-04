@@ -8,6 +8,15 @@
 /// @access public
 ////
 
+/// Generates a base dark switch schema.
+/// @access private
+/// @type {Map}
+$dark-base-switch: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 // stylelint-disable max-line-length
 /// Generates a dark material switch schema.
 /// @type {Map}
@@ -17,6 +26,7 @@
 /// @requires $material-switch
 $dark-material-switch: extend(
     $material-switch,
+    $dark-base-switch,
     (
         thumb-off-color: (
             color: (
@@ -35,10 +45,6 @@ $dark-material-switch: extend(
                 'gray',
                 200,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -62,6 +68,7 @@ $dark-material-switch: extend(
 /// @requires $fluent-switch
 $dark-fluent-switch: extend(
     $fluent-switch,
+    $dark-base-switch,
     (
         focus-outline-color: (
             color: (
@@ -147,10 +154,6 @@ $dark-fluent-switch: extend(
                 50,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -164,6 +167,7 @@ $dark-fluent-switch: extend(
 /// @requires $bootstrap-switch
 $dark-bootstrap-switch: extend(
     $bootstrap-switch,
+    $dark-base-switch,
     (
         focus-outline-color: (
             color: (
@@ -193,10 +197,6 @@ $dark-bootstrap-switch: extend(
                 100,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -217,6 +217,7 @@ $dark-bootstrap-switch: extend(
 /// @requires $indigo-switch
 $dark-indigo-switch: extend(
     $indigo-switch,
+    $dark-base-switch,
     (
         label-color: (
             contrast-color: (
@@ -299,10 +300,6 @@ $dark-indigo-switch: extend(
                 50,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

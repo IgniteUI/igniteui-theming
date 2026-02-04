@@ -70,6 +70,10 @@ $light-select: (
         ),
     ),
     default-size: 2,
+    _meta: (
+        name: 'select',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material select schema.
@@ -80,7 +84,6 @@ $material-select: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -121,7 +124,6 @@ $fluent-select: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -171,7 +173,6 @@ $bootstrap-select: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -221,7 +222,6 @@ $indigo-select: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

@@ -7,54 +7,31 @@
 /// @access public
 ////
 
+/// Generates a base dark ripple schema.
+/// @access private
+/// @type {Map}
+$dark-base-ripple: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material ripple schema.
 /// @type {Map}
 /// @requires $material-ripple
-$dark-material-ripple: extend(
-    $material-ripple,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-ripple: extend($material-ripple, $dark-base-ripple);
 
 /// Generates a dark fluent ripple schema.
 /// @type {Map}
 /// @requires $fluent-ripple
-$dark-fluent-ripple: extend(
-    $fluent-ripple,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-ripple: extend($fluent-ripple, $dark-base-ripple);
 
 /// Generates a dark bootstrap ripple schema.
 /// @type {Map}
 /// @requires $bootstrap-ripple
-$dark-bootstrap-ripple: extend(
-    $bootstrap-ripple,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-ripple: extend($bootstrap-ripple, $dark-base-ripple);
 
 /// Generates a dark indigo ripple schema.
 /// @type {Map}
 /// @requires $indigo-ripple
-$dark-indigo-ripple: extend(
-    $indigo-ripple,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-indigo-ripple: extend($indigo-ripple, $dark-base-ripple);

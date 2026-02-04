@@ -10,60 +10,42 @@
 /// Generates a dark base resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $light-resize-indicator
-$dark-base-resize-indicator: $light-resize-indicator;
+$dark-base-resize-indicator: extend(
+    $light-resize-indicator,
+    (
+        _meta: (
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark material resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $dark-base-resize-indicator
-$dark-material-resize-indicator: extend(
-    $dark-base-resize-indicator,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-resize-indicator: extend($material-resize-indicator, $dark-base-resize-indicator);
 
 /// Generates a dark fluent resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $dark-base-resize-indicator
-$dark-fluent-resize-indicator: extend(
-    $dark-base-resize-indicator,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-resize-indicator: extend($fluent-resize-indicator, $dark-base-resize-indicator);
 
 /// Generates a dark bootstrap resize indicator schema.
 /// @type {Map}
 /// @requires {Map} $dark-base-resize-indicator
-$dark-bootstrap-resize-indicator: extend(
-    $dark-base-resize-indicator,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-resize-indicator: extend($bootstrap-resize-indicator, $dark-base-resize-indicator);
 
 /// Generates a dark indigo resize indicator schema.
 /// @type {Map}
 /// @prop {Map} resize-indicator [color: ('primary', 300)] - The color of the resize indicator.
-$dark-indigo-resize-indicator: (
-    resize-indicator: (
-        color: (
-            'primary',
-            300,
+$dark-indigo-resize-indicator: extend(
+    $indigo-resize-indicator,
+    $dark-base-resize-indicator,
+    (
+        resize-indicator: (
+            color: (
+                'primary',
+                300,
+            ),
         ),
-    ),
-
-    _meta: (
-        theme: 'indigo',
-        variant: 'dark',
-    ),
+    )
 );

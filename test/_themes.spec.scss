@@ -63,6 +63,7 @@ $schema: (
         map.get($_theme-meta, 'variant'),
         'Component schema for #{map.get($_theme-meta, variant)} #{map.get($_theme-meta, theme)} #{$component} has missing/malformed variant metadata.'
     );
+    @include assert-true(map.get($_component-meta, 'name'), 'Component schema for #{$component} is missing name metadata.');
 }
 
 @include describe('Themes') {

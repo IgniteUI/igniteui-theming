@@ -29,6 +29,9 @@ $base-dark-tabs: (
             0.5,
         ),
     ),
+    _meta: (
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material tabs schema.
@@ -46,6 +49,7 @@ $base-dark-tabs: (
 /// @requires $base-dark-tabs
 $dark-material-tabs: extend(
     $material-tabs,
+    $base-dark-tabs,
     (
         item-hover-background: (
             color: (
@@ -103,10 +107,6 @@ $dark-material-tabs: extend(
                 200,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -161,10 +161,6 @@ $dark-fluent-tabs: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -175,7 +171,6 @@ $dark-bootstrap-tabs: extend(
     $bootstrap-tabs,
     (
         _meta: (
-            theme: 'bootstrap',
             variant: 'dark',
         ),
     )
@@ -204,6 +199,7 @@ $dark-bootstrap-tabs: extend(
 /// @requires $indigo-tabs
 $dark-indigo-tabs: extend(
     $indigo-tabs,
+    $base-dark-tabs,
     (
         item-hover-background: (
             contrast-color: (
@@ -326,10 +322,6 @@ $dark-indigo-tabs: extend(
                 50,
                 0.1,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

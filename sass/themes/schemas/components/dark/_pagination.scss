@@ -9,41 +9,42 @@
 
 /// Generates a base dark pagination schema.
 /// @type {Map}
-/// @prop {Map} background-color [color: ('surface')] - The background color of the paging panel.
 $base-dark-pagination: (
-    background-color: (
-        color: (
-            'surface',
-        ),
+    _meta: (
+        variant: 'dark',
     ),
 );
 
 /// Generates a dark material pagination schema.
 /// @type {Map}
+/// @prop {Map} background-color [color: ('surface')] - The background color of the paging panel.
 /// @requires $material-pagination
 /// @requires $base-dark-pagination
 $dark-material-pagination: extend(
     $material-pagination,
     $base-dark-pagination,
     (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
+        background-color: (
+            color: (
+                'surface',
+            ),
         ),
     )
 );
 
 /// Generates a dark fluent pagination schema.
 /// @type {Map}
+/// @prop {Map} background-color [color: ('surface')] - The background color of the paging panel.
 /// @requires $fluent-pagination
 /// @requires $base-dark-pagination
 $dark-fluent-pagination: extend(
     $fluent-pagination,
     $base-dark-pagination,
     (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
+        background-color: (
+            color: (
+                'surface',
+            ),
         ),
     )
 );
@@ -51,15 +52,7 @@ $dark-fluent-pagination: extend(
 /// Generates a dark bootstrap pagination schema.
 /// @type {Map}
 /// @requires $bootstrap-pagination
-$dark-bootstrap-pagination: extend(
-    $bootstrap-pagination,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-pagination: extend($bootstrap-pagination, $base-dark-pagination);
 
 /// Generates a dark indigo pagination schema.
 /// @type {Map}
@@ -67,16 +60,13 @@ $dark-bootstrap-pagination: extend(
 /// @requires $indigo-pagination
 $dark-indigo-pagination: extend(
     $indigo-pagination,
+    $base-dark-pagination,
     (
         border-color: (
             color: (
                 'gray',
                 200,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

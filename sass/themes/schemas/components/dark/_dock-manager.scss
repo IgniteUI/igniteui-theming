@@ -166,22 +166,17 @@ $dark-base-dock-manager: (
             100,
         ),
     ),
+
+    _meta: (
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material dock-manager schema.
 /// @type {Map}
 /// @requires $material-dock-manager
 /// @requires $dark-base-dock-manager
-$dark-material-dock-manager: extend(
-    $material-dock-manager,
-    $dark-base-dock-manager,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-dock-manager: extend($material-dock-manager, $dark-base-dock-manager);
 
 /// Generates a dark dock-manager schema.
 /// @type {Map}
@@ -216,10 +211,6 @@ $dark-fluent-dock-manager: extend(
                 'gray',
                 50,
             ),
-        ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
         ),
     )
 );
@@ -284,10 +275,6 @@ $dark-bootstrap-dock-manager: extend(
                 'gray',
                 500,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -367,10 +354,6 @@ $dark-indigo-dock-manager: extend(
                 'gray',
                 500,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );
