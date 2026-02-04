@@ -154,37 +154,41 @@ $bootstrap-banner: extend(
 /// @prop {Map} banner-border-color [color: ('gray', 300)] - The color used for the banner border.
 /// @prop {Map} banner-illustration-color [color: ('gray', 600)] - The color used for the banner illustration.
 /// @prop {Number} border-radius [rem(6px)] - The border radius of the banner
-$indigo-banner: (
-    banner-background: (
-        color: (
-            'gray',
-            200,
+/// @requires {Map} $light-banner
+$indigo-banner: extend(
+    $light-banner,
+    (
+        banner-background: (
+            color: (
+                'gray',
+                200,
+            ),
         ),
-    ),
 
-    banner-border-color: (
-        color: (
-            'gray',
-            300,
+        banner-border-color: (
+            color: (
+                'gray',
+                300,
+            ),
         ),
-    ),
 
-    banner-message-color: (
-        color: (
-            'gray',
-            700,
+        banner-message-color: (
+            color: (
+                'gray',
+                700,
+            ),
         ),
-    ),
 
-    banner-illustration-color: (
-        color: (
-            'gray',
-            600,
+        banner-illustration-color: (
+            color: (
+                'gray',
+                600,
+            ),
         ),
-    ),
 
-    border-radius: rem(6px),
-    _meta: (
-        theme: 'indigo',
-    ),
+        border-radius: rem(6px),
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
 );
