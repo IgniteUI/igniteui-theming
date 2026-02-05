@@ -32,7 +32,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
     $n: map.get($theme, '_meta', 'name');
 
     @if not($n) or string.length($n) == 0 {
-        @error 'Theme should have a non-null or empty name property in its _meta map. Example: _meta: (name: my-comp)';
+        $n: 'unkown-compoenent';
     }
 
     // This is one of 'material', 'fluent', 'bootstrap', or 'indigo'.
@@ -72,7 +72,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///   }
 @mixin css-vars($theme, $scope: null) {
     $selector: map.get($theme, 'selector');
-    $name: $scope or $selector;
+    $name: if($scope, $scope, $selector);
 
     @if is-root() {
         #{$name} {
