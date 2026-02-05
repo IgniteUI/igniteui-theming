@@ -31,7 +31,6 @@
     $active-background: null,
     $active-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'highlight'};
     $selector: (#{config.element-prefix() + '-' + 'highlight'}, '.igx-highlight');
     $highlight-schema: ();
 
@@ -54,7 +53,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             resting-background: $resting-background,
             resting-color: $resting-color,

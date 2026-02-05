@@ -179,7 +179,6 @@
     $border-radius-indicator: null,
     $border-radius-step-header: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'stepper'};
     $selector: #{config.element-prefix() + '-' + 'stepper'};
     $stepper-schema: ();
 
@@ -419,7 +418,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             content-foreground: $content-foreground,

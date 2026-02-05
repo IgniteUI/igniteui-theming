@@ -105,7 +105,7 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'button'};
+    $selector: #{config.variable-prefix() + '-' + 'button'};
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -237,5 +237,5 @@
         );
     }
 
-    @return (name: $name, variant: $variant, themes: $themes);
+    @return (selector: $selector, variant: $variant, themes: $themes);
 }

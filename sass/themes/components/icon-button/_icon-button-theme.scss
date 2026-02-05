@@ -67,7 +67,7 @@
 
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'icon-button'};
+    $selector: #{config.variable-prefix() + '-' + 'icon-button'};
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {
@@ -137,5 +137,5 @@
         );
     }
 
-    @return (name: $name, variant: $variant, themes: $themes);
+    @return (selector: $selector, variant: $variant, themes: $themes);
 }

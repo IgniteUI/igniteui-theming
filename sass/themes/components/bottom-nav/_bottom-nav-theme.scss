@@ -43,7 +43,6 @@
     $border-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'bottom-nav'};
     $selector: #{config.element-prefix() + '-' + 'bottom-nav'};
     $bottom-nav-schema: ();
 
@@ -95,7 +94,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             icon-color: $icon-color,

@@ -64,7 +64,6 @@
     $tick-label-color: null,
     $tick-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'slider'};
     $selector: #{config.element-prefix() + '-' + 'slider'};
     $slider-schema: ();
 
@@ -176,7 +175,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             track-color: $track-color,
             track-step-color: $track-step-color,

@@ -46,7 +46,6 @@
     $size: null,
     $dot-size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'badge'};
     $selector: #{config.element-prefix() + '-' + 'badge'};
     $badge-schema: ();
 
@@ -74,7 +73,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             icon-color: $icon-color,
             text-color: $text-color,

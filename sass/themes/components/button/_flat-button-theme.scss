@@ -91,7 +91,6 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'flat-button'};
     $selector: (
         #{'[' + config.element-prefix() + 'Button="flat"]'},
         #{config.element-prefix() + '-' + 'button[variant="flat"]'},
@@ -277,7 +276,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

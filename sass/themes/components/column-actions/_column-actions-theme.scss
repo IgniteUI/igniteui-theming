@@ -30,7 +30,6 @@
     $title-color: null,
     $background-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'column-actions'};
     $selector: #{config.element-prefix() + '-' + 'column-actions'};
     $column-actions-schema: ();
 
@@ -49,7 +48,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             title-color: $title-color,
             background-color: $background-color,

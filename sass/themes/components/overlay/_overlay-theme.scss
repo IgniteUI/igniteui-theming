@@ -22,7 +22,6 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-overlay-theme);
 @function overlay-theme($schema: $light-material-schema, $background-color: null) {
-    $name: #{config.variable-prefix() + '-' + 'overlay'};
     $selector: (
         #{config.element-prefix() + '-' + 'overlay'},
         '.igx-overlay__wrapper--modal',
@@ -41,7 +40,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background-color: $background-color,
         )
