@@ -3,13 +3,13 @@ $_element-prefix: null !default;
 
 @mixin configure-variable-prefix($value) {
     @if $value {
-        $_prefix: $value !global;
+        $_variable-prefix: $value !global;
     }
 }
 
 @mixin configure-element-prefix($value) {
     @if $value {
-        $_prefix: $value !global;
+        $_element-prefix: $value !global;
     }
 }
 

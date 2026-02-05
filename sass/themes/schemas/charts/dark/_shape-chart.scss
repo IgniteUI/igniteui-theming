@@ -1,4 +1,5 @@
 @use '../light/shape-chart' as *;
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -7,22 +8,31 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Generates a base dark shape chart schema.
+/// @access private
+/// @type {Map}
+$dark-shape-chart: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark shape chart schema.
 /// @type {Map}
 /// @requires $material-shape-chart
-$dark-material-shape-chart: $material-shape-chart;
+$dark-material-shape-chart: extend($material-shape-chart, $dark-shape-chart);
 
 /// Generates a dark fluent shape-chart schema.
 /// @type {Map}
 /// @requires $fluent-shape-chart
-$dark-fluent-shape-chart: $fluent-shape-chart;
+$dark-fluent-shape-chart: extend($fluent-shape-chart, $dark-shape-chart);
 
 /// Generates a dark bootstrap shape-chart schema.
 /// @type {Map}
 /// @requires $bootstrap-shape-chart
-$dark-bootstrap-shape-chart: $bootstrap-shape-chart;
+$dark-bootstrap-shape-chart: extend($bootstrap-shape-chart, $dark-shape-chart);
 
 /// Generates a dark indigo shape-chart schema.
 /// @type {Map}
 /// @requires $indigo-shape-chart
-$dark-indigo-shape-chart: $indigo-shape-chart;
+$dark-indigo-shape-chart: extend($indigo-shape-chart, $dark-shape-chart);

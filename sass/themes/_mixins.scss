@@ -4,6 +4,7 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use 'sass:list';
+@use 'config';
 @use '../utils/meta' as *;
 @use '../typography/functions' as *;
 
@@ -15,39 +16,43 @@
 /// @access private
 $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typography', '_meta');
 
-/// Parses a map of key value pairs from component themes to css variables.
+/// Parses a map of key value pairs from component themes to CSS variables.
 /// @access private
-/// @param {Map} $theme - The component theme to be used to generate css variables.
-/// @param {String} $name - The CSS variables name
-/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables
+/// @param {Map} $theme - The component theme used for generating CSS variables.
+/// @param {String} $name [null] - This property is deprecated and will be ignored.
+/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables.
 /// @example scss Convert theme colors to CSS variables.
 ///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
 ///   :root {
 ///     @include css-vars-from-theme($theme);
 ///   }
 /// @require {mixin} css-vars
-@mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
-    $themes: map.get($theme, 'themes');
-    $prefix: map.get($theme, 'prefix');
+@mixin css-vars-from-theme($theme, $name: null, $ignored: $ignored-keys) {
+    // This is the name of the component. For example, 'avatar' for the avatar component.
+    $n: map.get($theme, '_meta', 'name');
+
+    @if not($n) or string.length($n) == 0 {
+        @error 'Theme should have a non-null or empty name property in its _meta map. Example: _meta: (name: my-comp)';
+    }
+
+    // This is one of 'material', 'fluent', 'bootstrap', or 'indigo'.
     $t: map.get($theme, '_meta', 'theme');
 
-    // This is here only because the button theme consists of 4 nested themes.
-    // @if $themes and meta.type-of($themes) == 'map' {
-    //     @each $theme in $themes {
-    //         @include css-vars(list.nth($theme, 2));
-    //     }
-    // }
+    // This is one of 'light' or 'dark'.
+    $v: map.get($theme, '_meta', 'variant');
 
     @each $key, $value in map.remove($theme, $ignored...) {
-        $variable: if($prefix, #{$prefix}-#{$key}, #{$key});
-
         @if meta.type-of($value) != 'map' and $key != 'prefix' {
-            --#{$variable}: var(--#{$name}-#{$key}, #{$value});
+            --#{$key}: var(--#{config.variable-prefix()}-#{$n}-#{$key}, #{$value});
         }
     }
 
     @if $t and meta.type-of($t) == 'string' {
         --ig-theme: #{$t};
+    }
+
+    @if $v and meta.type-of($v) == 'string' {
+        --ig-theme-variant: #{$v};
     }
 }
 
@@ -66,22 +71,17 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///     @include css-vars($my-grid-theme);
 ///   }
 @mixin css-vars($theme, $scope: null) {
-    $s: map.get($theme, 'selector');
-    $n: map.get($theme, 'name');
-    $name: if($scope, $scope, $s or $n);
-
-    @if not($n) or string.length($n) == 0 {
-        @error 'Theme should have a non-null or empty name property. Example: theme: (name: my-theme)';
-    }
+    $selector: map.get($theme, 'selector');
+    $name: $scope or $selector;
 
     @if is-root() {
         #{$name} {
-            @include css-vars-from-theme($theme, $n);
+            @include css-vars-from-theme($theme);
         }
     } @else {
         &,
         #{$name} {
-            @include css-vars-from-theme($theme, $n);
+            @include css-vars-from-theme($theme);
         }
     }
 }

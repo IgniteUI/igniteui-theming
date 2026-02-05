@@ -6,8 +6,9 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '../node_modules/sass-true/' as *;
+@use '../sass/themes/schemas' as schemas;
+@use '../sass/themes/config' as config;
 @use '../index' as *;
-@use '../sass/themes/schemas/components' as schemas;
 
 $schema: (
     background: (
@@ -40,6 +41,7 @@ $schema: (
     _meta: (
         theme: 'material',
         variant: 'light',
+        name: 'test-component',
     ),
 );
 
@@ -63,12 +65,16 @@ $schema: (
         map.get($_theme-meta, 'variant'),
         'Component schema for #{map.get($_theme-meta, variant)} #{map.get($_theme-meta, theme)} #{$component} has missing/malformed variant metadata.'
     );
-    @include assert-true(map.get($_component-meta, 'name'), 'Component schema for #{$component} is missing name metadata.');
+    @include assert-true(
+        map.get($_component-meta, 'name'),
+        'Component schema for #{$component} is missing name metadata.'
+    );
 }
 
 @include describe('Themes') {
     @include describe('schemas') {
         @include it('resolves util function values') {
+            $selector: 'igx-data-chart';
             $instructions: (
                 expand-shorthand: (
                     4px 8px,
@@ -94,19 +100,25 @@ $schema: (
                         map.merge(
                             $resolved,
                             (
-                                name: 'data-chart',
-                                selector: 'igx-data-chart',
+                                selector: $selector,
+                                _meta: (
+                                    theme: 'material',
+                                    variant: 'light',
+                                    name: 'data-chart',
+                                ),
                             )
                         )
                     );
                 }
 
                 @include expect($selector: false) {
-                    igx-data-chart {
-                        --title-padding-top: var(--data-chart-title-padding-top, 4px);
-                        --title-padding-right: var(--data-chart-title-padding-right, 8px);
-                        --title-padding-bottom: var(--data-chart-title-padding-bottom, 4px);
-                        --title-padding-left: var(--data-chart-title-padding-left, 8px);
+                    #{$selector} {
+                        --title-padding-top: var(--#{config.variable-prefix()}-data-chart-title-padding-top, 4px);
+                        --title-padding-right: var(--#{config.variable-prefix()}-data-chart-title-padding-right, 8px);
+                        --title-padding-bottom: var(--#{config.variable-prefix()}-data-chart-title-padding-bottom, 4px);
+                        --title-padding-left: var(--#{config.variable-prefix()}-data-chart-title-padding-left, 8px);
+                        --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -185,6 +197,7 @@ $schema: (
                 _meta: (
                     theme: 'material',
                     variant: 'light',
+                    name: 'test-component',
                 ),
             );
 
@@ -235,90 +248,101 @@ $schema: (
         }
 
         @include it('should convert component theme props into CSS variables') {
-            $name: 'igc-avatar';
             $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
 
             @include assert() {
                 @include output() {
-                    @include css-vars-from-theme($theme, $name);
+                    @include css-vars-from-theme($theme);
                 }
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                     }
 
                     --ig-theme: material;
+                    --ig-theme-variant: light;
                 }
             }
         }
 
-        @include it('should convert component theme props into CSS variables with a prefix') {
-            $name: 'igc-dockmanager';
-            $prefix: 'igc';
-            $theme: extend(
-                map.remove(digest-schema($schema), $ignored-keys...),
-                (
-                    'prefix': $prefix,
-                )
-            );
+        @include it('should ignore $name property when provided to css-vars-from-theme mixin') {
+            $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
+            $prefixed-name: 'igc-#{$name}';
 
             @include assert() {
                 @include output() {
-                    @include css-vars-from-theme($theme, $name);
+                    @include css-vars-from-theme($theme, $prefixed-name);
                 }
 
                 @include expect() {
-                    @each $key, $value in map.remove($theme, 'prefix') {
-                        --#{$prefix}-#{$key}: var(--#{$name}-#{$key}, #{$value});
+                    @each $key, $value in map.remove($theme, $ignored-keys...) {
+                        --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                     }
+
+                    --ig-theme: material;
+                    --ig-theme-variant: light;
                 }
             }
         }
 
         @include it('should ignore all keys in the ignore list') {
-            $name: 'igc-avatar';
             $theme: digest-schema($schema);
 
             @each $key in $ignored-keys {
-                $theme: map.merge($theme, (#{$key}: 'test'));
+                // The _meta property already exists in the schema
+                // We need to add dummy values for the other ignored keys to ensure they're properly ignored in the mixin
+                @if $key != '_meta' {
+                    $theme: map.merge($theme, (#{$key}: 'test'));
+                }
             }
 
             @include assert() {
+                $name: map.get($theme, '_meta', 'name');
+
                 @include output() {
-                    @include css-vars-from-theme($theme, $name);
+                    @include css-vars-from-theme($theme);
                 }
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                     }
+
+                    --ig-theme: material;
+                    --ig-theme-variant: light;
                 }
             }
         }
 
         @include it('should scope theme CSS variables correctly') {
-            $name: 'igc-avatar';
+            $selector: 'igc-avatar';
+
+            // The theme should contain a selector property for the css-vars mixin to work properly in the :root context
             $theme: map.merge(
                 digest-schema($schema),
                 (
-                    name: $name,
+                    selector: $selector,
                 )
             );
+            $name: map.get($theme, '_meta', 'name');
 
-            // Calling from the root of the stylesheet
+            // Calling from the root of the stylesheet, uses the 'selector' property from the theme map
             @include assert() {
                 @include output($selector: false) {
                     @include css-vars($theme);
                 }
 
                 @include expect($selector: false) {
-                    #{$name} {
+                    #{$selector} {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -333,25 +357,21 @@ $schema: (
 
                 @include expect($selector: false) {
                     .my-theme,
-                    .my-theme #{$name} {
+                    .my-theme #{$selector} {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
         }
 
         @include it('should scope theme CSS variables to a specified scope') {
-            $name: 'igc-avatar';
-            $theme: map.merge(
-                digest-schema($schema),
-                (
-                    name: $name,
-                )
-            );
+            $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
 
             // Calling from the root of the stylesheet w/ custom selector provided
             @include assert() {
@@ -362,10 +382,11 @@ $schema: (
                 @include expect($selector: false) {
                     .custom-selector {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -382,10 +403,11 @@ $schema: (
                     .my-theme,
                     .my-theme .custom-selector {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            --#{$key}: var(--#{config.variable-prefix()}-#{$name}-#{$key}, #{$value});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }

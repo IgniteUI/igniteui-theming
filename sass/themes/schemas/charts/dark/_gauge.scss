@@ -1,4 +1,5 @@
 @use '../light/gauge' as *;
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -7,42 +8,51 @@
 /// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
 ////
 
+/// Generates a base dark gauge schema.
+/// @access private
+/// @type {Map}
+$dark-gauge: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates dark gauge schemas.
 /// @type {Map}
 /// @requires $material-linear-gauge
-$dark-material-linear-gauge: $material-linear-gauge;
+$dark-material-linear-gauge: extend($material-linear-gauge, $dark-gauge);
 
 /// Generates dark gauge schemas.
 /// @type {Map}
 /// @requires $material-radial-gauge
-$dark-material-radial-gauge: $material-radial-gauge;
+$dark-material-radial-gauge: extend($material-radial-gauge, $dark-gauge);
 
 /// Generates a dark fluent gauge schema.
 /// @type {Map}
 /// @requires $fluent-linear-gauge
-$dark-fluent-linear-gauge: $fluent-linear-gauge;
+$dark-fluent-linear-gauge: extend($fluent-linear-gauge, $dark-gauge);
 
 /// Generates a dark fluent gauge schema.
 /// @type {Map}
 /// @requires $fluent-radial-gauge
-$dark-fluent-radial-gauge: $fluent-radial-gauge;
+$dark-fluent-radial-gauge: extend($fluent-radial-gauge, $dark-gauge);
 
 /// Generates a dark bootstrap gauge schema.
 /// @type {Map}
 /// @requires $bootstrap-linear-gauge
-$dark-bootstrap-linear-gauge: $bootstrap-linear-gauge;
+$dark-bootstrap-linear-gauge: extend($bootstrap-linear-gauge, $dark-gauge);
 
 /// Generates a dark bootstrap gauge schema.
 /// @type {Map}
 /// @requires $bootstrap-radial-gauge
-$dark-bootstrap-radial-gauge: $bootstrap-radial-gauge;
+$dark-bootstrap-radial-gauge: extend($bootstrap-radial-gauge, $dark-gauge);
 
 /// Generates a dark indigo gauge schema.
 /// @type {Map}
 /// @requires $indigo-linear-gauge
-$dark-indigo-linear-gauge: $indigo-linear-gauge;
+$dark-indigo-linear-gauge: extend($indigo-linear-gauge, $dark-gauge);
 
 /// Generates a dark indigo gauge schema.
 /// @type {Map}
 /// @requires $indigo-radial-gauge
-$dark-indigo-radial-gauge: $indigo-radial-gauge;
+$dark-indigo-radial-gauge: extend($indigo-radial-gauge, $dark-gauge);

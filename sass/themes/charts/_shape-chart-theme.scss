@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,7 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {List} $margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @param {Color} $title-alignment [null] - Sets horizontal alignment which determines the title position, relative to the left and right edges of the control.
 /// @param {Color} $title-text-color [null] - Sets the color of the chart title.
@@ -106,14 +106,7 @@
     $y-axis-title-margin: null
 ) {
     $name: 'shape-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-shape-chart',
-            'webc': 'igc-shape-chart',
-            'blazor': 'igb-shape-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -245,14 +238,7 @@
     $target: 'angular'
 ) {
     $name: 'shape-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-shape-chart',
-            'webc': 'igc-shape-chart',
-            'blazor': 'igb-shape-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $title: map.get($categories, 'title');
     $subtitle: map.get($categories, 'subtitle');
     $x-axis-title-text-style: map.get($categories, 'x-axis-title-text-style');

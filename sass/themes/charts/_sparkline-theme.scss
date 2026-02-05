@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -14,8 +15,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
-///
 /// @param {Color} $brush [null] - Sets the sparkline brush.
 /// @param {Number} $line-thickness [null] - Sets the line thickness of the sparkline.
 /// @param {Color} $marker-brush [null] - Sets the marker brush of the sparkline.
@@ -68,14 +67,7 @@
     $normal-range-fill: null
 ) {
     $name: 'sparkline';
-    $selector: map.get(
-        (
-            'angular': 'igx-sparkline',
-            'webc': 'igc-sparkline',
-            'blazor': 'igb-sparkline',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $sparkline-schema: ();
 
     @if map.has-key($schema, $name) {
