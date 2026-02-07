@@ -18,6 +18,7 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// @deprecated Use flat-button-theme(), contained-button-theme(), outlined-button-theme(), or fab-button-theme() instead.
 /// If only background color is specified, text/icon color
 /// will be assigned automatically to a contrasting color.
 /// Does ___not___ apply for disabled state colors.
@@ -61,6 +62,10 @@
 ///   );
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-button-theme);
+/// @see flat-button-theme
+/// @see contained-button-theme
+/// @see outlined-button-theme
+/// @see fab-button-theme
 @function button-theme(
     $schema: $light-material-schema,
 
@@ -105,7 +110,9 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $selector: #{config.variable-prefix() + '-' + 'button'};
+    @warn 'button-theme() is deprecated. Use the variant-specific theme functions instead: flat-button-theme(), contained-button-theme(), outlined-button-theme(), fab-button-theme().';
+
+    $selector: #{config.element-prefix() + '-' + 'button'};
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -190,7 +197,6 @@
                 $_name: extend(
                         digest-schema($_schema),
                         (
-                            name: $name,
                             background: $background,
                             foreground: $foreground,
 

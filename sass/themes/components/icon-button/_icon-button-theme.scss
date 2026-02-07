@@ -16,6 +16,7 @@
 /// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
 ////
 
+/// @deprecated Use flat-icon-button-theme(), contained-icon-button-theme(), or outlined-icon-button-theme() instead.
 /// Generates a theme map for the icon button component.
 /// @param {Map} $schema [$light-material-schema] - The schema map or icon-button schema to use.
 /// @param {Color} $background [null] - Background color for the icon button.
@@ -38,6 +39,9 @@
 /// @param {Length} $size [null] - Size of the icon button.
 /// @requires $light-material-schema
 /// @return {Map} - A map containing the theme name, variant, and themes for the icon button.
+/// @see flat-icon-button-theme
+/// @see contained-icon-button-theme
+/// @see outlined-icon-button-theme
 @function icon-button-theme(
     $schema: $light-material-schema,
 
@@ -67,7 +71,9 @@
 
     $size: null
 ) {
-    $selector: #{config.variable-prefix() + '-' + 'icon-button'};
+    @warn 'icon-button-theme() is deprecated. Use the variant-specific theme functions instead: flat-icon-button-theme(), contained-icon-button-theme(), outlined-icon-button-theme().';
+
+    $selector: #{config.element-prefix() + '-' + 'icon-button'};
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {
@@ -106,7 +112,6 @@
                 $_name: extend(
                         digest-schema($_schema),
                         (
-                            name: $name,
                             background: $background,
                             foreground: $foreground,
                             shadow-color: $shadow-color,
