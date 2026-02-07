@@ -355,7 +355,6 @@
     // date-disabled-range-foreground is used for idle date in selected range
     $date-disabled-range-foreground: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'calendar'};
     $selector: (
         #{config.element-prefix() + '-' + 'calendar'},
         #{'.' + config.element-prefix() + '-' + 'date-picker'},
@@ -1187,7 +1186,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             size: $size,

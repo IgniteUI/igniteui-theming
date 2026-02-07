@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -141,14 +142,7 @@
     $zoom-slider-x-axis-major-stroke-thickness: null
 ) {
     $name: 'financial-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-financial-chart',
-            'webc': 'igc-financial-chart',
-            'blazor': 'igb-financial-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {

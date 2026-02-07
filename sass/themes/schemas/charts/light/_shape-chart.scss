@@ -1,4 +1,5 @@
 // stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -6,6 +7,16 @@
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
+
+/// Generates a base light shape chart schema.
+/// @access private
+/// @type {Map}
+$light-shape-chart: (
+    _meta: (
+        name: 'shape-chart',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material base shape chart schema.
 /// @type {Map}
@@ -50,73 +61,100 @@
 /// @property {String} y-axis-title-alignment [null] - Sets Horizontal alignment of the Y-axis title.
 /// @property {Color} y-axis-title-color [null] - Sets color of title on the Y-axis.
 /// @property {List} y-axis-title-margin [null] - Sets the margin around the title on the Y-axis.
-$material-shape-chart: (
-    'margin': null,
-    'title-alignment': null,
-    'title-text-color': (
-        color: (
-            'gray',
-            900,
+$material-shape-chart: extend(
+    $light-shape-chart,
+    (
+        margin: null,
+        title-alignment: null,
+        title-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    'title-margin': null,
-    'subtitle-alignment': null,
-    'subtitle-text-color': (
-        color: (
-            'gray',
-            600,
+        title-margin: null,
+        subtitle-alignment: null,
+        subtitle-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
         ),
-    ),
-    'subtitle-margin': null,
-    'brushes': series,
-    'marker-brushes': series,
-    'outlines': series,
-    'marker-outlines': series,
-    'thickness': null,
-    'trend-line-brushes': series,
-    'trend-line-thickness': null,
-    'x-axis-label-margin': null,
-    'x-axis-label-text-color': null,
-    'x-axis-label-vertical-alignment': null,
-    'x-axis-major-stroke': null,
-    'x-axis-major-stroke-thickness': null,
-    'x-axis-minor-stroke': null,
-    'x-axis-minor-stroke-thickness': null,
-    'x-axis-strip': null,
-    'x-axis-stroke': null,
-    'x-axis-stroke-thickness': null,
-    'x-axis-title-alignment': null,
-    'x-axis-title-color': null,
-    'x-axis-title-margin': null,
-    'y-axis-label-margin': null,
-    'y-axis-label-text-color': null,
-    'y-axis-label-vertical-alignment': null,
-    'y-axis-major-stroke': null,
-    'y-axis-major-stroke-thickness': null,
-    'y-axis-minor-stroke': null,
-    'y-axis-minor-stroke-thickness': null,
-    'y-axis-strip': null,
-    'y-axis-stroke': null,
-    'y-axis-stroke-thickness': null,
-    'y-axis-title-alignment': null,
-    'y-axis-title-color': null,
-    'y-axis-title-margin': null,
+        subtitle-margin: null,
+        brushes: series,
+        marker-brushes: series,
+        outlines: series,
+        marker-outlines: series,
+        thickness: null,
+        trend-line-brushes: series,
+        trend-line-thickness: null,
+        x-axis-label-margin: null,
+        x-axis-label-text-color: null,
+        x-axis-label-vertical-alignment: null,
+        x-axis-major-stroke: null,
+        x-axis-major-stroke-thickness: null,
+        x-axis-minor-stroke: null,
+        x-axis-minor-stroke-thickness: null,
+        x-axis-strip: null,
+        x-axis-stroke: null,
+        x-axis-stroke-thickness: null,
+        x-axis-title-alignment: null,
+        x-axis-title-color: null,
+        x-axis-title-margin: null,
+        y-axis-label-margin: null,
+        y-axis-label-text-color: null,
+        y-axis-label-vertical-alignment: null,
+        y-axis-major-stroke: null,
+        y-axis-major-stroke-thickness: null,
+        y-axis-minor-stroke: null,
+        y-axis-minor-stroke-thickness: null,
+        y-axis-strip: null,
+        y-axis-stroke: null,
+        y-axis-stroke-thickness: null,
+        y-axis-title-alignment: null,
+        y-axis-title-color: null,
+        y-axis-title-margin: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent shaep-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-shape-chart
-$fluent-shape-chart: $material-shape-chart;
+$fluent-shape-chart: extend(
+    $material-shape-chart,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap shape-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-shape-chart
-$bootstrap-shape-chart: $material-shape-chart;
+$bootstrap-shape-chart: extend(
+    $material-shape-chart,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo shape-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-shape-chart
-$indigo-shape-chart: $material-shape-chart;
+$indigo-shape-chart: extend(
+    $material-shape-chart,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

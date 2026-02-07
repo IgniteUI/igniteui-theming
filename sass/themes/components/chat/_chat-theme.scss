@@ -64,7 +64,6 @@
     $code-background: null,
     $code-border: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'chat'};
     $selector: #{config.element-prefix() + '-' + 'chat'};
     $chat-schema: ();
 
@@ -92,7 +91,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
 

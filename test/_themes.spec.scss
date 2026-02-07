@@ -6,57 +6,124 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '../node_modules/sass-true/' as *;
+@use '../sass/themes/schemas' as schemas;
+@use '../sass/themes/config' as config;
 @use '../index' as *;
 
 $schema: (
     background: (
-        color: (primary, 400)
+        color: (
+            primary,
+            400,
+        ),
     ),
     hover-background: (
-        color: (secondary, 700, .26)
+        color: (
+            secondary,
+            700,
+            0.26,
+        ),
     ),
     foreground: (
-        contrast-color: (primary, 400)
+        contrast-color: (
+            primary,
+            400,
+        ),
     ),
-    hover-foreground: contrast-color($color: secondary, $variant: 700),
+    hover-foreground: contrast-color(
+            $color: secondary,
+            $variant: 700,
+        ),
     border-style: solid,
     border-radius: rem(2px),
     brushes: series,
     resting-elevation: 2,
     _meta: (
         theme: 'material',
-        variant: 'light'
+        variant: 'light',
+        name: 'test-component',
     ),
 );
+
+/// Asserts that a component schema includes matching theme metadata.
+/// @param {Map} $theme - Collection of component schemas containing `_meta` information.
+/// @param {String} $component - Component name for error messages.
+/// @param {Map} $schema - Component schema map containing `_meta`.
+/// @output None.
+@mixin assert-schema($theme, $component, $schema) {
+    $_theme-meta: map.get($theme, '_meta');
+    $_component-meta: map.get($schema, '_meta');
+
+    @include assert-true($_component-meta, 'Component schema for #{$component} is missing metadata.');
+    @include assert-equal(
+        map.get($_component-meta, 'theme'),
+        map.get($_theme-meta, 'theme'),
+        'Component schema for #{map.get($_theme-meta, variant)} #{map.get($_theme-meta, theme)} #{$component} has missing/malformed theme metadata.'
+    );
+    @include assert-equal(
+        map.get($_component-meta, 'variant'),
+        map.get($_theme-meta, 'variant'),
+        'Component schema for #{map.get($_theme-meta, variant)} #{map.get($_theme-meta, theme)} #{$component} has missing/malformed variant metadata.'
+    );
+    @include assert-true(
+        map.get($_component-meta, 'name'),
+        'Component schema for #{$component} is missing name metadata.'
+    );
+}
 
 @include describe('Themes') {
     @include describe('schemas') {
         @include it('resolves util function values') {
+            $selector: 'igx-data-chart';
             $instructions: (
-                expand-shorthand: (4px 8px, 'padding'),
-                map-keys-prefix: 'title'
+                expand-shorthand: (
+                    4px 8px,
+                    'padding',
+                ),
+                map-keys-prefix: 'title',
             );
-            $result: ((
-                title-padding-top: 4px,
-                title-padding-right: 8px,
-                title-padding-bottom: 4px,
-                title-padding-left: 8px
-            ));
+            $result: (
+                (
+                    title-padding-top: 4px,
+                    title-padding-right: 8px,
+                    title-padding-bottom: 4px,
+                    title-padding-left: 8px,
+                )
+            );
             $resolved: resolve-value($instructions);
 
             @include assert-equal($resolved, $result);
 
             @include assert() {
                 @include output($selector: false) {
-                    @include css-vars(map.merge($resolved, (name: 'data-chart', selector: 'igx-data-chart')));
+                    @include css-vars(
+                        map.merge(
+                            $resolved,
+                            (
+                                selector: $selector,
+                                _meta: (
+                                    theme: 'material',
+                                    variant: 'light',
+                                    name: 'data-chart',
+                                ),
+                            )
+                        )
+                    );
                 }
 
                 @include expect($selector: false) {
-                    igx-data-chart {
-                        --title-padding-top: var(--data-chart-title-padding-top, 4px);
-                        --title-padding-right: var(--data-chart-title-padding-right, 8px);
-                        --title-padding-bottom: var(--data-chart-title-padding-bottom, 4px);
-                        --title-padding-left: var(--data-chart-title-padding-left, 8px);
+                    $vp: config.variable-prefix();
+                    $n: 'data-chart';
+
+                    #{$selector} {
+                        @each $dir in ('top', 'right', 'bottom', 'left') {
+                            $val: if($dir == 'top' or $dir == 'bottom', 4px, 8px);
+                            $fallback: if($vp == 'ig', #{$val}, var(--ig-#{$n}-title-padding-#{$dir}, #{$val}));
+                            --title-padding-#{$dir}: var(--#{$vp}-#{$n}-title-padding-#{$dir}, #{$fallback});
+                        }
+
+                        --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -64,12 +131,24 @@ $schema: (
 
         @include it('should resolve values from function instructions') {
             $instructions: (
-                (color: primary),
-                (contrast-color: (primary, '400')),
+                (
+                    color: primary,
+                ),
+                (
+                    contrast-color: (
+                        primary,
+                        '400',
+                    ),
+                )
             );
             $results: (
-                color($color: primary),
-                contrast-color($color: primary, $variant: '400'),
+                color(
+                    $color: primary,
+                ),
+                contrast-color(
+                    $color: primary,
+                    $variant: '400',
+                )
             );
 
             @for $i from 1 through list.length($instructions) {
@@ -82,12 +161,24 @@ $schema: (
 
         @include it('should work with custom(handmade) palettes') {
             $instructions: (
-                (color: tertiary),
-                (contrast-color: (tertiary, '400')),
+                (
+                    color: tertiary,
+                ),
+                (
+                    contrast-color: (
+                        tertiary,
+                        '400',
+                    ),
+                )
             );
             $results: (
-                color($color: tertiary),
-                contrast-color($color: tertiary, $variant: '400'),
+                color(
+                    $color: tertiary,
+                ),
+                contrast-color(
+                    $color: tertiary,
+                    $variant: '400',
+                )
             );
 
             @for $i from 1 through list.length($instructions) {
@@ -100,126 +191,171 @@ $schema: (
 
         @include it('should output theme maps from schema definitions') {
             $theme: (
-                background:  var(--ig-primary-400),
-                hover-background: hsl(from var(--ig-secondary-700) h s l / .26),
+                background: var(--ig-primary-400),
+                hover-background: hsl(from var(--ig-secondary-700) h s l / 0.26),
                 foreground: var(--ig-primary-400-contrast),
                 hover-foreground: var(--ig-secondary-700-contrast),
                 border-style: solid,
-                border-radius: .125rem,
+                border-radius: 0.125rem,
                 brushes: var(--chart-brushes),
                 resting-elevation: var(--ig-elevation-2),
                 _meta: (
                     theme: 'material',
                     variant: 'light',
-                )
+                    name: 'test-component',
+                ),
             );
 
             @include assert-equal(digest-schema($schema), $theme);
         }
 
+        @include it('should include proper metadata in each component schema') {
+            $theme-schemas: meta.module-variables(schemas);
+
+            @each $theme, $_schemas in $theme-schemas {
+                $_theme-meta: map.get($_schemas, '_meta');
+
+                @each $component, $schema in map.remove($_schemas, '_meta') {
+                    @if $component != 'button' and $component != 'icon-button' {
+                        @include assert-schema($_schemas, $component, $schema);
+                    } @else {
+                        @each $variant, $schema in $schema {
+                            @include assert-schema($_schemas, '#{$variant} #{$component}', $schema);
+                        }
+                    }
+                }
+            }
+        }
+
         @include it('should resolve the border-radius function from schema definitions') {
             $schema: (
                 border-radius: (
-                  border-radius: (
-                    12px,
-                    16px,
-                    20px
-                  )
+                    border-radius: (
+                        12px,
+                        16px,
+                        20px,
+                    ),
                 ),
             );
 
-            @include assert-equal(
-                map.get(digest-schema($schema), 'border-radius'),
-                border-radius(12px, 16px, 20px)
-            );
+            @include assert-equal(map.get(digest-schema($schema), 'border-radius'), border-radius(12px, 16px, 20px));
         }
 
         @include it('should retrieve a reference to the CSS variable for a given theme') {
-            $theme: map.merge(digest-schema($schema), (name: 'igc-avatar'));
+            $theme: map.merge(
+                digest-schema($schema),
+                (
+                    name: 'igc-avatar',
+                )
+            );
 
             @include assert-equal(var-get($theme, 'background', inherit), var(--background, inherit));
         }
 
         @include it('should convert component theme props into CSS variables') {
-            $name: 'igc-avatar';
             $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
+            $vp: config.variable-prefix();
 
             @include assert() {
                 @include output() {
-                    @include css-vars-from-theme($theme, $name);
+                    @include css-vars-from-theme($theme);
                 }
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
 
                     --ig-theme: material;
+                    --ig-theme-variant: light;
                 }
             }
         }
 
-        @include it('should convert component theme props into CSS variables with a prefix') {
-            $name: 'igc-dockmanager';
-            $prefix: 'igc';
-            $theme: extend(
-                map.remove(digest-schema($schema), $ignored-keys...),
-                (
-                    'prefix': $prefix
-                )
-            );
+        @include it('should ignore $name property when provided to css-vars-from-theme mixin') {
+            $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
+            $prefixed-name: 'igc-#{$name}';
+            $vp: config.variable-prefix();
 
             @include assert() {
                 @include output() {
-                    @include css-vars-from-theme($theme, $name);
+                    @include css-vars-from-theme($theme, $prefixed-name);
                 }
 
                 @include expect() {
-                    @each $key, $value in map.remove($theme, 'prefix') {
-                        --#{$prefix}-#{$key}: var(--#{$name}-#{$key}, #{$value});
+                    @each $key, $value in map.remove($theme, $ignored-keys...) {
+                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
+
+                    --ig-theme: material;
+                    --ig-theme-variant: light;
                 }
             }
         }
 
         @include it('should ignore all keys in the ignore list') {
-            $name: 'igc-avatar';
             $theme: digest-schema($schema);
 
             @each $key in $ignored-keys {
-                $theme: map.merge($theme, (#{$key}: 'test'));
+                // The _meta property already exists in the schema
+                // We need to add dummy values for the other ignored keys to ensure they're properly ignored in the mixin
+                @if $key != '_meta' {
+                    $theme: map.merge($theme, (#{$key}: 'test'));
+                }
             }
 
             @include assert() {
+                $name: map.get($theme, '_meta', 'name');
+                $vp: config.variable-prefix();
+
                 @include output() {
-                    @include css-vars-from-theme($theme, $name);
+                    @include css-vars-from-theme($theme);
                 }
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
+
+                    --ig-theme: material;
+                    --ig-theme-variant: light;
                 }
             }
         }
 
         @include it('should scope theme CSS variables correctly') {
-            $name: 'igc-avatar';
-            $theme: map.merge(digest-schema($schema), (name: $name));
+            $selector: 'igc-avatar';
 
-            // Calling from the root of the stylesheet
+            // The theme should contain a selector property for the css-vars mixin to work properly in the :root context
+            $theme: map.merge(
+                digest-schema($schema),
+                (
+                    selector: $selector,
+                )
+            );
+            $name: map.get($theme, '_meta', 'name');
+            $vp: config.variable-prefix();
+
+            // Calling from the root of the stylesheet, uses the 'selector' property from the theme map
             @include assert() {
                 @include output($selector: false) {
                     @include css-vars($theme);
                 }
 
                 @include expect($selector: false) {
-                    #{$name} {
+                    #{$selector} {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -234,20 +370,23 @@ $schema: (
 
                 @include expect($selector: false) {
                     .my-theme,
-                    .my-theme #{$name} {
+                    .my-theme #{$selector} {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
         }
 
         @include it('should scope theme CSS variables to a specified scope') {
-            $name: 'igc-avatar';
-            $theme: map.merge(digest-schema($schema), (name: $name));
+            $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
+            $vp: config.variable-prefix();
 
             // Calling from the root of the stylesheet w/ custom selector provided
             @include assert() {
@@ -258,10 +397,12 @@ $schema: (
                 @include expect($selector: false) {
                     .custom-selector {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -278,10 +419,12 @@ $schema: (
                     .my-theme,
                     .my-theme .custom-selector {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            --#{$key}: var(--#{$name}-#{$key}, #{$value});
+                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
 
                         --ig-theme: material;
+                        --ig-theme-variant: light;
                     }
                 }
             }
@@ -289,13 +432,13 @@ $schema: (
 
         @include it('should set the border-radius to a value between min and max') {
             $border-radius: border-radius(rem(4px), rem(2px), rem(4px));
-            $expected: clamp(.125rem, meta.inspect(calc(var(--ig-radius-factor, 1) * .25rem)), .25rem);
+            $expected: clamp(0.125rem, meta.inspect(calc(var(--ig-radius-factor, 1) * 0.25rem)), 0.25rem);
 
             @include assert-equal($assert: $border-radius, $expected: $expected, $inspect: true);
         }
 
         @include it('should include border-radius styles to a given scope with a value between min and max') {
-            $expected: clamp(.125rem, meta.inspect(calc(var(--ig-radius-factor, 1) * .25rem)), .25rem);
+            $expected: clamp(0.125rem, meta.inspect(calc(var(--ig-radius-factor, 1) * 0.25rem)), 0.25rem);
 
             @include assert() {
                 @include output() {
@@ -358,6 +501,277 @@ $schema: (
             }
         }
 
+        @include describe('Tokens') {
+            @include it('should generate global tokens with the ig prefix') {
+                $theme: digest-schema($schema);
+                $name: map.get($theme, '_meta', 'name');
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            @if meta.type-of($value) != 'map' and $key != 'prefix' {
+                                --ig-#{$name}-#{$key}: #{$value};
+                            }
+                        }
+                    }
+                }
+            }
+
+            @include it('should rewrite local var references to global ig-prefixed tokens') {
+                $theme: (
+                    background: red,
+                    color: adaptive-contrast(var(--background)),
+                    border-style: solid,
+                    _meta: (
+                        theme: 'material',
+                        variant: 'light',
+                        name: 'test-rewrite',
+                    ),
+                );
+                $name: map.get($theme, '_meta', 'name');
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        --ig-#{$name}-background: red;
+                        --ig-#{$name}-color: #{adaptive-contrast(var(--ig-#{$name}-background))};
+                        --ig-#{$name}-border-style: solid;
+                    }
+                }
+            }
+
+            @include it('should rewrite multiple local var references in a single value') {
+                $theme: (
+                    background: red,
+                    foreground: blue,
+                    computed: calc(var(--background) + var(--foreground)),
+                    _meta: (
+                        theme: 'material',
+                        variant: 'light',
+                        name: 'test-multi',
+                    ),
+                );
+                $name: 'test-multi';
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        --ig-#{$name}-background: red;
+                        --ig-#{$name}-foreground: blue;
+                        --ig-#{$name}-computed: calc(var(--ig-#{$name}-background) + var(--ig-#{$name}-foreground));
+                    }
+                }
+            }
+
+            @include it('should skip sizable expressions from schema defaults') {
+                $theme: (
+                    background: red,
+                    size: sizable(rem(32px), rem(40px), rem(48px)),
+                    _meta: (
+                        theme: 'material',
+                        variant: 'light',
+                        name: 'test-sizable',
+                    ),
+                );
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        --ig-test-sizable-background: red;
+                    }
+                }
+            }
+
+            @include it('should emit concrete size values provided by the user') {
+                $theme: (
+                    background: red,
+                    size: 2rem,
+                    _meta: (
+                        theme: 'material',
+                        variant: 'light',
+                        name: 'test-concrete-size',
+                    ),
+                );
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        --ig-test-concrete-size-background: red;
+                        --ig-test-concrete-size-size: 2rem;
+                    }
+                }
+            }
+
+            @include it('should not emit ignored keys') {
+                $theme: digest-schema($schema);
+                $theme: map.merge(
+                    $theme,
+                    (
+                        name: 'should-be-ignored',
+                        palette: 'should-be-ignored',
+                        variant: 'should-be-ignored',
+                        selector: 'should-be-ignored',
+                        type: 'should-be-ignored',
+                        theme: 'should-be-ignored',
+                        typography: 'should-be-ignored',
+                        default-size: 2,
+                    )
+                );
+                $name: map.get($theme, '_meta', 'name');
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            @if meta.type-of($value) != 'map' and $key != 'prefix' {
+                                --ig-#{$name}-#{$key}: #{$value};
+                            }
+                        }
+                    }
+                }
+            }
+
+            @include it('should always use the ig prefix regardless of configured variable-prefix') {
+                // The tokens mixin hardcodes 'ig', so even with the default 'igx' variable-prefix,
+                // the output should use --ig-{name}-{key}, not --igx-{name}-{key}.
+                $theme: (
+                    background: blue,
+                    _meta: (
+                        theme: 'material',
+                        variant: 'light',
+                        name: 'test-prefix',
+                    ),
+                );
+
+                @include assert() {
+                    @include output() {
+                        @include tokens($theme);
+                    }
+
+                    @include expect() {
+                        --ig-test-prefix-background: blue;
+                    }
+                }
+            }
+
+            @include it('should scope theme CSS variables when mode is scoped') {
+                $selector: 'igc-avatar';
+
+                $theme: map.merge(
+                    digest-schema($schema),
+                    (
+                        selector: $selector,
+                    )
+                );
+                $name: map.get($theme, '_meta', 'name');
+                $vp: config.variable-prefix();
+
+                // Scoped mode from the root of the stylesheet
+                @include assert() {
+                    @include output($selector: false) {
+                        @include tokens($theme, $mode: 'scoped');
+                    }
+
+                    @include expect($selector: false) {
+                        #{$selector} {
+                            @each $key, $value in map.remove($theme, $ignored-keys...) {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+
+                            --ig-theme: material;
+                            --ig-theme-variant: light;
+                        }
+                    }
+                }
+
+                // Scoped mode from within another selector
+                @include assert() {
+                    @include output($selector: false) {
+                        .my-theme {
+                            @include tokens($theme, $mode: 'scoped');
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        .my-theme,
+                        .my-theme #{$selector} {
+                            @each $key, $value in map.remove($theme, $ignored-keys...) {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+
+                            --ig-theme: material;
+                            --ig-theme-variant: light;
+                        }
+                    }
+                }
+            }
+
+            @include it('should scope theme CSS variables to a custom scope when mode is scoped') {
+                $theme: digest-schema($schema);
+                $name: map.get($theme, '_meta', 'name');
+                $vp: config.variable-prefix();
+
+                @include assert() {
+                    @include output($selector: false) {
+                        @include tokens($theme, $mode: 'scoped', $scope: '.custom-scope');
+                    }
+
+                    @include expect($selector: false) {
+                        .custom-scope {
+                            @each $key, $value in map.remove($theme, $ignored-keys...) {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+
+                            --ig-theme: material;
+                            --ig-theme-variant: light;
+                        }
+                    }
+                }
+            }
+
+            @include it('should produce identical output for css-vars and tokens in scoped mode') {
+                $selector: 'igc-test';
+                $theme: map.merge(
+                    digest-schema($schema),
+                    (
+                        selector: $selector,
+                    )
+                );
+
+                @include assert() {
+                    @include output($selector: false) {
+                        @include tokens($theme, $mode: 'scoped');
+                    }
+
+                    @include expect($selector: false) {
+                        @include css-vars($theme);
+                    }
+                }
+            }
+        }
+
         @include describe('Sizing') {
             @include it('should produce size variables') {
                 $sm: 100px;
@@ -370,12 +784,11 @@ $schema: (
                     }
 
                     @include expect() {
-                        width:
-                            max(
-                                calc(var(--is-large, 1) * max(#{$lg}, -1 * #{$lg})),
-                                calc(var(--is-medium, 1) * max(#{$md}, -1 * #{$md})),
-                                calc(var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}))
-                            );
+                        width: max(
+                            calc(var(--is-large, 1) * max(#{$lg}, -1 * #{$lg})),
+                            calc(var(--is-medium, 1) * max(#{$md}, -1 * #{$md})),
+                            calc(var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}))
+                        );
                     }
                 }
             }
@@ -391,18 +804,20 @@ $schema: (
                     }
 
                     @include expect() {
-                        padding:
-                            max(
-                                calc(
-                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing)))
-                                ),
-                                calc(
-                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing)))
-                                ),
-                                calc(
-                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing)))
-                                )
-                            );
+                        padding: max(
+                            calc(
+                                var(--is-large, 1) * max(#{$value}, -1 * #{$value}) *
+                                    var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing)))
+                            ),
+                            calc(
+                                var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) *
+                                    var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing)))
+                            ),
+                            calc(
+                                var(--is-small, 1) * max(#{$value}, -1 * #{$value}) *
+                                    var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing)))
+                            )
+                        );
                     }
                 }
             }
@@ -416,18 +831,20 @@ $schema: (
                     }
 
                     @include expect() {
-                        padding-inline:
-                            max(
-                                calc(
-                                    var(--is-large, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-large, var(--ig-spacing-inline, var(--ig-spacing)))
-                                ),
-                                calc(
-                                    var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-medium, var(--ig-spacing-inline, var(--ig-spacing)))
-                                ),
-                                calc(
-                                    var(--is-small, 1) * max(#{$value}, -1 * #{$value}) * var(--ig-spacing-inline-small, var(--ig-spacing-inline, var(--ig-spacing)))
-                                )
-                            );
+                        padding-inline: max(
+                            calc(
+                                var(--is-large, 1) * max(#{$value}, -1 * #{$value}) *
+                                    var(--ig-spacing-inline-large, var(--ig-spacing-inline, var(--ig-spacing)))
+                            ),
+                            calc(
+                                var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) *
+                                    var(--ig-spacing-inline-medium, var(--ig-spacing-inline, var(--ig-spacing)))
+                            ),
+                            calc(
+                                var(--is-small, 1) * max(#{$value}, -1 * #{$value}) *
+                                    var(--ig-spacing-inline-small, var(--ig-spacing-inline, var(--ig-spacing)))
+                            )
+                        );
                     }
                 }
             }
@@ -443,18 +860,20 @@ $schema: (
                     }
 
                     @include expect() {
-                        padding-block:
-                            max(
-                                calc(
-                                    var(--is-large, 1) * max(#{$lg}, -1 * #{$lg}) * var(--ig-spacing-block-large, var(--ig-spacing-block, var(--ig-spacing)))
-                                ),
-                                calc(
-                                    var(--is-medium, 1) * max(#{$md}, -1 * #{$md}) * var(--ig-spacing-block-medium, var(--ig-spacing-block, var(--ig-spacing)))
-                                ),
-                                calc(
-                                    var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}) * var(--ig-spacing-block-small, var(--ig-spacing-block, var(--ig-spacing)))
-                                )
-                            );
+                        padding-block: max(
+                            calc(
+                                var(--is-large, 1) * max(#{$lg}, -1 * #{$lg}) *
+                                    var(--ig-spacing-block-large, var(--ig-spacing-block, var(--ig-spacing)))
+                            ),
+                            calc(
+                                var(--is-medium, 1) * max(#{$md}, -1 * #{$md}) *
+                                    var(--ig-spacing-block-medium, var(--ig-spacing-block, var(--ig-spacing)))
+                            ),
+                            calc(
+                                var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}) *
+                                    var(--ig-spacing-block-small, var(--ig-spacing-block, var(--ig-spacing)))
+                            )
+                        );
                     }
                 }
             }

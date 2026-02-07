@@ -18,37 +18,22 @@ $base-dark-expansion-panel: (
             0.3,
         ),
     ),
+    _meta: (
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material expansion panel schema based on a mix of $material-expansion-panel and $base-dark-expansion-panel.
 /// @type {Map}
 /// @requires $material-expansion-panel
 /// @requires $base-dark-expansion-panel
-$dark-material-expansion-panel: extend(
-    $material-expansion-panel,
-    $base-dark-expansion-panel,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-expansion-panel: extend($material-expansion-panel, $base-dark-expansion-panel);
 
 /// Generates a dark fluent expansion panel schema based on a mix of $fluent-expansion-panel and $base-dark-expansion-panel.
 /// @type {Map}
 /// @requires $fluent-expansion-panel
 /// @requires $base-dark-expansion-panel
-$dark-fluent-expansion-panel: extend(
-    $fluent-expansion-panel,
-    $base-dark-expansion-panel,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-expansion-panel: extend($fluent-expansion-panel, $base-dark-expansion-panel);
 
 /// Generates a dark bootstrap expansion panel schema based on a mix of $bootstrap-expansion-panel and $base-dark-expansion-panel.
 /// @type {Map}
@@ -80,10 +65,6 @@ $dark-bootstrap-expansion-panel: extend(
                 'gray',
                 50,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -147,8 +128,8 @@ $dark-indigo-expansion-panel: extend(
                 0.2,
             ),
         ),
+
         _meta: (
-            theme: 'indigo',
             variant: 'dark',
         ),
     )

@@ -1,4 +1,5 @@
 @use '../light/doughnut-chart' as *;
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -7,22 +8,31 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Generates a base doughnut chart schema.
+/// @access private
+/// @type {Map}
+$dark-doughnut-chart: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark doughnut chart schema.
 /// @type {Map}
 /// @requires {function} extend
-$dark-material-doughnut-chart: $material-doughnut-chart;
+$dark-material-doughnut-chart: extend($material-doughnut-chart, $dark-doughnut-chart);
 
 /// Generates a dark fluent doughnut-chart schema.
 /// @type {Map}
 /// @requires $fluent-doughnut-chart
-$dark-fluent-doughnut-chart: $fluent-doughnut-chart;
+$dark-fluent-doughnut-chart: extend($fluent-doughnut-chart, $dark-doughnut-chart);
 
 /// Generates a dark bootstrap doughnut-chart schema.
 /// @type {Map}
 /// @requires $bootstrap-doughnut-chart
-$dark-bootstrap-doughnut-chart: $bootstrap-doughnut-chart;
+$dark-bootstrap-doughnut-chart: extend($bootstrap-doughnut-chart, $dark-doughnut-chart);
 
 /// Generates a dark indigo doughnut-chart schema.
 /// @type {Map}
 /// @requires $indigo-doughnut-chart
-$dark-indigo-doughnut-chart: $indigo-doughnut-chart;
+$dark-indigo-doughnut-chart: extend($indigo-doughnut-chart, $dark-doughnut-chart);

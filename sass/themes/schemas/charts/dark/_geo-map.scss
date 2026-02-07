@@ -1,4 +1,14 @@
 @use '../light/geo-map' as *;
+@use '../../../../utils/map' as *;
+
+/// Generates a base dark geo-map schema.
+/// @access private
+/// @type {Map}
+$dark-geo-map: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
 
 ////
 /// @package theming
@@ -11,22 +21,22 @@
 /// @type {Map}
 /// @requires $material-geo-map
 /// @see $material-geo-map
-$dark-material-geo-map: $material-geo-map;
+$dark-material-geo-map: extend($material-geo-map, $dark-geo-map);
 
 /// Generates a dark fluent geo map schema.
 /// @type {Map}
 /// @requires $fluent-geo-map
 /// @see $fluent-geo-map
-$dark-fluent-geo-map: $fluent-geo-map;
+$dark-fluent-geo-map: extend($fluent-geo-map, $dark-geo-map);
 
 /// Generates a dark bootstrap geo map schema.
 /// @type {Map}
 /// @requires $bootstrap-geo-map
 /// @see $bootstrap-geo-map
-$dark-bootstrap-geo-map: $bootstrap-geo-map;
+$dark-bootstrap-geo-map: extend($bootstrap-geo-map, $dark-geo-map);
 
 /// Generates a dark indigo geo map schema.
 /// @type {Map}
 /// @requires $indigo-geo-map
 /// @see $indigo-geo-map
-$dark-indigo-geo-map: $indigo-geo-map;
+$dark-indigo-geo-map: extend($indigo-geo-map, $dark-geo-map);

@@ -15,6 +15,10 @@ $light-resize-indicator: (
             500,
         ),
     ),
+    _meta: (
+        name: 'resize-indicator',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material resize indicator schema.
@@ -25,7 +29,6 @@ $material-resize-indicator: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -38,7 +41,6 @@ $fluent-resize-indicator: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -51,7 +53,6 @@ $bootstrap-resize-indicator: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -64,7 +65,6 @@ $indigo-resize-indicator: extend(
     (
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

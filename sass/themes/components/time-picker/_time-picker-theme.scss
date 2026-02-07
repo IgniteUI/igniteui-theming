@@ -64,7 +64,6 @@
     $divider-color: null,
     $time-item-size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'time-picker'};
     $selector: (
         #{config.element-prefix() + '-' + 'time-picker'},
         #{'.' + config.element-prefix() + '-' + 'time-picker'}
@@ -144,7 +143,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             text-color: $text-color,
             hover-text-color: $hover-text-color,

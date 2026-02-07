@@ -193,6 +193,7 @@ $light-list: (
             rem(24px),
         ),
     ),
+
     item-border-radius: (
         border-radius: (
             rem(0),
@@ -200,7 +201,13 @@ $light-list: (
             rem(24px),
         ),
     ),
+
     default-size: 2,
+
+    _meta: (
+        name: 'list',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material list schema.
@@ -231,7 +238,6 @@ $material-list: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -280,7 +286,6 @@ $fluent-list: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -378,9 +383,9 @@ $bootstrap-list: extend(
                 value: 'body-2',
             ),
         ),
+
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -593,9 +598,9 @@ $indigo-list: extend(
                 value: 'body-2',
             ),
         ),
+
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

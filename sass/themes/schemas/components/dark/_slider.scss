@@ -10,18 +10,19 @@
 
 // stylelint-disable max-line-length
 
+/// Generates a base dark slider schema.
+/// @access private
+/// @type {Map}
+$dark-base-slider: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material slider schema.
 /// @type {Map}
 /// @requires $material-slider
-$dark-material-slider: extend(
-    $material-slider,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-slider: extend($material-slider, $dark-base-slider);
 
 /// Generates a dark fluent slider schema.
 /// @type {Map}
@@ -38,6 +39,7 @@ $dark-material-slider: extend(
 /// @requires $fluent-slider
 $dark-fluent-slider: extend(
     $fluent-slider,
+    $dark-base-slider,
     (
         base-track-color: (
             color: (
@@ -99,10 +101,6 @@ $dark-fluent-slider: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -113,6 +111,7 @@ $dark-fluent-slider: extend(
 /// @requires $bootstrap-slider
 $dark-bootstrap-slider: extend(
     $bootstrap-slider,
+    $dark-base-slider,
     (
         base-track-color: (
             color: (
@@ -127,10 +126,6 @@ $dark-bootstrap-slider: extend(
                 500,
                 0.48,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -156,6 +151,7 @@ $dark-bootstrap-slider: extend(
 /// @requires $indigo-slider
 $dark-indigo-slider: extend(
     $indigo-slider,
+    $dark-base-slider,
     (
         track-step-color: (
             contrast-color: (
@@ -252,10 +248,6 @@ $dark-indigo-slider: extend(
                 'primary',
                 800,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

@@ -18,22 +18,17 @@ $base-dark-dialog: (
             500,
         ),
     ),
+
+    _meta: (
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material dialog schema.
 /// @type {Map}
 /// @requires $material-dialog
 /// @requires $base-dark-dialog
-$dark-material-dialog: extend(
-    $material-dialog,
-    $base-dark-dialog,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-dialog: extend($material-dialog, $base-dark-dialog);
 
 /// Generates a dark fluent dialog schema.
 /// @type {Map}
@@ -42,7 +37,6 @@ $dark-fluent-dialog: extend(
     $fluent-dialog,
     (
         _meta: (
-            theme: 'fluent',
             variant: 'dark',
         ),
     )
@@ -62,10 +56,6 @@ $dark-bootstrap-dialog: extend(
                 'gray',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -87,7 +77,6 @@ $dark-indigo-dialog: extend(
             ),
         ),
         _meta: (
-            theme: 'indigo',
             variant: 'dark',
         ),
     )

@@ -206,7 +206,6 @@
     $cell-selected-within-background: null,
     $cell-selected-within-text-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'grid'};
     $selector: (
         #{config.element-prefix() + '-' + 'grid'},
         #{config.element-prefix() + '-' + 'hierarchical-grid'},
@@ -473,7 +472,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             header-background: $header-background,

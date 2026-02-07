@@ -1,3 +1,4 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../../../../typography/functions' as *;
 @use '../elevation/input-group' as *;
@@ -8,8 +9,6 @@
 /// @group schemas
 /// @access public
 ////
-
-// stylelint-disable max-line-length
 
 /// Generates a base light input-group schema.
 /// @type {Map}
@@ -330,6 +329,10 @@ $light-input-group: extend(
                 value: 'body-2',
             ),
         ),
+        _meta: (
+            name: 'input-group',
+            variant: 'light',
+        ),
     )
 );
 
@@ -387,7 +390,6 @@ $material-input-group: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -542,7 +544,6 @@ $fluent-input-group: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -669,7 +670,6 @@ $bootstrap-input-group: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -879,7 +879,6 @@ $indigo-input-group: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

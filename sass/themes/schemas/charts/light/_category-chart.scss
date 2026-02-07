@@ -1,10 +1,21 @@
 // stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
+
 ////
 /// @package theming
 /// @group schemas
 /// @access public
-/// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
 ////
+
+/// Generates a base category chart schema.
+/// @access private
+/// @type {Map}
+$light-category-chart: (
+    _meta: (
+        name: 'category-chart',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material category chart schema.
 /// @type {Map}
@@ -62,161 +73,188 @@
 /// @property {Number} y-axis-tick-length [null] - Sets the length of tickmarks along the Y-axis.
 /// @property {Color} y-axis-tick-stroke [color: ('gray', 500)] - Sets the color to apply to tickmarks along the Y-axis.
 /// @property {Number} y-axis-tick-stroke-thickness [null] - Sets the thickness to apply to tickmarks along the Y-axis.
-$material-category-chart: (
-    'margin': (
-        expand-shorthand: (
-            null,
+$material-category-chart: extend(
+    $light-category-chart,
+    (
+        margin: (
+            expand-shorthand: (
+                null,
+            ),
         ),
-    ),
-    'brushes': series,
-    'marker-brushes': series,
-    'negative-brushes': hsl(347deg 82% 64%),
-    'outlines': series,
-    'marker-outlines': series,
-    'negative-outlines': hsl(347deg 82% 64%),
-    'title-alignment': null,
-    'title-margin': (
-        expand-shorthand: (
-            null,
+        brushes: series,
+        marker-brushes: series,
+        negative-brushes: hsl(347deg 82% 64%),
+        outlines: series,
+        marker-outlines: series,
+        negative-outlines: hsl(347deg 82% 64%),
+        title-alignment: null,
+        title-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'title',
         ),
-        map-keys-prefix: 'title',
-    ),
-    'title-text-color': (
-        color: (
-            'gray',
-            900,
+        title-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    'title-text-style': null,
-    'subtitle-margin': (
-        expand-shorthand: (
-            null,
+        title-text-style: null,
+        subtitle-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'subtitle',
         ),
-        map-keys-prefix: 'subtitle',
-    ),
-    'subtitle-alignment': null,
-    'subtitle-text-color': (
-        color: (
-            'gray',
-            700,
+        subtitle-alignment: null,
+        subtitle-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
         ),
-    ),
-    'subtitle-text-style': null,
-    'thickness': null,
-    'trend-line-brushes': series,
-    'trend-line-thickness': null,
-    'x-axis-label-margin': (
-        expand-shorthand: (
-            null,
+        subtitle-text-style: null,
+        thickness: null,
+        trend-line-brushes: series,
+        trend-line-thickness: null,
+        x-axis-label-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'x-axis-label',
         ),
-        map-keys-prefix: 'x-axis-label',
-    ),
-    'x-axis-label-text-color': (
-        color: (
-            'gray',
-            700,
+        x-axis-label-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
         ),
-    ),
-    'x-axis-label-text-style': null,
-    'x-axis-label-vertical-alignment': null,
-    'x-axis-major-stroke': null,
-    'x-axis-major-stroke-thickness': null,
-    'x-axis-minor-stroke': null,
-    'x-axis-minor-stroke-thickness': null,
-    'x-axis-strip': null,
-    'x-axis-stroke': (
-        color: (
-            'gray',
-            500,
+        x-axis-label-text-style: null,
+        x-axis-label-vertical-alignment: null,
+        x-axis-major-stroke: null,
+        x-axis-major-stroke-thickness: null,
+        x-axis-minor-stroke: null,
+        x-axis-minor-stroke-thickness: null,
+        x-axis-strip: null,
+        x-axis-stroke: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
-    'x-axis-stroke-thickness': null,
-    'x-axis-tick-length': null,
-    'x-axis-tick-stroke': (
-        color: (
-            'gray',
-            500,
+        x-axis-stroke-thickness: null,
+        x-axis-tick-length: null,
+        x-axis-tick-stroke: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
-    'x-axis-tick-stroke-thickness': null,
-    'x-axis-title-alignment': null,
-    'x-axis-title-margin': (
-        expand-shorthand: (
-            null,
+        x-axis-tick-stroke-thickness: null,
+        x-axis-title-alignment: null,
+        x-axis-title-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'x-axis-title',
         ),
-        map-keys-prefix: 'x-axis-title',
-    ),
-    'x-axis-title-text-color': (
-        color: (
-            'gray',
-            900,
+        x-axis-title-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    'x-axis-title-text-style': null,
-    'y-axis-label-margin': (
-        expand-shorthand: (
-            null,
+        x-axis-title-text-style: null,
+        y-axis-label-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'y-axis-label',
         ),
-        map-keys-prefix: 'y-axis-label',
-    ),
-    'y-axis-label-text-color': (
-        color: (
-            'gray',
-            700,
+        y-axis-label-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
         ),
-    ),
-    'y-axis-label-text-style': null,
-    'y-axis-label-vertical-alignment': null,
-    'y-axis-major-stroke': (
-        color: (
-            'gray',
-            300,
+        y-axis-label-text-style: null,
+        y-axis-label-vertical-alignment: null,
+        y-axis-major-stroke: (
+            color: (
+                'gray',
+                300,
+            ),
         ),
-    ),
-    'y-axis-major-stroke-thickness': null,
-    'y-axis-minor-stroke': null,
-    'y-axis-minor-stroke-thickness': null,
-    'y-axis-strip': null,
-    'y-axis-stroke': null,
-    'y-axis-stroke-thickness': null,
-    'y-axis-title-alignment': null,
-    'y-axis-title-margin': (
-        expand-shorthand: (
-            null,
+        y-axis-major-stroke-thickness: null,
+        y-axis-minor-stroke: null,
+        y-axis-minor-stroke-thickness: null,
+        y-axis-strip: null,
+        y-axis-stroke: null,
+        y-axis-stroke-thickness: null,
+        y-axis-title-alignment: null,
+        y-axis-title-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'y-axis-title',
         ),
-        map-keys-prefix: 'y-axis-title',
-    ),
-    'y-axis-title-text-color': (
-        color: (
-            'gray',
-            900,
+        y-axis-title-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    'y-axis-title-text-style': null,
-    'y-axis-tick-length': null,
-    'y-axis-tick-stroke': (
-        color: (
-            'gray',
-            500,
+        y-axis-title-text-style: null,
+        y-axis-tick-length: null,
+        y-axis-tick-stroke: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
-    'y-axis-tick-stroke-thickness': null,
+        y-axis-tick-stroke-thickness: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent category-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-category-chart
-$fluent-category-chart: $material-category-chart;
+$fluent-category-chart: extend(
+    $material-category-chart,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap category-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-category-chart
-$bootstrap-category-chart: $material-category-chart;
+$bootstrap-category-chart: extend(
+    $material-category-chart,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo category-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-category-chart
-$indigo-category-chart: $material-category-chart;
+$indigo-category-chart: extend(
+    $material-category-chart,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

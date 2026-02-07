@@ -99,7 +99,6 @@
     $remove-icon-color-focus: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'chip'};
     $selector: (#{config.element-prefix() + '-' + 'chip'}, '.igx-chip__ghost');
     $chip-schema: ();
 
@@ -220,7 +219,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
 

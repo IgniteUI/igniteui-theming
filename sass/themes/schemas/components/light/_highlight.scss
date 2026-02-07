@@ -41,6 +41,11 @@ $light-highlight: (
             'A100',
         ),
     ),
+
+    _meta: (
+        name: 'highlight',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material highlight schema.
@@ -51,7 +56,6 @@ $material-highlight: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -64,7 +68,6 @@ $fluent-highlight: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -77,7 +80,6 @@ $bootstrap-highlight: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -113,7 +115,6 @@ $indigo-highlight: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

@@ -53,7 +53,7 @@
     $file-selector-button-foreground--filled: null,
     $file-selector-button-foreground--disabled: null
 ) {
-    $name: 'igx-file-input';
+    $selector: '.igx-file-input';
     $file-input-schema: ();
 
     @if map.has-key($schema, 'file-input') {
@@ -127,7 +127,7 @@
     @return extend(
         $theme,
         (
-            name: $name,
+            selector: $selector,
             file-names-background: $file-names-background,
             file-names-background--focused: $file-names-background--focused,
             file-names-background--filled: $file-names-background--filled,

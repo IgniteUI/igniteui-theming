@@ -51,6 +51,10 @@ $light-navbar: extend(
                 value: 'h5',
             ),
         ),
+        _meta: (
+            name: 'navbar',
+            variant: 'light',
+        ),
     )
 );
 
@@ -68,7 +72,6 @@ $material-navbar: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -112,7 +115,6 @@ $fluent-navbar: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -151,7 +153,6 @@ $bootstrap-navbar: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -167,6 +168,7 @@ $bootstrap-navbar: extend(
 /// @requires {Map} $light-navbar
 /// @requires {Map} $indigo-elevation-navbar
 $indigo-navbar: extend(
+    $light-navbar,
     $indigo-elevation-navbar,
     (
         background: (
@@ -200,7 +202,6 @@ $indigo-navbar: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

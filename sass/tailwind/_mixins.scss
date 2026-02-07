@@ -51,11 +51,10 @@ $theme-schemas: () !default;
             }
 
             $_t: meta.call($fn, $schema: $schema, $_defaults...);
-            $_name: map.get($_t, name);
             $_variant: map.get($_t, _meta, variant);
 
             @utility #{$_variant}-#{$component} {
-                @include css-vars-from-theme($_t, $_name);
+                @include css-vars-from-theme($_t);
             }
         }
     }

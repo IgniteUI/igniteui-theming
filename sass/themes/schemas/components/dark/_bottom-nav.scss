@@ -7,13 +7,24 @@
 /// @access public
 ////
 
+/// Generates a base dark bottom-nav schema.
+/// @access private
+/// @type {Map}
+$dark-base-bottom-nav: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material bottom-nav schema.
 /// @type {Map}
 /// @prop {Map} icon-selected-color [color: ('primary', 500)] - The icon color used for the selected item.
 /// @prop {Map} label-selected-color [color: ('primary', 500)] - The label color used for the selected item.
 /// @requires $material-bottom-nav
+/// @requires $dark-base-bottom-nav
 $dark-material-bottom-nav: extend(
     $material-bottom-nav,
+    $dark-base-bottom-nav,
     (
         icon-selected-color: (
             color: (
@@ -26,10 +37,6 @@ $dark-material-bottom-nav: extend(
                 'primary',
                 500,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -39,8 +46,10 @@ $dark-material-bottom-nav: extend(
 /// @prop {Map} label-selected-color [color: ('primary', 300)] - The label color used for the selected item.
 /// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
 /// @requires $fluent-bottom-nav
+/// @requires $dark-base-bottom-nav
 $dark-fluent-bottom-nav: extend(
     $fluent-bottom-nav,
+    $dark-base-bottom-nav,
     (
         label-selected-color: (
             color: (
@@ -53,10 +62,6 @@ $dark-fluent-bottom-nav: extend(
                 'primary',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
         ),
     )
 );
@@ -66,8 +71,10 @@ $dark-fluent-bottom-nav: extend(
 /// @prop {Map} label-selected-color [color: ('primary', 300)] - The label color used for the selected item.
 /// @prop {Map} icon-selected-color [color: ('primary', 300)] - The icon color used for the selected item.
 /// @requires $bootstrap-bottom-nav
+/// @requires $dark-base-bottom-nav
 $dark-bootstrap-bottom-nav: extend(
     $bootstrap-bottom-nav,
+    $dark-base-bottom-nav,
     (
         label-selected-color: (
             color: (
@@ -81,11 +88,6 @@ $dark-bootstrap-bottom-nav: extend(
                 'primary',
                 300,
             ),
-        ),
-
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -100,8 +102,10 @@ $dark-bootstrap-bottom-nav: extend(
 /// @prop {Map} icon-disabled-color [contrast-color: ('gray', 50, .2)] - The disabled color of the icon.
 /// @prop {Map} label-disabled-color [contrast-color: ('gray', 50, .2)] - The disabled color of the label.
 /// @requires $indigo-bottom-nav
+/// @requires $dark-base-bottom-nav
 $dark-indigo-bottom-nav: extend(
     $indigo-bottom-nav,
+    $dark-base-bottom-nav,
     (
         border-color: (
             color: (
@@ -148,10 +152,6 @@ $dark-indigo-bottom-nav: extend(
                 50,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

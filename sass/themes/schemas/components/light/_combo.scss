@@ -1,3 +1,4 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../../../../typography/functions' as *;
 
@@ -6,8 +7,6 @@
 /// @group schemas
 /// @access public
 ////
-
-// stylelint-disable max-line-length
 
 /// Generates a light combo schema.
 /// @type {Map}
@@ -113,6 +112,10 @@ $light-combo: (
         ),
     ),
     default-size: 2,
+    _meta: (
+        name: 'combo',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material combo schema.
@@ -132,7 +135,6 @@ $material-combo: extend(
         clear-button-background-focus: transparent,
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -208,7 +210,6 @@ $fluent-combo: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -290,7 +291,6 @@ $bootstrap-combo: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -363,7 +363,6 @@ $indigo-combo: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

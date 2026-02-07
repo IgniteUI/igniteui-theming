@@ -33,6 +33,10 @@ $calendar-base: (
             rem(20px),
         ),
     ),
+    _meta: (
+        name: 'calendar',
+        variant: 'light',
+    ),
 );
 
 /// Generates a base material calendar schema.
@@ -79,6 +83,9 @@ $material-base: extend(
                 ),
             ),
         ),
+        _meta: (
+            theme: 'material',
+        ),
     )
 );
 
@@ -123,7 +130,6 @@ $fluent-base: extend(
                 200,
             ),
         ),
-
         typography: (
             header: (
                 year: (
@@ -134,6 +140,9 @@ $fluent-base: extend(
                     value: 'h4',
                 ),
             ),
+        ),
+        _meta: (
+            theme: 'fluent',
         ),
     )
 );
@@ -186,7 +195,6 @@ $bootstrap-base: extend(
                 300,
             ),
         ),
-
         typography: (
             header: (
                 year: (
@@ -197,6 +205,9 @@ $bootstrap-base: extend(
                     value: 'h4',
                 ),
             ),
+        ),
+        _meta: (
+            theme: 'bootstrap',
         ),
     )
 );
@@ -263,7 +274,6 @@ $indigo-base: extend(
                 400,
             ),
         ),
-
         typography: (
             header: (
                 year: (
@@ -274,6 +284,9 @@ $indigo-base: extend(
                     value: 'h5',
                 ),
             ),
+        ),
+        _meta: (
+            theme: 'indigo',
         ),
     )
 );

@@ -74,7 +74,6 @@
     $border-color: null,
     $border-color--hover: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'tabs'};
     $selector: #{config.element-prefix() + '-' + 'tabs'};
     $tabs-schema: ();
 
@@ -263,7 +262,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             item-text-color: $item-text-color,
             item-background: $item-background,

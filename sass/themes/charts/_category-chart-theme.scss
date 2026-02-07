@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,7 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {List} $margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @param {List} $brushes [series] - Defines the palette from which automatically assigned series brushes colors are selected.
 /// @param {List} $marker-brushes [series]- Defines the palette from which automatically assigned series marker brushes colors are selected.
@@ -136,14 +136,7 @@
     $y-axis-tick-stroke-thickness: null
 ) {
     $name: 'category-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-category-chart',
-            'webc': 'igc-category-chart',
-            'blazor': 'igb-category-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -293,14 +286,7 @@
     $target: 'angular'
 ) {
     $name: 'category-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-category-chart',
-            'webc': 'igc-category-chart',
-            'blazor': 'igb-category-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $title: map.get($categories, 'title');
     $subtitle: map.get($categories, 'subtitle');
     $x-axis-label-text-style: map.get($categories, 'x-axis-label-text-style');

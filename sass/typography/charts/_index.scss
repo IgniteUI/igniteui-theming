@@ -14,15 +14,14 @@
 
 /// Includes all chart related typography styles for a given type-scale and target.
 /// @param {Map} $type-scale - The type-scale to be used when including typography styles.
-/// @param {String} $target ['angular'] - The target platform. Could be 'angular', 'webc', or 'blazor'.
 /// @access public
 @mixin charts-typography($type-scale, $target: 'angular') {
-    @include category-chart-typography($type-scale: $type-scale, $target: $target);
-    @include data-chart-typography($type-scale: $type-scale, $target: $target);
-    @include financial-chart-typography($type-scale: $type-scale, $target: $target);
-    @include funnel-chart-typography($type-scale: $type-scale, $target: $target);
-    @include gauge-typography($target: $target);
-    @include graph-typography($target: $target);
-    @include pie-chart-typography($type-scale: $type-scale, $target: $target);
-    @include shape-chart-typography($type-scale: $type-scale, $target: $target);
+    @include category-chart-typography($type-scale: $type-scale);
+    @include data-chart-typography($type-scale: $type-scale);
+    @include financial-chart-typography($type-scale: $type-scale);
+    @include funnel-chart-typography($type-scale: $type-scale);
+    @include gauge-typography();
+    @include graph-typography();
+    @include pie-chart-typography($type-scale: $type-scale);
+    @include shape-chart-typography($type-scale: $type-scale);
 }

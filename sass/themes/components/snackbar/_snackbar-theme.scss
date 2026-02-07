@@ -36,7 +36,6 @@
     $button-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'snackbar'};
     $selector: #{config.element-prefix() + '-' + 'snackbar'};
     $snackbar-schema: ();
 
@@ -64,7 +63,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             background: $background,

@@ -105,6 +105,11 @@ $light-expansion-panel: (
             value: 'body-2',
         ),
     ),
+
+    _meta: (
+        name: 'expansion-panel',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material expansion panel schema.
@@ -115,7 +120,6 @@ $material-expansion-panel: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -169,7 +173,6 @@ $fluent-expansion-panel: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -190,7 +193,6 @@ $bootstrap-expansion-panel: extend(
 
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -275,7 +277,6 @@ $indigo-expansion-panel: extend(
 
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

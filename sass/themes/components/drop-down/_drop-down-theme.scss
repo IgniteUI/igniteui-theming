@@ -84,7 +84,6 @@
     $shadow: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'drop-down'};
     $selector: (#{config.element-prefix() + '-' + 'drop-down'}, '.igx-drop-down__list, .igx-grid-toolbar__dd-list');
     $drop-down-schema: ();
 
@@ -187,7 +186,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background-color: $background-color,
             border-radius: $border-radius,

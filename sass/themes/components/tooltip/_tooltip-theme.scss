@@ -33,7 +33,6 @@
     $background: null,
     $text-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'tooltip'};
     $selector: (#{config.element-prefix() + '-' + 'tooltip'}, #{'.' + config.element-prefix() + '-' + 'tooltip'});
     $tooltip-schema: ();
 
@@ -57,7 +56,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             text-color: $text-color,

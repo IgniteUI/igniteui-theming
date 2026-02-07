@@ -21,7 +21,6 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-ripple-theme);
 @function ripple-theme($schema: $light-material-schema, $color: null) {
-    $name: #{config.variable-prefix() + '-' + 'ripple'};
     $selector: (#{config.element-prefix() + '-' + 'ripple'}, #{'[' + config.element-prefix() + 'Ripple]'});
     $ripple-schema: ();
 
@@ -36,7 +35,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             color: $color,
         )

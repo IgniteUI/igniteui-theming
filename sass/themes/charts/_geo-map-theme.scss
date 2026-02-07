@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,7 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {String} $plot-area-background [null]- Gets or sets the brush used as the background for the current Map object's plot area.
 /// @requires extend
 ///
@@ -25,14 +25,7 @@
 ///   @include css-vars($my-map-theme);
 @function geo-map-theme($schema: $light-material-schema, $target: 'angular', $plot-area-background: null) {
     $name: 'geo-map';
-    $selector: map.get(
-        (
-            'angular': 'igx-geographic-map',
-            'webc': 'igc-geographic-map',
-            'blazor': 'igb-geographic-map',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {

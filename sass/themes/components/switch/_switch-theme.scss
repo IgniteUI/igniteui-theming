@@ -86,7 +86,6 @@
     $focus-fill-color: null,
     $focus-fill-hover-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'switch'};
     $selector: #{config.element-prefix() + '-' + 'switch'};
     $switch-schema: ();
 
@@ -243,7 +242,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             thumb-on-color: $thumb-on-color,

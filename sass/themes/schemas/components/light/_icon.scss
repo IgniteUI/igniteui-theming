@@ -24,6 +24,10 @@ $light-icon: (
         ),
     ),
     default-size: 3,
+    _meta: (
+        name: 'icon',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material icon schema.
@@ -34,7 +38,6 @@ $material-icon: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -47,7 +50,6 @@ $fluent-icon: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -60,7 +62,6 @@ $bootstrap-icon: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -87,7 +88,6 @@ $indigo-icon: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

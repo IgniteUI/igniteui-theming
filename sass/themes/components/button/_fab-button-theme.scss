@@ -101,7 +101,6 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'fab-button'};
     $selector: (
         #{'[' + config.element-prefix() + 'Button="fab"]'},
         #{config.element-prefix() + '-' + 'button[variant="fab"]'},
@@ -247,7 +246,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

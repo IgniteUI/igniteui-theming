@@ -39,6 +39,10 @@ $dark-query-builder: (
     color-expression-group-and: #da64ff,
 
     color-expression-group-or: #19ad87,
+
+    _meta: (
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material query builder schema.
@@ -46,31 +50,13 @@ $dark-query-builder: (
 /// @see $material-query-builder
 /// @requires $material-query-builder
 /// @requires $dark-query-builder
-$dark-material-query-builder: extend(
-    $material-query-builder,
-    $dark-query-builder,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-query-builder: extend($material-query-builder, $dark-query-builder);
 
 /// Generates a dark fluent query builder schema.
 /// @see $fluent-query-builder
 /// @requires $fluent-query-builder
 /// @requires $dark-query-builder
-$dark-fluent-query-builder: extend(
-    $fluent-query-builder,
-    $dark-query-builder,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-query-builder: extend($fluent-query-builder, $dark-query-builder);
 
 /// Generates a dark bootstrap query builder schema.
 /// @prop {Map} header-border [color: ('gray', 300)] - The border color of the query builder header.
@@ -86,10 +72,6 @@ $dark-bootstrap-query-builder: extend(
                 'gray',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -131,10 +113,6 @@ $dark-indigo-query-builder: extend(
                 'gray',
                 100,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

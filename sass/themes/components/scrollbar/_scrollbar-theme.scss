@@ -53,7 +53,6 @@
     $sb-corner-border-color: null,
     $sb-corner-border-size: null
 ) {
-    $name: 'ig-scrollbar';
     $selector: '.ig-scrollbar';
     $scrollbar-schema: ();
 
@@ -68,7 +67,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             sb-thumb-min-height: $sb-thumb-min-height,

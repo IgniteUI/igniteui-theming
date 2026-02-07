@@ -61,6 +61,11 @@ $light-grid-summary: (
             400,
         ),
     ),
+
+    _meta: (
+        name: 'grid-summary',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material grid-summary schema.
@@ -85,7 +90,6 @@ $material-grid-summary: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -136,7 +140,6 @@ $fluent-grid-summary: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -157,7 +160,6 @@ $bootstrap-grid-summary: extend(
 
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -201,7 +203,6 @@ $indigo-grid-summary: extend(
 
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

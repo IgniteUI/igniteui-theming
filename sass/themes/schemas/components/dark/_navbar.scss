@@ -7,6 +7,15 @@
 /// @access public
 ////
 
+/// Generates a base dark navbar schema.
+/// @access private
+/// @type {Map}
+$dark-base-navbar: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material navbar schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('primary', 800)] - The navbar background color.
@@ -15,6 +24,7 @@
 /// @requires $material-navbar
 $dark-material-navbar: extend(
     $material-navbar,
+    $dark-base-navbar,
     (
         background: (
             color: (
@@ -28,38 +38,18 @@ $dark-material-navbar: extend(
                 800,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark fluent navbar schema.
 /// @type {Map}
 /// @requires $fluent-navbar
-$dark-fluent-navbar: extend(
-    $fluent-navbar,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-navbar: extend($fluent-navbar, $dark-base-navbar);
 
 /// Generates a dark bootstrap navbar schema.
 /// @type {Map}
 /// @requires $bootstrap-navbar
-$dark-bootstrap-navbar: extend(
-    $bootstrap-navbar,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-navbar: extend($bootstrap-navbar, $dark-base-navbar);
 
 /// Generates a dark indigo navbar schema.
 /// @type {Map}
@@ -70,6 +60,7 @@ $dark-bootstrap-navbar: extend(
 /// @requires $indigo-navbar
 $dark-indigo-navbar: extend(
     $indigo-navbar,
+    $dark-base-navbar,
     (
         text-color: (
             contrast-color: (
@@ -95,10 +86,6 @@ $dark-indigo-navbar: extend(
                 'primary',
                 200,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

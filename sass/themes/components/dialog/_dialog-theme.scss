@@ -38,7 +38,6 @@
     $message-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'dialog'};
     $selector: (#{config.element-prefix() + '-' + 'dialog'}, '.igx-dialog');
     $dialog-schema: ();
 
@@ -70,7 +69,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             background: $background,

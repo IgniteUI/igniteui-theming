@@ -1,7 +1,6 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../light/icon-button' as *;
-
-// stylelint-disable max-line-length
 
 ////
 /// @package theming
@@ -9,19 +8,19 @@
 /// @access public
 ////
 
+/// Base light icon-button schema.
+/// @access private
+/// @type {Map}
+$dark-icon-button: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material flat icon button schema.
 /// @type {Map}
 /// @requires {Map} $material-flat-icon-button
-$material-flat-icon-button-dark: extend(
-    $material-flat-icon-button,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'flat',
-        ),
-    )
-);
+$material-flat-icon-button-dark: extend($material-flat-icon-button, $dark-icon-button);
 
 /// Generates a dark material contained icon button schema.
 /// @type {Map}
@@ -34,6 +33,7 @@ $material-flat-icon-button-dark: extend(
 /// @requires {Map} $material-contained-icon-button
 $material-contained-icon-button-dark: extend(
     $material-contained-icon-button,
+    $dark-icon-button,
     (
         background: (
             color: (
@@ -77,27 +77,13 @@ $material-contained-icon-button-dark: extend(
                 0.16,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'contained',
-        ),
     )
 );
 
 /// Generates a dark material outlined icon button schema.
 /// @type {Map}
 /// @requires {Map} $material-outlined-icon-button
-$material-outlined-icon-button-dark: extend(
-    $material-outlined-icon-button,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'outlined',
-        ),
-    )
-);
+$material-outlined-icon-button-dark: extend($material-outlined-icon-button, $dark-icon-button);
 
 /// Generates a dark material icon button schema.
 /// @type {Map}
@@ -168,6 +154,7 @@ $fluent-base-icon-button-dark: (
 $fluent-flat-icon-button-dark: extend(
     $fluent-flat-icon-button,
     $fluent-base-icon-button-dark,
+    $dark-icon-button,
     (
         foreground: (
             color: (
@@ -199,11 +186,6 @@ $fluent-flat-icon-button-dark: extend(
                 100,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'flat',
-        ),
     )
 );
 
@@ -225,6 +207,7 @@ $fluent-flat-icon-button-dark: extend(
 $fluent-contained-icon-button-dark: extend(
     $fluent-contained-icon-button,
     $fluent-base-icon-button-dark,
+    $dark-icon-button,
     (
         background: (
             color: (
@@ -292,11 +275,6 @@ $fluent-contained-icon-button-dark: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'contained',
-        ),
     )
 );
 
@@ -309,6 +287,7 @@ $fluent-contained-icon-button-dark: extend(
 $fluent-outlined-icon-button-dark: extend(
     $fluent-outlined-icon-button,
     $fluent-base-icon-button-dark,
+    $dark-icon-button,
     (
         border-color: (
             color: (
@@ -321,11 +300,6 @@ $fluent-outlined-icon-button-dark: extend(
                 'gray',
                 100,
             ),
-        ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'outlined',
         ),
     )
 );
@@ -344,44 +318,17 @@ $dark-fluent-icon-button: (
 /// Generates a dark bootstrap flat icon button schema.
 /// @type {Map}
 /// @requires {Map} $bootstrap-flat-icon-button
-$bootstrap-flat-icon-button-dark: extend(
-    $bootstrap-flat-icon-button,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-            type: 'flat',
-        ),
-    )
-);
+$bootstrap-flat-icon-button-dark: extend($bootstrap-flat-icon-button, $dark-icon-button);
 
 /// Generates a dark bootstrap contained icon button schema.
 /// @type {Map}
 /// @requires {Map} $bootstrap-contained-icon-button
-$bootstrap-contained-icon-button-dark: extend(
-    $bootstrap-contained-icon-button,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-            type: 'contained',
-        ),
-    )
-);
+$bootstrap-contained-icon-button-dark: extend($bootstrap-contained-icon-button, $dark-icon-button);
 
 /// Generates a dark bootstrap outlined icon button schema.
 /// @type {Map}
 /// @requires {Map} $bootstrap-outlined-icon-button
-$bootstrap-outlined-icon-button-dark: extend(
-    $bootstrap-outlined-icon-button,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-            type: 'outlined',
-        ),
-    )
-);
+$bootstrap-outlined-icon-button-dark: extend($bootstrap-outlined-icon-button, $dark-icon-button);
 
 /// Generates a dark bootstrap icon button schema.
 /// @type {Map}
@@ -487,17 +434,7 @@ $indigo-base-icon-button-dark: (
 /// Generates a dark indigo flat icon button schema.
 /// @type {Map}
 /// @requires {Map} $indigo-flat-icon-button
-$indigo-flat-icon-button-dark: extend(
-    $indigo-flat-icon-button,
-    $indigo-base-icon-button-dark,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'flat',
-        ),
-    )
-);
+$indigo-flat-icon-button-dark: extend($indigo-flat-icon-button, $indigo-base-icon-button-dark, $dark-icon-button);
 
 /// Generates a dark indigo outlined icon button schema.
 /// @type {Map}
@@ -507,6 +444,7 @@ $indigo-flat-icon-button-dark: extend(
 $indigo-outlined-icon-button-dark: extend(
     $indigo-outlined-icon-button,
     $indigo-base-icon-button-dark,
+    $dark-icon-button,
     (
         border-color: (
             contrast-color: (
@@ -522,11 +460,6 @@ $indigo-outlined-icon-button-dark: extend(
                 0.2,
             ),
         ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -540,6 +473,7 @@ $indigo-outlined-icon-button-dark: extend(
 $indigo-contained-icon-button-dark: extend(
     $indigo-contained-icon-button,
     $indigo-base-icon-button-dark,
+    $dark-icon-button,
     (
         hover-background: (
             color: (
@@ -565,11 +499,6 @@ $indigo-contained-icon-button-dark: extend(
                 'primary',
                 400,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'contained',
         ),
     )
 );

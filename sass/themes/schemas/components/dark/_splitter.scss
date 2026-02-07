@@ -7,6 +7,15 @@
 /// @access public
 ////
 
+/// Generates a base dark splitter schema.
+/// @access private
+/// @type {Map}
+$dark-base-splitter: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material splitter schema.
 /// @type {Map}
 /// @prop {Map} bar-color [color: ('gray', 50)] - The background color of the bar.
@@ -15,6 +24,7 @@
 /// @requires $light-splitter
 $dark-material-splitter: extend(
     $light-splitter,
+    $dark-base-splitter,
     (
         bar-color: (
             color: (
@@ -46,28 +56,12 @@ $dark-material-splitter: extend(
 /// Generates a dark fluent splitter schema.
 /// @type {Map}
 /// @requires $fluent-splitter
-$dark-fluent-splitter: extend(
-    $fluent-splitter,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-splitter: extend($fluent-splitter, $dark-base-splitter);
 
 /// Generates a dark bootstrap splitter schema.
 /// @type {Map}
 /// @requires $bootstrap-splitter
-$dark-bootstrap-splitter: extend(
-    $bootstrap-splitter,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-splitter: extend($bootstrap-splitter, $dark-base-splitter);
 
 /// Generates a dark indigo splitter schema.
 /// @type {Map}
@@ -78,6 +72,7 @@ $dark-bootstrap-splitter: extend(
 /// @requires $indigo-splitter
 $dark-indigo-splitter: extend(
     $indigo-splitter,
+    $dark-base-splitter,
     (
         bar-color: (
             color: (
@@ -104,10 +99,6 @@ $dark-indigo-splitter: extend(
                 'gray',
                 600,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

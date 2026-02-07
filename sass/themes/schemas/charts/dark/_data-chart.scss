@@ -1,4 +1,5 @@
 @use '../light/data-chart' as *;
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -7,22 +8,31 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Generates a base category chart schema.
+/// @access private
+/// @type {Map}
+$dark-data-chart: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark data chart schema.
 /// @type {Map}
 /// @requires $material-data-chart
-$dark-material-data-chart: $material-data-chart;
+$dark-material-data-chart: extend($material-data-chart, $dark-data-chart);
 
 /// Generates a dark fluent data-chart schema.
 /// @type {Map}
 /// @requires $fluent-data-chart
-$dark-fluent-data-chart: $fluent-data-chart;
+$dark-fluent-data-chart: extend($fluent-data-chart, $dark-data-chart);
 
 /// Generates a dark bootstrap data-chart schema.
 /// @type {Map}
 /// @requires $bootstrap-data-chart
-$dark-bootstrap-data-chart: $bootstrap-data-chart;
+$dark-bootstrap-data-chart: extend($bootstrap-data-chart, $dark-data-chart);
 
 /// Generates a dark indigo data-chart schema.
 /// @type {Map}
 /// @requires $indigo-data-chart
-$dark-indigo-data-chart: $indigo-data-chart;
+$dark-indigo-data-chart: extend($indigo-data-chart, $dark-data-chart);

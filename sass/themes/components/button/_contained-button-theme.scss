@@ -101,7 +101,6 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'contained-button'};
     $selector: (
         #{'[' + config.element-prefix() + 'Button="contained"]'},
         #{config.element-prefix() + '-' + 'button[variant="contained"]'},
@@ -271,7 +270,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

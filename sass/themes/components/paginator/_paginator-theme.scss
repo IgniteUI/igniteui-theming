@@ -33,7 +33,6 @@
     $background-color: null,
     $border-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'paginator'};
     $selector: #{config.element-prefix() + '-' + 'paginator'};
     $grid-paginator-schema: ();
 
@@ -52,7 +51,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             text-color: $text-color,
             background-color: $background-color,

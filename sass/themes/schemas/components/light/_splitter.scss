@@ -44,14 +44,18 @@ $light-splitter: (
         ),
     ),
 
-    size: 4px,
-
+    size: rem(4px),
     border-radius: (
         border-radius: (
             rem(2px),
             rem(0),
             rem(2px),
         ),
+    ),
+
+    _meta: (
+        name: 'splitter',
+        variant: 'light',
     ),
 );
 
@@ -63,7 +67,6 @@ $material-splitter: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -76,7 +79,6 @@ $fluent-splitter: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -89,7 +91,6 @@ $bootstrap-splitter: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -134,7 +135,6 @@ $indigo-splitter: extend(
 
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

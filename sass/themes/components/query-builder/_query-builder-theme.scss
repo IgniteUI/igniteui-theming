@@ -49,7 +49,6 @@
     $separator-color: null,
     $label-foreground: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'query-builder'};
     $selector: #{config.element-prefix() + '-' + 'query-builder'};
     $query-builder-schema: ();
 
@@ -95,7 +94,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             header-background: $header-background,

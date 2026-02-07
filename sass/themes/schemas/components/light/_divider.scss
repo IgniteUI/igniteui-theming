@@ -19,6 +19,10 @@ $light-divider: (
         ),
     ),
     inset: 0,
+    _meta: (
+        name: 'divider',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material divider schema.
@@ -29,7 +33,6 @@ $material-divider: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -42,7 +45,6 @@ $fluent-divider: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -54,7 +56,6 @@ $bootstrap-divider: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -66,7 +67,6 @@ $indigo-divider: extend(
     (
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

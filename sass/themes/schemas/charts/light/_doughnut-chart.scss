@@ -1,10 +1,22 @@
 // stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
+
 ////
 /// @package theming
 /// @group schemas
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
+
+/// Generates a base doughnut chart schema.
+/// @access private
+/// @type {Map}
+$light-doughnut-chart: (
+    _meta: (
+        name: 'doughnut-chart',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material base doughnut chart schema.
 /// @type {Map}
@@ -18,33 +30,60 @@
 /// @property {Number} selected-slice-opacity [null] - Sets the opacity of the selected slice.
 /// @property {Color} selected-slice-stroke [null] - Sets the stroke color of the selected slice.
 /// @property {Number} selected-slice-stroke-thickness [null] - Sets the stroke thickness of the selected slice.
-$material-doughnut-chart: (
-    'brushes': series,
-    'outlines': series,
-    'others-category-fill': null,
-    'others-category-opacity': null,
-    'others-category-stroke': null,
-    'others-category-stroke-thickness': null,
-    'selected-slice-fill': null,
-    'selected-slice-opacity': null,
-    'selected-slice-stroke': null,
-    'selected-slice-stroke-thickness': null,
+$material-doughnut-chart: extend(
+    $light-doughnut-chart,
+    (
+        brushes: series,
+        outlines: series,
+        others-category-fill: null,
+        others-category-opacity: null,
+        others-category-stroke: null,
+        others-category-stroke-thickness: null,
+        selected-slice-fill: null,
+        selected-slice-opacity: null,
+        selected-slice-stroke: null,
+        selected-slice-stroke-thickness: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent doughnut-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-doughnut-chart
-$fluent-doughnut-chart: $material-doughnut-chart;
+$fluent-doughnut-chart: extend(
+    $material-doughnut-chart,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap doughnut-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-doughnut-chart
-$bootstrap-doughnut-chart: $material-doughnut-chart;
+$bootstrap-doughnut-chart: extend(
+    $material-doughnut-chart,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo doughnut-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-doughnut-chart
-$indigo-doughnut-chart: $material-doughnut-chart;
+$indigo-doughnut-chart: extend(
+    $material-doughnut-chart,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

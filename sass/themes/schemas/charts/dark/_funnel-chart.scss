@@ -1,4 +1,5 @@
 @use '../light/funnel-chart' as *;
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -7,22 +8,31 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Generates a base funnel chart schema.
+/// @access private
+/// @type {Map}
+$dark-funnel-chart: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark funnel chart schema.
 /// @type {Map}
 /// @requires $material-funnel-chart
-$dark-material-funnel-chart: $material-funnel-chart;
+$dark-material-funnel-chart: extend($material-funnel-chart, $dark-funnel-chart);
 
 /// Generates a dark fluent funnel-chart schema.
 /// @type {Map}
 /// @requires $fluent-funnel-chart
-$dark-fluent-funnel-chart: $fluent-funnel-chart;
+$dark-fluent-funnel-chart: extend($fluent-funnel-chart, $dark-funnel-chart);
 
 /// Generates a dark bootstrap funnel-chart schema.
 /// @type {Map}
 /// @requires $bootstrap-funnel-chart
-$dark-bootstrap-funnel-chart: $bootstrap-funnel-chart;
+$dark-bootstrap-funnel-chart: extend($bootstrap-funnel-chart, $dark-funnel-chart);
 
 /// Generates a dark indigo funnel-chart schema.
 /// @type {Map}
 /// @requires $indigo-funnel-chart
-$dark-indigo-funnel-chart: $indigo-funnel-chart;
+$dark-indigo-funnel-chart: extend($indigo-funnel-chart, $dark-funnel-chart);

@@ -7,22 +7,28 @@
 /// @access public
 ////
 
+/// Generates a base dark grid-toolbar schema.
+/// @access private
+/// @type {Map}
+$base-dark-grid-toolbar: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material grid-toolbar schema.
 /// @type {Map}
 /// @prop {Map} title-text-color [color: ('gray', 600)] - The toolbar title text color.
 /// @requires $material-grid-toolbar
 $dark-material-grid-toolbar: extend(
     $material-grid-toolbar,
+    $base-dark-grid-toolbar,
     (
         title-text-color: (
             color: (
                 'gray',
                 600,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -33,17 +39,13 @@ $dark-material-grid-toolbar: extend(
 /// @requires $fluent-grid-toolbar
 $dark-fluent-grid-toolbar: extend(
     $fluent-grid-toolbar,
+    $base-dark-grid-toolbar,
     (
         title-text-color: (
             color: (
                 'gray',
                 600,
             ),
-        ),
-
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
         ),
     )
 );
@@ -54,17 +56,13 @@ $dark-fluent-grid-toolbar: extend(
 /// @requires $bootstrap-grid-toolbar
 $dark-bootstrap-grid-toolbar: extend(
     $bootstrap-grid-toolbar,
+    $base-dark-grid-toolbar,
     (
         title-text-color: (
             color: (
                 'gray',
                 600,
             ),
-        ),
-
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -75,16 +73,13 @@ $dark-bootstrap-grid-toolbar: extend(
 /// @requires $indigo-grid-toolbar
 $dark-indigo-grid-toolbar: extend(
     $indigo-grid-toolbar,
+    $base-dark-grid-toolbar,
     (
         border-color: (
             color: (
                 'gray',
                 200,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

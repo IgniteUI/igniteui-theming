@@ -54,6 +54,11 @@ $light-snackbar: extend(
                 value: 'body-2',
             ),
         ),
+
+        _meta: (
+            name: 'snackbar',
+            variant: 'light',
+        ),
     )
 );
 
@@ -65,7 +70,6 @@ $material-snackbar: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -77,9 +81,9 @@ $material-snackbar: extend(
 /// @prop {Map} button-color [color: ('gray', 900)] - The button color used in the snackbar.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(24px))] - The border radius used for snackbar.
 /// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-snackbar
+/// @requires {Map} $light-snackbar
 $fluent-snackbar: extend(
-    $default-elevation-snackbar,
+    $light-snackbar,
     (
         background: (
             color: (
@@ -116,7 +120,6 @@ $fluent-snackbar: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -153,7 +156,6 @@ $bootstrap-snackbar: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -200,7 +202,6 @@ $indigo-snackbar: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

@@ -79,6 +79,11 @@ $light-grid-filtering: (
             500,
         ),
     ),
+
+    _meta: (
+        name: 'grid-filtering',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material grid-filtering schema.
@@ -89,7 +94,6 @@ $material-grid-filtering: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -102,7 +106,6 @@ $fluent-grid-filtering: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -115,7 +118,6 @@ $bootstrap-grid-filtering: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -128,7 +130,6 @@ $indigo-grid-filtering: extend(
     (
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

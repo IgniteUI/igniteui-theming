@@ -6,14 +6,19 @@
 @use '../../sass/typography/charts' as *;
 @use '../../sass/elevations/presets' as *;
 @use '../../sass/themes/schemas' as *;
+@use '../../sass/themes/config' as *;
 @use '../../test/styles/mocks';
 @include palette($light-material-palette);
 @include typography($material-typeface, $material-type-scale);
 @include elevations($material-elevations);
 
 // Chart themes and typography
-@include chart-themes($schema: $dark-material-schema, $target: 'webc');
-@include charts-typography($type-scale: $material-type-scale, $target: 'webc');
+@include chart-themes($schema: $dark-material-schema);
+@include charts-typography($type-scale: $material-type-scale);
+
+.test {
+    @include css-vars($theme: avatar-theme($schema: $dark-material-schema, $background: red));
+}
 
 // Test handmade palette
 .handmade {

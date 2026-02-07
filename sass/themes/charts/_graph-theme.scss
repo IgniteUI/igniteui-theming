@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,7 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {Color} $backing-brush [null] - Sets the brush to use to fill the backing of the bullet graph.
 /// @param {Color} $backing-outline [null] - Sets the brush to use for the outline of the backing.
 /// @param {Number} $backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
@@ -68,14 +68,7 @@
     $value-stroke-thickness: null
 ) {
     $name: 'bullet-graph';
-    $selector: map.get(
-        (
-            'angular': 'igx-bullet-graph',
-            'webc': 'igc-bullet-graph',
-            'blazor': 'igb-bullet-graph',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -120,14 +113,8 @@
 /// @group typography
 /// @requires {mixin} type-style
 @mixin graph-typography($target: 'angular') {
-    $selector: map.get(
-        (
-            'angular': 'igx-bullet-graph',
-            'webc': 'igc-bullet-graph',
-            'blazor': 'igb-bullet-graph',
-        ),
-        $target
-    );
+    $name: 'bullet-graph';
+    $selector: #{element-prefix()}-#{$name};
 
     #{$selector} {
         --bullet-graph-font: var(--ig-font-family, inherit);

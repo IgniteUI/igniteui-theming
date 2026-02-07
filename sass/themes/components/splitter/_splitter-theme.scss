@@ -35,7 +35,6 @@
     $focus-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'splitter'};
     $selector: #{config.element-prefix() + '-' + 'splitter'};
     $splitter-schema: ();
 
@@ -69,7 +68,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             bar-color: $bar-color,
             handle-color: $handle-color,
