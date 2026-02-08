@@ -8,7 +8,10 @@
 /// @group Typography
 ////
 
-$typeface: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
+// stylelint-disable-next-line scss/dollar-variable-colon-space-after
+$typeface:
+    -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 $h1: type-style(
     $font-size: rem(40px),
     $font-weight: 500,
