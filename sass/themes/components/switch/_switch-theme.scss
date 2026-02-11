@@ -107,6 +107,10 @@
             $thumb-off-color: dynamic-shade(var(--track-off-color), $offset: 20);
         }
 
+        @if not($thumb-off-hover-color) and $thumb-off-color {
+            $thumb-off-hover-color: var(--thumb-off-color);
+        }
+
         @if not($thumb-disabled-color) and $thumb-off-color {
             $thumb-disabled-color: hsl(from var(--thumb-off-color) h s calc(l + 20));
         }
