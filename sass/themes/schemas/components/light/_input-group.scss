@@ -711,8 +711,8 @@ $bootstrap-input-group: extend(
 /// @requires {Map} $light-input-group
 /// @requires {Map} $indigo-elevation-input-group
 $indigo-input-group: extend(
-    $light-input-group,
     $indigo-validator,
+    $light-input-group,
     $indigo-elevation-input-group,
     (
         input-prefix-color: (
