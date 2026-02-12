@@ -63,7 +63,6 @@
     $clear-button-foreground-focus: null,
     $toggle-button-foreground-filled: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'combo'};
     $selector: (
         #{config.element-prefix() + '-' + 'combo'},
         #{config.element-prefix() + '-' + 'simple-combo'},
@@ -125,7 +124,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             search-separator-border-color: $search-separator-border-color,
             empty-list-placeholder-color: $empty-list-placeholder-color,

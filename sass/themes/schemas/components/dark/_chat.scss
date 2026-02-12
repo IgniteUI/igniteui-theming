@@ -24,64 +24,32 @@ $dark-base-chat: (
             200,
         ),
     ),
+    _meta: (
+        name: 'chat',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material chat schema.
 /// @type {Map}
 /// @requires $material-chat
 /// @requires $dark-base-chat
-$dark-material-chat: extend(
-    $material-chat,
-    $dark-base-chat,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-chat: extend($material-chat, $dark-base-chat);
 
 /// Generates a dark fluent chat schema.
 /// @type {Map}
 /// @requires $fluent-chat
 /// @requires $dark-base-chat
-$dark-fluent-chat: extend(
-    $fluent-chat,
-    $dark-base-chat,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-chat: extend($fluent-chat, $dark-base-chat);
 
 /// Generates a dark bootstrap chat schema.
 /// @type {Map}
 /// @requires $bootstrap-chat
 /// @requires $dark-base-chat
-$dark-bootstrap-chat: extend(
-    $bootstrap-chat,
-    $dark-base-chat,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-chat: extend($bootstrap-chat, $dark-base-chat);
 
 /// Generates a dark indigo chat schema.
 /// @type {Map}
 /// @requires $indigo-chat
 /// @requires $dark-base-chat
-$dark-indigo-chat: extend(
-    $indigo-chat,
-    $dark-base-chat,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-indigo-chat: extend($indigo-chat, $dark-base-chat);

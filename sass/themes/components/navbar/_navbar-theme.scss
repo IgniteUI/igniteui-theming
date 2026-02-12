@@ -44,7 +44,6 @@
     $hover-icon-color: null,
     $disable-shadow: false
 ) {
-    $name: #{config.variable-prefix() + '-' + 'navbar'};
     $selector: #{config.element-prefix() + '-' + 'navbar'};
     $navbar-schema: ();
 
@@ -95,7 +94,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             border-color: $border-color,

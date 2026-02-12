@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -14,7 +15,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {Color} $others-category-fill [null] - Sets the fill color for others category.
 /// @param {Number} $others-category-opacity [null] - Sets the opacity for others category.
 /// @param {Color} $others-category-stroke [null] - Sets the others category stroke color.
@@ -45,14 +45,7 @@
     $selected-slice-stroke-thickness: null
 ) {
     $name: 'doughnut-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-doughnut-chart',
-            'webc': 'igc-doughnut-chart',
-            'blazor': 'igb-doughnut-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {

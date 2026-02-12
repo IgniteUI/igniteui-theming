@@ -52,7 +52,6 @@
     $resting-shadow: null,
     $hover-shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'card'};
     $selector: #{config.element-prefix() + '-' + 'card'};
     $card-schema: ();
 
@@ -93,7 +92,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             outline-color: $outline-color,

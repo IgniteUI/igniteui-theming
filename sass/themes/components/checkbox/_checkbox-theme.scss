@@ -81,7 +81,6 @@
     $error-color-hover: null,
     $focus-outline-color-error: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'checkbox'};
     $selector: #{config.element-prefix() + '-' + 'checkbox'};
     $checkbox-schema: ();
 
@@ -145,7 +144,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             label-color: $label-color,
             label-color-hover: $label-color-hover,

@@ -74,7 +74,6 @@
     $item-disabled-icon-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'nav-drawer'};
     $selector: #{config.element-prefix() + '-' + 'nav-drawer'};
     $navdrawer-schema: ();
 
@@ -138,7 +137,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,

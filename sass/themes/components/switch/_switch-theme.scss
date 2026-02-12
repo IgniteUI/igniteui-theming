@@ -96,7 +96,6 @@
     $focus-fill-color: null,
     $focus-fill-hover-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'switch'};
     $selector: #{config.element-prefix() + '-' + 'switch'};
     $switch-schema: ();
 
@@ -116,6 +115,10 @@
 
         @if not($thumb-off-color) and $track-off-color {
             $thumb-off-color: dynamic-shade(var(--track-off-color), $offset: 20);
+        }
+
+        @if not($thumb-off-hover-color) and $thumb-off-color {
+            $thumb-off-hover-color: var(--thumb-off-color);
         }
 
         @if not($thumb-disabled-color) and $thumb-off-color {
@@ -253,7 +256,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             thumb-on-color: $thumb-on-color,

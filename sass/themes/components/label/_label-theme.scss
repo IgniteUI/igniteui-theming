@@ -21,7 +21,6 @@
 /// @param {Map} $color [null] - The text color.
 /// @param {Map} $disabled-color [null] - The disabled text color.
 @function label-theme($schema: $light-material-schema, $color: null, $disabled-color: null) {
-    $name: #{config.variable-prefix() + '-' + 'label'};
     $selector: (#{config.element-prefix() + '-' + 'label'}, #{'[' + config.element-prefix() + 'Label]'});
     $label-schema: ();
 
@@ -36,7 +35,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             color: $color,
             disabled-color: $disabled-color,

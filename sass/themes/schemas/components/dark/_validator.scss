@@ -8,43 +8,29 @@
 ////
 
 /// Generates a base dark validator schema.
+/// @access private
+/// @type {Map}
+$dark-base-validator: (
+    _meta: (
+        name: 'validator',
+        variant: 'dark',
+    ),
+);
+
+/// Generates a base dark validator schema.
 /// @type {Map}
 /// @requires $light-validator
-$dark-material-validator: extend(
-    $light-validator,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-validator: extend($material-validator, $dark-base-validator);
 
 /// Generates a dark fluent validator schema.
 /// @type {Map}
 /// @requires $light-validator
-$dark-fluent-validator: extend(
-    $light-validator,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-validator: extend($fluent-validator, $dark-base-validator);
 
 /// Generates a dark bootstrap validator schema.
 /// @type {Map}
 /// @requires $light-validator
-$dark-bootstrap-validator: extend(
-    $light-validator,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-validator: extend($bootstrap-validator, $dark-base-validator);
 
 /// Generates a dark indigo validator schema.
 /// @type {Map}
@@ -53,6 +39,7 @@ $dark-bootstrap-validator: extend(
 /// @requires $indigo-validator
 $dark-indigo-validator: extend(
     $indigo-validator,
+    $dark-base-validator,
     (
         helper-text-color: (
             contrast-color: (
@@ -67,10 +54,6 @@ $dark-indigo-validator: extend(
                 50,
                 0.8,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

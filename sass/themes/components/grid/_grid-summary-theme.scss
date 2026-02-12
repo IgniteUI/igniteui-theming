@@ -51,7 +51,6 @@
     $pinned-border-color: null,
     $label-hover-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'grid-summary'};
     $selector: #{'.' + config.element-prefix() + '-' + 'grid-summary'};
     $grid-summary-schema: ();
 
@@ -86,7 +85,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background-color: $background-color,
             label-color: $label-color,

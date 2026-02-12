@@ -57,7 +57,6 @@
     $size: null,
     $border-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'grid-toolbar'};
     $selector: (#{config.element-prefix() + '-' + 'grid-toolbar'}, '.igx-grid-toolbar__dd-list');
     $grid-toolbar-schema: ();
 
@@ -96,7 +95,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background-color: $background-color,
             title-text-color: $title-text-color,

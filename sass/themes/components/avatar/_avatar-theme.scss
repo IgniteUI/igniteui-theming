@@ -41,7 +41,6 @@
     $border-radius: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'avatar'};
     $selector: #{config.element-prefix() + '-' + 'avatar'};
     $avatar-schema: ();
 
@@ -64,7 +63,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             color: $color,

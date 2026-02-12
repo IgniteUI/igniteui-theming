@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,7 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {List} $brushes [series] - Defines the palette from which automatically assigned series colors are selected.
 /// @param {List} $outlines [series] - Defines the palette from which automatically assigned series outline colors are selected.
 /// @param {Number} $label-extent [null] - Sets the pixel amount by which the labels are offset from the edge of the slices.
@@ -48,14 +48,7 @@
     $radius-factor: null
 ) {
     $name: 'pie-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-pie-chart',
-            'webc': 'igc-pie-chart',
-            'blazor': 'igb-pie-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -94,14 +87,7 @@
 /// @requires {mixin} type-style
 @mixin pie-chart-typography($type-scale, $categories: (text: 'body-2'), $target: 'angular') {
     $name: 'pie-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-pie-chart',
-            'webc': 'igc-pie-chart',
-            'blazor': 'igb-pie-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $text: map.get($categories, 'text');
     $text-styles: type-scale-category($type-scale, $text);
 

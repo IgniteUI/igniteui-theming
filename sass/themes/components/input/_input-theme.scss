@@ -148,7 +148,6 @@
     $input-suffix-background--focused: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'input-group'};
     $selector: (
         #{config.element-prefix() + '-' + 'input-group'},
         #{config.element-prefix() + '-' + 'date-range-start'},
@@ -499,7 +498,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             idle-text-color: $idle-text-color,
             filled-text-color: $filled-text-color,

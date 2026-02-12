@@ -1,4 +1,5 @@
 // stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -6,6 +7,16 @@
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
+
+/// Generates a base light bullet graph schema.
+/// @access private
+/// @type {Map}
+$light-graph: (
+    _meta: (
+        name: 'bullet-graph',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material graph schema.
 /// @type {Map}
@@ -29,73 +40,100 @@
 /// @prop {Color} value-brush [(color: ('gray', 800))] - Sets the brush to use for the actual value element.
 /// @prop {Color} value-outline [null] - Sets the brush to use for the outline of actual value element.
 /// @prop {Number} value-stroke-thickness [null] - Sets the stroke thickness to use when rendering single actual value element.
-$material-graph: (
-    'backing-brush': (
-        color: 'surface',
-    ),
-    'backing-outline': (
-        color: 'surface',
-    ),
-    'backing-stroke-thickness': null,
-    'font-brush': (
-        contrast-color: (
-            'surface',
-            500,
+$material-graph: extend(
+    $light-graph,
+    (
+        backing-brush: (
+            color: 'surface',
         ),
-    ),
-    'minor-tick-brush': (
-        contrast-color: (
-            'surface',
-            500,
+        backing-outline: (
+            color: 'surface',
         ),
-    ),
-    'minor-tick-thickness': null,
-    'range-brushes': series,
-    'range-outlines': series,
-    'scale-background-brush': (
-        color: 'primary',
-    ),
-    'scale-background-outline': (
-        color: 'surface',
-    ),
-    'scale-background-thickness': null,
-    'target-value-breadth': null,
-    'target-value-brush': (
-        color: (
-            'gray',
-            800,
+        backing-stroke-thickness: null,
+        font-brush: (
+            contrast-color: (
+                'surface',
+                500,
+            ),
         ),
-    ),
-    'target-value-outline': null,
-    'target-value-thickness': null,
-    'tick-brush': (
-        contrast-color: (
-            'surface',
-            500,
+        minor-tick-brush: (
+            contrast-color: (
+                'surface',
+                500,
+            ),
         ),
-    ),
-    'tick-stroke-thickness': null,
-    'value-brush': (
-        color: (
-            'gray',
-            800,
+        minor-tick-thickness: null,
+        range-brushes: series,
+        range-outlines: series,
+        scale-background-brush: (
+            color: 'primary',
         ),
-    ),
-    'value-outline': null,
-    'value-stroke-thickness': null,
+        scale-background-outline: (
+            color: 'surface',
+        ),
+        scale-background-thickness: null,
+        target-value-breadth: null,
+        target-value-brush: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        target-value-outline: null,
+        target-value-thickness: null,
+        tick-brush: (
+            contrast-color: (
+                'surface',
+                500,
+            ),
+        ),
+        tick-stroke-thickness: null,
+        value-brush: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        value-outline: null,
+        value-stroke-thickness: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent graph schema.
 /// @type {Map}
 /// @requires {Map} $material-graph
-$fluent-graph: $material-graph;
+$fluent-graph: extend(
+    $material-graph,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap graph schema.
 /// @type {Map}
 /// @requires {Map} $material-graph
-$bootstrap-graph: $material-graph;
+$bootstrap-graph: extend(
+    $material-graph,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo graph schema.
 /// @type {Map}
 /// @requires {Map} $material-graph
-$indigo-graph: $material-graph;
+$indigo-graph: extend(
+    $material-graph,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

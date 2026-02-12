@@ -35,37 +35,23 @@ $dark-base-tile-manager: (
             0.5,
         ),
     ),
+    _meta: (
+        name: 'tile-manager',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material tile manager schema.
 /// @type {Map}
 /// @requires {Map} $material-tile-manager
 /// @requires {Map} $dark-base-tile-manager
-$dark-material-tile-manager: extend(
-    $material-tile-manager,
-    $dark-base-tile-manager,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-tile-manager: extend($material-tile-manager, $dark-base-tile-manager);
 
 /// Generates a dark fluent tile manager schema.
 /// @type {Map}
 /// @requires {Map} $fluent-tile-manager
 /// @requires {Map} $dark-base-tile-manager
-$dark-fluent-tile-manager: extend(
-    $fluent-tile-manager,
-    $dark-base-tile-manager,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-tile-manager: extend($fluent-tile-manager, $dark-base-tile-manager);
 
 /// Generates a dark bootstrap tile manager schema.
 /// @type {Map}
@@ -116,7 +102,6 @@ $dark-bootstrap-tile-manager: extend(
         ),
 
         _meta: (
-            theme: 'bootstrap',
             variant: 'dark',
         ),
     )
@@ -204,7 +189,6 @@ $dark-indigo-tile-manager: extend(
         ),
 
         _meta: (
-            theme: 'indigo',
             variant: 'dark',
         ),
     )

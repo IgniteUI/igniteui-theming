@@ -96,7 +96,6 @@
     $border-color: null,
     $border-width: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'list'};
     $selector: #{config.element-prefix() + '-' + 'list'};
     $list-schema: ();
 
@@ -242,7 +241,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,

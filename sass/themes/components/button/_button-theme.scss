@@ -28,6 +28,7 @@
 /// Setting just `$background` will create a properly contrasted button.
 /// Disabled state colors must be set explicitly (not auto-derived).
 ///
+/// @deprecated Use flat-button-theme(), contained-button-theme(), outlined-button-theme(), or fab-button-theme() instead.
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the button. PRIMARY - derives foreground and icon-color.
 /// @param {Color} $foreground [null] - The text color of the button. Auto-derived from background.
@@ -68,6 +69,10 @@
 ///   );
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-button-theme);
+/// @see flat-button-theme
+/// @see contained-button-theme
+/// @see outlined-button-theme
+/// @see fab-button-theme
 @function button-theme(
     $schema: $light-material-schema,
 
@@ -112,7 +117,9 @@
     $disabled-border-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'button'};
+    @warn 'button-theme() is deprecated. Use the variant-specific theme functions instead: flat-button-theme(), contained-button-theme(), outlined-button-theme(), fab-button-theme().';
+
+    $selector: #{config.element-prefix() + '-' + 'button'};
     $button-schema: ();
 
     @if map.has-key($schema, 'button') {
@@ -197,7 +204,6 @@
                 $_name: extend(
                         digest-schema($_schema),
                         (
-                            name: $name,
                             background: $background,
                             foreground: $foreground,
 
@@ -244,5 +250,5 @@
         );
     }
 
-    @return (name: $name, variant: $variant, themes: $themes);
+    @return (selector: $selector, variant: $variant, themes: $themes);
 }

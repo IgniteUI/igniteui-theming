@@ -119,7 +119,6 @@
     $disabled-selected-background: null,
     $disabled-selected-border-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'button-group'};
     $selector: (#{config.element-prefix() + '-' + 'buttongroup'}, #{config.element-prefix() + '-' + 'button-group'});
     $button-group-schema: ();
 
@@ -267,7 +266,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             item-text-color: $item-text-color,
             item-icon-color: $item-icon-color,

@@ -48,7 +48,6 @@
     $text-color: null,
     $diameter: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'circular-bar'};
     $selector: (
         #{config.element-prefix() + '-' + 'circular-bar'},
         #{config.element-prefix() + '-' + 'circular-progress'}
@@ -78,7 +77,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             base-circle-color: $base-circle-color,
             fill-color-default: $fill-color-default,

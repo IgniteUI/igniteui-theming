@@ -2,22 +2,28 @@
 @use '../../../../../typography/functions' as *;
 @use '../../light/calendar/base' as *;
 
+/// Generates a base dark calendar schema.
+/// @access private
+/// @type {Map}
+$dark-calendar-base: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a base dark material calendar schema.
 /// @type {Map}
 /// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
 /// @requires {Map} $material-base
 $dark-material-base: extend(
     $material-base,
+    $dark-calendar-base,
     (
         actions-divider-color: (
             color: (
                 'gray',
                 100,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -30,6 +36,7 @@ $dark-material-base: extend(
 /// @requires {Map} $fluent-base
 $dark-fluent-base: extend(
     $fluent-base,
+    $dark-calendar-base,
     (
         header-foreground: (
             contrast-color: (
@@ -49,26 +56,13 @@ $dark-fluent-base: extend(
                 100,
             ),
         ),
-
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a base dark bootstrap calendar schema.
 /// @type {Map}
 /// @requires {Map} $bootstrap-base
-$dark-bootstrap-base: extend(
-    $bootstrap-base,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-base: extend($bootstrap-base, $dark-calendar-base);
 
 /// Generates a base dark indigo calendar schema.
 /// @prop {Map} header-foreground [contrast-color: ('gray', 50)] - The header foreground color.
@@ -81,6 +75,7 @@ $dark-bootstrap-base: extend(
 /// @requires {Map} $indigo-base
 $dark-indigo-base: extend(
     $indigo-base,
+    $dark-calendar-base,
     (
         content-foreground: (
             color: (
@@ -117,11 +112,6 @@ $dark-indigo-base: extend(
                 'gray',
                 100,
             ),
-        ),
-
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

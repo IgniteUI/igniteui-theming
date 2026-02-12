@@ -87,7 +87,6 @@
     $indicator-active-border-color: null,
     $indicator-active-hover-dot-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'carousel'};
     $selector: #{config.element-prefix() + '-' + 'carousel'};
     $carousel-schema: ();
 
@@ -215,7 +214,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             slide-background: $slide-background,

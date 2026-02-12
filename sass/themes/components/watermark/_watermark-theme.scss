@@ -41,7 +41,6 @@
     $border-color: null,
     $border-radius: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'watermark'};
     $selector: 'igc-trial-watermark';
     $watermark-schema: ();
 
@@ -60,7 +59,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             base-color: $base-color,
             image-color: $image-color,

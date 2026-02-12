@@ -71,7 +71,6 @@
     $error-color-hover: null,
     $focus-outline-color-error: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'radio'};
     $selector: #{config.element-prefix() + '-' + 'radio'};
     $radio-schema: ();
 
@@ -133,7 +132,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             label-color: $label-color,
             label-color-hover: $label-color-hover,

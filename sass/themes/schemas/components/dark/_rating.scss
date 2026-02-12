@@ -8,18 +8,20 @@
 /// @access public
 ////
 
+/// Generates a base dark rating schema.
+/// @access private
+/// @type {Map}
+$dark-base-rating: (
+    _meta: (
+        name: 'rating',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material rating schema.
 /// @type {Map}
 /// @requires $material-rating
-$dark-material-rating: extend(
-    $material-rating,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-rating: extend($material-rating, $dark-base-rating);
 
 /// Generates a dark fluent rating schema.
 /// @type {Map}
@@ -30,6 +32,7 @@ $dark-material-rating: extend(
 /// @requires $fluent-rating
 $dark-fluent-rating: extend(
     $fluent-rating,
+    $dark-base-rating,
     (
         symbol-full-color: (
             color: (
@@ -55,25 +58,13 @@ $dark-fluent-rating: extend(
                 900,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark bootstrap rating schema.
 /// @type {Map}
 /// @requires $bootstrap-rating
-$dark-bootstrap-rating: extend(
-    $bootstrap-rating,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-rating: extend($bootstrap-rating, $dark-base-rating);
 
 /// Generates a dark indigo rating schema.
 /// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - sets the color for the label.
@@ -86,6 +77,7 @@ $dark-bootstrap-rating: extend(
 /// @requires $indigo-rating
 $dark-indigo-rating: extend(
     $indigo-rating,
+    $dark-base-rating,
     (
         label-color: (
             contrast-color: (
@@ -127,10 +119,6 @@ $dark-indigo-rating: extend(
                 300,
                 0.4,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

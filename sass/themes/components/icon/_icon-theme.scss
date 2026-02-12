@@ -34,7 +34,6 @@
     $size: null,
     $disabled-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'icon'};
     $selector: #{config.element-prefix() + '-' + 'icon'};
     $icon-schema: ();
 
@@ -49,7 +48,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             color: $color,
             size: $size,

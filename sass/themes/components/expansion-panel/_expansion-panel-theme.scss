@@ -54,7 +54,6 @@
     $disabled-description-color: null,
     $expanded-margin: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'expansion-panel'};
     $selector: #{config.element-prefix() + '-' + 'expansion-panel'};
     $expansion-panel-schema: ();
 
@@ -97,7 +96,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             header-background: $header-background,
             border-radius: $border-radius,

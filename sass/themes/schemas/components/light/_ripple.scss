@@ -18,6 +18,10 @@ $light-ripple: (
             0.7,
         ),
     ),
+    _meta: (
+        name: 'ripple',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material ripple schema.
@@ -28,7 +32,6 @@ $material-ripple: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -41,7 +44,6 @@ $fluent-ripple: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -54,7 +56,6 @@ $bootstrap-ripple: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -67,7 +68,6 @@ $indigo-ripple: extend(
     (
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

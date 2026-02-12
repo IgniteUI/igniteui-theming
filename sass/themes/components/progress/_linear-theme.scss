@@ -50,7 +50,6 @@
     $track-height: null,
     $strip-size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'linear-bar'};
     $selector: (#{config.element-prefix() + '-' + 'linear-bar'}, #{config.element-prefix() + '-' + 'linear-progress'});
     $linear-bar-schema: ();
     $linear-bar-schema: if(map.has-key($schema, 'linear-bar'), map.get($schema, 'linear-bar'), $schema);
@@ -63,7 +62,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             track-color: $track-color,
             fill-color-default: $fill-color-default,

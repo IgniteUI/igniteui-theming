@@ -36,7 +36,7 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-rating-theme);
 @function rating-theme($schema: $light-material-schema, $rest...) {
-    $name: 'igc-rating';
+    $selector: 'igc-rating';
     $rating-schema: ();
 
     @if map.has-key($schema, 'rating') {
@@ -50,7 +50,7 @@
     @return extend(
         $theme,
         (
-            name: $name,
+            selector: $selector,
         ),
         meta.keywords($rest)
     );

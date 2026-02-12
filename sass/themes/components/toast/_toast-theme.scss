@@ -42,7 +42,6 @@
     $text-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'toast'};
     $selector: #{config.element-prefix() + '-' + 'toast'};
     $toast-schema: ();
 
@@ -70,7 +69,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             border-radius: $border-radius,

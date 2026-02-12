@@ -80,6 +80,10 @@ $light-file-input: (
             500,
         ),
     ),
+    _meta: (
+        name: 'file-input',
+        variant: 'light',
+    ),
 );
 
 /// Generates a light fluent file input schema.
@@ -90,7 +94,6 @@ $fluent-file-input: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -166,7 +169,6 @@ $bootstrap-file-input: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -228,7 +230,6 @@ $indigo-file-input: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );
@@ -267,7 +268,6 @@ $material-file-input: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
