@@ -16,6 +16,7 @@ export {
   setSpacingSchema,
   setSpacingInputSchema,
   setRoundnessSchema,
+  readResourceSchema,
   platformSchema,
   type DetectPlatformParams,
   type CreatePaletteParams,
@@ -29,6 +30,7 @@ export {
   type SetSizeParams,
   type SetSpacingParams,
   type SetRoundnessParams,
+  type ReadResourceParams,
   type Platform,
 } from './schemas.js';
 
@@ -45,4 +47,5 @@ export {
   handleSetSize,
   handleSetSpacing,
   handleSetRoundness,
+  handleReadResource,
 } from './handlers/index.js';

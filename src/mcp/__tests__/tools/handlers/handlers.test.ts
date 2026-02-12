@@ -440,7 +440,7 @@ describe('handleCreateComponentTheme', () => {
 
     const text = result.content[0].text;
     expect(text).toContain('```css');
-    expect(text).toContain('--background: var(--ig-avatar-background'); // Correct prefix in var() fallback
+    expect(text).toContain('--background: var(--igx-avatar-background, var(--ig-avatar-background'); // Correct prefix in var() fallback
     expect(text).toContain('#ff5722');
   });
 

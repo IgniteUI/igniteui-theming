@@ -12,3 +12,4 @@ export {handleGetComponentDesignTokens} from './component-tokens.js';
 export {handleCreateComponentTheme} from './component-theme.js';
 export {handleGetColor} from './color.js';
 export {handleSetSize, handleSetSpacing, handleSetRoundness} from './layout.js';
+export {handleReadResource} from './resource.js';

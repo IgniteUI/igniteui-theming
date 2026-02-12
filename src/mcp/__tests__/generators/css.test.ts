@@ -244,7 +244,7 @@ describe('generateComponentThemeCss', () => {
     expect(result.css).toContain('igc-avatar');
 
     // Should contain CSS custom properties with correct prefix in var() fallback
-    expect(result.css).toContain('--background: var(--ig-avatar-background');
+    expect(result.css).toContain('--background: var(--igx-avatar-background, var(--ig-avatar-background');
   });
 
   it('should use platform-specific selector as default when no selector provided', async () => {

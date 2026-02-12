@@ -12,6 +12,7 @@ import {describe, it, expect} from 'vitest';
 import {
   colorSchema,
   createCustomPaletteSchema,
+  readResourceSchema,
   setRoundnessSchema,
   setSizeSchema,
   setSpacingSchema,
@@ -487,5 +488,21 @@ describe('createCustomPaletteSchema', () => {
 
       expect(result.success).toBe(true);
     });
+  });
+});
+
+describe('readResourceSchema', () => {
+  it('accepts a valid URI string', () => {
+    expect(readResourceSchema.safeParse({uri: 'theming://platforms'}).success).toBe(true);
+    expect(readResourceSchema.safeParse({uri: 'theming://presets/palettes/light'}).success).toBe(true);
+  });
+
+  it('requires the uri field', () => {
+    expect(readResourceSchema.safeParse({}).success).toBe(false);
+  });
+
+  it('rejects non-string uri', () => {
+    expect(readResourceSchema.safeParse({uri: 123}).success).toBe(false);
+    expect(readResourceSchema.safeParse({uri: null}).success).toBe(false);
   });
 });

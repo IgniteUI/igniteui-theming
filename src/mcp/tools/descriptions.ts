@@ -183,9 +183,10 @@ export const TOOL_DESCRIPTIONS = {
 </related_tools>
 
 <related_resources>
-  - theming://presets/palettes: View available preset palette colors
-  - theming://guidance/colors: Color guidance overview
-  - theming://guidance/colors/rules: Light/dark theme color rules
+  Call read_resource to load reference data:
+  - "theming://presets/palettes" — preset palette colors
+  - "theming://guidance/colors" — color guidance overview
+  - "theming://guidance/colors/rules" — light/dark theme color rules
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -371,9 +372,10 @@ export const TOOL_DESCRIPTIONS = {
 </anti_example>
 
 <related_resources>
-  - theming://presets/palettes: View preset palette colors for reference
-  - theming://guidance/colors/usage: Which shades to use for different purposes
-  - theming://guidance/colors/roles: Semantic meaning of each color family
+  Call read_resource to load reference data:
+  - "theming://presets/palettes" — preset palette colors for reference
+  - "theming://guidance/colors/usage" — which shades to use for different purposes
+  - "theming://guidance/colors/roles" — semantic meaning of each color family
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -425,7 +427,8 @@ export const TOOL_DESCRIPTIONS = {
 </related_tools>
 
 <related_resources>
-  - theming://presets/typography: View typography presets for all design systems
+  Call read_resource to load reference data:
+  - "theming://presets/typography" — typography presets for all design systems
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -464,7 +467,8 @@ export const TOOL_DESCRIPTIONS = {
 </related_tools>
 
 <related_resources>
-  - theming://presets/elevations: View elevation presets for Material and Indigo
+  Call read_resource to load reference data:
+  - "theming://presets/elevations" — elevation presets for Material and Indigo
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -560,13 +564,14 @@ export const TOOL_DESCRIPTIONS = {
 </related_tools>
 
   <related_resources>
-  - theming://presets/palettes: View available preset palette colors
-  - theming://guidance/colors: Color guidance overview
-  - theming://guidance/colors/rules: Light/dark theme color rules
-  - theming://platforms/angular: Angular platform configuration
-  - theming://platforms/webcomponents: Web Components platform configuration
-  - theming://platforms/react: React platform configuration
-  - theming://platforms/blazor: Blazor platform configuration
+  Call read_resource to load reference data:
+  - "theming://presets/palettes" — preset palette colors
+  - "theming://guidance/colors" — color guidance overview
+  - "theming://guidance/colors/rules" — light/dark theme color rules
+  - "theming://platforms/angular" — Angular platform configuration
+  - "theming://platforms/webcomponents" — Web Components platform configuration
+  - "theming://platforms/react" — React platform configuration
+  - "theming://platforms/blazor" — Blazor platform configuration
   </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -605,9 +610,10 @@ export const TOOL_DESCRIPTIONS = {
 </example>
 
 <related_resources>
-  - theming://docs/spacing-and-sizing
-  - theming://docs/functions/sizable
-  - theming://docs/mixins/sizable
+  Call read_resource to load reference data:
+  - "theming://docs/spacing-and-sizing" — spacing and sizing overview
+  - "theming://docs/functions/sizable" — sizable value function
+  - "theming://docs/mixins/sizable" — sizable mixin
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -649,9 +655,10 @@ export const TOOL_DESCRIPTIONS = {
 </example>
 
 <related_resources>
-  - theming://docs/spacing-and-sizing
-  - theming://docs/functions/pad
-  - theming://docs/mixins/spacing
+  Call read_resource to load reference data:
+  - "theming://docs/spacing-and-sizing" — spacing and sizing overview
+  - "theming://docs/functions/pad" — pad spacing function
+  - "theming://docs/mixins/spacing" — spacing mixin
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -688,8 +695,9 @@ export const TOOL_DESCRIPTIONS = {
 </example>
 
 <related_resources>
-  - theming://docs/spacing-and-sizing
-  - theming://docs/functions/border-radius
+  Call read_resource to load reference data:
+  - "theming://docs/spacing-and-sizing" — spacing and sizing overview
+  - "theming://docs/functions/border-radius" — border radius function
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -962,6 +970,39 @@ export const TOOL_DESCRIPTIONS = {
   - create_palette: Generate a complete palette with these colors
   - create_component_theme: Use retrieved colors in component theming
 </related_tools>`,
+
+  // ---------------------------------------------------------------------------
+  // read_resource - Resource access tool
+  // ---------------------------------------------------------------------------
+  read_resource: `Read a theming resource by URI. Returns reference data such as platform configurations, color palette presets, typography presets, color guidance, and layout documentation.
+
+<use_case>
+  Use this tool to load reference data before or during theme generation. Other tools
+  reference these resources in their related_resources sections — call this tool with
+  the listed URI to retrieve the data.
+
+  Common scenarios:
+  - Load palette presets to see available colors before creating a palette
+  - Read color guidance to understand shade usage and semantic roles
+  - Check platform configuration for usage examples and supported features
+  - Read layout documentation for spacing, sizing, and roundness details
+</use_case>
+
+<workflow>
+  1. Identify the resource URI from the available_resources list or from a related_resources hint in another tool
+  2. Call this tool with the URI
+  3. Use the returned data to inform your next action
+</workflow>
+
+<output>
+  Returns the resource content as text. Format depends on the resource:
+  - application/json resources return JSON data
+  - text/markdown resources return Markdown documentation
+</output>
+
+<error_handling>
+  If the URI is not found, returns the list of all available resource URIs.
+</error_handling>`,
 } as const;
 
 // ============================================================================
@@ -1076,4 +1117,9 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   contrastFlag: `If true, returns the contrast color for the specified shade instead of the shade itself. Contrast colors are pre-computed for optimal text readability. Default: false.`,
 
   opacity: `Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).`,
+
+  // ---------------------------------------------------------------------------
+  // Resource read parameters
+  // ---------------------------------------------------------------------------
+  resourceUri: `URI of the theming resource to read (e.g., "theming://presets/palettes", "theming://platforms/angular"). See the available_resources list in the tool description for all valid URIs.`,
 } as const;

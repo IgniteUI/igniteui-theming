@@ -39,7 +39,7 @@ $compound: ('button', 'icon-button');
                     > #{$_v} {
                         > #{$_component} {
                             @each $_token, $_value in map.remove(digest-schema($_schema), '_meta') {
-                                @if $_token != typography {
+                                @if $_token != typography and meta.type-of($_value) != map {
                                     --#{$_token}: #{$_value};
                                 }
                             }

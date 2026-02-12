@@ -91,44 +91,44 @@ export const RESOURCE_DEFINITIONS = [
   },
   {
     uri: RESOURCE_URIS.PLATFORM_ANGULAR,
-    name: 'Angular Platform',
+    name: 'Angular Platform Config',
     description: 'Ignite UI for Angular platform configuration, schemas, palettes, and usage examples',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.PLATFORM_WEBCOMPONENTS,
-    name: 'Web Components Platform',
+    name: 'Web Components Platform Config',
     description: 'Ignite UI for Web Components platform configuration, presets, and usage examples',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.PLATFORM_REACT,
-    name: 'React Platform',
+    name: 'React Platform Config',
     description: 'Ignite UI for React platform configuration, schemas, palettes, and usage examples',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.PLATFORM_BLAZOR,
-    name: 'Blazor Platform',
+    name: 'Blazor Platform Config',
     description: 'Ignite UI for Blazor platform configuration, schemas, palettes, and usage examples',
     mimeType: 'application/json',
   },
   // Preset resources
   {
     uri: RESOURCE_URIS.PALETTES,
-    name: 'All Palette Presets',
+    name: 'Color Palettes - All Presets',
     description: 'All predefined color palette configurations (light and dark variants for each design system)',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.PALETTES_LIGHT,
-    name: 'Light Palette Presets',
+    name: 'Color Palettes - Light',
     description: 'Light mode color palette configurations',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.PALETTES_DARK,
-    name: 'Dark Palette Presets',
+    name: 'Color Palettes - Dark',
     description: 'Dark mode color palette configurations',
     mimeType: 'application/json',
   },
@@ -147,85 +147,85 @@ export const RESOURCE_DEFINITIONS = [
   // Color guidance resources (organized under colors/ parent)
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS,
-    name: 'Color Guidance',
+    name: 'Color Guidance Overview',
     description:
       'Overview of all color guidance resources. Lists available sub-resources for theme rules, shade reference, semantic roles, interaction states, and design system patterns.',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS_RULES,
-    name: 'Light & Dark Theme Rules',
+    name: 'Color Rules - Light and Dark Themes',
     description:
       'Guidelines for choosing surface and gray colors based on theme variant (light/dark). Explains luminance requirements and contrast considerations.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS_USAGE,
-    name: 'Shade Reference',
+    name: 'Color Shade Reference',
     description:
       'Comprehensive guide explaining which shades (50-900) to use for different purposes across Ignite UI components. Includes shade-level guidance for all color families.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS_ROLES,
-    name: 'Color Roles',
+    name: 'Color Semantic Roles',
     description:
       'Structured data defining the semantic meaning of each color family (primary, secondary, gray, surface, error, success, warn, info). Includes component mappings and opacity usage.',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS_STATES,
-    name: 'Interaction States',
+    name: 'Color Interaction States',
     description:
       'Patterns showing how colors change across interaction states (idle, hover, focus, active, disabled) for common UI elements like buttons, list items, and inputs.',
     mimeType: 'application/json',
   },
   {
     uri: RESOURCE_URIS.GUIDANCE_COLORS_THEMES,
-    name: 'Design System Patterns',
+    name: 'Color Design System Patterns',
     description: 'Color usage characteristics specific to Material, Fluent, Bootstrap, and Indigo design systems.',
     mimeType: 'application/json',
   },
   // Layout documentation resources
   {
     uri: RESOURCE_URIS.DOCS_LAYOUT_OVERVIEW,
-    name: 'Layout Scale Overview',
+    name: 'Spacing and Sizing Overview',
     description: 'Overview of size, spacing, and roundness variables with examples for CSS and Sass.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.DOCS_FUNCTION_PAD,
-    name: 'pad() Function',
+    name: 'Pad Spacing Function',
     description: 'Documentation for the pad() spacing function and its usage.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.DOCS_FUNCTION_SIZABLE,
-    name: 'sizable() Function',
+    name: 'Sizable Value Function',
     description: 'Documentation for the sizable() function and size-based values.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.DOCS_FUNCTION_BORDER_RADIUS,
-    name: 'border-radius() Function',
+    name: 'Border Radius Function',
     description: 'Documentation for the border-radius() function and roundness scaling.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.DOCS_MIXIN_SPACING,
-    name: 'spacing() Mixin',
+    name: 'Spacing Mixin',
     description: 'Documentation for the spacing() mixin and spacing variables.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.DOCS_MIXIN_SIZING,
-    name: 'sizing() Mixin',
+    name: 'Sizing Mixin',
     description: 'Documentation for the sizing() mixin and size custom properties.',
     mimeType: 'text/markdown',
   },
   {
     uri: RESOURCE_URIS.DOCS_MIXIN_SIZABLE,
-    name: 'sizable() Mixin',
+    name: 'Sizable Mixin',
     description: 'Documentation for the sizable() mixin and size flags.',
     mimeType: 'text/markdown',
   },
@@ -383,31 +383,31 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           resources: [
             {
               uri: RESOURCE_URIS.GUIDANCE_COLORS_RULES,
-              name: 'Light & Dark Theme Rules',
+              name: 'Color Rules - Light and Dark Themes',
               description: 'Guidelines for surface/gray colors based on theme variant',
               mimeType: 'text/markdown',
             },
             {
               uri: RESOURCE_URIS.GUIDANCE_COLORS_USAGE,
-              name: 'Shade Reference',
+              name: 'Color Shade Reference',
               description: 'Which shades (50-900) to use for different purposes',
               mimeType: 'text/markdown',
             },
             {
               uri: RESOURCE_URIS.GUIDANCE_COLORS_ROLES,
-              name: 'Color Roles',
+              name: 'Color Semantic Roles',
               description: 'Semantic meaning of each color family',
               mimeType: 'application/json',
             },
             {
               uri: RESOURCE_URIS.GUIDANCE_COLORS_STATES,
-              name: 'Interaction States',
+              name: 'Color Interaction States',
               description: 'Color changes across hover/focus/active/disabled',
               mimeType: 'application/json',
             },
             {
               uri: RESOURCE_URIS.GUIDANCE_COLORS_THEMES,
-              name: 'Design System Patterns',
+              name: 'Color Design System Patterns',
               description: 'Material/Fluent/Bootstrap/Indigo characteristics',
               mimeType: 'application/json',
             },

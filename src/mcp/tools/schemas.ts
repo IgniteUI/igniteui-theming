@@ -383,3 +383,16 @@ export const setRoundnessSchema = z.object({
 export type SetSizeParams = z.infer<typeof setSizeSchema>;
 export type SetSpacingParams = z.infer<typeof setSpacingSchema>;
 export type SetRoundnessParams = z.infer<typeof setRoundnessSchema>;
+
+// ============================================================================
+// Resource Read Schema
+// ============================================================================
+
+/**
+ * Schema for read_resource tool.
+ */
+export const readResourceSchema = z.object({
+  uri: z.string().describe(PARAM_DESCRIPTIONS.resourceUri),
+});
+
+export type ReadResourceParams = z.infer<typeof readResourceSchema>;

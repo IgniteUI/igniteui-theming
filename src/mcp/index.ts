@@ -24,6 +24,7 @@ import {
   setSpacingSchema,
   setSpacingInputSchema,
   setRoundnessSchema,
+  readResourceSchema,
   handleDetectPlatform,
   handleCreatePalette,
   handleCreateCustomPalette,
@@ -36,6 +37,7 @@ import {
   handleSetSize,
   handleSetSpacing,
   handleSetRoundness,
+  handleReadResource,
 } from './tools/index.js';
 import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
 import {withPreprocessing} from './utils/preprocessing.js';
@@ -49,7 +51,7 @@ import {RESOURCE_DEFINITIONS, getResourceContent} from './resources/index.js';
 function createServer(): McpServer {
   const server = new McpServer({
     name: 'igniteui-theming',
-    version: '1.0.0',
+    version: '25.0.0',
   });
 
   // Register tools
@@ -316,6 +318,60 @@ function registerTools(server: McpServer): void {
       return handleGetColor(validated);
     },
   );
+
+  // read_resource tool — description built dynamically from RESOURCE_DEFINITIONS
+  server.registerTool(
+    'read_resource',
+    {
+      title: 'Read Theming Resource',
+      description: buildReadResourceDescription(),
+      inputSchema: {
+        uri: readResourceSchema.shape.uri,
+      },
+    },
+    async (params) => {
+      const validated = readResourceSchema.parse(params);
+      return handleReadResource(validated);
+    },
+  );
+}
+
+/**
+ * Build the read_resource tool description dynamically from RESOURCE_DEFINITIONS.
+ * Groups resources by URI path prefix and appends the catalog to the static description.
+ */
+function buildReadResourceDescription(): string {
+  const groups: Record<string, Array<{uri: string; name: string; description: string}>> = {
+    Platforms: [],
+    Presets: [],
+    'Color Guidance': [],
+    'Layout Docs': [],
+  };
+
+  for (const r of RESOURCE_DEFINITIONS) {
+    if (r.uri.includes('://platforms')) {
+      groups['Platforms'].push(r);
+    } else if (r.uri.includes('://presets/')) {
+      groups['Presets'].push(r);
+    } else if (r.uri.includes('://guidance/')) {
+      groups['Color Guidance'].push(r);
+    } else if (r.uri.includes('://docs/')) {
+      groups['Layout Docs'].push(r);
+    }
+  }
+
+  const lines: string[] = [TOOL_DESCRIPTIONS.read_resource, '', '<available_resources>'];
+
+  for (const [groupName, resources] of Object.entries(groups)) {
+    if (resources.length === 0) continue;
+    lines.push(`  ${groupName}:`);
+    for (const r of resources) {
+      lines.push(`    - "${r.uri}" — ${r.name}`);
+    }
+  }
+
+  lines.push('</available_resources>');
+  return lines.join('\n');
 }
 
 /**
