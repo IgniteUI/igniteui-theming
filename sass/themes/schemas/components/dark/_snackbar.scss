@@ -8,44 +8,30 @@
 /// @access public
 ////
 
+/// Generates a base dark snackbar schema.
+/// @access private
+/// @type {Map}
+$dark-base-snackbar: (
+    _meta: (
+        name: 'snackbar',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material snackbar schema.
 /// @type {Map}
 /// @requires $material-snackbar
-$dark-material-snackbar: extend(
-    $material-snackbar,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-snackbar: extend($material-snackbar, $dark-base-snackbar);
 
 /// Generates a dark fluent snackbar schema.
 /// @type {Map}
 /// @requires $fluent-snackbar
-$dark-fluent-snackbar: extend(
-    $fluent-snackbar,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-snackbar: extend($fluent-snackbar, $dark-base-snackbar);
 
 /// Generates a dark bootstrap snackbar schema.
 /// @type {Map}
 /// @requires $bootstrap-snackbar
-$dark-bootstrap-snackbar: extend(
-    $bootstrap-snackbar,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-snackbar: extend($bootstrap-snackbar, $dark-base-snackbar);
 
 /// Generates a dark indigo snackbar schema.
 /// @type {Map}
@@ -57,6 +43,7 @@ $dark-bootstrap-snackbar: extend(
 $dark-indigo-snackbar: extend(
     $indigo-snackbar,
     $dark-indigo-elevation-snackbar,
+    $dark-base-snackbar,
     (
         background: (
             color: (
@@ -77,10 +64,6 @@ $dark-indigo-snackbar: extend(
                 'gray',
                 200,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

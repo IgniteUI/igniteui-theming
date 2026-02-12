@@ -28,22 +28,17 @@ $base-dark-drop-down: (
             100,
         ),
     ),
+    _meta: (
+        name: 'drop-down',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material drop-down schema.
 /// @type {Map}
 /// @requires $material-drop-down
 /// @requires $base-dark-drop-down
-$dark-material-drop-down: extend(
-    $material-drop-down,
-    $base-dark-drop-down,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-drop-down: extend($material-drop-down, $base-dark-drop-down);
 
 /// Generates a dark fluent drop-down schema.
 /// @type {Map}
@@ -70,7 +65,6 @@ $dark-fluent-drop-down: extend(
             ),
         ),
         _meta: (
-            theme: 'fluent',
             variant: 'dark',
         ),
     )
@@ -90,7 +84,6 @@ $dark-bootstrap-drop-down: extend(
             ),
         ),
         _meta: (
-            theme: 'bootstrap',
             variant: 'dark',
         ),
     )
@@ -238,10 +231,6 @@ $dark-indigo-drop-down: extend(
                 50,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

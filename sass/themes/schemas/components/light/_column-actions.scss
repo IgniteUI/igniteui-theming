@@ -31,6 +31,11 @@ $light-column-actions: (
             value: 'subtitle-1',
         ),
     ),
+
+    _meta: (
+        name: 'column-actions',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material column actions schema.
@@ -41,7 +46,6 @@ $material-column-actions: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -54,7 +58,6 @@ $fluent-column-actions: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -67,7 +70,6 @@ $bootstrap-column-actions: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -80,7 +82,6 @@ $indigo-column-actions: extend(
     (
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

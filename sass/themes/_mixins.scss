@@ -4,7 +4,9 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use 'sass:list';
+@use 'config';
 @use '../utils/meta' as *;
+@use '../utils/string' as str;
 @use '../typography/functions' as *;
 
 ////
@@ -15,48 +17,225 @@
 /// @access private
 $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typography', '_meta');
 
-/// Parses a map of key value pairs from component themes to css variables.
+// -----------------------------------------------------------------------------
+// Private helper functions for the tokens mixin.
+// These are implementation details and should not be used directly.
+// -----------------------------------------------------------------------------
+
+/// Returns true if a key-value pair from a theme map should be emitted as a CSS variable.
+/// Filters out map values (nested sub-themes) and the special 'prefix' key.
 /// @access private
-/// @param {Map} $theme - The component theme to be used to generate css variables.
-/// @param {String} $name - The CSS variables name
-/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables
+/// @param {String} $key - The theme property key.
+/// @param {*} $value - The theme property value.
+/// @return {Boolean}
+@function _is-emittable($key, $value) {
+    @return meta.type-of($value) != 'map' and $key != 'prefix';
+}
+
+/// Returns true if a value contains a sizable() expression that depends on
+/// component-scoped variables (--is-large, --is-medium, --is-small).
+/// These expressions cannot be resolved at global scope because CSS custom
+/// properties resolve at the declaration scope, not the consumption scope.
+/// @access private
+/// @param {*} $value - The theme property value to check.
+/// @return {Boolean}
+@function _is-sizable($value) {
+    @return not not string.index('#{$value}', 'var(--is-');
+}
+
+/// Collects all emittable keys from a cleaned theme map.
+/// Used to build the list of local variable names that need to be
+/// rewritten to global token references.
+/// @access private
+/// @param {Map} $theme - A theme map with ignored keys already removed.
+/// @return {List} - A list of emittable key names.
+@function _collect-emittable-keys($theme) {
+    $keys: ();
+
+    @each $key, $value in $theme {
+        @if _is-emittable($key, $value) {
+            $keys: list.append($keys, $key);
+        }
+    }
+
+    @return $keys;
+}
+
+/// Rewrites local CSS variable references in a value to global token references.
+/// For example, `var(--background)` becomes `var(--ig-avatar-background)`.
+/// @access private
+/// @param {*} $value - The original theme property value.
+/// @param {String} $name - The component name (e.g., 'avatar').
+/// @param {List} $keys - The list of emittable keys whose local refs should be rewritten.
+/// @return {String} - The value with all local var references rewritten to global token names.
+@function _globalize-value($value, $name, $keys) {
+    $result: '#{$value}';
+
+    @each $key in $keys {
+        $result: str.replace($result, 'var(--#{$key})', 'var(--ig-#{$name}-#{$key})');
+    }
+
+    @return string.unquote($result);
+}
+
+// -----------------------------------------------------------------------------
+// Private helper mixins.
+// -----------------------------------------------------------------------------
+
+/// Parses a map of key value pairs from component themes to scoped CSS variables.
+/// Emits local variables with a fallback chain: platform-specific → universal → default value.
+/// @access private
+/// @param {Map} $theme - The component theme used for generating CSS variables.
+/// @param {String} $name [null] - Deprecated. This parameter is ignored.
+/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables.
 /// @example scss Convert theme colors to CSS variables.
 ///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
 ///   :root {
 ///     @include css-vars-from-theme($theme);
 ///   }
-/// @require {mixin} css-vars
-@mixin css-vars-from-theme($theme, $name, $ignored: $ignored-keys) {
-    $themes: map.get($theme, 'themes');
-    $prefix: map.get($theme, 'prefix');
-    $t: map.get($theme, '_meta', 'theme');
+@mixin css-vars-from-theme($theme, $name: null, $ignored: $ignored-keys) {
+    $n: map.get($theme, '_meta', 'name');
 
-    // This is here only because the button theme consists of 4 nested themes.
-    // @if $themes and meta.type-of($themes) == 'map' {
-    //     @each $theme in $themes {
-    //         @include css-vars(list.nth($theme, 2));
-    //     }
-    // }
+    @if not($n) or string.length($n) == 0 {
+        $n: 'unknown-component';
+    }
+
+    $t: map.get($theme, '_meta', 'theme');
+    $v: map.get($theme, '_meta', 'variant');
+    $vp: config.variable-prefix();
 
     @each $key, $value in map.remove($theme, $ignored...) {
-        $variable: if($prefix, #{$prefix}-#{$key}, #{$key});
-
-        @if meta.type-of($value) != 'map' and $key != 'prefix' {
-            --#{$variable}: var(--#{$name}-#{$key}, #{$value});
+        @if _is-emittable($key, $value) {
+            @if $vp == 'ig' {
+                --#{$key}: var(--ig-#{$n}-#{$key}, #{$value});
+            } @else {
+                --#{$key}: var(--#{$vp}-#{$n}-#{$key}, var(--ig-#{$n}-#{$key}, #{$value}));
+            }
         }
     }
 
     @if $t and meta.type-of($t) == 'string' {
         --ig-theme: #{$t};
     }
+
+    @if $v and meta.type-of($v) == 'string' {
+        --ig-theme-variant: #{$v};
+    }
+}
+
+/// Emits global CSS variable tokens from a component theme.
+/// Rewrites local variable references to global token names and
+/// skips sizable expressions that cannot resolve at global scope.
+/// @access private
+/// @param {Map} $theme - The component theme map.
+/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded.
+@mixin _tokens-global($theme, $ignored: $ignored-keys) {
+    $name: map.get($theme, '_meta', 'name');
+
+    @if not($name) or string.length($name) == 0 {
+        @error 'Theme must have a _meta.name property to generate tokens.';
+    }
+
+    $clean-theme: map.remove($theme, $ignored...);
+    $emittable-keys: _collect-emittable-keys($clean-theme);
+
+    @each $key, $value in $clean-theme {
+        @if _is-emittable($key, $value) and not _is-sizable($value) {
+            --ig-#{$name}-#{$key}: #{_globalize-value($value, $name, $emittable-keys)};
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Public mixins.
+// -----------------------------------------------------------------------------
+
+/// Generates CSS variable tokens from an Ignite UI component theme.
+///
+/// Supports two modes via the `$mode` parameter:
+///
+/// **`'global'` (default):** Generates universal CSS variable tokens with the `ig` prefix.
+/// Rewrites local CSS variable references (e.g., `var(--background)`) to global
+/// token references (e.g., `var(--ig-avatar-background)`) so that derived values
+/// like `adaptive-contrast` and `dynamic-shade` resolve correctly at any scope.
+///
+/// - **Limitation:** Properties whose values contain `sizable()` expressions (e.g., `size`)
+///   are silently skipped when they reference component-scoped variables (`--is-large`,
+///   `--is-medium`, `--is-small`). These variables are set by the `sizable()` mixin at the
+///   component level and cannot be resolved at global scope. CSS custom properties resolve
+///   at the declaration scope, so a `sizable()` expression at `:root` would always evaluate
+///   to the largest size. To override `size` as a global token, pass a concrete value
+///   (e.g., `$size: 2rem`) instead of a `sizable()` expression.
+///
+/// - **Note:** If theme values reference `adaptive-contrast()` derived colors, ensure
+///   the `adaptive-contrast()` mixin is included at the scope where tokens are declared
+///   so that the `--y-contrast` variable is available.
+///
+/// **`'scoped'`:** Generates component-scoped CSS variables using the configured
+/// `variable-prefix` (e.g., `igx`). Handles selector scoping and `is-root()` branching.
+/// Includes a universal `--ig-*` fallback chain so that global tokens can override
+/// component-scoped variables. Emits `--ig-theme` and `--ig-theme-variant` metadata.
+///
+/// @access public
+/// @group themes
+/// @param {Map} $theme - The component theme map to generate tokens from.
+/// @param {String} $mode ['global'] - The generation mode: 'global' for universal tokens, 'scoped' for component-level CSS variables.
+/// @param {String} $scope [null] - Only used in 'scoped' mode. Overrides the selector from the theme map.
+/// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating tokens.
+/// @example scss Generate universal avatar tokens (global mode)
+///   :root {
+///     @include tokens(avatar-theme($background: red));
+///   }
+///   // Output:
+///   // :root {
+///   //   --ig-avatar-background: red;
+///   //   --ig-avatar-color: hsla(from color(from var(--ig-avatar-background) ...) ...);
+///   //   ...
+///   // }
+/// @example scss Override size with a concrete value (global mode)
+///   :root {
+///     @include tokens(avatar-theme($size: 2rem));
+///   }
+///   // Output:
+///   // :root {
+///   //   --ig-avatar-size: 2rem;
+///   //   ...
+///   // }
+/// @example scss Generate scoped component tokens (scoped mode)
+///   @include tokens(avatar-theme($schema: $schema), $mode: 'scoped');
+/// @example scss Generate scoped component tokens with a custom scope
+///   @include tokens(dialog-theme($schema: $schema), $mode: 'scoped', $scope: '.igx-dialog');
+@mixin tokens($theme, $mode: 'global', $scope: null, $ignored: $ignored-keys) {
+    @if $mode == 'scoped' {
+        $selector: map.get($theme, 'selector');
+        $name: if($scope, $scope, $selector);
+
+        @if is-root() {
+            #{$name} {
+                @include css-vars-from-theme($theme);
+            }
+        } @else {
+            &,
+            #{$name} {
+                @include css-vars-from-theme($theme);
+            }
+        }
+    } @else {
+        $parent: if(is-root(), ':root', '&');
+
+        #{$parent} {
+            @include _tokens-global($theme, $ignored);
+        }
+    }
 }
 
 /// Add theme colors as CSS variables to a given scope.
+/// @deprecated Use `tokens($theme, $mode: 'scoped')` instead.
 /// @access public
 /// @group themes
 /// @param {map} $theme - The component theme to be used.
 /// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
-/// @requires {mixin} css-vars-from-theme
+/// @requires {mixin} tokens
 /// @example scss Convert grid theme colors to css variables
 ///   $my-grid-theme grid-theme(
 ///     $header-background: red,
@@ -66,24 +245,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///     @include css-vars($my-grid-theme);
 ///   }
 @mixin css-vars($theme, $scope: null) {
-    $s: map.get($theme, 'selector');
-    $n: map.get($theme, 'name');
-    $name: if($scope, $scope, $s or $n);
-
-    @if not($n) or string.length($n) == 0 {
-        @error 'Theme should have a non-null or empty name property. Example: theme: (name: my-theme)';
-    }
-
-    @if is-root() {
-        #{$name} {
-            @include css-vars-from-theme($theme, $n);
-        }
-    } @else {
-        &,
-        #{$name} {
-            @include css-vars-from-theme($theme, $n);
-        }
-    }
+    @include tokens($theme, $mode: 'scoped', $scope: $scope);
 }
 
 /// Adds border-radius style with a value between an upper and a lower bound.

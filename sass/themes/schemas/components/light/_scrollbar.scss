@@ -65,6 +65,10 @@ $light-scrollbar: (
     ),
     sb-corner-border-color: transparent,
     sb-corner-border-size: 0,
+    _meta: (
+        name: 'scrollbar',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material scrollbar schema.
@@ -75,7 +79,6 @@ $material-scrollbar: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -102,7 +105,6 @@ $fluent-scrollbar: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -115,7 +117,6 @@ $bootstrap-scrollbar: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -142,7 +143,6 @@ $indigo-scrollbar: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

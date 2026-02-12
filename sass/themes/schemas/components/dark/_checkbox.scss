@@ -8,13 +8,25 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Generates a base dark checkbox schema.
+/// @access private
+/// @type {Map}
+$dark-base-checkbox: (
+    _meta: (
+        name: 'checkbox',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material checkbox schema.
 /// @type {Map}
 /// @prop {Map} error-color [color: ('error', 500)] - The border and fill colors in invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and fill colors in invalid state on hover.
 /// @requires $material-checkbox
+/// @requires $dark-base-checkbox
 $dark-material-checkbox: extend(
     $material-checkbox,
+    $dark-base-checkbox,
     (
         error-color: (
             color: (
@@ -27,10 +39,6 @@ $dark-material-checkbox: extend(
                 'error',
                 500,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -46,8 +54,10 @@ $dark-material-checkbox: extend(
 /// @prop {Map} error-color [color: ('error', 100)] - The border and fill colors in invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 50)] - The border and fill colors in invalid state on hover.
 /// @requires $fluent-checkbox
+/// @requires $dark-base-checkbox
 $dark-fluent-checkbox: extend(
     $fluent-checkbox,
+    $dark-base-checkbox,
     (
         tick-color-hover: (
             color: (
@@ -97,10 +107,6 @@ $dark-fluent-checkbox: extend(
                 50,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -113,8 +119,10 @@ $dark-fluent-checkbox: extend(
 /// @prop {Map} error-color [color: ('error', 300)] - The border and fill colors in invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 400)] - The border and fill colors in invalid state on hover.
 /// @requires $bootstrap-checkbox
+/// @requires $dark-base-checkbox
 $dark-bootstrap-checkbox: extend(
     $bootstrap-checkbox,
+    $dark-base-checkbox,
     (
         focus-outline-color: (
             color: (
@@ -154,10 +162,6 @@ $dark-bootstrap-checkbox: extend(
                 400,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -173,8 +177,10 @@ $dark-bootstrap-checkbox: extend(
 /// @prop {Map} disabled-color [color: ('gray', 900, .2)] - The disabled border and fill colors.
 /// @prop {Map} disabled-color-label [color: ('gray', 900, .2)] - The disabled label color.
 /// @requires $indigo-checkbox
+/// @requires $dark-base-checkbox
 $dark-indigo-checkbox: extend(
     $indigo-checkbox,
+    $dark-base-checkbox,
     (
         label-color: (
             contrast-color: (
@@ -235,10 +241,6 @@ $dark-indigo-checkbox: extend(
                 50,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

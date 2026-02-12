@@ -8,18 +8,20 @@
 /// @access public
 ////
 
+/// Generates a base dark icon schema.
+/// @access private
+/// @type {Map}
+$dark-base-icon: (
+    _meta: (
+        name: 'icon',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material icon schema.
 /// @type {Map}
 /// @requires $material-icon
-$dark-material-icon: extend(
-    $material-icon,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-icon: extend($material-icon, $dark-base-icon);
 
 /// Generates a dark fluent icon schema.
 /// @type {Map}
@@ -27,6 +29,7 @@ $dark-material-icon: extend(
 /// @requires $fluent-icon
 $dark-fluent-icon: extend(
     $fluent-icon,
+    $dark-base-icon,
     (
         disabled-color: (
             color: (
@@ -34,35 +37,15 @@ $dark-fluent-icon: extend(
                 500,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark bootstrap icon schema.
 /// @type {Map}
 /// @requires $bootstrap-icon
-$dark-bootstrap-icon: extend(
-    $bootstrap-icon,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-icon: extend($bootstrap-icon, $dark-base-icon);
 
 /// Generates a dark indigo icon schema.
 /// @type {Map}
 /// @requires $indigo-icon
-$dark-indigo-icon: extend(
-    $indigo-icon,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-indigo-icon: extend($indigo-icon, $dark-base-icon);

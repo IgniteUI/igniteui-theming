@@ -7,18 +7,20 @@
 /// @access public
 ////
 
+/// Generates a base dark label schema.
+/// @access private
+/// @type {Map}
+$dark-base-label: (
+    _meta: (
+        name: 'label',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material label schema.
 /// @type {Map}
 /// @requires $material-label
-$dark-material-label: extend(
-    $material-label,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-label: extend($material-label, $dark-base-label);
 
 /// Generates a dark fluent label schema.
 /// @type {Map}
@@ -27,6 +29,7 @@ $dark-material-label: extend(
 /// @requires $fluent-label
 $dark-fluent-label: extend(
     $fluent-label,
+    $dark-base-label,
     (
         color: (
             color: (
@@ -40,47 +43,35 @@ $dark-fluent-label: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark bootstrap label schema.
 /// @type {Map}
 /// @requires $bootstrap-label
-$dark-bootstrap-label: extend(
-    $bootstrap-label,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-label: extend($bootstrap-label, $dark-base-label);
 
 /// Generates a dark indigo label schema.
 /// @type {Map}
 /// @prop {Map} color [contrast-color: ('primary', 500, .6)] - The label color.
 /// @prop {Map} disabled-color [contrast-color: ('primary', 500, .2)] - The label color in disabled state.
-$dark-indigo-label: (
-    color: (
-        contrast-color: (
-            'primary',
-            500,
-            0.6,
+$dark-indigo-label: extend(
+    $indigo-label,
+    $dark-base-label,
+    (
+        color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.6,
+            ),
         ),
-    ),
-    disabled-color: (
-        contrast-color: (
-            'primary',
-            500,
-            0.2,
+        disabled-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
         ),
-    ),
-    _meta: (
-        theme: 'indigo',
-        variant: 'dark',
-    ),
+    )
 );

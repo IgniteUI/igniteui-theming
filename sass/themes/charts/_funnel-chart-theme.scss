@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,8 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
-///
 /// @param {List} $brushes [null] - Defines the palette from which automatically assigned series colors are nelected.
 /// @param {List} $outlines [null] - Defines the palette from which automatically assigned series outline colors are selected.
 /// @param {String} $outer-label-alignment [null] - Sets which side of the chart the outer labels should appear.
@@ -44,14 +43,7 @@
     $text-color: null
 ) {
     $name: 'funnel-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-funnel-chart',
-            'webc': 'igc-funnel-chart',
-            'blazor': 'igb-funnel-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -84,14 +76,7 @@
     $target: 'angular'
 ) {
     $name: 'funnel-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-funnel-chart',
-            'webc': 'igc-funnel-chart',
-            'blazor': 'igb-funnel-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $outer-label-text-style: map.get($categories, 'outer-label-text-style');
     $text-style: map.get($categories, 'text-style');
     $outer-label: type-scale-category($type-scale, $outer-label-text-style);

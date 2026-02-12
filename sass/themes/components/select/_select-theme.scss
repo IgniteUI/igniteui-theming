@@ -39,7 +39,6 @@
     $toggle-button-foreground-filled: null,
     $toggle-button-background-focus--border: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'select'};
     $selector: #{config.element-prefix() + '-' + 'select'};
     $select-schema: ();
 
@@ -87,7 +86,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             toggle-button-background: $toggle-button-background,
             toggle-button-background-focus: $toggle-button-background-focus,

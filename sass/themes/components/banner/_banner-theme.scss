@@ -37,7 +37,6 @@
     $banner-illustration-color: null,
     $border-radius: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'banner'};
     $selector: (#{config.element-prefix() + '-' + 'banner'}, #{'.' + config.element-prefix() + '-' + 'banner'});
     $banner-schema: ();
 
@@ -60,7 +59,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             banner-background: $banner-background,
             banner-message-color: $banner-message-color,

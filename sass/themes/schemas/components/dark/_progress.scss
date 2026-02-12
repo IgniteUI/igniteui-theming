@@ -26,37 +26,23 @@ $dark-base-progress-linear: (
             0.7,
         ),
     ),
+    _meta: (
+        name: 'linear-bar',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material progress-linear schema.
 /// @type {Map}
 /// @requires $material-progress-linear
 /// @requires $dark-base-progress-linear
-$dark-material-progress-linear: extend(
-    $material-progress-linear,
-    $dark-base-progress-linear,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-progress-linear: extend($material-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark fluent progress-linear schema.
 /// @type {Map}
 /// @requires $fluent-progress-linear
 /// @requires $dark-base-progress-linear
-$dark-fluent-progress-linear: extend(
-    $fluent-progress-linear,
-    $dark-base-progress-linear,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-progress-linear: extend($fluent-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark bootstrap progress-linear schema.
 /// @type {Map}
@@ -64,6 +50,7 @@ $dark-fluent-progress-linear: extend(
 /// @requires $bootstrap-progress-linear
 $dark-bootstrap-progress-linear: extend(
     $bootstrap-progress-linear,
+    $dark-base-progress-linear,
     (
         stripes-color: (
             color: (
@@ -71,10 +58,6 @@ $dark-bootstrap-progress-linear: extend(
                 900,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -86,6 +69,7 @@ $dark-bootstrap-progress-linear: extend(
 /// @requires $indigo-progress-linear
 $dark-indigo-progress-linear: extend(
     $indigo-progress-linear,
+    $dark-base-progress-linear,
     (
         text-color: (
             contrast-color: (
@@ -102,10 +86,6 @@ $dark-indigo-progress-linear: extend(
                 0.2,
             ),
         ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -119,52 +99,29 @@ $dark-base-progress-circular: (
             300,
         ),
     ),
+    _meta: (
+        name: 'circular-bar',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material progress-circular schema.
 /// @type {Map}
 /// @requires $material-progress-circular
 /// @requires $dark-base-progress-circular
-$dark-material-progress-circular: extend(
-    $material-progress-circular,
-    $dark-base-progress-circular,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-progress-circular: extend($material-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark fluent progress-circular schema.
 /// @type {Map}
 /// @requires $fluent-progress-circular
 /// @requires $dark-base-progress-circular
-$dark-fluent-progress-circular: extend(
-    $fluent-progress-circular,
-    $dark-base-progress-circular,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-progress-circular: extend($fluent-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark bootstrap progress-circular schema.
 /// @type {Map}
 /// @requires $bootstrap-progress-circular
 /// @requires $dark-base-progress-circular
-$dark-bootstrap-progress-circular: extend(
-    $bootstrap-progress-circular,
-    $dark-base-progress-circular,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-progress-circular: extend($bootstrap-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark indigo progress-circular schema.
 /// @type {Map}
@@ -173,6 +130,7 @@ $dark-bootstrap-progress-circular: extend(
 /// @requires $indigo-progress-circular
 $dark-indigo-progress-circular: extend(
     $indigo-progress-circular,
+    $dark-base-progress-circular,
     (
         base-circle-color: (
             contrast-color: (
@@ -188,10 +146,6 @@ $dark-indigo-progress-circular: extend(
                 50,
                 0.8,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

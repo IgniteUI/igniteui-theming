@@ -1,4 +1,5 @@
 @use '../light/financial-chart' as *;
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -7,22 +8,31 @@
 /// @author <a href="https://github.com/didimmova" target="_blank">Dilyana Dimova</a>
 ////
 
+/// Generates a base financial chart schema.
+/// @access private
+/// @type {Map}
+$dark-financial-chart: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark financial chart schema.
 /// @type {Map}
 /// @requires $material-financial-chart
-$dark-material-financial-chart: $material-financial-chart;
+$dark-material-financial-chart: extend($material-financial-chart, $dark-financial-chart);
 
 /// Generates a dark fluent financial-chart schema.
 /// @type {Map}
 /// @requires $fluent-financial-chart
-$dark-fluent-financial-chart: $fluent-financial-chart;
+$dark-fluent-financial-chart: extend($fluent-financial-chart, $dark-financial-chart);
 
 /// Generates a dark bootstrap financial-chart schema.
 /// @type {Map}
 /// @requires $bootstrap-financial-chart
-$dark-bootstrap-financial-chart: $bootstrap-financial-chart;
+$dark-bootstrap-financial-chart: extend($bootstrap-financial-chart, $dark-financial-chart);
 
 /// Generates a dark indigo financial-chart schema.
 /// @type {Map}
 /// @requires $indigo-financial-chart
-$dark-indigo-financial-chart: $indigo-financial-chart;
+$dark-indigo-financial-chart: extend($indigo-financial-chart, $dark-financial-chart);

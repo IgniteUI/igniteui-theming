@@ -55,7 +55,6 @@
     $hover-selected-color: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'tree'};
     $selector: (#{config.element-prefix() + '-' + 'tree-node'}, #{config.element-prefix() + '-' + 'tree-item'});
     $tree-schema: ();
 
@@ -114,7 +113,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

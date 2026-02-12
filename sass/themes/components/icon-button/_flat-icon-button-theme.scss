@@ -64,7 +64,6 @@
 
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'flat-icon-button'};
     $selector: (
         #{'[' + config.element-prefix() + 'IconButton="flat"]'},
         #{config.element-prefix() + '-' + 'icon-button[variant="flat"]'},
@@ -198,7 +197,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

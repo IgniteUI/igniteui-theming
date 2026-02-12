@@ -1,11 +1,14 @@
 @use 'sass:map';
 @use '../../themes/mixins' as *;
 @use '../../themes/functions' as *;
+@use '../../themes/config' as *;
 @use '../_mixins.scss' as *;
 
 $theme-schemas: () !default;
 
 @mixin tailwind-themes() {
+    @include configure-variable-prefix('ig');
+
     // Avatar
     @include tailwind-theme(
         $component: avatar,

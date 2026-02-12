@@ -40,6 +40,11 @@ $light-date-range-picker: (
             value: 'caption',
         ),
     ),
+
+    _meta: (
+        name: 'date-range-picker',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material date-range-picker schema.
@@ -56,9 +61,9 @@ $material-date-range-picker: extend(
                 rem(56px),
             ),
         ),
+
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -80,7 +85,6 @@ $fluent-date-range-picker: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -117,7 +121,6 @@ $bootstrap-date-range-picker: extend(
 
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -163,7 +166,6 @@ $indigo-date-range-picker: extend(
 
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

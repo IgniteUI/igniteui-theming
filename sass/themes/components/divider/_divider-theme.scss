@@ -22,7 +22,6 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-divider-theme);
 @function divider-theme($schema: $light-material-schema, $color: null, $inset: null) {
-    $name: #{config.variable-prefix() + '-' + 'divider'};
     $selector: #{config.element-prefix() + '-' + 'divider'};
     $divider-schema: ();
 
@@ -37,7 +36,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             color: $color,
             inset: $inset,

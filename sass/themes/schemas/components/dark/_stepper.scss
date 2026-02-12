@@ -88,6 +88,10 @@ $base-stepper: (
             900,
         ),
     ),
+    _meta: (
+        name: 'stepper',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material stepper schema.
@@ -167,10 +171,6 @@ $dark-material-stepper: extend(
                 'error',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -264,10 +264,6 @@ $dark-fluent-stepper: extend(
                 50,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -348,11 +344,6 @@ $dark-bootstrap-stepper: extend(
                 'gray',
                 900,
             ),
-        ),
-
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -710,10 +701,6 @@ $dark-indigo-stepper: extend(
                 'gray',
                 50,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

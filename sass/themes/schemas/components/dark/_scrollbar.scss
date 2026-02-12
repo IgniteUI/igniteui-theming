@@ -7,31 +7,25 @@
 /// @access public
 ////
 
+/// Generates a base dark scrollbar schema.
+/// @access private
+/// @type {Map}
+$dark-base-scrollbar: (
+    _meta: (
+        name: 'scrollbar',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material scrollbar schema.
 /// @type {Map}
 /// @requires $material-scrollbar
-$dark-material-scrollbar: extend(
-    $material-scrollbar,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-scrollbar: extend($material-scrollbar, $dark-base-scrollbar);
 
 /// Generates a dark fluent scrollbar schema.
 /// @type {Map}
 /// @requires $fluent-scrollbar
-$dark-fluent-scrollbar: extend(
-    $fluent-scrollbar,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-scrollbar: extend($fluent-scrollbar, $dark-base-scrollbar);
 
 /// Generates a dark bootstrap scrollbar schema.
 /// @type {Map}
@@ -42,6 +36,7 @@ $dark-fluent-scrollbar: extend(
 /// @requires $bootstrap-scrollbar
 $dark-bootstrap-scrollbar: extend(
     $bootstrap-scrollbar,
+    $dark-base-scrollbar,
     (
         sb-thumb-bg-color: (
             color: (
@@ -70,10 +65,6 @@ $dark-bootstrap-scrollbar: extend(
                 100,
                 0.5,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -87,6 +78,7 @@ $dark-bootstrap-scrollbar: extend(
 /// @requires $indigo-scrollbar
 $dark-indigo-scrollbar: extend(
     $indigo-scrollbar,
+    $dark-base-scrollbar,
     (
         sb-thumb-bg-color: (
             color: (
@@ -111,10 +103,6 @@ $dark-indigo-scrollbar: extend(
                 'gray',
                 50,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

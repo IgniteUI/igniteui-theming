@@ -43,6 +43,10 @@ $light-avatar: (
         ),
     ),
     default-size: 1,
+    _meta: (
+        name: 'avatar',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material avatar schema.
@@ -53,7 +57,6 @@ $material-avatar: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -66,7 +69,6 @@ $fluent-avatar: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -81,7 +83,6 @@ $bootstrap-avatar: extend(
         border-radius: rem(4px),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -126,7 +127,6 @@ $indigo-avatar: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

@@ -23,6 +23,10 @@ $light-label: (
             500,
         ),
     ),
+    _meta: (
+        name: 'label',
+        variant: 'light',
+    ),
 );
 
 /// Generates a light material label schema.
@@ -39,7 +43,6 @@ $material-label: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -65,7 +68,6 @@ $fluent-label: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -91,7 +93,6 @@ $bootstrap-label: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -101,27 +102,29 @@ $bootstrap-label: extend(
 /// @prop {Map} color [color: ('gray', 600)] - The label color.
 /// @prop {Map} disabled-color [color: ('gray', 900, .2)] - The label color in disabled state.
 /// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
-$indigo-label: (
-    color: (
+$indigo-label: extend(
+    $light-label,
+    (
         color: (
-            'gray',
-            600,
+            color: (
+                'gray',
+                600,
+            ),
         ),
-    ),
-    disabled-color: (
-        color: (
-            'gray',
-            900,
-            0.2,
+        disabled-color: (
+            color: (
+                'gray',
+                900,
+                0.2,
+            ),
         ),
-    ),
-    typography: (
-        label: (
-            value: 'caption',
+        typography: (
+            label: (
+                value: 'caption',
+            ),
         ),
-    ),
-    _meta: (
-        theme: 'indigo',
-        variant: 'light',
-    ),
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
 );

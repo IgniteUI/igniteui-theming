@@ -64,7 +64,6 @@
 
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'contained-icon-button'};
     $selector: (
         #{'[' + config.element-prefix() + 'IconButton="contained"]'},
         #{config.element-prefix() + '-' + 'icon-button[variant="contained"]'},
@@ -206,7 +205,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

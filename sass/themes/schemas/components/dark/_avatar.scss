@@ -8,6 +8,7 @@
 ////
 
 /// Generates a base dark avatar schema.
+/// @access private
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 200)] - The background color of the avatar.
 $dark-base-avatar: (
@@ -17,52 +18,29 @@ $dark-base-avatar: (
             200,
         ),
     ),
+    _meta: (
+        name: 'avatar',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material avatar schema.
 /// @type {Map}
 /// @requires $material-avatar
 /// @requires $dark-base-avatar
-$dark-material-avatar: extend(
-    $material-avatar,
-    $dark-base-avatar,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-avatar: extend($material-avatar, $dark-base-avatar);
 
 /// Generates a dark fluent avatar schema.
 /// @type {Map}
 /// @requires $fluent-avatar
 /// @requires $dark-base-avatar
-$dark-fluent-avatar: extend(
-    $fluent-avatar,
-    $dark-base-avatar,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-avatar: extend($fluent-avatar, $dark-base-avatar);
 
 /// Generates a dark bootstrap avatar schema.
 /// @type {Map}
 /// @requires $bootstrap-avatar
 /// @requires $dark-base-avatar
-$dark-bootstrap-avatar: extend(
-    $bootstrap-avatar,
-    $dark-base-avatar,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-avatar: extend($bootstrap-avatar, $dark-base-avatar);
 
 /// Generates a dark indigo avatar schema.
 /// @type {Map}
@@ -71,6 +49,7 @@ $dark-bootstrap-avatar: extend(
 /// @requires $indigo-avatar
 $dark-indigo-avatar: extend(
     $indigo-avatar,
+    $dark-base-avatar,
     (
         color: (
             contrast-color: (
@@ -83,10 +62,6 @@ $dark-indigo-avatar: extend(
                 'gray',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

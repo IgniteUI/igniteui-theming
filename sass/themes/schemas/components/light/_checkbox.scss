@@ -100,11 +100,14 @@ $light-checkbox: (
             rem(24px),
         ),
     ),
-
     typography: (
         label: (
             value: 'body-2',
         ),
+    ),
+    _meta: (
+        name: 'checkbox',
+        variant: 'light',
     ),
 );
 
@@ -190,7 +193,6 @@ $material-checkbox: extend(
 
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -262,7 +264,6 @@ $fluent-checkbox: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -390,7 +391,6 @@ $bootstrap-checkbox: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -531,7 +531,6 @@ $indigo-checkbox: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );
