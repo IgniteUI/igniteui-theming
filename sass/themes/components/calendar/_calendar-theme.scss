@@ -426,10 +426,6 @@
             $picker-background: var(--header-background);
         }
 
-        @if not($picker-hover-foreground) and $picker-background {
-            $picker-hover-foreground: hsla(from adaptive-contrast(var(--picker-background)) h s l / 0.8);
-        }
-
         @if not($weekday-color) and $header-background {
             $weekday-color: hsla(from adaptive-contrast(var(--header-background)) h s l / 0.8);
         }
@@ -441,14 +437,20 @@
         @if not($picker-background) and $content-background {
             $picker-background: var(--content-background);
         }
-
-        @if not($picker-hover-foreground) and $header-background {
-            $picker-hover-foreground: var(--header-background);
-        }
     }
 
     @if not($picker-foreground) and $picker-background {
         $picker-foreground: adaptive-contrast(var(--picker-background));
+    }
+
+    @if $variant != 'bootstrap' {
+        @if not($picker-hover-foreground) and $header-background and not($picker-background) {
+            $picker-hover-foreground: var(--header-background);
+        }
+    }
+
+    @if not($picker-hover-foreground) and $picker-background {
+        $picker-hover-foreground: hsla(from adaptive-contrast(var(--picker-background)) h s l / 0.8);
     }
 
     @if not($picker-focus-foreground) and $picker-hover-foreground {
@@ -796,8 +798,12 @@
             $date-special-focus-border-color: var(--date-special-hover-border-color);
         }
     } @else {
-        @if not($date-special-foreground) and $header-background {
+        @if not($date-special-foreground) and $header-background and not($content-background) {
             $date-special-foreground: var(--header-background);
+        }
+
+        @if not($date-special-foreground) and $content-background {
+            $date-special-foreground: adaptive-contrast(var(--content-background));
         }
 
         @if not($date-special-border-color) and $date-special-foreground {
