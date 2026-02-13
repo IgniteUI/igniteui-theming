@@ -15,7 +15,13 @@ import {describe, it, expect} from 'vitest';
 import * as sass from 'sass-embedded';
 import * as path from 'path';
 import {fileURLToPath} from 'url';
-import {generatePalette, generateTypography, generateElevations, generateTheme} from '../../generators/sass.js';
+import {
+  generatePalette,
+  generateTypography,
+  generateElevations,
+  generateTheme,
+  generateComponentTheme,
+} from '../../generators/sass.js';
 
 // Get the package root directory (where sass/ folder is located)
 const __filename = fileURLToPath(import.meta.url);
@@ -514,5 +520,159 @@ describe('generateTheme', () => {
 
       expect(result.variables).toContain('$app-theme-palette');
     });
+  });
+});
+
+describe('generateComponentTheme', () => {
+  it('uses @include tokens() mixin in output', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).toContain('@include tokens(');
+  });
+
+  it('does NOT contain css-vars-from-theme', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).not.toContain('css-vars-from-theme');
+    expect(result.code).not.toContain('css-vars(');
+  });
+
+  it('uses correct selector for Angular platform', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    // Should contain a selector block wrapping the tokens include
+    expect(result.code).toMatch(/\{[\s\S]*@include tokens\(/);
+  });
+
+  it('uses correct selector for Web Components platform', () => {
+    const result = generateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).toMatch(/\{[\s\S]*@include tokens\(/);
+  });
+
+  it('uses custom selector when provided', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+      selector: '.my-custom-avatar',
+    });
+
+    expect(result.code).toContain('.my-custom-avatar {');
+    expect(result.code).toContain('@include tokens(');
+  });
+
+  it('includes schema variable based on designSystem and variant', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      designSystem: 'indigo',
+      variant: 'dark',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).toContain('$schema: $dark-indigo-schema');
+  });
+
+  it('defaults to material light schema', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).toContain('$schema: $light-material-schema');
+  });
+
+  it('includes token arguments in the theme function call', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000', color: 'white'},
+    });
+
+    expect(result.code).toContain('$background: #ff0000');
+    expect(result.code).toContain('$color: white');
+  });
+
+  it('uses custom variable name when provided', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+      name: 'my-avatar',
+    });
+
+    expect(result.variables).toContain('$my-avatar');
+    expect(result.code).toContain('$my-avatar:');
+  });
+
+  it('uses default variable name when not provided', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.variables).toContain('$custom-avatar-theme');
+    expect(result.code).toContain('$custom-avatar-theme:');
+  });
+
+  it('throws for unknown component', () => {
+    expect(() =>
+      generateComponentTheme({
+        platform: 'angular',
+        component: '__nonexistent_component__',
+        tokens: {background: '#ff0000'},
+      }),
+    ).toThrow('Unknown component');
+  });
+
+  it('uses Angular import for angular platform', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).toContain('igniteui-angular/theming');
+  });
+
+  it('uses generic import for webcomponents platform', () => {
+    const result = generateComponentTheme({
+      platform: 'webcomponents',
+      component: 'avatar',
+      tokens: {background: '#ff0000'},
+    });
+
+    expect(result.code).toContain('igniteui-theming');
+    expect(result.code).not.toContain('igniteui-angular');
+  });
+
+  it('includes description with component name and token count', () => {
+    const result = generateComponentTheme({
+      platform: 'angular',
+      component: 'avatar',
+      tokens: {background: '#ff0000', color: 'white'},
+    });
+
+    expect(result.description).toContain('avatar');
+    expect(result.description).toContain('2 token(s)');
   });
 });

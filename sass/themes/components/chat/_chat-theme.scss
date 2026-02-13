@@ -14,12 +14,11 @@
 
 /// Chat Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$header-background` - The background color of the chat header. Auto-derives: header-color.
-/// - `$message-background` - The background color of message bubbles. Auto-derives: message-color, message-actions-color.
+/// PRIMARY TOKENS:
+/// - `$header-background` — The background color of the chat header.
+/// - `$message-background` — The background color of message bubbles.
 ///
-/// Setting header-background automatically calculates a contrasting header-color.
-/// Setting message-background automatically calculates contrasting message-color and message-actions-color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the chat component.

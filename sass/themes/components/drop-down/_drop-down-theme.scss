@@ -16,13 +16,11 @@
 
 /// Drop-down Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background-color` - The drop-down background. Auto-derives: item-text-color, hover-item-background, focused-item-background, selected-item-background, disabled-item-text-color, header-text-color.
-/// - `$selected-item-background` - The selected item background. Auto-derives: selected-item-text-color, selected-hover-*, selected-focus-*, focused-item-border-color (indigo).
+/// PRIMARY TOKENS:
+/// - `$background-color` — The drop-down background.
+/// - `$selected-item-background` — The selected item background.
 ///
-/// Setting background-color cascades through all item states (hover, focused, selected, disabled).
-/// Selected state colors derive from selected-item-background through hover and focus states.
-/// Icon colors are derived from their corresponding text colors with reduced opacity.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background-color [null] - The drop-down background color. PRIMARY - derives item, hover, focus, selected, disabled colors.

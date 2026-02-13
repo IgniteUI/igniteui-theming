@@ -15,13 +15,13 @@
 
 /// Flat Icon Button Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$foreground` - Foreground (icon) color. Auto-derives: hover-background, focus-background, active-background, hover-foreground, focus-foreground, active-foreground, disabled-foreground, shadow-color, focus-border-color (variant-dependent).
-/// - `$hover-background` - Background color on hover. Auto-derives: hover-foreground.
-/// - `$focus-background` - Background color on focus. Auto-derives: focus-foreground.
-/// - `$active-background` - Background color when active. Auto-derives: active-foreground.
+/// PRIMARY TOKENS:
+/// - `$foreground` — Foreground (icon) color.
+/// - `$hover-background` — Background color on hover.
+/// - `$focus-background` — Background color on focus.
+/// - `$active-background` — Background color when active.
 ///
-/// For flat icon buttons, the foreground color is the primary token. Setting it derives all state backgrounds and their contrasting foreground colors. Derivation behavior varies by design variant (material, fluent, bootstrap, indigo).
+/// For flat icon buttons, the foreground color is the primary token.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema map or icon-button schema to use.
 /// @param {Color} $background [null] - Background color for the flat icon button.

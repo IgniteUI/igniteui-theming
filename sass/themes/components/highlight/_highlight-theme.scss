@@ -15,11 +15,11 @@
 
 /// Highlight Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$resting-background` - The resting state background. Auto-derives: resting-color.
-/// - `$active-background` - The active state background. Auto-derives: active-color.
+/// PRIMARY TOKENS:
+/// - `$resting-background` — The resting state background.
+/// - `$active-background` — The active state background.
 ///
-/// If only background color(s) specified, text color(s) will be assigned automatically to a contrasting color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $resting-background [null]- The background color used for the highlight in its resting state. PRIMARY - derives resting-color.

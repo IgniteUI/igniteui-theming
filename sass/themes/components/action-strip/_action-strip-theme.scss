@@ -15,10 +15,10 @@
 
 /// Action Strip Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$actions-background` - The actions background color. Auto-derives: icon-color.
+/// PRIMARY TOKENS:
+/// - `$actions-background` — The actions background color.
 ///
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $icon-color [null] - The color used for the actions icons. Auto-derived from actions-background.

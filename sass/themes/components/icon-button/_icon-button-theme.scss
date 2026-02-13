@@ -18,13 +18,13 @@
 
 /// Icon Button Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - Background color for the icon button. Auto-derives: foreground.
-/// - `$hover-background` - Background color on hover. Auto-derives: hover-foreground.
-/// - `$focus-background` - Background color on focus. Auto-derives: focus-foreground.
-/// - `$focus-hover-background` - Background color on focus + hover. Auto-derives: focus-hover-foreground.
+/// PRIMARY TOKENS:
+/// - `$background` — Background color for the icon button.
+/// - `$hover-background` — Background color on hover.
+/// - `$focus-background` — Background color on focus.
+/// - `$focus-hover-background` — Background color on focus + hover.
 ///
-/// Setting any background token automatically calculates a contrasting foreground color for that state.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// Generates a theme map for the icon button component.
 /// @deprecated Use flat-icon-button-theme(), contained-icon-button-theme(), or outlined-icon-button-theme() instead.

@@ -2,7 +2,7 @@
  * Handlers for layout scale tools: set_size, set_spacing, set_roundness.
  */
 
-import {COMPONENT_SELECTORS, getComponentPlatformAvailability, getComponentSelector} from '../../knowledge/index.js';
+import {COMPONENT_METADATA, getComponentPlatformAvailability, getComponentSelector} from '../../knowledge/index.js';
 import type {Platform} from '../../utils/types.js';
 import type {SetRoundnessParams, SetSizeParams, SetSpacingParams} from '../schemas.js';
 
@@ -40,8 +40,8 @@ function resolveScope(
   if (component) {
     const normalized = normalizeComponentName(component);
 
-    if (!normalized || !COMPONENT_SELECTORS[normalized]) {
-      const available = Object.keys(COMPONENT_SELECTORS);
+    if (!normalized || !COMPONENT_METADATA[normalized]) {
+      const available = Object.keys(COMPONENT_METADATA);
       const suggestions = normalized ? available.filter((name) => name.includes(normalized)).slice(0, 10) : [];
       const list = suggestions.length > 0 ? suggestions : available.slice(0, 15);
 
@@ -57,7 +57,7 @@ ${list.map((name) => `- ${name}`).join('\n')}`,
       notes.push('Scope ignored because component was provided.');
     }
 
-    const selectorsEntry = COMPONENT_SELECTORS[normalized];
+    const selectorsEntry = COMPONENT_METADATA[normalized].selectors;
     let selectors: string[] = [];
 
     if (platform) {

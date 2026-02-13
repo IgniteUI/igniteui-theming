@@ -16,11 +16,11 @@
 
 /// Grid Summary Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background-color` - The summaries background color. Auto-derives: label-color, result-color, border-color, pinned-border-color.
-/// - `$label-color` - The summaries label color. Auto-derives: label-hover-color.
+/// PRIMARY TOKENS:
+/// - `$background-color` — The summaries background color.
+/// - `$label-color` — The summaries label color.
 ///
-/// Setting background-color automatically calculates contrasting label and result colors, plus border colors.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background-color [null] - The summaries background color. PRIMARY - derives label-color, result-color, border-color, pinned-border-color.

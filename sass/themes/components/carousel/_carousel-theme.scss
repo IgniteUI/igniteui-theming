@@ -16,13 +16,11 @@
 
 /// Carousel Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$button-background` - The nav button background. Auto-derives: button-arrow-color, button-hover-*, button-disabled-*, button-focus-border-color.
-/// - `$indicator-background` - The indicator container background. Auto-derives: indicator-dot-color, indicator-border-color, indicator-active-*, indicator-focus-color.
+/// PRIMARY TOKENS:
+/// - `$button-background` — The nav button background.
+/// - `$indicator-background` — The indicator container background.
 ///
 /// Button colors cascade from button-background through hover and disabled states.
-/// Indicator colors cascade from indicator-background through active and focus states.
-/// Behavior varies by variant (indigo has additional derivation patterns).
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $slide-background [null] - The slide background color.

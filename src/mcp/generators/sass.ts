@@ -26,7 +26,6 @@ import {
   generateWebComponentsThemeSass,
   getComponentTheme,
   getComponentSelector,
-  getVariablePrefix,
   SCHEMA_PRESETS,
 } from '../knowledge/index.js';
 
@@ -378,10 +377,6 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
   const defaultSelectors = getComponentSelector(input.component, input.platform);
   const selector = input.selector || (defaultSelectors.length > 0 ? defaultSelectors[0] : input.component);
 
-  // Get variable prefix from platform
-  const prefix = getVariablePrefix(input.platform);
-  const varName = `${prefix}-${input.component}`;
-
   // Generate the code
   const sections: string[] = [
     generateHeader(`Custom ${input.component} theme`),
@@ -397,11 +392,11 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
   }
   sections.push(');');
 
-  // Add css-vars-from-theme mixin to apply the theme
+  // Apply the theme using tokens mixin (global mode)
   sections.push('');
   sections.push(`// Apply the theme to ${selector}`);
   sections.push(`${selector} {`);
-  sections.push(`  @include css-vars-from-theme(${themeName}, '${varName}');`);
+  sections.push(`  @include tokens(${themeName});`);
   sections.push('}');
 
   const code = sections.join('\n') + '\n';

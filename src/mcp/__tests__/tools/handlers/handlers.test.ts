@@ -423,7 +423,7 @@ describe('handleCreateComponentTheme', () => {
     expect(text).toContain('avatar-theme(');
     expect(text).toContain('$background: #ff5722');
     expect(text).toContain('igc-avatar'); // Platform-specific selector
-    expect(text).toContain('css-vars-from-theme'); // New mixin
+    expect(text).toContain('@include tokens('); // tokens mixin
   });
 
   it('generates CSS code when output is css', async () => {
@@ -440,7 +440,7 @@ describe('handleCreateComponentTheme', () => {
 
     const text = result.content[0].text;
     expect(text).toContain('```css');
-    expect(text).toContain('--background: var(--igx-avatar-background, var(--ig-avatar-background'); // Correct prefix in var() fallback
+    expect(text).toContain('--ig-avatar-background:');
     expect(text).toContain('#ff5722');
   });
 
@@ -550,7 +550,7 @@ describe('handleCreateComponentTheme', () => {
 
     const text = result.content[0].text;
     expect(text).toContain('igx-avatar'); // Angular selector
-    expect(text).toContain('--background: var(--igx-avatar-background'); // Angular prefix in var() fallback
+    expect(text).toContain('--ig-avatar-background:');
   });
 
   it('includes platform-specific selector when platform is provided', async () => {

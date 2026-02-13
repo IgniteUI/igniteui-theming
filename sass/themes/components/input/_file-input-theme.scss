@@ -14,13 +14,11 @@
 
 /// File Input Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$file-names-background` - The file names container background color. Auto-derives: file-names-background--focused, file-names-background--filled, file-names-background--disabled, file-names-foreground, file-names-foreground--focused, file-names-foreground--filled, file-names-foreground--disabled.
-/// - `$file-selector-button-background` - The file input selector button background color. Auto-derives: file-selector-button-background--focused, file-selector-button-background--filled, file-selector-button-background--disabled, file-selector-button-foreground, file-selector-button-foreground--focused, file-selector-button-foreground--filled, file-selector-button-foreground--disabled.
+/// PRIMARY TOKENS:
+/// - `$file-names-background` — The file names container background color.
+/// - `$file-selector-button-background` — The file input selector button background color.
 ///
-/// Setting file-names-background automatically calculates contrasting foreground colors for all states.
-/// Setting file-selector-button-background automatically calculates contrasting button foreground colors for all states.
-/// NOTE: Derivation only occurs if the background is not `transparent`.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $file-names-background [null] - The file names container background color. PRIMARY - derives all file-names foreground colors.

@@ -15,10 +15,10 @@
 
 /// Banner Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$banner-background` - The banner background color. Auto-derives: banner-message-color, banner-illustration-color.
+/// PRIMARY TOKENS:
+/// - `$banner-background` — The banner background color.
 ///
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $banner-background [null] - The color used for the banner background. PRIMARY - derives message and illustration colors.

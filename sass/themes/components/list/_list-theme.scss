@@ -16,13 +16,10 @@
 
 /// List Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
+/// PRIMARY TOKENS:
 /// - `$background` or `$item-background` - The list/item background. Auto-derives: header-background, item-background-hover, item-background-active, item-background-selected, all text/action/thumbnail colors.
 ///
-/// Setting background or item-background cascades through all item states (hover, active, selected).
-/// Each state derives its own text colors, title, subtitle, action, and thumbnail colors.
-/// Subtitle colors are slightly muted (0.74 opacity) compared to main text colors.
-/// Border color auto-derived in fluent/bootstrap variants.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The list background color. PRIMARY - derives item-background if not set.

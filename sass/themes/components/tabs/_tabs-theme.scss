@@ -15,12 +15,11 @@
 
 /// Tabs Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$item-background` - The tabs header background. Auto-derives: item-text-color, item-icon-color, item-hover colors, item-active colors, button colors, border-color.
-/// - `$item-active-color` - The active tab text color. Auto-derives: item-active-icon-color, indicator-color, item-active-hover colors.
+/// PRIMARY TOKENS:
+/// - `$item-background` — The tabs header background.
+/// - `$item-active-color` — The active tab text color.
 ///
 /// Setting just `$item-background` will theme all tab states consistently.
-/// The `$item-active-color` controls the indicator and active text appearance.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $item-text-color [null] - The color used for the tab text color. Auto-derived from item-background or synced with item-icon-color.

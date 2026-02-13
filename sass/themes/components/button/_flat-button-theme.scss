@@ -16,14 +16,13 @@
 
 /// Flat Button Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$foreground` - The text color of the button. Auto-derives: hover-background, focus-background, active-background, hover-foreground, focus-foreground, active-foreground, disabled-foreground (variant-dependent).
-/// - `$hover-background` - The hover background color. Auto-derives: hover-foreground.
-/// - `$focus-background` - The focus background color. Auto-derives: focus-foreground, focus-visible-background.
-/// - `$active-background` - The active background color. Auto-derives: active-foreground.
+/// PRIMARY TOKENS:
+/// - `$foreground` — The text color of the button.
+/// - `$hover-background` — The hover background color.
+/// - `$focus-background` — The focus background color.
+/// - `$active-background` — The active background color.
 ///
-/// For flat buttons, the foreground color is the primary token. Setting it derives all state backgrounds and their contrasting foreground colors. Derivation behavior varies by design variant (material, fluent, bootstrap, indigo).
-/// Does NOT apply for disabled state colors.
+/// For flat buttons, the foreground color is the primary token.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the button.

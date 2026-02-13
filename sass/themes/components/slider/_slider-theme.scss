@@ -16,15 +16,12 @@
 
 /// Slider Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$track-color` - The filled track color. Auto-derives: track-hover-color, label-background-color, thumb-color (material), thumb-border-color (fluent/indigo), disabled-fill-track-color.
-/// - `$base-track-color` - The unfilled track background. Auto-derives: base-track-hover-color, track-step-color, disabled-base-track-color.
-/// - `$thumb-color` - The thumb color (material). Auto-derives: label-background-color (bootstrap), thumb-border-color (bootstrap), disabled-thumb-color.
+/// PRIMARY TOKENS:
+/// - `$track-color` — The filled track color.
+/// - `$base-track-color` — The unfilled track background.
+/// - `$thumb-color` — The thumb color (material).
 ///
-/// The relationship between track and thumb varies by design variant:
-/// - Material: track-color and thumb-color are bidirectional (set either one)
-/// - Fluent/Indigo: track-color derives thumb-border-color
-/// - Bootstrap: thumb-color derives thumb-border-color and label-background-color
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $track-color [null] - The color of the track. PRIMARY - derives hover, label, and thumb colors.

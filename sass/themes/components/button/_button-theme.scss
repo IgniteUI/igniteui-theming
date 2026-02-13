@@ -20,13 +20,12 @@
 
 /// Button Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The main button background. Auto-derives: foreground, icon-color (via contrast).
-/// - `$hover-background` - Hover state background. Auto-derives: hover-foreground, icon-color-hover.
-/// - `$focus-background` - Focus state background. Auto-derives: focus-foreground, focus-visible colors.
+/// PRIMARY TOKENS:
+/// - `$background` — The main button background.
+/// - `$hover-background` — Hover state background.
+/// - `$focus-background` — Focus state background.
 ///
 /// Setting just `$background` will create a properly contrasted button.
-/// Disabled state colors must be set explicitly (not auto-derived).
 ///
 /// @deprecated Use flat-button-theme(), contained-button-theme(), outlined-button-theme(), or fab-button-theme() instead.
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.

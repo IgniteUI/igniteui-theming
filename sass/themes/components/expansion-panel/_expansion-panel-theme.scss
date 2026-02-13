@@ -15,12 +15,11 @@
 
 /// Expansion Panel Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$header-background` - The panel header background. Auto-derives: header-title-color, header-icon-color, header-description-color, header-focus-background, disabled colors.
-/// - `$body-background` - The panel body background. Auto-derives: body-color.
+/// PRIMARY TOKENS:
+/// - `$header-background` — The panel header background.
+/// - `$body-background` — The panel body background.
 ///
-/// Setting header-background cascades to all header text/icon colors and focus/disabled states.
-/// Body background independently derives its text color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $header-background [null] - The panel header background color. PRIMARY - derives header colors, focus, disabled.

@@ -15,13 +15,12 @@
 
 /// Tree Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The node background. Auto-derives: foreground, all state backgrounds (selected, active, active-selected, disabled), hover colors.
-/// - `$background-selected` - The selected node background. Auto-derives: foreground-selected, hover-selected-color.
-/// - `$background-active` - The active node background. Auto-derives: foreground-active, background-active-selected.
+/// PRIMARY TOKENS:
+/// - `$background` — The node background.
+/// - `$background-selected` — The selected node background.
+/// - `$background-active` — The active node background.
 ///
-/// Setting background cascades through all node states (selected, active, disabled).
-/// Each state derives its own foreground (text) color from its background.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} background [null] - The background color used for the tree node. PRIMARY - derives all state colors.

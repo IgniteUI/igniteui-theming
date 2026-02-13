@@ -15,16 +15,14 @@
 
 /// Stepper Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$step-background` - The base step background. Auto-derives: hover/focus backgrounds, indicator colors, title/subtitle colors for all step states (incomplete, current, invalid, complete, disabled).
-/// - `$indicator-background` - The step indicator background. Auto-derives: indicator-color, indicator-outline.
-/// - `$invalid-indicator-background` - The invalid step indicator. Auto-derives: invalid title/subtitle colors when step-background not set.
-/// - `$current-indicator-background` - The current step indicator. Auto-derives: current-indicator-color, current-indicator-outline.
-/// - `$complete-indicator-background` - The completed step indicator. Auto-derives: complete-indicator-color.
+/// PRIMARY TOKENS:
+/// - `$step-background` — The base step background.
+/// - `$indicator-background` — The step indicator background.
+/// - `$invalid-indicator-background` — The invalid step indicator.
+/// - `$current-indicator-background` — The current step indicator.
+/// - `$complete-indicator-background` — The completed step indicator.
 ///
-/// Setting step-background cascades through all step states (incomplete, current, invalid, complete, disabled).
-/// Each state (current, invalid, complete) can be independently themed by setting its specific tokens.
-/// Indicator colors are derived from their respective indicator backgrounds.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 ///

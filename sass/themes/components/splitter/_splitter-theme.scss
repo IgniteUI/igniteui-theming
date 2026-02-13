@@ -14,11 +14,10 @@
 
 /// Splitter Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$bar-color` - The bar background color. Auto-derives: handle-color, expander-color, focus-color.
+/// PRIMARY TOKENS:
+/// - `$bar-color` — The bar background color.
 ///
-/// Setting bar-color automatically calculates contrasting colors for handle and expander.
-/// Focus color behavior varies by variant (indigo uses same as bar-color, others use shaded version).
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $bar-color [null] - The background color of the bar. PRIMARY - derives handle, expander, focus colors.

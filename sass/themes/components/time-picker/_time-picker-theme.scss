@@ -15,14 +15,12 @@
 
 /// Time Picker Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background-color` - The picker panel background. Auto-derives: text-color, selected-text-color, active-item-background, border-color.
+/// PRIMARY TOKENS:
+/// - `$background-color` — The picker panel background.
 /// - `$selected-text-color` or `$active-item-background` - The selected/active accent color. These derive from each other and from header-background.
-/// - `$header-background` - The header background. Auto-derives: header-hour-text-color. Also derivable from selected-text-color or background-color.
+/// - `$header-background` — The header background.
 ///
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
-/// Does ___not___ apply for disabled state colors.
-/// Selected-text-color and active-item-background are interconnected - setting one derives the other.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $text-color [null] - The text color of a open time picker. Auto-derived from background-color.

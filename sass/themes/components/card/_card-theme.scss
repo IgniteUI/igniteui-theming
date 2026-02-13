@@ -16,11 +16,10 @@
 
 /// Card Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The card background color. Auto-derives: header-text-color, subtitle-text-color, content-text-color, actions-text-color.
+/// PRIMARY TOKENS:
+/// - `$background` — The card background color.
 ///
-/// Setting the background automatically calculates contrasting text colors for all card sections.
-/// Content and subtitle text colors are slightly muted compared to header and actions.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The card background color. PRIMARY - derives all text colors.

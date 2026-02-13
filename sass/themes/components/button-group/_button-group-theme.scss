@@ -15,14 +15,11 @@
 
 /// Button Group Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$item-background` - The base item background. Auto-derives: item-text-color, item-icon-color, item-border-color, all hover/selected/focused/disabled backgrounds and colors.
-/// - `$item-selected-background` - The selected item background. Auto-derives: selected text/icon colors, selected hover/focus backgrounds.
+/// PRIMARY TOKENS:
+/// - `$item-background` — The base item background.
+/// - `$item-selected-background` — The selected item background.
 ///
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
-/// Does ___not___ apply for disabled state colors.
-/// Border colors cascade from item-border-color through all states.
-/// Icon colors are kept in sync with their corresponding text colors.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {box-shadow} $shadow [null] - The shadow to be applied for the button group.

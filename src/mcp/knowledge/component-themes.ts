@@ -18,6 +18,16 @@ export interface ComponentToken {
 }
 
 /**
+ * Represents a primary token entry extracted from SassDoc descriptions.
+ */
+export interface PrimaryToken {
+  /** Token name without $ prefix (e.g., 'background', 'header-background') */
+  name: string;
+  /** Brief description of what this token controls and what it derives */
+  description: string;
+}
+
+/**
  * Represents a component theme definition.
  */
 export interface ComponentTheme {
@@ -25,8 +35,12 @@ export interface ComponentTheme {
   name: string;
   /** The Sass function name (e.g., 'button-theme', 'avatar-theme') */
   themeFunctionName: string;
-  /** Description of the theme function */
+  /** Title/description of the theme (e.g., 'Calendar Theme') */
   description: string;
+  /** Structured primary tokens extracted from SassDoc */
+  primaryTokens?: PrimaryToken[];
+  /** Optional summary prose about token behavior */
+  primaryTokensSummary?: string;
   /** Available design tokens */
   tokens: ComponentToken[];
 }

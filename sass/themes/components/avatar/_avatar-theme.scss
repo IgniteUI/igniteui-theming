@@ -16,10 +16,10 @@
 
 /// Avatar Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The avatar background color. Auto-derives: color (text), icon-color.
+/// PRIMARY TOKENS:
+/// - `$background` — The avatar background color.
 ///
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color used of the avatar. PRIMARY - derives color, icon-color.

@@ -16,12 +16,11 @@
 
 /// Contained Button Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The background color of the button. Auto-derives: foreground, icon-color, hover-background, focus-background, active-background, and their foreground colors.
-/// - `$foreground` - The text color of the button. Auto-derives: hover-foreground, focus-foreground, active-foreground (as fallbacks).
+/// PRIMARY TOKENS:
+/// - `$background` — The background color of the button.
+/// - `$foreground` — The text color of the button.
 ///
-/// Setting background automatically calculates a contrasting foreground color and derives all state backgrounds with their contrasting foreground colors. Derivation behavior varies by design variant (material, fluent, bootstrap, indigo).
-/// Does NOT apply for disabled state colors.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the button. PRIMARY - derives foreground, icon-color, hover-background, focus-background, active-background.

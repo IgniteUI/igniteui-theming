@@ -16,13 +16,12 @@
 
 /// Bottom Navigation Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The bar background color. Auto-derives: label-color, icon-color, disabled colors.
+/// PRIMARY TOKENS:
+/// - `$background` — The bar background color.
 /// - `$label-color` or `$icon-color` - Idle state colors. Either one derives the other, plus disabled colors.
 /// - `$label-selected-color` or `$icon-selected-color` - Selected state colors. Either one derives the other.
 ///
-/// If only background color is specified, the label and icon colors will be assigned automatically to a contrasting color.
-/// Label and icon colors are kept in sync - setting one derives the other if not explicitly set.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color used for the bar. PRIMARY - derives label-color, icon-color.

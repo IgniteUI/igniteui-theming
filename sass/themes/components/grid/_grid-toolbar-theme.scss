@@ -16,14 +16,13 @@
 
 /// Grid Toolbar Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background-color` - The toolbar background color. Auto-derives: title-text-color.
-/// - `$dropdown-background` - The toolbar drop-down background color. Auto-derives: item-text-color, item-hover-text-color, item-focus-text-color.
-/// - `$item-hover-background` - The drop-down item hover background. Auto-derives: item-hover-text-color.
-/// - `$item-focus-background` - The drop-down item focus background. Auto-derives: item-focus-text-color.
+/// PRIMARY TOKENS:
+/// - `$background-color` — The toolbar background color.
+/// - `$dropdown-background` — The toolbar drop-down background color.
+/// - `$item-hover-background` — The drop-down item hover background.
+/// - `$item-focus-background` — The drop-down item focus background.
 ///
-/// Setting background-color automatically calculates a contrasting title-text-color.
-/// Setting dropdown-background calculates contrasting text colors for dropdown items.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background-color [null] - The toolbar background color. PRIMARY - derives title-text-color.

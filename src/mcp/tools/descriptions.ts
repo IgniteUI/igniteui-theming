@@ -726,12 +726,16 @@ export const TOOL_DESCRIPTIONS = {
 
   COMPOUND COMPONENTS:
   - Some components like "combo", "grid", "select" are compound - they use multiple
-    internal components that may also need theming
-  - The response includes a "Compound checklist (required)" listing related themes
-    with scoped selectors for Angular and Web Components
-  - For each checklist item: call get_component_design_tokens, then create_component_theme
-    using the scoped selector listed for the target platform
-  - Items with missing selectors are marked "skipped - selector missing"
+    internal components that each need their own theme
+  - The response includes "Related themes and token derivations" listing each related
+    theme and, where available, derivation hints showing how child token values relate
+    to parent/sibling tokens (e.g., "foreground → adaptive-contrast of calendar.content-background")
+  - Follow derivation hints when setting child token values. If the user specifies an
+    explicit value, use that instead of the derived value.
+  - For each related theme: call get_component_design_tokens, then create_component_theme
+    using the selector assigned to that child under "Scopes by Platform" and "Related themes"
+  - Use \`@include tokens(child-theme(...))\` for each related theme inside the appropriate
+    scope selector
 
   VARIANTS INFO:
   - If you query a base component that has variants (e.g., "button"), the response
@@ -745,8 +749,7 @@ export const TOOL_DESCRIPTIONS = {
   - description: Information about the component theme
   - tokens: Array of { name, type, description } for each available token
   - variants: (if applicable) List of variant-specific theme names
-  - compoundInfo: (if applicable) Related themes for compound components
-  - compoundChecklist: (if applicable) Ordered list of related themes + selectors
+  - compoundInfo: (if applicable) Related themes with token derivation hints and guidance
 </output>
 
 <error_handling>
@@ -770,7 +773,7 @@ export const TOOL_DESCRIPTIONS = {
   // ---------------------------------------------------------------------------
   // create_component_theme - Theme generation tool
   // ---------------------------------------------------------------------------
-  create_component_theme: `Generate Sass code to customize an Ignite UI component's appearance using design tokens.
+  create_component_theme: `Generate Sass or CSS code to customize an Ignite UI component's appearance using design tokens.
 
 <use_case>
   Use this tool AFTER calling get_component_design_tokens to customize specific
@@ -782,8 +785,8 @@ export const TOOL_DESCRIPTIONS = {
   1. First call get_component_design_tokens to discover available tokens
   2. Choose which tokens to customize based on your design requirements
   3. Specify designSystem and variant to match the global theme or the one explicitly requested (defaults to Material light)
-  4. Call this tool with component name and token values
-  5. Receive ready-to-use Sass code with the component theme
+  4. Call this tool with component name, token values, and output format ("sass" or "css")
+  5. Receive ready-to-use Sass or CSS code with the component theme
 </workflow>
 
 <important_notes>
@@ -792,12 +795,13 @@ export const TOOL_DESCRIPTIONS = {
   - variant: Choose "light" (default) or "dark"
   - The correct schema (e.g., $light-bootstrap-schema, $dark-material-schema) is
     automatically selected and passed to the component theme function
+  - The correct output: Choose output format based on the target file type (Sass vs CSS)
   - This ensures component tokens inherit proper defaults from the design system
 
   TOKEN VALIDATION:
   - All provided token names are validated against the component's schema
   - Invalid tokens return an error with the list of valid token names
-  - You don't need to specify all tokens - only those you want to customize
+  - You don't need to specify all tokens - only those you want to customize (prefer PRIMARY tokens to minimize the number of overrides)
 
   TOKEN VALUE FORMATS:
   - Colors: Any valid CSS color format (hex, rgb, hsl, named colors)
@@ -811,18 +815,24 @@ export const TOOL_DESCRIPTIONS = {
   - Web Components: Uses "igc-*" element selectors
   - Custom selectors supported for targeted styling (e.g., ".my-button")
 
+  SASS OUTPUT:
+  - Generated code uses \`@include tokens($theme)\` to apply the theme
+  - The tokens mixin emits --ig-{component}-{token} CSS custom properties in global mode
+
   COMPOUND COMPLETENESS:
-  - If the user asks for a compound component AND selectors are available,
-    the response is incomplete unless related theme calls are also generated
-  - Use the compound checklist from get_component_design_tokens to drive the sequence
+  - If the user asks for a compound component, the response is incomplete unless
+    related theme calls are also generated
+  - Use the related themes list from get_component_design_tokens to drive the sequence
+  - All related themes should use the compound component's selector as the wrapper
+  - Follow token derivation hints to set child token values consistently
 </important_notes>
 
 <output>
   Returns:
-  - Generated Sass code with:
-    - Platform-specific @use import
-    - Theme function call with $schema parameter and provided token values
-    - css-vars-from-theme mixin to apply the theme to the selector
+  - Generated Sass or CSS code with:
+    - Platform-specific @use import (Sass only)
+    - Theme function call with $schema parameter and provided token values (Sass only)
+    - tokens mixin to apply the theme to the selector (Sass only)
   - Description of what was generated
   - Design system and variant used
   - List of tokens used
@@ -842,10 +852,7 @@ export const TOOL_DESCRIPTIONS = {
     "variant": "light",
     "component": "flat-button",
     "tokens": {
-      "background": "#1976D2",
-      "foreground": "#FFFFFF",
-      "hover-background": "#1565C0",
-      "border-radius": "24px"
+      "foreground": "#1976d2",
     }
   }
 
@@ -855,14 +862,11 @@ export const TOOL_DESCRIPTIONS = {
 
   $custom-flat-button-theme: flat-button-theme(
     $schema: $light-material-schema,
-    $background: #1976D2,
-    $foreground: #FFFFFF,
-    $hover-background: #1565C0,
-    $border-radius: 24px
+    $foreground: #1976d2,
   );
 
-  igx-button[igxButton="flat"] {
-    @include css-vars-from-theme($custom-flat-button-theme, 'igx-button');
+  .igx-button--flat {
+    @include tokens($custom-flat-button-theme);
   }
   \`\`\`
 
@@ -887,24 +891,32 @@ export const TOOL_DESCRIPTIONS = {
   );
 
   igc-avatar {
-    @include css-vars-from-theme($custom-avatar-theme, 'ig-avatar');
+    @include tokens($custom-avatar-theme);
   }
   \`\`\`
 </example>
 
 <compound_example>
-  Combo (compound) requires multiple calls using the scoped selectors from
-  get_component_design_tokens:
-  1) get_component_design_tokens { "component": "combo" }
-  2) create_component_theme { "component": "combo", ... }
-  3) create_component_theme { "component": "input-group", "selector": "igx-combo igx-input-group", ... }
-  4) create_component_theme { "component": "drop-down", "selector": ".igx-drop-down__list", ... }
-  5) create_component_theme { "component": "checkbox", "selector": "igx-combo-item igx-checkbox", ... }
+  Date Picker (compound) — child themes may use different scoped selectors per platform.
+  Follow token derivation hints and scope assignments from get_component_design_tokens:
+  1) get_component_design_tokens { "component": "date-picker" }
+  2) create_component_theme { "component": "date-picker", ... }
+  3) create_component_theme { "component": "calendar", "selector": ".igx-date-picker", ... }
+  4) create_component_theme { "component": "flat-button", "selector": ".igx-date-picker", ... }
+  5) create_component_theme { "component": "input-group", "selector": "igx-date-picker", ... }
+
+  Each call generates \`@include tokens($theme)\` inside the assigned scope selector.
+  - If you are targeting Angular, use the Angular selectors from the scopes table.
+  - If you are targeting Web Components, use the Web Components selectors from the scopes table.
+  - If you are targeting React, use the React selectors from the scopes table.
+  - If you are targeting Blazor, use the Blazor selectors from the scopes table.
+  The tokens mixin emits --ig-{component}-{token} variables that child components
+  consume via var() fallback — no per-child selectors needed.
 </compound_example>
 
 <related_tools>
-  - get_component_design_tokens: MUST call first to discover valid tokens
   - detect_platform: Run to auto-detect platform for correct imports
+  - get_component_design_tokens: MUST call first to discover valid tokens
   - create_theme: Use for full theme (palette + typography + elevations)
 </related_tools>`,
 

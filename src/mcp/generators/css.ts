@@ -204,7 +204,7 @@ export interface ComponentThemeCssOptions {
  * Generate CSS custom properties for a component theme.
  *
  * This function compiles Sass code that uses the component theme function
- * and @include css-vars-from-theme() mixin, then returns the compiled CSS output.
+ * and @include tokens() mixin, then returns the compiled CSS output.
  *
  * @example
  * const result = await generateComponentThemeCss({
@@ -267,7 +267,7 @@ ${themeName}: ${themeFn}(
 
 // Apply the theme to ${selector}
 ${selector} {
-  @include css-vars-from-theme(${themeName}, '${varName}');
+  @include tokens(${themeName});
 }
 `;
 

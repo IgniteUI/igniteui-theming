@@ -243,8 +243,7 @@ describe('generateComponentThemeCss', () => {
     // Should contain the selector
     expect(result.css).toContain('igc-avatar');
 
-    // Should contain CSS custom properties with correct prefix in var() fallback
-    expect(result.css).toContain('--background: var(--igx-avatar-background, var(--ig-avatar-background');
+    expect(result.css).toContain('--ig-avatar-background');
   });
 
   it('should use platform-specific selector as default when no selector provided', async () => {
@@ -353,10 +352,8 @@ describe('generateComponentThemeCss', () => {
       _loadPaths: TEST_LOAD_PATHS,
     });
 
-    // Should use the Angular selector
     expect(result.css).toMatch(/igx-avatar/);
-    // Should use igx prefix for variables in var() fallback
-    expect(result.css).toContain('--background: var(--igx-avatar-background');
+    expect(result.css).toContain('--ig-avatar-background');
   });
 
   it('should include schema parameter for bootstrap design system', async () => {

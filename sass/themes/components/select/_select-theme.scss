@@ -16,12 +16,10 @@
 
 /// Select Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$toggle-button-background` - The toggle button background. Auto-derives: toggle-button-foreground, toggle-button-background-focus, toggle-button-foreground-focus, toggle-button-foreground-filled.
+/// PRIMARY TOKENS:
+/// - `$toggle-button-background` — The toggle button background.
 ///
 /// Toggle button colors cascade from toggle-button-background through focus states.
-/// Behavior varies by variant (material uses shaded focus background, others use same as base).
-/// Bootstrap/indigo variants derive focus foreground from border variant background.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @requires $light-material-schema

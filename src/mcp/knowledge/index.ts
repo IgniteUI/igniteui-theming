@@ -155,32 +155,24 @@ export {
   searchComponents,
 } from './component-themes.js';
 
-// Component Selectors
+// Component Metadata (unified: selectors, variants, compound theming)
 export {
   type ComponentSelectors,
-  type CompoundComponentInfo,
-  type CompoundInnerSelectors,
-  COMPONENT_SELECTORS,
-  COMPONENT_VARIANTS,
+  type ComponentMetadata,
+  type CompoundInfo,
+  type TokenDerivation,
+  type ScopeSelectors,
+  COMPONENT_METADATA,
   VARIANT_THEME_NAMES,
-  COMPOUND_COMPONENTS,
   getComponentSelector,
   hasVariants,
   getVariants,
   isVariantTheme,
   getCompoundComponentInfo,
   isCompoundComponent,
-  getPartSelector,
-  getAngularInnerSelector,
-  getInnerSelector,
-  hasPartSelectors,
-  hasAngularInnerSelectors,
-  hasInnerSelectors,
-  getAllPartSelectors,
-  getAllAngularInnerSelectors,
-  getAllInnerSelectors,
+  getTokenDerivationsForChild,
   // Platform availability
   isComponentAvailable,
   getComponentsForPlatform,
   getComponentPlatformAvailability,
-} from './component-selectors.js';
+} from './component-metadata.js';

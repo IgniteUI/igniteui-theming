@@ -15,12 +15,11 @@
 
 /// Chip Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The main chip background. Auto-derives: text-color, border-color, hover/focus/selected backgrounds.
-/// - `$selected-background` - Selected state background. Auto-derives: selected-text-color, selected-border-color, hover-selected/focus-selected colors.
+/// PRIMARY TOKENS:
+/// - `$background` — The main chip background.
+/// - `$selected-background` — Selected state background.
 ///
 /// Setting just `$background` will create a complete chip theme with all states properly derived.
-/// The selected state can be customized separately via `$selected-background`.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {List} $border-radius [null] - The chip border-radius.

@@ -14,13 +14,13 @@
 
 /// Query Builder Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The background color. Auto-derives: label-foreground, header-background.
-/// - `$header-background` - The header background color. Auto-derives: header-foreground, subquery-header-background.
-/// - `$subquery-header-background` - The subquery header background. Auto-derives: subquery-border-color.
-/// - `$subquery-border-color` - The subquery border color. Auto-derives: separator-color, header-border (bootstrap).
+/// PRIMARY TOKENS:
+/// - `$background` — The background color.
+/// - `$header-background` — The header background color.
+/// - `$subquery-header-background` — The subquery header background.
+/// - `$subquery-border-color` — The subquery border color.
 ///
-/// Setting background starts a derivation chain: background → header-background → subquery-header-background → subquery-border-color → separator-color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the filtering row. PRIMARY - derives label-foreground, header-background.

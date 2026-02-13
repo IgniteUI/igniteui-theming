@@ -16,12 +16,11 @@
 
 /// Navigation Drawer Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The drawer background color. Auto-derives: all item text/icon colors, item-hover-background, item-active-background, disabled colors.
-/// - `$item-active-background` - The active item background. Auto-derives: item-active-text-color, item-active-icon-color.
+/// PRIMARY TOKENS:
+/// - `$background` — The drawer background color.
+/// - `$item-active-background` — The active item background.
 ///
-/// Setting background cascades through all item states (idle, hover, active, disabled).
-/// The active state colors can be independently controlled via item-active-background.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The navigation drawer background color. PRIMARY - derives all item colors.

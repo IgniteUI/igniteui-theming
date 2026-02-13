@@ -16,13 +16,12 @@
 
 /// Combo Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$toggle-button-background` - The toggle button background. Auto-derives: toggle-button-foreground, toggle-button-background-focus, toggle-button-foreground-focus, toggle-button-background-disabled, toggle-button-foreground-disabled, toggle-button-foreground-filled.
-/// - `$empty-list-background` - The empty list background. Auto-derives: empty-list-placeholder-color.
-/// - `$clear-button-background-focus` - The clear button focus background. Auto-derives: clear-button-foreground-focus.
+/// PRIMARY TOKENS:
+/// - `$toggle-button-background` — The toggle button background.
+/// - `$empty-list-background` — The empty list background.
+/// - `$clear-button-background-focus` — The clear button focus background.
 ///
 /// Toggle button colors cascade from toggle-button-background through focus and disabled states.
-/// Behavior varies by variant (material uses shaded focus background, others use same as base).
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $search-separator-border-color [null] - The combo search box separator color.

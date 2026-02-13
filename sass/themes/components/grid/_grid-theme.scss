@@ -16,14 +16,14 @@
 
 /// Grid Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$header-background` - The table header background color. Auto-derives: header-text-color, header-border-color, header-selected-background, sorted-header-icon-color, expand-all-icon-color, expand-all-icon-hover-color, group-row-background, grouparea-background, filtering-header-background, filtering-row-background.
-/// - `$content-background` - The table body background color. Auto-derives: content-text-color, row-odd-background, row-even-background, row-hover-background, row-border-color, row-selected-background, cell-selected-background, cell-editing-background, cell-active-border-color, pinned-border-color, edit-mode-color.
-/// - `$ghost-header-background` - The dragged header background color. Auto-derives: ghost-header-text-color, ghost-header-icon-color.
-/// - `$group-row-background` - The grid group row background color. Auto-derives: expand-icon-color, group-row-selected-background, group-label-text, group-count-background.
-/// - `$grouparea-background` - The grid group area background color. Auto-derives: grouparea-color, drop-area-background.
+/// PRIMARY TOKENS:
+/// - `$header-background` — The table header background color.
+/// - `$content-background` — The table body background color.
+/// - `$ghost-header-background` — The dragged header background color.
+/// - `$group-row-background` — The grid group row background color.
+/// - `$grouparea-background` — The grid group area background color.
 ///
-/// Setting header-background and content-background gives you comprehensive grid styling with automatic contrast calculations.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $header-background [null] - The table header background color. PRIMARY - derives header-text-color, header-border-color, and many more.

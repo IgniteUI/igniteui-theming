@@ -16,11 +16,10 @@
 
 /// Snackbar Theme
 ///
-/// PRIMARY TOKENS (set these first for quick theming):
-/// - `$background` - The background color. Auto-derives: text-color, button-color.
+/// PRIMARY TOKENS:
+/// - `$background` — The background color.
 ///
-/// If you specify a background color, but do not specify colors for either the
-/// button or the text, their colors will be set automatically to a contrasting color.
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color used in the snackbar. PRIMARY - derives text-color, button-color.
