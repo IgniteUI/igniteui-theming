@@ -13,7 +13,10 @@
 /// @prop {Map} handle-color [color: ('gray', 400)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 400)] - The color for the arrow expander's.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(2px))] - The border radius used for splitter.
-/// @prop {Map} focus-color [color: ('secondary', 500)] - The color used for focused splitter bar.
+/// @prop {Map} focus-color [color: ('primary', 500)] - The color used for focused splitter bar.
+/// @prop {Map} bar-color-active [color: ('gray', 300)] - The background color of the bar when pressed.
+/// @prop {Map} handle-color-active [color: ('gray', 600)] - The color for the bar drag handle when pressed.
+/// @prop {Map} expander-color-active [color: ('gray', 600)] - The color for the arrow expander's when pressed.
 /// @prop {Number} size [4px] - The size of the splitter, it's width for vertical and height for horizontal splitter.
 $light-splitter: (
     bar-color: (
@@ -25,7 +28,7 @@ $light-splitter: (
 
     focus-color: (
         color: (
-            'secondary',
+            'primary',
             500,
         ),
     ),
@@ -41,6 +44,27 @@ $light-splitter: (
         color: (
             'gray',
             400,
+        ),
+    ),
+
+    bar-color-active: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+
+    handle-color-active: (
+        color: (
+            'gray',
+            600,
+        ),
+    ),
+
+    expander-color-active: (
+        color: (
+            'gray',
+            600,
         ),
     ),
 
@@ -61,10 +85,17 @@ $light-splitter: (
 
 /// Generates a material splitter schema.
 /// @type {Map}
+/// @prop {Map} focus-color [color: ('secondary', 500)] - The color used for focused splitter bar.
 /// @requires {Map} $light-splitter
 $material-splitter: extend(
     $light-splitter,
     (
+        focus-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
         _meta: (
             theme: 'material',
         ),
@@ -98,9 +129,12 @@ $bootstrap-splitter: extend(
 /// Generates an indigo splitter schema.
 /// @type {Map}
 /// @prop {Map} bar-color [color: ('gray', 400)] - The background color of the bar.
-/// @prop {Map} focus-color [color: ('gray', 500)] - The color used for focused splitter bar.
+/// @prop {Map} focus-color [color: ('primary', 400)] - The color used for focused splitter bar.
 /// @prop {Map} handle-color [color: ('gray', 700)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 700)] - The color for the arrow expander.
+/// @prop {Map} bar-color-active [color: ('gray', 500)] - The background color of the bar when pressed.
+/// @prop {Map} handle-color-active [color: ('gray', 900)] - The color for the bar drag handle when pressed.
+/// @prop {Map} expander-color-active [color: ('gray', 900)] - The color for the arrow expander's when pressed.
 /// @requires {Map} $light-splitter
 $indigo-splitter: extend(
     $light-splitter,
@@ -114,8 +148,8 @@ $indigo-splitter: extend(
 
         focus-color: (
             color: (
-                'gray',
-                500,
+                'primary',
+                400,
             ),
         ),
 
@@ -130,6 +164,27 @@ $indigo-splitter: extend(
             color: (
                 'gray',
                 700,
+            ),
+        ),
+
+        bar-color-active: (
+            color: (
+                'gray',
+                500,
+            ),
+        ),
+
+        handle-color-active: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        expander-color-active: (
+            color: (
+                'gray',
+                900,
             ),
         ),
 

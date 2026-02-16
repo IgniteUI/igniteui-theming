@@ -10,7 +10,22 @@
 /// Generates a base dark splitter schema.
 /// @access private
 /// @type {Map}
+/// @prop {Map} handle-color [color: ('gray', 800)] - The color for the bar drag handle.
+/// @prop {Map} expander-color [color: ('gray', 800)] - The color for the arrow expander's.
 $dark-base-splitter: (
+    handle-color: (
+        color: (
+            'gray',
+            800,
+        ),
+    ),
+
+    expander-color: (
+        color: (
+            'gray',
+            800,
+        ),
+    ),
     _meta: (
         name: 'splitter',
         variant: 'dark',
@@ -19,57 +34,67 @@ $dark-base-splitter: (
 
 /// Generates a dark material splitter schema.
 /// @type {Map}
-/// @prop {Map} bar-color [color: ('gray', 50)] - The background color of the bar.
-/// @prop {Map} handle-color [color: ('gray', 800)] - The color for the bar drag handle.
-/// @prop {Map} expander-color [color: ('gray', 800)] - The color for the arrow expander's.
+/// @prop {Map} handle-color-active [color: ('gray', 800)] - The color for the bar drag handle when pressed.
+/// @prop {Map} expander-color-active [color: ('gray', 800)] - The color for the arrow expander's when pressed.
 /// @requires $light-splitter
+/// @requires $dark-base-splitter
 $dark-material-splitter: extend(
-    $light-splitter,
+    $material-splitter,
     $dark-base-splitter,
     (
-        bar-color: (
-            color: (
-                'gray',
-                50,
-            ),
-        ),
-
-        handle-color: (
+        handle-color-active: (
             color: (
                 'gray',
                 800,
             ),
         ),
-
-        expander-color: (
+        expander-color-active: (
             color: (
                 'gray',
                 800,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
 
 /// Generates a dark fluent splitter schema.
 /// @type {Map}
+/// @prop {Map} handle-color-active [color: ('gray', 900)] - The color for the bar drag handle when pressed.
+/// @prop {Map} expander-color-active [color: ('gray', 900)] - The color for the arrow expander's when pressed.
 /// @requires $fluent-splitter
-$dark-fluent-splitter: extend($fluent-splitter, $dark-base-splitter);
+/// @requires $dark-base-splitter
+$dark-fluent-splitter: extend(
+    $fluent-splitter,
+    $dark-base-splitter,
+    (
+        handle-color-active: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        expander-color-active: (
+            color: (
+                'gray',
+                900,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark bootstrap splitter schema.
 /// @type {Map}
 /// @requires $bootstrap-splitter
+/// @requires $dark-base-splitter
 $dark-bootstrap-splitter: extend($bootstrap-splitter, $dark-base-splitter);
 
 /// Generates a dark indigo splitter schema.
 /// @type {Map}
 /// @prop {Map} bar-color [color: ('gray', 200)] - The background color of the bar.
-/// @prop {Map} focus-color [color: ('gray', 300)] - The color used for focused splitter bar.
 /// @prop {Map} handle-color [color: ('gray', 600)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 600)] - The color for the arrow expander.
+/// @prop {Map} bar-color-active [color: ('gray', 300)] - The background color of the bar when pressed.
 /// @requires $indigo-splitter
 $dark-indigo-splitter: extend(
     $indigo-splitter,
@@ -82,12 +107,6 @@ $dark-indigo-splitter: extend(
             ),
         ),
 
-        focus-color: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
         handle-color: (
             color: (
                 'gray',
@@ -99,6 +118,13 @@ $dark-indigo-splitter: extend(
             color: (
                 'gray',
                 600,
+            ),
+        ),
+
+        bar-color-active: (
+            color: (
+                'gray',
+                300,
             ),
         ),
     )
