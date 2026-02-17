@@ -168,7 +168,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
   "mcp.servers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
     }
   }
 }
@@ -186,7 +186,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
    - **Command**: `node` (for local) or `npx` (for package)
    - **Arguments**:
      - Local: `/absolute/path/to/igniteui-theming/dist/mcp/index.js`
-     - Package: `igniteui-theming-mcp`
+     - Package: `igniteui-theming igniteui-theming-mcp`
 4. Click **OK** and restart AI Assistant
 
 </details>
@@ -219,7 +219,7 @@ Add to your configuration file:
   "mcpServers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
     }
   }
 }
@@ -252,7 +252,7 @@ Create or edit `.cursor/mcp.json` in your project:
   "mcpServers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
     }
   }
 }

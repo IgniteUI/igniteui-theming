@@ -29,21 +29,45 @@ This MCP server helps you create custom themes for Ignite UI applications by gen
 
 ---
 
-## Quick Start
+## How to Use
 
-### 1. Install the Package
+### When Developing or Contributing
+
+#### 1. Clone the Repository
 
 ```bash
-npm install igniteui-theming
+git clone https://github.com/IgniteUI/igniteui-theming.git
 ```
 
-### 2. Build the MCP Server
+#### 2. Installed Dependencies
+
+```bash
+cd igniteui-theming && npm install
+```
+
+#### 3. Build the MCP Server
 
 ```bash
 npm run build:mcp
 ```
 
-### 3. Configure Your AI Client
+---
+
+### When Using the MCP Server in Ignite UI Theming Project
+
+#### 1. Install the Theming Package 
+You probably already have this dependency if you're using Ignite UI for Angular
+
+```bash
+npm install igniteui-theming
+```
+
+#### 2. Configure Your AI Assistant to Use the MCP Server
+Follow the instructions in the [AI Assistant Configuration](#ai-assistant-configuration) section below to set up your editor or desktop AI assistant to connect to the MCP server.
+
+---
+
+### AI Assistant Configuration
 
 The MCP server uses STDIO transport and can be configured with any MCP-compatible client.
 
@@ -66,14 +90,27 @@ Create or edit `.vscode/mcp.json`:
 }
 ```
 
-**Using installed package (via npx):**
+**Using installed package (via npx, reads from 'node_modules/.bin/igniteui-theming-mcp):**
 
 ```json
 {
   "mcp.servers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+
+**Using latest package from NPM (no local install):**
+
+```json
+{
+  "mcp.servers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "ignitui-theming-mcp"]
     }
   }
 }
@@ -88,7 +125,7 @@ Create or edit `.vscode/mcp.json`:
    - **Command**: `node` (for local) or `npx` (for installed package)
    - **Arguments**:
      - Local: `/absolute/path/to/igniteui-theming/dist/mcp/index.js`
-     - Package: `igniteui-theming-mcp`
+     - Package: `igniteui-theming igniteui-theming-mcp`
 4. Click **OK** and restart AI Assistant
 
 #### Desktop Clients
@@ -113,14 +150,27 @@ Add to your Claude Desktop configuration file:
 }
 ```
 
-**Using installed package (via npx):**
+**Using installed package (via npx, reads from 'node_modules/.bin/igniteui-theming-mcp):**
 
 ```json
 {
   "mcpServers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+
+**Using latest package from NPM (no local install):**
+
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
     }
   }
 }
@@ -129,6 +179,8 @@ Add to your Claude Desktop configuration file:
 ##### Cursor
 
 Create or edit `.cursor/mcp.json` in your project:
+
+**Using local clone:**
 
 ```json
 {
@@ -141,7 +193,7 @@ Create or edit `.cursor/mcp.json` in your project:
 }
 ```
 
-Or using npx:
+**Using installed package (via npx, reads from 'node_modules/.bin/igniteui-theming-mcp):**
 
 ```json
 {
@@ -154,6 +206,19 @@ Or using npx:
 }
 ```
 
+**Using latest package from NPM (no local install):**
+
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+
 #### Other MCP Clients
 
 For any other MCP-compatible client, use the STDIO transport configuration:
@@ -161,7 +226,7 @@ For any other MCP-compatible client, use the STDIO transport configuration:
 - **Command**: `node` (or `npx`)
 - **Arguments**:
   - Local: `/absolute/path/to/igniteui-theming/dist/mcp/index.js`
-  - Package: `igniteui-theming-mcp`
+  - Package: `igniteui-theming igniteui-theming-mcp`
 
 ## Tools Reference
 
