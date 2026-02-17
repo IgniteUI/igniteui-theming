@@ -22,7 +22,7 @@ import {
   PLATFORM_METADATA,
   type PlatformDetectionResult,
   type DetectionSignal,
-} from '../../knowledge/index.js';
+} from '../../knowledge/platforms/index.js';
 import type {DetectPlatformParams} from '../schemas.js';
 
 /**

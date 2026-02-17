@@ -20,14 +20,12 @@ import type {
   Platform,
 } from '../utils/types.js';
 import {quoteFontFamily, generateUseStatement, toVariableName, generateHeader} from '../utils/sass.js';
-import {
-  TYPOGRAPHY_PRESETS,
-  generateAngularThemeSass,
-  generateWebComponentsThemeSass,
-  getComponentTheme,
-  getComponentSelector,
-  SCHEMA_PRESETS,
-} from '../knowledge/index.js';
+import {TYPOGRAPHY_PRESETS} from '../knowledge/typography.js';
+import {generateAngularThemeSass} from '../knowledge/platforms/angular.js';
+import {generateWebComponentsThemeSass} from '../knowledge/platforms/webcomponents.js';
+import {getComponentTheme} from '../knowledge/component-themes.js';
+import {getComponentSelector} from '../knowledge/component-metadata.js';
+import {SCHEMAS as SCHEMA_PRESETS} from '../knowledge/platforms/common.js';
 
 // Re-export utilities for external use
 export {

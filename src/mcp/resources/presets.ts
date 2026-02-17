@@ -3,30 +3,34 @@
  * Provides access to palette, typography, elevation presets, and platform information.
  */
 
+// Import directly from source modules to avoid circular dependencies with preserveModules
+import {PALETTE_PRESETS, LIGHT_PALETTE_PRESETS, DARK_PALETTE_PRESETS} from '../knowledge/palettes.js';
+import {TYPOGRAPHY_PRESETS} from '../knowledge/typography.js';
+import {ELEVATION_PRESETS} from '../knowledge/elevations.js';
+import {PLATFORM_METADATA} from '../knowledge/platforms/index.js';
+import {ANGULAR_PLATFORM, ANGULAR_USAGE_EXAMPLES} from '../knowledge/platforms/angular.js';
 import {
-  PALETTE_PRESETS,
-  LIGHT_PALETTE_PRESETS,
-  DARK_PALETTE_PRESETS,
-  TYPOGRAPHY_PRESETS,
-  ELEVATION_PRESETS,
-  PLATFORM_METADATA,
-  ANGULAR_PLATFORM,
-  ANGULAR_USAGE_EXAMPLES,
   WEBCOMPONENTS_PLATFORM,
   WEBCOMPONENTS_USAGE_EXAMPLES,
   WEBCOMPONENTS_RUNTIME_CONFIG,
-  COLOR_VARIANT_RULES,
-  COLOR_GUIDANCE_MARKDOWN,
-  COLOR_RULES_SUMMARY,
+} from '../knowledge/platforms/webcomponents.js';
+import {REACT_PLATFORM, REACT_USAGE_EXAMPLES} from '../knowledge/platforms/react.js';
+import {BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES} from '../knowledge/platforms/blazor.js';
+import {COLOR_VARIANT_RULES, COLOR_GUIDANCE_MARKDOWN, COLOR_RULES_SUMMARY} from '../knowledge/colors.js';
+import {
   COLOR_SEMANTIC_ROLES,
   COLOR_USAGE_MARKDOWN,
   OPACITY_USAGE,
   STATE_PATTERNS,
   THEME_PATTERNS,
-  TYPEFACE_PRESETS,
-  TYPE_SCALE_PRESETS,
-  ELEVATIONS_PRESETS,
-  SCHEMA_PRESETS,
+} from '../knowledge/color-usage.js';
+import {
+  SCHEMAS as SCHEMA_PRESETS,
+  TYPEFACES as TYPEFACE_PRESETS,
+  TYPE_SCALES as TYPE_SCALE_PRESETS,
+  ELEVATIONS as ELEVATIONS_PRESETS,
+} from '../knowledge/platforms/common.js';
+import {
   LAYOUT_OVERVIEW_DOC,
   PAD_FUNCTION_DOC,
   SIZABLE_FUNCTION_DOC,
@@ -34,11 +38,7 @@ import {
   SPACING_MIXIN_DOC,
   SIZING_MIXIN_DOC,
   SIZABLE_MIXIN_DOC,
-  REACT_PLATFORM,
-  REACT_USAGE_EXAMPLES,
-  BLAZOR_PLATFORM,
-  BLAZOR_USAGE_EXAMPLES,
-} from '../knowledge/index.js';
+} from '../knowledge/layout-docs.js';
 
 /**
  * Resource URI scheme.

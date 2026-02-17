@@ -1,29 +1,29 @@
 ## 1. Install Dependencies
 
-- [ ] 1.1 Install vite@^7.0.0 as dev dependency
-- [ ] 1.2 Install vite-plugin-dts@^4.3.0 as dev dependency
+- [x] 1.1 Install vite@^7.0.0 as dev dependency
+- [x] 1.2 Install vite-plugin-dts@^4.3.0 as dev dependency
 
 ## 2. Create Vite Configuration
 
-- [ ] 2.1 Create vite.config.ts in project root with library mode settings
-- [ ] 2.2 Implement chmodPlugin() for setting executable permissions on dist/mcp/index.js
-- [ ] 2.3 Configure rollupOptions with external dependencies (sass-embedded, zod, @modelcontextprotocol/sdk, node:\*)
-- [ ] 2.4 Configure preserveModules and preserveModulesRoot for file structure preservation
-- [ ] 2.5 Add vite-plugin-dts configuration with copyDtsFiles: true and bundleTypes: false
-- [ ] 2.6 Configure assetsInclude for markdown files
+- [x] 2.1 Create vite.config.ts in project root with library mode settings
+- [x] 2.2 Implement chmodPlugin() for setting executable permissions on dist/mcp/index.js
+- [x] 2.3 Configure rollupOptions with external dependencies (sass-embedded, zod, @modelcontextprotocol/sdk, node:\*)
+- [x] 2.4 Configure preserveModules and preserveModulesRoot for file structure preservation
+- [x] 2.5 Add vite-plugin-dts configuration with copyDtsFiles: true and bundleTypes: false
+- [x] 2.6 Configure assetsInclude for markdown files
 
 ## 3. Add TypeScript Support for Markdown
 
-- [ ] 3.1 Create src/mcp/vite-env.d.ts with module declarations for \*.md?raw imports
-- [ ] 3.2 Update tsconfig.json to include "vite/client" in types array
-- [ ] 3.3 Verify TypeScript recognizes markdown imports without errors
+- [x] 3.1 Create src/mcp/vite-env.d.ts with module declarations for \*.md?raw imports
+- [x] 3.2 Update tsconfig.json to include "vite/client" in types array
+- [x] 3.3 Verify TypeScript recognizes markdown imports without errors
 
 ## 4. Create Documentation Directory Structure
 
-- [ ] 4.1 Create src/mcp/knowledge/docs/ base directory
-- [ ] 4.2 Create docs/layout/ directory with functions/ and mixins/ subdirectories
-- [ ] 4.3 Create docs/colors/ directory
-- [ ] 4.4 Create docs/README.md with contributor guidelines
+- [x] 4.1 Create src/mcp/knowledge/docs/ base directory
+- [x] 4.2 Create docs/layout/ directory with functions/ and mixins/ subdirectories
+- [x] 4.3 Create docs/colors/ directory
+- [x] 4.4 Create docs/README.md with contributor guidelines
 
 ## 5. Extract Layout Documentation
 
