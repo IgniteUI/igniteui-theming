@@ -20,7 +20,7 @@
     "build:e2e": "sass --quiet ./test/e2e/theme.scss ./test/e2e/theme.css",
     "build:json": "node scripts/buildJSON.mjs && node scripts/buildComponentDocs.mjs",
     "build:tailwind": "npm run clean:tailwind && node scripts/buildTailwind.mjs",
-    "build:mcp": "npm run build:json && tsc -p tsconfig.json && node -e \"require('fs').chmodSync('dist/mcp/index.js', '755')\"",
+    "build:mcp": "npm run build:json && vite build",
     "serve:docs": "npx http-server ./docs",
     "preview:palette": "node scripts/previewPalette.mjs",
     "lint": "npm run lint:styles && npm run lint:prettier",
@@ -116,6 +116,8 @@
     "stylelint-scss": "^4.7.0",
     "tsx": "^4.0.0",
     "typescript": "^5.7.0",
+    "vite": "^7.3.1",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.15"
   }
 }
