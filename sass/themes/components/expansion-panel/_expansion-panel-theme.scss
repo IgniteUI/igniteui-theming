@@ -110,3 +110,16 @@
         )
     );
 }
+
+/// Accordion Theme
+///
+/// PRIMARY TOKENS:
+/// - `$header-background` — The panel header background.
+/// - `$body-background` — The panel body background.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @alias expansion-panel-theme
+@function accordion-theme($args...) {
+    @return expansion-panel-theme($args...);
+}

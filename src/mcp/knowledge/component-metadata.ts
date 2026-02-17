@@ -62,6 +62,9 @@ export interface ComponentMetadata {
 }
 
 export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
+  accordion: {
+    selectors: {angular: 'igx-accordion', webcomponents: 'igc-accordion'},
+  },
   'action-strip': {
     selectors: {angular: 'igx-action-strip', webcomponents: null},
   },
@@ -81,7 +84,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     },
   },
   'bottom-nav': {
-    selectors: {angular: 'igx-bottom-nav', webcomponents: 'igc-bottom-nav'},
+    selectors: {angular: 'igx-bottom-nav', webcomponents: null},
   },
   button: {
     selectors: {angular: '.igx-button', webcomponents: 'igc-button'},
@@ -120,12 +123,24 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   card: {
     selectors: {angular: 'igx-card', webcomponents: 'igc-card'},
+    compound: {
+      description: 'The card component can contain various child components like avatars, buttons, chips, and icons.',
+      relatedThemes: ['flat-button', 'flat-icon-button', 'chip', 'icon'],
+      guidance: `The card component can contain flat-button(s), flat-icon-button(s), and icon(s) that should harmonize visually well with the background of the card component. \
+        For the flat-button and flat-icon-button themes, ensure the foreground color contrasts well with the card background. \
+        For the icon theme, the color should also coordinate with the card background while maintaining sufficient contrast.`,
+    },
   },
   carousel: {
     selectors: {angular: 'igx-carousel', webcomponents: 'igc-carousel'},
   },
   chat: {
     selectors: {angular: 'igx-chat', webcomponents: 'igc-chat'},
+    compound: {
+      description: 'The carousel component uses a contained-button and a textarea internally.',
+      relatedThemes: ['contained-button', 'input-group'],
+      guidance: `Make sure the textarea and the contained-button themes visually coordinate with each other and the overall chat background.`,
+    },
   },
   checkbox: {
     selectors: {angular: 'igx-checkbox', webcomponents: 'igc-checkbox'},
@@ -135,6 +150,17 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   'column-actions': {
     selectors: {angular: 'igx-column-actions', webcomponents: null},
+    compound: {
+      description: 'The column actions component uses checkboxes for selection and flat-buttons for the action items.',
+      relatedThemes: ['checkbox', 'flat-button'],
+      tokenDerivations: {
+        'flat-button.foreground': {
+          from: 'column-actions.background',
+          transform: 'adaptive-contrast',
+        }
+      },
+      guidance: `Make sure to theme these child components to visually coordinate with each other and the overall column actions background.`,
+    },
   },
   combo: {
     selectors: {angular: 'igx-combo', webcomponents: 'igc-combo'},
@@ -142,18 +168,27 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       description: 'The combo component combines input, drop-down, and checkbox components.',
       relatedThemes: ['input-group', 'drop-down', 'checkbox'],
       tokenDerivations: {
-        'input-group.idle-text-color': {
-          from: 'combo.idle-text-color',
+        'input-group.focused-border-color': {
+          from: 'combo.toggle-button-background',
           transform: 'identity',
         },
         'drop-down.background-color': {
-          from: 'combo.idle-text-color',
+          from: 'combo.toggle-button-background',
+          transform: 'identity',
+        },
+        'checkbox.fill-color': {
+          from: 'combo.toggle-button-background',
           transform: 'identity',
         },
       },
-      guidance: `The combo input-group, drop-down, and checkbox should share a consistent color scheme. \
-The drop-down background should match the overall surface intent. \
-Checkbox colors typically follow the primary color of the combo.`,
+      additionalScopes: {
+        overlay: {angular: '.igx-drop-down__list'},
+      },
+      childScopes: {
+        'drop-down': {angular: 'overlay'},
+        'checkbox': {angular: 'overlay'},
+      },
+      guidance: `The combo input-group, drop-down, and checkbox should share a consistent color scheme.`,
     },
   },
   'date-picker': {
@@ -211,9 +246,21 @@ Checkbox colors typically follow the primary color of the combo.`,
   },
   dialog: {
     selectors: {angular: '.igx-dialog', webcomponents: 'igc-dialog'},
+    compound: {
+      description: 'The dialog component uses flat-buttons for the actions',
+      relatedThemes: ['flat-button'],
+      tokenDerivations: {
+        'flat-button.foreground': {
+          from: 'dialog.background',
+          transform: 'adaptive-contrast',
+        },
+      },
+      guidance: `The dialog action buttons should visually coordinate with the dialog background. \
+If customizing the dialog background, ensure flat-button foreground contrasts against it.`,
+    },
   },
   divider: {
-    selectors: {angular: 'igx-divider', webcomponents: null},
+    selectors: {angular: 'igx-divider', webcomponents: 'igc-divider'},
   },
   'dock-manager': {
     selectors: {angular: 'igc-dockmanager', webcomponents: 'igc-dockmanager'},
@@ -255,26 +302,20 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
         'The grid is a complex compound component with many themeable parts including filtering, editing, pagination, toolbar and more.',
       relatedThemes: [
         'action-strip',
-        'checkbox',
-        'chip',
-        'combo',
-        'select',
-        'drop-down',
         'grid-summary',
         'grid-toolbar',
         'paginator',
-        'snackbar',
+        'checkbox',
+        'chip',
         'input-group',
         'flat-button',
-        'contained-button',
         'outlined-button',
         'flat-icon-button',
-        'contained-icon-button',
         'outlined-icon-button',
       ],
-      guidance: `The grid is a complex compound with many related themes. \
+      guidance: `The grid is a complex compound component with many related themes. \
 For basic customization, focus on the grid theme itself and the most visible children: \
-input-group (filtering), flat-button/icon-button (toolbar actions), checkbox (row selection), \
+input-group (filtering), outlined-button/icon-button (toolbar actions), checkbox (row selection), \
 and paginator. The grid-summary and grid-toolbar themes control their respective areas. \
 Detailed token derivation rules are not yet available for the grid — use the token names \
 and descriptions from get_component_design_tokens for each child to guide value selection.`,
@@ -305,7 +346,15 @@ and descriptions from get_component_design_tokens for each child to guide value 
     selectors: {angular: 'igx-navbar', webcomponents: 'igc-navbar'},
     compound: {
       description: 'The navbar contains icons, buttons and icons buttons for navigation.',
-      relatedThemes: ['flat-button', 'outlined-button', 'flat-icon-button', 'outlined-icon-button'],
+      relatedThemes: [
+        'flat-button',
+        'outlined-button',
+        'contained-button',
+        'flat-icon-button',
+        'outlined-icon-button',
+        'contained-icon-button',
+        'icon',
+      ],
       guidance: `Make sure to theme flat and outlined buttons/icons in the navbar to visually coordinate with the navbar background.`,
     },
   },
@@ -317,6 +366,11 @@ and descriptions from get_component_design_tokens for each child to guide value 
   },
   paginator: {
     selectors: {angular: 'igx-paginator', webcomponents: 'igc-paginator'},
+    compound: {
+      description: 'The paginator uses combo and flat-icon-buttons for the page controls.',
+      relatedThemes: ['combo', 'flat-icon-button'],
+      guidance: `The combo and flat-icon-button themes should visually coordinate with each other and the overall paginator background.`,
+    },
   },
   'pivot-data-selector': {
     selectors: {angular: 'igx-pivot-data-selector', webcomponents: 'igc-pivot-data-selector'},
@@ -342,24 +396,23 @@ and descriptions from get_component_design_tokens for each child to guide value 
         'The query builder uses inputs, dropdowns, chips, buttons and button-groups for building query expressions.',
       relatedThemes: [
         'input-group',
-        'drop-down',
+        'select',
         'chip',
         'flat-button',
-        'contained-button',
+        'outlined-button',
         'button-group',
         'flat-icon-button',
+        'outlined-icon-button',
       ],
-      guidance: `The query builder uses input-groups for expression values, drop-downs for operator/field selection, \
-chips for displaying conditions, and buttons/button-groups for adding and grouping expressions. \
-Detailed token derivation rules are not yet available — use the token names \
-and descriptions from get_component_design_tokens for each child to guide value selection.`,
+      guidance: `The query builder uses input-groups and selects for expression values and operator/field selection, \
+chips for displaying conditions, and buttons/button-groups for adding and grouping expressions.`,
     },
   },
   radio: {
     selectors: {angular: 'igx-radio', webcomponents: 'igc-radio'},
   },
   rating: {
-    selectors: {angular: 'igx-rating', webcomponents: 'igc-rating'},
+    selectors: {angular: 'igc-rating', webcomponents: 'igc-rating'},
   },
   ripple: {
     selectors: {angular: 'igx-ripple', webcomponents: 'igc-ripple'},
@@ -372,13 +425,19 @@ and descriptions from get_component_design_tokens for each child to guide value 
     compound: {
       description: 'The select component combines input-group and drop-down components.',
       relatedThemes: ['input-group', 'drop-down'],
+      additionalScopes: {
+        overlay: {angular: '.igx-drop-down__list'},
+      },
+      childScopes: {
+        'drop-down': {angular: 'overlay'},
+      },
       tokenDerivations: {
-        'input-group.idle-text-color': {
-          from: 'select.idle-text-color',
+        'input-group.focused-border-color': {
+          from: 'select.toggle-button-background',
           transform: 'identity',
         },
         'drop-down.background-color': {
-          from: 'select.background-color',
+          from: 'select.toggle-button-background',
           transform: 'identity',
         },
       },
