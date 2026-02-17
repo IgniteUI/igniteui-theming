@@ -2,13 +2,13 @@
  * Tests for Sass utility functions.
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
-  toVariableName,
   generateHeader,
-  quoteFontFamily,
-  generateUseStatement,
   generatePaletteCode,
+  generateUseStatement,
+  quoteFontFamily,
+  toVariableName,
 } from '../../utils/sass.js';
 
 describe('toVariableName', () => {

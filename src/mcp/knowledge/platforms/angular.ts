@@ -11,10 +11,10 @@
  * - Requires `ig-typography` CSS class on root element
  */
 
-import {quoteFontFamily, generateUseStatement, generatePaletteCode, generateTypographyCode} from '../../utils/sass.js';
+import {generatePaletteCode, generateTypographyCode, generateUseStatement, quoteFontFamily} from '../../utils/sass.js';
+import type {DesignSystem, ThemeVariant} from '../../utils/types.js';
 import {PALETTE_PRESETS, type PalettePresetName} from '../palettes.js';
-import {DesignSystem, ThemeVariant} from '../../utils/types.js';
-import { PALETTES, SCHEMAS, TYPE_SCALES, TYPEFACES } from './common.js';
+import {PALETTES, SCHEMAS, TYPE_SCALES, TYPEFACES} from './common.js';
 
 export const ANGULAR_PLATFORM = {
   id: 'angular',

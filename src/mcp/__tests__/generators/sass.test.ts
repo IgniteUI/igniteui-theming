@@ -11,16 +11,16 @@
  * the theming library's context. We focus on structural validation.
  */
 
-import {describe, it, expect} from 'vitest';
+import * as path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import * as sass from 'sass-embedded';
-import * as path from 'path';
-import {fileURLToPath} from 'url';
+import {describe, expect, it} from 'vitest';
 import {
-  generatePalette,
-  generateTypography,
-  generateElevations,
-  generateTheme,
   generateComponentTheme,
+  generateElevations,
+  generatePalette,
+  generateTheme,
+  generateTypography,
 } from '../../generators/sass.js';
 
 // Get the package root directory (where sass/ folder is located)
@@ -640,7 +640,7 @@ describe('generateComponentTheme', () => {
         platform: 'angular',
         component: '__nonexistent_component__',
         tokens: {background: '#ff0000'},
-      }),
+      })
     ).toThrow('Unknown component');
   });
 

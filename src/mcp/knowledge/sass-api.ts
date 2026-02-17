@@ -14,11 +14,11 @@
  */
 
 import {
+  type DesignSystem,
+  type ElevationPreset,
   PALETTE_COLOR_GROUPS,
   type Platform,
-  type DesignSystem,
   type ThemeVariant,
-  type ElevationPreset,
 } from '../utils/types.js';
 
 // ============================================================================

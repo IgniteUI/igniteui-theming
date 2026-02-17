@@ -3,8 +3,8 @@
  * Describes how colors are used across Ignite UI components.
  */
 
-import type {ShadeLevel} from './multipliers.js';
 import COLOR_USAGE_MARKDOWN from './docs/colors/usage.md?raw';
+import type {ShadeLevel} from './multipliers.js';
 
 /**
  * Shade range description.

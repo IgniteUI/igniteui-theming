@@ -2,12 +2,12 @@
  * Handler for create_custom_palette tool.
  */
 
-import {generateCustomPaletteCode, generateUseStatement, toVariableName, generateHeader} from '../../utils/sass.js';
-import {generateCustomPaletteCss, formatCssOutput} from '../../generators/css.js';
+import {formatCssOutput, generateCustomPaletteCss} from '../../generators/css.js';
 import {PALETTE_PRESETS, type PalettePresetName} from '../../knowledge/palettes.js';
-import {validateCustomPalette, formatCustomPaletteValidation} from '../../validators/index.js';
+import {generateCustomPaletteCode, generateHeader, generateUseStatement, toVariableName} from '../../utils/sass.js';
+import type {ColorDefinition, GrayDefinition, ShadesBasedColor} from '../../utils/types.js';
+import {formatCustomPaletteValidation, validateCustomPalette} from '../../validators/index.js';
 import type {CreateCustomPaletteParams} from '../schemas.js';
-import type {ShadesBasedColor, ColorDefinition, GrayDefinition} from '../../utils/types.js';
 
 export async function handleCreateCustomPalette(params: CreateCustomPaletteParams) {
   const variant = params.variant ?? 'light';
@@ -64,7 +64,7 @@ export async function handleCreateCustomPalette(params: CreateCustomPaletteParam
       warn: colors.warn,
       error: colors.error,
     },
-    variant,
+    variant
   );
 
   if (!validation.isValid) {
@@ -105,7 +105,7 @@ async function handleCssOutput(
     warn: ColorDefinition;
     error: ColorDefinition;
   },
-  validation: Awaited<ReturnType<typeof validateCustomPalette>>,
+  validation: Awaited<ReturnType<typeof validateCustomPalette>>
 ) {
   try {
     const result = await generateCustomPaletteCss({
@@ -117,10 +117,10 @@ async function handleCssOutput(
     const formattedCss = formatCssOutput(result.css, result.description);
 
     // Build response
-    const responseParts: string[] = [`**Custom Palette Generated (CSS)**`];
+    const responseParts: string[] = ['**Custom Palette Generated (CSS)**'];
     responseParts.push('');
     responseParts.push(
-      `Created CSS custom properties for a custom ${variant} color palette based on ${designSystem} defaults.`,
+      `Created CSS custom properties for a custom ${variant} color palette based on ${designSystem} defaults.`
     );
     responseParts.push('');
     responseParts.push('Output format: CSS custom properties');
@@ -191,7 +191,7 @@ function handleSassOutput(
     warn: ColorDefinition;
     error: ColorDefinition;
   },
-  validation: Awaited<ReturnType<typeof validateCustomPalette>>,
+  validation: Awaited<ReturnType<typeof validateCustomPalette>>
 ) {
   // Generate the Sass code
   const paletteName = params.name ? toVariableName(params.name) : `custom-${variant}`;
@@ -215,7 +215,7 @@ ${paletteLines.join('\n')}
 `;
 
   // Build response
-  const responseParts: string[] = [`**Custom Palette Generated**`];
+  const responseParts: string[] = ['**Custom Palette Generated**'];
   responseParts.push('');
   responseParts.push(`Created a custom ${variant} color palette based on ${designSystem} defaults.`);
 

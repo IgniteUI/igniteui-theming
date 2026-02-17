@@ -75,29 +75,29 @@ function buildUsageExample(
   variant: string,
   contrast: boolean,
   opacity: number | undefined,
-  result: string,
+  result: string
 ): string {
   const examples: string[] = ['**Usage example:**'];
 
   if (contrast) {
     examples.push('```scss');
-    examples.push(`.my-element {`);
+    examples.push('.my-element {');
     examples.push(`  background: var(--ig-${color}-${variant});`);
     examples.push(`  color: ${result};`);
-    examples.push(`}`);
+    examples.push('}');
     examples.push('```');
   } else if (opacity !== undefined) {
     examples.push('```scss');
-    examples.push(`.my-element {`);
+    examples.push('.my-element {');
     examples.push(`  background: ${result};`);
-    examples.push(`}`);
+    examples.push('}');
     examples.push('```');
   } else {
     examples.push('```scss');
-    examples.push(`.my-element {`);
+    examples.push('.my-element {');
     examples.push(`  background: ${result};`);
     examples.push(`  color: var(--ig-${color}-${variant}-contrast);`);
-    examples.push(`}`);
+    examples.push('}');
     examples.push('```');
   }
 

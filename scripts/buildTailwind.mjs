@@ -1,8 +1,8 @@
-import path from 'path';
-import * as sass from 'sass-embedded';
-import {mkdirSync, writeFileSync} from 'fs';
-import {fileURLToPath} from 'url';
+import {mkdirSync, writeFileSync} from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {globby} from 'globby';
+import * as sass from 'sass-embedded';
 import report from './report.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -55,7 +55,9 @@ async function build() {
     try {
       const start = performance.now();
       const filesCompiled = await compileSass(config.inputDir, config.outputDir);
-      report.success(`Built ${filesCompiled} tailwind ${config.name} files in ${((performance.now() - start) / 1000).toFixed(2)}s`);
+      report.success(
+        `Built ${filesCompiled} tailwind ${config.name} files in ${((performance.now() - start) / 1000).toFixed(2)}s`
+      );
     } catch (error) {
       report.error(`Failed to build ${config.name}: ${error.message}`);
       process.exit(1);

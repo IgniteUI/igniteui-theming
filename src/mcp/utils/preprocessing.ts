@@ -76,7 +76,7 @@ export function deepParseJsonStrings(value: unknown): unknown {
  */
 export function withPreprocessing<TParams, TResult extends Record<string, unknown>>(
   schema: z.ZodSchema<TParams>,
-  handler: (params: TParams) => Promise<TResult> | TResult,
+  handler: (params: TParams) => Promise<TResult> | TResult
 ): (params: unknown) => Promise<TResult> {
   return async (rawParams: unknown) => {
     const preprocessed = deepParseJsonStrings(rawParams);

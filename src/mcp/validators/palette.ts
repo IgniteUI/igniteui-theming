@@ -7,21 +7,17 @@
  */
 
 import {
-  analyzeSurfaceGrayColors,
   analyzeColorForPalette,
-  LUMINANCE_THRESHOLD,
-  DEFAULT_MINIMUM_CONTRAST_RATIO,
-  SUGGESTED_COLORS,
+  analyzeSurfaceGrayColors,
   type ColorAnalysis,
-  type SurfaceGrayAnalysis,
+  DEFAULT_MINIMUM_CONTRAST_RATIO,
+  LUMINANCE_THRESHOLD,
   type PaletteSuitabilityAnalysis,
+  SUGGESTED_COLORS,
+  type SurfaceGrayAnalysis,
 } from '../utils/color.js';
+import {formatValidationMessages, type ValidationResult, type ValidationWarning} from '../utils/result.js';
 import type {ThemeVariant} from '../utils/types.js';
-import {
-  type ValidationResult,
-  type ValidationWarning,
-  formatValidationMessages,
-} from '../utils/result.js';
 
 // Re-export ValidationSeverity as WarningSeverity for backward compatibility
 export type WarningSeverity = 'warning' | 'info';
@@ -155,13 +151,13 @@ export async function validatePaletteColors(input: ValidatePaletteColorsInput): 
   // Add tips based on warnings
   if (warnings.some((w) => w.field === 'gray')) {
     tips.push(
-      'Consider omitting the gray parameter to let the palette() function auto-calculate an appropriate gray base from the surface color',
+      'Consider omitting the gray parameter to let the palette() function auto-calculate an appropriate gray base from the surface color'
     );
   }
 
   if (warnings.some((w) => w.field === 'surface')) {
     tips.push(
-      `For a ${variant} theme, use a ${variant === 'light' ? 'light' : 'dark'} surface color like ${SUGGESTED_COLORS[variant].surface.slice(0, 3).join(', ')}`,
+      `For a ${variant} theme, use a ${variant === 'light' ? 'light' : 'dark'} surface color like ${SUGGESTED_COLORS[variant].surface.slice(0, 3).join(', ')}`
     );
   }
 
@@ -394,12 +390,12 @@ export function formatPaletteSuitabilityWarnings(result: ThemeColorsSuitabilityR
   lines.push('');
   lines.push(
     '**Recommendation:** For production-quality results, use the `create_custom_palette` tool from the Ignite UI Theming MCP with explicit ' +
-      'shade values for these colors. This gives you fine-grained control over each shade level (50-900, A100-A700).',
+      'shade values for these colors. This gives you fine-grained control over each shade level (50-900, A100-A700).'
   );
   lines.push('');
   lines.push(
     'The generated code below uses the standard `palette()` function, which may produce ' +
-      'limited shade ranges for the flagged colors.',
+      'limited shade ranges for the flagged colors.'
   );
 
   return lines.join('\n');
@@ -424,11 +420,15 @@ export function generatePaletteSuitabilityComments(result: ThemeColorsSuitabilit
 
   for (const pc of result.problematicColors) {
     const issueText =
-      pc.issue === 'too-light' ? 'too light - darker shades may be washed out' : 'too dark - lighter shades may lack range';
+      pc.issue === 'too-light'
+        ? 'too light - darker shades may be washed out'
+        : 'too dark - lighter shades may lack range';
     lines.push(` *   - ${pc.name} (${pc.color}): luminance ${pc.luminance.toFixed(2)} - ${issueText}`);
   }
 
-  lines.push(' * Consider using the create_custom_palette tool of the Ignite UI Theming MCP server with explicit shade values for better results.');
+  lines.push(
+    ' * Consider using the create_custom_palette tool of the Ignite UI Theming MCP server with explicit shade values for better results.'
+  );
   lines.push(' */');
 
   return lines;

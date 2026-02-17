@@ -5,7 +5,7 @@
  * correct Sass code for Ignite UI for Angular applications.
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {generateAngularThemeSass} from '../../knowledge/platforms/angular.js';
 
 describe('generateAngularThemeSass', () => {

@@ -23,16 +23,21 @@
     "build:mcp": "npm run build:json && vite build",
     "serve:docs": "npx http-server ./docs",
     "preview:palette": "node scripts/previewPalette.mjs",
-    "lint": "npm run lint:styles && npm run lint:prettier",
+    "lint": "npm run lint:biome && npm run lint:styles && npm run lint:prettier",
+    "lint:biome": "biome check",
     "lint:styles": "stylelint ./sass/**/*.scss --fix",
     "lint:prettier": "prettier \"./sass/**/*.scss\" --check --ignore-path .gitignore",
-    "format": "stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
+    "format": "biome check --fix && stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
     "prepare": "husky install",
     "mcp:inspector": "npx @modelcontextprotocol/inspector dist/mcp/index.js",
     "test": "vitest run",
     "coverage": "vitest run --coverage"
   },
   "lint-staged": {
+    "*.{js,ts,cjs,mjs,jsx,tsx}": [
+      "biome check --fix --no-errors-on-unmatched",
+      "prettier --write"
+    ],
     "sass/**/*.{scss,css}": [
       "npm run format"
     ]
@@ -94,7 +99,9 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.2",
     "@types/node": "^22.0.0",
+    "@types/postcss-safe-parser": "^5.0.4",
     "@vitest/coverage-v8": "^4.0.16",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

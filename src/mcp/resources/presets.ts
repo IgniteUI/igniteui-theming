@@ -3,20 +3,6 @@
  * Provides access to palette, typography, elevation presets, and platform information.
  */
 
-// Import directly from source modules to avoid circular dependencies with preserveModules
-import {PALETTE_PRESETS, LIGHT_PALETTE_PRESETS, DARK_PALETTE_PRESETS} from '../knowledge/palettes.js';
-import {TYPOGRAPHY_PRESETS} from '../knowledge/typography.js';
-import {ELEVATION_PRESETS} from '../knowledge/elevations.js';
-import {PLATFORM_METADATA} from '../knowledge/platforms/index.js';
-import {ANGULAR_PLATFORM, ANGULAR_USAGE_EXAMPLES} from '../knowledge/platforms/angular.js';
-import {
-  WEBCOMPONENTS_PLATFORM,
-  WEBCOMPONENTS_USAGE_EXAMPLES,
-  WEBCOMPONENTS_RUNTIME_CONFIG,
-} from '../knowledge/platforms/webcomponents.js';
-import {REACT_PLATFORM, REACT_USAGE_EXAMPLES} from '../knowledge/platforms/react.js';
-import {BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES} from '../knowledge/platforms/blazor.js';
-import {COLOR_VARIANT_RULES, COLOR_GUIDANCE_MARKDOWN, COLOR_RULES_SUMMARY} from '../knowledge/colors.js';
 import {
   COLOR_SEMANTIC_ROLES,
   COLOR_USAGE_MARKDOWN,
@@ -24,21 +10,35 @@ import {
   STATE_PATTERNS,
   THEME_PATTERNS,
 } from '../knowledge/color-usage.js';
+import {COLOR_GUIDANCE_MARKDOWN, COLOR_RULES_SUMMARY, COLOR_VARIANT_RULES} from '../knowledge/colors.js';
+import {ELEVATION_PRESETS} from '../knowledge/elevations.js';
 import {
-  SCHEMAS as SCHEMA_PRESETS,
-  TYPEFACES as TYPEFACE_PRESETS,
-  TYPE_SCALES as TYPE_SCALE_PRESETS,
-  ELEVATIONS as ELEVATIONS_PRESETS,
-} from '../knowledge/platforms/common.js';
-import {
+  BORDER_RADIUS_FUNCTION_DOC,
   LAYOUT_OVERVIEW_DOC,
   PAD_FUNCTION_DOC,
   SIZABLE_FUNCTION_DOC,
-  BORDER_RADIUS_FUNCTION_DOC,
-  SPACING_MIXIN_DOC,
-  SIZING_MIXIN_DOC,
   SIZABLE_MIXIN_DOC,
+  SIZING_MIXIN_DOC,
+  SPACING_MIXIN_DOC,
 } from '../knowledge/layout-docs.js';
+// Import directly from source modules to avoid circular dependencies with preserveModules
+import {DARK_PALETTE_PRESETS, LIGHT_PALETTE_PRESETS, PALETTE_PRESETS} from '../knowledge/palettes.js';
+import {ANGULAR_PLATFORM, ANGULAR_USAGE_EXAMPLES} from '../knowledge/platforms/angular.js';
+import {BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES} from '../knowledge/platforms/blazor.js';
+import {
+  ELEVATIONS as ELEVATIONS_PRESETS,
+  SCHEMAS as SCHEMA_PRESETS,
+  TYPE_SCALES as TYPE_SCALE_PRESETS,
+  TYPEFACES as TYPEFACE_PRESETS,
+} from '../knowledge/platforms/common.js';
+import {PLATFORM_METADATA} from '../knowledge/platforms/index.js';
+import {REACT_PLATFORM, REACT_USAGE_EXAMPLES} from '../knowledge/platforms/react.js';
+import {
+  WEBCOMPONENTS_PLATFORM,
+  WEBCOMPONENTS_RUNTIME_CONFIG,
+  WEBCOMPONENTS_USAGE_EXAMPLES,
+} from '../knowledge/platforms/webcomponents.js';
+import {TYPOGRAPHY_PRESETS} from '../knowledge/typography.js';
 
 /**
  * Resource URI scheme.
@@ -253,7 +253,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           metadata: PLATFORM_METADATA,
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),
@@ -272,7 +272,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           usageExamples: ANGULAR_USAGE_EXAMPLES,
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),
@@ -292,7 +292,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           runtimeConfig: WEBCOMPONENTS_RUNTIME_CONFIG,
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),
@@ -311,7 +311,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           usageExamples: REACT_USAGE_EXAMPLES,
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),
@@ -330,7 +330,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           usageExamples: BLAZOR_USAGE_EXAMPLES,
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),
@@ -414,7 +414,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           ],
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),
@@ -444,7 +444,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
           opacityUsage: OPACITY_USAGE,
         },
         null,
-        2,
+        2
       ),
       mimeType: 'application/json',
     }),

@@ -1,9 +1,9 @@
-import {defineConfig} from 'vite';
-import {fileURLToPath} from 'node:url';
-import {dirname, resolve} from 'node:path';
 import {chmodSync, existsSync} from 'node:fs';
-import dts from 'vite-plugin-dts';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import type {Plugin} from 'vite';
+import {defineConfig} from 'vite';
+import dts from 'vite-plugin-dts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

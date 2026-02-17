@@ -9,8 +9,8 @@
  * - Confidence scoring
  */
 
-import {describe, it, expect, vi, beforeEach, afterEach} from 'vitest';
-import {detectPlatformFromDependencies, detectConfigFiles} from '../../knowledge/platforms/index.js';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {detectConfigFiles, detectPlatformFromDependencies} from '../../knowledge/platforms/index.js';
 
 // Mock fs module
 vi.mock('node:fs', async () => {
@@ -23,7 +23,7 @@ vi.mock('node:fs', async () => {
   };
 });
 
-import {existsSync, readFileSync, readdirSync} from 'node:fs';
+import {existsSync, readdirSync, readFileSync} from 'node:fs';
 
 const mockExistsSync = vi.mocked(existsSync);
 const mockReadFileSync = vi.mocked(readFileSync);
@@ -242,10 +242,13 @@ describe('detectPlatformFromDependencies', () => {
 
   describe('Ambiguous detection', () => {
     it('returns ambiguous when Angular and React packages both present', () => {
-      const result = detectPlatformFromDependencies({
-        'igniteui-angular': '^18.0.0',
-        'igniteui-react': '^18.0.0',
-      }, {});
+      const result = detectPlatformFromDependencies(
+        {
+          'igniteui-angular': '^18.0.0',
+          'igniteui-react': '^18.0.0',
+        },
+        {}
+      );
 
       expect(result.platform).toBeNull();
       expect(result.ambiguous).toBe(true);
@@ -267,10 +270,13 @@ describe('detectPlatformFromDependencies', () => {
     });
 
     it('provides helpful reason message for ambiguous results', () => {
-      const result = detectPlatformFromDependencies({
-        'igniteui-angular': '^18.0.0',
-        'igniteui-webcomponents': '^5.0.0',
-      }, {});
+      const result = detectPlatformFromDependencies(
+        {
+          'igniteui-angular': '^18.0.0',
+          'igniteui-webcomponents': '^5.0.0',
+        },
+        {}
+      );
 
       expect(result.reason).toContain('Multiple platforms detected');
       expect(result.reason).toContain('angular');
@@ -278,10 +284,13 @@ describe('detectPlatformFromDependencies', () => {
     });
 
     it('includes signals for each alternative platform', () => {
-      const result = detectPlatformFromDependencies({
-        'igniteui-angular': '^18.0.0',
-        'igniteui-react': '^18.0.0',
-      }, {});
+      const result = detectPlatformFromDependencies(
+        {
+          'igniteui-angular': '^18.0.0',
+          'igniteui-react': '^18.0.0',
+        },
+        {}
+      );
 
       expect(result.alternatives).toBeDefined();
 
@@ -321,10 +330,13 @@ describe('detectPlatformFromDependencies', () => {
 
   describe('Signal priority', () => {
     it('prefers Ignite UI package over framework fallback', () => {
-      const result = detectPlatformFromDependencies({
-        '@angular/core': '^18.0.0',
-        'igniteui-angular': '^18.0.0',
-      }, {});
+      const result = detectPlatformFromDependencies(
+        {
+          '@angular/core': '^18.0.0',
+          'igniteui-angular': '^18.0.0',
+        },
+        {}
+      );
 
       expect(result.platform).toBe('angular');
       expect(result.confidence).toBe('high');

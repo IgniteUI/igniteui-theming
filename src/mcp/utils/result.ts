@@ -246,7 +246,7 @@ export interface ValidationResult<TMetadata = unknown> {
  */
 export function validationSuccess<TMetadata = unknown>(
   warnings: ValidationWarning[] = [],
-  options?: {tips?: string[]; metadata?: TMetadata},
+  options?: {tips?: string[]; metadata?: TMetadata}
 ): ValidationResult<TMetadata> {
   return {
     isValid: true,
@@ -263,7 +263,7 @@ export function validationSuccess<TMetadata = unknown>(
 export function validationFailure<TMetadata = unknown>(
   errors: ValidationError[],
   warnings: ValidationWarning[] = [],
-  options?: {tips?: string[]; metadata?: TMetadata},
+  options?: {tips?: string[]; metadata?: TMetadata}
 ): ValidationResult<TMetadata> {
   return {
     isValid: false,
@@ -326,10 +326,7 @@ export interface FormatValidationOptions {
  * @param options - Formatting options
  * @returns Formatted markdown string
  */
-export function formatValidationMessages(
-  result: ValidationResult,
-  options: FormatValidationOptions = {},
-): string {
+export function formatValidationMessages(result: ValidationResult, options: FormatValidationOptions = {}): string {
   const {includeIcons = true, includeSuggestions = true, includeTips = true} = options;
   const lines: string[] = [];
 

@@ -7,7 +7,13 @@
  */
 
 import {SHADE_LEVELS} from '../knowledge/index.js';
-import {ALL_COLOR_SHADES, type Platform, type ColorDefinition, type GrayDefinition, ThemeVariant} from './types.js';
+import {
+  ALL_COLOR_SHADES,
+  type ColorDefinition,
+  type GrayDefinition,
+  type Platform,
+  type ThemeVariant,
+} from './types.js';
 
 /**
  * Properly quote a font-family value for Sass.
@@ -321,14 +327,54 @@ export function generateCustomPaletteCode(options: CustomPaletteCodeOptions): st
     shades: readonly string[];
     isGray: boolean;
   }> = [
-    {name: 'primary', def: options.colors.primary, shades: ALL_COLOR_SHADES, isGray: false},
-    {name: 'secondary', def: options.colors.secondary, shades: ALL_COLOR_SHADES, isGray: false},
-    {name: 'gray', def: options.colors.gray, shades: SHADE_LEVELS, isGray: true},
-    {name: 'surface', def: options.colors.surface, shades: ALL_COLOR_SHADES, isGray: false},
-    {name: 'info', def: options.colors.info, shades: ALL_COLOR_SHADES, isGray: false},
-    {name: 'success', def: options.colors.success, shades: ALL_COLOR_SHADES, isGray: false},
-    {name: 'warn', def: options.colors.warn, shades: ALL_COLOR_SHADES, isGray: false},
-    {name: 'error', def: options.colors.error, shades: ALL_COLOR_SHADES, isGray: false},
+    {
+      name: 'primary',
+      def: options.colors.primary,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
+    {
+      name: 'secondary',
+      def: options.colors.secondary,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
+    {
+      name: 'gray',
+      def: options.colors.gray,
+      shades: SHADE_LEVELS,
+      isGray: true,
+    },
+    {
+      name: 'surface',
+      def: options.colors.surface,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
+    {
+      name: 'info',
+      def: options.colors.info,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
+    {
+      name: 'success',
+      def: options.colors.success,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
+    {
+      name: 'warn',
+      def: options.colors.warn,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
+    {
+      name: 'error',
+      def: options.colors.error,
+      shades: ALL_COLOR_SHADES,
+      isGray: false,
+    },
   ];
 
   for (let i = 0; i < colorGroups.length; i++) {
@@ -376,8 +422,8 @@ export function generateCustomPaletteCode(options: CustomPaletteCodeOptions): st
   // Add metadata
   lines.push(`  '_meta': (`);
   lines.push(`    'variant': ${variant}`);
-  lines.push(`  )`);
-  lines.push(`);`);
+  lines.push('  )');
+  lines.push(');');
 
   return lines;
 }

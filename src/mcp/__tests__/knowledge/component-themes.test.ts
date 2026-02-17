@@ -2,14 +2,14 @@
  * Tests for component-themes.ts knowledge base
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
-  COMPONENT_THEMES,
   COMPONENT_NAMES,
+  COMPONENT_THEMES,
   getComponentTheme,
   getTokenNames,
-  validateTokens,
   searchComponents,
+  validateTokens,
 } from '../../knowledge/component-themes.js';
 
 describe('Component Themes Knowledge Base', () => {
@@ -22,7 +22,7 @@ describe('Component Themes Knowledge Base', () => {
     });
 
     it('should have correct structure for each component', () => {
-      const avatar = COMPONENT_THEMES['avatar'];
+      const avatar = COMPONENT_THEMES.avatar;
       expect(avatar).toHaveProperty('name', 'avatar');
       expect(avatar).toHaveProperty('themeFunctionName', 'avatar-theme');
       expect(avatar).toHaveProperty('tokens');
@@ -30,7 +30,7 @@ describe('Component Themes Knowledge Base', () => {
     });
 
     it('should have tokens with correct properties', () => {
-      const avatar = COMPONENT_THEMES['avatar'];
+      const avatar = COMPONENT_THEMES.avatar;
       const token = avatar.tokens.find((t) => t.name === 'background');
       expect(token).toBeDefined();
       expect(token).toHaveProperty('name', 'background');

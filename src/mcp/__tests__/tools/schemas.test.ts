@@ -8,7 +8,7 @@
  * of actual color values happens at Sass compile time.
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
   colorSchema,
   createCustomPaletteSchema,

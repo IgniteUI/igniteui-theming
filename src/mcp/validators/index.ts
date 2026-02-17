@@ -4,37 +4,35 @@
 
 // Re-export common validation types from result.ts
 export {
-  type ValidationResult,
-  type ValidationError,
-  type ValidationWarning,
-  type ValidationSeverity,
-  validationSuccess,
-  validationFailure,
   combineValidationResults,
   formatValidationMessages,
+  type ValidationError,
+  type ValidationResult,
+  type ValidationSeverity,
+  type ValidationWarning,
+  validationFailure,
+  validationSuccess,
 } from '../utils/result.js';
-
-// Palette validation
-export {
-  validatePaletteColors,
-  formatValidationResult,
-  generateWarningComments,
-  analyzeThemeColorsForPalette,
-  formatPaletteSuitabilityWarnings,
-  generatePaletteSuitabilityComments,
-  type PaletteWarning,
-  type PaletteValidationResult,
-  type PaletteValidationMetadata,
-  type ValidatePaletteColorsInput,
-  type WarningSeverity,
-  type ThemeColorsSuitabilityResult,
-} from './palette.js';
-
 // Custom palette validation
 export {
-  validateCustomPalette,
-  formatCustomPaletteValidation,
   type CustomPaletteError,
-  type CustomPaletteWarning,
   type CustomPaletteValidationResult,
+  type CustomPaletteWarning,
+  formatCustomPaletteValidation,
+  validateCustomPalette,
 } from './custom-palette.js';
+// Palette validation
+export {
+  analyzeThemeColorsForPalette,
+  formatPaletteSuitabilityWarnings,
+  formatValidationResult,
+  generatePaletteSuitabilityComments,
+  generateWarningComments,
+  type PaletteValidationMetadata,
+  type PaletteValidationResult,
+  type PaletteWarning,
+  type ThemeColorsSuitabilityResult,
+  type ValidatePaletteColorsInput,
+  validatePaletteColors,
+  type WarningSeverity,
+} from './palette.js';

@@ -4,10 +4,10 @@
  * which is the single source of truth from the Sass code.
  */
 
-import multipliersData from '../../../json/colors/meta/multipliers.json' with { type: 'json' };
+import multipliersData from '../../../json/colors/meta/multipliers.json' with {type: 'json'};
 
 // Re-export shade level constants and types from the canonical source
-export {SHADE_LEVELS, ACCENT_SHADE_LEVELS, type ShadeLevel, type AccentShadeLevel} from '../utils/types.js';
+export {ACCENT_SHADE_LEVELS, type AccentShadeLevel, SHADE_LEVELS, type ShadeLevel} from '../utils/types.js';
 
 export interface ShadeMultipliers {
   s?: Record<string, string>;
@@ -24,4 +24,7 @@ export const COLOR_MULTIPLIERS: ShadeMultipliers = multipliersData.color as Shad
  * Multipliers for grayscale colors.
  * Only contains lightness (l) multipliers as grayscale has no saturation.
  */
-export const GRAYSCALE_MULTIPLIERS: Pick<ShadeMultipliers, 'l'> = multipliersData.grayscale as Pick<ShadeMultipliers, 'l'>;
+export const GRAYSCALE_MULTIPLIERS: Pick<ShadeMultipliers, 'l'> = multipliersData.grayscale as Pick<
+  ShadeMultipliers,
+  'l'
+>;

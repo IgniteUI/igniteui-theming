@@ -91,32 +91,59 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     variants: ['flat-button', 'contained-button', 'outlined-button', 'fab-button'],
   },
   'flat-button': {
-    selectors: {angular: '.igx-button--flat', webcomponents: 'igc-button[variant="flat"]'},
+    selectors: {
+      angular: '.igx-button--flat',
+      webcomponents: 'igc-button[variant="flat"]',
+    },
   },
   'contained-button': {
-    selectors: {angular: ['.igx-button--contained'], webcomponents: 'igc-button[variant="contained"]'},
+    selectors: {
+      angular: ['.igx-button--contained'],
+      webcomponents: 'igc-button[variant="contained"]',
+    },
   },
   'outlined-button': {
-    selectors: {angular: ['.igx-button--outlined'], webcomponents: 'igc-button[variant="outlined"]'},
+    selectors: {
+      angular: ['.igx-button--outlined'],
+      webcomponents: 'igc-button[variant="outlined"]',
+    },
   },
   'fab-button': {
-    selectors: {angular: ['.igx-button--fab'], webcomponents: 'igc-button[variant="fab"]'},
+    selectors: {
+      angular: ['.igx-button--fab'],
+      webcomponents: 'igc-button[variant="fab"]',
+    },
   },
   'icon-button': {
-    selectors: {angular: ['.igx-icon-button'], webcomponents: 'igc-icon-button'},
+    selectors: {
+      angular: ['.igx-icon-button'],
+      webcomponents: 'igc-icon-button',
+    },
     variants: ['flat-icon-button', 'contained-icon-button', 'outlined-icon-button'],
   },
   'flat-icon-button': {
-    selectors: {angular: ['.igx-icon-button--flat'], webcomponents: 'igc-icon-button[variant="flat"]'},
+    selectors: {
+      angular: ['.igx-icon-button--flat'],
+      webcomponents: 'igc-icon-button[variant="flat"]',
+    },
   },
   'contained-icon-button': {
-    selectors: {angular: ['.igx-icon-button--contained'], webcomponents: 'igc-icon-button[variant="contained"]'},
+    selectors: {
+      angular: ['.igx-icon-button--contained'],
+      webcomponents: 'igc-icon-button[variant="contained"]',
+    },
   },
   'outlined-icon-button': {
-    selectors: {angular: ['.igx-icon-button--outlined'], webcomponents: 'igc-icon-button[variant="outlined"]'},
+    selectors: {
+      angular: ['.igx-icon-button--outlined'],
+      webcomponents: 'igc-icon-button[variant="outlined"]',
+    },
   },
   'button-group': {
-    selectors: {angular: 'igx-buttongroup', webcomponents: 'igc-button-group'},
+    selectors: {
+      angular: 'igx-buttongroup',
+      webcomponents: 'igc-button-group',
+    },
   },
   calendar: {
     selectors: {angular: 'igx-calendar', webcomponents: 'igc-calendar'},
@@ -139,7 +166,8 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     compound: {
       description: 'The carousel component uses a contained-button and a textarea internally.',
       relatedThemes: ['contained-button', 'input-group'],
-      guidance: `Make sure the textarea and the contained-button themes visually coordinate with each other and the overall chat background.`,
+      guidance:
+        'Make sure the textarea and the contained-button themes visually coordinate with each other and the overall chat background.',
     },
   },
   checkbox: {
@@ -157,9 +185,10 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
         'flat-button.foreground': {
           from: 'column-actions.background',
           transform: 'adaptive-contrast',
-        }
+        },
       },
-      guidance: `Make sure to theme these child components to visually coordinate with each other and the overall column actions background.`,
+      guidance:
+        'Make sure to theme these child components to visually coordinate with each other and the overall column actions background.',
     },
   },
   combo: {
@@ -186,9 +215,9 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       },
       childScopes: {
         'drop-down': {angular: 'overlay'},
-        'checkbox': {angular: 'overlay'},
+        checkbox: {angular: 'overlay'},
       },
-      guidance: `The combo input-group, drop-down, and checkbox should share a consistent color scheme.`,
+      guidance: 'The combo input-group, drop-down, and checkbox should share a consistent color scheme.',
     },
   },
   'date-picker': {
@@ -210,11 +239,14 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
           transform: 'adaptive-contrast',
         },
       },
-      guidance: `The flat-button foreground inside the calendar should contrast with the calendar content background.`,
+      guidance: 'The flat-button foreground inside the calendar should contrast with the calendar content background.',
     },
   },
   'date-range-picker': {
-    selectors: {angular: 'igx-date-range-picker', webcomponents: 'igc-date-range-picker'},
+    selectors: {
+      angular: 'igx-date-range-picker',
+      webcomponents: 'igc-date-range-picker',
+    },
     compound: {
       description: 'The date-range-picker combines input, calendar, and flat-button components.',
       relatedThemes: ['flat-button', 'input-group', 'calendar'],
@@ -232,7 +264,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
           transform: 'adaptive-contrast',
         },
       },
-      guidance: `The flat-button foreground inside the calendar should contrast with the calendar content background.`,
+      guidance: 'The flat-button foreground inside the calendar should contrast with the calendar content background.',
     },
   },
   'date-range-start': {
@@ -266,13 +298,22 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
     selectors: {angular: 'igc-dockmanager', webcomponents: 'igc-dockmanager'},
   },
   'drop-down': {
-    selectors: {angular: '.igx-drop-down__list', webcomponents: 'igc-dropdown'},
+    selectors: {
+      angular: '.igx-drop-down__list',
+      webcomponents: 'igc-dropdown',
+    },
   },
   'expansion-panel': {
-    selectors: {angular: 'igx-expansion-panel', webcomponents: 'igc-expansion-panel'},
+    selectors: {
+      angular: 'igx-expansion-panel',
+      webcomponents: 'igc-expansion-panel',
+    },
   },
   'file-input': {
-    selectors: {angular: 'igx-input-group[class~="igx-input-group--file"]', webcomponents: 'igc-file-input'},
+    selectors: {
+      angular: 'igx-input-group[class~="igx-input-group--file"]',
+      webcomponents: 'igc-file-input',
+    },
     compound: {
       description: 'The file-input uses an input-group for the input field.',
       relatedThemes: ['input-group', 'file-input'],
@@ -322,10 +363,16 @@ and descriptions from get_component_design_tokens for each child to guide value 
     },
   },
   'grid-summary': {
-    selectors: {angular: 'igx-grid-summary', webcomponents: 'igc-grid-summary'},
+    selectors: {
+      angular: 'igx-grid-summary',
+      webcomponents: 'igc-grid-summary',
+    },
   },
   'grid-toolbar': {
-    selectors: {angular: 'igx-grid-toolbar', webcomponents: 'igc-grid-toolbar'},
+    selectors: {
+      angular: 'igx-grid-toolbar',
+      webcomponents: 'igc-grid-toolbar',
+    },
   },
   highlight: {
     selectors: {angular: 'igx-highlight', webcomponents: 'igc-highlight'},
@@ -355,7 +402,8 @@ and descriptions from get_component_design_tokens for each child to guide value 
         'contained-icon-button',
         'icon',
       ],
-      guidance: `Make sure to theme flat and outlined buttons/icons in the navbar to visually coordinate with the navbar background.`,
+      guidance:
+        'Make sure to theme flat and outlined buttons/icons in the navbar to visually coordinate with the navbar background.',
     },
   },
   navdrawer: {
@@ -369,11 +417,15 @@ and descriptions from get_component_design_tokens for each child to guide value 
     compound: {
       description: 'The paginator uses combo and flat-icon-buttons for the page controls.',
       relatedThemes: ['combo', 'flat-icon-button'],
-      guidance: `The combo and flat-icon-button themes should visually coordinate with each other and the overall paginator background.`,
+      guidance:
+        'The combo and flat-icon-button themes should visually coordinate with each other and the overall paginator background.',
     },
   },
   'pivot-data-selector': {
-    selectors: {angular: 'igx-pivot-data-selector', webcomponents: 'igc-pivot-data-selector'},
+    selectors: {
+      angular: 'igx-pivot-data-selector',
+      webcomponents: 'igc-pivot-data-selector',
+    },
     compound: {
       description: 'The pivot data selector uses checkboxes, expansion panels, lists, and chips.',
       relatedThemes: ['checkbox', 'expansion-panel', 'chip', 'list'],
@@ -384,10 +436,16 @@ and descriptions from get_component_design_tokens for each child to guide value 
     },
   },
   'progress-circular': {
-    selectors: {angular: 'igx-circular-bar', webcomponents: 'igc-circular-progress'},
+    selectors: {
+      angular: 'igx-circular-bar',
+      webcomponents: 'igc-circular-progress',
+    },
   },
   'progress-linear': {
-    selectors: {angular: 'igx-linear-bar', webcomponents: 'igc-linear-progress'},
+    selectors: {
+      angular: 'igx-linear-bar',
+      webcomponents: 'igc-linear-progress',
+    },
   },
   'query-builder': {
     selectors: {angular: 'igx-query-builder', webcomponents: null},
@@ -482,7 +540,10 @@ The input-group text color should coordinate with the time-picker header.`,
     selectors: {angular: 'igx-tree-node', webcomponents: 'igc-tree'},
   },
   watermark: {
-    selectors: {angular: 'igc-trial-watermark', webcomponents: 'igc-trial-watermark'},
+    selectors: {
+      angular: 'igc-trial-watermark',
+      webcomponents: 'igc-trial-watermark',
+    },
   },
 };
 
@@ -492,7 +553,7 @@ The input-group text color should coordinate with the time-picker header.`,
 export const VARIANT_THEME_NAMES = new Set(
   Object.values(COMPONENT_METADATA)
     .filter((m) => m.variants)
-    .flatMap((m) => m.variants!),
+    .flatMap((m) => m.variants!)
 );
 
 // ===== Accessor Functions =====
@@ -554,7 +615,7 @@ export function getComponentsForPlatform(platform: Platform): string[] {
  * @returns Object indicating availability on each platform, or undefined if component not found
  */
 export function getComponentPlatformAvailability(
-  componentName: string,
+  componentName: string
 ): {angular: boolean; webcomponents: boolean} | undefined {
   const metadata = COMPONENT_METADATA[componentName];
   if (!metadata) {
@@ -620,7 +681,7 @@ export function isCompoundComponent(componentName: string): boolean {
  */
 export function getTokenDerivationsForChild(
   compoundName: string,
-  childThemeName: string,
+  childThemeName: string
 ): Record<string, TokenDerivation> {
   const compound = COMPONENT_METADATA[compoundName]?.compound;
   if (!compound?.tokenDerivations) {

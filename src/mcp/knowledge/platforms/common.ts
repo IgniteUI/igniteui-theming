@@ -16,7 +16,6 @@ export const PALETTE_PRESETS_PATHS = {
   },
 } as const;
 
-
 /**
  * Available typography preset paths
  */

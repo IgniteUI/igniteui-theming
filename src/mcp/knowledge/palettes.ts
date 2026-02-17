@@ -4,7 +4,7 @@
  * which is the single source of truth from the Sass code.
  */
 
-import palettesData from '../../../json/colors/presets/palettes.json' with { type: 'json' };
+import palettesData from '../../../json/colors/presets/palettes.json' with {type: 'json'};
 
 export interface PaletteColors {
   primary: string;

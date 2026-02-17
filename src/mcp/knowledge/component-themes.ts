@@ -82,7 +82,7 @@ export function getTokenNames(componentName: string): string[] {
  */
 export function validateTokens(
   componentName: string,
-  tokenNames: string[],
+  tokenNames: string[]
 ): {isValid: boolean; invalidTokens: string[]; validTokens: string[]} {
   const validTokens = getTokenNames(componentName);
   const invalidTokens = tokenNames.filter((name) => !validTokens.includes(name));

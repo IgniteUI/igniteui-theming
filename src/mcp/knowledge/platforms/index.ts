@@ -12,46 +12,42 @@
  * for automatic platform identification from project files.
  */
 
-import {existsSync, readFileSync, readdirSync} from 'node:fs';
+import {existsSync, readdirSync, readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import type {Platform} from '../../utils/types.js';
 
+// Re-export Platform type from canonical source
+export type {Platform} from '../../utils/types.js';
 // Angular platform
 export {
   ANGULAR_PLATFORM,
   ANGULAR_USAGE_EXAMPLES,
-  generateAngularThemeSass,
-  type CoreMixinOptions,
-  type ThemeMixinOptions,
   type AngularThemeTemplate,
+  type CoreMixinOptions,
+  generateAngularThemeSass,
+  type ThemeMixinOptions,
 } from './angular.js';
-
+// Blazor platform
+export {BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES} from './blazor.js';
+// React platform
+export {REACT_PLATFORM, REACT_USAGE_EXAMPLES} from './react.js';
 // Web Components platform
 export {
-  WEBCOMPONENTS_PLATFORM,
-  WEBCOMPONENTS_USAGE_EXAMPLES,
-  WEBCOMPONENTS_RUNTIME_CONFIG,
-  generateWebComponentsThemeSass,
   // Helper functions for testability and reuse
   generateWCHeader,
-  getWCElevationPreset,
   generateWCImports,
   generateWCProgressProperties,
   generateWCRootVariables,
   generateWCRtlSupport,
   generateWCScrollbarCustomization,
   generateWCThemingMixins,
+  generateWebComponentsThemeSass,
+  getWCElevationPreset,
+  WEBCOMPONENTS_PLATFORM,
+  WEBCOMPONENTS_RUNTIME_CONFIG,
+  WEBCOMPONENTS_USAGE_EXAMPLES,
   type WebComponentsThemeTemplate,
 } from './webcomponents.js';
-
-// React platform
-export {REACT_PLATFORM, REACT_USAGE_EXAMPLES} from './react.js';
-
-// Blazor platform
-export {BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES} from './blazor.js';
-
-// Re-export Platform type from canonical source
-export type {Platform} from '../../utils/types.js';
 
 // ============================================================================
 // PLATFORM DETECTION TYPES
@@ -164,7 +160,7 @@ interface ConfigFileSignal {
  * @param projectRoot - Path to the project root directory
  * @returns Array of detected config file signals
  */
-export function detectConfigFiles(projectRoot: string = '.'): ConfigFileSignal[] {
+export function detectConfigFiles(projectRoot = '.'): ConfigFileSignal[] {
   const signals: ConfigFileSignal[] = [];
   const root = resolve(projectRoot);
 
@@ -249,7 +245,7 @@ export function detectConfigFiles(projectRoot: string = '.'): ConfigFileSignal[]
 export function detectPlatformFromDependencies(
   dependencies: Record<string, string> = {},
   devDependencies: Record<string, string> = {},
-  projectRoot: string = '.',
+  projectRoot = '.'
 ): PlatformDetectionResult {
   const allDeps = {...dependencies, ...devDependencies};
   const signals: DetectionSignal[] = [];
@@ -259,7 +255,11 @@ export function detectPlatformFromDependencies(
   for (const [platform, patterns] of Object.entries(IGNITE_PACKAGE_PATTERNS) as [Platform, string[]][]) {
     for (const pattern of patterns) {
       if (pattern in allDeps) {
-        signals.push({type: 'ignite_package', package: pattern, confidence: 100});
+        signals.push({
+          type: 'ignite_package',
+          package: pattern,
+          confidence: 100,
+        });
         const current = platformScores.get(platform) || 0;
         platformScores.set(platform, Math.max(current, 100));
       }
@@ -269,7 +269,11 @@ export function detectPlatformFromDependencies(
   // STEP 2: Check config files (MEDIUM-HIGH confidence - 80, or 100 for Blazor with IgniteUI)
   const configSignals = detectConfigFiles(projectRoot);
   for (const signal of configSignals) {
-    signals.push({type: 'config_file', file: signal.file, confidence: signal.confidence});
+    signals.push({
+      type: 'config_file',
+      file: signal.file,
+      confidence: signal.confidence,
+    });
     const current = platformScores.get(signal.platform) || 0;
     platformScores.set(signal.platform, Math.max(current, signal.confidence));
   }
@@ -281,7 +285,11 @@ export function detectPlatformFromDependencies(
       const currentScore = platformScores.get(platform) || 0;
       if (currentScore < 60) {
         // Only use framework fallback if no better signal exists
-        signals.push({type: 'framework_package', package: pkg, confidence: 40});
+        signals.push({
+          type: 'framework_package',
+          package: pkg,
+          confidence: 40,
+        });
         platformScores.set(platform, Math.max(currentScore, 40));
       }
     }
@@ -350,7 +358,7 @@ export function detectPlatformFromDependencies(
 
   // Find the detected package for backward compatibility
   const detectedPackageSignal = signals.find(
-    (s) => s.type === 'ignite_package' && IGNITE_PACKAGE_PATTERNS[topPlatform]?.includes(s.package),
+    (s) => s.type === 'ignite_package' && IGNITE_PACKAGE_PATTERNS[topPlatform]?.includes(s.package)
   ) as PackageDetectionSignal | undefined;
 
   return {

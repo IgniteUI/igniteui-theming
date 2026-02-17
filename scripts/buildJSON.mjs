@@ -1,11 +1,11 @@
-import path from 'path';
-import * as sass from 'sass-embedded';
-import {exec as _exec} from 'child_process';
-import {mkdirSync as makeDir} from 'fs';
-import {writeFile} from 'fs/promises';
-import {fileURLToPath} from 'url';
-import {promisify} from 'util';
+import {exec as _exec} from 'node:child_process';
+import {mkdirSync as makeDir} from 'node:fs';
+import {writeFile} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {promisify} from 'node:util';
 import {globby} from 'globby';
+import * as sass from 'sass-embedded';
 import {parseCSS} from './parser.mjs';
 import report from './report.mjs';
 

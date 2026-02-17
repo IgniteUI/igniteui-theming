@@ -4,11 +4,10 @@
  *
  */
 
+import * as path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import * as sass from 'sass-embedded';
-import * as path from 'path';
-import {fileURLToPath} from 'url';
-import type {ColorDefinition, GrayDefinition, ThemeVariant} from '../utils/types.js';
-import type {PLATFORMS} from '../utils/types.js';
+import type {ColorDefinition, GrayDefinition, PLATFORMS, ThemeVariant} from '../utils/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -253,7 +252,7 @@ export async function generateComponentThemeCss(options: ComponentThemeCssOption
 
   // Get variable prefix from platform
   const prefix = getVariablePrefix(options.platform);
-  const varName = `${prefix}-${options.component}`;
+  const _varName = `${prefix}-${options.component}`;
 
   // Generate Sass code
   const sassCode = `

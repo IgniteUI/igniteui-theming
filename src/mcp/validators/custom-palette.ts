@@ -10,22 +10,22 @@
  * a single Sass compilation.
  */
 
-import {validateColorsInBatch, analyzeColorsWithHue, huesAreClose, DEFAULT_HUE_TOLERANCE} from '../utils/color.js';
 import {SHADE_LEVELS} from '../knowledge/index.js';
+import {analyzeColorsWithHue, DEFAULT_HUE_TOLERANCE, huesAreClose, validateColorsInBatch} from '../utils/color.js';
+import {
+  formatValidationMessages,
+  type ValidationError,
+  type ValidationResult,
+  type ValidationWarning,
+} from '../utils/result.js';
 import {
   ALL_COLOR_SHADES,
   CHROMATIC_COLOR_GROUPS,
-  type CreateCustomPaletteInput,
   type ColorDefinition,
+  type CreateCustomPaletteInput,
   type GrayDefinition,
   type ThemeVariant,
 } from '../utils/types.js';
-import {
-  type ValidationResult,
-  type ValidationError,
-  type ValidationWarning,
-  formatValidationMessages,
-} from '../utils/result.js';
 
 /**
  * Result of custom palette validation.
@@ -57,9 +57,10 @@ interface CollectedColor {
 /**
  * Collects all colors from a palette input for batch validation.
  */
-function collectAllColors(
-  input: CreateCustomPaletteInput,
-): {colors: CollectedColor[]; missingShades: ValidationError[]} {
+function collectAllColors(input: CreateCustomPaletteInput): {
+  colors: CollectedColor[];
+  missingShades: ValidationError[];
+} {
   const colors: CollectedColor[] = [];
   const missingShades: ValidationError[] = [];
 
@@ -87,7 +88,7 @@ function collectFromDefinition(
   definition: ColorDefinition | GrayDefinition,
   expectedShades: readonly string[],
   colors: CollectedColor[],
-  missingShades: ValidationError[],
+  missingShades: ValidationError[]
 ): void {
   if (definition.mode === 'shades') {
     // Collect base color
@@ -141,7 +142,7 @@ function collectFromDefinition(
  */
 export async function validateCustomPalette(
   input: CreateCustomPaletteInput,
-  variant: ThemeVariant = 'light',
+  variant: ThemeVariant = 'light'
 ): Promise<CustomPaletteValidationResult> {
   const errors: ValidationError[] = [];
   const warnings: ValidationWarning[] = [];
@@ -265,7 +266,7 @@ async function validateShadeProgression(
   shades: Record<string, string>,
   colorType: 'chromatic' | 'gray',
   variant: ThemeVariant,
-  warnings: ValidationWarning[],
+  warnings: ValidationWarning[]
 ): Promise<void> {
   const shade50 = shades['50'];
   const shade900 = shades['900'];
@@ -281,8 +282,8 @@ async function validateShadeProgression(
       shade900: shade900,
     });
 
-    const lum50 = analysis['shade50']?.luminance;
-    const lum900 = analysis['shade900']?.luminance;
+    const lum50 = analysis.shade50?.luminance;
+    const lum900 = analysis.shade900?.luminance;
 
     if (lum50 === undefined || lum900 === undefined) {
       return;
@@ -297,30 +298,28 @@ async function validateShadeProgression(
         warnings.push({
           field: groupName,
           message:
-            `For dark themes, gray shade 50 should be darker than shade 900 (inverted progression). ` +
+            'For dark themes, gray shade 50 should be darker than shade 900 (inverted progression). ' +
             `Found: 50 (luminance: ${lum50.toFixed(3)}) vs 900 (luminance: ${lum900.toFixed(3)}).`,
           severity: 'warning',
         });
       }
-    } else {
+    } else if (lum50 <= lum900) {
       // Chromatic or gray in light themes: 50 should be lighter (higher luminance) than 900
-      if (lum50 <= lum900) {
-        const context = colorType === 'gray' ? 'For light themes, gray' : 'Chromatic';
-        warnings.push({
-          field: groupName,
-          message:
-            `${context} shade 50 should be lighter than shade 900. ` +
-            `Found: 50 (luminance: ${lum50.toFixed(3)}) vs 900 (luminance: ${lum900.toFixed(3)}).`,
-          severity: 'warning',
-        });
-      }
+      const context = colorType === 'gray' ? 'For light themes, gray' : 'Chromatic';
+
+      warnings.push({
+        field: groupName,
+        message:
+          `${context} shade 50 should be lighter than shade 900. ` +
+          `Found: 50 (luminance: ${lum50.toFixed(3)}) vs 900 (luminance: ${lum900.toFixed(3)}).`,
+        severity: 'warning',
+      });
     }
-  } catch (error) {
+  } catch (_error) {
     // Color analysis failures are non-fatal - the color validity check will catch
     // truly invalid colors. This can happen with edge-case color formats that Sass
     // accepts but our analysis doesn't handle. Log for debugging if needed.
     if (process.env.DEBUG) {
-      console.warn(`[custom-palette] Shade progression validation skipped for ${groupName}:`, error);
     }
   }
 }
@@ -335,7 +334,7 @@ async function validateMonochromaticHue(
   groupName: string,
   shades: Record<string, string>,
   warnings: ValidationWarning[],
-  tolerance: number = DEFAULT_HUE_TOLERANCE,
+  tolerance: number = DEFAULT_HUE_TOLERANCE
 ): Promise<void> {
   const shade50 = shades['50'];
   const shade500 = shades['500'];
@@ -353,9 +352,9 @@ async function validateMonochromaticHue(
       shade900: shade900,
     });
 
-    const hue50 = analysis['shade50']?.hue;
-    const hue500 = analysis['shade500']?.hue;
-    const hue900 = analysis['shade900']?.hue;
+    const hue50 = analysis.shade50?.hue;
+    const hue500 = analysis.shade500?.hue;
+    const hue900 = analysis.shade900?.hue;
 
     if (hue50 === undefined || hue500 === undefined || hue900 === undefined) {
       return;
@@ -375,7 +374,7 @@ async function validateMonochromaticHue(
       for (let j = i + 1; j < hues.length; j++) {
         if (!huesAreClose(hues[i].hue, hues[j].hue, tolerance)) {
           outliers.push(
-            `${hues[i].shade} (${Math.round(hues[i].hue)}°) vs ${hues[j].shade} (${Math.round(hues[j].hue)}°)`,
+            `${hues[i].shade} (${Math.round(hues[i].hue)}°) vs ${hues[j].shade} (${Math.round(hues[j].hue)}°)`
           );
         }
       }
@@ -387,16 +386,15 @@ async function validateMonochromaticHue(
         message:
           `Color shades may not be monochromatic (hue varies by more than ±${tolerance}°). ` +
           `Differences found: ${outliers.join(', ')}. ` +
-          `Consider using colors from the same hue family for visual consistency.`,
+          'Consider using colors from the same hue family for visual consistency.',
         severity: 'warning',
       });
     }
-  } catch (error) {
+  } catch (_error) {
     // Color analysis failures are non-fatal - the color validity check will catch
     // truly invalid colors. This can happen with edge-case color formats that Sass
     // accepts but our analysis doesn't handle. Log for debugging if needed.
     if (process.env.DEBUG) {
-      console.warn(`[custom-palette] Hue validation skipped for ${groupName}:`, error);
     }
   }
 }

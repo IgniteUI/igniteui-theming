@@ -1,5 +1,5 @@
-import {describe, it, expect} from 'vitest';
-import {RESOURCE_URIS, getResourceContent} from '../../resources/index.js';
+import {describe, expect, it} from 'vitest';
+import {getResourceContent, RESOURCE_URIS} from '../../resources/index.js';
 
 describe('resource handlers', () => {
   it('returns platform listing resource', () => {

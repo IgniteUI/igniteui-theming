@@ -1,23 +1,23 @@
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
-  success,
+  combineValidationResults,
   failure,
-  isSuccess,
+  formatValidationMessages,
   isFailure,
+  isSuccess,
+  type McpResult,
   mapResult,
+  mcpError,
+  type Result,
+  success,
   unwrap,
   unwrapOr,
-  mcpError,
-  validationSuccess,
-  validationFailure,
-  combineValidationResults,
-  formatValidationMessages,
-  type Result,
-  type McpResult,
-  type ValidationResult,
   type ValidationError,
+  type ValidationResult,
   type ValidationWarning,
-} from '../../utils/result';
+  validationFailure,
+  validationSuccess,
+} from '../../utils/result.js';
 
 describe('Result Type', () => {
   describe('success()', () => {
@@ -180,7 +180,9 @@ describe('McpError', () => {
     });
 
     it('creates an error with context', () => {
-      const error = mcpError('VALIDATION_ERROR', 'Missing field', {field: 'primary'});
+      const error = mcpError('VALIDATION_ERROR', 'Missing field', {
+        field: 'primary',
+      });
       expect(error.code).toBe('VALIDATION_ERROR');
       expect(error.message).toBe('Missing field');
       expect(error.context).toEqual({field: 'primary'});
@@ -296,7 +298,7 @@ describe('ValidationResult', () => {
     it('preserves error and warning details', () => {
       const result1 = validationFailure(
         [{message: 'error', field: 'primary', suggestion: 'use hex'}],
-        [{message: 'warning', field: 'secondary'}],
+        [{message: 'warning', field: 'secondary'}]
       );
       const result2 = validationSuccess([{message: 'info', suggestion: 'consider contrast'}]);
       const combined = combineValidationResults(result1, result2);
@@ -356,11 +358,19 @@ describe('ValidationResult', () => {
       const result: ValidationResult = {
         isValid: false,
         errors: [
-          {field: 'primary', message: 'Invalid hex color', suggestion: 'Use format #RRGGBB'},
+          {
+            field: 'primary',
+            message: 'Invalid hex color',
+            suggestion: 'Use format #RRGGBB',
+          },
           {message: 'Missing required shade 500'},
         ],
         warnings: [
-          {field: 'contrast', message: 'Low contrast ratio', suggestion: 'Consider WCAG guidelines'},
+          {
+            field: 'contrast',
+            message: 'Low contrast ratio',
+            suggestion: 'Consider WCAG guidelines',
+          },
         ],
       };
       const formatted = formatValidationMessages(result);
@@ -392,7 +402,9 @@ describe('ValidationResult', () => {
 
     it('respects includeIcons option', () => {
       const result = validationFailure([{message: 'Error'}], [{message: 'Warning'}]);
-      const formatted = formatValidationMessages(result, {includeIcons: false});
+      const formatted = formatValidationMessages(result, {
+        includeIcons: false,
+      });
       expect(formatted).not.toContain('❌');
       expect(formatted).not.toContain('⚠️');
     });

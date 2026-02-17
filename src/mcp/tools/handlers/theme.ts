@@ -3,15 +3,15 @@
  */
 
 import {generateTheme} from '../../generators/sass.js';
-import type {CreateThemeParams} from '../schemas.js';
 import {
-  validatePaletteColors,
-  formatValidationResult,
-  generateWarningComments,
   analyzeThemeColorsForPalette,
   formatPaletteSuitabilityWarnings,
+  formatValidationResult,
   generatePaletteSuitabilityComments,
+  generateWarningComments,
+  validatePaletteColors,
 } from '../../validators/index.js';
+import type {CreateThemeParams} from '../schemas.js';
 
 export async function handleCreateTheme(params: CreateThemeParams) {
   const variant = params.variant ?? 'light';

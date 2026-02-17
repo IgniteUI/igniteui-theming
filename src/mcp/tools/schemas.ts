@@ -12,14 +12,14 @@
 import {z} from 'zod';
 import {SHADE_LEVELS} from '../knowledge/index.js';
 import {
-  PLATFORMS,
-  DESIGN_SYSTEMS,
-  VARIANTS,
-  ELEVATION_PRESETS,
+  ACCENT_SHADE_LEVELS,
   ALL_COLOR_SHADES,
+  DESIGN_SYSTEMS,
+  ELEVATION_PRESETS,
   OUTPUT_FORMATS,
   PALETTE_COLOR_GROUPS,
-  ACCENT_SHADE_LEVELS,
+  PLATFORMS,
+  VARIANTS,
 } from '../utils/types.js';
 import {PARAM_DESCRIPTIONS} from './descriptions.js';
 
@@ -184,7 +184,7 @@ export type CreateElevationsParams = z.infer<typeof createElevationsSchema>;
 export type CreateThemeParams = z.infer<typeof createThemeSchema>;
 
 // Re-export canonical types from utils/types.ts for convenience
-export type {Platform, DesignSystem, ThemeVariant, ElevationPreset, OutputFormat} from '../utils/types.js';
+export type {DesignSystem, ElevationPreset, OutputFormat, Platform, ThemeVariant} from '../utils/types.js';
 
 // ============================================================================
 // Custom Palette Schemas
@@ -339,7 +339,7 @@ export const getColorSchema = getColorBaseSchema.refine(
   {
     message: 'Gray color does not support accent shades (A100, A200, A400, A700). Use standard shades: 50-900.',
     path: ['variant'],
-  },
+  }
 );
 
 export type GetColorParams = z.infer<typeof getColorSchema>;

@@ -2,13 +2,13 @@
  * Tests for custom palette validation.
  */
 
-import { describe, it, expect } from 'vitest';
+import {describe, expect, it} from 'vitest';
+import type {CreateCustomPaletteInput, ExplicitColorShades, ShadesBasedColor} from '../../utils/types.js';
 import {
-  validateCustomPalette,
-  formatCustomPaletteValidation,
   type CustomPaletteValidationResult,
+  formatCustomPaletteValidation,
+  validateCustomPalette,
 } from '../../validators/custom-palette.js';
-import type { CreateCustomPaletteInput, ShadesBasedColor, ExplicitColorShades } from '../../utils/types.js';
 
 // Helper to create a minimal valid shades-based palette
 function createShadesBasedPalette(overrides?: Partial<CreateCustomPaletteInput>): CreateCustomPaletteInput {
@@ -42,10 +42,10 @@ function createExplicitShades(): ExplicitColorShades['shades'] {
     '700': '#388e3c',
     '800': '#2e7d32',
     '900': '#1b5e20',
-    'A100': '#b9f6ca',
-    'A200': '#69f0ae',
-    'A400': '#00e676',
-    'A700': '#00c853',
+    A100: '#b9f6ca',
+    A200: '#69f0ae',
+    A400: '#00e676',
+    A700: '#00c853',
   };
 }
 
@@ -61,7 +61,7 @@ describe('validateCustomPalette', () => {
 
     it('reports error for invalid base color', async () => {
       const input = createShadesBasedPalette({
-        primary: { mode: 'shades', baseColor: 'not-a-color' },
+        primary: {mode: 'shades', baseColor: 'not-a-color'},
       });
       const result = await validateCustomPalette(input, 'light');
 
@@ -76,11 +76,11 @@ describe('validateCustomPalette', () => {
 
     it('validates all color groups with shades mode', async () => {
       const input = createShadesBasedPalette({
-        gray: { mode: 'shades', baseColor: '#333333' },
-        info: { mode: 'shades', baseColor: '#0288d1' },
-        success: { mode: 'shades', baseColor: '#4caf50' },
-        warn: { mode: 'shades', baseColor: '#ff9800' },
-        error: { mode: 'shades', baseColor: '#f44336' },
+        gray: {mode: 'shades', baseColor: '#333333'},
+        info: {mode: 'shades', baseColor: '#0288d1'},
+        success: {mode: 'shades', baseColor: '#4caf50'},
+        warn: {mode: 'shades', baseColor: '#ff9800'},
+        error: {mode: 'shades', baseColor: '#f44336'},
       });
       const result = await validateCustomPalette(input, 'light');
 

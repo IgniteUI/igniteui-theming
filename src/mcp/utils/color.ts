@@ -3,9 +3,9 @@
  * Calls the actual Sass luminance() and contrast() functions for accurate validation.
  */
 
+import * as path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import * as sass from 'sass-embedded';
-import * as path from 'path';
-import {fileURLToPath} from 'url';
 
 // Get the package root directory (where sass/ folder is located)
 const __filename = fileURLToPath(import.meta.url);
@@ -94,7 +94,7 @@ $lum: color.luminance(${color});
       throw new Error(`Could not parse luminance from Sass output for color: ${color}`);
     }
 
-    const luminance = parseFloat(luminanceMatch[1]);
+    const luminance = Number.parseFloat(luminanceMatch[1]);
 
     return {
       color,
@@ -135,10 +135,10 @@ $ratio: color.contrast(${color1}, ${color2});
     // Parse the contrast ratio from CSS output
     const contrastMatch = result.css.match(/--contrast-ratio:\s*([\d.]+)/);
     if (!contrastMatch) {
-      throw new Error(`Could not parse contrast ratio from Sass output`);
+      throw new Error('Could not parse contrast ratio from Sass output');
     }
 
-    return parseFloat(contrastMatch[1]);
+    return Number.parseFloat(contrastMatch[1]);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(`Failed to calculate contrast between "${color1}" and "${color2}": ${message}`);
@@ -200,7 +200,7 @@ export async function analyzeSurfaceGrayColors(params: {
     if (surface) {
       const surfaceMatch = result.css.match(/--surface-luminance:\s*([\d.]+)/);
       if (surfaceMatch) {
-        const luminance = parseFloat(surfaceMatch[1]);
+        const luminance = Number.parseFloat(surfaceMatch[1]);
         analysis.surface = {
           color: surface,
           luminance,
@@ -212,7 +212,7 @@ export async function analyzeSurfaceGrayColors(params: {
     if (gray) {
       const grayMatch = result.css.match(/--gray-luminance:\s*([\d.]+)/);
       if (grayMatch) {
-        const luminance = parseFloat(grayMatch[1]);
+        const luminance = Number.parseFloat(grayMatch[1]);
         analysis.gray = {
           color: gray,
           luminance,
@@ -224,7 +224,7 @@ export async function analyzeSurfaceGrayColors(params: {
     if (surface && gray) {
       const contrastMatch = result.css.match(/--contrast-ratio:\s*([\d.]+)/);
       if (contrastMatch) {
-        analysis.contrastRatio = parseFloat(contrastMatch[1]);
+        analysis.contrastRatio = Number.parseFloat(contrastMatch[1]);
       }
     }
 
@@ -346,7 +346,7 @@ $hue: color.channel(${color}, "hue", $space: hsl);
       throw new Error(`Could not parse hue from Sass output for color: ${color}`);
     }
 
-    return parseFloat(hueMatch[1]);
+    return Number.parseFloat(hueMatch[1]);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(`Failed to extract hue from color "${color}": ${message}`);
@@ -378,7 +378,7 @@ export function huesAreClose(hue1: number, hue2: number, tolerance: number = DEF
  * @returns Map of key names to analysis results
  */
 export async function analyzeColorsWithHue(
-  colors: Record<string, string>,
+  colors: Record<string, string>
 ): Promise<Record<string, {luminance: number; hue: number}>> {
   const entries = Object.entries(colors);
   if (entries.length === 0) {
@@ -418,8 +418,8 @@ export async function analyzeColorsWithHue(
 
       if (lumMatch && hueMatch) {
         analysis[key] = {
-          luminance: parseFloat(lumMatch[1]),
-          hue: parseFloat(hueMatch[1]),
+          luminance: Number.parseFloat(lumMatch[1]),
+          hue: Number.parseFloat(hueMatch[1]),
         };
       }
     }
@@ -512,7 +512,7 @@ export async function analyzeColorForPalette(color: string): Promise<PaletteSuit
       issue: 'too-light',
       description:
         `Luminance ${analysis.luminance.toFixed(2)} exceeds ${PALETTE_LUMINANCE_THRESHOLDS.TOO_LIGHT} - ` +
-        `darker shades (600-900) will appear washed out`,
+        'darker shades (600-900) will appear washed out',
     };
   }
 
@@ -524,7 +524,7 @@ export async function analyzeColorForPalette(color: string): Promise<PaletteSuit
       issue: 'too-dark',
       description:
         `Luminance ${analysis.luminance.toFixed(2)} is below ${PALETTE_LUMINANCE_THRESHOLDS.TOO_DARK} - ` +
-        `lighter shades (50-200) will lack contrast range`,
+        'lighter shades (50-200) will lack contrast range',
     };
   }
 

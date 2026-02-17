@@ -5,10 +5,9 @@
  * during the refactoring of generateWebComponentsThemeSass.
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
   generateWCHeader,
-  getWCElevationPreset,
   generateWCImports,
   generateWCProgressProperties,
   generateWCRootVariables,
@@ -16,6 +15,7 @@ import {
   generateWCScrollbarCustomization,
   generateWCThemingMixins,
   generateWebComponentsThemeSass,
+  getWCElevationPreset,
 } from '../../knowledge/platforms/webcomponents.js';
 
 describe('generateWCHeader', () => {

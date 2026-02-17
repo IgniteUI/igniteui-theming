@@ -8,20 +8,20 @@
  * 4. TokenDerivation format validation
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
   COMPONENT_METADATA,
-  VARIANT_THEME_NAMES,
-  getComponentSelector,
-  hasVariants,
-  getVariants,
-  isVariantTheme,
-  getCompoundComponentInfo,
-  isCompoundComponent,
-  getTokenDerivationsForChild,
-  isComponentAvailable,
-  getComponentsForPlatform,
   getComponentPlatformAvailability,
+  getComponentSelector,
+  getComponentsForPlatform,
+  getCompoundComponentInfo,
+  getTokenDerivationsForChild,
+  getVariants,
+  hasVariants,
+  isComponentAvailable,
+  isCompoundComponent,
+  isVariantTheme,
+  VARIANT_THEME_NAMES,
 } from '../../knowledge/component-metadata.js';
 
 const VALID_TRANSFORMS = ['identity', 'adaptive-contrast', 'dynamic-shade'];
@@ -41,7 +41,7 @@ describe('Component Metadata Knowledge Base', () => {
         expect(metadata, `${name} should have selectors`).toHaveProperty('selectors');
         expect(metadata.selectors, `${name}.selectors should have angular property`).toHaveProperty('angular');
         expect(metadata.selectors, `${name}.selectors should have webcomponents property`).toHaveProperty(
-          'webcomponents',
+          'webcomponents'
         );
       }
     });
@@ -85,7 +85,7 @@ describe('Component Metadata Knowledge Base', () => {
           for (const variant of metadata.variants) {
             expect(
               COMPONENT_METADATA,
-              `variant '${variant}' of '${name}' should exist in COMPONENT_METADATA`,
+              `variant '${variant}' of '${name}' should exist in COMPONENT_METADATA`
             ).toHaveProperty(variant);
           }
         }
@@ -101,12 +101,12 @@ describe('Component Metadata Knowledge Base', () => {
         if (metadata.compound) {
           expect(metadata.compound, `${name}.compound should have description`).toHaveProperty('description');
           expect(typeof metadata.compound.description, `${name}.compound.description should be a string`).toBe(
-            'string',
+            'string'
           );
           expect(metadata.compound, `${name}.compound should have relatedThemes`).toHaveProperty('relatedThemes');
           expect(
             Array.isArray(metadata.compound.relatedThemes),
-            `${name}.compound.relatedThemes should be an array`,
+            `${name}.compound.relatedThemes should be an array`
           ).toBe(true);
         }
       }
@@ -122,13 +122,13 @@ describe('Component Metadata Knowledge Base', () => {
           if (scopeTargets.angular) {
             expect(
               scopeTargets.angular === 'inline' || additionalScopeKeys.includes(scopeTargets.angular),
-              `${name} childScope '${childName}' angular target '${scopeTargets.angular}' should be 'inline' or a key in additionalScopes`,
+              `${name} childScope '${childName}' angular target '${scopeTargets.angular}' should be 'inline' or a key in additionalScopes`
             ).toBe(true);
           }
           if (scopeTargets.webcomponents) {
             expect(
               scopeTargets.webcomponents === 'inline' || additionalScopeKeys.includes(scopeTargets.webcomponents),
-              `${name} childScope '${childName}' webcomponents target '${scopeTargets.webcomponents}' should be 'inline' or a key in additionalScopes`,
+              `${name} childScope '${childName}' webcomponents target '${scopeTargets.webcomponents}' should be 'inline' or a key in additionalScopes`
             ).toBe(true);
           }
         }
@@ -141,7 +141,7 @@ describe('Component Metadata Knowledge Base', () => {
 
         expect(
           metadata.compound.additionalScopes,
-          `${name}.compound.additionalScopes should not have an 'inline' key`,
+          `${name}.compound.additionalScopes should not have an 'inline' key`
         ).not.toHaveProperty('inline');
       }
     });
@@ -153,7 +153,7 @@ describe('Component Metadata Knowledge Base', () => {
         for (const childName of Object.keys(metadata.compound.childScopes)) {
           expect(
             metadata.compound.relatedThemes,
-            `${name} childScope child '${childName}' should be in relatedThemes`,
+            `${name} childScope child '${childName}' should be in relatedThemes`
           ).toContain(childName);
         }
       }
@@ -169,7 +169,7 @@ describe('Component Metadata Knowledge Base', () => {
 
         for (const key of Object.keys(metadata.compound.tokenDerivations)) {
           expect(key, `${compoundName} derivation key '${key}' should match 'child.token' pattern`).toMatch(
-            /^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/,
+            /^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/
           );
         }
       }
@@ -182,7 +182,7 @@ describe('Component Metadata Knowledge Base', () => {
         for (const [key, derivation] of Object.entries(metadata.compound.tokenDerivations)) {
           expect(
             derivation.from,
-            `${compoundName} derivation '${key}' from field '${derivation.from}' should match 'component.token' pattern`,
+            `${compoundName} derivation '${key}' from field '${derivation.from}' should match 'component.token' pattern`
           ).toMatch(/^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/);
         }
       }
@@ -195,7 +195,7 @@ describe('Component Metadata Knowledge Base', () => {
         for (const [key, derivation] of Object.entries(metadata.compound.tokenDerivations)) {
           expect(
             VALID_TRANSFORMS,
-            `${compoundName} derivation '${key}' transform '${derivation.transform}' should be valid`,
+            `${compoundName} derivation '${key}' transform '${derivation.transform}' should be valid`
           ).toContain(derivation.transform);
         }
       }
@@ -208,7 +208,7 @@ describe('Component Metadata Knowledge Base', () => {
         for (const [key, derivation] of Object.entries(metadata.compound.tokenDerivations)) {
           if (derivation.args !== undefined) {
             expect(typeof derivation.args, `${compoundName} derivation '${key}' args should be an object`).toBe(
-              'object',
+              'object'
             );
           }
         }
@@ -229,7 +229,7 @@ describe('Component Metadata Knowledge Base', () => {
       const expected = new Set(
         Object.values(COMPONENT_METADATA)
           .filter((m) => m.variants)
-          .flatMap((m) => m.variants!),
+          .flatMap((m) => m.variants!)
       );
 
       expect(VARIANT_THEME_NAMES).toEqual(expected);
@@ -239,7 +239,7 @@ describe('Component Metadata Knowledge Base', () => {
       for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
         if (metadata.variants) {
           expect(VARIANT_THEME_NAMES.has(name), `base component '${name}' should not be in VARIANT_THEME_NAMES`).toBe(
-            false,
+            false
           );
         }
       }
@@ -274,7 +274,7 @@ describe('Component Metadata Knowledge Base', () => {
 
     it('should normalize single selector to array', () => {
       const componentWithSingleSelector = Object.entries(COMPONENT_METADATA).find(
-        ([, m]) => typeof m.selectors.angular === 'string',
+        ([, m]) => typeof m.selectors.angular === 'string'
       );
 
       if (componentWithSingleSelector) {
@@ -287,7 +287,7 @@ describe('Component Metadata Knowledge Base', () => {
 
     it('should preserve array selectors as-is', () => {
       const componentWithArraySelector = Object.entries(COMPONENT_METADATA).find(([, m]) =>
-        Array.isArray(m.selectors.angular),
+        Array.isArray(m.selectors.angular)
       );
 
       if (componentWithArraySelector) {
@@ -461,7 +461,7 @@ describe('Component Metadata Knowledge Base', () => {
   describe('getTokenDerivationsForChild()', () => {
     it('should return derivations for a known child theme', () => {
       const withDerivations = Object.entries(COMPONENT_METADATA).find(
-        ([, m]) => m.compound?.tokenDerivations && Object.keys(m.compound.tokenDerivations).length > 0,
+        ([, m]) => m.compound?.tokenDerivations && Object.keys(m.compound.tokenDerivations).length > 0
       );
 
       if (withDerivations) {
@@ -498,7 +498,7 @@ describe('Component Metadata Knowledge Base', () => {
 
     it('should return empty object for compound without derivations', () => {
       const withoutDerivations = Object.entries(COMPONENT_METADATA).find(
-        ([, m]) => m.compound && !m.compound.tokenDerivations,
+        ([, m]) => m.compound && !m.compound.tokenDerivations
       );
 
       if (withoutDerivations) {
@@ -538,7 +538,7 @@ describe('Component Metadata Knowledge Base', () => {
 
         for (const scopeName of Object.keys(metadata.compound.additionalScopes)) {
           expect(validScopeNames, `${name} additionalScopes contains unexpected scope '${scopeName}'`).toContain(
-            scopeName,
+            scopeName
           );
         }
       }

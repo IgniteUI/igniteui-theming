@@ -1,15 +1,15 @@
+import type {CompoundInfo} from '../../knowledge/index.js';
 import {
-  getComponentTheme,
-  searchComponents,
   COMPONENT_NAMES,
-  hasVariants,
-  getVariants,
-  isCompoundComponent,
+  getComponentSelector,
+  getComponentTheme,
   getCompoundComponentInfo,
   getTokenDerivationsForChild,
-  getComponentSelector,
+  getVariants,
+  hasVariants,
+  isCompoundComponent,
+  searchComponents,
 } from '../../knowledge/index.js';
-import type {CompoundInfo} from '../../knowledge/index.js';
 import type {GetComponentDesignTokensParams, Platform} from '../schemas.js';
 
 export async function handleGetComponentDesignTokens(params: GetComponentDesignTokensParams) {
@@ -30,7 +30,7 @@ export async function handleGetComponentDesignTokens(params: GetComponentDesignT
     compoundInfo: CompoundInfo,
     componentName: string,
     scopeName: string,
-    platform: Platform,
+    platform: Platform
   ): string => {
     // React/Blazor share Web Components selectors
     const selectorPlatform: 'angular' | 'webcomponents' = platform === 'angular' ? 'angular' : 'webcomponents';
@@ -52,7 +52,7 @@ export async function handleGetComponentDesignTokens(params: GetComponentDesignT
   const resolveChildScopeName = (
     compoundInfo: CompoundInfo | undefined,
     childThemeName: string,
-    platform: Platform,
+    platform: Platform
   ): string => {
     // React/Blazor share Web Components scoping
     const scopePlatform: 'angular' | 'webcomponents' = platform === 'angular' ? 'angular' : 'webcomponents';
@@ -129,7 +129,7 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
       responseParts.push('**Steps:**');
       responseParts.push('1. Choose your platform and use the matching scopes below.');
       responseParts.push(
-        '2. For each related theme: call `get_component_design_tokens`, then `create_component_theme` using the selector for that platform scope.',
+        '2. For each related theme: call `get_component_design_tokens`, then `create_component_theme` using the selector for that platform scope.'
       );
       responseParts.push('3. Apply `@include tokens(child-theme(...))` inside the scope selector.');
       responseParts.push('');
@@ -168,7 +168,7 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
 
               return `| \`${relatedTheme}\` | ${scopeName} | ${selectorText} |`;
             })
-            .join('\n'),
+            .join('\n')
         );
         responseParts.push('');
       }

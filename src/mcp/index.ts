@@ -9,41 +9,39 @@
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
 import {z} from 'zod';
-
+import {getResourceContent, RESOURCE_DEFINITIONS} from './resources/index.js';
+import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
 import {
-  detectPlatformSchema,
-  createPaletteSchema,
-  createCustomPaletteSchema,
-  createTypographySchema,
-  createElevationsSchema,
-  createThemeSchema,
-  getComponentDesignTokensSchema,
   createComponentThemeSchema,
+  createCustomPaletteSchema,
+  createElevationsSchema,
+  createPaletteSchema,
+  createThemeSchema,
+  createTypographySchema,
+  detectPlatformSchema,
   getColorSchema,
-  setSizeSchema,
-  setSpacingSchema,
-  setSpacingInputSchema,
-  setRoundnessSchema,
-  readResourceSchema,
-  handleDetectPlatform,
-  handleCreatePalette,
-  handleCreateCustomPalette,
-  handleCreateTypography,
-  handleCreateElevations,
-  handleCreateTheme,
-  handleGetComponentDesignTokens,
+  getComponentDesignTokensSchema,
   handleCreateComponentTheme,
+  handleCreateCustomPalette,
+  handleCreateElevations,
+  handleCreatePalette,
+  handleCreateTheme,
+  handleCreateTypography,
+  handleDetectPlatform,
   handleGetColor,
+  handleGetComponentDesignTokens,
+  handleReadResource,
+  handleSetRoundness,
   handleSetSize,
   handleSetSpacing,
-  handleSetRoundness,
-  handleReadResource,
+  readResourceSchema,
+  setRoundnessSchema,
+  setSizeSchema,
+  setSpacingInputSchema,
+  setSpacingSchema,
 } from './tools/index.js';
-import {TOOL_DESCRIPTIONS} from './tools/descriptions.js';
 import {withPreprocessing} from './utils/preprocessing.js';
-import {PALETTE_COLOR_GROUPS, SHADE_LEVELS, ACCENT_SHADE_LEVELS} from './utils/types.js';
-
-import {RESOURCE_DEFINITIONS, getResourceContent} from './resources/index.js';
+import {ACCENT_SHADE_LEVELS, PALETTE_COLOR_GROUPS, SHADE_LEVELS} from './utils/types.js';
 
 /**
  * Create and configure the MCP server.
@@ -80,7 +78,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = detectPlatformSchema.parse(params);
       return handleDetectPlatform(validated);
-    },
+    }
   );
 
   // create_palette tool
@@ -108,7 +106,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = createPaletteSchema.parse(params);
       return await handleCreatePalette(validated);
-    },
+    }
   );
 
   // create_custom_palette tool
@@ -134,7 +132,7 @@ function registerTools(server: McpServer): void {
         error: createCustomPaletteSchema.shape.error,
       },
     },
-    withPreprocessing(createCustomPaletteSchema, handleCreateCustomPalette),
+    withPreprocessing(createCustomPaletteSchema, handleCreateCustomPalette)
   );
 
   // create_typography tool
@@ -152,7 +150,7 @@ function registerTools(server: McpServer): void {
         name: createTypographySchema.shape.name,
       },
     },
-    withPreprocessing(createTypographySchema, handleCreateTypography),
+    withPreprocessing(createTypographySchema, handleCreateTypography)
   );
 
   // create_elevations tool
@@ -171,7 +169,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = createElevationsSchema.parse(params);
       return handleCreateElevations(validated);
-    },
+    }
   );
 
   // create_theme tool
@@ -198,7 +196,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = createThemeSchema.parse(params);
       return await handleCreateTheme(validated);
-    },
+    }
   );
 
   // set_size tool
@@ -218,7 +216,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = setSizeSchema.parse(params);
       return handleSetSize(validated);
-    },
+    }
   );
 
   // set_spacing tool
@@ -240,7 +238,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = setSpacingSchema.parse(params);
       return handleSetSpacing(validated);
-    },
+    }
   );
 
   // set_roundness tool
@@ -260,7 +258,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = setRoundnessSchema.parse(params);
       return handleSetRoundness(validated);
-    },
+    }
   );
 
   // get_component_design_tokens tool
@@ -276,7 +274,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = getComponentDesignTokensSchema.parse(params);
       return await handleGetComponentDesignTokens(validated);
-    },
+    }
   );
 
   // create_component_theme tool
@@ -297,7 +295,7 @@ function registerTools(server: McpServer): void {
         output: createComponentThemeSchema.shape.output,
       },
     },
-    withPreprocessing(createComponentThemeSchema, handleCreateComponentTheme),
+    withPreprocessing(createComponentThemeSchema, handleCreateComponentTheme)
   );
 
   // get_color tool
@@ -316,7 +314,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = getColorSchema.parse(params);
       return handleGetColor(validated);
-    },
+    }
   );
 
   // read_resource tool — description built dynamically from RESOURCE_DEFINITIONS
@@ -332,7 +330,7 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = readResourceSchema.parse(params);
       return handleReadResource(validated);
-    },
+    }
   );
 }
 
@@ -350,9 +348,9 @@ function buildReadResourceDescription(): string {
 
   for (const r of RESOURCE_DEFINITIONS) {
     if (r.uri.includes('://platforms')) {
-      groups['Platforms'].push(r);
+      groups.Platforms.push(r);
     } else if (r.uri.includes('://presets/')) {
-      groups['Presets'].push(r);
+      groups.Presets.push(r);
     } else if (r.uri.includes('://guidance/')) {
       groups['Color Guidance'].push(r);
     } else if (r.uri.includes('://docs/')) {
@@ -403,7 +401,7 @@ function registerResources(server: McpServer): void {
             },
           ],
         };
-      },
+      }
     );
   }
 }
@@ -427,7 +425,6 @@ async function main(): Promise<void> {
 }
 
 // Run the server
-main().catch((error) => {
-  console.error('Failed to start MCP server:', error);
+main().catch((_error) => {
   process.exit(1);
 });

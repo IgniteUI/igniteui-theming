@@ -4,13 +4,12 @@
  * which is the single source of truth from the Sass code.
  */
 
-import materialElevationsData from '../../../json/elevations/material.json' with { type: 'json' };
-import indigoElevationsData from '../../../json/elevations/indigo.json' with { type: 'json' };
+import indigoElevationsData from '../../../json/elevations/indigo.json' with {type: 'json'};
+import materialElevationsData from '../../../json/elevations/material.json' with {type: 'json'};
 
-export type ElevationLevel =
-  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-  | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20
-  | 21 | 22 | 23 | 24;
+type StringToNumber<S extends string> = S extends `${infer N extends number}` ? N : never;
+
+export type ElevationLevel = StringToNumber<keyof typeof materialElevationsData.elevations>;
 
 export type ElevationPreset = 'material' | 'indigo';
 
@@ -40,7 +39,5 @@ export const ELEVATION_PRESETS: Record<ElevationPreset, ElevationMap> = {
  * Valid elevation levels.
  */
 export const ELEVATION_LEVELS: ElevationLevel[] = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  21, 22, 23, 24,
-];
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+] satisfies readonly ElevationLevel[];

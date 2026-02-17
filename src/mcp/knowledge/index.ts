@@ -2,177 +2,168 @@
  * Knowledge base index - re-exports all embedded theming data.
  */
 
-// Sass API Manifest (centralized API knowledge)
-export {
-  IMPORT_PATHS,
-  PALETTE_FUNCTION,
-  SHADES_FUNCTION,
-  TYPOGRAPHY_MIXIN,
-  ELEVATIONS_MIXIN,
-  PALETTE_MIXIN,
-  SPACING_MIXIN,
-  CORE_MIXIN,
-  THEME_MIXIN,
-  CSS_VARIABLE_PATTERNS,
-  VARIABLE_PATTERNS,
-  getImportPath,
-  getElevationsVariable,
-  isMixinSupported,
-  getPaletteColorGroups,
-  type PaletteFunctionParams,
-  type ShadesFunctionParams,
-  type TypographyMixinParams,
-  type ElevationsMixinParams,
-  type PaletteMixinParams,
-  type CoreMixinParams,
-  type ThemeMixinParams,
-} from './sass-api.js';
-
-// Color guidance
-export {COLOR_VARIANT_RULES, COLOR_GUIDANCE_MARKDOWN, COLOR_RULES_SUMMARY} from './colors.js';
-
 // Color usage
 export {
   COLOR_SEMANTIC_ROLES,
   COLOR_USAGE_MARKDOWN,
+  type ColorSemanticRole,
   OPACITY_USAGE,
+  type ShadeRange,
   STATE_PATTERNS,
   THEME_PATTERNS,
-  type ColorSemanticRole,
-  type ShadeRange,
 } from './color-usage.js';
 
-// Palettes
+// Color guidance
+export {COLOR_GUIDANCE_MARKDOWN, COLOR_RULES_SUMMARY, COLOR_VARIANT_RULES} from './colors.js';
+// Component Metadata (unified: selectors, variants, compound theming)
 export {
-  type PaletteColors,
-  type PalettePresetName,
-  PALETTE_PRESETS,
-  LIGHT_PALETTE_PRESETS,
-  DARK_PALETTE_PRESETS,
-} from './palettes.js';
+  COMPONENT_METADATA,
+  type ComponentMetadata,
+  type ComponentSelectors,
+  type CompoundInfo,
+  getComponentPlatformAvailability,
+  getComponentSelector,
+  getComponentsForPlatform,
+  getCompoundComponentInfo,
+  getTokenDerivationsForChild,
+  getVariants,
+  hasVariants,
+  // Platform availability
+  isComponentAvailable,
+  isCompoundComponent,
+  isVariantTheme,
+  type ScopeSelectors,
+  type TokenDerivation,
+  VARIANT_THEME_NAMES,
+} from './component-metadata.js';
+// Component Themes
+export {
+  COMPONENT_NAMES,
+  COMPONENT_THEMES,
+  type ComponentTheme,
+  type ComponentToken,
+  getComponentTheme,
+  getTokenNames,
+  searchComponents,
+  validateTokens,
+} from './component-themes.js';
 
 // Custom Palettes
-export {CUSTOM_PALETTE_GUIDANCE, REQUIRED_SHADES, ALL_CHROMATIC_SHADES, ALL_GRAY_SHADES} from './custom-palettes.js';
-
+export {ALL_CHROMATIC_SHADES, ALL_GRAY_SHADES, CUSTOM_PALETTE_GUIDANCE, REQUIRED_SHADES} from './custom-palettes.js';
+// Elevations
+export {
+  ELEVATION_LEVELS,
+  ELEVATION_PRESETS,
+  type ElevationLevel,
+  type ElevationPreset,
+  INDIGO_ELEVATIONS,
+  MATERIAL_ELEVATIONS,
+} from './elevations.js';
+// Layout docs
+export {
+  BORDER_RADIUS_FUNCTION_DOC,
+  LAYOUT_OVERVIEW_DOC,
+  PAD_FUNCTION_DOC,
+  SIZABLE_FUNCTION_DOC,
+  SIZABLE_MIXIN_DOC,
+  SIZING_MIXIN_DOC,
+  SPACING_MIXIN_DOC,
+} from './layout-docs.js';
 // Multipliers
 export {
-  type ShadeMultipliers,
+  ACCENT_SHADE_LEVELS,
+  type AccentShadeLevel,
   COLOR_MULTIPLIERS,
   GRAYSCALE_MULTIPLIERS,
   SHADE_LEVELS,
-  ACCENT_SHADE_LEVELS,
   type ShadeLevel,
-  type AccentShadeLevel,
+  type ShadeMultipliers,
 } from './multipliers.js';
-
-// Typography
+// Palettes
 export {
-  type TypeStyle,
-  type TypeScale,
-  type DesignSystem,
-  TYPOGRAPHY_PRESETS,
-  TYPE_SCALE_CATEGORIES,
-  type TypeScaleCategory,
-} from './typography.js';
+  DARK_PALETTE_PRESETS,
+  LIGHT_PALETTE_PRESETS,
+  PALETTE_PRESETS,
+  type PaletteColors,
+  type PalettePresetName,
+} from './palettes.js';
 
-// Elevations
 export {
-  type ElevationLevel,
-  type ElevationPreset,
-  MATERIAL_ELEVATIONS,
-  INDIGO_ELEVATIONS,
-  ELEVATION_PRESETS,
-  ELEVATION_LEVELS,
-} from './elevations.js';
-
+  ELEVATIONS as ELEVATIONS_PRESETS,
+  PALETTE_PRESETS_PATHS,
+  PALETTES as PALETTES_PRESETS,
+  SCHEMAS as SCHEMA_PRESETS,
+  TYPE_SCALES as TYPE_SCALE_PRESETS,
+  TYPEFACES as TYPEFACE_PRESETS,
+  TYPOGRAPHY_PRESETS_PATHS,
+} from './platforms/common.js';
 // Platforms
 export {
   // Angular
   ANGULAR_PLATFORM,
   ANGULAR_USAGE_EXAMPLES,
-  generateAngularThemeSass,
-  type CoreMixinOptions,
-  type ThemeMixinOptions,
   type AngularThemeTemplate,
-  // Web Components
-  WEBCOMPONENTS_PLATFORM,
-  WEBCOMPONENTS_USAGE_EXAMPLES,
-  WEBCOMPONENTS_RUNTIME_CONFIG,
-  generateWebComponentsThemeSass,
-  type WebComponentsThemeTemplate,
-  // React
-  REACT_PLATFORM,
-  REACT_USAGE_EXAMPLES,
   // Blazor
   BLAZOR_PLATFORM,
   BLAZOR_USAGE_EXAMPLES,
-  // Platform utilities
-  type Platform,
-  type PlatformDetectionResult,
-  type DetectionSignal,
-  type PackageDetectionSignal,
   type ConfigFileDetectionSignal,
-  type FrameworkDetectionSignal,
-  type PlatformAlternative,
-  detectPlatformFromDependencies,
-  isLicensedPackage,
+  type CoreMixinOptions,
+  type DetectionSignal,
   detectConfigFiles,
+  detectPlatformFromDependencies,
+  type FrameworkDetectionSignal,
+  generateAngularThemeSass,
+  generateWebComponentsThemeSass,
+  getVariablePrefix,
+  isLicensedPackage,
+  type PackageDetectionSignal,
   PLATFORM_METADATA,
   PLATFORM_VARIABLE_PREFIX,
-  getVariablePrefix,
+  // Platform utilities
+  type Platform,
+  type PlatformAlternative,
+  type PlatformDetectionResult,
+  // React
+  REACT_PLATFORM,
+  REACT_USAGE_EXAMPLES,
+  type ThemeMixinOptions,
+  // Web Components
+  WEBCOMPONENTS_PLATFORM,
+  WEBCOMPONENTS_RUNTIME_CONFIG,
+  WEBCOMPONENTS_USAGE_EXAMPLES,
+  type WebComponentsThemeTemplate,
 } from './platforms/index.js';
-
+// Sass API Manifest (centralized API knowledge)
 export {
-  PALETTE_PRESETS_PATHS,
-  TYPOGRAPHY_PRESETS_PATHS,
-  SCHEMAS as SCHEMA_PRESETS,
-  TYPEFACES as TYPEFACE_PRESETS,
-  TYPE_SCALES as TYPE_SCALE_PRESETS,
-  PALETTES as PALETTES_PRESETS,
-  ELEVATIONS as ELEVATIONS_PRESETS,
-} from './platforms/common.js';
-
-// Layout docs
+  CORE_MIXIN,
+  type CoreMixinParams,
+  CSS_VARIABLE_PATTERNS,
+  ELEVATIONS_MIXIN,
+  type ElevationsMixinParams,
+  getElevationsVariable,
+  getImportPath,
+  getPaletteColorGroups,
+  IMPORT_PATHS,
+  isMixinSupported,
+  PALETTE_FUNCTION,
+  PALETTE_MIXIN,
+  type PaletteFunctionParams,
+  type PaletteMixinParams,
+  SHADES_FUNCTION,
+  type ShadesFunctionParams,
+  SPACING_MIXIN,
+  THEME_MIXIN,
+  type ThemeMixinParams,
+  TYPOGRAPHY_MIXIN,
+  type TypographyMixinParams,
+  VARIABLE_PATTERNS,
+} from './sass-api.js';
+// Typography
 export {
-  LAYOUT_OVERVIEW_DOC,
-  PAD_FUNCTION_DOC,
-  SIZABLE_FUNCTION_DOC,
-  BORDER_RADIUS_FUNCTION_DOC,
-  SPACING_MIXIN_DOC,
-  SIZING_MIXIN_DOC,
-  SIZABLE_MIXIN_DOC,
-} from './layout-docs.js';
-
-// Component Themes
-export {
-  type ComponentToken,
-  type ComponentTheme,
-  COMPONENT_THEMES,
-  COMPONENT_NAMES,
-  getComponentTheme,
-  getTokenNames,
-  validateTokens,
-  searchComponents,
-} from './component-themes.js';
-
-// Component Metadata (unified: selectors, variants, compound theming)
-export {
-  type ComponentSelectors,
-  type ComponentMetadata,
-  type CompoundInfo,
-  type TokenDerivation,
-  type ScopeSelectors,
-  COMPONENT_METADATA,
-  VARIANT_THEME_NAMES,
-  getComponentSelector,
-  hasVariants,
-  getVariants,
-  isVariantTheme,
-  getCompoundComponentInfo,
-  isCompoundComponent,
-  getTokenDerivationsForChild,
-  // Platform availability
-  isComponentAvailable,
-  getComponentsForPlatform,
-  getComponentPlatformAvailability,
-} from './component-metadata.js';
+  type DesignSystem,
+  TYPE_SCALE_CATEGORIES,
+  TYPOGRAPHY_PRESETS,
+  type TypeScale,
+  type TypeScaleCategory,
+  type TypeStyle,
+} from './typography.js';

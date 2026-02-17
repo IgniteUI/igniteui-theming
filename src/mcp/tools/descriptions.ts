@@ -32,16 +32,18 @@ export const FRAGMENTS = {
   DESIGN_SYSTEM: `Design system preset: "material" (Material Design), "bootstrap" (Bootstrap), "fluent" (Microsoft Fluent), or "indigo" (Infragistics Indigo). Defaults to "material".`,
 
   /** Chromatic shade levels */
-  CHROMATIC_SHADES: `14 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A700`,
+  CHROMATIC_SHADES: '14 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A700',
 
   /** Gray shade levels */
-  GRAY_SHADES: `10 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900`,
+  GRAY_SHADES: '10 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900',
 
   /** Luminance warning */
-  LUMINANCE_WARNING: `Colors with extreme luminance (< 0.05 or > 0.45) may produce suboptimal automatic shade generation.`,
+  LUMINANCE_WARNING:
+    'Colors with extreme luminance (< 0.05 or > 0.45) may produce suboptimal automatic shade generation.',
 
   /** Monochromatic requirement for chromatic colors */
-  MONOCHROMATIC_RULE: `MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).`,
+  MONOCHROMATIC_RULE:
+    'MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).',
 
   /** Resource scheme */
   RESOURCE_SCHEME: 'theming://',
@@ -1030,7 +1032,8 @@ export const PARAM_DESCRIPTIONS = {
   // Common parameters (used across multiple tools)
   // ---------------------------------------------------------------------------
   platform: FRAGMENTS.PLATFORM,
-  licensed: `Use licensed @infragistics package (Angular only). Set to true if using @infragistics/igniteui-angular from private ProGet registry. Defaults to false (uses open-source igniteui-angular from npm). Note: igniteui-theming is always free/OSS for all other platforms.`,
+  licensed:
+    'Use licensed @infragistics package (Angular only). Set to true if using @infragistics/igniteui-angular from private ProGet registry. Defaults to false (uses open-source igniteui-angular from npm). Note: igniteui-theming is always free/OSS for all other platforms.',
   variant: FRAGMENTS.VARIANT,
   designSystem: FRAGMENTS.DESIGN_SYSTEM,
   name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
@@ -1057,7 +1060,8 @@ export const PARAM_DESCRIPTIONS = {
   // Typography parameters
   // ---------------------------------------------------------------------------
   fontFamily: `Font family string with fallbacks. Quote names with spaces. Example: '"Inter", "Helvetica Neue", sans-serif'`,
-  customScale: `Custom type scale overrides. Object with type style names as keys (h1, h2, body-1, button, etc.) and style objects as values containing fontSize, fontWeight, lineHeight, letterSpacing, textTransform.`,
+  customScale:
+    'Custom type scale overrides. Object with type style names as keys (h1, h2, body-1, button, etc.) and style objects as values containing fontSize, fontWeight, lineHeight, letterSpacing, textTransform.',
 
   // ---------------------------------------------------------------------------
   // Elevations parameters
@@ -1070,9 +1074,12 @@ export const PARAM_DESCRIPTIONS = {
   primaryColor: `Primary brand color for the theme - used for main actions and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
   secondaryColor: `Secondary/accent color for the theme - used for highlights and selection. ${FRAGMENTS.COLOR_FORMAT}`,
   surfaceColor: `Surface/background color for the theme. Use light colors (#FAFAFA) for "light" variant, dark colors (#121212) for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
-  includeTypography: `Include typography setup in the generated theme. Set to false if you want to configure typography separately. Defaults to true.`,
-  includeElevations: `Include elevation shadows in the generated theme. Set to false if you want to configure elevations separately. Defaults to true.`,
-  includeSpacing: `Include spacing CSS custom properties (Web Components platform only). Defaults to true. Has no effect on Angular platform.`,
+  includeTypography:
+    'Include typography setup in the generated theme. Set to false if you want to configure typography separately. Defaults to true.',
+  includeElevations:
+    'Include elevation shadows in the generated theme. Set to false if you want to configure elevations separately. Defaults to true.',
+  includeSpacing:
+    'Include spacing CSS custom properties (Web Components platform only). Defaults to true. Has no effect on Angular platform.',
 
   // ---------------------------------------------------------------------------
   // Custom palette parameters (for create_custom_palette)
@@ -1093,7 +1100,8 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
 
   grayShades: `Object with all gray shade values. ${FRAGMENTS.GRAY_SHADES}. For light themes: 50=lightest, 900=darkest. For dark themes: 50=darkest, 900=lightest.`,
 
-  contrastOverrides: `USUALLY OMIT THIS FIELD. Contrast colors are auto-generated using adaptive-contrast(). Only provide this if you have specific accessibility requirements with exact contrast values (rare). When omitted (recommended), the generated Sass code automatically includes adaptive-contrast(#shadeColor) for each shade, which auto-selects black or white for optimal readability.`,
+  contrastOverrides:
+    'USUALLY OMIT THIS FIELD. Contrast colors are auto-generated using adaptive-contrast(). Only provide this if you have specific accessibility requirements with exact contrast values (rare). When omitted (recommended), the generated Sass code automatically includes adaptive-contrast(#shadeColor) for each shade, which auto-selects black or white for optimal readability.',
 
   // ---------------------------------------------------------------------------
   // Component theming parameters
@@ -1114,10 +1122,11 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root.`,
   scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
   sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
-  spacing: `Spacing scale multiplier for --ig-spacing. 0 = none, 1 = default, 2 = double. Fractions allowed.`,
-  spacingInline: `Inline spacing scale multiplier for --ig-spacing-inline. Overrides inline spacing only.`,
-  spacingBlock: `Block spacing scale multiplier for --ig-spacing-block. Overrides block spacing only.`,
-  radiusFactor: `Roundness scale factor for --ig-radius-factor. 0 = minimum radius, 1 = maximum radius. Values must be between 0 and 1.`,
+  spacing: 'Spacing scale multiplier for --ig-spacing. 0 = none, 1 = default, 2 = double. Fractions allowed.',
+  spacingInline: 'Inline spacing scale multiplier for --ig-spacing-inline. Overrides inline spacing only.',
+  spacingBlock: 'Block spacing scale multiplier for --ig-spacing-block. Overrides block spacing only.',
+  radiusFactor:
+    'Roundness scale factor for --ig-radius-factor. 0 = minimum radius, 1 = maximum radius. Values must be between 0 and 1.',
 
   // ---------------------------------------------------------------------------
   // Color operations parameters (for get_color)
@@ -1126,9 +1135,11 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
 
   shadeVariant: `Color shade variant. Standard shades: 50 (lightest) through 900 (darkest). Accent shades: A100, A200, A400, A700 (more saturated). Default: "500" (base color). Note: Gray only supports standard shades (50-900).`,
 
-  contrastFlag: `If true, returns the contrast color for the specified shade instead of the shade itself. Contrast colors are pre-computed for optimal text readability. Default: false.`,
+  contrastFlag:
+    'If true, returns the contrast color for the specified shade instead of the shade itself. Contrast colors are pre-computed for optimal text readability. Default: false.',
 
-  opacity: `Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).`,
+  opacity:
+    'Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).',
 
   // ---------------------------------------------------------------------------
   // Resource read parameters

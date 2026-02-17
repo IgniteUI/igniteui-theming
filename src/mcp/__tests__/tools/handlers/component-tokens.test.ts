@@ -2,19 +2,23 @@
  * Tests for get_component_design_tokens handler.
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {handleGetComponentDesignTokens} from '../../../tools/handlers/component-tokens.js';
 
 describe('handleGetComponentDesignTokens', () => {
   it('uses instruction-oriented opening format', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'date-picker'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'date-picker',
+    });
     const text = result.content[0].text;
 
     expect(text).toContain('Implement a theme for the `date-picker` component using the following guidance.');
   });
 
   it('shows two platform sections: Angular and WC/React/Blazor', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'date-picker'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'date-picker',
+    });
     const text = result.content[0].text;
 
     expect(text).toContain('**Angular:**');
@@ -24,7 +28,9 @@ describe('handleGetComponentDesignTokens', () => {
   });
 
   it('shows overlay scope for Angular but omits it for WC group (date-picker)', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'date-picker'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'date-picker',
+    });
     const text = result.content[0].text;
 
     // Angular section has both inline and overlay scopes
@@ -38,7 +44,9 @@ describe('handleGetComponentDesignTokens', () => {
   });
 
   it('shows per-platform related themes for compound components', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'date-picker'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'date-picker',
+    });
     const text = result.content[0].text;
 
     // Angular: calendar in overlay scope
@@ -52,15 +60,17 @@ describe('handleGetComponentDesignTokens', () => {
     const text = result.content[0].text;
 
     expect(text).toContain(
-      '| inline | `igx-grid | igx-tree-grid | igx-hierarchical-grid | igx-pivot-grid | igx-grid-excel-style-filtering` |',
+      '| inline | `igx-grid | igx-tree-grid | igx-hierarchical-grid | igx-pivot-grid | igx-grid-excel-style-filtering` |'
     );
     expect(text).toContain(
-      '| inline | `igc-grid | igc-tree-grid | igc-hierarchical-grid | igc-pivot-grid | igc-grid-excel-style-filtering` |',
+      '| inline | `igc-grid | igc-tree-grid | igc-hierarchical-grid | igc-pivot-grid | igc-grid-excel-style-filtering` |'
     );
   });
 
   it('renders simple components without compound sections', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'avatar'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'avatar',
+    });
     const text = result.content[0].text;
 
     // Should have instruction opening and theme function
@@ -83,7 +93,9 @@ describe('handleGetComponentDesignTokens', () => {
   });
 
   it('renders primary tokens from structured data', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'calendar'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'calendar',
+    });
     const text = result.content[0].text;
 
     expect(text).toContain('**Primary Tokens:**');
@@ -93,7 +105,9 @@ describe('handleGetComponentDesignTokens', () => {
   });
 
   it('renders banner with inline scope for both platform groups', async () => {
-    const result = await handleGetComponentDesignTokens({component: 'banner'});
+    const result = await handleGetComponentDesignTokens({
+      component: 'banner',
+    });
     const text = result.content[0].text;
 
     //Platforms should have inline scope

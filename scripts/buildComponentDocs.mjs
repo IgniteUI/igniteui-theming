@@ -1,5 +1,5 @@
+import {mkdir, writeFile} from 'node:fs/promises';
 import sassdoc from 'sassdoc';
-import {writeFile, mkdir} from 'fs/promises';
 import report from './report.mjs';
 
 /**
@@ -34,7 +34,7 @@ function parsePrimaryTokens(rawDescription) {
   const contentLines = lines.slice(1); // skip "PRIMARY TOKENS (set these first...):" line
 
   const primaryTokens = [];
-  let summaryLines = [];
+  const summaryLines = [];
   let parsingTokens = true;
 
   for (let i = 0; i < contentLines.length; i++) {
@@ -64,7 +64,7 @@ function parsePrimaryTokens(rawDescription) {
               !nextLine.startsWith('Text') &&
               !nextLine.startsWith('Behavior')
             ) {
-              desc += ' ' + nextLine;
+              desc += ` ${nextLine}`;
               i++;
             } else {
               break;
@@ -112,7 +112,7 @@ async function extractComponentThemes() {
 
   // Filter to theme functions only
   const themeFunctions = data.filter(
-    (item) => item.context.type === 'function' && item.context.name.endsWith('-theme'),
+    (item) => item.context.type === 'function' && item.context.name.endsWith('-theme')
   );
 
   const components = {};

@@ -14,14 +14,14 @@
  */
 
 import {readFile} from 'node:fs/promises';
-import {resolve, dirname} from 'node:path';
+import {dirname, resolve} from 'node:path';
 import {z} from 'zod';
 import {
+  type DetectionSignal,
   detectPlatformFromDependencies,
   isLicensedPackage,
   PLATFORM_METADATA,
   type PlatformDetectionResult,
-  type DetectionSignal,
 } from '../../knowledge/platforms/index.js';
 import type {DetectPlatformParams} from '../schemas.js';
 
@@ -145,11 +145,11 @@ export async function handleDetectPlatform(params: DetectPlatformParams) {
 
   if (result.ambiguous && result.alternatives) {
     // AMBIGUOUS CASE: Multiple platforms detected
-    text = `## Platform Detection Result\n\n`;
-    text += `**Status:** Ambiguous - Multiple platforms detected\n\n`;
-    text += `The project appears to contain dependencies for multiple Ignite UI platforms. `;
-    text += `This might be a monorepo or a project transitioning between frameworks.\n\n`;
-    text += `### Detected Platforms\n\n`;
+    text = '## Platform Detection Result\n\n';
+    text += '**Status:** Ambiguous - Multiple platforms detected\n\n';
+    text += 'The project appears to contain dependencies for multiple Ignite UI platforms. ';
+    text += 'This might be a monorepo or a project transitioning between frameworks.\n\n';
+    text += '### Detected Platforms\n\n';
 
     for (const alt of result.alternatives) {
       const metadata = PLATFORM_METADATA[alt.platform as keyof typeof PLATFORM_METADATA];
@@ -159,8 +159,8 @@ export async function handleDetectPlatform(params: DetectPlatformParams) {
       text += `- **Theming module:** \`${metadata.themingModule}\`\n\n`;
     }
 
-    text += `### Action Required\n\n`;
-    text += `Please specify the platform explicitly when calling theme generation tools:\n\n`;
+    text += '### Action Required\n\n';
+    text += 'Please specify the platform explicitly when calling theme generation tools:\n\n';
     for (const alt of result.alternatives) {
       const metadata = PLATFORM_METADATA[alt.platform as keyof typeof PLATFORM_METADATA];
       text += `- Use \`platform: '${alt.platform}'\` for ${metadata.name}\n`;
@@ -168,7 +168,7 @@ export async function handleDetectPlatform(params: DetectPlatformParams) {
   } else if (result.platform) {
     // SINGLE PLATFORM DETECTED
     const metadata = PLATFORM_METADATA[result.platform];
-    text = `## Platform Detection Result\n\n`;
+    text = '## Platform Detection Result\n\n';
     text += `**Detected Platform:** ${metadata.name}\n`;
     text += `**Confidence:** ${result.confidence}\n`;
 
@@ -190,31 +190,31 @@ export async function handleDetectPlatform(params: DetectPlatformParams) {
         : metadata.themingModule;
     text += `**Theming Module:** \`${themingModule}\`\n\n`;
 
-    text += `### Usage\n\n`;
+    text += '### Usage\n\n';
     text += `When generating theme code, use \`platform: '${result.platform}'\``;
     if (result.platform === 'angular' && response.licensed) {
-      text += ` and \`licensed: true\``;
+      text += ' and `licensed: true`';
     }
-    text += ` to ensure the correct Sass syntax is generated for this platform.\n\n`;
+    text += ' to ensure the correct Sass syntax is generated for this platform.\n\n';
     text += `${metadata.description}`;
 
     // Add confidence-specific notes
     if (result.confidence === 'low') {
-      text += `\n\n### Note\n\n`;
-      text += `Detection confidence is **low**. This means no Ignite UI package was found, `;
-      text += `only framework packages. Please verify this is the correct platform before generating themes.`;
+      text += '\n\n### Note\n\n';
+      text += 'Detection confidence is **low**. This means no Ignite UI package was found, ';
+      text += 'only framework packages. Please verify this is the correct platform before generating themes.';
     } else if (result.confidence === 'medium') {
-      text += `\n\n### Note\n\n`;
-      text += `Detection confidence is **medium**. Consider verifying the platform if the generated `;
+      text += '\n\n### Note\n\n';
+      text += 'Detection confidence is **medium**. Consider verifying the platform if the generated ';
       text += `code doesn't work as expected.`;
     }
   } else {
     // NO PLATFORM DETECTED
-    text = `## Platform Detection Result\n\n`;
-    text += `**Platform:** Not detected\n`;
+    text = '## Platform Detection Result\n\n';
+    text += '**Platform:** Not detected\n';
     text += `**Reason:** ${result.reason}\n\n`;
-    text += `### Recommendation\n\n`;
-    text += `Please specify the platform explicitly when calling theme generation tools:\n\n`;
+    text += '### Recommendation\n\n';
+    text += 'Please specify the platform explicitly when calling theme generation tools:\n\n';
     text += `- Use \`platform: 'angular'\` for Ignite UI for Angular\n`;
     text += `- Use \`platform: 'webcomponents'\` for Ignite UI for Web Components\n`;
     text += `- Use \`platform: 'react'\` for Ignite UI for React\n`;

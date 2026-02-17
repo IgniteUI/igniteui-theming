@@ -17,14 +17,16 @@ function removeQuotes(string) {
 
 // Parse a value, converting array-like strings to arrays
 function parseValue(value) {
-  value = removeQuotes(value.trim());
-  if (value.startsWith('[') && value.endsWith(']')) {
-    return value
-      .substring(1, value.length - 1)
+  const v = removeQuotes(value.trim());
+
+  if (v.startsWith('[') && v.endsWith(']')) {
+    return v
+      .substring(1, v.length - 1)
       .split(',')
       .map((item) => item.trim());
   }
-  return value;
+
+  return v;
 }
 
 // Handle declaration processing
@@ -50,11 +52,14 @@ function setOutputPaths(map, data) {
 
 // Build the JSON structure based on the CSS input
 async function parseCSS(css) {
-  let resultJSON = {};
-  let outputDirs = {};
+  const resultJSON = {};
+  const outputDirs = {};
 
   try {
-    const result = await postcss().process(css, {parser: safeParser, from: undefined});
+    const result = await postcss().process(css, {
+      parser: safeParser,
+      from: undefined,
+    });
     let comment = '';
 
     result.root.walk((node) => {

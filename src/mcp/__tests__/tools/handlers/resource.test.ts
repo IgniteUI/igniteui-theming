@@ -1,6 +1,6 @@
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
+import {RESOURCE_DEFINITIONS, RESOURCE_URIS} from '../../../resources/index.js';
 import {handleReadResource} from '../../../tools/handlers/resource.js';
-import {RESOURCE_URIS, RESOURCE_DEFINITIONS} from '../../../resources/index.js';
 
 describe('handleReadResource', () => {
   describe('valid URIs', () => {
@@ -17,7 +17,9 @@ describe('handleReadResource', () => {
     });
 
     it('returns JSON content for light palette presets', async () => {
-      const result = await handleReadResource({uri: RESOURCE_URIS.PALETTES_LIGHT});
+      const result = await handleReadResource({
+        uri: RESOURCE_URIS.PALETTES_LIGHT,
+      });
 
       expect(result.isError).toBeUndefined();
 
@@ -38,7 +40,9 @@ describe('handleReadResource', () => {
     });
 
     it('returns JSON content for a specific platform', async () => {
-      const result = await handleReadResource({uri: RESOURCE_URIS.PLATFORM_ANGULAR});
+      const result = await handleReadResource({
+        uri: RESOURCE_URIS.PLATFORM_ANGULAR,
+      });
 
       expect(result.isError).toBeUndefined();
 
@@ -48,7 +52,9 @@ describe('handleReadResource', () => {
     });
 
     it('returns markdown content for color rules', async () => {
-      const result = await handleReadResource({uri: RESOURCE_URIS.GUIDANCE_COLORS_RULES});
+      const result = await handleReadResource({
+        uri: RESOURCE_URIS.GUIDANCE_COLORS_RULES,
+      });
 
       expect(result.isError).toBeUndefined();
       expect(result.content[0].text.length).toBeGreaterThan(0);
@@ -57,7 +63,9 @@ describe('handleReadResource', () => {
     });
 
     it('returns markdown content for layout docs', async () => {
-      const result = await handleReadResource({uri: RESOURCE_URIS.DOCS_LAYOUT_OVERVIEW});
+      const result = await handleReadResource({
+        uri: RESOURCE_URIS.DOCS_LAYOUT_OVERVIEW,
+      });
 
       expect(result.isError).toBeUndefined();
       expect(result.content[0].text.length).toBeGreaterThan(0);

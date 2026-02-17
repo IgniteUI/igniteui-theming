@@ -1,7 +1,7 @@
-import {describe, it, expect} from 'vitest';
-import * as path from 'path';
-import {fileURLToPath} from 'url';
-import {generatePaletteCss, generateCustomPaletteCss, formatCssOutput} from '../../generators/css.js';
+import * as path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {describe, expect, it} from 'vitest';
+import {formatCssOutput, generateCustomPaletteCss, generatePaletteCss} from '../../generators/css.js';
 import {SHADE_LEVELS} from '../../utils/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -127,7 +127,7 @@ describe('generatePaletteCss', () => {
         secondary: '#ff9800',
         surface: '#fafafa',
         _loadPaths: TEST_LOAD_PATHS,
-      }),
+      })
     ).rejects.toThrow();
   });
 });
@@ -309,7 +309,7 @@ describe('generateComponentThemeCss', () => {
         component: 'unknown-component',
         tokens: {background: '#1976d2'},
         _loadPaths: TEST_LOAD_PATHS,
-      }),
+      })
     ).rejects.toThrow('Unknown component');
   });
 

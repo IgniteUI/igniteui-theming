@@ -2,8 +2,8 @@
  * Knowledge about custom palette creation for model guidance.
  */
 
-import {SHADE_LEVELS, ACCENT_SHADE_LEVELS} from './multipliers.js';
 import CUSTOM_PALETTE_GUIDANCE from './docs/colors/custom-palettes.md?raw';
+import {ACCENT_SHADE_LEVELS, SHADE_LEVELS} from './multipliers.js';
 
 export {CUSTOM_PALETTE_GUIDANCE};
 

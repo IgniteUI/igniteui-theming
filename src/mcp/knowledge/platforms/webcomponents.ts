@@ -13,15 +13,15 @@
  */
 
 import {
-  quoteFontFamily,
-  generateUseStatement,
+  generateElevationsCode,
   generatePaletteCode,
   generateTypographyCode,
-  generateElevationsCode,
+  generateUseStatement,
+  quoteFontFamily,
 } from '../../utils/sass.js';
-import { DesignSystem, ThemeVariant } from '../../utils/types.js';
+import type {DesignSystem, ThemeVariant} from '../../utils/types.js';
 import {PALETTE_PRESETS, type PalettePresetName} from '../palettes.js';
-import { ELEVATIONS, PALETTE_PRESETS_PATHS, TYPOGRAPHY_PRESETS_PATHS } from './common.js';
+import {ELEVATIONS, PALETTE_PRESETS_PATHS, TYPOGRAPHY_PRESETS_PATHS} from './common.js';
 
 export const WEBCOMPONENTS_PLATFORM = {
   id: 'webcomponents',
@@ -248,7 +248,7 @@ export function generateWCThemingMixins(options: {
         fontFamily: typefaceValue,
         typeScaleVar: '$type-scale',
         indent,
-      }),
+      })
     );
     if (addComments) lines.push('');
   }
@@ -265,10 +265,7 @@ export function generateWCThemingMixins(options: {
 /**
  * Generate a custom palette theme with a theme() mixin wrapper.
  */
-function generateCustomPaletteTheme(
-  template: WebComponentsThemeTemplate,
-  typefaceValue: string,
-): string[] {
+function generateCustomPaletteTheme(template: WebComponentsThemeTemplate, typefaceValue: string): string[] {
   const {
     designSystem,
     variant,
@@ -314,7 +311,14 @@ function generateCustomPaletteTheme(
   lines.push('  // Root-level CSS custom properties');
   lines.push(...generateWCProgressProperties('  '));
   lines.push('');
-  lines.push(...generateWCRootVariables({designSystem, variant, usePaletteMap: true, indent: '  '}));
+  lines.push(
+    ...generateWCRootVariables({
+      designSystem,
+      variant,
+      usePaletteMap: true,
+      indent: '  ',
+    })
+  );
   lines.push('');
   lines.push(...generateWCRtlSupport('  '));
   lines.push('');
@@ -327,7 +331,7 @@ function generateCustomPaletteTheme(
       includeElevations,
       includeSpacing,
       indent: '  ',
-    }),
+    })
   );
   lines.push('}');
   lines.push('');
@@ -340,10 +344,7 @@ function generateCustomPaletteTheme(
 /**
  * Generate a preset palette theme (uses predefined palette from design system).
  */
-function generatePresetPaletteTheme(
-  template: WebComponentsThemeTemplate,
-  typefaceValue: string,
-): string[] {
+function generatePresetPaletteTheme(template: WebComponentsThemeTemplate, typefaceValue: string): string[] {
   const {designSystem, variant, includeTypography = true, includeElevations = true, includeSpacing = true} = template;
 
   const lines: string[] = [];
@@ -374,7 +375,7 @@ function generatePresetPaletteTheme(
       includeElevations,
       includeSpacing,
       addComments: true,
-    }),
+    })
   );
 
   return lines;
@@ -423,7 +424,7 @@ export function generateWebComponentsThemeSass(template: WebComponentsThemeTempl
       hasCustomColors,
       includeTypography,
       includeElevations,
-    }),
+    })
   );
   lines.push('');
 

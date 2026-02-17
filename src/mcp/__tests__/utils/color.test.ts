@@ -4,18 +4,18 @@
  * These tests use real Sass compilation to verify color analysis.
  */
 
-import { describe, it, expect } from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
   analyzeColor,
-  calculateContrast,
+  analyzeColorForPalette,
   analyzeSurfaceGrayColors,
-  isValidColor,
-  validateColorsInBatch,
+  calculateContrast,
   extractHue,
   huesAreClose,
-  analyzeColorForPalette,
+  isValidColor,
   LUMINANCE_THRESHOLD,
   PALETTE_LUMINANCE_THRESHOLDS,
+  validateColorsInBatch,
 } from '../../utils/color.js';
 
 describe('analyzeColor', () => {
@@ -69,7 +69,7 @@ describe('analyzeSurfaceGrayColors', () => {
   });
 
   it('analyzes surface only', async () => {
-    const result = await analyzeSurfaceGrayColors({ surface: 'white' });
+    const result = await analyzeSurfaceGrayColors({surface: 'white'});
     expect(result.surface).toBeDefined();
     expect(result.surface?.isLight).toBe(true);
     expect(result.gray).toBeUndefined();
@@ -77,7 +77,7 @@ describe('analyzeSurfaceGrayColors', () => {
   });
 
   it('analyzes gray only', async () => {
-    const result = await analyzeSurfaceGrayColors({ gray: 'black' });
+    const result = await analyzeSurfaceGrayColors({gray: 'black'});
     expect(result.gray).toBeDefined();
     expect(result.gray?.isLight).toBe(false);
     expect(result.surface).toBeUndefined();
@@ -236,15 +236,32 @@ describe('validateColorsInBatch', () => {
 
   it('handles large batches efficiently (14+ colors)', async () => {
     const colors: Record<string, string> = {};
-    const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', 'A100', 'A200', 'A400', 'A700'];
-    
+    const shades = [
+      '50',
+      '100',
+      '200',
+      '300',
+      '400',
+      '500',
+      '600',
+      '700',
+      '800',
+      '900',
+      'A100',
+      'A200',
+      'A400',
+      'A700',
+    ];
+
     // Generate 14 valid hex colors
     for (const shade of shades) {
-      colors[`shade-${shade}`] = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+      colors[`shade-${shade}`] = `#${Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0')}`;
     }
-    
+
     const result = await validateColorsInBatch(colors);
-    
+
     // All should be valid
     for (const shade of shades) {
       expect(result[`shade-${shade}`]).toBe(true);

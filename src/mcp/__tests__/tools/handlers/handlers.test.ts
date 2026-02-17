@@ -7,14 +7,14 @@
  * 3. Handle validation and warnings correctly
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
+import {handleCreateComponentTheme} from '../../../tools/handlers/component-theme.js';
+import {handleCreateCustomPalette} from '../../../tools/handlers/custom-palette.js';
+import {handleCreateElevations} from '../../../tools/handlers/elevations.js';
+import {handleSetRoundness, handleSetSize, handleSetSpacing} from '../../../tools/handlers/layout.js';
 import {handleCreatePalette} from '../../../tools/handlers/palette.js';
 import {handleCreateTheme} from '../../../tools/handlers/theme.js';
 import {handleCreateTypography} from '../../../tools/handlers/typography.js';
-import {handleCreateElevations} from '../../../tools/handlers/elevations.js';
-import {handleCreateCustomPalette} from '../../../tools/handlers/custom-palette.js';
-import {handleCreateComponentTheme} from '../../../tools/handlers/component-theme.js';
-import {handleSetRoundness, handleSetSize, handleSetSpacing} from '../../../tools/handlers/layout.js';
 
 describe('handleCreatePalette', () => {
   it('returns MCP response format', async () => {

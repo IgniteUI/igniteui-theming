@@ -2,10 +2,10 @@
  * Handler for create_palette tool.
  */
 
+import {formatCssOutput, generatePaletteCss} from '../../generators/css.js';
 import {generatePalette} from '../../generators/sass.js';
-import {generatePaletteCss, formatCssOutput} from '../../generators/css.js';
+import {formatValidationResult, generateWarningComments, validatePaletteColors} from '../../validators/index.js';
 import type {CreatePaletteParams} from '../schemas.js';
-import {validatePaletteColors, formatValidationResult, generateWarningComments} from '../../validators/index.js';
 
 export async function handleCreatePalette(params: CreatePaletteParams) {
   const variant = params.variant ?? 'light';
@@ -31,7 +31,7 @@ export async function handleCreatePalette(params: CreatePaletteParams) {
  */
 async function handleCssOutput(
   params: CreatePaletteParams,
-  validation: Awaited<ReturnType<typeof validatePaletteColors>>,
+  validation: Awaited<ReturnType<typeof validatePaletteColors>>
 ) {
   try {
     const result = await generatePaletteCss({

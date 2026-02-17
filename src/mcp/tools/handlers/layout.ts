@@ -33,7 +33,7 @@ function buildSelectorList(value: string | string[]): string[] {
 function resolveScope(
   component: string | undefined,
   scope: string | undefined,
-  platform: Platform | undefined,
+  platform: Platform | undefined
 ): ScopeResolution | ScopeError {
   const notes: string[] = [];
 
@@ -123,7 +123,7 @@ function buildResponse(
   output: 'css' | 'sass',
   code: string,
   notes: string[],
-  guidance: string[],
+  guidance: string[]
 ): {content: {type: 'text'; text: string}[]} {
   const responseParts: string[] = [description];
 
@@ -150,7 +150,10 @@ function buildResponse(
   };
 }
 
-function coerceSizeValue(size: string | number): {display: string; value: number} {
+function coerceSizeValue(size: string | number): {
+  display: string;
+  value: number;
+} {
   if (typeof size === 'number') {
     return {display: String(size), value: size};
   }

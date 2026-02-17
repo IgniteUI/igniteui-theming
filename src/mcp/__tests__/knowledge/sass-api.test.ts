@@ -5,23 +5,23 @@
  * and that helper functions work as expected.
  */
 
-import {describe, it, expect} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {
-  IMPORT_PATHS,
-  getImportPath,
-  PALETTE_FUNCTION,
-  SHADES_FUNCTION,
-  TYPOGRAPHY_MIXIN,
-  ELEVATIONS_MIXIN,
-  PALETTE_MIXIN,
-  SPACING_MIXIN,
   CORE_MIXIN,
-  THEME_MIXIN,
   CSS_VARIABLE_PATTERNS,
-  VARIABLE_PATTERNS,
+  ELEVATIONS_MIXIN,
   getElevationsVariable,
-  isMixinSupported,
+  getImportPath,
   getPaletteColorGroups,
+  IMPORT_PATHS,
+  isMixinSupported,
+  PALETTE_FUNCTION,
+  PALETTE_MIXIN,
+  SHADES_FUNCTION,
+  SPACING_MIXIN,
+  THEME_MIXIN,
+  TYPOGRAPHY_MIXIN,
+  VARIABLE_PATTERNS,
 } from '../../knowledge/sass-api.js';
 import {generateUseStatement} from '../../utils/sass.js';
 

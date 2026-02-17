@@ -9,39 +9,39 @@
  * - React: Uses `igniteui-theming` directly with individual mixins
  */
 
-import type {
-  CreatePaletteInput,
-  CreateTypographyInput,
-  CreateElevationsInput,
-  CreateThemeInput,
-  GeneratedCode,
-  DesignSystem,
-  ThemeVariant,
-  Platform,
-} from '../utils/types.js';
-import {quoteFontFamily, generateUseStatement, toVariableName, generateHeader} from '../utils/sass.js';
-import {TYPOGRAPHY_PRESETS} from '../knowledge/typography.js';
-import {generateAngularThemeSass} from '../knowledge/platforms/angular.js';
-import {generateWebComponentsThemeSass} from '../knowledge/platforms/webcomponents.js';
-import {getComponentTheme} from '../knowledge/component-themes.js';
 import {getComponentSelector} from '../knowledge/component-metadata.js';
+import {getComponentTheme} from '../knowledge/component-themes.js';
+import {generateAngularThemeSass} from '../knowledge/platforms/angular.js';
 import {SCHEMAS as SCHEMA_PRESETS} from '../knowledge/platforms/common.js';
+import {generateWebComponentsThemeSass} from '../knowledge/platforms/webcomponents.js';
+import {TYPOGRAPHY_PRESETS} from '../knowledge/typography.js';
+import {generateHeader, generateUseStatement, quoteFontFamily, toVariableName} from '../utils/sass.js';
+import type {
+  CreateElevationsInput,
+  CreatePaletteInput,
+  CreateThemeInput,
+  CreateTypographyInput,
+  DesignSystem,
+  GeneratedCode,
+  Platform,
+  ThemeVariant,
+} from '../utils/types.js';
 
-// Re-export utilities for external use
-export {
-  quoteFontFamily,
-  generateUseStatement,
-  generatePaletteCode,
-  generateTypographyCode,
-  generateElevationsCode,
-  toVariableName,
-  generateHeader,
-} from '../utils/sass.js';
 export type {
+  ElevationsCodeOptions,
   PaletteCodeOptions,
   PaletteCodeResult,
   TypographyCodeOptions,
-  ElevationsCodeOptions,
+} from '../utils/sass.js';
+// Re-export utilities for external use
+export {
+  generateElevationsCode,
+  generateHeader,
+  generatePaletteCode,
+  generateTypographyCode,
+  generateUseStatement,
+  quoteFontFamily,
+  toVariableName,
 } from '../utils/sass.js';
 
 /**
@@ -168,7 +168,7 @@ export function generateTheme(input: CreateThemeInput): GeneratedCode {
 function generateAngularTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
-  variant: ThemeVariant,
+  variant: ThemeVariant
 ): GeneratedCode {
   const code = generateAngularThemeSass({
     designSystem,
@@ -207,7 +207,7 @@ function generateAngularTheme(
 function generateWebComponentsTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
-  variant: ThemeVariant,
+  variant: ThemeVariant
 ): GeneratedCode {
   const code = generateWebComponentsThemeSass({
     designSystem,
@@ -253,7 +253,7 @@ function generateWebComponentsTheme(
 function generateGenericTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
-  variant: ThemeVariant,
+  variant: ThemeVariant
 ): GeneratedCode {
   const themeName = input.name ? toVariableName(input.name) : `${variant}-${designSystem}`;
   const paletteVar = `$${themeName}-palette`;
@@ -298,7 +298,7 @@ function generateGenericTheme(
       '@include typography(',
       `  $font-family: ${quoteFontFamily(typeface)},`,
       `  $type-scale: ${typeScaleVar}`,
-      ');',
+      ');'
     );
   }
 
@@ -311,7 +311,7 @@ function generateGenericTheme(
     sections.push('', '// Elevations setup', `@include elevations(${elevationsVar});`);
   }
 
-  const code = sections.join('\n') + '\n';
+  const code = `${sections.join('\n')}\n`;
 
   return {
     code,
@@ -397,7 +397,7 @@ export function generateComponentTheme(input: CreateComponentThemeInput): Genera
   sections.push(`  @include tokens(${themeName});`);
   sections.push('}');
 
-  const code = sections.join('\n') + '\n';
+  const code = `${sections.join('\n')}\n`;
 
   return {
     code,

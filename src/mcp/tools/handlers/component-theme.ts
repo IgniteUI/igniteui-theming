@@ -5,15 +5,15 @@
 
 import {generateComponentTheme} from '../../generators/sass.js';
 import {
-  getComponentTheme,
-  validateTokens,
   COMPONENT_NAMES,
-  searchComponents,
-  getComponentSelector,
-  isComponentAvailable,
   getComponentPlatformAvailability,
-  hasVariants,
+  getComponentSelector,
+  getComponentTheme,
   getVariants,
+  hasVariants,
+  isComponentAvailable,
+  searchComponents,
+  validateTokens,
 } from '../../knowledge/index.js';
 import type {CreateComponentThemeParams} from '../schemas.js';
 
@@ -210,7 +210,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
       responseParts.push('');
       responseParts.push('---');
       responseParts.push(
-        "**Usage:** Include this CSS in your stylesheet or add it to your application's global styles.",
+        "**Usage:** Include this CSS in your stylesheet or add it to your application's global styles."
       );
 
       return {
@@ -278,7 +278,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
     responseParts.push('');
     responseParts.push('---');
     responseParts.push(
-      '**Usage:** Import this Sass file in your main styles file, or include the code in your theme file.',
+      '**Usage:** Import this Sass file in your main styles file, or include the code in your theme file.'
     );
 
     return {

@@ -258,7 +258,7 @@ export type PaletteColorGroup = (typeof PALETTE_COLOR_GROUPS)[number];
  * Derived from PALETTE_COLOR_GROUPS to maintain single source of truth.
  */
 export const CHROMATIC_COLOR_GROUPS = PALETTE_COLOR_GROUPS.filter(
-  (g): g is Exclude<PaletteColorGroup, 'gray'> => g !== 'gray',
+  (g): g is Exclude<PaletteColorGroup, 'gray'> => g !== 'gray'
 );
 
 /**

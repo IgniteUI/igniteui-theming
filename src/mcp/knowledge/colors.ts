@@ -4,7 +4,7 @@
  * theme variants and color choices.
  */
 
-import {LUMINANCE_THRESHOLD, SUGGESTED_COLORS, DEFAULT_MINIMUM_CONTRAST_RATIO} from '../utils/color.js';
+import {DEFAULT_MINIMUM_CONTRAST_RATIO, LUMINANCE_THRESHOLD, SUGGESTED_COLORS} from '../utils/color.js';
 import COLOR_GUIDANCE_MARKDOWN from './docs/colors/guidance.md?raw';
 
 /**
