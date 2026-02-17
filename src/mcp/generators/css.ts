@@ -4,47 +4,52 @@
  *
  */
 
-import * as path from 'node:path';
-import {fileURLToPath} from 'node:url';
-import * as sass from 'sass-embedded';
-import type {ColorDefinition, GrayDefinition, PLATFORMS, ThemeVariant} from '../utils/types.js';
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+import * as sass from "sass-embedded";
+import type {
+	ColorDefinition,
+	GrayDefinition,
+	PLATFORMS,
+	ThemeVariant,
+} from "../utils/types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // From dist/mcp/generators/ we need to go up 3 levels to package root
-const PACKAGE_ROOT = path.resolve(__dirname, '..', '..', '..');
+const PACKAGE_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 /**
  * Result from generating CSS palette variables.
  */
 export interface CssPaletteResult {
-  css: string;
-  description: string;
+	css: string;
+	description: string;
 }
 
 /**
  * Result from generating component theme CSS.
  */
 export interface CssComponentThemeResult {
-  css: string;
-  description: string;
+	css: string;
+	description: string;
 }
 
 /**
  * Options for generating standard palette CSS variables.
  */
 export interface PaletteCssOptions {
-  primary: string;
-  secondary: string;
-  surface: string;
-  gray?: string;
-  info?: string;
-  success?: string;
-  warn?: string;
-  error?: string;
-  variant?: ThemeVariant;
-  _loadPaths?: string[];
+	primary: string;
+	secondary: string;
+	surface: string;
+	gray?: string;
+	info?: string;
+	success?: string;
+	warn?: string;
+	error?: string;
+	variant?: ThemeVariant;
+	_loadPaths?: string[];
 }
 
 /**
@@ -62,65 +67,67 @@ export interface PaletteCssOptions {
  * });
  * // result.css contains :root { --ig-primary-50: ...; --ig-primary-100: ...; ... }
  */
-export async function generatePaletteCss(options: PaletteCssOptions): Promise<CssPaletteResult> {
-  const variant = options.variant ?? 'light';
+export async function generatePaletteCss(
+	options: PaletteCssOptions,
+): Promise<CssPaletteResult> {
+	const variant = options.variant ?? "light";
 
-  const paletteArgs: string[] = [
-    `$primary: ${options.primary}`,
-    `$secondary: ${options.secondary}`,
-    `$surface: ${options.surface}`,
-  ];
+	const paletteArgs: string[] = [
+		`$primary: ${options.primary}`,
+		`$secondary: ${options.secondary}`,
+		`$surface: ${options.surface}`,
+	];
 
-  if (options.gray) paletteArgs.push(`$gray: ${options.gray}`);
-  if (options.info) paletteArgs.push(`$info: ${options.info}`);
-  if (options.success) paletteArgs.push(`$success: ${options.success}`);
-  if (options.warn) paletteArgs.push(`$warn: ${options.warn}`);
-  if (options.error) paletteArgs.push(`$error: ${options.error}`);
+	if (options.gray) paletteArgs.push(`$gray: ${options.gray}`);
+	if (options.info) paletteArgs.push(`$info: ${options.info}`);
+	if (options.success) paletteArgs.push(`$success: ${options.success}`);
+	if (options.warn) paletteArgs.push(`$warn: ${options.warn}`);
+	if (options.error) paletteArgs.push(`$error: ${options.error}`);
 
-  const sassCode = `
+	const sassCode = `
 @use 'sass/color' as *;
 
 $palette: palette(
-  ${paletteArgs.join(',\n  ')}
+  ${paletteArgs.join(",\n  ")}
 );
 
 @include palette($palette);
 `;
 
-  try {
-    const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
-    const result = await sass.compileStringAsync(sassCode, {
-      loadPaths,
-      style: 'expanded',
-    });
+	try {
+		const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
+		const result = await sass.compileStringAsync(sassCode, {
+			loadPaths,
+			style: "expanded",
+		});
 
-    return {
-      css: result.css,
-      description: `Generated CSS custom properties for a ${variant} palette with primary color ${options.primary}`,
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Failed to compile palette CSS: ${message}`);
-  }
+		return {
+			css: result.css,
+			description: `Generated CSS custom properties for a ${variant} palette with primary color ${options.primary}`,
+		};
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error);
+		throw new Error(`Failed to compile palette CSS: ${message}`);
+	}
 }
 
 /**
  * Options for generating custom palette CSS variables.
  */
 export interface CustomPaletteCssOptions {
-  variant?: ThemeVariant;
-  surfaceColor?: string;
-  colors: {
-    primary: ColorDefinition;
-    secondary: ColorDefinition;
-    surface: ColorDefinition;
-    gray: GrayDefinition;
-    info: ColorDefinition;
-    success: ColorDefinition;
-    warn: ColorDefinition;
-    error: ColorDefinition;
-  };
-  _loadPaths?: string[];
+	variant?: ThemeVariant;
+	surfaceColor?: string;
+	colors: {
+		primary: ColorDefinition;
+		secondary: ColorDefinition;
+		surface: ColorDefinition;
+		gray: GrayDefinition;
+		info: ColorDefinition;
+		success: ColorDefinition;
+		warn: ColorDefinition;
+		error: ColorDefinition;
+	};
+	_loadPaths?: string[];
 }
 
 /**
@@ -130,41 +137,43 @@ export interface CustomPaletteCssOptions {
  * (using either shades() function or explicit values), compiles it,
  * and returns the CSS output.
  */
-export async function generateCustomPaletteCss(options: CustomPaletteCssOptions): Promise<CssPaletteResult> {
-  const variant = options.variant ?? 'light';
-  const {generateCustomPaletteCode} = await import('../utils/sass.js');
+export async function generateCustomPaletteCss(
+	options: CustomPaletteCssOptions,
+): Promise<CssPaletteResult> {
+	const variant = options.variant ?? "light";
+	const { generateCustomPaletteCode } = await import("../utils/sass.js");
 
-  const paletteLines = generateCustomPaletteCode({
-    variant,
-    variableName: 'custom',
-    surfaceColor: options.surfaceColor,
-    colors: options.colors,
-  });
+	const paletteLines = generateCustomPaletteCode({
+		variant,
+		variableName: "custom",
+		surfaceColor: options.surfaceColor,
+		colors: options.colors,
+	});
 
-  const sassCode = `
+	const sassCode = `
 @use 'sass/color' as *;
 
-${paletteLines.join('\n')}
+${paletteLines.join("\n")}
 
 @include palette($custom-palette);
 `;
 
-  try {
-    const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
-    const result = await sass.compileStringAsync(sassCode, {
-      loadPaths,
-      style: 'expanded',
-    });
+	try {
+		const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
+		const result = await sass.compileStringAsync(sassCode, {
+			loadPaths,
+			style: "expanded",
+		});
 
-    return {
-      css: result.css,
-      description: `Generated CSS custom properties for a custom ${variant} palette`,
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+		return {
+			css: result.css,
+			description: `Generated CSS custom properties for a custom ${variant} palette`,
+		};
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error);
 
-    throw new Error(`Failed to compile custom palette CSS: ${message}`);
-  }
+		throw new Error(`Failed to compile custom palette CSS: ${message}`);
+	}
 }
 
 /**
@@ -172,31 +181,31 @@ ${paletteLines.join('\n')}
  * Adds a header comment and ensures consistent formatting.
  */
 export function formatCssOutput(css: string, description: string): string {
-  const header = `/* Generated by Ignite UI Theming MCP Server */
+	const header = `/* Generated by Ignite UI Theming MCP Server */
 /* ${description} */
 `;
-  return header + css;
+	return header + css;
 }
 
 /**
  * Options for generating component theme CSS variables.
  */
 export interface ComponentThemeCssOptions {
-  platform: (typeof PLATFORMS)[number];
-  /** Design system (defaults to 'material') */
-  designSystem?: string;
-  /** Theme variant - light or dark (defaults to 'light') */
-  variant?: string;
-  /** Component name (e.g., "button", "avatar") */
-  component: string;
-  /** Token name-value pairs */
-  tokens: Record<string, string | number>;
-  /** CSS selector to scope the theme (optional) */
-  selector?: string;
-  /** Custom variable name (optional) */
-  name?: string;
-  /** Internal testing parameter for load paths */
-  _loadPaths?: string[];
+	platform: (typeof PLATFORMS)[number];
+	/** Design system (defaults to 'material') */
+	designSystem?: string;
+	/** Theme variant - light or dark (defaults to 'light') */
+	variant?: string;
+	/** Component name (e.g., "button", "avatar") */
+	component: string;
+	/** Token name-value pairs */
+	tokens: Record<string, string | number>;
+	/** CSS selector to scope the theme (optional) */
+	selector?: string;
+	/** Custom variable name (optional) */
+	name?: string;
+	/** Internal testing parameter for load paths */
+	_loadPaths?: string[];
 }
 
 /**
@@ -216,52 +225,67 @@ export interface ComponentThemeCssOptions {
  * });
  * // result.css contains: igc-button { --ig-button-background: var(--ig-button-background, #1976d2); ... }
  */
-export async function generateComponentThemeCss(options: ComponentThemeCssOptions): Promise<CssComponentThemeResult> {
-  // Import functions we need (dynamic import to avoid circular dependencies)
-  const {getComponentTheme, getComponentSelector, getVariablePrefix, SCHEMA_PRESETS} =
-    await import('../knowledge/index.js');
-  const {toVariableName} = await import('../utils/sass.js');
+export async function generateComponentThemeCss(
+	options: ComponentThemeCssOptions,
+): Promise<CssComponentThemeResult> {
+	// Import functions we need (dynamic import to avoid circular dependencies)
+	const {
+		getComponentTheme,
+		getComponentSelector,
+		getVariablePrefix,
+		SCHEMA_PRESETS,
+	} = await import("../knowledge/index.js");
+	const { toVariableName } = await import("../utils/sass.js");
 
-  // Validate component exists
-  const theme = getComponentTheme(options.component);
+	// Validate component exists
+	const theme = getComponentTheme(options.component);
 
-  if (!theme) {
-    throw new Error(`Unknown component: ${options.component}`);
-  }
+	if (!theme) {
+		throw new Error(`Unknown component: ${options.component}`);
+	}
 
-  const designSystem = options.designSystem ?? 'material';
-  const variant = options.variant ?? 'light';
-  const themeFn = theme.themeFunctionName;
-  const themeName = options.name ? `$${toVariableName(options.name)}` : `$custom-${options.component}-theme`;
+	const designSystem = options.designSystem ?? "material";
+	const variant = options.variant ?? "light";
+	const themeFn = theme.themeFunctionName;
+	const themeName = options.name
+		? `$${toVariableName(options.name)}`
+		: `$custom-${options.component}-theme`;
 
-  // Get the schema variable based on design system and variant
-  const schemaVar =
-    SCHEMA_PRESETS[variant as 'light' | 'dark'][designSystem as 'material' | 'indigo' | 'bootstrap' | 'fluent'];
+	// Get the schema variable based on design system and variant
+	const schemaVar =
+		SCHEMA_PRESETS[variant as "light" | "dark"][
+			designSystem as "material" | "indigo" | "bootstrap" | "fluent"
+		];
 
-  // Build token arguments - schema comes first
-  const tokenArgs: string[] = [`$schema: ${schemaVar}`];
+	// Build token arguments - schema comes first
+	const tokenArgs: string[] = [`$schema: ${schemaVar}`];
 
-  for (const [tokenName, value] of Object.entries(options.tokens)) {
-    const stringValue = typeof value === 'number' ? String(value) : value;
-    tokenArgs.push(`$${tokenName}: ${stringValue}`);
-  }
+	for (const [tokenName, value] of Object.entries(options.tokens)) {
+		const stringValue = typeof value === "number" ? String(value) : value;
+		tokenArgs.push(`$${tokenName}: ${stringValue}`);
+	}
 
-  // Determine selector - use platform-specific component selector as default
-  const defaultSelectors = getComponentSelector(options.component, options.platform);
-  const selector = options.selector || (defaultSelectors.length > 0 ? defaultSelectors[0] : options.component);
+	// Determine selector - use platform-specific component selector as default
+	const defaultSelectors = getComponentSelector(
+		options.component,
+		options.platform,
+	);
+	const selector =
+		options.selector ||
+		(defaultSelectors.length > 0 ? defaultSelectors[0] : options.component);
 
-  // Get variable prefix from platform
-  const prefix = getVariablePrefix(options.platform);
-  const _varName = `${prefix}-${options.component}`;
+	// Get variable prefix from platform
+	const prefix = getVariablePrefix(options.platform);
+	const _varName = `${prefix}-${options.component}`;
 
-  // Generate Sass code
-  const sassCode = `
+	// Generate Sass code
+	const sassCode = `
 @use 'sass/themes' as *;
 @use 'sass/themes/schemas' as *;
 
 // Custom ${options.component} theme
 ${themeName}: ${themeFn}(
-  ${tokenArgs.join(',\n  ')}
+  ${tokenArgs.join(",\n  ")}
 );
 
 // Apply the theme to ${selector}
@@ -270,19 +294,19 @@ ${selector} {
 }
 `;
 
-  try {
-    const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
-    const result = await sass.compileStringAsync(sassCode, {
-      loadPaths,
-      style: 'expanded',
-    });
+	try {
+		const loadPaths = options._loadPaths ?? [PACKAGE_ROOT];
+		const result = await sass.compileStringAsync(sassCode, {
+			loadPaths,
+			style: "expanded",
+		});
 
-    return {
-      css: result.css,
-      description: `Generated CSS custom properties for ${options.component} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Failed to compile component theme CSS: ${message}`);
-  }
+		return {
+			css: result.css,
+			description: `Generated CSS custom properties for ${options.component} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
+		};
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error);
+		throw new Error(`Failed to compile component theme CSS: ${message}`);
+	}
 }

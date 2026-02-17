@@ -4,52 +4,57 @@
  * which is the single source of truth from the Sass code.
  */
 
-import palettesData from '../../../json/colors/presets/palettes.json' with {type: 'json'};
+import palettesData from "../../../json/colors/presets/palettes.json" with {
+	type: "json",
+};
 
 export interface PaletteColors {
-  primary: string;
-  secondary: string;
-  gray: string;
-  surface: string;
-  info: string;
-  success: string;
-  warn: string;
-  error: string;
+	primary: string;
+	secondary: string;
+	gray: string;
+	surface: string;
+	info: string;
+	success: string;
+	warn: string;
+	error: string;
 }
 
 export type PalettePresetName =
-  | 'light-bootstrap-palette'
-  | 'dark-bootstrap-palette'
-  | 'light-material-palette'
-  | 'dark-material-palette'
-  | 'light-fluent-palette'
-  | 'dark-fluent-palette'
-  | 'light-indigo-palette'
-  | 'dark-indigo-palette';
+	| "light-bootstrap-palette"
+	| "dark-bootstrap-palette"
+	| "light-material-palette"
+	| "dark-material-palette"
+	| "light-fluent-palette"
+	| "dark-fluent-palette"
+	| "light-indigo-palette"
+	| "dark-indigo-palette";
 
 /**
  * All palette presets loaded from JSON.
  */
-export const PALETTE_PRESETS = palettesData as Record<PalettePresetName, PaletteColors>;
+export const PALETTE_PRESETS = palettesData as Record<
+	PalettePresetName,
+	PaletteColors
+>;
 
 /**
  * Get light palette presets only.
  */
 export const LIGHT_PALETTE_PRESETS = {
-  'light-bootstrap-palette': PALETTE_PRESETS['light-bootstrap-palette'],
-  'light-material-palette': PALETTE_PRESETS['light-material-palette'],
-  'light-fluent-palette': PALETTE_PRESETS['light-fluent-palette'],
-  'light-indigo-palette': PALETTE_PRESETS['light-indigo-palette'],
+	"light-bootstrap-palette": PALETTE_PRESETS["light-bootstrap-palette"],
+	"light-material-palette": PALETTE_PRESETS["light-material-palette"],
+	"light-fluent-palette": PALETTE_PRESETS["light-fluent-palette"],
+	"light-indigo-palette": PALETTE_PRESETS["light-indigo-palette"],
 } as const;
 
 /**
  * Get dark palette presets only.
  */
 export const DARK_PALETTE_PRESETS = {
-  'dark-bootstrap-palette': PALETTE_PRESETS['dark-bootstrap-palette'],
-  'dark-material-palette': PALETTE_PRESETS['dark-material-palette'],
-  'dark-fluent-palette': PALETTE_PRESETS['dark-fluent-palette'],
-  'dark-indigo-palette': PALETTE_PRESETS['dark-indigo-palette'],
+	"dark-bootstrap-palette": PALETTE_PRESETS["dark-bootstrap-palette"],
+	"dark-material-palette": PALETTE_PRESETS["dark-material-palette"],
+	"dark-fluent-palette": PALETTE_PRESETS["dark-fluent-palette"],
+	"dark-indigo-palette": PALETTE_PRESETS["dark-indigo-palette"],
 } as const;
 
 // ============================================================================

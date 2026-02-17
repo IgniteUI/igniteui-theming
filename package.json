@@ -35,8 +35,7 @@
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,jsx,tsx}": [
-      "biome check --fix --no-errors-on-unmatched",
-      "prettier --write"
+      "biome check --fix --no-errors-on-unmatched"
     ],
     "sass/**/*.{scss,css}": [
       "npm run format"

@@ -5,7 +5,7 @@
  * as JSON strings when users type them in text fields.
  */
 
-import type {z} from 'zod';
+import type { z } from "zod";
 
 /**
  * Recursively parse JSON strings in a value.
@@ -29,32 +29,34 @@ import type {z} from 'zod';
  * // => { primary: { mode: 'shades' } }
  */
 export function deepParseJsonStrings(value: unknown): unknown {
-  if (typeof value === 'string') {
-    const trimmed = value.trim();
+	if (typeof value === "string") {
+		const trimmed = value.trim();
 
-    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-      try {
-        const parsed = JSON.parse(trimmed);
+		if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+			try {
+				const parsed = JSON.parse(trimmed);
 
-        // Recurse in case the parsed value contains more JSON strings
-        return deepParseJsonStrings(parsed);
-      } catch {
-        // Invalid JSON, keep as string
-        return value;
-      }
-    }
-    return value;
-  }
+				// Recurse in case the parsed value contains more JSON strings
+				return deepParseJsonStrings(parsed);
+			} catch {
+				// Invalid JSON, keep as string
+				return value;
+			}
+		}
+		return value;
+	}
 
-  if (Array.isArray(value)) {
-    return value.map(deepParseJsonStrings);
-  }
+	if (Array.isArray(value)) {
+		return value.map(deepParseJsonStrings);
+	}
 
-  if (value !== null && typeof value === 'object') {
-    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, deepParseJsonStrings(v)]));
-  }
+	if (value !== null && typeof value === "object") {
+		return Object.fromEntries(
+			Object.entries(value).map(([k, v]) => [k, deepParseJsonStrings(v)]),
+		);
+	}
 
-  return value;
+	return value;
 }
 
 /**
@@ -74,14 +76,17 @@ export function deepParseJsonStrings(value: unknown): unknown {
  *   withPreprocessing(createCustomPaletteSchema, handleCreateCustomPalette)
  * );
  */
-export function withPreprocessing<TParams, TResult extends Record<string, unknown>>(
-  schema: z.ZodSchema<TParams>,
-  handler: (params: TParams) => Promise<TResult> | TResult
+export function withPreprocessing<
+	TParams,
+	TResult extends Record<string, unknown>,
+>(
+	schema: z.ZodSchema<TParams>,
+	handler: (params: TParams) => Promise<TResult> | TResult,
 ): (params: unknown) => Promise<TResult> {
-  return async (rawParams: unknown) => {
-    const preprocessed = deepParseJsonStrings(rawParams);
-    const validated = schema.parse(preprocessed);
+	return async (rawParams: unknown) => {
+		const preprocessed = deepParseJsonStrings(rawParams);
+		const validated = schema.parse(preprocessed);
 
-    return handler(validated);
-  };
+		return handler(validated);
+	};
 }

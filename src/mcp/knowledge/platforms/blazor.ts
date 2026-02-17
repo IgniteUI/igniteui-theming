@@ -14,40 +14,40 @@
  */
 
 export const BLAZOR_PLATFORM = {
-  id: 'blazor',
-  name: 'Ignite UI for Blazor',
-  packageName: 'IgniteUI.Blazor',
+	id: "blazor",
+	name: "Ignite UI for Blazor",
+	packageName: "IgniteUI.Blazor",
 
-  /**
-   * The Sass module to import for theming
-   * Note: Blazor projects need to install igniteui-theming via npm
-   * even though the main package is NuGet-based
-   */
-  themingModule: 'igniteui-theming',
+	/**
+	 * The Sass module to import for theming
+	 * Note: Blazor projects need to install igniteui-theming via npm
+	 * even though the main package is NuGet-based
+	 */
+	themingModule: "igniteui-theming",
 
-  /**
-   * Detection patterns - Blazor uses NuGet packages, not npm
-   * Detection is done via .csproj file analysis
-   */
-  detectionPatterns: ['IgniteUI.Blazor'],
+	/**
+	 * Detection patterns - Blazor uses NuGet packages, not npm
+	 * Detection is done via .csproj file analysis
+	 */
+	detectionPatterns: ["IgniteUI.Blazor"],
 
-  /**
-   * Config files that indicate a Blazor project
-   * .csproj files with IgniteUI.Blazor package reference
-   */
-  configFiles: ['.csproj'],
+	/**
+	 * Config files that indicate a Blazor project
+	 * .csproj files with IgniteUI.Blazor package reference
+	 */
+	configFiles: [".csproj"],
 
-  /**
-   * No required root class (themes apply via CSS variables on :root)
-   */
-  rootClass: null,
+	/**
+	 * No required root class (themes apply via CSS variables on :root)
+	 */
+	rootClass: null,
 } as const;
 
 /**
  * Example usage documentation for Blazor
  */
 export const BLAZOR_USAGE_EXAMPLES = {
-  basic: `
+	basic: `
 // Basic Material Light Theme for Blazor
 // In your wwwroot/css/theme.scss file:
 
@@ -74,7 +74,7 @@ export const BLAZOR_USAGE_EXAMPLES = {
 @include spacing();
 `,
 
-  projectSetup: `
+	projectSetup: `
 // Blazor project setup for custom theming:
 
 // 1. Install NuGet package in your .csproj:
@@ -97,7 +97,7 @@ npm install igniteui-theming sass
 <link href="css/theme.css" rel="stylesheet" />
 `,
 
-  csprojExample: `
+	csprojExample: `
 <!-- Example .csproj with IgniteUI.Blazor -->
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <PropertyGroup>
@@ -109,7 +109,7 @@ npm install igniteui-theming sass
 </Project>
 `,
 
-  customPalette: `
+	customPalette: `
 // Custom Palette Theme
 @use 'igniteui-theming' as *;
 @use 'igniteui-theming/sass/typography/presets/material' as *;
@@ -138,7 +138,7 @@ $my-palette: palette(
 @include spacing();
 `,
 
-  darkTheme: `
+	darkTheme: `
 // Dark Indigo Theme for Blazor
 @use 'igniteui-theming' as *;
 @use 'igniteui-theming/sass/color/presets/dark/indigo' as *;

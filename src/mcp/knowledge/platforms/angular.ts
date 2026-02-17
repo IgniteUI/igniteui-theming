@@ -11,30 +11,35 @@
  * - Requires `ig-typography` CSS class on root element
  */
 
-import {generatePaletteCode, generateTypographyCode, generateUseStatement, quoteFontFamily} from '../../utils/sass.js';
-import type {DesignSystem, ThemeVariant} from '../../utils/types.js';
-import {PALETTE_PRESETS, type PalettePresetName} from '../palettes.js';
-import {PALETTES, SCHEMAS, TYPE_SCALES, TYPEFACES} from './common.js';
+import {
+	generatePaletteCode,
+	generateTypographyCode,
+	generateUseStatement,
+	quoteFontFamily,
+} from "../../utils/sass.js";
+import type { DesignSystem, ThemeVariant } from "../../utils/types.js";
+import { PALETTE_PRESETS, type PalettePresetName } from "../palettes.js";
+import { PALETTES, SCHEMAS, TYPE_SCALES, TYPEFACES } from "./common.js";
 
 export const ANGULAR_PLATFORM = {
-  id: 'angular',
-  name: 'Ignite UI for Angular',
-  packageName: 'igniteui-angular',
+	id: "angular",
+	name: "Ignite UI for Angular",
+	packageName: "igniteui-angular",
 
-  /**
-   * The Sass module to import for theming
-   */
-  themingModule: 'igniteui-angular/theming',
+	/**
+	 * The Sass module to import for theming
+	 */
+	themingModule: "igniteui-angular/theming",
 
-  /**
-   * Detection patterns in package.json dependencies
-   */
-  detectionPatterns: ['igniteui-angular', '@infragistics/igniteui-angular'],
+	/**
+	 * Detection patterns in package.json dependencies
+	 */
+	detectionPatterns: ["igniteui-angular", "@infragistics/igniteui-angular"],
 
-  /**
-   * Required CSS class on root element for typography
-   */
-  rootClass: 'ig-typography',
+	/**
+	 * Required CSS class on root element for typography
+	 */
+	rootClass: "ig-typography",
 } as const;
 
 /**
@@ -44,18 +49,18 @@ export const ANGULAR_PLATFORM = {
  * It provides base definitions needed for theming to work correctly.
  */
 export interface CoreMixinOptions {
-  /**
-   * Include/exclude styles for printing
-   * @default true
-   */
-  printLayout?: boolean;
+	/**
+	 * Include/exclude styles for printing
+	 * @default true
+	 */
+	printLayout?: boolean;
 
-  /**
-   * Switches component colors to more accessible values
-   * (suitable for color blind users)
-   * @default false
-   */
-  enhancedAccessibility?: boolean;
+	/**
+	 * Switches component colors to more accessible values
+	 * (suitable for color blind users)
+	 * @default false
+	 */
+	enhancedAccessibility?: boolean;
 }
 
 /**
@@ -64,55 +69,55 @@ export interface CoreMixinOptions {
  * The `theme` mixin generates styles for all components.
  */
 export interface ThemeMixinOptions {
-  /**
-   * The palette map to be used by default themes of all components
-   */
-  palette?: string;
+	/**
+	 * The palette map to be used by default themes of all components
+	 */
+	palette?: string;
 
-  /**
-   * The schema used as basis for styling components
-   * @default '$light-material-schema'
-   */
-  schema?: string;
+	/**
+	 * The schema used as basis for styling components
+	 * @default '$light-material-schema'
+	 */
+	schema?: string;
 
-  /**
-   * List of component themes to exclude from global theme
-   */
-  exclude?: string[];
+	/**
+	 * List of component themes to exclude from global theme
+	 */
+	exclude?: string[];
 
-  /**
-   * Global roundness factor (0 to 1)
-   */
-  roundness?: number;
+	/**
+	 * Global roundness factor (0 to 1)
+	 */
+	roundness?: number;
 
-  /**
-   * Enable/disable elevations for all components
-   * @default true
-   */
-  elevation?: boolean;
+	/**
+	 * Enable/disable elevations for all components
+	 * @default true
+	 */
+	elevation?: boolean;
 
-  /**
-   * The elevation map to use
-   * @default '$material-elevations'
-   */
-  elevations?: string;
+	/**
+	 * The elevation map to use
+	 * @default '$material-elevations'
+	 */
+	elevations?: string;
 }
 
 /**
  * Template for generating a complete Angular theme
  */
 export interface AngularThemeTemplate {
-  designSystem: DesignSystem;
-  variant: ThemeVariant;
-  primaryColor?: string;
-  secondaryColor?: string;
-  surfaceColor?: string;
-  grayColor?: string;
-  customPaletteName?: string;
-  fontFamily?: string;
-  includeTypography?: boolean;
-  coreOptions?: CoreMixinOptions;
-  themeOptions?: Partial<ThemeMixinOptions>;
+	designSystem: DesignSystem;
+	variant: ThemeVariant;
+	primaryColor?: string;
+	secondaryColor?: string;
+	surfaceColor?: string;
+	grayColor?: string;
+	customPaletteName?: string;
+	fontFamily?: string;
+	includeTypography?: boolean;
+	coreOptions?: CoreMixinOptions;
+	themeOptions?: Partial<ThemeMixinOptions>;
 }
 
 /**
@@ -123,131 +128,137 @@ export interface AngularThemeTemplate {
  * - Palette code (generatePaletteCode)
  * - Typography code (generateTypographyCode)
  */
-export function generateAngularThemeSass(template: AngularThemeTemplate): string {
-  const {
-    designSystem,
-    variant,
-    primaryColor,
-    secondaryColor,
-    surfaceColor,
-    grayColor,
-    customPaletteName = '$my-palette',
-    fontFamily,
-    includeTypography = true,
-    coreOptions = {},
-    themeOptions = {},
-  } = template;
+export function generateAngularThemeSass(
+	template: AngularThemeTemplate,
+): string {
+	const {
+		designSystem,
+		variant,
+		primaryColor,
+		secondaryColor,
+		surfaceColor,
+		grayColor,
+		customPaletteName = "$my-palette",
+		fontFamily,
+		includeTypography = true,
+		coreOptions = {},
+		themeOptions = {},
+	} = template;
 
-  const lines: string[] = [
-    '// Generated by Ignite UI Theming MCP Server',
-    '// Platform: Ignite UI for Angular',
-    '',
-    '// Import the theming module',
-    generateUseStatement('angular'),
-    '',
-  ];
+	const lines: string[] = [
+		"// Generated by Ignite UI Theming MCP Server",
+		"// Platform: Ignite UI for Angular",
+		"",
+		"// Import the theming module",
+		generateUseStatement("angular"),
+		"",
+	];
 
-  // Custom palette generation (if custom colors provided)
-  const hasCustomColors = primaryColor || secondaryColor || surfaceColor;
-  let paletteVariable: string;
+	// Custom palette generation (if custom colors provided)
+	const hasCustomColors = primaryColor || secondaryColor || surfaceColor;
+	let paletteVariable: string;
 
-  if (hasCustomColors) {
-    // Get default colors from the preset for this design system and variant
-    const presetName = `${variant}-${designSystem}-palette` as PalettePresetName;
-    const presetColors = PALETTE_PRESETS[presetName];
+	if (hasCustomColors) {
+		// Get default colors from the preset for this design system and variant
+		const presetName =
+			`${variant}-${designSystem}-palette` as PalettePresetName;
+		const presetColors = PALETTE_PRESETS[presetName];
 
-    // Use provided colors or fall back to preset defaults
-    // primary is required when hasCustomColors is true
-    const effectivePrimary = primaryColor || presetColors.primary;
-    const effectiveSecondary = secondaryColor || presetColors.secondary;
-    const effectiveSurface = surfaceColor || presetColors.surface;
+		// Use provided colors or fall back to preset defaults
+		// primary is required when hasCustomColors is true
+		const effectivePrimary = primaryColor || presetColors.primary;
+		const effectiveSecondary = secondaryColor || presetColors.secondary;
+		const effectiveSurface = surfaceColor || presetColors.surface;
 
-    // Use shared palette code generator
-    const paletteResult = generatePaletteCode({
-      primary: effectivePrimary,
-      secondary: effectiveSecondary,
-      surface: effectiveSurface,
-      gray: grayColor,
-      variableName: customPaletteName.replace(/^\$/, ''), // Remove $ prefix
-      useVariableReferences: true,
-    });
+		// Use shared palette code generator
+		const paletteResult = generatePaletteCode({
+			primary: effectivePrimary,
+			secondary: effectiveSecondary,
+			surface: effectiveSurface,
+			gray: grayColor,
+			variableName: customPaletteName.replace(/^\$/, ""), // Remove $ prefix
+			useVariableReferences: true,
+		});
 
-    lines.push('// Custom color palette');
-    lines.push(...paletteResult.colorVariables);
-    lines.push('');
-    lines.push(...paletteResult.paletteDefinition);
-    lines.push('');
+		lines.push("// Custom color palette");
+		lines.push(...paletteResult.colorVariables);
+		lines.push("");
+		lines.push(...paletteResult.paletteDefinition);
+		lines.push("");
 
-    paletteVariable = paletteResult.variableName;
-  } else {
-    // Use predefined palette
-    paletteVariable = PALETTES[variant][designSystem as keyof (typeof PALETTES)['light']];
-  }
+		paletteVariable = paletteResult.variableName;
+	} else {
+		// Use predefined palette
+		paletteVariable =
+			PALETTES[variant][designSystem as keyof (typeof PALETTES)["light"]];
+	}
 
-  // Core mixin
-  lines.push('// IMPORTANT: Always include core first!');
-  const coreArgs: string[] = [];
-  if (coreOptions.printLayout === false) {
-    coreArgs.push('$print-layout: false');
-  }
-  if (coreOptions.enhancedAccessibility) {
-    coreArgs.push('$enhanced-accessibility: true');
-  }
+	// Core mixin
+	lines.push("// IMPORTANT: Always include core first!");
+	const coreArgs: string[] = [];
+	if (coreOptions.printLayout === false) {
+		coreArgs.push("$print-layout: false");
+	}
+	if (coreOptions.enhancedAccessibility) {
+		coreArgs.push("$enhanced-accessibility: true");
+	}
 
-  if (coreArgs.length > 0) {
-    lines.push(`@include core(${coreArgs.join(', ')});`);
-  } else {
-    lines.push('@include core();');
-  }
+	if (coreArgs.length > 0) {
+		lines.push(`@include core(${coreArgs.join(", ")});`);
+	} else {
+		lines.push("@include core();");
+	}
 
-  // Typography mixin
-  if (includeTypography) {
-    // Use custom font family if provided, otherwise use preset variable
-    const typefaceValue = fontFamily ? quoteFontFamily(fontFamily) : TYPEFACES[designSystem];
-    const typeScale = TYPE_SCALES[designSystem];
+	// Typography mixin
+	if (includeTypography) {
+		// Use custom font family if provided, otherwise use preset variable
+		const typefaceValue = fontFamily
+			? quoteFontFamily(fontFamily)
+			: TYPEFACES[designSystem];
+		const typeScale = TYPE_SCALES[designSystem];
 
-    // Use shared typography code generator
-    const typographyLines = generateTypographyCode({
-      fontFamily: typefaceValue,
-      typeScaleVar: typeScale,
-    });
-    lines.push(...typographyLines);
-  }
+		// Use shared typography code generator
+		const typographyLines = generateTypographyCode({
+			fontFamily: typefaceValue,
+			typeScaleVar: typeScale,
+		});
+		lines.push(...typographyLines);
+	}
 
-  // Theme mixin
-  const schema = SCHEMAS[variant][designSystem];
-  const themeArgs: string[] = [];
+	// Theme mixin
+	const schema = SCHEMAS[variant][designSystem];
+	const themeArgs: string[] = [];
 
-  themeArgs.push(`  $palette: ${paletteVariable}`);
-  themeArgs.push(`  $schema: ${schema}`);
+	themeArgs.push(`  $palette: ${paletteVariable}`);
+	themeArgs.push(`  $schema: ${schema}`);
 
-  if (themeOptions.roundness !== undefined) {
-    themeArgs.push(`  $roundness: ${themeOptions.roundness}`);
-  }
-  if (themeOptions.elevation === false) {
-    themeArgs.push('  $elevation: false');
-  }
-  if (themeOptions.elevations) {
-    themeArgs.push(`  $elevations: ${themeOptions.elevations}`);
-  }
-  if (themeOptions.exclude && themeOptions.exclude.length > 0) {
-    themeArgs.push(`  $exclude: (${themeOptions.exclude.join(', ')})`);
-  }
+	if (themeOptions.roundness !== undefined) {
+		themeArgs.push(`  $roundness: ${themeOptions.roundness}`);
+	}
+	if (themeOptions.elevation === false) {
+		themeArgs.push("  $elevation: false");
+	}
+	if (themeOptions.elevations) {
+		themeArgs.push(`  $elevations: ${themeOptions.elevations}`);
+	}
+	if (themeOptions.exclude && themeOptions.exclude.length > 0) {
+		themeArgs.push(`  $exclude: (${themeOptions.exclude.join(", ")})`);
+	}
 
-  lines.push('');
-  lines.push('// Apply the theme');
-  lines.push('@include theme(');
-  lines.push(themeArgs.join(',\n'));
-  lines.push(');');
+	lines.push("");
+	lines.push("// Apply the theme");
+	lines.push("@include theme(");
+	lines.push(themeArgs.join(",\n"));
+	lines.push(");");
 
-  return lines.join('\n');
+	return lines.join("\n");
 }
 
 /**
  * Example usage documentation
  */
 export const ANGULAR_USAGE_EXAMPLES = {
-  basic: `
+	basic: `
 // Basic Material Light Theme
 @use "igniteui-angular/theming" as *;
 
@@ -262,7 +273,7 @@ export const ANGULAR_USAGE_EXAMPLES = {
 );
 `,
 
-  customPalette: `
+	customPalette: `
 // Custom Palette Theme
 @use "igniteui-angular/theming" as *;
 
@@ -283,7 +294,7 @@ $my-palette: palette(
 );
 `,
 
-  darkTheme: `
+	darkTheme: `
 // Dark Indigo Theme
 @use "igniteui-angular/theming" as *;
 
@@ -298,7 +309,7 @@ $my-palette: palette(
 );
 `,
 
-  excludeComponents: `
+	excludeComponents: `
 // Theme with excluded components
 @use "igniteui-angular/theming" as *;
 
@@ -316,7 +327,7 @@ $excluded-components: (igx-avatar, igx-badge);
 );
 `,
 
-  enhancedAccessibility: `
+	enhancedAccessibility: `
 // Theme with enhanced accessibility
 @use "igniteui-angular/theming" as *;
 

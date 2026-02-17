@@ -19,16 +19,16 @@
  * A successful result containing a value.
  */
 export interface Success<T> {
-  readonly ok: true;
-  readonly value: T;
+	readonly ok: true;
+	readonly value: T;
 }
 
 /**
  * A failed result containing an error.
  */
 export interface Failure<E> {
-  readonly ok: false;
-  readonly error: E;
+	readonly ok: false;
+	readonly error: E;
 }
 
 /**
@@ -44,7 +44,7 @@ export type Result<T, E = Error> = Success<T> | Failure<E>;
  * const result = success({ code: '...', variables: ['$my-palette'] });
  */
 export function success<T>(value: T): Success<T> {
-  return {ok: true, value};
+	return { ok: true, value };
 }
 
 /**
@@ -55,7 +55,7 @@ export function success<T>(value: T): Success<T> {
  * const result = failure({ code: 'INVALID_COLOR', message: 'Invalid color' });
  */
 export function failure<E>(error: E): Failure<E> {
-  return {ok: false, error};
+	return { ok: false, error };
 }
 
 /**
@@ -68,7 +68,7 @@ export function failure<E>(error: E): Failure<E> {
  * }
  */
 export function isSuccess<T, E>(result: Result<T, E>): result is Success<T> {
-  return result.ok;
+	return result.ok;
 }
 
 /**
@@ -81,7 +81,7 @@ export function isSuccess<T, E>(result: Result<T, E>): result is Success<T> {
  * }
  */
 export function isFailure<T, E>(result: Result<T, E>): result is Failure<E> {
-  return !result.ok;
+	return !result.ok;
 }
 
 /**
@@ -92,11 +92,14 @@ export function isFailure<T, E>(result: Result<T, E>): result is Failure<E> {
  * const result = success(5);
  * const doubled = mapResult(result, x => x * 2); // success(10)
  */
-export function mapResult<T, U, E>(result: Result<T, E>, fn: (value: T) => U): Result<U, E> {
-  if (result.ok) {
-    return success(fn(result.value));
-  }
-  return result;
+export function mapResult<T, U, E>(
+	result: Result<T, E>,
+	fn: (value: T) => U,
+): Result<U, E> {
+	if (result.ok) {
+		return success(fn(result.value));
+	}
+	return result;
 }
 
 /**
@@ -107,10 +110,10 @@ export function mapResult<T, U, E>(result: Result<T, E>, fn: (value: T) => U): R
  * const value = unwrap(result); // throws if result is a failure
  */
 export function unwrap<T>(result: Result<T, Error>): T {
-  if (result.ok) {
-    return result.value;
-  }
-  throw result.error;
+	if (result.ok) {
+		return result.value;
+	}
+	throw result.error;
 }
 
 /**
@@ -120,10 +123,10 @@ export function unwrap<T>(result: Result<T, Error>): T {
  * const value = unwrapOr(result, 'default');
  */
 export function unwrapOr<T, E>(result: Result<T, E>, defaultValue: T): T {
-  if (result.ok) {
-    return result.value;
-  }
-  return defaultValue;
+	if (result.ok) {
+		return result.value;
+	}
+	return defaultValue;
 }
 
 // ============================================================================
@@ -134,24 +137,24 @@ export function unwrapOr<T, E>(result: Result<T, E>, defaultValue: T): T {
  * Error codes for common error types in the MCP server.
  */
 export type ErrorCode =
-  | 'INVALID_COLOR'
-  | 'INVALID_PARAMETER'
-  | 'SASS_COMPILATION_ERROR'
-  | 'VALIDATION_ERROR'
-  | 'NOT_FOUND'
-  | 'UNKNOWN_ERROR';
+	| "INVALID_COLOR"
+	| "INVALID_PARAMETER"
+	| "SASS_COMPILATION_ERROR"
+	| "VALIDATION_ERROR"
+	| "NOT_FOUND"
+	| "UNKNOWN_ERROR";
 
 /**
  * A structured error with code and message.
  * More informative than a plain Error string.
  */
 export interface McpError {
-  /** Error code for programmatic handling */
-  code: ErrorCode;
-  /** Human-readable error message */
-  message: string;
-  /** Additional context (e.g., which field failed validation) */
-  context?: Record<string, unknown>;
+	/** Error code for programmatic handling */
+	code: ErrorCode;
+	/** Human-readable error message */
+	message: string;
+	/** Additional context (e.g., which field failed validation) */
+	context?: Record<string, unknown>;
 }
 
 /**
@@ -161,8 +164,12 @@ export interface McpError {
  * const error = mcpError('INVALID_COLOR', 'Invalid hex color: #xyz');
  * const error = mcpError('VALIDATION_ERROR', 'Missing required field', { field: 'primary' });
  */
-export function mcpError(code: ErrorCode, message: string, context?: Record<string, unknown>): McpError {
-  return {code, message, context};
+export function mcpError(
+	code: ErrorCode,
+	message: string,
+	context?: Record<string, unknown>,
+): McpError {
+	return { code, message, context };
 }
 
 /**
@@ -178,7 +185,7 @@ export type McpResult<T> = Result<T, McpError>;
 /**
  * Severity level for validation messages.
  */
-export type ValidationSeverity = 'error' | 'warning' | 'info';
+export type ValidationSeverity = "error" | "warning" | "info";
 
 /**
  * A validation error (fatal issue that prevents proceeding).
@@ -189,14 +196,14 @@ export type ValidationSeverity = 'error' | 'warning' | 'info';
  * - Structural problems that make generation impossible
  */
 export interface ValidationError {
-  /** The field or path that failed validation (e.g., 'primary', 'primary.500') */
-  field?: string;
-  /** Error message describing the issue */
-  message: string;
-  /** Suggestion for how to fix the error */
-  suggestion?: string;
-  /** Current value that caused the error */
-  currentValue?: string;
+	/** The field or path that failed validation (e.g., 'primary', 'primary.500') */
+	field?: string;
+	/** Error message describing the issue */
+	message: string;
+	/** Suggestion for how to fix the error */
+	suggestion?: string;
+	/** Current value that caused the error */
+	currentValue?: string;
 }
 
 /**
@@ -208,20 +215,20 @@ export interface ValidationError {
  * - Accessibility concerns
  */
 export interface ValidationWarning {
-  /** The field or path with a warning (e.g., 'surface', 'gray.50') */
-  field?: string;
-  /** Warning message describing the issue */
-  message: string;
-  /** Severity: 'warning' for potential problems, 'info' for suggestions */
-  severity?: 'warning' | 'info';
-  /** Suggestion for improvement */
-  suggestion?: string;
-  /** Current value that caused the warning */
-  currentValue?: string;
-  /** Suggested alternative values */
-  suggestedValues?: string[];
-  /** Additional technical details for advanced users */
-  details?: Record<string, unknown>;
+	/** The field or path with a warning (e.g., 'surface', 'gray.50') */
+	field?: string;
+	/** Warning message describing the issue */
+	message: string;
+	/** Severity: 'warning' for potential problems, 'info' for suggestions */
+	severity?: "warning" | "info";
+	/** Suggestion for improvement */
+	suggestion?: string;
+	/** Current value that caused the warning */
+	currentValue?: string;
+	/** Suggested alternative values */
+	suggestedValues?: string[];
+	/** Additional technical details for advanced users */
+	details?: Record<string, unknown>;
 }
 
 /**
@@ -229,49 +236,49 @@ export interface ValidationWarning {
  * Can contain both errors (fatal) and warnings (non-fatal).
  */
 export interface ValidationResult<TMetadata = unknown> {
-  /** Whether validation passed (no errors) */
-  isValid: boolean;
-  /** Validation errors (fatal issues that prevent proceeding) */
-  errors: ValidationError[];
-  /** Validation warnings (non-fatal issues that should be reported) */
-  warnings: ValidationWarning[];
-  /** Optional tips for the user (general guidance) */
-  tips?: string[];
-  /** Optional metadata from validation (e.g., analysis data) */
-  metadata?: TMetadata;
+	/** Whether validation passed (no errors) */
+	isValid: boolean;
+	/** Validation errors (fatal issues that prevent proceeding) */
+	errors: ValidationError[];
+	/** Validation warnings (non-fatal issues that should be reported) */
+	warnings: ValidationWarning[];
+	/** Optional tips for the user (general guidance) */
+	tips?: string[];
+	/** Optional metadata from validation (e.g., analysis data) */
+	metadata?: TMetadata;
 }
 
 /**
  * Create a successful validation result.
  */
 export function validationSuccess<TMetadata = unknown>(
-  warnings: ValidationWarning[] = [],
-  options?: {tips?: string[]; metadata?: TMetadata}
+	warnings: ValidationWarning[] = [],
+	options?: { tips?: string[]; metadata?: TMetadata },
 ): ValidationResult<TMetadata> {
-  return {
-    isValid: true,
-    errors: [],
-    warnings,
-    tips: options?.tips,
-    metadata: options?.metadata,
-  };
+	return {
+		isValid: true,
+		errors: [],
+		warnings,
+		tips: options?.tips,
+		metadata: options?.metadata,
+	};
 }
 
 /**
  * Create a failed validation result.
  */
 export function validationFailure<TMetadata = unknown>(
-  errors: ValidationError[],
-  warnings: ValidationWarning[] = [],
-  options?: {tips?: string[]; metadata?: TMetadata}
+	errors: ValidationError[],
+	warnings: ValidationWarning[] = [],
+	options?: { tips?: string[]; metadata?: TMetadata },
 ): ValidationResult<TMetadata> {
-  return {
-    isValid: false,
-    errors,
-    warnings,
-    tips: options?.tips,
-    metadata: options?.metadata,
-  };
+	return {
+		isValid: false,
+		errors,
+		warnings,
+		tips: options?.tips,
+		metadata: options?.metadata,
+	};
 }
 
 /**
@@ -279,44 +286,44 @@ export function validationFailure<TMetadata = unknown>(
  * The combined result is invalid if any input result is invalid.
  */
 export function combineValidationResults<TMetadata = unknown>(
-  ...results: ValidationResult<TMetadata>[]
+	...results: ValidationResult<TMetadata>[]
 ): ValidationResult<TMetadata> {
-  const combined: ValidationResult<TMetadata> = {
-    isValid: true,
-    errors: [],
-    warnings: [],
-    tips: [],
-  };
+	const combined: ValidationResult<TMetadata> = {
+		isValid: true,
+		errors: [],
+		warnings: [],
+		tips: [],
+	};
 
-  for (const result of results) {
-    if (!result.isValid) {
-      combined.isValid = false;
-    }
-    combined.errors.push(...result.errors);
-    combined.warnings.push(...result.warnings);
-    if (result.tips) {
-      combined.tips!.push(...result.tips);
-    }
-  }
+	for (const result of results) {
+		if (!result.isValid) {
+			combined.isValid = false;
+		}
+		combined.errors.push(...result.errors);
+		combined.warnings.push(...result.warnings);
+		if (result.tips) {
+			combined.tips!.push(...result.tips);
+		}
+	}
 
-  // Remove tips array if empty
-  if (combined.tips!.length === 0) {
-    delete combined.tips;
-  }
+	// Remove tips array if empty
+	if (combined.tips!.length === 0) {
+		delete combined.tips;
+	}
 
-  return combined;
+	return combined;
 }
 
 /**
  * Options for formatting validation messages.
  */
 export interface FormatValidationOptions {
-  /** Include severity icons (default: true) */
-  includeIcons?: boolean;
-  /** Include suggested values (default: true) */
-  includeSuggestions?: boolean;
-  /** Include tips section (default: true) */
-  includeTips?: boolean;
+	/** Include severity icons (default: true) */
+	includeIcons?: boolean;
+	/** Include suggested values (default: true) */
+	includeSuggestions?: boolean;
+	/** Include tips section (default: true) */
+	includeTips?: boolean;
 }
 
 /**
@@ -326,47 +333,58 @@ export interface FormatValidationOptions {
  * @param options - Formatting options
  * @returns Formatted markdown string
  */
-export function formatValidationMessages(result: ValidationResult, options: FormatValidationOptions = {}): string {
-  const {includeIcons = true, includeSuggestions = true, includeTips = true} = options;
-  const lines: string[] = [];
+export function formatValidationMessages(
+	result: ValidationResult,
+	options: FormatValidationOptions = {},
+): string {
+	const {
+		includeIcons = true,
+		includeSuggestions = true,
+		includeTips = true,
+	} = options;
+	const lines: string[] = [];
 
-  if (result.errors.length > 0) {
-    lines.push('**Errors:**');
-    for (const error of result.errors) {
-      const icon = includeIcons ? '❌ ' : '';
-      const prefix = error.field ? `\`${error.field}\`: ` : '';
-      lines.push(`- ${icon}${prefix}${error.message}`);
-      if (includeSuggestions && error.suggestion) {
-        lines.push(`  Suggestion: ${error.suggestion}`);
-      }
-    }
-  }
+	if (result.errors.length > 0) {
+		lines.push("**Errors:**");
+		for (const error of result.errors) {
+			const icon = includeIcons ? "❌ " : "";
+			const prefix = error.field ? `\`${error.field}\`: ` : "";
+			lines.push(`- ${icon}${prefix}${error.message}`);
+			if (includeSuggestions && error.suggestion) {
+				lines.push(`  Suggestion: ${error.suggestion}`);
+			}
+		}
+	}
 
-  if (result.warnings.length > 0) {
-    if (lines.length > 0) lines.push('');
-    lines.push('**Warnings:**');
-    for (const warning of result.warnings) {
-      const icon = includeIcons ? (warning.severity === 'info' ? 'ℹ️ ' : '⚠️ ') : '';
-      const prefix = warning.field ? `\`${warning.field}\`: ` : '';
-      lines.push(`- ${icon}${prefix}${warning.message}`);
-      if (includeSuggestions) {
-        if (warning.suggestedValues && warning.suggestedValues.length > 0) {
-          lines.push(`  Suggested: ${warning.suggestedValues.join(', ')}`);
-        } else if (warning.suggestion) {
-          lines.push(`  Suggestion: ${warning.suggestion}`);
-        }
-      }
-    }
-  }
+	if (result.warnings.length > 0) {
+		if (lines.length > 0) lines.push("");
+		lines.push("**Warnings:**");
+		for (const warning of result.warnings) {
+			const icon = includeIcons
+				? warning.severity === "info"
+					? "ℹ️ "
+					: "⚠️ "
+				: "";
+			const prefix = warning.field ? `\`${warning.field}\`: ` : "";
+			lines.push(`- ${icon}${prefix}${warning.message}`);
+			if (includeSuggestions) {
+				if (warning.suggestedValues && warning.suggestedValues.length > 0) {
+					lines.push(`  Suggested: ${warning.suggestedValues.join(", ")}`);
+				} else if (warning.suggestion) {
+					lines.push(`  Suggestion: ${warning.suggestion}`);
+				}
+			}
+		}
+	}
 
-  if (includeTips && result.tips && result.tips.length > 0) {
-    if (lines.length > 0) lines.push('');
-    lines.push('**Tips:**');
-    for (const tip of result.tips) {
-      const icon = includeIcons ? '💡 ' : '';
-      lines.push(`- ${icon}${tip}`);
-    }
-  }
+	if (includeTips && result.tips && result.tips.length > 0) {
+		if (lines.length > 0) lines.push("");
+		lines.push("**Tips:**");
+		for (const tip of result.tips) {
+			const icon = includeIcons ? "💡 " : "";
+			lines.push(`- ${icon}${tip}`);
+		}
+	}
 
-  return lines.join('\n');
+	return lines.join("\n");
 }

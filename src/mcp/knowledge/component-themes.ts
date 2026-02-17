@@ -3,46 +3,48 @@
  * This provides the LLM with accurate design tokens for each component.
  */
 
-import themesData from '../../../json/components/themes.json' with {type: 'json'};
+import themesData from "../../../json/components/themes.json" with {
+	type: "json",
+};
 
 /**
  * Represents a design token (themeable property) for a component.
  */
 export interface ComponentToken {
-  /** Token name (e.g., 'background', 'border-color') */
-  name: string;
-  /** Sass type (e.g., 'Color', 'Number', 'List', 'box-shadow') */
-  type: string;
-  /** Description of what this token controls */
-  description: string;
+	/** Token name (e.g., 'background', 'border-color') */
+	name: string;
+	/** Sass type (e.g., 'Color', 'Number', 'List', 'box-shadow') */
+	type: string;
+	/** Description of what this token controls */
+	description: string;
 }
 
 /**
  * Represents a primary token entry extracted from SassDoc descriptions.
  */
 export interface PrimaryToken {
-  /** Token name without $ prefix (e.g., 'background', 'header-background') */
-  name: string;
-  /** Brief description of what this token controls and what it derives */
-  description: string;
+	/** Token name without $ prefix (e.g., 'background', 'header-background') */
+	name: string;
+	/** Brief description of what this token controls and what it derives */
+	description: string;
 }
 
 /**
  * Represents a component theme definition.
  */
 export interface ComponentTheme {
-  /** Component name (e.g., 'button', 'avatar') */
-  name: string;
-  /** The Sass function name (e.g., 'button-theme', 'avatar-theme') */
-  themeFunctionName: string;
-  /** Title/description of the theme (e.g., 'Calendar Theme') */
-  description: string;
-  /** Structured primary tokens extracted from SassDoc */
-  primaryTokens?: PrimaryToken[];
-  /** Optional summary prose about token behavior */
-  primaryTokensSummary?: string;
-  /** Available design tokens */
-  tokens: ComponentToken[];
+	/** Component name (e.g., 'button', 'avatar') */
+	name: string;
+	/** The Sass function name (e.g., 'button-theme', 'avatar-theme') */
+	themeFunctionName: string;
+	/** Title/description of the theme (e.g., 'Calendar Theme') */
+	description: string;
+	/** Structured primary tokens extracted from SassDoc */
+	primaryTokens?: PrimaryToken[];
+	/** Optional summary prose about token behavior */
+	primaryTokensSummary?: string;
+	/** Available design tokens */
+	tokens: ComponentToken[];
 }
 
 /**
@@ -60,8 +62,10 @@ export const COMPONENT_NAMES = Object.keys(COMPONENT_THEMES);
  * @param componentName - The component name (e.g., 'button', 'avatar')
  * @returns The component theme or undefined if not found
  */
-export function getComponentTheme(componentName: string): ComponentTheme | undefined {
-  return COMPONENT_THEMES[componentName];
+export function getComponentTheme(
+	componentName: string,
+): ComponentTheme | undefined {
+	return COMPONENT_THEMES[componentName];
 }
 
 /**
@@ -70,8 +74,8 @@ export function getComponentTheme(componentName: string): ComponentTheme | undef
  * @returns Array of token names or empty array if component not found
  */
 export function getTokenNames(componentName: string): string[] {
-  const theme = getComponentTheme(componentName);
-  return theme ? theme.tokens.map((t) => t.name) : [];
+	const theme = getComponentTheme(componentName);
+	return theme ? theme.tokens.map((t) => t.name) : [];
 }
 
 /**
@@ -81,17 +85,19 @@ export function getTokenNames(componentName: string): string[] {
  * @returns Object with isValid flag and any invalid tokens
  */
 export function validateTokens(
-  componentName: string,
-  tokenNames: string[]
-): {isValid: boolean; invalidTokens: string[]; validTokens: string[]} {
-  const validTokens = getTokenNames(componentName);
-  const invalidTokens = tokenNames.filter((name) => !validTokens.includes(name));
+	componentName: string,
+	tokenNames: string[],
+): { isValid: boolean; invalidTokens: string[]; validTokens: string[] } {
+	const validTokens = getTokenNames(componentName);
+	const invalidTokens = tokenNames.filter(
+		(name) => !validTokens.includes(name),
+	);
 
-  return {
-    isValid: invalidTokens.length === 0,
-    invalidTokens,
-    validTokens,
-  };
+	return {
+		isValid: invalidTokens.length === 0,
+		invalidTokens,
+		validTokens,
+	};
 }
 
 /**
@@ -100,6 +106,8 @@ export function validateTokens(
  * @returns Array of matching component names
  */
 export function searchComponents(query: string): string[] {
-  const lowerQuery = query.toLowerCase();
-  return COMPONENT_NAMES.filter((name) => name.toLowerCase().includes(lowerQuery));
+	const lowerQuery = query.toLowerCase();
+	return COMPONENT_NAMES.filter((name) =>
+		name.toLowerCase().includes(lowerQuery),
+	);
 }

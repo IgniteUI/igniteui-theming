@@ -4,14 +4,22 @@
  * which is the single source of truth from the Sass code.
  */
 
-import indigoElevationsData from '../../../json/elevations/indigo.json' with {type: 'json'};
-import materialElevationsData from '../../../json/elevations/material.json' with {type: 'json'};
+import indigoElevationsData from "../../../json/elevations/indigo.json" with {
+	type: "json",
+};
+import materialElevationsData from "../../../json/elevations/material.json" with {
+	type: "json",
+};
 
-type StringToNumber<S extends string> = S extends `${infer N extends number}` ? N : never;
+type StringToNumber<S extends string> = S extends `${infer N extends number}`
+	? N
+	: never;
 
-export type ElevationLevel = StringToNumber<keyof typeof materialElevationsData.elevations>;
+export type ElevationLevel = StringToNumber<
+	keyof typeof materialElevationsData.elevations
+>;
 
-export type ElevationPreset = 'material' | 'indigo';
+export type ElevationPreset = "material" | "indigo";
 
 type ElevationMap = Record<string, string>;
 
@@ -19,25 +27,28 @@ type ElevationMap = Record<string, string>;
  * Material Design elevation definitions loaded from JSON.
  * Based on the Material Design elevation system with 25 levels (0-24).
  */
-export const MATERIAL_ELEVATIONS: ElevationMap = materialElevationsData.elevations as ElevationMap;
+export const MATERIAL_ELEVATIONS: ElevationMap =
+	materialElevationsData.elevations as ElevationMap;
 
 /**
  * Indigo Design System elevation definitions loaded from JSON.
  * A custom elevation system with unique shadow definitions.
  */
-export const INDIGO_ELEVATIONS: ElevationMap = indigoElevationsData.elevations as ElevationMap;
+export const INDIGO_ELEVATIONS: ElevationMap =
+	indigoElevationsData.elevations as ElevationMap;
 
 /**
  * All elevation presets indexed by design system name.
  */
 export const ELEVATION_PRESETS: Record<ElevationPreset, ElevationMap> = {
-  material: MATERIAL_ELEVATIONS,
-  indigo: INDIGO_ELEVATIONS,
+	material: MATERIAL_ELEVATIONS,
+	indigo: INDIGO_ELEVATIONS,
 };
 
 /**
  * Valid elevation levels.
  */
 export const ELEVATION_LEVELS: ElevationLevel[] = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+	22, 23, 24,
 ] satisfies readonly ElevationLevel[];

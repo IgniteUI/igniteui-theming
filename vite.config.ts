@@ -1,4 +1,4 @@
-import {chmodSync, existsSync} from 'node:fs';
+import {chmodSync, existsSync, readFileSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import type {Plugin} from 'vite';
@@ -7,6 +7,9 @@ import dts from 'vite-plugin-dts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const packageJson = JSON.parse(readFileSync(resolve(__dirname, 'package.json'), 'utf-8'));
+const version = process.env.MCP_VERSION || packageJson.version;
 
 /**
  * Plugin to set executable permissions on the MCP server entry point.
@@ -27,6 +30,9 @@ function chmodPlugin(): Plugin {
 }
 
 export default defineConfig({
+  define: {
+    __MCP_VERSION__: JSON.stringify(version),
+  },
   plugins: [
     dts({
       include: ['src/mcp/**/*'],

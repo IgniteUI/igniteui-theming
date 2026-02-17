@@ -19,34 +19,36 @@
  * Used to maintain consistency across descriptions.
  */
 export const FRAGMENTS = {
-  /** Platform parameter description */
-  PLATFORM: `Target platform: "angular" for Ignite UI for Angular, "webcomponents" for Ignite UI for Web Components, "react" for Ignite UI for React, or "blazor" for Ignite UI for Blazor. If omitted, generates generic code. Use detect_platform tool first to auto-detect from project files.`,
+	/** Platform parameter description */
+	PLATFORM: `Target platform: "angular" for Ignite UI for Angular, "webcomponents" for Ignite UI for Web Components, "react" for Ignite UI for React, or "blazor" for Ignite UI for Blazor. If omitted, generates generic code. Use detect_platform tool first to auto-detect from project files.`,
 
-  /** Color format examples - CSS Color Level 4 */
-  COLOR_FORMAT: `Valid CSS color formats: hex ("#3F51B5", "#3F51B5AA"), rgb/rgba ("rgb(63, 81, 181)", "rgb(63 81 181 / 0.5)"), hsl/hsla ("hsl(231, 48%, 48%)", "hsl(231 48% 48% / 0.5)"), hwb ("hwb(231 20% 30%)"), lab/lch ("lab(50% 40 59)", "lch(50% 80 30)"), oklab/oklch ("oklab(59% 0.1 0.1)", "oklch(60% 0.15 50)"), color() for wide-gamut ("color(display-p3 1 0.5 0)"), or CSS named colors ("indigo", "rebeccapurple").`,
+	/** Color format examples - CSS Color Level 4 */
+	COLOR_FORMAT: `Valid CSS color formats: hex ("#3F51B5", "#3F51B5AA"), rgb/rgba ("rgb(63, 81, 181)", "rgb(63 81 181 / 0.5)"), hsl/hsla ("hsl(231, 48%, 48%)", "hsl(231 48% 48% / 0.5)"), hwb ("hwb(231 20% 30%)"), lab/lch ("lab(50% 40 59)", "lch(50% 80 30)"), oklab/oklch ("oklab(59% 0.1 0.1)", "oklch(60% 0.15 50)"), color() for wide-gamut ("color(display-p3 1 0.5 0)"), or CSS named colors ("indigo", "rebeccapurple").`,
 
-  /** Variant parameter description */
-  VARIANT: `Theme variant: "light" (light backgrounds, dark text) or "dark" (dark backgrounds, light text). Defaults to "light".`,
+	/** Variant parameter description */
+	VARIANT: `Theme variant: "light" (light backgrounds, dark text) or "dark" (dark backgrounds, light text). Defaults to "light".`,
 
-  /** Design system parameter description */
-  DESIGN_SYSTEM: `Design system preset: "material" (Material Design), "bootstrap" (Bootstrap), "fluent" (Microsoft Fluent), or "indigo" (Infragistics Indigo). Defaults to "material".`,
+	/** Design system parameter description */
+	DESIGN_SYSTEM: `Design system preset: "material" (Material Design), "bootstrap" (Bootstrap), "fluent" (Microsoft Fluent), or "indigo" (Infragistics Indigo). Defaults to "material".`,
 
-  /** Chromatic shade levels */
-  CHROMATIC_SHADES: '14 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A700',
+	/** Chromatic shade levels */
+	CHROMATIC_SHADES:
+		"14 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A700",
 
-  /** Gray shade levels */
-  GRAY_SHADES: '10 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900',
+	/** Gray shade levels */
+	GRAY_SHADES:
+		"10 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900",
 
-  /** Luminance warning */
-  LUMINANCE_WARNING:
-    'Colors with extreme luminance (< 0.05 or > 0.45) may produce suboptimal automatic shade generation.',
+	/** Luminance warning */
+	LUMINANCE_WARNING:
+		"Colors with extreme luminance (< 0.05 or > 0.45) may produce suboptimal automatic shade generation.",
 
-  /** Monochromatic requirement for chromatic colors */
-  MONOCHROMATIC_RULE:
-    'MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).',
+	/** Monochromatic requirement for chromatic colors */
+	MONOCHROMATIC_RULE:
+		"MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).",
 
-  /** Resource scheme */
-  RESOURCE_SCHEME: 'theming://',
+	/** Resource scheme */
+	RESOURCE_SCHEME: "theming://",
 } as const;
 
 // ============================================================================
@@ -58,10 +60,10 @@ export const FRAGMENTS = {
  * These are shown to AI models when listing available tools.
  */
 export const TOOL_DESCRIPTIONS = {
-  // ---------------------------------------------------------------------------
-  // detect_platform - Simple tool
-  // ---------------------------------------------------------------------------
-  detect_platform: `Detect the target Ignite UI platform by analyzing package.json dependencies and project config files.
+	// ---------------------------------------------------------------------------
+	// detect_platform - Simple tool
+	// ---------------------------------------------------------------------------
+	detect_platform: `Detect the target Ignite UI platform by analyzing package.json dependencies and project config files.
 
 <use_case>
   Use this tool FIRST before generating any theme code to ensure platform-optimized output.
@@ -102,10 +104,10 @@ export const TOOL_DESCRIPTIONS = {
   - create_elevations: Configure shadows
 </related_tools>`,
 
-  // ---------------------------------------------------------------------------
-  // create_palette - Medium complexity
-  // ---------------------------------------------------------------------------
-  create_palette: `Generate a color palette for Ignite UI themes using the palette() Sass function.
+	// ---------------------------------------------------------------------------
+	// create_palette - Medium complexity
+	// ---------------------------------------------------------------------------
+	create_palette: `Generate a color palette for Ignite UI themes using the palette() Sass function.
 
 <use_case>
   Use this tool when you have base colors and want to auto-generate a complete palette
@@ -191,10 +193,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://guidance/colors/rules" — light/dark theme color rules
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // create_custom_palette - Complex tool
-  // ---------------------------------------------------------------------------
-  create_custom_palette: `Generate a custom color palette with fine-grained control over individual shade values.
+	// ---------------------------------------------------------------------------
+	// create_custom_palette - Complex tool
+	// ---------------------------------------------------------------------------
+	create_custom_palette: `Generate a custom color palette with fine-grained control over individual shade values.
 
 ⚠️ CRITICAL RULES - READ BEFORE GENERATING SHADES:
 1. MONOCHROMATIC: Each color (primary, secondary, etc.) must use ONE HUE only.
@@ -380,10 +382,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://guidance/colors/roles" — semantic meaning of each color family
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // create_typography - Medium complexity
-  // ---------------------------------------------------------------------------
-  create_typography: `Set up typography for Ignite UI themes with custom font families and type scales.
+	// ---------------------------------------------------------------------------
+	// create_typography - Medium complexity
+	// ---------------------------------------------------------------------------
+	create_typography: `Set up typography for Ignite UI themes with custom font families and type scales.
 
 <use_case>
   Use this tool to configure fonts that match your brand identity while maintaining
@@ -433,10 +435,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://presets/typography" — typography presets for all design systems
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // create_elevations - Simple tool
-  // ---------------------------------------------------------------------------
-  create_elevations: `Set up elevation shadows for Ignite UI themes.
+	// ---------------------------------------------------------------------------
+	// create_elevations - Simple tool
+	// ---------------------------------------------------------------------------
+	create_elevations: `Set up elevation shadows for Ignite UI themes.
 
 <use_case>
   Use this tool to configure box-shadow values that provide visual depth and hierarchy.
@@ -473,10 +475,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://presets/elevations" — elevation presets for Material and Indigo
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // create_theme - Complex tool
-  // ---------------------------------------------------------------------------
-  create_theme: `Generate a complete, production-ready Ignite UI theme with palette, typography, and elevations.
+	// ---------------------------------------------------------------------------
+	// create_theme - Complex tool
+	// ---------------------------------------------------------------------------
+	create_theme: `Generate a complete, production-ready Ignite UI theme with palette, typography, and elevations.
 
 <use_case>
   Use this tool as the starting point for new projects. It generates everything needed
@@ -576,10 +578,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://platforms/blazor" — Blazor platform configuration
   </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // set_size - Layout tool
-  // ---------------------------------------------------------------------------
-  set_size: `Set global or component-specific sizing by updating --ig-size.
+	// ---------------------------------------------------------------------------
+	// set_size - Layout tool
+	// ---------------------------------------------------------------------------
+	set_size: `Set global or component-specific sizing by updating --ig-size.
 
 <use_case>
   Use this tool for requests like:
@@ -618,10 +620,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://docs/mixins/sizable" — sizable mixin
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // set_spacing - Layout tool
-  // ---------------------------------------------------------------------------
-  set_spacing: `Set global or component-specific spacing by updating --ig-spacing.
+	// ---------------------------------------------------------------------------
+	// set_spacing - Layout tool
+	// ---------------------------------------------------------------------------
+	set_spacing: `Set global or component-specific spacing by updating --ig-spacing.
 
 <use_case>
   Use this tool for requests like:
@@ -663,10 +665,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://docs/mixins/spacing" — spacing mixin
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // set_roundness - Layout tool
-  // ---------------------------------------------------------------------------
-  set_roundness: `Set global or component-specific roundness by updating --ig-radius-factor.
+	// ---------------------------------------------------------------------------
+	// set_roundness - Layout tool
+	// ---------------------------------------------------------------------------
+	set_roundness: `Set global or component-specific roundness by updating --ig-radius-factor.
 
 <use_case>
   Use this tool for requests like:
@@ -702,10 +704,10 @@ export const TOOL_DESCRIPTIONS = {
   - "theming://docs/functions/border-radius" — border radius function
 </related_resources>`,
 
-  // ---------------------------------------------------------------------------
-  // get_component_design_tokens - Discovery tool
-  // ---------------------------------------------------------------------------
-  get_component_design_tokens: `Discover available design tokens (themeable properties) for an Ignite UI component.
+	// ---------------------------------------------------------------------------
+	// get_component_design_tokens - Discovery tool
+	// ---------------------------------------------------------------------------
+	get_component_design_tokens: `Discover available design tokens (themeable properties) for an Ignite UI component.
 
 <use_case>
   ALWAYS call this tool FIRST before using create_component_theme. It returns the
@@ -772,10 +774,10 @@ export const TOOL_DESCRIPTIONS = {
   - create_component_theme: Use the discovered tokens to create a custom theme
 </related_tools>`,
 
-  // ---------------------------------------------------------------------------
-  // create_component_theme - Theme generation tool
-  // ---------------------------------------------------------------------------
-  create_component_theme: `Generate Sass or CSS code to customize an Ignite UI component's appearance using design tokens.
+	// ---------------------------------------------------------------------------
+	// create_component_theme - Theme generation tool
+	// ---------------------------------------------------------------------------
+	create_component_theme: `Generate Sass or CSS code to customize an Ignite UI component's appearance using design tokens.
 
 <use_case>
   Use this tool AFTER calling get_component_design_tokens to customize specific
@@ -922,10 +924,10 @@ export const TOOL_DESCRIPTIONS = {
   - create_theme: Use for full theme (palette + typography + elevations)
 </related_tools>`,
 
-  // ---------------------------------------------------------------------------
-  // get_color - Color retrieval tool
-  // ---------------------------------------------------------------------------
-  get_color: `Retrieve a palette color from Ignite UI Theming as a CSS variable reference.
+	// ---------------------------------------------------------------------------
+	// get_color - Color retrieval tool
+	// ---------------------------------------------------------------------------
+	get_color: `Retrieve a palette color from Ignite UI Theming as a CSS variable reference.
 
 <use_case>
   Use this tool when you need to reference a specific palette color in CSS or Sass code.
@@ -985,10 +987,10 @@ export const TOOL_DESCRIPTIONS = {
   - create_component_theme: Use retrieved colors in component theming
 </related_tools>`,
 
-  // ---------------------------------------------------------------------------
-  // read_resource - Resource access tool
-  // ---------------------------------------------------------------------------
-  read_resource: `Read a theming resource by URI. Returns reference data such as platform configurations, color palette presets, typography presets, color guidance, and layout documentation.
+	// ---------------------------------------------------------------------------
+	// read_resource - Resource access tool
+	// ---------------------------------------------------------------------------
+	read_resource: `Read a theming resource by URI. Returns reference data such as platform configurations, color palette presets, typography presets, color guidance, and layout documentation.
 
 <use_case>
   Use this tool to load reference data before or during theme generation. Other tools
@@ -1028,121 +1030,124 @@ export const TOOL_DESCRIPTIONS = {
  * Include valid values, defaults, formats, and constraints.
  */
 export const PARAM_DESCRIPTIONS = {
-  // ---------------------------------------------------------------------------
-  // Common parameters (used across multiple tools)
-  // ---------------------------------------------------------------------------
-  platform: FRAGMENTS.PLATFORM,
-  licensed:
-    'Use licensed @infragistics package (Angular only). Set to true if using @infragistics/igniteui-angular from private ProGet registry. Defaults to false (uses open-source igniteui-angular from npm). Note: igniteui-theming is always free/OSS for all other platforms.',
-  variant: FRAGMENTS.VARIANT,
-  designSystem: FRAGMENTS.DESIGN_SYSTEM,
-  name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
-  output: `Output format: "sass" generates Sass code using igniteui-theming library functions. "css" generates CSS custom properties (variables) directly - useful for vanilla CSS projects or when you don't want Sass compilation. Defaults to tool-specific output ("sass" for theme generators, "css" for layout setters).`,
+	// ---------------------------------------------------------------------------
+	// Common parameters (used across multiple tools)
+	// ---------------------------------------------------------------------------
+	platform: FRAGMENTS.PLATFORM,
+	licensed:
+		"Use licensed @infragistics package (Angular only). Set to true if using @infragistics/igniteui-angular from private ProGet registry. Defaults to false (uses open-source igniteui-angular from npm). Note: igniteui-theming is always free/OSS for all other platforms.",
+	variant: FRAGMENTS.VARIANT,
+	designSystem: FRAGMENTS.DESIGN_SYSTEM,
+	name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
+	output: `Output format: "sass" generates Sass code using igniteui-theming library functions. "css" generates CSS custom properties (variables) directly - useful for vanilla CSS projects or when you don't want Sass compilation. Defaults to tool-specific output ("sass" for theme generators, "css" for layout setters).`,
 
-  // ---------------------------------------------------------------------------
-  // detect_platform parameters
-  // ---------------------------------------------------------------------------
-  packageJsonPath: `Path to package.json file, relative to current working directory. Defaults to "./package.json".`,
+	// ---------------------------------------------------------------------------
+	// detect_platform parameters
+	// ---------------------------------------------------------------------------
+	packageJsonPath: `Path to package.json file, relative to current working directory. Defaults to "./package.json".`,
 
-  // ---------------------------------------------------------------------------
-  // Color parameters (for create_palette)
-  // ---------------------------------------------------------------------------
-  primary: `Primary brand color - used for main actions, active states, and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
-  secondary: `Secondary/accent color - used for FABs, selection controls, highlights. ${FRAGMENTS.COLOR_FORMAT}`,
-  surface: `Surface/background color - should be light for "light" variant, dark for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
-  gray: `Gray/neutral base color for text, borders, disabled states. Optional - defaults from design system preset. ${FRAGMENTS.COLOR_FORMAT}`,
-  info: `Info state color (typically blue) for informational messages. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
-  success: `Success state color (typically green) for success messages and positive actions. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
-  warn: `Warning state color (typically orange/amber) for warning messages. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
-  error: `Error state color (typically red) for error messages and destructive actions. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
+	// ---------------------------------------------------------------------------
+	// Color parameters (for create_palette)
+	// ---------------------------------------------------------------------------
+	primary: `Primary brand color - used for main actions, active states, and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
+	secondary: `Secondary/accent color - used for FABs, selection controls, highlights. ${FRAGMENTS.COLOR_FORMAT}`,
+	surface: `Surface/background color - should be light for "light" variant, dark for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
+	gray: `Gray/neutral base color for text, borders, disabled states. Optional - defaults from design system preset. ${FRAGMENTS.COLOR_FORMAT}`,
+	info: `Info state color (typically blue) for informational messages. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
+	success: `Success state color (typically green) for success messages and positive actions. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
+	warn: `Warning state color (typically orange/amber) for warning messages. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
+	error: `Error state color (typically red) for error messages and destructive actions. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
 
-  // ---------------------------------------------------------------------------
-  // Typography parameters
-  // ---------------------------------------------------------------------------
-  fontFamily: `Font family string with fallbacks. Quote names with spaces. Example: '"Inter", "Helvetica Neue", sans-serif'`,
-  customScale:
-    'Custom type scale overrides. Object with type style names as keys (h1, h2, body-1, button, etc.) and style objects as values containing fontSize, fontWeight, lineHeight, letterSpacing, textTransform.',
+	// ---------------------------------------------------------------------------
+	// Typography parameters
+	// ---------------------------------------------------------------------------
+	fontFamily: `Font family string with fallbacks. Quote names with spaces. Example: '"Inter", "Helvetica Neue", sans-serif'`,
+	customScale:
+		"Custom type scale overrides. Object with type style names as keys (h1, h2, body-1, button, etc.) and style objects as values containing fontSize, fontWeight, lineHeight, letterSpacing, textTransform.",
 
-  // ---------------------------------------------------------------------------
-  // Elevations parameters
-  // ---------------------------------------------------------------------------
-  elevationPreset: `Elevation shadow preset: "material" (Material Design shadows) or "indigo" (Infragistics Indigo shadows). Defaults to "material".`,
+	// ---------------------------------------------------------------------------
+	// Elevations parameters
+	// ---------------------------------------------------------------------------
+	elevationPreset: `Elevation shadow preset: "material" (Material Design shadows) or "indigo" (Infragistics Indigo shadows). Defaults to "material".`,
 
-  // ---------------------------------------------------------------------------
-  // Theme-specific parameters (for create_theme)
-  // ---------------------------------------------------------------------------
-  primaryColor: `Primary brand color for the theme - used for main actions and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
-  secondaryColor: `Secondary/accent color for the theme - used for highlights and selection. ${FRAGMENTS.COLOR_FORMAT}`,
-  surfaceColor: `Surface/background color for the theme. Use light colors (#FAFAFA) for "light" variant, dark colors (#121212) for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
-  includeTypography:
-    'Include typography setup in the generated theme. Set to false if you want to configure typography separately. Defaults to true.',
-  includeElevations:
-    'Include elevation shadows in the generated theme. Set to false if you want to configure elevations separately. Defaults to true.',
-  includeSpacing:
-    'Include spacing CSS custom properties (Web Components platform only). Defaults to true. Has no effect on Angular platform.',
+	// ---------------------------------------------------------------------------
+	// Theme-specific parameters (for create_theme)
+	// ---------------------------------------------------------------------------
+	primaryColor: `Primary brand color for the theme - used for main actions and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
+	secondaryColor: `Secondary/accent color for the theme - used for highlights and selection. ${FRAGMENTS.COLOR_FORMAT}`,
+	surfaceColor: `Surface/background color for the theme. Use light colors (#FAFAFA) for "light" variant, dark colors (#121212) for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
+	includeTypography:
+		"Include typography setup in the generated theme. Set to false if you want to configure typography separately. Defaults to true.",
+	includeElevations:
+		"Include elevation shadows in the generated theme. Set to false if you want to configure elevations separately. Defaults to true.",
+	includeSpacing:
+		"Include spacing CSS custom properties (Web Components platform only). Defaults to true. Has no effect on Angular platform.",
 
-  // ---------------------------------------------------------------------------
-  // Custom palette parameters (for create_custom_palette)
-  // ---------------------------------------------------------------------------
-  colorDefinition: `Color definition object with mode selection:
+	// ---------------------------------------------------------------------------
+	// Custom palette parameters (for create_custom_palette)
+	// ---------------------------------------------------------------------------
+	colorDefinition: `Color definition object with mode selection:
 • mode: "shades" + baseColor: Auto-generates all shades from one color
 • mode: "explicit" + shades: Manually specify all ${FRAGMENTS.CHROMATIC_SHADES}
 IMPORTANT: All shades must be MONOCHROMATIC (same hue). Shades are lighter/darker versions of ONE color, not different colors.`,
 
-  grayDefinition: `Gray color definition object with mode selection:
+	grayDefinition: `Gray color definition object with mode selection:
 • mode: "shades" + baseColor: Auto-generates all shades from one color
 • mode: "explicit" + shades: Manually specify all ${FRAGMENTS.GRAY_SHADES}
 Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightest).`,
 
-  baseColor: `Base color for automatic shade generation using shades() function. Choose a mid-luminance color (0.1-0.4) for best results. ${FRAGMENTS.COLOR_FORMAT}`,
+	baseColor: `Base color for automatic shade generation using shades() function. Choose a mid-luminance color (0.1-0.4) for best results. ${FRAGMENTS.COLOR_FORMAT}`,
 
-  shades: `Object with all shade values. ${FRAGMENTS.CHROMATIC_SHADES}. Luminance should decrease from 50 (lightest) to 900 (darkest). CRITICAL: All shades must be the SAME COLOR (same hue) at different lightness levels - do NOT use different colors for different shades.`,
+	shades: `Object with all shade values. ${FRAGMENTS.CHROMATIC_SHADES}. Luminance should decrease from 50 (lightest) to 900 (darkest). CRITICAL: All shades must be the SAME COLOR (same hue) at different lightness levels - do NOT use different colors for different shades.`,
 
-  grayShades: `Object with all gray shade values. ${FRAGMENTS.GRAY_SHADES}. For light themes: 50=lightest, 900=darkest. For dark themes: 50=darkest, 900=lightest.`,
+	grayShades: `Object with all gray shade values. ${FRAGMENTS.GRAY_SHADES}. For light themes: 50=lightest, 900=darkest. For dark themes: 50=darkest, 900=lightest.`,
 
-  contrastOverrides:
-    'USUALLY OMIT THIS FIELD. Contrast colors are auto-generated using adaptive-contrast(). Only provide this if you have specific accessibility requirements with exact contrast values (rare). When omitted (recommended), the generated Sass code automatically includes adaptive-contrast(#shadeColor) for each shade, which auto-selects black or white for optimal readability.',
+	contrastOverrides:
+		"USUALLY OMIT THIS FIELD. Contrast colors are auto-generated using adaptive-contrast(). Only provide this if you have specific accessibility requirements with exact contrast values (rare). When omitted (recommended), the generated Sass code automatically includes adaptive-contrast(#shadeColor) for each shade, which auto-selects black or white for optimal readability.",
 
-  // ---------------------------------------------------------------------------
-  // Component theming parameters
-  // ---------------------------------------------------------------------------
-  component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Call this tool to discover available tokens BEFORE using create_component_theme.`,
+	// ---------------------------------------------------------------------------
+	// Component theming parameters
+	// ---------------------------------------------------------------------------
+	component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Call this tool to discover available tokens BEFORE using create_component_theme.`,
 
-  componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button".`,
+	componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button".`,
 
-  tokens: `Object mapping token names to values. Token names must be valid for the component (use get_component_design_tokens to discover them). Values can be CSS colors, dimensions with units, or other Sass-compatible values. Example: { "background": "#1976D2", "border-radius": "8px" }`,
+	tokens: `Object mapping token names to values. Token names must be valid for the component (use get_component_design_tokens to discover them). Values can be CSS colors, dimensions with units, or other Sass-compatible values. Example: { "background": "#1976D2", "border-radius": "8px" }`,
 
-  selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
+	selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
 
-  themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
+	themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
 
-  // ---------------------------------------------------------------------------
-  // Layout tool parameters
-  // ---------------------------------------------------------------------------
-  layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root.`,
-  scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
-  sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
-  spacing: 'Spacing scale multiplier for --ig-spacing. 0 = none, 1 = default, 2 = double. Fractions allowed.',
-  spacingInline: 'Inline spacing scale multiplier for --ig-spacing-inline. Overrides inline spacing only.',
-  spacingBlock: 'Block spacing scale multiplier for --ig-spacing-block. Overrides block spacing only.',
-  radiusFactor:
-    'Roundness scale factor for --ig-radius-factor. 0 = minimum radius, 1 = maximum radius. Values must be between 0 and 1.',
+	// ---------------------------------------------------------------------------
+	// Layout tool parameters
+	// ---------------------------------------------------------------------------
+	layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root.`,
+	scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
+	sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
+	spacing:
+		"Spacing scale multiplier for --ig-spacing. 0 = none, 1 = default, 2 = double. Fractions allowed.",
+	spacingInline:
+		"Inline spacing scale multiplier for --ig-spacing-inline. Overrides inline spacing only.",
+	spacingBlock:
+		"Block spacing scale multiplier for --ig-spacing-block. Overrides block spacing only.",
+	radiusFactor:
+		"Roundness scale factor for --ig-radius-factor. 0 = minimum radius, 1 = maximum radius. Values must be between 0 and 1.",
 
-  // ---------------------------------------------------------------------------
-  // Color operations parameters (for get_color)
-  // ---------------------------------------------------------------------------
-  colorName: `Palette color family name: "primary" (brand color), "secondary" (accent), "gray" (neutrals), "surface" (backgrounds), "info" winformational), "success" (positive), "warn" (warnings), "error" (errors/destructive).`,
+	// ---------------------------------------------------------------------------
+	// Color operations parameters (for get_color)
+	// ---------------------------------------------------------------------------
+	colorName: `Palette color family name: "primary" (brand color), "secondary" (accent), "gray" (neutrals), "surface" (backgrounds), "info" winformational), "success" (positive), "warn" (warnings), "error" (errors/destructive).`,
 
-  shadeVariant: `Color shade variant. Standard shades: 50 (lightest) through 900 (darkest). Accent shades: A100, A200, A400, A700 (more saturated). Default: "500" (base color). Note: Gray only supports standard shades (50-900).`,
+	shadeVariant: `Color shade variant. Standard shades: 50 (lightest) through 900 (darkest). Accent shades: A100, A200, A400, A700 (more saturated). Default: "500" (base color). Note: Gray only supports standard shades (50-900).`,
 
-  contrastFlag:
-    'If true, returns the contrast color for the specified shade instead of the shade itself. Contrast colors are pre-computed for optimal text readability. Default: false.',
+	contrastFlag:
+		"If true, returns the contrast color for the specified shade instead of the shade itself. Contrast colors are pre-computed for optimal text readability. Default: false.",
 
-  opacity:
-    'Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).',
+	opacity:
+		"Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).",
 
-  // ---------------------------------------------------------------------------
-  // Resource read parameters
-  // ---------------------------------------------------------------------------
-  resourceUri: `URI of the theming resource to read (e.g., "theming://presets/palettes", "theming://platforms/angular"). See the available_resources list in the tool description for all valid URIs.`,
+	// ---------------------------------------------------------------------------
+	// Resource read parameters
+	// ---------------------------------------------------------------------------
+	resourceUri: `URI of the theming resource to read (e.g., "theming://presets/palettes", "theming://platforms/angular"). See the available_resources list in the tool description for all valid URIs.`,
 } as const;

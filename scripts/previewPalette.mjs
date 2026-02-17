@@ -1,23 +1,23 @@
-import {mkdirSync as makeDir} from 'node:fs';
-import {writeFile} from 'node:fs/promises';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-import postcss from 'postcss';
-import * as sass from 'sass';
-import getArgs from './getArgs.js';
+import { mkdirSync as makeDir } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import postcss from "postcss";
+import * as sass from "sass";
+import getArgs from "./getArgs.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DEST_DIR = path.join.bind(null, path.resolve(__dirname, '../dist'));
+const DEST_DIR = path.join.bind(null, path.resolve(__dirname, "../dist"));
 
-const {palette, variant, out} = getArgs();
+const { palette, variant, out } = getArgs();
 
 const stripComments = () => {
-  return {
-    postcssPlugin: 'postcss-strip-comments',
-    OnceExit(root) {
-      root.walkComments((node) => node.remove());
-    },
-  };
+	return {
+		postcssPlugin: "postcss-strip-comments",
+		OnceExit(root) {
+			root.walkComments((node) => node.remove());
+		},
+	};
 };
 
 stripComments.postcss = true;
@@ -53,18 +53,18 @@ const styles = `
     }
 `;
 
-const result = sass.compileString(styles, {loadPaths: ['./']});
+const result = sass.compileString(styles, { loadPaths: ["./"] });
 let cssStr = postProcessor.process(result.css).css;
 
 // Strip BOM if any
 if (cssStr.charCodeAt(0) === 0xfeff) {
-  cssStr = cssStr.substring(1);
+	cssStr = cssStr.substring(1);
 }
 
 console.log(cssStr);
 
 if (out) {
-  const outputFile = DEST_DIR(`${palette}-${variant}.css`);
-  makeDir(path.dirname(outputFile), {recursive: true});
-  await writeFile(outputFile, cssStr, 'utf-8');
+	const outputFile = DEST_DIR(`${palette}-${variant}.css`);
+	makeDir(path.dirname(outputFile), { recursive: true });
+	await writeFile(outputFile, cssStr, "utf-8");
 }

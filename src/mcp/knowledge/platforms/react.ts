@@ -13,36 +13,41 @@
  */
 
 export const REACT_PLATFORM = {
-  id: 'react',
-  name: 'Ignite UI for React',
-  packageName: 'igniteui-react',
+	id: "react",
+	name: "Ignite UI for React",
+	packageName: "igniteui-react",
 
-  /**
-   * The Sass module to import for theming
-   */
-  themingModule: 'igniteui-theming',
+	/**
+	 * The Sass module to import for theming
+	 */
+	themingModule: "igniteui-theming",
 
-  /**
-   * Detection patterns in package.json dependencies
-   */
-  detectionPatterns: ['igniteui-react', '@infragistics/igniteui-react'],
+	/**
+	 * Detection patterns in package.json dependencies
+	 */
+	detectionPatterns: ["igniteui-react", "@infragistics/igniteui-react"],
 
-  /**
-   * Config files that indicate a React project
-   */
-  configFiles: ['vite.config.ts', 'vite.config.js', 'next.config.js', 'next.config.mjs'],
+	/**
+	 * Config files that indicate a React project
+	 */
+	configFiles: [
+		"vite.config.ts",
+		"vite.config.js",
+		"next.config.js",
+		"next.config.mjs",
+	],
 
-  /**
-   * No required root class (themes apply via CSS variables on :root)
-   */
-  rootClass: null,
+	/**
+	 * No required root class (themes apply via CSS variables on :root)
+	 */
+	rootClass: null,
 } as const;
 
 /**
  * Example usage documentation for React
  */
 export const REACT_USAGE_EXAMPLES = {
-  basic: `
+	basic: `
 // Basic Material Light Theme for React (Vite)
 // In your styles.scss or theme.scss file:
 
@@ -69,7 +74,7 @@ export const REACT_USAGE_EXAMPLES = {
 @include spacing();
 `,
 
-  viteConfig: `
+	viteConfig: `
 // vite.config.ts - Sass configuration for Ignite UI theming
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -87,7 +92,7 @@ export default defineConfig({
 });
 `,
 
-  nextjsConfig: `
+	nextjsConfig: `
 // next.config.js - Sass configuration for Next.js
 const path = require('path');
 
@@ -98,7 +103,7 @@ module.exports = {
 };
 `,
 
-  customPalette: `
+	customPalette: `
 // Custom Palette Theme for React
 @use 'igniteui-theming' as *;
 @use 'igniteui-theming/sass/typography/presets/material' as *;
@@ -127,7 +132,7 @@ $my-palette: palette(
 @include spacing();
 `,
 
-  darkTheme: `
+	darkTheme: `
 // Dark Indigo Theme for React
 @use 'igniteui-theming' as *;
 @use 'igniteui-theming/sass/typography/presets/indigo' as *;
