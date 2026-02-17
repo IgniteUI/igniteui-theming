@@ -1,6 +1,6 @@
-# sizable() mixin
+# The sizable() mixin
 
-Defines size state flags used by sizable() and pad():
+Defines size state flags used by `sizable()` and `pad()`:
 - --is-small
 - --is-medium
 - --is-large

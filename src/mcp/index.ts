@@ -364,7 +364,9 @@ function buildReadResourceDescription(): string {
 
   for (const [groupName, resources] of Object.entries(groups)) {
     if (resources.length === 0) continue;
+
     lines.push(`  ${groupName}:`);
+
     for (const r of resources) {
       lines.push(`    - "${r.uri}" — ${r.name}`);
     }

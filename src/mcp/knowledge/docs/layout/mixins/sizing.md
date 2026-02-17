@@ -1,6 +1,6 @@
-# sizing() mixin
+# The sizing() mixin
 
-Defines @property rules for size levels:
+Defines [CSS @property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property) rules for size levels:
 - --ig-size-small
 - --ig-size-medium
 - --ig-size-large
@@ -11,4 +11,4 @@ Defines @property rules for size levels:
 ```
 
 ## Notes
-- Typically included once at the root scope.
+- Typically included once at the root scope/stylesheet.

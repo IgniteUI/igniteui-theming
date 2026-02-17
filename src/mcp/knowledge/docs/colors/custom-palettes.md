@@ -1,14 +1,14 @@
 # Custom Palette Creation Guide
 
-## When to Use create_custom_palette vs create_palette
+## When to use create_custom_palette vs create_palette
 
-### Use create_palette (standard) when:
+### Use the create_palette tool (standard) when:
 - Brand colors work well as base colors for automatic shade generation
 - The base color has medium lightness (not too light, not too dark)
 - Quick, consistent shade generation is desired
 - Material Design shade conventions are acceptable
 
-### Use create_custom_palette when:
+### Use the create_custom_palette tool when:
 - The base color is very light (produces washed-out dark shades)
 - The base color is very dark (produces muddy light shades)
 - Precise control over specific shade values is required

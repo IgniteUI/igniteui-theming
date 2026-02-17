@@ -60,18 +60,18 @@ When both surface and gray are provided, the system checks their contrast ratio.
 ### Correct Light Theme
 ```scss
 $palette: palette(
-  $primary: #0066cc,
-  $secondary: #ff6600,
+  $primary: #06c,
+  $secondary: #f60,
   $surface: white,      // ✅ Light surface for light theme
-  $gray: #333333        // ✅ Dark gray base (optional)
+  $gray: #333           // ✅ Dark gray base (optional)
 );
 ```
 
 ### Correct Dark Theme
 ```scss
 $palette: palette(
-  $primary: #3399ff,
-  $secondary: #ff9933,
+  $primary: #39f,
+  $secondary: #f93,
   $surface: #1a1a1a,    // ✅ Dark surface for dark theme
   $gray: #f5f5f5        // ✅ Light gray base (optional)
 );

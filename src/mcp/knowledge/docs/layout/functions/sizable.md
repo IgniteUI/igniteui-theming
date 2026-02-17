@@ -1,27 +1,33 @@
-# sizable() function
+# The sizable() function
 
-Returns a size-aware value based on --ig-size and --component-size.
+Returns a size-aware value based on the values --ig-size and a user-declared --component-size CSS variables.
 
 ## Mechanism
-sizable() chooses between small/medium/large values using:
-- --component-size (resolved from --ig-size)
-- --ig-size-small/medium/large
+The sizable() function chooses between small/medium/large values using:
+- --component-size (user declared and liked to --ig-size)
+- --ig-size-small/medium/large (set by @include sizing())
 - --is-small/medium/large from @include sizable()
 
 ## Sass example
 ```scss
 .my-avatar {
-  width: sizable(32px, 40px, 48px);
-  height: sizable(32px, 40px, 48px);
+  @include sizable(); // Include --is-small/medium/large flags
+
+  --component-size: var(--ig-size, var(--ig-size-medium)); // Link component size to --ig-size with a default of 2 (medium)
+  --size: #{sizable(32px, 40px, 48px)};
+
+  width: var(--size);
+  height: var(--size);
 }
 ```
 
-## CSS example
-```css
+## Change the global size to medium, which will make the wid
+```scss
 :root {
   --ig-size: 2;
 }
 ```
 
 ## Notes
-- Requires @include sizable() in component styles.
+- Requires `@include sizable()` in component styles.
+- Requires `@include sizing()` once to set size variables.
