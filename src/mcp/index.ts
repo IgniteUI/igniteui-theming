@@ -56,6 +56,8 @@ function createServer(): McpServer {
 	const server = new McpServer({
 		name: "igniteui-theming",
 		version: __MCP_VERSION__,
+		description:
+			"Generate Sass theming code for Ignite UI components - create palettes, typography, elevations, and complete themes",
 	});
 
 	// Register tools
