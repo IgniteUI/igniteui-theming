@@ -411,7 +411,7 @@ and descriptions from get_component_design_tokens for each child to guide value 
 		selectors: { angular: "igx-navbar", webcomponents: "igc-navbar" },
 		compound: {
 			description:
-				"The navbar contains icons, buttons and icons buttons for navigation.",
+				"The navbar contains buttons and icons-buttons for navigation.",
 			relatedThemes: [
 				"flat-button",
 				"outlined-button",
@@ -419,10 +419,9 @@ and descriptions from get_component_design_tokens for each child to guide value 
 				"flat-icon-button",
 				"outlined-icon-button",
 				"contained-icon-button",
-				"icon",
 			],
 			guidance:
-				"Make sure to theme flat and outlined buttons/icons in the navbar to visually coordinate with the navbar background.",
+				"Make sure to theme all button and icon-button variants in the navbar to visually coordinate with the navbar background.",
 		},
 	},
 	navdrawer: {
