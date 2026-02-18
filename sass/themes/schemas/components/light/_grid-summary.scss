@@ -13,8 +13,8 @@
 /// @prop {Map} label-color [color: ('primary', 500)] - The summaries label color.
 /// @prop {Map} label-hover-color [color: ('primary', 700)] - The summaries hover label color.
 /// @prop {Map} result-color [contrast-color: ('gray', 300)] - The summaries value/result color.
-/// @prop {Map} border-color [color: ('gray', 400)] - The summaries border color.
-/// @prop {String} pinned-border-width [2px] - The border width of the summary panel.
+/// @prop {Color} border-color [transparent] - The summaries column border color.
+/// @prop {String} pinned-border-width [1px] - The border width of the summary panel.
 /// @prop {String} pinned-border-style [solid] - The border style of the summary panel.
 /// @prop {Map} pinned-border-color [color: ('gray', 400)] - The border color of the summary panel.
 $light-grid-summary: (
@@ -46,12 +46,7 @@ $light-grid-summary: (
         ),
     ),
 
-    border-color: (
-        color: (
-            'gray',
-            400,
-        ),
-    ),
+    border-color: transparent,
 
     pinned-border-width: 1px,
     pinned-border-style: solid,
@@ -167,7 +162,6 @@ $bootstrap-grid-summary: extend(
 /// @prop {Map} background-color [color: ('surface')] - The summaries background color.
 /// @prop {Map} label-hover-color [color: ('primary', 500)] - The summaries hover label color.
 /// @prop {Map} result-color [color: ('gray', 800)] - The summaries value/result color.
-/// @prop {Map} pinned-border-color [color: ('gray', 400)] - The border color of the summary panel.
 /// @requires {Map} $light-grid-summary
 $indigo-grid-summary: extend(
     $light-grid-summary,
@@ -189,13 +183,6 @@ $indigo-grid-summary: extend(
             color: (
                 'gray',
                 800,
-            ),
-        ),
-
-        pinned-border-color: (
-            color: (
-                'gray',
-                400,
             ),
         ),
 

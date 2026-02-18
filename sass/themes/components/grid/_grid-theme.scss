@@ -20,6 +20,10 @@
 /// @param {String} $header-border-width [null] - The border width used for header borders.
 /// @param {String} $header-border-style [null] - The border style used for header borders.
 /// @param {Color} $header-border-color [null] - The color used for header borders.
+/// @param {Color} body-column-border-color [null] - The border color used for the body column.
+/// @param {Color} body-column-hover-border-color [null] - The border color used for the body column when in hovered row.
+/// @param {Color} body-column-hover-selected-border-color [null] - The border color used for the body column when in hovered + selected row.
+/// @param {Color} body-column-selected-border-color [null] - The border color used for the body column when in selected row.
 /// @param {Color} $header-selected-background [null] - The table header background color when selected (ex. column selection).
 /// @param {Color} $header-selected-text-color [null] - The table header text color when selected (ex. column selection).
 /// @param {Color} $sorted-header-icon-color [null] - The sort icon color when sorted.
@@ -95,6 +99,7 @@
 /// @param {color} $row-drag-color [null] - The row drag handle color.
 /// @param {Color} $grid-border-color [null] - The color of the grid border.
 /// @param {List} $drop-area-border-radius [null] - The border radius used for column drop area.
+/// @param {List} $active-state-border-style [null] - The border style used for row active state and cell active state.
 /// @requires $light-material-schema
 /// @example scss Change the header background color
 ///   $my-grid-theme: grid-theme($header-background: black);
@@ -204,7 +209,14 @@
     $summaries-patch-background: null,
 
     $cell-selected-within-background: null,
-    $cell-selected-within-text-color: null
+    $cell-selected-within-text-color: null,
+
+    $body-column-border-color-odd: null,
+    $body-column-border-color-even: null,
+    $body-column-hover-border-color: null,
+    $body-column-hover-selected-border-color: null,
+    $body-column-selected-border-color: null,
+    $active-state-border-style: null
 ) {
     $name: #{config.variable-prefix() + '-' + 'grid'};
     $selector: (
@@ -470,6 +482,26 @@
         $drop-area-border-radius: map.get($theme, 'drop-area-border-radius');
     }
 
+    @if $row-odd-background and not($body-column-border-color-odd) {
+        $body-column-border-color-odd: $row-odd-background;
+    }
+
+    @if $row-even-background and not($body-column-border-color-even) {
+        $body-column-border-color-even: $row-even-background;
+    }
+
+    @if $row-hover-background and not($body-column-hover-border-color) {
+        $body-column-hover-border-color: $row-hover-background;
+    }
+
+    @if $row-selected-background and not($body-column-hover-selected-border-color) {
+        $body-column-hover-selected-border-color: $row-selected-background;
+    }
+
+    @if $row-selected-hover-background and not($body-column-selected-border-color) {
+        $body-column-selected-border-color: $row-selected-hover-background;
+    }
+
     @return extend(
         $theme,
         (
@@ -580,6 +612,13 @@
 
             cell-selected-within-background: $cell-selected-within-background,
             cell-selected-within-text-color: $cell-selected-within-text-color,
+            active-state-border-style: $active-state-border-style,
+
+            body-column-border-color-odd: $body-column-border-color-odd,
+            body-column-border-color-even: $body-column-border-color-even,
+            body-column-hover-border-color: $body-column-hover-border-color,
+            body-column-hover-selected-border-color: $body-column-hover-selected-border-color,
+            body-column-selected-border-color: $body-column-selected-border-color,
         )
     );
 }
