@@ -21,6 +21,7 @@ export {
 } from "./colors.js";
 // Component Metadata (unified: selectors, variants, compound theming)
 export {
+	CHILD_COMPONENT_MAP,
 	COMPONENT_METADATA,
 	type ComponentMetadata,
 	type ComponentSelectors,
@@ -29,6 +30,7 @@ export {
 	getComponentSelector,
 	getComponentsForPlatform,
 	getCompoundComponentInfo,
+	getParentComponent,
 	getTokenDerivationsForChild,
 	getVariants,
 	hasVariants,

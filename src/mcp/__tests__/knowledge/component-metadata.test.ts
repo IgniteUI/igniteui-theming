@@ -10,11 +10,13 @@
 
 import { describe, expect, it } from "vitest";
 import {
+	CHILD_COMPONENT_MAP,
 	COMPONENT_METADATA,
 	getComponentPlatformAvailability,
 	getComponentSelector,
 	getComponentsForPlatform,
 	getCompoundComponentInfo,
+	getParentComponent,
 	getTokenDerivationsForChild,
 	getVariants,
 	hasVariants,
@@ -632,6 +634,91 @@ describe("Component Metadata Knowledge Base", () => {
 					);
 				}
 			}
+		});
+	});
+
+	// ===== Child Component Tests =====
+
+	describe("CHILD_COMPONENT_MAP", () => {
+		it("should be a non-empty object", () => {
+			expect(CHILD_COMPONENT_MAP).toBeDefined();
+			expect(typeof CHILD_COMPONENT_MAP).toBe("object");
+			expect(Object.keys(CHILD_COMPONENT_MAP).length).toBeGreaterThan(0);
+		});
+
+		it("all parent components should exist in COMPONENT_METADATA", () => {
+			for (const [childName, parentName] of Object.entries(
+				CHILD_COMPONENT_MAP,
+			)) {
+				expect(
+					COMPONENT_METADATA,
+					`Parent component '${parentName}' for child '${childName}' should exist in COMPONENT_METADATA`,
+				).toHaveProperty(parentName);
+			}
+		});
+
+		it("child component names should not exist as top-level components", () => {
+			for (const childName of Object.keys(CHILD_COMPONENT_MAP)) {
+				expect(
+					COMPONENT_METADATA,
+					`Child component '${childName}' should not exist as a top-level component in COMPONENT_METADATA`,
+				).not.toHaveProperty(childName);
+			}
+		});
+
+		it("should have lowercase child component names", () => {
+			for (const childName of Object.keys(CHILD_COMPONENT_MAP)) {
+				expect(
+					childName,
+					`Child component name '${childName}' should be lowercase`,
+				).toBe(childName.toLowerCase());
+			}
+		});
+	});
+
+	describe("getParentComponent()", () => {
+		it("should return parent for known child components", () => {
+			const childComponents = ["list-item", "card-header", "tab-header"];
+			for (const childName of childComponents) {
+				if (CHILD_COMPONENT_MAP[childName]) {
+					const parent = getParentComponent(childName);
+					expect(parent).toBeDefined();
+					expect(typeof parent).toBe("string");
+					expect(COMPONENT_METADATA).toHaveProperty(parent!);
+				}
+			}
+		});
+
+		it("should return undefined for unknown child components", () => {
+			expect(getParentComponent("__nonexistent_child__")).toBeUndefined();
+		});
+
+		it("should return undefined for top-level components", () => {
+			const firstComponent = Object.keys(COMPONENT_METADATA)[0];
+			expect(getParentComponent(firstComponent)).toBeUndefined();
+		});
+
+		it("should handle case-insensitive lookup", () => {
+			const firstChild = Object.keys(CHILD_COMPONENT_MAP)[0];
+			const uppercase = firstChild.toUpperCase();
+			const mixedCase =
+				firstChild.charAt(0).toUpperCase() + firstChild.slice(1);
+
+			expect(getParentComponent(uppercase)).toBe(
+				CHILD_COMPONENT_MAP[firstChild],
+			);
+			expect(getParentComponent(mixedCase)).toBe(
+				CHILD_COMPONENT_MAP[firstChild],
+			);
+		});
+
+		it("should handle whitespace in input", () => {
+			const firstChild = Object.keys(CHILD_COMPONENT_MAP)[0];
+			const withSpaces = `  ${firstChild}  `;
+
+			expect(getParentComponent(withSpaces)).toBe(
+				CHILD_COMPONENT_MAP[firstChild],
+			);
 		});
 	});
 
