@@ -4,6 +4,7 @@ import {
 	getComponentSelector,
 	getComponentTheme,
 	getCompoundComponentInfo,
+	getParentComponent,
 	getTokenDerivationsForChild,
 	getVariants,
 	hasVariants,
@@ -75,6 +76,41 @@ export async function handleGetComponentDesignTokens(
 	const theme = getComponentTheme(normalizedName);
 
 	if (!theme) {
+		// Check if this is a child component first
+		const parentComponent = getParentComponent(normalizedName);
+
+		if (parentComponent) {
+			return {
+				content: [
+					{
+						type: "text" as const,
+						text: `**Child Component Detected: "${component}"**
+
+"${component}" is a child component that is styled through the **${parentComponent}** component theme.
+
+**Guidance:**
+Child components like "${component}" don't have their own separate themes. Instead, they inherit their styling from their parent component's theme. The ${parentComponent} theme includes design tokens that control the appearance of all its child components, including "${component}".
+
+**What to do next:**
+Use \`get_component_design_tokens\` with component name **"${parentComponent}"** to see the available design tokens.
+
+The ${parentComponent} theme tokens will control:
+- Background colors and surfaces for all child elements
+- Text colors for titles, subtitles, and content
+- Interaction states (hover, active, selected)
+- Spacing, borders, and other visual properties
+
+**Example:**
+\`\`\`
+get_component_design_tokens({ component: "${parentComponent}" })
+\`\`\`
+
+This will show you all the tokens you can use to customize the appearance of the entire ${parentComponent}, including its child elements like "${component}".`,
+					},
+				],
+			};
+		}
+
 		// Component not found - provide helpful suggestions
 		const suggestions = searchComponents(normalizedName);
 

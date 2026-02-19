@@ -6,6 +6,7 @@ import {
 	COMPONENT_METADATA,
 	getComponentPlatformAvailability,
 	getComponentSelector,
+	getParentComponent,
 } from "../../knowledge/index.js";
 import type { Platform } from "../../utils/types.js";
 import type {
@@ -49,6 +50,29 @@ function resolveScope(
 		const normalized = normalizeComponentName(component);
 
 		if (!normalized || !COMPONENT_METADATA[normalized]) {
+			// Check if this is a child component
+			const parentComponent = normalized
+				? getParentComponent(normalized)
+				: null;
+
+			if (parentComponent) {
+				return {
+					error: `**Error:** "${component}" is a child component that is styled through the **${parentComponent}** theme.
+
+**Guidance:**
+Child components like "${component}" don't have their own separate themes. Instead, they inherit their styling from their parent component's theme.
+
+**What to do:**
+Use the **${parentComponent}** component theme to style "${component}" and its related elements. The ${parentComponent} theme includes design tokens that control the appearance of all its child components, including "${component}".
+
+**Example:**
+To customize the appearance of "${component}", use:
+- Component: \`${parentComponent}\`
+- This will style the entire ${parentComponent} component, including all its child elements like "${component}".`,
+				};
+			}
+
+			// Not a known component or child component - provide suggestions
 			const available = Object.keys(COMPONENT_METADATA);
 			const suggestions = normalized
 				? available.filter((name) => name.includes(normalized)).slice(0, 10)

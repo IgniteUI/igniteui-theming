@@ -740,3 +740,76 @@ export function getTokenDerivationsForChild(
 
 	return result;
 }
+
+/**
+ * Mapping of child component names to their parent components.
+ * This helps guide users when they reference child components that don't have their own themes.
+ * Child components are styled through their parent component's theme.
+ */
+export const CHILD_COMPONENT_MAP: Record<string, string> = {
+	// List child components
+	"list-item": "list",
+	"list-header": "list",
+
+	// Card child components
+	"card-header": "card",
+	"card-content": "card",
+	"card-actions": "card",
+	"card-media": "card",
+
+	// Tabs child components
+	tab: "tabs",
+	"tab-header": "tabs",
+	"tab-panel": "tabs",
+	"tab-content": "tabs",
+
+	// Accordion child components
+	"accordion-header": "accordion",
+	"accordion-panel": "accordion",
+
+	// Grid child components
+	"grid-row": "grid",
+	"grid-cell": "grid",
+	"grid-header": "grid",
+
+	// Menu child components
+	"menu-item": "drop-down",
+
+	// Tree child components
+	"tree-node": "tree",
+	"tree-item": "tree",
+
+	// Input group child components
+	input: "input-group",
+	textarea: "input-group",
+
+	// Button group child components
+	"button-item": "button-group",
+
+	// Expansion panel child components
+	"expansion-panel-header": "expansion-panel",
+	"expansion-panel-body": "expansion-panel",
+
+	// Stepper child components
+	step: "stepper",
+	"step-header": "stepper",
+	"step-content": "stepper",
+
+	// Navbar child components
+	"navbar-title": "navbar",
+	"navbar-action": "navbar",
+
+	// Banner child components
+	"banner-actions": "banner",
+};
+
+/**
+ * Get the parent component for a child component.
+ * @param childComponentName - The child component name
+ * @returns The parent component name or undefined if not a known child component
+ */
+export function getParentComponent(
+	childComponentName: string,
+): string | undefined {
+	return CHILD_COMPONENT_MAP[childComponentName.toLowerCase().trim()];
+}
