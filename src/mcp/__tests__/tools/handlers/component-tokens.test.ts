@@ -8,18 +8,18 @@ import { handleGetComponentDesignTokens } from "../../../tools/handlers/componen
 describe("handleGetComponentDesignTokens", () => {
 	it("uses instruction-oriented opening format", async () => {
 		const result = await handleGetComponentDesignTokens({
-			component: "date-picker",
+			component: "date-range-picker",
 		});
 		const text = result.content[0].text;
 
 		expect(text).toContain(
-			"Implement a theme for the `date-picker` component using the following guidance.",
+			"Implement a theme for the `date-range-picker` component using the following guidance.",
 		);
 	});
 
 	it("shows two platform sections: Angular and WC/React/Blazor", async () => {
 		const result = await handleGetComponentDesignTokens({
-			component: "date-picker",
+			component: "date-range-picker",
 		});
 		const text = result.content[0].text;
 
@@ -29,32 +29,32 @@ describe("handleGetComponentDesignTokens", () => {
 		expect(text).not.toContain("**Scopes by Platform:**");
 	});
 
-	it("shows overlay scope for Angular but omits it for WC group (date-picker)", async () => {
+	it("shows overlay scope for Angular but omits it for WC group (date-range-picker)", async () => {
 		const result = await handleGetComponentDesignTokens({
-			component: "date-picker",
+			component: "date-range-picker",
 		});
 		const text = result.content[0].text;
 
 		// Angular section has both inline and overlay scopes
-		expect(text).toContain("| inline | `igx-date-picker` |");
+		expect(text).toContain("| inline | `igx-date-range-picker` |");
 		expect(text).toContain("| overlay | `.igx-date-picker` |");
 
 		// WC section has inline only - overlay row should NOT appear
-		expect(text).toContain("| inline | `igc-date-picker` |");
+		expect(text).toContain("| inline | `igc-date-range-picker` |");
 		// Overlay N/A row should be gone
 		expect(text).not.toContain("| overlay | N/A |");
 	});
 
 	it("shows per-platform related themes for compound components", async () => {
 		const result = await handleGetComponentDesignTokens({
-			component: "date-picker",
+			component: "date-range-picker",
 		});
 		const text = result.content[0].text;
 
 		// Angular: calendar in overlay scope
 		expect(text).toContain("| `calendar` | overlay | `.igx-date-picker` |");
 		// WC: calendar in inline scope
-		expect(text).toContain("| `calendar` | inline | `igc-date-picker` |");
+		expect(text).toContain("| `calendar` | inline | `igc-date-range-picker` |");
 	});
 
 	it("shows inline scope for grid", async () => {
