@@ -73,10 +73,10 @@ export async function handleGetComponentDesignTokens(
 	};
 
 	const resolution = resolveComponentTheme(normalizedName);
-	const theme = resolution.theme;
+	const theme = resolution?.theme;
 
 	if (!theme) {
-		if (resolution.error) {
+		if (resolution?.error) {
 			return {
 				content: [
 					{
@@ -89,6 +89,7 @@ Use a valid component name or update component metadata to point to a valid them
 				isError: true,
 			};
 		}
+
 		// Component not found - provide helpful suggestions
 		const suggestions = searchComponents(normalizedName);
 
