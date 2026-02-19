@@ -80,6 +80,46 @@ describe("Component Metadata Knowledge Base", () => {
 
 	// ===== Variant Structure Tests =====
 
+	describe("theme alias structure", () => {
+		it("theme aliases should reference existing component metadata entries", () => {
+			for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+				if (!metadata.theme) continue;
+				expect(
+					COMPONENT_METADATA,
+					`${name}.theme alias '${metadata.theme}' should exist in COMPONENT_METADATA`,
+				).toHaveProperty(metadata.theme);
+			}
+		});
+
+		it("theme aliases should not be self-referential", () => {
+			for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+				if (!metadata.theme) continue;
+				expect(
+					metadata.theme,
+					`${name}.theme alias should not reference itself`,
+				).not.toBe(name);
+			}
+		});
+
+		it("theme alias chains should not contain cycles", () => {
+			for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+				if (!metadata.theme) continue;
+
+				const visited = new Set<string>([name]);
+				let current: string | undefined = metadata.theme;
+
+				while (current) {
+					expect(
+						visited.has(current),
+						`theme alias cycle detected starting at '${name}'`,
+					).toBe(false);
+					visited.add(current);
+					current = COMPONENT_METADATA[current]?.theme;
+				}
+			}
+		});
+	});
+
 	describe("variants structure", () => {
 		it("components with variants should have non-empty string arrays", () => {
 			for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
@@ -639,7 +679,7 @@ describe("Component Metadata Knowledge Base", () => {
 
 	describe("production data invariants", () => {
 		it("should not contain stray or test scope entries", () => {
-			const validScopeNames = ["overlay"]; // Only known non-inline scope names
+			const validScopeNames = ["overlay", "input"]; // Known non-inline scope names
 			for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
 				if (!metadata.compound?.additionalScopes) continue;
 

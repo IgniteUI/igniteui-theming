@@ -569,35 +569,3 @@
 @function date-time-input-theme($args...) {
     @return input-group-theme($args...);
 }
-
-/// Date Range Start Theme
-///
-/// PRIMARY TOKENS:
-/// - `$box-background` — Box type input background.
-/// - `$search-background` — Search type input background.
-/// - `$border-color` — Border color for border/fluent types.
-/// - `$idle-bottom-line-color` — Bottom line color (material).
-/// - `$focused-border-color` — Focused state accent color.
-///
-/// For Material variant, set `$box-background` for box type inputs.
-///
-/// @alias input-group-theme
-@function date-range-start-theme($args...) {
-    @return input-group-theme($args...);
-}
-
-/// Date Range End Theme
-///
-/// PRIMARY TOKENS:
-/// - `$box-background` — Box type input background.
-/// - `$search-background` — Search type input background.
-/// - `$border-color` — Border color for border/fluent types.
-/// - `$idle-bottom-line-color` — Bottom line color (material).
-/// - `$focused-border-color` — Focused state accent color.
-///
-/// For Material variant, set `$box-background` for box type inputs.
-///
-/// @alias input-group-theme
-@function date-range-end-theme($args...) {
-    @return input-group-theme($args...);
-}

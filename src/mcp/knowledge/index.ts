@@ -48,6 +48,7 @@ export {
 	type ComponentToken,
 	getComponentTheme,
 	getTokenNames,
+	resolveComponentTheme,
 	searchComponents,
 	validateTokens,
 } from "./component-themes.js";

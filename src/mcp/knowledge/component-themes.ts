@@ -6,6 +6,7 @@
 import themesData from "../../../json/components/themes.json" with {
 	type: "json",
 };
+import { COMPONENT_METADATA } from "./component-metadata.js";
 
 /**
  * Represents a design token (themeable property) for a component.
@@ -47,6 +48,12 @@ export interface ComponentTheme {
 	tokens: ComponentToken[];
 }
 
+export interface ComponentThemeResolution {
+	theme?: ComponentTheme;
+	resolvedName?: string;
+	error?: string;
+}
+
 /**
  * All component themes loaded from JSON.
  */
@@ -65,7 +72,55 @@ export const COMPONENT_NAMES = Object.keys(COMPONENT_THEMES);
 export function getComponentTheme(
 	componentName: string,
 ): ComponentTheme | undefined {
-	return COMPONENT_THEMES[componentName];
+	return resolveComponentTheme(componentName)?.theme;
+}
+
+/**
+ * Resolve a component theme by name, falling back to metadata alias when needed.
+ * @param componentName - The component name (e.g., 'button', 'avatar')
+ * @returns Resolution with resolved theme name or error details
+ */
+export function resolveComponentTheme(
+	componentName: string,
+): ComponentThemeResolution | undefined {
+	const theme = COMPONENT_THEMES[componentName];
+
+	if (theme) {
+		return { theme: theme, resolvedName: componentName };
+	}
+
+	const metadata = COMPONENT_METADATA[componentName];
+
+	if (!metadata?.theme) {
+		return {};
+	}
+
+	const alias = metadata.theme;
+
+	if (alias === componentName) {
+		return {
+			error: `Theme alias target "${alias}" cannot reference itself.`,
+		};
+	}
+
+	if (!COMPONENT_METADATA[alias]) {
+		return {
+			error: `Theme alias target "${alias}" is not a valid component metadata entry.`,
+		};
+	}
+
+	const resolvedTheme = COMPONENT_THEMES[alias];
+
+	if (!resolvedTheme) {
+		return {
+			error: `Theme alias target "${alias}" does not have a theme definition.`,
+		};
+	}
+
+	return {
+		theme: resolvedTheme,
+		resolvedName: alias,
+	};
 }
 
 /**

@@ -2,12 +2,12 @@ import type { CompoundInfo } from "../../knowledge/index.js";
 import {
 	COMPONENT_NAMES,
 	getComponentSelector,
-	getComponentTheme,
 	getCompoundComponentInfo,
 	getTokenDerivationsForChild,
 	getVariants,
 	hasVariants,
 	isCompoundComponent,
+	resolveComponentTheme,
 	searchComponents,
 } from "../../knowledge/index.js";
 import type { GetComponentDesignTokensParams, Platform } from "../schemas.js";
@@ -72,9 +72,23 @@ export async function handleGetComponentDesignTokens(
 		return childScope?.[scopePlatform] ?? "inline";
 	};
 
-	const theme = getComponentTheme(normalizedName);
+	const resolution = resolveComponentTheme(normalizedName);
+	const theme = resolution.theme;
 
 	if (!theme) {
+		if (resolution.error) {
+			return {
+				content: [
+					{
+						type: "text" as const,
+						text: `**Error:** ${resolution.error}
+
+Use a valid component name or update component metadata to point to a valid theme.`,
+					},
+				],
+				isError: true,
+			};
+		}
 		// Component not found - provide helpful suggestions
 		const suggestions = searchComponents(normalizedName);
 
@@ -114,7 +128,7 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
 
 	// 1. Opening instruction line
 	responseParts.push(
-		`Implement a theme for the \`${theme.name}\` component using the following guidance.`,
+		`Implement a theme for the \`${normalizedName}\` component using the following guidance.`,
 	);
 	responseParts.push("");
 

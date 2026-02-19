@@ -52,9 +52,37 @@ export interface CompoundInfo {
 	guidance?: string;
 }
 
+const GRID_COMPOUND_INFO: CompoundInfo = {
+	description:
+		"The grid is a complex compound component with many themeable parts including filtering, editing, pagination, toolbar and more.",
+	relatedThemes: [
+		"action-strip",
+		"grid-summary",
+		"grid-toolbar",
+		"column-actions",
+		"paginator",
+		"checkbox",
+		"chip",
+		"list",
+		"input-group",
+		"flat-button",
+		"outlined-button",
+		"flat-icon-button",
+		"outlined-icon-button",
+	],
+	guidance: `The grid is a complex compound component with many related themes. \
+For basic customization, focus on the grid theme itself and the most visible children: \
+input-group (filtering), outlined-button/icon-button (toolbar actions), checkbox (row selection), \
+and paginator. The grid-summary and grid-toolbar themes control their respective areas. \
+Detailed token derivation rules are not yet available for the grid — use the token names \
+and descriptions from get_component_design_tokens for each child to guide value selection.`,
+};
+
 export interface ComponentMetadata {
 	/** Platform-specific CSS selectors */
 	selectors: ComponentSelectors;
+	/** Optional theme alias for components that reuse another component theme */
+	theme?: string;
 	/** Present only for components with variant-specific themes (e.g., button) */
 	variants?: string[];
 	/** Present only for compound components */
@@ -230,7 +258,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 			childScopes: {
 				"drop-down": { angular: "overlay" },
 				checkbox: { angular: "overlay" },
-				input: { angular: "input" },
+				"input-group": { angular: "input" },
 			},
 			guidance:
 				"The combo input-group, drop-down, and checkbox should share a consistent color scheme.",
@@ -289,9 +317,11 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 	},
 	"date-range-start": {
 		selectors: { angular: "igx-date-range-start", webcomponents: null },
+		theme: "input-group",
 	},
 	"date-range-end": {
 		selectors: { angular: "igx-date-range-end", webcomponents: null },
+		theme: "input-group",
 	},
 	"date-time-input": {
 		selectors: { angular: null, webcomponents: "igc-date-time-input" },
@@ -342,49 +372,38 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
 		},
 	},
 	grid: {
+		selectors: { angular: "igx-grid", webcomponents: "igc-grid" },
+		compound: GRID_COMPOUND_INFO,
+	},
+	"tree-grid": {
+		selectors: { angular: "igx-tree-grid", webcomponents: "igc-tree-grid" },
+		theme: "grid",
+		compound: GRID_COMPOUND_INFO,
+	},
+	"hierarchical-grid": {
 		selectors: {
-			angular: [
-				"igx-grid",
-				"igx-tree-grid",
-				"igx-hierarchical-grid",
-				"igx-pivot-grid",
-				"igx-grid-excel-style-filtering",
-			],
-			webcomponents: [
-				"igc-grid",
-				"igc-tree-grid",
-				"igc-hierarchical-grid",
-				"igc-pivot-grid",
-				"igc-grid-excel-style-filtering",
-			],
+			angular: "igx-hierarchical-grid",
+			webcomponents: "igc-hierarchical-grid",
 		},
-		compound: {
-			description:
-				"The grid is a complex compound component with many themeable parts including filtering, editing, pagination, toolbar and more.",
-			relatedThemes: [
-				"action-strip",
-				"grid-summary",
-				"grid-toolbar",
-				"paginator",
-				"checkbox",
-				"chip",
-				"input-group",
-				"flat-button",
-				"outlined-button",
-				"flat-icon-button",
-				"outlined-icon-button",
-			],
-			guidance: `The grid is a complex compound component with many related themes. \
-For basic customization, focus on the grid theme itself and the most visible children: \
-input-group (filtering), outlined-button/icon-button (toolbar actions), checkbox (row selection), \
-and paginator. The grid-summary and grid-toolbar themes control their respective areas. \
-Detailed token derivation rules are not yet available for the grid — use the token names \
-and descriptions from get_component_design_tokens for each child to guide value selection.`,
+		theme: "grid",
+		compound: GRID_COMPOUND_INFO,
+	},
+	"pivot-grid": {
+		selectors: { angular: "igx-pivot-grid", webcomponents: "igc-pivot-grid" },
+		theme: "grid",
+		compound: GRID_COMPOUND_INFO,
+	},
+	"grid-excel-style-filtering": {
+		selectors: {
+			angular: "igx-grid-excel-style-filtering",
+			webcomponents: "igc-grid-excel-style-filtering",
 		},
+		theme: "grid",
+		compound: GRID_COMPOUND_INFO,
 	},
 	"grid-summary": {
 		selectors: {
-			angular: "igx-grid-summary",
+			angular: ".igx-grid-summary",
 			webcomponents: "igc-grid-summary",
 		},
 	},
@@ -545,19 +564,33 @@ The drop-down background should match the select surface intent.`,
 		selectors: { angular: "igx-tabs", webcomponents: "igc-tabs" },
 	},
 	"time-picker": {
-		selectors: { angular: "igx-time-picker", webcomponents: "igc-time-picker" },
+		selectors: { angular: "igx-time-picker", webcomponents: null },
 		compound: {
 			description: "The time picker uses an input-group for the input field.",
-			relatedThemes: ["input-group", "time-picker"],
+			relatedThemes: ["input-group", "time-picker", "flat-button"],
+			additionalScopes: {
+				overlay: { angular: ".igx-time-picker" },
+			},
+			childScopes: {
+				"time-picker": { angular: "overlay" },
+				"flat-button": { angular: "overlay" },
+			},
 			guidance: `The time-picker input-group and the time-picker dial should share a consistent color scheme. \
 The input-group text color should coordinate with the time-picker header.`,
 		},
+	},
+	textarea: {
+		selectors: {
+			angular: ".igx-input-group--textarea-group",
+			webcomponents: "igc-textarea",
+		},
+		theme: "input-group",
 	},
 	toast: {
 		selectors: { angular: "igx-toast", webcomponents: "igc-toast" },
 	},
 	tooltip: {
-		selectors: { angular: "igx-tooltip", webcomponents: "igc-tooltip" },
+		selectors: { angular: ".igx-tooltip", webcomponents: "igc-tooltip" },
 	},
 	tree: {
 		selectors: { angular: "igx-tree-node", webcomponents: "igc-tree" },

@@ -3,11 +3,13 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { COMPONENT_METADATA } from "../../knowledge/component-metadata.js";
 import {
 	COMPONENT_NAMES,
 	COMPONENT_THEMES,
 	getComponentTheme,
 	getTokenNames,
+	resolveComponentTheme,
 	searchComponents,
 	validateTokens,
 } from "../../knowledge/component-themes.js";
@@ -61,6 +63,13 @@ describe("Component Themes Knowledge Base", () => {
 			expect(theme?.name).toBe("avatar");
 		});
 
+		it("should resolve theme aliases from metadata", () => {
+			const resolution = resolveComponentTheme("tree-grid");
+			expect(resolution?.theme).toBeDefined();
+			expect(resolution?.resolvedName).toBe("grid");
+			expect(resolution?.theme?.name).toBe("grid");
+		});
+
 		it("should return undefined for invalid component", () => {
 			const theme = getComponentTheme("nonexistent");
 			expect(theme).toBeUndefined();
@@ -70,6 +79,33 @@ describe("Component Themes Knowledge Base", () => {
 			// Our normalized comparison should handle this in handlers
 			const theme = getComponentTheme("Avatar");
 			expect(theme).toBeUndefined();
+		});
+
+		it("should surface invalid alias targets and self-references", () => {
+			const invalidAlias = "__alias_invalid_target__";
+			const selfAlias = "__alias_self__";
+
+			try {
+				(COMPONENT_METADATA as Record<string, any>)[invalidAlias] = {
+					selectors: { angular: null, webcomponents: null },
+					theme: "__missing_component__",
+				};
+				(COMPONENT_METADATA as Record<string, any>)[selfAlias] = {
+					selectors: { angular: null, webcomponents: null },
+					theme: selfAlias,
+				};
+
+				const invalidResolution = resolveComponentTheme(invalidAlias);
+				expect(invalidResolution?.error).toContain(
+					"not a valid component metadata entry",
+				);
+
+				const selfResolution = resolveComponentTheme(selfAlias);
+				expect(selfResolution?.error).toContain("cannot reference itself");
+			} finally {
+				delete (COMPONENT_METADATA as Record<string, any>)[invalidAlias];
+				delete (COMPONENT_METADATA as Record<string, any>)[selfAlias];
+			}
 		});
 	});
 

@@ -1392,18 +1392,3 @@
         )
     );
 }
-
-/// Date Picker Theme
-///
-/// PRIMARY TOKENS:
-/// - `$header-background` — The main accent color.
-/// - `$content-background` — The calendar body background.
-///
-/// Text and icon colors are auto-calculated for contrast.
-///
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-///
-/// @alias calendar-theme
-@function date-picker-theme($args...) {
-    @return calendar-theme($args...);
-}

@@ -57,16 +57,24 @@ describe("handleGetComponentDesignTokens", () => {
 		expect(text).toContain("| `calendar` | inline | `igc-date-picker` |");
 	});
 
-	it("joins array scope values with | for grid", async () => {
+	it("shows inline scope for grid", async () => {
 		const result = await handleGetComponentDesignTokens({ component: "grid" });
 		const text = result.content[0].text;
 
+		expect(text).toContain("| inline | `igx-grid` |");
+		expect(text).toContain("| inline | `igc-grid` |");
+	});
+
+	it("resolves theme aliases when theme is missing", async () => {
+		const result = await handleGetComponentDesignTokens({
+			component: "tree-grid",
+		});
+		const text = result.content[0].text;
+
 		expect(text).toContain(
-			"| inline | `igx-grid | igx-tree-grid | igx-hierarchical-grid | igx-pivot-grid | igx-grid-excel-style-filtering` |",
+			"Implement a theme for the `tree-grid` component using the following guidance.",
 		);
-		expect(text).toContain(
-			"| inline | `igc-grid | igc-tree-grid | igc-hierarchical-grid | igc-pivot-grid | igc-grid-excel-style-filtering` |",
-		);
+		expect(text).toContain("**Theme Function:** `grid-theme()`");
 	});
 
 	it("renders simple components without compound sections", async () => {
@@ -122,7 +130,7 @@ describe("handleGetComponentDesignTokens", () => {
 		expect(text).toContain("**Angular:**");
 		expect(text).toContain("**Web Components:**");
 		// Banner should have inline scope for both
-		expect(text).toContain("| inline | `.igx-banner` |");
+		expect(text).toContain("| inline | `igx-banner` |");
 		expect(text).toContain("| inline | `igc-banner` |");
 	});
 });
