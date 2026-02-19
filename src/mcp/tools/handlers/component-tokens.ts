@@ -101,7 +101,7 @@ The ${parentComponent} theme tokens will control:
 - Spacing, borders, and other visual properties
 
 **Example:**
-\`\`\`
+\`\`\`typescript
 get_component_design_tokens({ component: "${parentComponent}" })
 \`\`\`
 
