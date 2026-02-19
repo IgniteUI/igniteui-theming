@@ -75,7 +75,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
 		selectors: { angular: "igx-badge", webcomponents: "igc-badge" },
 	},
 	banner: {
-		selectors: { angular: ".igx-banner", webcomponents: "igc-banner" },
+		selectors: { angular: "igx-banner", webcomponents: "igc-banner" },
 		compound: {
 			description: "The banner component uses flat-buttons for the actions",
 			relatedThemes: ["flat-button"],
@@ -172,13 +172,13 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 		selectors: { angular: "igx-carousel", webcomponents: "igc-carousel" },
 	},
 	chat: {
-		selectors: { angular: "igx-chat", webcomponents: "igc-chat" },
+		selectors: { angular: "igc-chat", webcomponents: "igc-chat" },
 		compound: {
 			description:
-				"The carousel component uses a contained-button and a textarea internally.",
-			relatedThemes: ["contained-button", "input-group"],
+				"The chat component uses a flat-button, contained-icon-button, and a textarea internally.",
+			relatedThemes: ["flat-button", "contained-icon-button", "input-group"],
 			guidance:
-				"Make sure the textarea and the contained-button themes visually coordinate with each other and the overall chat background.",
+				"Make sure the textarea, the flat-button, and the contained-icon-button themes visually coordinate with each other and the overall chat background.",
 		},
 	},
 	checkbox: {
@@ -225,10 +225,12 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 			},
 			additionalScopes: {
 				overlay: { angular: ".igx-drop-down__list" },
+				input: { angular: "igx-combo, .igx-drop-down__list" },
 			},
 			childScopes: {
 				"drop-down": { angular: "overlay" },
 				checkbox: { angular: "overlay" },
+				input: { angular: "input" },
 			},
 			guidance:
 				"The combo input-group, drop-down, and checkbox should share a consistent color scheme.",
