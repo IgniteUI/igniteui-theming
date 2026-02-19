@@ -779,13 +779,6 @@ export const CHILD_COMPONENT_MAP: Record<string, string> = {
 	"tree-node": "tree",
 	"tree-item": "tree",
 
-	// Input group child components
-	input: "input-group",
-	textarea: "input-group",
-
-	// Button group child components
-	"button-item": "button-group",
-
 	// Expansion panel child components
 	"expansion-panel-header": "expansion-panel",
 	"expansion-panel-body": "expansion-panel",
