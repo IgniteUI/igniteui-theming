@@ -246,6 +246,10 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 					from: "combo.toggle-button-background",
 					transform: "identity",
 				},
+				"combo.empty-list-background": {
+					from: "combo.toggle-button-background",
+					transform: "identity",
+				},
 				"drop-down.background-color": {
 					from: "combo.toggle-button-background",
 					transform: "identity",
@@ -265,7 +269,36 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 				"input-group": { angular: "input" },
 			},
 			guidance:
-				"The combo input-group, drop-down, and checkbox should share a consistent color scheme.",
+				"The combo's input-group, drop-down, and checkbox should share a consistent color scheme.",
+		},
+	},
+	"simple-combo": {
+		selectors: {
+			angular: "igx-simple-combo",
+			webcomponents: "igc-combo[single-select]",
+		},
+		compound: {
+			description:
+				"The simple combo component combines input and drop-down components.",
+			relatedThemes: ["input-group", "drop-down"],
+			tokenDerivations: {
+				"combo.empty-list-background": {
+					from: "combo.toggle-button-background",
+					transform: "identity",
+				},
+				"input-group.focused-border-color": {
+					from: "combo.toggle-button-background",
+					transform: "identity",
+				},
+			},
+			additionalScopes: {
+				overlay: { angular: ".igx-drop-down__list" },
+			},
+			childScopes: {
+				"drop-down": { angular: "overlay" },
+			},
+			guidance:
+				"The simple-combo's input-group and drop-down should share a consistent color scheme.",
 		},
 	},
 	"date-picker": {
@@ -396,6 +429,15 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
 		selectors: { angular: "igx-pivot-grid", webcomponents: "igc-pivot-grid" },
 		theme: "grid",
 		compound: GRID_COMPOUND_INFO,
+	},
+	"grid-lite": {
+		selectors: { angular: "igx-grid-lite", webcomponents: "igc-grid-lite" },
+		theme: "grid",
+		compound: {
+			description:
+				"The grid lite component is a compound component some themeable parts including chips and checkboxes.",
+			relatedThemes: ["checkbox", "chip"],
+		},
 	},
 	"grid-excel-style-filtering": {
 		selectors: {
