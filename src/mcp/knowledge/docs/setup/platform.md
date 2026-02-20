@@ -199,6 +199,23 @@ After detection and setup, follow this order for a complete theme:
 - Layout tools work only with `:root` or custom `scope` selectors.
 - Read `theming://platforms/generic` for presets available in this mode.
 
+### Preset imports for non-Angular platforms
+
+For all non-Angular platforms (Web Components, React, Blazor, Generic), using preset variables such as `$material-type-scale`, `$indigo-type-scale`, `$material-elevations`, or `$indigo-elevations` requires additional `@use` imports beyond the base `@use 'igniteui-theming' as *;`:
+
+```scss
+// Base module (always required)
+@use 'igniteui-theming' as *;
+
+// Typography presets (required for $<designSystem>-type-scale variables)
+@use 'igniteui-theming/sass/typography/presets' as *;
+
+// Elevation presets (required for $material-elevations / $indigo-elevations)
+@use 'igniteui-theming/sass/elevations/presets' as *;
+```
+
+The MCP tools (`create_typography`, `create_elevations`, `create_theme`) automatically include these imports in their generated Sass output. Angular is not affected — its `igniteui-angular/theming` module re-exports all presets.
+
 ---
 
 ## Related Resources

@@ -1,8 +1,4 @@
-## Purpose
-
-Define typography generation outputs and handling of font stacks.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Typography generation emits typography mixin
 
@@ -31,10 +27,3 @@ The `create_typography` tool returns a Sass code block containing the `typograph
 - **WHEN** `platform: angular` is provided
 - **THEN** the output MUST NOT include a separate typography preset `@use` import
 - **AND** the output SHALL only include the `@use "igniteui-angular/theming" as *;` statement
-
-### Requirement: Font stacks are preserved
-
-#### Scenario: Font stack quoting
-
-- **WHEN** `fontFamily` contains a comma-separated stack
-- **THEN** the stack is wrapped in quotes to preserve it as a single value

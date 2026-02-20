@@ -118,6 +118,58 @@ export function generateUseStatement(
 }
 
 /**
+ * Typography presets index path.
+ * Imports through the index to get design-system-prefixed variables
+ * (e.g., $material-type-scale, $indigo-type-scale).
+ */
+const TYPOGRAPHY_PRESETS_PATH = "igniteui-theming/sass/typography/presets";
+
+/**
+ * Elevations presets index path.
+ * Imports through the index to get design-system-prefixed variables
+ * (e.g., $material-elevations, $indigo-elevations).
+ */
+const ELEVATIONS_PRESETS_PATH = "igniteui-theming/sass/elevations/presets";
+
+/**
+ * Generate additional @use import statements for typography and/or elevation presets.
+ *
+ * For non-Angular platforms, preset variables like `$material-type-scale` and
+ * `$material-elevations` are defined in separate sub-modules that must be
+ * explicitly imported. Angular's `igniteui-angular/theming` re-exports all
+ * presets, so no additional imports are needed.
+ *
+ * These imports use the presets index files which re-forward individual
+ * design system modules with prefixed names (e.g., `$type-scale` becomes
+ * `$material-type-scale` via `@forward './material' as material-*`).
+ *
+ * @param options - Configuration for which preset imports to include
+ * @returns Array of @use statements (empty for Angular)
+ */
+export function generatePresetImports(options: {
+	platform?: Platform;
+	includeTypography?: boolean;
+	includeElevations?: boolean;
+}): string[] {
+	// Angular re-exports all presets from its theming module
+	if (options.platform === "angular") {
+		return [];
+	}
+
+	const lines: string[] = [];
+
+	if (options.includeTypography) {
+		lines.push(`@use '${TYPOGRAPHY_PRESETS_PATH}' as *;`);
+	}
+
+	if (options.includeElevations) {
+		lines.push(`@use '${ELEVATIONS_PRESETS_PATH}' as *;`);
+	}
+
+	return lines;
+}
+
+/**
  * Options for generating a palette function call.
  */
 export interface PaletteCodeOptions {

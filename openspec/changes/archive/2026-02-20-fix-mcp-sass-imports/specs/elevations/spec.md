@@ -1,8 +1,4 @@
-## Purpose
-
-Define elevation generation output and design system selection.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Elevations generation emits elevations mixin
 
