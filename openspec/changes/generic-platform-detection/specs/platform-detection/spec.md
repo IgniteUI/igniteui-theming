@@ -27,7 +27,7 @@ The system detects a target platform using package dependencies, config files, a
 - **WHEN** a framework config file is detected (e.g., `angular.json`, `vite.config.*`, `next.config.*`) but no Ignite UI product package is found
 - **THEN** the platform is set to `"generic"`
 - **AND** confidence is `low` with the `config_file` signal included
-- **AND** the response SHALL include Sass `includePaths` guidance specific to the detected config file
+- **AND** the response SHALL include Sass load path guidance specific to the detected config file
 
 #### Scenario: Ambiguous detection
 

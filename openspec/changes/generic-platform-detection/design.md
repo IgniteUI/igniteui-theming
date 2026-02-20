@@ -13,7 +13,7 @@ The codebase has a binary display name pattern (`=== "angular" ? "Ignite UI for 
 - Make `"generic"` a first-class `Platform` member so TypeScript enforces handling across the codebase
 - Return `"generic"` from detection when no Ignite UI product is found, reserving `null` for error states only
 - Communicate tool eligibility clearly in the detection response (what works in generic mode, what doesn't)
-- Surface Sass `includePaths` guidance based on detected framework config files
+- Surface Sass load path guidance based on detected framework config files
 - Note the CSS-output-works-without-installation path for users who don't have `igniteui-theming` locally
 - Update tool descriptions so that LLMs using the MCP behave correctly with `"generic"` platform
 
@@ -92,16 +92,16 @@ In `layout.ts`, the `resolveScope()` function uses `if (platform)` to decide whe
 
 This is the correct behavior because the `component` parameter on layout tools targets Ignite UI component selectors, which don't exist in a generic project. The tool descriptions will guide LLMs to use `scope` instead, but the handler should still produce reasonable output if `component` is passed with `"generic"` anyway.
 
-### Decision 8: `detect_platform` response for `"generic"` includes tool eligibility and `includePaths` guidance
+### Decision 8: `detect_platform` response for `"generic"` includes tool eligibility and load path guidance
 
 The `handleDetectPlatform()` function in `platform.ts` builds the response text. Add a new branch for `platform === "generic"` (alongside the existing branches for ambiguous, single platform detected, and null/error). This branch produces:
 
 1. **Tool eligibility section** — lists usable tools and non-usable tools (with reasons)
 2. **Sass configuration section** — based on detected config file signals:
-   - `angular.json` → `stylePreprocessorOptions.includePaths`
-   - `vite.config.*` → `css.preprocessorOptions.scss.includePaths`
-   - `next.config.*` → `sassOptions.includePaths`
-   - No config file → general `includePaths` guidance
+   - `angular.json` → `stylePreprocessorOptions.includePaths` (Angular CLI's own API)
+   - `vite.config.*` → `css.preprocessorOptions.scss.loadPaths`
+   - `next.config.*` → `sassOptions.loadPaths`
+   - No config file → general `loadPaths` guidance
 3. **Installation note** — if `igniteui-theming` is not in dependencies, note CSS output works without it; Sass output requires it resolvable via `node_modules`
 
 The config file signals are already collected by `detectConfigFiles()` and included in the result's `signals` array, so the handler can inspect them to determine which guidance to show.

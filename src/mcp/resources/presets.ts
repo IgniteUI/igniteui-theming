@@ -31,6 +31,7 @@ import {
 	LIGHT_PALETTE_PRESETS,
 	PALETTE_PRESETS,
 } from "../knowledge/palettes.js";
+import { PLATFORM_SETUP_MARKDOWN } from "../knowledge/platform-setup.js";
 import {
 	ANGULAR_PLATFORM,
 	ANGULAR_USAGE_EXAMPLES,
@@ -79,6 +80,8 @@ export const RESOURCE_URIS = {
 	PALETTES_DARK: `${RESOURCE_SCHEME}://presets/palettes/dark`,
 	TYPOGRAPHY: `${RESOURCE_SCHEME}://presets/typography`,
 	ELEVATIONS: `${RESOURCE_SCHEME}://presets/elevations`,
+	// Platform setup guidance
+	GUIDANCE_PLATFORM_SETUP: `${RESOURCE_SCHEME}://guidance/platform-setup`,
 	// Color guidance resources (organized under colors/ parent)
 	GUIDANCE_COLORS: `${RESOURCE_SCHEME}://guidance/colors`,
 	GUIDANCE_COLORS_RULES: `${RESOURCE_SCHEME}://guidance/colors/rules`,
@@ -174,6 +177,14 @@ export const RESOURCE_DEFINITIONS = [
 		name: "Elevation Presets",
 		description: "Elevation/shadow presets (Material and Indigo)",
 		mimeType: "application/json",
+	},
+	// Platform setup guidance
+	{
+		uri: RESOURCE_URIS.GUIDANCE_PLATFORM_SETUP,
+		name: "Platform Setup Guide",
+		description:
+			"Instruction guide for platform detection, Sass configuration, dependency handling, and the recommended theming workflow. Read this before generating theme code.",
+		mimeType: "text/markdown",
 	},
 	// Color guidance resources (organized under colors/ parent)
 	{
@@ -427,6 +438,14 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
 		}),
 	],
 
+	// Platform setup guidance
+	[
+		RESOURCE_URIS.GUIDANCE_PLATFORM_SETUP,
+		() => ({
+			content: PLATFORM_SETUP_MARKDOWN,
+			mimeType: "text/markdown",
+		}),
+	],
 	// Color guidance resources
 	[
 		RESOURCE_URIS.GUIDANCE_COLORS,

@@ -91,7 +91,7 @@ export const TOOL_DESCRIPTIONS = {
   "generic" means no Ignite UI product framework was found. Most tools work in generic mode
   (palette, typography, elevations, theme generation, color references, layout tokens with scope).
   Component-specific tools (create_component_theme, get_component_design_tokens) are NOT available
-  in generic mode. The response includes Sass includePaths guidance based on detected build tooling.
+  in generic mode. The response includes Sass load path guidance based on detected build tooling.
   null is reserved for error states (package.json read failure) or ambiguous multi-product detection.
 </output>
 
@@ -109,7 +109,11 @@ export const TOOL_DESCRIPTIONS = {
   - create_theme: Generate complete theme
   - create_typography: Set up typography
   - create_elevations: Configure shadows
-</related_tools>`,
+</related_tools>
+
+<related_resources>
+  - "theming://guidance/platform-setup": Comprehensive setup guide covering detection workflow, Sass load path configuration, dependency handling, and the recommended theming sequence. Read this for detailed platform-specific setup instructions.
+</related_resources>`,
 
 	// ---------------------------------------------------------------------------
 	// create_palette - Medium complexity

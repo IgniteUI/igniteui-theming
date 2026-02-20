@@ -86,40 +86,40 @@ When the detected platform is `"generic"`, the `detect_platform` response SHALL 
 - **WHEN** `detect_platform` returns `platform: "generic"`
 - **THEN** the response SHALL note that layout tools (`set_size`, `set_spacing`, `set_roundness`) work globally via `:root` or with a custom `scope` selector, but the `component` parameter SHALL NOT be used because it resolves Ignite UI component selectors
 
-### Requirement: Generic detection response provides Sass includePaths guidance
+### Requirement: Generic detection response provides Sass load path guidance
 
-When the detected platform is `"generic"` and the output format is Sass, the response SHALL include project configuration guidance for Sass `includePaths`.
+When the detected platform is `"generic"` and the output format is Sass, the response SHALL include project configuration guidance for Sass load paths.
 
 #### Scenario: Angular config file detected
 
 - **WHEN** `detect_platform` returns `platform: "generic"` and `angular.json` was detected as a signal
-- **THEN** the response SHALL include guidance to add `"stylePreprocessorOptions": { "includePaths": ["node_modules"] }` in `angular.json`
+- **THEN** the response SHALL include guidance to add `"stylePreprocessorOptions": { "includePaths": ["node_modules"] }` in `angular.json` (Angular CLI uses `includePaths`)
 
 #### Scenario: Vite config file detected
 
 - **WHEN** `detect_platform` returns `platform: "generic"` and a `vite.config.*` file was detected as a signal
-- **THEN** the response SHALL include guidance to add `css: { preprocessorOptions: { scss: { includePaths: ['node_modules'] } } }` in the Vite config
+- **THEN** the response SHALL include guidance to add `css: { preprocessorOptions: { scss: { loadPaths: ['node_modules'] } } }` in the Vite config
 
 #### Scenario: Next.js config file detected
 
 - **WHEN** `detect_platform` returns `platform: "generic"` and a `next.config.*` file was detected as a signal
-- **THEN** the response SHALL include guidance to add `sassOptions: { includePaths: ['node_modules'] }` in the Next.js config
+- **THEN** the response SHALL include guidance to add `sassOptions: { loadPaths: ['node_modules'] }` in the Next.js config
 
 #### Scenario: No config file detected
 
 - **WHEN** `detect_platform` returns `platform: "generic"` and no framework config file was detected
-- **THEN** the response SHALL include general guidance to ensure `node_modules` is in the Sass compiler's `includePaths`
+- **THEN** the response SHALL include general guidance to ensure `node_modules` is in the Sass compiler's `loadPaths`
 - **AND** the response SHALL instruct the model to investigate the project's build configuration
 
-#### Scenario: CSS output does not need includePaths
+#### Scenario: CSS output does not need load paths
 
 - **WHEN** the user requests CSS output from any tool
-- **THEN** the response SHALL note that CSS output is compiled server-side by the MCP and requires no local `igniteui-theming` installation or `includePaths` configuration
+- **THEN** the response SHALL note that CSS output is compiled server-side by the MCP and requires no local `igniteui-theming` installation or load path configuration
 
 #### Scenario: Theming package not in project dependencies
 
 - **WHEN** `igniteui-theming` is not found in `package.json` dependencies or devDependencies
-- **THEN** the response SHALL note that for Sass output, the user needs `igniteui-theming` resolvable in their project (via `npm install igniteui-theming` or appropriate `includePaths`)
+- **THEN** the response SHALL note that for Sass output, the user needs `igniteui-theming` resolvable in their project (via `npm install igniteui-theming` or appropriate `loadPaths`)
 - **AND** the response SHALL note that CSS output works regardless since the MCP compiles it server-side
 
 ### Requirement: Display names resolve correctly for all platforms

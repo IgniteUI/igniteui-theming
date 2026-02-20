@@ -1,6 +1,6 @@
 ## Why
 
-The `detect_platform` tool treats platform detection as strictly an "Ignite UI product detection" problem. When no Ignite UI product framework is found, it returns `platform: null` with `confidence: "none"` and only recommends specifying one of the four Ignite UI platforms. This makes the MCP unusable for projects that don't use Ignite UI Angular, Web Components, React, or Blazor — even though most tools (palette generation, typography, elevations, full theme generation, color references, layout tokens) work perfectly in a platform-agnostic mode. Adding a first-class `"generic"` platform value fixes this gap and also surfaces project configuration guidance (Sass `includePaths`) that is currently missing entirely.
+The `detect_platform` tool treats platform detection as strictly an "Ignite UI product detection" problem. When no Ignite UI product framework is found, it returns `platform: null` with `confidence: "none"` and only recommends specifying one of the four Ignite UI platforms. This makes the MCP unusable for projects that don't use Ignite UI Angular, Web Components, React, or Blazor — even though most tools (palette generation, typography, elevations, full theme generation, color references, layout tokens) work perfectly in a platform-agnostic mode. Adding a first-class `"generic"` platform value fixes this gap and also surfaces project configuration guidance (Sass load paths) that is currently missing entirely.
 
 ## What Changes
 
@@ -13,14 +13,14 @@ The `detect_platform` tool treats platform detection as strictly an "Ignite UI p
 - Treat `"generic"` like `undefined` in layout tool scope resolution so it doesn't attempt to resolve Ignite UI component selectors
 - Fix binary display name ternaries (`=== "angular" ? ... : "Ignite UI for Web Components"`) across all handlers to use `PLATFORM_METADATA` lookups
 - Update tool descriptions for `detect_platform`, layout tools (`set_size`, `set_spacing`, `set_roundness`), and `get_component_design_tokens` to guide the model on generic-mode behavior — specifically that `component` should not be used with `"generic"` platform (use `scope` instead), and that component-specific tools are not useful without an Ignite UI product
-- Add Sass `includePaths` configuration guidance to the detection response based on detected framework config files (angular.json, vite.config, next.config, etc.)
+- Add Sass load path configuration guidance to the detection response based on detected framework config files (angular.json, vite.config, next.config, etc.)
 - Add a `"generic"` platform resource in `resources/presets.ts`
 
 ## Capabilities
 
 ### New Capabilities
 
-- `generic-platform`: Defines the behavior of the `"generic"` platform value — detection rules, tool eligibility, project configuration guidance, and Sass `includePaths` surfacing
+- `generic-platform`: Defines the behavior of the `"generic"` platform value — detection rules, tool eligibility, project configuration guidance, and Sass load path surfacing
 
 ### Modified Capabilities
 

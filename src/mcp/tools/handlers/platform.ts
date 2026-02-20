@@ -14,7 +14,7 @@
  * returns an ambiguous result prompting user to specify explicitly.
  *
  * When no Ignite UI product is found, returns "generic" platform
- * with tool eligibility guidance and Sass includePaths configuration help.
+ * with tool eligibility guidance and Sass load path configuration help.
  */
 
 import { readFile } from "node:fs/promises";
@@ -91,12 +91,12 @@ interface SassConfigEntry {
 	description: string;
 	/** Code fence language */
 	lang: string;
-	/** Code snippet showing how to configure includePaths */
+	/** Code snippet showing how to configure load paths */
 	code: string;
 }
 
 /**
- * Lookup table mapping config file patterns to Sass includePaths guidance.
+ * Lookup table mapping config file patterns to Sass load path guidance.
  * Add new entries here when supporting additional build tools.
  */
 const SASS_CONFIG_GUIDANCE: SassConfigEntry[] = [
@@ -124,7 +124,7 @@ const SASS_CONFIG_GUIDANCE: SassConfigEntry[] = [
 			"css: {",
 			"  preprocessorOptions: {",
 			"    scss: {",
-			"      includePaths: ['node_modules']",
+			"      loadPaths: ['node_modules']",
 			"    }",
 			"  }",
 			"}",
@@ -139,14 +139,14 @@ const SASS_CONFIG_GUIDANCE: SassConfigEntry[] = [
 		code: [
 			"// In next.config.js/mjs/ts:",
 			"sassOptions: {",
-			"  includePaths: ['node_modules']",
+			"  loadPaths: ['node_modules']",
 			"}",
 		].join("\n"),
 	},
 ];
 
 const SASS_CONFIG_FALLBACK =
-	"To use Sass output from this MCP, ensure your project's Sass compiler has `node_modules` in its `includePaths` (or `loadPaths`). The exact configuration depends on your build tool. Investigate the project's build configuration to find the right place to add this.";
+	"To use Sass output from this MCP, ensure your project's Sass compiler has `node_modules` in its `loadPaths`. The exact configuration depends on your build tool — Angular CLI uses `includePaths` in `angular.json`, while most other tools (Vite, Next.js, sass CLI) use `loadPaths`. Investigate the project's build configuration to find the right place to add this.";
 
 /**
  * Find Sass configuration guidance for a given config file name.
@@ -232,14 +232,14 @@ function buildOutputFormatNotes(hasThemingPackage: boolean): string[] {
 			"The `igniteui-theming` package was **not found** in this project's dependencies.",
 			"",
 			"- **CSS output** works without any local installation — the MCP compiles Sass to CSS server-side.",
-			"- **Sass output** requires `igniteui-theming` to be resolvable in your project. Run `npm install igniteui-theming` to install it, then configure `includePaths` as described above.",
+			"- **Sass output** requires `igniteui-theming` to be resolvable in your project. Run `npm install igniteui-theming` to install it, then configure `loadPaths` as described above.",
 		);
 	} else {
 		lines.push(
 			"The `igniteui-theming` package is installed in this project.",
 			"",
 			"- **CSS output** is compiled server-side by the MCP — no Sass toolchain needed.",
-			"- **Sass output** uses `@use 'igniteui-theming' as *;` and requires the `includePaths` configuration described above.",
+			"- **Sass output** uses `@use 'igniteui-theming' as *;` and requires the `loadPaths` configuration described above.",
 		);
 	}
 
