@@ -20,7 +20,7 @@
  */
 export const FRAGMENTS = {
 	/** Platform parameter description */
-	PLATFORM: `Target platform: "angular" for Ignite UI for Angular, "webcomponents" for Ignite UI for Web Components, "react" for Ignite UI for React, or "blazor" for Ignite UI for Blazor. If omitted, generates generic code. Use detect_platform tool first to auto-detect from project files.`,
+	PLATFORM: `Target platform: "angular" for Ignite UI for Angular, "webcomponents" for Ignite UI for Web Components, "react" for Ignite UI for React, "blazor" for Ignite UI for Blazor, or "generic" for platform-agnostic output (standalone igniteui-theming usage). If omitted, generates generic code. Use detect_platform tool first to auto-detect from project files.`,
 
 	/** Color format examples - CSS Color Level 4 */
 	COLOR_FORMAT: `Valid CSS color formats: hex ("#3F51B5", "#3F51B5AA"), rgb/rgba ("rgb(63, 81, 181)", "rgb(63 81 181 / 0.5)"), hsl/hsla ("hsl(231, 48%, 48%)", "hsl(231 48% 48% / 0.5)"), hwb ("hwb(231 20% 30%)"), lab/lch ("lab(50% 40 59)", "lch(50% 80 30)"), oklab/oklch ("oklab(59% 0.1 0.1)", "oklch(60% 0.15 50)"), color() for wide-gamut ("color(display-p3 1 0.5 0)"), or CSS named colors ("indigo", "rebeccapurple").`,
@@ -63,7 +63,7 @@ export const TOOL_DESCRIPTIONS = {
 	// ---------------------------------------------------------------------------
 	// detect_platform - Simple tool
 	// ---------------------------------------------------------------------------
-	detect_platform: `Detect the target Ignite UI platform by analyzing package.json dependencies and project config files.
+	detect_platform: `Detect the target platform by analyzing dependencies and project config files.
 
 <use_case>
   Use this tool FIRST before generating any theme code to ensure platform-optimized output.
@@ -75,21 +75,28 @@ export const TOOL_DESCRIPTIONS = {
   1. Ignite UI packages (HIGH - 100): igniteui-angular, igniteui-webcomponents, igniteui-react, IgniteUI.Blazor
   2. Config files (MEDIUM-HIGH - 80): angular.json, vite.config.*, next.config.*, .csproj
   3. Framework packages (LOW - 40): @angular/core, react, lit (fallback only)
+  4. Generic fallback: When no Ignite UI product is found, returns "generic" for standalone theming
 </detection_signals>
 
 <output>
   Returns:
-  - platform: "angular" | "webcomponents" | "react" | "blazor" | null
+  - platform: "angular" | "webcomponents" | "react" | "blazor" | "generic" | null
   - confidence: "high" | "medium" | "low" | "none"
-  - ambiguous: true if multiple platforms detected (requires user to specify explicitly)
+  - ambiguous: true if multiple Ignite UI platforms detected (requires user to specify explicitly)
   - alternatives: Array of detected platforms when ambiguous
   - signals: Array of detection signals found
   - detectedPackage: The primary package that triggered detection
   - platformInfo: Name, theming module path, and description
+
+  "generic" means no Ignite UI product framework was found. Most tools work in generic mode
+  (palette, typography, elevations, theme generation, color references, layout tokens with scope).
+  Component-specific tools (create_component_theme, get_component_design_tokens) are NOT available
+  in generic mode. The response includes Sass includePaths guidance based on detected build tooling.
+  null is reserved for error states (package.json read failure) or ambiguous multi-product detection.
 </output>
 
 <ambiguous_handling>
-  When multiple platforms are detected with significant confidence (≥60), returns:
+  When multiple Ignite UI platforms are detected with significant confidence (≥60), returns:
   - platform: null
   - ambiguous: true
   - alternatives: List of possible platforms with their signals
@@ -593,6 +600,7 @@ export const TOOL_DESCRIPTIONS = {
 <behavior>
   - Sets --ig-size in the chosen scope (defaults to :root)
   - Accepts "small", "medium", "large" (mapped to 1, 2, 3) or numeric values
+  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root.
 </behavior>
 
 <sass_notes>
@@ -637,6 +645,7 @@ export const TOOL_DESCRIPTIONS = {
   - Optional overrides for --ig-spacing-inline and --ig-spacing-block
   - 0 = no spacing, 1 = default, 2 = double (fractions allowed)
   - spacing is required; inline/block are optional overrides
+  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root.
 </behavior>
 
 <sass_notes>
@@ -679,6 +688,7 @@ export const TOOL_DESCRIPTIONS = {
 <behavior>
   - Sets --ig-radius-factor in the chosen scope (defaults to :root)
   - 0 = minimum radius, 1 = maximum radius, values between interpolate
+  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root.
 </behavior>
 
 <sass_notes>
@@ -713,6 +723,10 @@ export const TOOL_DESCRIPTIONS = {
   ALWAYS call this tool FIRST before using create_component_theme. It returns the
   exact token names that can be customized for a component, preventing hallucination
   of invalid property names.
+
+  NOTE: This tool returns tokens for Ignite UI framework components. It is NOT useful
+  when the detected platform is "generic" — component theming requires a specific
+  Ignite UI product (angular, webcomponents, react, or blazor).
 </use_case>
 
 <workflow>
@@ -1121,7 +1135,7 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
 	// ---------------------------------------------------------------------------
 	// Layout tool parameters
 	// ---------------------------------------------------------------------------
-	layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root.`,
+	layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root. Note: component targets Ignite UI framework selectors — do not use with platform "generic". Use "scope" instead for custom CSS selectors.`,
 	scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
 	sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
 	spacing:

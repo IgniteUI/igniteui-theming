@@ -72,6 +72,7 @@ export const RESOURCE_URIS = {
 	PLATFORM_WEBCOMPONENTS: `${RESOURCE_SCHEME}://platforms/webcomponents`,
 	PLATFORM_REACT: `${RESOURCE_SCHEME}://platforms/react`,
 	PLATFORM_BLAZOR: `${RESOURCE_SCHEME}://platforms/blazor`,
+	PLATFORM_GENERIC: `${RESOURCE_SCHEME}://platforms/generic`,
 	// Preset resources
 	PALETTES: `${RESOURCE_SCHEME}://presets/palettes`,
 	PALETTES_LIGHT: `${RESOURCE_SCHEME}://presets/palettes/light`,
@@ -132,6 +133,13 @@ export const RESOURCE_DEFINITIONS = [
 		name: "Blazor Platform Config",
 		description:
 			"Ignite UI for Blazor platform configuration, schemas, palettes, and usage examples",
+		mimeType: "application/json",
+	},
+	{
+		uri: RESOURCE_URIS.PLATFORM_GENERIC,
+		name: "Generic Platform Config",
+		description:
+			"Platform-agnostic theming configuration using igniteui-theming standalone, with presets for schemas, palettes, typography, and elevations",
 		mimeType: "application/json",
 	},
 	// Preset resources
@@ -277,7 +285,7 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
 		() => ({
 			content: JSON.stringify(
 				{
-					platforms: ["angular", "webcomponents", "react", "blazor"],
+					platforms: ["angular", "webcomponents", "react", "blazor", "generic"],
 					metadata: PLATFORM_METADATA,
 				},
 				null,
@@ -356,6 +364,24 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
 					typography: TYPOGRAPHY_PRESETS,
 					elevations: ELEVATION_PRESETS,
 					usageExamples: BLAZOR_USAGE_EXAMPLES,
+				},
+				null,
+				2,
+			),
+			mimeType: "application/json",
+		}),
+	],
+	[
+		RESOURCE_URIS.PLATFORM_GENERIC,
+		() => ({
+			content: JSON.stringify(
+				{
+					platform: PLATFORM_METADATA.generic,
+					schemas: SCHEMA_PRESETS,
+					palettes: PALETTE_PRESETS,
+					typefaces: TYPEFACE_PRESETS,
+					typography: TYPOGRAPHY_PRESETS,
+					elevations: ELEVATION_PRESETS,
 				},
 				null,
 				2,

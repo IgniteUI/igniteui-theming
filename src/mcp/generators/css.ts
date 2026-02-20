@@ -229,12 +229,8 @@ export async function generateComponentThemeCss(
 	options: ComponentThemeCssOptions,
 ): Promise<CssComponentThemeResult> {
 	// Import functions we need (dynamic import to avoid circular dependencies)
-	const {
-		getComponentTheme,
-		getComponentSelector,
-		getVariablePrefix,
-		SCHEMA_PRESETS,
-	} = await import("../knowledge/index.js");
+	const { getComponentTheme, getComponentSelector, SCHEMA_PRESETS } =
+		await import("../knowledge/index.js");
 	const { toVariableName } = await import("../utils/sass.js");
 
 	// Validate component exists
@@ -273,10 +269,6 @@ export async function generateComponentThemeCss(
 	const selector =
 		options.selector ||
 		(defaultSelectors.length > 0 ? defaultSelectors[0] : options.component);
-
-	// Get variable prefix from platform
-	const prefix = getVariablePrefix(options.platform);
-	const _varName = `${prefix}-${options.component}`;
 
 	// Generate Sass code
 	const sassCode = `

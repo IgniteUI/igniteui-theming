@@ -166,6 +166,7 @@ export function generateTheme(input: CreateThemeInput): GeneratedCode {
 		case "react":
 		case "blazor":
 			return generateWebComponentsTheme(input, designSystem, variant);
+		case "generic":
 		default:
 			return generateGenericTheme(input, designSystem, variant);
 	}

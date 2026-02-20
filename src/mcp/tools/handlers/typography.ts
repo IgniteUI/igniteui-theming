@@ -3,6 +3,7 @@
  */
 
 import { generateTypography } from "../../generators/sass.js";
+import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
 import type { CreateTypographyParams } from "../schemas.js";
 
 export function handleCreateTypography(params: CreateTypographyParams) {
@@ -20,7 +21,7 @@ export function handleCreateTypography(params: CreateTypographyParams) {
 
 	// Add platform hint if not specified
 	const platformNote = params.platform
-		? `Platform: ${params.platform === "angular" ? "Ignite UI for Angular" : "Ignite UI for Web Components"}`
+		? `Platform: ${PLATFORM_METADATA[params.platform]?.name ?? params.platform}`
 		: "Platform: Not specified (generic output). Specify `platform` for optimized code.";
 	responseParts.push("");
 	responseParts.push(platformNote);
