@@ -5,10 +5,7 @@
  * 1. Generated code contains expected Sass constructs
  * 2. Generated code structure is correct for each platform
  * 3. Variables and descriptions are set correctly
- *
- * Note: Full Sass compilation tests are limited because generated code
- * uses variables (like $material-type-scale) that are defined within
- * the theming library's context. We focus on structural validation.
+ * 4. Generated code compiles as valid Sass (compilation tests)
  */
 
 import * as path from "node:path";
@@ -32,12 +29,21 @@ const PACKAGE_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 /**
  * Rewrites generated Sass code to use local paths for testing.
  * Replaces package imports with local sass/ directory imports.
+ *
+ * Handles:
+ * - Base module: @use 'igniteui-theming' as *; → @use 'sass' as *;
+ * - Angular module: @use "igniteui-angular/theming" as *; → @use 'sass' as *;
+ * - Sub-module presets: @use 'igniteui-theming/sass/...' as *; → @use 'sass/...' as *;
  */
 function rewriteImportsForTesting(code: string): string {
 	return code
 		.replace(
 			/@use ['"]igniteui-angular\/theming['"] as \*;/g,
 			"@use 'sass' as *;",
+		)
+		.replace(
+			/@use ['"]igniteui-theming\/sass\/(.+?)['"] as \*;/g,
+			"@use 'sass/$1' as *;",
 		)
 		.replace(/@use ['"]igniteui-theming['"] as \*;/g, "@use 'sass' as *;");
 }
@@ -190,6 +196,69 @@ describe("generateTypography", () => {
 		// Font stack should be wrapped in quotes
 		expect(result.code).toContain("\"'Titillium Web', sans-serif\"");
 	});
+
+	it("includes typography preset import for non-Angular platforms", () => {
+		const result = generateTypography({
+			fontFamily: "Roboto",
+			designSystem: "material",
+		});
+
+		expect(result.code).toContain(
+			"@use 'igniteui-theming/sass/typography/presets' as *;",
+		);
+	});
+
+	it("omits typography preset import for Angular platform", () => {
+		const result = generateTypography({
+			platform: "angular",
+			fontFamily: "Roboto",
+			designSystem: "material",
+		});
+
+		expect(result.code).not.toContain("typography/presets");
+		expect(result.code).toContain("igniteui-angular/theming");
+	});
+
+	it("generates valid Sass that compiles for webcomponents", async () => {
+		const result = generateTypography({
+			platform: "webcomponents",
+			fontFamily: "Roboto",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("generates valid Sass that compiles for react", async () => {
+		const result = generateTypography({
+			platform: "react",
+			fontFamily: "Roboto",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("generates valid Sass that compiles for blazor", async () => {
+		const result = generateTypography({
+			platform: "blazor",
+			fontFamily: "Roboto",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("generates valid Sass that compiles with no platform", async () => {
+		const result = generateTypography({
+			fontFamily: "Roboto",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("compiles for all design systems", async () => {
+		for (const ds of ["material", "fluent", "bootstrap", "indigo"] as const) {
+			const result = generateTypography({
+				fontFamily: "Roboto",
+				designSystem: ds,
+			});
+			expect(await isValidSass(result.code)).toBe(true);
+		}
+	});
 });
 
 describe("generateElevations", () => {
@@ -213,6 +282,57 @@ describe("generateElevations", () => {
 		});
 
 		expect(result.variables).toContain("$indigo-elevations");
+		expect(result.code).toContain("$indigo-elevations");
+	});
+
+	it("includes elevations preset import for non-Angular platforms", () => {
+		const result = generateElevations({});
+
+		expect(result.code).toContain(
+			"@use 'igniteui-theming/sass/elevations/presets' as *;",
+		);
+	});
+
+	it("omits elevations preset import for Angular platform", () => {
+		const result = generateElevations({
+			platform: "angular",
+		});
+
+		expect(result.code).not.toContain("elevations/presets");
+		expect(result.code).toContain("igniteui-angular/theming");
+	});
+
+	it("generates valid Sass that compiles for webcomponents", async () => {
+		const result = generateElevations({
+			platform: "webcomponents",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("generates valid Sass that compiles for react", async () => {
+		const result = generateElevations({
+			platform: "react",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("generates valid Sass that compiles for blazor", async () => {
+		const result = generateElevations({
+			platform: "blazor",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("generates valid Sass that compiles with no platform", async () => {
+		const result = generateElevations({});
+		expect(await isValidSass(result.code)).toBe(true);
+	});
+
+	it("compiles with indigo design system", async () => {
+		const result = generateElevations({
+			designSystem: "indigo",
+		});
+		expect(await isValidSass(result.code)).toBe(true);
 		expect(result.code).toContain("$indigo-elevations");
 	});
 });
@@ -270,6 +390,51 @@ describe("generateTheme", () => {
 			});
 
 			expect(result.code).toContain("$surface: #222222");
+		});
+
+		it("generates valid Sass that compiles with defaults", async () => {
+			const result = generateTheme({
+				primaryColor: "#2ab759",
+				secondaryColor: "#f7bd32",
+				surfaceColor: "white",
+			});
+			expect(await isValidSass(result.code)).toBe(true);
+		});
+
+		it("generates valid Sass that compiles without typography", async () => {
+			const result = generateTheme({
+				primaryColor: "#2ab759",
+				secondaryColor: "#f7bd32",
+				surfaceColor: "white",
+				includeTypography: false,
+			});
+			expect(await isValidSass(result.code)).toBe(true);
+			expect(result.code).not.toContain("typography/presets");
+		});
+
+		it("generates valid Sass that compiles without elevations", async () => {
+			const result = generateTheme({
+				primaryColor: "#2ab759",
+				secondaryColor: "#f7bd32",
+				surfaceColor: "white",
+				includeElevations: false,
+			});
+			expect(await isValidSass(result.code)).toBe(true);
+			expect(result.code).not.toContain("elevations/presets");
+		});
+
+		it("includes preset imports for typography and elevations", () => {
+			const result = generateTheme({
+				primaryColor: "#2ab759",
+				designSystem: "material",
+			});
+
+			expect(result.code).toContain(
+				"@use 'igniteui-theming/sass/typography/presets' as *;",
+			);
+			expect(result.code).toContain(
+				"@use 'igniteui-theming/sass/elevations/presets' as *;",
+			);
 		});
 	});
 

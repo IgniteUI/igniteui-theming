@@ -34,8 +34,8 @@ describe("IMPORT_PATHS", () => {
 		expect(IMPORT_PATHS.webcomponents).toBe("igniteui-theming");
 	});
 
-	it("has correct default path", () => {
-		expect(IMPORT_PATHS.default).toBe("igniteui-theming");
+	it("has correct generic path", () => {
+		expect(IMPORT_PATHS.generic).toBe("igniteui-theming");
 	});
 });
 

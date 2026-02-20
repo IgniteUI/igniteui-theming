@@ -84,8 +84,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // Add node_modules to include paths for @use statements
-        includePaths: ['node_modules'],
+        // Add node_modules to load paths for @use statements
+        loadPaths: ['node_modules'],
       },
     },
   },
@@ -98,7 +98,7 @@ const path = require('path');
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'node_modules')],
+    loadPaths: [path.join(__dirname, 'node_modules')],
   },
 };
 `,

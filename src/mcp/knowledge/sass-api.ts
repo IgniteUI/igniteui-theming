@@ -41,8 +41,8 @@ export const IMPORT_PATHS = {
 	/** Direct igniteui-theming module for Blazor */
 	blazor: "igniteui-theming",
 
-	/** Default for platform-agnostic code */
-	default: "igniteui-theming",
+	/** Generic / platform-agnostic code */
+	generic: "igniteui-theming",
 } as const;
 
 /**
@@ -59,7 +59,7 @@ export function getImportPath(platform?: Platform): string {
 		case "angular":
 			return IMPORT_PATHS.angular;
 		default:
-			return IMPORT_PATHS.default;
+			return IMPORT_PATHS.generic;
 	}
 }
 

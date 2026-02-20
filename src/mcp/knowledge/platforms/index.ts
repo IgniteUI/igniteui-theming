@@ -133,6 +133,7 @@ const IGNITE_PACKAGE_PATTERNS: Record<Platform, string[]> = {
 	],
 	react: ["igniteui-react", "@infragistics/igniteui-react"],
 	blazor: [], // Blazor uses NuGet, not npm - detected via .csproj
+	generic: [], // Generic is platform-agnostic; not detectable from packages
 };
 
 /**
@@ -319,13 +320,33 @@ export function detectPlatformFromDependencies(
 	}
 
 	// STEP 4: Analyze results
+	// An Ignite UI product is confirmed by either:
+	// - An ignite_package signal (npm packages like igniteui-angular)
+	// - A config_file signal at confidence 100 (e.g., .csproj with IgniteUI.Blazor)
+	const hasIgniteProduct =
+		signals.some((s) => s.type === "ignite_package") ||
+		signals.some((s) => s.type === "config_file" && s.confidence === 100);
+
 	if (platformScores.size === 0) {
+		// No signals at all — generic platform with no confidence
 		return {
-			platform: null,
+			platform: "generic",
 			confidence: "none",
 			signals: [],
 			reason:
-				"No Ignite UI packages, framework packages, or config files detected",
+				"No Ignite UI packages, framework packages, or config files detected. Using generic (standalone) mode.",
+		};
+	}
+
+	// If no Ignite UI product was found, return generic regardless of
+	// framework/config signals. The signals are still included for guidance.
+	if (!hasIgniteProduct) {
+		return {
+			platform: "generic",
+			confidence: "low",
+			signals,
+			reason:
+				"No Ignite UI product package detected. Framework or config signals found but no Ignite UI product in use. Using generic (standalone) mode.",
 		};
 	}
 
@@ -409,26 +430,6 @@ export function detectPlatformFromDependencies(
 // ============================================================================
 
 /**
- * CSS variable prefix for each platform.
- * Angular uses 'igx-' prefix, all other platforms use 'ig-' prefix.
- */
-export const PLATFORM_VARIABLE_PREFIX: Record<Platform, string> = {
-	angular: "igx",
-	webcomponents: "ig",
-	react: "ig",
-	blazor: "ig",
-};
-
-/**
- * Get the CSS variable prefix for a given platform
- * @param platform - The platform to get the prefix for
- * @returns The CSS variable prefix (e.g., 'igx' for Angular, 'ig' for others)
- */
-export function getVariablePrefix(platform: Platform): string {
-	return PLATFORM_VARIABLE_PREFIX[platform];
-}
-
-/**
  * Determine if a detected package is a licensed @infragistics package.
  * Only applies to Angular - other platforms always use the free igniteui-theming package.
  *
@@ -480,5 +481,14 @@ export const PLATFORM_METADATA = {
 		themingModule: "igniteui-theming",
 		description:
 			"Uses igniteui-theming for Sass compilation in .NET Blazor projects. Theme styles are compiled to CSS and referenced in Blazor components. The igniteui-theming package is always free/OSS.",
+	},
+	generic: {
+		id: "generic",
+		name: "Ignite UI Theming (Standalone)",
+		shortName: "Generic",
+		packageName: "igniteui-theming",
+		themingModule: "igniteui-theming",
+		description:
+			"Platform-agnostic output using igniteui-theming directly. For projects that do not use a specific Ignite UI product framework (Angular, Web Components, React, or Blazor). Supports palette, typography, elevations, and theme generation. Component theming is not available in generic mode.",
 	},
 } as const;

@@ -152,7 +152,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
 
 ```json
 {
-  "mcp.servers": {
+  "servers": {
     "igniteui-theming": {
       "command": "node",
       "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
@@ -165,7 +165,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
 
 ```json
 {
-  "mcp.servers": {
+  "servers": {
     "igniteui-theming": {
       "command": "npx",
       "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]

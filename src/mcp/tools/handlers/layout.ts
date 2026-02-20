@@ -71,7 +71,7 @@ ${list.map((name) => `- ${name}`).join("\n")}`,
 		const selectorsEntry = COMPONENT_METADATA[normalized].selectors;
 		let selectors: string[] = [];
 
-		if (platform) {
+		if (platform && platform !== "generic") {
 			selectors = getComponentSelector(normalized, platform);
 
 			if (selectors.length === 0) {

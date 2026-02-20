@@ -17,6 +17,7 @@ import { generateWebComponentsThemeSass } from "../knowledge/platforms/webcompon
 import { TYPOGRAPHY_PRESETS } from "../knowledge/typography.js";
 import {
 	generateHeader,
+	generatePresetImports,
 	generateUseStatement,
 	quoteFontFamily,
 	toVariableName,
@@ -43,6 +44,7 @@ export {
 	generateElevationsCode,
 	generateHeader,
 	generatePaletteCode,
+	generatePresetImports,
 	generateTypographyCode,
 	generateUseStatement,
 	quoteFontFamily,
@@ -103,8 +105,18 @@ export function generateTypography(
 	const preset = TYPOGRAPHY_PRESETS[designSystem];
 	const typeface = input.fontFamily || preset.typeface;
 
+	const presetImports = generatePresetImports({
+		platform: input.platform,
+		includeTypography: true,
+	});
+
+	const imports = [
+		generateUseStatement(input.platform, input.licensed),
+		...presetImports,
+	].join("\n");
+
 	const code = `${generateHeader(`Typography setup using ${designSystem} type scale`)}
-${generateUseStatement(input.platform, input.licensed)}
+${imports}
 
 // Typography setup with ${designSystem} type scale
 @include typography(
@@ -129,8 +141,18 @@ export function generateElevations(
 	const preset = input.designSystem ?? "material";
 	const elevationsVar = `$${preset}-elevations`;
 
+	const presetImports = generatePresetImports({
+		platform: input.platform,
+		includeElevations: true,
+	});
+
+	const imports = [
+		generateUseStatement(input.platform, input.licensed),
+		...presetImports,
+	].join("\n");
+
 	const code = `${generateHeader(`Elevations setup using ${preset} preset`)}
-${generateUseStatement(input.platform, input.licensed)}
+${imports}
 
 // Elevations setup with ${preset} shadows
 @include elevations(${elevationsVar});
@@ -289,6 +311,13 @@ function generateGenericTheme(
 		paletteArgs.push(`$surface: ${variant === "dark" ? "#222222" : "white"}`);
 	}
 
+	// Generate preset imports for typography and/or elevations
+	const presetImports = generatePresetImports({
+		platform: input.platform,
+		includeTypography,
+		includeElevations,
+	});
+
 	// Build the code sections
 	const sections: string[] = [
 		generateHeader(
@@ -296,6 +325,7 @@ function generateGenericTheme(
 		),
 		'// NOTE: Specify platform ("angular" or "webcomponents") for optimized output',
 		generateUseStatement(input.platform, input.licensed),
+		...presetImports,
 		"",
 		`// ${themeName} palette`,
 		`${paletteVar}: palette(`,
