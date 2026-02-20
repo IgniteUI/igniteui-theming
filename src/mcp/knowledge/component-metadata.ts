@@ -203,10 +203,14 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
 		selectors: { angular: "igc-chat", webcomponents: "igc-chat" },
 		compound: {
 			description:
-				"The chat component uses a flat-button, contained-icon-button, and a textarea internally.",
-			relatedThemes: ["flat-button", "contained-icon-button", "input-group"],
+				"The chat component uses a flat-icon-button, contained-icon-button, and a textarea internally.",
+			relatedThemes: [
+				"flat-icon-button",
+				"contained-icon-button",
+				"input-group",
+			],
 			guidance:
-				"Make sure the textarea, the flat-button, and the contained-icon-button themes visually coordinate with each other and the overall chat background.",
+				"Make sure the textarea, the flat-icon-button, and the contained-icon-button themes visually coordinate with each other and the overall chat background.",
 		},
 	},
 	checkbox: {
