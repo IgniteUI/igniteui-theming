@@ -14,24 +14,33 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Slider Theme
+///
+/// PRIMARY TOKENS:
+/// - `$track-color` — The filled track color.
+/// - `$base-track-color` — The unfilled track background.
+/// - `$thumb-color` — The thumb color (material).
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $track-color [null] - The color of the track.
-/// @param {Color} $track-step-color [null] - The color of the track steps.
+/// @param {Color} $track-color [null] - The color of the track. PRIMARY - derives hover, label, and thumb colors.
+/// @param {Color} $track-step-color [null] - The color of the track steps. Auto-derived from base-track-color.
 /// @param {Number} $track-step-size [null] - The size of the track steps.
-/// @param {Color} $track-hover-color [null] - The color of the track on hover.
-/// @param {Color} $thumb-color [null] - The color of the thumb.
-/// @param {Color} $thumb-focus-color [null] - The focus color of the thumb.
-/// @param {Color} $thumb-border-color [null] - The thumb border color.
-/// @param {Color} $thumb-border-hover-color [null] - The thumb border color when hovered.
+/// @param {Color} $track-hover-color [null] - The color of the track on hover. Auto-derived from track-color.
+/// @param {Color} $thumb-color [null] - The color of the thumb. Auto-derived from track-color (material) or set independently.
+/// @param {Color} $thumb-focus-color [null] - The focus color of the thumb. Auto-derived from thumb-border-color or thumb-color.
+/// @param {Color} $thumb-border-color [null] - The thumb border color. Auto-derived from track-color (fluent/indigo) or thumb-color (bootstrap).
+/// @param {Color} $thumb-border-hover-color [null] - The thumb border color when hovered. Auto-derived from thumb-border-color.
 /// @param {Color} $thumb-border-focus-color [null] - The thumb border color when focused.
-/// @param {Color} $thumb-disabled-border-color [null] - The thumb border color when it's disabled.
-/// @param {Color} $disabled-thumb-color [null] - The thumb color when its disabled.
-/// @param {Color} $label-background-color [null] - The background color of the bubble label.
-/// @param {Color} $label-text-color [null] - The text color of the bubble label.
-/// @param {Color} $base-track-color [null] - The base background color of the track.
-/// @param {Color} $base-track-hover-color [null] - The base background color of the track on hover.
-/// @param {Color} $disabled-base-track-color [null] - The base background color of the track when is disabled.
-/// @param {Color} $disabled-fill-track-color [null] - The base background color of the fill track when is disabled.
+/// @param {Color} $thumb-disabled-border-color [null] - The thumb border color when it's disabled. Auto-derived from thumb-border-color.
+/// @param {Color} $disabled-thumb-color [null] - The thumb color when its disabled. Auto-derived from thumb-color.
+/// @param {Color} $label-background-color [null] - The background color of the bubble label. Auto-derived from track-color or thumb-color.
+/// @param {Color} $label-text-color [null] - The text color of the bubble label. Auto-derived from label-background-color.
+/// @param {Color} $base-track-color [null] - The base background color of the track. PRIMARY for unfilled track. Auto-derived from track-color (material).
+/// @param {Color} $base-track-hover-color [null] - The base background color of the track on hover. Auto-derived from base-track-color.
+/// @param {Color} $disabled-base-track-color [null] - The base background color of the track when is disabled. Auto-derived from base-track-color.
+/// @param {Color} $disabled-fill-track-color [null] - The base background color of the fill track when is disabled. Auto-derived from track-color.
 /// @param {Color} $tick-label-color [null] - The color of the tick label.
 /// @param {Color} $tick-color [null] - The background-color of the tick.
 /// @requires $light-material-schema

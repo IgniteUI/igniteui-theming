@@ -14,10 +14,16 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// Returns a map containing all style properties related to the theming of the tooltip.
+/// Tooltip Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The background color of the tooltip.
-/// @param {Color} $text-color [null] - The text color of the tooltip.
+/// @param {Color} $background [null] - The background color of the tooltip. PRIMARY - derives text-color.
+/// @param {Color} $text-color [null] - The text color of the tooltip. Auto-derived from background.
 /// @param {List} $border-radius [null] - The border radius used for the tooltip component.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the tooltip component.
 /// @requires $light-material-schema

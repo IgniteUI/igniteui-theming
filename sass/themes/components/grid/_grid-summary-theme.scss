@@ -14,15 +14,23 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Grid Summary Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background-color` — The summaries background color.
+/// - `$label-color` — The summaries label color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background-color [null] - The summaries background color is inherited form igx-grid__tfoot
-/// @param {Color} $label-color [null] - The summaries label color.
-/// @param {Color} $result-color [null] - The summaries value/result color.
-/// @param {Color} $border-color [null] - The summaries border color.
+/// @param {Color} $background-color [null] - The summaries background color. PRIMARY - derives label-color, result-color, border-color, pinned-border-color.
+/// @param {Color} $label-color [null] - The summaries label color. PRIMARY - derives label-hover-color. Auto-derived from background-color.
+/// @param {Color} $result-color [null] - The summaries value/result color. Auto-derived from background-color.
+/// @param {Color} $border-color [null] - The summaries border color. Auto-derived from background-color.
 /// @param {Color} $pinned-border-width [null] - The border width of the summary panel.
 /// @param {Color} $pinned-border-style [null] - The border style of the summary panel.
-/// @param {Color} $pinned-border-color [null] - The border color of the summary panel.
-/// @param {Color} $label-hover-color [null] - The summaries hover label color.
+/// @param {Color} $pinned-border-color [null] - The border color of the summary panel. Auto-derived from background-color.
+/// @param {Color} $label-hover-color [null] - The summaries hover label color. Auto-derived from label-color.
 /// @requires $light-material-schema
 /// @example scss Change the summaries background and labels color
 ///   $my-summary-theme: grid-summary-theme(

@@ -13,20 +13,23 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// Returns a map containing all style properties related to the theming the watermark directive.
+/// Watermark Theme
+///
+/// PRIMARY TOKENS:
+/// - `$link-background` — The link background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $base-color [null] - The base color for all elements of the watermark.
 /// @param {Color} $image-color [null] - The color used for the stamp image.
 /// @param {Number} $image-opacity [null] - The opacity of the stamp image.
-/// @param {Color} $link-background [null] - The background color used for the link.
-/// @param {Color} $color [null] - The color used for the link text.
+/// @param {Color} $link-background [null] - The background color used for the link. PRIMARY - derives color.
+/// @param {Color} $color [null] - The color used for the link text. Auto-derived from link-background.
 /// @param {Color} $border-color [null] - The border color used for the  link.
 /// @param {List} $border-radius [null] - The border radius used for the link.
 ///
 /// @example scss Change the watermark link background
-///   $my-watermark-theme: watermark-theme($link-background: magenta);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-watermark-theme);
 /// @requires $light-material-schema
 @function watermark-theme(
     $schema: $light-material-schema,

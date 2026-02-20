@@ -13,68 +13,79 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Stepper Theme
+///
+/// PRIMARY TOKENS:
+/// - `$step-background` — The base step background.
+/// - `$indicator-background` — The step indicator background.
+/// - `$invalid-indicator-background` — The invalid step indicator.
+/// - `$current-indicator-background` — The current step indicator.
+/// - `$complete-indicator-background` — The completed step indicator.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 ///
 /// @param {Color} $content-foreground [null] - The foreground of the step content.
-/// @param {Color} $step-background [null] - The background of the step header.
-/// @param {Color} $step-hover-background [null] - The background of the step header on hover.
-/// @param {Color} $step-focus-background [null] - The background of the step header on focus.
-/// @param {Color} $title-color [null] - The color of the step title.
-/// @param {Color} $title-hover-color [null] - The color of the step title on hover.
-/// @param {Color} $title-focus-color [null] - The color of the step title on focus.
-/// @param {Color} $subtitle-color [null] - The color of the step subtitle.
-/// @param {Color} $subtitle-hover-color [null] - The color of the step subtitle on hover.
-/// @param {Color} $subtitle-focus-color [null] - The color of the step subtitle on focus.
-/// @param {Color} $indicator-color [null] - The text color of the step indicator.
-/// @param {Color} $indicator-background [null] - The background color of the step indicator.
-/// @param {Color} $indicator-outline [null] - The outline color of the step indicator.
+/// @param {Color} $step-background [null] - The background of the step header. PRIMARY - derives all step states.
+/// @param {Color} $step-hover-background [null] - The background of the step header on hover. Auto-derived from step-background.
+/// @param {Color} $step-focus-background [null] - The background of the step header on focus. Auto-derived from step-background.
+/// @param {Color} $title-color [null] - The color of the step title. Auto-derived from step-background.
+/// @param {Color} $title-hover-color [null] - The color of the step title on hover. Auto-derived from step-hover-background.
+/// @param {Color} $title-focus-color [null] - The color of the step title on focus. Auto-derived from step-focus-background.
+/// @param {Color} $subtitle-color [null] - The color of the step subtitle. Auto-derived from step-background.
+/// @param {Color} $subtitle-hover-color [null] - The color of the step subtitle on hover. Auto-derived from step-hover-background.
+/// @param {Color} $subtitle-focus-color [null] - The color of the step subtitle on focus. Auto-derived from step-focus-background.
+/// @param {Color} $indicator-color [null] - The text color of the step indicator. Auto-derived from indicator-background.
+/// @param {Color} $indicator-background [null] - The background color of the step indicator. PRIMARY for indicator - derives indicator-color, indicator-outline. Auto-derived from step-background.
+/// @param {Color} $indicator-outline [null] - The outline color of the step indicator. Auto-derived from indicator-background.
 ///
-/// @param {Color} $invalid-step-background [null] - The background of the invalid step header.
-/// @param {Color} $invalid-step-hover-background [null] - The background of the invalid step header on hover.
-/// @param {Color} $invalid-step-focus-background [null] - The background of the invalid step header on focus.
-/// @param {Color} $invalid-title-color [null] - The color of the invalid step title.
-/// @param {Color} $invalid-title-hover-color [null] - The color of the invalid step title on hover.
-/// @param {Color} $invalid-title-focus-color [null] - The color of the invalid step title on focus.
-/// @param {Color} $invalid-subtitle-color [null] - The color of the invalid step subtitle.
-/// @param {Color} $invalid-subtitle-hover-color [null] - The color of the invalid step subtitle on hover.
-/// @param {Color} $invalid-subtitle-focus-color [null] - The color of the invalid step subtitle on focus.
-/// @param {Color} $invalid-indicator-color [null] - The color of the invalid step indicator.
-/// @param {Color} $invalid-indicator-background [null] - The background color of the invalid step indicator.
-/// @param {Color} $invalid-indicator-outline [null] - The outline color of the invalid step indicator.
+/// @param {Color} $invalid-step-background [null] - The background of the invalid step header. Auto-derived from step-background.
+/// @param {Color} $invalid-step-hover-background [null] - The background of the invalid step header on hover. Auto-derived from invalid-step-background.
+/// @param {Color} $invalid-step-focus-background [null] - The background of the invalid step header on focus. Auto-derived from invalid-step-background.
+/// @param {Color} $invalid-title-color [null] - The color of the invalid step title. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-title-hover-color [null] - The color of the invalid step title on hover. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-title-focus-color [null] - The color of the invalid step title on focus. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-subtitle-color [null] - The color of the invalid step subtitle. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-subtitle-hover-color [null] - The color of the invalid step subtitle on hover. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-subtitle-focus-color [null] - The color of the invalid step subtitle on focus. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-indicator-color [null] - The color of the invalid step indicator. Auto-derived from invalid-indicator-background.
+/// @param {Color} $invalid-indicator-background [null] - The background color of the invalid step indicator. PRIMARY for invalid state.
+/// @param {Color} $invalid-indicator-outline [null] - The outline color of the invalid step indicator. Auto-derived from invalid-indicator-background.
 ///
-/// @param {Color} $current-step-background [null] - The background of the current step header.
-/// @param {Color} $current-step-hover-background [null] - The background of the current step header on hover.
-/// @param {Color} $current-step-focus-background [null] - The background of the current step header on focus.
-/// @param {Color} $current-title-color [null] - The color of the current step title.
-/// @param {Color} $current-title-hover-color [null] - The color of the current step title on hover.
-/// @param {Color} $current-title-focus-color [null] - The color of the current step title on focus.
-/// @param {Color} $current-subtitle-color [null] - The color of the current step subtitle.
-/// @param {Color} $current-subtitle-hover-color [null] - The color of the current step subtitle on hover.
-/// @param {Color} $current-subtitle-focus-color [null] - The color of the current step subtitle on focus.
-/// @param {Color} $current-indicator-color [null] - The color of the current step indicator.
-/// @param {Color} $current-indicator-background [null] - The background color of the current step indicator.
-/// @param {Color} $current-indicator-outline [null] - The outline color of the current step indicator.
+/// @param {Color} $current-step-background [null] - The background of the current step header. Auto-derived from step-background.
+/// @param {Color} $current-step-hover-background [null] - The background of the current step header on hover. Auto-derived from current-step-background.
+/// @param {Color} $current-step-focus-background [null] - The background of the current step header on focus. Auto-derived from current-step-background.
+/// @param {Color} $current-title-color [null] - The color of the current step title. Auto-derived from current-step-background.
+/// @param {Color} $current-title-hover-color [null] - The color of the current step title on hover. Auto-derived from current-step-hover-background.
+/// @param {Color} $current-title-focus-color [null] - The color of the current step title on focus. Auto-derived from current-step-focus-background.
+/// @param {Color} $current-subtitle-color [null] - The color of the current step subtitle. Auto-derived from current-step-background.
+/// @param {Color} $current-subtitle-hover-color [null] - The color of the current step subtitle on hover. Auto-derived from current-step-hover-background.
+/// @param {Color} $current-subtitle-focus-color [null] - The color of the current step subtitle on focus. Auto-derived from current-step-focus-background.
+/// @param {Color} $current-indicator-color [null] - The color of the current step indicator. Auto-derived from current-indicator-background.
+/// @param {Color} $current-indicator-background [null] - The background color of the current step indicator. PRIMARY for current state. Auto-derived from current-step-background.
+/// @param {Color} $current-indicator-outline [null] - The outline color of the current step indicator. Auto-derived from current-indicator-background.
 ///
-/// @param {Color} $complete-step-background [null] - The background of the complete step header.
-/// @param {Color} $complete-step-hover-background [null] - The background of the complete step header on hover.
-/// @param {Color} $complete-step-focus-background [null] - The background of the complete step header on focus.
-/// @param {Color} $complete-title-color [null] - The color of the complete step title.
-/// @param {Color} $complete-title-hover-color [null] - The color of the complete step title on hover.
-/// @param {Color} $complete-title-focus-color [null] - The color of the complete step title on focus.
-/// @param {Color} $complete-subtitle-color [null] - The color of the complete step subtitle.
-/// @param {Color} $complete-subtitle-hover-color [null] - The color of the complete step subtitle on hover.
-/// @param {Color} $complete-subtitle-focus-color [null] - The color of the complete step subtitle on focus.
-/// @param {Color} $complete-indicator-color [null] - The color of the completed step indicator.
-/// @param {Color} $complete-indicator-background [null] - The background color of the completed step indicator.
+/// @param {Color} $complete-step-background [null] - The background of the complete step header. Auto-derived from step-background.
+/// @param {Color} $complete-step-hover-background [null] - The background of the complete step header on hover. Auto-derived from complete-step-background.
+/// @param {Color} $complete-step-focus-background [null] - The background of the complete step header on focus. Auto-derived from complete-step-background.
+/// @param {Color} $complete-title-color [null] - The color of the complete step title. Auto-derived from complete-step-background.
+/// @param {Color} $complete-title-hover-color [null] - The color of the complete step title on hover. Auto-derived from complete-step-hover-background.
+/// @param {Color} $complete-title-focus-color [null] - The color of the complete step title on focus. Auto-derived from complete-step-focus-background.
+/// @param {Color} $complete-subtitle-color [null] - The color of the complete step subtitle. Auto-derived from complete-step-background.
+/// @param {Color} $complete-subtitle-hover-color [null] - The color of the complete step subtitle on hover. Auto-derived from complete-step-hover-background.
+/// @param {Color} $complete-subtitle-focus-color [null] - The color of the complete step subtitle on focus. Auto-derived from complete-step-focus-background.
+/// @param {Color} $complete-indicator-color [null] - The color of the completed step indicator. Auto-derived from complete-indicator-background.
+/// @param {Color} $complete-indicator-background [null] - The background color of the completed step indicator. PRIMARY for complete state. Auto-derived from complete-step-background.
 /// @param {Color} $complete-indicator-outline [null] - The outline color of the completed step indicator.
 ///
-/// @param {Color} $disabled-title-color [null] - The title color of the disabled step.
-/// @param {Color} $disabled-subtitle-color [null] - The subtitle color of the disabled step.
-/// @param {Color} $disabled-indicator-color [null] - The indicator color of the disabled step.
-/// @param {Color} $disabled-indicator-background [null] - The indicator background of the disabled step.
-/// @param {Color} $disabled-indicator-outline [null] - The indicator outline color of the disabled step.
+/// @param {Color} $disabled-title-color [null] - The title color of the disabled step. Auto-derived from step-background.
+/// @param {Color} $disabled-subtitle-color [null] - The subtitle color of the disabled step. Auto-derived from step-background.
+/// @param {Color} $disabled-indicator-color [null] - The indicator color of the disabled step. Auto-derived from disabled-indicator-background.
+/// @param {Color} $disabled-indicator-background [null] - The indicator background of the disabled step. Auto-derived from step-background.
+/// @param {Color} $disabled-indicator-outline [null] - The indicator outline color of the disabled step. Auto-derived from disabled-indicator-background.
 ///
-/// @param {Color} $step-separator-color [null] - The separator border-color of between the steps.
+/// @param {Color} $step-separator-color [null] - The separator border-color of between the steps. Auto-derived from step-background or indicator-background.
 /// @param {Color} $complete-step-separator-color [null] - The separator border-color between the completed steps.
 ///
 /// @param {Color} $step-separator-style [null] - The separator border-style of between the steps.

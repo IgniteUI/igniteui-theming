@@ -14,10 +14,17 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Toast Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The background color used for the toast.
-/// @param {Color} $text-color [null] - The text-color used for the toast.
-/// @param {Color} $border-color [null] - The border-color used for the toast.
+/// @param {Color} $background [null] - The background color used for the toast. PRIMARY - derives text-color, border-color.
+/// @param {Color} $text-color [null] - The text-color used for the toast. Auto-derived from background.
+/// @param {Color} $border-color [null] - The border-color used for the toast. Auto-derived from text-color.
 /// @param {List} $border-radius [null] - The border radius used for the toast component.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the toast.
 /// @requires $light-material-schema

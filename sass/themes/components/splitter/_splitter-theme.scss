@@ -12,13 +12,19 @@
 /// @access public
 ////
 
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Splitter Theme
 ///
-/// @param {Color} $bar-color [null] - The background color of the bar.
-/// @param {Color} $handle-color [null] - The color for the bar drag handle.
-/// @param {Color} $expander-color [null] - The color for the arrow expander's.
+/// PRIMARY TOKENS:
+/// - `$bar-color` — The bar background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $bar-color [null] - The background color of the bar. PRIMARY - derives handle, expander, focus colors.
+/// @param {Color} $handle-color [null] - The color for the bar drag handle. Auto-derived from bar-color.
+/// @param {Color} $expander-color [null] - The color for the arrow expander's. Auto-derived from bar-color.
 /// @param {List} $border-radius [null] - the border radios of the splitter bar drag handle
-/// @param {Color} $focus-color [null] - The color used for focused splitter bar.
+/// @param {Color} $focus-color [null] - The color used for focused splitter bar. Auto-derived from bar-color (variant-dependent).
 /// @param {Color} $bar-color-active [null] - The background color of the bar when pressed.
 /// @param {Color} $handle-color-active [null] - The color for the bar drag handle when pressed.
 /// @param {Color} $expander-color-active [null] - The color for the arrow expander's when pressed.

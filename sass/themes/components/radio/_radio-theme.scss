@@ -14,25 +14,34 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Radio Theme
+///
+/// PRIMARY TOKENS:
+/// - `$fill-color` — The checked state border and dot color.
+/// - `$empty-color` — The unchecked border color.
+/// - `$error-color` — The invalid state color.
+///
+/// Setting just `$fill-color` will theme all checked states consistently.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 ///
 /// @param {Color} $label-color [null]- The text color used for the label text.
-/// @param {Color} $label-color-hover [null]- The text color used for the label text on hover.
-/// @param {Color} $empty-color [null] - The unchecked border color.
+/// @param {Color} $label-color-hover [null]- The text color used for the label text on hover. Auto-derived from label-color.
+/// @param {Color} $empty-color [null] - The unchecked border color. PRIMARY for unchecked states.
 /// @param {Color} $empty-fill-color [null] - The unchecked radio fill color.
-/// @param {Color} $fill-color [null] - The checked border and dot colors.
+/// @param {Color} $fill-color [null] - The checked border and dot colors. PRIMARY - derives hover/focus colors.
 /// @param {Color} $disabled-color [null] - The disabled border and dot colors.
 /// @param {Color} $disabled-label-color [null] - The disabled label color.
 /// @param {Color} $disabled-fill-color [null] - The disabled checked border and dot colors.
-/// @param {Color} $hover-color [null] - The border and dot colors on hover.
-/// @param {Color} $fill-color-hover [null] - The checked dot color on hover.
-/// @param {Color} $fill-hover-border-color [null] - The checked border color on hover.
-/// @param {Color} $focus-border-color [null] - The focus border color.
-/// @param {Color} $focus-outline-color [null] - The focus outlined color.
-/// @param {Color} $focus-outline-color-filled [null] - The focus outline color when radio is filled.
-/// @param {Color} $error-color [null] - The label, border and dot color in invalid state.
-/// @param {Color} $error-color-hover [null] - The label, border and dot color in invalid state on hover.
-/// @param {Color} $focus-outline-color-error [null] - The focus outline color in invalid state.
+/// @param {Color} $hover-color [null] - The border and dot colors on hover. Auto-derived from empty-color.
+/// @param {Color} $fill-color-hover [null] - The checked dot color on hover. Auto-derived from fill-color.
+/// @param {Color} $fill-hover-border-color [null] - The checked border color on hover. Auto-derived from fill-color-hover.
+/// @param {Color} $focus-border-color [null] - The focus border color. Auto-derived from fill-color (bootstrap).
+/// @param {Color} $focus-outline-color [null] - The focus outlined color. Auto-derived from empty-color (indigo) or fill-color (bootstrap).
+/// @param {Color} $focus-outline-color-filled [null] - The focus outline color when radio is filled. Auto-derived from fill-color (indigo).
+/// @param {Color} $error-color [null] - The label, border and dot color in invalid state. PRIMARY for error states.
+/// @param {Color} $error-color-hover [null] - The label, border and dot color in invalid state on hover. Auto-derived from error-color.
+/// @param {Color} $focus-outline-color-error [null] - The focus outline color in invalid state. Auto-derived from error-color.
 ///
 /// @requires $light-material-schema
 ///

@@ -12,23 +12,32 @@
 /// @access public
 ////
 
+/// Query Builder Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The background color.
+/// - `$header-background` — The header background color.
+/// - `$subquery-header-background` — The subquery header background.
+/// - `$subquery-border-color` — The subquery border color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} background [null] - The background color of the filtering row.
-/// @param {Color} header-background [null] - The background color of the query builder header.
-/// @param {Color} header-foreground [null] - The foreground color of the query builder header.
-/// @param {Color} header-border [null] - The border color of the query builder header.
+/// @param {Color} $background [null] - The background color of the filtering row. PRIMARY - derives label-foreground, header-background.
+/// @param {Color} $header-background [null] - The background color of the query builder header. PRIMARY - derives header-foreground, subquery-header-background. Auto-derived from background.
+/// @param {Color} $header-foreground [null] - The foreground color of the query builder header. Auto-derived from header-background.
+/// @param {Color} $header-border [null] - The border color of the query builder header. Auto-derived from subquery-border-color (bootstrap only).
 ///
-/// @param {Map} subquery-header-background [null] - The background color of the subquery header.
-/// @param {Map} subquery-border-color [null] - The border color of the query block.
-/// @param {Map} separator-color [null] - The separator color of the query block.
-/// @param {Number} subquery-border-radius [null] - The border radius of the subquery block.
+/// @param {Map} $subquery-header-background [null] - The background color of the subquery header. PRIMARY - derives subquery-border-color. Auto-derived from header-background.
+/// @param {Map} $subquery-border-color [null] - The border color of the query block. PRIMARY - derives separator-color. Auto-derived from subquery-header-background.
+/// @param {Map} $separator-color [null] - The separator color of the query block. Auto-derived from subquery-border-color.
+/// @param {Number} $subquery-border-radius [null] - The border radius of the subquery block.
 ///
-/// @param {Map} label-foreground [null] - The color for query builder labels "from" & "select".
-/// @param {Map} separator-color [null] - The separator color of the query builder tree block.
-/// @param {Number} border-radius [null] - The border radius of the query builder.
+/// @param {Map} $label-foreground [null] - The color for query builder labels "from" & "select". Auto-derived from background.
+/// @param {Number} $border-radius [null] - The border radius of the query builder.
 ///
-/// @param {Color} color-expression-group-and [null] - The color of advanced filtering "AND" condition group.
-/// @param {Color} color-expression-group-or [null] - The color of advanced filtering "OR" condition group.
+/// @param {Color} $color-expression-group-and [null] - The color of advanced filtering "AND" condition group.
+/// @param {Color} $color-expression-group-or [null] - The color of advanced filtering "OR" condition group.
 ///
 /// @example scss Set custom query-builder colors
 ///   $my-query-builder-theme: query-builder-theme($background: red);

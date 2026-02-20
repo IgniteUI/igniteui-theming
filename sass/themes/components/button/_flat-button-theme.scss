@@ -14,34 +14,41 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
-/// If only background color is specified, text/icon color
-/// will be assigned automatically to a contrasting color.
-/// Does ___not___ apply for disabled state colors.
+/// Flat Button Theme
+///
+/// PRIMARY TOKENS:
+/// - `$foreground` — The text color of the button.
+/// - `$hover-background` — The hover background color.
+/// - `$focus-background` — The focus background color.
+/// - `$active-background` — The active background color.
+///
+/// For flat buttons, the foreground color is the primary token.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the button.
-/// @param {Color} $foreground [null] - The text color of the button.
+/// @param {Color} $foreground [null] - The text color of the button. PRIMARY - derives hover/focus/active backgrounds and foregrounds.
 /// @param {Color} $icon-color [null] - The icon color in the button.
-/// @param {Color} $icon-color-hover [null] - The icon color in the button on hover.
-/// @param {Color} $hover-background [null] - The hover background color of the button.
-/// @param {Color} $hover-foreground [null] - The hover text color of the button.
-/// @param {Color} $focus-background [null] - The focus background color of the button.
-/// @param {Color} $focus-foreground [null] - The focus text color of the button.
-/// @param {Color} $focus-hover-background [null] - The background color on focus hovered state of the button.
-/// @param {Color} $focus-hover-foreground [null] - The text color on focus hovered state of the button.
-/// @param {Color} $focus-visible-background [null] - The focus-visible background color of the button.
-/// @param {Color} $focus-visible-foreground [null] - The focus-visible text color of the button.
-/// @param {Color} $active-background [null] - The active background of the button.
-/// @param {Color} $active-foreground [null] - The active text color of the button.
+/// @param {Color} $icon-color-hover [null] - The icon color in the button on hover. Auto-derived from hover-foreground.
+/// @param {Color} $hover-background [null] - The hover background color of the button. PRIMARY - derives hover-foreground. Auto-derived from foreground.
+/// @param {Color} $hover-foreground [null] - The hover text color of the button. Auto-derived from hover-background.
+/// @param {Color} $focus-background [null] - The focus background color of the button. PRIMARY - derives focus-foreground. Auto-derived from foreground.
+/// @param {Color} $focus-foreground [null] - The focus text color of the button. Auto-derived from focus-background.
+/// @param {Color} $focus-hover-background [null] - The background color on focus hovered state. Auto-derived from foreground.
+/// @param {Color} $focus-hover-foreground [null] - The text color on focus hovered state. Auto-derived from focus-hover-background.
+/// @param {Color} $focus-visible-background [null] - The focus-visible background color. Auto-derived from focus-background or foreground.
+/// @param {Color} $focus-visible-foreground [null] - The focus-visible text color. Auto-derived from focus-visible-background.
+/// @param {Color} $active-background [null] - The active background of the button. Auto-derived from foreground.
+/// @param {Color} $active-foreground [null] - The active text color of the button. Auto-derived from active-background.
 /// @param {List} $border-radius [null] - The border radius of the button.
 /// @param {Color} $border-color [null] - The border color of the button.
 /// @param {Color} $hover-border-color [null] - The hover border color of the button.
 /// @param {Color} $focus-border-color [null] - The focus border color of the button.
-/// @param {Color} $focus-visible-border-color [null] - The focus-visible border color of the button.
+/// @param {Color} $focus-visible-border-color [null] - The focus-visible border color. Auto-derived from focus-border-color or focus-visible-foreground.
 /// @param {Color} $active-border-color [null] - The active border color of the button.
-/// @param {Color} $shadow-color [null] - The shadow color of the button.
+/// @param {Color} $shadow-color [null] - The shadow color of the button. Auto-derived from focus-visible-foreground.
 /// @param {Color} $disabled-background [null] - The disabled background color of the button.
-/// @param {Color} $disabled-foreground [null] - The disabled text color of the button.
-/// @param {Color} $disabled-icon-color [null] - The disabled icon color of the button.
+/// @param {Color} $disabled-foreground [null] - The disabled text color of the button. Auto-derived from foreground (bootstrap/indigo).
+/// @param {Color} $disabled-icon-color [null] - The disabled icon color of the button. Auto-derived from disabled-foreground.
 /// @param {Color} $disabled-border-color [null] - The disabled border color of the button.
 ///
 /// @requires $light-material-schema

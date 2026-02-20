@@ -14,47 +14,47 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only header background color is specified, that color will be
-/// used as the leading color for all accented elements, such as:
-/// - current date color
-/// - selected date background
-/// - picker elements hover colors
-/// - year/month hover/selected colors
-/// If only background colors are specified, text/icon colors
-/// will be assigned automatically to a contrasting color.
+/// Calendar Theme
+///
+/// PRIMARY TOKENS:
+/// - `$header-background` — The main accent color.
+/// - `$content-background` — The calendar body background.
+///
+/// Text and icon colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 ///
 /// @param {Number} $size [null] - Size of days, months, and years views.
 /// @param {Number} $inner-size [null] - Inner size for calendar elements.
-/// @param {Color} $weekday-color [null] - Color for weekday labels.
+/// @param {Color} $weekday-color [null] - Color for weekday labels. Auto-derived from content-background.
 /// @param {Color} $actions-divider-color [null] - Divider color for date-picker actions.
 /// @param {List} $border-radius [null] - Border radius for calendar container.
-/// @param {Color} $content-background [null] - Background color for calendar.
+/// @param {Color} $content-background [null] - Background color for calendar. PRIMARY - derives content-foreground, inactive-color, date-hover colors, week-number colors.
 /// @param {Color} $border-color [null] - Border color for calendar container.
-/// @param {Color} $header-background [null] - Header background color.
-/// @param {Color} $header-foreground [null] - Header foreground color.
-/// @param {Color} $picker-foreground [null] - Foreground for the calendar picker.
+/// @param {Color} $header-background [null] - Header background color. PRIMARY - derives header-foreground and most accent/selection colors.
+/// @param {Color} $header-foreground [null] - Header foreground color. Auto-derived from header-background.
+/// @param {Color} $picker-foreground [null] - Foreground for the calendar picker. Auto-derived from picker-background.
 /// @param {Color} $picker-background [null] - Background for the calendar picker.
-/// @param {Color} $picker-hover-foreground [null] - :Hover foreground for the calendar picker.
-/// @param {Color} $picker-focus-foreground [null] - :Focus foreground for the calendar picker.
-/// @param {Color} $navigation-color [null] - Icon color for month navigation.
-/// @param {Color} $navigation-hover-color [null] - :Hover color for navigation icons.
-/// @param {Color} $navigation-focus-color [null] - :Focus color for navigation icons.
+/// @param {Color} $picker-hover-foreground [null] - :Hover foreground for the calendar picker. Auto-derived from header-background.
+/// @param {Color} $picker-focus-foreground [null] - :Focus foreground for the calendar picker. Auto-derived from picker-hover-foreground.
+/// @param {Color} $navigation-color [null] - Icon color for month navigation. Auto-derived from picker-background.
+/// @param {Color} $navigation-hover-color [null] - :Hover color for navigation icons. Auto-derived from picker-hover-foreground.
+/// @param {Color} $navigation-focus-color [null] - :Focus color for navigation icons. Auto-derived from navigation-hover-color.
 /// @param {List} $ym-border-radius [null] - Border radius for year/month views.
-/// @param {Color} $ym-hover-foreground [null] - :Hover foreground for year/month.
-/// @param {Color} $ym-hover-background [null] - :Hover background for year/month.
-/// @param {Color} $ym-current-outline-color [null] - Outline color for current year/month.
+/// @param {Color} $ym-hover-foreground [null] - :Hover foreground for year/month. Auto-derived from ym-hover-background.
+/// @param {Color} $ym-hover-background [null] - :Hover background for year/month. Auto-derived from date-hover-background.
+/// @param {Color} $ym-current-outline-color [null] - Outline color for current year/month. Auto-derived from date-current-border-color.
 /// @param {Color} $ym-current-outline-hover-color [null] - :Hover outline color for current year/month.
 /// @param {Color} $ym-current-outline-focus-color [null] - :Focus outline color for current year/month.
 /// @param {Color} $ym-current-background [null] - Background for current year/month.
-/// @param {Color} $ym-current-foreground [null] - Foreground for current year/month.
+/// @param {Color} $ym-current-foreground [null] - Foreground for current year/month. Auto-derived from ym-current-background.
 /// @param {Color} $ym-current-hover-foreground [null] - :Hover foreground for current year/month.
 /// @param {Color} $ym-current-hover-background [null] - :Hover background for current year/month.
 /// @param {Color} $ym-selected-outline-color [null] - Outline color for selected year/month.
 /// @param {Color} $ym-selected-hover-outline-color [null] - :Hover outline color for selected year/month.
 /// @param {Color} $ym-selected-focus-outline-color [null] - :Focus outline color for selected year/month.
-/// @param {Color} $ym-selected-foreground [null] - Foreground for selected year/month.
-/// @param {Color} $ym-selected-background [null] - Background for selected year/month.
+/// @param {Color} $ym-selected-foreground [null] - Foreground for selected year/month. Auto-derived from ym-selected-background.
+/// @param {Color} $ym-selected-background [null] - Background for selected year/month. Auto-derived from header-background.
 /// @param {Color} $ym-selected-hover-foreground [null] - :Hover foreground for selected year/month.
 /// @param {Color} $ym-selected-hover-background [null] - :Hover background for selected year/month.
 /// @param {Color} $ym-selected-current-outline-color [null] - Outline color for selected current year/month.
@@ -65,25 +65,25 @@
 /// @param {Color} $ym-selected-current-hover-foreground [null] - :Hover foreground for selected current year/month.
 /// @param {Color} $ym-selected-current-hover-background [null] - :Hover background for selected current year/month.
 /// @param {List} $week-number-border-radius [null] - Border radius for week number column.
-/// @param {Color} $week-number-foreground [null] - Foreground for week number column.
-/// @param {Color} $week-number-background [null] - Background for week number column.
-/// @param {Color} $content-foreground [null] - The foreground color for idle dates.
-/// @param {Color} $weekend-color [null] - Color for weekend days.
-/// @param {Color} $inactive-color [null] - Color for inactive dates (outside current month).
+/// @param {Color} $week-number-foreground [null] - Foreground for week number column. Auto-derived from week-number-background.
+/// @param {Color} $week-number-background [null] - Background for week number column. Auto-derived from content-background.
+/// @param {Color} $content-foreground [null] - The foreground color for idle dates. Auto-derived from content-background.
+/// @param {Color} $weekend-color [null] - Color for weekend days. Auto-derived from content-foreground.
+/// @param {Color} $inactive-color [null] - Color for inactive dates (outside current month). Auto-derived from content-background.
 /// @param {List} $date-border-radius [null] - Border radius for date cells.
 /// @param {Color} $date-border-color [null] - Border color for date cells.
 /// @param {Color} $date-hover-border-color [null] - :Hover border color for date cells.
 /// @param {Color} $date-focus-border-color [null] - :Focus border color for date cells.
-/// @param {Color} $date-hover-background [null] - :Hover background for date cells.
-/// @param {Color} $date-focus-background [null] - :Focus background for date cells.
-/// @param {Color} $date-hover-foreground [null] - :Hover foreground for date cells.
-/// @param {Color} $date-focus-foreground [null] - :Focus foreground for date cells.
+/// @param {Color} $date-hover-background [null] - :Hover background for date cells. Auto-derived from content-background.
+/// @param {Color} $date-focus-background [null] - :Focus background for date cells. Auto-derived from date-hover-background.
+/// @param {Color} $date-hover-foreground [null] - :Hover foreground for date cells. Auto-derived from date-hover-background.
+/// @param {Color} $date-focus-foreground [null] - :Focus foreground for date cells. Auto-derived from date-hover-foreground.
 /// @param {Color} $date-selected-border-color [null] - Border color for selected date.
 /// @param {Color} $date-selected-hover-border-color [null] - :Hover border color for selected date.
 /// @param {Color} $date-selected-focus-border-color [null] - :Focus border color for selected date.
-/// @param {Color} $date-selected-background [null] - Background for selected date.
-/// @param {Color} $date-selected-foreground [null] - Foreground for selected date.
-/// @param {Color} $date-selected-hover-background [null] - :Hover background for selected date.
+/// @param {Color} $date-selected-background [null] - Background for selected date. Auto-derived from header-background.
+/// @param {Color} $date-selected-foreground [null] - Foreground for selected date. Auto-derived from date-selected-background.
+/// @param {Color} $date-selected-hover-background [null] - :Hover background for selected date. Auto-derived from date-selected-background.
 /// @param {Color} $date-selected-focus-background [null] - :Focus background for selected date.
 /// @param {Color} $date-selected-hover-foreground [null] - :Hover foreground for selected date.
 /// @param {Color} $date-selected-focus-foreground [null] - :Focus foreground for selected date.
@@ -134,7 +134,7 @@
 /// @param {Color} $date-special-border-color [null] - Border color for special date.
 /// @param {Color} $date-special-hover-border-color [null] - :Hover border color for special date.
 /// @param {Color} $date-special-focus-border-color [null] - :Focus border color for special date.
-/// @param {Color} $date-special-foreground [null] - Foreground for special date.
+/// @param {Color} $date-special-foreground [null] - Foreground for special date. Auto-derived from header-background.
 /// @param {Color} $date-special-background [null] - Background for special date.
 /// @param {Color} $date-special-hover-foreground [null] - :Hover foreground for special date.
 /// @param {Color} $date-special-hover-background [null] - :Hover background for special date.

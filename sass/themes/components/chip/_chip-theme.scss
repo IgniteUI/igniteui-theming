@@ -14,12 +14,19 @@
 ////
 
 /// Chip Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The main chip background.
+/// - `$selected-background` — Selected state background.
+///
+/// Setting just `$background` will create a complete chip theme with all states properly derived.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {List} $border-radius [null] - The chip border-radius.
 ///
-/// @param {Color} $text-color [null] - The chip text color.
-/// @param {Color} $background [null] - The chip background color.
-/// @param {Color} $border-color [null] - The chip border color.
+/// @param {Color} $text-color [null] - The chip text color. Auto-derived from background.
+/// @param {Color} $background [null] - The chip background color. PRIMARY - derives text-color, border-color, hover/focus states.
+/// @param {Color} $border-color [null] - The chip border color. Auto-derived from background.
 ///
 /// @param {Color} $disabled-text-color [null] - The disabled chip text color.
 /// @param {Color} $disabled-background [null] - The disabled chip background color.
@@ -29,25 +36,25 @@
 /// @param {Color} $ghost-text-color [null] - The chip ghost text color.
 /// @param {box-shadow} $ghost-shadow [null] - The chip ghost shadow.
 ///
-/// @param {Color} $hover-text-color [null] - The chip text hover color.
-/// @param {Color} $hover-background [null] - The chip hover background color.
-/// @param {Color} $hover-border-color [null] - The chip hover border color.
+/// @param {Color} $hover-text-color [null] - The chip text hover color. Auto-derived from hover-background.
+/// @param {Color} $hover-background [null] - The chip hover background color. Auto-derived from background.
+/// @param {Color} $hover-border-color [null] - The chip hover border color. Auto-derived from hover-background.
 ///
-/// @param {Color} $focus-text-color [null] - The chip text focus color.
-/// @param {Color} $focus-background [null] - The chip focus background color.
-/// @param {color} $focus-border-color [null] - The chip focus border color.
+/// @param {Color} $focus-text-color [null] - The chip text focus color. Auto-derived from focus-background.
+/// @param {Color} $focus-background [null] - The chip focus background color. Auto-derived from background.
+/// @param {color} $focus-border-color [null] - The chip focus border color. Auto-derived from focus-background.
 ///
-/// @param {color} $selected-text-color [null] - The selected chip text color.
-/// @param {color} $selected-background [null] - The selected chip background color.
-/// @param {color} $selected-border-color [null] The selected chip border color.
+/// @param {color} $selected-text-color [null] - The selected chip text color. Auto-derived from selected-background.
+/// @param {color} $selected-background [null] - The selected chip background color. Auto-derived from background.
+/// @param {color} $selected-border-color [null] The selected chip border color. Auto-derived from selected-background.
 ///
-/// @param {color} $hover-selected-text-color [null] - The selected chip hover text color.
-/// @param {color} $hover-selected-background [null] - The selected chip hover background color.
-/// @param {color} $hover-selected-border-color [null] - The selected chip hover border color.
+/// @param {color} $hover-selected-text-color [null] - The selected chip hover text color. Auto-derived from hover-selected-background.
+/// @param {color} $hover-selected-background [null] - The selected chip hover background color. Auto-derived from selected-background.
+/// @param {color} $hover-selected-border-color [null] - The selected chip hover border color. Auto-derived from hover-selected-background.
 ///
-/// @param {color} $focus-selected-text-color [null] - The selected chip text focus color.
-/// @param {color} $focus-selected-background [null] - The selected chip focus background color.
-/// @param {color} $focus-selected-border-color [null] - The selected chip focus border color.
+/// @param {color} $focus-selected-text-color [null] - The selected chip text focus color. Auto-derived from focus-selected-background.
+/// @param {color} $focus-selected-background [null] - The selected chip focus background color. Auto-derived from selected-background.
+/// @param {color} $focus-selected-border-color [null] - The selected chip focus border color. Auto-derived from focus-selected-background.
 ///
 /// @param {color} $remove-icon-color [null] - The remove icon color for the chip.
 /// @param {color} $remove-icon-color-focus [null] - The remove icon color on focus for the chip.
