@@ -82,15 +82,19 @@ describe("detectPlatformFromDependencies", () => {
 			expect(result.confidence).toBe("high");
 		});
 
-		it("detects Angular from angular.json config file", () => {
+		it("detects Angular from angular.json config file with Ignite UI package", () => {
 			mockExistsSync.mockImplementation((path) => {
 				return String(path).includes("angular.json");
 			});
 
-			const result = detectPlatformFromDependencies({}, {}, "/project");
+			const result = detectPlatformFromDependencies(
+				{ "igniteui-angular": "^18.0.0" },
+				{},
+				"/project",
+			);
 
 			expect(result.platform).toBe("angular");
-			expect(result.confidence).toBe("high"); // 80 rounds to high
+			expect(result.confidence).toBe("high");
 			expect(result.signals).toContainEqual({
 				type: "config_file",
 				file: "angular.json",
@@ -98,13 +102,29 @@ describe("detectPlatformFromDependencies", () => {
 			});
 		});
 
-		it("uses @angular/core as fallback with low confidence", () => {
+		it("returns generic when angular.json exists but no Ignite UI package", () => {
+			mockExistsSync.mockImplementation((path) => {
+				return String(path).includes("angular.json");
+			});
+
+			const result = detectPlatformFromDependencies({}, {}, "/project");
+
+			expect(result.platform).toBe("generic");
+			expect(result.confidence).toBe("low");
+			expect(result.signals).toContainEqual({
+				type: "config_file",
+				file: "angular.json",
+				confidence: 80,
+			});
+		});
+
+		it("returns generic with @angular/core only (no Ignite UI package)", () => {
 			const result = detectPlatformFromDependencies(
 				{ "@angular/core": "^18.0.0" },
 				{},
 			);
 
-			expect(result.platform).toBe("angular");
+			expect(result.platform).toBe("generic");
 			expect(result.confidence).toBe("low");
 			expect(result.signals).toContainEqual({
 				type: "framework_package",
@@ -136,10 +156,10 @@ describe("detectPlatformFromDependencies", () => {
 			expect(result.confidence).toBe("high");
 		});
 
-		it("uses lit as fallback with low confidence", () => {
+		it("returns generic with lit only (no Ignite UI package)", () => {
 			const result = detectPlatformFromDependencies({ lit: "^3.0.0" }, {});
 
-			expect(result.platform).toBe("webcomponents");
+			expect(result.platform).toBe("generic");
 			expect(result.confidence).toBe("low");
 			expect(result.signals).toContainEqual({
 				type: "framework_package",
@@ -171,7 +191,7 @@ describe("detectPlatformFromDependencies", () => {
 			expect(result.confidence).toBe("high");
 		});
 
-		it("detects React from vite.config.ts with @vitejs/plugin-react", () => {
+		it("returns generic from vite.config.ts with React plugin but no Ignite UI package", () => {
 			mockExistsSync.mockImplementation((path) => {
 				return String(path).includes("vite.config.ts");
 			});
@@ -183,6 +203,31 @@ describe("detectPlatformFromDependencies", () => {
 
 			const result = detectPlatformFromDependencies({}, {}, "/project");
 
+			expect(result.platform).toBe("generic");
+			expect(result.confidence).toBe("low");
+			expect(result.signals).toContainEqual({
+				type: "config_file",
+				file: "vite.config.ts",
+				confidence: 80,
+			});
+		});
+
+		it("detects React from vite.config.ts with React plugin and Ignite UI package", () => {
+			mockExistsSync.mockImplementation((path) => {
+				return String(path).includes("vite.config.ts");
+			});
+			mockReadFileSync.mockReturnValue(`
+        import { defineConfig } from 'vite';
+        import react from '@vitejs/plugin-react';
+        export default defineConfig({ plugins: [react()] });
+      `);
+
+			const result = detectPlatformFromDependencies(
+				{ "igniteui-react": "^18.0.0" },
+				{},
+				"/project",
+			);
+
 			expect(result.platform).toBe("react");
 			expect(result.confidence).toBe("high");
 			expect(result.signals).toContainEqual({
@@ -192,12 +237,32 @@ describe("detectPlatformFromDependencies", () => {
 			});
 		});
 
-		it("detects React from next.config.js", () => {
+		it("returns generic from next.config.js without Ignite UI package", () => {
 			mockExistsSync.mockImplementation((path) => {
 				return String(path).includes("next.config.js");
 			});
 
 			const result = detectPlatformFromDependencies({}, {}, "/project");
+
+			expect(result.platform).toBe("generic");
+			expect(result.confidence).toBe("low");
+			expect(result.signals).toContainEqual({
+				type: "config_file",
+				file: "next.config.js",
+				confidence: 80,
+			});
+		});
+
+		it("detects React from next.config.js with Ignite UI package", () => {
+			mockExistsSync.mockImplementation((path) => {
+				return String(path).includes("next.config.js");
+			});
+
+			const result = detectPlatformFromDependencies(
+				{ "igniteui-react": "^18.0.0" },
+				{},
+				"/project",
+			);
 
 			expect(result.platform).toBe("react");
 			expect(result.confidence).toBe("high");
@@ -208,13 +273,13 @@ describe("detectPlatformFromDependencies", () => {
 			});
 		});
 
-		it("uses react package as fallback with low confidence", () => {
+		it("returns generic with react package only (no Ignite UI package)", () => {
 			const result = detectPlatformFromDependencies(
 				{ react: "^18.0.0", "react-dom": "^18.0.0" },
 				{},
 			);
 
-			expect(result.platform).toBe("react");
+			expect(result.platform).toBe("generic");
 			expect(result.confidence).toBe("low");
 			expect(result.signals).toContainEqual({
 				type: "framework_package",
@@ -249,7 +314,7 @@ describe("detectPlatformFromDependencies", () => {
 			});
 		});
 
-		it("detects Blazor SDK without IgniteUI with low confidence", () => {
+		it("returns generic for Blazor SDK without IgniteUI", () => {
 			mockExistsSync.mockReturnValue(false);
 			mockReaddirSync.mockReturnValue(["MyApp.csproj"] as unknown as ReturnType<
 				typeof readdirSync
@@ -264,7 +329,7 @@ describe("detectPlatformFromDependencies", () => {
 
 			const result = detectPlatformFromDependencies({}, {}, "/project");
 
-			expect(result.platform).toBe("blazor");
+			expect(result.platform).toBe("generic");
 			expect(result.confidence).toBe("low");
 			expect(result.signals).toContainEqual({
 				type: "config_file",
@@ -294,7 +359,7 @@ describe("detectPlatformFromDependencies", () => {
 			).toEqual(["angular", "react"]);
 		});
 
-		it("returns ambiguous when angular.json and next.config.js both exist", () => {
+		it("returns generic (not ambiguous) when angular.json and next.config.js both exist without Ignite UI", () => {
 			mockExistsSync.mockImplementation((path) => {
 				const pathStr = String(path);
 				return (
@@ -303,6 +368,28 @@ describe("detectPlatformFromDependencies", () => {
 			});
 
 			const result = detectPlatformFromDependencies({}, {}, "/project");
+
+			// Without Ignite UI product packages, config-only signals resolve to generic
+			expect(result.platform).toBe("generic");
+			expect(result.confidence).toBe("low");
+		});
+
+		it("returns ambiguous when angular.json and next.config.js both exist with Ignite UI packages", () => {
+			mockExistsSync.mockImplementation((path) => {
+				const pathStr = String(path);
+				return (
+					pathStr.includes("angular.json") || pathStr.includes("next.config.js")
+				);
+			});
+
+			const result = detectPlatformFromDependencies(
+				{
+					"igniteui-angular": "^18.0.0",
+					"igniteui-react": "^18.0.0",
+				},
+				{},
+				"/project",
+			);
 
 			expect(result.platform).toBeNull();
 			expect(result.ambiguous).toBe(true);
@@ -355,19 +442,19 @@ describe("detectPlatformFromDependencies", () => {
 	});
 
 	describe("No platform detected", () => {
-		it("returns null platform with none confidence when no matches", () => {
+		it("returns generic platform with none confidence when no matches", () => {
 			const result = detectPlatformFromDependencies({ lodash: "^4.17.0" }, {});
 
-			expect(result.platform).toBeNull();
+			expect(result.platform).toBe("generic");
 			expect(result.confidence).toBe("none");
 			expect(result.signals).toEqual([]);
 			expect(result.reason).toContain("No Ignite UI packages");
 		});
 
-		it("returns null platform when dependencies are empty", () => {
+		it("returns generic platform when dependencies are empty", () => {
 			const result = detectPlatformFromDependencies({}, {});
 
-			expect(result.platform).toBeNull();
+			expect(result.platform).toBe("generic");
 			expect(result.confidence).toBe("none");
 		});
 	});
@@ -388,13 +475,34 @@ describe("detectPlatformFromDependencies", () => {
 			// Should not include framework fallback since we have high confidence
 		});
 
-		it("prefers config file over framework fallback", () => {
+		it("returns generic with config file + framework package but no Ignite UI product", () => {
 			mockExistsSync.mockImplementation((path) => {
 				return String(path).includes("angular.json");
 			});
 
 			const result = detectPlatformFromDependencies(
 				{ "@angular/core": "^18.0.0" },
+				{},
+				"/project",
+			);
+
+			// Without Ignite UI product, returns generic despite strong config+framework signals
+			expect(result.platform).toBe("generic");
+			expect(result.confidence).toBe("low");
+			expect(result.signals).toContainEqual({
+				type: "config_file",
+				file: "angular.json",
+				confidence: 80,
+			});
+		});
+
+		it("prefers config file over framework fallback with Ignite UI package", () => {
+			mockExistsSync.mockImplementation((path) => {
+				return String(path).includes("angular.json");
+			});
+
+			const result = detectPlatformFromDependencies(
+				{ "@angular/core": "^18.0.0", "igniteui-angular": "^18.0.0" },
 				{},
 				"/project",
 			);

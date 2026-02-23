@@ -6,7 +6,7 @@ Document theme generation behavior and platform-specific output patterns.
 
 ### Requirement: Theme generation is platform-aware
 
-The `create_theme` tool generates Sass output that follows platform-specific conventions.
+The `create_theme` tool generates Sass output that follows platform-specific conventions. When no platform is specified (generic path), the output SHALL include the necessary preset imports for typography and elevation variables.
 
 #### Scenario: Angular output
 
@@ -30,6 +30,32 @@ The `create_theme` tool generates Sass output that follows platform-specific con
 
 - **WHEN** `platform` is not specified
 - **THEN** the response includes a hint to specify `platform`
+
+#### Scenario: Generic output includes typography preset import
+
+- **WHEN** `platform` is not specified (generic path)
+- **AND** `includeTypography` is not `false`
+- **THEN** the output MUST include `@use 'igniteui-theming/sass/typography/presets/<designSystem>' as *;`
+- **AND** this import MUST appear after the base `@use 'igniteui-theming' as *;` statement
+
+#### Scenario: Generic output includes elevations preset import
+
+- **WHEN** `platform` is not specified (generic path)
+- **AND** `includeElevations` is not `false`
+- **THEN** the output MUST include `@use 'igniteui-theming/sass/elevations/presets' as *;`
+- **AND** this import MUST appear after the base `@use 'igniteui-theming' as *;` statement
+
+#### Scenario: Generic output omits typography preset import when excluded
+
+- **WHEN** `platform` is not specified (generic path)
+- **AND** `includeTypography: false` is provided
+- **THEN** the output MUST NOT include a typography preset `@use` import
+
+#### Scenario: Generic output omits elevations preset import when excluded
+
+- **WHEN** `platform` is not specified (generic path)
+- **AND** `includeElevations: false` is provided
+- **THEN** the output MUST NOT include an elevations preset `@use` import
 
 ### Requirement: Theme includes optional sections by flags
 

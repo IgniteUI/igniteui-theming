@@ -358,7 +358,7 @@ function buildReadResourceDescription(): string {
 	> = {
 		Platforms: [],
 		Presets: [],
-		"Color Guidance": [],
+		Guidance: [],
 		"Layout Docs": [],
 	};
 
@@ -368,7 +368,7 @@ function buildReadResourceDescription(): string {
 		} else if (r.uri.includes("://presets/")) {
 			groups.Presets.push(r);
 		} else if (r.uri.includes("://guidance/")) {
-			groups["Color Guidance"].push(r);
+			groups.Guidance.push(r);
 		} else if (r.uri.includes("://docs/")) {
 			groups["Layout Docs"].push(r);
 		}

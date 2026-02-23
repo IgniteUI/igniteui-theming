@@ -265,6 +265,34 @@ describe("layout handlers", () => {
 		expect(text).toContain("--ig-radius-factor: 0.8;");
 		expect(text).toContain("igx-avatar");
 	});
+
+	it("set_size with generic platform and component merges selectors like undefined", async () => {
+		const resultGeneric = await handleSetSize({
+			size: "small",
+			component: "avatar",
+			platform: "generic",
+		});
+
+		const resultUndefined = await handleSetSize({
+			size: "small",
+			component: "avatar",
+		});
+
+		// Both should produce the same merged-selectors output
+		expect(resultGeneric.content[0].text).toBe(resultUndefined.content[0].text);
+	});
+
+	it("set_size with generic platform and scope works correctly", async () => {
+		const result = await handleSetSize({
+			size: "large",
+			scope: ".my-section",
+			platform: "generic",
+		});
+
+		const text = result.content[0].text;
+		expect(text).toContain("--ig-size: 3;");
+		expect(text).toContain(".my-section");
+	});
 });
 
 describe("handleCreateElevations", () => {
@@ -393,6 +421,22 @@ describe("handleCreateComponentTheme", () => {
 		expect(text).toContain("Error");
 		expect(text).toContain("platform");
 		expect(text).toContain("required");
+	});
+
+	it("returns error when platform is generic", async () => {
+		const result = await handleCreateComponentTheme({
+			platform: "generic",
+			component: "avatar",
+			tokens: {
+				background: "#ff5722",
+			},
+		});
+
+		expect(result.isError).toBe(true);
+		const text = result.content[0].text;
+		expect(text).toContain("Error");
+		expect(text).toContain("generic");
+		expect(text).toContain("not supported");
 	});
 
 	it("returns MCP response format for valid component", async () => {

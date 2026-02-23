@@ -20,12 +20,14 @@
  * - webcomponents: Ignite UI for Web Components (uses igniteui-theming directly)
  * - react: Ignite UI for React (uses igniteui-theming directly)
  * - blazor: Ignite UI for Blazor (uses igniteui-theming for Sass compilation)
+ * - generic: Platform-agnostic output using igniteui-theming directly (no Ignite UI product)
  */
 export const PLATFORMS = [
 	"angular",
 	"webcomponents",
 	"react",
 	"blazor",
+	"generic",
 ] as const;
 
 /**

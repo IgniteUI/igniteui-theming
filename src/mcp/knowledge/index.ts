@@ -124,11 +124,9 @@ export {
 	type FrameworkDetectionSignal,
 	generateAngularThemeSass,
 	generateWebComponentsThemeSass,
-	getVariablePrefix,
 	isLicensedPackage,
 	type PackageDetectionSignal,
 	PLATFORM_METADATA,
-	PLATFORM_VARIABLE_PREFIX,
 	// Platform utilities
 	type Platform,
 	type PlatformAlternative,

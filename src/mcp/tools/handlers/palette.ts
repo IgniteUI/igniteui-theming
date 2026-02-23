@@ -4,6 +4,7 @@
 
 import { formatCssOutput, generatePaletteCss } from "../../generators/css.js";
 import { generatePalette } from "../../generators/sass.js";
+import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
 import {
 	formatValidationResult,
 	generateWarningComments,
@@ -136,7 +137,7 @@ function handleSassOutput(
 
 	// Add platform hint if not specified
 	const platformNote = params.platform
-		? `Platform: ${params.platform === "angular" ? "Ignite UI for Angular" : "Ignite UI for Web Components"}`
+		? `Platform: ${PLATFORM_METADATA[params.platform]?.name ?? params.platform}`
 		: "Platform: Not specified (generic output). Specify `platform` for optimized code.";
 	responseParts.push("");
 	responseParts.push(platformNote);
