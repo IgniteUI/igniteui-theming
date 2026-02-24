@@ -15,6 +15,7 @@ import {
 	searchComponents,
 	validateTokens,
 } from "../../knowledge/index.js";
+import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
 import type { CreateComponentThemeParams } from "../schemas.js";
 
 export async function handleCreateComponentTheme(
@@ -46,6 +47,26 @@ export async function handleCreateComponentTheme(
 - \`blazor\` - Ignite UI for Blazor
 
 Please specify which platform you're using to generate the correct variable prefixes and selectors.`,
+				},
+			],
+			isError: true,
+		};
+	}
+
+	if (platform === "generic") {
+		return {
+			content: [
+				{
+					type: "text" as const,
+					text: `**Error:** \`create_component_theme\` requires a specific Ignite UI product platform.
+
+The \`"generic"\` platform is not supported for component theming because component selectors and variable prefixes are platform-specific and do not exist in generic mode.
+
+**Valid platforms:**
+- \`angular\` - Ignite UI for Angular
+- \`webcomponents\` - Ignite UI for Web Components
+- \`react\` - Ignite UI for React
+- \`blazor\` - Ignite UI for Blazor`,
 				},
 			],
 			isError: true,
@@ -112,7 +133,7 @@ Please use \`create_component_theme\` with one of the specific variant names abo
 			if (availability?.webcomponents)
 				availablePlatforms.push("Web Components");
 
-			const error = `**Error:** The \`${component}\` component is not available on ${platform === "angular" ? "Ignite UI for Angular" : "Ignite UI for Web Components"}. ${availablePlatforms.length > 0 ? `It is available on: ${availablePlatforms.join(", ")}.` : ""}`;
+			const error = `**Error:** The \`${component}\` component is not available on ${PLATFORM_METADATA[platform]?.name ?? platform}. ${availablePlatforms.length > 0 ? `It is available on: ${availablePlatforms.join(", ")}.` : ""}`;
 
 			return {
 				content: [{ type: "text" as const, text: error }],
@@ -200,7 +221,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
 			// Platform info
 			const platformNote = platform
-				? `Platform: ${platform === "angular" ? "Ignite UI for Angular" : `Ignite UI for ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}`
+				? `Platform: ${PLATFORM_METADATA[platform]?.name ?? platform}`
 				: "Platform: Not specified (generic output). Specify `platform` for optimized imports.";
 			responseParts.push(platformNote);
 
@@ -270,7 +291,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
 		// Platform info
 		const platformNote = platform
-			? `Platform: ${platform === "angular" ? "Ignite UI for Angular" : `Ignite UI for ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}`
+			? `Platform: ${PLATFORM_METADATA[platform]?.name ?? platform}`
 			: "Platform: Not specified (generic output). Specify `platform` for optimized imports.";
 		responseParts.push(platformNote);
 

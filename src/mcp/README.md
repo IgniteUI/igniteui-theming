@@ -81,7 +81,7 @@ Create or edit `.vscode/mcp.json`:
 
 ```json
 {
-  "mcp.servers": {
+  "servers": {
     "igniteui-theming": {
       "command": "node",
       "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
@@ -94,7 +94,7 @@ Create or edit `.vscode/mcp.json`:
 
 ```json
 {
-  "mcp.servers": {
+  "servers": {
     "igniteui-theming": {
       "command": "npx",
       "args": ["-y", "igniteui-theming-mcp"]
@@ -107,7 +107,7 @@ Create or edit `.vscode/mcp.json`:
 
 ```json
 {
-  "mcp.servers": {
+  "servers": {
     "igniteui-theming": {
       "command": "npx",
       "args": ["-y", "igniteui-theming", "ignitui-theming-mcp"]
@@ -184,7 +184,7 @@ Create or edit `.cursor/mcp.json` in your project:
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "igniteui-theming": {
       "command": "node",
       "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
@@ -197,7 +197,7 @@ Create or edit `.cursor/mcp.json` in your project:
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "igniteui-theming": {
       "command": "npx",
       "args": ["igniteui-theming-mcp"]
@@ -210,7 +210,7 @@ Create or edit `.cursor/mcp.json` in your project:
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "igniteui-theming": {
       "command": "npx",
       "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]

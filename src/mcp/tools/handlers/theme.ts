@@ -95,6 +95,9 @@ export async function handleCreateTheme(params: CreateThemeParams) {
 		case "blazor":
 			platformNote = "Platform: Ignite UI for Blazor";
 			break;
+		case "generic":
+			platformNote = "Platform: Ignite UI Theming (Standalone)";
+			break;
 		default:
 			platformNote =
 				"Platform: Not specified (generic output). Specify `platform` for optimized code.";

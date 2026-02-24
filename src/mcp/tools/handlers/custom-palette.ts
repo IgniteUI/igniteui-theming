@@ -10,6 +10,7 @@ import {
 	PALETTE_PRESETS,
 	type PalettePresetName,
 } from "../../knowledge/palettes.js";
+import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
 import {
 	generateCustomPaletteCode,
 	generateHeader,
@@ -273,7 +274,7 @@ ${paletteLines.join("\n")}
 
 	// Add platform hint
 	const platformNote = params.platform
-		? `Platform: ${params.platform === "angular" ? "Ignite UI for Angular" : "Ignite UI for Web Components"}`
+		? `Platform: ${PLATFORM_METADATA[params.platform]?.name ?? params.platform}`
 		: "Platform: Not specified (generic output). Specify `platform` for optimized code.";
 	responseParts.push("");
 	responseParts.push(platformNote);
