@@ -13,9 +13,13 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Pivot Data Selector Theme
+///
+/// NOTE: This component has no automatic token derivation.
+/// All tokens are directly passed to the schema without calculations.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 @function pivot-data-selector-theme($schema: $light-material-schema, $background: null) {
-    $name: 'igx-pivot-data-selector';
     $selector: '.igx-pivot-data-selector';
     $pivot-data-selector-schema: ();
 
@@ -30,7 +34,7 @@
     @return extend(
         $theme,
         (
-            name: $name,
+            selector: $selector,
         )
     );
 }

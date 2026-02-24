@@ -8,6 +8,16 @@
 /// @access public
 ////
 
+/// Generates a base dark radio schema.
+/// @access private
+/// @type {Map}
+$dark-base-radio: (
+    _meta: (
+        name: 'radio',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material radio schema.
 /// @type {Map}
 /// @prop {Map} error-color [color: ('error', 500)] - The label, border and dot color in invalid state.
@@ -15,6 +25,7 @@
 /// @requires $material-radio
 $dark-material-radio: extend(
     $material-radio,
+    $dark-base-radio,
     (
         error-color: (
             color: (
@@ -28,11 +39,6 @@ $dark-material-radio: extend(
                 'error',
                 500,
             ),
-        ),
-
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -52,6 +58,7 @@ $dark-material-radio: extend(
 /// @requires $fluent-radio
 $dark-fluent-radio: extend(
     $fluent-radio,
+    $dark-base-radio,
     (
         hover-color: (
             color: (
@@ -113,10 +120,6 @@ $dark-fluent-radio: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -131,6 +134,7 @@ $dark-fluent-radio: extend(
 /// @prop {Map} disabled-label-color [color: ('gray', 300)] - The disabled label color.
 $dark-bootstrap-radio: extend(
     $bootstrap-radio,
+    $dark-base-radio,
     (
         focus-outline-color: (
             color: (
@@ -170,10 +174,6 @@ $dark-bootstrap-radio: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -192,6 +192,7 @@ $dark-bootstrap-radio: extend(
 /// @requires $indigo-radio
 $dark-indigo-radio: extend(
     $indigo-radio,
+    $dark-base-radio,
     (
         label-color: (
             contrast-color: (
@@ -252,10 +253,6 @@ $dark-indigo-radio: extend(
                 500,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

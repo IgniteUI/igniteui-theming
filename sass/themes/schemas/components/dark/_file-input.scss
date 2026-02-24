@@ -8,6 +8,16 @@
 /// @access public
 ////
 
+/// Generates a base dark file-input schema.
+/// @access private
+/// @type {Map}
+$dark-base-file-input: (
+    _meta: (
+        name: 'file-input',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark fluent combo schema.
 /// @type {Map}
 /// @prop {Map} file-names-foreground--disabled [color: ('gray', 300)] - The file names color when the file input is disabled.
@@ -15,6 +25,7 @@
 /// @requires $fluent-file-input
 $dark-fluent-file-input: extend(
     $fluent-file-input,
+    $dark-base-file-input,
     (
         file-names-foreground--disabled: (
             color: (
@@ -28,25 +39,13 @@ $dark-fluent-file-input: extend(
                 200,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark bootstrap combo schema.
 /// @type {Map}
 /// @requires $bootstrap-file-input
-$dark-bootstrap-file-input: extend(
-    $bootstrap-file-input,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-file-input: extend($bootstrap-file-input, $dark-base-file-input);
 
 /// Generates a dark indigo combo schema.
 /// @type {Map}
@@ -59,6 +58,7 @@ $dark-bootstrap-file-input: extend(
 /// @requires $indigo-file-input
 $dark-indigo-file-input: extend(
     $indigo-file-input,
+    $dark-base-file-input,
     (
         file-names-foreground: (
             contrast-color: (
@@ -100,22 +100,10 @@ $dark-indigo-file-input: extend(
                 0.2,
             ),
         ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark material combo schema.
 /// @type {Map}
 /// @requires $material-file-input
-$dark-material-file-input: extend(
-    $material-file-input,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-file-input: extend($material-file-input, $dark-base-file-input);

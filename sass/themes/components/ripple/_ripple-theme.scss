@@ -13,6 +13,10 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Ripple Theme
+///
+/// This theme has no automatic token derivation. Only one token: color.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $color [null] - The color of the ripple.
 /// @requires $light-material-schema
@@ -21,7 +25,6 @@
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-ripple-theme);
 @function ripple-theme($schema: $light-material-schema, $color: null) {
-    $name: #{config.variable-prefix() + '-' + 'ripple'};
     $selector: (#{config.element-prefix() + '-' + 'ripple'}, #{'[' + config.element-prefix() + 'Ripple]'});
     $ripple-schema: ();
 
@@ -36,7 +39,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             color: $color,
         )

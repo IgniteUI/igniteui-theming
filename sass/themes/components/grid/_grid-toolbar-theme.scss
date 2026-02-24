@@ -14,15 +14,25 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Grid Toolbar Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background-color` — The toolbar background color.
+/// - `$dropdown-background` — The toolbar drop-down background color.
+/// - `$item-hover-background` — The drop-down item hover background.
+/// - `$item-focus-background` — The drop-down item focus background.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background-color [null] - The toolbar background color.
-/// @param {Color} $title-text-color [null] - The toolbar title text color.
-/// @param {Color} $dropdown-background [null] - The toolbar drop-down background color.
-/// @param {Color} $item-text-color [null] - The toolbar drop-down item text color.
-/// @param {Color} $item-hover-background [null] - The toolbar drop-down item hover background color.
-/// @param {Color} $item-hover-text-color [null] - The toolbar drop-down item hover text color.
-/// @param {Color} $item-focus-background [null] - The toolbar drop-down item focus background color.
-/// @param {Color} $item-focus-text-color [null] - The toolbar drop-down item focus text color.
+/// @param {Color} $background-color [null] - The toolbar background color. PRIMARY - derives title-text-color.
+/// @param {Color} $title-text-color [null] - The toolbar title text color. Auto-derived from background-color.
+/// @param {Color} $dropdown-background [null] - The toolbar drop-down background color. PRIMARY - derives item-text-color.
+/// @param {Color} $item-text-color [null] - The toolbar drop-down item text color. Auto-derived from dropdown-background.
+/// @param {Color} $item-hover-background [null] - The toolbar drop-down item hover background color. PRIMARY - derives item-hover-text-color.
+/// @param {Color} $item-hover-text-color [null] - The toolbar drop-down item hover text color. Auto-derived from dropdown-background or item-hover-background.
+/// @param {Color} $item-focus-background [null] - The toolbar drop-down item focus background color. PRIMARY - derives item-focus-text-color.
+/// @param {Color} $item-focus-text-color [null] - The toolbar drop-down item focus text color. Auto-derived from dropdown-background or item-focus-background.
 /// @param {Color} $border-color [null] - The toolbar border-bottom color.
 /// @requires $light-material-schema
 /// @example scss Change the toolbar background color
@@ -46,7 +56,6 @@
     $size: null,
     $border-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'grid-toolbar'};
     $selector: (#{config.element-prefix() + '-' + 'grid-toolbar'}, '.igx-grid-toolbar__dd-list');
     $grid-toolbar-schema: ();
 
@@ -85,7 +94,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background-color: $background-color,
             title-text-color: $title-text-color,

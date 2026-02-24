@@ -12,10 +12,16 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// Column actions Theme
+/// Column Actions Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background-color` — The background color of the panel.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $title-color [null]- The text color used for the title of the list.
-/// @param {Color} $background-color [null] - The background color of the panel.
+/// @param {Color} $title-color [null]- The text color used for the title of the list. Auto-derived from background-color.
+/// @param {Color} $background-color [null] - The background color of the panel. PRIMARY - derives title-color.
 ///
 /// @requires $light-material-schema
 ///
@@ -30,7 +36,6 @@
     $title-color: null,
     $background-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'column-actions'};
     $selector: #{config.element-prefix() + '-' + 'column-actions'};
     $column-actions-schema: ();
 
@@ -49,7 +54,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             title-color: $title-color,
             background-color: $background-color,

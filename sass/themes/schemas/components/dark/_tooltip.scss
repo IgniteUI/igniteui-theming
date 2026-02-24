@@ -8,44 +8,30 @@
 /// @access public
 ////
 
+/// Generates a base dark tooltip schema.
+/// @access private
+/// @type {Map}
+$dark-base-tooltip: (
+    _meta: (
+        name: 'tooltip',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material tooltip schema.
 /// @type {Map}
 /// @requires $material-tooltip
-$dark-material-tooltip: extend(
-    $material-tooltip,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-tooltip: extend($material-tooltip, $dark-base-tooltip);
 
 /// Generates a dark fluent tooltip schema.
 /// @type {Map}
 /// @requires $fluent-tooltip
-$dark-fluent-tooltip: extend(
-    $fluent-tooltip,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-tooltip: extend($fluent-tooltip, $dark-base-tooltip);
 
 /// Generates a dark bootstrap tooltip schema.
 /// @type {Map}
 /// @requires $bootstrap-tooltip
-$dark-bootstrap-tooltip: extend(
-    $bootstrap-tooltip,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-bootstrap-tooltip: extend($bootstrap-tooltip, $dark-base-tooltip);
 
 /// Generates a dark indigo tooltip schema.
 /// @type {Map}
@@ -57,6 +43,7 @@ $dark-bootstrap-tooltip: extend(
 $dark-indigo-tooltip: extend(
     $indigo-tooltip,
     $dark-indigo-elevation-tooltip,
+    $dark-base-tooltip,
     (
         background: (
             color: (
@@ -70,10 +57,6 @@ $dark-indigo-tooltip: extend(
                 'gray',
                 50,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

@@ -89,6 +89,11 @@ $light-grid-toolbar: (
             300,
         ),
     ),
+
+    _meta: (
+        name: 'grid-toolbar',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material grid-toolbar schema.
@@ -99,7 +104,6 @@ $material-grid-toolbar: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -117,7 +121,6 @@ $fluent-grid-toolbar: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -135,9 +138,9 @@ $bootstrap-grid-toolbar: extend(
                 100,
             ),
         ),
+
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -163,9 +166,9 @@ $indigo-grid-toolbar: extend(
                 400,
             ),
         ),
+
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

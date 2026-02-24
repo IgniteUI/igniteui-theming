@@ -14,16 +14,23 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified,
-/// the label and icon colors will be assigned automatically to a contrasting color.
+/// Bottom Navigation Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The bar background color.
+/// - `$label-color` or `$icon-color` - Idle state colors. Either one derives the other, plus disabled colors.
+/// - `$label-selected-color` or `$icon-selected-color` - Selected state colors. Either one derives the other.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The background color used for the toast.
-/// @param {Color} $label-color [null] - The label color used in idle state.
-/// @param {Color} $icon-color [null] - The icon color used in idle state.
-/// @param {Color} $label-selected-color [null] - The label color used in selected state.
-/// @param {Color} $icon-selected-color [null] - The icon color used in selected state.
-/// @param {Color} $icon-disabled-color [null] - The disabled color of the icon.
-/// @param {Color} $label-disabled-color [null] - The disabled color of the label.
+/// @param {Color} $background [null] - The background color used for the bar. PRIMARY - derives label-color, icon-color.
+/// @param {Color} $label-color [null] - The label color used in idle state. Auto-derived from background. Derives icon-color if not set.
+/// @param {Color} $icon-color [null] - The icon color used in idle state. Auto-derived from label-color if not set.
+/// @param {Color} $label-selected-color [null] - The label color used in selected state. Derives icon-selected-color if not set.
+/// @param {Color} $icon-selected-color [null] - The icon color used in selected state. Auto-derived from label-selected-color if not set.
+/// @param {Color} $icon-disabled-color [null] - The disabled color of the icon. Auto-derived from label-disabled-color if not set.
+/// @param {Color} $label-disabled-color [null] - The disabled color of the label. Auto-derived from label-color.
 /// @param {Color} $border-color [null] - The border color of the bottom navigation.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the bar.
 /// @requires $light-material-schema
@@ -43,7 +50,6 @@
     $border-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'bottom-nav'};
     $selector: #{config.element-prefix() + '-' + 'bottom-nav'};
     $bottom-nav-schema: ();
 
@@ -95,7 +101,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             icon-color: $icon-color,

@@ -14,38 +14,45 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// List Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` or `$item-background` - The list/item background. Auto-derives: header-background, item-background-hover, item-background-active, item-background-selected, all text/action/thumbnail colors.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The list background color.
-/// @param {Color} $header-background [null] - The list header background color.
-/// @param {Color} $header-text-color [null] - The list header text color.
-/// @param {Color} $item-background [null] - The list item background color.
-/// @param {Color} $item-background-hover [null] - The list item hover background color.
-/// @param {Color} $item-background-active [null] - The active list item background color.
-/// @param {Color} $item-background-selected [null] - The selected list item background color.
-/// @param {Color} $item-text-color [null] - The list item text color.
-/// @param {Color} $item-text-color-hover [null] - The list item hover text color.
-/// @param {Color} $item-text-color-active [null] - The active list item text color.
-/// @param {Color} $item-text-color-selected [null] - The selected list item text color.
-/// @param {Color} $item-title-color [null] - The list item title color.
-/// @param {Color} $item-title-color-hover [null] - The list item hover title color.
-/// @param {Color} $item-title-color-active [null] - The active list item title color.
-/// @param {Color} $item-title-color-selected [null] - The selected list item title color.
-/// @param {Color} $item-subtitle-color [null] - The list item subtitle color.
-/// @param {Color} $item-subtitle-color-hover [null] - The list item hover subtitle color.
-/// @param {Color} $item-subtitle-color-active [null] - The active list item subtitle color.
-/// @param {Color} $item-subtitle-color-selected [null] - The selected list item subtitle color.
-/// @param {Color} $item-action-color [null] - The list item action color.
-/// @param {Color} $item-action-color-hover [null] - The list item hover action color.
-/// @param {Color} $item-action-color-active [null] - The active list item action color.
-/// @param {Color} $item-action-color-selected [null] - The selected list item action color.
-/// @param {Color} $item-thumbnail-color [null] - The list item thumbnail color.
-/// @param {Color} $item-thumbnail-color-hover [null] - The list item hover thumbnail color.
-/// @param {Color} $item-thumbnail-color-active [null] - The active list item thumbnail color.
-/// @param {Color} $item-thumbnail-color-selected [null] - The selected list item thumbnail color.
+/// @param {Color} $background [null] - The list background color. PRIMARY - derives item-background if not set.
+/// @param {Color} $header-background [null] - The list header background color. Auto-derived from background or item-background.
+/// @param {Color} $header-text-color [null] - The list header text color. Auto-derived from header-background.
+/// @param {Color} $item-background [null] - The list item background color. PRIMARY - derives all item state colors.
+/// @param {Color} $item-background-hover [null] - The list item hover background color. Auto-derived from item-background.
+/// @param {Color} $item-background-active [null] - The active list item background color. Auto-derived from item-background-hover.
+/// @param {Color} $item-background-selected [null] - The selected list item background color. Auto-derived from item-background-active.
+/// @param {Color} $item-text-color [null] - The list item text color. Auto-derived from item-background.
+/// @param {Color} $item-text-color-hover [null] - The list item hover text color. Auto-derived from item-background-hover.
+/// @param {Color} $item-text-color-active [null] - The active list item text color. Auto-derived from item-background-active.
+/// @param {Color} $item-text-color-selected [null] - The selected list item text color. Auto-derived from item-background-selected.
+/// @param {Color} $item-title-color [null] - The list item title color. Auto-derived from item-text-color.
+/// @param {Color} $item-title-color-hover [null] - The list item hover title color. Auto-derived from item-text-color-hover.
+/// @param {Color} $item-title-color-active [null] - The active list item title color. Auto-derived from item-text-color-active.
+/// @param {Color} $item-title-color-selected [null] - The selected list item title color. Auto-derived from item-text-color-selected.
+/// @param {Color} $item-subtitle-color [null] - The list item subtitle color. Auto-derived from item-text-color (muted).
+/// @param {Color} $item-subtitle-color-hover [null] - The list item hover subtitle color. Auto-derived from item-text-color-hover (muted).
+/// @param {Color} $item-subtitle-color-active [null] - The active list item subtitle color. Auto-derived from item-text-color-active (muted).
+/// @param {Color} $item-subtitle-color-selected [null] - The selected list item subtitle color. Auto-derived from item-text-color-selected (muted).
+/// @param {Color} $item-action-color [null] - The list item action color. Auto-derived from item-text-color.
+/// @param {Color} $item-action-color-hover [null] - The list item hover action color. Auto-derived from item-text-color-hover.
+/// @param {Color} $item-action-color-active [null] - The active list item action color. Auto-derived from item-text-color-active.
+/// @param {Color} $item-action-color-selected [null] - The selected list item action color. Auto-derived from item-text-color-selected.
+/// @param {Color} $item-thumbnail-color [null] - The list item thumbnail color. Auto-derived from item-text-color.
+/// @param {Color} $item-thumbnail-color-hover [null] - The list item hover thumbnail color. Auto-derived from item-text-color-hover.
+/// @param {Color} $item-thumbnail-color-active [null] - The active list item thumbnail color. Auto-derived from item-text-color-active.
+/// @param {Color} $item-thumbnail-color-selected [null] - The selected list item thumbnail color. Auto-derived from item-text-color-selected.
 /// @param {List} $border-radius [null] - The border radius used for list component.
 /// @param {List} $item-border-radius [null] - The border radius used for list item.
 /// @param {Color} $border-width [null] - The list border width.
-/// @param {Number} $border-color [null] - The list border color.
+/// @param {Number} $border-color [null] - The list border color. Auto-derived from item-background (fluent/bootstrap).
 /// @requires $light-material-schema
 /// @example scss Change the list background color
 ///   $my-list-theme: list-theme($background: black);
@@ -86,7 +93,6 @@
     $border-color: null,
     $border-width: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'list'};
     $selector: #{config.element-prefix() + '-' + 'list'};
     $list-schema: ();
 
@@ -232,7 +238,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,

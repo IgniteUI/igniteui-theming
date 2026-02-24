@@ -14,21 +14,28 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Navigation Drawer Theme
 ///
-/// @param {Color} $background [null] - The navigation drawer background color.
+/// PRIMARY TOKENS:
+/// - `$background` — The drawer background color.
+/// - `$item-active-background` — The active item background.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $background [null] - The navigation drawer background color. PRIMARY - derives all item colors.
 /// @param {Color} $border-color [null] - The navigation drawer right border color.
-/// @param {Color} $item-header-text-color [null] - The header's idle text color.
-/// @param {Color} $item-text-color [null] - The item's idle text color.
-/// @param {Color} $item-icon-color [null] - The item's icon color.
-/// @param {Color} $item-active-text-color [null] - The item's active text color.
-/// @param {Color} $item-active-background [null] - The item's active background color.
-/// @param {Color} $item-active-icon-color [null] - The item's icon active color.
-/// @param {Color} $item-hover-background [null] - The item's hover background color.
-/// @param {Color} $item-hover-text-color [null] - The item's hover text color.
-/// @param {Color} $item-hover-icon-color [null] - The item's hover icon color.
-/// @param {Color} $item-disabled-text-color [null] - The item's disabled text color.
-/// @param {Color} $item-disabled-icon-color [null] - The item's disabled icon color.
+/// @param {Color} $item-header-text-color [null] - The header's idle text color. Auto-derived from background.
+/// @param {Color} $item-text-color [null] - The item's idle text color. Auto-derived from background.
+/// @param {Color} $item-icon-color [null] - The item's icon color. Auto-derived from background.
+/// @param {Color} $item-active-text-color [null] - The item's active text color. Auto-derived from item-active-background.
+/// @param {Color} $item-active-background [null] - The item's active background color. PRIMARY for active state - derives active text/icon. Auto-derived from background.
+/// @param {Color} $item-active-icon-color [null] - The item's icon active color. Auto-derived from item-active-background.
+/// @param {Color} $item-hover-background [null] - The item's hover background color. Auto-derived from background.
+/// @param {Color} $item-hover-text-color [null] - The item's hover text color. Auto-derived from background.
+/// @param {Color} $item-hover-icon-color [null] - The item's hover icon color. Auto-derived from background.
+/// @param {Color} $item-disabled-text-color [null] - The item's disabled text color. Auto-derived from background (muted).
+/// @param {Color} $item-disabled-icon-color [null] - The item's disabled icon color. Auto-derived from background (muted).
 /// @param {Color} $shadow [null] - Sets a custom shadow to be used by the drawer.
 /// @param {List} $border-radius [null] - The border radius used for the navdrawer.
 /// @param {List} $item-border-radius [null] - The border radius used for the navdrawer item.
@@ -66,7 +73,6 @@
     $item-disabled-icon-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'nav-drawer'};
     $selector: #{config.element-prefix() + '-' + 'nav-drawer'};
     $navdrawer-schema: ();
 
@@ -130,7 +136,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,

@@ -13,17 +13,24 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// Expansion panel Theme
+/// Expansion Panel Theme
+///
+/// PRIMARY TOKENS:
+/// - `$header-background` — The panel header background.
+/// - `$body-background` — The panel body background.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $header-background [null] - The panel header background color.
-/// @param {Color} $header-focus-background [null] - The panel header focus background color.
-/// @param {Color} $header-title-color [null] - The panel header title text color.
-/// @param {Color} $header-description-color [null] - The panel header description text color.
-/// @param {Color} $header-icon-color [null] - The panel header icon color.
-/// @param {Color} $body-color [null] - The panel body text color.
-/// @param {Color} $body-background [null] - The panel body background color.
-/// @param {Color} $disabled-text-color [null] - The panel disabled text color.
-/// @param {Color} $disabled-description-color [null] - The panel disabled header description text color.
+/// @param {Color} $header-background [null] - The panel header background color. PRIMARY - derives header colors, focus, disabled.
+/// @param {Color} $header-focus-background [null] - The panel header focus background color. Auto-derived from header-background.
+/// @param {Color} $header-title-color [null] - The panel header title text color. Auto-derived from header-background.
+/// @param {Color} $header-description-color [null] - The panel header description text color. Auto-derived from header-background (muted).
+/// @param {Color} $header-icon-color [null] - The panel header icon color. Auto-derived from header-background.
+/// @param {Color} $body-color [null] - The panel body text color. Auto-derived from body-background.
+/// @param {Color} $body-background [null] - The panel body background color. PRIMARY for body - derives body-color.
+/// @param {Color} $disabled-text-color [null] - The panel disabled text color. Auto-derived from header-background.
+/// @param {Color} $disabled-description-color [null] - The panel disabled header description text color. Auto-derived from header-background.
 /// @param {Number} $expanded-margin [null] - The expansion panel margin in expanded state when positioned inside accordion.
 /// @param {List} $border-radius [null] - The border radius used for expansion-panel component.
 /// @requires $light-material-schema
@@ -46,7 +53,6 @@
     $disabled-description-color: null,
     $expanded-margin: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'expansion-panel'};
     $selector: #{config.element-prefix() + '-' + 'expansion-panel'};
     $expansion-panel-schema: ();
 
@@ -89,7 +95,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             header-background: $header-background,
             border-radius: $border-radius,
@@ -104,4 +109,17 @@
             expanded-margin: $expanded-margin,
         )
     );
+}
+
+/// Accordion Theme
+///
+/// PRIMARY TOKENS:
+/// - `$header-background` — The panel header background.
+/// - `$body-background` — The panel body background.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @alias expansion-panel-theme
+@function accordion-theme($args...) {
+    @return expansion-panel-theme($args...);
 }

@@ -15,29 +15,37 @@
 ////
 
 /// Checkbox Theme
+///
+/// PRIMARY TOKENS:
+/// - `$fill-color` — The checked state border and fill color.
+/// - `$empty-color` — The unchecked border color.
+/// - `$error-color` — The invalid state color.
+///
+/// Setting just `$fill-color` will theme all checked states consistently.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $label-color [null]- The text color used for the label text.
-/// @param {Color} $label-color-hover [null]- The text color used for the label text on hover.
-/// @param {Color} $empty-color [null] - The unchecked border color.
-/// @param {Color} $empty-color-hover [null] - The unchecked border color on hover.
+/// @param {Color} $label-color-hover [null]- The text color used for the label text on hover. Auto-derived from label-color.
+/// @param {Color} $empty-color [null] - The unchecked border color. PRIMARY for unchecked states.
+/// @param {Color} $empty-color-hover [null] - The unchecked border color on hover. Auto-derived from empty-color.
 /// @param {Color} $empty-fill-color [null] - The unchecked fill color.
-/// @param {Color} $fill-color [null] - The checked border and fill colors.
-/// @param {Color} $fill-color-hover [null] - The checked border and fill colors on hover.
-/// @param {Color} $tick-color [null] - The checked mark color.
+/// @param {Color} $fill-color [null] - The checked border and fill colors. PRIMARY - derives tick-color, focus colors.
+/// @param {Color} $fill-color-hover [null] - The checked border and fill colors on hover. Auto-derived from fill-color.
+/// @param {Color} $tick-color [null] - The checked mark color. Auto-derived from fill-color (contrast).
 /// @param {Color} $tick-color-hover [null] - The checked mark color on hover.
 /// @param {Number} $tick-width [null] - The checked mark width.
 /// @param {Color} $disabled-color [null] - The disabled border and fill colors.
 /// @param {Color} $disabled-tick-color [null] - The checked mark color in disabled state.
-/// @param {Color} $disabled-indeterminate-color [null] - The disabled border and fill colors in indeterminate state.
+/// @param {Color} $disabled-indeterminate-color [null] - The disabled border and fill colors in indeterminate state. Auto-derived from fill-color.
 /// @param {Color} $disabled-color-label [null] - The disabled label color.
 /// @param {List} $border-radius [null] - The border radius used for checkbox component.
 /// @param {List} $border-radius-ripple [null] - The border radius used for checkbox ripple.
-/// @param {Color} $focus-outline-color [null] - The focus outlined color.
-/// @param {Color} $focus-outline-color-focused [null] - The focus outlined color for focused state.
-/// @param {Color} $focus-border-color [null] - The focus border color.
-/// @param {Color} $error-color [null] - The border and fill colors in invalid state.
-/// @param {Color} $error-color-hover [null] - The border and fill colors in invalid state on hover.
-/// @param {Color} $focus-outline-color-error [null] - The focus outline error color.
+/// @param {Color} $focus-outline-color [null] - The focus outlined color. Auto-derived from empty-color (indigo) or fill-color (bootstrap).
+/// @param {Color} $focus-outline-color-focused [null] - The focus outlined color for focused state. Auto-derived from fill-color (indigo).
+/// @param {Color} $focus-border-color [null] - The focus border color. Auto-derived from fill-color.
+/// @param {Color} $error-color [null] - The border and fill colors in invalid state. PRIMARY for error states.
+/// @param {Color} $error-color-hover [null] - The border and fill colors in invalid state on hover. Auto-derived from error-color.
+/// @param {Color} $focus-outline-color-error [null] - The focus outline error color. Auto-derived from error-color.
 /// Set to light when the surrounding area is dark.
 ///
 /// @requires $light-material-schema
@@ -72,7 +80,6 @@
     $error-color-hover: null,
     $focus-outline-color-error: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'checkbox'};
     $selector: #{config.element-prefix() + '-' + 'checkbox'};
     $checkbox-schema: ();
 
@@ -136,7 +143,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             label-color: $label-color,
             label-color-hover: $label-color-hover,

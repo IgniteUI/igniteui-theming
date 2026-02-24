@@ -7,31 +7,27 @@
 /// @access public
 ////
 
+/// Generates a base dark chip schema.
+/// @access private
+/// @type {Map}
+$dark-base-chip: (
+    _meta: (
+        name: 'chip',
+        variant: 'dark',
+    ),
+);
+
 /// Generates a dark material chip schema.
 /// @type {Map}
 /// @requires $material-chip
-$dark-material-chip: extend(
-    $material-chip,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+/// @requires $dark-base-chip
+$dark-material-chip: extend($material-chip, $dark-base-chip);
 
 /// Generates a dark fluent chip schema.
 /// @type {Map}
 /// @requires $fluent-chip
-$dark-fluent-chip: extend(
-    $fluent-chip,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+/// @requires $dark-base-chip
+$dark-fluent-chip: extend($fluent-chip, $dark-base-chip);
 
 /// Generates a dark bootstrap chip schema.
 /// @type {Map}
@@ -42,8 +38,10 @@ $dark-fluent-chip: extend(
 /// @prop {Map} focus-outline-color [color: ('gray', 300, 0.38)] - The chip focus outline color.
 /// @prop {Map} focus-selected-outline-color [color: ('gray', 300, 0.38)] - The selected chip focus outline color.
 /// @requires $bootstrap-chip
+/// @requires $dark-base-chip
 $dark-bootstrap-chip: extend(
     $bootstrap-chip,
+    $dark-base-chip,
     (
         hover-background: (
             color: (
@@ -88,11 +86,6 @@ $dark-bootstrap-chip: extend(
                 0.38,
             ),
         ),
-
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -118,8 +111,10 @@ $dark-bootstrap-chip: extend(
 /// @prop {Map} disabled-background [contrast-color: ('gray', 50, .05)] - The disabled chip background color.
 /// @prop {Map} disabled-border-color [ color: ('gray', 50)] - The disabled chip border color.
 /// @requires $indigo-chip
+/// @requires $dark-base-chip
 $dark-indigo-chip: extend(
     $indigo-chip,
+    $dark-base-chip,
     (
         text-color: (
             contrast-color: (
@@ -233,11 +228,6 @@ $dark-indigo-chip: extend(
                 'gray',
                 50,
             ),
-        ),
-
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

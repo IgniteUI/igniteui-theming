@@ -11,10 +11,14 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Date Range Picker Theme
+///
+/// NOTE: This component has no automatic token derivation.
+/// All tokens are directly passed to the schema without calculations.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {color} $label-color [null] - The color for date range separator label.
 @function date-range-picker-theme($schema: $light-material-schema, $label-color: null) {
-    $name: #{config.variable-prefix() + '-' + 'date-range-picker'};
     $selector: #{config.element-prefix() + '-' + 'date-range-picker'};
     $date-range-schema: ();
 
@@ -29,7 +33,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             label-color: $label-color,
         )

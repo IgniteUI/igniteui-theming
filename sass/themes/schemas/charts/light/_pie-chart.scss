@@ -1,10 +1,22 @@
 // stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
+
 ////
 /// @package theming
 /// @group schemas
 /// @access public
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
+
+/// Generates a base light pie chart schema.
+/// @access private
+/// @type {Map}
+$light-pie-chart: (
+    _meta: (
+        name: 'pie-chart',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material pie chart schema.
 /// @type {Map}
@@ -18,38 +30,65 @@
 /// @property {String} leader-line-type [null] - Sets what type of leader lines will be used for the outside end labels. Valid values are: 'straight', 'spline', and 'arc'.
 /// @property {String} leader-line-visibility [null] - Sets whether the leader lines are visible. Valid values are: 'visible' and 'collapsed'.
 /// @property {Number} radius-factor [null] - Sets the scaling factor of the chart's radius. Value between 0 and 1.
-$material-pie-chart: (
-    'brushes': series,
-    'outlines': series,
-    'label-extent': 30,
-    'label-inner-color': null,
-    'label-outer-color': (
-        color: (
-            'gray',
-            700,
+$material-pie-chart: extend(
+    $light-pie-chart,
+    (
+        brushes: series,
+        outlines: series,
+        label-extent: 30,
+        label-inner-color: null,
+        label-outer-color: (
+            color: (
+                'gray',
+                700,
+            ),
         ),
-    ),
-    'labels-position': null,
-    'leader-line-margin': null,
-    'leader-line-type': null,
-    'leader-line-visibility': null,
-    'radius-factor': null,
+        labels-position: null,
+        leader-line-margin: null,
+        leader-line-type: null,
+        leader-line-visibility: null,
+        radius-factor: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent pie chart schema.
 /// @type {Map}
 /// @requires {Map} $material-pie-chart
 /// @see $material-pie-chart
-$fluent-pie-chart: $material-pie-chart;
+$fluent-pie-chart: extend(
+    $material-pie-chart,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap pie chart schema.
 /// @type {Map}
 /// @requires {Map} $material-pie-chart
 /// @see $material-pie-chart
-$bootstrap-pie-chart: $material-pie-chart;
+$bootstrap-pie-chart: extend(
+    $material-pie-chart,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo pie chart schema.
 /// @type {Map}
 /// @requires {Map} $material-pie-chart
 /// @see $material-pie-chart
-$indigo-pie-chart: $material-pie-chart;
+$indigo-pie-chart: extend(
+    $material-pie-chart,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

@@ -9,58 +9,43 @@
 ////
 
 /// Generates a dark base toast schema.
-/// @see $light-toast
-$dark-base-toast: $light-toast;
+/// @access private
+/// @type {Map}
+$dark-base-toast: (
+    _meta: (
+        name: 'toast',
+        variant: 'dark',
+    ),
+);
 
 /// Generates a dark material toast schema.
 /// @type {Map}
 /// @requires $material-toast
 /// @requires $dark-base-toast
-$dark-material-toast: extend(
-    $material-toast,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-toast: extend($material-toast, $dark-base-toast);
 
 /// Generates a dark fluent toast schema.
 /// @type {Map}
 /// @requires $fluent-toast
 /// @requires $dark-base-toast
-$dark-fluent-toast: extend(
-    $fluent-toast,
-    (
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-fluent-toast: extend($fluent-toast, $dark-base-toast);
 
 /// Generates a dark bootstrap toast schema.
 /// @see $bootstrap-toast
 /// @requires $bootstrap-toast
-$dark-bootstrap-toast: extend(
-    $bootstrap-toast,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+/// @requires $dark-base-toast
+$dark-bootstrap-toast: extend($bootstrap-toast, $dark-base-toast);
 
 /// Generates a dark indigo toast schema.
 /// @type {Map}
 /// @prop {Map} background [color: ('gray', 300)] - The background color used for the toast.
 /// @prop {Map} text-color [contrast-color: ('gray', 50)] - The text-color used for the toast.
 /// @requires $indigo-toast
+/// @requires $dark-base-toast
 /// @requires $dark-indigo-elevation-toast
 $dark-indigo-toast: extend(
     $indigo-toast,
+    $dark-base-toast,
     $dark-indigo-elevation-toast,
     (
         background: (
@@ -75,11 +60,6 @@ $dark-indigo-toast: extend(
                 'gray',
                 50,
             ),
-        ),
-
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

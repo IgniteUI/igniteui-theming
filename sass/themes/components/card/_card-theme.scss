@@ -14,17 +14,22 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Card Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The card background color.
+///
+/// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The card background color.
+/// @param {Color} $background [null] - The card background color. PRIMARY - derives all text colors.
 /// @param {Color} $outline-color [null] - The color of the outline for outlined type cards.
-/// @param {Color} $header-text-color [null] - The text color of the card title.
-/// @param {Color} $subtitle-text-color [null] - The text color of the card subtitle.
-/// @param {Color} $content-text-color [null] - The text color of the card content.
-/// @param {Color} $actions-text-color [null] - The text color of the card buttons.
+/// @param {Color} $header-text-color [null] - The text color of the card title. Auto-derived from background.
+/// @param {Color} $subtitle-text-color [null] - The text color of the card subtitle. Auto-derived from background (muted).
+/// @param {Color} $content-text-color [null] - The text color of the card content. Auto-derived from background (muted).
+/// @param {Color} $actions-text-color [null] - The text color of the card buttons. Auto-derived from background.
 /// @param {box-shadow} $resting-shadow [null] - The shadow of the card in its resting state.
 /// @param {box-shadow} $hover-shadow [null] - The shadow of the card in its hover state.
-///
 /// @param {List} $border-radius [null] - The border radius used for card component.
 ///
 /// @requires $light-material-schema
@@ -46,7 +51,6 @@
     $resting-shadow: null,
     $hover-shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'card'};
     $selector: #{config.element-prefix() + '-' + 'card'};
     $card-schema: ();
 
@@ -87,7 +91,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             outline-color: $outline-color,

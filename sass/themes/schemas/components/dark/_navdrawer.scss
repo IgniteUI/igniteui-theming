@@ -27,6 +27,10 @@ $dark-base-navdrawer: extend(
                 200,
             ),
         ),
+        _meta: (
+            name: 'nav-drawer',
+            variant: 'dark',
+        ),
     )
 );
 
@@ -57,10 +61,6 @@ $dark-material-navdrawer: extend(
                 'gray',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -110,10 +110,6 @@ $dark-fluent-navdrawer: extend(
                 0.12,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -131,10 +127,6 @@ $dark-bootstrap-navdrawer: extend(
                 200,
                 0.8,
             ),
-        ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -156,6 +148,7 @@ $dark-bootstrap-navdrawer: extend(
 /// @requires $indigo-navdrawer
 $dark-indigo-navdrawer: extend(
     $indigo-navdrawer,
+    $dark-base-navdrawer,
     (
         border-color: (
             color: (
@@ -247,10 +240,6 @@ $dark-indigo-navdrawer: extend(
                 50,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

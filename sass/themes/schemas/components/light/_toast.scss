@@ -54,6 +54,11 @@ $light-toast: extend(
                 value: 'body-2',
             ),
         ),
+
+        _meta: (
+            name: 'toast',
+            variant: 'light',
+        ),
     )
 );
 
@@ -65,7 +70,6 @@ $material-toast: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -118,7 +122,6 @@ $fluent-toast: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -166,7 +169,6 @@ $bootstrap-toast: extend(
 
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -180,6 +182,7 @@ $bootstrap-toast: extend(
 /// @prop {Number} elevation [10] - The elevation level, between 0-24, to be used for the toast.
 /// @requires {Map} $indigo-elevation-toast
 $indigo-toast: extend(
+    $light-toast,
     $indigo-elevation-toast,
     (
         background: (
@@ -205,9 +208,9 @@ $indigo-toast: extend(
                 rem(26px),
             ),
         ),
+
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

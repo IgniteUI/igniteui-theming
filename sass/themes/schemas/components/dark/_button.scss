@@ -9,29 +9,41 @@
 /// @access public
 ////
 
+/// Generates a base dark button schema.
+/// @access private
+/// @type {Map}
+$dark-base-button: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
 /// @type {Map}
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 500)] - The disabled foreground color of the button.
 /// @prop {Map} disabled-icon-color [color: ('gray', 500)] - The disabled icon color of the button.
-$material-base-button-dark: (
-    disabled-background: (
-        color: (
-            'gray',
-            100,
+$material-base-button-dark: extend(
+    $dark-base-button,
+    (
+        disabled-background: (
+            color: (
+                'gray',
+                100,
+            ),
         ),
-    ),
-    disabled-foreground: (
-        color: (
-            'gray',
-            500,
+        disabled-foreground: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
-    disabled-icon-color: (
-        color: (
-            'gray',
-            500,
+        disabled-icon-color: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
+    )
 );
 
 /// @type {Map}
@@ -85,11 +97,6 @@ $material-flat-button-dark: extend(
             ),
         ),
         disabled-background: transparent,
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'flat',
-        ),
     )
 );
 
@@ -179,41 +186,16 @@ $material-outlined-button-dark: extend(
             ),
         ),
         disabled-background: transparent,
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'outlined',
-        ),
     )
 );
 
 /// @requires {Map} $material-contained-button
 /// @requires {Map} $material-base-button-dark
-$material-contained-button-dark: extend(
-    $material-contained-button,
-    $material-base-button-dark,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'contained',
-        ),
-    )
-);
+$material-contained-button-dark: extend($material-contained-button, $material-base-button-dark);
 
 /// @requires {Map} $material-fab-button
 /// @requires {Map} $material-base-button-dark
-$material-fab-button-dark: extend(
-    $material-fab-button,
-    $material-base-button-dark,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-            type: 'fab',
-        ),
-    )
-);
+$material-fab-button-dark: extend($material-fab-button, $material-base-button-dark);
 
 /// Generates a dark material button schema.
 /// @type {Map}
@@ -237,55 +219,58 @@ $dark-material-button: (
 /// @prop {Map} disabled-background [color: ('gray', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('gray', 200)] - The disabled foreground color of the button.
 /// @prop {Map} disabled-icon-color [color: ('gray', 200)] - The disabled icon color of the button.
-$fluent-base-button-dark: (
-    focus-visible-border-color: (
-        color: (
-            'gray',
-            400,
+$fluent-base-button-dark: extend(
+    $dark-base-button,
+    (
+        focus-visible-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
         ),
-    ),
-    hover-background: (
-        color: (
-            'gray',
-            50,
+        hover-background: (
+            color: (
+                'gray',
+                50,
+            ),
         ),
-    ),
-    focus-background: (
-        color: (
-            'gray',
-            100,
+        focus-background: (
+            color: (
+                'gray',
+                100,
+            ),
         ),
-    ),
-    focus-hover-background: (
-        color: (
-            'gray',
-            50,
+        focus-hover-background: (
+            color: (
+                'gray',
+                50,
+            ),
         ),
-    ),
-    active-background: (
-        color: (
-            'gray',
-            100,
+        active-background: (
+            color: (
+                'gray',
+                100,
+            ),
         ),
-    ),
-    disabled-background: (
-        color: (
-            'gray',
-            50,
+        disabled-background: (
+            color: (
+                'gray',
+                50,
+            ),
         ),
-    ),
-    disabled-foreground: (
-        color: (
-            'gray',
-            200,
+        disabled-foreground: (
+            color: (
+                'gray',
+                200,
+            ),
         ),
-    ),
-    disabled-icon-color: (
-        color: (
-            'gray',
-            200,
+        disabled-icon-color: (
+            color: (
+                'gray',
+                200,
+            ),
         ),
-    ),
+    )
 );
 
 /// @type {Map}
@@ -297,11 +282,6 @@ $fluent-flat-button-dark: extend(
     $fluent-base-button-dark,
     (
         disabled-background: transparent,
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'flat',
-        ),
     )
 );
 
@@ -345,11 +325,6 @@ $fluent-outlined-button-dark: extend(
                 'gray',
                 100,
             ),
-        ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'outlined',
         ),
     )
 );
@@ -465,11 +440,6 @@ $fluent-contained-button-dark: extend(
                 'primary',
                 300,
             ),
-        ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'contained',
         ),
     )
 );
@@ -587,11 +557,6 @@ $fluent-fab-button-dark: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-            type: 'fab',
-        ),
     )
 );
 
@@ -608,6 +573,22 @@ $dark-fluent-button: (
     fab: $fluent-fab-button-dark,
 );
 
+/// @type {Map}
+/// @requires {Map} $bootsrap-flat-button
+$bootstrap-flat-button-dark: extend($bootstrap-flat-button, $dark-base-button);
+
+/// @type {Map}
+/// @requires {Map} $bootsrap-outlined-button
+$bootstrap-outlined-button-dark: extend($bootstrap-outlined-button, $dark-base-button);
+
+/// @type {Map}
+/// @requires {Map} $bootsrap-contained-button
+$bootstrap-contained-button-dark: extend($bootstrap-contained-button, $dark-base-button);
+
+/// @type {Map}
+/// @requires {Map} $bootsrap-fab-button
+$bootstrap-fab-button-dark: extend($bootstrap-fab-button, $dark-base-button);
+
 /// Generates a dark bootstrap button schema.
 /// @type {Map}
 /// @requires {Map} $bootstrap-flat-button
@@ -615,10 +596,10 @@ $dark-fluent-button: (
 /// @requires {Map} $bootstrap-contained-button
 /// @requires {Map} $bootstrap-fab-button
 $dark-bootstrap-button: (
-    flat: $bootstrap-flat-button,
-    outlined: $bootstrap-outlined-button,
-    contained: $bootstrap-contained-button,
-    fab: $bootstrap-fab-button,
+    flat: $bootstrap-flat-button-dark,
+    outlined: $bootstrap-outlined-button-dark,
+    contained: $bootstrap-contained-button-dark,
+    fab: $bootstrap-fab-button-dark,
 );
 
 /// @type {Map}
@@ -632,70 +613,73 @@ $dark-bootstrap-button: (
 /// @prop {Map} focus-visible-foreground [contrast-color: ('primary', 500)] - The focus-visible text color of the button.
 /// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.20)] - The disabled foreground color of the button.
 /// @prop {Map} disabled-icon-color [contrast-color: ('primary', 500, 0.30)] - The disabled icon color of the button.
-$indigo-base-button-dark: (
-    foreground: (
-        contrast-color: (
-            'primary',
-            500,
+$indigo-base-button-dark: extend(
+    $dark-base-button,
+    (
+        foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    icon-color: (
-        contrast-color: (
-            'primary',
-            500,
-            0.8,
+        icon-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.8,
+            ),
         ),
-    ),
-    icon-color-hover: (
-        contrast-color: (
-            'primary',
-            500,
+        icon-color-hover: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    hover-foreground: (
-        contrast-color: (
-            'primary',
-            500,
+        hover-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    focus-foreground: (
-        contrast-color: (
-            'primary',
-            500,
+        focus-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    focus-hover-foreground: (
-        contrast-color: (
-            'primary',
-            500,
+        focus-hover-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    active-foreground: (
-        contrast-color: (
-            'primary',
-            500,
+        active-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    focus-visible-foreground: (
-        contrast-color: (
-            'primary',
-            500,
+        focus-visible-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+            ),
         ),
-    ),
-    disabled-foreground: (
-        contrast-color: (
-            'primary',
-            500,
-            0.2,
+        disabled-foreground: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
         ),
-    ),
-    disabled-icon-color: (
-        contrast-color: (
-            'primary',
-            500,
-            0.2,
+        disabled-icon-color: (
+            contrast-color: (
+                'primary',
+                500,
+                0.2,
+            ),
         ),
-    ),
+    )
 );
 
 /// @type {Map}
@@ -744,11 +728,6 @@ $indigo-flat-button-dark: extend(
                 500,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'flat',
         ),
     )
 );
@@ -848,43 +827,18 @@ $indigo-outlined-button-dark: extend(
                 0.2,
             ),
         ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'outlined',
-        ),
     )
 );
 
 /// @type {Map}
 /// @requires {Map} $indigo-contained-button
 /// @requires {Map} $indigo-base-button-dark
-$indigo-contained-button-dark: extend(
-    $indigo-contained-button,
-    $indigo-base-button-dark,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'contained',
-        ),
-    )
-);
+$indigo-contained-button-dark: extend($indigo-contained-button, $indigo-base-button-dark);
 
 /// @type {Map}
 /// @requires {Map} $indigo-fab-button
 /// @requires {Map} $indigo-base-button-dark
-$indigo-fab-button-dark: extend(
-    $indigo-fab-button,
-    $indigo-base-button-dark,
-    (
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
-            type: 'fab',
-        ),
-    )
-);
+$indigo-fab-button-dark: extend($indigo-fab-button, $indigo-base-button-dark);
 
 /// Generates a dark indigo button schema.
 /// @type {Map}

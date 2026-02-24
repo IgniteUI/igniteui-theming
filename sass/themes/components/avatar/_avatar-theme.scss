@@ -14,11 +14,17 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
+/// Avatar Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The avatar background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $color [null] - The text color used of the avatar.
-/// @param {Color} $icon-color [null] - The icon color used of the avatar.
-/// @param {Color} $background [null] - The background color used of the avatar.
+/// @param {Color} $background [null] - The background color used of the avatar. PRIMARY - derives color, icon-color.
+/// @param {Color} $color [null] - The text color used of the avatar. Auto-derived from background.
+/// @param {Color} $icon-color [null] - The icon color used of the avatar. Auto-derived from background.
 /// @param {Number} $border-radius [null] - The border-radius used of the avatar.
 /// @param {Number} $size [null] - The size of the avatar.
 /// @requires $light-material-schema
@@ -35,7 +41,6 @@
     $border-radius: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'avatar'};
     $selector: #{config.element-prefix() + '-' + 'avatar'};
     $avatar-schema: ();
 
@@ -58,7 +63,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             color: $color,

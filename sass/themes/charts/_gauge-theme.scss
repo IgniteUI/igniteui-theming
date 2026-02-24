@@ -3,6 +3,7 @@
 @use 'sass:meta';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -16,8 +17,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
-///
 /// @param {Color} $backing-brush [null] - Sets the color to use to fill the backing of the linear gauge.
 /// @param {Color} $backing-outline [null] - Sets the color to use for the outline of the backing.
 /// @param {Number} $backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
@@ -46,14 +45,7 @@
 ///   @include css-vars($custom-gauge-theme);
 @function linear-gauge-theme($schema: $light-material-schema, $target: 'angular', $rest...) {
     $name: 'linear-gauge';
-    $selector: map.get(
-        (
-            'angular': 'igx-linear-gauge',
-            'webc': 'igc-linear-gauge',
-            'blazor': 'igb-linear-gauge',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -101,14 +93,7 @@
 ///   @include css-vars($custom-gauge-theme);
 @function radial-gauge-theme($schema: $light-material-schema, $target: 'angular', $rest...) {
     $name: 'radial-gauge';
-    $selector: map.get(
-        (
-            'angular': 'igx-radial-gauge',
-            'webc': 'igc-radial-gauge',
-            'blazor': 'igb-radial-gauge',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -134,22 +119,10 @@
 /// @group typography
 /// @requires {mixin} type-style
 @mixin gauge-typography($target: 'angular') {
-    $linear-selector: map.get(
-        (
-            'angular': 'igx-linear-gauge',
-            'webc': 'igc-linear-gauge',
-            'blazor': 'igb-linear-gauge',
-        ),
-        $target
-    );
-    $radial-selector: map.get(
-        (
-            'angular': 'igx-radial-gauge',
-            'webc': 'igc-radial-gauge',
-            'blazor': 'igb-radial-gauge',
-        ),
-        $target
-    );
+    $linear-name: 'linear-gauge';
+    $linear-selector: #{element-prefix()}-#{$linear-name};
+    $radial-name: 'radial-gauge';
+    $radial-selector: #{element-prefix()}-#{$radial-name};
 
     #{$linear-selector} {
         --linear-gauge-font: var(--ig-font-family, inherit);

@@ -14,12 +14,17 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If you specify a background color, but do not specify colors for either the
-/// button or the text, their colors will be set automatically to a contrasting color.
+/// Snackbar Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background [null] - The background color used in the snackbar.
-/// @param {Color} $text-color [null] - The text color used in the snackbar.
-/// @param {Color} $button-color [null] - The button color used in the snackbar.
+/// @param {Color} $background [null] - The background color used in the snackbar. PRIMARY - derives text-color, button-color.
+/// @param {Color} $text-color [null] - The text color used in the snackbar. Auto-derived from background.
+/// @param {Color} $button-color [null] - The button color used in the snackbar. Auto-derived from background.
 /// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the snackbar.
 /// @param {List} $border-radius [null] - The border radius used for the snackbar component.
 /// @requires $light-material-schema
@@ -36,7 +41,6 @@
     $button-color: null,
     $shadow: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'snackbar'};
     $selector: #{config.element-prefix() + '-' + 'snackbar'};
     $snackbar-schema: ();
 
@@ -64,7 +68,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             border-radius: $border-radius,
             background: $background,

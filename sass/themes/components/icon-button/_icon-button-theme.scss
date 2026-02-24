@@ -16,17 +16,28 @@
 /// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
 ////
 
+/// Icon Button Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — Background color for the icon button.
+/// - `$hover-background` — Background color on hover.
+/// - `$focus-background` — Background color on focus.
+/// - `$focus-hover-background` — Background color on focus + hover.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// Generates a theme map for the icon button component.
+/// @deprecated Use flat-icon-button-theme(), contained-icon-button-theme(), or outlined-icon-button-theme() instead.
 /// @param {Map} $schema [$light-material-schema] - The schema map or icon-button schema to use.
-/// @param {Color} $background [null] - Background color for the icon button.
-/// @param {Color} $foreground [null] - Foreground (icon) color.
+/// @param {Color} $background [null] - Background color for the icon button. PRIMARY - derives foreground.
+/// @param {Color} $foreground [null] - Foreground (icon) color. Auto-derived from background.
 /// @param {Color} $shadow-color [null] - Shadow color for the icon button.
-/// @param {Color} $hover-background [null] - Background color on hover.
-/// @param {Color} $hover-foreground [null] - Foreground color on hover.
-/// @param {Color} $focus-background [null] - Background color on focus.
-/// @param {Color} $focus-foreground [null] - Foreground color on focus.
-/// @param {Color} $focus-hover-background [null] - Background color on focus + hover.
-/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover.
+/// @param {Color} $hover-background [null] - Background color on hover. PRIMARY - derives hover-foreground.
+/// @param {Color} $hover-foreground [null] - Foreground color on hover. Auto-derived from hover-background.
+/// @param {Color} $focus-background [null] - Background color on focus. PRIMARY - derives focus-foreground.
+/// @param {Color} $focus-foreground [null] - Foreground color on focus. Auto-derived from focus-background.
+/// @param {Color} $focus-hover-background [null] - Background color on focus + hover. PRIMARY - derives focus-hover-foreground.
+/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover. Auto-derived from focus-hover-background.
 /// @param {Color} $active-background [null] - Background color when active.
 /// @param {Color} $active-foreground [null] - Foreground color when active.
 /// @param {Length} $border-radius [null] - Border radius for the icon button.
@@ -38,6 +49,9 @@
 /// @param {Length} $size [null] - Size of the icon button.
 /// @requires $light-material-schema
 /// @return {Map} - A map containing the theme name, variant, and themes for the icon button.
+/// @see flat-icon-button-theme
+/// @see contained-icon-button-theme
+/// @see outlined-icon-button-theme
 @function icon-button-theme(
     $schema: $light-material-schema,
 
@@ -67,7 +81,9 @@
 
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'icon-button'};
+    @warn 'icon-button-theme() is deprecated. Use the variant-specific theme functions instead: flat-icon-button-theme(), contained-icon-button-theme(), outlined-icon-button-theme().';
+
+    $selector: #{config.element-prefix() + '-' + 'icon-button'};
     $icon-button-schema: ();
 
     @if map.has-key($schema, 'icon-button') {
@@ -106,7 +122,6 @@
                 $_name: extend(
                         digest-schema($_schema),
                         (
-                            name: $name,
                             background: $background,
                             foreground: $foreground,
                             shadow-color: $shadow-color,
@@ -137,5 +152,5 @@
         );
     }
 
-    @return (name: $name, variant: $variant, themes: $themes);
+    @return (selector: $selector, variant: $variant, themes: $themes);
 }

@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:meta' as meta;
 @use 'sass:string';
 @use 'sass:list';
 @use '../utils/meta' as *;
@@ -10,6 +11,18 @@
 /// @package theming
 /// @group Typography
 ////
+
+/// Normalizes a font-family value for use in CSS custom properties.
+/// If the value is a Sass string, it is unquoted to produce raw CSS tokens
+/// so that a stringified font list like "'Comic Sans MS', sans-serif"
+/// is emitted correctly. All other types (lists, var() expressions,
+/// keywords like inherit, etc.) are returned as-is.
+/// @access private
+/// @param {String | List | *} $value - The font-family value to normalize.
+/// @return {String | List | *} - The normalized value.
+@function _normalize-font-family($value) {
+    @return if(meta.type-of($value) == 'string', string.unquote($value), $value);
+}
 
 /// Includes all category related styles into the current style block.
 /// @param {String} $category - The type scale category.
@@ -115,16 +128,23 @@
     $mt: map.get($type-style, 'margin-top');
     $mb: map.get($type-style, 'margin-bottom');
 
-    @include css-vars-from-theme((#{$name}: #{$fw $fz $ff}), $prefix);
+    @include css-vars-from-theme((#{$name}: #{$fw $fz $ff}, _meta: (name: $prefix)));
 }
 
 /// Adds typography styles for h1-h6, paragraph and creates custom typography class selectors.
 /// The produced styles are based on the passed typeface and type scale.
 /// @access public
-/// @param {String} $font-family - The font family to be used across all typographic elements.
+/// @param {String | List} $font-family - The font family to be used across all typographic elements.
+/// Accepts a Sass list (e.g. "Open Sans", Helvetica, sans-serif), a quoted string
+/// (e.g. "'Comic Sans MS', sans-serif" for backward compatibility), or any other
+/// valid CSS value such as var(--my-font), inherit, etc.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
-/// @example scss
-///   @include typography('Roboto', $my-type-scale);
+/// @example scss Using a font-family list
+///   @include typography(("Open Sans", Helvetica, sans-serif), $my-type-scale);
+/// @example scss Using a quoted string (backward compatible)
+///   @include typography("'Comic Sans MS', sans-serif", $my-type-scale);
+/// @example scss Using a CSS variable reference
+///   @include typography(var(--my-custom-font), $my-type-scale);
 ///
 /// @requires {function} is-root
 /// @requires {mixin} type-style-vars
@@ -138,7 +158,7 @@
     $scope: if($root, ':root', '&');
 
     #{$scope} {
-        --ig-font-family: #{string.unquote($font-family)};
+        --ig-font-family: #{_normalize-font-family($font-family)};
         --ig-base-font-size: #{$base-font-size};
 
         @each $name, $style in map.remove($type-scale, '_meta') {

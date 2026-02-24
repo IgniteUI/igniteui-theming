@@ -1,3 +1,4 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../../../../typography/functions' as *;
 @use '../elevation/input-group' as *;
@@ -8,8 +9,6 @@
 /// @group schemas
 /// @access public
 ////
-
-// stylelint-disable max-line-length
 
 /// Generates a base light input-group schema.
 /// @type {Map}
@@ -60,7 +59,7 @@
 /// @prop {Map} input-prefix-color--focused [color: ('gray', 900)] - The input prefix color in the focused state.
 /// @prop {Color} input-prefix-background--focused [inherit] - The background color of an input prefix in the focused state.
 /// @prop {Map} input-suffix-color--filled [color: ('gray', 900)] - The input suffix color in the filled state.
-/// @prop {Color} input-suffix-background-filled [inherit] - The background color of an input suffix in the filled state.
+/// @prop {Color} input-suffix-background--filled [inherit] - The background color of an input suffix in the filled state.
 /// @prop {Map} input-suffix-color--focused [color: ('gray', 900)] - The input suffix color in the focused state.
 /// @prop {Color} input-suffix-background--focused [inherit] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(40px), rem(48px), rem(56px))] - The size used for the input group.
@@ -330,6 +329,10 @@ $light-input-group: extend(
                 value: 'body-2',
             ),
         ),
+        _meta: (
+            name: 'input-group',
+            variant: 'light',
+        ),
     )
 );
 
@@ -387,7 +390,6 @@ $material-input-group: extend(
         ),
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -542,7 +544,6 @@ $fluent-input-group: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -669,7 +670,6 @@ $bootstrap-input-group: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -711,8 +711,8 @@ $bootstrap-input-group: extend(
 /// @requires {Map} $light-input-group
 /// @requires {Map} $indigo-elevation-input-group
 $indigo-input-group: extend(
-    $light-input-group,
     $indigo-validator,
+    $light-input-group,
     $indigo-elevation-input-group,
     (
         input-prefix-color: (
@@ -879,7 +879,6 @@ $indigo-input-group: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

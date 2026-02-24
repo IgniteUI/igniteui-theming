@@ -7,16 +7,7 @@
 /// @type {Map}
 /// @requires {Map} $material-year-month
 /// @requires {Map} $dark-material-base
-$dark-material-year-month: extend(
-    $material-year-month,
-    $dark-material-base,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-year-month: extend($material-year-month, $dark-material-base);
 
 /// Generates a dark fluent year/month schema.
 /// @type {Map}
@@ -54,10 +45,6 @@ $dark-fluent-year-month: extend(
                 800,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -81,11 +68,6 @@ $dark-bootstrap-year-month: extend(
                 'gray',
                 100,
             ),
-        ),
-
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -170,10 +152,6 @@ $dark-indigo-year-month: extend(
                 'gray',
                 900,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

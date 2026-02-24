@@ -1,3 +1,4 @@
+// stylelint-disable max-line-length
 @use '../../../../utils/map' as *;
 @use '../../../../typography/functions' as *;
 @use '../light/combo' as *;
@@ -8,7 +9,15 @@
 /// @access public
 ////
 
-// stylelint-disable max-line-length
+/// Generates a base dark combo schema.
+/// @access private
+/// @type {Map}
+$dark-base-combo: (
+    _meta: (
+        name: 'combo',
+        variant: 'dark',
+    ),
+);
 
 /// Generates a dark material combo schema.
 /// @type {Map}
@@ -16,8 +25,10 @@
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 200)] - The combo toggle button background color when the combo is focused.
 /// @prop {Map} toggle-button-background-focus--border [color: ('gray', 100)] The combo toggle button background color when the combo is focused in border and line variants.
 /// @requires $material-combo
+/// @requires $dark-base-combo
 $dark-material-combo: extend(
     $material-combo,
+    $dark-base-combo,
     (
         toggle-button-background: (
             color: (
@@ -37,10 +48,6 @@ $dark-material-combo: extend(
                 100,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -57,8 +64,10 @@ $dark-material-combo: extend(
 /// @prop {Map} toggle-button-foreground-filled [color: ('gray', 400)] - The combo toggle button foreground color when the combo is focused.
 /// @prop {Map} toggle-button-foreground-disabled [color: ('gray', 300)] - The select toggle button foreground color when the select is disabled.
 /// @requires $fluent-combo
+/// @requires $dark-base-combo
 $dark-fluent-combo: extend(
     $fluent-combo,
+    $dark-base-combo,
     (
         clear-button-background: (
             color: (
@@ -120,25 +129,14 @@ $dark-fluent-combo: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
 /// Generates a dark bootstrap combo schema.
 /// @type {Map}
 /// @requires $bootstrap-combo
-$dark-bootstrap-combo: extend(
-    $bootstrap-combo,
-    (
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
-    )
-);
+/// @requires $dark-base-combo
+$dark-bootstrap-combo: extend($bootstrap-combo, $dark-base-combo);
 
 /// Generates a dark indigo combo schema.
 /// @prop {Map} clear-button-foreground [contrast-color: ('gray', 100, .6)] - The combo toggle clear foreground color.
@@ -149,8 +147,10 @@ $dark-bootstrap-combo: extend(
 /// @prop {Map} toggle-button-foreground-disabled [contrast-color: ('gray', 100, .2)] - The combo toggle button foreground color when the combo is disabled.
 /// @type {Map}
 /// @requires $indigo-combo
+/// @requires $dark-base-combo
 $dark-indigo-combo: extend(
     $indigo-combo,
+    $dark-base-combo,
     (
         clear-button-foreground: (
             contrast-color: (
@@ -193,10 +193,6 @@ $dark-indigo-combo: extend(
                 100,
                 0.2,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

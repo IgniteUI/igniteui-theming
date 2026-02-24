@@ -1,11 +1,21 @@
-/* stylelint-disable max-line-length */
+// stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
 /// @group schemas
 /// @access public
-/// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
+
+/// Generates a base data chart schema.
+/// @access private
+/// @type {Map}
+$light-data-chart: (
+    _meta: (
+        name: 'data-chart',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material base data chart schema.
 /// @type {Map}
@@ -39,98 +49,125 @@
 /// @prop {List} axis-title-margin [null] - Sets the margin (top, right, bottom, left) of a title on both axes.
 /// @prop {Color} axis-title-text-color [color: ('gray', 900)] - Sets the color of the title on the X-axis.
 /// @prop {String} axis-title-text-style [null] - Sets the CSS font property for the title on both axes.
-$material-data-chart: (
-    'margin': null,
-    'title-text-color': (
-        color: (
-            'gray',
-            900,
+$material-data-chart: extend(
+    $light-data-chart,
+    (
+        margin: null,
+        title-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    'title-margin': null,
-    'subtitle-text-color': (
-        color: (
-            'gray',
-            600,
+        title-margin: null,
+        subtitle-text-color: (
+            color: (
+                'gray',
+                600,
+            ),
         ),
-    ),
-    'subtitle-margin': null,
-    'brushes': series,
-    'marker-brushes': series,
-    'outlines': series,
-    'marker-outlines': series,
-    'plot-area-background': (
-        color: (
-            'surface',
-            500,
+        subtitle-margin: null,
+        brushes: series,
+        marker-brushes: series,
+        outlines: series,
+        marker-outlines: series,
+        plot-area-background: (
+            color: (
+                'surface',
+                500,
+            ),
         ),
-    ),
-    'title-horizontal-alignment': null,
-    'subtitle-horizontal-alignment': null,
-    'axis-label-margin': (
-        expand-shorthand: (
-            null,
+        title-horizontal-alignment: null,
+        subtitle-horizontal-alignment: null,
+        axis-label-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'axis-label',
         ),
-        map-keys-prefix: 'axis-label',
-    ),
-    'axis-label-text-color': (
-        color: (
-            'gray',
-            700,
+        axis-label-text-color: (
+            color: (
+                'gray',
+                700,
+            ),
         ),
-    ),
-    'axis-label-text-style': null,
-    'axis-label-vertical-alignment': null,
-    'axis-stroke': (
-        color: (
-            'gray',
-            500,
+        axis-label-text-style: null,
+        axis-label-vertical-alignment: null,
+        axis-stroke: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
-    'axis-stroke-thickness': null,
-    'axis-major-stroke': null,
-    'axis-major-stroke-thickness': null,
-    'axis-minor-stroke': null,
-    'axis-minor-stroke-thickness': null,
-    'axis-strip': null,
-    'axis-tick-length': null,
-    'axis-tick-stroke': (
-        color: (
-            'gray',
-            500,
+        axis-stroke-thickness: null,
+        axis-major-stroke: null,
+        axis-major-stroke-thickness: null,
+        axis-minor-stroke: null,
+        axis-minor-stroke-thickness: null,
+        axis-strip: null,
+        axis-tick-length: null,
+        axis-tick-stroke: (
+            color: (
+                'gray',
+                500,
+            ),
         ),
-    ),
-    'axis-tick-stroke-thickness': null,
-    'axis-title-alignment': null,
-    'axis-title-margin': (
-        expand-shorthand: (
-            null,
+        axis-tick-stroke-thickness: null,
+        axis-title-alignment: null,
+        axis-title-margin: (
+            expand-shorthand: (
+                null,
+            ),
+            map-keys-prefix: 'axis-title',
         ),
-        map-keys-prefix: 'axis-title',
-    ),
-    'axis-title-text-color': (
-        color: (
-            'gray',
-            900,
+        axis-title-text-color: (
+            color: (
+                'gray',
+                900,
+            ),
         ),
-    ),
-    'axis-title-text-style': null,
+        axis-title-text-style: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent data-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-data-chart
-$fluent-data-chart: $material-data-chart;
+$fluent-data-chart: extend(
+    $material-data-chart,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap data-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-data-chart
-$bootstrap-data-chart: $material-data-chart;
+$bootstrap-data-chart: extend(
+    $material-data-chart,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo data-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-data-chart
-$indigo-data-chart: $material-data-chart;
+$indigo-data-chart: extend(
+    $material-data-chart,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

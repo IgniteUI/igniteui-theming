@@ -14,22 +14,31 @@
 /// @author <a href="https://github.com/simeonoff" target="_blank">Simeon Simeonoff</a>
 ////
 
+/// Combo Theme
+///
+/// PRIMARY TOKENS:
+/// - `$toggle-button-background` — The toggle button background.
+/// - `$empty-list-background` — The empty list background.
+/// - `$clear-button-background-focus` — The clear button focus background.
+///
+/// Toggle button colors cascade from toggle-button-background through focus and disabled states.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $search-separator-border-color [null] - The combo search box separator color.
-/// @param {Color} $empty-list-placeholder-color [null] - The combo placeholder text color.
-/// @param {Color} $empty-list-background [null] - The combo list background color.
-/// @param {Color} $toggle-button-background [null] - The combo toggle button background color.
-/// @param {Color} $toggle-button-background-focus [null] - The combo toggle button background color when the combo is focused in material box variant.
-/// @param {Color} $toggle-button-background-focus--border [null] - The combo toggle button background color when the combo is focused in material border variant.
-/// @param {Color} $toggle-button-background-disabled [null] - The combo toggle button background color when the combo is disabled.
-/// @param {Color} $toggle-button-foreground [null] - The combo toggle button foreground color.
-/// @param {Color} $toggle-button-foreground-focus [null] - The combo toggle button foreground color when the combo is focused.
-/// @param {Color} $toggle-button-foreground-disabled [null] - The combo toggle button foreground color when the combo is disabled.
-/// @param {Color} $toggle-button-foreground-filled [null] - The combo toggle button foreground color when the combo is filled.
+/// @param {Color} $empty-list-placeholder-color [null] - The combo placeholder text color. Auto-derived from empty-list-background.
+/// @param {Color} $empty-list-background [null] - The combo list background color. PRIMARY - derives empty-list-placeholder-color.
+/// @param {Color} $toggle-button-background [null] - The combo toggle button background color. PRIMARY - derives all toggle button colors.
+/// @param {Color} $toggle-button-background-focus [null] - The combo toggle button background color when the combo is focused in material box variant. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-background-focus--border [null] - The combo toggle button background color when the combo is focused in material border variant. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-background-disabled [null] - The combo toggle button background color when the combo is disabled. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-foreground [null] - The combo toggle button foreground color. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-foreground-focus [null] - The combo toggle button foreground color when the combo is focused. Auto-derived from toggle-button-background-focus.
+/// @param {Color} $toggle-button-foreground-disabled [null] - The combo toggle button foreground color when the combo is disabled. Auto-derived from toggle-button-background.
+/// @param {Color} $toggle-button-foreground-filled [null] - The combo toggle button foreground color when the combo is filled. Auto-derived from toggle-button-background.
 /// @param {Color} $clear-button-background [null] - The combo clear button background color.
-/// @param {Color} $clear-button-background-focus [null] - The combo clear button background color when the combo is focused.
+/// @param {Color} $clear-button-background-focus [null] - The combo clear button background color when the combo is focused. PRIMARY for clear button focus.
 /// @param {Color} $clear-button-foreground [null] - The combo clear button foreground color.
-/// @param {Color} $clear-button-foreground-focus [null] - The combo clear button foreground color when the combo is focused.
+/// @param {Color} $clear-button-foreground-focus [null] - The combo clear button foreground color when the combo is focused. Auto-derived from clear-button-background-focus.
 /// @requires $light-material-schema
 /// @example scss Change the combo empty list background
 ///   $my-combo-theme: igx-checkbox-theme($empty-list-background);
@@ -53,7 +62,6 @@
     $clear-button-foreground-focus: null,
     $toggle-button-foreground-filled: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'combo'};
     $selector: (
         #{config.element-prefix() + '-' + 'combo'},
         #{config.element-prefix() + '-' + 'simple-combo'},
@@ -108,6 +116,14 @@
         $toggle-button-foreground-disabled: hsla(from adaptive-contrast(var(--toggle-button-background)) h s l / 0.7);
     }
 
+    @if not($clear-button-foreground) and $clear-button-background {
+        $clear-button-foreground: adaptive-contrast(var(--clear-button-background));
+    }
+
+    @if not($clear-button-foreground-focus) and $clear-button-foreground {
+        $clear-button-foreground-focus: var(--clear-button-foreground);
+    }
+
     @if not($clear-button-foreground-focus) and $clear-button-background-focus {
         $clear-button-foreground-focus: adaptive-contrast(var(--clear-button-background-focus));
     }
@@ -115,7 +131,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             search-separator-border-color: $search-separator-border-color,
             empty-list-placeholder-color: $empty-list-placeholder-color,

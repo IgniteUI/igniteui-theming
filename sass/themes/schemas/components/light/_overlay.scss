@@ -18,6 +18,10 @@ $light-overlay: (
             0.54,
         ),
     ),
+    _meta: (
+        name: 'overlay',
+        variant: 'light',
+    ),
 );
 
 /// Generates a material overlay schema.
@@ -28,7 +32,6 @@ $material-overlay: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -41,7 +44,6 @@ $fluent-overlay: extend(
     (
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -54,7 +56,6 @@ $bootstrap-overlay: extend(
     (
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -67,7 +68,6 @@ $indigo-overlay: extend(
     (
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

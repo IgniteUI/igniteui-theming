@@ -14,29 +14,36 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Carousel Theme
+///
+/// PRIMARY TOKENS:
+/// - `$button-background` — The nav button background.
+/// - `$indicator-background` — The indicator container background.
+///
+/// Button colors cascade from button-background through hover and disabled states.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $slide-background [null] - The slide background color.
-/// @param {Color} $button-background [null] - The previous/next buttons idle background color.
-/// @param {Color} $button-hover-background [null] - The previous/next buttons hover background color.
-/// @param {Color} $button-disabled-background [null] - The previous/next buttons disabled background color.
-/// @param {Color} $button-arrow-color [null] - The previous/next buttons idle arrow color.
-/// @param {Color} $button-hover-arrow-color [null] - The previous/next buttons hover arrow color.
-/// @param {Color} $button-disabled-arrow-color [null] - The previous/next buttons disabled arrow color.
-/// @param {Color} $button-border-color [null] - The previous/next buttons idle border color.
-/// @param {Color} $button-hover-border-color [null] - The previous/next buttons hover border color.
-/// @param {Color} $button-focus-border-color [null] - The navigation buttons border color on focus.
+/// @param {Color} $button-background [null] - The previous/next buttons idle background color. PRIMARY - derives arrow, hover, disabled, focus colors.
+/// @param {Color} $button-hover-background [null] - The previous/next buttons hover background color. Auto-derived from button-background.
+/// @param {Color} $button-disabled-background [null] - The previous/next buttons disabled background color. Auto-derived from button-background.
+/// @param {Color} $button-arrow-color [null] - The previous/next buttons idle arrow color. Auto-derived from button-background.
+/// @param {Color} $button-hover-arrow-color [null] - The previous/next buttons hover arrow color. Auto-derived from button-hover-background.
+/// @param {Color} $button-disabled-arrow-color [null] - The previous/next buttons disabled arrow color. Auto-derived from button-disabled-background.
+/// @param {Color} $button-border-color [null] - The previous/next buttons idle border color. Auto-derived from button-background (indigo).
+/// @param {Color} $button-hover-border-color [null] - The previous/next buttons hover border color. Auto-derived from button-border-color.
+/// @param {Color} $button-focus-border-color [null] - The navigation buttons border color on focus. Auto-derived from button-focus-arrow-color or button-background.
 /// @param {Color} $button-disabled-border-color [null] - The previous/next buttons disabled border color.
-/// @param {Color} $indicator-background [null] - The indicators container background color.
+/// @param {Color} $indicator-background [null] - The indicators container background color. PRIMARY - derives dot, border, active, focus colors.
 /// @param {Color} $label-indicator-background [null] - The label indicator container background color.
-/// @param {Color} $indicator-dot-color [null] - The idle indicator dot color.
-/// @param {Color} $indicator-hover-dot-color [null] - The hover indicator dot color.
-/// @param {Color} $indicator-focus-color [null] - The indicators border and dot color on focus.
-/// @param {Color} $indicator-border-color [null] - The idle indicator border color.
-/// @param {Color} $indicator-active-dot-color [null] - The active indicator dot color.
-/// @param {Color} $indicator-active-border-color [null] - The active indicator border color.
-/// @param {Color} $indicator-active-hover-dot-color [null] - The active indicator dot color on hover.
+/// @param {Color} $indicator-dot-color [null] - The idle indicator dot color. Auto-derived from indicator-background.
+/// @param {Color} $indicator-hover-dot-color [null] - The hover indicator dot color. Auto-derived from indicator-dot-color.
+/// @param {Color} $indicator-focus-color [null] - The indicators border and dot color on focus. Auto-derived from indicator-background or button-background.
+/// @param {Color} $indicator-border-color [null] - The idle indicator border color. Auto-derived from indicator-background or indicator-dot-color.
+/// @param {Color} $indicator-active-dot-color [null] - The active indicator dot color. Auto-derived from indicator-background or button-background.
+/// @param {Color} $indicator-active-border-color [null] - The active indicator border color. Auto-derived from indicator-active-dot-color.
+/// @param {Color} $indicator-active-hover-dot-color [null] - The active indicator dot color on hover. Auto-derived from indicator-active-dot-color.
 /// @param {box-shadow} $button-shadow [null] - Shadow underneath the previous/next buttons.
-///
 /// @param {List} $border-radius [null] - The border radius used for carousel component.
 ///
 /// @requires $light-material-schema
@@ -78,7 +85,6 @@
     $indicator-active-border-color: null,
     $indicator-active-hover-dot-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'carousel'};
     $selector: #{config.element-prefix() + '-' + 'carousel'};
     $carousel-schema: ();
 
@@ -206,7 +212,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             slide-background: $slide-background,

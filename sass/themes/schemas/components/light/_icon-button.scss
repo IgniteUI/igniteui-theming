@@ -7,7 +7,48 @@
 /// @access public
 ////
 
-/// Material Schemas
+/// Base light icon-button schema.
+/// @access private
+/// @type {Map}
+$light-icon-button: (
+    _meta: (
+        name: 'icon-button',
+        variant: 'light',
+    ),
+);
+
+/// Flat icon-button schema.
+/// @access private
+/// @type {Map}
+$flat-icon-button: (
+    selector: '[igxIconButton="flat"], .igx-icon-button--flat',
+    _meta: (
+        name: 'flat-icon-button',
+        type: 'flat',
+    ),
+);
+
+/// Contained icon-button schema.
+/// @access private
+/// @type {Map}
+$contained-icon-button: (
+    selector: '[igxIconButton="contained"], .igx-icon-button--contained',
+    _meta: (
+        name: 'contained-icon-button',
+        type: 'contained',
+    ),
+);
+
+/// Outlined icon-button schema.
+/// @access private
+/// @type {Map}
+$outlined-icon-button: (
+    selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
+    _meta: (
+        name: 'outlined-icon-button',
+        type: 'outlined',
+    ),
+);
 
 /// Generates a base material icon button schema.
 /// @type {Map}
@@ -122,22 +163,15 @@ $material-base-icon-button: (
             value: 'button',
         ),
     ),
+    _meta: (
+        theme: 'material',
+    ),
 );
 
 /// Generates a material flat icon button schema.
 /// @type {Map}
 /// @requires {Map} $material-base-icon-button
-$material-flat-icon-button: extend(
-    $material-base-icon-button,
-    (
-        selector: '[igxIconButton="flat"], .igx-icon-button--flat',
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'flat',
-        ),
-    )
-);
+$material-flat-icon-button: extend($light-icon-button, $flat-icon-button, $material-base-icon-button);
 
 /// Generates a material contained icon button schema.
 /// @type {Map}
@@ -149,9 +183,10 @@ $material-flat-icon-button: extend(
 /// @prop {Map} disabled-background [color: ('gray', 900, .04)] - The disabled background color of the material contained icon button.
 /// @requires {Map} $material-base-icon-button
 $material-contained-icon-button: extend(
+    $light-icon-button,
+    $contained-icon-button,
     $material-base-icon-button,
     (
-        selector: '[igxIconButton="contained"], .igx-icon-button--contained',
         background: (
             color: (
                 'gray',
@@ -194,11 +229,6 @@ $material-contained-icon-button: extend(
                 0.04,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -209,9 +239,10 @@ $material-contained-icon-button: extend(
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled border color of the material outlined icon button.
 /// @requires {Map} $material-base-icon-button
 $material-outlined-icon-button: extend(
+    $light-icon-button,
+    $outlined-icon-button,
     $material-base-icon-button,
     (
-        selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
         border-color: (
             color: (
                 'gray',
@@ -230,11 +261,6 @@ $material-outlined-icon-button: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'material',
-            variant: 'light',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -248,8 +274,6 @@ $material-icon-button: (
     contained: $material-contained-icon-button,
     outlined: $material-outlined-icon-button,
 );
-
-/// Fluent Schemas
 
 /// Generates a fluent base icon button schema.
 /// @type {Map}
@@ -359,22 +383,15 @@ $fluent-base-icon-button: (
         ),
     ),
     default-size: 2,
+    _meta: (
+        theme: 'fluent',
+    ),
 );
 
 /// Generates a fluent flat icon button schema.
 /// @type {Map}
 /// @requires {Map} $fluent-base-icon-button
-$fluent-flat-icon-button: extend(
-    $fluent-base-icon-button,
-    (
-        selector: '[igxIconButton="flat"], .igx-icon-button--flat',
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'flat',
-        ),
-    )
-);
+$fluent-flat-icon-button: extend($light-icon-button, $flat-icon-button, $fluent-base-icon-button);
 
 /// Generates a fluent contained icon button schema.
 /// @type {Map}
@@ -391,9 +408,10 @@ $fluent-flat-icon-button: extend(
 /// @prop {Map} focus-border-color [contrast-color: ('primary', 600)] - The focus border color of the fluent contained icon button.
 /// @requires {Map} $fluent-base-icon-button
 $fluent-contained-icon-button: extend(
+    $light-icon-button,
+    $contained-icon-button,
     $fluent-base-icon-button,
     (
-        selector: '[igxIconButton="contained"], .igx-icon-button--contained',
         background: (
             color: (
                 'primary',
@@ -460,11 +478,6 @@ $fluent-contained-icon-button: extend(
                 600,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -481,9 +494,10 @@ $fluent-contained-icon-button: extend(
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled border color of the fluent outlined icon button.
 /// @requires {Map} $fluent-base-icon-button
 $fluent-outlined-icon-button: extend(
+    $light-icon-button,
+    $outlined-icon-button,
     $fluent-base-icon-button,
     (
-        selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
         foreground: (
             color: (
                 'gray',
@@ -533,11 +547,6 @@ $fluent-outlined-icon-button: extend(
                 300,
             ),
         ),
-        _meta: (
-            theme: 'fluent',
-            variant: 'light',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -551,8 +560,6 @@ $fluent-icon-button: (
     contained: $fluent-contained-icon-button,
     outlined: $fluent-outlined-icon-button,
 );
-
-/// Bootstrap Schemas
 
 /// Generates a base bootstrap icon button schema.
 /// @type {Map}
@@ -663,6 +670,9 @@ $bootstrap-base-icon-button: (
         ),
     ),
     default-size: 2,
+    _meta: (
+        theme: 'bootstrap',
+    ),
 );
 
 /// Generates a bootstrap flat icon button schema.
@@ -677,9 +687,10 @@ $bootstrap-base-icon-button: (
 /// @prop {Map} active-foreground [color: ('primary', 800)] - The active text color of the bootstrap flat icon button.
 /// @requires {Map} $bootstrap-base-icon-button
 $bootstrap-flat-icon-button: extend(
+    $light-icon-button,
+    $flat-icon-button,
     $bootstrap-base-icon-button,
     (
-        selector: '[igxIconButton="flat"], .igx-icon-button--flat',
         hover-background: transparent,
         hover-foreground: (
             color: (
@@ -708,11 +719,6 @@ $bootstrap-flat-icon-button: extend(
                 800,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'flat',
-        ),
     )
 );
 
@@ -724,9 +730,10 @@ $bootstrap-flat-icon-button: extend(
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the bootstrap contained icon button.
 /// @requires {Map} $bootstrap-base-icon-button
 $bootstrap-contained-icon-button: extend(
+    $light-icon-button,
+    $contained-icon-button,
     $bootstrap-base-icon-button,
     (
-        selector: '[igxIconButton="contained"], .igx-icon-button--contained',
         background: (
             color: (
                 'primary',
@@ -751,11 +758,6 @@ $bootstrap-contained-icon-button: extend(
                 200,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'contained',
-        ),
     )
 );
 
@@ -767,9 +769,10 @@ $bootstrap-contained-icon-button: extend(
 /// @prop {Map} disabled-border-color [color: ('primary', 50)] - The disabled border color of the bootstrap outlined icon button.
 /// @requires {Map} $bootstrap-base-icon-button
 $bootstrap-outlined-icon-button: extend(
+    $light-icon-button,
+    $outlined-icon-button,
     $bootstrap-base-icon-button,
     (
-        selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
         border-color: (
             color: (
                 'primary',
@@ -794,11 +797,6 @@ $bootstrap-outlined-icon-button: extend(
                 50,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'light',
-            type: 'outlined',
-        ),
     )
 );
 
@@ -812,8 +810,6 @@ $bootstrap-icon-button: (
     contained: $bootstrap-contained-icon-button,
     outlined: $bootstrap-outlined-icon-button,
 );
-
-/// Indigo Schemas
 
 /// Generates a base indigo icon button schema.
 /// @type {Map}
@@ -935,22 +931,15 @@ $indigo-base-icon-button: (
             value: 'button',
         ),
     ),
+    _meta: (
+        theme: 'indigo',
+    ),
 );
 
 /// Generates an indigo flat icon button schema.
 /// @type {Map}
 /// @requires {Map} $indigo-base-icon-button
-$indigo-flat-icon-button: extend(
-    $indigo-base-icon-button,
-    (
-        selector: '[igxIconButton="flat"], .igx-icon-button--flat',
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'flat',
-        ),
-    )
-);
+$indigo-flat-icon-button: extend($light-icon-button, $flat-icon-button, $indigo-base-icon-button);
 
 /// Generates an indigo outlined icon button schema.
 /// @type {Map}
@@ -958,9 +947,10 @@ $indigo-flat-icon-button: extend(
 /// @prop {Map} disabled-border-color [color: ('gray', 900, 0.15)] - The disabled border color of the indigo outlined icon button.
 /// @requires {Map} $indigo-base-icon-button
 $indigo-outlined-icon-button: extend(
+    $light-icon-button,
+    $outlined-icon-button,
     $indigo-base-icon-button,
     (
-        selector: '[igxIconButton="outlined"], .igx-icon-button--outlined',
         border-color: (
             color: (
                 'gray',
@@ -973,11 +963,6 @@ $indigo-outlined-icon-button: extend(
                 900,
                 0.15,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'outlined',
         ),
     )
 );
@@ -1000,9 +985,10 @@ $indigo-outlined-icon-button: extend(
 /// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, .3)] - The disabled foreground color of the indigo icon button.
 /// @requires {Map} $indigo-base-icon-button
 $indigo-contained-icon-button: extend(
+    $light-icon-button,
+    $contained-icon-button,
     $indigo-base-icon-button,
     (
-        selector: '[igxIconButton="contained"], .igx-icon-button--contained',
         shadow-color: (
             color: (
                 'primary',
@@ -1092,11 +1078,6 @@ $indigo-contained-icon-button: extend(
                 500,
                 0.3,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'light',
-            type: 'contained',
         ),
     )
 );

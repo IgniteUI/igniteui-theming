@@ -217,6 +217,11 @@ $base-dark-grid: (
             100,
         ),
     ),
+
+    _meta: (
+        name: 'grid',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
@@ -266,11 +271,6 @@ $dark-material-grid: extend(
                 'gray',
                 50,
             ),
-        ),
-
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
         ),
     )
 );
@@ -381,11 +381,6 @@ $dark-fluent-grid: extend(
                 600,
             ),
         ),
-
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -463,11 +458,6 @@ $dark-bootstrap-grid: extend(
                 'gray',
                 100,
             ),
-        ),
-
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
         ),
     )
 );
@@ -818,7 +808,6 @@ $dark-indigo-grid: extend(
         ),
 
         _meta: (
-            theme: 'indigo',
             variant: 'dark',
         ),
     )

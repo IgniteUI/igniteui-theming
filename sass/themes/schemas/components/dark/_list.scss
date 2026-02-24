@@ -33,22 +33,18 @@ $base-dark-list: (
             100,
         ),
     ),
+
+    _meta: (
+        name: 'list',
+        variant: 'dark',
+    ),
 );
 
 /// Generates a dark material list schema based.
 /// @type {Map}
 /// @requires $material-list
 /// @requires $base-dark-list
-$dark-material-list: extend(
-    $material-list,
-    $base-dark-list,
-    (
-        _meta: (
-            theme: 'material',
-            variant: 'dark',
-        ),
-    )
-);
+$dark-material-list: extend($material-list, $base-dark-list);
 
 /// Generates a dark fluent list schema.
 /// @type {Map}
@@ -65,11 +61,6 @@ $dark-fluent-list: extend(
                 500,
             ),
         ),
-
-        _meta: (
-            theme: 'fluent',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -85,6 +76,7 @@ $dark-fluent-list: extend(
 /// @requires $bootstrap-list
 $dark-bootstrap-list: extend(
     $bootstrap-list,
+    $base-dark-list,
     (
         border-color: (
             color: (
@@ -134,10 +126,6 @@ $dark-bootstrap-list: extend(
                 400,
             ),
         ),
-        _meta: (
-            theme: 'bootstrap',
-            variant: 'dark',
-        ),
     )
 );
 
@@ -166,6 +154,7 @@ $dark-bootstrap-list: extend(
 /// @requires $indigo-list
 $dark-indigo-list: extend(
     $indigo-list,
+    $base-dark-list,
     (
         header-text-color: (
             contrast-color: (
@@ -318,10 +307,6 @@ $dark-indigo-list: extend(
                 50,
                 0.8,
             ),
-        ),
-        _meta: (
-            theme: 'indigo',
-            variant: 'dark',
         ),
     )
 );

@@ -14,17 +14,25 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
+/// Switch Theme
+///
+/// PRIMARY TOKENS:
+/// - `$track-on-color` — The ON state track color.
+/// - `$track-off-color` — The OFF state track color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $thumb-on-color [null] - The color of the thumb when the switch is on.
-/// @param {Color} $track-on-color [null] - The color of the track when the switch is on.
-/// @param {Color} $track-on-hover-color [null] - The color of the track when the switch is on and hovered.
-/// @param {Color} $thumb-off-color [null] - The color of the thumb when the switch is off.
-/// @param {Color} $thumb-off-hover-color [null] - The color of the thumb when the switch is off and hovered.
-/// @param {Color} $track-off-color [null] - The color of the track when the switch is off.
-/// @param {Color} $thumb-disabled-color [null] - The color of the thumb when the switch is disabled.
-/// @param {Color} $thumb-on-disabled-color [null] - The color of the thumb when the switch is on and disabled.
-/// @param {Color} $track-disabled-color [null] - The color of the track when the switch is disabled.
-/// @param {Color} $track-on-disabled-color [null] - The color of the track when the switch is on and disabled.
+/// @param {Color} $thumb-on-color [null] - The color of the thumb when the switch is on. Auto-derived from track-on-color (non-material) or bidirectional with track-on-color (material).
+/// @param {Color} $track-on-color [null] - The color of the track when the switch is on. PRIMARY for ON state.
+/// @param {Color} $track-on-hover-color [null] - The color of the track when the switch is on and hovered. Auto-derived from track-on-color.
+/// @param {Color} $thumb-off-color [null] - The color of the thumb when the switch is off. Auto-derived from track-off-color or border-color.
+/// @param {Color} $thumb-off-hover-color [null] - The color of the thumb when the switch is off and hovered. Auto-derived from thumb-off-color.
+/// @param {Color} $track-off-color [null] - The color of the track when the switch is off. PRIMARY for OFF state.
+/// @param {Color} $thumb-disabled-color [null] - The color of the thumb when the switch is disabled. Auto-derived from thumb-off-color.
+/// @param {Color} $thumb-on-disabled-color [null] - The color of the thumb when the switch is on and disabled. Auto-derived from thumb-on-color.
+/// @param {Color} $track-disabled-color [null] - The color of the track when the switch is disabled. Auto-derived from track-off-color.
+/// @param {Color} $track-on-disabled-color [null] - The color of the track when the switch is on and disabled. Auto-derived from track-on-color.
 /// @param {Color} $label-color [null] - The color of the switch label
 /// @param {Color} $label-hover-color [null] - The color of the switch label on hover.
 /// @param {Color} $label-disabled-color [null] - The color of the switch label when the switch is disabled
@@ -34,15 +42,15 @@
 /// @param {List} $border-radius-track [null] - The border radius used for switch track.
 /// @param {List} $border-radius-thumb [null] - The border radius used for switch thumb.
 /// @param {List} $border-radius-ripple [null] - The border radius used for switch ripple.
-/// @param {Color} $border-color [null] - The border color of the switch.
-/// @param {Color} $border-hover-color [null] - The border color of the switch on hover.
-/// @param {Color} $border-disabled-color [null] - The border color of the switch when it is disabled.
-/// @param {Color} $border-on-color [null] - The border color when the switch is on.
-/// @param {Color} $border-on-hover-color [null] - The border color when the switch is on and hovered.
-/// @param {Color} $focus-outline-color [null] - The focus outlined color.
-/// @param {Color} $focus-outline-color-focused [null] - The focus outlined color for focused state.
-/// @param {Color} $focus-fill-color [null] - The focus fill color.
-/// @param {Color} $focus-fill-hover-color [null] - The focus fill color on hover.
+/// @param {Color} $border-color [null] - The border color of the switch. Auto-derived from thumb-off-color.
+/// @param {Color} $border-hover-color [null] - The border color of the switch on hover. Auto-derived from track-off-color or border-color.
+/// @param {Color} $border-disabled-color [null] - The border color of the switch when it is disabled. Auto-derived from border-color.
+/// @param {Color} $border-on-color [null] - The border color when the switch is on. Auto-derived from track-on-color.
+/// @param {Color} $border-on-hover-color [null] - The border color when the switch is on and hovered. Auto-derived from border-on-color.
+/// @param {Color} $focus-outline-color [null] - The focus outlined color. Auto-derived from border-color (indigo) or track-on-color (bootstrap).
+/// @param {Color} $focus-outline-color-focused [null] - The focus outlined color for focused state. Auto-derived from border-on-color (indigo).
+/// @param {Color} $focus-fill-color [null] - The focus fill color. Auto-derived from track-on-color (bootstrap).
+/// @param {Color} $focus-fill-hover-color [null] - The focus fill color on hover. Auto-derived from focus-fill-color.
 /// @requires $light-material-schema
 ///
 /// @example scss Set custom track and thumb on colors
@@ -86,7 +94,6 @@
     $focus-fill-color: null,
     $focus-fill-hover-color: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'switch'};
     $selector: #{config.element-prefix() + '-' + 'switch'};
     $switch-schema: ();
 
@@ -106,6 +113,10 @@
 
         @if not($thumb-off-color) and $track-off-color {
             $thumb-off-color: dynamic-shade(var(--track-off-color), $offset: 20);
+        }
+
+        @if not($thumb-off-hover-color) and $thumb-off-color {
+            $thumb-off-hover-color: var(--thumb-off-color);
         }
 
         @if not($thumb-disabled-color) and $thumb-off-color {
@@ -243,7 +254,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
 
             thumb-on-color: $thumb-on-color,

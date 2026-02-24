@@ -12,13 +12,22 @@
 /// @access public
 ////
 
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Splitter Theme
 ///
-/// @param {Color} $bar-color [null] - The background color of the bar.
-/// @param {Color} $handle-color [null] - The color for the bar drag handle.
-/// @param {Color} $expander-color [null] - The color for the arrow expander's.
+/// PRIMARY TOKENS:
+/// - `$bar-color` — The bar background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $bar-color [null] - The background color of the bar. PRIMARY - derives handle, expander, focus colors.
+/// @param {Color} $handle-color [null] - The color for the bar drag handle. Auto-derived from bar-color.
+/// @param {Color} $expander-color [null] - The color for the arrow expander's. Auto-derived from bar-color.
 /// @param {List} $border-radius [null] - the border radios of the splitter bar drag handle
-/// @param {Color} $focus-color [null] - The color used for focused splitter bar.
+/// @param {Color} $focus-color [null] - The color used for focused splitter bar. Auto-derived from bar-color (variant-dependent).
+/// @param {Color} $bar-color-active [null] - The background color of the bar when pressed.
+/// @param {Color} $handle-color-active [null] - The color for the bar drag handle when pressed.
+/// @param {Color} $expander-color-active [null] - The color for the arrow expander's when pressed.
 /// @param {Number} $size [null] - The size of the splitter, its width for vertical and height for horizontal splitter.
 /// @requires $light-material-schema
 /// @example scss Set a custom expander color
@@ -33,9 +42,11 @@
     $expander-color: null,
     $border-radius: null,
     $focus-color: null,
+    $bar-color-active: null,
+    $handle-color-active: null,
+    $expander-color-active: null,
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'splitter'};
     $selector: #{config.element-prefix() + '-' + 'splitter'};
     $splitter-schema: ();
 
@@ -56,26 +67,30 @@
         $expander-color: adaptive-contrast(var(--bar-color));
     }
 
-    @if $variant != 'indigo' {
-        @if not($focus-color) and $bar-color {
-            $focus-color: dynamic-shade(var(--bar-color), $offset: 10);
-        }
-    } @else {
-        @if not($focus-color) and $bar-color {
-            $focus-color: var(--bar-color);
-        }
+    @if not($bar-color-active) and $bar-color {
+        $bar-color-active: dynamic-shade(var(--bar-color), $offset: 10);
+    }
+
+    @if not($handle-color-active) and $handle-color {
+        $handle-color-active: dynamic-shade(var(--handle-color), $offset: 10);
+    }
+
+    @if not($expander-color-active) and $expander-color {
+        $expander-color-active: dynamic-shade(var(--expander-color), $offset: 10);
     }
 
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             bar-color: $bar-color,
             handle-color: $handle-color,
             expander-color: $expander-color,
             border-radius: $border-radius,
             focus-color: $focus-color,
+            bar-color-active: $bar-color-active,
+            handle-color-active: $handle-color-active,
+            expander-color-active: $expander-color-active,
             size: $size,
         )
     );

@@ -13,12 +13,17 @@
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
 
-/// If only background color is specified, text/icon color will be assigned automatically to a contrasting color.
-/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// Action Strip Theme
 ///
-/// @param {Color} $icon-color [null] - The color used for the actions icons.
+/// PRIMARY TOKENS:
+/// - `$actions-background` — The actions background color.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $icon-color [null] - The color used for the actions icons. Auto-derived from actions-background.
 /// @param {Color} $background [null] - The color used for the action strip component content background.
-/// @param {Color} $actions-background [null] - The color used for the actions background.
+/// @param {Color} $actions-background [null] - The color used for the actions background. PRIMARY - derives icon-color.
 /// @param {Color} $delete-action [null] - The color used for the delete icon in action strip component.
 /// @param {List} $actions-border-radius [null] - The border radius used for actions container inside action strip component.
 ///
@@ -35,7 +40,7 @@
     $delete-action: null,
     $actions-border-radius: null
 ) {
-    $name: 'igx-action-strip';
+    $selector: 'igx-action-strip';
     $action-strip-schema: ();
 
     @if map.has-key($schema, 'action-strip') {
@@ -57,7 +62,7 @@
     @return extend(
         $theme,
         (
-            name: $name,
+            selector: $selector,
             background: $background,
             actions-background: $actions-background,
             icon-color: $icon-color,

@@ -13,24 +13,33 @@
 /// @author <a href="https://github.com/SisIvanova" target="_blank">Silvia Ivanova</a>
 ////
 
-/// Generates a theme map for the flat variant of the icon button component.
+/// Flat Icon Button Theme
+///
+/// PRIMARY TOKENS:
+/// - `$foreground` — Foreground (icon) color.
+/// - `$hover-background` — Background color on hover.
+/// - `$focus-background` — Background color on focus.
+/// - `$active-background` — Background color when active.
+///
+/// For flat icon buttons, the foreground color is the primary token.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema map or icon-button schema to use.
 /// @param {Color} $background [null] - Background color for the flat icon button.
-/// @param {Color} $foreground [null] - Foreground (icon) color.
-/// @param {Color} $shadow-color [null] - Shadow color for the icon button.
-/// @param {Color} $hover-background [null] - Background color on hover.
-/// @param {Color} $hover-foreground [null] - Foreground color on hover.
-/// @param {Color} $focus-background [null] - Background color on focus.
-/// @param {Color} $focus-foreground [null] - Foreground color on focus.
-/// @param {Color} $focus-hover-background [null] - Background color on focus + hover.
-/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover.
-/// @param {Color} $active-background [null] - Background color when active.
-/// @param {Color} $active-foreground [null] - Foreground color when active.
+/// @param {Color} $foreground [null] - Foreground (icon) color. PRIMARY - derives hover/focus/active backgrounds and foregrounds.
+/// @param {Color} $shadow-color [null] - Shadow color. Auto-derived from foreground (bootstrap).
+/// @param {Color} $hover-background [null] - Background color on hover. PRIMARY - derives hover-foreground. Auto-derived from foreground.
+/// @param {Color} $hover-foreground [null] - Foreground color on hover. Auto-derived from hover-background or foreground.
+/// @param {Color} $focus-background [null] - Background color on focus. PRIMARY - derives focus-foreground. Auto-derived from foreground.
+/// @param {Color} $focus-foreground [null] - Foreground color on focus. Auto-derived from focus-background or foreground.
+/// @param {Color} $focus-hover-background [null] - Background color on focus + hover. Auto-derived from foreground or hover-background.
+/// @param {Color} $focus-hover-foreground [null] - Foreground color on focus + hover. Auto-derived from focus-hover-background or foreground.
+/// @param {Color} $active-background [null] - Background color when active. Auto-derived from foreground.
+/// @param {Color} $active-foreground [null] - Foreground color when active. Auto-derived from active-background, foreground, or hover-foreground.
 /// @param {Length} $border-radius [null] - Border radius for the icon button.
 /// @param {Color} $border-color [null] - Border color.
-/// @param {Color} $focus-border-color [null] - Border color on focus.
+/// @param {Color} $focus-border-color [null] - Border color on focus. Auto-derived from foreground (indigo).
 /// @param {Color} $disabled-background [null] - Background color when disabled.
-/// @param {Color} $disabled-foreground [null] - Foreground color when disabled.
+/// @param {Color} $disabled-foreground [null] - Foreground color when disabled. Auto-derived from foreground (bootstrap/indigo).
 /// @param {Color} $disabled-border-color [null] - Border color when disabled.
 /// @param {Length} $size [null] - Size of the icon button.
 /// @requires $light-material-schema
@@ -64,7 +73,6 @@
 
     $size: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'flat-icon-button'};
     $selector: (
         #{'[' + config.element-prefix() + 'IconButton="flat"]'},
         #{config.element-prefix() + '-' + 'icon-button[variant="flat"]'},
@@ -198,7 +206,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
             foreground: $foreground,

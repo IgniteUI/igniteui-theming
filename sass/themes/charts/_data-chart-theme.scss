@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../config' as *;
 @use '../schemas/charts' as *;
 @use '../../utils' as *;
 @use '../../typography/mixins' as *;
@@ -15,7 +16,6 @@
 ////
 
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Map} $target ['angular'] - The target platform to be used when scoping the theme variables.
 /// @param {List} $margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @param {Color} $title-text-color [null] - Sets the color of the chart title.
 /// @param {List} $title-margin [null] - Sets the margin (top, right, bottom, left) of the chart title.
@@ -88,14 +88,7 @@
     $axis-strip: null
 ) {
     $name: 'data-chart';
-    $selector: map.get(
-        (
-            'angular': 'igx-data-chart',
-            'webc': 'igc-data-chart',
-            'blazor': 'igb-data-chart',
-        ),
-        $target
-    );
+    $selector: #{element-prefix()}-#{$name};
     $chart-schema: ();
 
     @if map.has-key($schema, $name) {
@@ -175,18 +168,11 @@
 /// @requires {mixin} type-style
 @mixin data-chart-typography($type-scale, $categories: (title: 'h6', subtitle: 'subtitle-1'), $target: 'angular') {
     $name: 'data-chart';
+    $selector: #{element-prefix()}-#{$name};
     $title: map.get($categories, 'title');
     $subtitle: map.get($categories, 'subtitle');
     $title-styles: type-scale-category($type-scale, $title);
     $subtitle-styles: type-scale-category($type-scale, $subtitle);
-    $selector: map.get(
-        (
-            'angular': 'igx-data-chart',
-            'webc': 'igc-data-chart',
-            'blazor': 'igb-data-chart',
-        ),
-        $target
-    );
 
     #{$selector} {
         @include font-var('title-text-style', $title-styles, $name);

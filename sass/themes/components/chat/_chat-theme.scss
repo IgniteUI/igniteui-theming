@@ -13,24 +13,31 @@
 ////
 
 /// Chat Theme
+///
+/// PRIMARY TOKENS:
+/// - `$header-background` — The background color of the chat header.
+/// - `$message-background` — The background color of message bubbles.
+///
+/// Derived colors are auto-calculated for contrast.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} background [null] - The background color of the chat component.
-/// @param {Color} header-background [null] - The background color of the chat header.
-/// @param {Color} header-color [null] - The text color of the chat header.
-/// @param {Color} header-border [null] - The color used for the chat header border.
-/// @param {Color} message-background [null] - The background color of the sent message bubble.
-/// @param {Color} message-color [null] - The text color of the chat messages.
-/// @param {Color} message-actions-color [null] - The icon color of the chat message actions.
-/// @param {Color} file-background [null] - The background color of the image message container.
-/// @param {Color} file-icon-color [null] - The color of the attached file icon.
-/// @param {Color} file-icon-accent-color [null] - The accent color of the attached file icon.
-/// @param {Color} image-background [null] - The background color of the image message container.
-/// @param {Color} image-border [null] - The border color of the image message container.
-/// @param {Color} image-attachment-icon [null] - The color of the message attachment icon.
-/// @param {Color} chat-input-border [null] - The border color of the chat input area.
-/// @param {Color} progress-indicator-color [null] - The color of the progress indicator in the chat component.
-/// @param {Color} code-background [null] - The background color of the code snippets in the chat component.
-/// @param {Color} code-border [null] - The border color of the code snippets in the chat component.
+/// @param {Color} $background [null] - The background color of the chat component.
+/// @param {Color} $header-background [null] - The background color of the chat header. PRIMARY - derives header-color.
+/// @param {Color} $header-color [null] - The text color of the chat header. Auto-derived from header-background.
+/// @param {Color} $header-border [null] - The color used for the chat header border.
+/// @param {Color} $message-background [null] - The background color of the sent message bubble. PRIMARY - derives message-color, message-actions-color.
+/// @param {Color} $message-color [null] - The text color of the chat messages. Auto-derived from message-background.
+/// @param {Color} $message-actions-color [null] - The icon color of the chat message actions. Auto-derived from message-color.
+/// @param {Color} $file-background [null] - The background color of the image message container.
+/// @param {Color} $file-icon-color [null] - The color of the attached file icon.
+/// @param {Color} $file-icon-accent-color [null] - The accent color of the attached file icon.
+/// @param {Color} $image-background [null] - The background color of the image message container.
+/// @param {Color} $image-border [null] - The border color of the image message container.
+/// @param {Color} $image-attachment-icon [null] - The color of the message attachment icon.
+/// @param {Color} $chat-input-border [null] - The border color of the chat input area.
+/// @param {Color} $progress-indicator-color [null] - The color of the progress indicator in the chat component.
+/// @param {Color} $code-background [null] - The background color of the code snippets in the chat component.
+/// @param {Color} $code-border [null] - The border color of the code snippets in the chat component.
 /// @requires $light-material-schema
 ///
 /// @example scss Change background color
@@ -64,7 +71,6 @@
     $code-background: null,
     $code-border: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'chat'};
     $selector: #{config.element-prefix() + '-' + 'chat'};
     $chat-schema: ();
 
@@ -92,7 +98,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             background: $background,
 

@@ -1,4 +1,5 @@
 // stylelint-disable max-line-length
+@use '../../../../utils/map' as *;
 
 ////
 /// @package theming
@@ -6,6 +7,16 @@
 /// @access public
 /// @author <a href="https://github.com/desig9stein" target="_blank">Marin Popov</a>
 ////
+
+/// Generates a base funnel chart schema.
+/// @access private
+/// @type {Map}
+$light-funnel-chart: (
+    _meta: (
+        name: 'funnel-chart',
+        variant: 'light',
+    ),
+);
 
 /// Generates a material funnel chart schema.
 /// @type {Map}
@@ -18,32 +29,59 @@
 /// @property {Number} outline-thickness [null] - Sets the thickness of outline around slices.
 /// @property {Color} text-color [null] - Sets the Color used for the inner labels.
 /// @property {String} text-style [null] - Sets the text style for inner labels.
-$material-funnel-chart: (
-    'brushes': series,
-    'outlines': series,
-    'outer-label-alignment': null,
-    'outer-label-text-color': null,
-    'outer-label-text-style': null,
-    'outer-label-visibility': null,
-    'outline-thickness': null,
-    'text-color': null,
-    'text-style': null,
+$material-funnel-chart: extend(
+    $light-funnel-chart,
+    (
+        brushes: series,
+        outlines: series,
+        outer-label-alignment: null,
+        outer-label-text-color: null,
+        outer-label-text-style: null,
+        outer-label-visibility: null,
+        outline-thickness: null,
+        text-color: null,
+        text-style: null,
+        _meta: (
+            theme: 'material',
+        ),
+    )
 );
 
 /// Generates a fluent funnel-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-funnel-chart
-$fluent-funnel-chart: $material-funnel-chart;
+$fluent-funnel-chart: extend(
+    $material-funnel-chart,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
 
 /// Generates a bootstrap funnel-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-funnel-chart
-$bootstrap-funnel-chart: $material-funnel-chart;
+$bootstrap-funnel-chart: extend(
+    $material-funnel-chart,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
 
 /// Generates an indigo funnel-chart schema.
 /// @type {Map}
 /// @requires {function} extend
 /// @requires {Map} $material-funnel-chart
-$indigo-funnel-chart: $material-funnel-chart;
+$indigo-funnel-chart: extend(
+    $material-funnel-chart,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

@@ -14,9 +14,14 @@
 /// @access public
 ////
 
+/// Circular Progress Theme
+///
+/// This theme has no automatic token derivation. All fill colors are independent.
+/// The fill-color-default can accept a single color or a list of two colors for gradient effect.
+///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $base-circle-color [null] - The base circle fill color.
-/// @param {Color | List<Color>} $fill-color-default [null] - The progress circle fill color.
+/// @param {Color | List<Color>} $fill-color-default [null] - The progress circle fill color. Can be a single color or list of two colors for gradient.
 /// @param {Color} $fill-color-danger [null] - The track danger fill color.
 /// @param {Color} $fill-color-warning [null] - The track warning fill color.
 /// @param {Color} $fill-color-info [null] - The track info fill color.
@@ -43,7 +48,6 @@
     $text-color: null,
     $diameter: null
 ) {
-    $name: #{config.variable-prefix() + '-' + 'circular-bar'};
     $selector: (
         #{config.element-prefix() + '-' + 'circular-bar'},
         #{config.element-prefix() + '-' + 'circular-progress'}
@@ -73,7 +77,6 @@
     @return extend(
         $theme,
         (
-            name: $name,
             selector: $selector,
             base-circle-color: $base-circle-color,
             fill-color-default: $fill-color-default,

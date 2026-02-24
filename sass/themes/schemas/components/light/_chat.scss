@@ -128,6 +128,10 @@ $light-chat: (
             300,
         ),
     ),
+    _meta: (
+        'name': 'chat',
+        'variant': 'light',
+    ),
 );
 
 /// Generates a light material chat schema.
@@ -138,7 +142,6 @@ $material-chat: extend(
     (
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -172,7 +175,6 @@ $fluent-chat: extend(
         ),
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -206,7 +208,6 @@ $bootstrap-chat: extend(
         ),
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -268,7 +269,6 @@ $indigo-chat: extend(
         ),
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );

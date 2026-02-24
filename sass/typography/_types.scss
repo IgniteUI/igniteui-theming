@@ -6,7 +6,7 @@
 /// A list consisting of 13 different category type styles
 /// @type List
 /// @access public
-$ITypeScale: (h1, h2, h3, h4, h5, h6, subtitle-1, subtitle-2, body-1, body-2, button, caption, overline);
+$ITypeScale: (h1, h2, h3, h4, h5, h6, subtitle-1, subtitle-2, body-1, body-2, button, caption, overline) !default;
 
 /// A set of style rules for all categories
 /// @type Map
@@ -21,7 +21,7 @@ $ITypeStyle: (
     text-transform: none,
     margin-top: 0,
     margin-bottom: 0,
-);
+) !default;
 
 /// A list of all category type styles that can be maped to native elements
 /// @type Map
@@ -34,4 +34,4 @@ $IElementCategories: (
     h5: 'h5',
     h6: 'h6',
     body-1: 'p',
-);
+) !default;

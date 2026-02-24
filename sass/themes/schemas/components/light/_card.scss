@@ -70,7 +70,13 @@ $light-card: extend(
                 rem(24px),
             ),
         ),
+
         default-size: 2,
+
+        _meta: (
+            name: 'card',
+            variant: 'light',
+        ),
     )
 );
 
@@ -128,9 +134,9 @@ $material-card: extend(
                 value: 'body-2',
             ),
         ),
+
         _meta: (
             theme: 'material',
-            variant: 'light',
         ),
     )
 );
@@ -184,7 +190,6 @@ $fluent-card: extend(
 
         _meta: (
             theme: 'fluent',
-            variant: 'light',
         ),
     )
 );
@@ -229,7 +234,6 @@ $bootstrap-card: extend(
 
         _meta: (
             theme: 'bootstrap',
-            variant: 'light',
         ),
     )
 );
@@ -299,7 +303,6 @@ $indigo-card: extend(
 
         _meta: (
             theme: 'indigo',
-            variant: 'light',
         ),
     )
 );
