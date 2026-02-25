@@ -209,11 +209,11 @@
 
     @if $variant == 'bootstrap' or $variant == 'indigo' {
         @if not($shadow-color) and $focus-visible-background {
-            $shadow-color: hsla(from var(--focus-visible-background) h s l / 0.5);
+            $shadow-color: hsl(from var(--focus-visible-background) h s l / 0.5);
         }
 
         @if not($disabled-background) and $background {
-            $disabled-background: hsla(from var(--background) h s l / 0.5);
+            $disabled-background: hsl(from var(--background) h s l / 0.5);
         }
 
         @if not($disabled-icon-color) and $disabled-foreground {
@@ -221,11 +221,11 @@
         }
 
         @if not($disabled-foreground) and $disabled-background {
-            $disabled-foreground: hsla(from adaptive-contrast(var(--disabled-background)) h s l / 0.5);
+            $disabled-foreground: hsl(from adaptive-contrast(var(--disabled-background)) h s l / 0.5);
         }
 
         @if not($disabled-icon-color) and $disabled-background {
-            $disabled-icon-color: hsla(from adaptive-contrast(var(--disabled-background)) h s l / 0.5);
+            $disabled-icon-color: hsl(from adaptive-contrast(var(--disabled-background)) h s l / 0.5);
         }
     }
 

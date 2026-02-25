@@ -162,7 +162,7 @@
     }
 
     @if not($disabled-selected-background) and $item-selected-background {
-        $disabled-selected-background: hsla(from var(--item-selected-background) h s l / 0.3);
+        $disabled-selected-background: hsl(from var(--item-selected-background) h s l / 0.3);
     }
 
     // border colors
@@ -232,7 +232,7 @@
     }
 
     @if not($disabled-text-color) and $disabled-background-color {
-        $disabled-text-color: hsla(from adaptive-contrast(var(--disabled-background-color)) h s l / 0.4);
+        $disabled-text-color: hsl(from adaptive-contrast(var(--disabled-background-color)) h s l / 0.4);
     }
 
     @if not($disabled-selected-text-color) and $disabled-text-color {
@@ -240,7 +240,7 @@
     }
 
     @if not($idle-shadow-color) and $item-background {
-        $idle-shadow-color: hsla(from var(--item-background) h s l / 0.5);
+        $idle-shadow-color: hsl(from var(--item-background) h s l / 0.5);
     }
 
     @if not($idle-shadow-color) and $selected-shadow-color {

@@ -75,11 +75,11 @@
     }
 
     @if not($border-color) and $background-color {
-        $border-color: hsla(from adaptive-contrast(var(--background-color)) h s l / 0.26);
+        $border-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.26);
     }
 
     @if not($pinned-border-color) and $background-color {
-        $pinned-border-color: hsla(from adaptive-contrast(var(--background-color)) h s l / 0.26);
+        $pinned-border-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.26);
     }
 
     @return extend(

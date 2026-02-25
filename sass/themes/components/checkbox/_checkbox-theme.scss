@@ -113,7 +113,7 @@
     }
 
     @if not($disabled-indeterminate-color) and $fill-color {
-        $disabled-indeterminate-color: hsla(from var(--fill-color) h s l / 0.5);
+        $disabled-indeterminate-color: hsl(from var(--fill-color) h s l / 0.5);
     }
 
     @if not($error-color-hover) and $error-color {
@@ -121,22 +121,22 @@
     }
 
     @if not($focus-outline-color-error) and $error-color {
-        $focus-outline-color-error: hsla(from var(--error-color) h s l / 0.5);
+        $focus-outline-color-error: hsl(from var(--error-color) h s l / 0.5);
     }
 
     @if $variant == 'bootstrap' {
         @if not($focus-outline-color) and $fill-color {
-            $focus-outline-color: hsla(from var(--fill-color) h s l / 0.5);
+            $focus-outline-color: hsl(from var(--fill-color) h s l / 0.5);
         }
     }
 
     @if $variant == 'indigo' {
         @if not($focus-outline-color) and $empty-color {
-            $focus-outline-color: hsla(from var(--empty-color) h s l / 0.5);
+            $focus-outline-color: hsl(from var(--empty-color) h s l / 0.5);
         }
 
         @if not($focus-outline-color-focused) and $fill-color {
-            $focus-outline-color-focused: hsla(from var(--fill-color) h s l / 0.5);
+            $focus-outline-color-focused: hsl(from var(--fill-color) h s l / 0.5);
         }
     }
 

@@ -140,7 +140,7 @@
         }
     } @else {
         @if not($thumb-off-color) and $track-off-color {
-            $thumb-off-color: hsla(from adaptive-contrast(var(--track-off-color)) h s l / 0.8);
+            $thumb-off-color: hsl(from adaptive-contrast(var(--track-off-color)) h s l / 0.8);
         }
 
         @if not($border-color) and $thumb-off-color {
@@ -180,15 +180,15 @@
         }
 
         @if not($thumb-disabled-color) and $thumb-off-color {
-            $thumb-disabled-color: hsla(from var(--thumb-off-color) h s l / 0.3);
+            $thumb-disabled-color: hsl(from var(--thumb-off-color) h s l / 0.3);
         }
 
         @if not($border-disabled-color) and $border-color {
-            $border-disabled-color: hsla(from var(--border-color) h s l / 0.3);
+            $border-disabled-color: hsl(from var(--border-color) h s l / 0.3);
         }
 
         @if not($thumb-on-disabled-color) and $thumb-on-color {
-            $thumb-on-disabled-color: hsla(from var(--thumb-on-color) h s l / 0.3);
+            $thumb-on-disabled-color: hsl(from var(--thumb-on-color) h s l / 0.3);
         }
 
         @if $variant == 'bootstrap' {
@@ -197,7 +197,7 @@
             }
 
             @if not($focus-outline-color) and $focus-fill-color {
-                $focus-outline-color: hsla(from var(--focus-fill-color) h s l / 0.5);
+                $focus-outline-color: hsl(from var(--focus-fill-color) h s l / 0.5);
             }
 
             @if not($focus-fill-hover-color) and $focus-fill-color {
@@ -207,21 +207,21 @@
 
         @if $variant == 'indigo' {
             @if not($focus-outline-color) and $border-color {
-                $focus-outline-color: hsla(from var(--border-color) h s l / 0.5);
+                $focus-outline-color: hsl(from var(--border-color) h s l / 0.5);
             }
 
             @if not($focus-outline-color-focused) and $border-on-color {
-                $focus-outline-color-focused: hsla(from var(--border-on-color) h s l / 0.5);
+                $focus-outline-color-focused: hsl(from var(--border-on-color) h s l / 0.5);
             }
         }
     }
 
     @if not($track-disabled-color) and $track-off-color {
-        $track-disabled-color: hsla(from var(--track-off-color) h s l / 0.5);
+        $track-disabled-color: hsl(from var(--track-off-color) h s l / 0.5);
     }
 
     @if not($track-on-disabled-color) and $track-on-color {
-        $track-on-disabled-color: hsla(from var(--track-on-color) h s l / 0.5);
+        $track-on-disabled-color: hsl(from var(--track-on-color) h s l / 0.5);
     }
 
     @if not($resting-shadow) {

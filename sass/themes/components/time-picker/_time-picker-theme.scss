@@ -85,11 +85,11 @@
     $theme: digest-schema($time-picker-schema);
 
     @if not($text-color) and $background-color {
-        $text-color: hsla(from adaptive-contrast(var(--background-color)) h s l / 0.7);
+        $text-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.7);
     }
 
     @if not($hover-text-color) and $text-color {
-        $hover-text-color: hsla(from var(--text-color) h s l / 1);
+        $hover-text-color: hsl(from var(--text-color) h s l / 1);
     }
 
     @if not($header-background) and $selected-text-color {
@@ -113,7 +113,7 @@
     }
 
     @if not($active-item-background) and $background-color {
-        $active-item-background: hsla(from adaptive-contrast(var(--background-color)) h s l / 0.5);
+        $active-item-background: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.5);
     }
 
     @if not($active-item-foreground) and $active-item-background {
@@ -125,11 +125,11 @@
     }
 
     @if not($disabled-text-color) and $disabled-item-background {
-        $disabled-text-color: hsla(from adaptive-contrast(var(--disabled-item-background)) h s l / 0.6);
+        $disabled-text-color: hsl(from adaptive-contrast(var(--disabled-item-background)) h s l / 0.6);
     }
 
     @if not($border-color) and $background-color {
-        $border-color: hsla(from adaptive-contrast(var(--background-color)) h s l / 0.6);
+        $border-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.6);
     }
 
     @if not($divider-color) and $border-color {

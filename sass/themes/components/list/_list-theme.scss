@@ -154,7 +154,7 @@
     }
 
     @if not($item-subtitle-color) and $item-text-color {
-        $item-subtitle-color: hsla(from var(--item-text-color) h s l / 0.74);
+        $item-subtitle-color: hsl(from var(--item-text-color) h s l / 0.74);
     }
 
     @if not($item-subtitle-color) and $item-text-color {
@@ -178,7 +178,7 @@
     }
 
     @if not($item-subtitle-color-hover) and $item-text-color-hover {
-        $item-subtitle-color-hover: hsla(from var(--item-text-color-hover) h s l / 0.74);
+        $item-subtitle-color-hover: hsl(from var(--item-text-color-hover) h s l / 0.74);
     }
 
     @if not($item-text-color-active) and $item-background-active {
@@ -214,11 +214,11 @@
     }
 
     @if not($item-subtitle-color-active) and $item-text-color-active {
-        $item-subtitle-color-active: hsla(from var(--item-text-color-active) h s l / 0.74);
+        $item-subtitle-color-active: hsl(from var(--item-text-color-active) h s l / 0.74);
     }
 
     @if not($item-subtitle-color-selected) and $item-text-color-selected {
-        $item-subtitle-color-selected: hsla(from var(--item-text-color-selected) h s l / 0.74);
+        $item-subtitle-color-selected: hsl(from var(--item-text-color-selected) h s l / 0.74);
     }
 
     @if not($item-subtitle-color-active) and $item-text-color-active {
@@ -231,7 +231,7 @@
 
     @if $variant == 'fluent' or $variant == 'bootstrap' {
         @if not($border-color) and $item-background {
-            $border-color: hsla(from adaptive-contrast(var(--item-background)) h s l / 0.15);
+            $border-color: hsl(from adaptive-contrast(var(--item-background)) h s l / 0.15);
         }
     }
 

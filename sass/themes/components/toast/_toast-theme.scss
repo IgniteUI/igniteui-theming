@@ -58,7 +58,7 @@
     }
 
     @if not($border-color) and $text-color {
-        $border-color: hsla(from var(--text-color) h s l / 0.3);
+        $border-color: hsl(from var(--text-color) h s l / 0.3);
     }
 
     @if not($shadow) {
