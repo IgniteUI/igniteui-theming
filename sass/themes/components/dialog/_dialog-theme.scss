@@ -60,11 +60,11 @@
     }
 
     @if not($message-color) and $background {
-        $message-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.8);
+        $message-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.8);
     }
 
     @if not($border-color) and $background {
-        $border-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.3);
+        $border-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.3);
     }
 
     @if not($shadow) {

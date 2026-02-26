@@ -70,11 +70,11 @@
 
     @if $variant == 'indigo' {
         @if not($border-color) and $background {
-            $border-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.3);
+            $border-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.3);
         }
 
         @if not($hover-icon-color) and $background {
-            $hover-icon-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.7);
+            $hover-icon-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.7);
         }
     } @else {
         @if not($hover-icon-color) and $background {

@@ -83,7 +83,7 @@
     }
 
     @if not($hover-color) and $background {
-        $hover-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.1);
+        $hover-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.1);
     }
 
     @if not($hover-selected-color) and $background-selected {

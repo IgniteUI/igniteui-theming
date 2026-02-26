@@ -210,11 +210,11 @@
 
     @if $variant == 'bootstrap' or $variant == 'indigo' {
         @if not($focus-outline-color) and $focus-background {
-            $focus-outline-color: hsla(from var(--focus-background) h s l / 0.4);
+            $focus-outline-color: hsl(from var(--focus-background) h s l / 0.4);
         }
 
         @if not($focus-selected-outline-color) and $focus-selected-background {
-            $focus-selected-outline-color: hsla(from var(--focus-selected-background) h s l / 0.4);
+            $focus-selected-outline-color: hsl(from var(--focus-selected-background) h s l / 0.4);
         }
     }
 

@@ -237,7 +237,7 @@
     $theme: digest-schema($grid-schema);
 
     @if not($ghost-header-icon-color) and $ghost-header-background {
-        $ghost-header-icon-color: hsla(from adaptive-contrast(var(--ghost-header-background)) h s l / 0.07);
+        $ghost-header-icon-color: hsl(from adaptive-contrast(var(--ghost-header-background)) h s l / 0.07);
     }
 
     @if not($ghost-header-text-color) and $ghost-header-background {
@@ -257,7 +257,7 @@
     }
 
     @if not($header-border-color) and $header-background {
-        $header-border-color: hsla(from adaptive-contrast(var(--header-background)) h s l / 0.24);
+        $header-border-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.24);
     }
 
     @if not($content-text-color) and $content-background {
@@ -313,7 +313,7 @@
     }
 
     @if not($row-border-color) and $content-background {
-        $row-border-color: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.08);
+        $row-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.08);
     }
 
     @if not($cell-selected-within-background) and $row-selected-background {
@@ -337,11 +337,11 @@
     }
 
     @if not($cell-active-border-color) and $content-background {
-        $cell-active-border-color: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.5);
+        $cell-active-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
     }
 
     @if not($pinned-border-color) and $content-background {
-        $pinned-border-color: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.08);
+        $pinned-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.08);
     }
 
     @if not($group-row-background) and $header-background {
@@ -373,7 +373,7 @@
     }
 
     @if not($expand-all-icon-color) and $header-background {
-        $expand-all-icon-color: hsla(from adaptive-contrast(var(--header-background)) h s l / 0.87);
+        $expand-all-icon-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.87);
     }
 
     @if not($expand-all-icon-hover-color) and $header-background {
@@ -381,15 +381,15 @@
     }
 
     @if not($sorted-header-icon-color) and $header-background {
-        $sorted-header-icon-color: hsla(from adaptive-contrast(var(--header-background)) h s l / 0.8);
+        $sorted-header-icon-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
     }
 
     @if not($sortable-header-icon-hover-color) and $sorted-header-icon-color {
-        $sortable-header-icon-hover-color: hsla(from var(--sorted-header-icon-color) h s l / 1);
+        $sortable-header-icon-hover-color: hsl(from var(--sorted-header-icon-color) h s l / 1);
     }
 
     @if not($edit-mode-color) and $content-background {
-        $edit-mode-color: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.5);
+        $edit-mode-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
     }
 
     @if not($group-label-text) and $group-row-background {
@@ -409,11 +409,11 @@
     }
 
     @if not($grouparea-color) and $grouparea-background {
-        $grouparea-color: hsla(from adaptive-contrast(var(--grouparea-background)) h s l / 0.8);
+        $grouparea-color: hsl(from adaptive-contrast(var(--grouparea-background)) h s l / 0.8);
     }
 
     @if not($grouparea-color) and $header-background {
-        $grouparea-color: hsla(from adaptive-contrast(var(--header-background)) h s l / 0.8);
+        $grouparea-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
     }
 
     @if not($drop-area-background) and $grouparea-background {
@@ -457,11 +457,11 @@
     }
 
     @if not($excel-filtering-actions-foreground) and $filtering-row-background {
-        $excel-filtering-actions-foreground: hsla(from adaptive-contrast(var(--filtering-row-background)) h s l / 0.8);
+        $excel-filtering-actions-foreground: hsl(from adaptive-contrast(var(--filtering-row-background)) h s l / 0.8);
     }
 
     @if not($excel-filtering-actions-disabled-foreground) and $filtering-row-background {
-        $excel-filtering-actions-disabled-foreground: hsla(
+        $excel-filtering-actions-disabled-foreground: hsl(
             from adaptive-contrast(var(--filtering-row-background)) h s l / 0.5
         );
     }

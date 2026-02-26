@@ -152,23 +152,23 @@
 
     @if $variant == 'material' or $variant == 'fluent' {
         @if not($hover-background) and $foreground {
-            $hover-background: hsla(from var(--foreground) h s l / 0.08);
+            $hover-background: hsl(from var(--foreground) h s l / 0.08);
         }
 
         @if not($focus-background) and $foreground {
-            $focus-background: hsla(from var(--foreground) h s l / 0.32);
+            $focus-background: hsl(from var(--foreground) h s l / 0.32);
         }
 
         @if not($focus-hover-background) and $foreground {
-            $focus-hover-background: hsla(from var(--foreground) h s l / 0.24);
+            $focus-hover-background: hsl(from var(--foreground) h s l / 0.24);
         }
 
         @if not($active-background) and $foreground {
-            $active-background: hsla(from var(--foreground) h s l / 0.16);
+            $active-background: hsl(from var(--foreground) h s l / 0.16);
         }
 
         @if not($hover-foreground) and $hover-background {
-            $hover-foreground: hsla(from var(--hover-background) h s l / 1);
+            $hover-foreground: hsl(from var(--hover-background) h s l / 1);
         }
 
         @if not($icon-color-hover) and $hover-foreground {
@@ -176,24 +176,24 @@
         }
 
         @if not($focus-foreground) and $focus-background {
-            $focus-foreground: hsla(from var(--focus-background) h s l / 1);
+            $focus-foreground: hsl(from var(--focus-background) h s l / 1);
         }
 
         @if not($focus-hover-foreground) and $focus-hover-background {
-            $focus-hover-foreground: hsla(from var(--focus-hover-background) h s l / 1);
+            $focus-hover-foreground: hsl(from var(--focus-hover-background) h s l / 1);
         }
 
         @if not($active-foreground) and $active-background {
-            $active-foreground: hsla(from var(--active-background) h s l / 1);
+            $active-foreground: hsl(from var(--active-background) h s l / 1);
         }
 
         @if $variant == 'material' {
             @if not($focus-visible-background) and $foreground {
-                $focus-visible-background: hsla(from var(--foreground) h s l / 0.16);
+                $focus-visible-background: hsl(from var(--foreground) h s l / 0.16);
             }
 
             @if not($focus-visible-foreground) and $focus-visible-background {
-                $focus-visible-foreground: hsla(from var(--focus-visible-background) h s l / 1);
+                $focus-visible-foreground: hsl(from var(--focus-visible-background) h s l / 1);
             }
         } @else {
             @if not($focus-visible-foreground) and $focus-foreground {
@@ -210,19 +210,19 @@
 
     @if $variant == 'indigo' {
         @if not($hover-background) and $foreground {
-            $hover-background: hsla(from var(--foreground) h s l / 0.08);
+            $hover-background: hsl(from var(--foreground) h s l / 0.08);
         }
 
         @if not($focus-background) and $foreground {
-            $focus-background: hsla(from var(--foreground) h s l / 0.08);
+            $focus-background: hsl(from var(--foreground) h s l / 0.08);
         }
 
         @if not($focus-hover-background) and $foreground {
-            $focus-hover-background: hsla(from var(--foreground) h s l / 0.08);
+            $focus-hover-background: hsl(from var(--foreground) h s l / 0.08);
         }
 
         @if not($active-background) and $foreground {
-            $active-background: hsla(from var(--foreground) h s l / 0.08);
+            $active-background: hsl(from var(--foreground) h s l / 0.08);
         }
     }
 
@@ -267,7 +267,7 @@
             }
 
             @if not($shadow-color) and $focus-visible-foreground {
-                $shadow-color: hsla(from var(--focus-visible-foreground) h s l / 0.5);
+                $shadow-color: hsl(from var(--focus-visible-foreground) h s l / 0.5);
             }
         } @else {
             @if not($active-foreground) and $foreground {
@@ -275,7 +275,7 @@
             }
 
             @if not($shadow-color) and $focus-visible-foreground {
-                $shadow-color: hsla(from var(--focus-visible-foreground) h s l / 0.2);
+                $shadow-color: hsl(from var(--focus-visible-foreground) h s l / 0.2);
             }
         }
     }
