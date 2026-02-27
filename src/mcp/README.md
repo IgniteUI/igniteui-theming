@@ -110,7 +110,7 @@ Create or edit `.vscode/mcp.json`:
   "servers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "ignitui-theming-mcp"]
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
     }
   }
 }
