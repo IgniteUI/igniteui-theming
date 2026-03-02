@@ -86,8 +86,14 @@ $dark-fluent-splitter: extend(
 /// Generates a dark bootstrap splitter schema.
 /// @type {Map}
 /// @requires $bootstrap-splitter
-/// @requires $dark-base-splitter
-$dark-bootstrap-splitter: extend($bootstrap-splitter, $dark-base-splitter);
+$dark-bootstrap-splitter: extend(
+    $bootstrap-splitter,
+    (
+        _meta: (
+            variant: 'dark',
+        ),
+    )
+);
 
 /// Generates a dark indigo splitter schema.
 /// @type {Map}
