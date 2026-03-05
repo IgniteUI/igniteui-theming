@@ -23,16 +23,19 @@
 /// @prop {Map} content-background [color: ('gray', 50)] - The table body background color.
 /// @prop {Map} content-text-color [color: ('gray', 800)] - The table body text color.
 /// @prop {Map} row-odd-background [color: ('gray', 50)] - The background color of odd rows.
+/// @prop {Map} body-column-border-color-odd [color: ('gray', 50)] - The border color used for the body columns in odd rows.
 /// @prop {Map} row-even-background [color: ('gray', 50)] - The background color of even rows.
+/// @prop {Map} body-column-border-color-even [color: ('gray', 50)] - The border color used for the body columns in even rows.
 /// @prop {Color} row-odd-text-color [inherit] - The text color of odd rows.
 /// @prop {Color} row-even-text-color [inherit] - The text color of even rows.
 /// @prop {Map} tree-selected-filtered-row-text-color [color: ('primary', 400)] - The selected filtered row text color of the tree.
 /// @prop {Map} row-selected-text-color [contrast-color: ('secondary', 50)] - The selected row text color.
 /// @prop {Map} row-hover-background [color: ('gray', 200)] - The hover row background color.
+/// @prop {Map} body-column-hover-border-color [color: ('gray', 200)] - The border color used for the body columns.
 /// @prop {Map} row-hover-text-color [contrast-color: ('gray', 200)] - The hover row text color.
 /// @prop {Map} row-border-color [color: ('gray', 300, .38)] - The row bottom border color.
 /// @prop {Map} row-highlight [color: ('secondary', 500)] - The grid row highlight color.
-/// @prop {Number} pinned-border-width [2px] - The border width of the pinned border.
+/// @prop {Number} pinned-border-width [.125rem] - The border width of the pinned border.
 /// @prop {String} pinned-border-style [solid] - The CSS border style of the pinned border.
 /// @prop {Map} pinned-border-color [color: ('gray', 400)] - The color of the pinned border.
 /// @prop {Map} cell-active-border-color [color: ('primary', 500)] - The active(focused) cell border color.
@@ -86,6 +89,7 @@
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
 /// @prop {Map} row-ghost-background [color: 'primary', 50] - The background color of the dragged row.
 /// @prop {Map} summaries-patch-background [color: ('gray', 300)] - The leading summaries patch backround. Used in hierarchical grids.
+/// @prop {String} active-state-border-style ['solid'] - The border style used for row active state and cell active state.
 /// @prop {Map} typography [
 ///  header: (comfortable: (value: 'overline'),
 ///  compact: (value: 'subtitle-1'))
@@ -255,6 +259,20 @@ $light-grid: extend(
             ),
         ),
 
+        body-column-border-color-odd: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        body-column-border-color-even: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+
         row-odd-text-color: inherit,
 
         row-even-text-color: inherit,
@@ -274,6 +292,13 @@ $light-grid: extend(
         ),
 
         row-hover-background: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        body-column-hover-border-color: (
             color: (
                 'gray',
                 200,
@@ -302,7 +327,7 @@ $light-grid: extend(
             ),
         ),
 
-        pinned-border-width: 2px,
+        pinned-border-width: 0.125rem,
 
         pinned-border-style: solid,
 
@@ -597,6 +622,8 @@ $light-grid: extend(
             ),
         ),
 
+        active-state-border-style: 'solid',
+
         _meta: (
             name: 'grid',
             variant: 'light',
@@ -610,11 +637,13 @@ $light-grid: extend(
 /// @prop {Map} header-selected-background [color: ('secondary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 100)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('secondary', 50)] - The selected row background color.
+/// @prop {Map} row-selected-hover-background [color: ('secondary', 100)] - The selected row hover background.
+/// @prop {Map} row-selected-hover-text-color [contrast-color: ('secondary', 100)] - The selected row hover text color.
+/// @prop {Map} body-column-selected-border-color [color: ('secondary', 50)] - The border color used for the body column when in group-row state.
+/// @prop {Map} body-column-hover-selected-border-color [color: ('secondary', 100)] - The border color used for the body column when in group-row + hover state.
 /// @prop {Map} tree-selected-filtered-row-text-color [color: ('secondary', 300)] - The selected filtered row text color of the tree.
 /// @prop {Map} cell-selected-within-background [color: ('secondary', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('secondary', 200)] - The color of the selected cell inside a selected row/column.
-/// @prop {Map} row-selected-hover-background [color: ('secondary', 100)] - The selected row hover background.
-/// @prop {Map} row-selected-hover-text-color [contrast-color: ('secondary', 100)] - The selected row hover text color.
 /// @prop {Map} cell-active-border-color [color: ('secondary', 500)] - The active(focused) cell border color.
 /// @prop {Map} group-label-column-name-text [color: ('primary', 800)] - The grid group row column name text color.
 /// @prop {Map} group-label-icon [color: ('primary', 800)] - The grid group row icon color.
@@ -654,6 +683,34 @@ $material-grid: extend(
             ),
         ),
 
+        row-selected-hover-background: (
+            color: (
+                'secondary',
+                100,
+            ),
+        ),
+
+        row-selected-hover-text-color: (
+            contrast-color: (
+                'secondary',
+                100,
+            ),
+        ),
+
+        body-column-selected-border-color: (
+            color: (
+                'secondary',
+                50,
+            ),
+        ),
+
+        body-column-hover-selected-border-color: (
+            color: (
+                'secondary',
+                100,
+            ),
+        ),
+
         tree-selected-filtered-row-text-color: (
             color: (
                 'secondary',
@@ -672,20 +729,6 @@ $material-grid: extend(
             contrast-color: (
                 'secondary',
                 200,
-            ),
-        ),
-
-        row-selected-hover-background: (
-            color: (
-                'secondary',
-                100,
-            ),
-        ),
-
-        row-selected-hover-text-color: (
-            contrast-color: (
-                'secondary',
-                100,
             ),
         ),
 
@@ -733,6 +776,8 @@ $material-grid: extend(
 /// @prop {Map} header-border-color [color: ('gray', 100)] - The color used for header borders.
 /// @prop {Map} row-selected-background [color: ('gray', 200)] - The selected row background color.
 /// @prop {Map} row-selected-hover-background [color: ('gray', 300)] - The selected row hover background.
+/// @prop {Map} body-column-selected-border-color [color: ('gray', 200)] - The border color used for the body column when in group-row state.
+/// @prop {Map} body-column-hover-selected-border-color [color: ('gray', 300)] - The border color used for the body column when in group-row + hover state.
 /// @prop {Map} row-border-color [color: ('gray', 100)] - The row bottom border color.
 /// @prop {Map} pinned-border-color [color: ('gray', 200)] - The color of the pinned border.
 /// @prop {Map} cell-active-border-color [color: ('primary', 100)] - The active(focused) cell border color.
@@ -792,20 +837,6 @@ $fluent-grid: extend(
             color: (
                 'gray',
                 100,
-            ),
-        ),
-
-        row-selected-hover-background: (
-            color: (
-                'gray',
-                300,
-            ),
-        ),
-
-        row-selected-hover-text-color: (
-            contrast-color: (
-                'gray',
-                300,
             ),
         ),
 
@@ -869,6 +900,34 @@ $fluent-grid: extend(
             ),
         ),
 
+        row-selected-hover-background: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        row-selected-hover-text-color: (
+            contrast-color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        body-column-selected-border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        body-column-hover-selected-border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
         tree-selected-filtered-row-text-color: (
             color: (
                 'gray',
@@ -928,6 +987,8 @@ $fluent-grid: extend(
 /// @prop {Map} sorted-header-icon-color [color: ('primary', 500)] - The sorted table header icon color.
 /// @prop {Map} row-selected-background [ color: ('primary', 50)] - The selected row background color.
 /// @prop {Map} row-selected-hover-background [color: ('primary', 100)] - The selected row hover background.
+/// @prop {Map} body-column-selected-border-color [color: ('primary', 50)] - The border color used for the body column when in group-row state.
+/// @prop {Map} body-column-hover-selected-border-color [color: ('primary', 100)] - The border color used for the body column when in group-row + hover state.
 /// @prop {Map} resize-line-color [color: ('primary', 500)] - The table header resize line color.
 /// @prop {List} drop-area-border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for drop-area.
 /// @prop {Map} cell-selected-within-background [color: ('primary', 100)] - The background of the selected cell inside a selected row/column.
@@ -1005,13 +1066,6 @@ $bootstrap-grid: extend(
             ),
         ),
 
-        row-selected-background: (
-            color: (
-                'primary',
-                50,
-            ),
-        ),
-
         cell-selected-within-background: (
             color: (
                 'primary',
@@ -1026,6 +1080,13 @@ $bootstrap-grid: extend(
             ),
         ),
 
+        row-selected-background: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+
         row-selected-hover-background: (
             color: (
                 'primary',
@@ -1035,6 +1096,20 @@ $bootstrap-grid: extend(
 
         row-selected-hover-text-color: (
             contrast-color: (
+                'primary',
+                100,
+            ),
+        ),
+
+        body-column-selected-border-color: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+
+        body-column-hover-selected-border-color: (
+            color: (
                 'primary',
                 100,
             ),
@@ -1089,14 +1164,17 @@ $bootstrap-grid: extend(
 /// @prop {Map} ghost-header-text-color [color: 'gray', 700] - The dragged header text color.
 /// @prop {Map} ghost-header-icon-color [color: 'gray', 600] - The dragged header icon color.
 /// @prop {Map} row-odd-background [color: ('surface')] - The background color of odd rows.
+/// @prop {Map} body-column-border-color-odd [color: ('surface')] - The border color used for the body columns in odd rows.
 /// @prop {Map} row-even-background [color: ('surface')] - The background color of even rows.
+/// @prop {Map} body-column-border-color-even [color: ('surface')] - The border color used for the body columns in even rows.
 /// @prop {Map} row-border-color [color: ('gray', 300)] - The row bottom border color.
 /// @prop {Map} row-highlight [color: ('primary', 400)] - The grid row highlight color.
-/// @prop {Map} row-hover-background [color: ('gray', 200)] - The hover row background color.
 /// @prop {Map} sorted-header-icon-color [color: ('primary', 500)] - The sorted table header icon color.
 /// @prop {Map} sortable-header-icon-hover-color [color: ('primary', 400)] - The icon color on hover in grid header when the column is sortable.
 /// @prop {Map} row-selected-background [color: ('primary', 50)] - The selected row background color.
 /// @prop {Map} row-selected-hover-background [color: ('primary', 100)] - The selected row hover background.
+/// @prop {Map} body-column-selected-border-color [color: ('primary', 50)] - The border color used for the body column when in group-row state.
+/// @prop {Map} body-column-hover-selected-border-color [color: ('primary', 100)] - The border color used for the body column when in group-row + hover state.
 /// @prop {Map} pinned-border-color [color: ('gray', 400)] - The color of the pinned border.
 /// @prop {Map} resize-line-color [color: ('primary', 400)] - The table header resize line color.
 /// @prop {Map} drop-indicator-color [color: ('primary', 400)] - The color of the drop indicator.
@@ -1255,13 +1333,6 @@ $indigo-grid: extend(
             ),
         ),
 
-        row-hover-background: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-
         sorted-header-icon-color: (
             color: (
                 'primary',
@@ -1273,13 +1344,6 @@ $indigo-grid: extend(
             color: (
                 'primary',
                 400,
-            ),
-        ),
-
-        row-selected-background: (
-            color: (
-                'primary',
-                50,
             ),
         ),
 
@@ -1304,6 +1368,13 @@ $indigo-grid: extend(
             ),
         ),
 
+        row-selected-background: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+
         row-selected-hover-background: (
             color: (
                 'primary',
@@ -1315,6 +1386,20 @@ $indigo-grid: extend(
             color: (
                 'gray',
                 900,
+            ),
+        ),
+
+        body-column-selected-border-color: (
+            color: (
+                'primary',
+                50,
+            ),
+        ),
+
+        body-column-hover-selected-border-color: (
+            color: (
+                'primary',
+                100,
             ),
         ),
 
@@ -1396,6 +1481,18 @@ $indigo-grid: extend(
         ),
 
         row-odd-background: (
+            color: (
+                'surface',
+            ),
+        ),
+
+        body-column-border-color-odd: (
+            color: (
+                'surface',
+            ),
+        ),
+
+        body-column-border-color-even: (
             color: (
                 'surface',
             ),
