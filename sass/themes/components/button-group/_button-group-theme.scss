@@ -22,7 +22,7 @@
 /// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {box-shadow} $shadow [null] - The shadow to be applied for the button group.
+/// @param {List} $shadow [null] - The shadow to be applied for the button group.
 /// @param {Color} $item-text-color [null]- The text color for button group items. Auto-derived from item-background.
 /// @param {color} $item-icon-color [null]- The icon color for button group items. Auto-derived from item-text-color.
 /// @param {Color} $item-background [null] - The background color for button group items. PRIMARY - derives all state colors.
@@ -65,7 +65,7 @@
 ///
 /// @requires $light-material-schema
 ///
-/// @example scss Change the background, text, and border colors
+/// @example scss - Change the background, text, and border colors
 ///   $my-button-group-theme: button-group-theme(
 ///     $item-text-color: white,
 ///     $item-background: rgba(0, 0, 0, .8),

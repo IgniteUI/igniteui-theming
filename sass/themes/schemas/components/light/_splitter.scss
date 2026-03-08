@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light splitter schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} bar-color [color: ('gray', 200)] - The background color of the bar.
 /// @prop {Map} handle-color [color: ('gray', 400)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 400)] - The color for the arrow expander's.
@@ -84,9 +84,9 @@ $light-splitter: (
 );
 
 /// Generates a material splitter schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focus-color [color: ('secondary', 500)] - The color used for focused splitter bar.
-/// @requires {Map} $light-splitter
+/// @requires $light-splitter
 $material-splitter: extend(
     $light-splitter,
     (
@@ -103,8 +103,8 @@ $material-splitter: extend(
 );
 
 /// Generates a fluent splitter schema.
-/// @type {Map}
-/// @requires {Map} $light-splitter
+/// @type Map
+/// @requires $light-splitter
 $fluent-splitter: extend(
     $light-splitter,
     (
@@ -115,8 +115,8 @@ $fluent-splitter: extend(
 );
 
 /// Generates a bootstrap splitter schema.
-/// @type {Map}
-/// @requires {Map} $light-splitter
+/// @type Map
+/// @requires $light-splitter
 $bootstrap-splitter: extend(
     $light-splitter,
     (
@@ -127,7 +127,7 @@ $bootstrap-splitter: extend(
 );
 
 /// Generates an indigo splitter schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} bar-color [color: ('gray', 400)] - The background color of the bar.
 /// @prop {Map} focus-color [color: ('primary', 400)] - The color used for focused splitter bar.
 /// @prop {Map} handle-color [color: ('gray', 700)] - The color for the bar drag handle.
@@ -135,7 +135,7 @@ $bootstrap-splitter: extend(
 /// @prop {Map} bar-color-active [color: ('gray', 500)] - The background color of the bar when pressed.
 /// @prop {Map} handle-color-active [color: ('gray', 900)] - The color for the bar drag handle when pressed.
 /// @prop {Map} expander-color-active [color: ('gray', 900)] - The color for the arrow expander's when pressed.
-/// @requires {Map} $light-splitter
+/// @requires $light-splitter
 $indigo-splitter: extend(
     $light-splitter,
     (

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a light grid-filtering schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} menu-background [color: ('surface')] - The idle menu background color.
 /// @prop {Color} toggle-background [transparent] - The idle toggle background color.
 /// @prop {Color} toggle-filtered-background [transparent] - The filtered toggle background color.
@@ -87,8 +87,8 @@ $light-grid-filtering: (
 );
 
 /// Generates a material grid-filtering schema.
-/// @type {Map}
-/// @requires {Map} $light-grid-filtering
+/// @type Map
+/// @requires $light-grid-filtering
 $material-grid-filtering: extend(
     $light-grid-filtering,
     (
@@ -99,8 +99,8 @@ $material-grid-filtering: extend(
 );
 
 /// Generates a fluent grid-filtering schema.
-/// @type {Map}
-/// @requires {Map} $light-grid-filtering
+/// @type Map
+/// @requires $light-grid-filtering
 $fluent-grid-filtering: extend(
     $light-grid-filtering,
     (
@@ -111,8 +111,8 @@ $fluent-grid-filtering: extend(
 );
 
 /// Generates a bootstrap grid-filtering schema.
-/// @type {Map}
-/// @requires {Map} $light-grid-filtering
+/// @type Map
+/// @requires $light-grid-filtering
 $bootstrap-grid-filtering: extend(
     $light-grid-filtering,
     (
@@ -123,8 +123,8 @@ $bootstrap-grid-filtering: extend(
 );
 
 /// Generates an indigo grid-filtering schema.
-/// @type {Map}
-/// @requires {Map} $light-grid-filtering
+/// @type Map
+/// @requires $light-grid-filtering
 $indigo-grid-filtering: extend(
     $light-grid-filtering,
     (

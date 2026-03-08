@@ -1,0 +1,15 @@
+id: sassdoc-param-missing-dollar
+language: sassdoc
+severity: warning
+message: '@param name must start with $, e.g. @param {Type} $name'
+transform:
+  FIXED:
+    replace:
+      source: $MATCH
+      replace: '^(@(?:param|parameter|arg|argument)\s+\{[^}]+\}\s+)'
+      by: '$1$$'
+rule:
+  kind: ERROR
+  regex: '^@(param|parameter|arg|argument)\s+\{[^}]+\}\s+[^\$\s]'
+  pattern: $MATCH
+fix: '$FIXED'

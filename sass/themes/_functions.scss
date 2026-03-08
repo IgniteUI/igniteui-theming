@@ -18,7 +18,7 @@
 /// @requires {function} resolve-value
 /// @requires {function} elevation
 /// @requires {function} chart-brushes
-/// @example scss Get the resolved theme for a schema
+/// @example scss - Get the resolved theme for a schema
 ///   $custom-schema: (
 ///     foreground: (
 ///        color: ('primary', 800, .5)
@@ -26,7 +26,7 @@
 ///     border-radius: (rem(5px), rem(0), rem(8px)) // default, min and max radius
 ///   );
 ///   $theme: digest-schema($custom-schema);
-/// @returns {Map} - A theme map with resolved values.
+/// @returns {Map} A theme map with resolved values.
 @function digest-schema($schema) {
     $result: ();
 
@@ -56,9 +56,9 @@
 /// the function should be called with.
 /// @access private
 /// @param {Map} $instructions - The map to be used as instruction set.
-/// @example scss Resolve primary 500 color
+/// @example scss - Resolve primary 500 color
 ///   $value: resolve-value((color: (primary, 500)));
-/// @returns {dynamic} - The resolved value.
+/// @returns {Map} The resolved value.
 @function resolve-value($instructions) {
     $result: ();
 
@@ -103,11 +103,11 @@
 /// @param {Map} $theme - The source theme to be used to read values from.
 /// @param {String} $property - A key from the theme map to assign as value to the property.
 /// @param {String} $fallback [null] - A value to be used if the CSS property is not defined.
-/// @example scss Assign the color property in a set of rules to a value from the theme.
+/// @example scss - Assign the color property in a set of rules to a value from the theme.
 ///   [part='icon'] {
 ///     color: var-get($theme, 'icon-color', inherit); // var(--icon-color, inherit)
 ///   }
-/// @returns {String} - The CSS reference of the property in the theme.
+/// @returns {String} The CSS reference of the property in the theme.
 @function var-get($theme, $property, $fallback: null) {
     @if map.has-key($theme, $property) {
         $p: --#{$property};
@@ -123,7 +123,7 @@
 /// @param {Number} $radius - The preferred value.
 /// @param {Number} $min [rem(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
-/// @return {Number} - The clamped value
+/// @return {Number} The clamped value
 @function border-radius($radius, $min: #{rem(0)}, $max: $radius) {
     $factor: math.div($radius, $max);
 
@@ -137,9 +137,9 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
-/// @example
+/// @example scss
 ///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
-/// @return {Function} - The evaluated value.
+/// @return {Function} The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
     $sm: max(#{$sm}, -1 * #{$sm});
     $md: max(#{$md}, -1 * #{$md});
@@ -160,11 +160,11 @@
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
 /// @param {Number} $dir [null] - The preferred direction - inline or block.
-/// @example
+/// @example scss
 ///   .my-component {
 ///     padding: pad(4px, 8px, 16px);
 ///   }
-/// @return {Function} - The evaluated value.
+/// @return {Function} The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
     $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
     $sm: max(#{$sm}, -1 * #{$sm});
@@ -184,11 +184,11 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
-/// @example
+/// @example scss
 ///   .my-component {
 ///     padding: pad-inline(4px, 8px, 16px);
 ///   }
-/// @return {Function} - The evaluated value.
+/// @return {Function} The evaluated value.
 @function pad-inline($sm, $md: $sm, $lg: $md) {
     @return pad($sm, $md, $lg, $dir: inline);
 }
@@ -199,11 +199,11 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
-/// @example
+/// @example scss
 ///   .my-component {
 ///     padding: pad-block(4px, 8px, 16px);
 ///   }
-/// @return {Function} - The evaluated value.
+/// @return {Function} The evaluated value.
 @function pad-block($sm, $md: $sm, $lg: $md) {
     @return pad($sm, $md, $lg, $dir: block);
 }

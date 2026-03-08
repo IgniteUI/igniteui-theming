@@ -1,0 +1,13 @@
+id: sassdoc-prop-needs-name
+language: sassdoc
+severity: warning
+message: '@prop should have a valid name, e.g. @prop {Type} name — names must begin with a letter or underscore'
+rule:
+  any:
+    - kind: tag_property
+      not:
+        has:
+          kind: property_name
+          regex: '^[a-zA-Z_]'
+    - kind: ERROR
+      regex: '^@prop(erty)?(\s+(?:\{[^}]+\}\s+[\$\[\(\{]|[\$\[\(])|\s*$)'

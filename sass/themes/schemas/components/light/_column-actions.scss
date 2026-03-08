@@ -8,7 +8,7 @@
 ////
 
 /// Generates a light column actions schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} title-color [color: ('primary', 500)]- The text color used for the title of the list.
 /// @prop {Map} background-color [color: ('surface')] - The background color of the panel.
 /// @prop {Map} typography [title: (value: 'subtitle-1')] - The typography styles used for the component.
@@ -39,8 +39,8 @@ $light-column-actions: (
 );
 
 /// Generates a material column actions schema.
-/// @type {Map}
-/// @requires {map} $light-column-actions
+/// @type Map
+/// @requires $light-column-actions
 $material-column-actions: extend(
     $light-column-actions,
     (
@@ -51,8 +51,8 @@ $material-column-actions: extend(
 );
 
 /// Generates a fluent column actions schema.
-/// @type {Map}
-/// @requires {map} $light-column-actions
+/// @type Map
+/// @requires $light-column-actions
 $fluent-column-actions: extend(
     $light-column-actions,
     (
@@ -63,8 +63,8 @@ $fluent-column-actions: extend(
 );
 
 /// Generates a bootstrap column actions schema.
-/// @type {Map}
-/// @requires {map} $light-column-actions
+/// @type Map
+/// @requires $light-column-actions
 $bootstrap-column-actions: extend(
     $light-column-actions,
     (
@@ -75,8 +75,8 @@ $bootstrap-column-actions: extend(
 );
 
 /// Generates an indigo column actions schema.
-/// @type {Map}
-/// @requires {map} $light-column-actions
+/// @type Map
+/// @requires $light-column-actions
 $indigo-column-actions: extend(
     $light-column-actions,
     (

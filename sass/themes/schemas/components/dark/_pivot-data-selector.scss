@@ -9,7 +9,7 @@
 
 /// Generates a base dark pivot data selector schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-pivot-data-selector: (
     _meta: (
         name: 'pivot-data-selector',
@@ -18,21 +18,21 @@ $dark-base-pivot-data-selector: (
 );
 
 /// Generates a dark material pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $material-pivot-data-selector
+/// @type Map
+/// @requires $material-pivot-data-selector
 $dark-material-pivot-data-selector: extend($material-pivot-data-selector, $dark-base-pivot-data-selector);
 
 /// Generates a dark fluent pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $fluent-pivot-data-selector
+/// @type Map
+/// @requires $fluent-pivot-data-selector
 $dark-fluent-pivot-data-selector: extend($fluent-pivot-data-selector, $dark-base-pivot-data-selector);
 
 /// Generates a dark bootstrap pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $bootstrap-pivot-data-selector
+/// @type Map
+/// @requires $bootstrap-pivot-data-selector
 $dark-bootstrap-pivot-data-selector: extend($bootstrap-pivot-data-selector, $dark-base-pivot-data-selector);
 
 /// Generates a dark indigo pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $indigo-pivot-data-selector
+/// @type Map
+/// @requires $indigo-pivot-data-selector
 $dark-indigo-pivot-data-selector: extend($indigo-pivot-data-selector, $dark-base-pivot-data-selector);

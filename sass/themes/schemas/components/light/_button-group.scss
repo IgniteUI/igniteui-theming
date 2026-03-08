@@ -9,7 +9,7 @@
 ////
 
 /// Generates a light button group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} idle-shadow-color [transparent] - The outline color of button group items.
 /// @prop {Color} selected-shadow-color [transparent] - The outline color of selected button group items.
 /// @prop {Map} item-text-color [color: ('gray', 700)] - The text color for button group items.
@@ -25,7 +25,7 @@
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for button-group component.
 /// @prop {Number} default-size [2] - The default size used for the button-group component.
 /// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-button-group
+/// @requires $default-elevation-button-group
 $light-button-group: extend(
     $default-elevation-button-group,
     (
@@ -120,7 +120,7 @@ $light-button-group: extend(
 );
 
 /// Generates a material button group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-icon-color [color: ('gray', 700)] - The icon color for button group items.
 /// @prop {Map} item-hover-text-color [color: ('gray', 800)] - The hover text color for button group items.
 /// @prop {Map} item-hover-icon-color [color: ('gray', 800)] - The hover icon color for button group items.
@@ -145,8 +145,8 @@ $light-button-group: extend(
 /// @prop {Map} disabled-selected-border-color [color: ('gray', 400)] - The disabled border color for a selected item from the button group.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for button-group component.
 /// @prop {Number} default-size [3] - The default size used for the button-group component.
-/// @requires {Map} $light-button-group
-/// @requires {Map} $default-elevation-button-group
+/// @requires $light-button-group
+/// @requires $default-elevation-button-group
 $material-button-group: extend(
     $light-button-group,
     $default-elevation-button-group,
@@ -320,7 +320,7 @@ $material-button-group: extend(
 );
 
 /// Generates a fluent button group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-text-color [color: ('gray', 900)] - The text color for button group items.
 /// @prop {Map} item-icon-color [color: ('gray', 900)] - The icon color for button group items.
 /// @prop {Map} item-background [contrast-color: ('gray', 900)] - The background color for button group items.
@@ -348,8 +348,8 @@ $material-button-group: extend(
 /// @prop {Map} disabled-selected-border-color [color: ('gray', 600)] - The disabled border color for a selected item from the button group.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the button group shadow.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for button-group component.
-/// @requires {Map} $light-button-group
-/// @requires {Map} $fluent-elevation-button-group
+/// @requires $light-button-group
+/// @requires $fluent-elevation-button-group
 $fluent-button-group: extend(
     $light-button-group,
     $fluent-elevation-button-group,
@@ -546,7 +546,7 @@ $fluent-button-group: extend(
 );
 
 /// Generates a bootstrap button group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} idle-shadow-color [color: ('primary', 600, .5)] - The outline color of button group items.
 /// @prop {Map} selected-shadow-color [color: ('primary', 600, .5)] - The outline color of selected button group items.
 /// @prop {Map} item-background [color: ('primary', 500)] - The background color for button group items.
@@ -577,8 +577,8 @@ $fluent-button-group: extend(
 /// @prop {Map} disabled-selected-icon-color [color: ('primary', 200)] - The disabled icon color for a selected item in the button group.
 /// @prop {Map} disabled-selected-border-color [color: ('primary', 100)] - The disabled border color for a selected item from the button group.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the button group shadow.
-/// @requires {Map} $light-button-group
-/// @requires {Map} $bootstrap-elevation-button-group
+/// @requires $light-button-group
+/// @requires $bootstrap-elevation-button-group
 $bootstrap-button-group: extend(
     $light-button-group,
     $bootstrap-elevation-button-group,
@@ -797,7 +797,7 @@ $bootstrap-button-group: extend(
 );
 
 /// Generates an indigo light button-group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-icon-color [color: ('gray', 600)] - The icon color for button group items.
 /// @prop {Map} idle-shadow-color [color: ('gray', 900, .15)] - The outline color of button group items.
 /// @prop {Map} selected-shadow-color [color: ('primary', 400, .5)] - The outline color of selected button group items.
@@ -823,8 +823,8 @@ $bootstrap-button-group: extend(
 /// @prop {Map} disabled-selected-icon-color [contrast-color: ('primary', 500, .3)] - The disabled icon color for a selected item in the button group.
 /// @prop {Map} disabled-selected-border-color [color: ('primary', 400, .5)] - The disabled border color for a selected item from the button group.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the button group shadow.
-/// @requires {Map} $light-button-group
-/// @requires {Map} $indigo-elevation-button-group
+/// @requires $light-button-group
+/// @requires $indigo-elevation-button-group
 $indigo-button-group: extend(
     $light-button-group,
     $indigo-elevation-button-group,

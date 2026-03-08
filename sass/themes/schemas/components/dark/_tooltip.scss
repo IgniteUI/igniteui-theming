@@ -10,7 +10,7 @@
 
 /// Generates a base dark tooltip schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-tooltip: (
     _meta: (
         name: 'tooltip',
@@ -19,27 +19,27 @@ $dark-base-tooltip: (
 );
 
 /// Generates a dark material tooltip schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-tooltip
 $dark-material-tooltip: extend($material-tooltip, $dark-base-tooltip);
 
 /// Generates a dark fluent tooltip schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-tooltip
 $dark-fluent-tooltip: extend($fluent-tooltip, $dark-base-tooltip);
 
 /// Generates a dark bootstrap tooltip schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-tooltip
 $dark-bootstrap-tooltip: extend($bootstrap-tooltip, $dark-base-tooltip);
 
 /// Generates a dark indigo tooltip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('gray', 300, .9)] - The background color of the tooltip.
 /// @prop {Map} text-color [contrast-color: ('gray', 50)] - The text color of the tooltip.
 /// @prop {Number} elevation [9] - The elevation level, between 0-24, to be used for the tooltip.
-/// @requires {Map} $indigo-tooltip
-/// @requires {Map} $dark-indigo-elevation-tooltip
+/// @requires $indigo-tooltip
+/// @requires $dark-indigo-elevation-tooltip
 $dark-indigo-tooltip: extend(
     $indigo-tooltip,
     $dark-indigo-elevation-tooltip,

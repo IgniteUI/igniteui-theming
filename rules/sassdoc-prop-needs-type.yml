@@ -1,0 +1,9 @@
+id: sassdoc-prop-needs-type
+language: sassdoc
+severity: warning
+message: '@prop should have a type annotation, e.g. @prop {Type} name'
+rule:
+  kind: tag_property
+  not:
+    has:
+      kind: type

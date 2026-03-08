@@ -100,14 +100,14 @@
 /// @param {Color} $tree-filtered-text-color [null] - Grouping row background color on focus.
 /// @param {Color} $summaries-patch-background [null] - The leading summaries patch background.
 /// @param {Color} $row-highlight [null] - The grid row highlight indication color.
-/// @param {box-shadow} $grid-shadow [null] - The shadow of the grid.
-/// @param {box-shadow} $drag-shadow [null] - The shadow for movable elements.
+/// @param {List} $grid-shadow [null] - The shadow of the grid.
+/// @param {List} $drag-shadow [null] - The shadow for movable elements.
 /// @param {color} $row-ghost-background [null] - The dragged row background color.
 /// @param {color} $row-drag-color [null] - The row drag handle color.
 /// @param {Color} $grid-border-color [null] - The color of the grid border.
 /// @param {List} $drop-area-border-radius [null] - The border radius for column drop area.
 /// @requires $light-material-schema
-/// @example scss Change the header background color
+/// @example scss - Change the header background color
 ///   $my-grid-theme: grid-theme($header-background: black);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-grid-theme);

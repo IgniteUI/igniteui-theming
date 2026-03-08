@@ -9,7 +9,7 @@
 
 /// Generates a base dark label schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-label: (
     _meta: (
         name: 'label',
@@ -18,12 +18,12 @@ $dark-base-label: (
 );
 
 /// Generates a dark material label schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-label
 $dark-material-label: extend($material-label, $dark-base-label);
 
 /// Generates a dark fluent label schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} color [color: ('gray', 800)] - The label color.
 /// @prop {Map} disabled-color [color: ('gray', 300)] - The label color in disabled state.
 /// @requires $fluent-label
@@ -47,12 +47,12 @@ $dark-fluent-label: extend(
 );
 
 /// Generates a dark bootstrap label schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-label
 $dark-bootstrap-label: extend($bootstrap-label, $dark-base-label);
 
 /// Generates a dark indigo label schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} color [contrast-color: ('primary', 500, .6)] - The label color.
 /// @prop {Map} disabled-color [contrast-color: ('primary', 500, .2)] - The label color in disabled state.
 $dark-indigo-label: extend(

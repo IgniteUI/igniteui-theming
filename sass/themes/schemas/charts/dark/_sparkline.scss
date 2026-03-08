@@ -10,7 +10,7 @@
 
 /// Generates a base dark sparkline schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-sparkline: (
     _meta: (
         variant: 'dark',
@@ -18,21 +18,21 @@ $dark-sparkline: (
 );
 
 /// Generates a dark sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-sparkline
 $dark-material-sparkline: extend($material-sparkline, $dark-sparkline);
 
 /// Generates a dark fluent sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-sparkline
 $dark-fluent-sparkline: extend($fluent-sparkline, $dark-sparkline);
 
 /// Generates a dark bootstrap sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-sparkline
 $dark-bootstrap-sparkline: extend($bootstrap-sparkline, $dark-sparkline);
 
 /// Generates a dark indigo sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-sparkline
 $dark-indigo-sparkline: extend($indigo-sparkline, $dark-sparkline);

@@ -1,0 +1,8 @@
+id: sassdoc-invalid-type-name
+language: sassdoc
+severity: warning
+message: 'Unknown Sass type — use Map, List, Color, Number, String, Bool, Boolean, Null, Function, Mixin, Arglist, Calculation, Length, or "*"'
+rule:
+  kind: type_name
+  not:
+    regex: '^(\*|\(\)|(?:Map|List|Color|Number|String|Bool|Boolean|Null|Function|Mixin|Arglist|Calculation|Length|map|list|color|number|string|bool|null|function|mixin|arglist|calculation)(?:\.\.\.|<[\w-]+>)?)$'

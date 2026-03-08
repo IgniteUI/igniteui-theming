@@ -11,7 +11,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a base dark tabs schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-hover-background [color: ('gray', 100, .5)] - The background used for the tabs on hover.
 /// @prop {Map} item-active-hover-background [color: ('gray', 100, .5)] - The color used for the active tab background on hover and focus.
 $base-dark-tabs: (
@@ -36,7 +36,7 @@ $base-dark-tabs: (
 );
 
 /// Generates a dark material tabs schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-hover-background [color: ('gray', 100, 0.3)] - The background used for the tabs on hover.
 /// @prop {Map} item-active-hover-background [color: ('gray', 100, 0.3)] - The color used for the active tab background on hover and focus.
 /// @prop {Map} item-active-icon-color [color: ('primary', 500)] - The color used for the active tab icon.
@@ -112,7 +112,7 @@ $dark-material-tabs: extend(
 );
 
 /// Generates a dark fluent tabs schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-disabled-color [color: ('gray', 300)] - The color used for the disabled tabs text.
 /// @prop {Map} item-disabled-icon-color [color: ('gray', 300)] - The color used for the disabled tab icon.
 /// @prop {Map} item-hover-background [color: ('gray', 50)] - The background used for the tabs on hover.
@@ -166,7 +166,7 @@ $dark-fluent-tabs: extend(
 );
 
 /// Generates a dark bootstrap tabs schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-tabs
 $dark-bootstrap-tabs: extend(
     $bootstrap-tabs,
@@ -178,7 +178,7 @@ $dark-bootstrap-tabs: extend(
 );
 
 /// Generates a dark indigo tabs schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-hover-background [contrast-color: ('gray', 50, .1)] - The background used for the tabs on hover.
 /// @prop {Map} item-active-hover-background [contrast-color: ('gray', 50, .1)] - The color used for the active tab background on hover and focus.
 /// @prop {Map} item-text-color [contrast-color: ('gray', 50, .8)] - The color used for the tab text color.

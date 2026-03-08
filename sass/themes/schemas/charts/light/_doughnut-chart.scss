@@ -10,7 +10,7 @@
 
 /// Generates a base doughnut chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-doughnut-chart: (
     _meta: (
         name: 'doughnut-chart',
@@ -19,7 +19,7 @@ $light-doughnut-chart: (
 );
 
 /// Generates a material base doughnut chart schema.
-/// @type {Map}
+/// @type Map
 /// @property {List} brushes [series] - Defines the palette from which automatically assigned series colors are selected.
 /// @property {List} outlines [series] - Defines the palette from which automatically assigned series outline colors are selected.
 /// @property {Color} others-category-fill [null] - Sets the fill color for others category.
@@ -50,9 +50,9 @@ $material-doughnut-chart: extend(
 );
 
 /// Generates a fluent doughnut-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-doughnut-chart
+/// @requires $material-doughnut-chart
 $fluent-doughnut-chart: extend(
     $material-doughnut-chart,
     (
@@ -63,9 +63,9 @@ $fluent-doughnut-chart: extend(
 );
 
 /// Generates a bootstrap doughnut-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-doughnut-chart
+/// @requires $material-doughnut-chart
 $bootstrap-doughnut-chart: extend(
     $material-doughnut-chart,
     (
@@ -76,9 +76,9 @@ $bootstrap-doughnut-chart: extend(
 );
 
 /// Generates an indigo doughnut-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-doughnut-chart
+/// @requires $material-doughnut-chart
 $indigo-doughnut-chart: extend(
     $material-doughnut-chart,
     (

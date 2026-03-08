@@ -1,0 +1,13 @@
+id: sassdoc-throw-needs-description
+language: sassdoc
+severity: warning
+message: '@throw must include a description, e.g. @throw Error something went wrong'
+rule:
+  any:
+    - kind: tag_throw
+      not:
+        has:
+          kind: line_description
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@(throw|throws|exception)\s*$'

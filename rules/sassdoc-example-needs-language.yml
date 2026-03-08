@@ -1,0 +1,9 @@
+id: sassdoc-example-needs-language
+language: sassdoc
+severity: error
+message: '@example should specify a language, e.g. @example scss'
+rule:
+  kind: tag_example
+  not:
+    has:
+      kind: example_language

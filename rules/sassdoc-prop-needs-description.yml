@@ -1,0 +1,9 @@
+id: sassdoc-prop-needs-description
+language: sassdoc
+severity: warning
+message: '@prop should have a description'
+rule:
+  kind: tag_property
+  not:
+    has:
+      kind: tag_description

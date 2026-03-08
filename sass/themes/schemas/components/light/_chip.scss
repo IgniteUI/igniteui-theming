@@ -9,7 +9,7 @@
 ////
 
 /// Generates a light chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} border-radius [(rem(16px), rem(0), rem(16px))] - The border radius used for chip.
 /// @prop {Map} background [color: ('gray', 200)] - The chip background color.
 /// @prop {Color} border-color [transparent] - The chip border color.
@@ -20,8 +20,8 @@
 /// @prop {Color} hover-border-color [transparent] - The chip hover border color.
 /// @prop {Map} selected-text-color [contrast-color: ('gray', 300)] - The selected chip text color.
 /// @prop {Map} selected-background [color: ('primary', 500)] - The selected chip background color.
-/// @prop {Color} selected-border-color [transparent] The selected chip border color.
-/// @prop {Map} focus-text-color [contrast-color: ('gray', 500)] The focused chip text color.
+/// @prop {Color} selected-border-color [transparent] - The selected chip border color.
+/// @prop {Map} focus-text-color [contrast-color: ('gray', 500)] - The focused chip text color.
 /// @prop {Color} focus-border-color [transparent] - The chip focus border color.
 /// @prop {Map} hover-selected-text-color [contrast-color: ('gray', 400)] - The selected chip hover text color.
 /// @prop {Map} hover-selected-background [color: ('gray', 400)] - The selected chip hover background color.
@@ -30,13 +30,13 @@
 /// @prop {Number} ghost-elevation [8] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
 /// @prop {color} remove-icon-color ["'currentColor'"] - The remove icon color for the chip.
 /// @prop {Color} remove-icon-color-focus ["'currentColor'"] - The remove icon color on focus for the chip.
-/// @prop {Map} $disabled-text-color [color: ('gray', 500)] - The disabled chip text color.
-/// @prop {Map} $disabled-background [color: ('gray', 200)] - The disabled chip background color.
-/// @prop {Map} $disabled-border-color [color: ('gray', 200)] - The disabled chip border color.
+/// @prop {Map} disabled-text-color [color: ('gray', 500)] - The disabled chip text color.
+/// @prop {Map} disabled-background [color: ('gray', 200)] - The disabled chip background color.
+/// @prop {Map} disabled-border-color [color: ('gray', 200)] - The disabled chip border color.
 /// @prop {List} size [(rem(20px), rem(24px), rem(32px))] - The size used for the chip height.
 /// @prop {Number} default-size [2] - The default size used for the chip component.
 /// @prop {Map} typography [text: (value: 'body-2')] - The typography styles used for the component.
-/// @prop {Map} $default-elevation-chip
+/// @requires $default-elevation-chip
 $light-chip: extend(
     $default-elevation-chip,
     (
@@ -183,15 +183,15 @@ $light-chip: extend(
 );
 
 /// Generates a material chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [contrast-color: ('gray', 300)] - The chip text color.
 /// @prop {Map} background [color: ('gray', 300)] - The chip background color.
-/// @prop {Map} focus-background [color: ('gray', 500)] The focused chip background color.
+/// @prop {Map} focus-background [color: ('gray', 500)] - The focused chip background color.
 /// @prop {Map} selected-background [color: ('gray', 300)] - The selected chip background color.
 /// @prop {Map} focus-selected-text-color [contrast-color: ('gray', 500)] - The selected chip text focus color.
 /// @prop {Map} focus-selected-background [color: ('gray', 500)] - The selected chip focus background color.
-/// @requires {Map} $light-chip
-/// @requires {Map} $default-elevation-chip
+/// @requires $light-chip
+/// @requires $default-elevation-chip
 $material-chip: extend(
     $light-chip,
     $default-elevation-chip,
@@ -245,23 +245,23 @@ $material-chip: extend(
 );
 
 /// Generates a fluent chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [color: ('gray', 700)] - The chip text color.
 /// @prop {Map} ghost-background [color: ('primary', 500)] - The chip ghost background color.
 /// @prop {Map} ghost-text-color [contrast-color: ('primary', 500)] - The chip ghost text color.
 /// @prop {Map} hover-background [color: ('gray', 200)] - The chip hover background color.
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 200)] - The chip text hover color.
 /// @prop {Map} selected-text-color [contrast-color: ('primary', 700))] - The selected chip text color.
-/// @prop {Map} focus-background [color: ('primary', 600)] The focused chip background color.
-/// @prop {Map} focus-text-color [contrast-color: ('primary', 700)] The focused chip text color.
+/// @prop {Map} focus-background [color: ('primary', 600)] - The focused chip background color.
+/// @prop {Map} focus-text-color [contrast-color: ('primary', 700)] - The focused chip text color.
 /// @prop {Map} hover-selected-text-color [contrast-color: ('primary', 700)] - The selected chip hover text color.
 /// @prop {Map} hover-selected-background [color: ('primary', 600)] - The selected chip hover background color.
 /// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 700)] - The selected chip text focus color.
 /// @prop {Map} focus-selected-background [color: ('primary', 500)] - The selected chip focus background color.
 /// @prop {Map} typography [text: (value: 'subtitle-2')] - The typography styles used for the component.
 /// @prop {Number} ghost-elevation [2] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
-/// @requires {Map} $light-chip
-/// @requires {Map} $fluent-elevation-chip
+/// @requires $light-chip
+/// @requires $fluent-elevation-chip
 $fluent-chip: extend(
     $light-chip,
     $fluent-elevation-chip,
@@ -363,20 +363,20 @@ $fluent-chip: extend(
 );
 
 /// Generates a bootstrap chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [contrast-color: ('gray', 200)] - The chip text color.
 /// @prop {Map} selected-background [color: ('gray', 200)] - The selected chip background color.
 /// @prop {Map} selected-text-color [contrast-color: ('gray', 200)] - The selected chip text color.
-/// @prop {Map} focus-text-color [contrast-color: ('gray', 200)] The focused chip text color.
-/// @prop {Map} focus-background [color: ('gray', 200)] The focused chip background color.
+/// @prop {Map} focus-text-color [contrast-color: ('gray', 200)] - The focused chip text color.
+/// @prop {Map} focus-background [color: ('gray', 200)] - The focused chip background color.
 /// @prop {Map} focus-selected-background [color: ('gray', 200)] - The selected chip focus background color.
 /// @prop {Map} focus-selected-text-color [contrast-color: ('gray', 200)] - The selected chip text focus color.
 /// @prop {Number} ghost-elevation [0] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for chip.
 /// @prop {Map} focus-outline-color [color: ('gray', 500, 0.38)] - The chip focus outline color.
 /// @prop {Map} focus-selected-outline-color [color: ('gray', 500, 0.38)] - The selected chip focus outline color.
-/// @requires {Map} $light-chip
-/// @requires {Map} $bootstrap-elevation-chip
+/// @requires $light-chip
+/// @requires $bootstrap-elevation-chip
 $bootstrap-chip: extend(
     $light-chip,
     $bootstrap-elevation-chip,
@@ -461,16 +461,16 @@ $bootstrap-chip: extend(
 );
 
 /// Generates an indigo chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} size [(rem(20px), rem(24px), rem(28px))] - The size used for the chip height.
 /// @prop {Number} ghost-elevation [1] - The elevation level, between 0-24, to be used for the chip's ghost (dragging mode).
 /// @prop {Map} text-color [color: ('gray', 700)] - The chip text color.
 /// @prop {Map} hover-text-color [color: ('gray', 900)] - The chip text hover color.
-/// @prop {Map} focus-text-color [color: ('gray', 700)] The focused chip text color.
+/// @prop {Map} focus-text-color [color: ('gray', 700)] - The focused chip text color.
 ///
 /// @prop {Map} background [color: ('gray', 50)] - The chip background color.
 /// @prop {Map} hover-background [color: ('gray', 200)] - The chip hover background color.
-/// @prop {Map} focus-background [color: ('gray', 50)] The focused chip background color.
+/// @prop {Map} focus-background [color: ('gray', 50)] - The focused chip background color.
 ///
 /// @prop {Map} border-color [color: ('gray', 400)] - The chip border color.
 /// @prop {Map} hover-border-color [color: ('gray', 500)] - The chip hover border color.
@@ -483,7 +483,7 @@ $bootstrap-chip: extend(
 /// @prop {Map} focus-selected-text-color [contrast-color: ('primary', 900)] - The selected chip text focus color.
 /// @prop {Map} focus-selected-background [color: ('primary', 500)] - The selected chip focus background color.
 ///
-/// @prop {Map} selected-border-color [color: ('primary', 500)] The selected chip border color.
+/// @prop {Map} selected-border-color [color: ('primary', 500)] - The selected chip border color.
 /// @prop {Map} hover-selected-border-color [color: ('primary', 400)] - The selected chip hover border color.
 /// @prop {Map} focus-selected-border-color [color: ('primary', 500)] - The selected chip focus border color.
 /// @prop {Map} focus-selected-outline-color [color: ('primary', 400, .5)] - The selected chip focus outline color.
@@ -494,8 +494,8 @@ $bootstrap-chip: extend(
 /// @prop {Map} disabled-text-color [color: ('gray', 900, .2)] - The disabled chip text color.
 /// @prop {Map} disabled-background [contrast-color: ('gray', 900)] - The disabled chip background color.
 /// @prop {Map} disabled-border-color [ color: ('gray', 300)] - The disabled chip border color.
-/// @requires {Map} $light-chip
-/// @requires {Map} $indigo-elevation-chip
+/// @requires $light-chip
+/// @requires $indigo-elevation-chip
 $indigo-chip: extend(
     $light-chip,
     $indigo-elevation-chip,

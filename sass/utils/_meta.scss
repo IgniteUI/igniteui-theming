@@ -7,7 +7,7 @@
 
 /// Returns true if the scope where it's called is the root of the document.
 /// @access public
-/// @example scss Check if the current scope is root
+/// @example scss - Check if the current scope is root
 ///   @mixin smart-mixin() {
 ///     $scope: if(is-root(), ':root', '&');
 ///
@@ -15,7 +15,7 @@
 ///       /* style rules here */
 ///     }
 ///   }
-/// @return {Boolean} - Returns a boolean depending on the scope where it's called
+/// @return {Boolean} Returns a boolean depending on the scope where it's called
 @function is-root() {
     @each $selector in & {
         @return $selector == null;
@@ -24,7 +24,7 @@
 
 /// Returns true if the scope where it's called is :host.
 /// @access public
-/// @example scss Check if the current scope is :root
+/// @example scss - Check if the current scope is :root
 ///   @mixin smart-mixin() {
 ///     $host: is-host();
 ///
@@ -32,7 +32,7 @@
 ///       /* style rules here */
 ///     }
 ///   }
-/// @return {Boolean} - Returns a boolean depending on the scope where it's called
+/// @return {Boolean} Returns a boolean depending on the scope where it's called
 @function is-host() {
     @return not(is-root()) and selector.is-superselector(':host', &);
 }

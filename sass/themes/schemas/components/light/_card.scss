@@ -9,7 +9,7 @@
 ////
 
 /// Generates a light card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: 'surface'] - The card background color.
 /// @prop {Map} header-text-color [color: ('gray', 900)] - The text color of the card title.
 /// @prop {Map} subtitle-text-color [color: ('gray', 700)] - The text color of the card subtitle.
@@ -20,7 +20,7 @@
 /// @prop {Number} hover-elevation [6] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for card.
 /// @prop {Number} default-size [2] - The default size used for the card component.
-/// @requires {Map} $default-elevation-card
+/// @requires $default-elevation-card
 $light-card: extend(
     $default-elevation-card,
     (
@@ -81,19 +81,12 @@ $light-card: extend(
 );
 
 /// Generates a material card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} subtitle-text-color [color: ('gray', 900)] - The text color of the card subtitle.
 /// @prop {Map} outline-color [color: ('gray', 400, .54)] - The outline color of an outlined type card.
 /// @prop {Map} actions-text-color [color: ('gray', 900)] - The text color of the card buttons.
-/// @prop {Map} typography [
-///   title: (
-///     value: 'h6',
-///     small: (value: 'subtitle-2')
-///   ),
-///   subtitle: (value: 'subtitle-2'),
-///   content: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-card
+/// @prop {Map} typography [title: (value: 'h6'), small: (value: 'subtitle-2'), subtitle: (value: 'subtitle-2'), content: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-card
 $material-card: extend(
     $light-card,
     (
@@ -142,18 +135,11 @@ $material-card: extend(
 );
 
 /// Generates a fluent card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} outline-color [color: ('gray', 200)] - The outline color of an outlined type card.
 /// @prop {List} border-radius [(rem(0px), rem(0), rem(24px))] - The border radius used for card.
-/// @prop {Map} typography [
-///   title: (
-///     value: 'subtitle-1',
-///     small: (value: 'subtitle-2')
-///   ),
-///   subtitle: (value: 'body-2'),
-///   content: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-card
+/// @prop {Map} typography [title: (value: 'subtitle-1'), small: (value: 'subtitle-2'), subtitle: (value: 'body-2'), content: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-card
 $fluent-card: extend(
     $light-card,
     (
@@ -195,17 +181,10 @@ $fluent-card: extend(
 );
 
 /// Generates a bootstrap card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} subtitle-text-color [color: ('gray', 800)] - The text color of the card subtitle.
-/// @prop {Map} typography [
-///   title: (
-///     value: 'h5',
-///     small: (value: 'subtitle-2')
-///   ),
-///   subtitle: (value: 'body-1'),
-///   content: (value: 'body-1')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-card
+/// @prop {Map} typography [title: (value: 'h5'), small: (value: 'subtitle-2'), subtitle: (value: 'body-1'), content: (value: 'body-1')] - The typography styles used for the component.
+/// @requires $light-card
 $bootstrap-card: extend(
     $light-card,
     (
@@ -239,20 +218,13 @@ $bootstrap-card: extend(
 );
 
 /// Generates an indigo card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [contrast-color: ('gray', 900)] - The card background color.
 /// @prop {Map} header-text-color [color: ('gray', 800)] - The text color of the card title.
 /// @prop {Map} actions-text-color [color: ('gray', 600)] - The text color of the card buttons.
 /// @prop {List} border-radius [(rem(6px), rem(0), rem(24px))] - The border radius used for card.
-/// @prop {Map} typography [
-///   title: (
-///     value: 'h6',
-///     small: (value: 'body-2')
-///   ),
-///   subtitle: (value: 'body-2'),
-///   content: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-card
+/// @prop {Map} typography [title: (value: 'h6'), small: (value: 'body-2'), subtitle: (value: 'body-2'), content: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-card
 $indigo-card: extend(
     $light-card,
     (

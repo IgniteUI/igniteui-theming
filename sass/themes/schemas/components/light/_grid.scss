@@ -9,7 +9,7 @@
 ////
 
 /// Generates a light grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} grid-border-color [transparent] - The grid border color.
 /// @prop {Map} header-background [color: ('gray', 100)] - The table header background color.
 /// @prop {Map} sorted-header-icon-color [color: ('secondary', 500)] - The sorted table header icon color.
@@ -86,11 +86,8 @@
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
 /// @prop {Map} row-ghost-background [color: 'primary', 50] - The background color of the dragged row.
 /// @prop {Map} summaries-patch-background [color: ('gray', 300)] - The leading summaries patch backround. Used in hierarchical grids.
-/// @prop {Map} typography [
-///  header: (comfortable: (value: 'overline'),
-///  compact: (value: 'subtitle-1'))
-/// ] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-grid
+/// @prop {Map} typography [header: (comfortable: (value: 'overline'), compact: (value: 'subtitle-1'))] - The typography styles used for the component.
+/// @requires $default-elevation-grid
 $light-grid: extend(
     $default-elevation-grid,
     (
@@ -605,7 +602,7 @@ $light-grid: extend(
 );
 
 /// Generates a material grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [color: ('gray', 800, .8)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('secondary', 100)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 100)] - The table header text color when selected (ex. column selection).
@@ -619,8 +616,8 @@ $light-grid: extend(
 /// @prop {Map} group-label-column-name-text [color: ('primary', 800)] - The grid group row column name text color.
 /// @prop {Map} group-label-icon [color: ('primary', 800)] - The grid group row icon color.
 /// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
-/// @requires {Map} $light-grid
-/// @requires {Map} $default-elevation-grid
+/// @requires $light-grid
+/// @requires $default-elevation-grid
 $material-grid: extend(
     $light-grid,
     $default-elevation-grid,
@@ -724,7 +721,7 @@ $material-grid: extend(
 );
 
 /// Generates a fluent grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} grid-border-color [color: ('gray', 100)] - The grid border color only.
 /// @prop {Map} header-background [color: 'surface'] - The table header background color.
 /// @prop {Map} header-text-color [color: ('gray', 800)] - The table header text color.
@@ -750,8 +747,8 @@ $material-grid: extend(
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 300)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 300)] - The selected row hover text color.
 /// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
-/// @requires {Map} $light-grid
-/// @requires {Map} $fluent-elevation-grid
+/// @requires $light-grid
+/// @requires $fluent-elevation-grid
 $fluent-grid: extend(
     $light-grid,
     $fluent-elevation-grid,
@@ -915,7 +912,7 @@ $fluent-grid: extend(
 );
 
 /// Generates a bootstrap grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} grouparea-background [color: 'surface'] - The grid group area background color.
 /// @prop {Map} group-label-icon [color: ('primary', 600)] - The grid group row icon color.
 /// @prop {Map} group-label-column-name-text [color: ('primary', 600)] - The grid group row column name text color.
@@ -933,7 +930,7 @@ $fluent-grid: extend(
 /// @prop {Map} cell-selected-within-background [color: ('primary', 100)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('primary', 100)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('primary', 100)] - The selected row hover text color.
-/// @requires {Map} $light-grid
+/// @requires $light-grid
 $bootstrap-grid: extend(
     $light-grid,
     (
@@ -1076,7 +1073,7 @@ $bootstrap-grid: extend(
 );
 
 /// Generates an indigo grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} content-background [color: ('surface')] - The table body background color.
 /// @prop {Map} header-background [color: ('surface')] - The table header background color.
 /// @prop {Map} header-text-color [color: ('gray', 800)] - The table header text color.
@@ -1133,7 +1130,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 900, .2)] - The text color of the excel style filtering options in disabled state.
 /// @prop {Map} row-drag-color [color: ('gray', 800, .75))] - The color of the drag handle.
 /// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
-/// @requires {Map} $light-grid
+/// @requires $light-grid
 $indigo-grid: extend(
     $light-grid,
     $indigo-elevation-grid,

@@ -1,0 +1,13 @@
+id: sassdoc-output-needs-description
+language: sassdoc
+severity: warning
+message: '@output must include a description, e.g. @output Describes the CSS output'
+rule:
+  any:
+    - kind: tag_output
+      not:
+        has:
+          kind: line_description
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@output\s*$'

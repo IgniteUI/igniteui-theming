@@ -1,0 +1,13 @@
+id: sassdoc-alias-needs-reference
+language: sassdoc
+severity: warning
+message: '@alias must include a reference, e.g. @alias other-item'
+rule:
+  any:
+    - kind: tag_alias
+      not:
+        has:
+          kind: alias_name
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@alias'

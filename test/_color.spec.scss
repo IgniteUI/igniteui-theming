@@ -196,15 +196,9 @@ $_palette: palette(
             @include assert-true(color($_palette, 'primary', '500'));
             @include assert-equal(color($_palette, 'primary', '500'), $_primary);
             @include assert-true(contrast-color($_palette, primary, 500));
-            @include assert-equal(
-                contrast-color($_palette, primary, 500),
-                var(--ig-primary-500-contrast)
-            );
+            @include assert-equal(contrast-color($_palette, primary, 500), var(--ig-primary-500-contrast));
             @include assert-true(contrast-color($_palette, 'primary', '500'));
-            @include assert-equal(
-                contrast-color($_palette, 'primary', '500'),
-                var(--ig-primary-500-contrast)
-            );
+            @include assert-equal(contrast-color($_palette, 'primary', '500'), var(--ig-primary-500-contrast));
         }
 
         @include it('should generate an HSL color shade from a given base color') {
@@ -234,9 +228,7 @@ $_palette: palette(
 
             $surface: #444;
             $shade: shade($color, null, $variant, $surface);
-            $expected: #{var(--ig-#{$color}-h),
-                var(--ig-#{$color}-s),
-                13%};
+            $expected: var(--ig-#{$color}-h), var(--ig-#{$color}-s), 13%;
             $expected: (
                 raw: hsl(0deg 0% 13%),
                 hsl: #{hsl(from var(--ig-gray-500) h s 13%)},
@@ -349,7 +341,7 @@ $_palette: palette(
                 }
 
                 @include contains() {
-                    color: rgb(250, 250, 250);
+                    color: rgb(250 250 250);
                 }
             }
         }

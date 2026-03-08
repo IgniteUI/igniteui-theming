@@ -43,13 +43,13 @@
 /// @param {Color} $selected-focus-item-text-color [null] - The drop-down selected item focus text color. Auto-derived from selected-focus-item-background.
 /// @param {Color} $disabled-item-background [null] - The drop-down disabled item background color.
 /// @param {Color} $disabled-item-text-color [null] - The drop-down disabled item text color. Auto-derived from background-color or disabled-item-background.
-/// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the drop-down.
+/// @param {List} $shadow [null] - Sets a shadow to be used for the drop-down.
 /// @param {Number} $border-width [null] - The border width used for drop-down component.
 /// @param {Color} $border-color [null] - The border color used for drop-down component.
 /// @param {List} $border-radius [null] - The border radius used for drop-down component.
 /// @param {List} $item-border-radius [null] - The border radius used for drop-down items.
 /// @requires $light-material-schema
-/// @example scss Change the background-color of the dropdown
+/// @example scss - Change the background-color of the dropdown
 ///   $my-dropdown-theme: drop-down-theme($background-color: #09f);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-dropdown-theme);

@@ -11,7 +11,7 @@
 
 /// Generates a base category chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-category-chart: (
     _meta: (
         variant: 'dark',
@@ -19,21 +19,21 @@ $dark-category-chart: (
 );
 
 /// Generates a dark category-chart schema based on a mix of $material-category-chart and $base-dark-category-chart
-/// @type {Map}
+/// @type Map
 /// @requires $material-category-chart
 $dark-material-category-chart: extend($material-category-chart, $dark-category-chart);
 
 /// Generates a dark fluent category-chart schema based on a mix of $fluent-category-chart and $base-dark-category-chart
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-category-chart
 $dark-fluent-category-chart: extend($fluent-category-chart, $dark-category-chart);
 
 /// Generates a bootstrap category-chart schema based on a mix of $bootstrap-category-chart and $base-dark-category-chart
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-category-chart
 $dark-bootstrap-category-chart: extend($bootstrap-category-chart, $dark-category-chart);
 
 /// Generates an indigo category-chart schema based on a mix of $indigo-category-chart and $base-dark-category-chart
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-category-chart
 $dark-indigo-category-chart: extend($indigo-category-chart, $dark-category-chart);

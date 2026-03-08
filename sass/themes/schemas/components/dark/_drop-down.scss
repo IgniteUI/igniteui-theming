@@ -12,7 +12,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a base dark drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} disabled-item-text-color [color: ('gray', 300)] - The drop-down disabled item text color.
 /// @prop {Map} border-color [color: ('gray', 100)] - The border color used for drop-down component.
 $base-dark-drop-down: (
@@ -35,13 +35,13 @@ $base-dark-drop-down: (
 );
 
 /// Generates a dark material drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-drop-down
 /// @requires $base-dark-drop-down
 $dark-material-drop-down: extend($material-drop-down, $base-dark-drop-down);
 
 /// Generates a dark fluent drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [contrast-color: 'surface'] - The drop-down header text color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color used for the drop-down items on focus state.
 /// @prop {Map} disabled-item-text-color [color: ('gray', 200)] - The drop-down disabled item text color.
@@ -71,7 +71,7 @@ $dark-fluent-drop-down: extend(
 );
 
 /// Generates a dark bootstrap drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} disabled-item-text-color [color: ('gray', 200)] - The drop-down disabled item text color.
 /// @requires $bootstrap-drop-down
 $dark-bootstrap-drop-down: extend(
@@ -90,7 +90,7 @@ $dark-bootstrap-drop-down: extend(
 );
 
 /// Generates a dark indigo drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-color [color: ('gray', 50)] - The drop-down background color.
 /// @prop {Map} header-text-color [contrast-color: ('gray', 50, .6)] - The drop-down header text color.
 /// @prop {Map} item-text-color [contrast-color: ('gray', 50, .8)] - The drop-down item text color.

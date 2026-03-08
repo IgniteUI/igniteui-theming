@@ -11,7 +11,7 @@
 ////
 
 /// Generates a base light input-group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} input-prefix-color [color: ('gray', 700)] - The text color of an input prefix of type line, box and border.
 /// @prop {Color} input-prefix-background [transparent] - The background color of an input prefix of type line, box and border.
 /// @prop {Map} input-suffix-color [color: ('gray', 700)] - The text color of an input suffix of type line, box and border.
@@ -64,11 +64,8 @@
 /// @prop {Color} input-suffix-background--focused [inherit] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(40px), rem(48px), rem(56px))] - The size used for the input group.
 /// @prop {Number} default-size [2] - The default size used for the input group component.
-/// @prop {Map} typography [
-///   helper-text: (value: 'caption'),
-///   input-text: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-validator
+/// @prop {Map} typography [helper-text: (value: 'caption'), input-text: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-validator
 $light-input-group: extend(
     $light-validator,
     (
@@ -337,7 +334,7 @@ $light-input-group: extend(
 );
 
 /// Generates a material input-group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Number} search-resting-elevation [1] - The elevation level, between 0-24, to be used for the resting state of the search input.
 /// @prop {Number} search-hover-elevation [2] - The elevation level, between 0-24, to be used for the hover state of the search input.
 /// @prop {Number} search-disabled-elevation [1] - The elevation level, between 0-24, to be used for the disabled state of the search input.
@@ -346,12 +343,9 @@ $light-input-group: extend(
 /// @prop {Map} border-color [color: ('gray', 500)] - The border color for input groups of type border and fluent.
 /// @prop {Map} hover-border-color [color: ('gray', 800)] - The hover input border for input groups of type border and fluent.
 /// @prop {Map} disabled-border-color [color: ('gray', 500)] - The disabled border color for input groups of type border and fluent.
-/// @prop {Map} typography [
-///   helper-text: (value: 'caption'),
-///   input-text: (value: 'subtitle-1')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-input-group
-/// @requires {Map} $default-elevation-input-group
+/// @prop {Map} typography [helper-text: (value: 'caption'), input-text: (value: 'subtitle-1')] - The typography styles used for the component.
+/// @requires $light-input-group
+/// @requires $default-elevation-input-group
 $material-input-group: extend(
     $light-input-group,
     $default-elevation-input-group,
@@ -395,7 +389,7 @@ $material-input-group: extend(
 );
 
 /// Generates a fluent input-group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} idle-secondary-color [color: ('gray', 900)] - The label color in the idle state.
 /// @prop {Map} idle-text-color [color: ('gray', 900)] - The input text color in the idle state.
 /// @prop {Map} border-color [color: ('gray', 700)] - The border color for input groups of type border and fluent.
@@ -418,8 +412,8 @@ $material-input-group: extend(
 /// @prop {Map} input-suffix-background-filled [color: ('gray', 100)] - The background color of an input suffix in the filled state.
 /// @prop {Map} input-suffix-background--focused [color: ('gray', 100)] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(32px), rem(40px), rem(48px))] - The size used for the input group.
-/// @requires {Map} $light-input-group
-/// @requires {Map} $fluent-elevation-input-group
+/// @requires $light-input-group
+/// @requires $fluent-elevation-input-group
 $fluent-input-group: extend(
     $light-input-group,
     $fluent-elevation-input-group,
@@ -549,7 +543,7 @@ $fluent-input-group: extend(
 );
 
 /// Generates a bootstrap input-group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Number} search-resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state of the search input.
 /// @prop {Number} search-hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state of the search input.
 /// @prop {Number} search-disabled-elevation [0] - The elevation level, between 0-24, to be used for the disabled state of the search input.
@@ -570,12 +564,9 @@ $fluent-input-group: extend(
 /// @prop {Map} input-suffix-background-filled [color: ('gray', 300)] - The background color of an input suffix in the filled state.
 /// @prop {Map} input-suffix-background--focused [color: ('gray', 300)] - The background color of an input suffix in the focused state.
 /// @prop {List} size [(rem(32px), rem(38px), rem(48px))] - The size used for the input group.
-/// @prop {Map} typography [
-///   helper-text: (value: 'body-2'),
-///   input-text: (value: 'body-1')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-input-group
-/// @requires {Map} $bootstrap-elevation-input-group
+/// @prop {Map} typography [helper-text: (value: 'body-2'), input-text: (value: 'body-1')] - The typography styles used for the component.
+/// @requires $light-input-group
+/// @requires $bootstrap-elevation-input-group
 $bootstrap-input-group: extend(
     $light-input-group,
     $bootstrap-elevation-input-group,
@@ -675,7 +666,7 @@ $bootstrap-input-group: extend(
 );
 
 /// Generates an indigo input-group schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} input-prefix-color [color: ('gray', 600)] - The text color of an input prefix of type line, box and border.
 /// @prop {Map} input-suffix-color [color: ('gray', 600)] - The text color of an input suffix of type line, box and border.
 /// @prop {Map} input-prefix-color--filled [color: ('gray', 600)] - The input prefix color in the filled state.
@@ -708,8 +699,8 @@ $bootstrap-input-group: extend(
 /// @prop {List} border-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for border input.
 /// @prop {List} search-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for search input.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the input group.
-/// @requires {Map} $light-input-group
-/// @requires {Map} $indigo-elevation-input-group
+/// @requires $light-input-group
+/// @requires $indigo-elevation-input-group
 $indigo-input-group: extend(
     $indigo-validator,
     $light-input-group,

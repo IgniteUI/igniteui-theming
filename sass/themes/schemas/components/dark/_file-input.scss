@@ -10,7 +10,7 @@
 
 /// Generates a base dark file-input schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-file-input: (
     _meta: (
         name: 'file-input',
@@ -19,7 +19,7 @@ $dark-base-file-input: (
 );
 
 /// Generates a dark fluent combo schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} file-names-foreground--disabled [color: ('gray', 300)] - The file names color when the file input is disabled.
 /// @prop {Map} file-selector-button-foreground--disabled [color: ('gray', 200)] - The selector button foreground color when the file input is disabled.
 /// @requires $fluent-file-input
@@ -43,12 +43,12 @@ $dark-fluent-file-input: extend(
 );
 
 /// Generates a dark bootstrap combo schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-file-input
 $dark-bootstrap-file-input: extend($bootstrap-file-input, $dark-base-file-input);
 
 /// Generates a dark indigo combo schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} file-names-foreground [contrast-color: ('gray', 50, .8)] - The input text color in the idle state.
 /// @prop {Map} file-names-foreground--filled [contrast-color: ('gray', 50, .8)] - The input text color in the filled state.
 /// @prop {Map} file-names-foreground--focused [contrast-color: ('gray', 50)] - The input text color in the focused state.
@@ -104,6 +104,6 @@ $dark-indigo-file-input: extend(
 );
 
 /// Generates a dark material combo schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-file-input
 $dark-material-file-input: extend($material-file-input, $dark-base-file-input);

@@ -1,0 +1,9 @@
+id: sassdoc-return-needs-type
+language: sassdoc
+severity: warning
+message: '@return should have a type annotation, e.g. @return {Type}'
+rule:
+  kind: tag_return
+  not:
+    has:
+      kind: type

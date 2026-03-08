@@ -10,7 +10,7 @@
 
 /// Generates a base dark pie chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-pie-chart: (
     _meta: (
         variant: 'dark',
@@ -18,25 +18,25 @@ $dark-pie-chart: (
 );
 
 /// Generates a dark base pie chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-pie-chart
 /// @see $material-pie-chart
 $dark-material-pie-chart: extend($material-pie-chart, $dark-pie-chart);
 
 /// Generates a dark fluent pie chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-pie-chart
 /// @see $fluent-pie-chart
 $dark-fluent-pie-chart: extend($fluent-pie-chart, $dark-pie-chart);
 
 /// Generates a dark bootstrap pie chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-pie-chart
 /// @see $bootstrap-pie-chart
 $dark-bootstrap-pie-chart: extend($bootstrap-pie-chart, $dark-pie-chart);
 
 /// Generates a dark indigo pie chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-pie-chart
 /// @see $indigo-pie-chart
 $dark-indigo-pie-chart: extend($indigo-pie-chart, $dark-pie-chart);

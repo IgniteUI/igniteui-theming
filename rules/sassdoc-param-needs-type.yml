@@ -1,0 +1,9 @@
+id: sassdoc-param-needs-type
+language: sassdoc
+severity: warning
+message: '@param should have a type annotation, e.g. @param {Type} $name'
+rule:
+  kind: tag_param
+  not:
+    has:
+      kind: type

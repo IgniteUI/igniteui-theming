@@ -1,0 +1,16 @@
+id: sassdoc-example-needs-hyphen
+language: sassdoc
+severity: warning
+message: '@example description should be preceded by a hyphen, e.g. @example scss - Description'
+transform:
+  FIXED:
+    replace:
+      source: $MATCH
+      replace: '^(@example\s+\w+)\s+'
+      by: '$1 - '
+rule:
+  kind: tag_example
+  has:
+    kind: ERROR
+  pattern: $MATCH
+fix: '$FIXED'

@@ -9,7 +9,7 @@
 ////
 
 /// Generates a base light navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('primary', 400)] - The navbar background color.
 /// @prop {Color} border-color [transparent] - The navbar border color.
 /// @prop {Map} text-color [contrast-color: ('primary', 400)] - The navbar text color.
@@ -17,7 +17,7 @@
 /// @prop {Map} hover-icon-color [color: ('gray', 900)] - The navbar hover icon color.
 /// @prop {Map} typography [title: (value: 'h5')] - The typography styles used for the component.
 /// @prop {Number} elevation [4] - The elevation level, between 0-24, to be used for the navbar.
-/// @requires {Map} $default-elevation-navbar
+/// @requires $default-elevation-navbar
 $light-navbar: extend(
     $default-elevation-navbar,
     (
@@ -59,9 +59,9 @@ $light-navbar: extend(
 );
 
 /// Generates a material navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} typography [title: (value: 'h6')] - The typography styles used for the component.
-/// @requires {Map} $light-navbar
+/// @requires $light-navbar
 $material-navbar: extend(
     $light-navbar,
     (
@@ -77,13 +77,13 @@ $material-navbar: extend(
 );
 
 /// Generates a fluent navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: 'surface'] - The navbar background color.
 /// @prop {Map} text-color [color: ('gray', 900)] - The navbar text color.
 /// @prop {Map} idle-icon-color [color: ('primary', 500)] - The navbar idle icon color.
 /// @prop {Map} hover-icon-color [color: ('primary', 500)] - The navbar hover icon color.
 /// @prop {Map} typography [title: (value: 'subtitle-2')] - The typography styles used for the component.
-/// @requires {Map} $light-navbar
+/// @requires $light-navbar
 $fluent-navbar: extend(
     $light-navbar,
     (
@@ -120,15 +120,15 @@ $fluent-navbar: extend(
 );
 
 /// Generates a bootstrap navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: 'surface'] - The navbar background color.
 /// @prop {Map} border-color [color: ('gray', 300)] - The navbar border color.
 /// @prop {Map} text-color [contrast-color: 'surface'] - The navbar text color.
 /// @prop {Map} idle-icon-color [contrast-color: 'surface'] - The navbar idle icon color.
 /// @prop {Map} hover-icon-color [contrast-color: 'surface'] - The navbar hover icon color.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the navbar.
-/// @requires {Map} $light-navbar
-/// @requires {Map} $bootstrap-elevation-navbar
+/// @requires $light-navbar
+/// @requires $bootstrap-elevation-navbar
 $bootstrap-navbar: extend(
     $light-navbar,
     $bootstrap-elevation-navbar,
@@ -158,15 +158,15 @@ $bootstrap-navbar: extend(
 );
 
 /// Generates an indigo navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('surface', 500)] - The navbar background color.
 /// @prop {Map} text-color [color: ('gray', 800)] - The navbar text color.
 /// @prop {Map} idle-icon-color [color: ('gray', 600)] - The navbar idle icon color.
 /// @prop {Map} hover-icon-color [color: ('gray', 700)] - The navbar hover icon color.
 /// @prop {Color} border-color [color: ('primary', 500)] - The navbar border color.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the navbar.
-/// @requires {Map} $light-navbar
-/// @requires {Map} $indigo-elevation-navbar
+/// @requires $light-navbar
+/// @requires $indigo-elevation-navbar
 $indigo-navbar: extend(
     $light-navbar,
     $indigo-elevation-navbar,

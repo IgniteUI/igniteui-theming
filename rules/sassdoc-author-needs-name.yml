@@ -1,0 +1,13 @@
+id: sassdoc-author-needs-name
+language: sassdoc
+severity: warning
+message: '@author should have a valid name, e.g. @author John Doe'
+rule:
+  any:
+    - kind: tag_author
+      not:
+        has:
+          kind: line_description
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@author\s*$'

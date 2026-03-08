@@ -1,0 +1,17 @@
+id: sassdoc-since-description-no-hyphen
+language: sassdoc
+severity: warning
+message: '@since description should not be preceded by a hyphen — write @since 1.0.0 Description, not @since 1.0.0 - Description'
+transform:
+  FIXED:
+    replace:
+      source: $MATCH
+      replace: '(\d+\.\d+\.\d+)\s+-\s+'
+      by: '$1 '
+rule:
+  kind: tag_since
+  has:
+    kind: line_description
+    regex: '^-\s'
+  pattern: $MATCH
+fix: '$FIXED'

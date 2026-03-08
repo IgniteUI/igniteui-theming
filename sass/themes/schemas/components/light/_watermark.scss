@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light watermark schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} base-color [null] - The base color for all elements of the watermark.
 /// @prop {Color} image-color [null] - The color used for the stamp image.
 /// @prop {Number} image-opacity [null] - The opacity of the stamp image.
@@ -47,8 +47,8 @@ $light-watermark: extend(
 );
 
 /// Generates a light material watermark schema.
-/// @type {Map}
-/// @requires {Map} $light-watermark
+/// @type Map
+/// @requires $light-watermark
 $material-watermark: extend(
     $light-watermark,
     (
@@ -59,9 +59,9 @@ $material-watermark: extend(
 );
 
 /// Generates a light fluent watermark schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(16px))] - The border radius used for watermark.
-/// @requires {Map} $light-watermark
+/// @requires $light-watermark
 $fluent-watermark: extend(
     $light-watermark,
     (
@@ -79,9 +79,9 @@ $fluent-watermark: extend(
 );
 
 /// Generates a bootstrap watermark schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(16px))] - The border radius used for watermark.
-/// @requires {Map} $light-watermark
+/// @requires $light-watermark
 $bootstrap-watermark: extend(
     $light-watermark,
     (
@@ -99,10 +99,10 @@ $bootstrap-watermark: extend(
 );
 
 /// Generates an indigo watermark schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('primary', 300)] - The border color for the link.
 /// @prop {List} border-radius [(rem(16px), rem(0), rem(16px))] - The border radius used for watermark.
-/// @requires {Map} $light-watermark
+/// @requires $light-watermark
 $indigo-watermark: extend(
     $light-watermark,
     (
