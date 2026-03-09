@@ -43,12 +43,12 @@
 /// @param {Color} $indicator-active-dot-color [null] - The active indicator dot color. Auto-derived from indicator-background or button-background.
 /// @param {Color} $indicator-active-border-color [null] - The active indicator border color. Auto-derived from indicator-active-dot-color.
 /// @param {Color} $indicator-active-hover-dot-color [null] - The active indicator dot color on hover. Auto-derived from indicator-active-dot-color.
-/// @param {box-shadow} $button-shadow [null] - Shadow underneath the previous/next buttons.
+/// @param {List} $button-shadow [null] - Shadow underneath the previous/next buttons.
 /// @param {List} $border-radius [null] - The border radius used for carousel component.
 ///
 /// @requires $light-material-schema
 ///
-/// @example scss Change the previous/next button colors
+/// @example scss - Change the previous/next button colors
 ///   $my-carousel-theme: carousel-theme(
 ///     $button-background: black,
 ///     $button-hover-background: white

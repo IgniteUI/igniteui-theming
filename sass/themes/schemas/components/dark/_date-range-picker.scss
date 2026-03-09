@@ -9,7 +9,7 @@
 
 /// Generates a base dark date-range-picker schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-date-range-picker: (
     _meta: (
         variant: 'dark',
@@ -17,7 +17,7 @@ $dark-base-date-range-picker: (
 );
 
 /// Generates a dark material date-range-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} ranges-border [color: ('gray', 100)] - The border color for the predefined ranges area.
 /// @requires $material-date-range-picker
 /// @requires $dark-base-date-range-picker
@@ -35,7 +35,7 @@ $dark-material-date-range-picker: extend(
 );
 
 /// Generates a dark fluent date-range-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} ranges-border [color: ('gray', 100)] - The border color for the predefined ranges area.
 /// @requires $fluent-date-range-picker
 /// @requires $dark-base-date-range-picker
@@ -53,13 +53,13 @@ $dark-fluent-date-range-picker: extend(
 );
 
 /// Generates a dark bootstrap date-range-picker schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-date-range-picker
 /// @requires $dark-base-date-range-picker
 $dark-bootstrap-date-range-picker: extend($bootstrap-date-range-picker, $dark-base-date-range-picker);
 
 /// Generates a dark indigo date-range-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [contrast-color: ('primary', 500, 0.6)] - The color for date range separator label.
 /// @prop {Map} ranges-background [color: ('gray', 50)] - The background color for the predefined ranges area.
 /// @prop {Map} ranges-border [color: ('gray', 100)] - The border color for the predefined ranges area.

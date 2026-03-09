@@ -8,7 +8,7 @@
 ////
 
 /// Generates a dark base dock-manager schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} dock-background [color: ('gray', 50)] - Sets the background color of the dock manager.
 /// @prop {Color} background-color [color: ('gray', 50)] - Sets the base dock manager color as well as the pane headers and tabs background colors.
 /// @prop {Color} pane-header-background [color: ('gray', 50)] - Sets the background color for pane headers.
@@ -174,19 +174,19 @@ $dark-base-dock-manager: (
 );
 
 /// Generates a dark material dock-manager schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-dock-manager
 /// @requires $dark-base-dock-manager
 $dark-material-dock-manager: extend($material-dock-manager, $dark-base-dock-manager);
 
 /// Generates a dark dock-manager schema.
-/// @type {Map}
+/// @type Map
 /// @requires $light-dock-manager
 /// @requires $dark-base-dock-manager
 $dark-dock-manager: extend($light-dock-manager, $dark-base-dock-manager);
 
 /// Generates a dark fluent dock-manager schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} tab-text-active [color: ('primary', 200)] - Sets the text color for active tabs.
 /// @prop {Color} floating-pane-border-color [transparent] - Sets the border color for floating panes.
 /// @prop {Color} joystick-border-color [transparent] - Sets the border color of the joystick.
@@ -217,7 +217,7 @@ $dark-fluent-dock-manager: extend(
 );
 
 /// Generates a dark bootstrap dock-manager schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} joystick-background [color: ('surface')] - Sets the background color of the joystick.
 /// @prop {Color} joystick-background-active [color: ('gray', 50)] - Sets the background color of the joysticks.
 /// @prop {Color} joystick-icon-color [contrast-color: 'surface'] - Sets the color for the joystick icons.

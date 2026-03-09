@@ -9,7 +9,7 @@
 
 /// Generates a base dark scrollbar schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-scrollbar: (
     _meta: (
         name: 'scrollbar',
@@ -18,17 +18,17 @@ $dark-base-scrollbar: (
 );
 
 /// Generates a dark material scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-scrollbar
 $dark-material-scrollbar: extend($material-scrollbar, $dark-base-scrollbar);
 
 /// Generates a dark fluent scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-scrollbar
 $dark-fluent-scrollbar: extend($fluent-scrollbar, $dark-base-scrollbar);
 
 /// Generates a dark bootstrap scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} sb-thumb-bg-color [color: ('gray', 200, .5)] - The background color used for the thumb.
 /// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 200, .5)] - The :hover background color of the thumb.
 /// @prop {Map} sb-track-bg-color [color: ('gray', 100, .5)] - The background color used for the track.
@@ -70,7 +70,7 @@ $dark-bootstrap-scrollbar: extend(
 );
 
 /// Generates a dark indigo scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} sb-thumb-bg-color [color: ('gray', 100)] - The background color used for the thumb.
 /// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 100)] - The :hover background color of the thumb.
 /// @prop {Map} sb-track-bg-color [color: ('gray', 50)] - The background color used for the track.

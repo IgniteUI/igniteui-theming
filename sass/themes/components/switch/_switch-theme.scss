@@ -36,9 +36,9 @@
 /// @param {Color} $label-color [null] - The color of the switch label
 /// @param {Color} $label-hover-color [null] - The color of the switch label on hover.
 /// @param {Color} $label-disabled-color [null] - The color of the switch label when the switch is disabled
-/// @param {box-shadow} $resting-shadow [null] - The shadow used for the thumb in resting state of the switch.
-/// @param {box-shadow} $hover-shadow [null] - The shadow used for the thumb in hover state of the switch.
-/// @param {box-shadow} $disabled-shadow [null] - The shadow used for the thumb in disable state of the switch.
+/// @param {List} $resting-shadow [null] - The shadow used for the thumb in resting state of the switch.
+/// @param {List} $hover-shadow [null] - The shadow used for the thumb in hover state of the switch.
+/// @param {List} $disabled-shadow [null] - The shadow used for the thumb in disable state of the switch.
 /// @param {List} $border-radius-track [null] - The border radius used for switch track.
 /// @param {List} $border-radius-thumb [null] - The border radius used for switch thumb.
 /// @param {List} $border-radius-ripple [null] - The border radius used for switch ripple.
@@ -53,7 +53,7 @@
 /// @param {Color} $focus-fill-hover-color [null] - The focus fill color on hover. Auto-derived from focus-fill-color.
 /// @requires $light-material-schema
 ///
-/// @example scss Set custom track and thumb on colors
+/// @example scss - Set custom track and thumb on colors
 ///   $my-switch-theme: switch-theme($thumb-on-color: black, $track-on-color: yellow);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-switch-theme);

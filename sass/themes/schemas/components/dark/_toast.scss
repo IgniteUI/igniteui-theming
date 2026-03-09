@@ -10,7 +10,7 @@
 
 /// Generates a dark base toast schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-toast: (
     _meta: (
         name: 'toast',
@@ -19,13 +19,13 @@ $dark-base-toast: (
 );
 
 /// Generates a dark material toast schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-toast
 /// @requires $dark-base-toast
 $dark-material-toast: extend($material-toast, $dark-base-toast);
 
 /// Generates a dark fluent toast schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-toast
 /// @requires $dark-base-toast
 $dark-fluent-toast: extend($fluent-toast, $dark-base-toast);
@@ -37,7 +37,7 @@ $dark-fluent-toast: extend($fluent-toast, $dark-base-toast);
 $dark-bootstrap-toast: extend($bootstrap-toast, $dark-base-toast);
 
 /// Generates a dark indigo toast schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('gray', 300)] - The background color used for the toast.
 /// @prop {Map} text-color [contrast-color: ('gray', 50)] - The text-color used for the toast.
 /// @requires $indigo-toast

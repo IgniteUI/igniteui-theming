@@ -9,7 +9,7 @@
 
 /// Generates a base dark navbar schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-navbar: (
     _meta: (
         name: 'navbar',
@@ -18,7 +18,7 @@ $dark-base-navbar: (
 );
 
 /// Generates a dark material navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('primary', 800)] - The navbar background color.
 /// @prop {Color} border-color [transparent] - The navbar border color.
 /// @prop {Map} text-color [contrast-color: ('primary', 800)] - The navbar text color.
@@ -43,17 +43,17 @@ $dark-material-navbar: extend(
 );
 
 /// Generates a dark fluent navbar schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-navbar
 $dark-fluent-navbar: extend($fluent-navbar, $dark-base-navbar);
 
 /// Generates a dark bootstrap navbar schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-navbar
 $dark-bootstrap-navbar: extend($bootstrap-navbar, $dark-base-navbar);
 
 /// Generates a dark indigo navbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [contrast-color: ('gray', 100)] - The navbar text color.
 /// @prop {Map} idle-icon-color [contrast-color: ('gray', 100, 0.8)] - The navbar idle icon color.
 /// @prop {Map} hover-icon-color [contrast-color: ('gray', 100)] - The navbar hover icon color.

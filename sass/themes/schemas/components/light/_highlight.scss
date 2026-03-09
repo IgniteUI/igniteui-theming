@@ -8,11 +8,11 @@
 ////
 
 /// Generates a light highlight schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} resting-background [color: ('gray', 300)] - The background color used for the highlight in its resting state.
 /// @prop {Map} resting-color [contrast-color: ('gray', 300)] - The icon color used for the highlight in its resting state.
 /// @prop {Map} active-background [color: ('secondary', A100)] - The background color used for the highlight in its active state.
-/// @prop {Map} active-color [contrast-color: ('secondary', A100) - The text color used for the highlight in its active state.
+/// @prop {Map} active-color [contrast-color: ('secondary', A100)] - The text color used for the highlight in its active state.
 $light-highlight: (
     resting-background: (
         color: (
@@ -49,8 +49,8 @@ $light-highlight: (
 );
 
 /// Generates a material highlight schema.
-/// @type {Map}
-/// @requires {Map} $light-highlight
+/// @type Map
+/// @requires $light-highlight
 $material-highlight: extend(
     $light-highlight,
     (
@@ -61,8 +61,8 @@ $material-highlight: extend(
 );
 
 /// Generates a fluent highlight schema.
-/// @type {Map}
-/// @requires {Map} $light-highlight
+/// @type Map
+/// @requires $light-highlight
 $fluent-highlight: extend(
     $light-highlight,
     (
@@ -73,8 +73,8 @@ $fluent-highlight: extend(
 );
 
 /// Generates a bootstrap highlight schema.
-/// @type {Map}
-/// @requires {Map} $light-highlight
+/// @type Map
+/// @requires $light-highlight
 $bootstrap-highlight: extend(
     $light-highlight,
     (
@@ -85,11 +85,11 @@ $bootstrap-highlight: extend(
 );
 
 /// Generates an indigo highlight schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} active-background [color: ('primary', 500)] - The background color used for the highlight in its active state.
 /// @prop {Map} active-color [contrast-color: ('primary', 500)] - The text color used for the highlight in its active state.
 /// @prop {Map} resting-color [contrast-color: ( color: ('gray', 300))] - The icon color used for the highlight in its resting state.
-/// @requires {Map} $light-highlight
+/// @requires $light-highlight
 $indigo-highlight: extend(
     $light-highlight,
     (

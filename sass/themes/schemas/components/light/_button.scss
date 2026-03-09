@@ -9,7 +9,7 @@
 /// @access public
 ////
 
-/// @type {Map}
+/// @type Map
 /// @prop {Color} shadow-color [transparent] - The shadow color of the button.
 /// @prop {Color} border-color [transparent] - The outline color of the button.
 /// @prop {Color} hover-border-color [transparent] - The hover border color of the button.
@@ -69,7 +69,7 @@ $light-base-button: (
 
 /// Flat button schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $flat-button: (
     selector: '[igxButton="flat"], .igx-button--flat',
     _meta: (
@@ -80,7 +80,7 @@ $flat-button: (
 
 /// Contained button schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $contained-button: (
     selector: '[igxButton="contained"], .igx-button--contained',
     _meta: (
@@ -91,7 +91,7 @@ $contained-button: (
 
 /// Outlined button schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $outlined-button: (
     selector: '[igxButton="outlined"], .igx-button--outlined',
     _meta: (
@@ -102,7 +102,7 @@ $outlined-button: (
 
 /// Floating action button schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $fab-button: (
     selector: '[igxButton="fab"], .igx-button--fab',
     _meta: (
@@ -111,12 +111,12 @@ $fab-button: (
     ),
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Color} background [transparent] - The background color of a flat button.
 /// @prop {Map} focus-foreground [color: ('secondary', 500)] - The text color of a flat button when focused with click and keyboard.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for flat button.
-/// @requires {Map} $light-base-button
-/// @requires {Map} $flat-elevation-button
+/// @requires $light-base-button
+/// @requires $flat-elevation-button
 $light-flat-button: extend(
     $light-base-button,
     $flat-button,
@@ -139,9 +139,9 @@ $light-flat-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled focused border color of an outlined button.
-/// @requires {Map} $light-flat-button
+/// @requires $light-flat-button
 $light-outlined-button: extend(
     $light-flat-button,
     $outlined-button,
@@ -155,15 +155,15 @@ $light-outlined-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('secondary', 500)] - The background color of an contained button.
 /// @prop {Map} active-background [color: ('secondary', 300)] - The active background color of a contained button.
 /// @prop {Number} resting-elevation [2] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [4] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [8] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for contained button.
-/// @requires {Map} $light-base-button
-/// @requires {Map} $light-contained-elevation
+/// @requires $light-base-button
+/// @requires $light-contained-elevation
 $light-contained-button: extend(
     $light-base-button,
     $contained-button,
@@ -191,13 +191,13 @@ $light-contained-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Number} resting-elevation [6] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [12] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [12] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} size [(rem(32px), rem(40px), rem(48px))] - The size used for floating button.
-/// @requires {Map} $light-contained-button
-/// @requires {Map} $light-fab-elevation
+/// @requires $light-contained-button
+/// @requires $light-fab-elevation
 $light-fab-button: extend(
     $light-contained-button,
     $fab-button,
@@ -214,11 +214,11 @@ $light-fab-button: extend(
 );
 
 /// Generates a light button schema.
-/// @type {Map}
-/// @requires {Map} $light-flat-button
-/// @requires {Map} $light-outlined-button
-/// @requires {Map} $light-contained-button
-/// @requires {Map} $light-fab-button
+/// @type Map
+/// @requires $light-flat-button
+/// @requires $light-outlined-button
+/// @requires $light-contained-button
+/// @requires $light-fab-button
 $light-button: (
     flat: $light-flat-button,
     outlined: $light-outlined-button,
@@ -226,8 +226,8 @@ $light-button: (
     fab: $light-fab-button,
 );
 
-/// @type {Map}
-/// @requires {Map} $light-base-button
+/// @type Map
+/// @requires $light-base-button
 $material-base-button: extend(
     $light-base-button,
     (
@@ -237,7 +237,7 @@ $material-base-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} foreground [color: ('secondary', 500)] - The idle text color of a flat button.
 /// @prop {Map} icon-color [color: ('secondary', 500)] - The idle icon color of the button.
 /// @prop {Map} icon-color-hover [color: ('secondary', 800)] - The hover icon color of the button.
@@ -252,8 +252,8 @@ $material-base-button: extend(
 /// @prop {Map} active-background [color: ('secondary', 500, .16)] - The active background color of a flat button.
 /// @prop {Map} active-foreground [color: ('secondary', 800)] - The active text color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
-/// @requires {Map} $material-base-button
-/// @requires {Map} $light-flat-button
+/// @requires $material-base-button
+/// @requires $light-flat-button
 $material-flat-button: extend(
     $material-base-button,
     $light-flat-button,
@@ -345,15 +345,15 @@ $material-flat-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focus-foreground [color: ('secondary', 900)] - The text color of an outlined button when focused with click and keyboard.
 /// @prop {Map} border-color [color: ('secondary', 500)] - The outline color of an outlined button.
 /// @prop {Map} hover-border-color [color: ('secondary', 800)] - The hover border color of an outlined button.
 /// @prop {Map} focus-border-color [color: ('secondary', 900)] - The focus border color of an outlined button.
 /// @prop {Map} focus-visible-border-color [color: ('secondary', 800)] - The focus-visible border color of an outlined button.
 /// @prop {Map} active-border-color [color: ('secondary', 800)] - The active border color of an outlined button.
-/// @requires {Map} $material-base-button
-/// @requires {Map} $light-outlined-button
+/// @requires $material-base-button
+/// @requires $light-outlined-button
 $material-outlined-button: extend(
     $material-flat-button,
     $light-outlined-button,
@@ -398,7 +398,7 @@ $material-outlined-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} foreground [contrast-color: ('secondary', 400)] - The idle text color of a contained button.
 /// @prop {Map} icon-color [contrast-color: ('secondary', 400)] - The idle icon color of the button.
 /// @prop {Map} hover-background [color: ('secondary', 400)] - The hover background color of a contained button.
@@ -412,8 +412,8 @@ $material-outlined-button: extend(
 /// @prop {Map} focus-hover-foreground [contrast-color: ('secondary', 400)] - The text color on focus hovered state of the button.
 /// @prop {Map} active-foreground [contrast-color: ('secondary', 300)] - The active text color of a contained button.
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
-/// @requires {Map} $light-contained-button
-/// @requires {Map} $material-base-button
+/// @requires $light-contained-button
+/// @requires $material-base-button
 $material-contained-button: extend(
     $material-base-button,
     $light-contained-button,
@@ -499,11 +499,11 @@ $material-contained-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} disabled-background [color: ('gray', 100)] - The disabled background color of the button.
 /// @prop {List} border-radius [(rem(28px), rem(12px), rem(28px))] - The border radius used for floating button.
-/// @requires {Map} $light-fab-button
-/// @requires {Map} $material-base-button
+/// @requires $light-fab-button
+/// @requires $material-base-button
 $material-fab-button: extend(
     $material-base-button,
     $material-contained-button,
@@ -526,11 +526,11 @@ $material-fab-button: extend(
 );
 
 /// Generates a light material button schema.
-/// @type {Map}
-/// @requires {Map} $material-flat-button
-/// @requires {Map} $material-outlined-button
-/// @requires {Map} $material-contained-button
-/// @requires {Map} $material-fab-button
+/// @type Map
+/// @requires $material-flat-button
+/// @requires $material-outlined-button
+/// @requires $material-contained-button
+/// @requires $material-fab-button
 $material-button: (
     flat: $material-flat-button,
     outlined: $material-outlined-button,
@@ -538,9 +538,9 @@ $material-button: (
     fab: $material-fab-button,
 );
 
-/// @type {Map}
-/// @requires {Map} $light-base-button
-/// @requires {Map} $flat-elevation-button
+/// @type Map
+/// @requires $light-base-button
+/// @requires $flat-elevation-button
 /// @prop {Map} foreground [color: ('gray', 900)] - The idle text color of the button.
 /// @prop {Map} icon-color [color: ('gray', 900)] - The idle icon color of the button.
 /// @prop {Map} icon-color-hover [color: ('gray', 900)] - The hover icon color of the button.
@@ -668,11 +668,11 @@ $fluent-base-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
-/// @requires {Map} $material-flat-button
-/// @requires {Map} $light-flat-button
-/// @requires {Map} $fluent-base-button
+/// @requires $material-flat-button
+/// @requires $light-flat-button
+/// @requires $fluent-base-button
 $fluent-flat-button: extend(
     $light-flat-button,
     $fluent-base-button,
@@ -681,14 +681,14 @@ $fluent-flat-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 600)] - The border color of an outlined button.
 /// @prop {Map} hover-border-color [color: ('gray', 600)] - The hover border color of an outlined button.
 /// @prop {Map} focus-border-color [color: ('gray', 600)] - The focus border color of the button.
 /// @prop {Map} active-border-color [color: ('gray', 600)] - The active border color of an outlined button.
 /// @prop {Map} disabled-border-color [color: ('gray', 300)] - The disabled focused border color of an outlined button.
-/// @requires {Map} $light-outlined-button
-/// @requires {Map} $fluent-base-button
+/// @requires $light-outlined-button
+/// @requires $fluent-base-button
 $fluent-outlined-button: extend(
     $light-outlined-button,
     $fluent-base-button,
@@ -733,7 +733,7 @@ $fluent-outlined-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focus-visible-border-color [contrast-color: ('primary', 900)] - The focus-visible border color of a contained button.
 /// @prop {Map} background [color: ('primary', 500)] - The background color of an contained button.
 /// @prop {Map} foreground [contrast-color: ('primary', 900)] - The idle text color of a contained button.
@@ -753,8 +753,8 @@ $fluent-outlined-button: extend(
 /// @prop {Number} hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [0] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for contained button.
-/// @requires {Map} $light-contained-button
-/// @requires {Map} $fluent-base-button
+/// @requires $light-contained-button
+/// @requires $fluent-base-button
 $fluent-contained-button: extend(
     $light-contained-button,
     $fluent-base-button,
@@ -859,14 +859,14 @@ $fluent-contained-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Number} resting-elevation [0] - The elevation level, between 0-24, to be used for the resting state.
 /// @prop {Number} hover-elevation [0] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} focus-elevation [0] - The elevation level, between 0-24, to be used for the focus state.
 /// @prop {List} border-radius [(rem(14px), rem(12px), rem(28px))] - The border radius used for fab button.
 /// @prop {List} size [(rem(32px), rem(40px), rem(48px))] - The size used for the button.
-/// @requires {Map} $fluent-base-button
-/// @requires {Map} $fluent-contained-button
+/// @requires $fluent-base-button
+/// @requires $fluent-contained-button
 $fluent-fab-button: extend(
     $fluent-base-button,
     $fluent-contained-button,
@@ -890,11 +890,11 @@ $fluent-fab-button: extend(
 );
 
 /// Generates a light fluent button schema.
-/// @type {Map}
-/// @requires {Map} $fluent-flat-button
-/// @requires {Map} $fluent-outlined-button
-/// @requires {Map} $fluent-contained-button
-/// @requires {Map} $fluent-fab-button
+/// @type Map
+/// @requires $fluent-flat-button
+/// @requires $fluent-outlined-button
+/// @requires $fluent-contained-button
+/// @requires $fluent-fab-button
 $fluent-button: (
     flat: $fluent-flat-button,
     outlined: $fluent-outlined-button,
@@ -902,15 +902,15 @@ $fluent-button: (
     fab: $fluent-fab-button,
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} disabled-background [color: ('primary', 50)] - The disabled background color of the button.
 /// @prop {Map} disabled-foreground [color: ('primary', 200)] - The disabled foreground color of the button.
 /// @prop {Map} disabled-icon-color [color: ('primary', 200)] - The disabled icon color of the button.
 /// @prop {Map} shadow-color [color: ('primary', 600, .5)] - The shadow color of the button.
 /// @prop {List} size [(rem(31px), rem(38px), rem(48px))] - The size used for the button.
 /// @prop {Number} default-size [2] - The default size used for the button component.
-/// @requires {Map} $light-base-button
-/// @requires {Map} $flat-elevation-button
+/// @requires $light-base-button
+/// @requires $flat-elevation-button
 $bootstrap-base-button: extend(
     $light-base-button,
     $flat-elevation-button,
@@ -954,7 +954,7 @@ $bootstrap-base-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} foreground [color: ('primary', 500)] - The idle text color of a flat button.
 /// @prop {Map} icon-color [color: ('primary', 500)] - The idle icon color of the button.
 /// @prop {Color} hover-background [transparent] - The hover background color of a flat button.
@@ -969,8 +969,8 @@ $bootstrap-base-button: extend(
 /// @prop {Color} active-background [transparent] - The active background color of a flat button.
 /// @prop {Map} active-foreground [color: ('primary', 800)] - The active background color of a flat button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of a flat button.
-/// @requires {Map} $light-flat-button
-/// @requires {Map} $bootstrap-base-button
+/// @requires $light-flat-button
+/// @requires $bootstrap-base-button
 $bootstrap-flat-button: extend(
     $light-flat-button,
     $bootstrap-base-button,
@@ -1032,7 +1032,7 @@ $bootstrap-flat-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} foreground [color: ('primary', 500)] - The idle text color of an outlined button.
 /// @prop {Map} icon-color [color: ('primary', 500)] - The idle icon color of an outlined button.
 /// @prop {Map} border-color [color: ('primary', 500)] - The border color of an outlined button.
@@ -1053,8 +1053,8 @@ $bootstrap-flat-button: extend(
 /// @prop {Map} active-border-color [color: ('primary', 800)] - The active border color of an outlined button.
 /// @prop {Map} disabled-border-color [color: ('primary', 50), lighten: 35%] - The disabled focused border color of an outlined button.
 /// @prop {Color} disabled-background [transparent] - The disabled background color of an outlined button.
-/// @requires {Map} $light-outlined-button
-/// @requires {Map} $bootstrap-base-button
+/// @requires $light-outlined-button
+/// @requires $bootstrap-base-button
 $bootstrap-outlined-button: extend(
     $light-outlined-button,
     $bootstrap-base-button,
@@ -1177,7 +1177,7 @@ $bootstrap-outlined-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('primary', 500)] - The background color of a contained button.
 /// @prop {Map} foreground [contrast-color: ('primary', 600)] - The idle text color of a contained button.
 /// @prop {Map} icon-color [contrast-color: ('primary', 600)] - The idle icon color of the button.
@@ -1192,8 +1192,8 @@ $bootstrap-outlined-button: extend(
 /// @prop {Map} focus-foreground [contrast-color: ('primary', 800)] - The text color of a contained button when focused with click and keyboard.
 /// @prop {Map} active-background [color: ('primary', 800)] - The active background color of an contained button.
 /// @prop {Map} active-foreground [contrast-color: ('primary', 800)] - The active text color of an contained button.
-/// @requires {Map} $light-contained-button
-/// @requires {Map} $bootstrap-base-button
+/// @requires $light-contained-button
+/// @requires $bootstrap-base-button
 $bootstrap-contained-button: extend(
     $light-contained-button,
     $bootstrap-base-button,
@@ -1285,11 +1285,11 @@ $bootstrap-contained-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {List} border-radius [(rem(15px), rem(12px), rem(28px))] - The border radius used for outlined button.
-/// @requires {Map} $light-fab-button
-/// @requires {Map} $bootstrap-base-button
-/// @requires {Map} $bootstrap-contained-button
+/// @requires $light-fab-button
+/// @requires $bootstrap-base-button
+/// @requires $bootstrap-contained-button
 $bootstrap-fab-button: extend(
     $bootstrap-base-button,
     $bootstrap-contained-button,
@@ -1306,11 +1306,11 @@ $bootstrap-fab-button: extend(
 );
 
 /// Generates a light bootstrap button schema.
-/// @type {Map}
-/// @requires {Map} $bootstrap-flat-button
-/// @requires {Map} $bootstrap-outlined-button
-/// @requires {Map} $bootstrap-contained-button
-/// @requires {Map} $bootstrap-fab-button
+/// @type Map
+/// @requires $bootstrap-flat-button
+/// @requires $bootstrap-outlined-button
+/// @requires $bootstrap-contained-button
+/// @requires $bootstrap-fab-button
 $bootstrap-button: (
     flat: $bootstrap-flat-button,
     outlined: $bootstrap-outlined-button,
@@ -1318,7 +1318,7 @@ $bootstrap-button: (
     fab: $bootstrap-fab-button,
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} foreground [color: ('gray', 700)] - The idle text color of the button.
 /// @prop {Map} icon-color [color: ('gray', 600)] - The idle icon color of the button.
 /// @prop {Map} icon-color-hover [color: ('gray', 700)] - The hover icon color of the button.
@@ -1339,8 +1339,8 @@ $bootstrap-button: (
 /// @prop {List} border-radius [(rem(40px), rem(0), rem(40px))] - The border radius used for the button.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the button.
 /// @prop {Number} default-size [2] - The default size used for the button component.
-/// @requires {Map} $light-base-button
-/// @requires {Map} $flat-elevation-button
+/// @requires $light-base-button
+/// @requires $flat-elevation-button
 $indigo-base-button: extend(
     $light-base-button,
     $flat-elevation-button,
@@ -1465,20 +1465,20 @@ $indigo-base-button: extend(
     )
 );
 
-/// @type {Map}
-/// @requires {Map} $light-flat-button
-/// @requires {Map} $indigo-base-button
+/// @type Map
+/// @requires $light-flat-button
+/// @requires $indigo-base-button
 $indigo-flat-button: extend($light-flat-button, $indigo-base-button);
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 500)] - The border color of an outlined button.
 /// @prop {Map} hover-border-color [color: ('gray', 600)] - The hover border color of a outlined button.
 /// @prop {Map} focus-border-color [color: ('gray', 600)] - The focus border color of a outlined button.
 /// @prop {Map} focus-visible-border-color [color: ('gray', 500)] - The focus-visible border color of a outlined button.
 /// @prop {Map} active-border-color [color: ('gray', 900, 0.15)] - The active border color of a outlined button.
 /// @prop {Map} disabled-border-color [color: ('gray', 900, 0.15)] - The disabled focused border color of an outlined button.
-/// @requires {Map} $light-outlined-button
-/// @requires {Map} $indigo-base-button
+/// @requires $light-outlined-button
+/// @requires $indigo-base-button
 $indigo-outlined-button: extend(
     $light-outlined-button,
     $indigo-base-button,
@@ -1523,7 +1523,7 @@ $indigo-outlined-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('primary', 500)] - The background color of a flat button.
 /// @prop {Map} foreground [contrast-color: ('primary', 500)] - The idle text color of a contained button.
 /// @prop {Map} icon-color [contrast-color: ('primary', 500, 0.8)] - The idle icon color of the button.
@@ -1542,8 +1542,8 @@ $indigo-outlined-button: extend(
 /// @prop {Map} disabled-background [color: ('primary', 400, 0.50)] - The disabled background color of a flat button.
 /// @prop {Map} disabled-foreground [contrast-color: ('primary', 500, 0.4)] - The disabled foreground color of the button.
 /// @prop {Map} disabled-icon-color [contrast-color: ('primary', 500, 0.3)] - The disabled icon color of the button.
-/// @requires {Map} $light-contained-button
-/// @requires {Map} $indigo-base-button
+/// @requires $light-contained-button
+/// @requires $indigo-base-button
 $indigo-contained-button: extend(
     $light-contained-button,
     $indigo-base-button,
@@ -1664,12 +1664,12 @@ $indigo-contained-button: extend(
     )
 );
 
-/// @type {Map}
+/// @type Map
 /// @prop {List} border-radius [(rem(40px), rem(12px), rem(40px))] - The border radius used for fab button.
 /// @prop {List} size [(rem(28px), rem(32px), rem(36px))] - The size used for the fab button.
-/// @requires {Map} $light-fab-button
-/// @requires {Map} $indigo-base-button
-/// @requires {Map} $indigo-contained-button
+/// @requires $light-fab-button
+/// @requires $indigo-base-button
+/// @requires $indigo-contained-button
 $indigo-fab-button: extend(
     $indigo-base-button,
     $indigo-contained-button,
@@ -1693,11 +1693,11 @@ $indigo-fab-button: extend(
 );
 
 /// Generates a light indigo button schema.
-/// @type {Map}
-/// @requires {Map} $indigo-flat-button
-/// @requires {Map} $indigo-outlined-button
-/// @requires {Map} $indigo-contained-button
-/// @requires {Map} $indigo-fab-button
+/// @type Map
+/// @requires $indigo-flat-button
+/// @requires $indigo-outlined-button
+/// @requires $indigo-contained-button
+/// @requires $indigo-fab-button
 $indigo-button: (
     flat: $indigo-flat-button,
     outlined: $indigo-outlined-button,

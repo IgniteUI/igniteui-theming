@@ -10,7 +10,7 @@
 
 /// Generates a base dark switch schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-switch: (
     _meta: (
         name: 'switch',
@@ -20,7 +20,7 @@ $dark-base-switch: (
 
 // stylelint-disable max-line-length
 /// Generates a dark material switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} thumb-off-color [color: ('gray', 100)] - The color of the thumb when the switch is off.
 /// @prop {Map} thumb-off-hover-color [color: ('gray', 100)] - The color of the thumb when the switch is off and hovered.
 /// @prop {Map} thumb-disabled-color [color: ('gray', 200)] - The color of the thumb when the switch is disabled.
@@ -51,7 +51,7 @@ $dark-material-switch: extend(
 );
 
 /// Generates a dark fluent switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focus-outline-color [color: ('gray', 400)] - The focus outlined color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color of the switch.
 /// @prop {Map} border-on-color [color: ('primary', 300)] - The border color of the on-switch.
@@ -159,7 +159,7 @@ $dark-fluent-switch: extend(
 );
 
 /// Generates a dark bootstrap switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focus-outline-color [color: ('primary', 900, 0.5)] - The focus outlined color.
 /// @prop {Map} label-disabled-color [color: ('gray', 300)] - The color of the switch label when the switch is disabled
 /// @prop {Map} border-disabled-color [color: ('gray', 100)] - The border color of the disabled switch.
@@ -202,7 +202,7 @@ $dark-bootstrap-switch: extend(
 );
 
 /// Generates a dark indigo switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - The color of the switch label.
 /// @prop {Map} label-hover-color [contrast-color: ('gray', 50)] - The color of the switch label on hover.
 /// @prop {Map} label-disabled-color [contrast-color: ('gray', 50, .2)] - The color of the switch label when the switch is disabled.

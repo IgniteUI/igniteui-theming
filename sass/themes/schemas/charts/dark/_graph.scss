@@ -10,7 +10,7 @@
 
 /// Generates a base light bullet graph schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-graph: (
     _meta: (
         variant: 'dark',
@@ -18,21 +18,21 @@ $dark-graph: (
 );
 
 /// Generates a dark graph schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-graph
 $dark-material-graph: extend($material-graph, $dark-graph);
 
 /// Generates a dark fluent graph schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-graph
 $dark-fluent-graph: extend($fluent-graph, $dark-graph);
 
 /// Generates a dark bootstrap graph schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-graph
 $dark-bootstrap-graph: extend($bootstrap-graph, $dark-graph);
 
 /// Generates a dark indigo graph schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-graph
 $dark-indigo-graph: extend($indigo-graph, $dark-graph);

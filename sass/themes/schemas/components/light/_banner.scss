@@ -8,7 +8,7 @@
 ////
 
 /// Generates a light banner schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} banner-background [color: 'surface'] - The color used for the banner background.
 /// @prop {Map} banner-message-color [contrast-color: 'surface'] - The color used for the banner label.
 /// @prop {Map} typography [message: (value: 'body-2')] - The typography styles used for the component.
@@ -33,11 +33,11 @@ $light-banner: (
 );
 
 /// Generates a material banner schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} banner-message-color [color: ('gray', 900)] - The color used for the banner label.
 /// @prop {Map} banner-illustration-color [color: ('gray', 900)] - The color used for the banner illustration.
 /// @prop {Map} banner-border-color [color: ('gray', 300)] - The color used for the banner border.
-/// @requires {Map} $light-banner
+/// @requires $light-banner
 $material-banner: extend(
     $light-banner,
     (
@@ -69,12 +69,12 @@ $material-banner: extend(
 );
 
 /// Generates a fluent banner schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} banner-message-color [color: ('gray', 900)] - The color used for the banner label.
 /// @prop {Map} banner-illustration-color [color: ('gray', 900)] - The color used for the banner illustration.
 /// @prop {Map} banner-border-color [color: ('gray', 300)] - The color used for the banner border.
 /// @prop {Map} typography [message: (value: 'caption')] - The typography styles used for the component.
-/// @requires {Map} $light-banner
+/// @requires $light-banner
 $fluent-banner: extend(
     $light-banner,
     (
@@ -112,11 +112,11 @@ $fluent-banner: extend(
 );
 
 /// Generates a bootstrap banner schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} banner-message-color [color: ('gray', 800)] - The color used for the banner label.
 /// @prop {Map} banner-border-color [color: ('gray', 300)] - The color used for the banner border.
 /// @prop {Map} banner-illustration-color [color: ('gray', 800)] - The color used for the banner illustration.
-/// @requires {Map} $light-banner
+/// @requires $light-banner
 $bootstrap-banner: extend(
     $light-banner,
     (
@@ -148,13 +148,13 @@ $bootstrap-banner: extend(
 );
 
 /// Generates an indigo banner schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} banner-background [color: ('gray', 200)] - The color used for the banner background.
 /// @prop {Map} banner-message-color [color: ('gray', 700)] - The color used for the banner label.
 /// @prop {Map} banner-border-color [color: ('gray', 300)] - The color used for the banner border.
 /// @prop {Map} banner-illustration-color [color: ('gray', 600)] - The color used for the banner illustration.
 /// @prop {Number} border-radius [rem(6px)] - The border radius of the banner
-/// @requires {Map} $light-banner
+/// @requires $light-banner
 $indigo-banner: extend(
     $light-banner,
     (

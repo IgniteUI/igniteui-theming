@@ -9,7 +9,7 @@
 
 /// Generates a base dark splitter schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 /// @prop {Map} handle-color [color: ('gray', 800)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 800)] - The color for the arrow expander's.
 $dark-base-splitter: (
@@ -33,7 +33,7 @@ $dark-base-splitter: (
 );
 
 /// Generates a dark material splitter schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} handle-color-active [color: ('gray', 800)] - The color for the bar drag handle when pressed.
 /// @prop {Map} expander-color-active [color: ('gray', 800)] - The color for the arrow expander's when pressed.
 /// @requires $light-splitter
@@ -58,7 +58,7 @@ $dark-material-splitter: extend(
 );
 
 /// Generates a dark fluent splitter schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} handle-color-active [color: ('gray', 900)] - The color for the bar drag handle when pressed.
 /// @prop {Map} expander-color-active [color: ('gray', 900)] - The color for the arrow expander's when pressed.
 /// @requires $fluent-splitter
@@ -84,13 +84,13 @@ $dark-fluent-splitter: extend(
 );
 
 /// Generates a dark bootstrap splitter schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-splitter
 /// @requires $dark-base-splitter
 $dark-bootstrap-splitter: extend($bootstrap-splitter, $dark-base-splitter);
 
 /// Generates a dark indigo splitter schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} bar-color [color: ('gray', 200)] - The background color of the bar.
 /// @prop {Map} handle-color [color: ('gray', 600)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 600)] - The color for the arrow expander.

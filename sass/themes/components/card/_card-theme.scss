@@ -28,13 +28,13 @@
 /// @param {Color} $subtitle-text-color [null] - The text color of the card subtitle. Auto-derived from background (muted).
 /// @param {Color} $content-text-color [null] - The text color of the card content. Auto-derived from background (muted).
 /// @param {Color} $actions-text-color [null] - The text color of the card buttons. Auto-derived from background.
-/// @param {box-shadow} $resting-shadow [null] - The shadow of the card in its resting state.
-/// @param {box-shadow} $hover-shadow [null] - The shadow of the card in its hover state.
+/// @param {List} $resting-shadow [null] - The shadow of the card in its resting state.
+/// @param {List} $hover-shadow [null] - The shadow of the card in its hover state.
 /// @param {List} $border-radius [null] - The border radius used for card component.
 ///
 /// @requires $light-material-schema
 ///
-/// @example scss Change the background and content text colors in card
+/// @example scss - Change the background and content text colors in card
 ///   $my-card-theme: card-theme($background: #fff);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-card-theme);

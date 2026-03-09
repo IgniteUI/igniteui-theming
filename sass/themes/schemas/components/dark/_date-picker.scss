@@ -9,9 +9,9 @@
 ////
 
 /// Generates a dark material date-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
-/// @requires {Map} $dark-material-base
+/// @requires $dark-material-base
 $dark-material-date-picker: extend(
     $dark-material-base,
     (
@@ -25,9 +25,9 @@ $dark-material-date-picker: extend(
 );
 
 /// Generates a dark fluent date-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Мap} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
-/// @requires {Map} $dark-fluent-base
+/// @requires $dark-fluent-base
 $dark-fluent-date-picker: extend(
     $dark-fluent-base,
     (
@@ -41,14 +41,14 @@ $dark-fluent-date-picker: extend(
 );
 
 /// Generates a dark bootstrap date-picker schema.
-/// @type {Map}
-/// @requires {Map} $dark-bootstrap-base
+/// @type Map
+/// @requires $dark-bootstrap-base
 $dark-bootstrap-date-picker: $dark-bootstrap-base;
 
 /// Generates an dark indigo date-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Мап} actions-divider-color [color: ('gray', 100)] - The border color used for the date-picker actions divider.
-/// @requires {Map} $dark-indigo-base
+/// @requires $dark-indigo-base
 $dark-indigo-date-picker: extend(
     $dark-indigo-base,
     (

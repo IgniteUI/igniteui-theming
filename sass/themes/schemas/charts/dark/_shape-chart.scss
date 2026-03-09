@@ -10,7 +10,7 @@
 
 /// Generates a base dark shape chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-shape-chart: (
     _meta: (
         variant: 'dark',
@@ -18,21 +18,21 @@ $dark-shape-chart: (
 );
 
 /// Generates a dark shape chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-shape-chart
 $dark-material-shape-chart: extend($material-shape-chart, $dark-shape-chart);
 
 /// Generates a dark fluent shape-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-shape-chart
 $dark-fluent-shape-chart: extend($fluent-shape-chart, $dark-shape-chart);
 
 /// Generates a dark bootstrap shape-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-shape-chart
 $dark-bootstrap-shape-chart: extend($bootstrap-shape-chart, $dark-shape-chart);
 
 /// Generates a dark indigo shape-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-shape-chart
 $dark-indigo-shape-chart: extend($indigo-shape-chart, $dark-shape-chart);

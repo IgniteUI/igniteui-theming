@@ -10,7 +10,7 @@
 
 /// Generates a base light sparkline schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-sparkline: (
     _meta: (
         name: 'sparkline',
@@ -19,7 +19,7 @@ $light-sparkline: (
 );
 
 /// Generates a material base sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} brush [color: ('primary', 500)] - Sets the sparkline brush.
 /// @prop {Number} line-thickness [null] - Sets the line thickness of the sparkline.
 /// @prop {Color} marker-brush [null] - Sets the marker brush of the sparkline.
@@ -34,7 +34,7 @@ $light-sparkline: (
 /// @prop {Number} high-marker-size [null] - Sets the high marker size of the sparkline.
 /// @prop {Color} negative-brush [null] - Sets the negative brush of the sparkline.
 /// @prop {Color} negative-marker-brush [null] - Sets the negative marker brush of the sparkline.
-/// @prop {Number} negative marker-size [null] - Sets the negative marker size of the sparkline.
+/// @prop {Number} negative-marker-size [null] - Sets the negative marker size of the sparkline.
 /// @prop {Color} trend-line-brush [null] - Sets the trendline brush of the sparkline.
 /// @prop {Color} trend-line-thickness [null] - Sets the thickness of the sparkline's trendline.
 /// @prop {Color} horizontal-axis-brush [null] - Sets the horizontal axis line brush of the sparkline.
@@ -75,9 +75,9 @@ $material-sparkline: extend(
 );
 
 /// Generates a fluent sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-sparkline
+/// @requires $material-sparkline
 $fluent-sparkline: extend(
     $material-sparkline,
     (
@@ -88,9 +88,9 @@ $fluent-sparkline: extend(
 );
 
 /// Generates a bootstrap sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-sparkline
+/// @requires $material-sparkline
 $bootstrap-sparkline: extend(
     $material-sparkline,
     (
@@ -101,9 +101,9 @@ $bootstrap-sparkline: extend(
 );
 
 /// Generates an indigo sparkline schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-sparkline
+/// @requires $material-sparkline
 $indigo-sparkline: extend(
     $material-sparkline,
     (

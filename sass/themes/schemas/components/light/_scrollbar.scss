@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {String | Number} sb-size [rem(16px)] - The size of the scrollbar.
 /// @prop {String | Number} sb-thumb-min-height [rem(32px)] - The min-height of the thumb.
 /// @prop {Map} sb-thumb-bg-color [color: ('gray', 400)] - The background color of the thumb.
@@ -72,8 +72,8 @@ $light-scrollbar: (
 );
 
 /// Generates a material scrollbar schema.
-/// @type {Map}
-/// @requires {Map} $light-scrollbar
+/// @type Map
+/// @requires $light-scrollbar
 $material-scrollbar: extend(
     $light-scrollbar,
     (
@@ -84,10 +84,10 @@ $material-scrollbar: extend(
 );
 
 /// Generates a fluent scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} sb-thumb-bg-color [color: ('gray', 300)] - The background color used for the thumb.
 /// @prop {Map} sb-thumb-bg-color-hover [color: ('gray', 300)] - The :hover background color of the thumb.
-/// @requires {Map} $light-scrollbar
+/// @requires $light-scrollbar
 $fluent-scrollbar: extend(
     $light-scrollbar,
     (
@@ -110,8 +110,8 @@ $fluent-scrollbar: extend(
 );
 
 /// Generates a bootstrap scrollbar schema.
-/// @type {Map}
-/// @requires {Map} $light-scrollbar
+/// @type Map
+/// @requires $light-scrollbar
 $bootstrap-scrollbar: extend(
     $light-scrollbar,
     (
@@ -122,10 +122,10 @@ $bootstrap-scrollbar: extend(
 );
 
 /// Generates an indigo scrollbar schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} sb-track-bg-color [color: ('gray', 200)] - The background color used for the track.
 /// @prop {Map} sb-track-bg-color-hover [color: ('gray', 100)] - The :hover background color of the track.
-/// @requires {Map} $light-scrollbar
+/// @requires $light-scrollbar
 $indigo-scrollbar: extend(
     $light-scrollbar,
     (

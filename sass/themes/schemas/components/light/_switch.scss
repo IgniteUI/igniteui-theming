@@ -11,7 +11,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a base light switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} thumb-on-color [color: ('gray', 50)] - The color of the thumb when the switch is on.
 /// @prop {Map} track-on-color [color: ('primary', 500)] - The color of the track when the switch is on.
 /// @prop {Color} track-off-color [transparent] - The color of the track when the switch is off.
@@ -104,7 +104,7 @@ $light-switch: extend(
 );
 
 /// Generates a material switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} focus-outline-color [transparent] - The focus outlined color.
 /// @prop {Color} border-color [transparent] - The border color of the switch.
 /// @prop {Color} border-hover-color [transparent] - The border color of the switch on hover.
@@ -126,8 +126,8 @@ $light-switch: extend(
 /// @prop {Number} hover-elevation [1] - The elevation level, between 0-24, to be used for the hover state.
 /// @prop {Number} disabled-elevation [1] - The elevation level, between 0-24, to be used for the disabled state.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
-/// @requires {Map} $light-switch
-/// @requires {Map} $default-elevation-switch
+/// @requires $light-switch
+/// @requires $default-elevation-switch
 $material-switch: extend(
     $light-switch,
     $default-elevation-switch,
@@ -207,7 +207,7 @@ $material-switch: extend(
 );
 
 /// Generates a fluent switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 700)] - The border color of the switch.
 /// @prop {Map} border-hover-color [color: ('gray', 900)] - The border color of the switch on hover.
 /// @prop {Map} focus-fill-color [color: ('gray', 700)] - The focus fill color.
@@ -224,7 +224,7 @@ $material-switch: extend(
 /// @prop {Map} thumb-on-disabled-color [color: ('gray', 100)] - The color of the thumb when the switch is on and disabled.
 /// @prop {Map} focus-outline-color [color: ('gray', 700)] - The focus outlined color.
 /// @prop {List} border-radius-track [(rem(10px), rem(0), rem(10px))] - The border radius used for switch track.
-/// @requires {Map} $light-switch
+/// @requires $light-switch
 $fluent-switch: extend(
     $light-switch,
     (
@@ -332,7 +332,7 @@ $fluent-switch: extend(
 );
 
 /// Generates a bootstrap switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} track-on-hover-color [color: ('primary', 600)] - The color of the track when the switch is on and hovered.
 /// @prop {Map} focus-outline-color [color: ('primary', 200, 0.5)] - The focus outlined color.
 /// @prop {Map} focus-fill-color [color: ('primary', 200)] - The focus fill color.
@@ -350,7 +350,7 @@ $fluent-switch: extend(
 /// @prop {List} border-radius-track [(rem(32px), rem(0), rem(32px))] - The border radius used for switch track.
 /// @prop {List} border-radius-thumb [(rem(32px), rem(0), rem(32px))] - The border radius used for switch thumb.
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
-/// @requires {Map} $fluent-switch
+/// @requires $fluent-switch
 $bootstrap-switch: extend(
     $fluent-switch,
     (
@@ -465,7 +465,7 @@ $bootstrap-switch: extend(
 );
 
 /// Generates an indigo switch schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [color: ('gray', 800)] - The color of the switch label.
 /// @prop {Map} label-disabled-color [color: ('gray', 900, .2)] - The color of the switch label when the switch is disabled
 /// @prop {Map} thumb-on-color [contrast-color: ('gray', 900)] - The color of the thumb when the switch is on.

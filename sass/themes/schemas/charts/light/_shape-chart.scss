@@ -10,7 +10,7 @@
 
 /// Generates a base light shape chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-shape-chart: (
     _meta: (
         name: 'shape-chart',
@@ -19,7 +19,7 @@ $light-shape-chart: (
 );
 
 /// Generates a material base shape chart schema.
-/// @type {Map}
+/// @type Map
 /// @property {List} margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @property {Color} title-alignment [null] - Sets horizontal alignment which determines the title position, relative to the left and right edges of the control.
 /// @property {Color} title-text-color [null] - Sets the color of the chart title.
@@ -121,9 +121,9 @@ $material-shape-chart: extend(
 );
 
 /// Generates a fluent shaep-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-shape-chart
+/// @requires $material-shape-chart
 $fluent-shape-chart: extend(
     $material-shape-chart,
     (
@@ -134,9 +134,9 @@ $fluent-shape-chart: extend(
 );
 
 /// Generates a bootstrap shape-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-shape-chart
+/// @requires $material-shape-chart
 $bootstrap-shape-chart: extend(
     $material-shape-chart,
     (
@@ -147,9 +147,9 @@ $bootstrap-shape-chart: extend(
 );
 
 /// Generates an indigo shape-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-shape-chart
+/// @requires $material-shape-chart
 $indigo-shape-chart: extend(
     $material-shape-chart,
     (

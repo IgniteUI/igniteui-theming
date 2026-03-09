@@ -1,0 +1,13 @@
+id: sassdoc-group-needs-name
+language: sassdoc
+severity: warning
+message: '@group should have a valid name, e.g. @group themes — name must be a single word (letters, digits, hyphens, underscores)'
+rule:
+  any:
+    - kind: tag_group
+      not:
+        has:
+          kind: group_name
+          regex: '^[a-zA-Z_][\w-]*$'
+    - kind: ERROR
+      regex: '^@group\s*$'

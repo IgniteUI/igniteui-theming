@@ -1,0 +1,13 @@
+id: sassdoc-todo-needs-description
+language: sassdoc
+severity: warning
+message: '@todo must include a description, e.g. @todo Fix this later'
+rule:
+  any:
+    - kind: tag_todo
+      not:
+        has:
+          kind: line_description
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@todo\s*$'

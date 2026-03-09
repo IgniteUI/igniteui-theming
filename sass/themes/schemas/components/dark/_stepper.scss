@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} current-indicator-color [color: ('gray', 900)] - The color of the current step indicator.
 /// @prop {Map} invalid-indicator-color [color: ('gray', 900)] - The color of the invalid step indicator.
 /// @prop {Map} step-hover-background [color: ('gray', 100, .3)] - The background of the step header on hover.
@@ -95,7 +95,7 @@ $base-stepper: (
 );
 
 /// Generates a dark material stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} current-indicator-color [contrast-color: ('gray', 50)] - The color of the current step indicator.
 /// @prop {Map} invalid-indicator-color [contrast-color: ('gray', 900)] - The color of the invalid step indicator.
 /// @prop {Map} invalid-indicator-background [color: ('error', 500)] - The background color of the invalid step indicator.
@@ -176,7 +176,7 @@ $dark-material-stepper: extend(
 );
 
 /// Generates a dark fluent stepper schema
-/// @type {Map}
+/// @type Map
 /// @prop {Map} complete-indicator-background [color: ('gray', 100)] - The background color of the completed step indicator.
 /// @prop {Map} step-focus-background [color: ('gray', 100, .4)] - The background of the step header on focus.
 /// @prop {Map} invalid-step-focus-background [color: ('gray', 100, .4)] - The background of the invalid step header on focus.
@@ -268,7 +268,7 @@ $dark-fluent-stepper: extend(
 );
 
 /// Generates a dark bootstrap stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} indicator-color [color: ('primary', 300)] - The text color of the incomplete step indicator.
 /// @prop {Map} step-separator-color [color: ('gray', 100)] - The separator border-color of between the steps.
 /// @prop {Map} invalid-title-color [color: ('error', 400)] - The color of the invalid step title.
@@ -349,7 +349,7 @@ $dark-bootstrap-stepper: extend(
 );
 
 /// Generates a dark indigo stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} content-foreground [contrast-color: ('gray', 50, .8)] - The foreground of the step content.
 /// @prop {Map} indicator-color [contrast-color: ('gray', 50, .8)] - The text color of the incomplete step indicator.
 /// @prop {Map} indicator-background [contrast-color: ('gray', 50, .15)] - The background color of the incomplete step indicator.

@@ -10,7 +10,7 @@
 
 /// Generates a base light bullet graph schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-graph: (
     _meta: (
         name: 'bullet-graph',
@@ -19,7 +19,7 @@ $light-graph: (
 );
 
 /// Generates a material graph schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} backing-brush [(color: 'surface', darken: 5%)] - Sets the brush to use to fill the backing of the bullet graph.
 /// @prop {Color} backing-outline [(color: 'surface', darken: 8%)] - Sets the brush to use for the outline of the backing.
 /// @prop {Number} backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
@@ -103,8 +103,8 @@ $material-graph: extend(
 );
 
 /// Generates a fluent graph schema.
-/// @type {Map}
-/// @requires {Map} $material-graph
+/// @type Map
+/// @requires $material-graph
 $fluent-graph: extend(
     $material-graph,
     (
@@ -115,8 +115,8 @@ $fluent-graph: extend(
 );
 
 /// Generates a bootstrap graph schema.
-/// @type {Map}
-/// @requires {Map} $material-graph
+/// @type Map
+/// @requires $material-graph
 $bootstrap-graph: extend(
     $material-graph,
     (
@@ -127,8 +127,8 @@ $bootstrap-graph: extend(
 );
 
 /// Generates an indigo graph schema.
-/// @type {Map}
-/// @requires {Map} $material-graph
+/// @type Map
+/// @requires $material-graph
 $indigo-graph: extend(
     $material-graph,
     (

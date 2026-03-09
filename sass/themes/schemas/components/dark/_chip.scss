@@ -9,7 +9,7 @@
 
 /// Generates a base dark chip schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-chip: (
     _meta: (
         name: 'chip',
@@ -18,19 +18,19 @@ $dark-base-chip: (
 );
 
 /// Generates a dark material chip schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-chip
 /// @requires $dark-base-chip
 $dark-material-chip: extend($material-chip, $dark-base-chip);
 
 /// Generates a dark fluent chip schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-chip
 /// @requires $dark-base-chip
 $dark-fluent-chip: extend($fluent-chip, $dark-base-chip);
 
 /// Generates a dark bootstrap chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} hover-background [color: ('gray', 100)] - The chip hover background color.
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 100)] - The chip text hover color.
 /// @prop {Map} hover-selected-background [color: ('gray', 100)] - The selected chip hover background color.
@@ -90,14 +90,14 @@ $dark-bootstrap-chip: extend(
 );
 
 /// Generates a dark indigo chip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The chip text color.
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 50)] - The chip text hover color.
-/// @prop {Map} focus-text-color [contrast-color: ('gray', 50, .8)] The focused chip text color.
+/// @prop {Map} focus-text-color [contrast-color: ('gray', 50, .8)] - The focused chip text color.
 ///
 /// @prop {Map} background [contrast-color: ('gray', 50, .05)] - The chip background color.
 /// @prop {Map} hover-background [contrast-color: ('gray', 50, .1)] - The chip hover background color.
-/// @prop {Map} focus-background [contrast-color: ('gray', 50, .05)] The focused chip background color.
+/// @prop {Map} focus-background [contrast-color: ('gray', 50, .05)] - The focused chip background color.
 ///
 /// @prop {Map} border-color [color: ('gray', 100)] - The chip border color.
 /// @prop {Map} hover-border-color [color: ('gray', 200)] - The chip hover border color.

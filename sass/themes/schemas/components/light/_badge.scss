@@ -9,17 +9,17 @@
 ////
 
 /// Generates a light badge schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} icon-color [contrast-color: ('primary', 900)] - The icon color used for the badge component.
 /// @prop {Map} text-color [contrast-color: ('primary', 900)] - The text color used for the badge component.
 /// @prop {Map} border-color [contrast-color: ('gray', 900)] - The border color used for the badge component.
 /// @prop {Map} background-color [color: ('primary', 500)] - The background color used for the badge component.
-/// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the badge shadow.
+/// @prop {Number} elevation [1] - The elevation level, between 0-24, used for the badge shadow.
 /// @prop {Number} border-radius [0] - The border-radius used for the badge component.
 /// @prop {List} size [(rem(16px), rem(22px), rem(26px))] - The size used for the badge.
 /// @prop {Number} default-size [2] - The default size used for the badge component (medium).
 /// @prop {Map} typography [text: (value: 'caption')] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-badge
+/// @requires $default-elevation-badge
 $light-badge: extend(
     $default-elevation-badge,
     (
@@ -77,10 +77,10 @@ $light-badge: extend(
 );
 
 /// Generates a material badge schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-color [color: ('primary', 800)] - The background color used for the badge component.
 /// @prop {List} dot-size [(rem(8px), rem(10px), rem(12px))] - The size used for the dot type badge.
-/// @requires {Map} $light-badge
+/// @requires $light-badge
 $material-badge: extend(
     $light-badge,
     (
@@ -106,9 +106,9 @@ $material-badge: extend(
 );
 
 /// Generates a fluent badge schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} dot-size [(rem(6px), rem(10px), rem(12px))] - The size used for the dot type badge.
-/// @requires {Map} $light-badge
+/// @requires $light-badge
 $fluent-badge: extend(
     $light-badge,
     (
@@ -127,12 +127,12 @@ $fluent-badge: extend(
 );
 
 /// Generates a bootstrap badge schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} icon-color [contrast-color: ('primary', 100)] - The icon color used.
 /// @prop {Map} text-color [contrast-color: ('primary', 100)] - The text color used.
 /// @prop {List} border-radius [(rem(2px), rem(4px), rem(4px))] - The border radius used for badge.
 /// @prop {List} dot-size [(rem(6px), rem(10px), rem(14px))] - The size used for the dot type badge.
-/// @requires {Map} $light-badge
+/// @requires $light-badge
 $bootstrap-badge: extend(
     $light-badge,
     (
@@ -173,14 +173,14 @@ $bootstrap-badge: extend(
 );
 
 /// Generates an indigo badge schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 100)] - The border color used for the badge component.
 /// @prop {List} size [(rem(14px), rem(18px), rem(22px))] - The size used for the badge.
 /// @prop {List} dot-size [(rem(6px), rem(8px), rem(10px))] - The size used for the dot type badge.
 /// @prop {Map} typography [text: (value: 'button')] - The typography styles used for the component.
 /// @prop {Number} default-size [3] - The default size used for the badge component (large).
-/// @requires {Map} $light-badge
-/// @requires {Map} $indigo-elevation-badge
+/// @requires $light-badge
+/// @requires $indigo-elevation-badge
 $indigo-badge: extend(
     $light-badge,
     $indigo-elevation-badge,

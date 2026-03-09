@@ -8,7 +8,7 @@
 ////
 
 /// Generates the base dark grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} content-background [color: 'surface'] - The table body background color.
 /// @prop {Map} drop-area-background [color: ('gray', 100, .4)] - The drop area background color.
 /// @prop {Map} header-border-color [color: ('gray', 200, .24)] - The color used for header borders.
@@ -201,7 +201,7 @@ $base-dark-grid: (
 );
 
 /// Generates a dark material grid schema based on a mix of $material-grid and $base-dark-grid.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [color: ('gray', 800, .7)] - The table header text color.
 /// @prop {Map} group-label-column-name-text [color: ('primary', 500)] - The grid group row column name text color.
 /// @prop {Map} group-label-icon [color: ('primary', 500)] - The grid group row icon color.
@@ -252,7 +252,7 @@ $dark-material-grid: extend(
 );
 
 /// Generates a dark fluent grid schema based on a mix of $fluent-grid and $base-dark-grid.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-selected-background [color: ('gray', 200)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray', 200)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} row-selected-background [color: ('gray', 100)] - The selected row background color.
@@ -343,7 +343,7 @@ $dark-fluent-grid: extend(
 );
 
 /// Generates a dark bootstrap grid schema based on a mix of $bootstrap-grid and $base-dark-grid.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} group-count-text-color [color: ('gray', 600)] - The grid group row cont badge text color.
 /// @prop {Map} group-label-icon [color: ('primary', 300)] - The grid group row icon color.
 /// @prop {Map} group-label-column-name-text [color: ('primary', 300)] - The grid group row column name text color.
@@ -421,10 +421,10 @@ $dark-bootstrap-grid: extend(
 );
 
 /// Generates a dark indigo grid schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} content-text-color [contrast-color: ('gray', 50, .8)] - The table body text color.
 /// @prop {Map} header-border-color [color: ('gray', 200)] - The color used for header borders.
-/// @prop {MAp} header-text-color [contrast-color: ('gray', 50, .9)] - The table header text color.
+/// @prop {Map} header-text-color [contrast-color: ('gray', 50, .9)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 900)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray' 50)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} filtering-header-background [color: ('gray', 100)] - The background color of the filtered column header.

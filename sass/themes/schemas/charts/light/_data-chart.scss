@@ -9,7 +9,7 @@
 
 /// Generates a base data chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-data-chart: (
     _meta: (
         name: 'data-chart',
@@ -18,7 +18,7 @@ $light-data-chart: (
 );
 
 /// Generates a material base data chart schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @prop {Color} title-text-color [color: ('gray', 900)] - Sets the color of the chart title.
 /// @prop {List} title-margin [null] - Sets the margin (top, right, bottom, left) of the chart title.
@@ -134,9 +134,9 @@ $material-data-chart: extend(
 );
 
 /// Generates a fluent data-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-data-chart
+/// @requires $material-data-chart
 $fluent-data-chart: extend(
     $material-data-chart,
     (
@@ -147,9 +147,9 @@ $fluent-data-chart: extend(
 );
 
 /// Generates a bootstrap data-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-data-chart
+/// @requires $material-data-chart
 $bootstrap-data-chart: extend(
     $material-data-chart,
     (
@@ -160,9 +160,9 @@ $bootstrap-data-chart: extend(
 );
 
 /// Generates an indigo data-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-data-chart
+/// @requires $material-data-chart
 $indigo-data-chart: extend(
     $material-data-chart,
     (

@@ -11,7 +11,7 @@
 /// @prop {Map} helper-text-color [color: ('gray', 700)] - The color used for helper text.
 /// @prop {Map} text-error-color [color: ('error', 500)] - The color used for the error message.
 /// @prop {Map} icon-error-color [color: ('error', 500)] - The color used for the error icon.
-/// @type {Map}
+/// @type Map
 $light-validator: extend(
     (
         helper-text-color: (
@@ -40,8 +40,8 @@ $light-validator: extend(
 );
 
 /// Generates a light material validator schema.
-/// @type {Map}
-/// @requires {Map} $light-validator
+/// @type Map
+/// @requires $light-validator
 $material-validator: extend(
     $light-validator,
     (
@@ -52,8 +52,8 @@ $material-validator: extend(
 );
 
 /// Generates a light fluent validator schema.
-/// @type {Map}
-/// @requires {Map} $light-validator
+/// @type Map
+/// @requires $light-validator
 $fluent-validator: extend(
     $light-validator,
     (
@@ -64,8 +64,8 @@ $fluent-validator: extend(
 );
 
 /// Generates a bootstrap validator schema.
-/// @type {Map}
-/// @requires {Map} $light-validator
+/// @type Map
+/// @requires $light-validator
 $bootstrap-validator: extend(
     $light-validator,
     (
@@ -76,9 +76,9 @@ $bootstrap-validator: extend(
 );
 
 /// Generates an indigo validator schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-error-color [color: ('gray', 700)] - The color used for error message.
-/// @requires {Map} $light-validator
+/// @requires $light-validator
 $indigo-validator: extend(
     $light-validator,
     (

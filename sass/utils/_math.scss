@@ -10,7 +10,7 @@
 /// @access public
 /// @param {Number} $number - The number to be rounded
 /// @param {Number} $precision [2] - Specifies the number of the digits after the decimal separator
-/// @returns {Number} - The rounded number
+/// @returns {Number} The rounded number
 @function to-fixed($number, $precision: 2) {
     $pow: math.pow(10, $precision);
 
@@ -19,9 +19,9 @@
 
 /// Converts a number to a string.
 /// @access public
-/// @param {number} $num - The number to convert.
-/// @param {radix} $radix [16] - The base radix to use for the conversion.
-/// @return {String} - The resulting string.
+/// @param {Number} $num - The number to convert.
+/// @param {Number} $radix [16] - The base radix to use for the conversion.
+/// @return {String} The resulting string.
 @function to-string($num, $radix: 16) {
     $chars: '0123456789abcdef';
     $result: '';
@@ -51,7 +51,7 @@
 /// Removes measurement units from variable.
 /// @access private
 /// @param {Number} $var - The variable to remove the unit of.
-/// @return {Number} - The given variable without units.
+/// @return {Number} The given variable without units.
 @function unitless($var) {
     @return math.div($var, $var * 0 + 1);
 }

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a light divider schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} color [color: ('gray', 300)] - The color used for the divider.
 /// @prop {number} inset [0] - The inset value of the divider.
 $light-divider: (
@@ -26,8 +26,8 @@ $light-divider: (
 );
 
 /// Generates a material divider schema.
-/// @type {Map}
-/// @requires {Map} $light-divider
+/// @type Map
+/// @requires $light-divider
 $material-divider: extend(
     $light-divider,
     (
@@ -38,8 +38,8 @@ $material-divider: extend(
 );
 
 /// Generates a fluent divider schema.
-/// @type {Map}
-/// @requires {Map} $light-divider
+/// @type Map
+/// @requires $light-divider
 $fluent-divider: extend(
     $light-divider,
     (
@@ -50,7 +50,7 @@ $fluent-divider: extend(
 );
 
 /// Generates a bootstrap divider schema.
-/// @type {Map}
+/// @type Map
 $bootstrap-divider: extend(
     $light-divider,
     (
@@ -61,7 +61,7 @@ $bootstrap-divider: extend(
 );
 
 /// Generates an indigo divider schema.
-/// @type {Map}
+/// @type Map
 $indigo-divider: extend(
     $light-divider,
     (

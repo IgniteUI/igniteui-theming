@@ -43,7 +43,7 @@ $_enhanced-accessibility: false;
 /// @param {Color} $error [#ff134a] - The error color used throughout the application (optional).
 /// @param {String} $variant [null] - Used internally (optional).
 /// @requires {function} shades
-/// @returns {Map} - A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
+/// @returns {Map} A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
 /// @example scss
 ///   // Pass the required colors
 ///   $my-palette: palette(
@@ -99,7 +99,7 @@ $_enhanced-accessibility: false;
 /// @param {List} $shades - The list of shade variants.
 /// @param {Color} $surface [null] - The surface color. Useful if generating shades of gray (optional).
 /// @requires {function} adaptive-contrast
-/// @returns {Map} - A map consisting of color shades and their respective contrast colors.
+/// @returns {Map} A map consisting of color shades and their respective contrast colors.
 ///
 /// @example scss
 ///   $color-name: 'accent';
@@ -138,7 +138,7 @@ $_enhanced-accessibility: false;
 /// @param {Color} $surface [null] - The surface color. Useful when generating a shade of gray (optional).
 /// @require {function} luminance
 /// @require {function} to-fixed
-/// @returns {Map} - A map containing a list of HSL values and a raw color value.
+/// @returns {Map} A map containing a list of HSL values and a raw color value.
 @function shade($name, $color, $shade, $surface: null) {
     $h: var(--ig-#{$name}-h);
     $s: var(--ig-#{$name}-s);
@@ -191,7 +191,7 @@ $_enhanced-accessibility: false;
 /// @param {Number} $lightness [50] - The target lightness value to move toward.
 /// @param {Number} $percentage [0.1] - The percentage to move toward the target lightness.
 /// @param {Number} $offset [10] - The offset added or subtracted based on direction.
-/// @returns {Color} - The dynamically shaded color in LCH color space
+/// @returns {Color} The dynamically shaded color in LCH color space
 @function dynamic-shade($color, $lightness: 50, $factor: 0.1, $offset: 5) {
     @return lch(from $color calc(l + ($lightness - l) * $factor + sign($lightness - l) * $offset) c h);
 }
@@ -201,7 +201,7 @@ $_enhanced-accessibility: false;
 /// @access private
 /// @group Color
 /// @param {Color} $color - The color to normalize.
-/// @returns {Color} - The normalized color in hex format.
+/// @returns {Color} The normalized color in hex format.
 @function _normalize-color($color) {
     @if meta.type-of($color) == 'color' {
         // Round RGB channels to integers to maintain backward compatibility with older Sass behavior
@@ -222,7 +222,7 @@ $_enhanced-accessibility: false;
 /// @param {String} $color [primary] - The target color from the color palette.
 /// @param {Number | String} $variant [500] - The target color shade from the color palette.
 /// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
-/// @returns {Color | String} - The raw color shade or CSS variable reference from the palette.
+/// @returns {Color | String} The raw color shade or CSS variable reference from the palette.
 ///
 /// @example scss - Getting a color from the palette
 ///   // Without providing a palette
@@ -269,9 +269,9 @@ $_enhanced-accessibility: false;
 /// @param {Number | String} $variant [500] - The target color shade from the color palette.
 /// @param {Number} $opacity [null] - Optional opacity to apply to the color shade.
 /// @requires {function} color
-/// @returns {Color | String} - The raw contrast color shade or CSS variable from the palette.
+/// @returns {Color | String} The raw contrast color shade or CSS variable from the palette.
 ///
-/// @example scss without passing a palette
+/// @example scss - without passing a palette
 ///   .my-component {
 ///      background: color($color: 'primary', $variant: 200);
 ///      color: contrast-color($color: 'primary', $variant: 200);
@@ -285,7 +285,7 @@ $_enhanced-accessibility: false;
 /// @access public
 /// @group Color
 /// @param {Color} $color - The base color used in the calculation.
-/// @returns {string} - Returns a relative HSL color where the lightness is adjusted
+/// @returns {string} Returns a relative HSL color where the lightness is adjusted
 /// based on the specified contrast level, resulting in either black or white.
 ///
 /// @example scss
@@ -307,9 +307,9 @@ $_enhanced-accessibility: false;
 /// @param {Color} $background - The background color used to return a contrast/forground color for.
 /// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors
 /// that can be used with the provided background.
-/// @param {AAA | AA | A} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
+/// @param {String} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
 /// @require {function} contrast
-/// @returns {Color} - Returns either white, black, or the provided foreground
+/// @returns {Color} Returns either white, black, or the provided foreground
 /// color if it meets the required contrast level.
 ///
 /// @example scss
@@ -370,7 +370,7 @@ $_enhanced-accessibility: false;
 /// @group Color
 /// @param {Color} $color-1 - The first color, usually transparent.
 /// @param {Color} $color-2 [#fff] - The second color, usually opaque.
-/// @return {Color} - The color representation of the rgba value.
+/// @return {Color} The color representation of the rgba value.
 @function to-opaque($color-1, $color-2: #fff) {
     @if meta.type-of($color-1) == color and meta.type-of($color-2) == color {
         $red: color.channel($color-1, 'red', $space: rgb);
@@ -392,9 +392,9 @@ $_enhanced-accessibility: false;
 /// @access public
 /// @group Color
 /// @param {Color} $color - The color to be converted to an HSL list of values.
-/// @example scss Turn #000 into an HSL list of values
+/// @example scss - Turn #000 into an HSL list of values
 ///   $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
-/// @return {List} - This list of HSL values.
+/// @return {List} This list of HSL values.
 @function to-hsl($color) {
     @return (
         math.round(color.channel($color, 'hue', $space: hsl)),
@@ -412,7 +412,7 @@ $_enhanced-accessibility: false;
 /// @example scss
 ///   $conrast: contrast(#09f, #000); // 7
 ///
-/// @returns {Number} - The contrast ratio between the background and foreground colors.
+/// @returns {Number} The contrast ratio between the background and foreground colors.
 /// @require {function} luminance
 /// @require {function} to-fixed
 /// @link https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests WCAG 2.0 Contrast Ratio
@@ -433,7 +433,7 @@ $_enhanced-accessibility: false;
 ///   $blue: luminance(#09f); // 0.3
 ///   $black: luminance(#000); // 0
 ///
-/// @returns {Number | String} - The calculated luminance of a given color
+/// @returns {Number | String} The calculated luminance of a given color
 /// @link https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests. WCAG 2.0 Contrast Ratio
 @function luminance($color) {
     @if meta.type-of($color) == 'color' {
@@ -451,7 +451,7 @@ $_enhanced-accessibility: false;
 /// @access private
 /// @group Color
 /// @param {Number} $value - The sRGB color
-/// @returns {Number} - The calculated linear channel value
+/// @returns {Number} The calculated linear channel value
 @function _lcv($value) {
     // stylelint-disable number-max-precision
     @return if($value < 0.03928, math.div($value, 12.92), math.pow(math.div($value + 0.055, 1.055), 2.4));
@@ -460,7 +460,7 @@ $_enhanced-accessibility: false;
 /// Returns a list of colors to be used as chart brushes. The return value depends on the value of enhanced-accessibility.
 /// @access public
 /// @group Palettes
-/// @returns { List } - A list of colors to be used as chart brushes.
+/// @returns { List } A list of colors to be used as chart brushes.
 /// @see {mixin} configure-colors
 /// @see $brushes-regular
 /// @see $brushes-color-blind

@@ -12,7 +12,7 @@
 
 /// Generates a base dark select schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-select: (
     _meta: (
         name: 'select',
@@ -21,7 +21,7 @@ $dark-base-select: (
 );
 
 /// Generates a dark material select schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} toggle-button-background [color: ('gray', 100)] - The select toggle button background color.
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 200)] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-background-focus--border [color: ('gray', 100)] - The select toggle button background color when the select is focused in material border and line variants.
@@ -52,7 +52,7 @@ $dark-material-select: extend(
 );
 
 /// Generates a dark fluent select schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} toggle-button-background [color: ('gray', 50)] - The select toggle button background color.
 /// @prop {Map} toggle-button-background-focus [color: ('gray', 50)] - The select toggle button background color when the select is focused.
 /// @prop {Map} toggle-button-foreground [color: ('gray', 400)] - The select toggle button foreground color.
@@ -104,12 +104,12 @@ $dark-fluent-select: extend(
 );
 
 /// Generates a dark bootstrap select schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-select
 $dark-bootstrap-select: extend($bootstrap-select, $dark-base-select);
 
 /// Generates a dark indigo select schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} toggle-button-foreground [contrast-color: ('gray', 100, .6)] - The select toggle button foreground color.
 /// @prop {Map} toggle-button-foreground-focus [contrast-color: ('gray', 100, .6)] - The select toggle button foreground color when the select is focused.
 /// @prop {Map} toggle-button-foreground-filled [contrast-color: ('gray', 100, .8)] - The select toggle button foreground color when the select is focused.

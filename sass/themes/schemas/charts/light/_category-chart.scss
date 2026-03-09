@@ -9,7 +9,7 @@
 
 /// Generates a base category chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-category-chart: (
     _meta: (
         name: 'category-chart',
@@ -18,7 +18,7 @@ $light-category-chart: (
 );
 
 /// Generates a material category chart schema.
-/// @type {Map}
+/// @type Map
 /// @property {List} margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @property {List} brushes [series] - Defines the palette from which automatically assigned series brushes colors are selected.
 /// @property {List} marker-brushes [series]- Defines the palette from which automatically assigned series marker brushes colors are selected.
@@ -221,9 +221,9 @@ $material-category-chart: extend(
 );
 
 /// Generates a fluent category-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-category-chart
+/// @requires $material-category-chart
 $fluent-category-chart: extend(
     $material-category-chart,
     (
@@ -234,9 +234,9 @@ $fluent-category-chart: extend(
 );
 
 /// Generates a bootstrap category-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-category-chart
+/// @requires $material-category-chart
 $bootstrap-category-chart: extend(
     $material-category-chart,
     (
@@ -247,9 +247,9 @@ $bootstrap-category-chart: extend(
 );
 
 /// Generates an indigo category-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-category-chart
+/// @requires $material-category-chart
 $indigo-category-chart: extend(
     $material-category-chart,
     (

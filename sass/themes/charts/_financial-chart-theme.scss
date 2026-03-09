@@ -75,7 +75,7 @@
 /// @param {Number} $y-axis-tick-stroke-thickness [null] - Sets the thickness to apply to tickmarks along the Y-axis.
 /// @param {String} $zoom-slider-x-axis-major-stroke [null] - Gets or sets stroke brush of major gridlines on x-axis of the zoom slider pane.
 /// @param {Number} $zoom-slider-x-axis-major-stroke-thickness [null] - Gets or sets thickness of major gridlines on x-axis of the zoom slider pane.
-/// @requires extend
+/// @requires {function} extend
 ///
 /// @example scss
 ///   $my-chart-theme: financial-chart-theme($title-alignment: left, $brushes: red, blue, yellow, pink);
@@ -271,14 +271,7 @@
 /// category from the typographic scale.
 /// @group typography
 /// @param {Map} $type-scale - A typographic scale as produced by type-scale.
-/// @param {Map} $categories [(
-/// 'title': 'h6',
-/// 'subtitle': 'subtitle-1,
-/// 'x-axis-label-text-style': 'body-2',
-/// 'y-axis-label-text-style': 'body-2',
-/// 'x-axis-title-text-style': 'body-2',
-/// 'y-axis-title-text-style': 'body-2',
-/// )] - The categories from the typographic scale used for type styles.
+/// @param {Map} $categories - The categories from the typographic scale used for type styles.
 /// @requires {mixin} type-style
 @mixin financial-chart-typography(
     $type-scale,

@@ -9,7 +9,7 @@
 ////
 
 /// Generates a base light year/month views schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Number} default-size [2] - The default size used for the calendar component.
 /// @prop {Map} ym-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the current month/year.
 /// @prop {Map} ym-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the current month/year.
@@ -62,7 +62,7 @@ $light-year-month: extend(
 );
 
 /// Generates a light material year/month views schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('secondary', 700)] - The :hover foreground color of the current/selected year/month.
 /// @prop {Map} ym-selected-current-hover-background [color: ('secondary', 700)] - The :hover background color of the current/selected year.
 /// @prop {Map} ym-hover-foreground [color: ('gray', 900)] -  The :hover foreground color of the month/year.
@@ -83,9 +83,7 @@ $light-year-month: extend(
 /// @prop {Map} ym-selected-current-outline-color [color: ('gray', 900)] - The outline color of the selected current month/year.
 /// @prop {Map} ym-selected-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the selected current month/year.
 /// @prop {Map} ym-selected-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the selected current month/year.
-/// @prop {Map} typography [
-///   content: (value: 'body-1')
-/// ]
+/// @prop {Map} typography [content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-year-month
 /// @requires $material-base
 $material-year-month: extend(
@@ -206,7 +204,7 @@ $material-year-month: extend(
 );
 
 /// Generates a light fluent year/month views schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} ym-hover-background [color: ('gray', 200)] - The :hover background color of the month/year.
 /// @prop {Map} ym-selected-current-hover-foreground [color: ('gray', 900)] - The foreground color of the current/selected month/year on :hover.
 /// @prop {Map} ym-selected-current-hover-background [color: ('primary', 100, .5)] - The background color of the current/selected month/year on :hover.
@@ -230,9 +228,7 @@ $material-year-month: extend(
 /// @prop {Map} ym-selected-current-outline-hover-color [color: ('gray', 700)] - The :hover outline color of the selected current month/year.
 /// @prop {Map} ym-selected-current-outline-focus-color [color: ('gray', 700)] - The :focus outline color of the selected current month/year.
 /// @prop {List} ym-border-radius [(rem(0), rem(0), rem(25px))] - The border radius used for the month/year.
-/// @prop {Map} typography [
-///   content: (value: 'body-1')
-/// ]
+/// @prop {Map} typography [content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-year-month
 /// @requires $fluent-base
 $fluent-year-month: extend(
@@ -379,7 +375,7 @@ $fluent-year-month: extend(
 );
 
 /// Generates a light bootstrap year/month views schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} ym-current-outline-color [color: ('gray', 900)] - The outline color of the current month/year.
 /// @prop {Map} ym-selected-current-hover-foreground [contrast-color: ('primary', 900)] - The :hover foreground color of the current/selected month/year.
 /// @prop {Map} ym-selected-current-hover-background [color: ('primary', 600)] - The :hover background color of the current/selected month/year.
@@ -401,9 +397,7 @@ $fluent-year-month: extend(
 /// @prop {Map} ym-selected-current-outline-hover-color [color: ('gray', 900)] - The :hover outline color of the selected current month/year.
 /// @prop {Map} ym-selected-current-outline-focus-color [color: ('gray', 900)] - The :focus outline color of the selected current month/year.
 /// @prop {List} ym-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the month/year.
-/// @prop {Map} typography [
-///   content: (value: 'body-1')
-/// ]
+/// @prop {Map} typography [content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-year-month
 /// @requires $bootstrap-base
 $bootstrap-year-month: extend(
@@ -530,7 +524,7 @@ $bootstrap-year-month: extend(
 );
 
 /// Generates a light indigo year/month views schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} ym-hover-foreground [color: ('gray', 800)] -  The :hover foreground color of the month/year.
 /// @prop {Map} ym-hover-background [color: ('gray', 900, .05)] - The :hover background color of the month/year.
 /// @prop {Map} ym-current-foreground [color: ('gray', 800)] - The foreground color of the current month/year.
@@ -551,9 +545,7 @@ $bootstrap-year-month: extend(
 /// @prop {Map} ym-selected-current-outline-color [color: ('primary', 100)] - The outline color of the selected current month/year.
 /// @prop {Map} ym-selected-current-outline-hover-color [color: ('primary', 200)] - The :hover outline color of the selected current month/year.
 /// @prop {Map} ym-selected-current-outline-focus-color [color: ('primary', 200)] - The :focus outline color of the selected current month/year.
-/// @prop {Map} typography [
-///   content: (value: 'body-1')
-/// ]
+/// @prop {Map} typography [content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-year-month
 /// @requires $indigo-base
 $indigo-year-month: extend(

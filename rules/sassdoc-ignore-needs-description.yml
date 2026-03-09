@@ -1,0 +1,13 @@
+id: sassdoc-ignore-needs-description
+language: sassdoc
+severity: warning
+message: '@ignore must include a description, e.g. @ignore Reason for ignoring'
+rule:
+  any:
+    - kind: tag_ignore
+      not:
+        has:
+          kind: line_description
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@ignore\s*$'

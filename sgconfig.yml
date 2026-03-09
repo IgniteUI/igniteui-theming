@@ -1,0 +1,17 @@
+ruleDirs: ['./rules']
+customLanguages:
+  scss:
+    libraryPath: ./lib/scss.so
+    extensions: [scss]
+    expandoChar: _
+  sassdoc:
+    libraryPath: ./lib/sassdoc.so
+    extensions: [sassdoc]
+    expandoChar: _
+languageInjections:
+  - hostLanguage: scss
+    rule:
+      pattern:
+        context: '/// $CONTENT'
+        selector: sassdoc_line
+    injected: sassdoc

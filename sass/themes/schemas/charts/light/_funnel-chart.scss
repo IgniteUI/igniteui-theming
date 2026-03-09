@@ -10,7 +10,7 @@
 
 /// Generates a base funnel chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-funnel-chart: (
     _meta: (
         name: 'funnel-chart',
@@ -19,7 +19,7 @@ $light-funnel-chart: (
 );
 
 /// Generates a material funnel chart schema.
-/// @type {Map}
+/// @type Map
 /// @property {List} brushes [series] - Defines the palette from which automatically assigned series colors are selected.
 /// @property {List} outlines [series] - Defines the palette from which automatically assigned series outline colors are selected.
 /// @property {String} outer-label-alignment [null] - Sets which side of the chart the outer labels should appear.
@@ -48,9 +48,9 @@ $material-funnel-chart: extend(
 );
 
 /// Generates a fluent funnel-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-funnel-chart
+/// @requires $material-funnel-chart
 $fluent-funnel-chart: extend(
     $material-funnel-chart,
     (
@@ -61,9 +61,9 @@ $fluent-funnel-chart: extend(
 );
 
 /// Generates a bootstrap funnel-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-funnel-chart
+/// @requires $material-funnel-chart
 $bootstrap-funnel-chart: extend(
     $material-funnel-chart,
     (
@@ -74,9 +74,9 @@ $bootstrap-funnel-chart: extend(
 );
 
 /// Generates an indigo funnel-chart schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-funnel-chart
+/// @requires $material-funnel-chart
 $indigo-funnel-chart: extend(
     $material-funnel-chart,
     (

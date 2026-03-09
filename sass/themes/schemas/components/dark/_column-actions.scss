@@ -9,7 +9,7 @@
 
 /// Generates a base dark column-actions schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-column-actions: (
     _meta: (
         name: 'column-actions',
@@ -18,21 +18,21 @@ $dark-base-column-actions: (
 );
 
 /// Generates a dark material column actions schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-column-actions
 $dark-material-column-actions: extend($material-column-actions, $dark-base-column-actions);
 
 /// Generates a dark fluent column actions schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-column-actions
 $dark-fluent-column-actions: extend($fluent-column-actions, $dark-base-column-actions);
 
 /// Generates a dark bootstrap column actions schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-column-actions
 $dark-bootstrap-column-actions: extend($bootstrap-column-actions, $dark-base-column-actions);
 
 /// Generates a dark indigo column actions schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-column-actions
 $dark-indigo-column-actions: extend($indigo-column-actions, $dark-base-column-actions);

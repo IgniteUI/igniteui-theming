@@ -36,12 +36,12 @@
 /// @param {Number} $time-item-size [null] - The height of the time item.
 /// @param {Color} $divider-color [null] - The color for the actions area divider. Auto-derived from border-color.
 /// @param {Color} $border-color [null] - The border color around the time picker. Auto-derived from background-color.
-/// @param {box-shadow} $modal-shadow [null] - The custom shadow to be used for the time picker in modal mode.
-/// @param {box-shadow} $dropdown-shadow [null] - The custom shadow to be used for the time picker in dropdown mode.
+/// @param {List} $modal-shadow [null] - The custom shadow to be used for the time picker in modal mode.
+/// @param {List} $dropdown-shadow [null] - The custom shadow to be used for the time picker in dropdown mode.
 /// @param {List} $border-radius [null] - The border radius used for the outline of the picker.
 /// @param {List} $active-item-border-radius [null] - The border radius used for the outline of the currently active item (hours, minutes, AM/PM).
 /// @requires $light-material-schema
-/// @example scss Change the background and text colors in  time picker
+/// @example scss - Change the background and text colors in  time picker
 ///   $my-time-picker-theme: time-picker-theme(
 ///     $text-color: white,
 ///     $background-color: black
