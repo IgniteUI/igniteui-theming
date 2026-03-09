@@ -403,7 +403,7 @@
     }
 
     @if not($inactive-color) and $content-background {
-        $inactive-color: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.5);
+        $inactive-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
     }
 
     @if not($weekday-color) and $inactive-color {
@@ -411,11 +411,11 @@
     }
 
     @if not($week-number-background) and $content-background {
-        $week-number-background: hsla(from var(--content-background) h s calc(l * 0.8));
+        $week-number-background: hsl(from var(--content-background) h s calc(l * 0.8));
     }
 
     @if not($week-number-foreground) and $week-number-background {
-        $week-number-foreground: hsla(from adaptive-contrast(var(--week-number-background)) h s l / 0.5);
+        $week-number-foreground: hsl(from adaptive-contrast(var(--week-number-background)) h s l / 0.5);
     }
 
     // base end
@@ -427,7 +427,7 @@
         }
 
         @if not($weekday-color) and $header-background {
-            $weekday-color: hsla(from adaptive-contrast(var(--header-background)) h s l / 0.8);
+            $weekday-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
         }
 
         @if not($week-number-foreground) and not($week-number-background) and $header-background {
@@ -450,7 +450,7 @@
     }
 
     @if not($picker-hover-foreground) and $picker-background {
-        $picker-hover-foreground: hsla(from adaptive-contrast(var(--picker-background)) h s l / 0.8);
+        $picker-hover-foreground: hsl(from adaptive-contrast(var(--picker-background)) h s l / 0.8);
     }
 
     @if not($picker-focus-foreground) and $picker-hover-foreground {
@@ -501,11 +501,11 @@
     // date current start
     @if $variant == 'indigo' {
         @if not($date-current-background) and $header-background {
-            $date-current-background: hsla(from var(--header-background) h s l / 0.4);
+            $date-current-background: hsl(from var(--header-background) h s l / 0.4);
         }
 
         @if not($date-current-border-color) and $date-current-background {
-            $date-current-border-color: hsla(from var(--date-current-background) h s l / 0.6);
+            $date-current-border-color: hsl(from var(--date-current-background) h s l / 0.6);
         }
 
         @if not($date-current-hover-background) and $date-current-background {
@@ -961,7 +961,7 @@
         }
     } @else {
         @if not($ym-selected-background) and $header-background {
-            $ym-selected-background: hsla(from var(--header-background) h s l / 0.3);
+            $ym-selected-background: hsl(from var(--header-background) h s l / 0.3);
         }
 
         @if not($ym-current-background) and $date-selected-background {
@@ -973,7 +973,7 @@
         }
 
         @if not($ym-selected-hover-background) and $ym-selected-background {
-            $ym-selected-hover-background: hsla(from dynamic-shade(var(--ym-selected-background)) h s l / 0.5);
+            $ym-selected-hover-background: hsl(from dynamic-shade(var(--ym-selected-background)) h s l / 0.5);
         }
 
         @if not($ym-selected-current-outline-color) and $ym-selected-current-foreground {
@@ -1062,11 +1062,11 @@
         }
     } @else {
         @if not($date-selected-range-background) and $date-selected-background {
-            $date-selected-range-background: hsla(from var(--date-selected-background) h s l / 0.24);
+            $date-selected-range-background: hsl(from var(--date-selected-background) h s l / 0.24);
         }
 
         @if not($date-range-preview-border-color) and $date-selected-background {
-            $date-range-preview-border-color: hsla(from var(--date-selected-background) h s l / 0.5);
+            $date-range-preview-border-color: hsl(from var(--date-selected-background) h s l / 0.5);
         }
 
         @if not($date-selected-current-range-hover-foreground) and $date-selected-current-range-hover-background {
@@ -1102,25 +1102,23 @@
 
     @if not($date-selected-range-hover-foreground) and $date-selected-range-hover-background {
         $date-selected-range-hover-foreground: adaptive-contrast(
-            hsla(from var(--date-selected-range-hover-background) h s l / 1)
+            hsl(from var(--date-selected-range-hover-background) h s l / 1)
         );
     }
 
     @if not($date-selected-range-focus-foreground) and $date-selected-range-focus-background {
         $date-selected-range-focus-foreground: adaptive-contrast(
-            hsla(from var(--date-selected-range-focus-background) h s l / 1)
+            hsl(from var(--date-selected-range-focus-background) h s l / 1)
         );
     }
 
     @if $variant == 'indigo' {
         @if not($date-selected-current-range-background) and $date-selected-background {
-            $date-selected-current-range-background: hsla(
-                from var(--date-selected-background) h s calc(l * 0.9) / 0.12
-            );
+            $date-selected-current-range-background: hsl(from var(--date-selected-background) h s calc(l * 0.9) / 0.12);
         }
 
         @if not($date-selected-current-range-hover-background) and $date-selected-background {
-            $date-selected-current-range-hover-background: hsla(
+            $date-selected-current-range-hover-background: hsl(
                 from var(--date-selected-background) h s calc(l * 0.9) / 0.24
             );
         }
@@ -1153,11 +1151,11 @@
     // date range end
 
     @if not($date-disabled-foreground) and $content-background {
-        $date-disabled-foreground: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.3);
+        $date-disabled-foreground: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.3);
     }
 
     @if not($date-disabled-range-foreground) and $date-selected-range-background {
-        $date-disabled-range-foreground: hsla(from adaptive-contrast(var(--content-background)) h s l / 0.3);
+        $date-disabled-range-foreground: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.3);
     }
 
     // Selected + special

@@ -121,11 +121,11 @@
     }
 
     @if not($item-disabled-text-color) and $background {
-        $item-disabled-text-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.38);
+        $item-disabled-text-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.38);
     }
 
     @if not($item-disabled-icon-color) and $background {
-        $item-disabled-icon-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.38);
+        $item-disabled-icon-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.38);
     }
 
     @if not($shadow) {

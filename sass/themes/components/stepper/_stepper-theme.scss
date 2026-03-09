@@ -211,7 +211,7 @@
     }
 
     @if not($indicator-background) and $step-background {
-        $indicator-background: hsla(from adaptive-contrast(var(--step-background)) h s l / 0.6);
+        $indicator-background: hsl(from adaptive-contrast(var(--step-background)) h s l / 0.6);
     }
 
     @if not($indicator-outline) and $indicator-background {
