@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} step-background [transparent] - The background of the step header.
 /// @prop {Map} title-color [color: ('gray', 900)] - The text color of the step title.
 /// @prop {Map} title-hover-color [color: ('gray', 900)] - The text color of the step title on hover.
@@ -325,7 +325,7 @@ $light-stepper: (
 );
 
 /// Generates a material stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} indicator-background [color: ('gray', 400)] - The background color of the incomplete step indicator.
 /// @prop {Map} indicator-color [contrast-color: ('gray', 400)] - The text color of the incomplete step indicator.
 /// @prop {Map} complete-indicator-background [color: ('gray', 900)] - The background color of the completed step indicator.
@@ -351,7 +351,7 @@ $light-stepper: (
 /// @prop {Map} current-step-focus-background [color: ('gray', 200)] - The background of the current step header on hover.
 /// @prop {Map} complete-step-focus-background [color: ('gray', 200)] - The background of the complete step header on hover.
 /// @prop {Map} disabled-indicator-background [color: ('gray', 200)] - The background color of the disabled step indicator.
-/// @requires {Map} $light-stepper
+/// @requires $light-stepper
 $material-stepper: extend(
     $light-stepper,
     (
@@ -512,7 +512,7 @@ $material-stepper: extend(
 );
 
 /// Generates a fluent stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} indicator-outline [transparent] - The outline color of the incomplete step indicator.
 /// @prop {Map} indicator-color [color: ('gray', 900)] - The text color of the incomplete step indicator.
 /// @prop {Map} complete-indicator-background [color: ('gray', 300)] - The background color of the completed step indicator.
@@ -529,7 +529,7 @@ $material-stepper: extend(
 /// @prop {Color} disabled-indicator-outline [transparent] - The outline color of the disabled step indicator.
 /// @prop {List} border-radius-indicator [(rem(2px), rem(0), rem(100px))] - The indicator border radius.
 /// @prop {List} border-radius-step-header [(rem(2px), rem(0), rem(100px))] - The header border radius.
-/// @requires {Map} $light-stepper
+/// @requires $light-stepper
 $fluent-stepper: extend(
     $light-stepper,
     (
@@ -628,7 +628,7 @@ $fluent-stepper: extend(
 );
 
 /// Generates a bootstrap stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} indicator-color [color: ('primary', 600)] - The text color of the incomplete step indicator.
 /// @prop {Map} indicator-outline [color: ('gray', 400)] - The outline color of the incomplete step indicator.
 /// @prop {Map} disabled-indicator-outline [color: ('gray', 300)] - The outline color of the disabled step indicator.
@@ -652,7 +652,7 @@ $fluent-stepper: extend(
 /// @prop {Map} complete-step-focus-background [color: ('gray', 300, .5)] - The background of the complete step header on hover.
 /// @prop {List} border-radius-indicator [(rem(2px), rem(0), rem(100px))] - The indicator border radius.
 /// @prop {List} border-radius-step-header [(rem(2px), rem(0), rem(100px))] - The header border radius.
-/// @requires {Map} $light-stepper
+/// @requires $light-stepper
 $bootstrap-stepper: extend(
     $light-stepper,
     (
@@ -811,7 +811,7 @@ $bootstrap-stepper: extend(
 );
 
 /// Generates an indigo stepper schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} complete-indicator-background [color: ('gray', 600)] - The background color of the completed step indicator.
 /// @prop {Color} complete-indicator-outline [transparent] - The outline color of the completed step indicator.
 /// @prop {Map} complete-indicator-color [contrast-color: ('gray', 900)] - The color of the completed step indicator.

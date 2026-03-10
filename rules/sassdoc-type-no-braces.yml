@@ -1,0 +1,15 @@
+id: sassdoc-type-no-braces
+language: sassdoc
+severity: warning
+message: '@type does not use braces — write @type $INNER, not @type {$INNER}'
+transform:
+  INNER:
+    replace:
+      source: $MATCH
+      replace: '^@type\s*\{(.*)\}\s*$'
+      by: '$1'
+rule:
+  kind: ERROR
+  regex: '^@type\s*\{'
+  pattern: $MATCH
+fix: '@type $INNER'

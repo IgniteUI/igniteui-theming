@@ -8,7 +8,7 @@
 ////
 
 /// Generates a light action-strip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} icon-color ["'currentColor'"] - The color used for the actions icons.
 /// @prop {Map} background [color: ('gray', 100, .38)] - The color used for the action strip component content background.
 /// @prop {Map} actions-background [color: ('gray', 200)] - The color used for actions background.
@@ -47,9 +47,9 @@ $light-action-strip: extend(
 );
 
 /// Generates a material action strip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} actions-border-radius [(rem(24px), rem(0), rem(24px))] - The border radius used for action strip actions container.
-/// @requires {Map} $light-action-strip
+/// @requires $light-action-strip
 $material-action-strip: extend(
     $light-action-strip,
     (
@@ -68,9 +68,9 @@ $material-action-strip: extend(
 );
 
 /// Generates a fluent action strip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} actions-border-radius [(rem(0), rem(0), rem(24px))] - The border radius used for action strip actions container.
-/// @requires {Map} $light-action-strip
+/// @requires $light-action-strip
 $fluent-action-strip: extend(
     $light-action-strip,
     (
@@ -89,9 +89,9 @@ $fluent-action-strip: extend(
 );
 
 /// Generates a bootstrap action strip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} actions-border-radius [(rem(4px), rem(0), rem(24px))] - The border radius used for action strip actions container.
-/// @requires {Map} $light-action-strip
+/// @requires $light-action-strip
 $bootstrap-action-strip: extend(
     $light-action-strip,
     (
@@ -110,11 +110,11 @@ $bootstrap-action-strip: extend(
 );
 
 /// Generates an indigo action strip schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} icon-color [contrast-color: 'primary'] - The color used for the actions icons.
 /// @prop {Map} actions-background [color: ('primary')] - The color used for actions background.
 /// @prop {List} actions-border-radius [(rem(3px), rem(0), rem(24px))] - The border radius used for action strip actions container.
-/// @requires {Map} $light-action-strip
+/// @requires $light-action-strip
 $indigo-action-strip: extend(
     $light-action-strip,
     (

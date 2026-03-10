@@ -1,4 +1,4 @@
-// stylelint-disable value-no-vendor-prefix
+// stylelint-disable property-no-deprecated
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:meta';
@@ -48,7 +48,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// rewritten to global token references.
 /// @access private
 /// @param {Map} $theme - A theme map with ignored keys already removed.
-/// @return {List} - A list of emittable key names.
+/// @return {List} A list of emittable key names.
 @function _collect-emittable-keys($theme) {
     $keys: ();
 
@@ -67,7 +67,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @param {*} $value - The original theme property value.
 /// @param {String} $name - The component name (e.g., 'avatar').
 /// @param {List} $keys - The list of emittable keys whose local refs should be rewritten.
-/// @return {String} - The value with all local var references rewritten to global token names.
+/// @return {String} The value with all local var references rewritten to global token names.
 @function _globalize-value($value, $name, $keys) {
     $result: '#{$value}';
 
@@ -182,7 +182,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @param {String} $mode ['global'] - The generation mode: 'global' for universal tokens, 'scoped' for component-level CSS variables.
 /// @param {String} $scope [null] - Only used in 'scoped' mode. Overrides the selector from the theme map.
 /// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating tokens.
-/// @example scss Generate universal avatar tokens (global mode)
+/// @example scss - Generate universal avatar tokens (global mode)
 ///   :root {
 ///     @include tokens(avatar-theme($background: red));
 ///   }
@@ -192,7 +192,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///   //   --ig-avatar-color: hsla(from color(from var(--ig-avatar-background) ...) ...);
 ///   //   ...
 ///   // }
-/// @example scss Override size with a concrete value (global mode)
+/// @example scss - Override size with a concrete value (global mode)
 ///   :root {
 ///     @include tokens(avatar-theme($size: 2rem));
 ///   }
@@ -201,9 +201,9 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///   //   --ig-avatar-size: 2rem;
 ///   //   ...
 ///   // }
-/// @example scss Generate scoped component tokens (scoped mode)
+/// @example scss - Generate scoped component tokens (scoped mode)
 ///   @include tokens(avatar-theme($schema: $schema), $mode: 'scoped');
-/// @example scss Generate scoped component tokens with a custom scope
+/// @example scss - Generate scoped component tokens with a custom scope
 ///   @include tokens(dialog-theme($schema: $schema), $mode: 'scoped', $scope: '.igx-dialog');
 @mixin tokens($theme, $mode: 'global', $scope: null, $ignored: $ignored-keys) {
     @if $mode == 'scoped' {
@@ -236,7 +236,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @param {map} $theme - The component theme to be used.
 /// @param {map} $scope [null] - The CSS variables scope to be used. (optional)
 /// @requires {mixin} tokens
-/// @example scss Convert grid theme colors to css variables
+/// @example scss - Convert grid theme colors to css variables
 ///   $my-grid-theme grid-theme(
 ///     $header-background: red,
 ///     $content-background: #222
@@ -267,7 +267,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @param {number|string} $lines - The number of lines to show
 /// @param {Boolean} $inline - Sets whether an element displays inline-box or box
 /// @param {Boolean} $vertical - Sets whether an element lays out its contents horizontally or vertically
-/// @example scss Truncates text after the fourth line
+/// @example scss - Truncates text after the fourth line
 ///    @include line-clamp(4, true, true);
 @mixin line-clamp($lines, $inline, $vertical) {
     display: if($inline, -webkit-inline-box, -webkit-box);

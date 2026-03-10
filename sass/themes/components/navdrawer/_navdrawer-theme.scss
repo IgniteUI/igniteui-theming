@@ -40,7 +40,7 @@
 /// @param {List} $border-radius [null] - The border radius used for the navdrawer.
 /// @param {List} $item-border-radius [null] - The border radius used for the navdrawer item.
 /// @requires $light-material-schema
-/// @example scss Change the background and item colors
+/// @example scss - Change the background and item colors
 ///   $navdrawer-theme: navdrawer-theme(
 ///     $background: #2d313a,
 ///     $item-active-background: #ecc256,
@@ -121,11 +121,11 @@
     }
 
     @if not($item-disabled-text-color) and $background {
-        $item-disabled-text-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.38);
+        $item-disabled-text-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.38);
     }
 
     @if not($item-disabled-icon-color) and $background {
-        $item-disabled-icon-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.38);
+        $item-disabled-icon-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.38);
     }
 
     @if not($shadow) {

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark query builder schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} subquery-header-background [color: ('gray', 50)] - The background color of the subquery header.
 /// @prop {Map} subquery-border-color [color: ('gray', 200)] - The border color of the query block.
 /// @prop {Map} separator-color [color: ('gray', 300)] - The separator color of the query block.
@@ -47,7 +47,7 @@ $dark-query-builder: (
 );
 
 /// Generates a dark material query builder schema.
-/// @type {Map}
+/// @type Map
 /// @see $material-query-builder
 /// @requires $material-query-builder
 /// @requires $dark-query-builder
@@ -78,7 +78,7 @@ $dark-bootstrap-query-builder: extend(
 );
 
 /// Generates a dark indigo query builder schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('gray', 50)] - The background color of the query builder.
 /// @prop {Map} header-background [color: ('gray', 50)] - The background color of the query builder header.
 /// @prop {Map} subquery-header-background [contrast-color: ('gray', 50, .05)] - The background color of the subquery header.

@@ -1,0 +1,13 @@
+id: sassdoc-require-needs-reference
+language: sassdoc
+severity: warning
+message: '@require/@requires must include a reference, e.g. @requires {mixin} my-mixin'
+rule:
+  any:
+    - kind: tag_require
+      not:
+        has:
+          kind: see_reference
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@requires?\s*$'

@@ -1,0 +1,13 @@
+id: sassdoc-type-needs-value
+language: sassdoc
+severity: warning
+message: '@type must include a type, e.g. @type Map or @type String | Number'
+rule:
+  any:
+    - kind: tag_type
+      not:
+        has:
+          kind: type_name
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@type\s*$'

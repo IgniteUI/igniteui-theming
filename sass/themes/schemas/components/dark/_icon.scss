@@ -10,7 +10,7 @@
 
 /// Generates a base dark icon schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-icon: (
     _meta: (
         name: 'icon',
@@ -19,12 +19,12 @@ $dark-base-icon: (
 );
 
 /// Generates a dark material icon schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-icon
 $dark-material-icon: extend($material-icon, $dark-base-icon);
 
 /// Generates a dark fluent icon schema.
-/// @type {Map}
+/// @type Map
 /// @property {Map} disabled-color [color: ('gray' 500)] - The icon color.
 /// @requires $fluent-icon
 $dark-fluent-icon: extend(
@@ -41,11 +41,11 @@ $dark-fluent-icon: extend(
 );
 
 /// Generates a dark bootstrap icon schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-icon
 $dark-bootstrap-icon: extend($bootstrap-icon, $dark-base-icon);
 
 /// Generates a dark indigo icon schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-icon
 $dark-indigo-icon: extend($indigo-icon, $dark-base-icon);

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark card schema.
-/// @type {Map}
+/// @type Map
 $dark-base-card: (
     _meta: (
         name: 'card',
@@ -17,7 +17,7 @@ $dark-base-card: (
 );
 
 /// Generates a dark material card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} outline-color [color: ('gray', 400, .38)] - The outline color of an outlined type card.
 /// @requires $material-card
 /// @requires $dark-base-card
@@ -36,7 +36,7 @@ $dark-material-card: extend(
 );
 
 /// Generates a dark fluent card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} actions-text-color [color: ('primary', 300)] - The text color of the card buttons.
 /// @requires $fluent-card
 /// @requires $dark-base-card
@@ -54,13 +54,13 @@ $dark-fluent-card: extend(
 );
 
 /// Generates a dark bootstrap card schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-card
 /// @requires $dark-base-card
 $dark-bootstrap-card: extend($bootstrap-card, $dark-base-card);
 
 /// Generates a dark indigo card schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('gray', 50)] - The card background color.
 /// @prop {Map} outline-color [color: ('gray', 100)] - The outline color of an outlined type card.
 /// @prop {Map} header-text-color [contrast-color: ('gray', 50, .9)] - The text color of the card title.

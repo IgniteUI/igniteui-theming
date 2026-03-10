@@ -9,7 +9,7 @@
 ////
 
 /// Generates a light dialog schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: 'surface'] - The dialog background color.
 /// @prop {Map} title-color [color: ('gray', 900)] - The dialog title text color.
 /// @prop {Map} message-color [color: ('gray', 600)] - The dialog message text color.
@@ -18,11 +18,8 @@
 /// @prop {Number} elevation [24] - The elevation level, between 0-24, to be used for the dialog.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(36px))] - The border radius used for dialog.
 /// @prop {Number} default-size [2] - The default size used for the dialog component.
-/// @prop {Map} typography [
-///  title: (value: 'h5'),
-///  content: (value: 'body-1')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-dialog
+/// @prop {Map} typography [title: (value: 'h5'), content: (value: 'body-1')] - The typography styles used for the component.
+/// @requires $default-elevation-dialog
 $light-dialog: extend(
     $default-elevation-dialog,
     (
@@ -81,12 +78,9 @@ $light-dialog: extend(
 );
 
 /// Generates a material dialog schema.
-/// @type {Map}
-/// @prop {Map} typography [
-///  title: (value: 'h6'),
-///  content: (value: 'body-1')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-dialog
+/// @type Map
+/// @prop {Map} typography [title: (value: 'h6'), content: (value: 'body-1')] - The typography styles used for the component.
+/// @requires $light-dialog
 $material-dialog: extend(
     $light-dialog,
     (
@@ -105,14 +99,11 @@ $material-dialog: extend(
 );
 
 /// Generates a fluent dialog schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(36px))] - The border radius used for dialog.
 /// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
-/// @prop {Map} typography [
-///  title: (value: 'h6'),
-///  content: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-dialog
+/// @prop {Map} typography [title: (value: 'h6'), content: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-dialog
 $fluent-dialog: extend(
     $light-dialog,
     (
@@ -144,11 +135,11 @@ $fluent-dialog: extend(
 );
 
 /// Generates a bootstrap dialog schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color for dialog component.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the dialog.
-/// @requires {Map} $light-dialog
-/// @requires {Map} $bootstrap-elevation-dialog
+/// @requires $light-dialog
+/// @requires $bootstrap-elevation-dialog
 $bootstrap-dialog: extend(
     $light-dialog,
     $bootstrap-elevation-dialog,
@@ -166,10 +157,10 @@ $bootstrap-dialog: extend(
 );
 
 /// Generates an indigo dialog schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} message-color [color: ('gray', 700)] - The dialog message text color.
 /// @prop {List} border-radius [(rem(10px), rem(0), rem(36px))] - The border radius used for dialog.
-/// @requires {Map} $light-dialog
+/// @requires $light-dialog
 $indigo-dialog: extend(
     $light-dialog,
     (

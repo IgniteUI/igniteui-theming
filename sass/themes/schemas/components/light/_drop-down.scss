@@ -11,7 +11,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a light drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color used for drop-down component.
 /// @prop {Map} background-color [color: 'surface'] - The drop-down background color.
 /// @prop {Map} header-text-color [color: ('secondary', 500)] - The drop-down header text color.
@@ -32,12 +32,8 @@
 /// @prop {List} item-border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the drop-down items.
 /// @prop {List} size [(rem(28px), rem(32px), rem(40px))] - The size used for the dropdown item height.
 /// @prop {Number} default-size [2] - The default size used for the drop down component.
-/// @prop {Map} typography [
-///   header: (value: 'overline'),
-///   item: (value: 'body-2'),
-///   select-item: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-drop-down
+/// @prop {Map} typography [header: (value: 'overline'), item: (value: 'body-2'), select-item: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $default-elevation-drop-down
 $light-drop-down: extend(
     $default-elevation-drop-down,
     (
@@ -154,7 +150,7 @@ $light-drop-down: extend(
 );
 
 /// Generates a material drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} selected-item-background [color: ('secondary', 100)] - The drop-down selected item background color.
 /// @prop {Map} selected-item-text-color [contrast-color: ('secondary', 100)] - The drop-down selected item text color.
 /// @prop {Map} selected-item-icon-color [contrast-color: ('secondary', 100)] - The drop-down selected item icon color.
@@ -163,8 +159,8 @@ $light-drop-down: extend(
 /// @prop {Map} selected-hover-item-icon-color [contrast-color: ('secondary', 200)] - The drop-down selected item hover icon color.
 /// @prop {Map} selected-focus-item-background [color: ('secondary', 200)] - The drop-down selected item focus background color.
 /// @prop {Map} selected-focus-item-text-color [contrast-color: ('secondary', 200)] - The drop-down selected item focus text color.
-/// @requires {Map} $light-drop-down
-/// @requires {Map} $default-elevation-drop-down
+/// @requires $light-drop-down
+/// @requires $default-elevation-drop-down
 $material-drop-down: extend(
     $light-drop-down,
     $default-elevation-drop-down,
@@ -225,7 +221,7 @@ $material-drop-down: extend(
 );
 
 /// Generates a fluent drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focused-item-background [color: 'surface'] - The drop-down focused item background color.
 /// @prop {Map} selected-item-background [color: ('gray', 200)] - The drop-down selected item background color.
 /// @prop {Map} selected-item-text-color [color: ('gray', 900)] - The drop-down selected item text color.
@@ -238,13 +234,9 @@ $material-drop-down: extend(
 /// @prop {Map} border-color [color: ('gray', 700)] - The border color used for the drop-down items on focus state.
 /// @prop {Number} elevation [3] - The elevation level, between 0-24, to be used for the drop-down shadow.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for drop-down component.
-/// @prop {Map} typography [
-///   header: (value: 'subtitle-2'),
-///   item: (value: 'body-2'),
-///   select-item: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-drop-down
-/// @requires {Map} $fluent-elevation-drop-down
+/// @prop {Map} typography [header: (value: 'subtitle-2'), item: (value: 'body-2'), select-item: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-drop-down
+/// @requires $fluent-elevation-drop-down
 $fluent-drop-down: extend(
     $light-drop-down,
     $fluent-elevation-drop-down,
@@ -333,7 +325,7 @@ $fluent-drop-down: extend(
 );
 
 /// Generates a bootstrap drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [color: ('gray', 700)] - The drop-down header text color.
 /// @prop {Map} hover-item-background [color: ('gray', 200)] - The drop-down hover item background color.
 /// @prop {Map} focused-item-background [color: ('gray', 200)] - The drop-down focused item background color.
@@ -347,8 +339,8 @@ $fluent-drop-down: extend(
 /// @prop {Map} disabled-item-text-color [color: ('gray', 400)] - The drop-down disabled item text color.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the drop-down shadow.
 /// @prop {Number} border-width [1px] - The border width used for drop-down component.
-/// @requires {Map} $light-drop-down
-/// @requires {Map} $bootstrap-elevation-drop-down
+/// @requires $light-drop-down
+/// @requires $bootstrap-elevation-drop-down
 $bootstrap-drop-down: extend(
     $light-drop-down,
     $bootstrap-elevation-drop-down,
@@ -427,7 +419,7 @@ $bootstrap-drop-down: extend(
 );
 
 /// Generates an indigo drop-down schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-color [contrast-color: ('gray', 900)] - The drop-down background color.
 /// @prop {Map} header-text-color [color: ('gray', 600)] - The drop-down header text color.
 /// @prop {Map} item-icon-color [color: ('gray', 600)] - The drop-down item icon color.
@@ -450,8 +442,8 @@ $bootstrap-drop-down: extend(
 /// @prop {List} item-border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for the drop-down items.
 /// @prop {Number} border-width [1px] - The border width used for drop-down component.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the dropdown item height.
-/// @requires {Map} $light-drop-down
-/// @requires {Map} $indigo-elevation-drop-down
+/// @requires $light-drop-down
+/// @requires $indigo-elevation-drop-down
 $indigo-drop-down: extend(
     $light-drop-down,
     $indigo-elevation-drop-down,

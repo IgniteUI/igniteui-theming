@@ -9,7 +9,7 @@
 ////
 
 /// Generates a base light time-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [color: ('gray', 900)] - The text color of an open time picker.
 /// @prop {Map} hover-text-color [color: ('primary', 500)] - The hover text color of an open time picker.
 /// @prop {Map} selected-text-color [color: ('primary', 500)] -  The text color of a selected item in time picker.
@@ -24,11 +24,8 @@
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
 /// @prop {List} time-item-size [(rem(28px), rem(32px), rem(36px))] - The height of the time item.
 /// @prop {Number} default-size [2] - the default size.
-/// @prop {Map} typography [
-///   header-hour: (value: 'h4'),
-///   selected-time: (value: 'h5')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $default-elevation-time-picker
+/// @prop {Map} typography [header-hour: (value: 'h4'), selected-time: (value: 'h5')] - The typography styles used for the component.
+/// @requires $default-elevation-time-picker
 $light-time-picker: extend(
     $default-elevation-time-picker,
     (
@@ -124,7 +121,7 @@ $light-time-picker: extend(
 );
 
 /// Generates a light material time-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-background [color: ('secondary', 500)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [contrast-color: ('secondary', 500)] - The header hour text color of a time picker.
 /// @prop {Map} hover-text-color [color: ('secondary', 500)] - The hover text color of an open time picker.
@@ -132,7 +129,7 @@ $light-time-picker: extend(
 /// @prop {Map} active-item-foreground [contrast-color: ('secondary', 500)] - The foreground color for current item in focused column inside the time picker.
 /// @prop {Map} active-item-background [color: ('secondary', 500)] - The background color for current item in focused column inside the time picker.
 /// @prop {List} active-item-border-radius [(rem(15px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
-/// @requires {Map} $light-time-picker
+/// @requires $light-time-picker
 $material-time-picker: extend(
     $light-time-picker,
     (
@@ -193,7 +190,7 @@ $material-time-picker: extend(
 );
 
 /// Generates a fluent time-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-background [color: ('primary', 500)] - The header background color of a time picker.
 /// @prop {Map} header-hour-text-color [contrast-color: ('primary', 500)] - The header hour text color of a time picker.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(20px))] - The border radius used for the overall shape of the time-picker.
@@ -248,7 +245,7 @@ $fluent-time-picker: extend(
 );
 
 /// Generates a bootstrap time-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} selected-text-color [color: ('primary', 600)] -  The text color of a selected item in time picker.
 /// @prop {Map} hover-text-color [color: ('primary', 600)] - The hover text color of an open time picker.
 /// @prop {Map} header-background [color: ('gray', 100)] - The header background color of a time picker.
@@ -257,10 +254,7 @@ $fluent-time-picker: extend(
 /// @prop {Map} divider-color [color: ('gray', 300)] - The divider color of the time picker.
 /// @prop {Map} active-item-background [color: ('primary', 600)] - The background color for current item in focused column inside the time picker.
 /// @prop {List} active-item-border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the highlight of the active item in the time-picker.
-/// @prop {Map} typography [
-///   header-hour: (value: 'h4'),
-///   selected-time: (value: 'h4')
-/// ] - The typography styles used for the component.
+/// @prop {Map} typography [header-hour: (value: 'h4'), selected-time: (value: 'h4')] - The typography styles used for the component.
 /// @requires $light-time-picker
 $bootstrap-time-picker: extend(
     $light-time-picker,
@@ -338,7 +332,7 @@ $bootstrap-time-picker: extend(
 );
 
 /// Generates an indigo time-picker schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [color: ('gray', 800)] - The text color of an open time picker.
 /// @prop {Map} active-item-foreground [contrast-color: ('primary', 900)] - The foreground color for current item in focused column inside the time picker.
 /// @prop {Map} background-color [contrast-color: ('gray', 900)] - The time-picker panel background color.
@@ -348,10 +342,7 @@ $bootstrap-time-picker: extend(
 /// @prop {List} active-item-border-radius [(rem(32px), rem(0), rem(32px))] - The border radius used for the highlight of the active item in the time-picker.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border-color of the time picker.
 /// @prop {Map} divider-color [color: ('gray', 400)] - The divider color of the time picker.
-/// @prop {Map} typography [
-///   header-hour: (value: 'h5'),
-///   selected-time: (value: 'h6')
-/// ] - The typography styles used for the component.
+/// @prop {Map} typography [header-hour: (value: 'h5'), selected-time: (value: 'h6')] - The typography styles used for the component.
 /// @requires $light-time-picker
 $indigo-time-picker: extend(
     $light-time-picker,

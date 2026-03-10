@@ -10,7 +10,7 @@
 
 /// Generates a base dark rating schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-rating: (
     _meta: (
         name: 'rating',
@@ -19,12 +19,12 @@ $dark-base-rating: (
 );
 
 /// Generates a dark material rating schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-rating
 $dark-material-rating: extend($material-rating, $dark-base-rating);
 
 /// Generates a dark fluent rating schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} symbol-full-color [color: ('gray', 800)] - sets the color in selected state for the symbol when it is a plane text.
 /// @prop {Map} symbol-empty-color [color: ('gray', 400)] - sets the idle color for the symbol when it is a plane text.
 /// @prop {Map} disabled-full-symbol-color [color: ('warn', 900)] - sets the color for the symbol in selected/disabled state when it is a plane text.
@@ -62,7 +62,7 @@ $dark-fluent-rating: extend(
 );
 
 /// Generates a dark bootstrap rating schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-rating
 $dark-bootstrap-rating: extend($bootstrap-rating, $dark-base-rating);
 
@@ -73,7 +73,7 @@ $dark-bootstrap-rating: extend($bootstrap-rating, $dark-base-rating);
 /// @prop {Map} disabled-label-color [color: ('contrast-color', 50, .2)] - sets the color for the label in disabled state.
 /// @prop {Map} disabled-value-label [color: ('contrast-color', 50, .2)] - sets the color for the value in disabled state.
 /// @prop {Map} disabled-empty-symbol-color [color: ('gray', 300, .4)] - sets the idle color for the symbol in disabled state when it is a plane text.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-rating
 $dark-indigo-rating: extend(
     $indigo-rating,

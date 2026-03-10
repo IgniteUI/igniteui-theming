@@ -10,7 +10,7 @@
 
 /// Generates a base light pie chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-pie-chart: (
     _meta: (
         name: 'pie-chart',
@@ -19,7 +19,7 @@ $light-pie-chart: (
 );
 
 /// Generates a material pie chart schema.
-/// @type {Map}
+/// @type Map
 /// @property {List} brushes [series] - Defines the palette from which automatically assigned series colors are selected.
 /// @property {List} outlines [series] - Defines the palette from which automatically assigned series outline colors are selected.
 /// @property {Number} label-extent [30] - Sets the pixel amount by which the labels are offset from the edge of the slices.
@@ -55,8 +55,8 @@ $material-pie-chart: extend(
 );
 
 /// Generates a fluent pie chart schema.
-/// @type {Map}
-/// @requires {Map} $material-pie-chart
+/// @type Map
+/// @requires $material-pie-chart
 /// @see $material-pie-chart
 $fluent-pie-chart: extend(
     $material-pie-chart,
@@ -68,8 +68,8 @@ $fluent-pie-chart: extend(
 );
 
 /// Generates a bootstrap pie chart schema.
-/// @type {Map}
-/// @requires {Map} $material-pie-chart
+/// @type Map
+/// @requires $material-pie-chart
 /// @see $material-pie-chart
 $bootstrap-pie-chart: extend(
     $material-pie-chart,
@@ -81,8 +81,8 @@ $bootstrap-pie-chart: extend(
 );
 
 /// Generates an indigo pie chart schema.
-/// @type {Map}
-/// @requires {Map} $material-pie-chart
+/// @type Map
+/// @requires $material-pie-chart
 /// @see $material-pie-chart
 $indigo-pie-chart: extend(
     $material-pie-chart,

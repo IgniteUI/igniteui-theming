@@ -10,7 +10,7 @@
 
 /// Generates a base financial chart schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-financial-chart: (
     _meta: (
         name: 'financial-chart',
@@ -19,7 +19,7 @@ $light-financial-chart: (
 );
 
 /// Generates a material base chart schema.
-/// @type {Map}
+/// @type Map
 /// @prop {List} margin [null] - Sets the margin (top, right, bottom, left) of the chart content.
 /// @prop {String} title-alignment [null] - The horizontal alignment to use for the title.
 /// @prop {Color} title-text-color [null] - Sets the color of the chart title.
@@ -143,8 +143,8 @@ $material-financial-chart: extend(
 );
 
 /// Generates a fluent financial-chart schema.
-/// @type {Map}
-/// @requires {Map} $material-financial-chart
+/// @type Map
+/// @requires $material-financial-chart
 $fluent-financial-chart: extend(
     $material-financial-chart,
     (
@@ -155,8 +155,8 @@ $fluent-financial-chart: extend(
 );
 
 /// Generates a bootstrap financial-chart schema.
-/// @type {Map}
-/// @requires {Map} $material-financial-chart
+/// @type Map
+/// @requires $material-financial-chart
 $bootstrap-financial-chart: extend(
     $material-financial-chart,
     (
@@ -167,8 +167,8 @@ $bootstrap-financial-chart: extend(
 );
 
 /// Generates an indigo financial-chart schema.
-/// @type {Map}
-/// @requires {Map} $material-financial-chart
+/// @type Map
+/// @requires $material-financial-chart
 $indigo-financial-chart: extend(
     $material-financial-chart,
     (

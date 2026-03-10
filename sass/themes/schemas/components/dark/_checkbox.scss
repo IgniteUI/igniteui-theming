@@ -10,7 +10,7 @@
 
 /// Generates a base dark checkbox schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-checkbox: (
     _meta: (
         name: 'checkbox',
@@ -19,7 +19,7 @@ $dark-base-checkbox: (
 );
 
 /// Generates a dark material checkbox schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} error-color [color: ('error', 500)] - The border and fill colors in invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and fill colors in invalid state on hover.
 /// @requires $material-checkbox
@@ -44,7 +44,7 @@ $dark-material-checkbox: extend(
 );
 
 /// Generates a dark fluent checkbox schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} tick-color-hover [color: ('gray', 400)] - The checked mark color on hover when the control in unchecked.
 /// @prop {Map} focus-outline-color [color: ('gray', 400)] - The focus outlined color.
 /// @prop {Map} fill-color [color: ('primary', 300)] - The checked border and fill colors.
@@ -111,7 +111,7 @@ $dark-fluent-checkbox: extend(
 );
 
 /// Generates a dark bootstrap checkbox schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} focus-outline-color [color: ('primary', 900, 0.5)] - The focus outlined color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 900, 0.5)] - The focus outlined color for focused invalid state.
 /// @prop {Map} disabled-color [color: ('gray', 100)] - The disabled border color.
@@ -166,7 +166,7 @@ $dark-bootstrap-checkbox: extend(
 );
 
 /// Generates a dark indigo checkbox schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [color: ('gray', 900, .8)]- The text color used for the label text.
 /// @prop {Map} label-color-hover [color: ('gray', 900)]- The text color used for the label text on hover.
 /// @prop {Map} focus-outline-color [color: ('gray', 900, .2)] - The focus outlined color.

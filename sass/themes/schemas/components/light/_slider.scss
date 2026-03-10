@@ -10,7 +10,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a base light slider schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} track-color [color: ('secondary', 500)] - The color of the track.
 /// @prop {Color} track-step-color [white] - The color of the track steps.
 /// @prop {Number} track-step-size [rem(3px)] - The size of the track steps.
@@ -19,10 +19,7 @@
 /// @prop {Map} label-text-color [contrast-color: ('gray', 700)] - The text color of the bubble label.
 /// @prop {Map} tick-label-color [color: ('gray', 500)] - The color of the tick label.
 /// @prop {Map} tick-color [color: ('gray', 500)] - The background-color of the tick.
-/// @prop {Map} typography [
-///   ticks-label: (value: 'caption'),
-///   thumb-label: (value: 'caption')
-/// ] - The typography styles used for the component.
+/// @prop {Map} typography [ticks-label: (value: 'caption'), thumb-label: (value: 'caption')] - The typography styles used for the component.
 $light-slider: (
     track-color: (
         color: (
@@ -77,7 +74,7 @@ $light-slider: (
 );
 
 /// Generates a material slider schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} thumb-color [color: ('secondary', 500)] - The color of the thumb.
 /// @prop {Map} thumb-border-color [color: ('secondary', 500)] - The thumb border color.
 /// @prop {Map} thumb-border-hover-color [color: ('secondary', 500)] - The thumb border color when hovered.
@@ -90,7 +87,7 @@ $light-slider: (
 /// @prop {Map} base-track-hover-color [color: ('secondary', 500, .24)] - The base background color of the track on hover.
 /// @prop {Map} disabled-base-track-color [color: ('gray', 200)] - The base background color of the track when is disabled.
 /// @prop {Map} disabled-fill-track-color [color: ('gray', 400)] - The background color of the fill track when is disabled.
-/// @requires {Map} $light-slider
+/// @requires $light-slider
 $material-slider: extend(
     $light-slider,
     (
@@ -170,7 +167,7 @@ $material-slider: extend(
 );
 
 /// Generates a fluent slider schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} track-color [color: ('gray', 800)] - The color of the track.
 /// @prop {Map} track-hover-color [color: ('primary', 500)] - The color of the track on hover.
 /// @prop {Map} thumb-color [color: ('surface', 500)] - The color of the thumb.
@@ -184,7 +181,7 @@ $material-slider: extend(
 /// @prop {Map} base-track-hover-color [color: ('gray', 600)] - The base background color of the track on hover.
 /// @prop {Map} disabled-base-track-color [color: ('gray', 100)] - The base background color of the track when is disabled.
 /// @prop {Map} disabled-fill-track-color [color: ('gray', 500)] - The background color of the fill track when is disabled.
-/// @requires {Map} $light-slider
+/// @requires $light-slider
 $fluent-slider: extend(
     $light-slider,
     (
@@ -273,7 +270,7 @@ $fluent-slider: extend(
 );
 
 /// Generates a bootstrap slider schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} base-track-color [color: ('secondary', 500, .24)] - The base background color of the track.
 /// @prop {Map} base-track-hover-color [color: ('secondary', 500, .24)] - The base background color of the track on hover.
 /// @prop {Map} label-background-color [color: ('gray', 700)] - The background color of the bubble label.
@@ -284,7 +281,7 @@ $fluent-slider: extend(
 /// @prop {Map} thumb-focus-color [color: ('primary', 200)] - The focus outline color of the thumb.
 /// @prop {Map} disabled-thumb-color [color: ('gray', 400)] - The thumb color when its disabled.
 /// @prop {Map} disabled-base-track-color [color: ('gray', 200)] - The base background color of the track when is disabled.
-/// @requires {Map} $light-slider
+/// @requires $light-slider
 $bootstrap-slider: extend(
     $fluent-slider,
     (
@@ -357,7 +354,7 @@ $bootstrap-slider: extend(
 );
 
 /// Generates an indigo slider schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} track-step-color [color: ('gray', 900, 0.4)] - The color of the track steps.
 /// @prop {Number} track-step-size [rem(2px)] - The size of the track steps.
 /// @prop {Map} base-track-color [color: ('gray', 400)] - The base background color of the track.
@@ -377,11 +374,8 @@ $bootstrap-slider: extend(
 /// @prop {Map} thumb-disabled-border-color [color: ('primary', 50)] - The thumb border color when it's disabled.
 /// @prop {Map} disabled-base-track-color [color: ('gray', 900, 0.15)] - The base background color of the track when is disabled.
 /// @prop {Map} disabled-fill-track-color [color: ('primary', 50)] - The background color of the fill track when is disabled.
-/// @prop {Map} typography [
-///   ticks-label: (value: 'body-2'),
-///   thumb-label: (value: 'subtitle-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-slider
+/// @prop {Map} typography [ticks-label: (value: 'body-2'), thumb-label: (value: 'subtitle-2')] - The typography styles used for the component.
+/// @requires $light-slider
 $indigo-slider: extend(
     $light-slider,
     (

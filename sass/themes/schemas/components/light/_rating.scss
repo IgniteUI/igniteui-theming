@@ -10,7 +10,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a base light rating schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [color: ('gray', 900)] - sets the color for the label.
 /// @prop {Map} value-label [color: ('gray', 900)] - sets the color for the value label.
 /// @prop {Map} symbol-empty-color [color: ('gray', 600)] - sets the idle color for the symbol when it is a plane text.
@@ -92,9 +92,9 @@ $light-rating: (
 );
 
 /// Generates a material rating schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} value-label [color: ('gray', 700)] - sets the color for the value label.
-/// @requires {Map} $light-rating
+/// @requires $light-rating
 $material-rating: extend(
     $light-rating,
     (
@@ -111,12 +111,12 @@ $material-rating: extend(
 );
 
 /// Generates a fluent rating schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} symbol-empty-color [color: ('gray', 700)] - sets the idle color for the symbol when it is a plane text.
 /// @prop {Map} symbol-full-color [[color: ('warn', 900)] - sets the color in selected state for the symbol when it is a plane text.
 /// @prop {Map} disabled-empty-symbol-color [color: ('warn', 100)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} disabled-full-symbol-color [color: ('warn', 100)] - sets the color for the symbol in selected/disabled state when it is a plane text.
-/// @requires {Map} $light-rating
+/// @requires $light-rating
 $fluent-rating: extend(
     $light-rating,
     (
@@ -151,8 +151,8 @@ $fluent-rating: extend(
 );
 
 /// Generates a bootstrap rating schema.
-/// @type {Map}
-/// @requires {Map} $light-rating
+/// @type Map
+/// @requires $light-rating
 $bootstrap-rating: extend(
     $light-rating,
     (
@@ -163,7 +163,7 @@ $bootstrap-rating: extend(
 );
 
 /// Generates an indigo rating schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [color: ('gray', 800)] - sets the color for the label.
 /// @prop {Map} value-label [color: ('gray', 800)] - sets the color for the value label.
 /// @prop {Map} symbol-empty-color [color: ('gray', 600)] - sets the idle color for the symbol when it is a plane text.
@@ -173,7 +173,7 @@ $bootstrap-rating: extend(
 /// @prop {Map} disabled-empty-symbol-color [color: ('gray', 500, .4)] - sets the idle color for the symbol in disabled state when it is a plane text.
 /// @prop {Map} disabled-full-symbol-color [color: ('warn', 300, .4)] - sets the color for the symbol in selected/disabled state when it is a plane text.
 /// @prop {List} symbol-size [(rem(18px), rem(24px), rem(30px))] - the size of the symbols.
-/// @requires {Map} $light-rating
+/// @requires $light-rating
 $indigo-rating: extend(
     $light-rating,
     (

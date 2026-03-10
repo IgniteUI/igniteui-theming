@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light pivot data selector schema.
-/// @type {Map}
+/// @type Map
 $light-pivot-data-selector: (
     background: (
         color: 'surface',
@@ -27,8 +27,8 @@ $light-pivot-data-selector: (
 );
 
 /// Generates a material pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $light-pivot-data-selector
+/// @type Map
+/// @requires $light-pivot-data-selector
 $material-pivot-data-selector: extend(
     $light-pivot-data-selector,
     (
@@ -39,8 +39,8 @@ $material-pivot-data-selector: extend(
 );
 
 /// Generates a fluent pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $light-pivot-data-selector
+/// @type Map
+/// @requires $light-pivot-data-selector
 $fluent-pivot-data-selector: extend(
     $light-pivot-data-selector,
     (
@@ -51,8 +51,8 @@ $fluent-pivot-data-selector: extend(
 );
 
 /// Generates a bootstrap pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $light-pivot-data-selector
+/// @type Map
+/// @requires $light-pivot-data-selector
 $bootstrap-pivot-data-selector: extend(
     $light-pivot-data-selector,
     (
@@ -63,8 +63,8 @@ $bootstrap-pivot-data-selector: extend(
 );
 
 /// Generates a indigo pivot data selector schema.
-/// @type {Map}
-/// @requires {Map} $light-pivot-data-selector
+/// @type Map
+/// @requires $light-pivot-data-selector
 $indigo-pivot-data-selector: extend(
     $light-pivot-data-selector,
     (

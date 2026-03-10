@@ -9,7 +9,7 @@
 
 /// Generates a base dark validator schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-validator: (
     _meta: (
         name: 'validator',
@@ -18,22 +18,22 @@ $dark-base-validator: (
 );
 
 /// Generates a base dark validator schema.
-/// @type {Map}
+/// @type Map
 /// @requires $light-validator
 $dark-material-validator: extend($material-validator, $dark-base-validator);
 
 /// Generates a dark fluent validator schema.
-/// @type {Map}
+/// @type Map
 /// @requires $light-validator
 $dark-fluent-validator: extend($fluent-validator, $dark-base-validator);
 
 /// Generates a dark bootstrap validator schema.
-/// @type {Map}
+/// @type Map
 /// @requires $light-validator
 $dark-bootstrap-validator: extend($bootstrap-validator, $dark-base-validator);
 
 /// Generates a dark indigo validator schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} helper-text-color [contrast-color: ('gray', 50, .8)] - The color used for helper text.
 /// @prop {Map} text-error-color [contrast-color: ('gray', 50, .8)] - The color used for the error message.
 /// @requires $indigo-validator

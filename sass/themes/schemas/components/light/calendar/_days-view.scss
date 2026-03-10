@@ -9,7 +9,7 @@
 ////
 
 /// Generates a base light days-view schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} weekday-color [color: ('gray', 500)] - The foreground color of the weekday labels.
 /// @prop {Map} weekend-color [color: ('gray', 900)] - The foreground color of the weekend days.
 /// @prop {Map} inactive-color [color: ('gray', 500)] - The foreground color of the previous and next month dates.
@@ -200,7 +200,7 @@ $light-days-view: extend(
 );
 
 /// Generates a light material days-view schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} date-hover-background [color: ('gray', 100)] - The :hover background color of a date.
 /// @prop {Map} date-focus-background [color: ('gray', 100)] - The :focus background color of date.
 /// @prop {Map} date-current-foreground [color: ('gray', 900)] - The foreground color of the current date.
@@ -260,10 +260,7 @@ $light-days-view: extend(
 /// @prop {List} date-current-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the current date selection.
 /// @prop {Map} weekday-color [color: ('gray', 700)] - The foreground color of the weekday labels.
 /// @prop {Map} week-number-foreground [color: ('gray', 700)] - The foreground color of the week number column.
-/// @prop {Map} typography [
-///   weekday-label: (value: 'body-1'),
-///   content: (value: 'body-1')
-/// ] - The typography styles used for the component.
+/// @prop {Map} typography [weekday-label: (value: 'body-1'), content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-days-view
 /// @requires $material-base
 $material-days-view: extend(
@@ -635,7 +632,7 @@ $material-days-view: extend(
 );
 
 /// Generates a light fluent days-view schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} date-special-foreground [color: ('gray', 900)] - The foreground color of a special date.
 /// @prop {Map} date-special-hover-foreground [color: ('gray', 900)] - The foreground color of a special date.
 /// @prop {Map} date-special-focus-foreground [color: ('gray', 900)] - The foreground color of a special date.
@@ -714,10 +711,7 @@ $material-days-view: extend(
 /// @prop {Map} weekday-color [color: ('gray', 700)] - The foreground color of the weekday labels.
 /// @prop {Map} week-number-foreground [color: ('gray', 700)] - The foreground color of the week number column.
 /// @prop {Map} inactive-color [color: ('gray', 700)] - The foreground color of the previous and next month dates.
-/// @prop {Map} typography [
-///   weekday-label: (value: 'body-1'),
-///   content: (value: 'body-1')
-/// ] - The typography styles used for the component.
+/// @prop {Map} typography [weekday-label: (value: 'body-1'), content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-days-view
 /// @requires $fluent-base
 $fluent-days-view: extend(
@@ -1190,7 +1184,7 @@ $fluent-days-view: extend(
 );
 
 /// Generates a light bootstrap days-view schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} date-special-hover-background [color: ('gray', 200)] - The background color of a special date.
 /// @prop {Map} date-special-focus-background [color: ('gray', 200)] - The background color of a special date.
 /// @prop {Map} date-special-range-hover-background [color: ('gray', 200)] - The :hover background color of a special date in range selection.
@@ -1258,10 +1252,7 @@ $fluent-days-view: extend(
 /// @prop {List} date-special-border-radius [(rem(20px), rem(0), rem(20px))] - The border radius used for the special date selection.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for the calendar.
 /// @prop {List} week-number-border-radius [(rem(0), rem(0), rem(8px))] - The border radius used for the week numbers column.
-/// @prop {Map} typography [
-///   weekday-label: (value: 'body-2'),
-///   content: (value: 'body-1')
-/// ] - The typography styles used for the component.
+/// @prop {Map} typography [weekday-label: (value: 'body-2'), content: (value: 'body-1')] - The typography styles used for the component.
 /// @requires $light-days-view
 /// @requires $bootstrap-base
 $bootstrap-days-view: extend(
@@ -1655,7 +1646,7 @@ $bootstrap-days-view: extend(
 );
 
 /// Generates a light indigo days-view schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} weekend-color [color: ('gray', 800)] - The foreground color of the weekend days.
 /// @prop {Map} week-number-foreground [color: ('gray', 600)] - The foreground color of the week number column.
 /// @prop {Map} week-number-background [color: ('gray', 900, .05)] - The background color of the week number column.

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: 'surface'] - The list background color.
 /// @prop {Map} header-background [color: 'surface'] - The list header background color.
 /// @prop {Map} header-text-color [color: ('secondary', 500)] - The list header text color.
@@ -211,14 +211,9 @@ $light-list: (
 );
 
 /// Generates a material list schema.
-/// @type {Map}
-/// @prop {Map} typography [
-///   header: (value: 'overline'),
-///   item: (value: 'subtitle-1'),
-///   title: (value: 'subtitle-1'),
-///   subtitle: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-list
+/// @type Map
+/// @prop {Map} typography [header: (value: 'overline'),item: (value: 'subtitle-1'), title: (value: 'subtitle-1'), subtitle: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-list
 $material-list: extend(
     $light-list,
     (
@@ -243,17 +238,12 @@ $material-list: extend(
 );
 
 /// Generates a fluent list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [color: ('secondary', 700)] - The list header text color.
 /// @prop {Map} border-color [color: ('gray', 200)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
-/// @prop {Map} typography [
-///   header: (value: 'overline'),
-///   item: (value: 'caption'),
-///   title: (value: 'caption'),
-///   subtitle: (value: 'caption')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-list
+/// @prop {Map} typography [header: (value: 'overline'), item: (value: 'caption'), title: (value: 'caption'), subtitle: (value: 'caption')] - The typography styles used for the component.
+/// @requires $light-list
 $fluent-list: extend(
     $light-list,
     (
@@ -291,7 +281,7 @@ $fluent-list: extend(
 );
 
 /// Generates a bootstrap list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The list header background color.
 /// @prop {Map} item-background [contrast-color: ('gray', 900)] - The list item background color.
 /// @prop {Map} item-text-color [color: ('gray', 900)] - The list item text color.
@@ -301,13 +291,8 @@ $fluent-list: extend(
 /// @prop {Map} border-radius [border-radius: (rem(4px), rem(0), rem(24px))] - The border radius used for list component.
 /// @prop {Map} border-color [color: ('gray', 300)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
-/// @prop {Map} typography [
-///   header: (value: 'overline'),
-///   item: (value: 'body-2'),
-///   title: (value: 'body-1'),
-///   subtitle: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-list
+/// @prop {Map} typography [header: (value: 'overline'), item: (value: 'body-2'), title: (value: 'body-1'), subtitle: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-list
 $bootstrap-list: extend(
     $light-list,
     (
@@ -391,7 +376,7 @@ $bootstrap-list: extend(
 );
 
 /// Generates an indigo list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Color} background [transparent] - The list background color.
 /// @prop {Color} header-background [transparent] - The list header background color.
 /// @prop {Map} header-text-color [color: ('gray', 600)] - The list header text color.
@@ -417,13 +402,8 @@ $bootstrap-list: extend(
 /// @prop {Map} item-thumbnail-color-active [color: ('gray', 700)] - The list item thumbnail active color.
 /// @prop {Map} item-thumbnail-color-selected [color: ('gray', 700)] - The list item thumbnail selected color.
 /// @prop {Number} item-border-radius [rem(4px)] - The border radius used for list item.
-/// @prop {Map} typography [
-///   header: (value: 'overline'),
-///   item: (value: 'body-2'),
-///   title: (value: 'body-2'),
-///   subtitle: (value: 'body-2')
-/// ] - The typography styles used for the component.
-/// @requires {Map} $light-list
+/// @prop {Map} typography [ header: (value: 'overline'), item: (value: 'body-2'), title: (value: 'body-2'), subtitle: (value: 'body-2')] - The typography styles used for the component.
+/// @requires $light-list
 $indigo-list: extend(
     $light-list,
     (

@@ -1,0 +1,13 @@
+id: sassdoc-param-needs-name
+language: sassdoc
+severity: warning
+message: '@param should have a valid name, e.g. @param {Type} $name — names must begin with $ followed by a letter or underscore'
+rule:
+  any:
+    - kind: tag_param
+      not:
+        has:
+          kind: variable_name
+          regex: '^\$[a-zA-Z_]'
+    - kind: ERROR
+      regex: '^@(param|parameter|arg|argument)(\s+(?:\{[^}]+\}\s+\$[^a-zA-Z_\s]|[^\$\s\{]|\$[^a-zA-Z_\s])|\s*$)'
