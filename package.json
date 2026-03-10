@@ -23,7 +23,7 @@
     "build:mcp": "npm run build:json && vite build",
     "serve:docs": "npx http-server ./docs",
     "preview:palette": "node scripts/previewPalette.mjs",
-    "lint": "npm run lint:biome && npm run lint:styles && npm run lint:prettier",
+    "lint": "npm run lint:biome && npm run lint:styles && npm run lint:prettier && npm run lint:sassdoc",
     "lint:biome": "biome check",
     "lint:styles": "stylelint ./sass/**/*.scss --fix",
     "lint:prettier": "prettier \"./sass/**/*.scss\" --check --ignore-path .gitignore",
