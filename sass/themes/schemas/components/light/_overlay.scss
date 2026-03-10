@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base light overlay schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-color [color: ('gray', 500, .54)] - The background color used for modal overlays.
 $light-overlay: (
     background-color: (
@@ -25,8 +25,8 @@ $light-overlay: (
 );
 
 /// Generates a material overlay schema.
-/// @type {Map}
-/// @requires {Map} $light-overlay
+/// @type Map
+/// @requires $light-overlay
 $material-overlay: extend(
     $light-overlay,
     (
@@ -37,8 +37,8 @@ $material-overlay: extend(
 );
 
 /// Generates a fluent overlay schema.
-/// @type {Map}
-/// @requires {Map} $light-overlay
+/// @type Map
+/// @requires $light-overlay
 $fluent-overlay: extend(
     $light-overlay,
     (
@@ -49,8 +49,8 @@ $fluent-overlay: extend(
 );
 
 /// Generates a bootstrap overlay schema.
-/// @type {Map}
-/// @requires {Map} $light-overlay
+/// @type Map
+/// @requires $light-overlay
 $bootstrap-overlay: extend(
     $light-overlay,
     (
@@ -61,8 +61,8 @@ $bootstrap-overlay: extend(
 );
 
 /// Generates an indigo overlay schema.
-/// @type {Map}
-/// @requires {Map} $light-overlay
+/// @type Map
+/// @requires $light-overlay
 $indigo-overlay: extend(
     $light-overlay,
     (

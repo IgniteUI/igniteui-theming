@@ -1,0 +1,13 @@
+id: sassdoc-see-needs-reference
+language: sassdoc
+severity: warning
+message: '@see must include a reference, e.g. @see {mixin} my-mixin'
+rule:
+  any:
+    - kind: tag_see
+      not:
+        has:
+          kind: see_reference
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@see\s*$'

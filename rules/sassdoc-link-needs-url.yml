@@ -1,0 +1,13 @@
+id: sassdoc-link-needs-url
+language: sassdoc
+severity: warning
+message: '@link/@source must be followed by a valid URL, e.g. @link https://example.com Optional caption'
+rule:
+  any:
+    - kind: tag_link
+      not:
+        has:
+          kind: url
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@(link|source)'

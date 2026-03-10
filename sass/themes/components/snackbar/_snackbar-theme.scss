@@ -25,10 +25,10 @@
 /// @param {Color} $background [null] - The background color used in the snackbar. PRIMARY - derives text-color, button-color.
 /// @param {Color} $text-color [null] - The text color used in the snackbar. Auto-derived from background.
 /// @param {Color} $button-color [null] - The button color used in the snackbar. Auto-derived from background.
-/// @param {box-shadow} $shadow [null] - Sets a shadow to be used for the snackbar.
+/// @param {List} $shadow [null] - Sets a shadow to be used for the snackbar.
 /// @param {List} $border-radius [null] - The border radius used for the snackbar component.
 /// @requires $light-material-schema
-/// @example scss Set a custom background color
+/// @example scss - Set a custom background color
 ///   $my-snackbar-theme: snackbar-theme($background: white);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-snackbar-theme);

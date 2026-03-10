@@ -9,7 +9,7 @@
 
 /// Generates a base dark banner schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-banner: (
     _meta: (
         name: 'banner',
@@ -18,22 +18,22 @@ $dark-base-banner: (
 );
 
 /// Generates a dark material banner schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-banner
 $dark-material-banner: extend($material-banner, $dark-base-banner);
 
 /// Generates a dark fluent banner schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-banner
 $dark-fluent-banner: extend($fluent-banner, $dark-base-banner);
 
 /// Generates a dark bootstrap banner schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-banner
 $dark-bootstrap-banner: extend($bootstrap-banner, $dark-base-banner);
 
 /// Generates a dark indigo banner schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} banner-background [color: ('gray', 50)] - The color used for the banner background.
 /// @prop {Map} banner-border-color [color: ('gray', 100)] - The color used for the banner border.
 /// @requires $indigo-banner

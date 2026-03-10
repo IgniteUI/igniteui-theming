@@ -19,7 +19,7 @@
 /// keywords like inherit, etc.) are returned as-is.
 /// @access private
 /// @param {String | List | *} $value - The font-family value to normalize.
-/// @return {String | List | *} - The normalized value.
+/// @return {String | List | *} The normalized value.
 @function _normalize-font-family($value) {
     @return if(meta.type-of($value) == 'string', string.unquote($value), $value);
 }
@@ -28,7 +28,7 @@
 /// @param {String} $category - The type scale category.
 /// @param {String} $check [true] - Toggles category checks against ITypeScale.
 /// Set to false when using a custom type scale.
-/// @example scss Add the `h1` styles to custom CSS selector.
+/// @example scss - Add the `h1` styles to custom CSS selector.
 ///   .fancy-h1 {
 ///      @include type-style('h1');
 ///
@@ -54,7 +54,7 @@
 /// Transforms a type style map into css font variables.
 /// @param {String} $name - The custom CSS variable name.
 /// @param {Map} $type-style - A type style map reference as produced by type-style.
-/// @example scss Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
+/// @example scss - Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
 ///   $h1-style: type-scale-category($type-scale, 'h1');
 ///   @include type-style-vars('h1', $h1-style);
 @mixin type-style-vars($name, $type-style) {
@@ -112,7 +112,7 @@
 /// @param {String} $name - The custom CSS variable name.
 /// @param {Map} $type-style - A type style map reference as produces by type-style.
 /// @param {String} $prefix [null] - Optional prefix.
-/// @example scss Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
+/// @example scss - Assign the `h1` styles to custom CSS property using the CSS font shorthand syntax.
 ///   $h1-style: type-scale-category($type-scale, 'h1');
 ///   @include font-var('h1-font', $h1-style);
 @mixin font-var($name, $type-style, $prefix: null) {
@@ -139,11 +139,11 @@
 /// (e.g. "'Comic Sans MS', sans-serif" for backward compatibility), or any other
 /// valid CSS value such as var(--my-font), inherit, etc.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
-/// @example scss Using a font-family list
+/// @example scss - Using a font-family list
 ///   @include typography(("Open Sans", Helvetica, sans-serif), $my-type-scale);
-/// @example scss Using a quoted string (backward compatible)
+/// @example scss - Using a quoted string (backward compatible)
 ///   @include typography("'Comic Sans MS', sans-serif", $my-type-scale);
-/// @example scss Using a CSS variable reference
+/// @example scss - Using a CSS variable reference
 ///   @include typography(var(--my-custom-font), $my-type-scale);
 ///
 /// @requires {function} is-root

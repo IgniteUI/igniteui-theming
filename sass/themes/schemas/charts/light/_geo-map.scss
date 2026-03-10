@@ -10,7 +10,7 @@
 
 /// Generates a base light geo-map schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $light-geo-map: (
     _meta: (
         name: 'geo-map',
@@ -19,7 +19,7 @@ $light-geo-map: (
 );
 
 /// Generates a material geo map schema.
-/// @type {Map}
+/// @type Map
 /// @prop {String} plot-area-background [null] - Gets or sets the brush used as the background for the current Map object's plot area.
 $material-geo-map: extend(
     $light-geo-map,
@@ -34,9 +34,9 @@ $material-geo-map: extend(
 );
 
 /// Generates a fluent geo map schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-geo-map
+/// @requires $material-geo-map
 $fluent-geo-map: extend(
     $material-geo-map,
     (
@@ -47,9 +47,9 @@ $fluent-geo-map: extend(
 );
 
 /// Generates a bootstrap geo map schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-geo-map
+/// @requires $material-geo-map
 $bootstrap-geo-map: extend(
     $material-geo-map,
     (
@@ -60,9 +60,9 @@ $bootstrap-geo-map: extend(
 );
 
 /// Generates an indigo geo map schema.
-/// @type {Map}
+/// @type Map
 /// @requires {function} extend
-/// @requires {Map} $material-geo-map
+/// @requires $material-geo-map
 $indigo-geo-map: extend(
     $material-geo-map,
     (

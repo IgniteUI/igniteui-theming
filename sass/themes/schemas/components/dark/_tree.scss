@@ -11,7 +11,7 @@
 // stylelint-disable max-line-length
 
 /// Generates a base dark tree schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-active [color: ('gray', 100)] - The background color used for the active tree node.
 /// @prop {Map} foreground-active [color: ('gray', 900)] - The color used for the content in active state of the tree node.
 /// @prop {Map} hover-color [color: ('gray', 200, .5)] - The background color used for the tree node on hover.
@@ -50,13 +50,13 @@ $base-dark-tree: (
 );
 
 /// Generates a dark material tree schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-tree
 /// @requires $base-dark-tree
 $dark-material-tree: extend($material-tree, $base-dark-tree);
 
 /// Generates a dark fluent tree schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-selected [color: ('gray', 100)] - The background color used for the selected tree node.
 /// @prop {Map} foreground-selected [color: ('gray', 900)] - The color used for the content of the selected tree node.
 /// @prop {Map} background-active-selected [color: ('gray', 200)] - The background color used for the active selected tree node.
@@ -95,7 +95,7 @@ $dark-fluent-tree: extend(
 );
 
 /// Generates a dark bootstrap tree schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} hover-color [color: ('gray', 500, .3)] - The background color used for the tree node on hover.
 /// @prop {Map} foreground-active [contrast-color: ('surface')] - The color used for the content in active state of the tree node.
 /// @requires $bootstrap-tree
@@ -120,7 +120,7 @@ $dark-bootstrap-tree: extend(
 );
 
 /// Generates a dark indigo tree schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-active [color: ('primary', 400, 0.3)] - The background color used for the active tree node.
 /// @prop {Map} background-active-selected [color: ('primary', 400, 0.3)] - The background color used for the active selected tree node.
 /// @prop {Map} foreground [contrast-color: ('gray', 50, 0.8)] - The color used for the tree node content.

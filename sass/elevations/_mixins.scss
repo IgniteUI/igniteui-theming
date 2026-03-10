@@ -8,7 +8,7 @@
 /// Generates CSS variables for a given elevations map.
 /// @access public
 /// @param {Map} $elevations - The elevations map to use to generate CSS variables.
-/// @example scss Generate CSS variables for elevations.
+/// @example scss - Generate CSS variables for elevations.
 ///   $elevations: (
 ///       small: box-shadow(0 .125rem .25rem rgba(0 0 0 / 75%)),
 ///       medium: box-shadow(0 .25rem .5rem rgba(0 0 0 / 85%)),
@@ -31,7 +31,7 @@
 /// Includes box-shadow styles for an elevation by name
 /// @access public
 /// @param {String} $name - The name of the shadow.
-/// @example scss Include a box shadow by its name.
+/// @example scss - Include a box shadow by its name.
 ///   .my-class {
 ///     @include elevation(small);
 ///   }

@@ -1,0 +1,13 @@
+id: sassdoc-since-needs-version
+language: sassdoc
+severity: warning
+message: '@since must include a version, e.g. @since 1.0.0 or @since 1.0.0 Description'
+rule:
+  any:
+    - kind: tag_since
+      not:
+        has:
+          kind: version
+          regex: '.+'
+    - kind: ERROR
+      regex: '^@since'

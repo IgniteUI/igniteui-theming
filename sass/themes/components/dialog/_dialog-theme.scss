@@ -25,11 +25,11 @@
 /// @param {Color} $background [null] - The dialog background color. PRIMARY - derives title-color, message-color, border-color.
 /// @param {Color} $title-color [null] - The dialog title text color. Auto-derived from background.
 /// @param {Color} $message-color [null] - The dialog message text color. Auto-derived from background (slightly transparent).
-/// @param {box-shadow} $shadow [null] - The shadow used for the dialog.
+/// @param {List} $shadow [null] - The shadow used for the dialog.
 /// @param {List} $border-radius [null] - The border radius used for dialog component.
 /// @param {Color} $border-color [null] - The border color used for dialog component. Auto-derived from background.
 /// @requires $light-material-schema
-/// @example scss Change the background color
+/// @example scss - Change the background color
 ///   $my-dialog-theme: dialog-theme($background: black);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-dialog-theme);
@@ -60,11 +60,11 @@
     }
 
     @if not($message-color) and $background {
-        $message-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.8);
+        $message-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.8);
     }
 
     @if not($border-color) and $background {
-        $border-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.3);
+        $border-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.3);
     }
 
     @if not($shadow) {

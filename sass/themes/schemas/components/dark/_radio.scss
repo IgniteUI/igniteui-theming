@@ -10,7 +10,7 @@
 
 /// Generates a base dark radio schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $dark-base-radio: (
     _meta: (
         name: 'radio',
@@ -19,7 +19,7 @@ $dark-base-radio: (
 );
 
 /// Generates a dark material radio schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} error-color [color: ('error', 500)] - The label, border and dot color in invalid state.
 /// @prop {Map} error-color-hover [color: ('error', 500)] - The border and dot color in invalid state on hover.
 /// @requires $material-radio
@@ -44,7 +44,7 @@ $dark-material-radio: extend(
 );
 
 /// Generates a dark fluent radio schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} hover-color [color: ('gray', 400)] - The border and dot colors on hover.
 /// @prop {Map} fill-color [color: ('primary', 300)] - The checked border and dot colors.
 /// @prop {Map} fill-hover-border-color [color: ('primary', 100)] - The text color used for the label text.
@@ -124,7 +124,7 @@ $dark-fluent-radio: extend(
 );
 
 /// Generates a dark bootstrap radio schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-radio
 /// @prop {Map} focus-outline-color [color: ('primary', 900, 0.5)] - The focus outline color.
 /// @prop {Map} focus-outline-color-error [color: ('error', 900, 0.5)] - The focus outline color when radio is invalid.
@@ -178,7 +178,7 @@ $dark-bootstrap-radio: extend(
 );
 
 /// Generates a dark indigo radio schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} label-color [contrast-color: ('primary', 500, 0.8)] - The text color used for the label text.
 /// @prop {Map} label-color-hover [contrast-color: ('primary', 500)] - The text color used for the label text on hover.
 /// @prop {Map} hover-color [contrast-color: ('primary', 500, 0.8)] - The text color used for the label text.

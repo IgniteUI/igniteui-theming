@@ -13,9 +13,9 @@
 
 /// Converts pixels to relative values (em).
 /// @access public
-/// @param {number|string} $pixels - The pixel value to be converted.
-/// @param {number|string} $context [$browser-context] - The base context to convert against.
-/// @example
+/// @param {Number | String} $pixels - The pixel value to be converted.
+/// @param {Number | String} $context [$browser-context] - The base context to convert against.
+/// @example scss
 ///   .my-component {
 ///     margin: em(10px) em(5px);
 ///   }
@@ -25,7 +25,7 @@
 ///     margin: 0.625em 0.3125em;
 ///   }
 ///
-/// @return {number} - Returns the pixels value converted to em.
+/// @return {number} Returns the pixels value converted to em.
 @function em($pixels, $context: $base-font-size) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
@@ -42,7 +42,7 @@
 /// @access public
 /// @param {number|string} $pixels - The pixel value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
-/// @example
+/// @example scss
 ///   .my-component {
 ///     margin: rem(10px) rem(5px);
 ///   }
@@ -52,7 +52,7 @@
 ///     margin: 0.625rem 0.3125rem;
 ///   }
 ///
-/// @return {number} - Returns the pixels value converted to rem.
+/// @return {number} Returns the pixels value converted to rem.
 @function rem($pixels, $context: $base-font-size) {
     @if math.is-unitless($pixels) {
         $pixels: $pixels * 1px;
@@ -69,7 +69,7 @@
 /// @access public
 /// @param {number|string} $num - The relative value to be converted.
 /// @param {number|string} $context [$browser-context] - The base context to convert against.
-/// @example
+/// @example scss
 ///   .my-component {
 ///     margin: px(3rem);
 ///   }
@@ -79,7 +79,7 @@
 ///     margin: 48px;
 ///   }
 ///
-/// @return {number} - Returns the relative value converted to pixels.
+/// @return {number} Returns the relative value converted to pixels.
 @function px($num, $context: $base-font-size) {
     @if math.is-unitless($context) {
         $context: $context * 1px;
@@ -104,7 +104,7 @@
 /// @param {Number} $margin-top [0] - The margin-top property of the type style.
 /// @param {Number} $margin-bottom [0] - The margin-bottom property of the type style.
 /// @requires $ITypeStyle
-/// @example
+/// @example scss
 ///   $main_navigation: type-style(
 ///      $font-size: rem(14px),
 ///      $font-weight: 600,
@@ -117,7 +117,7 @@
 ///   .main-nav {
 ///     @include type-style($main_navigation);
 ///   }
-/// @returns {Map} - A map of all defined type style properties.
+/// @returns {Map} A map of all defined type style properties.
 @function type-style($args...) {
     $keywords: meta.keywords($args);
     $result: ();
@@ -158,7 +158,7 @@
 /// @param {Map} $overline - A map containing type style properties as produces by the type-style function.
 /// @param {String} $_theme [null] - The theme related to this type scale. Internal use only.
 /// @requires $ITypeScale
-/// @example
+/// @example scss
 ///   // First define type styles to use
 ///   $my-body-1: type-style(
 ///      $font-size: rem(14px),
@@ -170,7 +170,7 @@
 ///	    $body-1: $my-body-1,
 ///	    ...
 ///   );
-/// @returns {Map} - A map of all defined type scales.
+/// @returns {Map} A map of all defined type scales.
 @function type-scale($_theme: null, $args...) {
     $style_fn: meta.get-function('type-style');
     $categories: meta.keywords($args);
@@ -201,9 +201,9 @@
 /// Get type scale category config.
 /// @param {Map} $scale - A type scale map reference as produces by type-scale.
 /// @param {String} $category - The scale category you want config for. For instance - 'h1';
-/// @example scss Get the type scale category config for the `h1` scale.
+/// @example scss - Get the type scale category config for the `h1` scale.
 ///   $h1-type-scale: type-scale-category($type-scale, 'h1');
-/// @returns {Map} - The config map for the selected category in the type scale.
+/// @returns {Map} The config map for the selected category in the type scale.
 @function type-scale-category($scale, $category) {
     @return map.get($scale, $category);
 }

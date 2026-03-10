@@ -1,0 +1,17 @@
+id: sassdoc-return-description-no-hyphen
+language: sassdoc
+severity: warning
+message: '@return description should not be preceded by a hyphen — write @return {Type} Description, not @return {Type} - Description'
+transform:
+  FIXED:
+    replace:
+      source: $MATCH
+      replace: '(\{[^}]+\})\s+-\s+'
+      by: '$1 '
+rule:
+  kind: tag_return
+  has:
+    kind: line_description
+    regex: '^-\s'
+  pattern: $MATCH
+fix: '$FIXED'

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark watermark schema.
-/// @type {Map}
+/// @type Map
 $dark-watermark: (
     image-opacity: 15%,
     _meta: (
@@ -18,25 +18,25 @@ $dark-watermark: (
 );
 
 /// Generates a base dark watermark schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-watermark
 /// @requires $dark-watermark
 $dark-material-watermark: extend($material-watermark, $dark-watermark);
 
 /// Generates a dark fluent watermark schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-watermark
 /// @requires $dark-watermark
 $dark-fluent-watermark: extend($fluent-watermark, $dark-watermark);
 
 /// Generates a dark bootstrap watermark schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-watermark
 /// @requires $dark-watermark
 $dark-bootstrap-watermark: extend($bootstrap-watermark, $dark-watermark);
 
 /// Generates a dark indigo watermark schema.
-/// @type {Map}
+/// @type Map
 /// @requires $indigo-watermark
 /// @requires $dark-watermark
 $dark-indigo-watermark: extend($indigo-watermark, $dark-watermark);

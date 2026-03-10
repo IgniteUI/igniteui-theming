@@ -1,0 +1,14 @@
+id: sassdoc-require-placeholder-needs-percent
+language: sassdoc
+severity: warning
+message: '@requires {placeholder} reference must start with %, e.g. @requires {placeholder} %my-placeholder'
+rule:
+  kind: tag_require
+  all:
+    - has:
+        kind: see_type
+        regex: 'placeholder'
+    - has:
+        kind: see_reference
+        not:
+          regex: '^%'

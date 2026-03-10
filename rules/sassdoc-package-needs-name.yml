@@ -1,0 +1,13 @@
+id: sassdoc-package-needs-name
+language: sassdoc
+severity: warning
+message: '@package should have a valid name, e.g. @package theming — name must be a single word (letters, digits, hyphens, underscores)'
+rule:
+  any:
+    - kind: tag_package
+      not:
+        has:
+          kind: package_name
+          regex: '^[a-zA-Z_][\w-]*$'
+    - kind: ERROR
+      regex: '^@package\s*$'

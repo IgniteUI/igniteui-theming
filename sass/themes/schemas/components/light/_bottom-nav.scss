@@ -9,7 +9,7 @@
 ////
 
 /// Generates a light bottom navigation scheme.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('gray', 50)] - The background color used for the bottom nav.
 /// @prop {Map} icon-color [color: ('gray', 700)] - The icon color used in idle state.
 /// @prop {Map} icon-selected-color [color: ('primary', 500)] - The icon color used for the selected item.
@@ -20,7 +20,7 @@
 /// @prop {Color} border-color [transparent] - The border color of the bottom navigation.
 /// @prop {Map} typography [label: (value: 'caption')] - The typography styles used for the component.
 /// @prop {Number} elevation [8] - The elevation level, between 0-24, to be used for the bottom nav.
-/// @requires {Map} $default-elevation-bottom-nav
+/// @requires $default-elevation-bottom-nav
 $light-bottom-nav: extend(
     $default-elevation-bottom-nav,
     (
@@ -81,10 +81,10 @@ $light-bottom-nav: extend(
 );
 
 /// Generates a material bottom navigation schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} icon-selected-color [color: ('primary', 800)] - The icon color used for the selected item.
 /// @prop {Map} label-selected-color [color: ('primary', 800)] - The label color used for the selected item.
-/// @requires {Map} $light-bottom-nav
+/// @requires $light-bottom-nav
 $material-bottom-nav: extend(
     $light-bottom-nav,
     (
@@ -107,10 +107,10 @@ $material-bottom-nav: extend(
 );
 
 /// Generates a fluent bottom navigation schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Number} elevation [1] - The elevation level, between 0-24, to be used for the bottom nav.
-/// @requires {Map} $light-bottom-nav
-/// @requires {Map} $fluent-elevation-bottom-nav
+/// @requires $light-bottom-nav
+/// @requires $fluent-elevation-bottom-nav
 $fluent-bottom-nav: extend(
     $light-bottom-nav,
     $fluent-elevation-bottom-nav,
@@ -122,8 +122,8 @@ $fluent-bottom-nav: extend(
 );
 
 /// Generates a bootstrap bottom navigation schema.
-/// @type {Map}
-/// @requires {Map} $light-bottom-nav
+/// @type Map
+/// @requires $light-bottom-nav
 $bootstrap-bottom-nav: extend(
     $light-bottom-nav,
     (
@@ -134,7 +134,7 @@ $bootstrap-bottom-nav: extend(
 );
 
 /// Generates an indigo bottom navigation schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 300)] - The border color of the bottom navigation.
 /// @prop {Map} background [color: 'surface'] - The background color used for the bottom nav.
 /// @prop {Map} icon-color [color: ('gray', 600)] - The icon color used in idle state.
@@ -142,8 +142,8 @@ $bootstrap-bottom-nav: extend(
 /// @prop {Map} icon-disabled-color [color: ('gray', 900, .2)] - The disabled color of the icon.
 /// @prop {Map} label-disabled-color [color: ('gray', 900, .2)] - The disabled color of the label.
 /// @prop {Number} elevation [4] - The elevation level, between 0-24, to be used for the bottom nav.
-/// @requires {Map} $light-bottom-nav
-/// @requires {Map} $indigo-elevation-bottom-nav
+/// @requires $light-bottom-nav
+/// @requires $indigo-elevation-bottom-nav
 $indigo-bottom-nav: extend(
     $light-bottom-nav,
     $indigo-elevation-bottom-nav,

@@ -1,0 +1,13 @@
+id: sassdoc-see-bare-ref-needs-type
+language: sassdoc
+severity: warning
+message: 'Bare @see reference needs a type — use {function}, {mixin}, {variable}, or {placeholder}'
+rule:
+  kind: tag_see
+  all:
+    - has:
+        kind: see_reference
+        regex: '^[^$%]'
+    - not:
+        has:
+          kind: see_type

@@ -25,12 +25,12 @@
 /// @param {Color} $background [null] - The navbar background color. PRIMARY - derives text-color and icon colors.
 /// @param {Color} $text-color [null] - The navbar text color. Auto-derived from background.
 /// @param {Color} $border-color [null] - The navbar border color. Auto-derived from background (indigo).
-/// @param {box-shadow} $shadow [null] - The shadow of the navbar.
+/// @param {List} $shadow [null] - The shadow of the navbar.
 /// @param {Color} $idle-icon-color [null] - The navbar idle icon color. Auto-derived from background.
 /// @param {Color} $hover-icon-color [null] - The navbar hover icon color. Auto-derived from idle-icon-color or background.
 /// @param {Bool} $disable-shadow [true] - Sets the navbar shadow visibility.
 /// @requires $light-material-schema
-/// @example scss Change the background color
+/// @example scss - Change the background color
 ///   $my-navbar-theme: navbar-theme($background: green);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-navbar-theme);
@@ -70,11 +70,11 @@
 
     @if $variant == 'indigo' {
         @if not($border-color) and $background {
-            $border-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.3);
+            $border-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.3);
         }
 
         @if not($hover-icon-color) and $background {
-            $hover-icon-color: hsla(from adaptive-contrast(var(--background)) h s l / 0.7);
+            $hover-icon-color: hsl(from adaptive-contrast(var(--background)) h s l / 0.7);
         }
     } @else {
         @if not($hover-icon-color) and $background {

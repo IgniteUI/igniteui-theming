@@ -8,7 +8,7 @@
 ////
 
 /// Generates a dark expansion panel schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-focus-background [color: ('gray', 100, .3)] - The panel header focus background color.
 $base-dark-expansion-panel: (
     header-focus-background: (
@@ -25,19 +25,19 @@ $base-dark-expansion-panel: (
 );
 
 /// Generates a dark material expansion panel schema based on a mix of $material-expansion-panel and $base-dark-expansion-panel.
-/// @type {Map}
+/// @type Map
 /// @requires $material-expansion-panel
 /// @requires $base-dark-expansion-panel
 $dark-material-expansion-panel: extend($material-expansion-panel, $base-dark-expansion-panel);
 
 /// Generates a dark fluent expansion panel schema based on a mix of $fluent-expansion-panel and $base-dark-expansion-panel.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-expansion-panel
 /// @requires $base-dark-expansion-panel
 $dark-fluent-expansion-panel: extend($fluent-expansion-panel, $base-dark-expansion-panel);
 
 /// Generates a dark bootstrap expansion panel schema based on a mix of $bootstrap-expansion-panel and $base-dark-expansion-panel.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-background [color: ('gray', 50)] - The panel header background color.
 /// @prop {Map} header-description-color [color: ('gray', 600)] - The panel header description text color.
 /// @prop {Map} body-background [color: ('gray', 50)] - The panel body background color.
@@ -71,7 +71,7 @@ $dark-bootstrap-expansion-panel: extend(
 );
 
 /// Generates a dark indigo expansion panel schema.
-/// @type {Map}
+/// @type Map
 ///
 /// @prop {Map} header-title-color [contrast-color: ('gray', 50, 0.9)] - The panel header title text color.
 /// @prop {Map} header-description-color [contrast-color: ('gray', 50, 0.7)] - The panel header description text color.

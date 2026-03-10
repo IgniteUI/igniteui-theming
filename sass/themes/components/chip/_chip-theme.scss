@@ -34,7 +34,7 @@
 ///
 /// @param {Color} $ghost-background [null] - The chip ghost background color.
 /// @param {Color} $ghost-text-color [null] - The chip ghost text color.
-/// @param {box-shadow} $ghost-shadow [null] - The chip ghost shadow.
+/// @param {List} $ghost-shadow [null] - The chip ghost shadow.
 ///
 /// @param {Color} $hover-text-color [null] - The chip text hover color. Auto-derived from hover-background.
 /// @param {Color} $hover-background [null] - The chip hover background color. Auto-derived from background.
@@ -46,7 +46,7 @@
 ///
 /// @param {color} $selected-text-color [null] - The selected chip text color. Auto-derived from selected-background.
 /// @param {color} $selected-background [null] - The selected chip background color. Auto-derived from background.
-/// @param {color} $selected-border-color [null] The selected chip border color. Auto-derived from selected-background.
+/// @param {color} $selected-border-color [null] - The selected chip border color. Auto-derived from selected-background.
 ///
 /// @param {color} $hover-selected-text-color [null] - The selected chip hover text color. Auto-derived from hover-selected-background.
 /// @param {color} $hover-selected-background [null] - The selected chip hover background color. Auto-derived from selected-background.
@@ -61,7 +61,7 @@
 ///
 /// @requires $light-material-schema
 ///
-/// @example scss Change the background color
+/// @example scss - Change the background color
 ///   $my-chip-theme: igx-chip-theme($background: black);
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($my-chip-theme);
@@ -210,11 +210,11 @@
 
     @if $variant == 'bootstrap' or $variant == 'indigo' {
         @if not($focus-outline-color) and $focus-background {
-            $focus-outline-color: hsla(from var(--focus-background) h s l / 0.4);
+            $focus-outline-color: hsl(from var(--focus-background) h s l / 0.4);
         }
 
         @if not($focus-selected-outline-color) and $focus-selected-background {
-            $focus-selected-outline-color: hsla(from var(--focus-selected-background) h s l / 0.4);
+            $focus-selected-outline-color: hsl(from var(--focus-selected-background) h s l / 0.4);
         }
     }
 

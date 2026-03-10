@@ -9,7 +9,7 @@
 ////
 
 /// Generates a base light gauge schema.
-/// @type {Map}
+/// @type Map
 /// @property {Color} backing-brush [(color: 'surface', darken: 8%)] - Sets the color to use to fill the backing of the linear gauge.
 /// @property {Color} backing-outline [(color: 'surface', darken: 8%)] - Sets the color to use for the outline of the backing.
 /// @property {Number} backing-stroke-thickness [null] - Sets the stroke thickness of the backing outline.
@@ -71,7 +71,7 @@ $light-base-gauge: (
 
 /// Generates a base light gauge schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $linear-gauge: (
     _meta: (
         name: 'linear-gauge',
@@ -79,7 +79,7 @@ $linear-gauge: (
 );
 
 /// Generates a material linear gauge schema.
-/// @type {Map}
+/// @type Map
 /// @property {Number} needle-breadth [null] - Sets the needle breadth.
 /// @property {Number} needle-inner-base-width [null] - Sets the width of the needle's inner base.
 /// @property {Number} needle-inner-point-width [null] - Sets the width of the needle's inner point.
@@ -88,7 +88,7 @@ $linear-gauge: (
 /// @property {Color} scale-outline [(color: 'surface', darken: 8%)] - Sets the color to use for the outline of the scale.
 /// @property {Number} scale-stroke-thickness [null] - Sets the stroke thickness of the scale outline.
 /// @requires {function} extend
-/// @requires {Map} $material-gauge
+/// @requires $material-gauge
 $material-linear-gauge: extend(
     $linear-gauge,
     $light-base-gauge,
@@ -109,8 +109,8 @@ $material-linear-gauge: extend(
 );
 
 /// Generates a material fluent gauge schemas.
-/// @type {Map}
-/// @requires {Map} $material-linear-gauge
+/// @type Map
+/// @requires $material-linear-gauge
 $fluent-linear-gauge: extend(
     $material-linear-gauge,
     (
@@ -121,8 +121,8 @@ $fluent-linear-gauge: extend(
 );
 
 /// Generates a material bootstrap gauge schemas.
-/// @type {Map}
-/// @requires {Map} $material-linear-gauge
+/// @type Map
+/// @requires $material-linear-gauge
 $bootstrap-linear-gauge: extend(
     $material-linear-gauge,
     (
@@ -133,8 +133,8 @@ $bootstrap-linear-gauge: extend(
 );
 
 /// Generates a material indigo gauge schemas.
-/// @type {Map}
-/// @requires {Map} $material-linear-gauge
+/// @type Map
+/// @requires $material-linear-gauge
 $indigo-linear-gauge: extend(
     $material-linear-gauge,
     (
@@ -146,7 +146,7 @@ $indigo-linear-gauge: extend(
 
 /// Generates a base radial gauge schema.
 /// @access private
-/// @type {Map}
+/// @type Map
 $radial-gauge: (
     _meta: (
         name: 'radial-gauge',
@@ -154,11 +154,11 @@ $radial-gauge: (
 );
 
 /// Generates a material radial gauge schema.
-/// @type {Map}
+/// @type Map
 /// @property {Color} needle-pivot-brush [color: 'primary'] - Sets the color of the needle pivot point.
 /// @property {Color} needle-pivot-outline [color: 'surface'] - Sets the outline color of the needle pivot point.
 /// @requires {function} extend
-/// @requires {Map} $material-gauge
+/// @requires $material-gauge
 $material-radial-gauge: extend(
     $radial-gauge,
     $light-base-gauge,
@@ -176,8 +176,8 @@ $material-radial-gauge: extend(
 );
 
 /// Generates a material fluent gauge schemas.
-/// @type {Map}
-/// @requires {Map} $material-radial-gauge
+/// @type Map
+/// @requires $material-radial-gauge
 $fluent-radial-gauge: extend(
     $material-radial-gauge,
     (
@@ -188,8 +188,8 @@ $fluent-radial-gauge: extend(
 );
 
 /// Generates a material bootstrap gauge schemas.
-/// @type {Map}
-/// @requires {Map} $material-radial-gauge
+/// @type Map
+/// @requires $material-radial-gauge
 $bootstrap-radial-gauge: extend(
     $material-radial-gauge,
     (
@@ -200,8 +200,8 @@ $bootstrap-radial-gauge: extend(
 );
 
 /// Generates a material indigo gauge schemas.
-/// @type {Map}
-/// @requires {Map} $material-radial-gauge
+/// @type Map
+/// @requires $material-radial-gauge
 $indigo-radial-gauge: extend(
     $material-radial-gauge,
     (

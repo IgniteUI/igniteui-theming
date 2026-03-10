@@ -36,7 +36,7 @@
 /// @param {Color} $input-prefix-color [null] - The input prefix color in the idle state. Auto-derived from box/search-background.
 /// @param {Color} $input-prefix-background [null] - The background color of an input prefix in the idle state. Synced with suffix-background.
 /// @param {Color} $input-prefix-color--filled [null] - The input prefix color in the filled state. Auto-derived from prefix-color or background.
-/// @param {Color} $input-prefix-background--filled] - The background color of an input prefix in the filled state.
+/// @param {Color} $input-prefix-background--filled - The background color of an input prefix in the filled state.
 /// @param {Color} $input-prefix-color--focused [null] - The input prefix color in the focused state. Auto-derived from prefix-color--filled or background.
 /// @param {Color} $input-prefix-background--focused [null] - The background color of an input prefix in the focused state.
 /// @param {Color} $input-suffix-color [null] - The input suffix color in the idle state. Auto-derived from box/search-background. Synced with prefix-color.
@@ -63,19 +63,19 @@
 /// @param {Color} $border-disabled-background [null] - The background color of an input group of type border in the disabled state.
 /// @param {Color} $search-background [null] - The background color of an input group of type search. PRIMARY for search inputs.
 /// @param {Color} $search-disabled-background [null] - The background color of an input group of type search in the disabled state. Auto-derived from search-background.
-/// @param {box-shadow} $search-resting-shadow [null] - The shadow color of an input group of type search in its resting state.
-/// @param {box-shadow} $search-hover-shadow [null] - The shadow color of an input group of type search in its hover state.
-/// @param {box-shadow} $search-disabled-shadow [null] - The shadow color of an input group of type search in its disabled state.
+/// @param {List} $search-resting-shadow [null] - The shadow color of an input group of type search in its resting state.
+/// @param {List} $search-hover-shadow [null] - The shadow color of an input group of type search in its hover state.
+/// @param {List} $search-disabled-shadow [null] - The shadow color of an input group of type search in its disabled state.
 /// @param {Color} $success-secondary-color [null] - The success color used in the valid state.
 /// @param {Color} $warning-secondary-color [null] - The warning color used in the warning state.
 /// @param {Color} $error-secondary-color [null] - The error color used in the error state.
 /// @param {List} $box-border-radius [null] - The border radius used for box input.
 /// @param {List} $border-border-radius [null] - The border radius used for border input.
 /// @param {List} $search-border-radius [null] - The border radius used for search input.
-/// @param {Color} placeholder-color [null] - The placeholder color of an input group. Auto-derived from box/search-background.
-/// @param {Color} hover-placeholder-color [null] - The placeholder color of an input group on hover. Auto-derived from box-background-hover or placeholder-color.
-/// @param {Color} disabled-placeholder-color [null] - The disabled placeholder color of an input group. Auto-derived from disabled background.
-/// @example scss Change the focused border and label colors
+/// @param {Color} $placeholder-color [null] - The placeholder color of an input group. Auto-derived from box/search-background.
+/// @param {Color} $hover-placeholder-color [null] - The placeholder color of an input group on hover. Auto-derived from box-background-hover or placeholder-color.
+/// @param {Color} $disabled-placeholder-color [null] - The disabled placeholder color of an input group. Auto-derived from disabled background.
+/// @example scss - Change the focused border and label colors
 ///   $my-input-group-theme: input-group-theme($focused-secondary-color: pink, $focused-bottom-line-color: pink);
 ///   // Pass the theme to the css-vars() mixin
 ///   @include css-vars($my-input-group-theme);
@@ -176,11 +176,11 @@
         }
 
         @if not($placeholder-color) and $box-background {
-            $placeholder-color: hsla(from adaptive-contrast(var(--box-background)) h s l / 0.9);
+            $placeholder-color: hsl(from adaptive-contrast(var(--box-background)) h s l / 0.9);
         }
 
         @if not($hover-placeholder-color) and $box-background-hover {
-            $hover-placeholder-color: hsla(from adaptive-contrast(var(--box-background-hover)) h s l / 0.9);
+            $hover-placeholder-color: hsl(from adaptive-contrast(var(--box-background-hover)) h s l / 0.9);
         }
 
         @if not($idle-text-color) and $box-background {
@@ -200,11 +200,11 @@
         }
 
         @if not($idle-secondary-color) and $box-background {
-            $idle-secondary-color: hsla(from adaptive-contrast(var(--box-background)) h s l / 0.9);
+            $idle-secondary-color: hsl(from adaptive-contrast(var(--box-background)) h s l / 0.9);
         }
 
         @if not($input-prefix-color) and $box-background {
-            $input-prefix-color: hsla(from adaptive-contrast(var(--box-background)) h s l / 0.9);
+            $input-prefix-color: hsl(from adaptive-contrast(var(--box-background)) h s l / 0.9);
         }
 
         @if not($input-prefix-color--filled) and $box-background {
@@ -216,7 +216,7 @@
         }
 
         @if not($input-suffix-color) and $box-background {
-            $input-suffix-color: hsla(from adaptive-contrast(var(--box-background)) h s l / 0.9);
+            $input-suffix-color: hsl(from adaptive-contrast(var(--box-background)) h s l / 0.9);
         }
 
         @if not($input-suffix-color--filled) and $box-background {
@@ -229,7 +229,7 @@
 
         @if $box-background != transparent {
             @if not($box-disabled-background) and $box-background {
-                $box-disabled-background: hsla(from var(--box-background) h s l / 0.4);
+                $box-disabled-background: hsl(from var(--box-background) h s l / 0.4);
             }
 
             @if not($disabled-placeholder-color) and $box-disabled-background {
@@ -245,11 +245,11 @@
             }
 
             @if not($disabled-placeholder-color) and $placeholder-color {
-                $disabled-placeholder-color: hsla(from var(--placeholder-color) h s l / 0.7);
+                $disabled-placeholder-color: hsl(from var(--placeholder-color) h s l / 0.7);
             }
 
             @if not($disabled-text-color) and $idle-text-color {
-                $disabled-text-color: hsla(from var(--idle-text-color) h s l / 0.7);
+                $disabled-text-color: hsl(from var(--idle-text-color) h s l / 0.7);
             }
         }
     }
@@ -292,7 +292,7 @@
         }
 
         @if not($focused-secondary-color) and $focused-border-color {
-            $focused-secondary-color: hsla(from var(--focused-border-color) h s l / 0.4);
+            $focused-secondary-color: hsl(from var(--focused-border-color) h s l / 0.4);
         }
     } @else {
         @if not($hover-border-color) and $border-color {
@@ -318,7 +318,7 @@
 
     // search input
     @if not($placeholder-color) and $search-background {
-        $placeholder-color: hsla(from adaptive-contrast(var(--search-background)) h s l / 0.9);
+        $placeholder-color: hsl(from adaptive-contrast(var(--search-background)) h s l / 0.9);
     }
 
     @if not($hover-placeholder-color) and $placeholder-color {
@@ -352,11 +352,11 @@
     }
 
     @if not($input-prefix-color) and $search-background {
-        $input-prefix-color: hsla(from adaptive-contrast(var(--search-background)) h s l / 0.9);
+        $input-prefix-color: hsl(from adaptive-contrast(var(--search-background)) h s l / 0.9);
     }
 
     @if not($input-suffix-color) and $search-background {
-        $input-suffix-color: hsla(from adaptive-contrast(var(--search-background)) h s l / 0.9);
+        $input-suffix-color: hsl(from adaptive-contrast(var(--search-background)) h s l / 0.9);
     }
 
     @if $variant != 'indigo' {
@@ -379,7 +379,7 @@
 
     @if $search-background != transparent {
         @if not($search-disabled-background) and $search-background {
-            $search-disabled-background: hsla(from var(--search-background) h s l / 0.4);
+            $search-disabled-background: hsl(from var(--search-background) h s l / 0.4);
         }
 
         @if not($disabled-placeholder-color) and $search-disabled-background {
@@ -395,11 +395,11 @@
         }
 
         @if not($disabled-placeholder-color) and $placeholder-color {
-            $disabled-placeholder-color: hsla(from var(--placeholder-color) h s l / 0.7);
+            $disabled-placeholder-color: hsl(from var(--placeholder-color) h s l / 0.7);
         }
 
         @if not($disabled-text-color) and $idle-text-color {
-            $disabled-text-color: hsla(from var(--idle-text-color) h s l / 0.7);
+            $disabled-text-color: hsl(from var(--idle-text-color) h s l / 0.7);
         }
     }
 

@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} item-background-hover [color: ('gray', 100)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('gray', 100)] - The active list item background color.
 /// @prop {Map} item-background-selected [color: ('gray', 100)] - The selected list item background color.
@@ -41,13 +41,13 @@ $base-dark-list: (
 );
 
 /// Generates a dark material list schema based.
-/// @type {Map}
+/// @type Map
 /// @requires $material-list
 /// @requires $base-dark-list
 $dark-material-list: extend($material-list, $base-dark-list);
 
 /// Generates a dark fluent list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [color: ('secondary', 500)] - The list header text color.
 /// @requires $fluent-list
 /// @requires $base-dark-list
@@ -65,7 +65,7 @@ $dark-fluent-list: extend(
 );
 
 /// Generates a dark bootstrap list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 100)] - The list border color.
 /// @prop {Map} item-background [color: ('gray', 50)] - The list item background color.
 /// @prop {Map} item-background-hover [color: ('gray', 100)] - The list item hover background.
@@ -130,7 +130,7 @@ $dark-bootstrap-list: extend(
 );
 
 /// Generates a dark indigo list schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-text-color [contrast-color: ('gray', 50, .6)] - The list header text color.
 /// @prop {Map} item-background-hover [color: ('primary', 400, .3)] - The list item hover background.
 /// @prop {Map} item-background-active [color: ('primary')] - The active list item background color.

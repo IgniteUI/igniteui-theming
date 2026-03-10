@@ -1,0 +1,9 @@
+id: sassdoc-param-needs-description
+language: sassdoc
+severity: warning
+message: '@param should have a description'
+rule:
+  kind: tag_param
+  not:
+    has:
+      kind: tag_description

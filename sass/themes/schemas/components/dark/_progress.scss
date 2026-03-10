@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark progress-linear schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} track-color [color: ('gray', 300)] - The main track color.
 /// @prop {Map} stripes-color [color: ('gray', 900, .7)] - The track stripes color.
 $dark-base-progress-linear: (
@@ -33,19 +33,19 @@ $dark-base-progress-linear: (
 );
 
 /// Generates a dark material progress-linear schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-progress-linear
 /// @requires $dark-base-progress-linear
 $dark-material-progress-linear: extend($material-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark fluent progress-linear schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-progress-linear
 /// @requires $dark-base-progress-linear
 $dark-fluent-progress-linear: extend($fluent-progress-linear, $dark-base-progress-linear);
 
 /// Generates a dark bootstrap progress-linear schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} stripes-color [color: ('gray', 900, .2)] - The track stripes color.
 /// @requires $bootstrap-progress-linear
 $dark-bootstrap-progress-linear: extend(
@@ -63,7 +63,7 @@ $dark-bootstrap-progress-linear: extend(
 );
 
 /// Generates a dark indigo progress-linear schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The track value text color.
 /// @prop {Map} track-color [contrast-color: ('gray', 50, .2)] - The main track color.
 /// @requires $indigo-progress-linear
@@ -90,7 +90,7 @@ $dark-indigo-progress-linear: extend(
 );
 
 /// Generates a base dark progress-circular schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} base-circle-color [color: ('gray', 300)] - The base circle fill color.
 $dark-base-progress-circular: (
     base-circle-color: (
@@ -106,25 +106,25 @@ $dark-base-progress-circular: (
 );
 
 /// Generates a dark material progress-circular schema.
-/// @type {Map}
+/// @type Map
 /// @requires $material-progress-circular
 /// @requires $dark-base-progress-circular
 $dark-material-progress-circular: extend($material-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark fluent progress-circular schema.
-/// @type {Map}
+/// @type Map
 /// @requires $fluent-progress-circular
 /// @requires $dark-base-progress-circular
 $dark-fluent-progress-circular: extend($fluent-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark bootstrap progress-circular schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-progress-circular
 /// @requires $dark-base-progress-circular
 $dark-bootstrap-progress-circular: extend($bootstrap-progress-circular, $dark-base-progress-circular);
 
 /// Generates a dark indigo progress-circular schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} base-circle-color [contrast-color: ('gray', 50, .2)] - The base circle fill color.
 /// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The value text color.
 /// @requires $indigo-progress-circular

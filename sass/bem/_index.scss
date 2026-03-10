@@ -13,7 +13,8 @@
 /// @package theming
 ////
 
-/// @type String - The Element separator used. Default '__'.
+/// The Element separator used. Default '__'.
+/// @type String
 /// @access public
 /// @example scss - Change the element separator from '__' to '-'
 ///   $bem--sep-elem: '-';
@@ -28,7 +29,8 @@
 ///   .block-element { background: blue; }
 $bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
 
-/// @type String - The Modifier separator used. Default '--'.
+/// The Modifier separator used. Default '--'.
+/// @type String
 /// @access public
 /// @example scss - Change the modifier separator from '--' to '---'
 ///   $bem--sep-mod: '---';
@@ -43,7 +45,8 @@ $bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
 ///   .block---modifier { background: red; }
 $bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
 
-/// @type String - The Modifier Value separator used. Default '-'.
+/// The Modifier Value separator used. Default '-'.
+/// @type String
 /// @access public
 /// @example scss - Change the modifier value separator from '-' to '_'
 ///   $bem--sep-mod-val: '_';
@@ -231,22 +234,22 @@ $_bem-mod-cache: () !default;
 /// @param {String|Map} $mod [null] - A block modifier.
 /// @param {List} $mods [null] - A list of block modifiers.
 ///
-/// @example scss Include a block
+/// @example scss - Include a block
 ///   $selector: bem-selector(block); // returns .block
 ///
-/// @example scss Include a block and an element
+/// @example scss - Include a block and an element
 ///   $selector: bem-selector(block, $elem: elem); // returns .block__elem
 ///
-/// @example scss Include block, element, and element modifier
+/// @example scss - Include block, element, and element modifier
 ///   $selector: bem-selector(block, $elem: (elem, mod); // returns .block__elem--mod
 ///
-/// @example scss Include block and block modifier
+/// @example scss - Include block and block modifier
 ///   $selector: bem-selector(block, $mod: mod) // returns .block--mod
 ///
-/// @example scss Include block and multiple block modifiers
+/// @example scss - Include block and multiple block modifiers
 ///   $selector: bem-selector(block, $mods: (mod-1, mod-2)) // returns .block--mod-1.block--mod-2
 ///
-/// @example scss Include block modifier followed by block sub-element
+/// @example scss - Include block modifier followed by block sub-element
 ///   $selector: bem-selector(block, $m: mod, $e: elem); // returns .block--mod .block__elem
 ///
 /// @return {String} The generated BEM selector string
@@ -367,7 +370,7 @@ $_bem-mod-cache: () !default;
 /// is to clearly denote the start of a BEM block.
 /// @access public
 /// @param {String} $block - The block name.
-/// @example
+/// @example scss - Include a block
 ///   @include bem-block(block) {
 ///      background: green;
 ///   }
@@ -443,10 +446,9 @@ $_bem-mod-cache: () !default;
 /// Generates selectors for multiple block modifiers with optional exclusions
 /// @access public
 /// @param {List} $mods - List of modifier names
-/// @param {Map} $options - Optional configuration map
-/// @param {String|List} $options.not - Modifier(s) to exclude with :not()
-/// @throw {Error} If used outside a block context
-/// @throw {Error} If used inside an element or pseudo-selector
+/// @param {Boolean} $not - Modifier(s) to exclude with :not()
+/// @throws Error if used outside a block context
+/// @throws Error if used inside an element or pseudo-selector
 /// @example scss
 ///   @include bem-block(card) {
 ///     @include bem-mods(large, primary, (not: outline)) {

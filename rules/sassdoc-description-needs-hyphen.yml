@@ -1,0 +1,23 @@
+id: sassdoc-description-needs-hyphen
+language: sassdoc
+severity: warning
+message: 'Description should be preceded by a hyphen, e.g. @param {Type} $name - description'
+rule:
+  any:
+    # Case 1: ERROR is a sibling of tag (no hyphen found at all)
+    - kind: ERROR
+      regex: '^[^\[\(]'
+      follows:
+        kind: tag
+        has:
+          any:
+            - kind: tag_param
+            - kind: tag_property
+    # Case 2: ERROR is inside tag_param (text before a later hyphen)
+    - kind: tag_param
+      has:
+        kind: ERROR
+    # Case 3: ERROR is inside tag_property (text before a later hyphen)
+    - kind: tag_property
+      has:
+        kind: ERROR

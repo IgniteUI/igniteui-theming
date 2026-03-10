@@ -1,0 +1,17 @@
+id: sassdoc-link-caption-no-hyphen
+language: sassdoc
+severity: warning
+message: '@link/@source caption should not be preceded by a hyphen — write @link URL Caption, not @link URL - Caption'
+transform:
+  FIXED:
+    replace:
+      source: $MATCH
+      replace: '(https?://\S+)\s+-\s+'
+      by: '$1 '
+rule:
+  kind: tag_link
+  has:
+    kind: link_caption
+    regex: '^\s*-\s'
+  pattern: $MATCH
+fix: '$FIXED'

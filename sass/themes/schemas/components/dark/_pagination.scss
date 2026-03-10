@@ -8,7 +8,7 @@
 ////
 
 /// Generates a base dark pagination schema.
-/// @type {Map}
+/// @type Map
 $base-dark-pagination: (
     _meta: (
         name: 'paginator',
@@ -17,7 +17,7 @@ $base-dark-pagination: (
 );
 
 /// Generates a dark material pagination schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-color [color: ('surface')] - The background color of the paging panel.
 /// @requires $material-pagination
 /// @requires $base-dark-pagination
@@ -34,7 +34,7 @@ $dark-material-pagination: extend(
 );
 
 /// Generates a dark fluent pagination schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background-color [color: ('surface')] - The background color of the paging panel.
 /// @requires $fluent-pagination
 /// @requires $base-dark-pagination
@@ -51,12 +51,12 @@ $dark-fluent-pagination: extend(
 );
 
 /// Generates a dark bootstrap pagination schema.
-/// @type {Map}
+/// @type Map
 /// @requires $bootstrap-pagination
 $dark-bootstrap-pagination: extend($bootstrap-pagination, $base-dark-pagination);
 
 /// Generates a dark indigo pagination schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} border-color [color: ('gray', 200)] - The border color of the paging panel.
 /// @requires $indigo-pagination
 $dark-indigo-pagination: extend(

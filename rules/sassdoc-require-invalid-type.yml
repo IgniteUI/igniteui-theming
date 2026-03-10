@@ -1,0 +1,21 @@
+id: sassdoc-require-invalid-type
+language: sassdoc
+severity: warning
+message: '@require type must be function, mixin, variable, or placeholder — not {$TYPE}'
+transform:
+  TYPE:
+    replace:
+      source: $MATCH
+      replace: '^@require[s]?\s*\{([^}]+)\}.*$'
+      by: '$1'
+  FIXED:
+    replace:
+      source: $MATCH
+      replace: '^(@require[s]?)\s*\{[^}]+\}\s*'
+      by: '$1 '
+rule:
+  kind: tag_require
+  has:
+    kind: ERROR
+  pattern: $MATCH
+fix: '$FIXED'

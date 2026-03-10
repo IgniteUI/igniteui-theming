@@ -10,7 +10,7 @@
 ////
 
 /// Generates a base light query builder schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [color: ('surface', 500)] - The background color of the query builder.
 /// @prop {Map} header-background [color: ('surface', 500)] - The background color of the query builder header.
 /// @prop {Map} header-foreground [color: ('gray', 900)] - The foreground color of the query builder header.
@@ -23,7 +23,7 @@
 /// @prop {Color} color-expression-group-or [#007254] - The color of advanced filtering "OR" condition group.
 /// @prop {Number} subquery-border-radius [rem(12px)] - The border radius of the subquery block.
 /// @prop {Number} border-radius [rem(4px)] - The border radius of the query builder.
-/// @requires {Map} $default-elevation-query-builder
+/// @requires $default-elevation-query-builder
 $light-query-builder: extend(
     $default-elevation-query-builder,
     (
@@ -91,8 +91,8 @@ $light-query-builder: extend(
 );
 
 /// Generates a material query builder schema.
-/// @type {Map}
-/// @requires {Map} $light-query-builder
+/// @type Map
+/// @requires $light-query-builder
 $material-query-builder: extend(
     $light-query-builder,
     (
@@ -103,9 +103,9 @@ $material-query-builder: extend(
 );
 
 /// Generates a fluent query builder schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Number} border-radius [rem(4px)] - The border radius of the query builder.
-/// @requires {Map} $light-query-builder
+/// @requires $light-query-builder
 $fluent-query-builder: extend(
     $light-query-builder,
     (
@@ -117,9 +117,9 @@ $fluent-query-builder: extend(
 );
 
 /// Generates a bootstrap query builder schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} header-border [color: ('gray', 300)] - The border color of the query builder header.
-/// @requires {Map} $light-query-builder
+/// @requires $light-query-builder
 $bootstrap-query-builder: extend(
     $light-query-builder,
     (
@@ -136,11 +136,11 @@ $bootstrap-query-builder: extend(
 );
 
 /// Generates an indigo query builder schema.
-/// @type {Map}
+/// @type Map
 /// @prop {Map} background [contrast-color: ('gray', 900)] - The background color of the query builder.
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The background color of the query builder header.
 /// @prop {Number} border-radius [rem(10px)] - The border radius of the query builder.
-/// @requires {Map} $light-query-builder
+/// @requires $light-query-builder
 $indigo-query-builder: extend(
     $light-query-builder,
     (
