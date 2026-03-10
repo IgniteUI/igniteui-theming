@@ -30,7 +30,7 @@
     "lint:sassdoc": "ast-grep scan --error",
     "fix:sassdoc": "node scripts/fixSassdoc.mjs",
     "format": "biome check --fix && stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
-    "prepare": "husky install",
+    "prepare": "husky install && node scripts/setup-grammars.mjs",
     "mcp:inspector": "npx @modelcontextprotocol/inspector dist/mcp/index.js",
     "test": "vitest run",
     "coverage": "vitest run --coverage"
@@ -129,5 +129,9 @@
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.15"
+  },
+  "treeSitterGrammars": {
+    "tree-sitter-scss": "v0.1.0",
+    "tree-sitter-sassdoc": "v0.1.0"
   }
 }
