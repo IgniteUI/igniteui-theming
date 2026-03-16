@@ -26,6 +26,9 @@
 /// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $background [null] - The background color of the grid. PRIMARY
+/// @param {Color} $foreground [null] - The foreground color of the grid. PRIMARY
+/// @param {Color} $accent-color [null] - The accent color used for interactive elements in the grid. PRIMARY
 /// @param {Color} $header-background [null] - The table header background color. PRIMARY - derives header-text-color, header-border-color, and many more.
 /// @param {Color} $header-text-color [null] - The table header text color. Auto-derived from header-background.
 /// @param {String} $header-border-width [null] - The border width used for header borders.
@@ -118,6 +121,10 @@
 ///   @include css-vars($my-grid-theme);
 @function grid-theme(
     $schema: $light-material-schema,
+
+    $background: null,
+    $foreground: null,
+    $accent-color: null,
 
     $header-background: null,
     $header-text-color: null,
@@ -248,274 +255,372 @@
 
     $theme: digest-schema($grid-schema);
 
-    @if not($ghost-header-icon-color) and $ghost-header-background {
-        $ghost-header-icon-color: hsl(from adaptive-contrast(var(--ghost-header-background)) h s l / 0.07);
-    }
-
-    @if not($ghost-header-text-color) and $ghost-header-background {
-        $ghost-header-text-color: adaptive-contrast(var(--ghost-header-background));
-    }
-
-    @if not($header-text-color) and $header-background {
-        $header-text-color: adaptive-contrast(var(--header-background));
-    }
-
-    @if not($header-selected-background) and $header-background {
-        $header-selected-background: dynamic-shade(var(--header-background));
-    }
-
-    @if not($header-selected-text-color) and $header-selected-background {
-        $header-selected-text-color: adaptive-contrast(var(--header-selected-background));
-    }
-
-    @if not($header-border-color) and $header-background {
-        $header-border-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.24);
-    }
-
-    @if not($content-text-color) and $content-background {
-        $content-text-color: adaptive-contrast(var(--content-background));
-    }
-
-    @if not($row-odd-background) and $content-background {
-        $row-odd-background: hsl(from var(--content-background) h calc(s - 10) l);
-    }
-
-    @if not($row-odd-text-color) and $row-odd-background {
-        $row-odd-text-color: adaptive-contrast(var(--row-odd-background));
-    }
-
-    @if not($row-even-background) and $content-background {
-        $row-even-background: hsl(from var(--content-background) h calc(s + 10) l);
-    }
-
-    @if not($row-even-text-color) and $row-even-background {
-        $row-even-text-color: adaptive-contrast(var(--row-even-background));
-    }
-
-    @if not($row-hover-background) and $content-background {
-        $row-hover-background: dynamic-shade(var(--content-background), $offset: 7);
-    }
-
-    @if not($row-hover-text-color) and $row-hover-background {
-        $row-hover-text-color: adaptive-contrast(var(--row-hover-background));
-    }
-
-    @if not($cell-selected-background) and $content-background {
-        $cell-selected-background: dynamic-shade(var(--content-background));
-    }
-
-    @if not($cell-selected-text-color) and $cell-selected-background {
-        $cell-selected-text-color: adaptive-contrast(var(--cell-selected-background));
-    }
-
-    @if not($row-selected-background) and $content-background {
-        $row-selected-background: dynamic-shade(var(--content-background));
-    }
-
-    @if not($row-selected-text-color) and $row-selected-background {
-        $row-selected-text-color: adaptive-contrast(var(--row-selected-background));
-    }
-
-    @if not($row-selected-hover-background) and $row-selected-background {
-        $row-selected-hover-background: dynamic-shade(var(--row-selected-background), $offset: 7);
-    }
-
-    @if not($row-selected-hover-text-color) and $row-selected-hover-background {
-        $row-selected-hover-text-color: adaptive-contrast(var(--row-selected-hover-background));
-    }
-
-    @if not($row-border-color) and $content-background {
-        $row-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.08);
-    }
-
-    @if not($cell-selected-within-background) and $row-selected-background {
-        $cell-selected-within-background: dynamic-shade(var(--row-selected-background), $offset: 7);
-    }
-
-    @if not($cell-selected-within-text-color) and $cell-selected-within-background {
-        $cell-selected-within-text-color: adaptive-contrast(var(--cell-selected-within-background));
-    }
-
-    @if not($cell-editing-background) and $content-background {
-        $cell-editing-background: var(--content-background);
-    }
-
-    @if not($cell-editing-foreground) and $cell-editing-background {
-        $cell-editing-foreground: adaptive-contrast(var(--cell-editing-background));
-    }
-
-    @if not($cell-editing-focus-foreground) and $cell-editing-background {
-        $cell-editing-focus-foreground: adaptive-contrast(var(--cell-editing-background));
-    }
-
-    @if not($cell-active-border-color) and $content-background {
-        $cell-active-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
-    }
-
-    @if not($pinned-border-color) and $content-background {
-        $pinned-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.08);
-    }
-
-    @if not($group-row-background) and $header-background {
-        $group-row-background: $header-background;
-    }
-
-    @if not($expand-icon-color) and $group-row-background {
-        $expand-icon-color: adaptive-contrast(var(--group-row-background));
-    }
-
-    @if not($group-row-selected-background) and $group-row-background {
-        $group-row-selected-background: dynamic-shade(var(--group-row-background), $offset: 10);
-    }
-
-    @if not($group-label-text) and $group-row-selected-background {
-        $group-label-text: adaptive-contrast(var(--group-row-selected-background));
-    }
-
-    @if not($expand-icon-color) and $group-row-selected-background {
-        $expand-icon-color: adaptive-contrast(var(--group-row-selected-background));
-    }
-
-    @if not($expand-icon-hover-color) and $expand-icon-color {
-        $expand-icon-hover-color: var(--expand-icon-color);
-    }
-
-    @if not($group-count-background) and $group-row-selected-background {
-        $group-count-background: adaptive-contrast(var(--group-row-selected-background));
-    }
-
-    @if not($expand-all-icon-color) and $header-background {
-        $expand-all-icon-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.87);
-    }
-
-    @if not($expand-all-icon-hover-color) and $header-background {
-        $expand-all-icon-hover-color: adaptive-contrast(var(--header-background));
-    }
-
-    @if not($sorted-header-icon-color) and $header-background {
-        $sorted-header-icon-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
-    }
-
-    @if not($sortable-header-icon-hover-color) and $sorted-header-icon-color {
-        $sortable-header-icon-hover-color: hsl(from var(--sorted-header-icon-color) h s l / 1);
-    }
+    // header
 
-    @if not($edit-mode-color) and $content-background {
-        $edit-mode-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
+    @if not($header-background) and $foreground and $background {
+        $header-background: color-mix(in srgb, var(--foreground) 6%, var(--background));
     }
 
-    @if not($group-label-text) and $group-row-background {
-        $group-label-text: adaptive-contrast(var(--group-row-background));
+    @if not($header-selected-background) and $accent-color and $background {
+        $header-selected-background: color-mix(in srgb, var(--accent-color) 12%, var(--background));
     }
 
-    @if not($group-count-background) and $group-row-background {
-        $group-count-background: adaptive-contrast(var(--group-row-background));
+    @if not($header-selected-text-color) and $foreground {
+        $header-selected-text-color: var(--foreground);
     }
 
-    @if not($group-count-text-color) and $group-count-background {
-        $group-count-text-color: adaptive-contrast(var(--group-count-background));
+    @if not($ghost-header-background) and $header-background {
+        $ghost-header-background: var(--header-background);
     }
 
-    @if not($grouparea-background) and $header-background {
-        $grouparea-background: var(--header-background);
+    @if not($ghost-header-text-color) and $foreground {
+        $ghost-header-text-color: var(--foreground);
     }
 
-    @if not($grouparea-color) and $grouparea-background {
-        $grouparea-color: hsl(from adaptive-contrast(var(--grouparea-background)) h s l / 0.8);
+    @if not($ghost-header-icon-color) and $foreground {
+        $ghost-header-icon-color: var(--foreground);
     }
 
-    @if not($grouparea-color) and $header-background {
-        $grouparea-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
-    }
+    // row and content
 
-    @if not($drop-area-background) and $grouparea-background {
-        $drop-area-background: adaptive-contrast(var(--grouparea-background));
+    @if not($content-background) and $background {
+        $content-background: var(--background);
     }
 
-    @if not($drop-area-on-drop-background) and $drop-area-background {
-        $drop-area-on-drop-background: $drop-area-background;
+    @if not($row-odd-background) and $background {
+        $row-odd-background: var(--background);
     }
 
-    @if not($drop-area-text-color) and $drop-area-background {
-        $drop-area-text-color: adaptive-contrast(var(--drop-area-background));
+    @if not($row-hover-background) and $accent-color and $background {
+        $row-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
     }
 
-    @if not($drop-area-icon-color) and $drop-area-background {
-        $drop-area-icon-color: adaptive-contrast(var(--drop-area-background));
+    @if not($row-selected-background) and $accent-color and $background {
+        $row-selected-background: color-mix(in srgb, var(--accent-color) 12%, var(--background));
     }
 
-    @if not($filtering-header-background) and $header-background {
-        $filtering-header-background: color-mix(in hsl, var(--header-background), #fff 5%);
+    @if not($row-selected-hover-background) and $accent-color and $background {
+        $row-selected-hover-background: color-mix(in srgb, var(--accent-color) 16%, var(--background));
     }
 
-    @if not($filtering-header-text-color) and $filtering-header-background {
-        $filtering-header-text-color: adaptive-contrast(var(--filtering-header-background));
+    @if not($row-even-background) and $foreground and $background {
+        $row-even-background: color-mix(in srgb, var(--foreground) 4%, var(--background));
     }
 
-    @if not($filtering-row-background) and $header-background {
-        $filtering-row-background: color-mix(in hsl, var(--header-background), #fff 5%);
+    @if not($row-odd-text-color) and $foreground {
+        $row-odd-text-color: var(--foreground);
     }
 
-    @if not($filtering-row-text-color) and $filtering-row-background {
-        $filtering-row-text-color: adaptive-contrast(var(--filtering-row-background));
+    @if not($row-even-text-color) and $foreground {
+        $row-even-text-color: var(--foreground);
     }
 
-    @if not($excel-filtering-header-foreground) and $filtering-row-background {
-        $excel-filtering-header-foreground: adaptive-contrast(var(--filtering-row-background));
+    @if not($row-selected-text-color) and $foreground {
+        $row-selected-text-color: var(--foreground);
     }
 
-    @if not($excel-filtering-subheader-foreground) and $filtering-row-background {
-        $excel-filtering-subheader-foreground: adaptive-contrast(var(--filtering-row-background));
-    }
+    // cell
 
-    @if not($excel-filtering-actions-foreground) and $filtering-row-background {
-        $excel-filtering-actions-foreground: hsl(from adaptive-contrast(var(--filtering-row-background)) h s l / 0.8);
+    @if not($cell-selected-background) and $accent-color and $background {
+        $cell-selected-background: color-mix(in srgb, var(--accent-color) 24%, var(--background));
     }
 
-    @if not($excel-filtering-actions-disabled-foreground) and $filtering-row-background {
-        $excel-filtering-actions-disabled-foreground: hsl(
-            from adaptive-contrast(var(--filtering-row-background)) h s l / 0.5
-        );
+    @if not($cell-selected-text-color) and $foreground {
+        $cell-selected-text-color: var(--foreground);
     }
 
-    @if not($grid-shadow) {
-        $grid-elevation: map.get($grid-schema, 'grid-elevation');
-        $grid-shadow: elevation($grid-elevation);
+    @if not($cell-active-border-color) and $accent-color {
+        $cell-active-border-color: var(--accent-color);
     }
 
-    @if not($drag-shadow) {
-        $drag-elevation: map.get($grid-schema, 'drag-elevation');
-        $drag-shadow: elevation($drag-elevation);
+    @if not($cell-selected-within-background) and $accent-color and $background {
+        $cell-selected-within-background: color-mix(in srgb, var(--accent-color) 24%, var(--background));
     }
 
-    @if not($drop-area-border-radius) {
-        $drop-area-border-radius: map.get($theme, 'drop-area-border-radius');
+    @if not($cell-selected-within-text-color) and $foreground {
+        $cell-selected-within-text-color: var(--foreground);
     }
 
-    @if $row-odd-background and not($body-column-border-color-odd) {
-        $body-column-border-color-odd: $row-odd-background;
-    }
+    // summaries
 
-    @if $row-even-background and not($body-column-border-color-even) {
-        $body-column-border-color-even: $row-even-background;
+    @if not($summaries-patch-background) and $foreground and $background {
+        $summaries-patch-background: color-mix(in srgb, var(--foreground) 12%, var(--background));
     }
 
-    @if $row-hover-background and not($body-column-hover-border-color) {
-        $body-column-hover-border-color: $row-hover-background;
-    }
+    // OLD LOGIC - to be removed after testing
 
-    @if $row-selected-background and not($body-column-hover-selected-border-color) {
-        $body-column-hover-selected-border-color: $row-selected-background;
-    }
+    // @if not($ghost-header-icon-color) and $ghost-header-background {
+    //     $ghost-header-icon-color: hsl(from adaptive-contrast(var(--ghost-header-background)) h s l / 0.07);
+    // }
 
-    @if $row-selected-hover-background and not($body-column-selected-border-color) {
-        $body-column-selected-border-color: $row-selected-hover-background;
-    }
+    // @if not($ghost-header-text-color) and $ghost-header-background {
+    //     $ghost-header-text-color: adaptive-contrast(var(--ghost-header-background));
+    // }
+
+    // @if not($header-text-color) and $header-background {
+    //     $header-text-color: adaptive-contrast(var(--header-background));
+    // }
+
+    // @if not($header-selected-background) and $header-background {
+    //     $header-selected-background: dynamic-shade(var(--header-background));
+    // }
+
+    // @if not($header-selected-text-color) and $header-selected-background {
+    //     $header-selected-text-color: adaptive-contrast(var(--header-selected-background));
+    // }
+
+    // @if not($header-border-color) and $header-background {
+    //     $header-border-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.24);
+    // }
+
+    // @if not($content-text-color) and $content-background {
+    //     $content-text-color: adaptive-contrast(var(--content-background));
+    // }
+
+    // @if not($row-odd-background) and $content-background {
+    //     $row-odd-background: hsl(from var(--content-background) h calc(s - 10) l);
+    // }
+
+    // @if not($row-odd-text-color) and $row-odd-background {
+    //     $row-odd-text-color: adaptive-contrast(var(--row-odd-background));
+    // }
+
+    // @if not($row-even-background) and $content-background {
+    //     $row-even-background: hsl(from var(--content-background) h calc(s + 10) l);
+    // }
+
+    // @if not($row-even-text-color) and $row-even-background {
+    //     $row-even-text-color: adaptive-contrast(var(--row-even-background));
+    // }
+
+    // @if not($row-hover-background) and $content-background {
+    //     $row-hover-background: dynamic-shade(var(--content-background), $offset: 7);
+    // }
+
+    // @if not($row-hover-text-color) and $row-hover-background {
+    //     $row-hover-text-color: adaptive-contrast(var(--row-hover-background));
+    // }
+
+    // @if not($cell-selected-background) and $content-background {
+    //     $cell-selected-background: dynamic-shade(var(--content-background));
+    // }
+
+    // @if not($cell-selected-text-color) and $cell-selected-background {
+    //     $cell-selected-text-color: adaptive-contrast(var(--cell-selected-background));
+    // }
+
+    // @if not($row-selected-background) and $content-background {
+    //     $row-selected-background: dynamic-shade(var(--content-background));
+    // }
+
+    // @if not($row-selected-text-color) and $row-selected-background {
+    //     $row-selected-text-color: adaptive-contrast(var(--row-selected-background));
+    // }
+
+    // @if not($row-selected-hover-background) and $row-selected-background {
+    //     $row-selected-hover-background: dynamic-shade(var(--row-selected-background), $offset: 7);
+    // }
+
+    // @if not($row-selected-hover-text-color) and $row-selected-hover-background {
+    //     $row-selected-hover-text-color: adaptive-contrast(var(--row-selected-hover-background));
+    // }
+
+    // @if not($row-border-color) and $content-background {
+    //     $row-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.08);
+    // }
+
+    // @if not($cell-selected-within-background) and $row-selected-background {
+    //     $cell-selected-within-background: dynamic-shade(var(--row-selected-background), $offset: 7);
+    // }
+
+    // @if not($cell-selected-within-text-color) and $cell-selected-within-background {
+    //     $cell-selected-within-text-color: adaptive-contrast(var(--cell-selected-within-background));
+    // }
+
+    // @if not($cell-editing-background) and $content-background {
+    //     $cell-editing-background: var(--content-background);
+    // }
+
+    // @if not($cell-editing-foreground) and $cell-editing-background {
+    //     $cell-editing-foreground: adaptive-contrast(var(--cell-editing-background));
+    // }
+
+    // @if not($cell-editing-focus-foreground) and $cell-editing-background {
+    //     $cell-editing-focus-foreground: adaptive-contrast(var(--cell-editing-background));
+    // }
+
+    // @if not($cell-active-border-color) and $content-background {
+    //     $cell-active-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
+    // }
+
+    // @if not($pinned-border-color) and $content-background {
+    //     $pinned-border-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.08);
+    // }
+
+    // @if not($group-row-background) and $header-background {
+    //     $group-row-background: $header-background;
+    // }
+
+    // @if not($expand-icon-color) and $group-row-background {
+    //     $expand-icon-color: adaptive-contrast(var(--group-row-background));
+    // }
+
+    // @if not($group-row-selected-background) and $group-row-background {
+    //     $group-row-selected-background: dynamic-shade(var(--group-row-background), $offset: 10);
+    // }
+
+    // @if not($group-label-text) and $group-row-selected-background {
+    //     $group-label-text: adaptive-contrast(var(--group-row-selected-background));
+    // }
+
+    // @if not($expand-icon-color) and $group-row-selected-background {
+    //     $expand-icon-color: adaptive-contrast(var(--group-row-selected-background));
+    // }
+
+    // @if not($expand-icon-hover-color) and $expand-icon-color {
+    //     $expand-icon-hover-color: var(--expand-icon-color);
+    // }
+
+    // @if not($group-count-background) and $group-row-selected-background {
+    //     $group-count-background: adaptive-contrast(var(--group-row-selected-background));
+    // }
+
+    // @if not($expand-all-icon-color) and $header-background {
+    //     $expand-all-icon-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.87);
+    // }
+
+    // @if not($expand-all-icon-hover-color) and $header-background {
+    //     $expand-all-icon-hover-color: adaptive-contrast(var(--header-background));
+    // }
+
+    // @if not($sorted-header-icon-color) and $header-background {
+    //     $sorted-header-icon-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
+    // }
+
+    // @if not($sortable-header-icon-hover-color) and $sorted-header-icon-color {
+    //     $sortable-header-icon-hover-color: hsl(from var(--sorted-header-icon-color) h s l / 1);
+    // }
+
+    // @if not($edit-mode-color) and $content-background {
+    //     $edit-mode-color: hsl(from adaptive-contrast(var(--content-background)) h s l / 0.5);
+    // }
+
+    // @if not($group-label-text) and $group-row-background {
+    //     $group-label-text: adaptive-contrast(var(--group-row-background));
+    // }
+
+    // @if not($group-count-background) and $group-row-background {
+    //     $group-count-background: adaptive-contrast(var(--group-row-background));
+    // }
+
+    // @if not($group-count-text-color) and $group-count-background {
+    //     $group-count-text-color: adaptive-contrast(var(--group-count-background));
+    // }
+
+    // @if not($grouparea-background) and $header-background {
+    //     $grouparea-background: var(--header-background);
+    // }
+
+    // @if not($grouparea-color) and $grouparea-background {
+    //     $grouparea-color: hsl(from adaptive-contrast(var(--grouparea-background)) h s l / 0.8);
+    // }
+
+    // @if not($grouparea-color) and $header-background {
+    //     $grouparea-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.8);
+    // }
+
+    // @if not($drop-area-background) and $grouparea-background {
+    //     $drop-area-background: adaptive-contrast(var(--grouparea-background));
+    // }
+
+    // @if not($drop-area-on-drop-background) and $drop-area-background {
+    //     $drop-area-on-drop-background: $drop-area-background;
+    // }
+
+    // @if not($drop-area-text-color) and $drop-area-background {
+    //     $drop-area-text-color: adaptive-contrast(var(--drop-area-background));
+    // }
+
+    // @if not($drop-area-icon-color) and $drop-area-background {
+    //     $drop-area-icon-color: adaptive-contrast(var(--drop-area-background));
+    // }
+
+    // @if not($filtering-header-background) and $header-background {
+    //     $filtering-header-background: color-mix(in hsl, var(--header-background), #fff 5%);
+    // }
+
+    // @if not($filtering-header-text-color) and $filtering-header-background {
+    //     $filtering-header-text-color: adaptive-contrast(var(--filtering-header-background));
+    // }
+
+    // @if not($filtering-row-background) and $header-background {
+    //     $filtering-row-background: color-mix(in hsl, var(--header-background), #fff 5%);
+    // }
+
+    // @if not($filtering-row-text-color) and $filtering-row-background {
+    //     $filtering-row-text-color: adaptive-contrast(var(--filtering-row-background));
+    // }
+
+    // @if not($excel-filtering-header-foreground) and $filtering-row-background {
+    //     $excel-filtering-header-foreground: adaptive-contrast(var(--filtering-row-background));
+    // }
+
+    // @if not($excel-filtering-subheader-foreground) and $filtering-row-background {
+    //     $excel-filtering-subheader-foreground: adaptive-contrast(var(--filtering-row-background));
+    // }
+
+    // @if not($excel-filtering-actions-foreground) and $filtering-row-background {
+    //     $excel-filtering-actions-foreground: hsl(from adaptive-contrast(var(--filtering-row-background)) h s l / 0.8);
+    // }
+
+    // @if not($excel-filtering-actions-disabled-foreground) and $filtering-row-background {
+    //     $excel-filtering-actions-disabled-foreground: hsl(
+    //         from adaptive-contrast(var(--filtering-row-background)) h s l / 0.5
+    //     );
+    // }
+
+    // @if not($grid-shadow) {
+    //     $grid-elevation: map.get($grid-schema, 'grid-elevation');
+    //     $grid-shadow: elevation($grid-elevation);
+    // }
+
+    // @if not($drag-shadow) {
+    //     $drag-elevation: map.get($grid-schema, 'drag-elevation');
+    //     $drag-shadow: elevation($drag-elevation);
+    // }
+
+    // @if not($drop-area-border-radius) {
+    //     $drop-area-border-radius: map.get($theme, 'drop-area-border-radius');
+    // }
+
+    // @if $row-odd-background and not($body-column-border-color-odd) {
+    //     $body-column-border-color-odd: $row-odd-background;
+    // }
+
+    // @if $row-even-background and not($body-column-border-color-even) {
+    //     $body-column-border-color-even: $row-even-background;
+    // }
+
+    // @if $row-hover-background and not($body-column-hover-border-color) {
+    //     $body-column-hover-border-color: $row-hover-background;
+    // }
+
+    // @if $row-selected-background and not($body-column-hover-selected-border-color) {
+    //     $body-column-hover-selected-border-color: $row-selected-background;
+    // }
+
+    // @if $row-selected-hover-background and not($body-column-selected-border-color) {
+    //     $body-column-selected-border-color: $row-selected-hover-background;
+    // }
 
     @return extend(
         $theme,
         (
             selector: $selector,
+
+            background: $background,
+            foreground: $foreground,
+            accent-color: $accent-color,
 
             header-background: $header-background,
             header-text-color: $header-text-color,
