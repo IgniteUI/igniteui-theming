@@ -315,8 +315,16 @@
         $row-even-text-color: var(--foreground);
     }
 
+    @if not($row-hover-text-color) and $foreground {
+        $row-hover-text-color: var(--foreground);
+    }
+
     @if not($row-selected-text-color) and $foreground {
         $row-selected-text-color: var(--foreground);
+    }
+
+    @if not($row-selected-hover-text-color) and $foreground {
+        $row-selected-hover-text-color: var(--foreground);
     }
 
     // cell
