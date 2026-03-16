@@ -265,6 +265,10 @@
         $header-selected-background: color-mix(in srgb, var(--accent-color) 12%, var(--background));
     }
 
+    @if not($header-text-color) and $foreground {
+        $header-text-color: var(--foreground);
+    }
+
     @if not($header-selected-text-color) and $foreground {
         $header-selected-text-color: var(--foreground);
     }
