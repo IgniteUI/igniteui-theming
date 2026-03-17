@@ -261,12 +261,12 @@
         $header-background: color-mix(in srgb, var(--foreground) 6%, var(--background));
     }
 
-    @if not($header-selected-background) and $accent-color and $background {
-        $header-selected-background: color-mix(in srgb, var(--accent-color) 12%, var(--background));
-    }
-
     @if not($header-text-color) and $foreground {
         $header-text-color: var(--foreground);
+    }
+
+    @if not($header-selected-background) and $accent-color and $background {
+        $header-selected-background: color-mix(in srgb, var(--accent-color) 12%, var(--background));
     }
 
     @if not($header-selected-text-color) and $foreground {
@@ -285,10 +285,26 @@
         $ghost-header-icon-color: var(--foreground);
     }
 
+    @if not($header-border-color) and $foreground and $background {
+        $header-border-color: hsl(from color-mix(in srgb, var(--foreground) 20%, var(--background)) h s l / 0.38);
+    }
+
+    @if not($sorted-header-icon-color) and $accent-color {
+        $sorted-header-icon-color: hsl(from var(--accent-color) h s l / 0.7);
+    }
+
+    @if not($sortable-header-icon-hover-color) and $accent-color {
+        $sortable-header-icon-hover-color: var(--accent-color);
+    }
+
     // row and content
 
     @if not($content-background) and $background {
         $content-background: var(--background);
+    }
+
+    @if not($content-text-color) and $foreground {
+        $content-text-color: var(--foreground);
     }
 
     @if not($row-odd-background) and $background {
@@ -331,6 +347,34 @@
         $row-selected-hover-text-color: var(--foreground);
     }
 
+    @if not($row-border-color) and $foreground and $background {
+        $row-border-color: hsl(from color-mix(in srgb, var(--foreground) 16%, var(--background)) h s l / 0.38);
+    }
+
+    @if not($pinned-border-color) and $foreground and $background {
+        $pinned-border-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
+    }
+
+    @if not($edit-mode-color) and $accent-color {
+        $edit-mode-color: var(--accent-color);
+    }
+
+    @if not($edited-row-indicator) and $foreground and $background {
+        $edited-row-indicator: color-mix(in srgb, var(--foreground) 16%, var(--background));
+    }
+
+    @if not($row-highlight) and $accent-color {
+        $row-highlight: var(--accent-color);
+    }
+
+    @if not($row-ghost-background) and $background {
+        $row-ghost-background: var(--background);
+    }
+
+    @if not($row-drag-color) and $foreground {
+        $row-drag-color: var(--foreground);
+    }
+
     // cell
 
     @if not($cell-selected-background) and $accent-color and $background {
@@ -339,6 +383,26 @@
 
     @if not($cell-selected-text-color) and $foreground {
         $cell-selected-text-color: var(--foreground);
+    }
+
+    @if not($cell-editing-background) and $background {
+        $cell-editing-background: var(--background);
+    }
+
+    @if not($cell-editing-foreground) and $foreground {
+        $cell-editing-foreground: var(--foreground);
+    }
+
+    @if not($cell-editing-focus-foreground) and $foreground {
+        $cell-editing-focus-foreground: var(--foreground);
+    }
+
+    @if not($cell-edited-value-color) and $foreground and $background {
+        $cell-edited-value-color: color-mix(in srgb, var(--foreground) 80%, var(--background));
+    }
+
+    @if not($cell-new-color) and $foreground {
+        $cell-new-color: var(--foreground);
     }
 
     @if not($cell-active-border-color) and $accent-color {
@@ -353,10 +417,136 @@
         $cell-selected-within-text-color: var(--foreground);
     }
 
+    @if not($cell-disabled-color) and $foreground and $background {
+        $cell-disabled-color: color-mix(in srgb, var(--foreground) 50%, var(--background));
+    }
+
+    // filtering
+
+    @if not($filtering-header-background) and $background {
+        $filtering-header-background: var(--background);
+    }
+
+    @if not($filtering-header-text-color) and $foreground {
+        $filtering-header-text-color: var(--foreground);
+    }
+
+    @if not($filtering-row-background) and $background {
+        $filtering-row-background: var(--background);
+    }
+
+    @if not($filtering-row-text-color) and $foreground {
+        $filtering-row-text-color: var(--foreground);
+    }
+
+    // excel filtering
+
+    @if not($excel-filtering-header-foreground) and $foreground {
+        $excel-filtering-header-foreground: var(--foreground);
+    }
+
+    @if not($excel-filtering-subheader-foreground) and $foreground {
+        $excel-filtering-subheader-foreground: var(--foreground);
+    }
+
+    @if not($excel-filtering-actions-foreground) and $foreground {
+        $excel-filtering-actions-foreground: var(--foreground);
+    }
+
+    @if not($excel-filtering-actions-hover-foreground) and $foreground {
+        $excel-filtering-actions-hover-foreground: var(--foreground);
+    }
+
+    @if not($excel-filtering-actions-disabled-foreground) and $foreground and $background {
+        $excel-filtering-actions-disabled-foreground: color-mix(in srgb, var(--foreground) 50%, var(--background));
+    }
+
+    // resizing
+
+    @if not($resize-line-color) and $accent-color {
+        $resize-line-color: var(--accent-color);
+    }
+
+    // grouping
+
+    @if not($grouparea-background) and $foreground and $background {
+        $grouparea-background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+    }
+
+    @if not($grouparea-color) and $foreground and $background {
+        $grouparea-color: color-mix(in srgb, var(--foreground) 60%, var(--background));
+    }
+
+    @if not($group-row-background) and $foreground and $background {
+        $group-row-background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+    }
+
+    @if not($group-row-selected-background) and $foreground and $background {
+        $group-row-selected-background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+    }
+
+    @if not($group-label-column-name-text) and $accent-color {
+        $group-label-column-name-text: var(--accent-color);
+    }
+
+    @if not($group-label-icon) and $accent-color {
+        $group-label-icon: var(--accent-color);
+    }
+
+    @if not($group-label-text) and $foreground and $background {
+        $group-label-text: color-mix(in srgb, var(--foreground) 80%, var(--background));
+    }
+
+    @if not($group-count-background) and $foreground and $background {
+        $group-count-background: color-mix(in srgb, var(--foreground) 12%, var(--background));
+    }
+
+    @if not($group-count-text-color) and $foreground {
+        $group-count-text-color: var(--foreground);
+    }
+
+    @if not($drop-area-text-color) and $foreground and $background {
+        $drop-area-text-color: color-mix(in srgb, var(--foreground) 80%, var(--background));
+    }
+
+    @if not($drop-area-icon-color) and $foreground and $background {
+        $drop-area-icon-color: color-mix(in srgb, var(--foreground) 80%, var(--background));
+    }
+
+    @if not($drop-area-background) and $background {
+        $drop-area-background: var(--background);
+    }
+
+    @if not($drop-area-on-drop-background) and $background {
+        $drop-area-on-drop-background: var(--background);
+    }
+
     // summaries
 
     @if not($summaries-patch-background) and $foreground and $background {
         $summaries-patch-background: color-mix(in srgb, var(--foreground) 12%, var(--background));
+    }
+
+    // other
+
+    @if not($drop-indicator-color) and $accent-color {
+        $drop-indicator-color: var(--accent-color);
+    }
+
+    @if not($expand-all-icon-color) and $foreground and $background {
+        $expand-all-icon-color: color-mix(in srgb, var(--foreground) 70%, var(--background));
+    }
+
+    @if not($expand-all-icon-hover-color) and $foreground and $background {
+        $expand-all-icon-hover-color: color-mix(in srgb, var(--foreground) 80%, var(--background));
+    }
+
+    @if not($expand-icon-color) and $foreground and $background {
+        $expand-icon-color: color-mix(in srgb, var(--foreground) 60%, var(--background));
+    }
+
+    @if not($expand-icon-hover-color) and $foreground and $background {
+        $expand-icon-hover-color: color-mix(in srgb, var(--foreground) 70%, var(--background));
     }
 
     // OLD LOGIC - to be removed after testing

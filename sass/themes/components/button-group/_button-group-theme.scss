@@ -128,6 +128,18 @@
     $theme: digest-schema($button-group-schema);
     $border: rem(1px, 16px) solid map.get($theme, 'item-selected-border-color');
 
+    @if not($item-hover-text-color) and $item-text-color {
+        $item-hover-text-color: dynamic-shade(var(--item-text-color));
+    }
+
+    @if not($item-selected-hover-text-color) and $item-selected-text-color {
+        $item-selected-hover-text-color: dynamic-shade(var(--item-selected-text-color));
+    }
+
+    @if not($disabled-text-color) and $item-text-color {
+        $disabled-text-color: hsl(from var(--item-text-color) h s l / 0.6);
+    }
+
     // background colors
     @if not($item-hover-background) and $item-background {
         $item-hover-background: dynamic-shade(var(--item-background));
