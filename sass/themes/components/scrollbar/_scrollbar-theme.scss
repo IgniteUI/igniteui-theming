@@ -68,6 +68,14 @@
 
     $theme: digest-schema($scrollbar-schema);
 
+    @if not($sb-thumb-bg-color-hover) and $sb-thumb-bg-color {
+        $sb-thumb-bg-color-hover: var(--sb-thumb-bg-color);
+    }
+
+    @if not($sb-track-bg-color-hover) and $sb-track-bg-color {
+        $sb-track-bg-color-hover: var(--sb-track-bg-color);
+    }
+
     @return extend(
         $theme,
         (

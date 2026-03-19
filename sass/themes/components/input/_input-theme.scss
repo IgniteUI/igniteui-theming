@@ -167,7 +167,7 @@
     $search-disabled-elevation: map.get($input-group-schema, 'search-disabled-elevation');
 
     // if idle-text-color is set but no box/search background, derive all text states from it
-    @if $idle-text-color and not($box-background) and not($search-background) {
+    @if $idle-text-color {
         @if not($filled-text-color) {
             $filled-text-color: var(--idle-text-color);
         }

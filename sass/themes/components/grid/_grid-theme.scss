@@ -100,6 +100,7 @@
 /// @param {Color} $excel-filtering-actions-foreground [null] - The excel filtering actions text color. Auto-derived from filtering-row-background.
 /// @param {Color} $excel-filtering-actions-hover-foreground [null] - The excel filtering actions hover text color.
 /// @param {Color} $excel-filtering-actions-disabled-foreground [null] - The excel filtering actions disabled text color. Auto-derived from filtering-row-background.
+/// @param {Color} $excel-filtering-border-color [null] - The border color used in the excel style filter. Auto-derived from foreground and background.
 /// @param {Color} $tree-filtered-text-color [null] - Grouping row background color on focus.
 /// @param {Color} $summaries-patch-background [null] - The leading summaries patch background.
 /// @param {Color} $row-highlight [null] - The grid row highlight indication color.
@@ -213,8 +214,13 @@
     $excel-filtering-header-foreground: null,
     $excel-filtering-subheader-foreground: null,
     $excel-filtering-actions-foreground: null,
+    $excel-filtering-actions-icon-color: null,
     $excel-filtering-actions-hover-foreground: null,
+    $excel-filtering-actions-hover-icon-color: null,
+    $excel-filtering-actions-selected-icon-color: null,
+    $excel-filtering-actions-hover-background: null,
     $excel-filtering-actions-disabled-foreground: null,
+    $excel-filtering-border-color: null,
 
     $row-highlight: null,
     $grid-shadow: null,
@@ -453,12 +459,32 @@
         $excel-filtering-actions-foreground: var(--foreground);
     }
 
+    @if not($excel-filtering-actions-icon-color) and $foreground {
+        $excel-filtering-actions-icon-color: var(--foreground);
+    }
+
     @if not($excel-filtering-actions-hover-foreground) and $foreground {
         $excel-filtering-actions-hover-foreground: var(--foreground);
     }
 
+    @if not($excel-filtering-actions-hover-icon-color) and $foreground {
+        $excel-filtering-actions-hover-icon-color: var(--foreground);
+    }
+
+    @if not($excel-filtering-actions-selected-icon-color) and $accent-color {
+        $excel-filtering-actions-selected-icon-color: var(--accent-color);
+    }
+
+    @if not($excel-filtering-actions-hover-background) and $accent-color and $background {
+        $excel-filtering-actions-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
+    }
+
     @if not($excel-filtering-actions-disabled-foreground) and $foreground and $background {
         $excel-filtering-actions-disabled-foreground: color-mix(in srgb, var(--foreground) 50%, var(--background));
+    }
+
+    @if not($excel-filtering-border-color) and $foreground and $background {
+        $excel-filtering-border-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
     }
 
     // resizing
@@ -909,8 +935,13 @@
             excel-filtering-header-foreground: $excel-filtering-header-foreground,
             excel-filtering-subheader-foreground: $excel-filtering-subheader-foreground,
             excel-filtering-actions-foreground: $excel-filtering-actions-foreground,
+            excel-filtering-actions-icon-color: $excel-filtering-actions-icon-color,
             excel-filtering-actions-hover-foreground: $excel-filtering-actions-hover-foreground,
+            excel-filtering-actions-hover-icon-color: $excel-filtering-actions-hover-icon-color,
+            excel-filtering-actions-selected-icon-color: $excel-filtering-actions-selected-icon-color,
+            excel-filtering-actions-hover-background: $excel-filtering-actions-hover-background,
             excel-filtering-actions-disabled-foreground: $excel-filtering-actions-disabled-foreground,
+            excel-filtering-border-color: $excel-filtering-border-color,
 
             tree-filtered-text-color: $tree-filtered-text-color,
             tree-selected-filtered-row-text-color: $tree-selected-filtered-row-text-color,
