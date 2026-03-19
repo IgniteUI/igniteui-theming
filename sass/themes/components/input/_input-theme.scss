@@ -203,6 +203,20 @@
         @if not($input-suffix-color--focused) {
             $input-suffix-color--focused: var(--idle-text-color);
         }
+
+        @if not($disabled-text-color) {
+            $disabled-text-color: hsl(from var(--idle-text-color) h s l / 0.7);
+        }
+    }
+
+    @if $placeholder-color {
+        @if not($hover-placeholder-color) {
+            $hover-placeholder-color: var(--placeholder-color);
+        }
+
+        @if not($disabled-placeholder-color) {
+            $disabled-placeholder-color: hsl(from var(--placeholder-color) h s l / 0.7);
+        }
     }
 
     @if $variant == 'material' {

@@ -261,6 +261,10 @@
 
     $theme: digest-schema($grid-schema);
 
+    @if not($foreground) and $background {
+        $foreground: adaptive-contrast(var(--background));
+    }
+
     // header
 
     @if not($header-background) and $foreground and $background {
