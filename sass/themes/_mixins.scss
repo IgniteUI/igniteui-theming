@@ -88,8 +88,12 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @param {Map} $theme - The component theme used for generating CSS variables.
 /// @param {String} $name [null] - Deprecated. This parameter is ignored.
 /// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating CSS variables.
-/// @example scss Convert theme colors to CSS variables.
-///   $theme: digest-schema((background: color(primary, 500), foreground: contrast-color(color, 500));
+/// @example scss - Convert theme colors to CSS variables.
+///   $theme: digest-schema((
+///     background: color(primary, '500'),
+///     foreground: contrast-color(color, '500')
+///   ));
+///
 ///   :root {
 ///     @include css-vars-from-theme($theme);
 ///   }
@@ -102,14 +106,17 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 
     $t: map.get($theme, '_meta', 'theme');
     $v: map.get($theme, '_meta', 'variant');
+    $p: map.get($theme, 'prefix');
     $vp: config.variable-prefix();
 
     @each $key, $value in map.remove($theme, $ignored...) {
         @if _is-emittable($key, $value) {
+            $local: if($p, '#{$p}-#{$key}', $key);
+
             @if $vp == 'ig' {
-                --#{$key}: var(--ig-#{$n}-#{$key}, #{$value});
+                --#{$local}: var(--ig-#{$n}-#{$key}, #{$value});
             } @else {
-                --#{$key}: var(--#{$vp}-#{$n}-#{$key}, var(--ig-#{$n}-#{$key}, #{$value}));
+                --#{$local}: var(--#{$vp}-#{$n}-#{$key}, var(--ig-#{$n}-#{$key}, #{$value}));
             }
         }
     }

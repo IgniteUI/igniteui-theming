@@ -276,6 +276,96 @@ $schema: (
             }
         }
 
+        @include it('should prepend the prefix to CSS variable names when the theme map includes a prefix') {
+            $theme: map.merge(
+                digest-schema($schema),
+                (
+                    prefix: 'igc',
+                )
+            );
+            $name: map.get($theme, '_meta', 'name');
+            $vp: config.variable-prefix();
+
+            @include assert() {
+                @include output() {
+                    @include css-vars-from-theme($theme);
+                }
+
+                @include expect() {
+                    @each $key, $value in map.remove($theme, $ignored-keys...) {
+                        @if $key != 'prefix' {
+                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+
+                            --igc-#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                        }
+                    }
+
+                    --ig-theme: material;
+                    --ig-theme-variant: light;
+                }
+            }
+        }
+
+        @include it('should not prepend a prefix when the theme map has no prefix property') {
+            $theme: digest-schema($schema);
+            $name: map.get($theme, '_meta', 'name');
+            $vp: config.variable-prefix();
+
+            // Verify no prefix key exists in the digested schema
+            @include assert-false(map.get($theme, 'prefix'), 'Digested schema should not have a prefix key');
+
+            @include assert() {
+                @include output() {
+                    @include css-vars-from-theme($theme);
+                }
+
+                @include expect() {
+                    @each $key, $value in map.remove($theme, $ignored-keys...) {
+                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+
+                        --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                    }
+
+                    --ig-theme: material;
+                    --ig-theme-variant: light;
+                }
+            }
+        }
+
+        @include it('should scope prefixed CSS variables correctly via the tokens mixin') {
+            $selector: 'igc-dockmanager';
+            $theme: map.merge(
+                digest-schema($schema),
+                (
+                    selector: $selector,
+                    prefix: 'igc',
+                )
+            );
+            $name: map.get($theme, '_meta', 'name');
+            $vp: config.variable-prefix();
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include tokens($theme, $mode: 'scoped');
+                }
+
+                @include expect($selector: false) {
+                    #{$selector} {
+                        @each $key, $value in map.remove($theme, $ignored-keys...) {
+                            @if $key != 'prefix' {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+
+                                --igc-#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+                        }
+
+                        --ig-theme: material;
+                        --ig-theme-variant: light;
+                    }
+                }
+            }
+        }
+
         @include it('should ignore $name property when provided to css-vars-from-theme mixin') {
             $theme: digest-schema($schema);
             $name: map.get($theme, '_meta', 'name');

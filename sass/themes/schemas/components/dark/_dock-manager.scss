@@ -26,7 +26,7 @@
 /// @prop {Color} tab-background [color: ('gray', 100, .3)] - Sets the background color for tabs.
 /// @prop {Color} tab-background-active [color: ('gray', 100, .3)] - Sets the background color for active tabs.
 /// @prop {Color} tab-border-color-active [color: ('gray', 100)] - Sets the border color for active tabs.
-/// @prop {Color} button-text [contrast-color: 'surface'] - Sets the button text color.
+/// @prop {Color} button-component-text [contrast-color: 'surface'] - Sets the button text color.
 /// @prop {Color} flyout-shadow-color [color: ('gray', 50, .3)] - Sets the flyout shadow color.
 /// @prop {Color} drop-shadow-background [color: ('primary', 900, .3)] - Sets the drop-shadow background color.
 /// @prop {Color} splitter-background [color: ('gray', 100)] - Sets the background color for the splitters.
@@ -140,7 +140,7 @@ $dark-base-dock-manager: (
         ),
     ),
 
-    button-text: (
+    button-component-text: (
         contrast-color: 'surface',
     ),
 
@@ -282,7 +282,7 @@ $dark-bootstrap-dock-manager: extend(
 
 /// Generates a dark indigo dock-manager schema.
 /// @type Map
-/// @prop {Color} button-text [color: ('primary', 200)] - Sets the button text color.
+/// @prop {Color} button-component-text [color: ('primary', 200)] - Sets the button text color.
 /// @prop {Color} joystick-background [color: ('surface')] - Sets the background color of the joystick.
 /// @prop {Color} joystick-background-active [color: ('primary')] - Sets the background color of the joysticks.
 /// @prop {Color} joystick-border-color [color: ('gray', 100)] - Sets the border color of the joystick.
@@ -297,7 +297,7 @@ $dark-indigo-dock-manager: extend(
     $indigo-dock-manager,
     $dark-base-dock-manager,
     (
-        button-text: (
+        button-component-text: (
             color: (
                 'primary',
                 200,
