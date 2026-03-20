@@ -13,7 +13,7 @@
 /// @prop {Color} active-color [color: 'primary'] - Sets the active text and border colors for tabs, panes, and menus.
 /// @prop {Color} background-color [null] - Sets the base dock manager color as well as the pane headers and tabs background colors.
 /// @prop {Color} border-color [color: ('surface')] - Sets the global border color in the dock manager. Also sets the pane content background and the context menu active background colors.
-/// @prop {Color} button-text [color: ('gray', 800)] - Sets the button text color.
+/// @prop {Color} button-component-text [color: ('gray', 800)] - Sets the button text color.
 /// @prop {Color} context-menu-background-active [color: 'primary'] - Sets the background color for active context menus.
 /// @prop {Color} context-menu-background [null] - Sets the background color for context menus.
 /// @prop {Color} dock-background [null] - Sets the background color of the dock manager.
@@ -60,7 +60,7 @@ $light-dock-manager: (
         ),
     ),
 
-    button-text: (
+    button-component-text: (
         color: (
             'gray',
             800,
@@ -347,7 +347,7 @@ $fluent-dock-manager: extend(
 
 /// Generates a bootstrap dock-manager schema.
 /// @type Map
-/// @prop {Color} button-text [color: 'primary'] - Sets the button text color.
+/// @prop {Color} button-component-text [color: 'primary'] - Sets the button text color.
 /// @prop {Color} context-menu-background [color: 'surface'] - Sets the background color for context menus.
 /// @prop {Color} context-menu-color-active [color: 'surface'] - Sets the text color for active context menus.
 /// @prop {Color} context-menu-color [color: 'primary'] - Sets the text color for context menus.
@@ -364,7 +364,7 @@ $fluent-dock-manager: extend(
 $bootstrap-dock-manager: extend(
     $light-dock-manager,
     (
-        button-text: (
+        button-component-text: (
             color: 'primary',
         ),
 
@@ -446,7 +446,7 @@ $bootstrap-dock-manager: extend(
 /// Generates a light indigo dock-manager schema.
 /// @type Map
 /// @prop {Color} background-color [color: ('gray', 100)] - Sets the base dock manager color as well as the pane headers and tabs background colors.
-/// @prop {Color} button-text [color: 'primary'] - Sets the button text color.
+/// @prop {Color} button-component-text [color: 'primary'] - Sets the button text color.
 /// @prop {Color} context-menu-color-active [contrast-color: 'primary'] - Sets the text color for active context menus.
 /// @prop {Color} context-menu-color [color: ('gray', 700)] - Sets the text color for context menus.
 /// @prop {Color} joystick-background [color: ('primary', 50)] - Sets the background color of the joysticks.
@@ -468,7 +468,7 @@ $indigo-dock-manager: extend(
             ),
         ),
 
-        button-text: (
+        button-component-text: (
             color: 'primary',
         ),
 
