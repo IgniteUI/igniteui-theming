@@ -329,6 +329,10 @@
             $focused-bottom-line-color: var(--hover-bottom-line-color);
         }
 
+        @if not($disabled-bottom-line-color) and $idle-bottom-line-color {
+            $disabled-bottom-line-color: hsl(from var(--idle-bottom-line-color) h s l / 0.5);
+        }
+
         @if $variant == 'material' {
             @if not($focused-secondary-color) and $focused-bottom-line-color {
                 $focused-secondary-color: var(--focused-bottom-line-color);
