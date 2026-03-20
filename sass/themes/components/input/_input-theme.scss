@@ -180,28 +180,30 @@
             $focused-text-color: var(--idle-text-color);
         }
 
-        @if not($input-prefix-color) {
-            $input-prefix-color: var(--idle-text-color);
-        }
+        @if $variant == 'material' or $variant == 'indigo' {
+            @if not($input-prefix-color) {
+                $input-prefix-color: var(--idle-text-color);
+            }
 
-        @if not($input-prefix-color--filled) {
-            $input-prefix-color--filled: var(--idle-text-color);
-        }
+            @if not($input-prefix-color--filled) {
+                $input-prefix-color--filled: var(--idle-text-color);
+            }
 
-        @if not($input-prefix-color--focused) {
-            $input-prefix-color--focused: var(--idle-text-color);
-        }
+            @if not($input-prefix-color--focused) {
+                $input-prefix-color--focused: var(--idle-text-color);
+            }
 
-        @if not($input-suffix-color) {
-            $input-suffix-color: var(--idle-text-color);
-        }
+            @if not($input-suffix-color) {
+                $input-suffix-color: var(--idle-text-color);
+            }
 
-        @if not($input-suffix-color--filled) {
-            $input-suffix-color--filled: var(--idle-text-color);
-        }
+            @if not($input-suffix-color--filled) {
+                $input-suffix-color--filled: var(--idle-text-color);
+            }
 
-        @if not($input-suffix-color--focused) {
-            $input-suffix-color--focused: var(--idle-text-color);
+            @if not($input-suffix-color--focused) {
+                $input-suffix-color--focused: var(--idle-text-color);
+            }
         }
 
         @if not($disabled-text-color) {
