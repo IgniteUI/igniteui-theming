@@ -166,6 +166,61 @@
     $search-hover-elevation: map.get($input-group-schema, 'search-hover-elevation');
     $search-disabled-elevation: map.get($input-group-schema, 'search-disabled-elevation');
 
+    // if idle-text-color is set but no box/search background, derive all text states from it
+    @if $idle-text-color {
+        @if not($filled-text-color) {
+            $filled-text-color: var(--idle-text-color);
+        }
+
+        @if not($filled-text-hover-color) {
+            $filled-text-hover-color: var(--idle-text-color);
+        }
+
+        @if not($focused-text-color) {
+            $focused-text-color: var(--idle-text-color);
+        }
+
+        @if $variant == 'material' or $variant == 'indigo' {
+            @if not($input-prefix-color) {
+                $input-prefix-color: var(--idle-text-color);
+            }
+
+            @if not($input-prefix-color--filled) {
+                $input-prefix-color--filled: var(--idle-text-color);
+            }
+
+            @if not($input-prefix-color--focused) {
+                $input-prefix-color--focused: var(--idle-text-color);
+            }
+
+            @if not($input-suffix-color) {
+                $input-suffix-color: var(--idle-text-color);
+            }
+
+            @if not($input-suffix-color--filled) {
+                $input-suffix-color--filled: var(--idle-text-color);
+            }
+
+            @if not($input-suffix-color--focused) {
+                $input-suffix-color--focused: var(--idle-text-color);
+            }
+        }
+
+        @if not($disabled-text-color) {
+            $disabled-text-color: hsl(from var(--idle-text-color) h s l / 0.7);
+        }
+    }
+
+    @if $placeholder-color {
+        @if not($hover-placeholder-color) {
+            $hover-placeholder-color: var(--placeholder-color);
+        }
+
+        @if not($disabled-placeholder-color) {
+            $disabled-placeholder-color: hsl(from var(--placeholder-color) h s l / 0.7);
+        }
+    }
+
     @if $variant == 'material' {
         @if not($box-background-hover) and $box-background {
             $box-background-hover: var(--box-background);
@@ -272,6 +327,10 @@
 
         @if not($focused-bottom-line-color) and $hover-bottom-line-color {
             $focused-bottom-line-color: var(--hover-bottom-line-color);
+        }
+
+        @if not($disabled-bottom-line-color) and $idle-bottom-line-color {
+            $disabled-bottom-line-color: hsl(from var(--idle-bottom-line-color) h s l / 0.5);
         }
 
         @if $variant == 'material' {
