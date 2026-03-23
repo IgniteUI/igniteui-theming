@@ -6,7 +6,12 @@
 @include describe('Utilities') {
     @include describe('css') {
         @include it('should expand shorthand properties') {
-            $expected: ('padding-top': 4px, 'padding-right': 8px, 'padding-bottom': 4px, 'padding-left': 8px);
+            $expected: (
+                'padding-top': 4px,
+                'padding-right': 8px,
+                'padding-bottom': 4px,
+                'padding-left': 8px,
+            );
 
             @include assert-equal(expand-shorthand(4px 8px, 'padding'), $expected);
         }
@@ -74,31 +79,184 @@
 
     @include describe('map') {
         @include it('should clean a map of null values') {
-            $dirty: (one: 'foo', two: null, three: 'baz');
-            $clean: (one: 'foo', three: 'baz');
+            $dirty: (
+                one: 'foo',
+                two: null,
+                three: 'baz',
+            );
+            $clean: (
+                one: 'foo',
+                three: 'baz',
+            );
 
             @include assert-equal(clean($dirty), $clean);
         }
 
         @include it('should merge two maps removing null values in the process') {
-            $map-1: (one: 'foo', two: null, three: 'baz');
-            $map-2: (one: 'foo', two: 'bar', three: 'bozo');
-            $result: (one: 'foo', two: 'bar', three: 'bozo');
+            $map-1: (
+                one: 'foo',
+                two: null,
+                three: 'baz',
+            );
+            $map-2: (
+                one: 'foo',
+                two: 'bar',
+                three: 'bozo',
+            );
+            $result: (
+                one: 'foo',
+                two: 'bar',
+                three: 'bozo',
+            );
 
             @include assert-equal(extend($map-1, $map-2), $result);
         }
 
+        @include it('should accumulate _meta keys when merging schema maps') {
+            $base: (
+                background: (
+                    color: (
+                        'gray',
+                        900,
+                    ),
+                ),
+                _meta: (
+                    name: 'foo',
+                    variant: 'light',
+                ),
+            );
+            $override: (
+                _meta: (
+                    theme: 'indigo',
+                ),
+            );
+            $result: (
+                background: (
+                    color: (
+                        'gray',
+                        900,
+                    ),
+                ),
+                _meta: (
+                    name: 'foo',
+                    variant: 'light',
+                    theme: 'indigo',
+                ),
+            );
+
+            @include assert-equal(extend($base, $override), $result);
+        }
+
+        @include it('should fully replace nested property maps regardless of whether the override has _meta') {
+            // Case A: override has no _meta
+            $base-a: (
+                background: (
+                    contrast-color: (
+                        'gray',
+                        900,
+                    ),
+                ),
+                _meta: (
+                    name: 'foo',
+                    variant: 'light',
+                    theme: 'indigo',
+                ),
+            );
+            $override-a: (
+                background: (
+                    color: (
+                        'gray',
+                        50,
+                    ),
+                ),
+            );
+            $result-a: (
+                background: (
+                    color: (
+                        'gray',
+                        50,
+                    ),
+                ),
+                _meta: (
+                    name: 'foo',
+                    variant: 'light',
+                    theme: 'indigo',
+                ),
+            );
+
+            @include assert-equal(extend($base-a, $override-a), $result-a);
+
+            // Case B: override has _meta
+            $base-b: (
+                background: (
+                    contrast-color: (
+                        'gray',
+                        900,
+                    ),
+                ),
+                _meta: (
+                    name: 'foo',
+                    variant: 'light',
+                    theme: 'indigo',
+                ),
+            );
+            $override-b: (
+                background: (
+                    color: (
+                        'gray',
+                        50,
+                    ),
+                ),
+                _meta: (
+                    variant: 'dark',
+                ),
+            );
+            $result-b: (
+                background: (
+                    color: (
+                        'gray',
+                        50,
+                    ),
+                ),
+                _meta: (
+                    name: 'foo',
+                    variant: 'dark',
+                    theme: 'indigo',
+                ),
+            );
+
+            @include assert-equal(extend($base-b, $override-b), $result-b);
+        }
+
         @include it('should diff two maps resolving all unique values in the second map in the process') {
-            $map-1: (one: 'foo', two: 'bar', three: 'baz');
-            $map-2: (one: 'foo', two: 'bar', three: 'bozo');
-            $result: (three: 'bozo');
+            $map-1: (
+                one: 'foo',
+                two: 'bar',
+                three: 'baz',
+            );
+            $map-2: (
+                one: 'foo',
+                two: 'bar',
+                three: 'bozo',
+            );
+            $result: (
+                three: 'bozo',
+            );
 
             @include assert-equal(diff($map-1, $map-2), $result);
         }
 
         @include it('should prefix all keys in a map with a given string') {
-            $map: (one: 'foo', two: 'bar', three: 'baz');
-            $prefixed-map: (test_one: 'foo', test_two: 'bar', test_three: 'baz');
+            $map: (
+                one: 'foo',
+                two: 'bar',
+                three: 'baz',
+            );
+            $prefixed-map: (
+                test_one: 'foo',
+                test_two: 'bar',
+                test_three: 'baz',
+            );
 
             @include assert-equal(map-keys-prefix($map, 'test', '_'), $prefixed-map);
         }
