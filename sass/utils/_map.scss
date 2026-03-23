@@ -31,7 +31,15 @@
     $result: ();
 
     @each $map in $maps {
-        $result: map.deep-merge($result, clean($map));
+        $cleaned: clean($map);
+
+        @if map.has-key($cleaned, '_meta') {
+            $_meta: map.get($result, '_meta') or ();
+            $result: map.merge($result, $cleaned);
+            $result: map.set($result, '_meta', map.deep-merge($_meta, map.get($cleaned, '_meta')));
+        } @else {
+            $result: map.merge($result, $cleaned);
+        }
     }
 
     @return $result;
