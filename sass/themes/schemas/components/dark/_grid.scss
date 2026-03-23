@@ -510,6 +510,7 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-disabled-foreground [contrast-color: ('gray', 50, .2)] - The text color of the excel style filtering options in disabled state.
 /// @prop {Map} excel-filtering-border-color [color: ('gray', 100)] - The border color used in the excel style filter.
 /// @prop {Map} row-ghost-background [color: ('gray', 100)] - The background color of the dragged row.
+/// @prop {Map} filtering-dialog-background [color: ('gray', 50)] - The background color of the advanced filtering dialog.
 /// @requires $indigo-grid
 $dark-indigo-grid: extend(
     $indigo-grid,
@@ -839,6 +840,13 @@ $dark-indigo-grid: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        filtering-dialog-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
 

@@ -95,6 +95,7 @@
 /// @param {Color} $filtering-header-text-color [null] - The filtered column header text color. Auto-derived from filtering-header-background.
 /// @param {Color} $filtering-row-background [null] - The filtering row background. Auto-derived from header-background.
 /// @param {Color} $filtering-row-text-color [null] - The filtering row text color. Auto-derived from filtering-row-background.
+/// @param {Color} $filtering-dialog-background [null] - The background color of the advanced filtering dialog.
 /// @param {Color} $excel-filtering-header-foreground [null] - The excel filtering header text color. Auto-derived from filtering-row-background.
 /// @param {Color} $excel-filtering-subheader-foreground [null] - The excel filtering subheader text color. Auto-derived from filtering-row-background.
 /// @param {Color} $excel-filtering-actions-foreground [null] - The excel filtering actions text color. Auto-derived from filtering-row-background.
@@ -207,6 +208,7 @@
     $filtering-header-text-color: null,
     $filtering-row-background: null,
     $filtering-row-text-color: null,
+    $filtering-dialog-background: null,
     $tree-filtered-text-color: null,
     $tree-selected-filtered-row-text-color: null,
     $tree-selected-filtered-cell-text-color: null,
@@ -260,9 +262,16 @@
     }
 
     $theme: digest-schema($grid-schema);
+    $variant: map.get($theme, '_meta', 'theme');
 
     @if not($foreground) and $background {
         $foreground: adaptive-contrast(var(--background));
+    }
+
+    @if $variant == 'fluent' {
+        @if not($grid-border-color) and $background and $foreground {
+            $grid-border-color: color-mix(in srgb, var(--foreground) 12%, var(--background));
+        }
     }
 
     // header
@@ -432,6 +441,10 @@
     }
 
     // filtering
+
+    @if not($filtering-dialog-background) and $background {
+        $filtering-dialog-background: var(--background);
+    }
 
     @if not($filtering-header-background) and $background {
         $filtering-header-background: var(--background);
@@ -935,6 +948,7 @@
             filtering-header-text-color: $filtering-header-text-color,
             filtering-row-background: $filtering-row-background,
             filtering-row-text-color: $filtering-row-text-color,
+            filtering-dialog-background: $filtering-dialog-background,
 
             excel-filtering-header-foreground: $excel-filtering-header-foreground,
             excel-filtering-subheader-foreground: $excel-filtering-subheader-foreground,

@@ -75,6 +75,7 @@
 /// @prop {Map} filtering-header-text-color [color: ('gray', 800)] - The text color of the filtered column header.
 /// @prop {Map} filtering-row-background [color: 'gray', 50)] - The background color of the filtering row.
 /// @prop {Map} filtering-row-text-color [color: ('gray', 800)] - The text color of the filtering row.
+/// @prop {Map} filtering-dialog-background [color: ('surface', 500)] - The background color of the advanced filtering dialog.
 /// @prop {Map} excel-filtering-header-foreground [color: ('gray', 700)] - The text color of the header in the excel style filtering.
 /// @prop {Map} excel-filtering-subheader-foreground [color: ('gray', 700)] - The text color of the sorting and moving headers in the excel style filtering.
 /// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 700)] - The text color of the excel style filtering options.
@@ -584,6 +585,13 @@ $light-grid: extend(
             color: (
                 'gray',
                 800,
+            ),
+        ),
+
+        filtering-dialog-background: (
+            color: (
+                'surface',
+                500,
             ),
         ),
 
@@ -1204,6 +1212,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} header-selected-text-color [color: 'gray', 900] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
 /// @prop {Map} filtering-row-background [color: ('surface', 500)] - The background color of the filtering row.
+/// @prop {Map} filtering-dialog-background [contrast-color: ('gray', 900)] - The background color of the advanced filtering dialog.
 /// @prop {Map} edited-row-indicator [color: ('primary', 400)] - The indicator's color of edited row.
 /// @prop {Map} cell-selected-background [color: ('primary', 50)] - The selected cell background color.
 /// @prop {Map} ghost-header-text-color [color: 'gray', 700] - The dragged header text color.
@@ -1324,6 +1333,13 @@ $indigo-grid: extend(
             color: (
                 'surface',
                 500,
+            ),
+        ),
+
+        filtering-dialog-background: (
+            contrast-color: (
+                'gray',
+                900,
             ),
         ),
 
