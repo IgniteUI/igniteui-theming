@@ -127,8 +127,7 @@ $_bem-mod-cache: () !default;
 /// Checks if the element separator string is part of the passed string.
 /// @access private
 /// @param {String} $x - The string to check.
-/// @returns {number|null} Will return the index of the occurance,
-/// or null if the element separator name is not part of the passed string.
+/// @returns {number|null} Will return the index of the occurance, or null if the element is not part of the string.
 @function bem--contains-elem($x) {
     // if you set the separators to common strings, this could fail
     @return string.index($x, $bem--sep-elem);
@@ -137,8 +136,7 @@ $_bem-mod-cache: () !default;
 /// Checks if the modifier separator string is part of the passed string.
 /// @access private
 /// @param {String} $x - The string to check.
-/// @returns {number|null} Will return the index of the occurance,
-/// or null if the modifier separator string is not part of the passed string.
+/// @returns {number|null} Will return the index of the occurance, or null if the modifier is not part of the string.
 @function bem--contains-mod($x) {
     // if you set the separators to common strings, this could fail
     @return string.index($x, $bem--sep-mod);
@@ -147,8 +145,7 @@ $_bem-mod-cache: () !default;
 /// Checks if the passed selector string contains a colon.
 /// @access private
 /// @param {String} $x - The string to check for colons.
-/// @returns {number|null} Will return the index of the occurance,
-/// or null if the string does not contain any colons.
+/// @returns {number|null} Will return the index of the occurance, or null if the string does not contain any colons.
 @function bem--contains-pseudo($x) {
     @return string.index($x, ':');
 }
@@ -213,7 +210,7 @@ $_bem-mod-cache: () !default;
 /// @param {String|Map} $mod - Optional modifier
 /// @param {String} $first - Optional first selector for nesting
 /// @return {String} The generated selector
-/// @throw {Error} If invalid parameter types are provided
+/// @throw If invalid parameter types are provided
 @function bem--generate-elem-selector($block, $elem, $mod, $first: null) {
     @if $first and not meta.type-of($first) == 'string' {
         @error 'First selector must be a string, got #{meta.type-of($first)}';
@@ -229,8 +226,7 @@ $_bem-mod-cache: () !default;
 /// Generates a full BEM selector.
 /// @access public
 /// @param {String} $block - A string block name. Required.
-/// @param {String|List} $elem [null] - A sub-element name. If `$mod` is not present, it is
-/// joined with $block. If $mod is present, it is nested under `$block--$mod`.
+/// @param {String|List} $elem [null] - A sub-element name. If `$mod` is not present, it is joined with $block. If $mod is present, it is nested under `$block--$mod`.
 /// @param {String|Map} $mod [null] - A block modifier.
 /// @param {List} $mods [null] - A list of block modifiers.
 ///
@@ -241,13 +237,13 @@ $_bem-mod-cache: () !default;
 ///   $selector: bem-selector(block, $elem: elem); // returns .block__elem
 ///
 /// @example scss - Include block, element, and element modifier
-///   $selector: bem-selector(block, $elem: (elem, mod); // returns .block__elem--mod
+///   $selector: bem-selector(block, $elem: (elem, mod)); // returns .block__elem--mod
 ///
 /// @example scss - Include block and block modifier
-///   $selector: bem-selector(block, $mod: mod) // returns .block--mod
+///   $selector: bem-selector(block, $mod: mod); // returns .block--mod
 ///
 /// @example scss - Include block and multiple block modifiers
-///   $selector: bem-selector(block, $mods: (mod-1, mod-2)) // returns .block--mod-1.block--mod-2
+///   $selector: bem-selector(block, $mods: (mod-1, mod-2)); // returns .block--mod-1.block--mod-2
 ///
 /// @example scss - Include block modifier followed by block sub-element
 ///   $selector: bem-selector(block, $m: mod, $e: elem); // returns .block--mod .block__elem
@@ -332,8 +328,8 @@ $_bem-mod-cache: () !default;
 /// @param {String} $mod [null] - The modifier name. Optional.
 /// @return {String} The BEM element selector string.
 /// @example scss
-///   $selector: elem('button', 'icon') // returns '.button__icon'
-///   $selector: elem('button', 'icon', 'big') // returns '.button__icon--big'
+///   $selector: elem('button', 'icon'); // returns '.button__icon'
+///   $selector: elem('button', 'icon', 'big'); // returns '.button__icon--big'
 @function elem($block, $elem, $mod: null) {
     @if not meta.type-of($block) == 'string' {
         @error 'Block must be a string, got #{meta.type-of($block)}';
@@ -360,8 +356,8 @@ $_bem-mod-cache: () !default;
 /// @param {String} $mod - The modifier name.
 /// @return {String} The BEM modifier selector string.
 /// @example scss
-///   $selector: mod('button', 'primary') // returns '.button--primary'
-///   $selector: mod('card', 'outlined') // returns '.card--outlined'
+///   $selector: mod('button', 'primary'); // returns '.button--primary'
+///   $selector: mod('card', 'outlined'); // returns '.card--outlined'
 @function mod($block, $mod) {
     @return bem-selector($block, $m: $mod);
 }
@@ -571,8 +567,7 @@ $_bem-mod-cache: () !default;
 /// Generates a full BEM rule.
 /// @access public
 /// @param {String} $block - A string block name. Required.
-/// @param {String|List} $elem [null] - A sub-element name. If `$mod` is not present, it is
-/// joined with $block. If $mod is present, it is nested under `$block--$mod`.
+/// @param {String|List} $elem [null] - A sub-element name. If `$mod` is not present, it is joined with $block. If $mod is present, it is nested under `$block--$mod`.
 /// @param {String|Map} $mod [null] - A block modifier.
 /// @param {String|Map} $mods [null] - A list of block modifiers.
 ///
