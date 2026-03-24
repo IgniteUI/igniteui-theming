@@ -13,8 +13,8 @@
 // Tracks added CSS variables for color shades
 $_added: () !default;
 
-// Generates CSS variables for a shade color
-// @access private
+/// Generates CSS variables for a shade color
+/// @access private
 @mixin _shade($color, $shade, $value, $contrast) {
     $_shade: meta.type-of($shade) == 'string';
     $_hsl: if($_shade, string.index($shade, 'hsl'), false);
