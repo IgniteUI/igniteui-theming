@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "bin": {
     "igniteui-theming-mcp": "./dist/mcp/index.js"
   },
   "scripts": {
     "build": "npm run clean && npm run build:tailwind && npm run build:json && npm run build:e2e",
-    "build:json": "node .scripts/buildJSON.mjs && node .scripts/buildComponentDocs.mjs",
+    "build:json": "node .scripts/buildJSON.mjs && node .scripts/buildComponentDocs.mjs && node .scripts/buildBarrel.mjs",
     "build:tailwind": "npm run clean:tailwind && node .scripts/buildTailwind.mjs",
     "build:docs": "npm run clean:docs && npm run build:docs:en:production",
     "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./sass -d docs",
