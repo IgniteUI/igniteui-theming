@@ -35,6 +35,7 @@
 /// @param {Color} $tick-color-hover [null] - The checked mark color on hover.
 /// @param {Number} $tick-width [null] - The checked mark width.
 /// @param {Color} $disabled-color [null] - The disabled border and fill colors.
+/// @param {Color} $disabled-fill-color [null] - The disabled border and fill colors in checked state. Auto-derived from disabled-color (material/fluent) or disabled-indeterminate-color (bootstrap/indigo).
 /// @param {Color} $disabled-tick-color [null] - The checked mark color in disabled state.
 /// @param {Color} $disabled-indeterminate-color [null] - The disabled border and fill colors in indeterminate state. Auto-derived from fill-color.
 /// @param {Color} $disabled-color-label [null] - The disabled label color.
@@ -69,6 +70,7 @@
     $tick-color-hover: null,
     $tick-width: null,
     $disabled-color: null,
+    $disabled-fill-color: null,
     $disabled-tick-color: null,
     $disabled-indeterminate-color: null,
     $disabled-color-label: null,
@@ -116,6 +118,14 @@
         $disabled-indeterminate-color: hsl(from var(--fill-color) h s l / 0.5);
     }
 
+    @if not($disabled-fill-color) and $fill-color {
+        $disabled-fill-color: hsl(from var(--fill-color) h s l / 0.5);
+    }
+
+    @if not($disabled-color-label) and $label-color {
+        $disabled-color-label: hsl(from var(--label-color) h s l / 0.5);
+    }
+
     @if not($error-color-hover) and $error-color {
         $error-color-hover: dynamic-shade(var(--error-color));
     }
@@ -155,6 +165,7 @@
             tick-color-hover: $tick-color-hover,
             tick-width: $tick-width,
             disabled-color: $disabled-color,
+            disabled-fill-color: $disabled-fill-color,
             disabled-tick-color: $disabled-tick-color,
             disabled-indeterminate-color: $disabled-indeterminate-color,
             disabled-color-label: $disabled-color-label,
