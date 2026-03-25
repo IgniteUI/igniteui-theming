@@ -34,9 +34,9 @@ async function compileSass(inputDir, outputDir) {
   mkdirSync(outputDir, { recursive: true });
 
   const files = [];
-  for await (const file of glob(`${inputDir}/**/*.scss`)) {
-    if (!path.basename(file).startsWith("_")) {
-      files.push(file);
+  for await (const entry of glob("**/*.scss", { cwd: inputDir })) {
+    if (!path.basename(entry).startsWith("_")) {
+      files.push(path.join(inputDir, entry));
     }
   }
   const compiler = await sass.initAsyncCompiler();

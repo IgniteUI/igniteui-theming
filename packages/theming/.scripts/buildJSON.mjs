@@ -10,7 +10,8 @@ import report from "./report.mjs";
 
 const exec = promisify(_exec);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DEST_DIR = path.join.bind(null, path.resolve(__dirname, "../dist/json"));
+const PACKAGE_ROOT = path.resolve(__dirname, "..");
+const DEST_DIR = path.join.bind(null, path.resolve(PACKAGE_ROOT, "dist/json"));
 
 (async () => {
   const start = performance.now();
@@ -20,9 +21,10 @@ const DEST_DIR = path.join.bind(null, path.resolve(__dirname, "../dist/json"));
   report.info("Building JSON files...");
 
   // Generate JSON files from Sass
-  for await (const src of glob("sass/json/*.scss")) {
+  for await (const entry of glob("sass/json/*.scss", { cwd: PACKAGE_ROOT })) {
+    const src = path.join(PACKAGE_ROOT, entry);
     const { css } = await compiler.compileAsync(src, {
-      loadPaths: ["sass"],
+      loadPaths: [path.join(PACKAGE_ROOT, "sass")],
       silenceDeprecations: ["color-functions"],
     });
 
