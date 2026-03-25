@@ -88,9 +88,6 @@ export default defineConfig({
   },
 
   resolve: {
-    alias: {
-      'igniteui-theming/json': resolve(__dirname, '../theming/dist/json'),
-    },
     extensions: ['.ts', '.js', '.json', '.md'],
   },
 

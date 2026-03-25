@@ -4,9 +4,7 @@
  * which is the single source of truth from the Sass code.
  */
 
-import multipliersData from "igniteui-theming/json/colors/meta/multipliers.json" with {
-  type: "json",
-};
+import { PaletteMultipliers as multipliersData } from "igniteui-theming";
 
 // Re-export shade level constants and types from the canonical source
 export {

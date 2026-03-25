@@ -3,9 +3,7 @@
  * This provides the LLM with accurate design tokens for each component.
  */
 
-import themesData from "igniteui-theming/json/components/themes.json" with {
-  type: "json",
-};
+import { ComponentThemes as themesData } from "igniteui-theming";
 import { COMPONENT_METADATA } from "./component-metadata.js";
 
 /**

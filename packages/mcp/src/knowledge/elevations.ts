@@ -4,12 +4,10 @@
  * which is the single source of truth from the Sass code.
  */
 
-import indigoElevationsData from "igniteui-theming/json/elevations/indigo.json" with {
-  type: "json",
-};
-import materialElevationsData from "igniteui-theming/json/elevations/material.json" with {
-  type: "json",
-};
+import {
+  IndigoElevations as indigoElevationsData,
+  MaterialElevations as materialElevationsData,
+} from "igniteui-theming";
 
 type StringToNumber<S extends string> = S extends `${infer N extends number}`
   ? N

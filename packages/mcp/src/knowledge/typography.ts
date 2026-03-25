@@ -4,9 +4,7 @@
  * which is the single source of truth from the Sass code.
  */
 
-import typescalesData from "igniteui-theming/json/typography/presets/typescales.json" with {
-  type: "json",
-};
+import { Typescales as typescalesData } from "igniteui-theming";
 import type { DesignSystem } from "../utils/types.js";
 
 // Re-export DesignSystem for backwards compatibility
@@ -44,7 +42,7 @@ export interface TypeScale {
 /**
  * Typography presets loaded from JSON.
  */
-export const TYPOGRAPHY_PRESETS = typescalesData as Record<
+export const TYPOGRAPHY_PRESETS = typescalesData as unknown as Record<
   DesignSystem,
   TypeScale
 >;

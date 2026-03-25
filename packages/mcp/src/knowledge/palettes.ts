@@ -4,9 +4,7 @@
  * which is the single source of truth from the Sass code.
  */
 
-import palettesData from "igniteui-theming/json/colors/presets/palettes.json" with {
-  type: "json",
-};
+import { Palettes as palettesData } from "igniteui-theming";
 
 export interface PaletteColors {
   primary: string;
