@@ -1,0 +1,114 @@
+{
+  "name": "igniteui-theming",
+  "version": "1.0.0",
+  "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "igniteui-theming-mcp": "./dist/mcp/index.js"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build:tailwind && npm run build:json && npm run build:e2e",
+    "build:json": "node .scripts/buildJSON.mjs && node .scripts/buildComponentDocs.mjs",
+    "build:tailwind": "npm run clean:tailwind && node .scripts/buildTailwind.mjs",
+    "build:docs": "npm run clean:docs && npm run build:docs:en:production",
+    "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./src -d docs",
+    "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./src -d docs",
+    "build:e2e": "sass --quiet ./tests/e2e/theme.scss ./tests/e2e/theme.css",
+    "clean": "npm run clean:json && npm run clean:tailwind && npm run clean:mcp && npm run clean:docs",
+    "clean:json": "shx rm -rf dist/json",
+    "clean:tailwind": "shx rm -rf dist/tailwind",
+    "clean:mcp": "shx rm -rf dist/mcp",
+    "clean:docs": "shx rm -rf docs",
+    "preview:palette": "node .scripts/previewPalette.mjs",
+    "serve:docs": "npx serve ./docs",
+    "lint": "npm run lint:styles && npm run lint:prettier && npm run lint:sassdoc",
+    "lint:styles": "stylelint ./src/**/*.scss --fix",
+    "lint:prettier": "prettier \"./src/**/*.scss\" --check --ignore-path .gitignore",
+    "lint:sassdoc": "ast-grep scan --error",
+    "fix:sassdoc": "node .scripts/fixSassdoc.mjs",
+    "format": "stylelint \"./src/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./src/**/*.{scss,css}\" --write --ignore-path .gitignore",
+    "prepare": "node .scripts/setup-grammars.mjs",
+    "test": "vitest run"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,jsx,tsx}": [
+      "biome check --fix --no-errors-on-unmatched"
+    ],
+    "src/**/*.{scss,css}": [
+      "npm run format",
+      "npm run lint:sassdoc"
+    ]
+  },
+  "files": [
+    "src/",
+    "dist/",
+    "_index.scss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgniteUI/igniteui-theming.git",
+    "directory": "packages/theming"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "Ignite",
+    "UI",
+    "theming",
+    "palettes",
+    "elevations",
+    "typography",
+    "design systems",
+    "model context protocol",
+    "mcp"
+  ],
+  "author": "Infragistics",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-theming/issues"
+  },
+  "homepage": "https://github.com/IgniteUI/igniteui-theming#readme",
+  "exports": {
+    ".": {
+      "sass": "./_index.scss",
+      "tailwind": "./dist/tailwind/theme.css",
+      "node": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./sass/**/*.*": "./src/**/*.*",
+    "./tailwind/*": "./dist/tailwind/*",
+    "./json/colors/meta/multipliers.json": "./dist/json/colors/meta/multipliers.json",
+    "./json/colors/meta/palette.json": "./dist/json/colors/meta/palette.json",
+    "./json/colors/presets/palettes.json": "./dist/json/colors/presets/palettes.json",
+    "./json/components/themes.json": "./dist/json/components/themes.json",
+    "./json/elevations/indigo.json": "./dist/json/elevations/indigo.json",
+    "./json/elevations/material.json": "./dist/json/elevations/material.json",
+    "./json/typography/presets/typescales.json": "./dist/json/typography/presets/typescales.json",
+    "./mcp": {
+      "import": "./dist/mcp/index.js"
+    }
+  },
+  "dependencies": {
+    "sass-embedded": "~1.92.1"
+  },
+  "devDependencies": {
+    "@ast-grep/cli": "^0.41.0",
+    "@types/postcss-safe-parser": "^5.0.4",
+    "igniteui-sassdoc-theme": "^1.1.6",
+    "lunr": "^2.3.9",
+    "postcss": "^8.4.35",
+    "postcss-safe-parser": "^7.0.0",
+    "sass-true": "^9.0.0",
+    "sassdoc": "^2.7.4",
+    "sassdoc-plugin-localization": "^2.0.0",
+    "stylelint": "^17.3.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-scss": "^7.0.0"
+  },
+  "treeSitterGrammars": {
+    "tree-sitter-scss": "v0.2.0",
+    "tree-sitter-sassdoc": "v0.1.0"
+  }
+}

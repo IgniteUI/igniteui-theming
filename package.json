@@ -1,137 +1,42 @@
 {
   "name": "igniteui-theming",
-  "version": "1.0.0",
-  "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
-  "main": "index.js",
-  "type": "module",
-  "bin": {
-    "igniteui-theming-mcp": "./dist/mcp/index.js"
+  "private": true,
+  "description": "A Sass library that helps with the implementation of design systems.",
+  "author": "Infragistics",
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-theming/issues"
   },
-  "scripts": {
-    "clean": "npm run clean:json && npm run clean:mcp && npm run clean:docs",
-    "clean:json": "shx rm -rf json",
-    "clean:docs": "shx rm -rf docs",
-    "clean:tailwind": "shx rm -rf tailwind",
-    "clean:mcp": "shx rm -rf dist/mcp",
-    "build": "npm run clean && npm run build:tailwind && npm run build:e2e && npm run build:mcp",
-    "build:docs": "npm run clean:docs && npm run build:docs:en:production",
-    "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./sass -d docs",
-    "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./sass -d docs",
-    "build:e2e": "sass --quiet ./test/e2e/theme.scss ./test/e2e/theme.css",
-    "build:json": "node scripts/buildJSON.mjs && node scripts/buildComponentDocs.mjs",
-    "build:tailwind": "npm run clean:tailwind && node scripts/buildTailwind.mjs",
-    "build:mcp": "npm run build:json && vite build",
-    "serve:docs": "npx http-server ./docs",
-    "preview:palette": "node scripts/previewPalette.mjs",
-    "lint": "npm run lint:biome && npm run lint:styles && npm run lint:prettier && npm run lint:sassdoc",
-    "lint:biome": "biome check",
-    "lint:styles": "stylelint ./sass/**/*.scss --fix",
-    "lint:prettier": "prettier \"./sass/**/*.scss\" --check --ignore-path .gitignore",
-    "lint:sassdoc": "ast-grep scan --error",
-    "fix:sassdoc": "node scripts/fixSassdoc.mjs",
-    "format": "biome check --fix && stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
-    "prepare": "husky install && node scripts/setup-grammars.mjs",
-    "mcp:inspector": "npx @modelcontextprotocol/inspector dist/mcp/index.js",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage"
-  },
-  "lint-staged": {
-    "*.{js,ts,cjs,mjs,jsx,tsx}": [
-      "biome check --fix --no-errors-on-unmatched"
-    ],
-    "sass/**/*.{scss,css}": [
-      "npm run format",
-      "npm run lint:sassdoc"
-    ]
-  },
-  "files": [
-    "sass/",
-    "json/",
-    "tailwind/",
-    "dist/mcp/",
-    "_index.scss"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IgniteUI/igniteui-theming.git"
   },
-  "keywords": [
-    "sass",
-    "Ignite",
-    "UI",
-    "theming",
-    "palettes",
-    "elevations",
-    "typography"
-  ],
-  "author": "Infragistics",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/IgniteUI/igniteui-theming/issues"
-  },
   "homepage": "https://github.com/IgniteUI/igniteui-theming#readme",
-  "exports": {
-    ".": {
-      "sass": "./_index.scss",
-      "tailwind": "./theme.css",
-      "esm2020": "./index.js",
-      "es2020": "./index.js",
-      "es2015": "./index.js",
-      "node": "./index.js",
-      "default": "./index.js"
-    },
-    "./functions": {
-      "sass": "./sass/_functions.scss"
-    },
-    "./sass/**/*.*": "./sass/**/*.*",
-    "./tailwind/*": "./tailwind/*",
-    "./json/colors/meta/multipliers.json": "./json/colors/meta/multipliers.json",
-    "./json/colors/meta/palette.json": "./json/colors/meta/palette.json",
-    "./json/colors/presets/palettes.json": "./json/colors/presets/palettes.json",
-    "./json/elevations/indigo.json": "./json/elevations/indigo.json",
-    "./json/elevations/material.json": "./json/elevations/material.json",
-    "./json/typography/presets/typescales.json": "./json/typography/presets/typescales.json",
-    "./mcp": {
-      "import": "./dist/mcp/index.js"
-    }
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.25.0",
-    "sass-embedded": "~1.92.1",
-    "zod": "^3.25.76"
+  "type": "module",
+  "workspaces": [
+    "packages/theming",
+    "packages/mcp"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "vitest run",
+    "lint": "npm run lint:biome && npm run lint --workspaces --if-present",
+    "lint:biome": "biome check",
+    "format": "biome check --fix",
+    "prepare": "husky install && npm run prepare --workspaces --if-present",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@ast-grep/cli": "^0.41.0",
     "@biomejs/biome": "^2.4.2",
     "@types/node": "^22.0.0",
-    "@types/postcss-safe-parser": "^5.0.4",
     "@vitest/coverage-v8": "^4.0.16",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.1.3",
-    "globby": "^13.1.4",
     "husky": "^8.0.3",
-    "igniteui-sassdoc-theme": "^1.1.6",
-    "lunr": "^2.3.9",
-    "postcss": "^8.4.35",
-    "postcss-safe-parser": "^7.0.0",
     "prettier": "^3.2.5",
-    "sass-true": "^9.0.0",
-    "sassdoc": "^2.7.4",
-    "sassdoc-plugin-localization": "^2.0.0",
     "shx": "^0.3.4",
-    "stylelint": "^17.3.0",
-    "stylelint-config-standard-scss": "^17.0.0",
-    "stylelint-scss": "^7.0.0",
     "tsx": "^4.0.0",
     "typescript": "^5.7.0",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.15"
-  },
-  "treeSitterGrammars": {
-    "tree-sitter-scss": "v0.1.0",
-    "tree-sitter-sassdoc": "v0.1.0"
   }
 }

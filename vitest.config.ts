@@ -1,16 +1,31 @@
+import {resolve} from 'node:path';
 import {defineConfig} from 'vitest/config';
 
+const ALIAS_PATHS = {
+  theming: resolve(__dirname, 'packages/theming'),
+  mcp: resolve(__dirname, 'packages/mcp'),
+  dtcg: resolve(__dirname, 'packages/dtcg'),
+};
+
 export default defineConfig({
+  resolve: {
+    alias: ALIAS_PATHS,
+  },
   test: {
-    root: './',
-    include: ['**/*.{test,spec}.ts'],
-    environment: 'node',
-    globals: false,
-    testTimeout: 10000, // 10s for Sass compilation tests
-    coverage: {
-      provider: 'v8',
-      include: ['**/*.ts'],
-      exclude: ['dist', '**/*.test.ts', '**/*.spec.ts', 'index.ts'],
-    },
+    projects: [
+      'packages/theming',
+      'packages/mcp',
+      {
+        resolve: {
+          alias: ALIAS_PATHS,
+        },
+        test: {
+          name: 'integration',
+          include: ['tests/**/*.test.ts'],
+          testTimeout: 15_000,
+          environment: 'node',
+        },
+      },
+    ],
   },
 });

@@ -369,7 +369,7 @@ For detailed documentation including:
 - Troubleshooting guide
 - Development instructions
 
-See the [MCP Server README](./src/mcp/README.md)
+See the [MCP Server README](./packages/mcp/README.md)
 
 ### Development Scripts
 

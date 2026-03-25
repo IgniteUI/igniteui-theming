@@ -12,8 +12,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'npm'
@@ -46,10 +46,11 @@ jobs:
             echo "NPM_TAG=latest"
           fi >> $GITHUB_ENV
           echo ${NPM_TAG}
+
       - name: Create package version
         run: npm version ${VERSION/-patch/} --no-git-tag-version --save --allow-same-version
-        working-directory: ./
+        working-directory: packages/theming
 
       - name: Publish igniteui-theming
         run: npm publish --tag ${NPM_TAG}
-        working-directory: ./
+        working-directory: packages/theming
