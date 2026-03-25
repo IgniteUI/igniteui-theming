@@ -1,0 +1,52 @@
+// stylelint-disable selector-type-no-unknown, max-nesting-depth
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use '../themes/schemas' as schemas;
+@use '../themes/functions' as *;
+
+$schemas: meta.module-variables(schemas);
+$compound: ('button', 'icon-button');
+
+/*
+* @outputDir - /components
+*/
+@each $key, $value in $schemas {
+    @each $_component, $_schema in map.remove($value, '_meta') {
+        @if list.index($compound, $_component) {
+            @each $_sub-component, $_sub-schema in $_schema {
+                $_t: map.get($_sub-schema, '_meta', 'theme');
+                $_v: map.get($_sub-schema, '_meta', 'variant');
+
+                #{$_t} {
+                    > #{$_v} {
+                        > #{$_component}-#{$_sub-component} {
+                            @each $_token, $_value in map.remove(digest-schema($_sub-schema), '_meta') {
+                                @if $_token != typography {
+                                    --#{$_token}: #{$_value};
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } @else {
+            $_t: map.get($_schema, '_meta', 'theme');
+            $_v: map.get($_schema, '_meta', 'variant');
+
+            @if $_v != null and $_t != null {
+                #{$_t} {
+                    > #{$_v} {
+                        > #{$_component} {
+                            @each $_token, $_value in map.remove(digest-schema($_schema), '_meta') {
+                                @if $_token != typography and meta.type-of($_value) != map {
+                                    --#{$_token}: #{$_value};
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use '../../themes/schemas';
+@use '../../themes/mixins' as *;
+@use '../../themes/functions' as *;
+@use '../mixins' as * with (
+    $theme-schemas: (
+        light: schemas.$light-bootstrap-schema,
+        dark: schemas.$dark-bootstrap-schema,
+    )
+);
+@use 'common' as *;
+
+// Common tailwind utilites
+@include tailwind-themes();
+
+// Theme specific utilities
+// Slider
+@include tailwind-theme(
+    $component: slider,
+    $props: (
+        thumb-color,
+        base-track-color,
+    )
+);
+
+// Switch
+@include tailwind-theme(
+    $component: switch,
+    $props: (
+        thumb-off-color,
+        track-on-color,
+    )
+);

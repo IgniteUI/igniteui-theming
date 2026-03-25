@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use '../mixins' as *;
+
+@theme {
+    @include generate-color-vars();
+    @include generate-shadow-vars();
+
+    --font-ig: var(--ig-font-family);
+    --text-base: var(--ig-base-font-size);
+}
+
+@include generate-typography-utilities();
