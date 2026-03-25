@@ -37,6 +37,7 @@
   "scripts": {
     "test": "vitest run",
     "build": "vite build && shx cp -r dist/ ../theming/dist/mcp/",
+    "clean": "shx rm -rf dist/",
     "inspect": "npx @modelcontextprotocol/inspector ./dist/index.js"
   },
   "lint-staged": {

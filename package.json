@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
     "test": "vitest run",
     "lint": "npm run lint:biome && npm run lint --workspaces --if-present",
     "lint:biome": "biome check",
