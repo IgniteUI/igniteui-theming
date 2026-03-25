@@ -1,5 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
-import { glob } from "node:fs/promises";
+import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as sass from "sass-embedded";
@@ -33,12 +32,9 @@ const BUILD_CONFIGS = [
 async function compileSass(inputDir, outputDir) {
   mkdirSync(outputDir, { recursive: true });
 
-  const files = [];
-  for await (const entry of glob("**/*.scss", { cwd: inputDir })) {
-    if (!path.basename(entry).startsWith("_")) {
-      files.push(path.join(inputDir, entry));
-    }
-  }
+  const files = readdirSync(inputDir, { recursive: true })
+    .filter((f) => f.endsWith(".scss") && !path.basename(f).startsWith("_"))
+    .map((f) => path.join(inputDir, f));
   const compiler = await sass.initAsyncCompiler();
 
   for (const file of files) {
