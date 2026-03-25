@@ -2,7 +2,7 @@
   "name": "igniteui-theming",
   "version": "1.0.0",
   "description": "A set of Sass variables, mixins, and functions for generating palettes, typography, and elevations used by Ignite UI components.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "type": "module",
   "bin": {
     "igniteui-theming-mcp": "./dist/mcp/index.js"
@@ -74,8 +74,8 @@
     ".": {
       "sass": "./_index.scss",
       "tailwind": "./dist/tailwind/theme.css",
-      "node": "./index.js",
-      "default": "./index.js"
+      "node": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json",
     "./sass/**/*.*": "./sass/**/*.*",
