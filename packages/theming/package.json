@@ -43,7 +43,8 @@
   "files": [
     "sass/",
     "dist/",
-    "_index.scss"
+    "_index.scss",
+    "index.js"
   ],
   "repository": {
     "type": "git",
@@ -73,8 +74,8 @@
     ".": {
       "sass": "./_index.scss",
       "tailwind": "./dist/tailwind/theme.css",
-      "node": "./dist/index.js",
-      "default": "./dist/index.js"
+      "node": "./index.js",
+      "default": "./index.js"
     },
     "./package.json": "./package.json",
     "./sass/**/*.*": "./sass/**/*.*",
