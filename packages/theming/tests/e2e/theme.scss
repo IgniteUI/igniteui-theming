@@ -1,12 +1,12 @@
 @use '../../index' as * with (
     $base-font-size: 16px
 );
-@use '../../src/color/presets' as *;
-@use '../../src/typography/presets' as *;
-@use '../../src/typography/charts' as *;
-@use '../../src/elevations/presets' as *;
-@use '../../src/themes/schemas' as *;
-@use '../../src/themes/config' as *;
+@use '../../sass/color/presets' as *;
+@use '../../sass/typography/presets' as *;
+@use '../../sass/typography/charts' as *;
+@use '../../sass/elevations/presets' as *;
+@use '../../sass/themes/schemas' as *;
+@use '../../sass/themes/config' as *;
 @use '../../tests/styles/mocks';
 @include palette($light-material-palette);
 @include typography($material-typeface, $material-type-scale);

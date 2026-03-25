@@ -20,9 +20,9 @@ const DEST_DIR = path.join.bind(null, path.resolve(__dirname, "../dist/json"));
   report.info("Building JSON files...");
 
   // Generate JSON files from Sass
-  for await (const src of glob("src/json/*.scss")) {
+  for await (const src of glob("sass/json/*.scss")) {
     const { css } = await compiler.compileAsync(src, {
-      loadPaths: ["src"],
+      loadPaths: ["sass"],
       silenceDeprecations: ["color-functions"],
     });
 

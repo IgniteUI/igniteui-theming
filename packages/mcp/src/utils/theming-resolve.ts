@@ -2,7 +2,7 @@
  * Theming package resolution utilities.
  *
  * Provides a Sass FileImporter that resolves `@use 'igniteui-theming/sass/...'`
- * to the theming package's src/ directory.
+ * to the theming package's sass/ directory.
  *
  * Resolution strategy:
  * - Dev/test mode: resolves the `igniteui-theming` package via Node module resolution
@@ -42,7 +42,7 @@ export const THEMING_ROOT = resolveThemingRoot();
 
 /**
  * Sass FileImporter that resolves `@use 'igniteui-theming/sass/...'`
- * to the theming package's `src/` directory.
+ * to the theming package's `sass/` directory.
  *
  * @example
  * ```ts
@@ -57,12 +57,12 @@ export const themingImporter: FileImporter = {
   findFileUrl(url: string) {
     if (url === "igniteui-theming/sass") {
       // Bare import: @use 'igniteui-theming/sass' as *;
-      // Resolve to the src/ directory index
-      return new URL(`file://${path.join(THEMING_ROOT, "src")}/`);
+      // Resolve to the sass/ directory index
+      return new URL(`file://${path.join(THEMING_ROOT, "sass")}/`);
     }
     if (url.startsWith(THEMING_SASS_PREFIX)) {
       const subpath = url.slice(THEMING_SASS_PREFIX.length);
-      return new URL(subpath, `file://${path.join(THEMING_ROOT, "src")}/`);
+      return new URL(subpath, `file://${path.join(THEMING_ROOT, "sass")}/`);
     }
     return null;
   },

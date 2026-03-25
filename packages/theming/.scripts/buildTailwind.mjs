@@ -17,12 +17,12 @@ const SASS_CONFIG = {
 const BUILD_CONFIGS = [
   {
     name: "themes",
-    inputDir: path.resolve(__dirname, "../src/tailwind/themes"),
+    inputDir: path.resolve(__dirname, "../sass/tailwind/themes"),
     outputDir: path.resolve(__dirname, "../dist/tailwind/themes"),
   },
   {
     name: "utilities",
-    inputDir: path.resolve(__dirname, "../src/tailwind/utilities"),
+    inputDir: path.resolve(__dirname, "../sass/tailwind/utilities"),
     outputDir: path.resolve(__dirname, "../dist/tailwind/utilities"),
   },
 ];

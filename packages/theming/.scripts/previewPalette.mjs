@@ -27,9 +27,9 @@ const postProcessor = postcss([stripComments]);
 const styles = `
     @use 'sass:string';
     @use 'sass:map';
-    @use 'src' as *;
-    @use 'src/color';
-    @use 'src/color/presets' as *;
+    @use 'sass' as *;
+    @use 'sass/color';
+    @use 'sass/color/presets' as *;
 
     $protoPalette: map.remove(color.$IPalette, '_meta');
     $result: ();

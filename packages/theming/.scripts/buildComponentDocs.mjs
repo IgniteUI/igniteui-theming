@@ -113,7 +113,7 @@ function convertParamsToTokens(params = []) {
 }
 
 async function extractComponentThemes() {
-  const data = await sassdoc.parse("./src/themes/components/**/*-theme.scss", {
+  const data = await sassdoc.parse("./sass/themes/components/**/*-theme.scss", {
     verbose: false,
   });
 
