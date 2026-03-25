@@ -31,7 +31,7 @@ const DEST_DIR = path.join.bind(null, path.resolve(PACKAGE_ROOT, "dist/json"));
     for (const [out, data] of Object.entries(await parseCSS(css))) {
       const outputFile = DEST_DIR(`${out}.json`);
       makeDir(path.dirname(outputFile), { recursive: true });
-      writeFile(outputFile, JSON.stringify(data), "utf-8");
+      await writeFile(outputFile, JSON.stringify(data), "utf-8");
     }
   }
 
