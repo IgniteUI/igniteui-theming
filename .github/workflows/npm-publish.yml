@@ -8,6 +8,10 @@ on:
   release:
     types: [created]
 
+env:
+  VERSION: ${{ github.ref_name }}
+  MCP_VERSION: ${{ env.VERSION }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,16 +23,6 @@ jobs:
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Extract version from release tag
-        run: |
-          VERSION="${{ github.event.release.tag_name }}"
-          if [ -z "$VERSION" ]; then
-            echo "::error::Could not determine version from release tag"
-            exit 1
-          fi
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "Publishing version: ${VERSION}"
-
       - name: Install dependencies
         run: npm ci
 
@@ -37,8 +31,6 @@ jobs:
 
       - name: Build package
         run: npm run build
-        env:
-          MCP_VERSION: ${{ env.VERSION }}
 
       - name: Test package
         run: npm test
