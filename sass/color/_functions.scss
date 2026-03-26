@@ -276,7 +276,6 @@ $_enhanced-accessibility: false;
 ///      background: color($color: 'primary', $variant: 200);
 ///      color: contrast-color($color: 'primary', $variant: 200);
 ///    }
-///
 @function contrast-color($palette: null, $color: primary, $variant: 500, $opacity: null) {
     @return color($palette, $color, #{$variant}-contrast, $opacity);
 }
@@ -285,8 +284,6 @@ $_enhanced-accessibility: false;
 /// @access public
 /// @group Color
 /// @param {Color} $color - The base color used in the calculation.
-/// @returns {string} Returns a relative HSL color where the lightness is adjusted
-/// based on the specified contrast level, resulting in either black or white.
 ///
 /// @example scss
 ///   .my-component {
@@ -294,6 +291,7 @@ $_enhanced-accessibility: false;
 ///      background: var(--bg);
 ///      color: adaptive-contrast(var(--bg)); // hsl(from color(from var(--bg) var(--y-contrast)) h 0 l)
 ///    }
+/// @returns {string} Returns a relative HSL color where the lightness is adjusted
 @function adaptive-contrast($color) {
     $fn: meta.get-function('color', $css: true);
 
@@ -305,20 +303,17 @@ $_enhanced-accessibility: false;
 /// @access public
 /// @group Color
 /// @param {Color} $background - The background color used to return a contrast/forground color for.
-/// @param {Color | List<Color>} $foreground [#fff] - A list of foreground colors
-/// that can be used with the provided background.
+/// @param {Color | List } $foreground [#fff] - A list of foreground colors that can be used with the provided background.
 /// @param {String} $contrast [AAA] - The contrast level according to WCAG 2.0 standards.
-/// @require {function} contrast
-/// @returns {Color} Returns either white, black, or the provided foreground
-/// color if it meets the required contrast level.
-///
 /// @example scss
 ///   .my-component {
 ///      background: #09f;
 ///      color: text-contrast(#09f);
 ///    }
 ///
+/// @require {function} contrast
 /// @see {function} adaptive-contrast
+/// @returns {Color} Returns either white, black, or the provided foreground color if it meets the required contrast level.
 /// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html WCAG 2.0 Contrast
 @function text-contrast($background, $foreground: white, $contrast: 'AAA') {
     @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
