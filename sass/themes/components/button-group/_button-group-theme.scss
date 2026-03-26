@@ -251,6 +251,10 @@
         $disabled-selected-text-color: var(--disabled-text-color);
     }
 
+    @if not($disabled-selected-icon-color) and $disabled-selected-text-color {
+        $disabled-selected-icon-color: var(--disabled-selected-text-color);
+    }
+
     @if not($idle-shadow-color) and $item-background {
         $idle-shadow-color: hsl(from var(--item-background) h s l / 0.5);
     }
