@@ -62,7 +62,7 @@ export function quoteFontFamily(typeface: string): string {
  * toVariableName('DARK_THEME_v2') // 'dark-theme-v2'
  */
 export function toVariableName(name: string): string {
-  if (!name || !name.trim()) {
+  if (!name?.trim()) {
     throw new Error("Variable name cannot be empty");
   }
 

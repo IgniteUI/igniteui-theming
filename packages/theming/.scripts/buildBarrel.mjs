@@ -85,7 +85,7 @@ function zodSchemaToTS(schema, exportName) {
  * Handles the subset of Zod types used in our schemas.
  */
 function zodToTSType(schema) {
-  if (!schema || !schema._def) return "unknown";
+  if (!schema?._def) return "unknown";
 
   const def = schema._def;
   const typeName = def.typeName;

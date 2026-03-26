@@ -13,7 +13,7 @@ import report from "./report.mjs";
  * - summary: any remaining non-token prose after the tokens list
  */
 function parsePrimaryTokens(rawDescription) {
-  if (!rawDescription || !rawDescription.trim()) {
+  if (!rawDescription?.trim()) {
     return { title: "", primaryTokens: [], summary: "" };
   }
 
