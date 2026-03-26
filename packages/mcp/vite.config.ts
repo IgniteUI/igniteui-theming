@@ -53,7 +53,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
 
-    rollupOptions: {
+    rolldownOptions: {
       // Externalize dependencies (don't bundle them)
       // They will be resolved from node_modules at runtime
       external: [
@@ -83,7 +83,7 @@ export default defineConfig({
       },
     },
 
-    target: 'node18',
+    target: 'node22',
     minify: false, // Keep code readable for debugging
   },
 
