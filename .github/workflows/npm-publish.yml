@@ -10,7 +10,6 @@ on:
 
 env:
   VERSION: ${{ github.ref_name }}
-  MCP_VERSION: ${{ env.VERSION }}
 
 jobs:
   build:
@@ -31,6 +30,8 @@ jobs:
 
       - name: Build package
         run: npm run build
+        env:
+          MCP_VERSION: ${{ env.VERSION }}
 
       - name: Test package
         run: npm test
