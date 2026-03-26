@@ -121,13 +121,8 @@ dist
 Loading complete
 
 # Tree-sitter grammar binaries (downloaded by scripts/setup-grammars.mjs)
-lib/*.so
-lib/*.dll
+.lib
 
 # Artifacts
-test/e2e/*.css
-test/e2e/*.css.map
-json
-!sass/json
-tailwind
-!sass/tailwind
+packages/theming/tests/e2e/*.css
+packages/theming/tests/e2e/*.css.map

@@ -6,6 +6,26 @@
 
 The Ignite UI Theming repository collects a set of Sass mixins, functions, and variables used to create themes for a variety of UI frameworks built by Infragistics. The theming package makes it super easy to create palettes, elevations and typography styles for your projects.
 
+## Repository Structure
+
+This repository is an npm workspaces monorepo with two packages:
+
+| Package            | Name                   | Description                                                 |
+| ------------------ | ---------------------- | ----------------------------------------------------------- |
+| `packages/theming` | `igniteui-theming`     | Sass source, JSON build artifacts, published to npm         |
+| `packages/mcp`     | `igniteui-theming-mcp` | MCP server sources, built into `packages/theming/dist/mcp/` |
+
+The `igniteui-theming` package is the only published artifact — it includes both the Sass theming library and the MCP server binary.
+
+Common commands from the repo root:
+
+```bash
+npm install    # install all workspace dependencies
+npm run build  # build theming + MCP in dependency order
+npm test       # run all tests across both packages
+npm run lint   # lint all packages
+```
+
 ## Palettes
 
 We provide four predefined palettes - material, bootstrap, fluent and indigo that have all the necessary colors along with diffent variants of those colors to make it even easier picking the right one for your case. Here's what they look like:
@@ -90,28 +110,14 @@ To run the suite of tests, run
 npm run test
 ```
 
-## Building and Running API Docs
-
-To build the docs, run
-
-```
-npm run build:docs
-```
-
-To start the docs in your browser, run
-
-```
-npm run serve:docs
-```
-
 ## Testing and Debugging
 
 ### Preview Palettes
 
-To preview a palette you can pass the palette (`material`, `bootstrap`, `fluent`, `indigo`) and variant (`light` or `dark`) to the `palette` and `variant` arguments respectively. If you want to output the result to a file in the `./dist` folder add the `out` option.
+Run from `packages/theming`. Pass the palette (`material`, `bootstrap`, `fluent`, `indigo`) and variant (`light` or `dark`). 
 
-```
-npm run preview:palette -- --palette=material --variant=light --out
+```bash
+npm run preview:palette -- --palette=material --variant=light
 ```
 
 ---
@@ -134,11 +140,11 @@ The Model Context Protocol allows AI assistants (like Claude, GitHub Copilot, an
 
 #### 1. Clone and Build
 
-Clone the repository and build the MCP server:
+Clone the repository and build:
 
 ```bash
 npm install
-npm run build:mcp
+npm run build
 ```
 
 #### 2. Configure Your AI Client
@@ -155,7 +161,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
   "servers": {
     "igniteui-theming": {
       "command": "node",
-      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+      "args": ["/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js"]
     }
   }
 }
@@ -185,7 +191,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
    - **Name**: `igniteui-theming`
    - **Command**: `node` (for local) or `npx` (for package)
    - **Arguments**:
-     - Local: `/absolute/path/to/igniteui-theming/dist/mcp/index.js`
+     - Local: `/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js`
      - Package: `igniteui-theming igniteui-theming-mcp`
 4. Click **OK** and restart AI Assistant
 
@@ -206,7 +212,7 @@ Add to your configuration file:
   "mcpServers": {
     "igniteui-theming": {
       "command": "node",
-      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+      "args": ["/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js"]
     }
   }
 }
@@ -239,7 +245,7 @@ Create or edit `.cursor/mcp.json` in your project:
   "mcpServers": {
     "igniteui-theming": {
       "command": "node",
-      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+      "args": ["/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js"]
     }
   }
 }
@@ -369,19 +375,19 @@ For detailed documentation including:
 - Troubleshooting guide
 - Development instructions
 
-See the [MCP Server README](./src/mcp/README.md)
+See the [MCP Server README](./packages/mcp/README.md)
 
 ### Development Scripts
 
 ```bash
-# Build for production
-npm run build:mcp
-
-# Debug with MCP Inspector
-npm run mcp:inspector
+# Build for production (theming + MCP)
+npm run build
 
 # Run tests
 npm run test
+
+# Debug with MCP Inspector (from packages/mcp)
+npm run inspect
 ```
 
 ---

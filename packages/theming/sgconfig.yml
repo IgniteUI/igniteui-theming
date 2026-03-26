@@ -1,0 +1,25 @@
+ruleDirs: ['.rules']
+customLanguages:
+  scss:
+    libraryPath:
+      aarch64-apple-darwin: .lib/scss.so
+      x86_64-apple-darwin: .lib/scss.so
+      x86_64-unknown-linux-gnu: .lib/scss.so
+      x86_64-pc-windows-msvc: .lib/scss.dll
+    extensions: [scss]
+    expandoChar: _
+  sassdoc:
+    libraryPath:
+      aarch64-apple-darwin: .lib/sassdoc.so
+      x86_64-apple-darwin: .lib/sassdoc.so
+      x86_64-unknown-linux-gnu: .lib/sassdoc.so
+      x86_64-pc-windows-msvc: .lib/sassdoc.dll
+    extensions: [sassdoc]
+    expandoChar: _
+languageInjections:
+  - hostLanguage: scss
+    rule:
+      pattern:
+        context: '/// $CONTENT'
+        selector: sassdoc_line
+    injected: sassdoc
