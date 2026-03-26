@@ -25,7 +25,8 @@
     "lint:biome": "biome check",
     "format": "biome check --fix",
     "prepare": "husky install && npm run prepare --workspaces --if-present",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "mcp:inspector": "npx @modelcontextprotocol/inspector ./packages/theming/dist/mcp/index.js"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",
