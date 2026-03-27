@@ -608,8 +608,8 @@
         $row-selected-hover-background: color-mix(in srgb, var(--accent-color) 16%, var(--background));
     }
 
-    @if not($row-even-background) and $foreground and $background {
-        $row-even-background: color-mix(in srgb, var(--foreground) 4%, var(--background));
+    @if not($row-even-background) and $background {
+        $row-even-background: var(--background);
     }
 
     @if not($row-odd-text-color) and $foreground {
