@@ -9,14 +9,8 @@ export default defineConfig({
     testTimeout: 10000, // 10s for Sass compilation tests
     coverage: {
       provider: "v8",
-      include: ["**/*.ts"],
-      exclude: [
-        "dist/**",
-        "node_modules/**",
-        "**/*.test.ts",
-        "**/*.spec.ts",
-        "vitest.config.ts",
-      ],
+      include: ["tests/**/*.ts"],
+      exclude: ["**/*.test.ts", "**/*.spec.ts"],
     },
   },
 });
