@@ -58,6 +58,18 @@
     $theme: digest-schema($select-schema);
     $variant: map.get($theme, '_meta', 'theme');
 
+    @if not($toggle-button-foreground-filled) and $toggle-button-foreground {
+        $toggle-button-foreground-filled: var(--toggle-button-foreground);
+    }
+
+    @if not($toggle-button-foreground-focus) and $toggle-button-foreground {
+        $toggle-button-foreground-focus: dynamic-shade(var(--toggle-button-foreground));
+    }
+
+    @if not($toggle-button-foreground-disabled) and $toggle-button-foreground {
+        $toggle-button-foreground-disabled: hsl(from var(--toggle-button-foreground) h s l / 0.5);
+    }
+
     @if not($toggle-button-foreground) and $toggle-button-background {
         $toggle-button-foreground: adaptive-contrast(var(--toggle-button-background));
     }
@@ -88,6 +100,14 @@
         @if not($toggle-button-foreground-focus) and $toggle-button-background-focus {
             $toggle-button-foreground-focus: adaptive-contrast(var(--toggle-button-background-focus));
         }
+    }
+
+    @if not($toggle-button-background-disabled) and $toggle-button-background {
+        $toggle-button-background-disabled: hsl(from var(--toggle-button-background) h s l / 0.5);
+    }
+
+    @if not($toggle-button-foreground-disabled) and $toggle-button-foreground {
+        $toggle-button-foreground-disabled: hsl(from var(--toggle-button-foreground) h s l / 0.5);
     }
 
     @return extend(

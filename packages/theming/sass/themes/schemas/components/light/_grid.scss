@@ -75,11 +75,17 @@
 /// @prop {Map} filtering-header-text-color [color: ('gray', 800)] - The text color of the filtered column header.
 /// @prop {Map} filtering-row-background [color: 'gray', 50)] - The background color of the filtering row.
 /// @prop {Map} filtering-row-text-color [color: ('gray', 800)] - The text color of the filtering row.
+/// @prop {Map} filtering-dialog-background [color: ('surface', 500)] - The background color of the advanced filtering dialog.
 /// @prop {Map} excel-filtering-header-foreground [color: ('gray', 700)] - The text color of the header in the excel style filtering.
 /// @prop {Map} excel-filtering-subheader-foreground [color: ('gray', 700)] - The text color of the sorting and moving headers in the excel style filtering.
 /// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 700)] - The text color of the excel style filtering options.
+/// @prop {Map} excel-filtering-actions-icon-color [color: ('gray', 700)] - The icon color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 700)] - The text color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-hover-icon-color [color: ('gray', 700)] - The icon color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-selected-icon-color [color: ('secondary', 500)] - The icon color of the excel style filtering options in active state.
+/// @prop {Map} excel-filtering-actions-hover-background [color: ('gray', 100)] - The background color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 400)] - The text color of the excel style filtering options in disabled state.
+/// @prop {Map} excel-filtering-border-color [color: ('gray', 300)] - The border color used in the excel style filter.
 /// @prop {Map} row-drag-color [color: ('gray', 200))] - The color of the drag handle.
 /// @prop {Number} grid-elevation [2] - The elevation level, between 0-24, to be used for the grid.
 /// @prop {Number} drag-elevation [5] - The elevation level, between 0-24, to be used for movable elements (ex. column header).
@@ -212,6 +218,13 @@ $light-grid: extend(
             ),
         ),
 
+        excel-filtering-actions-icon-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
         excel-filtering-actions-hover-foreground: (
             color: (
                 'gray',
@@ -219,10 +232,38 @@ $light-grid: extend(
             ),
         ),
 
+        excel-filtering-actions-hover-icon-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        excel-filtering-actions-selected-icon-color: (
+            color: (
+                'secondary',
+                500,
+            ),
+        ),
+
+        excel-filtering-actions-hover-background: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         excel-filtering-actions-disabled-foreground: (
             color: (
                 'gray',
                 400,
+            ),
+        ),
+
+        excel-filtering-border-color: (
+            color: (
+                'gray',
+                300,
             ),
         ),
 
@@ -544,6 +585,13 @@ $light-grid: extend(
             color: (
                 'gray',
                 800,
+            ),
+        ),
+
+        filtering-dialog-background: (
+            color: (
+                'surface',
+                500,
             ),
         ),
 
@@ -991,6 +1039,7 @@ $fluent-grid: extend(
 /// @prop {Map} cell-selected-within-background [color: ('primary', 100)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('primary', 100)] - The color of the selected cell inside a selected row/column.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('primary', 100)] - The selected row hover text color.
+/// @prop {Map} excel-filtering-border-color [color: ('gray', 100)] - The border color used in the excel style filter.
 /// @requires $light-grid
 $bootstrap-grid: extend(
     $light-grid,
@@ -1141,6 +1190,13 @@ $bootstrap-grid: extend(
             ),
         ),
 
+        excel-filtering-border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         _meta: (
             theme: 'bootstrap',
         ),
@@ -1156,6 +1212,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} header-selected-text-color [color: 'gray', 900] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
 /// @prop {Map} filtering-row-background [color: ('surface', 500)] - The background color of the filtering row.
+/// @prop {Map} filtering-dialog-background [contrast-color: ('gray', 900)] - The background color of the advanced filtering dialog.
 /// @prop {Map} edited-row-indicator [color: ('primary', 400)] - The indicator's color of edited row.
 /// @prop {Map} cell-selected-background [color: ('primary', 50)] - The selected cell background color.
 /// @prop {Map} ghost-header-text-color [color: 'gray', 700] - The dragged header text color.
@@ -1206,6 +1263,11 @@ $bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 800)] - The text color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-foreground [color: ('gray', 900)] - The text color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 900, .2)] - The text color of the excel style filtering options in disabled state.
+/// @prop {Map} excel-filtering-actions-active-icon-color [color: ('primary', 200)] - The icon color of the excel style filtering options in active state.
+/// @prop {Map} excel-filtering-actions-selected-icon-color [color: ('primary', 200)] - The icon color of the excel style filtering options in selected state.
+/// @prop {Map} excel-filtering-actions-icon-color [color: ('gray', 600)] - The icon color of the excel style filtering options.
+/// @prop {Map} excel-filtering-actions-hover-icon-color [color: ('gray', 700)] - The icon color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-hover-background [color: ('gray', 200)] - The background color of the excel style filtering options in hover/focus state.
 /// @prop {Map} row-drag-color [color: ('gray', 800, .75))] - The color of the drag handle.
 /// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires $light-grid
@@ -1271,6 +1333,13 @@ $indigo-grid: extend(
             color: (
                 'surface',
                 500,
+            ),
+        ),
+
+        filtering-dialog-background: (
+            contrast-color: (
+                'gray',
+                900,
             ),
         ),
 
@@ -1590,10 +1659,38 @@ $indigo-grid: extend(
             ),
         ),
 
+        excel-filtering-actions-icon-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         excel-filtering-actions-hover-foreground: (
             color: (
                 'gray',
                 900,
+            ),
+        ),
+
+        excel-filtering-actions-hover-icon-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
+
+        excel-filtering-actions-selected-icon-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        excel-filtering-actions-hover-background: (
+            color: (
+                'gray',
+                200,
             ),
         ),
 

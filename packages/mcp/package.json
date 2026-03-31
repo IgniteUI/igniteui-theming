@@ -30,14 +30,11 @@
   "exports": {
     ".": {
       "default": "./dist/index.js"
-    },
-    "./mcp": {
-      "import": "./dist/index.js"
     }
   },
   "scripts": {
     "test": "vitest run",
-    "build": "vite build && shx cp -r dist/ ../theming/dist/mcp/",
+    "build": "vite build",
     "clean": "shx rm -rf dist/",
     "inspect": "npx @modelcontextprotocol/inspector ./dist/index.js"
   },

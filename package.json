@@ -18,20 +18,19 @@
     "packages/mcp"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build -w packages/theming",
     "clean": "npm run clean --workspaces --if-present",
     "test": "vitest run",
     "lint": "npm run lint:biome && npm run lint --workspaces --if-present",
     "lint:biome": "biome check",
-    "format": "biome check --fix",
+    "format": "biome check --fix && npm run format --workspaces --if-present",
     "prepare": "husky install && npm run prepare --workspaces --if-present",
     "coverage": "vitest run --coverage",
     "mcp:inspector": "npx @modelcontextprotocol/inspector ./packages/theming/dist/mcp/index.js"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",
-    "sass-embedded": "~1.92.1",
-    "@types/node": "^22.0.0",
+    "@types/node": "^25.4.0",
     "@vitest/coverage-v8": "^4.1.1",
     "husky": "^8.0.3",
     "prettier": "^3.2.5",

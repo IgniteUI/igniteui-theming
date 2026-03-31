@@ -118,6 +118,30 @@
     $theme: digest-schema($chip-schema);
     $variant: map.get($theme, '_meta', 'theme');
 
+    // have unified text-color for all states if text-color is provided
+
+    @if not($hover-text-color) and $text-color {
+        $hover-text-color: var(--text-color);
+    }
+
+    @if not($focus-text-color) and $text-color {
+        $focus-text-color: var(--text-color);
+    }
+
+    @if not($selected-text-color) and $text-color {
+        $selected-text-color: var(--text-color);
+    }
+
+    @if not($hover-selected-text-color) and $selected-text-color {
+        $hover-selected-text-color: var(--selected-text-color);
+    }
+
+    @if not($focus-selected-text-color) and $selected-text-color {
+        $focus-selected-text-color: var(--selected-text-color);
+    }
+
+    // rest of the styles are derived from background
+
     @if not($text-color) and $background {
         $text-color: adaptive-contrast(var(--background));
     }

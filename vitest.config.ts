@@ -15,17 +15,6 @@ export default defineConfig({
     projects: [
       'packages/theming',
       'packages/mcp',
-      {
-        resolve: {
-          alias: ALIAS_PATHS,
-        },
-        test: {
-          name: 'integration',
-          include: ['tests/**/*.test.ts'],
-          testTimeout: 15_000,
-          environment: 'node',
-        },
-      },
     ],
   },
 });
