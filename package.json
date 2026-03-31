@@ -18,7 +18,7 @@
     "packages/mcp"
   ],
   "scripts": {
-    "build": "npm run build -w packages/theming && npm run build -w packages/mcp",
+    "build": "npm run build -w packages/theming",
     "clean": "npm run clean --workspaces --if-present",
     "test": "vitest run",
     "lint": "npm run lint:biome && npm run lint --workspaces --if-present",

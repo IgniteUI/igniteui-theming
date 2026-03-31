@@ -9,9 +9,10 @@
     "igniteui-theming-mcp": "./dist/mcp/index.js"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:tailwind && npm run build:json && npm run build:e2e",
+    "build": "npm run clean && npm run build:tailwind && npm run build:json && npm run build:mcp && npm run build:e2e",
     "build:json": "node .scripts/buildJSON.mjs && node .scripts/buildComponentDocs.mjs && node .scripts/buildBarrel.mjs",
     "build:tailwind": "npm run clean:tailwind && node .scripts/buildTailwind.mjs",
+    "build:mcp": "npm run build --prefix ../mcp && shx cp -r ../mcp/dist ./dist/mcp",
     "build:docs": "npm run clean:docs && npm run build:docs:en:production",
     "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./sass -d docs",
     "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./sass -d docs",
