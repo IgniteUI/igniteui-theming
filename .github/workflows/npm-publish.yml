@@ -8,19 +8,19 @@ on:
   release:
     types: [created]
 
+env:
+  VERSION: ${{ github.ref_name }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
-
-      - run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-      - run: echo ${VERSION}
 
       - name: Install dependencies
         run: npm ci
@@ -46,10 +46,11 @@ jobs:
             echo "NPM_TAG=latest"
           fi >> $GITHUB_ENV
           echo ${NPM_TAG}
+
       - name: Create package version
         run: npm version ${VERSION/-patch/} --no-git-tag-version --save --allow-same-version
-        working-directory: ./
+        working-directory: packages/theming
 
       - name: Publish igniteui-theming
-        run: npm publish --tag ${NPM_TAG}
-        working-directory: ./
+        run: npm publish --tag ${NPM_TAG} --provenance
+        working-directory: packages/theming

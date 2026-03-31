@@ -1,0 +1,54 @@
+{
+  "name": "igniteui-theming-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Model Context Protocol (MCP) implementation for Ignite UI Theming",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgniteUI/igniteui-theming.git",
+    "directory": "packages/mcp"
+  },
+  "keywords": [
+    "model context protocol",
+    "mcp",
+    "Ignite",
+    "UI",
+    "theming"
+  ],
+  "author": "Infragistics",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-theming/issues"
+  },
+  "homepage": "https://github.com/IgniteUI/igniteui-theming#readme",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "build": "vite build",
+    "clean": "shx rm -rf dist/",
+    "inspect": "npx @modelcontextprotocol/inspector ./dist/index.js"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,jsx,tsx}": [
+      "biome check --fix --no-errors-on-unmatched"
+    ]
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "sass-embedded": "~1.92.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "igniteui-theming": "*"
+  }
+}
