@@ -1,14 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "types": ["vite/client", "node"]
-  },
-  "exclude": ["node_modules", "packages"]
+  "extends": "./tsconfig.base.json",
+  "include": ["packages/**/*.ts"],
+  "exclude": ["node_modules"]
 }
