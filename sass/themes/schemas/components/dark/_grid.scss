@@ -501,9 +501,14 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} cell-disabled-color [contrast-color: ('gray', 50, .2)] - The text color of a disabled cell.
 /// @prop {Map} drop-area-background [color: ('gray', 100)] - The drop area background color.
 /// @prop {Map} excel-filtering-actions-foreground [contrast-color: ('gray', 50, .9)] - The text color of the excel style filtering options.
+/// @prop {Map} excel-filtering-actions-icon-color [contrast-color: ('gray', 50, .6)] - The icon color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-foreground [contrast-color: ('gray', 50)] - The text color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-hover-icon-color [contrast-color: ('gray', 50, .8)] - The icon color of the excel style filtering options in hover/focus state.
+/// @prop {Map} excel-filtering-actions-hover-background [contrast-color: ('gray', 50, .1)] - The background color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [contrast-color: ('gray', 50, .2)] - The text color of the excel style filtering options in disabled state.
+/// @prop {Map} excel-filtering-border-color [color: ('gray', 100)] - The border color used in the excel style filter.
 /// @prop {Map} row-ghost-background [color: ('gray', 100)] - The background color of the dragged row.
+/// @prop {Map} filtering-dialog-background [color: ('gray', 50)] - The background color of the advanced filtering dialog.
 /// @prop {Map} body-column-selected-border-color [color: ('primary', 900)] - The border color used for the body column when in group-row state.
 /// @prop {Map} body-column-hover-selected-border-color [color: ('primary', 700)] - The border color used for the body column when in group-row + hover state.
 /// @requires $indigo-grid
@@ -799,10 +804,34 @@ $dark-indigo-grid: extend(
             ),
         ),
 
+        excel-filtering-actions-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+
         excel-filtering-actions-hover-foreground: (
             contrast-color: (
                 'gray',
                 50,
+            ),
+        ),
+
+        excel-filtering-actions-hover-icon-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        excel-filtering-actions-hover-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
             ),
         ),
 
@@ -814,10 +843,24 @@ $dark-indigo-grid: extend(
             ),
         ),
 
+        excel-filtering-border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
         row-ghost-background: (
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        filtering-dialog-background: (
+            color: (
+                'gray',
+                50,
             ),
         ),
 
