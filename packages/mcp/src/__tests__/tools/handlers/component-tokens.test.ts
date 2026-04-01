@@ -17,52 +17,48 @@ describe("handleGetComponentDesignTokens", () => {
     );
   });
 
-  it("shows two platform sections: Angular and WC/React/Blazor", async () => {
+  it("shows flat related themes list for compound components", async () => {
     const result = await handleGetComponentDesignTokens({
       component: "date-range-picker",
     });
     const text = result.content[0].text;
 
-    expect(text).toContain("**Angular:**");
-    expect(text).toContain("**Web Components:**");
-    // Old format should NOT be present
-    expect(text).not.toContain("**Scopes by Platform:**");
+    expect(text).toContain(
+      "**Related themes:** `flat-button`, `input-group`, `calendar`",
+    );
+    expect(text).toContain(
+      "Scope all related themes under the parent component selector:",
+    );
   });
 
-  it("shows overlay scope for Angular but omits it for WC group (date-range-picker)", async () => {
+  it("shows both Angular and WC platform lines for cross-platform compound", async () => {
     const result = await handleGetComponentDesignTokens({
       component: "date-range-picker",
     });
     const text = result.content[0].text;
 
-    // Angular section has both inline and overlay scopes
-    expect(text).toContain("| inline | `igx-date-range-picker` |");
-    expect(text).toContain("| overlay | `.igx-date-picker` |");
-
-    // WC section has inline only - overlay row should NOT appear
-    expect(text).toContain("| inline | `igc-date-range-picker` |");
-    // Overlay N/A row should be gone
-    expect(text).not.toContain("| overlay | N/A |");
+    expect(text).toContain("- **Angular:** `igx-date-range-picker`");
+    expect(text).toContain(
+      "- **Web Components / React / Blazor:** `igc-date-range-picker`",
+    );
   });
 
-  it("shows per-platform related themes for compound components", async () => {
+  it("omits WC platform line for Angular-only compound (time-picker)", async () => {
     const result = await handleGetComponentDesignTokens({
-      component: "date-range-picker",
+      component: "time-picker",
     });
     const text = result.content[0].text;
 
-    // Angular: calendar in overlay scope
-    expect(text).toContain("| `calendar` | overlay | `.igx-date-picker` |");
-    // WC: calendar in inline scope
-    expect(text).toContain("| `calendar` | inline | `igc-date-range-picker` |");
+    expect(text).toContain("- **Angular:** `igx-time-picker`");
+    expect(text).not.toContain("Web Components / React / Blazor");
   });
 
-  it("shows inline scope for grid", async () => {
+  it("shows parent selector for grid compound", async () => {
     const result = await handleGetComponentDesignTokens({ component: "grid" });
     const text = result.content[0].text;
 
-    expect(text).toContain("| inline | `igx-grid` |");
-    expect(text).toContain("| inline | `igc-grid` |");
+    expect(text).toContain("- **Angular:** `igx-grid`");
+    expect(text).toContain("- **Web Components / React / Blazor:** `igc-grid`");
   });
 
   it("resolves theme aliases when theme is missing", async () => {
@@ -95,13 +91,6 @@ describe("handleGetComponentDesignTokens", () => {
 
     // Should have tokens table
     expect(text).toContain("**Available Tokens");
-
-    // Should NOT have compound sections
-    expect(text).not.toContain("**Compound Component:**");
-    expect(text).not.toContain("**Steps:**");
-    expect(text).not.toContain("| Scope | Selector |");
-    expect(text).not.toContain("**Token derivations:**");
-    expect(text).not.toContain("**Guidance:**");
   });
 
   it("renders primary tokens from structured data", async () => {
@@ -120,17 +109,16 @@ describe("handleGetComponentDesignTokens", () => {
     );
   });
 
-  it("renders banner with inline scope for both platform groups", async () => {
+  it("renders banner compound with both platform lines", async () => {
     const result = await handleGetComponentDesignTokens({
       component: "banner",
     });
     const text = result.content[0].text;
 
-    //Platforms should have inline scope
-    expect(text).toContain("**Angular:**");
-    expect(text).toContain("**Web Components:**");
-    // Banner should have inline scope for both
-    expect(text).toContain("| inline | `igx-banner` |");
-    expect(text).toContain("| inline | `igc-banner` |");
+    expect(text).toContain("**Related themes:** `flat-button`");
+    expect(text).toContain("- **Angular:** `igx-banner`");
+    expect(text).toContain(
+      "- **Web Components / React / Blazor:** `igc-banner`",
+    );
   });
 });

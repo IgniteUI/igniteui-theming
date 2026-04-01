@@ -749,15 +749,14 @@ export const TOOL_DESCRIPTIONS = {
   COMPOUND COMPONENTS:
   - Some components like "combo", "grid", "select" are compound - they use multiple
     internal components that each need their own theme
-  - The response includes "Related themes and token derivations" listing each related
-    theme and, where available, derivation hints showing how child token values relate
-    to parent/sibling tokens (e.g., "foreground → adaptive-contrast of calendar.content-background")
+  - The response lists related themes and, where available, token derivation hints
+    showing how child token values relate to parent/sibling tokens
+    (e.g., "foreground → adaptive-contrast of calendar.content-background")
   - Follow derivation hints when setting child token values. If the user specifies an
     explicit value, use that instead of the derived value.
+  - All related themes should be scoped under the parent component's selector
   - For each related theme: call get_component_design_tokens, then create_component_theme
-    using the selector assigned to that child under "Scopes by Platform" and "Related themes"
-  - Use \`@include tokens(child-theme(...))\` for each related theme inside the appropriate
-    scope selector
+    using the parent component's selector for the target platform
 
   VARIANTS INFO:
   - If you query a base component that has variants (e.g., "button"), the response
@@ -919,19 +918,16 @@ export const TOOL_DESCRIPTIONS = {
 </example>
 
 <compound_example>
-  Date Picker (compound) — child themes may use different scoped selectors per platform.
-  Follow token derivation hints and scope assignments from get_component_design_tokens:
+  Date Picker (compound) — all child themes use the parent component's selector.
+  Follow token derivation hints from get_component_design_tokens:
   1) get_component_design_tokens { "component": "date-picker" }
-  2) create_component_theme { "component": "date-picker", ... }
-  3) create_component_theme { "component": "calendar", "selector": ".igx-date-picker", ... }
-  4) create_component_theme { "component": "flat-button", "selector": ".igx-date-picker", ... }
+  2) create_component_theme { "component": "date-picker", "platform": "angular", ... }
+  3) create_component_theme { "component": "calendar", "selector": "igx-date-picker", ... }
+  4) create_component_theme { "component": "flat-button", "selector": "igx-date-picker", ... }
   5) create_component_theme { "component": "input-group", "selector": "igx-date-picker", ... }
 
-  Each call generates \`@include tokens($theme)\` inside the assigned scope selector.
-  - If you are targeting Angular, use the Angular selectors from the scopes table.
-  - If you are targeting Web Components, use the Web Components selectors from the scopes table.
-  - If you are targeting React, use the React selectors from the scopes table.
-  - If you are targeting Blazor, use the Blazor selectors from the scopes table.
+  Each child theme uses the parent's platform selector (e.g., \`igx-date-picker\` for Angular,
+  \`igc-date-picker\` for Web Components / React / Blazor).
   The tokens mixin emits --ig-{component}-{token} variables that child components
   consume via var() fallback — no per-child selectors needed.
 </compound_example>

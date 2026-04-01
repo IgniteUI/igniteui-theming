@@ -36,7 +36,6 @@ export {
   isComponentAvailable,
   isCompoundComponent,
   isVariantTheme,
-  type ScopeSelectors,
   type TokenDerivation,
   VARIANT_THEME_NAMES,
 } from "./component-metadata.js";

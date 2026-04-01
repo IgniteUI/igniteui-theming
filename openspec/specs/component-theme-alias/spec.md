@@ -1,5 +1,8 @@
-## ADDED Requirements
+# component-theme-alias Specification
 
+## Purpose
+TBD - created by archiving change component-theme-alias. Update Purpose after archive.
+## Requirements
 ### Requirement: Component metadata supports theme alias
 
 Component metadata SHALL allow an optional `theme` field that names another component whose theme implementation is used for styling.
@@ -25,3 +28,4 @@ Theme alias values MUST reference an existing component metadata entry and MUST 
 - **GIVEN** component metadata sets `theme` equal to its own component name
 - **WHEN** metadata is validated
 - **THEN** validation fails with an error indicating the alias is self-referential
+

@@ -1,12 +1,10 @@
 ## Purpose
 
 Document theme generation behavior and platform-specific output patterns.
-
 ## Requirements
-
 ### Requirement: Theme generation is platform-aware
 
-The `create_theme` tool generates Sass output that follows platform-specific conventions. When no platform is specified (generic path), the output SHALL include the necessary preset imports for typography and elevation variables.
+The `create_theme` tool generates Sass output that follows platform-specific conventions.
 
 #### Scenario: Angular output
 
@@ -26,36 +24,18 @@ The `create_theme` tool generates Sass output that follows platform-specific con
 - **THEN** the output uses the Web Components mixin pattern
 - **AND** `core()` and Angular `theme()` mixins are not used
 
+#### Scenario: Generic platform output
+
+- **WHEN** `platform: "generic"` is provided
+- **THEN** the output SHALL use the generic theme generator (same as the current `undefined` platform path)
+- **AND** the output SHALL use `@use 'igniteui-theming' as *;` as the import
+- **AND** the response platform note SHALL display `"Platform: Ignite UI Theming (Standalone)"` instead of `"Platform: Not specified (generic output)"`
+
 #### Scenario: Platform hint
 
-- **WHEN** `platform` is not specified
+- **WHEN** `platform` is not specified (undefined)
 - **THEN** the response includes a hint to specify `platform`
-
-#### Scenario: Generic output includes typography preset import
-
-- **WHEN** `platform` is not specified (generic path)
-- **AND** `includeTypography` is not `false`
-- **THEN** the output MUST include `@use 'igniteui-theming/sass/typography/presets/<designSystem>' as *;`
-- **AND** this import MUST appear after the base `@use 'igniteui-theming' as *;` statement
-
-#### Scenario: Generic output includes elevations preset import
-
-- **WHEN** `platform` is not specified (generic path)
-- **AND** `includeElevations` is not `false`
-- **THEN** the output MUST include `@use 'igniteui-theming/sass/elevations/presets' as *;`
-- **AND** this import MUST appear after the base `@use 'igniteui-theming' as *;` statement
-
-#### Scenario: Generic output omits typography preset import when excluded
-
-- **WHEN** `platform` is not specified (generic path)
-- **AND** `includeTypography: false` is provided
-- **THEN** the output MUST NOT include a typography preset `@use` import
-
-#### Scenario: Generic output omits elevations preset import when excluded
-
-- **WHEN** `platform` is not specified (generic path)
-- **AND** `includeElevations: false` is provided
-- **THEN** the output MUST NOT include an elevations preset `@use` import
+- **AND** the hint SHALL mention `"generic"` as a valid option for platform-agnostic output
 
 ### Requirement: Theme includes optional sections by flags
 
@@ -83,3 +63,4 @@ The `create_theme` tool includes typography, elevations, and spacing by default 
 - **WHEN** provided colors are unsuitable for the chosen variant
 - **THEN** the response includes a warning message
 - **AND** the response still returns generated code
+

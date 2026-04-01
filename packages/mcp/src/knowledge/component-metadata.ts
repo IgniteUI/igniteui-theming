@@ -24,14 +24,6 @@ export interface TokenDerivation {
 }
 
 /**
- * Platform-specific selector(s) for a named scope.
- */
-export interface ScopeSelectors {
-  angular?: string | string[];
-  webcomponents?: string | string[];
-}
-
-/**
  * Information about a compound component (one that contains multiple themeable sub-components).
  */
 export interface CompoundInfo {
@@ -39,13 +31,6 @@ export interface CompoundInfo {
   description: string;
   /** Related theme functions needed for full customization */
   relatedThemes: string[];
-  /**
-   * Non-inline scopes (e.g., overlay). Inline scope is always derived from base selectors.
-   * Most compounds won't have this field.
-   */
-  additionalScopes?: Record<string, ScopeSelectors>;
-  /** Maps child theme name to a scope name per platform. Values: 'inline' or a key in additionalScopes */
-  childScopes?: Record<string, { angular?: string; webcomponents?: string }>;
   /** Token derivation rules. Key: 'childTheme.childToken' */
   tokenDerivations?: Record<string, TokenDerivation>;
   /** Free-form guidance for edge cases */
@@ -259,15 +244,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
           transform: "identity",
         },
       },
-      additionalScopes: {
-        overlay: { angular: ".igx-drop-down__list" },
-        input: { angular: "igx-combo, .igx-drop-down__list" },
-      },
-      childScopes: {
-        "drop-down": { angular: "overlay" },
-        checkbox: { angular: "overlay" },
-        "input-group": { angular: "input" },
-      },
       guidance:
         "The combo's input-group, drop-down, and checkbox should share a consistent color scheme.",
     },
@@ -291,12 +267,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
           transform: "identity",
         },
       },
-      additionalScopes: {
-        overlay: { angular: ".igx-drop-down__list" },
-      },
-      childScopes: {
-        "drop-down": { angular: "overlay" },
-      },
       guidance:
         "The simple-combo's input-group and drop-down should share a consistent color scheme.",
     },
@@ -307,14 +277,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       description:
         "The date-picker combines input, calendar, and flat-button components.",
       relatedThemes: ["flat-button", "input-group", "calendar"],
-      additionalScopes: {
-        overlay: { angular: ".igx-date-picker" },
-      },
-      childScopes: {
-        calendar: { angular: "overlay" },
-        "flat-button": { angular: "overlay" },
-        "input-group": { angular: "inline" },
-      },
       tokenDerivations: {
         "flat-button.foreground": {
           from: "calendar.content-background",
@@ -334,14 +296,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       description:
         "The date-range-picker combines input, calendar, and flat-button components.",
       relatedThemes: ["flat-button", "input-group", "calendar"],
-      additionalScopes: {
-        overlay: { angular: ".igx-date-picker" },
-      },
-      childScopes: {
-        calendar: { angular: "overlay" },
-        "flat-button": { angular: "overlay" },
-        "input-group": { angular: "inline" },
-      },
       tokenDerivations: {
         "flat-button.foreground": {
           from: "calendar.content-background",
@@ -571,12 +525,6 @@ chips for displaying conditions, and buttons/button-groups for adding and groupi
       description:
         "The select component combines input-group and drop-down components.",
       relatedThemes: ["input-group", "drop-down"],
-      additionalScopes: {
-        overlay: { angular: ".igx-drop-down__list" },
-      },
-      childScopes: {
-        "drop-down": { angular: "overlay" },
-      },
       tokenDerivations: {
         "input-group.focused-border-color": {
           from: "select.toggle-button-background",
@@ -614,13 +562,6 @@ The drop-down background should match the select surface intent.`,
     compound: {
       description: "The time picker uses an input-group for the input field.",
       relatedThemes: ["input-group", "time-picker", "flat-button"],
-      additionalScopes: {
-        overlay: { angular: ".igx-time-picker" },
-      },
-      childScopes: {
-        "time-picker": { angular: "overlay" },
-        "flat-button": { angular: "overlay" },
-      },
       guidance: `The time-picker input-group and the time-picker dial should share a consistent color scheme. \
 The input-group text color should coordinate with the time-picker header.`,
     },

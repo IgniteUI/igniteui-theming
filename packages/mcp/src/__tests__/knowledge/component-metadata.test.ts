@@ -4,7 +4,7 @@
  * These tests verify:
  * 1. COMPONENT_METADATA unified data structure (selectors, variants, compound info)
  * 2. Accessor function behavior
- * 3. Structural invariants (inline scope derivation, childScopes validity, etc.)
+ * 3. Structural invariants (compound field validation, etc.)
  * 4. TokenDerivation format validation
  */
 
@@ -177,59 +177,6 @@ describe("Component Metadata Knowledge Base", () => {
             Array.isArray(metadata.compound.relatedThemes),
             `${name}.compound.relatedThemes should be an array`,
           ).toBe(true);
-        }
-      }
-    });
-
-    it('childScopes references should be valid ("inline" or key in additionalScopes)', () => {
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.childScopes) continue;
-
-        const additionalScopeKeys = Object.keys(
-          metadata.compound.additionalScopes ?? {},
-        );
-
-        for (const [childName, scopeTargets] of Object.entries(
-          metadata.compound.childScopes,
-        )) {
-          if (scopeTargets.angular) {
-            expect(
-              scopeTargets.angular === "inline" ||
-                additionalScopeKeys.includes(scopeTargets.angular),
-              `${name} childScope '${childName}' angular target '${scopeTargets.angular}' should be 'inline' or a key in additionalScopes`,
-            ).toBe(true);
-          }
-          if (scopeTargets.webcomponents) {
-            expect(
-              scopeTargets.webcomponents === "inline" ||
-                additionalScopeKeys.includes(scopeTargets.webcomponents),
-              `${name} childScope '${childName}' webcomponents target '${scopeTargets.webcomponents}' should be 'inline' or a key in additionalScopes`,
-            ).toBe(true);
-          }
-        }
-      }
-    });
-
-    it("no inline scope should appear in additionalScopes", () => {
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.additionalScopes) continue;
-
-        expect(
-          metadata.compound.additionalScopes,
-          `${name}.compound.additionalScopes should not have an 'inline' key`,
-        ).not.toHaveProperty("inline");
-      }
-    });
-
-    it("childScopes children should be listed in relatedThemes", () => {
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.childScopes) continue;
-
-        for (const childName of Object.keys(metadata.compound.childScopes)) {
-          expect(
-            metadata.compound.relatedThemes,
-            `${name} childScope child '${childName}' should be in relatedThemes`,
-          ).toContain(childName);
         }
       }
     });
@@ -676,22 +623,4 @@ describe("Component Metadata Knowledge Base", () => {
   });
 
   // ===== Production Data Invariants =====
-
-  describe("production data invariants", () => {
-    it("should not contain stray or test scope entries", () => {
-      const validScopeNames = ["overlay", "input"]; // Known non-inline scope names
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.additionalScopes) continue;
-
-        for (const scopeName of Object.keys(
-          metadata.compound.additionalScopes,
-        )) {
-          expect(
-            validScopeNames,
-            `${name} additionalScopes contains unexpected scope '${scopeName}'`,
-          ).toContain(scopeName);
-        }
-      }
-    });
-  });
 });
