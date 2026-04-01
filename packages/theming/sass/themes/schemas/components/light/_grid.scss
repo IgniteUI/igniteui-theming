@@ -86,14 +86,15 @@
 /// @prop {Map} excel-filtering-actions-hover-background [color: ('gray', 100)] - The background color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [color: ('gray', 400)] - The text color of the excel style filtering options in disabled state.
 /// @prop {Map} excel-filtering-border-color [color: ('gray', 300)] - The border color used in the excel style filter.
-/// @prop {Map} row-drag-color [color: ('gray', 200))] - The color of the drag handle.
+/// @prop {Map} row-drag-color [color: ('gray', 800)] - The color of the drag handle.
 /// @prop {Number} grid-elevation [2] - The elevation level, between 0-24, to be used for the grid.
 /// @prop {Number} drag-elevation [5] - The elevation level, between 0-24, to be used for movable elements (ex. column header).
 /// @prop {List} drop-area-border-radius [(rem(16px), rem(0), rem(16px))] - The border radius used for drop-area.
 /// @prop {List} header-size [(rem(32px), rem(40px), rem(50px))] - The size used for the grid header.
 /// @prop {List} drop-area-size [(rem(24px), rem(24px), rem(32px))] - The size used for the grid drop area.
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
-/// @prop {Color} row-ghost-background [color: 'primary', 50] - The background color of the dragged row.
+/// @prop {Color} row-ghost-background [color: ('gray', 50)] - The background color of the dragged row.
+/// @prop {Color} row-ghost-border-color [color: ('gray', 500)] - The border color of the dragged row.
 /// @prop {Color} summaries-patch-background [color: ('gray', 300)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @prop {String} active-state-border-style ['solid'] - The border style used for row active state and cell active state.
 /// @prop {Map} typography [header: (comfortable: (value: 'overline'), compact: (value: 'subtitle-1'))] - The typography styles used for the component.
@@ -361,7 +362,7 @@ $light-grid: extend(
         row-drag-color: (
             color: (
                 'gray',
-                200,
+                800,
             ),
         ),
 
@@ -611,8 +612,15 @@ $light-grid: extend(
 
         row-ghost-background: (
             color: (
-                'primary',
+                'gray',
                 50,
+            ),
+        ),
+
+        row-ghost-border-color: (
+            color: (
+                'gray',
+                500,
             ),
         ),
 
@@ -831,7 +839,6 @@ $material-grid: extend(
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-text-color [color: ('gray', 700)] - The grid group row cont badge text color.
 /// @prop {Map} filtering-header-text-color [color: ('gray', 900)] - The text color of the filtered column header.
-/// @prop {Map} row-ghost-background [color: 'surface'] - The background color of the dragged row.
 /// @prop {number} grid-elevation [0] - The elevation level, between 0-24, to be used for the grid.
 /// @prop {number} drag-elevation [1] - The elevation level, between 0-24, to be used for movable elements (ex. column header).
 /// @prop {List} drop-area-border-radius [(rem(2px), rem(0), rem(16px))] - The border radius used for drop-area.
@@ -992,10 +999,6 @@ $fluent-grid: extend(
                 'gray',
                 300,
             ),
-        ),
-
-        row-ghost-background: (
-            color: 'surface',
         ),
 
         drop-area-border-radius: (
@@ -1268,7 +1271,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-icon-color [color: ('gray', 600)] - The icon color of the excel style filtering options.
 /// @prop {Map} excel-filtering-actions-hover-icon-color [color: ('gray', 700)] - The icon color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-hover-background [color: ('gray', 200)] - The background color of the excel style filtering options in hover/focus state.
-/// @prop {Map} row-drag-color [color: ('gray', 800, .75))] - The color of the drag handle.
+/// @prop {Color} row-ghost-background [color: ('surface')] - The background color of the dragged row.
 /// @prop {Map} summaries-patch-background [color: ('surface')] - The leading summaries patch backround. Used in hierarchical grids.
 /// @requires $light-grid
 $indigo-grid: extend(
@@ -1702,18 +1705,9 @@ $indigo-grid: extend(
             ),
         ),
 
-        row-drag-color: (
-            color: (
-                'gray',
-                800,
-                0.75,
-            ),
-        ),
-
         row-ghost-background: (
             color: (
-                'gray',
-                200,
+                'surface',
             ),
         ),
 
