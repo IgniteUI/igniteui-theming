@@ -1,7 +1,9 @@
 ## Purpose
 
 Define component theming requirements, validation, and platform-specific output rules.
+
 ## Requirements
+
 ### Requirement: Component theming requires platform
 
 The `create_component_theme` tool requires a `platform` parameter and SHALL specify compound-component completeness rules to reduce incomplete outputs.
@@ -29,7 +31,7 @@ The `create_component_theme` tool requires a `platform` parameter and SHALL spec
 
 ### Requirement: Component token schemas are exposed
 
-The `get_component_design_tokens` tool SHALL use an instruction-oriented output format that varies based on whether the component is compound or simple. For compound components, the response SHALL include numbered steps, per-platform scope tables, related theme tables, token derivations, and guidance. For simple components, the response SHALL include the theme function, primary tokens, and the token table without compound sections.
+The `get_component_design_tokens` tool SHALL use an instruction-oriented output format that varies based on whether the component is compound, simple, or a child sub-component. For compound components, the response SHALL include numbered steps, per-platform scope tables, related theme tables, token derivations, and guidance. For simple components, the response SHALL include the theme function, primary tokens, and the token table without compound sections. For child sub-components, the response SHALL include a relationship note followed by the full parent theme's tokens.
 
 #### Scenario: Compound component response uses instruction-oriented format
 
@@ -44,6 +46,20 @@ The `get_component_design_tokens` tool SHALL use an instruction-oriented output 
 - **THEN** the response opens with `Implement a theme for the \`<name>\` component using the following guidance.`
 - **AND** includes the theme function name, primary tokens, and available tokens table
 - **AND** does NOT include steps, scope tables, related theme tables, token derivations, or guidance sections
+
+#### Scenario: Child component response includes relationship note
+
+- **WHEN** `get_component_design_tokens` is called for a child component (one with `childOf` set in metadata)
+- **THEN** the response includes a note stating that the component is a child of the parent component
+- **AND** the note states that styling is controlled through the parent's theme
+- **AND** the response shows the full parent theme's tokens (unfiltered)
+- **AND** the theme function name shown is the parent's theme function (e.g., `list-theme()` for `list-item`)
+
+#### Scenario: Child component relationship note format
+
+- **WHEN** `get_component_design_tokens` is called for `list-item`
+- **THEN** the response includes text indicating `list-item` is a child of `list`
+- **AND** indicates that tokens apply at the list level
 
 #### Scenario: Missing selector entries are handled
 
@@ -172,3 +188,60 @@ The SassDoc description block in `*-theme.scss` files SHALL use concise one-line
 - **WHEN** the SassDoc descriptions are trimmed
 - **THEN** all `@param` annotations remain unchanged with their full derivation descriptions
 
+### Requirement: Generated theme code uses parent selector for child components
+
+The `create_component_theme` tool SHALL scope generated theme code to the parent component's selector when the component has a `childOf` field. This applies to both Sass and CSS output.
+
+#### Scenario: Sass output for child component uses parent selector
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `platform: "angular"`
+- **WHEN** no custom `selector` is provided
+- **THEN** the generated Sass code scopes the `@include tokens(...)` call to `igx-list` (the parent's selector)
+- **AND** the theme function call uses `list-theme()`
+
+#### Scenario: CSS output for child component uses parent selector
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"`, `platform: "webcomponents"`, and `output: "css"`
+- **WHEN** no custom `selector` is provided
+- **THEN** the generated CSS scopes custom properties to `igc-list` (the parent's selector)
+
+#### Scenario: Custom selector overrides parent selector for child component
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `selector: ".my-custom-list"`
+- **WHEN** a custom selector is provided
+- **THEN** the generated code uses `.my-custom-list` as the scope
+- **AND** the parent selector resolution is bypassed
+
+#### Scenario: Same-element alias continues to use own selector
+
+- **GIVEN** `create_component_theme` is called with `component: "textarea"` and `platform: "angular"`
+- **WHEN** no custom `selector` is provided
+- **THEN** the generated code scopes to `.igx-input-group--textarea-group` (textarea's own selector)
+- **AND** NOT to `igx-input-group` (the aliased theme's selector)
+
+### Requirement: Generated theme variable name uses parent for child components
+
+When generating theme code for a child component, the variable name SHALL derive from the parent component's name, not the child's. This ensures merge-compatible output across sub-parts of the same component.
+
+#### Scenario: Child component Sass output uses parent variable name
+
+- **GIVEN** `create_component_theme` is called with `component: "card-actions"` and `platform: "angular"`
+- **WHEN** no custom `name` is provided
+- **THEN** the generated variable is `$custom-card-theme` and the comment says "Custom card theme"
+
+#### Scenario: Child component CSS output uses parent in description
+
+- **GIVEN** `create_component_theme` is called with `component: "card-actions"` and `output: "css"`
+- **WHEN** no custom `name` is provided
+- **THEN** the description says "Generated CSS custom properties for card component"
+
+### Requirement: Child component platform availability delegates to parent
+
+When the `create_component_theme` handler checks platform availability for a child component, it SHALL check the parent component's availability instead of the child's.
+
+#### Scenario: Child component passes platform check via parent
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `platform: "angular"`
+- **WHEN** the handler checks platform availability
+- **THEN** it checks `isComponentAvailable("list", "angular")` (the parent)
+- **AND** the request succeeds

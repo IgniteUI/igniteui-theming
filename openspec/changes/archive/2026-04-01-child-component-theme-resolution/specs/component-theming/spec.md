@@ -79,18 +79,29 @@ The `create_component_theme` tool SHALL scope generated theme code to the parent
 - **WHEN** no custom `selector` is provided
 - **THEN** the generated code scopes to `igx-avatar` (the component's own selector)
 
-### Requirement: Child component platform availability uses own selectors
+### Requirement: Generated theme variable name uses parent for child components
 
-Platform availability checks for child components SHALL use the child's own selectors, not the parent's. A child component is available on a platform if its own `selectors` entry for that platform is non-null.
+When generating theme code for a child component, the variable name SHALL derive from the parent component's name, not the child's. This ensures merge-compatible output across sub-parts of the same component.
 
-#### Scenario: Child component available on both platforms
+#### Scenario: Child component Sass output uses parent variable name
 
-- **GIVEN** `list-item` has selectors `{ angular: "igx-list-item", webcomponents: "igc-list-item" }`
-- **WHEN** `isComponentAvailable("list-item", "angular")` is called
-- **THEN** it returns `true`
+- **GIVEN** `create_component_theme` is called with `component: "card-actions"` and `platform: "angular"`
+- **WHEN** no custom `name` is provided
+- **THEN** the generated variable is `$custom-card-theme` and the comment says "Custom card theme"
 
-#### Scenario: Child component not available on a platform
+#### Scenario: Child component CSS output uses parent in description
 
-- **GIVEN** `expansion-panel-body` has `selectors.webcomponents` set to `null`
-- **WHEN** `isComponentAvailable("expansion-panel-body", "webcomponents")` is called
-- **THEN** it returns `false`
+- **GIVEN** `create_component_theme` is called with `component: "card-actions"` and `output: "css"`
+- **WHEN** no custom `name` is provided
+- **THEN** the description says "Generated CSS custom properties for card component"
+
+### Requirement: Child component platform availability delegates to parent
+
+When the `create_component_theme` handler checks platform availability for a child component, it SHALL check the parent component's availability instead of the child's.
+
+#### Scenario: Child component passes platform check via parent
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `platform: "angular"`
+- **WHEN** the handler checks platform availability
+- **THEN** it checks `isComponentAvailable("list", "angular")` (the parent)
+- **AND** the request succeeds

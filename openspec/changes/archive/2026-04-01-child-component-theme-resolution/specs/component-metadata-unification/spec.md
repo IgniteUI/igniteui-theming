@@ -2,7 +2,7 @@
 
 ### Requirement: Single unified component metadata map
 
-All component metadata (selectors, variants, compound info, child-of-parent relationships) SHALL be stored in a single `COMPONENT_METADATA` map exported from `component-metadata.ts`. Each component SHALL have exactly one entry keyed by its theme name or child component name.
+All component metadata (selectors, variants, compound info, child-of-parent relationships) SHALL be stored in a single `COMPONENT_METADATA` map exported from `component-metadata.ts`. Each component SHALL have exactly one entry keyed by its theme name or child component name. The `selectors` field SHALL be optional — `childOf` entries omit it.
 
 #### Scenario: Simple component lookup
 
@@ -24,18 +24,18 @@ All component metadata (selectors, variants, compound info, child-of-parent rela
 #### Scenario: Child component lookup
 
 - **WHEN** a child component (e.g., `list-item`) is looked up in `COMPONENT_METADATA`
-- **THEN** the entry contains `selectors`, `theme`, and `childOf` fields
-- **AND** `childOf` names the parent component whose selectors are used for theming scope
-- **AND** no `compound` or `variants` fields are present
+- **THEN** the entry contains only a `childOf` field
+- **AND** `selectors`, `theme`, `compound`, and `variants` fields are absent
 
 ### Requirement: Accessor functions preserve existing signatures
 
-All public accessor functions SHALL maintain their existing call signatures and return types. New accessor functions MAY be added for child component resolution.
+All public accessor functions SHALL maintain their existing call signatures and return types. New accessor functions MAY be added for child component resolution. Existing accessor functions SHALL handle missing `selectors` gracefully.
 
 #### Scenario: getComponentSelector unchanged
 
 - **WHEN** `getComponentSelector(name, platform)` is called
 - **THEN** it returns the same value as before, read from `COMPONENT_METADATA[name].selectors[platform]`
+- **AND** returns `[]` if `selectors` is undefined (childOf entries)
 
 #### Scenario: isCompoundComponent uses unified map
 
@@ -66,3 +66,18 @@ All public accessor functions SHALL maintain their existing call signatures and 
 
 - **WHEN** `getThemingSelector(name, platform)` is called
 - **THEN** it returns the parent's selectors if `childOf` is set, or the component's own selectors otherwise
+
+#### Scenario: isComponentAvailable handles missing selectors
+
+- **WHEN** `isComponentAvailable(name, platform)` is called for a childOf entry
+- **THEN** it returns `false` (no own selectors)
+
+#### Scenario: getComponentsForPlatform excludes childOf entries
+
+- **WHEN** `getComponentsForPlatform(platform)` is called
+- **THEN** childOf entries are excluded from the result (they have no selectors)
+
+#### Scenario: getComponentPlatformAvailability handles missing selectors
+
+- **WHEN** `getComponentPlatformAvailability(name)` is called for a childOf entry
+- **THEN** it returns `undefined`
