@@ -29,6 +29,7 @@ export {
   getComponentSelector,
   getComponentsForPlatform,
   getCompoundComponentInfo,
+  getThemingSelector,
   getTokenDerivationsForChild,
   getVariants,
   hasVariants,

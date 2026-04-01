@@ -88,12 +88,11 @@ export function resolveComponentTheme(
   }
 
   const metadata = COMPONENT_METADATA[componentName];
+  const alias = metadata?.theme ?? metadata?.childOf;
 
-  if (!metadata?.theme) {
+  if (!alias) {
     return {};
   }
-
-  const alias = metadata.theme;
 
   if (alias === componentName) {
     return {

@@ -745,6 +745,20 @@ export const TOOL_DESCRIPTIONS = {
   - Button variants: Use specific variant names like "flat-button", "contained-button",
     "outlined-button", "fab-button" (NOT just "button")
   - Icon button variants: "flat-icon-button", "contained-icon-button", "outlined-icon-button"
+  - Child sub-components: Use names like "list-item", "card-header", "accordion-header",
+    "tab-item", "step", "expansion-panel-header". These resolve to the parent component's
+    theme automatically.
+
+  CHILD SUB-COMPONENTS:
+  - Some component parts (e.g., "list-item", "card-header", "accordion-header") don't have
+    their own theme function — they are styled through the parent component's theme tokens.
+  - When you query a child sub-component, the response includes a note explaining the
+    parent-child relationship and shows the parent theme's full token list.
+  - The token descriptions guide you to the relevant tokens (e.g., "item-background"
+    for list items, "header-text-color" for card headers).
+  - When you then call create_component_theme with a child name, it automatically
+    uses the parent's theme function, variable name, and selector — producing output
+    that is merge-compatible with the parent component's theme.
 
   COMPOUND COMPONENTS:
   - Some components like "combo", "grid", "select" are compound - they use multiple
@@ -771,6 +785,7 @@ export const TOOL_DESCRIPTIONS = {
   - tokens: Array of { name, type, description } for each available token
   - variants: (if applicable) List of variant-specific theme names
   - compoundInfo: (if applicable) Related themes with token derivation hints and guidance
+  - childNote: (if child sub-component) A note explaining the parent-child relationship
 </output>
 
 <error_handling>
@@ -785,6 +800,14 @@ export const TOOL_DESCRIPTIONS = {
   }
 
   Returns tokens like: background, foreground, hover-background, border-radius, etc.
+
+  Get tokens for a child sub-component:
+  {
+    "component": "list-item"
+  }
+
+  Returns the list theme's tokens with a note: "list-item is a child of the list component.
+  Its styling is controlled through the list theme."
 </example>
 
 <related_tools>
@@ -832,9 +855,19 @@ export const TOOL_DESCRIPTIONS = {
 
   SELECTORS:
   - Default selector is auto-detected based on platform and component
+  - For child sub-components (e.g., "list-item", "card-header"), the selector
+    automatically resolves to the parent component's selector (e.g., "igx-list", "igx-card")
   - Angular: Uses "igx-*" element selectors or attribute selectors
   - Web Components: Uses "igc-*" element selectors
   - Custom selectors supported for targeted styling (e.g., ".my-button")
+
+  CHILD SUB-COMPONENTS:
+  - When creating a theme for a child sub-component (e.g., "card-actions"), the output
+    uses the parent's theme function, variable name, and selector.
+  - This means the output for "card" and "card-actions" is merge-compatible:
+    both produce \`$custom-card-theme: card-theme(...)\` scoped to \`igx-card\`.
+  - To add tokens for multiple sub-parts, merge the token arguments into a single
+    theme function call rather than creating separate themes.
 
   SASS OUTPUT:
   - Generated code uses \`@include tokens($theme)\` to apply the theme
@@ -1122,13 +1155,13 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   // ---------------------------------------------------------------------------
   // Component theming parameters
   // ---------------------------------------------------------------------------
-  component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Call this tool to discover available tokens BEFORE using create_component_theme.`,
+  component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Child sub-component names like "list-item", "card-header", "accordion-header", "tab-item", "step" are also supported — they resolve to the parent component's theme. Call this tool to discover available tokens BEFORE using create_component_theme.`,
 
-  componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button".`,
+  componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button". Child sub-component names (e.g., "list-item", "card-header") are supported and automatically resolve to the parent theme with the parent's selector and variable name.`,
 
   tokens: `Object mapping token names to values. Token names must be valid for the component (use get_component_design_tokens to discover them). Values can be CSS colors, dimensions with units, or other Sass-compatible values. Example: { "background": "#1976D2", "border-radius": "8px" }`,
 
-  selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
+  selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For child sub-components (e.g., "list-item"), the default selector is the parent component's selector (e.g., "igx-list"). For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
 
   themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
 

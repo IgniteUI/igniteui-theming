@@ -5,10 +5,11 @@
 
 import { generateComponentTheme } from "../../generators/sass.js";
 import {
+  COMPONENT_METADATA,
   COMPONENT_NAMES,
   getComponentPlatformAvailability,
-  getComponentSelector,
   getComponentTheme,
+  getThemingSelector,
   getVariants,
   hasVariants,
   isComponentAvailable,
@@ -122,11 +123,13 @@ Please use \`create_component_theme\` with one of the specific variant names abo
   }
 
   if (platform) {
-    const isAvailable = isComponentAvailable(normalizedComponent, platform);
+    // For child components, check parent's availability
+    const metadata = COMPONENT_METADATA[normalizedComponent];
+    const availabilityTarget = metadata?.childOf ?? normalizedComponent;
+    const isAvailable = isComponentAvailable(availabilityTarget, platform);
 
     if (!isAvailable) {
-      const availability =
-        getComponentPlatformAvailability(normalizedComponent);
+      const availability = getComponentPlatformAvailability(availabilityTarget);
       const availablePlatforms: string[] = [];
 
       if (availability?.angular) availablePlatforms.push("Angular");
@@ -189,7 +192,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
   if (!finalSelector && platform) {
     // Get platform-specific default selector
-    const selectors = getComponentSelector(normalizedComponent, platform);
+    const selectors = getThemingSelector(normalizedComponent, platform);
 
     if (selectors.length > 0) {
       // Use the first selector as default

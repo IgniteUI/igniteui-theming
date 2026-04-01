@@ -662,4 +662,62 @@ describe("handleCreateComponentTheme", () => {
     const text = result.content[0].text;
     expect(text).toContain("$schema: $light-bootstrap-schema");
   });
+
+  // ===== Child Component Tests =====
+
+  it("uses parent selector for child component (Sass)", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "list-item",
+      tokens: {
+        "item-background": "#ff0000",
+      },
+    });
+
+    expect(result.isError).toBeUndefined();
+
+    const text = result.content[0].text;
+
+    // Should use parent's selector (igx-list), not child's (igx-list-item)
+    expect(text).toContain("igx-list {");
+    expect(text).not.toContain("igx-list-item {");
+
+    // Should use parent's theme function
+    expect(text).toContain("list-theme(");
+  });
+
+  it("uses parent selector for child component (CSS output)", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "list-item",
+      output: "css",
+      tokens: {
+        "item-background": "#ff0000",
+      },
+    });
+
+    expect(result.isError).toBeUndefined();
+
+    const text = result.content[0].text;
+
+    // Should scope to parent's selector
+    expect(text).toContain("igc-list");
+  });
+
+  it("textarea alias still uses own selector (not parent)", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "textarea",
+      tokens: {
+        "box-background": "#ffffff",
+      },
+    });
+
+    expect(result.isError).toBeUndefined();
+
+    const text = result.content[0].text;
+
+    // textarea is a same-element alias, should use its own selector
+    expect(text).toContain(".igx-input-group--textarea-group");
+  });
 });

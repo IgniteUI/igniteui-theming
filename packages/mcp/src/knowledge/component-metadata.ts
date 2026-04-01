@@ -64,10 +64,12 @@ and descriptions from get_component_design_tokens for each child to guide value 
 };
 
 export interface ComponentMetadata {
-  /** Platform-specific CSS selectors */
-  selectors: ComponentSelectors;
+  /** Platform-specific CSS selectors. Optional for `childOf` entries (theming scope comes from the parent). */
+  selectors?: ComponentSelectors;
   /** Optional theme alias for components that reuse another component theme */
   theme?: string;
+  /** Parent component name for child sub-components. When set, theming scope uses the parent's selector instead of the child's own. Mutually exclusive with `compound`. */
+  childOf?: string;
   /** Present only for components with variant-specific themes (e.g., button) */
   variants?: string[];
   /** Present only for compound components */
@@ -77,6 +79,12 @@ export interface ComponentMetadata {
 export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   accordion: {
     selectors: { angular: "igx-accordion", webcomponents: "igc-accordion" },
+  },
+  "accordion-body": {
+    childOf: "accordion",
+  },
+  "accordion-header": {
+    childOf: "accordion",
   },
   "action-strip": {
     selectors: { angular: "igx-action-strip", webcomponents: null },
@@ -180,6 +188,15 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
         For the flat-button and flat-icon-button themes, ensure the foreground color contrasts well with the card background. \
         For the icon theme, the color should also coordinate with the card background while maintaining sufficient contrast.`,
     },
+  },
+  "card-actions": {
+    childOf: "card",
+  },
+  "card-content": {
+    childOf: "card",
+  },
+  "card-header": {
+    childOf: "card",
   },
   carousel: {
     selectors: { angular: "igx-carousel", webcomponents: "igc-carousel" },
@@ -344,11 +361,20 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
       webcomponents: "igc-dropdown",
     },
   },
+  "drop-down-item": {
+    childOf: "drop-down",
+  },
   "expansion-panel": {
     selectors: {
       angular: "igx-expansion-panel",
       webcomponents: "igc-expansion-panel",
     },
+  },
+  "expansion-panel-body": {
+    childOf: "expansion-panel",
+  },
+  "expansion-panel-header": {
+    childOf: "expansion-panel",
   },
   "file-input": {
     selectors: {
@@ -428,6 +454,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   list: {
     selectors: { angular: "igx-list", webcomponents: "igc-list" },
   },
+  "list-header": {
+    childOf: "list",
+  },
+  "list-item": {
+    childOf: "list",
+  },
   navbar: {
     selectors: { angular: "igx-navbar", webcomponents: "igc-navbar" },
     compound: {
@@ -447,6 +479,9 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   navdrawer: {
     selectors: { angular: "igx-nav-drawer", webcomponents: "igc-nav-drawer" },
+  },
+  "nav-drawer-item": {
+    childOf: "navdrawer",
   },
   overlay: {
     selectors: { angular: ".igx-overlay__content", webcomponents: null },
@@ -548,6 +583,9 @@ The drop-down background should match the select surface intent.`,
   splitter: {
     selectors: { angular: "igx-splitter", webcomponents: "igc-splitter" },
   },
+  step: {
+    childOf: "stepper",
+  },
   stepper: {
     selectors: { angular: "igx-stepper", webcomponents: "igc-stepper" },
   },
@@ -556,6 +594,9 @@ The drop-down background should match the select surface intent.`,
   },
   tabs: {
     selectors: { angular: "igx-tabs", webcomponents: "igc-tabs" },
+  },
+  "tab-item": {
+    childOf: "tabs",
   },
   "time-picker": {
     selectors: { angular: "igx-time-picker", webcomponents: null },
@@ -616,6 +657,10 @@ export function getComponentSelector(
     return [];
   }
 
+  if (!metadata.selectors) {
+    return [];
+  }
+
   const platformSelectors =
     platform === "angular"
       ? metadata.selectors.angular
@@ -631,6 +676,30 @@ export function getComponentSelector(
 }
 
 /**
+ * Get the selector(s) to use for theming scope.
+ * For child components (with `childOf`), returns the parent's selectors.
+ * For all other components, returns the component's own selectors.
+ * @param componentName - The component name
+ * @param platform - The target platform
+ * @returns Array of selectors for theming scope, empty array if not found
+ */
+export function getThemingSelector(
+  componentName: string,
+  platform: Platform,
+): string[] {
+  const metadata = COMPONENT_METADATA[componentName];
+  if (!metadata) {
+    return [];
+  }
+
+  if (metadata.childOf) {
+    return getComponentSelector(metadata.childOf, platform);
+  }
+
+  return getComponentSelector(componentName, platform);
+}
+
+/**
  * Check if a component is available on a specific platform.
  * @param componentName - The component name
  * @param platform - The target platform ('angular' or 'webcomponents')
@@ -641,7 +710,7 @@ export function isComponentAvailable(
   platform: Platform,
 ): boolean {
   const metadata = COMPONENT_METADATA[componentName];
-  if (!metadata) {
+  if (!metadata?.selectors) {
     return false;
   }
 
@@ -660,6 +729,7 @@ export function isComponentAvailable(
 export function getComponentsForPlatform(platform: Platform): string[] {
   return Object.entries(COMPONENT_METADATA)
     .filter(([, metadata]) => {
+      if (!metadata.selectors) return false;
       const platformSelector =
         platform === "angular"
           ? metadata.selectors.angular
@@ -678,7 +748,7 @@ export function getComponentPlatformAvailability(
   componentName: string,
 ): { angular: boolean; webcomponents: boolean } | undefined {
   const metadata = COMPONENT_METADATA[componentName];
-  if (!metadata) {
+  if (!metadata?.selectors) {
     return undefined;
   }
 

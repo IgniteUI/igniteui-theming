@@ -1,4 +1,5 @@
 import {
+  COMPONENT_METADATA,
   COMPONENT_NAMES,
   getComponentSelector,
   getCompoundComponentInfo,
@@ -69,6 +70,18 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
     `Implement a theme for the \`${normalizedName}\` component using the following guidance.`,
   );
   responseParts.push("");
+
+  // 1b. Child component relationship note
+  const metadata = COMPONENT_METADATA[normalizedName];
+
+  if (metadata?.childOf) {
+    const parentName = metadata.childOf;
+
+    responseParts.push(
+      `**Note:** \`${normalizedName}\` is a child of the \`${parentName}\` component. Its styling is controlled through the \`${parentName}\` theme — all tokens below apply at the ${parentName} level.`,
+    );
+    responseParts.push("");
+  }
 
   // 2. Theme function
   responseParts.push(`**Theme Function:** \`${theme.themeFunctionName}()\``);

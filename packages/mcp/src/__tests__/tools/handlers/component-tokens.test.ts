@@ -109,6 +109,62 @@ describe("handleGetComponentDesignTokens", () => {
     );
   });
 
+  // ===== Child Component Tests =====
+
+  it("shows relationship note for child component (list-item)", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "list-item",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain("`list-item` is a child of the `list` component");
+    expect(text).toContain("styling is controlled through the `list` theme");
+  });
+
+  it("shows parent theme function for child component", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "list-item",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain("**Theme Function:** `list-theme()`");
+  });
+
+  it("shows parent tokens for child component (unfiltered)", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "list-item",
+    });
+    const text = result.content[0].text;
+
+    // Should include item-* tokens
+    expect(text).toContain("item-background");
+
+    // Should also include header-* tokens (unfiltered)
+    expect(text).toContain("header-background");
+  });
+
+  it("shows relationship note for nav-drawer-item (naming mismatch case)", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "nav-drawer-item",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain(
+      "`nav-drawer-item` is a child of the `navdrawer` component",
+    );
+    expect(text).toContain("**Theme Function:** `navdrawer-theme()`");
+  });
+
+  it("shows relationship note for step child component", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "step",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain("`step` is a child of the `stepper` component");
+    expect(text).toContain("**Theme Function:** `stepper-theme()`");
+  });
+
   it("renders banner compound with both platform lines", async () => {
     const result = await handleGetComponentDesignTokens({
       component: "banner",
