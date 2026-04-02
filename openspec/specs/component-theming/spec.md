@@ -6,7 +6,7 @@ Define component theming requirements, validation, and platform-specific output 
 
 ### Requirement: Component theming requires platform
 
-The `create_component_theme` tool requires a `platform` parameter and SHALL specify compound-component completeness rules to reduce incomplete outputs.
+The `create_component_theme` tool requires a `platform` parameter and SHALL specify compound-component completeness rules to reduce incomplete outputs. Generated Sass SHALL include an inline `@use` placement comment, and the handler response text SHALL include an assembly note about `@use` top-of-file placement and deduplication.
 
 #### Scenario: Missing platform
 
@@ -28,6 +28,16 @@ The `create_component_theme` tool requires a `platform` parameter and SHALL spec
 
 - **WHEN** a compound component is detected
 - **THEN** guidance includes a short canonical example (e.g., combo) demonstrating the full multi-call flow
+
+#### Scenario: Inline placement comment in Sass
+
+- **WHEN** `create_component_theme` returns Sass output
+- **THEN** the Sass code block SHALL contain a comment above the first `@use` about top-of-file placement and deduplication
+
+#### Scenario: Assembly note in response
+
+- **WHEN** `create_component_theme` returns Sass output
+- **THEN** the handler response text SHALL include a placement note after the code block about `@use` top-of-file and deduplication
 
 ### Requirement: Component token schemas are exposed
 

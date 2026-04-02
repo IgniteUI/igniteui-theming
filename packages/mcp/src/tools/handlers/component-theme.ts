@@ -17,6 +17,7 @@ import {
   validateTokens,
 } from "../../knowledge/index.js";
 import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
+import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import type { CreateComponentThemeParams } from "../schemas.js";
 
 export async function handleCreateComponentTheme(
@@ -314,6 +315,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
     responseParts.push("```scss");
     responseParts.push(result.code.trimEnd());
     responseParts.push("```");
+    responseParts.push(SASS_USE_ASSEMBLY_NOTE);
 
     // Add usage hint
     responseParts.push("");

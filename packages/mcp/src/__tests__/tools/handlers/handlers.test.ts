@@ -19,6 +19,10 @@ import {
 import { handleCreatePalette } from "../../../tools/handlers/palette.js";
 import { handleCreateTheme } from "../../../tools/handlers/theme.js";
 import { handleCreateTypography } from "../../../tools/handlers/typography.js";
+import {
+  SASS_USE_ASSEMBLY_NOTE,
+  SASS_USE_INLINE_COMMENT,
+} from "../../../utils/sass.js";
 
 describe("handleCreatePalette", () => {
   it("returns MCP response format", async () => {
@@ -94,6 +98,28 @@ describe("handleCreatePalette", () => {
 
     const text = result.content[0].text;
     expect(text).toContain("$my-brand-palette");
+  });
+
+  it("includes inline @use placement comment in generated Sass", async () => {
+    const result = await handleCreatePalette({
+      primary: "#2ab759",
+      secondary: "#f7bd32",
+      surface: "white",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_INLINE_COMMENT);
+  });
+
+  it("includes assembly note after Sass code block", async () => {
+    const result = await handleCreatePalette({
+      primary: "#2ab759",
+      secondary: "#f7bd32",
+      surface: "white",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
   });
 });
 
@@ -194,6 +220,20 @@ describe("handleCreateTheme", () => {
 
     const text = result.content[0].text;
     expect(text).toContain("Platform: Ignite UI for Blazor");
+  });
+
+  it("includes inline @use placement comment in generated Sass", async () => {
+    const result = await handleCreateTheme(baseThemeParams);
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_INLINE_COMMENT);
+  });
+
+  it("includes assembly note after Sass code block", async () => {
+    const result = await handleCreateTheme(baseThemeParams);
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
   });
 });
 
@@ -756,5 +796,40 @@ describe("handleCreateComponentTheme", () => {
 
     // textarea is a same-element alias, should use its own selector
     expect(text).toContain(".igx-input-group--textarea-group");
+  });
+
+  it("includes inline @use placement comment in generated Sass", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      tokens: { background: "#ff5722" },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_INLINE_COMMENT);
+  });
+
+  it("includes assembly note after Sass code block", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      tokens: { background: "#ff5722" },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
+  });
+
+  it("CSS output does not include inline comment or assembly note", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      output: "css",
+      tokens: { background: "#ff5722" },
+    });
+
+    const text = result.content[0].text;
+    expect(text).not.toContain(SASS_USE_INLINE_COMMENT);
+    expect(text).not.toContain(SASS_USE_ASSEMBLY_NOTE);
   });
 });

@@ -5,6 +5,7 @@
 import { formatCssOutput, generatePaletteCss } from "../../generators/css.js";
 import { generatePalette } from "../../generators/sass.js";
 import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
+import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import {
   formatValidationResult,
   generateWarningComments,
@@ -156,6 +157,7 @@ function handleSassOutput(
   responseParts.push("```scss");
   responseParts.push(finalCode.trimEnd());
   responseParts.push("```");
+  responseParts.push(SASS_USE_ASSEMBLY_NOTE);
 
   return {
     content: [

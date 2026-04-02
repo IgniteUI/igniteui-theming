@@ -47,6 +47,12 @@ export const FRAGMENTS = {
   MONOCHROMATIC_RULE:
     "MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).",
 
+  /** Sass @use placement guidance for tools that generate Sass output */
+  SASS_FILE_PLACEMENT: `SASS FILE PLACEMENT:
+  - When combining Sass output from multiple tools into one file, all @use rules
+    must appear at the top before any other statements. Deduplicate @use lines
+    that share the same module path.`,
+
   /** Resource scheme */
   RESOURCE_SCHEME: "theming://",
 } as const;
@@ -155,6 +161,8 @@ export const TOOL_DESCRIPTIONS = {
     The palette() function always generates 50=lightest to 900=darkest.
   - Only gray shades behave differently based on variant (for text contrast).
   - DO NOT manually invert primary/secondary colors for dark themes.
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -302,6 +310,8 @@ export const TOOL_DESCRIPTIONS = {
   MIXING MODES:
   - You can use "shades" mode for some colors and "explicit" for others
   - Example: explicit primary, shades-based secondary and surface
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -415,6 +425,8 @@ export const TOOL_DESCRIPTIONS = {
   - Quote font names that contain spaces: '"Segoe UI"' not 'Segoe UI'
   - Design system affects: font sizes, line heights, letter spacing, font weights
   - Type styles include: h1-h6, subtitle-1/2, body-1/2, button, caption, overline
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -467,6 +479,8 @@ export const TOOL_DESCRIPTIONS = {
   - "indigo" preset: Infragistics Indigo shadow specifications
   - Elevation 0 = no shadow, elevation 24 = maximum shadow depth
   - Components use elevation() function to apply specific levels
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -529,6 +543,8 @@ export const TOOL_DESCRIPTIONS = {
   - Web Components: Uses igniteui-theming directly with palette(), typography(), elevations() mixins
   - React: Uses igniteui-theming directly (same as Web Components), common with Vite/Next.js
   - Blazor: Uses igniteui-theming for Sass compilation, theme CSS referenced in Blazor components
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -879,6 +895,8 @@ export const TOOL_DESCRIPTIONS = {
   - Use the related themes list from get_component_design_tokens to drive the sequence
   - All related themes should use the compound component's selector as the wrapper
   - Follow token derivation hints to set child token values consistently
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>

@@ -4,6 +4,7 @@
 
 import { generateTypography } from "../../generators/sass.js";
 import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
+import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import type { CreateTypographyParams } from "../schemas.js";
 
 export function handleCreateTypography(params: CreateTypographyParams) {
@@ -32,6 +33,7 @@ export function handleCreateTypography(params: CreateTypographyParams) {
   responseParts.push("```scss");
   responseParts.push(result.code.trimEnd());
   responseParts.push("```");
+  responseParts.push(SASS_USE_ASSEMBLY_NOTE);
 
   return {
     content: [

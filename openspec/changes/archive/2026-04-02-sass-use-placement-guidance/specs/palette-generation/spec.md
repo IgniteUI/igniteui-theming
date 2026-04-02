@@ -1,8 +1,4 @@
-## Purpose
-
-Describe palette generation outputs for Sass and CSS, including warnings and platform hints.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Palette generation returns Sass by default
 
@@ -45,14 +41,3 @@ The `create_palette` tool returns an MCP text response with a Sass code block wh
 
 - **WHEN** `create_palette` returns Sass output
 - **THEN** the handler response text SHALL include a placement note after the code block about `@use` top-of-file and deduplication
-
-### Requirement: Palette CSS output uses Sass compilation
-
-The `create_palette` tool can emit CSS custom properties when `output: css` is requested.
-
-#### Scenario: CSS output includes theme variables
-
-- **WHEN** `output: css` is provided
-- **THEN** the response contains a CSS block
-- **AND** the CSS block includes `--ig-<color>-<shade>` variables
-- **AND** the CSS includes WCAG and contrast variables
