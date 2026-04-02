@@ -439,6 +439,43 @@ describe("handleCreateComponentTheme", () => {
     expect(text).toContain("not supported");
   });
 
+  it("suggests progress-linear for linear progress phrasing", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "linear progress",
+      tokens: {
+        background: "#ff5722",
+      },
+    });
+
+    expect(result.isError).toBe(true);
+
+    const text = result.content[0].text;
+    expect(text).toContain('Component "linear progress" not found.');
+    expect(text).toContain("**Similar components:**");
+
+    const suggestions = text.split("**Similar components:**")[1] ?? "";
+    expect(suggestions.trimStart().startsWith("- progress-linear")).toBe(true);
+  });
+
+  it("suggests progress components for common typo phrasing", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "pogress",
+      tokens: {
+        background: "#ff5722",
+      },
+    });
+
+    expect(result.isError).toBe(true);
+
+    const text = result.content[0].text;
+    expect(text).toContain('Component "pogress" not found.');
+    expect(text).toContain("**Similar components:**");
+    expect(text).toContain("- progress-circular");
+    expect(text).toContain("- progress-linear");
+  });
+
   it("returns MCP response format for valid component", async () => {
     const result = await handleCreateComponentTheme({
       platform: "webcomponents",

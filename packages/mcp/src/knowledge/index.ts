@@ -40,6 +40,12 @@ export {
   type TokenDerivation,
   VARIANT_THEME_NAMES,
 } from "./component-metadata.js";
+// Component Search
+export {
+  type ComponentSearcher,
+  type CreateComponentSearcherOptions,
+  createComponentSearcher,
+} from "./component-search.js";
 // Component Themes
 export {
   COMPONENT_NAMES,

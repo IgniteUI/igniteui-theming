@@ -68,6 +68,8 @@ export interface ComponentMetadata {
   selectors?: ComponentSelectors;
   /** Optional theme alias for components that reuse another component theme */
   theme?: string;
+  /** Optional synonym aliases for search (synonyms only, not word-order permutations). */
+  aliases?: string[];
   /** Parent component name for child sub-components. When set, theming scope uses the parent's selector instead of the child's own. Mutually exclusive with `compound`. */
   childOf?: string;
   /** Present only for components with variant-specific themes (e.g., button) */
@@ -239,6 +241,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   combo: {
     selectors: { angular: "igx-combo", webcomponents: "igc-combo" },
+    aliases: ["combobox", "autocomplete"],
     compound: {
       description:
         "The combo component combines input, drop-down, and checkbox components.",
@@ -333,9 +336,11 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   "date-time-input": {
     selectors: { angular: null, webcomponents: "igc-date-time-input" },
+    aliases: ["datetime input", "date time input"],
   },
   dialog: {
     selectors: { angular: ".igx-dialog", webcomponents: "igc-dialog" },
+    aliases: ["modal", "popup"],
     compound: {
       description: "The dialog component uses flat-buttons for the actions",
       relatedThemes: ["flat-button"],
@@ -360,6 +365,7 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
       angular: ".igx-drop-down__list",
       webcomponents: "igc-dropdown",
     },
+    aliases: ["dropdown menu"],
   },
   "drop-down-item": {
     childOf: "drop-down",
@@ -479,6 +485,14 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   navdrawer: {
     selectors: { angular: "igx-nav-drawer", webcomponents: "igc-nav-drawer" },
+    aliases: [
+      "drawer",
+      "side drawer",
+      "side nav",
+      "sidenav",
+      "navigation drawer",
+      "navigation panel",
+    ],
   },
   "nav-drawer-item": {
     childOf: "navdrawer",
@@ -488,6 +502,7 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   paginator: {
     selectors: { angular: "igx-paginator", webcomponents: "igc-paginator" },
+    aliases: ["pagination", "pager"],
     compound: {
       description:
         "The paginator uses combo and flat-icon-buttons for the page controls.",
@@ -516,15 +531,18 @@ and descriptions from get_component_design_tokens for each child to guide value 
       angular: "igx-circular-bar",
       webcomponents: "igc-circular-progress",
     },
+    aliases: ["spinner", "circular loader", "loading spinner"],
   },
   "progress-linear": {
     selectors: {
       angular: "igx-linear-bar",
       webcomponents: "igc-linear-progress",
     },
+    aliases: ["progress-bar", "loading bar", "linear loader"],
   },
   "query-builder": {
     selectors: { angular: "igx-query-builder", webcomponents: null },
+    aliases: ["filter builder"],
     compound: {
       description:
         "The query builder uses inputs, dropdowns, chips, buttons and button-groups for building query expressions.",
@@ -547,6 +565,7 @@ chips for displaying conditions, and buttons/button-groups for adding and groupi
   },
   rating: {
     selectors: { angular: "igc-rating", webcomponents: "igc-rating" },
+    aliases: ["star rating"],
   },
   ripple: {
     selectors: { angular: "igx-ripple", webcomponents: "igc-ripple" },
@@ -556,6 +575,7 @@ chips for displaying conditions, and buttons/button-groups for adding and groupi
   },
   select: {
     selectors: { angular: "igx-select", webcomponents: "igc-select" },
+    aliases: ["select box"],
     compound: {
       description:
         "The select component combines input-group and drop-down components.",
@@ -591,6 +611,7 @@ The drop-down background should match the select surface intent.`,
   },
   switch: {
     selectors: { angular: "igx-switch", webcomponents: "igc-switch" },
+    aliases: ["toggle"],
   },
   tabs: {
     selectors: { angular: "igx-tabs", webcomponents: "igc-tabs" },

@@ -109,6 +109,31 @@ describe("handleGetComponentDesignTokens", () => {
     );
   });
 
+  it("suggests progress-linear for linear progress phrasing", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "linear progress",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain('Component "linear progress" not found.');
+    expect(text).toContain("**Similar components:**");
+
+    const suggestions = text.split("**Similar components:**")[1] ?? "";
+    expect(suggestions.trimStart().startsWith("- progress-linear")).toBe(true);
+  });
+
+  it("suggests progress components for common typo phrasing", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "pogress",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain('Component "pogress" not found.');
+    expect(text).toContain("**Similar components:**");
+    expect(text).toContain("- progress-circular");
+    expect(text).toContain("- progress-linear");
+  });
+
   // ===== Child Component Tests =====
 
   it("shows relationship note for child component (list-item)", async () => {

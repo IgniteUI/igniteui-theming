@@ -8,7 +8,7 @@ TBD - created by archiving change unify-component-metadata. Update Purpose after
 
 ### Requirement: Single unified component metadata map
 
-All component metadata (selectors, variants, compound info, child-of-parent relationships) SHALL be stored in a single `COMPONENT_METADATA` map exported from `component-metadata.ts`. Each component SHALL have exactly one entry keyed by its theme name or child component name. The `selectors` field SHALL be optional — `childOf` entries omit it.
+All component metadata (selectors, variants, compound info, child-of-parent relationships, and optional synonym aliases) SHALL be stored in a single `COMPONENT_METADATA` map exported from `component-metadata.ts`. Each component SHALL have exactly one entry keyed by its canonical theme name or child component name. The `selectors` field SHALL be optional — `childOf` entries omit it. The `aliases` field SHALL be optional and, when present, SHALL contain synonym terms that resolve to the canonical key.
 
 #### Scenario: Simple component lookup
 
@@ -32,6 +32,13 @@ All component metadata (selectors, variants, compound info, child-of-parent rela
 
 - **WHEN** a base component with variants (e.g., `button`) is looked up in `COMPONENT_METADATA`
 - **THEN** the entry contains `selectors` and a `variants` field listing variant theme names
+
+#### Scenario: Synonym aliases are optional metadata
+
+- **GIVEN** `switch` includes an `aliases` field with `toggle`
+- **WHEN** `COMPONENT_METADATA["switch"]` is inspected
+- **THEN** the canonical key remains `switch`
+- **AND** `aliases` is present as optional metadata for search resolution
 
 ### Requirement: Inline scope derived from base selectors
 

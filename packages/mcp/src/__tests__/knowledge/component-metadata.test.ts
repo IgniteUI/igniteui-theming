@@ -133,6 +133,40 @@ describe("Component Metadata Knowledge Base", () => {
     });
   });
 
+  describe("synonym aliases structure", () => {
+    it("aliases should be non-empty string arrays when present", () => {
+      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+        if (!metadata.aliases) continue;
+
+        expect(
+          Array.isArray(metadata.aliases),
+          `${name}.aliases should be an array`,
+        ).toBe(true);
+
+        expect(
+          metadata.aliases.length,
+          `${name}.aliases should be non-empty`,
+        ).toBeGreaterThan(0);
+
+        for (const alias of metadata.aliases) {
+          expect(typeof alias, `${name} alias should be a string`).toBe(
+            "string",
+          );
+
+          expect(
+            alias.trim().length,
+            `${name} alias should not be empty`,
+          ).toBeGreaterThan(0);
+
+          expect(
+            alias,
+            `${name} alias should not duplicate canonical name`,
+          ).not.toBe(name);
+        }
+      }
+    });
+  });
+
   describe("variants structure", () => {
     it("components with variants should have non-empty string arrays", () => {
       for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
