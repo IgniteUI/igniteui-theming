@@ -9,6 +9,7 @@ import {
   COMPONENT_NAMES,
   getComponentPlatformAvailability,
   getComponentTheme,
+  getCompoundComponentInfo,
   getThemingSelector,
   getVariants,
   hasVariants,
@@ -19,6 +20,40 @@ import {
 import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
 import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import type { CreateComponentThemeParams } from "../schemas.js";
+
+/**
+ * Build a warning note when a composed component is themed with non-primary tokens.
+ * Returns the warning string or empty string if not applicable.
+ */
+function getComposedTokenWarning(
+  componentName: string,
+  tokenNames: string[],
+): string {
+  const compoundInfo = getCompoundComponentInfo(componentName);
+
+  if (!compoundInfo?.composed) {
+    return "";
+  }
+
+  const componentTheme = getComponentTheme(componentName);
+  const primaryNames = new Set(
+    (componentTheme?.primaryTokens ?? []).map((pt) => pt.name),
+  );
+  const nonPrimaryTokens = tokenNames.filter((t) => !primaryNames.has(t));
+
+  if (nonPrimaryTokens.length === 0) {
+    return "";
+  }
+
+  const primaryList = [...primaryNames].map((t) => `\`${t}\``).join(", ");
+
+  return (
+    "\n\n" +
+    `⚠️ **Composed component notice:** \`${componentName}\` only needs the primary tokens (${primaryList}). ` +
+    `The other ${nonPrimaryTokens.length} token(s) override auto-derived values, which may cause visual inconsistencies. ` +
+    "If the user did not explicitly request these tokens, consider re-generating with only the primary tokens."
+  );
+}
 
 export async function handleCreateComponentTheme(
   params: CreateComponentThemeParams,
@@ -253,11 +288,17 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
         "**Usage:** Include this CSS in your stylesheet or add it to your application's global styles.",
       );
 
+      // Composed component warning (if applicable)
+      const cssWarning = getComposedTokenWarning(
+        normalizedComponent,
+        Object.keys(tokens),
+      );
+
       return {
         content: [
           {
             type: "text" as const,
-            text: responseParts.join("\n"),
+            text: responseParts.join("\n") + cssWarning,
           },
         ],
       };
@@ -324,11 +365,17 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
       "**Usage:** Import this Sass file in your main styles file, or include the code in your theme file.",
     );
 
+    // Composed component warning (if applicable)
+    const sassWarning = getComposedTokenWarning(
+      normalizedComponent,
+      Object.keys(tokens),
+    );
+
     return {
       content: [
         {
           type: "text" as const,
-          text: responseParts.join("\n"),
+          text: responseParts.join("\n") + sassWarning,
         },
       ],
     };

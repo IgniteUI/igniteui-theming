@@ -35,6 +35,11 @@ export interface CompoundInfo {
   tokenDerivations?: Record<string, TokenDerivation>;
   /** Free-form guidance for edge cases */
   guidance?: string;
+  /**
+   * When true, the framework internally generates themes for relatedThemes from the parent's primary tokens
+   * LLMs should NOT generate separate child themes for relatedThemes.
+   */
+  composed?: boolean;
 }
 
 const GRID_COMPOUND_INFO: CompoundInfo = {
@@ -55,12 +60,8 @@ const GRID_COMPOUND_INFO: CompoundInfo = {
     "flat-icon-button",
     "outlined-icon-button",
   ],
-  guidance: `The grid is a complex compound component with many related themes. \
-For basic customization, focus on the grid theme itself and the most visible children: \
-input-group (filtering), outlined-button/icon-button (toolbar actions), checkbox (row selection), \
-and paginator. The grid-summary and grid-toolbar themes control their respective areas. \
-Detailed token derivation rules are not yet available for the grid — use the token names \
-and descriptions from get_component_design_tokens for each child to guide value selection.`,
+  composed: true,
+  guidance: `The grid's theme will automatically derive the related themes for all related child components.`,
 };
 
 export interface ComponentMetadata {

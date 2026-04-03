@@ -100,94 +100,28 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
     responseParts.push("");
   }
 
-  if (isCompoundComponent(normalizedName)) {
-    const compoundInfo = getCompoundComponentInfo(normalizedName);
+  const primaryNames = new Set(
+    (theme.primaryTokens ?? []).map((pt) => pt.name),
+  );
 
-    if (compoundInfo) {
-      // 3. Compound Component description
-      responseParts.push("**Compound Component:**");
-      responseParts.push(compoundInfo.description);
-      responseParts.push("");
-
-      // 4. Related themes list
-      responseParts.push(
-        `**Related themes:** ${compoundInfo.relatedThemes.map((t) => `\`${t}\``).join(", ")}`,
-      );
-
-      // 5. Scoping instruction with per-platform parent selectors
-      const angularSelectors = getComponentSelector(normalizedName, "angular");
-      const wcSelectors = getComponentSelector(normalizedName, "webcomponents");
-
-      const platformLines: string[] = [];
-      if (angularSelectors.length > 0) {
-        const selectorText =
-          angularSelectors.length === 1
-            ? angularSelectors[0]
-            : angularSelectors.join(" | ");
-        platformLines.push(`- **Angular:** \`${selectorText}\``);
-      }
-      if (wcSelectors.length > 0) {
-        const selectorText =
-          wcSelectors.length === 1 ? wcSelectors[0] : wcSelectors.join(" | ");
-        platformLines.push(
-          `- **Web Components / React / Blazor:** \`${selectorText}\``,
-        );
-      }
-
-      if (platformLines.length > 0) {
-        responseParts.push(
-          "Scope all related themes under the parent component selector:",
-        );
-        responseParts.push(platformLines.join("\n"));
-      }
-      responseParts.push("");
-
-      // 6. Token derivations (platform-agnostic)
-      const derivationRows = compoundInfo.relatedThemes.flatMap(
-        (relatedTheme) => {
-          const derivations = getTokenDerivationsForChild(
-            normalizedName,
-            relatedTheme,
-          );
-
-          return Object.entries(derivations).map(([token, derivation]) => {
-            const transformDesc =
-              derivation.transform === "identity"
-                ? `same as \`${derivation.from}\``
-                : `\`${derivation.transform}\` of \`${derivation.from}\``;
-
-            return `| \`${relatedTheme}\` | \`${token}\` | ${transformDesc} |`;
-          });
-        },
-      );
-
-      responseParts.push("**Token derivations:**");
-
-      if (derivationRows.length > 0) {
-        responseParts.push("| Theme | Token | Derivation |");
-        responseParts.push("| --- | --- | --- |");
-        responseParts.push(derivationRows.join("\n"));
-      } else {
-        responseParts.push("None.");
-      }
-
-      responseParts.push("");
-
-      // 7. Guidance
-      if (compoundInfo.guidance) {
-        responseParts.push("**Guidance:**");
-        responseParts.push(compoundInfo.guidance);
-        responseParts.push("");
-      }
-    }
-  }
-
-  // 8. Primary Tokens (for both compound and simple)
   if (theme.primaryTokens && theme.primaryTokens.length > 0) {
-    responseParts.push("**Primary Tokens:**");
+    responseParts.push("**\u2705 Primary Tokens \u2014 USE THESE:**");
+    responseParts.push("");
+    responseParts.push(
+      "Use ONLY these tokens when creating the initial theme. " +
+        "The framework auto-derives all other tokens from these.",
+    );
+    responseParts.push("");
+    responseParts.push("| Token Name | Type | Description |");
+    responseParts.push("|------------|------|-------------|");
 
-    for (const pt of theme.primaryTokens) {
-      responseParts.push(`- \`$${pt.name}\` — ${pt.description}`);
+    for (const token of theme.tokens) {
+      if (primaryNames.has(token.name)) {
+        const cleanDesc = token.description.replace(/\s+/g, " ").trim();
+        responseParts.push(
+          `| \`${token.name}\` | ${token.type} | ${cleanDesc} |`,
+        );
+      }
     }
 
     if (theme.primaryTokensSummary) {
@@ -198,34 +132,132 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
     responseParts.push("");
   }
 
-  // 9. Available Tokens table
-  if (theme.tokens.length > 0) {
-    responseParts.push(`**Available Tokens (${theme.tokens.length}):**`);
-    responseParts.push("");
-    responseParts.push("| Token Name | Type | Description |");
-    responseParts.push("|------------|------|-------------|");
+  if (isCompoundComponent(normalizedName)) {
+    const compoundInfo = getCompoundComponentInfo(normalizedName);
 
-    for (const token of theme.tokens) {
-      // Clean up description - remove newlines and extra whitespace
-      const cleanDesc = token.description.replace(/\s+/g, " ").trim();
+    if (compoundInfo) {
+      if (compoundInfo.composed) {
+        responseParts.push("**Composed Compound Component:**");
+        responseParts.push(compoundInfo.description);
+        responseParts.push("");
+        responseParts.push(
+          "\u26a1 **This is a composed component.** The framework automatically generates internal derived " +
+            "themes for all child components from the PRIMARY tokens. " +
+            "**Do NOT create separate themes** for the related components listed below \u2014 " +
+            "unless instructed otherwise by the user.",
+        );
+        responseParts.push("");
+        responseParts.push(
+          `**Internally themed children (auto-derived):** ${compoundInfo.relatedThemes.map((t) => `\`${t}\``).join(", ")}`,
+        );
+        responseParts.push("");
 
-      responseParts.push(
-        `| \`${token.name}\` | ${token.type} | ${cleanDesc} |`,
-      );
+        if (compoundInfo.guidance) {
+          responseParts.push("**Guidance:**");
+          responseParts.push(compoundInfo.guidance);
+          responseParts.push("");
+        }
+      } else {
+        responseParts.push("**Compound Component:**");
+        responseParts.push(compoundInfo.description);
+        responseParts.push("");
+
+        responseParts.push(
+          `**Related themes:** ${compoundInfo.relatedThemes.map((t) => `\`${t}\``).join(", ")}`,
+        );
+
+        const angularSelectors = getComponentSelector(
+          normalizedName,
+          "angular",
+        );
+        const wcSelectors = getComponentSelector(
+          normalizedName,
+          "webcomponents",
+        );
+
+        const platformLines: string[] = [];
+        if (angularSelectors.length > 0) {
+          const selectorText =
+            angularSelectors.length === 1
+              ? angularSelectors[0]
+              : angularSelectors.join(" | ");
+          platformLines.push(`- **Angular:** \`${selectorText}\``);
+        }
+        if (wcSelectors.length > 0) {
+          const selectorText =
+            wcSelectors.length === 1 ? wcSelectors[0] : wcSelectors.join(" | ");
+          platformLines.push(
+            `- **Web Components / React / Blazor:** \`${selectorText}\``,
+          );
+        }
+
+        if (platformLines.length > 0) {
+          responseParts.push(
+            "Scope all related themes under the parent component selector:",
+          );
+          responseParts.push(platformLines.join("\n"));
+        }
+        responseParts.push("");
+
+        const derivationRows = compoundInfo.relatedThemes.flatMap(
+          (relatedTheme) => {
+            const derivations = getTokenDerivationsForChild(
+              normalizedName,
+              relatedTheme,
+            );
+
+            return Object.entries(derivations).map(([token, derivation]) => {
+              const transformDesc =
+                derivation.transform === "identity"
+                  ? `same as \`${derivation.from}\``
+                  : `\`${derivation.transform}\` of \`${derivation.from}\``;
+
+              return `| \`${relatedTheme}\` | \`${token}\` | ${transformDesc} |`;
+            });
+          },
+        );
+
+        responseParts.push("**Token derivations:**");
+
+        if (derivationRows.length > 0) {
+          responseParts.push("| Theme | Token | Derivation |");
+          responseParts.push("| --- | --- | --- |");
+          responseParts.push(derivationRows.join("\n"));
+        } else {
+          responseParts.push("None.");
+        }
+
+        responseParts.push("");
+
+        if (compoundInfo.guidance) {
+          responseParts.push("**Guidance:**");
+          responseParts.push(compoundInfo.guidance);
+          responseParts.push("");
+        }
+      }
     }
+  }
 
+  const availableTokens = theme.tokens.filter((t) => !primaryNames.has(t.name));
+
+  if (availableTokens.length > 0) {
+    responseParts.push(
+      `**\ud83d\udcd6 Available Tokens (${availableTokens.length}) \u2014 DO NOT USE unless the user explicitly requests a specific customization:**`,
+    );
     responseParts.push("");
-  } else {
+    responseParts.push(availableTokens.map((t) => `\`${t.name}\``).join(", "));
+    responseParts.push("");
+  } else if (theme.tokens.length === 0) {
     responseParts.push(
       "**No customizable tokens available for this component.**",
     );
     responseParts.push("");
   }
 
-  // 10. Next step
   responseParts.push("---");
   responseParts.push(
-    "**Next step:** Use `create_component_theme` with the tokens above to generate Sass/CSS code.",
+    "**Next step:** Use `create_component_theme` with ONLY the **primary tokens** above. " +
+      "Do NOT add available tokens unless the user explicitly asks for a specific one.",
   );
 
   return {

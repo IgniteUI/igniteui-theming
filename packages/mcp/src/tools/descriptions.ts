@@ -777,8 +777,10 @@ export const TOOL_DESCRIPTIONS = {
     that is merge-compatible with the parent component's theme.
 
   COMPOUND COMPONENTS:
-  - Some components like "combo", "grid", "select" are compound - they use multiple
-    internal components that each need their own theme
+  There are two types of compound components:
+
+  **Standard compounds** (e.g., "combo", "select", "date-picker"):
+  - Use multiple internal components that each need their own theme
   - The response lists related themes and, where available, token derivation hints
     showing how child token values relate to parent/sibling tokens
     (e.g., "foreground → adaptive-contrast of calendar.content-background")
@@ -787,6 +789,18 @@ export const TOOL_DESCRIPTIONS = {
   - All related themes should be scoped under the parent component's selector
   - For each related theme: call get_component_design_tokens, then create_component_theme
     using the parent component's selector for the target platform
+
+  **Composed compounds** (e.g., "grid components"):
+  - The framework automatically generates internal themes for all child components from just the primary tokens
+  - Do NOT create separate themes for the related components — they are auto-derived
+    in the component's Sass styles
+  - The response uses a **two-tier token hierarchy**:
+    - **✅ Primary Tokens — USE THESE**: Use ONLY these tokens for the initial theme
+    - **📖 Refinement Tokens — REFERENCE ONLY**: Auto-derived tokens available ONLY when
+      the user explicitly requests fine-grained control (e.g., "change the header background")
+  - Only set the primary tokens in the parent component's theme; all children inherit automatically
+  - The response clearly marks these as "Composed Compound Component" and lists the
+    internally themed children for reference (not for separate theming)
 
   VARIANTS INFO:
   - If you query a base component that has variants (e.g., "button"), the response
@@ -890,11 +904,17 @@ export const TOOL_DESCRIPTIONS = {
   - The tokens mixin emits --ig-{component}-{token} CSS custom properties in global mode
 
   COMPOUND COMPLETENESS:
-  - If the user asks for a compound component, the response is incomplete unless
-    related theme calls are also generated
-  - Use the related themes list from get_component_design_tokens to drive the sequence
-  - All related themes should use the compound component's selector as the wrapper
-  - Follow token derivation hints to set child token values consistently
+  - **Standard compounds:** If the user asks for a standard compound component,
+    the response is incomplete unless related theme calls are also generated.
+    Use the related themes list from get_component_design_tokens to drive the sequence.
+    All related themes should use the compound component's selector as the wrapper.
+    Follow token derivation hints to set child token values consistently.
+  - **Composed compounds:** If the component is a composed compound (e.g., grid),
+    do NOT generate separate child themes. Only set the primary tokens (background,
+    foreground, accent-color) on the parent component's theme — child themes are
+    auto-derived internally by the component's Sass styles.
+    Refinement tokens (e.g., header-background) can be added in follow-up calls
+    when the user explicitly asks to customize a specific aspect.
 
   ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
