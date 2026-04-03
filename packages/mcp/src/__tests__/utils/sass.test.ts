@@ -94,27 +94,35 @@ describe("quoteFontFamily", () => {
 describe("generateUseStatement", () => {
   it("generates Angular import for angular platform", () => {
     const result = generateUseStatement("angular");
-    expect(result).toBe('@use "igniteui-angular/theming" as *;');
+    expect(result).toContain('@use "igniteui-angular/theming" as *;');
   });
 
   it("generates licensed Angular import when licensed is true", () => {
     const result = generateUseStatement("angular", true);
-    expect(result).toBe('@use "@infragistics/igniteui-angular/theming" as *;');
+    expect(result).toContain(
+      '@use "@infragistics/igniteui-angular/theming" as *;',
+    );
   });
 
   it("generates generic import for webcomponents platform", () => {
     const result = generateUseStatement("webcomponents");
-    expect(result).toBe("@use 'igniteui-theming' as *;");
+    expect(result).toContain("@use 'igniteui-theming' as *;");
   });
 
   it("ignores licensed flag for webcomponents (always free)", () => {
     const result = generateUseStatement("webcomponents", true);
-    expect(result).toBe("@use 'igniteui-theming' as *;");
+    expect(result).toContain("@use 'igniteui-theming' as *;");
   });
 
   it("generates generic import when platform is undefined", () => {
     const result = generateUseStatement();
-    expect(result).toBe("@use 'igniteui-theming' as *;");
+    expect(result).toContain("@use 'igniteui-theming' as *;");
+  });
+
+  it("prepends inline placement comment", () => {
+    const result = generateUseStatement();
+    expect(result).toContain("// NOTE: @use rules must be at the top");
+    expect(result.indexOf("// NOTE")).toBeLessThan(result.indexOf("@use"));
   });
 });
 

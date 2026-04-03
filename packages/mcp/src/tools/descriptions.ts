@@ -47,6 +47,12 @@ export const FRAGMENTS = {
   MONOCHROMATIC_RULE:
     "MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).",
 
+  /** Sass @use placement guidance for tools that generate Sass output */
+  SASS_FILE_PLACEMENT: `SASS FILE PLACEMENT:
+  - When combining Sass output from multiple tools into one file, all @use rules
+    must appear at the top before any other statements. Deduplicate @use lines
+    that share the same module path.`,
+
   /** Resource scheme */
   RESOURCE_SCHEME: "theming://",
 } as const;
@@ -155,6 +161,8 @@ export const TOOL_DESCRIPTIONS = {
     The palette() function always generates 50=lightest to 900=darkest.
   - Only gray shades behave differently based on variant (for text contrast).
   - DO NOT manually invert primary/secondary colors for dark themes.
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -302,6 +310,8 @@ export const TOOL_DESCRIPTIONS = {
   MIXING MODES:
   - You can use "shades" mode for some colors and "explicit" for others
   - Example: explicit primary, shades-based secondary and surface
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -415,6 +425,8 @@ export const TOOL_DESCRIPTIONS = {
   - Quote font names that contain spaces: '"Segoe UI"' not 'Segoe UI'
   - Design system affects: font sizes, line heights, letter spacing, font weights
   - Type styles include: h1-h6, subtitle-1/2, body-1/2, button, caption, overline
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -467,6 +479,8 @@ export const TOOL_DESCRIPTIONS = {
   - "indigo" preset: Infragistics Indigo shadow specifications
   - Elevation 0 = no shadow, elevation 24 = maximum shadow depth
   - Components use elevation() function to apply specific levels
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -529,6 +543,8 @@ export const TOOL_DESCRIPTIONS = {
   - Web Components: Uses igniteui-theming directly with palette(), typography(), elevations() mixins
   - React: Uses igniteui-theming directly (same as Web Components), common with Vite/Next.js
   - Blazor: Uses igniteui-theming for Sass compilation, theme CSS referenced in Blazor components
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -745,19 +761,46 @@ export const TOOL_DESCRIPTIONS = {
   - Button variants: Use specific variant names like "flat-button", "contained-button",
     "outlined-button", "fab-button" (NOT just "button")
   - Icon button variants: "flat-icon-button", "contained-icon-button", "outlined-icon-button"
+  - Child sub-components: Use names like "list-item", "card-header", "accordion-header",
+    "tab-item", "step", "expansion-panel-header". These resolve to the parent component's
+    theme automatically.
+
+  CHILD SUB-COMPONENTS:
+  - Some component parts (e.g., "list-item", "card-header", "accordion-header") don't have
+    their own theme function — they are styled through the parent component's theme tokens.
+  - When you query a child sub-component, the response includes a note explaining the
+    parent-child relationship and shows the parent theme's full token list.
+  - The token descriptions guide you to the relevant tokens (e.g., "item-background"
+    for list items, "header-text-color" for card headers).
+  - When you then call create_component_theme with a child name, it automatically
+    uses the parent's theme function, variable name, and selector — producing output
+    that is merge-compatible with the parent component's theme.
 
   COMPOUND COMPONENTS:
-  - Some components like "combo", "grid", "select" are compound - they use multiple
-    internal components that each need their own theme
-  - The response includes "Related themes and token derivations" listing each related
-    theme and, where available, derivation hints showing how child token values relate
-    to parent/sibling tokens (e.g., "foreground → adaptive-contrast of calendar.content-background")
+  There are two types of compound components:
+
+  **Standard compounds** (e.g., "combo", "select", "date-picker"):
+  - Use multiple internal components that each need their own theme
+  - The response lists related themes and, where available, token derivation hints
+    showing how child token values relate to parent/sibling tokens
+    (e.g., "foreground → adaptive-contrast of calendar.content-background")
   - Follow derivation hints when setting child token values. If the user specifies an
     explicit value, use that instead of the derived value.
+  - All related themes should be scoped under the parent component's selector
   - For each related theme: call get_component_design_tokens, then create_component_theme
-    using the selector assigned to that child under "Scopes by Platform" and "Related themes"
-  - Use \`@include tokens(child-theme(...))\` for each related theme inside the appropriate
-    scope selector
+    using the parent component's selector for the target platform
+
+  **Composed compounds** (e.g., "grid components"):
+  - The framework automatically generates internal themes for all child components from just the primary tokens
+  - Do NOT create separate themes for the related components — they are auto-derived
+    in the component's Sass styles
+  - The response uses a **two-tier token hierarchy**:
+    - **✅ Primary Tokens — USE THESE**: Use ONLY these tokens for the initial theme
+    - **📖 Refinement Tokens — REFERENCE ONLY**: Auto-derived tokens available ONLY when
+      the user explicitly requests fine-grained control (e.g., "change the header background")
+  - Only set the primary tokens in the parent component's theme; all children inherit automatically
+  - The response clearly marks these as "Composed Compound Component" and lists the
+    internally themed children for reference (not for separate theming)
 
   VARIANTS INFO:
   - If you query a base component that has variants (e.g., "button"), the response
@@ -772,6 +815,7 @@ export const TOOL_DESCRIPTIONS = {
   - tokens: Array of { name, type, description } for each available token
   - variants: (if applicable) List of variant-specific theme names
   - compoundInfo: (if applicable) Related themes with token derivation hints and guidance
+  - childNote: (if child sub-component) A note explaining the parent-child relationship
 </output>
 
 <error_handling>
@@ -786,6 +830,14 @@ export const TOOL_DESCRIPTIONS = {
   }
 
   Returns tokens like: background, foreground, hover-background, border-radius, etc.
+
+  Get tokens for a child sub-component:
+  {
+    "component": "list-item"
+  }
+
+  Returns the list theme's tokens with a note: "list-item is a child of the list component.
+  Its styling is controlled through the list theme."
 </example>
 
 <related_tools>
@@ -833,20 +885,38 @@ export const TOOL_DESCRIPTIONS = {
 
   SELECTORS:
   - Default selector is auto-detected based on platform and component
+  - For child sub-components (e.g., "list-item", "card-header"), the selector
+    automatically resolves to the parent component's selector (e.g., "igx-list", "igx-card")
   - Angular: Uses "igx-*" element selectors or attribute selectors
   - Web Components: Uses "igc-*" element selectors
   - Custom selectors supported for targeted styling (e.g., ".my-button")
+
+  CHILD SUB-COMPONENTS:
+  - When creating a theme for a child sub-component (e.g., "card-actions"), the output
+    uses the parent's theme function, variable name, and selector.
+  - This means the output for "card" and "card-actions" is merge-compatible:
+    both produce \`$custom-card-theme: card-theme(...)\` scoped to \`igx-card\`.
+  - To add tokens for multiple sub-parts, merge the token arguments into a single
+    theme function call rather than creating separate themes.
 
   SASS OUTPUT:
   - Generated code uses \`@include tokens($theme)\` to apply the theme
   - The tokens mixin emits --ig-{component}-{token} CSS custom properties in global mode
 
   COMPOUND COMPLETENESS:
-  - If the user asks for a compound component, the response is incomplete unless
-    related theme calls are also generated
-  - Use the related themes list from get_component_design_tokens to drive the sequence
-  - All related themes should use the compound component's selector as the wrapper
-  - Follow token derivation hints to set child token values consistently
+  - **Standard compounds:** If the user asks for a standard compound component,
+    the response is incomplete unless related theme calls are also generated.
+    Use the related themes list from get_component_design_tokens to drive the sequence.
+    All related themes should use the compound component's selector as the wrapper.
+    Follow token derivation hints to set child token values consistently.
+  - **Composed compounds:** If the component is a composed compound (e.g., grid),
+    do NOT generate separate child themes. Only set the primary tokens (background,
+    foreground, accent-color) on the parent component's theme — child themes are
+    auto-derived internally by the component's Sass styles.
+    Refinement tokens (e.g., header-background) can be added in follow-up calls
+    when the user explicitly asks to customize a specific aspect.
+
+  ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
 <output>
@@ -919,19 +989,16 @@ export const TOOL_DESCRIPTIONS = {
 </example>
 
 <compound_example>
-  Date Picker (compound) — child themes may use different scoped selectors per platform.
-  Follow token derivation hints and scope assignments from get_component_design_tokens:
+  Date Picker (compound) — all child themes use the parent component's selector.
+  Follow token derivation hints from get_component_design_tokens:
   1) get_component_design_tokens { "component": "date-picker" }
-  2) create_component_theme { "component": "date-picker", ... }
-  3) create_component_theme { "component": "calendar", "selector": ".igx-date-picker", ... }
-  4) create_component_theme { "component": "flat-button", "selector": ".igx-date-picker", ... }
+  2) create_component_theme { "component": "date-picker", "platform": "angular", ... }
+  3) create_component_theme { "component": "calendar", "selector": "igx-date-picker", ... }
+  4) create_component_theme { "component": "flat-button", "selector": "igx-date-picker", ... }
   5) create_component_theme { "component": "input-group", "selector": "igx-date-picker", ... }
 
-  Each call generates \`@include tokens($theme)\` inside the assigned scope selector.
-  - If you are targeting Angular, use the Angular selectors from the scopes table.
-  - If you are targeting Web Components, use the Web Components selectors from the scopes table.
-  - If you are targeting React, use the React selectors from the scopes table.
-  - If you are targeting Blazor, use the Blazor selectors from the scopes table.
+  Each child theme uses the parent's platform selector (e.g., \`igx-date-picker\` for Angular,
+  \`igc-date-picker\` for Web Components / React / Blazor).
   The tokens mixin emits --ig-{component}-{token} variables that child components
   consume via var() fallback — no per-child selectors needed.
 </compound_example>
@@ -1126,13 +1193,13 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   // ---------------------------------------------------------------------------
   // Component theming parameters
   // ---------------------------------------------------------------------------
-  component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Call this tool to discover available tokens BEFORE using create_component_theme.`,
+  component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Child sub-component names like "list-item", "card-header", "accordion-header", "tab-item", "step" are also supported — they resolve to the parent component's theme. Call this tool to discover available tokens BEFORE using create_component_theme.`,
 
-  componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button".`,
+  componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button". Child sub-component names (e.g., "list-item", "card-header") are supported and automatically resolve to the parent theme with the parent's selector and variable name.`,
 
   tokens: `Object mapping token names to values. Token names must be valid for the component (use get_component_design_tokens to discover them). Values can be CSS colors, dimensions with units, or other Sass-compatible values. Example: { "background": "#1976D2", "border-radius": "8px" }`,
 
-  selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
+  selector: `Optional CSS selector to scope the theme. If omitted, uses the platform's default selector for the component. For child sub-components (e.g., "list-item"), the default selector is the parent component's selector (e.g., "igx-list"). For Angular: "igx-*" selectors, for Web Components: "igc-*" selectors. You can specify custom selectors like ".my-custom-button" for targeted styling.`,
 
   themeName: `Optional name for the generated theme variable (without $ prefix). If omitted, auto-generates based on component name (e.g., "$custom-button-theme").`,
 

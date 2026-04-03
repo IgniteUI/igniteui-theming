@@ -9,7 +9,10 @@
  * - React: Uses `igniteui-theming` directly with individual mixins
  */
 
-import { getComponentSelector } from "../knowledge/component-metadata.js";
+import {
+  COMPONENT_METADATA,
+  getThemingSelector,
+} from "../knowledge/component-metadata.js";
 import { getComponentTheme } from "../knowledge/component-themes.js";
 import { generateAngularThemeSass } from "../knowledge/platforms/angular.js";
 import { SCHEMAS as SCHEMA_PRESETS } from "../knowledge/platforms/common.js";
@@ -414,9 +417,13 @@ export function generateComponentTheme(
   const designSystem: DesignSystem = input.designSystem ?? "material";
   const variant: ThemeVariant = input.variant ?? "light";
   const themeFn = theme.themeFunctionName;
+  // For child components, derive variable name from parent to avoid
+  // generating a separate variable that signals "different theme"
+  const themeComponentName =
+    COMPONENT_METADATA[input.component]?.childOf ?? input.component;
   const themeName = input.name
     ? `$${toVariableName(input.name)}`
-    : `$custom-${input.component}-theme`;
+    : `$custom-${themeComponentName}-theme`;
 
   // Get the schema variable based on design system and variant
   const schemaVar = SCHEMA_PRESETS[variant][designSystem];
@@ -429,21 +436,19 @@ export function generateComponentTheme(
     tokenArgs.push(`$${tokenName}: ${stringValue}`);
   }
 
-  // Determine selector - use platform-specific component selector as default
-  const defaultSelectors = getComponentSelector(
-    input.component,
-    input.platform,
-  );
+  // Determine selector - use platform-specific theming selector as default
+  // For child components, this resolves to the parent's selector
+  const defaultSelectors = getThemingSelector(input.component, input.platform);
   const selector =
     input.selector ||
     (defaultSelectors.length > 0 ? defaultSelectors[0] : input.component);
 
   // Generate the code
   const sections: string[] = [
-    generateHeader(`Custom ${input.component} theme`),
+    generateHeader(`Custom ${themeComponentName} theme`),
     generateUseStatement(input.platform, input.licensed),
     "",
-    `// Custom ${input.component} theme`,
+    `// Custom ${themeComponentName} theme`,
     `${themeName}: ${themeFn}(`,
   ];
 
@@ -464,7 +469,7 @@ export function generateComponentTheme(
 
   return {
     code,
-    description: `Generated custom ${input.component} theme with ${Object.keys(input.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
+    description: `Generated custom ${themeComponentName} theme with ${Object.keys(input.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
     variables: [themeName],
   };
 }

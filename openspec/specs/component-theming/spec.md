@@ -6,12 +6,18 @@ Define component theming requirements, validation, and platform-specific output 
 
 ### Requirement: Component theming requires platform
 
-The `create_component_theme` tool requires a `platform` parameter and SHALL specify compound-component completeness rules to reduce incomplete outputs.
+The `create_component_theme` tool requires a `platform` parameter and SHALL specify compound-component completeness rules to reduce incomplete outputs. Generated Sass SHALL include an inline `@use` placement comment, and the handler response text SHALL include an assembly note about `@use` top-of-file placement and deduplication.
 
 #### Scenario: Missing platform
 
 - **WHEN** `platform` is not provided
 - **THEN** the tool returns an error indicating `platform` is required
+
+#### Scenario: Generic platform rejected
+
+- **WHEN** `platform: "generic"` is provided
+- **THEN** the tool SHALL return an error stating that `create_component_theme` requires a specific Ignite UI product platform (angular, webcomponents, react, or blazor)
+- **AND** the error SHALL explain that component theming requires platform-specific selectors and variable prefixes that do not exist in generic mode
 
 #### Scenario: Compound guidance treated as completeness criteria
 
@@ -23,22 +29,82 @@ The `create_component_theme` tool requires a `platform` parameter and SHALL spec
 - **WHEN** a compound component is detected
 - **THEN** guidance includes a short canonical example (e.g., combo) demonstrating the full multi-call flow
 
+#### Scenario: Inline placement comment in Sass
+
+- **WHEN** `create_component_theme` returns Sass output
+- **THEN** the Sass code block SHALL contain a comment above the first `@use` about top-of-file placement and deduplication
+
+#### Scenario: Assembly note in response
+
+- **WHEN** `create_component_theme` returns Sass output
+- **THEN** the handler response text SHALL include a placement note after the code block about `@use` top-of-file and deduplication
+
 ### Requirement: Component token schemas are exposed
 
-The `get_component_design_tokens` tool SHALL explicitly indicate when a component is compound and provide an actionable checklist for generating related themes.
+The `get_component_design_tokens` tool SHALL use a unified output format across all component types (simple, compound, composed compound, child sub-component). All components SHALL present primary tokens in a prominent table with strict "use only these" instruction, and available (non-primary) tokens as a compact name list with strict "do not use" instruction. Compound and composed compound components SHALL include additional context sections between the primary and available tokens sections. For child sub-components, the response SHALL include a relationship note followed by the full parent theme's tokens.
 
-#### Scenario: Compound component response includes required checklist
+#### Scenario: Unified primary tokens format
 
-- **WHEN** `get_component_design_tokens` is called for a compound component
-- **THEN** the response includes a "Compound checklist (required)" section listing each related theme and its scoped selector
-- **AND** the checklist instructs the model to call `get_component_design_tokens` and `create_component_theme` for each related theme using the provided selector
+- **WHEN** `get_component_design_tokens` is called for any component with primary tokens
+- **THEN** the response SHALL include a primary tokens section with a header indicating these are the tokens to use
+- **AND** the section SHALL include an instruction stating that ONLY these tokens should be used for the initial theme and the framework auto-derives all other tokens
+- **AND** the primary tokens SHALL be rendered as a table with columns: Token Name, Type, Description
+- **AND** the table SHALL include ONLY the tokens listed in the component's `primaryTokens` field
+
+#### Scenario: Unified available tokens format
+
+- **WHEN** `get_component_design_tokens` is called for any component with non-primary tokens
+- **THEN** the response SHALL include an available tokens section with a header indicating these should NOT be used unless explicitly requested
+- **AND** the available tokens SHALL be rendered as a compact comma-separated name list (not a table)
+- **AND** the list SHALL include ONLY tokens NOT in the `primaryTokens` field
+
+#### Scenario: Unified next-step instruction
+
+- **WHEN** `get_component_design_tokens` is called for any component
+- **THEN** the next-step instruction SHALL reference **primary tokens** specifically
+- **AND** SHALL state that available tokens should NOT be added unless the user explicitly asks
+
+#### Scenario: Composed compound includes additional context
+
+- **WHEN** `get_component_design_tokens` is called for a composed compound component (one with `composed: true`)
+- **THEN** the response SHALL include the composed compound explanation between the primary tokens and available tokens sections
+- **AND** the explanation SHALL state that the framework auto-derives child themes from primary tokens
+- **AND** SHALL list the internally themed children
+- **AND** SHALL instruct not to create separate themes for related components
+
+#### Scenario: Compound component response uses instruction-oriented format
+
+- **WHEN** `get_component_design_tokens` is called for a standard compound component (one with `compound` but without `composed: true`)
+- **THEN** the response opens with `Implement a theme for the \`<name>\` component using the following guidance.`
+- **AND** includes compound-specific context (related themes, scoping selectors, token derivations, guidance) between the primary tokens and available tokens sections
+
+#### Scenario: Simple component response omits compound sections
+
+- **WHEN** `get_component_design_tokens` is called for a non-compound component
+- **THEN** the response opens with `Implement a theme for the \`<name>\` component using the following guidance.`
+- **AND** includes the theme function name, primary tokens table, and available tokens list
+- **AND** does NOT include compound-specific sections (related themes, scoping, derivations, guidance)
+
+#### Scenario: Child component response includes relationship note
+
+- **WHEN** `get_component_design_tokens` is called for a child component (one with `childOf` set in metadata)
+- **THEN** the response includes a note stating that the component is a child of the parent component
+- **AND** the note states that styling is controlled through the parent's theme
+- **AND** the response shows the full parent theme's tokens (unfiltered)
+- **AND** the theme function name shown is the parent's theme function (e.g., `list-theme()` for `list-item`)
+
+#### Scenario: Child component relationship note format
+
+- **WHEN** `get_component_design_tokens` is called for `list-item`
+- **THEN** the response includes text indicating `list-item` is a child of `list`
+- **AND** indicates that tokens apply at the list level
 
 #### Scenario: Missing selector entries are handled
 
 - **WHEN** a compound component has related themes without scoped selectors (e.g., selector is `TODO`)
 - **THEN** the checklist marks those related themes as skipped and explains that selector data is missing
 
-#### Scenario: Token schema lookup (legacy)
+#### Scenario: Token schema lookup
 
 - **WHEN** `get_component_design_tokens` is called with a component name
 - **THEN** the response lists supported tokens and variant hints
@@ -83,9 +149,162 @@ The `get_component_design_tokens` tool SHALL explicitly indicate when a componen
 
 ### Requirement: Compound checklist is ordered and minimal
 
-The checklist SHALL be ordered and concise to minimize response length while preserving determinism.
+The compound component response SHALL present related themes in ordered tables grouped by platform, without additional narrative beyond the guidance paragraph.
 
 #### Scenario: Checklist length control
 
-- **WHEN** the checklist is generated
-- **THEN** it lists only related themes and their selectors, without additional narrative
+- **WHEN** the compound component response is generated
+- **THEN** it lists related themes in platform-specific tables with columns: Theme, Scope, Selector
+- **AND** does NOT include additional narrative in the tables themselves
+
+### Requirement: Platform groups reflect theming strategy
+
+The `get_component_design_tokens` response SHALL group platforms into two theming strategies: "Angular" and "Web Components / React / Blazor". React and Blazor wrap Web Components and use identical selectors (`igc-`), variable prefixes (`--ig-`), and inline-only scoping.
+
+#### Scenario: Two platform sections for compound components
+
+- **WHEN** `get_component_design_tokens` is called for a compound component
+- **THEN** the response shows exactly two platform sections: "Angular" and "Web Components / React / Blazor"
+- **AND** uses `webcomponents` as the representative platform for selector resolution in the WC group
+
+#### Scenario: No duplicate tables for WC-based platforms
+
+- **WHEN** the response includes platform scope tables
+- **THEN** React and Blazor do NOT get separate tables
+- **AND** are covered by the "Web Components / React / Blazor" section
+
+### Requirement: Irrelevant scope rows are omitted
+
+The response SHALL omit scope rows where the platform group has no selector. This prevents showing misleading N/A entries for scopes that don't apply to a platform.
+
+#### Scenario: Overlay scope omitted for WC-based platforms
+
+- **WHEN** a compound component defines an `overlay` scope with an Angular selector but no `webcomponents` selector
+- **THEN** the "Web Components / React / Blazor" scope table does NOT include an overlay row
+
+#### Scenario: All defined scopes shown for Angular
+
+- **WHEN** a compound component defines both `inline` and `overlay` scopes with Angular selectors
+- **THEN** the "Angular" scope table includes both rows
+
+### Requirement: PRIMARY TOKENS are structured data
+
+The build pipeline SHALL extract PRIMARY TOKENS from SassDoc descriptions into a structured `primaryTokens` field in `themes.json`, separate from the free-form `description` field.
+
+#### Scenario: themes.json contains primaryTokens field
+
+- **WHEN** `buildComponentDocs.mjs` processes a theme function with a PRIMARY TOKENS block in its SassDoc description
+- **THEN** `themes.json` includes a `primaryTokens` array with `{ name, description }` objects for each primary token
+- **AND** the `description` field contains only the title line and optional summary (not the PRIMARY TOKENS block)
+
+#### Scenario: Theme function without PRIMARY TOKENS
+
+- **WHEN** a theme function has no PRIMARY TOKENS block in its SassDoc description
+- **THEN** `themes.json` includes an empty `primaryTokens` array for that component
+- **AND** the `description` field contains the full original description
+
+#### Scenario: Handler renders primary tokens from structured data
+
+- **WHEN** `get_component_design_tokens` renders the response
+- **THEN** it reads the `primaryTokens` field from the theme data
+- **AND** renders them as a concise bullet list under a **Primary Tokens** section
+
+### Requirement: SassDoc descriptions are concise
+
+The SassDoc description block in `*-theme.scss` files SHALL use concise one-line summaries for PRIMARY TOKENS entries, removing verbose "Auto-derives: X, Y, Z" enumeration lists. Individual `@param` annotations are unchanged.
+
+#### Scenario: Trimmed PRIMARY TOKENS format
+
+- **GIVEN** a theme function SassDoc block with PRIMARY TOKENS
+- **WHEN** the description is read
+- **THEN** each PRIMARY TOKEN entry is a single line: `- \`$name\` — Summary sentence.`
+- **AND** there are no multi-line "Auto-derives:" continuation lines in the PRIMARY TOKENS block
+
+#### Scenario: Param annotations preserved
+
+- **GIVEN** a theme function with `@param` SassDoc annotations
+- **WHEN** the SassDoc descriptions are trimmed
+- **THEN** all `@param` annotations remain unchanged with their full derivation descriptions
+
+### Requirement: Generated theme code uses parent selector for child components
+
+The `create_component_theme` tool SHALL scope generated theme code to the parent component's selector when the component has a `childOf` field. This applies to both Sass and CSS output.
+
+#### Scenario: Sass output for child component uses parent selector
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `platform: "angular"`
+- **WHEN** no custom `selector` is provided
+- **THEN** the generated Sass code scopes the `@include tokens(...)` call to `igx-list` (the parent's selector)
+- **AND** the theme function call uses `list-theme()`
+
+#### Scenario: CSS output for child component uses parent selector
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"`, `platform: "webcomponents"`, and `output: "css"`
+- **WHEN** no custom `selector` is provided
+- **THEN** the generated CSS scopes custom properties to `igc-list` (the parent's selector)
+
+#### Scenario: Custom selector overrides parent selector for child component
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `selector: ".my-custom-list"`
+- **WHEN** a custom selector is provided
+- **THEN** the generated code uses `.my-custom-list` as the scope
+- **AND** the parent selector resolution is bypassed
+
+#### Scenario: Same-element alias continues to use own selector
+
+- **GIVEN** `create_component_theme` is called with `component: "textarea"` and `platform: "angular"`
+- **WHEN** no custom `selector` is provided
+- **THEN** the generated code scopes to `.igx-input-group--textarea-group` (textarea's own selector)
+- **AND** NOT to `igx-input-group` (the aliased theme's selector)
+
+### Requirement: Generated theme variable name uses parent for child components
+
+When generating theme code for a child component, the variable name SHALL derive from the parent component's name, not the child's. This ensures merge-compatible output across sub-parts of the same component.
+
+#### Scenario: Child component Sass output uses parent variable name
+
+- **GIVEN** `create_component_theme` is called with `component: "card-actions"` and `platform: "angular"`
+- **WHEN** no custom `name` is provided
+- **THEN** the generated variable is `$custom-card-theme` and the comment says "Custom card theme"
+
+#### Scenario: Child component CSS output uses parent in description
+
+- **GIVEN** `create_component_theme` is called with `component: "card-actions"` and `output: "css"`
+- **WHEN** no custom `name` is provided
+- **THEN** the description says "Generated CSS custom properties for card component"
+
+### Requirement: Composed component theme warns on non-primary tokens
+
+The `create_component_theme` handler SHALL append an informational warning when a composed compound component is themed with non-primary tokens. The warning SHALL NOT prevent code generation — the theme code SHALL still be produced normally. This provides a feedback signal without breaking backward compatibility.
+
+#### Scenario: Warning appended for non-primary tokens on composed component
+
+- **GIVEN** `create_component_theme` is called for a composed compound component
+- **WHEN** the provided tokens include tokens not in the component's `primaryTokens` field
+- **THEN** the response SHALL include the generated theme code (Sass or CSS) as normal
+- **AND** the response SHALL append a warning noting that only primary tokens are needed
+- **AND** the warning SHALL list the primary token names
+- **AND** the warning SHALL state that non-primary tokens override auto-derived values and may cause visual inconsistencies
+
+#### Scenario: No warning for primary-only tokens on composed component
+
+- **GIVEN** `create_component_theme` is called for a composed compound component
+- **WHEN** all provided tokens are in the component's `primaryTokens` field
+- **THEN** the response SHALL include the generated theme code without any composed component warning
+
+#### Scenario: No warning for non-composed components
+
+- **GIVEN** `create_component_theme` is called for a non-composed component (simple or standard compound)
+- **WHEN** any valid tokens are provided
+- **THEN** the response SHALL NOT include a composed component warning
+
+### Requirement: Child component platform availability delegates to parent
+
+When the `create_component_theme` handler checks platform availability for a child component, it SHALL check the parent component's availability instead of the child's.
+
+#### Scenario: Child component passes platform check via parent
+
+- **GIVEN** `create_component_theme` is called with `component: "list-item"` and `platform: "angular"`
+- **WHEN** the handler checks platform availability
+- **THEN** it checks `isComponentAvailable("list", "angular")` (the parent)
+- **AND** the request succeeds
