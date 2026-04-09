@@ -36,7 +36,9 @@
 /// @param {Color} $item-focused-text-color [null] - The focused text color for button group items. Auto-derived from item-focused-background.
 /// @param {Color} $item-focused-background [null] - The focused background color for button group items. Auto-derived from item-hover-background.
 /// @param {Color} $item-focused-border-color [null] - The focused border color for an item from the button group. Auto-derived from item-border-color.
+/// @param {Color} $item-focused-hover-border-color [null] - The focused & hover border color for an item from the button group. Auto-derived from item-focused-border-color.
 /// @param {Color} $item-focused-hover-background [null] - The focused & hover background color for button group items. Auto-derived from item-focused-background.
+/// @param {Color} $item-active-background [null] - The active background color for button group items. Auto-derived from item-hover-background.
 /// @param {Color} $idle-shadow-color [null] - The outline color of focused button group items. Auto-derived from item-background or selected-shadow-color.
 /// @param {Color} $selected-shadow-color [null] - The outline color of focused/selected button group items. Auto-derived from idle-shadow-color.
 ///
@@ -55,6 +57,7 @@
 /// @param {Color} $item-selected-hover-border-color [null] - The border color for a selected item in hover state in the button group. Auto-derived from item-border-color.
 /// @param {Color} $item-selected-focus-background [null] - The background color for a selected item in focused state in the button group. Auto-derived from item-selected-background.
 /// @param {Color} $item-selected-focus-hover-background [null] - The background color for a selected item in focused & hover state in the button group. Auto-derived from item-selected-hover-background.
+/// @param {Color} $item-selected-active-background [null] - The active background color for a selected item in the button group. Auto-derived from item-selected-hover-background.
 ///
 /// @param {Color} $disabled-selected-text-color [null] - The disabled text color for a selected item in the button group. Auto-derived from disabled-text-color.
 /// @param {Color} $disabled-selected-icon-color [null] - The disabled icon color for a selected item in the button group. Auto-derived from disabled-selected-text-color.
@@ -89,8 +92,10 @@
 
     $item-focused-text-color: null,
     $item-focused-border-color: null,
+    $item-focused-hover-border-color: null,
     $item-focused-background: null,
     $item-focused-hover-background: null,
+    $item-active-background: null,
     $idle-shadow-color: null,
     $selected-shadow-color: null,
     $border-radius: null,
@@ -110,6 +115,7 @@
     $item-selected-hover-border-color: null,
     $item-selected-focus-background: null,
     $item-selected-focus-hover-background: null,
+    $item-selected-active-background: null,
 
     $disabled-selected-text-color: null,
     $disabled-selected-icon-color: $disabled-selected-text-color,
@@ -161,12 +167,20 @@
         $item-selected-focus-hover-background: var(--item-selected-hover-background);
     }
 
+    @if not($item-selected-active-background) and $item-selected-hover-background {
+        $item-selected-active-background: dynamic-shade(var(--item-selected-hover-background));
+    }
+
     @if not($item-focused-background) and $item-background {
         $item-focused-background: var(--item-hover-background);
     }
 
     @if not($item-focused-hover-background) and $item-focused-background {
         $item-focused-hover-background: dynamic-shade(var(--item-focused-background));
+    }
+
+    @if not($item-active-background) and $item-hover-background {
+        $item-active-background: dynamic-shade(var(--item-hover-background));
     }
 
     @if not($disabled-background-color) and $item-background {
@@ -188,6 +202,10 @@
 
     @if not($item-focused-border-color) and $item-border-color {
         $item-focused-border-color: var(--item-border-color);
+    }
+
+    @if not($item-focused-hover-border-color) and $item-focused-border-color {
+        $item-focused-hover-border-color: var(--item-focused-border-color);
     }
 
     @if not($item-selected-border-color) and $item-border-color {
@@ -287,7 +305,9 @@
             item-focused-text-color: $item-focused-text-color,
             item-focused-background: $item-focused-background,
             item-focused-border-color: $item-focused-border-color,
+            item-focused-hover-border-color: $item-focused-hover-border-color,
             item-focused-hover-background: $item-focused-hover-background,
+            item-active-background: $item-active-background,
             border-radius: $border-radius,
             item-hover-text-color: $item-hover-text-color,
             item-hover-icon-color: $item-hover-icon-color,
@@ -306,6 +326,7 @@
             item-selected-hover-border-color: $item-selected-hover-border-color,
             item-selected-focus-background: $item-selected-focus-background,
             item-selected-focus-hover-background: $item-selected-focus-hover-background,
+            item-selected-active-background: $item-selected-active-background,
             disabled-selected-text-color: $disabled-selected-text-color,
             disabled-selected-icon-color: $disabled-selected-icon-color,
             disabled-selected-background: $disabled-selected-background,
