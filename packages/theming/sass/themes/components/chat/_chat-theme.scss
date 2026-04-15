@@ -16,18 +16,22 @@
 ///
 /// PRIMARY TOKENS:
 /// - `$header-background` — The background color of the chat header.
-/// - `$message-background` — The background color of message bubbles.
+/// - `$sent-message-background` — The background color for sent messages.
+/// - `$received-message-background` — The background color for received messages.
 ///
 /// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the chat component.
-/// @param {Color} $header-background [null] - The background color of the chat header. PRIMARY - derives header-color.
+/// @param {Color} $header-background [null] - The background color of the chat header.
 /// @param {Color} $header-color [null] - The text color of the chat header. Auto-derived from header-background.
 /// @param {Color} $header-border [null] - The color used for the chat header border.
-/// @param {Color} $message-background [null] - The background color of the sent message bubble. PRIMARY - derives message-color, message-actions-color.
-/// @param {Color} $message-color [null] - The text color of the chat messages. Auto-derived from message-background.
-/// @param {Color} $message-actions-color [null] - The icon color of the chat message actions. Auto-derived from message-color.
+/// @param {Color} $sent-message-background [null] - The background color for sent messages.
+/// @param {Color} $sent-message-color [null] - The text color of the chat messages. Auto-derived from sent-message-background.
+/// @param {Color} $received-message-background [null] - The background color for received messages.
+/// @param {Color} $received-message-color [null] - The text color for received messages. Auto-derived from received-message-background.
+/// @param {Color} $message-actions-color [null] - The icon color of the chat received message actions. Auto-derived from received-message-color.
+/// @param {Number} $message-border-radius [null] - The border radius of the chat messages.
 /// @param {Color} $file-background [null] - The background color of the image message container.
 /// @param {Color} $file-icon-color [null] - The color of the attached file icon.
 /// @param {Color} $file-icon-accent-color [null] - The accent color of the attached file icon.
@@ -53,9 +57,14 @@
     $header-color: null,
     $header-border: null,
 
-    $message-background: null,
-    $message-color: null,
+    $sent-message-background: null,
+    $sent-message-color: null,
+
+    $received-message-background: null,
+    $received-message-color: null,
+
     $message-actions-color: null,
+    $message-border-radius: null,
 
     $file-background: null,
     $file-icon-color: null,
@@ -87,12 +96,16 @@
         $header-color: adaptive-contrast(var(--header-background));
     }
 
-    @if not($message-color) and $message-background {
-        $message-color: adaptive-contrast(var(--message-background));
+    @if not($sent-message-color) and $sent-message-background {
+        $sent-message-color: adaptive-contrast(var(--sent-message-background));
     }
 
-    @if not($message-actions-color) and $message-background {
-        $message-actions-color: adaptive-contrast(var(--message-color));
+    @if not($received-message-color) and $received-message-background {
+        $received-message-color: adaptive-contrast(var(--received-message-background));
+    }
+
+    @if not($message-actions-color) and $received-message-background {
+        $message-actions-color: adaptive-contrast(var(--received-message-color));
     }
 
     @return extend(
@@ -105,9 +118,14 @@
             header-color: $header-color,
             header-border: $header-border,
 
-            message-background: $message-background,
-            message-color: $message-color,
+            sent-message-background: $sent-message-background,
+            sent-message-color: $sent-message-color,
+
+            received-message-background: $received-message-background,
+            received-message-color: $received-message-color,
+
             message-actions-color: $message-actions-color,
+            message-border-radius: $message-border-radius,
 
             file-background: $file-background,
             file-icon-color: $file-icon-color,
