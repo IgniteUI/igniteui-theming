@@ -28,8 +28,8 @@
 /// @prop {Map} item-selected-focus-hover-background [color: ('gray', 400)] - The background color for a selected item in focused & hover state in the button group.
 /// @prop {Map} item-selected-active-background [color: ('gray', 500)] - The active background color for a selected item in the button group.
 /// @prop {Map} item-active-border-color [color: ('gray', 500)] - The active border color for button group items.
+/// @prop {Map} item-selected-active-border-color [color: ('gray', 600)] - The active border color for a selected item in the button group.
 /// @prop {Map} disabled-background-color [color: ('gray', 50)] - The background color for a disabled item in the button group.
-/// @prop {Map} disabled-selected-background [color: ('gray', 100)] - The disabled background color for a selected item in the button group.
 /// @prop {Number} elevation [2] - The elevation level, between 0-24, to be used for the button group shadow.
 /// @prop {List} border-radius [(rem(4px), rem(0), rem(20px))] - The border radius used for button-group component.
 /// @prop {Number} default-size [2] - The default size used for the button-group component.
@@ -153,17 +153,17 @@ $light-button-group: extend(
             ),
         ),
 
+        item-selected-active-border-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+
         disabled-background-color: (
             color: (
                 'gray',
                 50,
-            ),
-        ),
-
-        disabled-selected-background: (
-            color: (
-                'gray',
-                100,
             ),
         ),
 
@@ -205,12 +205,12 @@ $light-button-group: extend(
 /// @prop {Map} item-selected-border-color [color: ('gray', 500)] - The border color for a selected item from the button group.
 /// @prop {Map} item-selected-hover-background [color: ('gray', 300)] - The background color for a selected item in hover state in the button group.
 /// @prop {Map} item-active-background [color: ('gray', 400)] - The active background color for button group items.
-/// @prop {Map} item-selected-active-border-color [color: ('gray', 600)] - The active border color for a selected item in the button group.
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 500)] - The border color for a selected item in hover state in the button group.
 /// @prop {Map} disabled-text-color [color: ('gray', 400)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 400)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-text-color [color: ('gray', 400)] - The disabled text color for a selected item in the button group.
 /// @prop {Map} disabled-selected-icon-color [color: ('gray', 400)] - The disabled icon color for a selected item in the button group.
+/// @prop {Map} disabled-selected-background [color: ('gray', 100)] - The disabled background color for a selected item in the button group.
 /// @prop {Map} disabled-selected-border-color [color: ('gray', 400)] - The disabled border color for a selected item from the button group.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for button-group component.
 /// @prop {Number} default-size [3] - The default size used for the button-group component.
@@ -318,13 +318,6 @@ $material-button-group: extend(
             ),
         ),
 
-        item-selected-active-border-color: (
-            color: (
-                'gray',
-                600,
-            ),
-        ),
-
         disabled-text-color: (
             color: (
                 'gray',
@@ -350,6 +343,13 @@ $material-button-group: extend(
             color: (
                 'gray',
                 400,
+            ),
+        ),
+
+        disabled-selected-background: (
+            color: (
+                'gray',
+                100,
             ),
         ),
 
@@ -388,11 +388,11 @@ $material-button-group: extend(
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 600)] - The border color for a selected item in hover state in the button group.
 /// @prop {Map} item-active-background [color: ('gray', 300)] - The active background color for button group items.
 /// @prop {Map} item-active-border-color [color: ('gray', 600)] - The active border color for button group items.
-/// @prop {Map} item-selected-active-border-color [color: ('gray', 400)] - The active border color for a selected item in the button group.
 /// @prop {Map} disabled-text-color [color: ('gray', 500)] - The text/icon color for a disabled item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 600)] - The border color for a disabled item in the button group.
 /// @prop {Map} disabled-selected-text-color [color: ('gray', 500)] - The disabled text color for a selected item in the button group.
 /// @prop {Map} disabled-selected-icon-color [color: ('gray', 500)] - The disabled icon color for a selected item in the button group.
+/// @prop {Map} disabled-selected-background [color: ('gray', 200)] - The disabled background color for a selected item in the button group.
 /// @prop {Map} disabled-selected-border-color [color: ('gray', 600)] - The disabled border color for a selected item from the button group.
 /// @prop {Number} elevation [0] - The elevation level, between 0-24, to be used for the button group shadow.
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for button-group component.
@@ -528,13 +528,6 @@ $fluent-button-group: extend(
             ),
         ),
 
-        item-selected-active-border-color: (
-            color: (
-                'gray',
-                400,
-            ),
-        ),
-
         disabled-text-color: (
             color: (
                 'gray',
@@ -560,6 +553,13 @@ $fluent-button-group: extend(
             color: (
                 'gray',
                 500,
+            ),
+        ),
+
+        disabled-selected-background: (
+            color: (
+                'gray',
+                200,
             ),
         ),
 

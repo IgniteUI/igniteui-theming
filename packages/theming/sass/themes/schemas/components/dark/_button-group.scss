@@ -131,6 +131,8 @@ $base-dark-button-group: (
 /// @prop {Map} item-selected-active-background [color: ('gray', 200)] - The active background color for a selected item in the button group.
 /// @prop {Map} item-selected-active-border-color [color: ('gray', 500)] - The active border color for a selected item in the button group.
 /// @prop {Map} disabled-selected-background [color: ('gray', 50)] - The disabled background color for a selected item in the button group.
+/// @prop {Map} disabled-selected-text-color [color: ('gray', 200)] - The disabled text color for a selected item in the button group.
+/// @prop {Map} disabled-selected-icon-color [color: ('gray', 200)] - The disabled icon color for a selected item in the button group.
 /// @requires $material-button-group
 /// @requires $base-dark-button-group
 $dark-material-button-group: extend(
@@ -192,6 +194,20 @@ $dark-material-button-group: extend(
                 50,
             ),
         ),
+
+        disabled-selected-text-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        disabled-selected-icon-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
     )
 );
 
@@ -207,6 +223,7 @@ $dark-material-button-group: extend(
 /// @prop {Map} item-selected-hover-background [color: ('gray', 100)] - The background color for a selected item in hover or focus state in the button group.
 /// @prop {Map} item-selected-hover-border-color [color: ('gray', 600)] - The border color for a selected item in hover state in the button group.
 /// @prop {Map} item-active-background [color: ('gray', 100)] - The active background color for button group items.
+/// @prop {Map} item-active-border-color [color: ('gray', 400)] - The active border color for button group items.
 /// @prop {Map} item-selected-active-background [color: ('gray', 300)] - The active background color for a selected item in the button group.
 /// @prop {Map} item-selected-active-border-color [color: ('gray', 600)] - The active border color for a selected item in the button group.
 /// @prop {Map} item-disabled-border [color: ('gray', 400)] - The border color for button group disabled items.
@@ -288,6 +305,13 @@ $dark-fluent-button-group: extend(
             color: (
                 'gray',
                 100,
+            ),
+        ),
+
+        item-active-border-color: (
+            color: (
+                'gray',
+                400,
             ),
         ),
 
