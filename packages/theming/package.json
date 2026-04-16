@@ -17,6 +17,7 @@
     "build:docs:en:production": "set NODE_ENV=production && npx sassdoc ./sass -d docs",
     "build:docs:en:staging": "set NODE_ENV=staging && npx sassdoc ./sass -d docs",
     "build:e2e": "sass --quiet ./tests/e2e/theme.scss ./tests/e2e/theme.css",
+    "build:tokens": "tz build",
     "clean": "npm run clean:json && npm run clean:tailwind && npm run clean:mcp && npm run clean:docs",
     "clean:json": "shx rm -rf dist/json",
     "clean:tailwind": "shx rm -rf dist/tailwind",
@@ -100,6 +101,9 @@
   "devDependencies": {
     "@ast-grep/cli": "^0.42.0",
     "@types/postcss-safe-parser": "^5.0.4",
+    "@igniteui-theming/plugins": "*",
+    "@terrazzo/parser": "^2.0.0",
+    "@terrazzo/cli": "^2.0.0",
     "igniteui-sassdoc-theme": "^1.1.6",
     "lunr": "^2.3.9",
     "postcss": "^8.4.35",
