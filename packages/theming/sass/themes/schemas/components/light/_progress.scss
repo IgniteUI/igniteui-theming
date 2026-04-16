@@ -237,7 +237,7 @@ $indigo-progress-linear: extend(
 
 /// Generates a base light progress-circular schema.
 /// @type Map
-/// @prop {Map} base-circle-color [color: ('gray', 300)] - The base circle fill color.
+/// @prop {Map} track-color [color: ('gray', 300)] - The base circle fill color.
 /// @prop {Map} fill-color-default [color: ('primary', 500)] - The progress circle default fill color.
 /// @prop {Map} fill-color-danger [color: ('error')] - The progress circle danger fill color.
 /// @prop {Map} fill-color-warning [color: ('warn')] - The progress circle warning fill color.
@@ -248,7 +248,7 @@ $indigo-progress-linear: extend(
 /// @prop {List} track-border-radius [rem(0)] - The border radius used for the progress bar track.
 $light-progress-circular: extend(
     (
-        base-circle-color: (
+        track-color: (
             color: (
                 'gray',
                 300,
@@ -342,7 +342,7 @@ $bootstrap-progress-circular: extend(
 
 /// Generates an indigo progress-circular schema.
 /// @type Map
-/// @prop {Map} base-circle-color [color: ('gray', 900, .15)] - The base circle fill color.
+/// @prop {Map} track-color [color: ('gray', 900, .15)] - The base circle fill color.
 /// @prop {Map} fill-color-default [color: ('primary', 400)] - The track default fill color.
 /// @prop {Map} fill-color-danger [color: ('error', 400)] - The track danger fill color.
 /// @prop {Map} fill-color-warning [color: ('warn', 400)] - The track warning fill color.
@@ -353,7 +353,7 @@ $bootstrap-progress-circular: extend(
 $indigo-progress-circular: extend(
     $light-progress-circular,
     (
-        base-circle-color: (
+        track-color: (
             color: (
                 'gray',
                 900,
