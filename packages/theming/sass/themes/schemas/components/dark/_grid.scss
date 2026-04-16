@@ -26,7 +26,6 @@
 /// @prop {Map} row-selected-text-color [contrast-color: ('secondary', 'A700')] - The selected row text color.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('secondary', 'A400')] - The selected row hover text color.
 /// @prop {Map} row-highlight [color: ('secondary', 500)] - The highlight color of a row.
-/// @prop {Map} row-ghost-background [color: ('primary', 900)] - The dragged row background color.
 /// @prop {Map} cell-selected-background [color: ('gray', 100)] - The selected cell background color.
 /// @prop {Map} cell-selected-text-color [contrast-color: ('gray', 100)] - The selected cell text color.
 /// @prop {Map} cell-selected-within-background [color: ('secondary', 'A400')] - The background of the selected cell inside a selected row/column.
@@ -152,13 +151,6 @@ $base-dark-grid: (
         color: (
             'secondary',
             500,
-        ),
-    ),
-
-    row-ghost-background: (
-        color: (
-            'primary',
-            900,
         ),
     ),
 
@@ -507,7 +499,6 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} excel-filtering-actions-hover-background [contrast-color: ('gray', 50, .1)] - The background color of the excel style filtering options in hover/focus state.
 /// @prop {Map} excel-filtering-actions-disabled-foreground [contrast-color: ('gray', 50, .2)] - The text color of the excel style filtering options in disabled state.
 /// @prop {Map} excel-filtering-border-color [color: ('gray', 100)] - The border color used in the excel style filter.
-/// @prop {Map} row-ghost-background [color: ('gray', 100)] - The background color of the dragged row.
 /// @prop {Map} filtering-dialog-background [color: ('gray', 50)] - The background color of the advanced filtering dialog.
 /// @prop {Map} body-column-selected-border-color [color: ('primary', 900)] - The border color used for the body column when in group-row state.
 /// @prop {Map} body-column-hover-selected-border-color [color: ('primary', 700)] - The border color used for the body column when in group-row + hover state.
@@ -844,13 +835,6 @@ $dark-indigo-grid: extend(
         ),
 
         excel-filtering-border-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        row-ghost-background: (
             color: (
                 'gray',
                 100,

@@ -461,7 +461,7 @@ Sets the roundness scale for all components or a specific component by updating 
 
 Discovers available design tokens (customizable properties) for a specific Ignite UI component. Use this tool **before** `create_component_theme` to see what tokens are available.
 
-For compound components (e.g., combo, select, grid), the response includes a **Compound checklist (required)** with scoped selectors. Follow the checklist by calling `get_component_design_tokens` and `create_component_theme` for each related theme. Items with missing selectors are marked as skipped.
+For compound components (e.g., combo, select, grid), the response lists related child themes that should also be themed. For each related theme, call `get_component_design_tokens` and then `create_component_theme` using the parent component's selector.
 
 | Parameter   | Type   | Required | Description                                     |
 | ----------- | ------ | -------- | ----------------------------------------------- |
@@ -496,7 +496,7 @@ For compound components (e.g., combo, select, grid), the response includes a **C
 
 Generates Sass code to customize a specific component's appearance using design tokens. Call `get_component_design_tokens` first to discover available tokens.
 
-If the requested component is compound and selectors are available, include the related theme calls from the checklist. Otherwise the response is incomplete.
+If the requested component is compound and selectors are available, include the related theme calls scoped under the parent component's selector. Otherwise the response is incomplete.
 
 | Parameter      | Type                                                        | Required | Description                           |
 | -------------- | ----------------------------------------------------------- | -------- | ------------------------------------- |
@@ -536,14 +536,15 @@ AI: Perfect! Let me create that theme for you.
 **Compound example (combo, Angular):**
 
 ```
-AI: First, let me get compound selectors for combo.
+AI: First, let me get the design tokens and related themes for combo.
 [calls get_component_design_tokens with component="combo"]
 
-AI: Now I will generate themes for combo and its related components.
-[calls create_component_theme with component="combo"]
-[calls create_component_theme with component="input-group" selector="igx-combo igx-input-group"]
-[calls create_component_theme with component="drop-down" selector=".igx-drop-down__list"]
-[calls create_component_theme with component="checkbox" selector="igx-combo-item igx-checkbox"]
+AI: Now I will generate themes for combo and its related components,
+    all scoped under the parent selector.
+[calls create_component_theme with component="combo" platform="angular"]
+[calls create_component_theme with component="input-group" selector="igx-combo"]
+[calls create_component_theme with component="drop-down" selector="igx-combo"]
+[calls create_component_theme with component="checkbox" selector="igx-combo"]
 ```
 
 ---

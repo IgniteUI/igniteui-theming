@@ -19,6 +19,10 @@ import {
 import { handleCreatePalette } from "../../../tools/handlers/palette.js";
 import { handleCreateTheme } from "../../../tools/handlers/theme.js";
 import { handleCreateTypography } from "../../../tools/handlers/typography.js";
+import {
+  SASS_USE_ASSEMBLY_NOTE,
+  SASS_USE_INLINE_COMMENT,
+} from "../../../utils/sass.js";
 
 describe("handleCreatePalette", () => {
   it("returns MCP response format", async () => {
@@ -94,6 +98,28 @@ describe("handleCreatePalette", () => {
 
     const text = result.content[0].text;
     expect(text).toContain("$my-brand-palette");
+  });
+
+  it("includes inline @use placement comment in generated Sass", async () => {
+    const result = await handleCreatePalette({
+      primary: "#2ab759",
+      secondary: "#f7bd32",
+      surface: "white",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_INLINE_COMMENT);
+  });
+
+  it("includes assembly note after Sass code block", async () => {
+    const result = await handleCreatePalette({
+      primary: "#2ab759",
+      secondary: "#f7bd32",
+      surface: "white",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
   });
 });
 
@@ -194,6 +220,20 @@ describe("handleCreateTheme", () => {
 
     const text = result.content[0].text;
     expect(text).toContain("Platform: Ignite UI for Blazor");
+  });
+
+  it("includes inline @use placement comment in generated Sass", async () => {
+    const result = await handleCreateTheme(baseThemeParams);
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_INLINE_COMMENT);
+  });
+
+  it("includes assembly note after Sass code block", async () => {
+    const result = await handleCreateTheme(baseThemeParams);
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
   });
 });
 
@@ -439,6 +479,43 @@ describe("handleCreateComponentTheme", () => {
     expect(text).toContain("not supported");
   });
 
+  it("suggests progress-linear for linear progress phrasing", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "linear progress",
+      tokens: {
+        background: "#ff5722",
+      },
+    });
+
+    expect(result.isError).toBe(true);
+
+    const text = result.content[0].text;
+    expect(text).toContain('Component "linear progress" not found.');
+    expect(text).toContain("**Similar components:**");
+
+    const suggestions = text.split("**Similar components:**")[1] ?? "";
+    expect(suggestions.trimStart().startsWith("- progress-linear")).toBe(true);
+  });
+
+  it("suggests progress components for common typo phrasing", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "pogress",
+      tokens: {
+        background: "#ff5722",
+      },
+    });
+
+    expect(result.isError).toBe(true);
+
+    const text = result.content[0].text;
+    expect(text).toContain('Component "pogress" not found.');
+    expect(text).toContain("**Similar components:**");
+    expect(text).toContain("- progress-circular");
+    expect(text).toContain("- progress-linear");
+  });
+
   it("returns MCP response format for valid component", async () => {
     const result = await handleCreateComponentTheme({
       platform: "webcomponents",
@@ -661,5 +738,98 @@ describe("handleCreateComponentTheme", () => {
 
     const text = result.content[0].text;
     expect(text).toContain("$schema: $light-bootstrap-schema");
+  });
+
+  // ===== Child Component Tests =====
+
+  it("uses parent selector for child component (Sass)", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "list-item",
+      tokens: {
+        "item-background": "#ff0000",
+      },
+    });
+
+    expect(result.isError).toBeUndefined();
+
+    const text = result.content[0].text;
+
+    // Should use parent's selector (igx-list), not child's (igx-list-item)
+    expect(text).toContain("igx-list {");
+    expect(text).not.toContain("igx-list-item {");
+
+    // Should use parent's theme function
+    expect(text).toContain("list-theme(");
+  });
+
+  it("uses parent selector for child component (CSS output)", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "list-item",
+      output: "css",
+      tokens: {
+        "item-background": "#ff0000",
+      },
+    });
+
+    expect(result.isError).toBeUndefined();
+
+    const text = result.content[0].text;
+
+    // Should scope to parent's selector
+    expect(text).toContain("igc-list");
+  });
+
+  it("textarea alias still uses own selector (not parent)", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "textarea",
+      tokens: {
+        "box-background": "#ffffff",
+      },
+    });
+
+    expect(result.isError).toBeUndefined();
+
+    const text = result.content[0].text;
+
+    // textarea is a same-element alias, should use its own selector
+    expect(text).toContain(".igx-input-group--textarea-group");
+  });
+
+  it("includes inline @use placement comment in generated Sass", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      tokens: { background: "#ff5722" },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_INLINE_COMMENT);
+  });
+
+  it("includes assembly note after Sass code block", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      tokens: { background: "#ff5722" },
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
+  });
+
+  it("CSS output does not include inline comment or assembly note", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      output: "css",
+      tokens: { background: "#ff5722" },
+    });
+
+    const text = result.content[0].text;
+    expect(text).not.toContain(SASS_USE_INLINE_COMMENT);
+    expect(text).not.toContain(SASS_USE_ASSEMBLY_NOTE);
   });
 });

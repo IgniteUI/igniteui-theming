@@ -91,9 +91,9 @@ $dark-indigo-progress-linear: extend(
 
 /// Generates a base dark progress-circular schema.
 /// @type Map
-/// @prop {Map} base-circle-color [color: ('gray', 300)] - The base circle fill color.
+/// @prop {Map} track-color [color: ('gray', 300)] - The base circle fill color.
 $dark-base-progress-circular: (
-    base-circle-color: (
+    track-color: (
         color: (
             'gray',
             300,
@@ -125,14 +125,14 @@ $dark-bootstrap-progress-circular: extend($bootstrap-progress-circular, $dark-ba
 
 /// Generates a dark indigo progress-circular schema.
 /// @type Map
-/// @prop {Map} base-circle-color [contrast-color: ('gray', 50, .2)] - The base circle fill color.
+/// @prop {Map} track-color [contrast-color: ('gray', 50, .2)] - The base circle fill color.
 /// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The value text color.
 /// @requires $indigo-progress-circular
 $dark-indigo-progress-circular: extend(
     $indigo-progress-circular,
     $dark-base-progress-circular,
     (
-        base-circle-color: (
+        track-color: (
             contrast-color: (
                 'gray',
                 50,

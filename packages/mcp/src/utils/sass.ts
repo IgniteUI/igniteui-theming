@@ -95,13 +95,21 @@ export function generateHeader(description: string): string {
 // standalone tools and platform-specific theme generators.
 // ============================================================================
 
+/** Inline comment prepended above @use lines in generated Sass. */
+export const SASS_USE_INLINE_COMMENT =
+  "// NOTE: @use rules must be at the top of the file. Deduplicate when combining multiple outputs.";
+
+/** Markdown assembly note appended after Sass code blocks in handler responses. */
+export const SASS_USE_ASSEMBLY_NOTE =
+  "\n> **File placement:** `@use` rules must appear at the very top of the `.scss` file, before any other statements. When combining outputs from multiple tools, keep only one `@use` per module path.";
+
 /**
  * Generate the Sass @use statement for the theming library.
  * Uses platform-specific import paths when platform is specified.
  *
  * @param platform - Target platform (angular or webcomponents)
  * @param licensed - Whether to use the licensed @infragistics package (Angular only, defaults to false)
- * @returns The appropriate @use statement for the platform
+ * @returns The inline placement comment + @use statement for the platform
  */
 export function generateUseStatement(
   platform?: Platform,
@@ -111,10 +119,10 @@ export function generateUseStatement(
     const packagePath = licensed
       ? "@infragistics/igniteui-angular"
       : "igniteui-angular";
-    return `@use "${packagePath}/theming" as *;`;
+    return `${SASS_USE_INLINE_COMMENT}\n@use "${packagePath}/theming" as *;`;
   }
   // Web Components, React, Blazor, or unspecified (always use igniteui-theming - it's free)
-  return "@use 'igniteui-theming' as *;";
+  return `${SASS_USE_INLINE_COMMENT}\n@use 'igniteui-theming' as *;`;
 }
 
 /**
