@@ -24,14 +24,6 @@ export interface TokenDerivation {
 }
 
 /**
- * Platform-specific selector(s) for a named scope.
- */
-export interface ScopeSelectors {
-  angular?: string | string[];
-  webcomponents?: string | string[];
-}
-
-/**
  * Information about a compound component (one that contains multiple themeable sub-components).
  */
 export interface CompoundInfo {
@@ -39,17 +31,15 @@ export interface CompoundInfo {
   description: string;
   /** Related theme functions needed for full customization */
   relatedThemes: string[];
-  /**
-   * Non-inline scopes (e.g., overlay). Inline scope is always derived from base selectors.
-   * Most compounds won't have this field.
-   */
-  additionalScopes?: Record<string, ScopeSelectors>;
-  /** Maps child theme name to a scope name per platform. Values: 'inline' or a key in additionalScopes */
-  childScopes?: Record<string, { angular?: string; webcomponents?: string }>;
   /** Token derivation rules. Key: 'childTheme.childToken' */
   tokenDerivations?: Record<string, TokenDerivation>;
   /** Free-form guidance for edge cases */
   guidance?: string;
+  /**
+   * When true, the framework internally generates themes for relatedThemes from the parent's primary tokens
+   * LLMs should NOT generate separate child themes for relatedThemes.
+   */
+  composed?: boolean;
 }
 
 const GRID_COMPOUND_INFO: CompoundInfo = {
@@ -70,19 +60,19 @@ const GRID_COMPOUND_INFO: CompoundInfo = {
     "flat-icon-button",
     "outlined-icon-button",
   ],
-  guidance: `The grid is a complex compound component with many related themes. \
-For basic customization, focus on the grid theme itself and the most visible children: \
-input-group (filtering), outlined-button/icon-button (toolbar actions), checkbox (row selection), \
-and paginator. The grid-summary and grid-toolbar themes control their respective areas. \
-Detailed token derivation rules are not yet available for the grid — use the token names \
-and descriptions from get_component_design_tokens for each child to guide value selection.`,
+  composed: true,
+  guidance: `The grid's theme will automatically derive the related themes for all related child components.`,
 };
 
 export interface ComponentMetadata {
-  /** Platform-specific CSS selectors */
-  selectors: ComponentSelectors;
+  /** Platform-specific CSS selectors. Optional for `childOf` entries (theming scope comes from the parent). */
+  selectors?: ComponentSelectors;
   /** Optional theme alias for components that reuse another component theme */
   theme?: string;
+  /** Optional synonym aliases for search (synonyms only, not word-order permutations). */
+  aliases?: string[];
+  /** Parent component name for child sub-components. When set, theming scope uses the parent's selector instead of the child's own. Mutually exclusive with `compound`. */
+  childOf?: string;
   /** Present only for components with variant-specific themes (e.g., button) */
   variants?: string[];
   /** Present only for compound components */
@@ -92,6 +82,12 @@ export interface ComponentMetadata {
 export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   accordion: {
     selectors: { angular: "igx-accordion", webcomponents: "igc-accordion" },
+  },
+  "accordion-body": {
+    childOf: "accordion",
+  },
+  "accordion-header": {
+    childOf: "accordion",
   },
   "action-strip": {
     selectors: { angular: "igx-action-strip", webcomponents: null },
@@ -196,6 +192,15 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
         For the icon theme, the color should also coordinate with the card background while maintaining sufficient contrast.`,
     },
   },
+  "card-actions": {
+    childOf: "card",
+  },
+  "card-content": {
+    childOf: "card",
+  },
+  "card-header": {
+    childOf: "card",
+  },
   carousel: {
     selectors: { angular: "igx-carousel", webcomponents: "igc-carousel" },
   },
@@ -237,6 +242,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   combo: {
     selectors: { angular: "igx-combo", webcomponents: "igc-combo" },
+    aliases: ["combobox", "autocomplete"],
     compound: {
       description:
         "The combo component combines input, drop-down, and checkbox components.",
@@ -258,15 +264,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
           from: "combo.toggle-button-background",
           transform: "identity",
         },
-      },
-      additionalScopes: {
-        overlay: { angular: ".igx-drop-down__list" },
-        input: { angular: "igx-combo, .igx-drop-down__list" },
-      },
-      childScopes: {
-        "drop-down": { angular: "overlay" },
-        checkbox: { angular: "overlay" },
-        "input-group": { angular: "input" },
       },
       guidance:
         "The combo's input-group, drop-down, and checkbox should share a consistent color scheme.",
@@ -291,12 +288,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
           transform: "identity",
         },
       },
-      additionalScopes: {
-        overlay: { angular: ".igx-drop-down__list" },
-      },
-      childScopes: {
-        "drop-down": { angular: "overlay" },
-      },
       guidance:
         "The simple-combo's input-group and drop-down should share a consistent color scheme.",
     },
@@ -307,14 +298,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       description:
         "The date-picker combines input, calendar, and flat-button components.",
       relatedThemes: ["flat-button", "input-group", "calendar"],
-      additionalScopes: {
-        overlay: { angular: ".igx-date-picker" },
-      },
-      childScopes: {
-        calendar: { angular: "overlay" },
-        "flat-button": { angular: "overlay" },
-        "input-group": { angular: "inline" },
-      },
       tokenDerivations: {
         "flat-button.foreground": {
           from: "calendar.content-background",
@@ -334,14 +317,6 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       description:
         "The date-range-picker combines input, calendar, and flat-button components.",
       relatedThemes: ["flat-button", "input-group", "calendar"],
-      additionalScopes: {
-        overlay: { angular: ".igx-date-picker" },
-      },
-      childScopes: {
-        calendar: { angular: "overlay" },
-        "flat-button": { angular: "overlay" },
-        "input-group": { angular: "inline" },
-      },
       tokenDerivations: {
         "flat-button.foreground": {
           from: "calendar.content-background",
@@ -362,9 +337,11 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   "date-time-input": {
     selectors: { angular: null, webcomponents: "igc-date-time-input" },
+    aliases: ["datetime input", "date time input"],
   },
   dialog: {
     selectors: { angular: ".igx-dialog", webcomponents: "igc-dialog" },
+    aliases: ["modal", "popup"],
     compound: {
       description: "The dialog component uses flat-buttons for the actions",
       relatedThemes: ["flat-button"],
@@ -389,12 +366,22 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
       angular: ".igx-drop-down__list",
       webcomponents: "igc-dropdown",
     },
+    aliases: ["dropdown menu"],
+  },
+  "drop-down-item": {
+    childOf: "drop-down",
   },
   "expansion-panel": {
     selectors: {
       angular: "igx-expansion-panel",
       webcomponents: "igc-expansion-panel",
     },
+  },
+  "expansion-panel-body": {
+    childOf: "expansion-panel",
+  },
+  "expansion-panel-header": {
+    childOf: "expansion-panel",
   },
   "file-input": {
     selectors: {
@@ -474,6 +461,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   list: {
     selectors: { angular: "igx-list", webcomponents: "igc-list" },
   },
+  "list-header": {
+    childOf: "list",
+  },
+  "list-item": {
+    childOf: "list",
+  },
   navbar: {
     selectors: { angular: "igx-navbar", webcomponents: "igc-navbar" },
     compound: {
@@ -493,12 +486,24 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   navdrawer: {
     selectors: { angular: "igx-nav-drawer", webcomponents: "igc-nav-drawer" },
+    aliases: [
+      "drawer",
+      "side drawer",
+      "side nav",
+      "sidenav",
+      "navigation drawer",
+      "navigation panel",
+    ],
+  },
+  "nav-drawer-item": {
+    childOf: "navdrawer",
   },
   overlay: {
     selectors: { angular: ".igx-overlay__content", webcomponents: null },
   },
   paginator: {
     selectors: { angular: "igx-paginator", webcomponents: "igc-paginator" },
+    aliases: ["pagination", "pager"],
     compound: {
       description:
         "The paginator uses combo and flat-icon-buttons for the page controls.",
@@ -527,15 +532,18 @@ and descriptions from get_component_design_tokens for each child to guide value 
       angular: "igx-circular-bar",
       webcomponents: "igc-circular-progress",
     },
+    aliases: ["spinner", "circular loader", "loading spinner"],
   },
   "progress-linear": {
     selectors: {
       angular: "igx-linear-bar",
       webcomponents: "igc-linear-progress",
     },
+    aliases: ["progress-bar", "loading bar", "linear loader"],
   },
   "query-builder": {
     selectors: { angular: "igx-query-builder", webcomponents: null },
+    aliases: ["filter builder"],
     compound: {
       description:
         "The query builder uses inputs, dropdowns, chips, buttons and button-groups for building query expressions.",
@@ -558,6 +566,7 @@ chips for displaying conditions, and buttons/button-groups for adding and groupi
   },
   rating: {
     selectors: { angular: "igc-rating", webcomponents: "igc-rating" },
+    aliases: ["star rating"],
   },
   ripple: {
     selectors: { angular: "igx-ripple", webcomponents: "igc-ripple" },
@@ -567,16 +576,11 @@ chips for displaying conditions, and buttons/button-groups for adding and groupi
   },
   select: {
     selectors: { angular: "igx-select", webcomponents: "igc-select" },
+    aliases: ["select box"],
     compound: {
       description:
         "The select component combines input-group and drop-down components.",
       relatedThemes: ["input-group", "drop-down"],
-      additionalScopes: {
-        overlay: { angular: ".igx-drop-down__list" },
-      },
-      childScopes: {
-        "drop-down": { angular: "overlay" },
-      },
       tokenDerivations: {
         "input-group.focused-border-color": {
           from: "select.toggle-button-background",
@@ -600,27 +604,27 @@ The drop-down background should match the select surface intent.`,
   splitter: {
     selectors: { angular: "igx-splitter", webcomponents: "igc-splitter" },
   },
+  step: {
+    childOf: "stepper",
+  },
   stepper: {
     selectors: { angular: "igx-stepper", webcomponents: "igc-stepper" },
   },
   switch: {
     selectors: { angular: "igx-switch", webcomponents: "igc-switch" },
+    aliases: ["toggle"],
   },
   tabs: {
     selectors: { angular: "igx-tabs", webcomponents: "igc-tabs" },
+  },
+  "tab-item": {
+    childOf: "tabs",
   },
   "time-picker": {
     selectors: { angular: "igx-time-picker", webcomponents: null },
     compound: {
       description: "The time picker uses an input-group for the input field.",
       relatedThemes: ["input-group", "time-picker", "flat-button"],
-      additionalScopes: {
-        overlay: { angular: ".igx-time-picker" },
-      },
-      childScopes: {
-        "time-picker": { angular: "overlay" },
-        "flat-button": { angular: "overlay" },
-      },
       guidance: `The time-picker input-group and the time-picker dial should share a consistent color scheme. \
 The input-group text color should coordinate with the time-picker header.`,
     },
@@ -675,6 +679,10 @@ export function getComponentSelector(
     return [];
   }
 
+  if (!metadata.selectors) {
+    return [];
+  }
+
   const platformSelectors =
     platform === "angular"
       ? metadata.selectors.angular
@@ -690,6 +698,30 @@ export function getComponentSelector(
 }
 
 /**
+ * Get the selector(s) to use for theming scope.
+ * For child components (with `childOf`), returns the parent's selectors.
+ * For all other components, returns the component's own selectors.
+ * @param componentName - The component name
+ * @param platform - The target platform
+ * @returns Array of selectors for theming scope, empty array if not found
+ */
+export function getThemingSelector(
+  componentName: string,
+  platform: Platform,
+): string[] {
+  const metadata = COMPONENT_METADATA[componentName];
+  if (!metadata) {
+    return [];
+  }
+
+  if (metadata.childOf) {
+    return getComponentSelector(metadata.childOf, platform);
+  }
+
+  return getComponentSelector(componentName, platform);
+}
+
+/**
  * Check if a component is available on a specific platform.
  * @param componentName - The component name
  * @param platform - The target platform ('angular' or 'webcomponents')
@@ -700,7 +732,7 @@ export function isComponentAvailable(
   platform: Platform,
 ): boolean {
   const metadata = COMPONENT_METADATA[componentName];
-  if (!metadata) {
+  if (!metadata?.selectors) {
     return false;
   }
 
@@ -719,6 +751,7 @@ export function isComponentAvailable(
 export function getComponentsForPlatform(platform: Platform): string[] {
   return Object.entries(COMPONENT_METADATA)
     .filter(([, metadata]) => {
+      if (!metadata.selectors) return false;
       const platformSelector =
         platform === "angular"
           ? metadata.selectors.angular
@@ -737,7 +770,7 @@ export function getComponentPlatformAvailability(
   componentName: string,
 ): { angular: boolean; webcomponents: boolean } | undefined {
   const metadata = COMPONENT_METADATA[componentName];
-  if (!metadata) {
+  if (!metadata?.selectors) {
     return undefined;
   }
 

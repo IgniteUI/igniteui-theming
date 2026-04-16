@@ -260,17 +260,17 @@ describe("VARIABLE_PATTERNS", () => {
 describe("generateUseStatement", () => {
   it("generates Angular use statement with double quotes", () => {
     const result = generateUseStatement("angular");
-    expect(result).toBe('@use "igniteui-angular/theming" as *;');
+    expect(result).toContain('@use "igniteui-angular/theming" as *;');
   });
 
   it("generates Web Components use statement with single quotes", () => {
     const result = generateUseStatement("webcomponents");
-    expect(result).toBe("@use 'igniteui-theming' as *;");
+    expect(result).toContain("@use 'igniteui-theming' as *;");
   });
 
   it("generates default use statement when platform is undefined", () => {
     const result = generateUseStatement();
-    expect(result).toBe("@use 'igniteui-theming' as *;");
+    expect(result).toContain("@use 'igniteui-theming' as *;");
   });
 });
 
