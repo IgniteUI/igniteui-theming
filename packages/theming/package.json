@@ -10,8 +10,6 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:tailwind && npm run build:json && npm run build:mcp && npm run build:e2e",
-    "prepack": "shx cp ../../README.md README.md && shx cp ../../LICENSE LICENSE",
-    "postpack": "shx rm -f README.md LICENSE",
     "build:json": "node .scripts/buildJSON.mjs && node .scripts/buildComponentDocs.mjs && node .scripts/buildBarrel.mjs",
     "build:tailwind": "npm run clean:tailwind && node .scripts/buildTailwind.mjs",
     "build:mcp": "npm run build --prefix ../mcp && shx cp -r ../mcp/dist ./dist/mcp",
@@ -32,6 +30,8 @@
     "lint:sassdoc": "ast-grep scan --error",
     "fix:sassdoc": "node .scripts/fixSassdoc.mjs",
     "format": "stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
+    "prepack": "shx cp ../../README.md README.md && shx cp ../../LICENSE LICENSE",
+    "postpack": "shx rm -f README.md LICENSE",
     "prepare": "node .scripts/setup-grammars.mjs",
     "test": "vitest run"
   },
