@@ -224,6 +224,7 @@
     $grid-shadow: null,
     $drag-shadow: null,
     $row-ghost-background: null,
+    $row-ghost-border-color: null,
     $row-drag-color: null,
     $drop-area-border-radius: null,
     $grid-border-color: null,
@@ -652,6 +653,10 @@
         $row-ghost-background: var(--background);
     }
 
+    @if not($row-ghost-border-color) and $foreground and $background {
+        $row-ghost-border-color: hsl(from color-mix(in srgb, var(--foreground) 16%, var(--background)) h s l / 0.38);
+    }
+
     @if not($row-drag-color) and $foreground {
         $row-drag-color: var(--foreground);
     }
@@ -965,6 +970,7 @@
             grid-elevation: $grid-shadow,
             drag-elevation: $drag-shadow,
             row-ghost-background: $row-ghost-background,
+            row-ghost-border-color: $row-ghost-border-color,
             row-drag-color: $row-drag-color,
             drop-area-border-radius: $drop-area-border-radius,
             sortable-header-icon-hover-color: $sortable-header-icon-hover-color,
