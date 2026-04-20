@@ -225,8 +225,12 @@ export async function generateComponentThemeCss(
   options: ComponentThemeCssOptions,
 ): Promise<CssComponentThemeResult> {
   // Import functions we need (dynamic import to avoid circular dependencies)
-  const { getComponentTheme, getComponentSelector, SCHEMA_PRESETS } =
-    await import("../knowledge/index.js");
+  const {
+    COMPONENT_METADATA,
+    getComponentTheme,
+    getThemingSelector,
+    SCHEMA_PRESETS,
+  } = await import("../knowledge/index.js");
   const { toVariableName } = await import("../utils/sass.js");
 
   // Validate component exists
@@ -239,9 +243,12 @@ export async function generateComponentThemeCss(
   const designSystem = options.designSystem ?? "material";
   const variant = options.variant ?? "light";
   const themeFn = theme.themeFunctionName;
+  // For child components, derive variable name from parent
+  const themeComponentName =
+    COMPONENT_METADATA[options.component]?.childOf ?? options.component;
   const themeName = options.name
     ? `$${toVariableName(options.name)}`
-    : `$custom-${options.component}-theme`;
+    : `$custom-${themeComponentName}-theme`;
 
   // Get the schema variable based on design system and variant
   const schemaVar =
@@ -257,8 +264,9 @@ export async function generateComponentThemeCss(
     tokenArgs.push(`$${tokenName}: ${stringValue}`);
   }
 
-  // Determine selector - use platform-specific component selector as default
-  const defaultSelectors = getComponentSelector(
+  // Determine selector - use platform-specific theming selector as default
+  // For child components, this resolves to the parent's selector
+  const defaultSelectors = getThemingSelector(
     options.component,
     options.platform,
   );
@@ -271,7 +279,7 @@ export async function generateComponentThemeCss(
 @use 'igniteui-theming/sass/themes' as *;
 @use 'igniteui-theming/sass/themes/schemas' as *;
 
-// Custom ${options.component} theme
+// Custom ${themeComponentName} theme
 ${themeName}: ${themeFn}(
   ${tokenArgs.join(",\n  ")}
 );
@@ -291,7 +299,7 @@ ${selector} {
 
     return {
       css: result.css,
-      description: `Generated CSS custom properties for ${options.component} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
+      description: `Generated CSS custom properties for ${themeComponentName} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

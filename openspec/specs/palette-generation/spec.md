@@ -6,7 +6,7 @@ Describe palette generation outputs for Sass and CSS, including warnings and pla
 
 ### Requirement: Palette generation returns Sass by default
 
-The `create_palette` tool returns an MCP text response with a Sass code block when `output` is not specified.
+The `create_palette` tool returns an MCP text response with a Sass code block when `output` is not specified. Generated Sass SHALL include an inline `@use` placement comment, and the handler response text SHALL include an assembly note about `@use` top-of-file placement and deduplication.
 
 #### Scenario: Required colors
 
@@ -35,6 +35,16 @@ The `create_palette` tool returns an MCP text response with a Sass code block wh
 
 - **WHEN** `surface` conflicts with `variant` (light vs dark)
 - **THEN** the response includes a warning but still returns code
+
+#### Scenario: Inline placement comment in Sass
+
+- **WHEN** `create_palette` returns Sass output
+- **THEN** the Sass code block SHALL contain a comment above the first `@use` about top-of-file placement and deduplication
+
+#### Scenario: Assembly note in response
+
+- **WHEN** `create_palette` returns Sass output
+- **THEN** the handler response text SHALL include a placement note after the code block about `@use` top-of-file and deduplication
 
 ### Requirement: Palette CSS output uses Sass compilation
 

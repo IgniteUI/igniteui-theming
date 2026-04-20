@@ -5,6 +5,7 @@
 
 import { ComponentThemes as themesData } from "igniteui-theming";
 import { COMPONENT_METADATA } from "./component-metadata.js";
+import { createComponentSearcher } from "./component-search.js";
 
 /**
  * Represents a design token (themeable property) for a component.
@@ -62,6 +63,11 @@ export const COMPONENT_THEMES = themesData as Record<string, ComponentTheme>;
  */
 export const COMPONENT_NAMES = Object.keys(COMPONENT_THEMES);
 
+const componentSearcher = createComponentSearcher({
+  componentNames: COMPONENT_NAMES,
+  metadata: COMPONENT_METADATA,
+});
+
 /**
  * Get a component theme by name.
  * @param componentName - The component name (e.g., 'button', 'avatar')
@@ -88,12 +94,11 @@ export function resolveComponentTheme(
   }
 
   const metadata = COMPONENT_METADATA[componentName];
+  const alias = metadata?.theme ?? metadata?.childOf;
 
-  if (!metadata?.theme) {
+  if (!alias) {
     return {};
   }
-
-  const alias = metadata.theme;
 
   if (alias === componentName) {
     return {
@@ -159,8 +164,5 @@ export function validateTokens(
  * @returns Array of matching component names
  */
 export function searchComponents(query: string): string[] {
-  const lowerQuery = query.toLowerCase();
-  return COMPONENT_NAMES.filter((name) =>
-    name.toLowerCase().includes(lowerQuery),
-  );
+  return componentSearcher.search(query);
 }

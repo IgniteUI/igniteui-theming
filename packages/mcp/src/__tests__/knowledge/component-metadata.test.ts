@@ -4,7 +4,7 @@
  * These tests verify:
  * 1. COMPONENT_METADATA unified data structure (selectors, variants, compound info)
  * 2. Accessor function behavior
- * 3. Structural invariants (inline scope derivation, childScopes validity, etc.)
+ * 3. Structural invariants (compound field validation, etc.)
  * 4. TokenDerivation format validation
  */
 
@@ -15,6 +15,7 @@ import {
   getComponentSelector,
   getComponentsForPlatform,
   getCompoundComponentInfo,
+  getThemingSelector,
   getTokenDerivationsForChild,
   getVariants,
   hasVariants,
@@ -36,8 +37,9 @@ describe("Component Metadata Knowledge Base", () => {
       expect(Object.keys(COMPONENT_METADATA).length).toBeGreaterThan(0);
     });
 
-    it("each entry should have a selectors object with angular and webcomponents properties", () => {
+    it("non-childOf entries should have a selectors object with angular and webcomponents properties", () => {
       for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+        if (metadata.childOf) continue; // childOf entries don't need selectors
         expect(metadata, `${name} should have selectors`).toHaveProperty(
           "selectors",
         );
@@ -52,8 +54,19 @@ describe("Component Metadata Knowledge Base", () => {
       }
     });
 
+    it("childOf entries should not have selectors", () => {
+      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+        if (!metadata.childOf) continue;
+        expect(
+          metadata.selectors,
+          `${name} has childOf and should not have selectors`,
+        ).toBeUndefined();
+      }
+    });
+
     it("selectors should be strings, arrays of strings, or null", () => {
       for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+        if (!metadata.selectors) continue; // childOf entries have no selectors
         const { angular, webcomponents } = metadata.selectors;
         const angularIsValid =
           angular === null ||
@@ -120,6 +133,40 @@ describe("Component Metadata Knowledge Base", () => {
     });
   });
 
+  describe("synonym aliases structure", () => {
+    it("aliases should be non-empty string arrays when present", () => {
+      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
+        if (!metadata.aliases) continue;
+
+        expect(
+          Array.isArray(metadata.aliases),
+          `${name}.aliases should be an array`,
+        ).toBe(true);
+
+        expect(
+          metadata.aliases.length,
+          `${name}.aliases should be non-empty`,
+        ).toBeGreaterThan(0);
+
+        for (const alias of metadata.aliases) {
+          expect(typeof alias, `${name} alias should be a string`).toBe(
+            "string",
+          );
+
+          expect(
+            alias.trim().length,
+            `${name} alias should not be empty`,
+          ).toBeGreaterThan(0);
+
+          expect(
+            alias,
+            `${name} alias should not duplicate canonical name`,
+          ).not.toBe(name);
+        }
+      }
+    });
+  });
+
   describe("variants structure", () => {
     it("components with variants should have non-empty string arrays", () => {
       for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
@@ -177,59 +224,6 @@ describe("Component Metadata Knowledge Base", () => {
             Array.isArray(metadata.compound.relatedThemes),
             `${name}.compound.relatedThemes should be an array`,
           ).toBe(true);
-        }
-      }
-    });
-
-    it('childScopes references should be valid ("inline" or key in additionalScopes)', () => {
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.childScopes) continue;
-
-        const additionalScopeKeys = Object.keys(
-          metadata.compound.additionalScopes ?? {},
-        );
-
-        for (const [childName, scopeTargets] of Object.entries(
-          metadata.compound.childScopes,
-        )) {
-          if (scopeTargets.angular) {
-            expect(
-              scopeTargets.angular === "inline" ||
-                additionalScopeKeys.includes(scopeTargets.angular),
-              `${name} childScope '${childName}' angular target '${scopeTargets.angular}' should be 'inline' or a key in additionalScopes`,
-            ).toBe(true);
-          }
-          if (scopeTargets.webcomponents) {
-            expect(
-              scopeTargets.webcomponents === "inline" ||
-                additionalScopeKeys.includes(scopeTargets.webcomponents),
-              `${name} childScope '${childName}' webcomponents target '${scopeTargets.webcomponents}' should be 'inline' or a key in additionalScopes`,
-            ).toBe(true);
-          }
-        }
-      }
-    });
-
-    it("no inline scope should appear in additionalScopes", () => {
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.additionalScopes) continue;
-
-        expect(
-          metadata.compound.additionalScopes,
-          `${name}.compound.additionalScopes should not have an 'inline' key`,
-        ).not.toHaveProperty("inline");
-      }
-    });
-
-    it("childScopes children should be listed in relatedThemes", () => {
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.childScopes) continue;
-
-        for (const childName of Object.keys(metadata.compound.childScopes)) {
-          expect(
-            metadata.compound.relatedThemes,
-            `${name} childScope child '${childName}' should be in relatedThemes`,
-          ).toContain(childName);
         }
       }
     });
@@ -374,7 +368,7 @@ describe("Component Metadata Knowledge Base", () => {
     it("should normalize single selector to array", () => {
       const componentWithSingleSelector = Object.entries(
         COMPONENT_METADATA,
-      ).find(([, m]) => typeof m.selectors.angular === "string");
+      ).find(([, m]) => m.selectors && typeof m.selectors.angular === "string");
 
       if (componentWithSingleSelector) {
         const [name] = componentWithSingleSelector;
@@ -387,13 +381,13 @@ describe("Component Metadata Knowledge Base", () => {
     it("should preserve array selectors as-is", () => {
       const componentWithArraySelector = Object.entries(
         COMPONENT_METADATA,
-      ).find(([, m]) => Array.isArray(m.selectors.angular));
+      ).find(([, m]) => m.selectors && Array.isArray(m.selectors.angular));
 
       if (componentWithArraySelector) {
         const [name, m] = componentWithArraySelector;
         const result = getComponentSelector(name, "angular");
         expect(Array.isArray(result)).toBe(true);
-        expect(result.length).toBe((m.selectors.angular as string[]).length);
+        expect(result.length).toBe((m.selectors!.angular as string[]).length);
       }
     });
   });
@@ -401,7 +395,8 @@ describe("Component Metadata Knowledge Base", () => {
   describe("isComponentAvailable()", () => {
     it("should return true for components available on platform", () => {
       const component = Object.entries(COMPONENT_METADATA).find(
-        ([, m]) => m.selectors.angular !== null,
+        ([, m]) =>
+          m.selectors?.angular !== null && m.selectors?.angular !== undefined,
       );
       if (component) {
         expect(isComponentAvailable(component[0], "angular")).toBe(true);
@@ -410,7 +405,7 @@ describe("Component Metadata Knowledge Base", () => {
 
     it("should return false for components not available on platform", () => {
       const component = Object.entries(COMPONENT_METADATA).find(
-        ([, m]) => m.selectors.angular === null,
+        ([, m]) => m.selectors && m.selectors.angular === null,
       );
       if (component) {
         expect(isComponentAvailable(component[0], "angular")).toBe(false);
@@ -419,6 +414,10 @@ describe("Component Metadata Knowledge Base", () => {
 
     it("should return false for unknown components", () => {
       expect(isComponentAvailable("__nonexistent__", "angular")).toBe(false);
+    });
+
+    it("should return false for childOf entries (no selectors)", () => {
+      expect(isComponentAvailable("list-item", "angular")).toBe(false);
     });
   });
 
@@ -436,8 +435,14 @@ describe("Component Metadata Knowledge Base", () => {
     it("should only include components available on that platform", () => {
       const angularComponents = getComponentsForPlatform("angular");
       for (const name of angularComponents) {
-        expect(COMPONENT_METADATA[name].selectors.angular).not.toBeNull();
+        expect(COMPONENT_METADATA[name].selectors!.angular).not.toBeNull();
       }
+    });
+
+    it("should not include childOf entries", () => {
+      const angularComponents = getComponentsForPlatform("angular");
+      expect(angularComponents).not.toContain("list-item");
+      expect(angularComponents).not.toContain("card-header");
     });
   });
 
@@ -675,23 +680,201 @@ describe("Component Metadata Knowledge Base", () => {
     });
   });
 
-  // ===== Production Data Invariants =====
+  // ===== Child Component (childOf) Tests =====
 
-  describe("production data invariants", () => {
-    it("should not contain stray or test scope entries", () => {
-      const validScopeNames = ["overlay", "input"]; // Known non-inline scope names
-      for (const [name, metadata] of Object.entries(COMPONENT_METADATA)) {
-        if (!metadata.compound?.additionalScopes) continue;
+  describe("childOf structure", () => {
+    const CHILD_ENTRIES = Object.entries(COMPONENT_METADATA).filter(
+      ([_, m]) => m.childOf,
+    );
 
-        for (const scopeName of Object.keys(
-          metadata.compound.additionalScopes,
-        )) {
-          expect(
-            validScopeNames,
-            `${name} additionalScopes contains unexpected scope '${scopeName}'`,
-          ).toContain(scopeName);
-        }
+    it("should have child component entries", () => {
+      expect(CHILD_ENTRIES.length).toBeGreaterThan(0);
+    });
+
+    it("childOf entries should not have theme (resolved via parent)", () => {
+      for (const [name, metadata] of CHILD_ENTRIES) {
+        expect(
+          metadata.theme,
+          `${name} has childOf and should not have theme (theme is resolved via childOf)`,
+        ).toBeUndefined();
       }
+    });
+
+    it("childOf should reference an existing component in COMPONENT_METADATA", () => {
+      for (const [name, metadata] of CHILD_ENTRIES) {
+        expect(
+          COMPONENT_METADATA,
+          `${name}.childOf '${metadata.childOf}' should exist in COMPONENT_METADATA`,
+        ).toHaveProperty(metadata.childOf!);
+      }
+    });
+
+    it("childOf parent should have at least one non-null selector", () => {
+      for (const [name, metadata] of CHILD_ENTRIES) {
+        const parent = COMPONENT_METADATA[metadata.childOf!];
+        const hasSelector =
+          parent.selectors?.angular !== null ||
+          parent.selectors?.webcomponents !== null;
+
+        expect(
+          hasSelector,
+          `${name}.childOf parent '${metadata.childOf}' should have at least one non-null selector`,
+        ).toBe(true);
+      }
+    });
+
+    it("childOf and compound should be mutually exclusive", () => {
+      for (const [name, metadata] of CHILD_ENTRIES) {
+        expect(
+          metadata.compound,
+          `${name} has childOf and should not have compound`,
+        ).toBeUndefined();
+      }
+    });
+
+    it("child entries should not have variants", () => {
+      for (const [name, metadata] of CHILD_ENTRIES) {
+        expect(
+          metadata.variants,
+          `${name} has childOf and should not have variants`,
+        ).toBeUndefined();
+      }
+    });
+
+    it("child entries should not appear in VARIANT_THEME_NAMES", () => {
+      for (const [name] of CHILD_ENTRIES) {
+        expect(
+          VARIANT_THEME_NAMES.has(name),
+          `child component '${name}' should not be in VARIANT_THEME_NAMES`,
+        ).toBe(false);
+      }
+    });
+  });
+
+  describe("specific child component entries", () => {
+    it("accordion-header should be a child of accordion", () => {
+      const entry = COMPONENT_METADATA["accordion-header"];
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("accordion");
+    });
+
+    it("accordion-body should be a child of accordion", () => {
+      const entry = COMPONENT_METADATA["accordion-body"];
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("accordion");
+    });
+
+    it("list-item should be a child of list", () => {
+      const entry = COMPONENT_METADATA["list-item"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("list");
+      expect(entry.selectors).toBeUndefined();
+      expect(entry.theme).toBeUndefined();
+    });
+
+    it("list-header should be a child of list", () => {
+      const entry = COMPONENT_METADATA["list-header"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("list");
+    });
+
+    it("drop-down-item should be a child of drop-down", () => {
+      const entry = COMPONENT_METADATA["drop-down-item"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("drop-down");
+    });
+
+    it("nav-drawer-item should be a child of navdrawer", () => {
+      const entry = COMPONENT_METADATA["nav-drawer-item"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("navdrawer");
+    });
+
+    it("tab-item should be a child of tabs", () => {
+      const entry = COMPONENT_METADATA["tab-item"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("tabs");
+    });
+
+    it("step should be a child of stepper", () => {
+      const entry = COMPONENT_METADATA.step;
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("stepper");
+    });
+
+    it("card-header should be a child of card", () => {
+      const entry = COMPONENT_METADATA["card-header"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("card");
+    });
+
+    it("card-content should be a child of card", () => {
+      const entry = COMPONENT_METADATA["card-content"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("card");
+    });
+
+    it("card-actions should be a child of card", () => {
+      const entry = COMPONENT_METADATA["card-actions"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("card");
+    });
+
+    it("expansion-panel-header should be a child of expansion-panel", () => {
+      const entry = COMPONENT_METADATA["expansion-panel-header"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("expansion-panel");
+    });
+
+    it("expansion-panel-body should be a child of expansion-panel", () => {
+      const entry = COMPONENT_METADATA["expansion-panel-body"];
+
+      expect(entry).toBeDefined();
+      expect(entry.childOf).toBe("expansion-panel");
+    });
+  });
+
+  // ===== getThemingSelector Tests =====
+
+  describe("getThemingSelector()", () => {
+    it("should return parent selector for child component", () => {
+      const result = getThemingSelector("list-item", "angular");
+
+      expect(result).toEqual(["igx-list"]);
+    });
+
+    it("should return parent WC selector for child component", () => {
+      const result = getThemingSelector("nav-drawer-item", "webcomponents");
+
+      expect(result).toEqual(["igc-nav-drawer"]);
+    });
+
+    it("should return own selector for non-child component", () => {
+      const result = getThemingSelector("avatar", "angular");
+
+      expect(result).toEqual(["igx-avatar"]);
+    });
+
+    it("should return own selector for same-element alias (textarea)", () => {
+      const result = getThemingSelector("textarea", "angular");
+
+      expect(result).toEqual([".igx-input-group--textarea-group"]);
+    });
+
+    it("should return empty array for unknown component", () => {
+      const result = getThemingSelector("nonexistent", "angular");
+
+      expect(result).toEqual([]);
     });
   });
 });

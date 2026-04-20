@@ -15,6 +15,7 @@ import {
   generateCustomPaletteCode,
   generateHeader,
   generateUseStatement,
+  SASS_USE_ASSEMBLY_NOTE,
   toVariableName,
 } from "../../utils/sass.js";
 import type {
@@ -308,6 +309,7 @@ ${paletteLines.join("\n")}
   responseParts.push("```scss");
   responseParts.push(code.trimEnd());
   responseParts.push("```");
+  responseParts.push(SASS_USE_ASSEMBLY_NOTE);
 
   return {
     content: [

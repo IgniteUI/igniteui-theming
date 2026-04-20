@@ -71,6 +71,12 @@ ${list.map((name) => `- ${name}`).join("\n")}`,
     const selectorsEntry = COMPONENT_METADATA[normalized].selectors;
     let selectors: string[] = [];
 
+    if (!selectorsEntry) {
+      return {
+        error: `**Error:** Component "${component}" does not have platform selectors. It may be a child sub-component — use its parent component for layout overrides.`,
+      };
+    }
+
     if (platform && platform !== "generic") {
       selectors = getComponentSelector(normalized, platform);
 

@@ -145,6 +145,8 @@ describe("Component Themes Knowledge Base", () => {
   describe("searchComponents()", () => {
     it("should find components by partial name", () => {
       const results = searchComponents("button");
+
+      expect(results[0]).toBe("button");
       expect(results).toContain("button");
       expect(results).toContain("flat-button");
       expect(results).toContain("button-group");
@@ -158,6 +160,43 @@ describe("Component Themes Knowledge Base", () => {
     it("should be case-insensitive", () => {
       const results = searchComponents("AVATAR");
       expect(results).toContain("avatar");
+    });
+
+    it("should match order-independent component names", () => {
+      const results = searchComponents("linear progress");
+
+      expect(COMPONENT_METADATA["progress-linear"]?.aliases).not.toContain(
+        "linear-progress",
+      );
+      expect(results[0]).toBe("progress-linear");
+    });
+
+    it("should match selector-like names with framework prefixes", () => {
+      const results = searchComponents("igx-linear-bar");
+      expect(results[0]).toBe("progress-linear");
+    });
+
+    it("should match hyphenless forms through normalization", () => {
+      const results = searchComponents("datepicker");
+      expect(results).toContain("date-picker");
+    });
+
+    it("should resolve explicit synonym aliases", () => {
+      const results = searchComponents("toggle");
+      expect(results[0]).toBe("switch");
+    });
+
+    it("should recover common single-token typos", () => {
+      const results = searchComponents("pogress");
+      expect(results).toContain("progress-linear");
+      expect(results).toContain("progress-circular");
+    });
+
+    it("should return deterministic ordering for the same query", () => {
+      const firstRun = searchComponents("linear progress");
+      const secondRun = searchComponents("linear progress");
+
+      expect(secondRun).toEqual(firstRun);
     });
   });
 });

@@ -3,6 +3,7 @@
  */
 
 import { generateTheme } from "../../generators/sass.js";
+import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import {
   analyzeThemeColorsForPalette,
   formatPaletteSuitabilityWarnings,
@@ -126,6 +127,7 @@ export async function handleCreateTheme(params: CreateThemeParams) {
   responseParts.push("```scss");
   responseParts.push(finalCode.trimEnd());
   responseParts.push("```");
+  responseParts.push(SASS_USE_ASSEMBLY_NOTE);
 
   return {
     content: [
