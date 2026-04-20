@@ -30,6 +30,8 @@
     "lint:sassdoc": "ast-grep scan --error",
     "fix:sassdoc": "node .scripts/fixSassdoc.mjs",
     "format": "stylelint \"./sass/**/*.{scss,css}\" --fix --allow-empty-input --ignore-path .gitignore && prettier \"./sass/**/*.{scss,css}\" --write --ignore-path .gitignore",
+    "prepack": "shx cp ../../README.md README.md && shx cp ../../LICENSE LICENSE",
+    "postpack": "shx rm -f README.md LICENSE",
     "prepare": "node .scripts/setup-grammars.mjs",
     "test": "vitest run"
   },
