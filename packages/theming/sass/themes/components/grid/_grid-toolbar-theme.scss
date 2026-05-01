@@ -17,7 +17,9 @@
 /// Grid Toolbar Theme
 ///
 /// PRIMARY TOKENS:
-/// - `$background-color` — The toolbar background color.
+/// - `$background` — The toolbar background and drop-down background color.
+/// - `$foreground` — The toolbar title and drop-down item text color.
+/// - `$accent-color` — The accent color used to derive interactive item backgrounds.
 /// - `$dropdown-background` — The toolbar drop-down background color.
 /// - `$item-hover-background` — The drop-down item hover background.
 /// - `$item-focus-background` — The drop-down item focus background.
@@ -25,28 +27,33 @@
 /// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $background-color [null] - The toolbar background color. PRIMARY - derives title-text-color.
-/// @param {Color} $title-text-color [null] - The toolbar title text color. Auto-derived from background-color.
+/// @param {Color} $background [null] - The toolbar background and drop-down background color. PRIMARY - derives title-text-color and dropdown-background.
+/// @param {Color} $foreground [null] - The toolbar title and drop-down item text color. PRIMARY - derives title-text-color and item-text-color.
+/// @param {Color} $accent-color [null] - The accent color used to derive interactive item backgrounds.
+/// @param {Color} $title-text-color [null] - The toolbar title text color. Auto-derived from background.
 /// @param {Color} $dropdown-background [null] - The toolbar drop-down background color. PRIMARY - derives item-text-color.
 /// @param {Color} $item-text-color [null] - The toolbar drop-down item text color. Auto-derived from dropdown-background.
 /// @param {Color} $item-hover-background [null] - The toolbar drop-down item hover background color. PRIMARY - derives item-hover-text-color.
 /// @param {Color} $item-hover-text-color [null] - The toolbar drop-down item hover text color. Auto-derived from dropdown-background or item-hover-background.
 /// @param {Color} $item-focus-background [null] - The toolbar drop-down item focus background color. PRIMARY - derives item-focus-text-color.
 /// @param {Color} $item-focus-text-color [null] - The toolbar drop-down item focus text color. Auto-derived from dropdown-background or item-focus-background.
+/// @param {List} $size [null] - The size used for the grid toolbar min-height.
 /// @param {Color} $border-color [null] - The toolbar border-bottom color.
 /// @requires $light-material-schema
 /// @example scss - Change the toolbar background color
 ///   $my-toolbar-theme: grid-toolbar-theme(
-///     $background-color: black
+///     $background: black
 ///   );
 ///   // Pass the theme to the css-vars mixin
 ///   @include css-vars($my-toolbar-theme);
 @function grid-toolbar-theme(
     $schema: $light-material-schema,
 
-    $background-color: null,
-    $title-text-color: null,
+    $background: null,
+    $foreground: null,
+    $accent-color: null,
 
+    $title-text-color: null,
     $dropdown-background: null,
     $item-text-color: null,
     $item-hover-background: null,
@@ -67,8 +74,44 @@
 
     $theme: digest-schema($grid-toolbar-schema);
 
-    @if not($title-text-color) and $background-color {
-        $title-text-color: adaptive-contrast(var(--background-color));
+    @if not($foreground) and $background {
+        $foreground: adaptive-contrast(var(--background));
+    }
+
+    @if not($title-text-color) and $foreground {
+        $title-text-color: var(--foreground);
+    }
+
+    @if not($dropdown-background) and $background {
+        $dropdown-background: var(--background);
+    }
+
+    @if not($item-text-color) and $foreground {
+        $item-text-color: var(--foreground);
+    }
+
+    @if not($item-hover-background) and $background and $accent-color {
+        $item-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
+    }
+
+    @if not($item-hover-text-color) and $item-text-color {
+        $item-hover-text-color: var(--item-text-color);
+    }
+
+    @if not($item-focus-background) and $background and $accent-color {
+        $item-focus-background: color-mix(in srgb, var(--accent-color) 12%, var(--background));
+    }
+
+    @if not($item-focus-text-color) and $item-text-color {
+        $item-focus-text-color: var(--item-text-color);
+    }
+
+    @if not($border-color) and $foreground and $background {
+        $border-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
+    }
+
+    @if not($title-text-color) and $background {
+        $title-text-color: adaptive-contrast(var(--background));
     }
 
     @if not($item-text-color) and $dropdown-background {
@@ -95,7 +138,9 @@
         $theme,
         (
             selector: $selector,
-            background-color: $background-color,
+            background: $background,
+            foreground: $foreground,
+            accent-color: $accent-color,
             title-text-color: $title-text-color,
             item-text-color: $item-text-color,
             dropdown-background: $dropdown-background,

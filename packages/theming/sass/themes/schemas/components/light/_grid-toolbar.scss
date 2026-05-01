@@ -9,7 +9,7 @@
 
 /// Generates a light grid-toolbar schema.
 /// @type Map
-/// @prop {Map} background-color [color: ('gray', 50)] - The toolbar background color.
+/// @prop {Map} background [color: ('gray', 50)] - The toolbar background color.
 /// @prop {Map} title-text-color [color: ('gray', 700)] - The toolbar title text color.
 /// @prop {Map} dropdown-background [color: ('surface')] - The toolbar drop-down background color.
 /// @prop {Map} item-text-color [color: ('gray', 600)] - The toolbar drop-down item text color.
@@ -20,7 +20,7 @@
 /// @prop {List} size [(rem(44px), rem(52px), rem(58px))] - The size used for the grid toolbar min-height.
 /// @prop {Map} border-color [color: ('gray', 300)] - The toolbar border-bottom color.
 $light-grid-toolbar: (
-    background-color: (
+    background: (
         color: (
             'gray',
             50,
@@ -110,12 +110,12 @@ $material-grid-toolbar: extend(
 
 /// Generates a fluent grid-toolbar schema.
 /// @type Map
-/// @prop {Map} background-color [color: 'surface'] - The toolbar background color.
+/// @prop {Map} background [color: 'surface'] - The toolbar background color.
 /// @requires $light-grid-toolbar
 $fluent-grid-toolbar: extend(
     $light-grid-toolbar,
     (
-        background-color: (
+        background: (
             color: 'surface',
         ),
 
@@ -147,13 +147,13 @@ $bootstrap-grid-toolbar: extend(
 
 /// Generates an indigo grid-toolbar schema.
 /// @type Map
-/// @prop {Color} background-color [color: ('surface', 500)] - The toolbar background color.
+/// @prop {Color} background [color: ('surface', 500)] - The toolbar background color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The toolbar border-bottom color.
 /// @requires $light-grid-toolbar
 $indigo-grid-toolbar: extend(
     $light-grid-toolbar,
     (
-        background-color: (
+        background: (
             color: (
                 'surface',
                 500,

@@ -1,0 +1,185 @@
+@use '../../../../utils/map' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light excel filtering schema.
+/// @type Map
+/// @prop {Map} background [color: ('gray', 50)] - The background color for the excel filtering area.
+/// @prop {Map} secondary-background [color: ('gray', 50)] - The secondary background color for the excel filtering area.
+/// @prop {Map} header-foreground [color: ('gray', 700)] - The text color of the header in the excel style filtering.
+/// @prop {Map} subheader-foreground [color: ('gray', 700)] - The text color of the sorting and moving headers in the excel style filtering.
+/// @prop {Map} actions-foreground [color: ('gray', 700)] - The text color of the excel style filtering options.
+/// @prop {Map} actions-icon-color [color: ('gray', 700)] - The icon color of the excel style filtering options.
+/// @prop {Map} actions-hover-foreground [color: ('gray', 700)] - The text color of the excel style filtering options in hover/focus state.
+/// @prop {Map} actions-hover-icon-color [color: ('gray', 700)] - The icon color of the excel style filtering options in hover/focus state.
+/// @prop {Map} actions-selected-icon-color [color: ('secondary', 500)] - The icon color of the excel style filtering options in active state.
+/// @prop {Map} actions-hover-background [color: ('gray', 100)] - The background color of the excel style filtering options in hover/focus state.
+/// @prop {Map} actions-disabled-foreground [color: ('gray', 400)] - The text color of the excel style filtering options in disabled state.
+/// @prop {Map} border-color [color: ('gray', 300)] - The border color used in the excel style filter.
+/// @type Map
+$light-excel-filtering: (
+    background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
+
+    secondary-background: (
+        color: (
+            'gray',
+            50,
+        ),
+    ),
+
+    header-foreground: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    subheader-foreground: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    actions-foreground: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    actions-icon-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    actions-hover-foreground: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    actions-hover-icon-color: (
+        color: (
+            'gray',
+            700,
+        ),
+    ),
+
+    actions-selected-icon-color: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+
+    actions-hover-background: (
+        color: (
+            'gray',
+            100,
+        ),
+    ),
+
+    actions-disabled-foreground: (
+        color: (
+            'gray',
+            400,
+        ),
+    ),
+
+    border-color: (
+        color: (
+            'gray',
+            300,
+        ),
+    ),
+
+    _meta: (
+        name: 'excel-filtering',
+        variant: 'light',
+    ),
+);
+
+/// Generates a material excel filtering schema.
+/// @type Map
+/// @requires $light-excel-filtering
+$material-excel-filtering: extend(
+    $light-excel-filtering,
+    (
+        _meta: (
+            theme: 'material',
+        ),
+    )
+);
+
+/// Generates a fluent excel filtering schema.
+/// @type Map
+/// @requires $light-excel-filtering
+$fluent-excel-filtering: extend(
+    $light-excel-filtering,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
+
+/// Generates a bootstrap excel filtering schema.
+/// @type Map
+/// @requires $light-excel-filtering
+/// @prop {Map} actions-selected-icon-color [color: ('primary', 500)] - The icon color of the excel style filtering options in active state (overrides secondary 500).
+$bootstrap-excel-filtering: extend(
+    $light-excel-filtering,
+    (
+        actions-selected-icon-color: (
+            color: (
+                'primary',
+                500,
+            ),
+        ),
+
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
+
+/// Generates an indigo excel filtering schema.
+/// @prop {Map} background [contrast-color: ('gray', 900)] - The background contrast color for the excel filtering area.
+/// @prop {Map} secondary-background [color: ('surface', 500)] - The secondary background color for the excel filtering area.
+/// @type Map
+/// @requires $light-excel-filtering
+$indigo-excel-filtering: extend(
+    $light-excel-filtering,
+    (
+        background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
+
+        secondary-background: (
+            color: (
+                'surface',
+                500,
+            ),
+        ),
+
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);

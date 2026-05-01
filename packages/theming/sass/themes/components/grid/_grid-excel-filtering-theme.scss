@@ -1,0 +1,172 @@
+@use 'sass:map';
+@use '../../config';
+@use '../../functions' as *;
+@use '../../schemas/' as *;
+@use '../../../utils/map' as *;
+@use '../../../color/functions' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
+/// Excel Filtering Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The background color for the excel filtering area.
+/// - `$foreground` — The foreground/text color for the excel filtering area.
+/// - `$accent-color` — The accent color for the excel filtering area and its internal components.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $background [null] - The background color for the excel filtering area.
+/// @param {Color} $foreground [null] - The foreground/text color for the excel filtering area.
+/// @param {Color} $accent-color [null] - The accent color for the excel filtering and its internal components.
+/// @param {Color} $secondary-background [null] - The secondary background color for the excel filtering area.
+/// @param {Color} $header-foreground [null] - The excel filtering header text color.
+/// @param {Color} $subheader-foreground [null] - The excel filtering subheader text color.
+/// @param {Color} $actions-foreground [null] - The excel filtering actions text color.
+/// @param {Color} $actions-icon-color [null] - The excel filtering actions icon color.
+/// @param {Color} $actions-hover-foreground [null] - The excel filtering actions hover text color.
+/// @param {Color} $actions-hover-icon-color [null] - The excel filtering actions hover icon color.
+/// @param {Color} $actions-selected-icon-color [null] - The excel filtering actions selected icon color.
+/// @param {Color} $actions-hover-background [null] - The excel filtering actions hover background color.
+/// @param {Color} $actions-disabled-foreground [null] - The excel filtering actions disabled text color.
+/// @param {Color} $border-color [null] - The border color used in the excel style filter.
+/// @requires $light-material-schema
+/// @example scss - Change excel filtering header color
+///   $my-excel-filtering-theme: excel-filtering-theme($background: blue, $accent-color: orange);
+///   @include css-vars($my-excel-filtering-theme);
+@function excel-filtering-theme(
+    $schema: $light-material-schema,
+    $background: null,
+    $foreground: null,
+    $accent-color: null,
+    $secondary-background: null,
+    $header-foreground: null,
+    $subheader-foreground: null,
+    $actions-foreground: null,
+    $actions-icon-color: null,
+    $actions-hover-foreground: null,
+    $actions-hover-icon-color: null,
+    $actions-selected-icon-color: null,
+    $actions-hover-background: null,
+    $actions-disabled-foreground: null,
+    $border-color: null
+) {
+    $selector: (#{config.element-prefix() + '-' + 'grid-excel-style-filtering'}, '.igx-excel-filter__secondary');
+    $excel-filtering-schema: ();
+
+    @if map.has-key($schema, 'grid-excel-filtering') {
+        $excel-filtering-schema: map.get($schema, 'grid-excel-filtering');
+    } @else {
+        $excel-filtering-schema: $schema;
+    }
+
+    $theme: digest-schema($excel-filtering-schema);
+
+    @if not($foreground) and $background {
+        $foreground: adaptive-contrast(var(--background));
+    }
+
+    @if not($secondary-background) and $background {
+        $secondary-background: var(--background);
+    }
+
+    @if not($header-foreground) and $foreground {
+        $header-foreground: var(--foreground);
+    }
+
+    @if not($subheader-foreground) and $foreground {
+        $subheader-foreground: var(--foreground);
+    }
+
+    @if not($actions-foreground) and $foreground {
+        $actions-foreground: var(--foreground);
+    }
+
+    @if not($actions-icon-color) and $foreground {
+        $actions-icon-color: var(--foreground);
+    }
+
+    @if not($actions-hover-foreground) and $foreground {
+        $actions-hover-foreground: var(--foreground);
+    }
+
+    @if not($actions-hover-icon-color) and $foreground {
+        $actions-hover-icon-color: var(--foreground);
+    }
+
+    @if not($actions-hover-background) and $accent-color and $background {
+        $actions-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
+    }
+
+    @if not($actions-disabled-foreground) and $foreground and $background {
+        $actions-disabled-foreground: color-mix(in srgb, var(--foreground) 50%, var(--background));
+    }
+
+    @if not($border-color) and $foreground and $background {
+        $border-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+    }
+
+    @if not($header-foreground) and $foreground {
+        $header-foreground: var(--foreground);
+    }
+
+    @if not($subheader-foreground) and $foreground {
+        $subheader-foreground: var(--foreground);
+    }
+
+    @if not($actions-foreground) and $foreground {
+        $actions-foreground: var(--foreground);
+    }
+
+    @if not($actions-icon-color) and $foreground {
+        $actions-icon-color: var(--foreground);
+    }
+
+    @if not($actions-hover-foreground) and $foreground {
+        $actions-hover-foreground: var(--foreground);
+    }
+
+    @if not($actions-hover-icon-color) and $foreground {
+        $actions-hover-icon-color: var(--foreground);
+    }
+
+    @if not($actions-selected-icon-color) and $accent-color {
+        $actions-selected-icon-color: var(--accent-color);
+    }
+
+    @if not($actions-hover-background) and $accent-color and $background {
+        $actions-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
+    }
+
+    @if not($actions-disabled-foreground) and $foreground and $background {
+        $actions-disabled-foreground: color-mix(in srgb, var(--foreground) 50%, var(--background));
+    }
+
+    @if not($border-color) and $foreground and $background {
+        $border-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+    }
+
+    @return extend(
+        $theme,
+        (
+            selector: $selector,
+            background: $background,
+            foreground: $foreground,
+            accent-color: $accent-color,
+            secondary-background: $secondary-background,
+            header-foreground: $header-foreground,
+            subheader-foreground: $subheader-foreground,
+            actions-foreground: $actions-foreground,
+            actions-icon-color: $actions-icon-color,
+            actions-hover-foreground: $actions-hover-foreground,
+            actions-hover-icon-color: $actions-hover-icon-color,
+            actions-selected-icon-color: $actions-selected-icon-color,
+            actions-hover-background: $actions-hover-background,
+            actions-disabled-foreground: $actions-disabled-foreground,
+            border-color: $border-color,
+        )
+    );
+}

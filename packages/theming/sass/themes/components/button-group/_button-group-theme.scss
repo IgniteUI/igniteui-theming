@@ -140,7 +140,7 @@
     $theme: digest-schema($button-group-schema);
     $border: rem(1px, 16px) solid map.get($theme, 'item-selected-border-color');
 
-    @if not($item-hover-text-color) and $item-text-color {
+    @if not($item-hover-text-color) and not($item-hover-background) and ($item-text-color) {
         $item-hover-text-color: dynamic-shade(var(--item-text-color));
     }
 
