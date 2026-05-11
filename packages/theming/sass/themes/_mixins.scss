@@ -257,12 +257,15 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 }
 
 /// Adds border-radius style with a value between an upper and a lower bound.
-/// @access private
+/// @access public
+/// @group utilities
 /// @param {Number} $radius - The preferred value.
 /// @param {Number} $min [rem(0)] - The minimum value.
 /// @param {Number} $max [$radius] - The maximum allowed value.
 /// @example scss
-///    @include border-radius(4px);
+///   .my-component {
+///     @include border-radius(10px, 5px, 20px);
+///   }
 @mixin border-radius($radius, $min: #{rem(0)}, $max: $radius) {
     $factor: math.div($radius, $max);
 
