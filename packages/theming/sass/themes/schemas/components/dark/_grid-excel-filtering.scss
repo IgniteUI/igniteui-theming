@@ -1,0 +1,37 @@
+@use '../../../../utils/map' as *;
+@use '../light/grid-excel-filtering' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a base dark excel-filtering schema.
+/// @access private
+/// @type Map
+$base-dark-excel-filtering: (
+    _meta: (
+        variant: 'dark',
+    ),
+);
+
+/// Generates a dark material excel-filtering schema.
+/// @type Map
+/// @requires $material-excel-filtering
+$dark-material-excel-filtering: extend($material-excel-filtering, $base-dark-excel-filtering);
+
+/// Generates a dark fluent excel-filtering schema.
+/// @type Map
+/// @requires $fluent-excel-filtering
+$dark-fluent-excel-filtering: extend($fluent-excel-filtering, $base-dark-excel-filtering);
+
+/// Generates a dark bootstrap excel-filtering schema.
+/// @type Map
+/// @requires $bootstrap-excel-filtering
+$dark-bootstrap-excel-filtering: extend($bootstrap-excel-filtering, $base-dark-excel-filtering);
+
+/// Generates a dark indigo excel-filtering schema.
+/// @type Map
+/// @requires $indigo-excel-filtering
+$dark-indigo-excel-filtering: extend($indigo-excel-filtering, $base-dark-excel-filtering);

@@ -17,14 +17,15 @@
 /// Paginator Theme
 ///
 /// PRIMARY TOKENS:
-/// - `$background-color` — The paginator background.
+/// - `$background` — The paginator background.
 ///
 /// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $text-color [currentColor] - The text color. Auto-derived from background-color.
-/// @param {Color} $background-color [rgba(0, 0, 0, .04)] - The background color of the paging panel. PRIMARY - derives text-color.
+/// @param {Color} $foreground [currentColor] - The text color. Auto-derived from background.
+/// @param {Color} $background [rgba(0, 0, 0, .04)] - The background color of the paging panel. PRIMARY - derives foreground.
 /// @param {Color} $border-color [rgba(0, 0, 0, .26)] - The border color of the paging panel.
+/// @param {Color} $accent-color [null] - The accent color used for paginator interactive elements.
 /// @requires $light-material-schema
 /// @example scss - Change the stripes color
 ///   $my-paginator-theme: paginator-theme(
@@ -35,9 +36,10 @@
 @function paginator-theme(
     $schema: $light-material-schema,
 
-    $text-color: null,
-    $background-color: null,
-    $border-color: null
+    $foreground: null,
+    $background: null,
+    $border-color: null,
+    $accent-color: null
 ) {
     $selector: #{config.element-prefix() + '-' + 'paginator'};
     $grid-paginator-schema: ();
@@ -50,17 +52,18 @@
 
     $theme: digest-schema($grid-paginator-schema);
 
-    @if not($text-color) and $background-color {
-        $text-color: adaptive-contrast($background-color);
+    @if not($foreground) and $background {
+        $foreground: adaptive-contrast($background);
     }
 
     @return extend(
         $theme,
         (
             selector: $selector,
-            text-color: $text-color,
-            background-color: $background-color,
+            foreground: $foreground,
+            background: $background,
             border-color: $border-color,
+            accent-color: $accent-color,
         )
     );
 }
