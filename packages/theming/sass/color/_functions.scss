@@ -67,6 +67,7 @@ $_enhanced-accessibility: false;
 ) {
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
+    $gray: if($gray, $gray, if(luminance($surface) > 0.5, #000, #fff));
     $primary-palette: shades('primary', $primary, $color-shades);
     $secondary-palette: shades('secondary', $secondary, $color-shades);
     $surface-palette: shades('surface', $surface, $color-shades);
@@ -74,7 +75,7 @@ $_enhanced-accessibility: false;
     $info-palette: if($info, shades('info', $info, $color-shades), ());
     $success-palette: if($success, shades('success', $success, $color-shades), ());
     $warn-palette: if($warn, shades('warn', $warn, $color-shades), ());
-    $error-palette: if($success, shades('error', $error, $color-shades), ());
+    $error-palette: if($error, shades('error', $error, $color-shades), ());
 
     @return (
         'primary': $primary-palette,
@@ -122,6 +123,15 @@ $_enhanced-accessibility: false;
                 $variant: map.get($shade, 'hsl'),
                 '#{$variant}-contrast': adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}),
                 '#{$variant}-raw': map.get($shade, 'raw'),
+            )
+        );
+    }
+
+    @if $color {
+        $result: map.merge(
+            $result,
+            (
+                'seed': #{$color},
             )
         );
     }
