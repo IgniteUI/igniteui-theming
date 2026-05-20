@@ -382,17 +382,8 @@ $_palette: palette(
         }
 
         @include describe('seed color variables') {
-            @include it('stores the user-provided color; derives gray seed from surface when gray is omitted') {
-                @include assert-equal(map.get($_palette, '_meta', 'seeds', 'primary'), $_primary);
-
-                // gray omitted — derived from surface luminance (#fff → #000)
-                @include assert-equal(map.get($_palette, '_meta', 'seeds', 'gray'), #000);
-
-                // gray provided — stored as-is
-                @include assert-equal(map.get($_palette-with-gray, '_meta', 'seeds', 'gray'), $_gray);
-            }
-
-            @include it('emits seed CSS variables for all palette colors including derived gray') {
+            @include it('emits --ig-{name}-seed CSS variables; uses provided gray or derives from surface') {
+                // palette with explicitly provided gray
                 @include assert() {
                     @include output($selector: false) {
                         @include palette($_palette-with-gray);
@@ -402,6 +393,20 @@ $_palette: palette(
                         :root {
                             --ig-primary-seed: #{$_primary};
                             --ig-gray-seed: #{$_gray};
+                        }
+                    }
+                }
+
+                // palette with gray omitted — derived from surface (#fff → #000)
+                @include assert() {
+                    @include output($selector: false) {
+                        @include palette($_palette);
+                    }
+
+                    @include contains($selector: false) {
+                        :root {
+                            --ig-primary-seed: #{$_primary};
+                            --ig-gray-seed: #000;
                         }
                     }
                 }
