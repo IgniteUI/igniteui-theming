@@ -67,7 +67,6 @@ $_enhanced-accessibility: false;
 ) {
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
-    $gray: if($gray, $gray, if(luminance($surface) > 0.5, #000, #fff));
     $primary-palette: shades('primary', $primary, $color-shades);
     $secondary-palette: shades('secondary', $secondary, $color-shades);
     $surface-palette: shades('surface', $surface, $color-shades);
@@ -127,15 +126,6 @@ $_enhanced-accessibility: false;
         );
     }
 
-    @if $color {
-        $result: map.merge(
-            $result,
-            (
-                'seed': #{$color},
-            )
-        );
-    }
-
     @return $result;
 }
 
@@ -157,6 +147,11 @@ $_enhanced-accessibility: false;
     @if #{$name} == 'gray' {
         $lum: luminance($surface);
         $color: if($color, $color, if($lum > 0.5, #000, #fff));
+
+        @if #{$shade} == 'seed' {
+            @return (raw: $color, hsl: $color);
+        }
+
         $lmap: map.get(multipliers.$grayscale, 'l');
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), #{$shade});
@@ -177,7 +172,7 @@ $_enhanced-accessibility: false;
         $hsl: null;
         $raw: null;
 
-        @if #{$shade} == '500' {
+        @if #{$shade} == '500' or #{$shade} == 'seed' {
             $hsl: $color;
             $raw: $color;
         } @else {
