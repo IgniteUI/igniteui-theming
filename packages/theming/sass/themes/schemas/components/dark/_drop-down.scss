@@ -109,14 +109,11 @@ $dark-bootstrap-drop-down: extend(
 /// @prop {Map} selected-focus-item-background [color: ('primary', 400, .3)] - The drop-down selected item focus background color.
 /// @prop {Map} selected-focus-item-text-color [contrast-color: ('gray', 50)] - The drop-down selected item focus text color.
 /// @prop {Map} disabled-item-text-color [contrast-color: ('gray', 50, .2)] - The drop-down disabled item text color.
-/// @prop {Number} elevation [2] - The elevation level, between 0-24, to be used for the drop-down shadow.
 /// @requires $indigo-drop-down
 /// @requires $base-dark-drop-down
-/// @requires $dark-indigo-elevation-drop-down
 $dark-indigo-drop-down: extend(
     $indigo-drop-down,
     $base-dark-drop-down,
-    $dark-indigo-elevation-drop-down,
     (
         background-color: (
             color: (
