@@ -236,10 +236,8 @@ $material-drop-down: extend(
 /// @prop {List} border-radius [(rem(2px), rem(0), rem(20px))] - The border radius used for drop-down component.
 /// @prop {Map} typography [header: (value: 'subtitle-2'), item: (value: 'body-2'), select-item: (value: 'body-2')] - The typography styles used for the component.
 /// @requires $light-drop-down
-/// @requires $fluent-elevation-drop-down
 $fluent-drop-down: extend(
     $light-drop-down,
-    $fluent-elevation-drop-down,
     (
         focused-item-background: (
             color: (
@@ -443,10 +441,8 @@ $bootstrap-drop-down: extend(
 /// @prop {Number} border-width [1px] - The border width used for drop-down component.
 /// @prop {List} size [(rem(24px), rem(28px), rem(32px))] - The size used for the dropdown item height.
 /// @requires $light-drop-down
-/// @requires $indigo-elevation-drop-down
 $indigo-drop-down: extend(
     $light-drop-down,
-    $indigo-elevation-drop-down,
     (
         background-color: (
             contrast-color: (
