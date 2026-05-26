@@ -17,6 +17,18 @@ $_success: green;
 $_info: blue;
 $_warn: orange;
 $_error: red;
+$_gray: #333;
+$_palette-with-gray: palette(
+    $primary: $_primary,
+    $secondary: $_secondary,
+    $surface: $_surface,
+    $success: $_success,
+    $info: $_info,
+    $warn: $_warn,
+    $error: $_error,
+    $gray: $_gray,
+    $variant: 'material',
+);
 $_palette: palette(
     $primary: $_primary,
     $secondary: $_secondary,
@@ -364,6 +376,38 @@ $_palette: palette(
                         --ig-contrast-level: var(--ig-wcag-aaa);
                         --y: clamp(0, (y / var(--ig-contrast-level) - 1) * -infinity, 1);
                         --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
+                    }
+                }
+            }
+        }
+
+        @include describe('seed color variables') {
+            @include it('emits --ig-{name}-seed CSS variables; uses provided gray or derives from surface') {
+                // palette with explicitly provided gray
+                @include assert() {
+                    @include output($selector: false) {
+                        @include palette($_palette-with-gray);
+                    }
+
+                    @include contains($selector: false) {
+                        :root {
+                            --ig-primary-seed: #{$_primary};
+                            --ig-gray-seed: #{$_gray};
+                        }
+                    }
+                }
+
+                // palette with gray omitted — derived from surface (#fff → #000)
+                @include assert() {
+                    @include output($selector: false) {
+                        @include palette($_palette);
+                    }
+
+                    @include contains($selector: false) {
+                        :root {
+                            --ig-primary-seed: #{$_primary};
+                            --ig-gray-seed: #000;
+                        }
                     }
                 }
             }
