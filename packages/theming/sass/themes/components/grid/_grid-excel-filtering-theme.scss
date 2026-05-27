@@ -109,46 +109,6 @@
         $border-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
     }
 
-    @if not($header-foreground) and $foreground {
-        $header-foreground: var(--foreground);
-    }
-
-    @if not($subheader-foreground) and $foreground {
-        $subheader-foreground: var(--foreground);
-    }
-
-    @if not($actions-foreground) and $foreground {
-        $actions-foreground: var(--foreground);
-    }
-
-    @if not($actions-icon-color) and $foreground {
-        $actions-icon-color: var(--foreground);
-    }
-
-    @if not($actions-hover-foreground) and $foreground {
-        $actions-hover-foreground: var(--foreground);
-    }
-
-    @if not($actions-hover-icon-color) and $foreground {
-        $actions-hover-icon-color: var(--foreground);
-    }
-
-    @if not($actions-selected-icon-color) and $accent-color {
-        $actions-selected-icon-color: var(--accent-color);
-    }
-
-    @if not($actions-hover-background) and $accent-color and $background {
-        $actions-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
-    }
-
-    @if not($actions-disabled-foreground) and $foreground and $background {
-        $actions-disabled-foreground: color-mix(in srgb, var(--foreground) 50%, var(--background));
-    }
-
-    @if not($border-color) and $foreground and $background {
-        $border-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
-    }
-
     @return extend(
         $theme,
         (
