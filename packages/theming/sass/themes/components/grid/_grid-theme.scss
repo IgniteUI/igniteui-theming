@@ -269,16 +269,16 @@
         $ghost-header-text-color: adaptive-contrast(var(--ghost-header-background));
     }
 
+    @if not($header-selected-text-color) and $header-selected-background and not($header-text-color) {
+        $header-selected-text-color: adaptive-contrast(var(--header-selected-background));
+    }
+
     @if not($header-text-color) and $header-background {
         $header-text-color: adaptive-contrast(var(--header-background));
     }
 
     @if not($header-selected-background) and $header-background {
         $header-selected-background: dynamic-shade(var(--header-background));
-    }
-
-    @if not($header-selected-text-color) and $header-selected-background and not($header-text-color) {
-        $header-selected-text-color: adaptive-contrast(var(--header-selected-background));
     }
 
     @if not($header-selected-text-color) and $header-text-color {
