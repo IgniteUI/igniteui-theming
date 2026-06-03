@@ -281,6 +281,14 @@
         $header-selected-text-color: adaptive-contrast(var(--header-selected-background));
     }
 
+    @if not($drop-area-text-color) and $header-text-color {
+        $drop-area-text-color: var(--header-text-color);
+    }
+
+    @if not($drop-area-icon-color) and $drop-area-text-color {
+        $drop-area-icon-color: var(--drop-area-text-color);
+    }
+
     @if not($header-border-color) and $header-background {
         $header-border-color: hsl(from adaptive-contrast(var(--header-background)) h s l / 0.24);
     }
@@ -503,26 +511,6 @@
 
     @if not($drop-area-border-radius) {
         $drop-area-border-radius: map.get($theme, 'drop-area-border-radius');
-    }
-
-    @if $row-odd-background and not($body-column-border-color-odd) {
-        $body-column-border-color-odd: $row-odd-background;
-    }
-
-    @if $row-even-background and not($body-column-border-color-even) {
-        $body-column-border-color-even: $row-even-background;
-    }
-
-    @if $row-hover-background and not($body-column-hover-border-color) {
-        $body-column-hover-border-color: $row-hover-background;
-    }
-
-    @if $row-selected-background and not($body-column-hover-selected-border-color) {
-        $body-column-hover-selected-border-color: $row-selected-background;
-    }
-
-    @if $row-selected-hover-background and not($body-column-selected-border-color) {
-        $body-column-selected-border-color: $row-selected-hover-background;
     }
 
     // Start of Theme Builder Logic
@@ -857,6 +845,26 @@
 
     @if not($expand-icon-hover-color) and $foreground and $background {
         $expand-icon-hover-color: color-mix(in srgb, var(--foreground) 70%, var(--background));
+    }
+
+    @if $row-odd-background and not($body-column-border-color-odd) {
+        $body-column-border-color-odd: $row-odd-background;
+    }
+
+    @if $row-even-background and not($body-column-border-color-even) {
+        $body-column-border-color-even: $row-even-background;
+    }
+
+    @if $row-hover-background and not($body-column-hover-border-color) {
+        $body-column-hover-border-color: $row-hover-background;
+    }
+
+    @if $row-selected-background and not($body-column-hover-selected-border-color) {
+        $body-column-hover-selected-border-color: $row-selected-background;
+    }
+
+    @if $row-selected-hover-background and not($body-column-selected-border-color) {
+        $body-column-selected-border-color: $row-selected-hover-background;
     }
 
     @return extend(

@@ -101,6 +101,10 @@
         $actions-hover-background: color-mix(in srgb, var(--accent-color) 8%, var(--background));
     }
 
+    @if not($actions-selected-icon-color) and $accent-color {
+        $actions-selected-icon-color: var(--accent-color);
+    }
+
     @if not($actions-disabled-foreground) and $foreground and $background {
         $actions-disabled-foreground: color-mix(in srgb, var(--foreground) 50%, var(--background));
     }
