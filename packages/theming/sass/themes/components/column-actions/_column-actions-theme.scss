@@ -2,6 +2,7 @@
 @use '../../config';
 @use '../../functions' as *;
 @use '../../schemas/' as *;
+@use '../../../color/functions' as *;
 @use '../../../utils/map' as *;
 
 ////
@@ -15,13 +16,15 @@
 /// Column Actions Theme
 ///
 /// PRIMARY TOKENS:
-/// - `$background-color` — The background color of the panel.
+/// - `$background` — The background color of the panel.
 ///
 /// Derived colors are auto-calculated for contrast.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
-/// @param {Color} $title-color [null]- The text color used for the title of the list. Auto-derived from background-color.
-/// @param {Color} $background-color [null] - The background color of the panel. PRIMARY - derives title-color.
+/// @param {Color} $title-color [null] - The text color used for the title of the list. Auto-derived from foreground.
+/// @param {Color} $background [null] - The background color of the panel. PRIMARY - derives foreground and title-color.
+/// @param {Color} $foreground [null] - The foreground color for content and icons in the panel. Auto-derived from background.
+/// @param {Color} $accent-color [null] - The accent color used for highlights or active states in the panel.
 ///
 /// @requires $light-material-schema
 ///
@@ -34,7 +37,9 @@
     $schema: $light-material-schema,
 
     $title-color: null,
-    $background-color: null
+    $background: null,
+    $foreground: null,
+    $accent-color: null
 ) {
     $selector: #{config.element-prefix() + '-' + 'column-actions'};
     $column-actions-schema: ();
@@ -47,8 +52,12 @@
 
     $theme: digest-schema($column-actions-schema);
 
-    @if not($title-color) and $background-color {
-        $title-color: adaptive-contrast(var(--background-color));
+    @if not($foreground) and $background {
+        $foreground: adaptive-contrast(var(--background));
+    }
+
+    @if not($title-color) and $foreground {
+        $title-color: var(--foreground);
     }
 
     @return extend(
@@ -56,7 +65,9 @@
         (
             selector: $selector,
             title-color: $title-color,
-            background-color: $background-color,
+            background: $background,
+            foreground: $foreground,
+            accent-color: $accent-color,
         )
     );
 }

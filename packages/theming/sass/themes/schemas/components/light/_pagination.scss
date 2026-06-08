@@ -9,19 +9,19 @@
 
 /// Generates a base light pagination schema.
 /// @type Map
-/// @prop {Map} text-color [color: ('gray', 800)] - The text color.
-/// @prop {Map} background-color [color: ('gray', 100)] - The background color of the paging panel.
+/// @prop {Map} foreground [color: ('gray', 800)] - The text color.
+/// @prop {Map} background [color: ('gray', 100)] - The background color of the paging panel.
 /// @prop {Map} border-color [color: ('gray', 200)] - The border color of the paging panel.
 /// @prop {List} size [(rem(44px), rem(48px), rem(56px))] - The size used for the paginator.
 $light-pagination: (
-    text-color: (
+    foreground: (
         color: (
             'gray',
             800,
         ),
     ),
 
-    background-color: (
+    background: (
         color: (
             'gray',
             100,
@@ -62,13 +62,13 @@ $material-pagination: extend(
 
 /// Generates a fluent pagination schema.
 /// @type Map
-/// @prop {Map} background-color [color: 'surface'] - The background color of the paging panel.
+/// @prop {Map} background [color: 'surface'] - The background color of the paging panel.
 /// @prop {Map} border-color [color: ('gray', 100)] - The border color of the paging panel.
 /// @requires $light-pagination
 $fluent-pagination: extend(
     $light-pagination,
     (
-        background-color: (
+        background: (
             color: 'surface',
         ),
 
@@ -86,12 +86,12 @@ $fluent-pagination: extend(
 
 /// Generates a bootstrap pagination schema.
 /// @type Map
-/// @prop {Map} background-color [color: ('gray', 50)] - The background color of the paging panel.
+/// @prop {Map} background [color: ('gray', 50)] - The background color of the paging panel.
 /// @requires $light-pagination
 $bootstrap-pagination: extend(
     $light-pagination,
     (
-        background-color: (
+        background: (
             color: (
                 'gray',
                 50,
@@ -105,13 +105,13 @@ $bootstrap-pagination: extend(
 
 /// Generates an indigo pagination schema.
 /// @type Map
-/// @prop {Map} background-color [color: ('surface', 500)] - The background color of the paging panel.
+/// @prop {Map} background [color: ('surface', 500)] - The background color of the paging panel.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color of the paging panel.
 /// @requires $light-pagination
 $indigo-pagination: extend(
     $light-pagination,
     (
-        background-color: (
+        background: (
             color: (
                 'surface',
                 500,
