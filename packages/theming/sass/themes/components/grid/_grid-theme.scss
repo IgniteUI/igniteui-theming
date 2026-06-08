@@ -49,10 +49,13 @@
 /// @param {Color} $row-selected-hover-text-color [null] - The selected row hover text color. Auto-derived from row-selected-hover-background.
 /// @param {Color} $row-hover-background [null] - The hover row background color. Auto-derived from content-background.
 /// @param {Color} $row-hover-text-color [null] - The hover row text color. Auto-derived from row-hover-background.
+/// @param {String} $row-border-width [null] - The row bottom border width.
+/// @param {String} $row-border-style [null] - The row bottom border style.
 /// @param {Color} $row-border-color [null] - The row bottom border color. Auto-derived from content-background.
 /// @param {String} $pinned-border-width [null] - The border width of the pinned border.
 /// @param {String} $pinned-border-style [null] - The CSS border style of the pinned border.
 /// @param {Color} $pinned-border-color [null] - The color of the pinned border. Auto-derived from content-background.
+/// @param {String} $cell-active-border-width [null] - The border width for the active cell.
 /// @param {Color} $cell-active-border-color [null] - The border color for the active cell. Auto-derived from content-background.
 /// @param {Color} $cell-selected-background [null] - The selected cell background color. Auto-derived from content-background.
 /// @param {Color} $cell-selected-text-color [null] - The selected cell text color. Auto-derived from cell-selected-background.
@@ -99,6 +102,7 @@
 /// @param {Color} $excel-filtering-actions-disabled-foreground [null] - The excel filtering actions disabled text color. Auto-derived from filtering-row-background.
 /// @param {Color} $excel-filtering-border-color [null] - The border color used in the excel style filter. Auto-derived from foreground and background.
 /// @param {Color} $tree-filtered-text-color [null] - Grouping row background color on focus.
+/// @param {Color} $summaries-border-color [null] - The border color of the summaries row.
 /// @param {Color} $summaries-patch-background [null] - The leading summaries patch background.
 /// @param {Color} $row-highlight [null] - The grid row highlight indication color.
 /// @param {List} $grid-shadow [null] - The shadow of the grid.
@@ -152,13 +156,17 @@
     $row-selected-hover-text-color: null,
     $row-hover-background: null,
     $row-hover-text-color: null,
+    $row-border-width: null,
+    $row-border-style: null,
     $row-border-color: null,
 
     $pinned-border-width: null,
     $pinned-border-style: null,
     $pinned-border-color: null,
 
+    $cell-active-border-width: null,
     $cell-active-border-color: null,
+
     $cell-selected-background: null,
     $cell-selected-text-color: null,
     $cell-editing-background: null,
@@ -229,6 +237,7 @@
     $drop-area-border-radius: null,
     $grid-border-color: null,
     $sortable-header-icon-hover-color: null,
+    $summaries-border-color: null,
     $summaries-patch-background: null,
 
     $cell-selected-within-background: null,
@@ -325,8 +334,12 @@
         $row-hover-text-color: adaptive-contrast(var(--row-hover-background));
     }
 
+    @if not($cell-selected-within-background) and $cell-selected-background {
+        $cell-selected-within-background: dynamic-shade($cell-selected-background);
+    }
+
     @if not($cell-selected-background) and $content-background {
-        $cell-selected-background: dynamic-shade(var(--content-background));
+        $cell-selected-background: dynamic-shade(var(--content-background), $offset: 10);
     }
 
     @if not($cell-selected-text-color) and $cell-selected-background {
@@ -601,7 +614,7 @@
         $row-odd-text-color: var(--foreground);
     }
 
-    @if not($row-even-text-color) and $foreground {
+    @if not($row-even-text-color) and $foreground and not($row-even-background) {
         $row-even-text-color: var(--foreground);
     }
 
@@ -651,12 +664,12 @@
 
     // cell
 
-    @if not($cell-selected-background) and $accent-color and $background {
-        $cell-selected-background: color-mix(in srgb, var(--accent-color) 24%, var(--background));
+    @if not($cell-selected-text-color) and $foreground and not($cell-selected-background) {
+        $cell-selected-text-color: var(--foreground);
     }
 
-    @if not($cell-selected-text-color) and $foreground {
-        $cell-selected-text-color: var(--foreground);
+    @if not($cell-selected-background) and $accent-color and $background {
+        $cell-selected-background: color-mix(in srgb, var(--accent-color) 24%, var(--background));
     }
 
     @if not($cell-editing-background) and $background {
@@ -683,12 +696,12 @@
         $cell-active-border-color: var(--accent-color);
     }
 
-    @if not($cell-selected-within-background) and $accent-color and $background {
-        $cell-selected-within-background: color-mix(in srgb, var(--accent-color) 24%, var(--background));
+    @if not($cell-selected-within-text-color) and $foreground and not($cell-selected-within-background) {
+        $cell-selected-within-text-color: var(--foreground);
     }
 
-    @if not($cell-selected-within-text-color) and $foreground {
-        $cell-selected-within-text-color: var(--foreground);
+    @if not($cell-selected-within-background) and $accent-color and $background {
+        $cell-selected-within-background: color-mix(in srgb, var(--accent-color) 24%, var(--background));
     }
 
     @if not($cell-disabled-color) and $foreground and $background {
@@ -903,12 +916,15 @@
             row-selected-hover-text-color: $row-selected-hover-text-color,
             row-hover-background: $row-hover-background,
             row-hover-text-color: $row-hover-text-color,
+            row-border-width: $row-border-width,
+            row-border-style: $row-border-style,
             row-border-color: $row-border-color,
 
             pinned-border-width: $pinned-border-width,
             pinned-border-style: $pinned-border-style,
             pinned-border-color: $pinned-border-color,
 
+            cell-active-border-width: $cell-active-border-width,
             cell-active-border-color: $cell-active-border-color,
             cell-selected-background: $cell-selected-background,
             cell-editing-background: $cell-editing-background,
@@ -983,6 +999,7 @@
             drop-area-border-radius: $drop-area-border-radius,
             sortable-header-icon-hover-color: $sortable-header-icon-hover-color,
             grid-border-color: $grid-border-color,
+            summaries-border-color: $summaries-border-color,
             summaries-patch-background: $summaries-patch-background,
 
             cell-selected-within-background: $cell-selected-within-background,
