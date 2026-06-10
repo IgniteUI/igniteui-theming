@@ -294,6 +294,96 @@
         }
     }
 
+    @include it('creates element selector inside an attribute selector context') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    &[aria-selected=false] {
+                        @include e(element) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block[aria-selected=false] .block__element {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @include it('creates element--modifier selector inside an attribute selector context') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    &[aria-selected=false] {
+                        @include e(element, $m: active) {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block[aria-selected=false] .block__element--active {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    @include it('creates multiple element modifier selectors inside an attribute selector context') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    &[aria-selected=false] {
+                        @include e(element, $mods: (small, pink)) {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block[aria-selected=false] .block__element--small.block__element--pink {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    @include it('creates element selector inside a descendant attribute selector context') {
+        @include assert() {
+            @include output($selector: false) {
+                @include b(block) {
+                    [aria-selected=true] {
+                        @include e(element) {
+                            display: block;
+                        }
+                    }
+
+                    [aria-selected=false] {
+                        @include e(element) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            @include expect($selector: false) {
+                .block [aria-selected=true] .block__element {
+                    display: block;
+                }
+
+                .block [aria-selected=false] .block__element {
+                    display: none;
+                }
+            }
+        }
+    }
+
     @include it('should be able to use element classes in modifier body rules') {
         @include assert() {
             @include output($selector: false) {

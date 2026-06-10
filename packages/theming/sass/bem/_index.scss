@@ -150,6 +150,14 @@ $_bem-mod-cache: () !default;
     @return string.index($x, ':');
 }
 
+/// Checks if the passed selector string contains an attribute selector.
+/// @access private
+/// @param {String} $x - The string to check for attribute selectors.
+/// @returns {number|null} Will return the index of the occurrence, or null if the string does not contain any attribute selectors.
+@function bem--contains-attr($x) {
+    @return string.index($x, '[');
+}
+
 /// Returns the BEM block-name that generated `$x`. Does not include leading ".".
 /// @access private
 /// @param {String} $x - The block name.
@@ -160,6 +168,16 @@ $_bem-mod-cache: () !default;
         @return string.slice($x, 1, string.index($x, $bem--sep-elem) - 1);
     } @else if bem--contains-pseudo($x) {
         @return string.slice($x, 1, string.index($x, ':') - 1);
+    } @else if bem--contains-attr($x) {
+        $attr-idx: string.index($x, '[');
+        $end: $attr-idx - 1;
+
+        // Trim trailing descendant-combinator space before [
+        @if string.slice($x, $end, $end) == ' ' {
+            $end: $end - 1;
+        }
+
+        @return string.slice($x, 1, $end);
     }
 
     @return $x;
@@ -169,7 +187,13 @@ $_bem-mod-cache: () !default;
 /// @access private
 @function bem--extract-first-selector($x) {
     $parens: string.index($x, '(');
-    $eow: if($parens, string.index($x, ')'), string.index($x, ' ') or -1);
+    $space: string.index($x, ' ');
+    $bracket: string.index($x, '[');
+
+    // A space that precedes an attribute selector is a descendant combinator —
+    // treat the whole selector as a single unit (no split before the [...])
+    $space-before-attr: $space and $bracket and $space < $bracket;
+    $eow: if($parens, string.index($x, ')'), if($space-before-attr, -1, $space or -1));
 
     @return string.slice($x, 1, $eow);
 }
@@ -403,7 +427,7 @@ $_bem-mod-cache: () !default;
     $context: bem--selector-to-string(&);
     $block: bem--extract-block($context);
     $first: bem--extract-first-selector($context);
-    $nested: bem--contains-pseudo($context) or bem--contains-mod($context);
+    $nested: bem--contains-pseudo($context) or bem--contains-mod($context) or bem--contains-attr($context);
     $mod: $m or $mod;
 
     // Validate context
