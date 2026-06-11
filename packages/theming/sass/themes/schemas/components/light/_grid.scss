@@ -33,11 +33,14 @@
 /// @prop {Map} row-hover-background [color: ('gray', 200)] - The hover row background color.
 /// @prop {Map} body-column-hover-border-color [color: ('gray', 200)] - The border color used for the body columns.
 /// @prop {Map} row-hover-text-color [contrast-color: ('gray', 200)] - The hover row text color.
+/// @prop {Number} row-border-width [rem(1px)] - The row bottom border width.
+/// @prop {String} row-border-style [solid] - The row bottom border style.
 /// @prop {Map} row-border-color [color: ('gray', 300, .38)] - The row bottom border color.
 /// @prop {Map} row-highlight [color: ('secondary', 500)] - The grid row highlight color.
 /// @prop {Number} pinned-border-width [.125rem] - The border width of the pinned border.
 /// @prop {String} pinned-border-style [solid] - The CSS border style of the pinned border.
 /// @prop {Map} pinned-border-color [color: ('gray', 400)] - The color of the pinned border.
+/// @prop {Number} cell-active-border-width [1px] - The border width for the active cell.
 /// @prop {Map} cell-active-border-color [color: ('primary', 500)] - The active(focused) cell border color.
 /// @prop {Map} cell-selected-background [color: ('gray', 200)] - The selected cell background color.
 /// @prop {Map} cell-selected-text-color [contrast-color: ('gray', 200)] - The selected cell text color.
@@ -95,6 +98,7 @@
 /// @prop {List} group-area-size [(rem(41), rem(49px), rem(57px))] - The size used for the grid group area.
 /// @prop {Color} row-ghost-background [color: ('gray', 50)] - The background color of the dragged row.
 /// @prop {Color} row-ghost-border-color [color: ('gray', 500)] - The border color of the dragged row.
+/// @prop {Map} summaries-border-color [color: ('gray', 400)] - The border color of the summaries row.
 /// @prop {Color} summaries-patch-background [color: ('gray', 300)] - The leading summaries patch backround. Used in hierarchical grids.
 /// @prop {String} active-state-border-style ['solid'] - The border style used for row active state and cell active state.
 /// @prop {Map} typography [header: (comfortable: (value: 'overline'), compact: (value: 'subtitle-1'))] - The typography styles used for the component.
@@ -165,8 +169,7 @@ $light-grid: extend(
             ),
         ),
 
-        header-border-width: 1px,
-
+        header-border-width: rem(1px),
         header-border-style: solid,
 
         header-border-color: (
@@ -351,6 +354,9 @@ $light-grid: extend(
             ),
         ),
 
+        row-border-width: rem(1px),
+        row-border-style: solid,
+
         row-border-color: (
             color: (
                 'gray',
@@ -366,8 +372,7 @@ $light-grid: extend(
             ),
         ),
 
-        pinned-border-width: 0.125rem,
-
+        pinned-border-width: rem(2px),
         pinned-border-style: solid,
 
         pinned-border-color: (
@@ -377,6 +382,7 @@ $light-grid: extend(
             ),
         ),
 
+        cell-active-border-width: rem(1px),
         cell-active-border-color: (
             color: (
                 'primary',
@@ -653,6 +659,13 @@ $light-grid: extend(
                 rem(41px),
                 rem(49px),
                 rem(57px),
+            ),
+        ),
+
+        summaries-border-color: (
+            color: (
+                'gray',
+                400,
             ),
         ),
 
