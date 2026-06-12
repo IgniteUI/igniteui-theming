@@ -13,8 +13,10 @@
 /// @prop {Map} label-color [color: ('primary', 500)] - The summaries label color.
 /// @prop {Map} label-hover-color [color: ('primary', 700)] - The summaries hover label color.
 /// @prop {Map} result-color [contrast-color: ('gray', 300)] - The summaries value/result color.
+/// @prop {String} border-width [1px] - The summaries column border width.
+/// @prop {String} border-style [solid] - The summaries column border style.
 /// @prop {Color} border-color [transparent] - The summaries column border color.
-/// @prop {String} pinned-border-width [1px] - The border width of the summary panel.
+/// @prop {String} pinned-border-width [2px] - The border width of the summary panel.
 /// @prop {String} pinned-border-style [solid] - The border style of the summary panel.
 /// @prop {Map} pinned-border-color [color: ('gray', 400)] - The border color of the summary panel.
 $light-grid-summary: (
@@ -46,9 +48,11 @@ $light-grid-summary: (
         ),
     ),
 
+    border-width: 1px,
+    border-style: solid,
     border-color: transparent,
 
-    pinned-border-width: 1px,
+    pinned-border-width: 2px,
     pinned-border-style: solid,
     pinned-border-color: (
         color: (
