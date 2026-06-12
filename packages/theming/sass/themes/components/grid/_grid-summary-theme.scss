@@ -26,9 +26,11 @@
 /// @param {Color} $background-color [null] - The summaries background color. PRIMARY - derives label-color, result-color, border-color, pinned-border-color.
 /// @param {Color} $label-color [null] - The summaries label color. PRIMARY - derives label-hover-color. Auto-derived from background-color.
 /// @param {Color} $result-color [null] - The summaries value/result color. Auto-derived from background-color.
+/// @param {String} $border-width [null] - The summaries border width.
+/// @param {String} $border-style [null] - The summaries border style.
 /// @param {Color} $border-color [null] - The summaries border color. Auto-derived from background-color.
-/// @param {Color} $pinned-border-width [null] - The border width of the summary panel.
-/// @param {Color} $pinned-border-style [null] - The border style of the summary panel.
+/// @param {String} $pinned-border-width [null] - The border width of the summary panel.
+/// @param {String} $pinned-border-style [null] - The border style of the summary panel.
 /// @param {Color} $pinned-border-color [null] - The border color of the summary panel. Auto-derived from background-color.
 /// @param {Color} $label-hover-color [null] - The summaries hover label color. Auto-derived from label-color.
 /// @requires $light-material-schema
@@ -45,6 +47,8 @@
     $background-color: null,
     $label-color: null,
     $result-color: null,
+    $border-width: null,
+    $border-style: null,
     $border-color: null,
     $pinned-border-width: null,
     $pinned-border-style: null,
@@ -75,7 +79,7 @@
     }
 
     @if not($border-color) and $background-color {
-        $border-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.26);
+        $border-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.2);
     }
 
     @if not($pinned-border-color) and $background-color {
@@ -89,6 +93,8 @@
             background-color: $background-color,
             label-color: $label-color,
             result-color: $result-color,
+            border-width: $border-width,
+            border-style: $border-style,
             border-color: $border-color,
             pinned-border-width: $pinned-border-width,
             pinned-border-style: $pinned-border-style,
