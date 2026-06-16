@@ -60,6 +60,7 @@ $dark-material-grid-summary: extend(
 /// Generates a dark fluent grid-summary schema.
 /// @type Map
 /// @prop {Map} label-color [color: ('primary', 300)] - The summaries label color.
+/// @prop {Map} pinned-border-color [color: ('gray', 300, .24)] - The color of the pinned border.
 /// @requires $fluent-grid-summary
 $dark-fluent-grid-summary: extend(
     $fluent-grid-summary,
@@ -69,6 +70,14 @@ $dark-fluent-grid-summary: extend(
             color: (
                 'primary',
                 300,
+            ),
+        ),
+
+        pinned-border-color: (
+            color: (
+                'gray',
+                300,
+                0.24,
             ),
         ),
     )

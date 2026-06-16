@@ -331,9 +331,7 @@
     }
 
     @if not($header-border-color) and $header-text-color and $header-background {
-        $header-border-color: hsl(
-            from color-mix(in srgb, var(--header-text-color) 20%, var(--header-background)) h s l / 0.38
-        );
+        $header-border-color: color-mix(in srgb, var(--header-text-color) 20%, var(--header-background));
     }
 
     @if not($sorted-header-icon-color) and $accent-color {

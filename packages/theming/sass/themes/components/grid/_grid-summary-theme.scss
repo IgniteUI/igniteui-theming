@@ -78,8 +78,16 @@
         $result-color: adaptive-contrast(var(--background-color));
     }
 
+    @if not($border-color) and $background-color and $result-color {
+        $border-color: hsl(from color-mix(in srgb, var(--result-color) 16%, var(--background-color)) h s l / 0.38);
+    }
+
     @if not($border-color) and $background-color {
         $border-color: hsl(from adaptive-contrast(var(--background-color)) h s l / 0.2);
+    }
+
+    @if not($pinned-border-color) and $background-color and $result-color {
+        $pinned-border-color: color-mix(in srgb, var(--result-color) 20%, var(--background-color));
     }
 
     @if not($pinned-border-color) and $background-color {
