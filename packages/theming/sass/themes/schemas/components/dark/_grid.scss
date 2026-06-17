@@ -11,7 +11,7 @@
 /// @type Map
 /// @prop {Color} content-background [color: 'surface'] - The table body background color.
 /// @prop {Map} drop-area-background [color: ('gray', 100, .4)] - The drop area background color.
-/// @prop {Map} header-border-color [color: ('gray', 200, .24)] - The color used for header borders.
+/// @prop {Map} header-border-color [color: ('gray', 200)] - The color used for header borders.
 /// @prop {Map} header-background [color: ('gray', 100)] - The table header background color.
 /// @prop {Map} header-selected-background [color: ('secondary', 600)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 600)] - The table header text color when selected (ex. column selection).
@@ -51,7 +51,6 @@ $base-dark-grid: (
         color: (
             'gray',
             200,
-            0.24,
         ),
     ),
 
@@ -275,6 +274,7 @@ $dark-material-grid: extend(
 /// @prop {Map} row-selected-hover-background [color: ('gray', 200)] - The selected row background color on hover.
 /// @prop {Map} body-column-selected-border-color [color: ('gray', 100)] - The border color used for the body column when in group-row state.
 /// @prop {Map} body-column-hover-selected-border-color [color: ('gray', 200)] - The border color used for the body column when in group-row + hover state.
+/// @prop {Map} pinned-border-color [color: ('gray', 300, .24)] - The color of the pinned border.
 /// @prop {Map} row-selected-hover-text-color [contrast-color: ('gray', 200)] - The selected row hover text color.
 /// @prop {Map} cell-selected-within-background [color: ('gray', 200)] - The background of the selected cell inside a selected row/column.
 /// @prop {Map} cell-selected-within-text-color [contrast-color: ('gray', 200)] - The color of the selected cell inside a selected row/column.
