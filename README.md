@@ -124,7 +124,7 @@ npm run preview:palette -- --palette=material --variant=light
 
 ## MCP Server (AI-Assisted Theming)
 
-The Ignite UI Theming package includes a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that enables AI assistants to generate production-ready theming code for your Ignite UI applications. This MCP server is part of the larger tooling [AI assisted development toolchain](https://www.infragistics.com/ai-assisted-app-development) in Ignite UI.
+The Ignite UI Theming package includes a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that enables AI assistants to generate production-ready theming code for your Ignite UI applications. This MCP server is part of the larger [AI-assisted development toolchain](https://www.infragistics.com/ai-assisted-app-development) for Ignite UI.
 
 ### What is MCP?
 
