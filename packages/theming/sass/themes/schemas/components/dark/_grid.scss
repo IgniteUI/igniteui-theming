@@ -12,6 +12,7 @@
 /// @prop {Color} content-background [color: 'surface'] - The table body background color.
 /// @prop {Map} drop-area-background [color: ('gray', 100, .4)] - The drop area background color.
 /// @prop {Map} header-border-color [color: ('gray', 200)] - The color used for header borders.
+/// @prop {Map} action-border-color [color: ('gray', 200)] - The color used for action borders.
 /// @prop {Map} header-background [color: ('gray', 100)] - The table header background color.
 /// @prop {Map} header-selected-background [color: ('secondary', 600)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('secondary', 600)] - The table header text color when selected (ex. column selection).
@@ -48,6 +49,13 @@ $base-dark-grid: (
     ),
 
     header-border-color: (
+        color: (
+            'gray',
+            200,
+        ),
+    ),
+
+    action-border-color: (
         color: (
             'gray',
             200,
@@ -456,6 +464,7 @@ $dark-bootstrap-grid: extend(
 /// @type Map
 /// @prop {Map} content-text-color [contrast-color: ('gray', 50, .8)] - The table body text color.
 /// @prop {Map} header-border-color [color: ('gray', 200)] - The color used for header borders.
+/// @prop {Map} action-border-color [color: ('gray', 200)] - The color used for action borders.
 /// @prop {Map} header-text-color [contrast-color: ('gray', 50, .9)] - The table header text color.
 /// @prop {Map} header-selected-background [color: ('primary', 900)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray' 50)] - The table header text color when selected (ex. column selection).
@@ -522,6 +531,13 @@ $dark-indigo-grid: extend(
         ),
 
         header-border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        action-border-color: (
             color: (
                 'gray',
                 200,

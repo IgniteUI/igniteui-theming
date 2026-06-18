@@ -52,6 +52,7 @@
 /// @param {String} $row-border-width [null] - The row bottom border width.
 /// @param {String} $row-border-style [null] - The row bottom border style.
 /// @param {Color} $row-border-color [null] - The row bottom border color. Auto-derived from content-background.
+/// @param {Color} $action-border-color [null] - The color used for action borders.
 /// @param {String} $pinned-border-width [null] - The border width of the pinned border.
 /// @param {String} $pinned-border-style [null] - The CSS border style of the pinned border.
 /// @param {Color} $pinned-border-color [null] - The color of the pinned border. Auto-derived from content-background.
@@ -159,6 +160,8 @@
     $row-border-width: null,
     $row-border-style: null,
     $row-border-color: null,
+
+    $action-border-color: null,
 
     $pinned-border-width: null,
     $pinned-border-style: null,
@@ -394,6 +397,10 @@
 
     @if not($row-border-color) and $foreground and $background {
         $row-border-color: hsl(from color-mix(in srgb, var(--foreground) 16%, var(--background)) h s l / 0.38);
+    }
+
+    @if not($action-border-color) and $foreground and $background {
+        $action-border-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
     }
 
     @if not($pinned-border-color) and $foreground and $background {
@@ -681,6 +688,8 @@
             row-border-width: $row-border-width,
             row-border-style: $row-border-style,
             row-border-color: $row-border-color,
+
+            action-border-color: $action-border-color,
 
             pinned-border-width: $pinned-border-width,
             pinned-border-style: $pinned-border-style,

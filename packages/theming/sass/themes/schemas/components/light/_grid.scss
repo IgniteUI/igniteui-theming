@@ -17,6 +17,7 @@
 /// @prop {Number} header-border-width [1px] - The border width used for header borders.
 /// @prop {String} header-border-style [solid] - The border style used for header borders.
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
+/// @prop {Map} action-border-color [color: ('gray', 400)] - The color used for action borders.
 /// @prop {Map} ghost-header-text-color [color: ('gray', 700)] - The dragged header text color.
 /// @prop {Map} ghost-header-icon-color [color: ('gray', 600)] - The dragged header icon color.
 /// @prop {Map} ghost-header-background [color: ('gray', 50)] - The dragged header background color.
@@ -173,6 +174,13 @@ $light-grid: extend(
         header-border-style: solid,
 
         header-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        action-border-color: (
             color: (
                 'gray',
                 400,
@@ -839,6 +847,7 @@ $material-grid: extend(
 /// @prop {Map} header-selected-background [color: ('gray', 200)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [contrast-color: ('gray', 200)] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 300)] - The color used for header borders.
+/// @prop {Map} action-border-color [color: ('gray', 300)] - The color used for action borders.
 /// @prop {Map} row-selected-background [color: ('gray', 200)] - The selected row background color.
 /// @prop {Map} row-selected-hover-background [color: ('gray', 300)] - The selected row hover background.
 /// @prop {Map} body-column-selected-border-color [color: ('gray', 200)] - The border color used for the body column when in group-row state.
@@ -898,6 +907,13 @@ $fluent-grid: extend(
         ),
 
         header-border-color: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+
+        action-border-color: (
             color: (
                 'gray',
                 300,
@@ -1226,6 +1242,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} header-selected-background [color: ('primary', 50)] - The table header background color when selected (ex. column selection).
 /// @prop {Map} header-selected-text-color [color: 'gray', 900] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
+/// @prop {Map} action-border-color [color: ('gray', 400)] - The color used for action borders.
 /// @prop {Map} filtering-row-background [color: ('surface', 500)] - The background color of the filtering row.
 /// @prop {Map} filtering-dialog-background [contrast-color: ('gray', 900)] - The background color of the advanced filtering dialog.
 /// @prop {Map} edited-row-indicator [color: ('primary', 400)] - The indicator's color of edited row.
@@ -1324,6 +1341,13 @@ $indigo-grid: extend(
         ),
 
         header-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+
+        action-border-color: (
             color: (
                 'gray',
                 400,
