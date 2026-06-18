@@ -613,20 +613,20 @@
         $drop-indicator-color: var(--accent-color);
     }
 
-    @if not($expand-all-icon-color) and $foreground and $background {
-        $expand-all-icon-color: color-mix(in srgb, var(--foreground) 70%, var(--background));
+    @if not($expand-all-icon-color) and $header-text-color and $header-background {
+        $expand-all-icon-color: color-mix(in srgb, var(--header-text-color) 70%, var(--header-background));
     }
 
-    @if not($expand-all-icon-hover-color) and $foreground and $background {
-        $expand-all-icon-hover-color: color-mix(in srgb, var(--foreground) 80%, var(--background));
+    @if not($expand-all-icon-hover-color) and $header-text-color and $header-background {
+        $expand-all-icon-hover-color: color-mix(in srgb, var(--header-text-color) 80%, var(--header-background));
     }
 
-    @if not($expand-icon-color) and $foreground and $background {
-        $expand-icon-color: color-mix(in srgb, var(--foreground) 60%, var(--background));
+    @if not($expand-icon-color) and $header-text-color and $header-background {
+        $expand-icon-color: color-mix(in srgb, var(--header-text-color) 60%, var(--header-background));
     }
 
-    @if not($expand-icon-hover-color) and $foreground and $background {
-        $expand-icon-hover-color: color-mix(in srgb, var(--foreground) 70%, var(--background));
+    @if not($expand-icon-hover-color) and $header-text-color and $header-background {
+        $expand-icon-hover-color: color-mix(in srgb, var(--header-text-color) 70%, var(--header-background));
     }
 
     @if $row-odd-background and not($body-column-border-color-odd) {
