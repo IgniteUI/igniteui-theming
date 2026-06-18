@@ -34,15 +34,14 @@ export async function handleCreateTheme(params: CreateThemeParams) {
   });
 
   if (output === "css") {
-    return handleCssOutput(params, variant, validation, suitabilityAnalysis);
+    return handleCssOutput(params, validation, suitabilityAnalysis);
   }
 
-  return handleSassOutput(params, variant, validation, suitabilityAnalysis);
+  return handleSassOutput(params, validation, suitabilityAnalysis);
 }
 
 async function handleCssOutput(
   params: CreateThemeParams,
-  _variant: string,
   validation: Awaited<ReturnType<typeof validatePaletteColors>>,
   suitabilityAnalysis: Awaited<ReturnType<typeof analyzeThemeColorsForPalette>>,
 ) {
@@ -121,7 +120,6 @@ async function handleCssOutput(
 
 async function handleSassOutput(
   params: CreateThemeParams,
-  _variant: string,
   validation: Awaited<ReturnType<typeof validatePaletteColors>>,
   suitabilityAnalysis: Awaited<ReturnType<typeof analyzeThemeColorsForPalette>>,
 ) {
