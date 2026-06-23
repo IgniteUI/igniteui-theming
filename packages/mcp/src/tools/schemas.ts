@@ -159,6 +159,7 @@ export const createTypographySchema = z.object({
     .optional()
     .describe(PARAM_DESCRIPTIONS.customScale),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 });
 
 /**
@@ -171,6 +172,7 @@ export const createElevationsSchema = z.object({
     PARAM_DESCRIPTIONS.elevationPreset,
   ),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 });
 
 /**
@@ -201,6 +203,7 @@ export const createThemeSchema = z.object({
     .optional()
     .default(true)
     .describe(PARAM_DESCRIPTIONS.includeSpacing),
+  output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 });
 
 /**

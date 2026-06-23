@@ -40,6 +40,7 @@ describe("handleCreatePalette", () => {
 
   it("includes generated Sass code", async () => {
     const result = await handleCreatePalette({
+      platform: "angular",
       primary: "#2ab759",
       secondary: "#f7bd32",
       surface: "white",
@@ -63,8 +64,9 @@ describe("handleCreatePalette", () => {
     expect(text).toContain("Ignite UI for Angular");
   });
 
-  it("shows platform hint when not specified", async () => {
+  it("shows platform hint when not specified (Sass output)", async () => {
     const result = await handleCreatePalette({
+      output: "sass",
       primary: "#2ab759",
       secondary: "#f7bd32",
       surface: "white",
@@ -88,8 +90,9 @@ describe("handleCreatePalette", () => {
     expect(text).toContain("surface");
   });
 
-  it("includes variable names in response", async () => {
+  it("includes variable names in response (Sass output)", async () => {
     const result = await handleCreatePalette({
+      platform: "angular",
       primary: "#2ab759",
       secondary: "#f7bd32",
       surface: "white",
@@ -102,6 +105,7 @@ describe("handleCreatePalette", () => {
 
   it("includes inline @use placement comment in generated Sass", async () => {
     const result = await handleCreatePalette({
+      platform: "angular",
       primary: "#2ab759",
       secondary: "#f7bd32",
       surface: "white",
@@ -113,6 +117,7 @@ describe("handleCreatePalette", () => {
 
   it("includes assembly note after Sass code block", async () => {
     const result = await handleCreatePalette({
+      platform: "angular",
       primary: "#2ab759",
       secondary: "#f7bd32",
       surface: "white",
@@ -125,6 +130,7 @@ describe("handleCreatePalette", () => {
 
 describe("handleCreateTheme", () => {
   const baseThemeParams = {
+    platform: "angular" as const,
     primaryColor: "#2ab759",
     secondaryColor: "#f7bd32",
     surfaceColor: "white",
@@ -199,7 +205,9 @@ describe("handleCreateTheme", () => {
     });
 
     const text = result.content[0].text;
+    // WC defaults to CSS output — platform name appears in CSS response
     expect(text).toContain("Web Components");
+    expect(text).toContain("```css");
   });
 
   it("shows React-specific platform name for react platform", async () => {
@@ -209,7 +217,9 @@ describe("handleCreateTheme", () => {
     });
 
     const text = result.content[0].text;
+    // React defaults to CSS output — platform name appears in CSS response
     expect(text).toContain("Platform: Ignite UI for React");
+    expect(text).toContain("```css");
   });
 
   it("shows Blazor-specific platform name for blazor platform", async () => {
@@ -219,7 +229,9 @@ describe("handleCreateTheme", () => {
     });
 
     const text = result.content[0].text;
+    // Blazor defaults to CSS output — platform name appears in CSS response
     expect(text).toContain("Platform: Ignite UI for Blazor");
+    expect(text).toContain("```css");
   });
 
   it("includes inline @use placement comment in generated Sass", async () => {
@@ -238,8 +250,9 @@ describe("handleCreateTheme", () => {
 });
 
 describe("handleCreateTypography", () => {
-  it("returns MCP response format", () => {
-    const result = handleCreateTypography({
+  it("returns MCP response format", async () => {
+    const result = await handleCreateTypography({
+      platform: "angular",
       fontFamily: "Roboto",
     });
 
@@ -248,8 +261,9 @@ describe("handleCreateTypography", () => {
     expect(result.content[0]).toHaveProperty("type", "text");
   });
 
-  it("includes typography mixin in code", () => {
-    const result = handleCreateTypography({
+  it("includes typography mixin in code", async () => {
+    const result = await handleCreateTypography({
+      platform: "angular",
       fontFamily: "Roboto",
     });
 
@@ -259,8 +273,9 @@ describe("handleCreateTypography", () => {
     expect(text).toContain("Roboto");
   });
 
-  it("uses specified design system type scale", () => {
-    const result = handleCreateTypography({
+  it("uses specified design system type scale", async () => {
+    const result = await handleCreateTypography({
+      platform: "angular",
       fontFamily: "Inter",
       designSystem: "indigo",
     });
@@ -336,31 +351,32 @@ describe("layout handlers", () => {
 });
 
 describe("handleCreateElevations", () => {
-  it("returns MCP response format", () => {
-    const result = handleCreateElevations({});
+  it("returns MCP response format", async () => {
+    const result = await handleCreateElevations({ platform: "angular" });
 
     expect(result).toHaveProperty("content");
     expect(result.content).toBeInstanceOf(Array);
     expect(result.content[0]).toHaveProperty("type", "text");
   });
 
-  it("includes elevations mixin in code", () => {
-    const result = handleCreateElevations({});
+  it("includes elevations mixin in code", async () => {
+    const result = await handleCreateElevations({ platform: "angular" });
 
     const text = result.content[0].text;
     expect(text).toContain("```scss");
     expect(text).toContain("@include elevations(");
   });
 
-  it("uses material elevations by default", () => {
-    const result = handleCreateElevations({});
+  it("uses material elevations by default", async () => {
+    const result = await handleCreateElevations({ platform: "angular" });
 
     const text = result.content[0].text;
     expect(text).toContain("$material-elevations");
   });
 
-  it("uses indigo elevations when specified", () => {
-    const result = handleCreateElevations({
+  it("uses indigo elevations when specified", async () => {
+    const result = await handleCreateElevations({
+      platform: "angular",
       designSystem: "indigo",
     });
 
@@ -384,6 +400,7 @@ describe("handleCreateCustomPalette", () => {
 
   it("generates palette with shades mode", async () => {
     const result = await handleCreateCustomPalette({
+      platform: "angular",
       primary: { mode: "shades", baseColor: "#2ab759" },
       secondary: { mode: "shades", baseColor: "#f7bd32" },
       surface: { mode: "shades", baseColor: "white" },
@@ -533,12 +550,13 @@ describe("handleCreateComponentTheme", () => {
     expect(result.content[0]).toHaveProperty("text");
   });
 
-  it("generates Sass code by default with platform-specific selector", async () => {
+  it("generates Sass code when output is sass (webcomponents)", async () => {
     const result = await handleCreateComponentTheme({
       platform: "webcomponents",
       designSystem: "material",
       variant: "light",
       component: "avatar",
+      output: "sass",
       tokens: {
         background: "#ff5722",
       },
@@ -617,6 +635,7 @@ describe("handleCreateComponentTheme", () => {
       designSystem: "material",
       variant: "light",
       component: "flat-button",
+      output: "sass",
       tokens: {
         background: "#ff5722",
       },
@@ -634,6 +653,7 @@ describe("handleCreateComponentTheme", () => {
       designSystem: "material",
       variant: "light",
       component: "avatar",
+      output: "sass",
       tokens: {
         background: "#ff5722",
       },
@@ -731,6 +751,7 @@ describe("handleCreateComponentTheme", () => {
       platform: "webcomponents",
       designSystem: "bootstrap",
       variant: "light",
+      output: "sass",
       tokens: {
         background: "#ff5722",
       },
@@ -802,6 +823,7 @@ describe("handleCreateComponentTheme", () => {
     const result = await handleCreateComponentTheme({
       platform: "webcomponents",
       component: "avatar",
+      output: "sass",
       tokens: { background: "#ff5722" },
     });
 
@@ -813,6 +835,7 @@ describe("handleCreateComponentTheme", () => {
     const result = await handleCreateComponentTheme({
       platform: "webcomponents",
       component: "avatar",
+      output: "sass",
       tokens: { background: "#ff5722" },
     });
 

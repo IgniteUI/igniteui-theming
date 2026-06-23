@@ -34,7 +34,8 @@ export async function handleCreateCustomPalette(
 ) {
   const variant = params.variant ?? "light";
   const designSystem = params.designSystem ?? "material";
-  const output = params.output ?? "sass";
+  const output =
+    params.output ?? (params.platform === "angular" ? "sass" : "css");
   const presetName = `${variant}-${designSystem}-palette` as PalettePresetName;
   const preset = PALETTE_PRESETS[presetName];
 

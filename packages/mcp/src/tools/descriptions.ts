@@ -74,6 +74,10 @@ export const TOOL_DESCRIPTIONS = {
 <use_case>
   Use this tool FIRST before generating any theme code to ensure platform-optimized output.
   The detected platform determines the correct Sass module paths and syntax.
+  Output format ("sass" vs "css") is a separate concern — see the output parameter on each
+  generation tool. For non-Angular platforms, prefer "css" unless the project has a confirmed
+  Sass pipeline; use your own file-reading tools or ask the user to confirm before choosing
+  output: "sass".
 </use_case>
 
 <detection_signals>
@@ -516,7 +520,7 @@ export const TOOL_DESCRIPTIONS = {
   2. Creates color palette using palette() function
   3. Sets up typography with specified font family (if includeTypography: true)
   4. Configures elevations based on design system (if includeElevations: true)
-  5. Configures spacing utilities for Web Components (if includeSpacing: true)
+  5. Configures spacing utilities for Web Components, React, and Blazor (if includeSpacing: true)
   6. Applies the theme using the theme() mixin
   7. Returns luminance warnings if any colors may produce poor shades
 </workflow>
@@ -1124,7 +1128,13 @@ export const PARAM_DESCRIPTIONS = {
   variant: FRAGMENTS.VARIANT,
   designSystem: FRAGMENTS.DESIGN_SYSTEM,
   name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
-  output: `Output format: "sass" generates Sass code using igniteui-theming library functions. "css" generates CSS custom properties (variables) directly - useful for vanilla CSS projects or when you don't want Sass compilation. Defaults to tool-specific output ("sass" for theme generators, "css" for layout setters).`,
+  output: `Output format for the generated code.
+
+"sass" — Returns Sass source using igniteui-theming functions and mixins. Requires a Sass pipeline in the consuming project. Prefer for Angular (Angular CLI handles Sass compilation automatically).
+
+"css" — The MCP server compiles the Sass internally and returns ready-to-use CSS custom properties. No local Sass toolchain needed. Prefer for Web Components, React, and Blazor unless the project has a confirmed Sass setup (e.g. .scss files and a sass build step are present). When in doubt, use "css" or ask the user.
+
+Layout tools (set_size, set_spacing, set_roundness) default to "css". Generation tools (create_palette, create_theme, etc.) default to "sass" for Angular and "css" for all other platforms.`,
 
   // ---------------------------------------------------------------------------
   // detect_platform parameters
@@ -1166,7 +1176,7 @@ export const PARAM_DESCRIPTIONS = {
   includeElevations:
     "Include elevation shadows in the generated theme. Set to false if you want to configure elevations separately. Defaults to true.",
   includeSpacing:
-    "Include spacing CSS custom properties (Web Components platform only). Defaults to true. Has no effect on Angular platform.",
+    "Include spacing CSS custom properties. Applies to Web Components, React, and Blazor. Has no effect on Angular. Defaults to true.",
 
   // ---------------------------------------------------------------------------
   // Custom palette parameters (for create_custom_palette)

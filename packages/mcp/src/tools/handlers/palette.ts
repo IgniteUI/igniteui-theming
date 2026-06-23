@@ -15,7 +15,8 @@ import type { CreatePaletteParams } from "../schemas.js";
 
 export async function handleCreatePalette(params: CreatePaletteParams) {
   const variant = params.variant ?? "light";
-  const output = params.output ?? "sass";
+  const output =
+    params.output ?? (params.platform === "angular" ? "sass" : "css");
 
   // Validate surface and gray colors against the variant
   const validation = await validatePaletteColors({

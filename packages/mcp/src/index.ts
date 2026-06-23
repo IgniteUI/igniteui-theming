@@ -156,6 +156,7 @@ function registerTools(server: McpServer): void {
         designSystem: createTypographySchema.shape.designSystem,
         customScale: createTypographySchema.shape.customScale,
         name: createTypographySchema.shape.name,
+        output: createTypographySchema.shape.output,
       },
     },
     withPreprocessing(createTypographySchema, handleCreateTypography),
@@ -172,6 +173,7 @@ function registerTools(server: McpServer): void {
         licensed: createElevationsSchema.shape.licensed,
         designSystem: createElevationsSchema.shape.designSystem,
         name: createElevationsSchema.shape.name,
+        output: createElevationsSchema.shape.output,
       },
     },
     async (params) => {
@@ -199,6 +201,7 @@ function registerTools(server: McpServer): void {
         includeTypography: createThemeSchema.shape.includeTypography,
         includeElevations: createThemeSchema.shape.includeElevations,
         includeSpacing: createThemeSchema.shape.includeSpacing,
+        output: createThemeSchema.shape.output,
       },
     },
     async (params) => {

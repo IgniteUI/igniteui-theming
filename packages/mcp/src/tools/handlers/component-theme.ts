@@ -64,7 +64,7 @@ export async function handleCreateComponentTheme(
     tokens,
     selector,
     name,
-    output = "sass",
+    output = params.platform === "angular" ? "sass" : "css",
     designSystem = "material",
     variant = "light",
   } = params;
