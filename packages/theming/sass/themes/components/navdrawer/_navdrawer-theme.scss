@@ -39,6 +39,8 @@
 /// @param {Color} $shadow [null] - Sets a custom shadow to be used by the drawer.
 /// @param {List} $border-radius [null] - The border radius used for the navdrawer.
 /// @param {List} $item-border-radius [null] - The border radius used for the navdrawer item.
+/// @param {Number} $size [null] - The width of the navigation drawer in its expanded (full) state.
+/// @param {Number} $size--mini [null] - The width of the navigation drawer in its mini state.
 /// @requires $light-material-schema
 /// @example scss - Change the background and item colors
 ///   $navdrawer-theme: navdrawer-theme(
@@ -53,6 +55,9 @@
 
     $border-radius: null,
     $item-border-radius: null,
+
+    $size: null,
+    $size--mini: null,
 
     $background: null,
     $border-color: null,
@@ -139,6 +144,8 @@
             selector: $selector,
             border-radius: $border-radius,
             item-border-radius: $item-border-radius,
+            size: $size,
+            size--mini: $size--mini,
             background: $background,
             border-color: $border-color,
             item-text-color: $item-text-color,
