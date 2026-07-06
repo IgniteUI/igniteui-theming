@@ -15,10 +15,14 @@
 /// @prop {Map} item-disabled-icon-color [color: ('gray', 400)] - The item's disabled icon color.
 /// @prop {Map} elevation [16] - The elevation level, between 0-24, to be used for the drawer.
 /// @prop {List} border-radius [(rem(0), rem(0), rem(36px))] - The border radius used for the navdrawer component.
+/// @prop {Number} size [rem(240px)] - The width of the navigation drawer in its expanded (full) state.
+/// @prop {Number} size--mini [rem(56px)] - The width of the navigation drawer in its mini state.
 /// @requires $default-elevation-navdrawer
 $light-navdrawer: extend(
     $default-elevation-navdrawer,
     (
+        size: rem(240px),
+        size--mini: rem(56px),
         background: (
             color: 'surface',
         ),
@@ -169,10 +173,12 @@ $material-navdrawer: extend(
 /// @prop {Map} item-icon-color [ color: ('primary', 500)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 800)] - The header's idle text color.
 /// @prop {Map} typography [ item: (value: 'body-2'), header: (value: 'subtitle-1')] - The typography styles used for the component.
+/// @prop {Number} size--mini [rem(40px)] - The width of the navigation drawer in its mini state.
 /// @requires $light-navdrawer
 $fluent-navdrawer: extend(
     $light-navdrawer,
     (
+        size--mini: rem(40px),
         item-border-radius: 0,
         item-hover-icon-color: (
             color: (
@@ -262,10 +268,12 @@ $fluent-navdrawer: extend(
 /// @prop {Map} item-icon-color [ color: ('gray', 900)] - The item's icon color.
 /// @prop {Map} item-header-text-color [color: ('gray', 900)] - The header's idle text color.
 /// @prop {Map} typography [item: (value: 'body-2'), header: (value: 'caption')] - The typography styles used for the component.
+/// @prop {Number} size--mini [rem(88px)] - The width of the navigation drawer in its mini state.
 /// @requires $light-navdrawer
 $bootstrap-navdrawer: extend(
     $light-navdrawer,
     (
+        size--mini: rem(88px),
         item-border-radius: (
             border-radius: (
                 rem(4px),
@@ -365,10 +373,12 @@ $bootstrap-navdrawer: extend(
 /// @prop {Map} border-color [color: ('gray', 300)] - The navigation drawer right border color.
 /// @prop {List} item-border-radius [(rem(4px), rem(0), rem(4px))] - The border radius used for the navdrawer items.
 /// @prop {Map} typography [item: (value: 'subtitle-2'), header: (value: 'overline')] - The typography styles used for the component.
+/// @prop {Number} size--mini [rem(48px)] - The width of the navigation drawer in its mini state.
 /// @requires $light-navdrawer
 $indigo-navdrawer: extend(
     $light-navdrawer,
     (
+        size--mini: rem(48px),
         border-color: (
             color: (
                 'gray',
