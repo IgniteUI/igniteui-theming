@@ -803,7 +803,7 @@ $bootstrap-chip: extend(
 /// @prop {Map} disabled-border-color [ color: ('gray', 300)] - The outlined disabled chip border color.
 /// @prop {Color} disabled-selected-outlined-background [transparent] - The selected outlined chip disabled background color.
 /// @prop {Map} disabled-selected-outlined-text-color [color: ('gray', 900)] - The selected outlined chip disabled text color.
-/// @prop {Map} disabled-selected-border-color [color: ('gray', 400)] - The selected outlined chip disabled border color.
+/// @prop {Map} disabled-selected-border-color [color: ('primary', 400)] - The selected outlined chip disabled border color.
 ///
 /// @requires $light-chip
 /// @requires $indigo-elevation-chip
@@ -1025,7 +1025,7 @@ $indigo-chip: extend(
 
         disabled-selected-border-color: (
             color: (
-                'gray',
+                'primary',
                 400,
             ),
         ),
