@@ -16,8 +16,9 @@
 /// - `$background` — The QR code background color.
 /// - `$dark-color` — The color of the dark (data) modules.
 ///
-/// `$corner-square-color` and `$corner-dot-color` fall back to `$dark-color` when not set,
-/// so a two-tone QR code only requires setting `$background` and `$dark-color`.
+/// `$corner-square-color` and `$corner-dot-color` default to a live `var(--dark-color)`
+/// reference in the schema, so they automatically track `$dark-color` - including plain CSS
+/// custom property overrides at runtime - unless a caller sets a corner color explicitly.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $background [null] - The background color of the QR code. PRIMARY.
@@ -47,14 +48,6 @@
     }
 
     $theme: digest-schema($qr-code-schema);
-
-    @if not($corner-square-color) and $dark-color {
-        $corner-square-color: $dark-color;
-    }
-
-    @if not($corner-dot-color) and $dark-color {
-        $corner-dot-color: $dark-color;
-    }
 
     @return extend(
         $theme,
