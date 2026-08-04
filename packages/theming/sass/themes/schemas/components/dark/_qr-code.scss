@@ -1,0 +1,45 @@
+@use '../../../../utils/map' as *;
+@use '../light/qr-code' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a base dark qr-code schema.
+/// @access private
+/// @type Map
+/// No value overrides - background/dark-color are fixed literal colors (white/black) in the
+/// light schema, deliberately not derived from the surface-relative `gray` scale, so they do
+/// not invert when the app switches to a dark palette. See ../light/_qr-code.scss for details.
+$dark-base-qr-code: (
+    _meta: (
+        name: 'qr-code',
+        variant: 'dark',
+    ),
+);
+
+/// Generates a dark material qr-code schema.
+/// @type Map
+/// @requires $material-qr-code
+/// @requires $dark-base-qr-code
+$dark-material-qr-code: extend($material-qr-code, $dark-base-qr-code);
+
+/// Generates a dark fluent qr-code schema.
+/// @type Map
+/// @requires $fluent-qr-code
+/// @requires $dark-base-qr-code
+$dark-fluent-qr-code: extend($fluent-qr-code, $dark-base-qr-code);
+
+/// Generates a dark bootstrap qr-code schema.
+/// @type Map
+/// @requires $bootstrap-qr-code
+/// @requires $dark-base-qr-code
+$dark-bootstrap-qr-code: extend($bootstrap-qr-code, $dark-base-qr-code);
+
+/// Generates a dark indigo qr-code schema.
+/// @type Map
+/// @requires $indigo-qr-code
+/// @requires $dark-base-qr-code
+$dark-indigo-qr-code: extend($indigo-qr-code, $dark-base-qr-code);
