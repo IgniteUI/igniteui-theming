@@ -1077,6 +1077,72 @@ export const TOOL_DESCRIPTIONS = {
 </related_tools>`,
 
   // ---------------------------------------------------------------------------
+  // get_chart_series_colors - Chart series brush palette retrieval tool
+  // ---------------------------------------------------------------------------
+  get_chart_series_colors: `Retrieve the shared Ignite UI chart series brush palette, per-chart-type color-token guidance, and validate custom brush lists.
+
+<use_case>
+  Use this tool when theming Ignite UI charts (category, data, doughnut, pie, funnel, shape,
+  financial, linear/radial gauge, bullet graph) and you need the default series colors, want to
+  know which theme tokens accept a custom color list for a given chart type, or want to sanity-check
+  a custom brush list before using it in a $brushes: (...) override.
+
+  NOT covered by this tool: sparkline (singular tokens, not a palette list) and
+  selection/highlight colors (selectionBrush, focusBrush — component-only, no Sass theme equivalent).
+</use_case>
+
+<workflow>
+  1. Call with no arguments to get the full 10-color default (regular) palette.
+  2. Optionally set mode: "color-blind" for the accessibility-friendly variant.
+  3. Optionally set index (1-10) to retrieve a single brush color.
+  4. Optionally set chartType (e.g. "category-chart", "financial-chart", "linear-gauge") to see
+     which theme tokens on that chart type accept the palette, plus a ready-to-use Sass snippet.
+  5. Optionally set customBrushes to a color array to validate it before using it in an override —
+     checks each color is valid and flags color pairs with similar hues that may be hard to tell apart.
+</workflow>
+
+<output_examples>
+  Default palette:
+    {}
+    → 10-color list + var(--chart-brushes) reference
+
+  Single brush:
+    { index: 3 }
+    → the 3rd regular-palette color
+
+  Chart-type guidance:
+    { chartType: "category-chart" }
+    → token table (brushes, marker-brushes, outlines, marker-outlines, trend-line-brushes,
+      negative-brushes, negative-outlines) + a category-chart-theme() Sass snippet
+
+  Custom brush validation:
+    { customBrushes: ["#4285f4", "#ea4335", "#fbbc05", "#34a853"] }
+    → validity + hue-distinctness warnings
+</output_examples>
+
+<important_notes>
+  THEME VS. COMPONENT PRECEDENCE:
+  - This tool and the Sass snippets it generates set the THEME DEFAULT only.
+  - Chart components also expose their own color-list properties (e.g. Angular's brushes,
+    outlines, markerBrushes, markerOutlines, rangeBrushes, rangeOutlines) that OVERRIDE the
+    theme default per instance. Always mention this precedence when generating chart theme code.
+
+  SCOPE:
+  - Only list-valued brush/outline tokens are covered. Sparkline and selection/highlight colors
+    are intentionally excluded — see the guidance resource at theming://guidance/colors/charts.
+  - Some chart types default certain tokens to a FIXED color rather than the shared palette
+    (e.g. category-chart's negative-brushes/negative-outlines default to red, not "series") —
+    check the "default" column in the chartType response rather than assuming uniformity.
+</important_notes>
+
+<related_tools>
+  - create_component_theme: Not yet wired for chart components (see project notes) — use the
+    Sass snippet from this tool directly instead.
+  - theming://guidance/colors/charts: Full guidance resource with the complete per-chart-type
+    token reference and override examples.
+</related_tools>`,
+
+  // ---------------------------------------------------------------------------
   // read_resource - Resource access tool
   // ---------------------------------------------------------------------------
   read_resource: `Read a theming resource by URI. Returns reference data such as platform configurations, color palette presets, typography presets, color guidance, and layout documentation.
@@ -1240,6 +1306,19 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
 
   opacity:
     "Opacity value between 0 (fully transparent) and 1 (fully opaque). When provided, wraps the color in CSS relative color syntax: hsl(from var(...) h s l / opacity).",
+
+  // ---------------------------------------------------------------------------
+  // Chart series colors parameters (for get_chart_series_colors)
+  // ---------------------------------------------------------------------------
+  chartBrushMode: `Which series brush palette to use: "regular" (default, visually distinct colors) or "color-blind" (alternate palette for better distinguishability under common color vision deficiencies, activated via the configure-colors($enhanced-accessibility: true) Sass mixin). Default: "regular".`,
+
+  chartBrushIndex:
+    "Optional 1-based index (1-10) to retrieve a single brush color from the palette instead of the full 10-color list.",
+
+  chartType: `Optional chart type to get color-token guidance for (e.g., "category-chart", "financial-chart", "linear-gauge", "bullet-graph"). When provided, the response lists which theme tokens accept the series brush list for that chart type and a Sass usage snippet. Not all chart types are covered — sparkline and selection/highlight colors are out of scope (see the guidance resource for why).`,
+
+  customBrushes:
+    "Optional array of CSS colors to validate as a custom series brush list before using them in a $brushes: (...) override. When provided, the tool checks each color is valid and flags any pair of colors that may be hard to visually distinguish (similar hue).",
 
   // ---------------------------------------------------------------------------
   // Resource read parameters

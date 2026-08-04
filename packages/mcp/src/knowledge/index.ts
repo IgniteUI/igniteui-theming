@@ -2,6 +2,19 @@
  * Knowledge base index - re-exports all embedded theming data.
  */
 
+// Chart series colors
+export {
+  CHART_BRUSHES_COLOR_BLIND,
+  CHART_BRUSHES_REGULAR,
+  CHART_SERIES_COLORS_MARKDOWN,
+  CHART_TYPE_COLOR_TOKENS,
+  CHART_TYPES,
+  type ChartColorToken,
+  type ChartTypeColorInfo,
+  EXCLUDED_CHART_TYPES,
+  getChartBrushPalette,
+  getChartTypeColorTokens,
+} from "./chart-colors.js";
 // Color usage
 export {
   COLOR_SEMANTIC_ROLES,
@@ -12,7 +25,6 @@ export {
   STATE_PATTERNS,
   THEME_PATTERNS,
 } from "./color-usage.js";
-
 // Color guidance
 export {
   COLOR_GUIDANCE_MARKDOWN,

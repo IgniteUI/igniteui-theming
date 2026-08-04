@@ -4,6 +4,12 @@
  */
 
 import {
+  CHART_BRUSHES_COLOR_BLIND,
+  CHART_BRUSHES_REGULAR,
+  CHART_SERIES_COLORS_MARKDOWN,
+  CHART_TYPE_COLOR_TOKENS,
+} from "../knowledge/chart-colors.js";
+import {
   COLOR_SEMANTIC_ROLES,
   COLOR_USAGE_MARKDOWN,
   OPACITY_USAGE,
@@ -89,6 +95,9 @@ export const RESOURCE_URIS = {
   GUIDANCE_COLORS_ROLES: `${RESOURCE_SCHEME}://guidance/colors/roles`,
   GUIDANCE_COLORS_STATES: `${RESOURCE_SCHEME}://guidance/colors/states`,
   GUIDANCE_COLORS_THEMES: `${RESOURCE_SCHEME}://guidance/colors/themes`,
+  GUIDANCE_COLORS_CHARTS: `${RESOURCE_SCHEME}://guidance/colors/charts`,
+  // Chart preset resources
+  PRESETS_CHART_BRUSHES: `${RESOURCE_SCHEME}://presets/chart-brushes`,
   // Layout documentation resources
   DOCS_LAYOUT_OVERVIEW: `${RESOURCE_SCHEME}://docs/spacing-and-sizing`,
   DOCS_FUNCTION_PAD: `${RESOURCE_SCHEME}://docs/functions/pad`,
@@ -227,6 +236,20 @@ export const RESOURCE_DEFINITIONS = [
     name: "Color Design System Patterns",
     description:
       "Color usage characteristics specific to Material, Fluent, Bootstrap, and Indigo design systems.",
+    mimeType: "application/json",
+  },
+  {
+    uri: RESOURCE_URIS.GUIDANCE_COLORS_CHARTS,
+    name: "Chart Series Colors Guidance",
+    description:
+      "Guidance on the shared chart series brush palette (regular/color-blind), the accessibility toggle, per-chart-type color tokens (category, data, doughnut, pie, funnel, shape, financial, gauge, bullet graph), and the theme-vs-component-property override precedence. Excludes sparkline and selection/highlight colors.",
+    mimeType: "text/markdown",
+  },
+  {
+    uri: RESOURCE_URIS.PRESETS_CHART_BRUSHES,
+    name: "Chart Series Brush Palettes",
+    description:
+      "The shared 10-color chart series palette used as the default for chart brush/outline tokens, in both regular and color-blind-friendly variants.",
     mimeType: "application/json",
   },
   // Layout documentation resources
@@ -486,6 +509,13 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
               description: "Material/Fluent/Bootstrap/Indigo characteristics",
               mimeType: "application/json",
             },
+            {
+              uri: RESOURCE_URIS.GUIDANCE_COLORS_CHARTS,
+              name: "Chart Series Colors Guidance",
+              description:
+                "Shared chart series brush palette, per-chart-type color tokens, and theme-vs-component-property precedence",
+              mimeType: "text/markdown",
+            },
           ],
         },
         null,
@@ -535,6 +565,28 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
     RESOURCE_URIS.GUIDANCE_COLORS_THEMES,
     () => ({
       content: JSON.stringify(THEME_PATTERNS, null, 2),
+      mimeType: "application/json",
+    }),
+  ],
+  [
+    RESOURCE_URIS.GUIDANCE_COLORS_CHARTS,
+    () => ({
+      content: CHART_SERIES_COLORS_MARKDOWN,
+      mimeType: "text/markdown",
+    }),
+  ],
+  [
+    RESOURCE_URIS.PRESETS_CHART_BRUSHES,
+    () => ({
+      content: JSON.stringify(
+        {
+          regular: CHART_BRUSHES_REGULAR,
+          "color-blind": CHART_BRUSHES_COLOR_BLIND,
+          chartTypeTokens: CHART_TYPE_COLOR_TOKENS,
+        },
+        null,
+        2,
+      ),
       mimeType: "application/json",
     }),
   ],

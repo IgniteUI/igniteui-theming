@@ -434,6 +434,35 @@ export const getColorSchema = getColorBaseSchema.refine(
 
 export type GetColorParams = z.infer<typeof getColorSchema>;
 
+/**
+ * Schema for get_chart_series_colors tool input.
+ * Retrieves the shared chart series brush palette, per-chart-type token
+ * guidance, and optionally validates a user-supplied custom brush list.
+ */
+export const getChartSeriesColorsSchema = z.object({
+  mode: z
+    .enum(["regular", "color-blind"])
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.chartBrushMode),
+  index: z
+    .number()
+    .int()
+    .min(1)
+    .max(10)
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.chartBrushIndex),
+  chartType: z.string().optional().describe(PARAM_DESCRIPTIONS.chartType),
+  customBrushes: z
+    .array(colorSchema)
+    .min(1)
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.customBrushes),
+});
+
+export type GetChartSeriesColorsParams = z.infer<
+  typeof getChartSeriesColorsSchema
+>;
+
 // ============================================================================
 // Layout Tools Schemas
 // ============================================================================

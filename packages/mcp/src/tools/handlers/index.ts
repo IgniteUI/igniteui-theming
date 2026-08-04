@@ -2,6 +2,7 @@
  * Tool handlers index - re-exports all tool handlers.
  */
 
+export { handleGetChartSeriesColors } from "./chart-colors.js";
 export { handleGetColor } from "./color.js";
 export { handleCreateComponentTheme } from "./component-theme.js";
 export { handleGetComponentDesignTokens } from "./component-tokens.js";
