@@ -573,6 +573,33 @@ AI: Now I will generate themes for combo and its related components,
 
 ---
 
+### `get_chart_series_colors`
+
+Retrieves the shared Ignite UI chart series brush palette (the fixed 10-color palette used as the default fill/outline colors for chart series), per-chart-type color-token guidance, and validates custom brush lists before they're used in a theme override.
+
+Covers category, data, doughnut, pie, funnel, shape, and financial charts, plus linear/radial gauge and bullet graph range colors. **Not covered:** sparkline (its color tokens are singular, not a palette list) and selection/highlight colors (`selectionBrush`, `focusBrush` — component-only, no Sass theme equivalent).
+
+| Parameter       | Type                           | Required | Description                                                                                                             |
+| --------------- | ------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `mode`          | `"regular"` \| `"color-blind"` | No       | Which palette variant to use (default: `"regular"`)                                                                     |
+| `index`         | number (1-10)                  | No       | Retrieve a single brush color by 1-based index instead of the full list                                                 |
+| `chartType`     | string                         | No       | Chart type to get token guidance for (e.g. `"category-chart"`, `"financial-chart"`, `"linear-gauge"`, `"bullet-graph"`) |
+| `customBrushes` | string[]                       | No       | A custom color list to validate before using it in a `$brushes: (...)` override                                         |
+
+**Example prompts:**
+
+> "What are the default chart series colors?"
+
+> "Give me the color-blind-friendly chart palette"
+
+> "Which theme tokens control the colors of a category chart's series?"
+
+> "I want to use these 4 brand colors for my financial chart series — are they distinguishable enough?"
+
+**Important:** this tool (and the Sass it generates) sets the **theme default** only. Chart components also expose their own color-list properties (e.g. Angular's `brushes`, `outlines`, `markerBrushes`, `markerOutlines`, `rangeBrushes`, `rangeOutlines`) that **override** the theme default per instance.
+
+---
+
 ## Resources Reference
 
 The MCP server exposes read-only resources that provide reference data.
@@ -589,24 +616,26 @@ The MCP server exposes read-only resources that provide reference data.
 
 ### Preset Resources
 
-| URI                                | Description                               |
-| ---------------------------------- | ----------------------------------------- |
-| `theming://presets/palettes`       | All predefined palette configurations     |
-| `theming://presets/palettes/light` | Light mode palette presets                |
-| `theming://presets/palettes/dark`  | Dark mode palette presets                 |
-| `theming://presets/typography`     | Typography presets for all design systems |
-| `theming://presets/elevations`     | Elevation shadow presets                  |
+| URI                                | Description                                                                            |
+| ---------------------------------- | -------------------------------------------------------------------------------------- |
+| `theming://presets/palettes`       | All predefined palette configurations                                                  |
+| `theming://presets/palettes/light` | Light mode palette presets                                                             |
+| `theming://presets/palettes/dark`  | Dark mode palette presets                                                              |
+| `theming://presets/typography`     | Typography presets for all design systems                                              |
+| `theming://presets/elevations`     | Elevation shadow presets                                                               |
+| `theming://presets/chart-brushes`  | Shared chart series brush palette (regular + color-blind) and per-chart-type token map |
 
 ### Color Guidance Resources
 
-| URI                                | Description                                |
-| ---------------------------------- | ------------------------------------------ |
-| `theming://guidance/colors`        | Overview of color guidance resources       |
-| `theming://guidance/colors/rules`  | Light/dark theme color rules               |
-| `theming://guidance/colors/usage`  | Which shades to use for different purposes |
-| `theming://guidance/colors/roles`  | Semantic meaning of each color family      |
-| `theming://guidance/colors/states` | Color changes for interaction states       |
-| `theming://guidance/colors/themes` | Design system-specific color patterns      |
+| URI                                | Description                                                                                                  |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `theming://guidance/colors`        | Overview of color guidance resources                                                                         |
+| `theming://guidance/colors/rules`  | Light/dark theme color rules                                                                                 |
+| `theming://guidance/colors/usage`  | Which shades to use for different purposes                                                                   |
+| `theming://guidance/colors/roles`  | Semantic meaning of each color family                                                                        |
+| `theming://guidance/colors/states` | Color changes for interaction states                                                                         |
+| `theming://guidance/colors/themes` | Design system-specific color patterns                                                                        |
+| `theming://guidance/colors/charts` | Chart series brush palette, per-chart-type color tokens, and theme-vs-component-property override precedence |
 
 ### Layout Documentation Resources
 

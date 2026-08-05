@@ -60,6 +60,23 @@ palettes {
 }
 
 /*
+* @outputDir - /colors/charts
+*/
+brushes {
+    > regular {
+        @for $i from 1 through list.length($brushes-regular) {
+            --brush-#{$i}: #{list.nth($brushes-regular, $i)};
+        }
+    }
+
+    > color-blind {
+        @for $i from 1 through list.length($brushes-color-blind) {
+            --brush-#{$i}: #{list.nth($brushes-color-blind, $i)};
+        }
+    }
+}
+
+/*
 * @outputDir - /typography/presets
 */
 typescales {
