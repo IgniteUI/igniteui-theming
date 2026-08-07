@@ -26,56 +26,56 @@
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {List} $border-radius [null] - The chip border-radius.
 ///
+/// @param {Color} $background [null] - The default (non-outlined) chip background color.
 /// @param {Color} $text-color [null] - The chip text color. Auto-derived from background.
-/// @param {Color} $background [null] - The chip background color. PRIMARY - derives text-color, border-color, hover/focus states.
+/// @param {Color} $outlined-background [null] - The outlined chip background color.
 /// @param {Color} $outlined-text-color [null] - The outlined chip text color. Auto-derived from the outlined-background.
-/// @param {Color} $outlined-background [null] - The outlined chip background color. PRIMARY - derives text-color, border-color, hover/focus states.
 /// @param {Color} $border-color [null] - The outlined chip border color.
 ///
 /// @param {Color} $disabled-text-color [null] - The disabled chip text color.
 /// @param {Color} $disabled-background [null] - The disabled chip background color.
-/// @param {Color} $disabled-outlined-text-color [null] - The disabled outlined chip text color.
 /// @param {Color} $disabled-outlined-background [null] - The disabled outlined chip background color.
+/// @param {Color} $disabled-outlined-text-color [null] - The disabled outlined chip text color.
 /// @param {Color} $disabled-border-color [null] - The disabled outlined chip border color.
 ///
 /// @param {Color} $ghost-background [null] - The chip ghost background color.
 /// @param {Color} $ghost-text-color [null] - The chip ghost text color.
 /// @param {List} $ghost-shadow [null] - The chip ghost shadow.
 ///
-/// @param {Color} $hover-text-color [null] - The chip text hover color. Auto-derived from hover-background.
 /// @param {Color} $hover-background [null] - The chip hover background color. Auto-derived from background.
-/// @param {Color} $hover-outlined-text-color [null] - The outlined chip hover text color. Auto-derived from hover-outlined-background.
+/// @param {Color} $hover-text-color [null] - The chip text hover color. Auto-derived from hover-background.
 /// @param {Color} $hover-outlined-background [null] - The outlined chip hover background color. Auto-derived from outlined-background.
-/// @param {Color} $hover-border-color [null] - The outlined chip hover border color.
+/// @param {Color} $hover-outlined-text-color [null] - The outlined chip hover text color. Auto-derived from hover-outlined-background.
+/// @param {Color} $hover-border-color [null] - The outlined chip hover border color. Auto-derived from border-color.
 ///
-/// @param {Color} $focus-text-color [null] - The chip text focus color. Auto-derived from focus-background.
 /// @param {Color} $focus-background [null] - The chip focus background color. Auto-derived from background.
-/// @param {Color} $focus-outlined-text-color [null] - The outlined chip focus text color. Auto-derived from focus-outlined-background.
+/// @param {Color} $focus-text-color [null] - The chip text focus color. Auto-derived from focus-background.
 /// @param {Color} $focus-outlined-background [null] - The outlined chip focus background color. Auto-derived from outlined-background.
-/// @param {Color} $focus-border-color [null] - The outlined chip focus border color.
-/// @param {Color} $focus-shadow-color [null] - The chip focus shadow color in Bootstrap and Indigo.
+/// @param {Color} $focus-outlined-text-color [null] - The outlined chip focus text color. Auto-derived from focus-outlined-background.
+/// @param {Color} $focus-border-color [null] - The outlined chip focus border color. Auto-derived from border-color.
+/// @param {Color} $focus-shadow-color [null] - The chip focus shadow color in Bootstrap and Indigo. Auto-derived from focus-border-color.
 ///
-/// @param {Color} $selected-text-color [null] - The selected chip text color. Auto-derived from selected-background.
 /// @param {Color} $selected-background [null] - The selected chip background color. Auto-derived from background.
+/// @param {Color} $selected-text-color [null] - The selected chip text color. Auto-derived from selected-background.
+/// @param {Color} $selected-outlined-background [null] - The outlined chip background color. Auto-derived from outlined-background.
 /// @param {Color} $selected-outlined-text-color [null] - The outlined chip text color. Auto-derived from selected-outlined-background.
-/// @param {Color} $selected-outlined-background [null] - The outlined chip background color. PRIMARY - derives text-color, border-color, hover/focus states.
 /// @param {Color} $selected-border-color [null] - The selected outlined chip border color.
 ///
-/// @param {Color} $hover-selected-text-color [null] - The selected chip hover text color. Auto-derived from hover-selected-background.
 /// @param {Color} $hover-selected-background [null] - The selected chip hover background color. Auto-derived from selected-background.
-/// @param {Color} $hover-selected-outlined-text-color [null] - The outlined chip hover text color. Auto-derived from hover-selected-outlined-background.
+/// @param {Color} $hover-selected-text-color [null] - The selected chip hover text color. Auto-derived from hover-selected-background.
 /// @param {Color} $hover-selected-outlined-background [null] - The outlined chip hover background color. Auto-derived from selected-outlined-background.
-/// @param {Color} $hover-selected-border-color [null] - The selected outlined chip hover border color.
+/// @param {Color} $hover-selected-outlined-text-color [null] - The outlined chip hover text color. Auto-derived from hover-selected-outlined-background.
+/// @param {Color} $hover-selected-border-color [null] - The selected outlined chip hover border color. Auto-derived from selected-border-color.
 ///
-/// @param {Color} $focus-selected-text-color [null] - The selected chip text focus color. Auto-derived from focus-selected-background.
 /// @param {Color} $focus-selected-background [null] - The selected chip focus background color. Auto-derived from selected-background.
-/// @param {Color} $focus-selected-outlined-text-color [null] - The selected outlined chip focus text color. Auto-derived from focus-selected-outlined-background.
+/// @param {Color} $focus-selected-text-color [null] - The selected chip text focus color. Auto-derived from focus-selected-background.
 /// @param {Color} $focus-selected-outlined-background [null] - The selected outlined chip focus background color. Auto-derived from selected-outlined-background.
-/// @param {Color} $focus-selected-border-color [null] - The selected outlined chip focus border color.
-/// @param {Color} $focus-selected-shadow-color [null] - The selected chip focus shadow color in Bootstrap and Indigo.
+/// @param {Color} $focus-selected-outlined-text-color [null] - The selected outlined chip focus text color. Auto-derived from focus-selected-outlined-background.
+/// @param {Color} $focus-selected-border-color [null] - The selected outlined chip focus border color. Auto-derived from selected-border-color.
+/// @param {Color} $focus-selected-shadow-color [null] - The selected chip focus shadow color in Bootstrap and Indigo. Auto-derived from focus-selected-border-color.
 ///
-/// @param {Color} $disabled-selected-text-color [null] - The disabled selected chip text color.
 /// @param {Color} $disabled-selected-background [null] - The disabled selected chip background color.
+/// @param {Color} $disabled-selected-text-color [null] - The disabled selected chip text color.
 /// @param {Color} $disabled-selected-outlined-text-color [null] - The disabled selected outlined chip text color.
 /// @param {Color} $disabled-selected-outlined-background [null] - The disabled selected outlined chip background color.
 /// @param {Color} $disabled-selected-border-color [null] - The disabled selected outlined chip border color.
@@ -249,13 +249,33 @@
         $focus-selected-text-color: adaptive-contrast(var(--focus-selected-background));
     }
 
+    @if not($hover-border-color) and $border-color {
+        $hover-border-color: var(--border-color);
+    }
+
+    @if not($focus-border-color) and $border-color {
+        $focus-border-color: var(--border-color);
+    }
+
+    @if not($selected-border-color) and $border-color {
+        $selected-border-color: var(--border-color);
+    }
+
+    @if not($hover-selected-border-color) and $selected-border-color {
+        $hover-selected-border-color: var(--selected-border-color);
+    }
+
+    @if not($focus-selected-border-color) and $selected-border-color {
+        $focus-selected-border-color: var(--selected-border-color);
+    }
+
     @if $variant == 'bootstrap' or $variant == 'indigo' {
-        @if not($focus-shadow-color) and $focus-background {
-            $focus-shadow-color: hsl(from var(--focus-background) h s l / 0.4);
+        @if not($focus-shadow-color) and $focus-border-color {
+            $focus-shadow-color: hsl(from var(--focus-border-color) h s l / 0.4);
         }
 
-        @if not($focus-selected-shadow-color) and $focus-selected-background {
-            $focus-selected-shadow-color: hsl(from var(--focus-selected-background) h s l / 0.4);
+        @if not($focus-selected-shadow-color) and $focus-selected-border-color {
+            $focus-selected-shadow-color: hsl(from var(--focus-selected-border-color) h s l / 0.4);
         }
     }
 
@@ -263,16 +283,54 @@
         $outlined-text-color: adaptive-contrast(var(--outlined-background));
     }
 
+    @if not($hover-outlined-background) and $outlined-background {
+        $hover-outlined-background: dynamic-shade(var(--outlined-background));
+    }
+
     @if not($hover-outlined-text-color) and $hover-outlined-background {
         $hover-outlined-text-color: adaptive-contrast(var(--hover-outlined-background));
+    }
+
+    @if not($focus-outlined-background) and $outlined-background {
+        $focus-outlined-background: dynamic-shade(var(--outlined-background), $offset: 7);
+    }
+
+    @if $variant == 'fluent' {
+        @if not($focus-outlined-background) and $selected-outlined-background {
+            $focus-outlined-background: var(--selected-outlined-background);
+        }
     }
 
     @if not($focus-outlined-text-color) and $focus-outlined-background {
         $focus-outlined-text-color: adaptive-contrast(var(--focus-outlined-background));
     }
 
+    @if $variant != 'indigo' and $variant != 'fluent' {
+        @if not($selected-outlined-background) and $outlined-background {
+            $selected-outlined-background: var(--outlined-background);
+        }
+    } @else {
+        @if not($selected-outlined-background) and $outlined-background {
+            $selected-outlined-background: dynamic-shade(var(--outlined-background));
+        }
+    }
+
     @if not($selected-outlined-text-color) and $selected-outlined-background {
         $selected-outlined-text-color: adaptive-contrast(var(--selected-outlined-background));
+    }
+
+    @if not($hover-selected-outlined-background) and $selected-outlined-background {
+        $hover-selected-outlined-background: dynamic-shade(var(--selected-outlined-background));
+    }
+
+    @if $variant != 'indigo' {
+        @if not($focus-selected-outlined-background) and $selected-outlined-background {
+            $focus-selected-outlined-background: dynamic-shade(var(--selected-outlined-background), $offset: 7);
+        }
+    } @else {
+        @if not($focus-selected-outlined-background) and $selected-outlined-background {
+            $focus-selected-outlined-background: var(--selected-outlined-background);
+        }
     }
 
     @if not($hover-selected-outlined-text-color) and $hover-selected-outlined-background {
