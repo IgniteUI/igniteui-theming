@@ -13,6 +13,7 @@
 /// @type Map
 /// @prop {Map} label-color [color: ('gray', 900)] - The color of the color picker label.
 /// @prop {Map} label-color-disabled [color: ('gray', 500)] - The color of the color picker label in disabled state.
+/// @prop {Map} label-color-invalid [color: ('error', 800)] - The color of the color picker label in disabled state.
 /// @prop {Color} anchor-background [transparent] - The background color of the color picker trigger.
 /// @prop {Map} anchor-background-hover [color: ('gray', 500, .2)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-focus [color: ('gray', 500, .16)] - The background color of the color picker trigger on focus-visible.
@@ -50,6 +51,12 @@ $light-color-picker: extend(
             color: (
                 'gray',
                 900,
+            ),
+        ),
+        label-color-invalid: (
+            color: (
+                'error',
+                800,
             ),
         ),
         label-color-disabled: (
@@ -201,18 +208,11 @@ $light-color-picker: extend(
 /// @type Map
 /// @prop {List} trigger-size  [(rem(24px), rem(30px), rem(36px))] - The size used for the color picker trigger.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
-/// @prop {Map} invalid-color [color: 'error', 500] - The color used for invalid states.
 /// @requires $light-color-picker
 $material-color-picker: extend(
     $light-color-picker,
     $material-elevation-color-picker,
     (
-        invalid-color: (
-            color: (
-                'error',
-                500,
-            ),
-        ),
         trigger-size: (
             sizable: (
                 rem(24px),
@@ -247,11 +247,25 @@ $material-color-picker: extend(
 /// @prop {Map} anchor-background-active [color: ('gray', 300)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-active [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Color} anchor-background-disabled [color: ('gray', 100)] - The background color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in disabled state.
+/// @prop {Map} invalid-color [color: 'error', 500] - The color used for invalid states.
 /// @requires $light-color-picker
 $fluent-color-picker: extend(
     $light-color-picker,
     $fluent-elevation-color-picker,
     (
+        invalid-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        label-color-invalid: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
         anchor-border-radius: (
             border-radius: rem(2px),
         ),
@@ -394,6 +408,7 @@ $bootstrap-color-picker: extend(
 
 /// Generates an indigo color picker schema.
 /// @type Map
+/// @prop {Map} label-color-invalid [color: ('gray', 800)] - The color of the color picker label in disabled state.
 /// @prop {Map} invalid-color [color: 'error', 500] - The color used for invalid states.
 /// @prop {Map} label-color [color: ('gray', 800)] - The color of the color picker label.
 /// @prop {Map} label-color-disabled [color: ('gray', 900, .2)] - The color of the color picker label in disabled state.
@@ -431,10 +446,16 @@ $indigo-color-picker: extend(
                 700,
             ),
         ),
+        label-color-invalid: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
         label-color-disabled: (
             color: (
                 'gray',
-                500,
+                900,
                 0.2,
             ),
         ),
