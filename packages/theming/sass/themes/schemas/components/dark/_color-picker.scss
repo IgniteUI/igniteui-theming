@@ -221,9 +221,9 @@ $dark-bootstrap-color-picker: extend(
 /// @prop {Map} anchor-background-focus-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + active state.
-/// @prop {Map} anchor-border-color-disabled [contrast-color: ('gray', 900, .2)] - The border color of the color picker trigger in disabled state.
-/// @prop {Map} label-color-disabled [contrast-color: ('gray', 900, .2)] - The color of the color picker label in disabled state.
-/// @prop {Map} anchor-outline-color [color: ('gray', 900, .2)] - The outline color of the color picker trigger in focus-visible state.
+/// @prop {Map} anchor-border-color-disabled [contrast-color: ('gray', 50, .2)] - The border color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-disabled [contrast-color: ('gray', 50, .2)] - The color of the color picker label in disabled state.
+/// @prop {Map} anchor-outline-color [contrast-color: ('gray', 50, .2)] - The outline color of the color picker trigger in focus-visible state.
 /// @requires $indigo-color-picker
 /// @requires $dark-base-color-picker
 $dark-indigo-color-picker: extend(
@@ -274,14 +274,14 @@ $dark-indigo-color-picker: extend(
         anchor-border-color-disabled: (
             contrast-color: (
                 'gray',
-                900,
+                50,
                 0.2,
             ),
         ),
         anchor-outline-color: (
-            color: (
+            contrast-color: (
                 'gray',
-                900,
+                50,
                 0.2,
             ),
         ),
