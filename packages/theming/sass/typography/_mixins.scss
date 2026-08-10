@@ -69,10 +69,7 @@
 }
 
 /// Styles all native elements that match the IElementCategories map.
-/// Elements marked `[data-no-typography]` - or nested inside one - opt out of
-/// this default entirely, so a consumer's own override (e.g. a component that
-/// restyles the heading it renders) doesn't have to fight this rule for
-/// specificity or cascade layer priority.
+/// @param {Boolean} $allow-exclusion [false] - When true, excludes `h1-h6` and `p` styles from elements `[data-no-typography]` (or nested inside one).
 /// @example scss - Add type styles to all native elements.
 ///   .ig-typography {
 ///     @include type-style-elements();
@@ -80,7 +77,7 @@
 /// @requires {mixin} type-style
 /// @requires $ITypeScale
 /// @requires $IElementCategories
-@mixin type-style-elements() {
+@mixin type-style-elements($allow-exclusion: false) {
     @each $category in types.$ITypeScale {
         // Get the native element that uses typographic styles directly
         // as mapped in the $IElementCategories
@@ -88,8 +85,14 @@
 
         // Add native element typographic styles.
         @if $e {
-            :where(#{$e}):not(:is([data-no-typography], [data-no-typography] *)) {
-                @include type-style($category);
+            @if $allow-exclusion {
+                :where(#{$e}):not(:is([data-no-typography], [data-no-typography] *)) {
+                    @include type-style($category);
+                }
+            } @else {
+                #{$e} {
+                    @include type-style($category);
+                }
             }
         }
     }
@@ -139,6 +142,7 @@
 /// @access public
 /// @param {String | List} $font-family - The font family to be used across all typographic elements.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
+/// @param {Boolean} $allow-exclusion [false] - When true, excludes `h1-h6` and `p` styles from elements `[data-no-typography]` (or nested inside one).
 /// @example scss - Using a font-family list
 ///   @include typography(("Open Sans", Helvetica, sans-serif), $my-type-scale);
 /// @example scss - Using a quoted string (backward compatible)
@@ -152,7 +156,7 @@
 /// @requires {mixin} type-style-elements
 /// @requires {function} is-root
 /// @requires {function} is-host
-@mixin typography($font-family, $type-scale) {
+@mixin typography($font-family, $type-scale, $allow-exclusion: false) {
     $root: is-root();
     $host: is-host();
     $scope: if($root, ':root', '&');
@@ -168,7 +172,7 @@
 
     @if $root or $host {
         .ig-typography {
-            @include type-style-elements();
+            @include type-style-elements($allow-exclusion);
             @include type-style-classes();
         }
     }
