@@ -69,8 +69,10 @@
 }
 
 /// Styles all native elements that match the IElementCategories map.
-/// Element selectors are wrapped in `:where()` to keep them overridable with a
-/// single class selector, without adding specificity beyond the caller's scope.
+/// Elements marked `[data-no-typography]` - or nested inside one - opt out of
+/// this default entirely, so a consumer's own override (e.g. a component that
+/// restyles the heading it renders) doesn't have to fight this rule for
+/// specificity or cascade layer priority.
 /// @example scss - Add type styles to all native elements.
 ///   .ig-typography {
 ///     @include type-style-elements();
@@ -86,7 +88,7 @@
 
         // Add native element typographic styles.
         @if $e {
-            :where(#{$e}) {
+            :where(#{$e}):not(:is([data-no-typography], [data-no-typography] *)) {
                 @include type-style($category);
             }
         }
