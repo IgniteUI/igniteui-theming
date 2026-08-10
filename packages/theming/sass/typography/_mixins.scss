@@ -69,6 +69,8 @@
 }
 
 /// Styles all native elements that match the IElementCategories map.
+/// Element selectors are wrapped in `:where()` to keep them overridable with a
+/// single class selector, without adding specificity beyond the caller's scope.
 /// @example scss - Add type styles to all native elements.
 ///   .ig-typography {
 ///     @include type-style-elements();
@@ -84,7 +86,7 @@
 
         // Add native element typographic styles.
         @if $e {
-            #{$e} {
+            :where(#{$e}) {
                 @include type-style($category);
             }
         }
