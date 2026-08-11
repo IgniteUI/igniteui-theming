@@ -102,9 +102,7 @@ $light-color-picker: extend(
             ),
         ),
         anchor-background-disabled: transparent,
-        anchor-outline-color: (
-            color: transparent,
-        ),
+        anchor-outline-color: transparent,
         anchor-border-color: (
             color: (
                 'gray',
@@ -179,9 +177,7 @@ $light-color-picker: extend(
                 400,
             ),
         ),
-        transparency-grid-even: (
-            color: #fff,
-        ),
+        transparency-grid-even: #fff,
         invalid-color: (
             color: (
                 'error',
@@ -420,7 +416,7 @@ $bootstrap-color-picker: extend(
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 900, .15)] - The border color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-outline-color [color: ('gray', 900, .15)] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 900, .05)] - The background color of the color picker trigger on hover.
-/// @prop {Map} anchor-background-focus [color: transparent] - The background color of the color picker trigger on focus-visible.
+/// @prop {Color} anchor-background-focus [transparent] - The background color of the color picker trigger on focus-visible.
 /// @prop {Map} anchor-background-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
@@ -488,9 +484,7 @@ $indigo-color-picker: extend(
                 0.05,
             ),
         ),
-        anchor-background-focus: (
-            color: transparent,
-        ),
+        anchor-background-focus: transparent,
         anchor-background-active: (
             color: (
                 'gray',
