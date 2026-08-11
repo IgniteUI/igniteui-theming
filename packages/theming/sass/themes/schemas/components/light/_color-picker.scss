@@ -37,7 +37,7 @@
 /// @prop {Map} swatch-border-color [color: 'gray', 600] - The border color of the predefined color swatches.
 /// @prop {Map} swatch-separator-color [color: 'gray', 300] - The color of the separator above the swatches.
 /// @prop {List} swatch-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius of the predefined color swatches.
-/// @prop {Number} swatch-size [rem(24px)] - The size of the predefined color swatches.
+/// @prop {Number} swatch-size [rem(28px)] - The size of the predefined color swatches.
 /// @prop {Map} invalid-color [color: 'error', 800] - The color used for invalid states.
 /// @prop {Number} marker-size [rem(16px)] - The size of the color picker canvas marker.
 /// @prop {Number} marker-elevation [1] - The elevation of the color picker canvas marker.
@@ -172,7 +172,7 @@ $light-color-picker: extend(
         swatch-border-radius: (
             border-radius: rem(4px),
         ),
-        swatch-size: rem(24px),
+        swatch-size: rem(28px),
         transparency-grid-color: (
             color: (
                 'gray',
@@ -422,7 +422,6 @@ $bootstrap-color-picker: extend(
 /// @prop {Map} anchor-background-focus-active [color: ('gray', 900, .5)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
 /// @prop {Color} swatch-separator-color [transparent] - The color of the separator above the swatches.
-/// @prop {Number} swatch-size [rem(20px)] - The size of the predefined color swatches.
 /// @prop {List} trigger-size  [(rem(20px), rem(24px), rem(28px))] - The size used for the color picker trigger.
 /// @prop {Number} default-size [2] - The default size used for the color picker component.
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
@@ -510,7 +509,6 @@ $indigo-color-picker: extend(
             ),
         ),
         swatch-separator-color: transparent,
-        swatch-size: rem(20px),
         picker-border-radius: rem(10px),
         trigger-size: (
             sizable: (
