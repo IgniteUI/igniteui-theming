@@ -236,7 +236,7 @@ $scale: type-scale(
             }
         }
 
-        @include it('should include CSS headeing and paragraph style rules for mapped categories in a type scale') {
+        @include it('should include CSS headeing and paragraph style rules for mapped categories in a type scale, unwrapped by default') {
             @include assert() {
                 @include output() {
                     @include type-style-elements();
@@ -245,6 +245,22 @@ $scale: type-scale(
                 @include expect() {
                     @each $category, $element in $IElementCategories {
                         #{$element} {
+                            @include type-style($category);
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should wrap CSS heading and paragraph style rules in :where():not() when $allow-exclusion is true') {
+            @include assert() {
+                @include output() {
+                    @include type-style-elements($allow-exclusion: true);
+                }
+
+                @include expect() {
+                    @each $category, $element in $IElementCategories {
+                        :where(#{$element}):not(:is([data-no-typography], [data-no-typography] *)) {
                             @include type-style($category);
                         }
                     }
