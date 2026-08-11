@@ -1,0 +1,62 @@
+@use 'sass:map';
+@use '../../config';
+@use '../../functions' as *;
+@use '../../schemas/' as *;
+@use '../../../utils/map' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
+/// QR Code Theme
+///
+/// PRIMARY TOKENS:
+/// - `$background` — The QR code background color.
+/// - `$dark-color` — The color of the dark (data) modules.
+///
+/// `$corner-square-color` and `$corner-dot-color` default to a live `var(--dark-color)`
+/// reference in the schema, so they automatically track `$dark-color` - including plain CSS
+/// custom property overrides at runtime - unless a caller sets a corner color explicitly.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $background [null] - The background color of the QR code. PRIMARY.
+/// @param {Color} $dark-color [null] - The color used for the dark (data) modules of the QR code. PRIMARY - falls back for corner-square-color, corner-dot-color.
+/// @param {Color} $corner-square-color [null] - The fill color for the outer corner (finder-pattern) squares. Falls back to dark-color.
+/// @param {Color} $corner-dot-color [null] - The fill color for the inner corner (finder-pattern) dots. Falls back to dark-color.
+/// @requires $light-material-schema
+///
+/// @example scss - Change the data module and background colors
+///   $my-qr-code-theme: qr-code-theme($background: white, $dark-color: black);
+///   // Pass the theme to the css-vars() mixin
+///   @include css-vars($my-qr-code-theme);
+@function qr-code-theme(
+    $schema: $light-material-schema,
+    $background: null,
+    $dark-color: null,
+    $corner-square-color: null,
+    $corner-dot-color: null
+) {
+    $selector: #{config.element-prefix() + '-' + 'qr-code'};
+    $qr-code-schema: ();
+
+    @if map.has-key($schema, 'qr-code') {
+        $qr-code-schema: map.get($schema, 'qr-code');
+    } @else {
+        $qr-code-schema: $schema;
+    }
+
+    $theme: digest-schema($qr-code-schema);
+
+    @return extend(
+        $theme,
+        (
+            selector: $selector,
+            background: $background,
+            dark-color: $dark-color,
+            corner-square-color: $corner-square-color,
+            corner-dot-color: $corner-dot-color,
+        )
+    );
+}

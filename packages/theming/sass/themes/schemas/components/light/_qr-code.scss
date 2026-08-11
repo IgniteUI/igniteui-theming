@@ -1,0 +1,83 @@
+@use '../../../../utils/map' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a light qr-code schema.
+///
+/// `background`/`dark-color` are fixed literal colors (not palette-relative `gray` shades) so
+/// the QR code stays reliably dark-on-light regardless of whether the consuming app is using
+/// a light or dark palette - the `gray` scale is derived from the active `$surface` luminance
+/// and inverts in dark mode, which would silently flip the code to light-on-dark and risk
+/// scan failures on many real-world QR scanners. `corner-square-color` and `corner-dot-color`
+/// are set to a live `var(--dark-color)` reference rather than a literal, so they automatically
+/// track `dark-color` - including plain CSS custom property overrides at runtime - unless a
+/// consumer sets a corner color explicitly. The `qr-code-theme()` function additionally derives
+/// a literal value for them when `$dark-color` is passed as an explicit Sass argument.
+///
+/// @type Map
+/// @prop {Color} background [white] - The background color of the QR code.
+/// @prop {Color} dark-color [black] - The color used for the dark (data) modules of the QR code.
+/// @prop {String} corner-square-color [var(--dark-color)] - The fill color for the outer corner squares of the QR code. Tracks dark-color by default.
+/// @prop {String} corner-dot-color [var(--dark-color)] - The fill color for the inner corner dots of the QR code. Tracks dark-color by default.
+$light-qr-code: (
+    background: white,
+    dark-color: black,
+    corner-square-color: var(--dark-color),
+    corner-dot-color: var(--dark-color),
+    _meta: (
+        name: 'qr-code',
+        variant: 'light',
+    ),
+);
+
+/// Generates a material qr-code schema.
+/// @type Map
+/// @requires $light-qr-code
+$material-qr-code: extend(
+    $light-qr-code,
+    (
+        _meta: (
+            theme: 'material',
+        ),
+    )
+);
+
+/// Generates a fluent qr-code schema.
+/// @type Map
+/// @requires $light-qr-code
+$fluent-qr-code: extend(
+    $light-qr-code,
+    (
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
+
+/// Generates a bootstrap qr-code schema.
+/// @type Map
+/// @requires $light-qr-code
+$bootstrap-qr-code: extend(
+    $light-qr-code,
+    (
+        _meta: (
+            theme: 'bootstrap',
+        ),
+    )
+);
+
+/// Generates an indigo qr-code schema.
+/// @type Map
+/// @requires $light-qr-code
+$indigo-qr-code: extend(
+    $light-qr-code,
+    (
+        _meta: (
+            theme: 'indigo',
+        ),
+    )
+);
