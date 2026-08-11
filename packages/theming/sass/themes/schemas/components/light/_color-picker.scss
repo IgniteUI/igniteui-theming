@@ -13,16 +13,16 @@
 /// @type Map
 /// @prop {Map} label-color [color: ('gray', 900)] - The color of the color picker label.
 /// @prop {Map} label-color-disabled [color: ('gray', 500)] - The color of the color picker label in disabled state.
-/// @prop {Map} label-color-invalid [color: ('error', 800)] - The color of the color picker label in disabled state.
+/// @prop {Map} label-color-invalid [color: ('error', 800)] - The color of the color picker label in invalid state.
 /// @prop {Color} anchor-background [transparent] - The background color of the color picker trigger.
 /// @prop {Map} anchor-background-hover [color: ('gray', 500, .2)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-focus [color: ('gray', 500, .16)] - The background color of the color picker trigger on focus-visible.
 /// @prop {Map} anchor-background-focus-hover [color: ('gray', 500, .24)] - The background color of the color picker trigger in focus-visible + hover state.
-/// @prop {Map} anchor-background-active [color: ('gray', 500, .16)] - The background color of the color picker trigger in active state.
+/// @prop {Map} anchor-background-active [color: ('gray', 500, .32)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-active [color: ('gray', 500, .32)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Color} anchor-background-disabled [transparent] - The background color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-border-color [color: ('gray', 600)] - The border color of the color picker trigger.
-/// @prop {Map} anchor-border-color-disabled [color: ('gray', 600)] - The border color of the color picker trigger in disabled state.
+/// @prop {Map} anchor-border-color-disabled [color: ('gray', 300)] - The border color of the color picker trigger in disabled state.
 /// @prop {Color} anchor-outline-color [transparent] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Number} anchor-border-radius [rem(4px)] - The border radius of the color picker trigger.
 /// @prop {Map} swatch-preview-border-color [color: ('gray', 300)] - The border color of the color preview inside the trigger.
@@ -34,17 +34,17 @@
 /// @prop {Map} slider-track-border-color [color: ('gray', 600)] - The border color of the hue and alpha slider tracks.
 /// @prop {Number} slider-track-border-radius [rem(10px)] - The border radius of the hue and alpha slider tracks.
 /// @prop {Map} slider-thumb-border-color [contrast-color: ('gray', 900)] - The border color of the hue and alpha slider thumbs.
-/// @prop {Map} swatch-border-color [color: 'gray', 600] - The border color of the predefined color swatches.
-/// @prop {Map} swatch-separator-color [color: 'gray', 300] - The color of the separator above the swatches.
-/// @prop {List} swatch-border-radius [(rem(4px), rem(0), rem(8px))] - The border radius of the predefined color swatches.
+/// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
+/// @prop {Map} swatch-separator-color [color: ('gray', 300)] - The color of the separator above the swatches.
+/// @prop {Number} swatch-border-radius [rem(4px)] - The border radius of the predefined color swatches.
 /// @prop {Number} swatch-size [rem(28px)] - The size of the predefined color swatches.
-/// @prop {Map} invalid-color [color: 'error', 800] - The color used for invalid states.
+/// @prop {Map} transparency-grid-odd [color: ('gray', 400)] - The odd color of the transparency grid.
+/// @prop {Color} transparency-grid-even [#fff] - The even color of the transparency grid.
+/// @prop {Map} invalid-color [color: ('error', 800)] - The color used for invalid states.
 /// @prop {Number} marker-size [rem(16px)] - The size of the color picker canvas marker.
 /// @prop {Number} marker-elevation [1] - The elevation of the color picker canvas marker.
 /// @prop {Map} marker-color [contrast-color: ('gray', 900)] - The color of the color picker canvas marker.
 /// @prop {Number} default-size [2] - The default size used for the color picker component.
-/// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
-/// @requires $default-elevation-color-picker
 $light-color-picker: extend(
     (
         label-color: (
@@ -173,14 +173,14 @@ $light-color-picker: extend(
             border-radius: rem(4px),
         ),
         swatch-size: rem(28px),
-        transparency-grid-color: (
+        transparency-grid-odd: (
             color: (
                 'gray',
                 400,
             ),
         ),
-        transparency-grid-background: (
-            color: 'surface',
+        transparency-grid-even: (
+            color: #fff,
         ),
         invalid-color: (
             color: (
@@ -208,7 +208,9 @@ $light-color-picker: extend(
 /// @type Map
 /// @prop {List} trigger-size  [(rem(24px), rem(30px), rem(36px))] - The size used for the color picker trigger.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
+/// @prop {Number} picker-elevation [24] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @requires $light-color-picker
+/// @requires $material-elevation-color-picker
 $material-color-picker: extend(
     $light-color-picker,
     $material-elevation-color-picker,
@@ -246,10 +248,12 @@ $material-color-picker: extend(
 /// @prop {Map} anchor-background-focus-hover [color: ('gray', 200)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 300)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-active [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
-/// @prop {Color} anchor-background-disabled [color: ('gray', 100)] - The background color of the color picker trigger in disabled state.
-/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in disabled state.
-/// @prop {Map} invalid-color [color: 'error', 500] - The color used for invalid states.
+/// @prop {Map} anchor-background-disabled [color: ('gray', 100)] - The background color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in invalid state.
+/// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
+/// @prop {Number} picker-elevation [24] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @requires $light-color-picker
+/// @requires $fluent-elevation-color-picker
 $fluent-color-picker: extend(
     $light-color-picker,
     $fluent-elevation-color-picker,
@@ -408,21 +412,20 @@ $bootstrap-color-picker: extend(
 
 /// Generates an indigo color picker schema.
 /// @type Map
-/// @prop {Map} label-color-invalid [color: ('gray', 800)] - The color of the color picker label in disabled state.
-/// @prop {Map} invalid-color [color: 'error', 500] - The color used for invalid states.
-/// @prop {Map} label-color [color: ('gray', 800)] - The color of the color picker label.
+/// @prop {Map} label-color-invalid [color: ('gray', 800)] - The color of the color picker label in invalid state.
+/// @prop {Map} invalid-color [color: ('error', 800)] - The color used for invalid states.
+/// @prop {Map} label-color [color: ('gray', 700)] - The color of the color picker label.
 /// @prop {Map} label-color-disabled [color: ('gray', 900, .2)] - The color of the color picker label in disabled state.
 /// @prop {Map} anchor-border-color [color: ('gray', 400)] - The border color of the color picker trigger.
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 900, .15)] - The border color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-outline-color [color: ('gray', 900, .15)] - The outline color of the color picker trigger in focus-visible state.
-/// @prop {Map} anchor-background-hover [color: ('gray', 900, .5)] - The background color of the color picker trigger on hover.
-/// @prop {Color} anchor-background-focus [color: (transparent] - The background color of the color picker trigger on focus-visible.
-/// @prop {Map} anchor-background-focus-hover [color: ('gray', 900, .5)] - The background color of the color picker trigger on hover.
-/// @prop {Map} anchor-background-active [color: ('gray', 900, .5)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 900, .5)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-hover [color: ('gray', 900, .05)] - The background color of the color picker trigger on hover.
+/// @prop {Map} anchor-background-focus [color: transparent] - The background color of the color picker trigger on focus-visible.
+/// @prop {Map} anchor-background-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in active state.
+/// @prop {Map} anchor-background-focus-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
 /// @prop {Color} swatch-separator-color [transparent] - The color of the separator above the swatches.
-/// @prop {List} trigger-size  [(rem(20px), rem(24px), rem(28px))] - The size used for the color picker trigger.
+/// @prop {List} trigger-size  [(rem(24px), rem(28px), rem(32px))] - The size used for the color picker trigger.
 /// @prop {Number} default-size [2] - The default size used for the color picker component.
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 /// @prop {Number} picker-border-radius [rem(10px)] - The border radius of the color picker dropdown.

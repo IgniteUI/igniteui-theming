@@ -35,8 +35,8 @@ $dark-base-color-picker: (
 
 /// Generates a dark material color picker schema.
 /// @type Map
-/// @prop {Map} invalid-color [color: 'error', 500] - The color used for invalid states.
-/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in disabled state.
+/// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
+/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in invalid state.
 /// @requires $material-color-picker
 /// @requires $dark-base-color-picker
 $dark-material-color-picker: extend(
@@ -60,8 +60,8 @@ $dark-material-color-picker: extend(
 
 /// Generates a dark fluent color picker schema.
 /// @type Map
-/// @prop {Map} invalid-color [color: 'error', 100] - The color used for invalid states.
-/// @prop {Map} label-color-invalid [color: ('error', 100)] - The color of the color picker label in disabled state.
+/// @prop {Map} invalid-color [color: ('error', 100)] - The color used for invalid states.
+/// @prop {Map} label-color-invalid [color: ('error', 100)] - The color of the color picker label in invalid state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 50)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-focus-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 100)] - The background color of the color picker trigger in active state.
@@ -141,8 +141,8 @@ $dark-fluent-color-picker: extend(
 
 /// Generates a dark bootstrap color picker schema.
 /// @type Map
-/// @prop {Map} invalid-color [color: 'error', 300] - The color used for invalid states.
-/// @prop {Map} label-color-invalid [color: ('error', 300)] - The color of the color picker label in disabled state.
+/// @prop {Map} invalid-color [color: ('error', 300)] - The color used for invalid states.
+/// @prop {Map} label-color-invalid [color: ('error', 300)] - The color of the color picker label in invalid state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 50)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-focus-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 100)] - The background color of the color picker trigger in active state.
@@ -215,9 +215,9 @@ $dark-bootstrap-color-picker: extend(
 
 /// Generates a dark indigo color picker schema.
 /// @type Map
-/// @prop {Map} label-color-invalid [color: ('gray', 800, .8)] - The color of the color picker label in disabled state.
-/// @prop {Map} swatch-border-color [color: 'gray', 600] - The border color of the predefined color swatches.
-/// @prop {Map} anchor-background-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger on hover..
+/// @prop {Map} label-color-invalid [color: ('gray', 800, .8)] - The color of the color picker label in invalid state.
+/// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
+/// @prop {Map} anchor-background-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-focus-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + active state.
