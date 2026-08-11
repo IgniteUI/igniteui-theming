@@ -1,0 +1,296 @@
+@use '../../../../utils/map' as *;
+@use '../../../../typography/functions' as *;
+@use '../light/color-picker' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+// stylelint-disable max-line-length
+/// Generates a base dark color picker schema.
+/// @access private
+/// @prop {Map} slider-thumb-border-color [contrast-color: ('gray', 50)] - The border color of the color picker slider thumb.
+/// @prop {Map} marker-color [contrast-color: ('gray', 50)] - The color of the color picker canvas marker.
+/// @type Map.
+$dark-base-color-picker: (
+    slider-thumb-border-color: (
+        contrast-color: (
+            'gray',
+            50,
+        ),
+    ),
+    marker-color: (
+        contrast-color: (
+            'gray',
+            50,
+        ),
+    ),
+    _meta: (
+        name: 'color-picker',
+        variant: 'dark',
+    ),
+);
+
+/// Generates a dark material color picker schema.
+/// @type Map
+/// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
+/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in invalid state.
+/// @requires $material-color-picker
+/// @requires $dark-base-color-picker
+$dark-material-color-picker: extend(
+    $material-color-picker,
+    $dark-base-color-picker,
+    (
+        invalid-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        label-color-invalid: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark fluent color picker schema.
+/// @type Map
+/// @prop {Map} invalid-color [color: ('error', 100)] - The color used for invalid states.
+/// @prop {Map} label-color-invalid [color: ('error', 100)] - The color of the color picker label in invalid state.
+/// @prop {Map} anchor-background-hover [color: ('gray', 50)] - The background color of the color picker trigger on hover.
+/// @prop {Map} anchor-background-focus-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Map} anchor-background-active [color: ('gray', 100)] - The background color of the color picker trigger in active state.
+/// @prop {Map} anchor-background-focus-active [color: ('gray', 100)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-disabled [color: ('gray', 50)] - The background color of the color picker trigger in disabled state.
+/// @prop {Map} anchor-outline-color [color: ('gray', 400)] - The outline color of the color picker trigger in focus-visible state.
+/// @prop {Map} anchor-border-color-disabled [color: ('gray', 100)] - The border color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-disabled [color: ('gray', 300)] - The color of the color picker label in disabled state.
+/// @requires $fluent-color-picker
+/// @requires $dark-base-color-picker
+$dark-fluent-color-picker: extend(
+    $fluent-color-picker,
+    $dark-base-color-picker,
+    (
+        invalid-color: (
+            color: (
+                'error',
+                100,
+            ),
+        ),
+        label-color-invalid: (
+            color: (
+                'error',
+                100,
+            ),
+        ),
+        anchor-background-hover: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        anchor-background-focus-hover: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        anchor-background-focus-active: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        anchor-background-active: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        anchor-background-disabled: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        anchor-border-color-disabled: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        anchor-outline-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        label-color-disabled: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark bootstrap color picker schema.
+/// @type Map
+/// @prop {Map} invalid-color [color: ('error', 300)] - The color used for invalid states.
+/// @prop {Map} label-color-invalid [color: ('error', 300)] - The color of the color picker label in invalid state.
+/// @prop {Map} anchor-background-hover [color: ('gray', 50)] - The background color of the color picker trigger on hover.
+/// @prop {Map} anchor-background-focus-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Map} anchor-background-active [color: ('gray', 100)] - The background color of the color picker trigger in active state.
+/// @prop {Map} anchor-background-focus-active [color: ('gray', 100)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-disabled [color: ('gray', 50)] - The background color of the color picker trigger in disabled state.
+/// @prop {Map} anchor-border-color-disabled [color: ('gray', 100)] - The border color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-disabled [color: ('gray', 300)] - The color of the color picker label in disabled state.
+/// @requires $bootstrap-color-picker
+/// @requires $dark-base-color-picker
+$dark-bootstrap-color-picker: extend(
+    $bootstrap-color-picker,
+    $dark-base-color-picker,
+    (
+        invalid-color: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
+        label-color-invalid: (
+            color: (
+                'error',
+                300,
+            ),
+        ),
+        anchor-background-hover: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        anchor-background-focus-hover: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        anchor-background-focus-active: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        anchor-background-active: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        anchor-background-disabled: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        anchor-border-color-disabled: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+        label-color-disabled: (
+            color: (
+                'gray',
+                300,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark indigo color picker schema.
+/// @type Map
+/// @prop {Map} label-color-invalid [color: ('gray', 800, .8)] - The color of the color picker label in invalid state.
+/// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
+/// @prop {Map} anchor-background-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger on hover.
+/// @prop {Map} anchor-background-focus-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Map} anchor-background-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in active state.
+/// @prop {Map} anchor-background-focus-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-border-color-disabled [contrast-color: ('gray', 50, .2)] - The border color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-disabled [contrast-color: ('gray', 50, .2)] - The color of the color picker label in disabled state.
+/// @prop {Map} anchor-outline-color [contrast-color: ('gray', 50, .2)] - The outline color of the color picker trigger in focus-visible state.
+/// @requires $indigo-color-picker
+/// @requires $dark-base-color-picker
+$dark-indigo-color-picker: extend(
+    $indigo-color-picker,
+    $dark-base-color-picker,
+    (
+        label-color-invalid: (
+            color: (
+                'gray',
+                800,
+                0.8,
+            ),
+        ),
+        swatch-border-color: (
+            color: (
+                'gray',
+                600,
+            ),
+        ),
+        anchor-background-hover: (
+            contrast-color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
+        anchor-background-focus-hover: (
+            contrast-color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
+        anchor-background-active: (
+            contrast-color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
+        anchor-background-focus-active: (
+            contrast-color: (
+                'gray',
+                900,
+                0.1,
+            ),
+        ),
+        anchor-border-color-disabled: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        anchor-outline-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+        label-color-disabled: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+    )
+);
