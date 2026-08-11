@@ -86,7 +86,7 @@
         // Add native element typographic styles.
         @if $e {
             @if $allow-exclusion {
-                :where(#{$e}):not(:is([data-no-typography], [data-no-typography] *)) {
+                :where(#{$e}):not(:where([data-no-typography], [data-no-typography] *)) {
                     @include type-style($category);
                 }
             } @else {

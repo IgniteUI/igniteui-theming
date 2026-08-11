@@ -260,7 +260,7 @@ $scale: type-scale(
 
                 @include expect() {
                     @each $category, $element in $IElementCategories {
-                        :where(#{$element}):not(:is([data-no-typography], [data-no-typography] *)) {
+                        :where(#{$element}):not(:where([data-no-typography], [data-no-typography] *)) {
                             @include type-style($category);
                         }
                     }
