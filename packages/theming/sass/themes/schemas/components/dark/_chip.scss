@@ -25,9 +25,81 @@ $dark-material-chip: extend($material-chip, $dark-base-chip);
 
 /// Generates a dark fluent chip schema.
 /// @type Map
+/// @prop {Map} hover-outlined-background [color: ('gray', 200, 0.30)] - The outlined chip hover background color.
+/// @prop {Map} focus-outlined-background [color: ('primary', 600, 0.20)] - The outlined chip focus background color.
+/// @prop {Map} focus-border-color [color: ('primary', 200)] - The outlined chip focus border color.
+/// @prop {Map} selected-border-color [color: ('primary', 200)] - The selected outlined chip border color.
+/// @prop {Map} hover-selected-outlined-background [color: ('primary', 600, 0.20)] - The selected outlined chip hover background color.
+/// @prop {Map} hover-selected-border-color [color: ('primary', 200)] - The selected outlined chip hover border color.
+/// @prop {Map} focus-selected-outlined-background [color: ('primary', 800, 0.50)] - The selected outlined chip focus background color.
+/// @prop {Map} focus-selected-border-color [color: ('primary', 200)] - The selected outlined chip focus border color.
 /// @requires $fluent-chip
 /// @requires $dark-base-chip
-$dark-fluent-chip: extend($fluent-chip, $dark-base-chip);
+$dark-fluent-chip: extend(
+    $fluent-chip,
+    $dark-base-chip,
+    (
+        hover-outlined-background: (
+            color: (
+                'gray',
+                200,
+                0.3,
+            ),
+        ),
+
+        focus-outlined-background: (
+            color: (
+                'primary',
+                600,
+                0.2,
+            ),
+        ),
+
+        focus-border-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        selected-border-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        hover-selected-outlined-background: (
+            color: (
+                'primary',
+                600,
+                0.2,
+            ),
+        ),
+
+        hover-selected-border-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+
+        focus-selected-outlined-background: (
+            color: (
+                'primary',
+                800,
+                0.5,
+            ),
+        ),
+
+        focus-selected-border-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+    )
+);
 
 /// Generates a dark bootstrap chip schema.
 /// @type Map
@@ -35,8 +107,10 @@ $dark-fluent-chip: extend($fluent-chip, $dark-base-chip);
 /// @prop {Map} hover-text-color [contrast-color: ('gray', 100)] - The chip text hover color.
 /// @prop {Map} hover-selected-background [color: ('gray', 100)] - The selected chip hover background color.
 /// @prop {Map} hover-selected-text-color [contrast-color: ('gray', 100)] - The selected chip hover text color.
-/// @prop {Map} focus-outline-color [color: ('gray', 300, 0.38)] - The chip focus outline color.
-/// @prop {Map} focus-selected-outline-color [color: ('gray', 300, 0.38)] - The selected chip focus outline color.
+/// @prop {Map} focus-shadow-color [color: ('gray', 300, 0.38)] - The chip focus shadow color.
+/// @prop {Map} focus-selected-shadow-color [color: ('gray', 300, 0.38)] - The selected chip focus shadow color.
+/// @prop {Map} hover-outlined-background [color: ('gray', 100, 0.30)] - The outlined chip hover background color.
+/// @prop {Map} hover-selected-outlined-background [color: ('gray', 100, 0.30)] - The selected outlined chip hover background color.
 /// @requires $bootstrap-chip
 /// @requires $dark-base-chip
 $dark-bootstrap-chip: extend(
@@ -71,7 +145,7 @@ $dark-bootstrap-chip: extend(
             ),
         ),
 
-        focus-outline-color: (
+        focus-shadow-color: (
             color: (
                 'gray',
                 300,
@@ -79,11 +153,27 @@ $dark-bootstrap-chip: extend(
             ),
         ),
 
-        focus-selected-outline-color: (
+        focus-selected-shadow-color: (
             color: (
                 'gray',
                 300,
                 0.38,
+            ),
+        ),
+
+        hover-outlined-background: (
+            color: (
+                'gray',
+                100,
+                0.3,
+            ),
+        ),
+
+        hover-selected-outlined-background: (
+            color: (
+                'gray',
+                100,
+                0.3,
             ),
         ),
     )
@@ -91,75 +181,80 @@ $dark-bootstrap-chip: extend(
 
 /// Generates a dark indigo chip schema.
 /// @type Map
-/// @prop {Map} text-color [contrast-color: ('gray', 50, .8)] - The chip text color.
-/// @prop {Map} hover-text-color [contrast-color: ('gray', 50)] - The chip text hover color.
-/// @prop {Map} focus-text-color [contrast-color: ('gray', 50, .8)] - The focused chip text color.
+/// @prop {Map} hover-text-color [color: ('gray', 50)] - The chip text hover color.
+/// @prop {Map} focus-text-color [color: ('gray', 800)] - The focused chip text color.
 ///
-/// @prop {Map} background [contrast-color: ('gray', 50, .05)] - The chip background color.
-/// @prop {Map} hover-background [contrast-color: ('gray', 50, .1)] - The chip hover background color.
-/// @prop {Map} focus-background [contrast-color: ('gray', 50, .05)] - The focused chip background color.
+/// @prop {Map} background [color: ('gray', 300)] - The chip background color.
+/// @prop {Map} hover-background [color: ('gray', 400)] - The chip hover background color.
+/// @prop {Map} focus-background [color: ('gray', 300)] - The focused chip background color.
 ///
 /// @prop {Map} border-color [color: ('gray', 100)] - The chip border color.
-/// @prop {Map} hover-border-color [color: ('gray', 200)] - The chip hover border color.
-/// @prop {Map} focus-border-color [color: ('gray', 100)] - The chip focus border color.
-/// @prop {Map} focus-outline-color [contrast-color: ('gray', 50, .2)] - The chip focus outline color.
+/// @prop {Map} focus-shadow-color [contrast-color: ('gray', 50, .2)] - The chip focus shadow color.
 ///
 /// @prop {Map} ghost-background [color: ('gray', 100)] - The chip ghost background color.
 /// @prop {Map} ghost-text-color [contrast-color: ('gray', 100, .8)] - The chip ghost text color.
 ///
 /// @prop {Map} disabled-text-color [contrast-color: ('gray', 50, .2)] - The disabled chip text color.
 /// @prop {Map} disabled-background [contrast-color: ('gray', 50, .05)] - The disabled chip background color.
-/// @prop {Map} disabled-border-color [ color: ('gray', 50)] - The disabled chip border color.
+/// @prop {Map} disabled-selected-text-color [contrast-color: ('gray', 50, .20)] - The selected disabled chip text color.
+///
+/// @prop {Map} outlined-background [contrast-color: ('gray', 50, .05)] - The outlined chip  background color.
+/// @prop {Map} outlined-text-color [contrast-color: ('gray', 50, .80)] - The outlined chip text color.
+/// @prop {Map} border-color [color: ('gray', 100)] - The chip border color.
+/// @prop {Map} selected-outlined-text-color [contrast-color: ('gray', 50)] - The selected outlined chip text color.
+///
+/// @prop {Map} hover-outlined-background [contrast-color: ('gray', 50, .10)] - The outlined chip hover background color.
+/// @prop {Map} hover-outlined-text-color [contrast-color: ('gray', 50)] - The outlined chip hover text color.
+/// @prop {Map} hover-border-color [color: ('gray', 200)] - The outlined chip hover border color.
+/// @prop {Map} hover-selected-outlined-text-color [contrast-color: ('gray', 50)] - The selected outlined chip hover text color.
+///
+/// @prop {Map} focus-outlined-background [contrast-color: ('gray', 50, .05)] - The outlined chip focus background color.
+/// @prop {Map} focus-outlined-text-color [contrast-color: ('gray', 50, .80)] - The outlined chip focus text color.
+/// @prop {Map} focus-border-color [color: ('gray', 100)] - The outlined chip focus border color.
+/// @prop {Map} focus-selected-outlined-text-color [contrast-color: ('gray', 50)] - The selected outlined chip focus text color.
+///
+/// @prop {Map} disabled-outlined-background [contrast-color: ('gray', 50, .05)] - The outlined chip disabled background color.
+/// @prop {Map} disabled-outlined-text-color [contrast-color: ('gray', 50, .20)] - The outlined chip disabled text color.
+/// @prop {Map} disabled-border-color [color: ('gray', 50)] - The outlined disabled chip border color.
+/// @prop {Map} disabled-selected-outlined-text-color [contrast-color: ('gray', 50)] - The selected outlined chip disabled text color.
 /// @requires $indigo-chip
 /// @requires $dark-base-chip
 $dark-indigo-chip: extend(
     $indigo-chip,
     $dark-base-chip,
     (
-        text-color: (
-            contrast-color: (
-                'gray',
-                50,
-                0.8,
-            ),
-        ),
-
         hover-text-color: (
-            contrast-color: (
+            color: (
                 'gray',
                 50,
             ),
         ),
 
         focus-text-color: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.8,
+                800,
             ),
         ),
 
         background: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.05,
+                300,
             ),
         ),
 
         hover-background: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.1,
+                400,
             ),
         ),
 
         focus-background: (
-            contrast-color: (
+            color: (
                 'gray',
-                50,
-                0.05,
+                300,
             ),
         ),
 
@@ -178,28 +273,7 @@ $dark-indigo-chip: extend(
             ),
         ),
 
-        border-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        hover-border-color: (
-            color: (
-                'gray',
-                200,
-            ),
-        ),
-
-        focus-border-color: (
-            color: (
-                'gray',
-                100,
-            ),
-        ),
-
-        focus-outline-color: (
+        focus-shadow-color: (
             contrast-color: (
                 'gray',
                 50,
@@ -223,8 +297,128 @@ $dark-indigo-chip: extend(
             ),
         ),
 
+        disabled-selected-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
+        outlined-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
+            ),
+        ),
+
+        outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        selected-outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        hover-outlined-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.1,
+            ),
+        ),
+
+        hover-outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        hover-border-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+
+        hover-selected-outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        focus-outlined-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
+            ),
+        ),
+
+        focus-outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
+
+        focus-border-color: (
+            color: (
+                'gray',
+                100,
+            ),
+        ),
+
+        focus-selected-outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        disabled-outlined-background: (
+            contrast-color: (
+                'gray',
+                50,
+                0.05,
+            ),
+        ),
+
+        disabled-outlined-text-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.2,
+            ),
+        ),
+
         disabled-border-color: (
             color: (
+                'gray',
+                50,
+            ),
+        ),
+
+        disabled-selected-outlined-text-color: (
+            contrast-color: (
                 'gray',
                 50,
             ),

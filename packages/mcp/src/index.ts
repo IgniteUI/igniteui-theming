@@ -19,6 +19,7 @@ import {
   createThemeSchema,
   createTypographySchema,
   detectPlatformSchema,
+  getChartSeriesColorsSchema,
   getColorSchema,
   getComponentDesignTokensSchema,
   handleCreateComponentTheme,
@@ -28,6 +29,7 @@ import {
   handleCreateTheme,
   handleCreateTypography,
   handleDetectPlatform,
+  handleGetChartSeriesColors,
   handleGetColor,
   handleGetComponentDesignTokens,
   handleReadResource,
@@ -330,6 +332,25 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = getColorSchema.parse(params);
       return handleGetColor(validated);
+    },
+  );
+
+  // get_chart_series_colors tool
+  server.registerTool(
+    "get_chart_series_colors",
+    {
+      title: "Get Chart Series Colors",
+      description: TOOL_DESCRIPTIONS.get_chart_series_colors,
+      inputSchema: {
+        mode: getChartSeriesColorsSchema.shape.mode,
+        index: getChartSeriesColorsSchema.shape.index,
+        chartType: getChartSeriesColorsSchema.shape.chartType,
+        customBrushes: getChartSeriesColorsSchema.shape.customBrushes,
+      },
+    },
+    async (params) => {
+      const validated = getChartSeriesColorsSchema.parse(params);
+      return handleGetChartSeriesColors(validated);
     },
   );
 

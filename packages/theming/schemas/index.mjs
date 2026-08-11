@@ -47,6 +47,13 @@ export const PalettesSchema = z.record(
   }),
 );
 
+const chartBrushSetSchema = z.record(z.string(), z.string());
+
+export const ChartBrushesSchema = z.object({
+  regular: chartBrushSetSchema,
+  "color-blind": chartBrushSetSchema,
+});
+
 const componentTokenSchema = z.object({
   name: z.string(),
   type: z.string().optional(),
@@ -133,6 +140,10 @@ export const EXPORT_MAP = {
     schema: PaletteMetaSchema,
   },
   "colors/presets/palettes": { exportName: "Palettes", schema: PalettesSchema },
+  "colors/charts/brushes": {
+    exportName: "ChartBrushes",
+    schema: ChartBrushesSchema,
+  },
   "components/bootstrap": {
     exportName: "BootstrapThemes",
     schema: DesignSystemThemesSchema,
