@@ -63,9 +63,9 @@ $dark-material-color-picker: extend(
 /// @prop {Map} invalid-color [color: ('error', 100)] - The color used for invalid states.
 /// @prop {Map} label-color-invalid [color: ('error', 100)] - The color of the color picker label in invalid state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 50)] - The background color of the color picker trigger on hover.
-/// @prop {Map} anchor-background-focus-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 100)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 100)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 100)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} anchor-background-disabled [color: ('gray', 50)] - The background color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-outline-color [color: ('gray', 400)] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 100)] - The border color of the color picker trigger in disabled state.
@@ -94,13 +94,13 @@ $dark-fluent-color-picker: extend(
                 50,
             ),
         ),
-        anchor-background-focus-hover: (
+        anchor-background-focus-visible-hover: (
             color: (
                 'gray',
                 50,
             ),
         ),
-        anchor-background-focus-active: (
+        anchor-background-active-focus-visible: (
             color: (
                 'gray',
                 100,
@@ -144,9 +144,9 @@ $dark-fluent-color-picker: extend(
 /// @prop {Map} invalid-color [color: ('error', 300)] - The color used for invalid states.
 /// @prop {Map} label-color-invalid [color: ('error', 300)] - The color of the color picker label in invalid state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 50)] - The background color of the color picker trigger on hover.
-/// @prop {Map} anchor-background-focus-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 50)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 100)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 100)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 100)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} anchor-background-disabled [color: ('gray', 50)] - The background color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 100)] - The border color of the color picker trigger in disabled state.
 /// @prop {Map} label-color-disabled [color: ('gray', 300)] - The color of the color picker label in disabled state.
@@ -174,13 +174,13 @@ $dark-bootstrap-color-picker: extend(
                 50,
             ),
         ),
-        anchor-background-focus-hover: (
+        anchor-background-focus-visible-hover: (
             color: (
                 'gray',
                 50,
             ),
         ),
-        anchor-background-focus-active: (
+        anchor-background-active-focus-visible: (
             color: (
                 'gray',
                 100,
@@ -218,9 +218,9 @@ $dark-bootstrap-color-picker: extend(
 /// @prop {Map} label-color-invalid [color: ('gray', 800, .8)] - The color of the color picker label in invalid state.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
 /// @prop {Map} anchor-background-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger on hover.
-/// @prop {Map} anchor-background-focus-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Map} anchor-background-focus-visible-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-active-focus-visible [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} anchor-border-color-disabled [contrast-color: ('gray', 50, .2)] - The border color of the color picker trigger in disabled state.
 /// @prop {Map} label-color-disabled [contrast-color: ('gray', 50, .2)] - The color of the color picker label in disabled state.
 /// @prop {Map} anchor-outline-color [contrast-color: ('gray', 50, .2)] - The outline color of the color picker trigger in focus-visible state.
@@ -250,7 +250,7 @@ $dark-indigo-color-picker: extend(
                 0.1,
             ),
         ),
-        anchor-background-focus-hover: (
+        anchor-background-focus-visible-hover: (
             contrast-color: (
                 'gray',
                 900,
@@ -264,7 +264,7 @@ $dark-indigo-color-picker: extend(
                 0.1,
             ),
         ),
-        anchor-background-focus-active: (
+        anchor-background-active-focus-visible: (
             contrast-color: (
                 'gray',
                 900,
