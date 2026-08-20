@@ -15,11 +15,7 @@
 /// @prop {Map} label-color-disabled [color: ('gray', 500)] - The color of the color picker label in disabled state.
 /// @prop {Map} label-color-invalid [color: ('error', 800)] - The color of the color picker label in invalid state.
 /// @prop {Color} anchor-background [transparent] - The background color of the color picker trigger.
-/// @prop {Map} anchor-background-hover [color: ('gray', 500, .2)] - The background color of the color picker trigger on hover.
-/// @prop {Map} anchor-background-focus [color: ('gray', 500, .16)] - The background color of the color picker trigger on focus-visible.
-/// @prop {Map} anchor-background-focus-hover [color: ('gray', 500, .24)] - The background color of the color picker trigger in focus-visible + hover state.
-/// @prop {Map} anchor-background-active [color: ('gray', 500, .32)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 500, .32)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 500, .24)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Color} anchor-background-disabled [transparent] - The background color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-border-color [color: ('gray', 600)] - The border color of the color picker trigger.
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 300)] - The border color of the color picker trigger in disabled state.
@@ -66,39 +62,11 @@ $light-color-picker: extend(
             ),
         ),
         anchor-background: transparent,
-        anchor-background-hover: (
-            color: (
-                'gray',
-                500,
-                0.2,
-            ),
-        ),
-        anchor-background-focus: (
-            color: (
-                'gray',
-                500,
-                0.16,
-            ),
-        ),
-        anchor-background-focus-hover: (
+        anchor-background-focus-visible-hover: (
             color: (
                 'gray',
                 500,
                 0.24,
-            ),
-        ),
-        anchor-background-focus-active: (
-            color: (
-                'gray',
-                500,
-                0.32,
-            ),
-        ),
-        anchor-background-active: (
-            color: (
-                'gray',
-                500,
-                0.32,
             ),
         ),
         anchor-background-disabled: transparent,
@@ -205,12 +173,44 @@ $light-color-picker: extend(
 /// @prop {List} trigger-size  [(rem(24px), rem(30px), rem(36px))] - The size used for the color picker trigger.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
 /// @prop {Number} picker-elevation [24] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
+/// @prop {Map} anchor-background-hover [color: ('gray', 500, .08)] - The background color of the color picker trigger on hover.
+/// @prop {Map} anchor-background-active [color: ('gray', 500, .16)] - The background color of the color picker trigger in active state.
+/// @prop {Map} anchor-background-focus-visible [color: ('gray', 500, .16)] - The background color of the color picker trigger on focus-visible.
+/// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 500, .32)] - The background color of the color picker trigger in focus-visible + active state.
 /// @requires $light-color-picker
 /// @requires $material-elevation-color-picker
 $material-color-picker: extend(
     $light-color-picker,
     $material-elevation-color-picker,
     (
+        anchor-background-hover: (
+            color: (
+                'gray',
+                500,
+                0.08,
+            ),
+        ),
+        anchor-background-active: (
+            color: (
+                'gray',
+                500,
+                0.16,
+            ),
+        ),
+        anchor-background-focus-visible: (
+            color: (
+                'gray',
+                500,
+                0.16,
+            ),
+        ),
+        anchor-background-active-focus-visible: (
+            color: (
+                'gray',
+                500,
+                0.32,
+            ),
+        ),
         trigger-size: (
             sizable: (
                 rem(24px),
@@ -238,12 +238,11 @@ $material-color-picker: extend(
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 /// @prop {Map} anchor-outline-color [color: ('gray', 700)] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Number} picker-border-radius [rem(2px)] - The border radius of the color picker dropdown.
-/// @prop {Color} anchor-background [transparent] - The background color of the color picker trigger.
 /// @prop {Map} anchor-background-hover [color: ('gray', 200)] - The background color of the color picker trigger on hover.
-/// @prop {Color} anchor-background-focus [transparent] - The background color of the color picker trigger on focus-visible.
-/// @prop {Map} anchor-background-focus-hover [color: ('gray', 200)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Color} anchor-background-focus-visible [transparent] - The background color of the color picker trigger on focus-visible.
+/// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 200)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 300)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} anchor-background-disabled [color: ('gray', 100)] - The background color of the color picker trigger in disabled state.
 /// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in invalid state.
 /// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
@@ -280,15 +279,14 @@ $fluent-color-picker: extend(
         ),
         picker-border-color: transparent,
         picker-border-radius: rem(2px),
-        anchor-background: transparent,
         anchor-background-hover: (
             color: (
                 'gray',
                 200,
             ),
         ),
-        anchor-background-focus: transparent,
-        anchor-background-focus-hover: (
+        anchor-background-focus-visible: transparent,
+        anchor-background-focus-visible-hover: (
             color: (
                 'gray',
                 200,
@@ -300,7 +298,7 @@ $fluent-color-picker: extend(
                 300,
             ),
         ),
-        anchor-background-focus-active: (
+        anchor-background-active-focus-visible: (
             color: (
                 'gray',
                 300,
@@ -336,13 +334,12 @@ $fluent-color-picker: extend(
 /// @prop {List} trigger-size  [(rem(32px), rem(38px), rem(48px))] - The size used for the color picker trigger.
 /// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @prop {Map} anchor-outline-color [color: ('primary', 600, .5)] - The outline color of the color picker trigger in focus-visible state.
-/// @prop {Color} anchor-background [transparent] - The background color of the color picker trigger.
 /// @prop {Map} picker-border-color [color: ('gray', 300)] - The border color of the color picker dropdown.
 /// @prop {Map} anchor-background-hover [color: ('gray', 200)] - The background color of the color picker trigger on hover.
-/// @prop {Color} anchor-background-focus [transparent] - The background color of the color picker trigger on focus-visible.
-/// @prop {Map} anchor-background-focus-hover [color: ('gray', 200)] - The background color of the color picker trigger in focus-visible + hover state.
+/// @prop {Color} anchor-background-focus-visible [transparent] - The background color of the color picker trigger on focus-visible.
+/// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 200)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 300)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
 /// @requires $light-color-picker
 /// @requires $bootstrap-elevation-color-picker
 $bootstrap-color-picker: extend(
@@ -369,15 +366,14 @@ $bootstrap-color-picker: extend(
                 300,
             ),
         ),
-        anchor-background: transparent,
         anchor-background-hover: (
             color: (
                 'gray',
                 200,
             ),
         ),
-        anchor-background-focus: transparent,
-        anchor-background-focus-hover: (
+        anchor-background-focus-visible: transparent,
+        anchor-background-focus-visible-hover: (
             color: (
                 'gray',
                 200,
@@ -389,7 +385,7 @@ $bootstrap-color-picker: extend(
                 300,
             ),
         ),
-        anchor-background-focus-active: (
+        anchor-background-active-focus-visible: (
             color: (
                 'gray',
                 300,
@@ -416,9 +412,9 @@ $bootstrap-color-picker: extend(
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 900, .15)] - The border color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-outline-color [color: ('gray', 900, .15)] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 900, .05)] - The background color of the color picker trigger on hover.
-/// @prop {Color} anchor-background-focus [transparent] - The background color of the color picker trigger on focus-visible.
+/// @prop {Color} anchor-background-focus-visible [transparent] - The background color of the color picker trigger on focus-visible.
 /// @prop {Map} anchor-background-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in active state.
-/// @prop {Map} anchor-background-focus-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 900, .05)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
 /// @prop {Color} swatch-separator-color [transparent] - The color of the separator above the swatches.
 /// @prop {List} trigger-size  [(rem(24px), rem(28px), rem(32px))] - The size used for the color picker trigger.
@@ -484,7 +480,7 @@ $indigo-color-picker: extend(
                 0.05,
             ),
         ),
-        anchor-background-focus: transparent,
+        anchor-background-focus-visible: transparent,
         anchor-background-active: (
             color: (
                 'gray',
@@ -492,7 +488,7 @@ $indigo-color-picker: extend(
                 0.05,
             ),
         ),
-        anchor-background-focus-active: (
+        anchor-background-active-focus-visible: (
             color: (
                 'gray',
                 900,
