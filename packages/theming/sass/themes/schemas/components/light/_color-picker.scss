@@ -340,12 +340,27 @@ $fluent-color-picker: extend(
 /// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 200)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 300)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 300)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Map} anchor-background-disabled [color: ('gray', 100)] - The background color of the color picker trigger in disabled state.
+/// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in invalid state.
+/// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
 /// @requires $light-color-picker
 /// @requires $bootstrap-elevation-color-picker
 $bootstrap-color-picker: extend(
     $light-color-picker,
     $bootstrap-elevation-color-picker,
     (
+        invalid-color: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
+        label-color-invalid: (
+            color: (
+                'error',
+                500,
+            ),
+        ),
         trigger-size: (
             sizable: (
                 rem(32px),
@@ -389,6 +404,12 @@ $bootstrap-color-picker: extend(
             color: (
                 'gray',
                 300,
+            ),
+        ),
+        anchor-background-disabled: (
+            color: (
+                'gray',
+                100,
             ),
         ),
         typography: (
