@@ -231,6 +231,7 @@ $material-color-picker: extend(
 
 /// Generates a fluent color picker schema.
 /// @type Map
+/// @prop {Map} swatch-preview-border-color [color: ('gray', 700)] - The border color of the color preview inside the trigger.
 /// @prop {Number} anchor-border-radius [rem(2px)] - The border radius of the color picker trigger.
 /// @prop {Number} swatch-border-radius [rem(2px)] - The border radius of the predefined color swatches.
 /// @prop {List} trigger-size  [(rem(24px), rem(32px), rem(38px))] - The size used for the color picker trigger.
@@ -253,6 +254,12 @@ $fluent-color-picker: extend(
     $light-color-picker,
     $fluent-elevation-color-picker,
     (
+        swatch-preview-border-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         invalid-color: (
             color: (
                 'error',
@@ -426,14 +433,15 @@ $bootstrap-color-picker: extend(
 /// Generates an indigo color picker schema.
 /// @type Map
 /// @prop {Map} label-color-invalid [color: ('gray', 800)] - The color of the color picker label in invalid state.
-/// @prop {Map} invalid-color [color: ('error', 800)] - The color used for invalid states.
-/// @prop {Map} label-color [color: ('gray', 700)] - The color of the color picker label.
+/// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
+/// @prop {Map} label-color [color: ('gray', 800)] - The color of the color picker label.
 /// @prop {Map} label-color-disabled [color: ('gray', 900, .2)] - The color of the color picker label in disabled state.
-/// @prop {Map} anchor-border-color [color: ('gray', 400)] - The border color of the color picker trigger.
+/// @prop {Map} anchor-border-color [color: ('gray', 600)] - The border color of the color picker trigger.
 /// @prop {Map} anchor-border-color-disabled [color: ('gray', 900, .15)] - The border color of the color picker trigger in disabled state.
 /// @prop {Map} anchor-outline-color [color: ('gray', 900, .15)] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Map} anchor-background-hover [color: ('gray', 900, .05)] - The background color of the color picker trigger on hover.
 /// @prop {Color} anchor-background-focus-visible [transparent] - The background color of the color picker trigger on focus-visible.
+/// @prop {Map} anchor-background-focus-visible-hover [color: ('gray', 900, .05)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [color: ('gray', 900, .05)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 900, .05)] - The background color of the color picker trigger in focus-visible + active state.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
@@ -443,22 +451,29 @@ $bootstrap-color-picker: extend(
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 /// @prop {Number} picker-border-radius [rem(10px)] - The border radius of the color picker dropdown.
 /// @prop {Number} picker-elevation [2] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
+/// @prop {Map} picker-background [contrast-color: 'gray', 900] - The background color of the color picker dropdown.
 /// @requires $light-color-picker
 /// @requires $indigo-elevation-color-picker
 $indigo-color-picker: extend(
     $light-color-picker,
     $indigo-elevation-color-picker,
     (
+        picker-background: (
+            contrast-color: (
+                'gray',
+                900,
+            ),
+        ),
         invalid-color: (
             color: (
                 'error',
-                800,
+                500,
             ),
         ),
         label-color: (
             color: (
                 'gray',
-                700,
+                800,
             ),
         ),
         label-color-invalid: (
@@ -477,7 +492,7 @@ $indigo-color-picker: extend(
         anchor-border-color: (
             color: (
                 'gray',
-                400,
+                600,
             ),
         ),
         anchor-border-color-disabled: (
@@ -502,6 +517,13 @@ $indigo-color-picker: extend(
             ),
         ),
         anchor-background-focus-visible: transparent,
+        anchor-background-focus-visible-hover: (
+            color: (
+                'gray',
+                900,
+                0.05,
+            ),
+        ),
         anchor-background-active: (
             color: (
                 'gray',
