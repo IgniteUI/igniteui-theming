@@ -172,11 +172,11 @@ $light-color-picker: extend(
 /// @type Map
 /// @prop {List} trigger-size  [(rem(24px), rem(30px), rem(36px))] - The size used for the color picker trigger.
 /// @prop {Map} typography [label: (value: 'subtitle-1')] - The typography styles used for the component.
-/// @prop {Number} picker-elevation [24] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @prop {Map} anchor-background-hover [color: ('gray', 500, .08)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-active [color: ('gray', 500, .16)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-focus-visible [color: ('gray', 500, .16)] - The background color of the color picker trigger on focus-visible.
 /// @prop {Map} anchor-background-active-focus-visible [color: ('gray', 500, .32)] - The background color of the color picker trigger in focus-visible + active state.
+/// @prop {Number} picker-elevation [24] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @requires $light-color-picker
 /// @requires $material-elevation-color-picker
 $material-color-picker: extend(
@@ -337,7 +337,7 @@ $fluent-color-picker: extend(
 
 /// Generates a bootstrap color picker schema.
 /// @type Map
-/// @prop {Number} picker-elevation [0] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
+/// @prop {Map} anchor-border-color [color: ('gray', 700)] - The border color of the color picker trigger.
 /// @prop {List} trigger-size  [(rem(32px), rem(38px), rem(48px))] - The size used for the color picker trigger.
 /// @prop {Map} typography [label: (value: 'body-1')] - The typography styles used for the component.
 /// @prop {Map} anchor-outline-color [color: ('primary', 600, .5)] - The outline color of the color picker trigger in focus-visible state.
@@ -350,12 +350,19 @@ $fluent-color-picker: extend(
 /// @prop {Map} anchor-background-disabled [color: ('gray', 100)] - The background color of the color picker trigger in disabled state.
 /// @prop {Map} label-color-invalid [color: ('error', 500)] - The color of the color picker label in invalid state.
 /// @prop {Map} invalid-color [color: ('error', 500)] - The color used for invalid states.
+/// @prop {Number} picker-elevation [0] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @requires $light-color-picker
 /// @requires $bootstrap-elevation-color-picker
 $bootstrap-color-picker: extend(
     $light-color-picker,
     $bootstrap-elevation-color-picker,
     (
+        anchor-border-color: (
+            color: (
+                'gray',
+                700,
+            ),
+        ),
         invalid-color: (
             color: (
                 'error',
@@ -450,8 +457,8 @@ $bootstrap-color-picker: extend(
 /// @prop {Number} default-size [2] - The default size used for the color picker component.
 /// @prop {Map} typography [label: (value: 'body-2')] - The typography styles used for the component.
 /// @prop {Number} picker-border-radius [rem(10px)] - The border radius of the color picker dropdown.
-/// @prop {Number} picker-elevation [2] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @prop {Map} picker-background [contrast-color: ('gray', 900)] - The background color of the color picker dropdown.
+/// @prop {Number} picker-elevation [24] - The elevation level, between 0-24, to be used for the color picker dropdown shadow.
 /// @requires $light-color-picker
 /// @requires $indigo-elevation-color-picker
 $indigo-color-picker: extend(
