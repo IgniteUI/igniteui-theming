@@ -1,0 +1,8 @@
+@use '../sass/color' as *;
+$light: palette($primary: #09f, $secondary: #09f, $surface: #fff);
+$off: palette($primary: #09f, $secondary: #09f, $surface: #f5f6f8);
+$dark: palette($primary: #09f, $secondary: #09f, $surface: #1a1a24);
+$V: ('50','100','200','300','400','500','600','700','800','900');
+surface-white { @each $v in $V { #{$v}: color($light, surface, $v); } }
+surface-offwhite { @each $v in $V { #{$v}: color($off, surface, $v); } }
+surface-dark { @each $v in $V { #{$v}: color($dark, surface, $v); } }

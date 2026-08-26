@@ -1,0 +1,6 @@
+@use 'sass:map';
+@use '../sass/color/gamut' as g;
+@each $h in (0, 60, 120, 210, 250, 270, 315, 330) {
+  $c: g.cusp($h);
+  .h#{$h} { l: #{map.get($c,'l')}; c: #{map.get($c,'c')}; }
+}

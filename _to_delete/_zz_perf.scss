@@ -1,0 +1,18 @@
+@use "sass:color"; @use "sass:math"; @use "sass:map";
+// realistic: 12 palette colors x 14 shades, each with a binary-search gamut map (20 iters)
+@function bs-gamut($L, $C, $H, $iters) {
+  $lo: 0; $hi: $C; $i: 0;
+  @while $i < $iters {
+    $mid: math.div($lo + $hi, 2);
+    @if color.is-in-gamut(oklch($L * 100% $mid $H), srgb) { $lo: $mid; } @else { $hi: $mid; }
+    $i: $i + 1;
+  }
+  @return oklch($L * 100% $lo $H);
+}
+$hues: 20 50 80 110 140 170 200 230 260 290 320 350;
+$Ls: 0.98 0.95 0.9 0.82 0.74 0.66 0.58 0.5 0.42 0.34 0.26 0.18 0.12 0.08;
+:root {
+  @each $h in $hues { @each $l in $Ls {
+    --c-#{$h}-#{$l}: #{bs-gamut($l, 0.4, $h, 20)};
+  } }
+}

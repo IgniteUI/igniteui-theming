@@ -1,0 +1,4 @@
+@use '../sass/color' as *;
+$p: palette($primary: #09f, $secondary: #df1b74, $surface: #fff, $gray: #333, $variant: 'test');
+.gamut-relative { @include palette($p, $contrast: false); }
+lands-on { primary: seed-lands-on($p, 'primary'); secondary: seed-lands-on($p, 'secondary'); }

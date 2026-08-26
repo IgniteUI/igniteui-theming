@@ -1,0 +1,162 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+
+////
+/// sRGB gamut geometry in OKLCH.
+///
+/// Every hue has a hard limit on how colorful it can get, and that limit changes with
+/// lightness. Plotted, it makes a tent: chroma rises from 0 at black, peaks at the
+/// hue's "cusp", and falls back to 0 at white. These functions find that tent and
+/// report its height at any lightness.
+///
+/// @package theming
+/// @group Palettes
+/// @access private
+////
+
+/// Reads a color's OKLCH channels as plain numbers.
+///
+/// `color.channel()` returns units — lightness as `70.8%`, hue as `314.6deg`. Feeding
+/// those straight into arithmetic silently yields a hundred-times-too-large lightness
+/// and range comparisons that never match, and it compiles without error.
+/// @access private
+/// @param {Color} $c - The color to read.
+/// @returns {Map} A map with unitless `l`, `c` and `h` keys.
+@function read($c) {
+    $ok: color.to-space($c, oklch);
+    $h: color.channel($ok, 'hue', $space: oklch);
+
+    @return (
+        l: math.div(color.channel($ok, 'lightness', $space: oklch), 100%),
+        c: color.channel($ok, 'chroma', $space: oklch),
+        h: if($h == 0, 0, math.div($h, 1deg))
+    );
+}
+
+/// Builds an OKLCH color from unitless components.
+/// @access private
+@function make($l, $c, $h) {
+    @return color.change(oklch(0.5 0 0), $lightness: $l, $chroma: $c, $hue: $h);
+}
+
+/// Whether the screen can show this color.
+/// @access private
+@function in-srgb($l, $c, $h) {
+    @return color.is-in-gamut(make($l, $c, $h), srgb);
+}
+
+/// The tent's height at one lightness: the most chroma sRGB can hold there.
+///
+/// Found by bisection — guess the middle of the remaining range, keep the half that
+/// still contains the answer, repeat. 18 rounds narrows 0.45 to about 0.0000017.
+/// @access private
+/// @param {Number} $l - Lightness, 0 to 1.
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {Number} The maximum in-gamut chroma.
+@function max-chroma($l, $h) {
+    $lo: 0;
+    $hi: 0.45;
+    $i: 0;
+
+    @while $i < 18 {
+        $mid: math.div($lo + $hi, 2);
+
+        @if in-srgb($l, $mid, $h) {
+            $lo: $mid;
+        } @else {
+            $hi: $mid;
+        }
+
+        $i: $i + 1;
+    }
+
+    @return $lo;
+}
+
+/// The peak of the tent for a hue.
+///
+/// `max-chroma` rises then falls as lightness climbs, so a ternary search finds the
+/// peak in far fewer probes than a scan: repeatedly discard whichever third of the
+/// range cannot contain it.
+/// @access private
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {Map} `l` and `c` of the peak.
+@function cusp($h) {
+    $lo: 0.02;
+    $hi: 0.995;
+    $i: 0;
+
+    @while $i < 26 {
+        $a: $lo + math.div($hi - $lo, 3);
+        $b: $hi - math.div($hi - $lo, 3);
+
+        @if max-chroma($a, $h) < max-chroma($b, $h) {
+            $lo: $a;
+        } @else {
+            $hi: $b;
+        }
+
+        $i: $i + 1;
+    }
+
+    $l: math.div($lo + $hi, 2);
+
+    @return (l: $l, c: max-chroma($l, $h));
+}
+
+/// The peak expressed as the two slopes of a tent.
+///
+/// Storing it this way turns "how much chroma is available at lightness L" into a
+/// single multiply on each side. Compute this once per color family — every shade in
+/// a family shares a hue, so they share a tent.
+/// @access private
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {List} `(rising-slope, falling-slope)`.
+@function tent($h) {
+    $k: cusp($h);
+    $lc: map.get($k, 'l');
+    $cc: map.get($k, 'c');
+
+    @return (math.div($cc, $lc), math.div($cc, 1 - $lc));
+}
+
+/// A `min()` that curves instead of forming a sharp point.
+///
+/// The tent's height is whichever slope is lower, but a hard `min()` leaves a corner,
+/// and a corner shows up in the ramp as one shade noticeably more colorful than its
+/// neighbours. `$p` controls how tight the corner is: higher hugs the real boundary.
+/// @access private
+@function soft-min($a, $b, $p) {
+    @if $a <= 0 or $b <= 0 {
+        @return 0;
+    }
+
+    @return math.pow(math.div(1, math.div(1, math.pow($a, $p)) + math.div(1, math.pow($b, $p))), math.div(1, $p));
+}
+
+/// Converts a color to sRGB with integer channels.
+///
+/// Matches what the browser will actually paint, and keeps generated token files free
+/// of ten-decimal channel values.
+/// @access private
+@function to-srgb($c) {
+    $rgb: color.to-space($c, rgb);
+
+    @return rgb(
+        math.round(color.channel($rgb, 'red', $space: rgb)),
+        math.round(color.channel($rgb, 'green', $space: rgb)),
+        math.round(color.channel($rgb, 'blue', $space: rgb))
+    );
+}
+
+/// How much chroma the ramp is allowed to use at a given lightness.
+/// @access private
+/// @param {Number} $l - Lightness, 0 to 1.
+/// @param {List} $tent - The family's tent, from `tent()`.
+/// @param {Number} $p - Ceiling softness.
+/// @returns {Number} The chroma ceiling.
+@function ceiling($l, $tent, $p) {
+    @return soft-min($l * list.nth($tent, 1), (1 - $l) * list.nth($tent, 2), $p);
+}

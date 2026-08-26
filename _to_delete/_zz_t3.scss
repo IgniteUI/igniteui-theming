@@ -1,0 +1,18 @@
+@use "sass:color";
+@use "sass:math";
+c { --d: #{color.to-gamut(oklch(70% 0.4 250), srgb, local-minde)};
+    --d2: #{color.to-gamut(oklch(70% 0.4 250), $method: clip)};
+    --g: #{color.is-in-gamut(oklch(70% 0.4 250))};
+    --g2: #{color.is-in-gamut(oklch(70% 0.4 250), display-p3)};
+}
+@function bisect($lo, $hi, $n) {
+  $i: 0;
+  @while $i < $n {
+    $mid: math.div($lo + $hi, 2);
+    @if $mid * $mid > 2 { $hi: $mid; } @else { $lo: $mid; }
+    $i: $i + 1;
+  }
+  @return $lo;
+}
+@function recurse($n) { @if $n <= 0 { @return 0; } @return 1 + recurse($n - 1); }
+f { --sqrt2: #{bisect(1, 2, 200)}; --rec: #{recurse(5000)}; }

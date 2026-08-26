@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shade generators</title>
+<style>
+:root{color-scheme:light dark;--bg:#fff;--fg:#16141f;--mut:#6b6579;--line:#e4e1ea;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#121120;--fg:#eae7f2;--mut:#948da8;--line:#2c2940;--card:#1a1829}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;padding:0 24px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:1.9rem;letter-spacing:-.02em;margin:44px 0 6px}
+.sub{color:var(--mut);max-width:70ch;margin:0 0 24px}
+.live{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:14px 18px;margin-bottom:34px}
+.live input[type=color]{width:46px;height:34px;border:1px solid var(--line);border-radius:6px;background:none;padding:2px}
+.live .demo{display:flex;flex:1;min-width:260px;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.live .demo i{flex:1;height:34px}
+section{border-top:1px solid var(--line);padding-top:22px;margin-top:30px}
+header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+header i{width:22px;height:22px;border-radius:5px;border:1px solid var(--line)}
+header h2{font-size:1rem;margin:0}
+header code,.lands{color:var(--mut);font:12px ui-monospace,monospace}
+.lands{margin-left:auto}
+.two{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.lbl{font:600 11px/1 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.verdict{letter-spacing:0;text-transform:none;font-weight:500}
+.ok{color:#2e7d3b}.bad{color:#c11a5e}
+@media (prefers-color-scheme:dark){.ok{color:#69c97b}.bad{color:#ff8cb0}}
+.ramp{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.ramp.acc{margin-top:6px;width:40%}
+.sw{flex:1;height:56px;background:var(--live);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:11px ui-monospace,monospace;position:relative}
+.sw::after{content:"";position:absolute;inset:auto 0 0 0;height:10px;background:var(--baked)}
+.sw b{font-weight:600;opacity:.85}.sw em{font-style:normal;opacity:.7;font-size:10px}
+footer{color:var(--mut);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:18px}
+</style></head><body><div class="wrap">
+<h1>Shade generators, side by side</h1>
+<p class="sub">Compiled from the library. Each swatch is painted from the relative-color expression the
+library emits; the 10px strip along its bottom edge is the baked hex. If the two ever disagree you will
+see a seam. Numbers are WCAG contrast against white.</p>
+
+<div class="live">
+  <label for="seed"><strong>Live seed</strong></label>
+  <input type="color" id="seed" value="#0099ff">
+  <span class="mut" style="color:var(--mut);font:12px ui-monospace,monospace">changing this re-tints the ramp at runtime &mdash; no rebuild</span>
+  <div class="demo" id="demo"></div>
+</div>
+
+
+<section>
+  <header><i style="background:#0099ff"></i><h2>Framework primary</h2><code>#0099ff</code>
+    <span class="lands">seed lands on <b>300</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#0099ff"></span></p>
+      <div class="ramp" data-id="f-#0099ff"><div class="sw" data-hex="rgb(225, 236, 251)" style="--baked:rgb(225, 236, 251);--live:oklch(from var(--ig-primary-seed) 0.9402 min(c * 0.1264, 0.0232) calc(h + 6.804))">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(171, 207, 251)" style="--baked:rgb(171, 207, 251);--live:oklch(from var(--ig-primary-seed) 0.844 min(c * 0.3941, 0.0724) calc(h + 4.879))">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(116, 180, 250)" style="--baked:rgb(116, 180, 250);--live:oklch(from var(--ig-primary-seed) 0.7551 min(c * 0.6602, 0.1213) calc(h + 3.103))">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(67, 155, 239)" style="--baked:rgb(67, 155, 239);--live:oklch(from var(--ig-primary-seed) 0.6742 min(c * 0.8212, 0.1508) calc(h + 1.484))">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(27, 131, 214)" style="--baked:rgb(27, 131, 214);--live:oklch(from var(--ig-primary-seed) 0.5973 min(c * 0.8367, 0.1537) h)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(9, 109, 183)" style="--baked:rgb(9, 109, 183);--live:oklch(from var(--ig-primary-seed) 0.5244 min(c * 0.7664, 0.1408) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(7, 89, 150)" style="--baked:rgb(7, 89, 150);--live:oklch(from var(--ig-primary-seed) 0.4535 min(c * 0.6602, 0.1213) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(11, 69, 116)" style="--baked:rgb(11, 69, 116);--live:oklch(from var(--ig-primary-seed) 0.3818 min(c * 0.5301, 0.0974) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(12, 48, 80)" style="--baked:rgb(12, 48, 80);--live:oklch(from var(--ig-primary-seed) 0.3034 min(c * 0.3808, 0.0699) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(7, 23, 39)" style="--baked:rgb(7, 23, 39);--live:oklch(from var(--ig-primary-seed) 0.2004 min(c * 0.2097, 0.0385) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(192, 222, 255)" style="--baked:rgb(192, 222, 255);--live:oklch(from var(--ig-primary-seed) 0.889 min(c * 0.3037, 0.0558) calc(h + 2.817))">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(74, 165, 255)" style="--baked:rgb(74, 165, 255);--live:oklch(from var(--ig-primary-seed) 0.7075 min(c * 0.8606, 0.1581) calc(h + 2.149))">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(4, 127, 213)" style="--baked:rgb(4, 127, 213);--live:oklch(from var(--ig-primary-seed) 0.5847 min(c * 0.8681, 0.1595) h)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 100, 169)" style="--baked:rgb(0, 100, 169);--live:oklch(from var(--ig-primary-seed) 0.4923 min(c * 0.7355, 0.1351) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#0099ff"></span></p>
+      <div class="ramp" data-id="l-#0099ff"><div class="sw" data-hex="hsl(204, 123%, 89%)" style="--baked:hsl(204, 123%, 89%);--live:hsl(204, 123%, 89%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 80%, 83%)" style="--baked:hsl(204, 80%, 83%);--live:hsl(204, 80%, 83%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 64%, 71.5%)" style="--baked:hsl(204, 64%, 71.5%);--live:hsl(204, 64%, 71.5%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 73%, 59.5%)" style="--baked:hsl(204, 73%, 59.5%);--live:hsl(204, 73%, 59.5%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 87.5%, 54%)" style="--baked:hsl(204, 87.5%, 54%);--live:hsl(204, 87.5%, 54%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#0099ff" style="--baked:#0099ff;--live:#0099ff">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 126%, 44.5%)" style="--baked:hsl(204, 126%, 44.5%);--live:hsl(204, 126%, 44.5%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 126%, 40.5%)" style="--baked:hsl(204, 126%, 40.5%);--live:hsl(204, 126%, 40.5%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 126%, 36.5%)" style="--baked:hsl(204, 126%, 36.5%);--live:hsl(204, 126%, 36.5%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 126%, 32%)" style="--baked:hsl(204, 126%, 32%);--live:hsl(204, 126%, 32%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(204, 123%, 67%)" style="--baked:hsl(204, 123%, 67%);--live:hsl(204, 123%, 67%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 122%, 58%)" style="--baked:hsl(204, 122%, 58%);--live:hsl(204, 122%, 58%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 123%, 45.5%)" style="--baked:hsl(204, 123%, 45.5%);--live:hsl(204, 123%, 45.5%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(204, 123%, 32.5%)" style="--baked:hsl(204, 123%, 32.5%);--live:hsl(204, 123%, 32.5%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#df1b74"></i><h2>Framework secondary</h2><code>#df1b74</code>
+    <span class="lands">seed lands on <b>400</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#df1b74"></span></p>
+      <div class="ramp" data-id="f-#df1b74"><div class="sw" data-hex="rgb(254, 229, 235)" style="--baked:rgb(254, 229, 235);--live:oklch(from var(--ig-primary-seed) 0.9439 min(c * 0.1274, 0.029) h)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(255, 186, 205)" style="--baked:rgb(255, 186, 205);--live:oklch(from var(--ig-primary-seed) 0.8579 min(c * 0.3639, 0.0828) calc(h - 0.806))">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(255, 141, 177)" style="--baked:rgb(255, 141, 177);--live:oklch(from var(--ig-primary-seed) 0.7764 min(c * 0.6247, 0.1421) calc(h - 0.949))">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(253, 93, 150)" style="--baked:rgb(253, 93, 150);--live:oklch(from var(--ig-primary-seed) 0.7011 min(c * 0.8788, 0.1999) h)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(233, 52, 127)" style="--baked:rgb(233, 52, 127);--live:oklch(from var(--ig-primary-seed) 0.6267 min(c * 0.9712, 0.221) h)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(203, 23, 105)" style="--baked:rgb(203, 23, 105);--live:oklch(from var(--ig-primary-seed) 0.5522 min(c * 0.9342, 0.2125) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(169, 13, 86)" style="--baked:rgb(169, 13, 86);--live:oklch(from var(--ig-primary-seed) 0.4784 min(c * 0.8203, 0.1866) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(131, 16, 66)" style="--baked:rgb(131, 16, 66);--live:oklch(from var(--ig-primary-seed) 0.402 min(c * 0.6615, 0.1505) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(91, 17, 46)" style="--baked:rgb(91, 17, 46);--live:oklch(from var(--ig-primary-seed) 0.3181 min(c * 0.4739, 0.1078) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(44, 10, 22)" style="--baked:rgb(44, 10, 22);--live:oklch(from var(--ig-primary-seed) 0.2085 min(c * 0.2592, 0.059) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(255, 211, 224)" style="--baked:rgb(255, 211, 224);--live:oklch(from var(--ig-primary-seed) 0.9072 min(c * 0.231, 0.0526) calc(h + 356.496))">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(255, 111, 163)" style="--baked:rgb(255, 111, 163);--live:oklch(from var(--ig-primary-seed) 0.7302 min(c * 0.7981, 0.1816) calc(h - 1.535))">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(236, 25, 123)" style="--baked:rgb(236, 25, 123);--live:oklch(from var(--ig-primary-seed) 0.616 min(c * 1.053, 0.2396) h)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(191, 1, 96)" style="--baked:rgb(191, 1, 96);--live:oklch(from var(--ig-primary-seed) 0.5201 min(c * 0.9218, 0.2097) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#df1b74"></span></p>
+      <div class="ramp" data-id="l-#df1b74"><div class="sw" data-hex="hsl(332.76, 96.43%, 87.25%)" style="--baked:hsl(332.76, 96.43%, 87.25%);--live:hsl(332.76, 96.43%, 87.25%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 62.72%, 81.37%)" style="--baked:hsl(332.76, 62.72%, 81.37%);--live:hsl(332.76, 62.72%, 81.37%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 50.18%, 70.1%)" style="--baked:hsl(332.76, 50.18%, 70.1%);--live:hsl(332.76, 50.18%, 70.1%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 57.23%, 58.33%)" style="--baked:hsl(332.76, 57.23%, 58.33%);--live:hsl(332.76, 57.23%, 58.33%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 68.6%, 52.94%)" style="--baked:hsl(332.76, 68.6%, 52.94%);--live:hsl(332.76, 68.6%, 52.94%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#df1b74" style="--baked:#df1b74;--live:#df1b74">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 98.78%, 43.63%)" style="--baked:hsl(332.76, 98.78%, 43.63%);--live:hsl(332.76, 98.78%, 43.63%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 98.78%, 39.71%)" style="--baked:hsl(332.76, 98.78%, 39.71%);--live:hsl(332.76, 98.78%, 39.71%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 98.78%, 35.78%)" style="--baked:hsl(332.76, 98.78%, 35.78%);--live:hsl(332.76, 98.78%, 35.78%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 98.78%, 31.37%)" style="--baked:hsl(332.76, 98.78%, 31.37%);--live:hsl(332.76, 98.78%, 31.37%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(332.76, 96.43%, 65.69%)" style="--baked:hsl(332.76, 96.43%, 65.69%);--live:hsl(332.76, 96.43%, 65.69%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 95.65%, 56.86%)" style="--baked:hsl(332.76, 95.65%, 56.86%);--live:hsl(332.76, 95.65%, 56.86%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 96.43%, 44.61%)" style="--baked:hsl(332.76, 96.43%, 44.61%);--live:hsl(332.76, 96.43%, 44.61%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(332.76, 96.43%, 31.86%)" style="--baked:hsl(332.76, 96.43%, 31.86%);--live:hsl(332.76, 96.43%, 31.86%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#faa419"></i><h2>Warn</h2><code>#faa419</code>
+    <span class="lands">seed lands on <b>200</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#faa419"></span></p>
+      <div class="ramp" data-id="f-#faa419"><div class="sw" data-hex="rgb(251, 234, 215)" style="--baked:rgb(251, 234, 215);--live:oklch(from var(--ig-primary-seed) 0.946 min(c * 0.1898, 0.0312) h)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(247, 196, 134)" style="--baked:rgb(247, 196, 134);--live:oklch(from var(--ig-primary-seed) 0.8514 min(c * 0.5993, 0.0986) h)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(233, 161, 64)" style="--baked:rgb(233, 161, 64);--live:oklch(from var(--ig-primary-seed) 0.7625 min(c * 0.8418, 0.1385) h)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(207, 136, 24)" style="--baked:rgb(207, 136, 24);--live:oklch(from var(--ig-primary-seed) 0.6821 min(c * 0.8564, 0.1409) h)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(177, 114, 4)" style="--baked:rgb(177, 114, 4);--live:oklch(from var(--ig-primary-seed) 0.6046 min(c * 0.7864, 0.1294) h)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(149, 95, 1)" style="--baked:rgb(149, 95, 1);--live:oklch(from var(--ig-primary-seed) 0.5307 min(c * 0.6932, 0.114) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(121, 77, 4)" style="--baked:rgb(121, 77, 4);--live:oklch(from var(--ig-primary-seed) 0.4588 min(c * 0.5893, 0.0969) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(94, 60, 9)" style="--baked:rgb(94, 60, 9);--live:oklch(from var(--ig-primary-seed) 0.3861 min(c * 0.4709, 0.0775) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(65, 42, 11)" style="--baked:rgb(65, 42, 11);--live:oklch(from var(--ig-primary-seed) 0.3066 min(c * 0.3375, 0.0555) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(31, 20, 6)" style="--baked:rgb(31, 20, 6);--live:oklch(from var(--ig-primary-seed) 0.2023 min(c * 0.1855, 0.0305) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(255, 211, 157)" style="--baked:rgb(255, 211, 157);--live:oklch(from var(--ig-primary-seed) 0.8928 min(c * 0.5171, 0.0851) calc(h + 1.537))">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(222, 144, 4)" style="--baked:rgb(222, 144, 4);--live:oklch(from var(--ig-primary-seed) 0.716 min(c * 0.9343, 0.1537) h)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(172, 110, 0)" style="--baked:rgb(172, 110, 0);--live:oklch(from var(--ig-primary-seed) 0.5917 min(c * 0.7753, 0.1275) h)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(136, 86, 0)" style="--baked:rgb(136, 86, 0);--live:oklch(from var(--ig-primary-seed) 0.4975 min(c * 0.6519, 0.1072) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#faa419"></span></p>
+      <div class="ramp" data-id="l-#faa419"><div class="sw" data-hex="hsl(37.07, 117.77%, 95.98%)" style="--baked:hsl(37.07, 117.77%, 95.98%);--live:hsl(37.07, 117.77%, 95.98%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 76.6%, 89.51%)" style="--baked:hsl(37.07, 76.6%, 89.51%);--live:hsl(37.07, 76.6%, 89.51%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 61.28%, 77.11%)" style="--baked:hsl(37.07, 61.28%, 77.11%);--live:hsl(37.07, 61.28%, 77.11%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 69.89%, 64.17%)" style="--baked:hsl(37.07, 69.89%, 64.17%);--live:hsl(37.07, 69.89%, 64.17%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 83.78%, 58.24%)" style="--baked:hsl(37.07, 83.78%, 58.24%);--live:hsl(37.07, 83.78%, 58.24%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#faa419" style="--baked:#faa419;--live:#faa419">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 120.64%, 47.99%)" style="--baked:hsl(37.07, 120.64%, 47.99%);--live:hsl(37.07, 120.64%, 47.99%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 120.64%, 43.68%)" style="--baked:hsl(37.07, 120.64%, 43.68%);--live:hsl(37.07, 120.64%, 43.68%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 120.64%, 39.36%)" style="--baked:hsl(37.07, 120.64%, 39.36%);--live:hsl(37.07, 120.64%, 39.36%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 120.64%, 34.51%)" style="--baked:hsl(37.07, 120.64%, 34.51%);--live:hsl(37.07, 120.64%, 34.51%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(37.07, 117.77%, 72.25%)" style="--baked:hsl(37.07, 117.77%, 72.25%);--live:hsl(37.07, 117.77%, 72.25%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 116.81%, 62.55%)" style="--baked:hsl(37.07, 116.81%, 62.55%);--live:hsl(37.07, 116.81%, 62.55%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 117.77%, 49.07%)" style="--baked:hsl(37.07, 117.77%, 49.07%);--live:hsl(37.07, 117.77%, 49.07%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(37.07, 117.77%, 35.05%)" style="--baked:hsl(37.07, 117.77%, 35.05%);--live:hsl(37.07, 117.77%, 35.05%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#4eb862"></i><h2>Success</h2><code>#4eb862</code>
+    <span class="lands">seed lands on <b>200</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#4eb862"></span></p>
+      <div class="ramp" data-id="f-#4eb862"><div class="sw" data-hex="rgb(202, 246, 206)" style="--baked:rgb(202, 246, 206);--live:oklch(from var(--ig-primary-seed) 0.9325 min(c * 0.4533, 0.0713) h)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(128, 226, 143)" style="--baked:rgb(128, 226, 143);--live:oklch(from var(--ig-primary-seed) 0.8312 min(c * 0.9418, 0.1481) h)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(94, 197, 112)" style="--baked:rgb(94, 197, 112);--live:oklch(from var(--ig-primary-seed) 0.7415 min(c * 0.9822, 0.1545) h)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(73, 169, 91)" style="--baked:rgb(73, 169, 91);--live:oklch(from var(--ig-primary-seed) 0.6595 min(c * 0.9259, 0.1456) h)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(59, 144, 75)" style="--baked:rgb(59, 144, 75);--live:oklch(from var(--ig-primary-seed) 0.584 min(c * 0.8359, 0.1315) h)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(48, 120, 62)" style="--baked:rgb(48, 120, 62);--live:oklch(from var(--ig-primary-seed) 0.5124 min(c * 0.7337, 0.1154) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(39, 98, 50)" style="--baked:rgb(39, 98, 50);--live:oklch(from var(--ig-primary-seed) 0.4435 min(c * 0.6237, 0.0981) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(32, 76, 39)" style="--baked:rgb(32, 76, 39);--live:oklch(from var(--ig-primary-seed) 0.3739 min(c * 0.4991, 0.0785) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(24, 53, 28)" style="--baked:rgb(24, 53, 28);--live:oklch(from var(--ig-primary-seed) 0.2979 min(c * 0.3588, 0.0564) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(11, 25, 13)" style="--baked:rgb(11, 25, 13);--live:oklch(from var(--ig-primary-seed) 0.1976 min(c * 0.1983, 0.0312) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(53, 250, 108)" style="--baked:rgb(53, 250, 108);--live:oklch(from var(--ig-primary-seed) 0.8646 min(c * 1.5195, 0.239) h)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 186, 71)" style="--baked:rgb(0, 186, 71);--live:oklch(from var(--ig-primary-seed) 0.6871 min(c * 1.282, 0.2016) h)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 143, 53)" style="--baked:rgb(0, 143, 53);--live:oklch(from var(--ig-primary-seed) 0.5678 min(c * 1.0593, 0.1666) h)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 113, 40)" style="--baked:rgb(0, 113, 40);--live:oklch(from var(--ig-primary-seed) 0.4777 min(c * 0.8913, 0.1402) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#4eb862"></span></p>
+      <div class="ramp" data-id="l-#4eb862"><div class="sw" data-hex="hsl(131.32, 52.57%, 91.44%)" style="--baked:hsl(131.32, 52.57%, 91.44%);--live:hsl(131.32, 52.57%, 91.44%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 34.19%, 85.28%)" style="--baked:hsl(131.32, 34.19%, 85.28%);--live:hsl(131.32, 34.19%, 85.28%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 27.35%, 73.46%)" style="--baked:hsl(131.32, 27.35%, 73.46%);--live:hsl(131.32, 27.35%, 73.46%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 31.2%, 61.13%)" style="--baked:hsl(131.32, 31.2%, 61.13%);--live:hsl(131.32, 31.2%, 61.13%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 37.4%, 55.48%)" style="--baked:hsl(131.32, 37.4%, 55.48%);--live:hsl(131.32, 37.4%, 55.48%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#4eb862" style="--baked:#4eb862;--live:#4eb862">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 53.85%, 45.72%)" style="--baked:hsl(131.32, 53.85%, 45.72%);--live:hsl(131.32, 53.85%, 45.72%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 53.85%, 41.61%)" style="--baked:hsl(131.32, 53.85%, 41.61%);--live:hsl(131.32, 53.85%, 41.61%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 53.85%, 37.5%)" style="--baked:hsl(131.32, 53.85%, 37.5%);--live:hsl(131.32, 53.85%, 37.5%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 53.85%, 32.88%)" style="--baked:hsl(131.32, 53.85%, 32.88%);--live:hsl(131.32, 53.85%, 32.88%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(131.32, 52.57%, 68.84%)" style="--baked:hsl(131.32, 52.57%, 68.84%);--live:hsl(131.32, 52.57%, 68.84%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 52.15%, 59.59%)" style="--baked:hsl(131.32, 52.15%, 59.59%);--live:hsl(131.32, 52.15%, 59.59%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 52.57%, 46.75%)" style="--baked:hsl(131.32, 52.57%, 46.75%);--live:hsl(131.32, 52.57%, 46.75%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(131.32, 52.57%, 33.39%)" style="--baked:hsl(131.32, 52.57%, 33.39%);--live:hsl(131.32, 52.57%, 33.39%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#ffe9b0"></i><h2>Near-white seed</h2><code>#ffe9b0</code>
+    <span class="lands">seed lands on <b>50</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#ffe9b0"></span></p>
+      <div class="ramp" data-id="f-#ffe9b0"><div class="sw" data-hex="rgb(249, 234, 196)" style="--baked:rgb(249, 234, 196);--live:oklch(from var(--ig-primary-seed) 0.9401 min(c * 0.6808, 0.0522) h)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(237, 200, 98)" style="--baked:rgb(237, 200, 98);--live:oklch(from var(--ig-primary-seed) 0.8453 min(c * 1.6622, 0.1273) h)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(211, 171, 49)" style="--baked:rgb(211, 171, 49);--live:oklch(from var(--ig-primary-seed) 0.7574 min(c * 1.8285, 0.1401) h)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(184, 146, 21)" style="--baked:rgb(184, 146, 21);--live:oklch(from var(--ig-primary-seed) 0.6762 min(c * 1.7413, 0.1334) h)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(157, 123, 7)" style="--baked:rgb(157, 123, 7);--live:oklch(from var(--ig-primary-seed) 0.5992 min(c * 1.5749, 0.1207) h)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(131, 103, 5)" style="--baked:rgb(131, 103, 5);--live:oklch(from var(--ig-primary-seed) 0.5259 min(c * 1.383, 0.1059) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(106, 83, 7)" style="--baked:rgb(106, 83, 7);--live:oklch(from var(--ig-primary-seed) 0.4548 min(c * 1.1747, 0.09) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(82, 65, 11)" style="--baked:rgb(82, 65, 11);--live:oklch(from var(--ig-primary-seed) 0.3829 min(c * 0.9388, 0.0719) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(57, 45, 12)" style="--baked:rgb(57, 45, 12);--live:oklch(from var(--ig-primary-seed) 0.3043 min(c * 0.6733, 0.0516) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(27, 22, 7)" style="--baked:rgb(27, 22, 7);--live:oklch(from var(--ig-primary-seed) 0.201 min(c * 0.3707, 0.0284) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(255, 213, 97)" style="--baked:rgb(255, 213, 97);--live:oklch(from var(--ig-primary-seed) 0.887 min(c * 1.8368, 0.1407) h)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(197, 156, 0)" style="--baked:rgb(197, 156, 0);--live:oklch(from var(--ig-primary-seed) 0.7096 min(c * 1.8927, 0.145) h)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(152, 120, 0)" style="--baked:rgb(152, 120, 0);--live:oklch(from var(--ig-primary-seed) 0.5864 min(c * 1.5641, 0.1198) h)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(120, 94, 0)" style="--baked:rgb(120, 94, 0);--live:oklch(from var(--ig-primary-seed) 0.4936 min(c * 1.3166, 0.1009) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#ffe9b0"></span></p>
+      <div class="ramp" data-id="l-#ffe9b0"><div class="sw" data-hex="hsl(43.29, 123%, 150.43%)" style="--baked:hsl(43.29, 123%, 150.43%);--live:hsl(43.29, 123%, 150.43%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 80%, 140.29%)" style="--baked:hsl(43.29, 80%, 140.29%);--live:hsl(43.29, 80%, 140.29%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 64%, 120.85%)" style="--baked:hsl(43.29, 64%, 120.85%);--live:hsl(43.29, 64%, 120.85%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 73%, 100.57%)" style="--baked:hsl(43.29, 73%, 100.57%);--live:hsl(43.29, 73%, 100.57%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 87.5%, 91.27%)" style="--baked:hsl(43.29, 87.5%, 91.27%);--live:hsl(43.29, 87.5%, 91.27%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#ffe9b0" style="--baked:#ffe9b0;--live:#ffe9b0">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 126%, 75.21%)" style="--baked:hsl(43.29, 126%, 75.21%);--live:hsl(43.29, 126%, 75.21%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 126%, 68.45%)" style="--baked:hsl(43.29, 126%, 68.45%);--live:hsl(43.29, 126%, 68.45%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 126%, 61.69%)" style="--baked:hsl(43.29, 126%, 61.69%);--live:hsl(43.29, 126%, 61.69%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 126%, 54.09%)" style="--baked:hsl(43.29, 126%, 54.09%);--live:hsl(43.29, 126%, 54.09%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(43.29, 123%, 113.24%)" style="--baked:hsl(43.29, 123%, 113.24%);--live:hsl(43.29, 123%, 113.24%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 122%, 98.03%)" style="--baked:hsl(43.29, 122%, 98.03%);--live:hsl(43.29, 122%, 98.03%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 123%, 76.9%)" style="--baked:hsl(43.29, 123%, 76.9%);--live:hsl(43.29, 123%, 76.9%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(43.29, 123%, 54.93%)" style="--baked:hsl(43.29, 123%, 54.93%);--live:hsl(43.29, 123%, 54.93%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#141225"></i><h2>Near-black seed</h2><code>#141225</code>
+    <span class="lands">seed lands on <b>900</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#141225"></span></p>
+      <div class="ramp" data-id="f-#141225"><div class="sw" data-hex="rgb(237, 236, 241)" style="--baked:rgb(237, 236, 241);--live:oklch(from var(--ig-primary-seed) 0.9452 min(c * 0.2038, 0.0077) calc(h + 13.042))">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(206, 201, 220)" style="--baked:rgb(206, 201, 220);--live:oklch(from var(--ig-primary-seed) 0.8463 min(c * 0.6855, 0.0258) calc(h + 9.779))">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(178, 172, 203)" style="--baked:rgb(178, 172, 203);--live:oklch(from var(--ig-primary-seed) 0.759 min(c * 1.1884, 0.0448) calc(h + 6.898))">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(152, 146, 188)" style="--baked:rgb(152, 146, 188);--live:oklch(from var(--ig-primary-seed) 0.6794 min(c * 1.6473, 0.0621) calc(h + 4.27))">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(127, 122, 172)" style="--baked:rgb(127, 122, 172);--live:oklch(from var(--ig-primary-seed) 0.6023 min(c * 2.0078, 0.0757) calc(h + 1.727))">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(105, 100, 153)" style="--baked:rgb(105, 100, 153);--live:oklch(from var(--ig-primary-seed) 0.5299 min(c * 2.1791, 0.0821) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(85, 80, 130)" style="--baked:rgb(85, 80, 130);--live:oklch(from var(--ig-primary-seed) 0.4595 min(c * 2.1031, 0.0793) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(66, 62, 102)" style="--baked:rgb(66, 62, 102);--live:oklch(from var(--ig-primary-seed) 0.3869 min(c * 1.7868, 0.0674) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(46, 44, 71)" style="--baked:rgb(46, 44, 71);--live:oklch(from var(--ig-primary-seed) 0.3074 min(c * 1.3116, 0.0494) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(22, 21, 35)" style="--baked:rgb(22, 21, 35);--live:oklch(from var(--ig-primary-seed) 0.2027 min(c * 0.7261, 0.0274) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(225, 212, 255)" style="--baked:rgb(225, 212, 255);--live:oklch(from var(--ig-primary-seed) 0.8949 min(c * 1.5789, 0.0595) calc(h + 12.128))">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(170, 142, 255)" style="--baked:rgb(170, 142, 255);--live:oklch(from var(--ig-primary-seed) 0.7203 min(c * 4.2713, 0.161) calc(h + 6.223))">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(134, 92, 255)" style="--baked:rgb(134, 92, 255);--live:oklch(from var(--ig-primary-seed) 0.6077 min(c * 6.0798, 0.2292) calc(h + 2.297))">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(109, 46, 247)" style="--baked:rgb(109, 46, 247);--live:oklch(from var(--ig-primary-seed) 0.5244 min(c * 7.1002, 0.2676) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#141225"></span></p>
+      <div class="ramp" data-id="l-#141225"><div class="sw" data-hex="hsl(246.32, 42.49%, 19.2%)" style="--baked:hsl(246.32, 42.49%, 19.2%);--live:hsl(246.32, 42.49%, 19.2%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 27.64%, 17.9%)" style="--baked:hsl(246.32, 27.64%, 17.9%);--live:hsl(246.32, 27.64%, 17.9%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 22.11%, 15.42%)" style="--baked:hsl(246.32, 22.11%, 15.42%);--live:hsl(246.32, 22.11%, 15.42%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 25.22%, 12.83%)" style="--baked:hsl(246.32, 25.22%, 12.83%);--live:hsl(246.32, 25.22%, 12.83%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 30.23%, 11.65%)" style="--baked:hsl(246.32, 30.23%, 11.65%);--live:hsl(246.32, 30.23%, 11.65%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#141225" style="--baked:#141225;--live:#141225">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 43.53%, 9.6%)" style="--baked:hsl(246.32, 43.53%, 9.6%);--live:hsl(246.32, 43.53%, 9.6%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 43.53%, 8.74%)" style="--baked:hsl(246.32, 43.53%, 8.74%);--live:hsl(246.32, 43.53%, 8.74%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 43.53%, 7.87%)" style="--baked:hsl(246.32, 43.53%, 7.87%);--live:hsl(246.32, 43.53%, 7.87%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 43.53%, 6.9%)" style="--baked:hsl(246.32, 43.53%, 6.9%);--live:hsl(246.32, 43.53%, 6.9%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(246.32, 42.49%, 14.45%)" style="--baked:hsl(246.32, 42.49%, 14.45%);--live:hsl(246.32, 42.49%, 14.45%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 42.15%, 12.51%)" style="--baked:hsl(246.32, 42.15%, 12.51%);--live:hsl(246.32, 42.15%, 12.51%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 42.49%, 9.81%)" style="--baked:hsl(246.32, 42.49%, 9.81%);--live:hsl(246.32, 42.49%, 9.81%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(246.32, 42.49%, 7.01%)" style="--baked:hsl(246.32, 42.49%, 7.01%);--live:hsl(246.32, 42.49%, 7.01%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#00ff00"></i><h2>Neon</h2><code>#00ff00</code>
+    <span class="lands">seed lands on <b>100</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#00ff00"></span></p>
+      <div class="ramp" data-id="f-#00ff00"><div class="sw" data-hex="rgb(191, 251, 185)" style="--baked:rgb(191, 251, 185);--live:oklch(from var(--ig-primary-seed) 0.9305 min(c * 0.3595, 0.106) h)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(93, 231, 85)" style="--baked:rgb(93, 231, 85);--live:oklch(from var(--ig-primary-seed) 0.8227 min(c * 0.7525, 0.2219) h)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(47, 203, 42)" style="--baked:rgb(47, 203, 42);--live:oklch(from var(--ig-primary-seed) 0.7358 min(c * 0.784, 0.2312) h)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(17, 175, 14)" style="--baked:rgb(17, 175, 14);--live:oklch(from var(--ig-primary-seed) 0.6543 min(c * 0.7392, 0.2179) h)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(1, 149, 1)" style="--baked:rgb(1, 149, 1);--live:oklch(from var(--ig-primary-seed) 0.5793 min(c * 0.6674, 0.1968) h)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(1, 124, 0)" style="--baked:rgb(1, 124, 0);--live:oklch(from var(--ig-primary-seed) 0.5083 min(c * 0.5858, 0.1727) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(5, 101, 4)" style="--baked:rgb(5, 101, 4);--live:oklch(from var(--ig-primary-seed) 0.4397 min(c * 0.4977, 0.1467) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(11, 78, 9)" style="--baked:rgb(11, 78, 9);--live:oklch(from var(--ig-primary-seed) 0.371 min(c * 0.3987, 0.1175) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(13, 55, 11)" style="--baked:rgb(13, 55, 11);--live:oklch(from var(--ig-primary-seed) 0.2958 min(c * 0.2868, 0.0846) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(7, 26, 6)" style="--baked:rgb(7, 26, 6);--live:oklch(from var(--ig-primary-seed) 0.1964 min(c * 0.1586, 0.0468) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(58, 251, 52)" style="--baked:rgb(58, 251, 52);--live:oklch(from var(--ig-primary-seed) 0.8632 min(c * 0.9255, 0.2729) h)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 187, 0)" style="--baked:rgb(0, 187, 0);--live:oklch(from var(--ig-primary-seed) 0.686 min(c * 0.7917, 0.2334) h)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 144, 0)" style="--baked:rgb(0, 144, 0);--live:oklch(from var(--ig-primary-seed) 0.5668 min(c * 0.6542, 0.1929) h)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(0, 114, 0)" style="--baked:rgb(0, 114, 0);--live:oklch(from var(--ig-primary-seed) 0.4769 min(c * 0.5504, 0.1623) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#00ff00"></span></p>
+      <div class="ramp" data-id="l-#00ff00"><div class="sw" data-hex="hsl(120, 123%, 89%)" style="--baked:hsl(120, 123%, 89%);--live:hsl(120, 123%, 89%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 80%, 83%)" style="--baked:hsl(120, 80%, 83%);--live:hsl(120, 80%, 83%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 64%, 71.5%)" style="--baked:hsl(120, 64%, 71.5%);--live:hsl(120, 64%, 71.5%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 73%, 59.5%)" style="--baked:hsl(120, 73%, 59.5%);--live:hsl(120, 73%, 59.5%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 87.5%, 54%)" style="--baked:hsl(120, 87.5%, 54%);--live:hsl(120, 87.5%, 54%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#00ff00" style="--baked:#00ff00;--live:#00ff00">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 126%, 44.5%)" style="--baked:hsl(120, 126%, 44.5%);--live:hsl(120, 126%, 44.5%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 126%, 40.5%)" style="--baked:hsl(120, 126%, 40.5%);--live:hsl(120, 126%, 40.5%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 126%, 36.5%)" style="--baked:hsl(120, 126%, 36.5%);--live:hsl(120, 126%, 36.5%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 126%, 32%)" style="--baked:hsl(120, 126%, 32%);--live:hsl(120, 126%, 32%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(120, 123%, 67%)" style="--baked:hsl(120, 123%, 67%);--live:hsl(120, 123%, 67%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 122%, 58%)" style="--baked:hsl(120, 122%, 58%);--live:hsl(120, 122%, 58%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 123%, 45.5%)" style="--baked:hsl(120, 123%, 45.5%);--live:hsl(120, 123%, 45.5%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(120, 123%, 32.5%)" style="--baked:hsl(120, 123%, 32.5%);--live:hsl(120, 123%, 32.5%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#a99bb0"></i><h2>Washed out</h2><code>#a99bb0</code>
+    <span class="lands">seed lands on <b>300</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#a99bb0"></span></p>
+      <div class="ramp" data-id="f-#a99bb0"><div class="sw" data-hex="rgb(240, 235, 241)" style="--baked:rgb(240, 235, 241);--live:oklch(from var(--ig-primary-seed) 0.9458 min(c * 0.2673, 0.0091) calc(h + 6.917))">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(215, 200, 218)" style="--baked:rgb(215, 200, 218);--live:oklch(from var(--ig-primary-seed) 0.8503 min(c * 0.8851, 0.0301) calc(h + 5.006))">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(192, 168, 200)" style="--baked:rgb(192, 168, 200);--live:oklch(from var(--ig-primary-seed) 0.7632 min(c * 1.5308, 0.052) calc(h + 3.263))">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(170, 140, 182)" style="--baked:rgb(170, 140, 182);--live:oklch(from var(--ig-primary-seed) 0.6828 min(c * 2.0471, 0.0695) calc(h + 1.655))">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(147, 116, 162)" style="--baked:rgb(147, 116, 162);--live:oklch(from var(--ig-primary-seed) 0.6055 min(c * 2.2731, 0.0772) calc(h + 0.11))">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(125, 95, 139)" style="--baked:rgb(125, 95, 139);--live:oklch(from var(--ig-primary-seed) 0.533 min(c * 2.1964, 0.0746) h)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(102, 77, 114)" style="--baked:rgb(102, 77, 114);--live:oklch(from var(--ig-primary-seed) 0.461 min(c * 1.935, 0.0657) h)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(79, 60, 88)" style="--baked:rgb(79, 60, 88);--live:oklch(from var(--ig-primary-seed) 0.3879 min(c * 1.5661, 0.0532) h)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(55, 42, 61)" style="--baked:rgb(55, 42, 61);--live:oklch(from var(--ig-primary-seed) 0.3081 min(c * 1.127, 0.0383) h)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(26, 20, 29)" style="--baked:rgb(26, 20, 29);--live:oklch(from var(--ig-primary-seed) 0.2031 min(c * 0.6201, 0.0211) h)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(247, 205, 255)" style="--baked:rgb(247, 205, 255);--live:oklch(from var(--ig-primary-seed) 0.8992 min(c * 2.3677, 0.0804) calc(h + 5.985))">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(221, 119, 255)" style="--baked:rgb(221, 119, 255);--live:oklch(from var(--ig-primary-seed) 0.7351 min(c * 6.2159, 0.211) calc(h + 2.701))">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(194, 45, 246)" style="--baked:rgb(194, 45, 246);--live:oklch(from var(--ig-primary-seed) 0.6216 min(c * 8.2185, 0.279) calc(h + 0.431))">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(159, 4, 206)" style="--baked:rgb(159, 4, 206);--live:oklch(from var(--ig-primary-seed) 0.5279 min(c * 7.6261, 0.2589) h)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#a99bb0"></span></p>
+      <div class="ramp" data-id="l-#a99bb0"><div class="sw" data-hex="hsl(280, 14.43%, 115.53%)" style="--baked:hsl(280, 14.43%, 115.53%);--live:hsl(280, 14.43%, 115.53%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 9.39%, 107.74%)" style="--baked:hsl(280, 9.39%, 107.74%);--live:hsl(280, 9.39%, 107.74%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 7.51%, 92.81%)" style="--baked:hsl(280, 7.51%, 92.81%);--live:hsl(280, 7.51%, 92.81%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 8.56%, 77.23%)" style="--baked:hsl(280, 8.56%, 77.23%);--live:hsl(280, 8.56%, 77.23%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 10.27%, 70.09%)" style="--baked:hsl(280, 10.27%, 70.09%);--live:hsl(280, 10.27%, 70.09%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#a99bb0" style="--baked:#a99bb0;--live:#a99bb0">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.78%, 57.76%)" style="--baked:hsl(280, 14.78%, 57.76%);--live:hsl(280, 14.78%, 57.76%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.78%, 52.57%)" style="--baked:hsl(280, 14.78%, 52.57%);--live:hsl(280, 14.78%, 52.57%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.78%, 47.38%)" style="--baked:hsl(280, 14.78%, 47.38%);--live:hsl(280, 14.78%, 47.38%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.78%, 41.54%)" style="--baked:hsl(280, 14.78%, 41.54%);--live:hsl(280, 14.78%, 41.54%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(280, 14.43%, 86.97%)" style="--baked:hsl(280, 14.43%, 86.97%);--live:hsl(280, 14.43%, 86.97%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.31%, 75.29%)" style="--baked:hsl(280, 14.31%, 75.29%);--live:hsl(280, 14.31%, 75.29%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.43%, 59.06%)" style="--baked:hsl(280, 14.43%, 59.06%);--live:hsl(280, 14.43%, 59.06%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(280, 14.43%, 42.19%)" style="--baked:hsl(280, 14.43%, 42.19%);--live:hsl(280, 14.43%, 42.19%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#8a8a8a"></i><h2>Pure gray</h2><code>#8a8a8a</code>
+    <span class="lands">seed lands on <b>400</b></span></header>
+  <div class="two">
+    <div>
+      <p class="lbl">gamut-relative <span class="verdict" data-for="f-#8a8a8a"></span></p>
+      <div class="ramp" data-id="f-#8a8a8a"><div class="sw" data-hex="rgb(235, 235, 235)" style="--baked:rgb(235, 235, 235);--live:oklch(from var(--ig-primary-seed) 0.9404 0 0)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(204, 204, 204)" style="--baked:rgb(204, 204, 204);--live:oklch(from var(--ig-primary-seed) 0.8448 0 0)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(176, 176, 176)" style="--baked:rgb(176, 176, 176);--live:oklch(from var(--ig-primary-seed) 0.7562 0 0)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(151, 151, 151)" style="--baked:rgb(151, 151, 151);--live:oklch(from var(--ig-primary-seed) 0.6749 0 0)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(127, 127, 127)" style="--baked:rgb(127, 127, 127);--live:oklch(from var(--ig-primary-seed) 0.598 0 0)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(106, 106, 106)" style="--baked:rgb(106, 106, 106);--live:oklch(from var(--ig-primary-seed) 0.5248 0 0)">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(86, 86, 86)" style="--baked:rgb(86, 86, 86);--live:oklch(from var(--ig-primary-seed) 0.4539 0 0)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(67, 67, 67)" style="--baked:rgb(67, 67, 67);--live:oklch(from var(--ig-primary-seed) 0.3822 0 0)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(47, 47, 47)" style="--baked:rgb(47, 47, 47);--live:oklch(from var(--ig-primary-seed) 0.304 0 0)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(22, 22, 22)" style="--baked:rgb(22, 22, 22);--live:oklch(from var(--ig-primary-seed) 0.2009 0 0)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="rgb(219, 219, 219)" style="--baked:rgb(219, 219, 219);--live:oklch(from var(--ig-primary-seed) 0.89 0 0)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(161, 161, 161)" style="--baked:rgb(161, 161, 161);--live:oklch(from var(--ig-primary-seed) 0.7081 0 0)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(124, 124, 124)" style="--baked:rgb(124, 124, 124);--live:oklch(from var(--ig-primary-seed) 0.5851 0 0)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="rgb(97, 97, 97)" style="--baked:rgb(97, 97, 97);--live:oklch(from var(--ig-primary-seed) 0.4926 0 0)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+    <div>
+      <p class="lbl">legacy <span class="verdict" data-for="l-#8a8a8a"></span></p>
+      <div class="ramp" data-id="l-#8a8a8a"><div class="sw" data-hex="hsl(0, 0%, 96.33%)" style="--baked:hsl(0, 0%, 96.33%);--live:hsl(0, 0%, 96.33%)">
+     <b>50</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 89.84%)" style="--baked:hsl(0, 0%, 89.84%);--live:hsl(0, 0%, 89.84%)">
+     <b>100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 77.39%)" style="--baked:hsl(0, 0%, 77.39%);--live:hsl(0, 0%, 77.39%)">
+     <b>200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 64.4%)" style="--baked:hsl(0, 0%, 64.4%);--live:hsl(0, 0%, 64.4%)">
+     <b>300</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 58.45%)" style="--baked:hsl(0, 0%, 58.45%);--live:hsl(0, 0%, 58.45%)">
+     <b>400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="#8a8a8a" style="--baked:#8a8a8a;--live:#8a8a8a">
+     <b>500</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 48.16%)" style="--baked:hsl(0, 0%, 48.16%);--live:hsl(0, 0%, 48.16%)">
+     <b>600</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 43.84%)" style="--baked:hsl(0, 0%, 43.84%);--live:hsl(0, 0%, 43.84%)">
+     <b>700</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 39.51%)" style="--baked:hsl(0, 0%, 39.51%);--live:hsl(0, 0%, 39.51%)">
+     <b>800</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 34.64%)" style="--baked:hsl(0, 0%, 34.64%);--live:hsl(0, 0%, 34.64%)">
+     <b>900</b><em class="cr"></em>
+   </div></div>
+      <div class="ramp acc"><div class="sw" data-hex="hsl(0, 0%, 72.52%)" style="--baked:hsl(0, 0%, 72.52%);--live:hsl(0, 0%, 72.52%)">
+     <b>A100</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 62.78%)" style="--baked:hsl(0, 0%, 62.78%);--live:hsl(0, 0%, 62.78%)">
+     <b>A200</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 49.25%)" style="--baked:hsl(0, 0%, 49.25%);--live:hsl(0, 0%, 49.25%)">
+     <b>A400</b><em class="cr"></em>
+   </div><div class="sw" data-hex="hsl(0, 0%, 35.18%)" style="--baked:hsl(0, 0%, 35.18%);--live:hsl(0, 0%, 35.18%)">
+     <b>A700</b><em class="cr"></em>
+   </div></div>
+    </div>
+  </div>
+</section>
+
+<footer>Generated by <code>.scripts/previewShades.mjs</code>. The legacy ramps are what the library
+shipped before; the palettes bundled with the library stay on that generator.</footer>
+</div>
+<script>
+const LIVE = {"lands-on":"\"300\"","raw-50":"rgb(225, 236, 251)","expr-50":"oklch(from var(--ig-primary-seed) 0.9402 min(c * 0.1264, 0.0232) calc(h + 6.804))","raw-100":"rgb(171, 207, 251)","expr-100":"oklch(from var(--ig-primary-seed) 0.844 min(c * 0.3941, 0.0724) calc(h + 4.879))","raw-200":"rgb(116, 180, 250)","expr-200":"oklch(from var(--ig-primary-seed) 0.7551 min(c * 0.6602, 0.1213) calc(h + 3.103))","raw-300":"rgb(67, 155, 239)","expr-300":"oklch(from var(--ig-primary-seed) 0.6742 min(c * 0.8212, 0.1508) calc(h + 1.484))","raw-400":"rgb(27, 131, 214)","expr-400":"oklch(from var(--ig-primary-seed) 0.5973 min(c * 0.8367, 0.1537) h)","raw-500":"rgb(9, 109, 183)","expr-500":"oklch(from var(--ig-primary-seed) 0.5244 min(c * 0.7664, 0.1408) h)","raw-600":"rgb(7, 89, 150)","expr-600":"oklch(from var(--ig-primary-seed) 0.4535 min(c * 0.6602, 0.1213) h)","raw-700":"rgb(11, 69, 116)","expr-700":"oklch(from var(--ig-primary-seed) 0.3818 min(c * 0.5301, 0.0974) h)","raw-800":"rgb(12, 48, 80)","expr-800":"oklch(from var(--ig-primary-seed) 0.3034 min(c * 0.3808, 0.0699) h)","raw-900":"rgb(7, 23, 39)","expr-900":"oklch(from var(--ig-primary-seed) 0.2004 min(c * 0.2097, 0.0385) h)","raw-A100":"rgb(192, 222, 255)","expr-A100":"oklch(from var(--ig-primary-seed) 0.889 min(c * 0.3037, 0.0558) calc(h + 2.817))","raw-A200":"rgb(74, 165, 255)","expr-A200":"oklch(from var(--ig-primary-seed) 0.7075 min(c * 0.8606, 0.1581) calc(h + 2.149))","raw-A400":"rgb(4, 127, 213)","expr-A400":"oklch(from var(--ig-primary-seed) 0.5847 min(c * 0.8681, 0.1595) h)","raw-A700":"rgb(0, 100, 169)","expr-A700":"oklch(from var(--ig-primary-seed) 0.4923 min(c * 0.7355, 0.1351) h)"};
+const SHADES = ["50","100","200","300","400","500","600","700","800","900"];
+const demo = document.getElementById('demo');
+demo.innerHTML = SHADES.map(k=>'<i style="background:'+LIVE['expr-'+k]+'"></i>').join('');
+document.getElementById('seed').addEventListener('input', e => {
+  demo.style.setProperty('--ig-primary-seed', e.target.value);
+});
+demo.style.setProperty('--ig-primary-seed', '#0099ff');
+
+// Resolve every swatch through the browser so legacy hsl() and modern oklch()
+// values are compared on the same footing.
+const probe = document.createElement('span');
+probe.style.display = 'none';
+document.body.appendChild(probe);
+const lin = v => (v /= 255) <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+const lum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+const resolve = value => {
+  probe.style.color = '';
+  probe.style.color = value;
+  const m = getComputedStyle(probe).color.match(/[d.]+/g) || [];
+  return m.slice(0, 3).map(Number);
+};
+
+document.querySelectorAll('.sw').forEach(el => {
+  const rgb = resolve(el.dataset.hex);
+  el.dataset.rgb = rgb.join(',');
+  el.querySelector('.cr').textContent = (1.05 / (lum(rgb) + 0.05)).toFixed(1);
+  el.style.color = lum(rgb) > 0.32 ? 'rgba(0,0,0,.72)' : 'rgba(255,255,255,.85)';
+});
+
+document.querySelectorAll('.ramp[data-id]').forEach(ramp => {
+  const sw = [...ramp.querySelectorAll('.sw')].map(el => el.dataset.rgb.split(',').map(Number));
+  let fails = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const a = 1.05 / (lum(sw[i]) + 0.05);
+    const b = 1.05 / (lum(sw[i + 5]) + 0.05);
+
+    if (b / a < 4.5) fails++;
+  }
+
+  const dup = new Set(sw.map(String)).size !== sw.length;
+  const v = document.querySelector('.verdict[data-for="' + ramp.dataset.id + '"]');
+  v.className = 'verdict ' + (fails || dup ? 'bad' : 'ok');
+  v.textContent = (fails ? fails + ' of 5 AA pairs fail' : 'all 5 AA pairs pass') + (dup ? ' · duplicate shades' : '');
+});
+</script></body></html>

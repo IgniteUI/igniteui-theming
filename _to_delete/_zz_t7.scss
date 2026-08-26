@@ -1,0 +1,14 @@
+@use "sass:color"; @use "sass:meta"; @use "sass:math";
+$m: oklch(70% 0.15 none);
+a { --type: #{meta.type-of($m)};
+    --missing: #{color.is-missing($m, "hue")};
+    --powerless: #{color.is-powerless(oklch(70% 0 250), "hue")};
+    --same2: #{color.same(#f00, rgb(255 0 0))};
+    --ch-alpha: #{color.channel(#f00, "alpha")};
+    // channel with $space on non-matching color
+    --cross: #{color.channel(oklch(70% 0.15 250), "red", $space: rgb)};
+    --cross2: #{color.channel(oklch(70% 0.15 250), "lightness", $space: hsl)};
+    // out of range channel clamping?
+    --oor: #{oklch(150% 0.15 250)};
+    --neg: #{oklch(70% -0.5 250)};
+}

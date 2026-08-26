@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "sass:meta";
+b {
+  --pi: #{math.$pi};  --e: #{math.$e};
+  --pow: #{math.pow(2, 10)};
+  --pow-frac: #{math.pow(1.2, math.div(1, 2.4))};
+  --sqrt: #{math.sqrt(2)};
+  --log10: #{math.log(100, 10)};
+  --ln: #{math.log(math.$e)};
+  --exp-via-pow: #{math.pow(math.$e, 2)};
+  --sin-deg: #{math.sin(30deg)};
+  --sin-rad: #{math.sin(0.5235987756)};
+  --acos: #{math.acos(0.5)};
+  --atan2: #{math.atan2(1, -1)};
+  --hypot: #{math.hypot(3, 4)};
+  --clamp: #{math.clamp(0, 1.5, 1)};
+  --div-pct: #{math.div(50%, 100%)};
+  --div3: #{math.div(1, 3)};
+  --round: #{math.round(2.5)};
+  --eps: #{math.$epsilon};
+  --maxsafe: #{math.$max-safe-integer};
+}
+@debug meta.module-functions("math");

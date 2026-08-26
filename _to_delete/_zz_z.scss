@@ -1,0 +1,10 @@
+@use "sass:color";
+$k: color.to-space(#3f51b5, oklch);
+z {
+  --a: #{color.change($k, $lightness: 0.85)};
+  --b: #{color.change($k, $lightness: 85%)};
+  --c: #{color.change($k, $lightness: 0.85, $space: oklch)};
+  --d: #{color.channel($k, "lightness")};
+  --mix1: #{color.mix($k, color.to-space(#fff, oklch), 50%, oklch)};
+  --mix2: #{color.mix(#3f51b5, #fff, 50%, oklch)};
+}

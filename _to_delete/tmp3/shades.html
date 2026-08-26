@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shade generators</title>
+<style>
+:root{color-scheme:light dark;--bg:#fff;--fg:#16141f;--mut:#6b6579;--line:#e4e1ea;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#121120;--fg:#eae7f2;--mut:#948da8;--line:#2c2940;--card:#1a1829}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;padding:0 24px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:1.9rem;letter-spacing:-.02em;margin:44px 0 6px}
+.sub{color:var(--mut);max-width:72ch;margin:0 0 10px}
+.warns{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:14px 18px;margin:22px 0 34px;font:12px/1.6 ui-monospace,monospace;color:var(--mut)}
+.warns b{color:var(--fg);font-family:ui-sans-serif,system-ui,sans-serif}
+h3{font-size:1.05rem;margin:44px 0 0}
+section{border-top:1px solid var(--line);padding-top:22px;margin-top:26px}
+header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+header i{width:22px;height:22px;border-radius:5px;border:1px solid var(--line)}
+header h2{font-size:1rem;margin:0}
+header code,.lands{color:var(--mut);font:12px ui-monospace,monospace}
+.lands{margin-left:auto}
+.two{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.two.accents{margin-top:10px}
+.two.accents .ramp{width:60%}
+.lbl{font:600 11px/1 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);margin:0 0 6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.verdict{letter-spacing:0;text-transform:none;font-weight:500}
+.ok{color:#2e7d3b}.bad{color:#c11a5e}
+@media (prefers-color-scheme:dark){.ok{color:#69c97b}.bad{color:#ff8cb0}}
+.ramp{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.sw{flex:1;height:56px;background:var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:11px ui-monospace,monospace}
+.sw b{font-weight:600;opacity:.85}.sw em{font-style:normal;opacity:.7;font-size:10px}
+.note{color:var(--mut);font-size:12px;margin:6px 0 0}
+footer{color:var(--mut);font-size:13px;border-top:1px solid var(--line);margin-top:40px;padding-top:18px}
+</style></head><body><div class="wrap">
+<h1>Shade generators, side by side</h1>
+<p class="sub">Compiled from the library. Numbers are WCAG contrast against white for color ramps,
+and against the surface for the neutral and surface families. Every value is a concrete color &mdash;
+the generator resolves them at build time.</p>
+
+
+<h3>Color ramps</h3>
+
+<section>
+  <header><i style="background:#0099ff"></i><h2>Framework primary</h2><code>#0099ff</code>
+    <span class="lands">lands on <b>300</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#0099ff"></span></p>
+    <div class="ramp" data-id="f#0099ff"><div class="sw" data-c="rgb(226, 237, 251)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(172, 207, 251)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(117, 180, 250)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(67, 155, 239)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(27, 131, 214)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(9, 109, 183)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(6, 89, 150)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(11, 69, 116)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(12, 48, 80)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(6, 22, 37)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#0099ff"></span></p>
+    <div class="ramp" data-id="l#0099ff"><div class="sw" data-c="hsl(204, 123%, 89%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 80%, 83%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 64%, 71.5%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 73%, 59.5%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 87.5%, 54%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#0099ff"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 126%, 44.5%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 126%, 40.5%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 126%, 36.5%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 126%, 32%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(191, 221, 255)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(73, 164, 255)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(4, 127, 213)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 100, 169)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(204, 123%, 67%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 122%, 58%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 123%, 45.5%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(204, 123%, 32.5%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#df1b74"></i><h2>Framework secondary</h2><code>#df1b74</code>
+    <span class="lands">lands on <b>400</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#df1b74"></span></p>
+    <div class="ramp" data-id="f#df1b74"><div class="sw" data-c="rgb(254, 230, 235)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(255, 186, 205)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(255, 141, 177)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(253, 92, 150)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(233, 52, 126)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(203, 23, 105)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(168, 13, 85)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(131, 16, 66)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(91, 17, 46)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(43, 9, 21)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#df1b74"></span></p>
+    <div class="ramp" data-id="l#df1b74"><div class="sw" data-c="hsl(332.76, 96.43%, 87.25%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 62.72%, 81.37%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 50.18%, 70.1%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 57.23%, 58.33%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 68.6%, 52.94%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#df1b74"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 98.78%, 43.63%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 98.78%, 39.71%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 98.78%, 35.78%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 98.78%, 31.37%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(255, 205, 220)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(255, 112, 163)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(236, 25, 123)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(191, 1, 96)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(332.76, 96.43%, 65.69%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 95.65%, 56.86%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 96.43%, 44.61%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(332.76, 96.43%, 31.86%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#faa419"></i><h2>Warn</h2><code>#faa419</code>
+    <span class="lands">lands on <b>200</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#faa419"></span></p>
+    <div class="ramp" data-id="f#faa419"><div class="sw" data-c="rgb(251, 233, 213)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(247, 195, 133)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(233, 162, 65)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(206, 135, 24)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(177, 114, 4)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(149, 94, 1)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(121, 77, 4)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(94, 60, 9)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(65, 42, 11)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(30, 19, 6)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#faa419"></span></p>
+    <div class="ramp" data-id="l#faa419"><div class="sw" data-c="hsl(37.07, 117.77%, 95.98%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 76.6%, 89.51%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 61.28%, 77.11%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 69.89%, 64.17%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 83.78%, 58.24%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#faa419"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 120.64%, 47.99%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 120.64%, 43.68%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 120.64%, 39.36%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 120.64%, 34.51%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(255, 211, 156)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(222, 144, 3)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(172, 110, 0)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(136, 86, 0)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(37.07, 117.77%, 72.25%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 116.81%, 62.55%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 117.77%, 49.07%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(37.07, 117.77%, 35.05%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#4eb862"></i><h2>Success</h2><code>#4eb862</code>
+    <span class="lands">lands on <b>200</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#4eb862"></span></p>
+    <div class="ramp" data-id="f#4eb862"><div class="sw" data-c="rgb(203, 247, 207)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(127, 225, 142)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(94, 197, 112)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(73, 169, 91)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(59, 144, 75)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(48, 120, 62)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(39, 98, 50)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(32, 76, 39)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(24, 53, 28)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(11, 24, 12)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#4eb862"></span></p>
+    <div class="ramp" data-id="l#4eb862"><div class="sw" data-c="hsl(131.32, 52.57%, 91.44%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 34.19%, 85.28%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 27.35%, 73.46%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 31.2%, 61.13%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 37.4%, 55.48%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#4eb862"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 53.85%, 45.72%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 53.85%, 41.61%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 53.85%, 37.5%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 53.85%, 32.88%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(51, 250, 108)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 186, 71)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 143, 53)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 113, 40)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(131.32, 52.57%, 68.84%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 52.15%, 59.59%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 52.57%, 46.75%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(131.32, 52.57%, 33.39%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#ffe9b0"></i><h2>Near-white seed</h2><code>#ffe9b0</code>
+    <span class="lands">lands on <b>50</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#ffe9b0"></span></p>
+    <div class="ramp" data-id="f#ffe9b0"><div class="sw" data-c="rgb(249, 235, 198)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(238, 200, 99)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(212, 171, 49)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(184, 146, 21)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(156, 123, 7)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(131, 103, 5)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(106, 83, 7)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(82, 65, 11)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(57, 45, 12)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(26, 21, 6)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#ffe9b0"></span></p>
+    <div class="ramp" data-id="l#ffe9b0"><div class="sw" data-c="hsl(43.29, 123%, 150.43%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 80%, 140.29%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 64%, 120.85%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 73%, 100.57%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 87.5%, 91.27%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#ffe9b0"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 126%, 75.21%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 126%, 68.45%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 126%, 61.69%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 126%, 54.09%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(255, 213, 99)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(197, 155, 0)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(152, 119, 0)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(120, 94, 0)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(43.29, 123%, 113.24%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 122%, 98.03%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 123%, 76.9%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(43.29, 123%, 54.93%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#141225"></i><h2>Near-black seed</h2><code>#141225</code>
+    <span class="lands">lands on <b>900</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#141225"></span></p>
+    <div class="ramp" data-id="f#141225"><div class="sw" data-c="rgb(237, 235, 241)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(207, 202, 220)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(178, 172, 203)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(152, 146, 188)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(127, 122, 172)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(105, 100, 153)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(85, 80, 130)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(66, 62, 102)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(46, 44, 71)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(21, 20, 33)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#141225"></span></p>
+    <div class="ramp" data-id="l#141225"><div class="sw" data-c="hsl(246.32, 42.49%, 19.2%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 27.64%, 17.9%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 22.11%, 15.42%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 25.22%, 12.83%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 30.23%, 11.65%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#141225"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 43.53%, 9.6%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 43.53%, 8.74%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 43.53%, 7.87%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 43.53%, 6.9%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(225, 212, 255)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(171, 143, 255)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(134, 92, 255)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(109, 46, 247)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(246.32, 42.49%, 14.45%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 42.15%, 12.51%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 42.49%, 9.81%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(246.32, 42.49%, 7.01%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#00ff00"></i><h2>Neon</h2><code>#00ff00</code>
+    <span class="lands">lands on <b>100</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#00ff00"></span></p>
+    <div class="ramp" data-id="f#00ff00"><div class="sw" data-c="rgb(193, 251, 187)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(93, 231, 86)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(47, 203, 42)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(17, 175, 14)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(1, 148, 1)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(1, 124, 0)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(5, 101, 4)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(11, 78, 9)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(13, 55, 11)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(7, 25, 6)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#00ff00"></span></p>
+    <div class="ramp" data-id="l#00ff00"><div class="sw" data-c="hsl(120, 123%, 89%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 80%, 83%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 64%, 71.5%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 73%, 59.5%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 87.5%, 54%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#00ff00"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 126%, 44.5%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 126%, 40.5%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 126%, 36.5%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 126%, 32%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(56, 251, 50)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 187, 0)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 144, 0)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 114, 0)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(120, 123%, 67%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 122%, 58%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 123%, 45.5%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(120, 123%, 32.5%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#a99bb0"></i><h2>Washed out</h2><code>#a99bb0</code>
+    <span class="lands">lands on <b>300</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#a99bb0"></span></p>
+    <div class="ramp" data-id="f#a99bb0"><div class="sw" data-c="rgb(239, 234, 240)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(214, 199, 218)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(192, 168, 200)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(170, 140, 182)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(147, 116, 162)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(125, 95, 139)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(102, 77, 114)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(79, 60, 88)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(55, 42, 61)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(25, 19, 28)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#a99bb0"></span></p>
+    <div class="ramp" data-id="l#a99bb0"><div class="sw" data-c="hsl(280, 14.43%, 115.53%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 9.39%, 107.74%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 7.51%, 92.81%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 8.56%, 77.23%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 10.27%, 70.09%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#a99bb0"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.78%, 57.76%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.78%, 52.57%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.78%, 47.38%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.78%, 41.54%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(246, 204, 255)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(221, 117, 255)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(194, 45, 246)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(159, 4, 206)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(280, 14.43%, 86.97%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.31%, 75.29%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.43%, 59.06%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(280, 14.43%, 42.19%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#8a8a8a"></i><h2>Pure gray</h2><code>#8a8a8a</code>
+    <span class="lands">lands on <b>400</b></span></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gamut-relative <span class="verdict" data-for="f#8a8a8a"></span></p>
+    <div class="ramp" data-id="f#8a8a8a"><div class="sw" data-c="rgb(236, 236, 236)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(204, 204, 204)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(176, 176, 176)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(150, 150, 150)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(127, 127, 127)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(106, 106, 106)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(86, 86, 86)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(67, 67, 67)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(47, 47, 47)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(21, 21, 21)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+    
+  <div class="col">
+    <p class="lbl">legacy <span class="verdict" data-for="l#8a8a8a"></span></p>
+    <div class="ramp" data-id="l#8a8a8a"><div class="sw" data-c="hsl(0, 0%, 96.33%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 89.84%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 77.39%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 64.4%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 58.45%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#8a8a8a"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 48.16%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 43.84%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 39.51%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 34.64%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two accents">
+    <div class="col"><p class="lbl">accent track</p><div class="ramp"><div class="sw" data-c="rgb(218, 218, 218)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="rgb(161, 161, 161)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="rgb(124, 124, 124)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="rgb(97, 97, 97)"><b>A700</b><em class="cr"></em></div></div></div>
+    <div class="col"><p class="lbl">legacy accents</p><div class="ramp"><div class="sw" data-c="hsl(0, 0%, 72.52%)"><b>A100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 62.78%)"><b>A200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 49.25%)"><b>A400</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 35.18%)"><b>A700</b><em class="cr"></em></div></div></div>
+  </div>
+</section>
+
+<h3>Ladder flavors</h3>
+<p class="sub">The same generator, a different rhythm. Each curve was fitted to the scale it is named
+after; <code>material</code> reproduces this library's original grayscale, which is why it is the default
+for <code>gray</code>. Pass one with <code>$ladders: ('gray': 'carbon')</code>, or hand in your own
+<code>cubic-bezier</code> control points.</p>
+<section>
+  
+    <div class="col" style="margin-bottom:14px">
+      <p class="lbl">even <span class="verdict" data-for="ladder-even"></span></p>
+      <div class="ramp" data-id="ladder-even"><div class="sw" data-c="rgb(236, 236, 236)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(204, 204, 204)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(176, 176, 176)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(150, 150, 150)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(127, 127, 127)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(106, 106, 106)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(86, 86, 86)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(67, 67, 67)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(47, 47, 47)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(21, 21, 21)"><b>900</b><em class="cr"></em></div></div>
+    </div>
+    <div class="col" style="margin-bottom:14px">
+      <p class="lbl">material <span class="verdict" data-for="ladder-material"></span></p>
+      <div class="ramp" data-id="ladder-material"><div class="sw" data-c="rgb(251, 251, 251)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(247, 247, 247)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(236, 236, 236)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(217, 217, 217)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(193, 193, 193)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(164, 164, 164)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(132, 132, 132)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(99, 99, 99)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(66, 66, 66)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(33, 33, 33)"><b>900</b><em class="cr"></em></div></div>
+    </div>
+    <div class="col" style="margin-bottom:14px">
+      <p class="lbl">tailwind <span class="verdict" data-for="ladder-tailwind"></span></p>
+      <div class="ramp" data-id="ladder-tailwind"><div class="sw" data-c="rgb(251, 251, 251)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(244, 244, 244)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(233, 233, 233)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(211, 211, 211)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(161, 161, 161)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(114, 114, 114)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(85, 85, 85)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(63, 63, 63)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(44, 44, 44)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(24, 24, 24)"><b>900</b><em class="cr"></em></div></div>
+    </div>
+    <div class="col" style="margin-bottom:14px">
+      <p class="lbl">carbon <span class="verdict" data-for="ladder-carbon"></span></p>
+      <div class="ramp" data-id="ladder-carbon"><div class="sw" data-c="rgb(244, 244, 244)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(222, 222, 222)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(198, 198, 198)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(170, 170, 170)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(141, 141, 141)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(110, 110, 110)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(82, 82, 82)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(58, 58, 58)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(37, 37, 37)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(22, 22, 22)"><b>900</b><em class="cr"></em></div></div>
+    </div>
+</section>
+
+<h3>Neutral and surface families</h3>
+
+<section>
+  <header><i style="background:#ffffff"></i><h2>Pure white surface</h2><code>#ffffff</code></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gray &middot; gamut-relative <span class="verdict" data-for="g#ffffff"></span></p>
+    <div class="ramp" data-id="g#ffffff"><div class="sw" data-c="rgb(251, 251, 251)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(247, 247, 247)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(236, 236, 236)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(217, 217, 217)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(193, 193, 193)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(164, 164, 164)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(132, 132, 132)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(99, 99, 99)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(66, 66, 66)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(33, 33, 33)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">anchored to the surface, so 50 always sits nearest the background</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">gray &middot; legacy <span class="verdict" data-for="gl#ffffff"></span></p>
+    <div class="ramp" data-id="gl#ffffff"><div class="sw" data-c="hsl(0, 0%, 98%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 96%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 93%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 88%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 74%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 62%)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 54%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 38%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 26%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 13%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">surface &middot; gamut-relative <span class="verdict" data-for="s#ffffff"></span></p>
+    <div class="ramp" data-id="s#ffffff"><div class="sw" data-c="rgb(253, 253, 253)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(240, 240, 240)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(228, 228, 228)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(216, 216, 216)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(204, 204, 204)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(255, 255, 255)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(194, 194, 194)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(183, 183, 183)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(174, 174, 174)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(164, 164, 164)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">500 is the background; every other shade is a layer on it, 50 the faintest through 900 the strongest</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">surface &middot; legacy <span class="verdict" data-for="sl#ffffff"></span></p>
+    <div class="ramp" data-id="sl#ffffff"><div class="sw" data-c="hsl(0, 0%, 178%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 166%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 143%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 119%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 108%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#ffffff"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 89%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 81%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 73%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 64%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#f8f8fa"></i><h2>Off-white surface</h2><code>#f8f8fa</code></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gray &middot; gamut-relative <span class="verdict" data-for="g#f8f8fa"></span></p>
+    <div class="ramp" data-id="g#f8f8fa"><div class="sw" data-c="rgb(243, 243, 243)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(240, 240, 240)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(229, 229, 229)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(211, 211, 211)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(187, 187, 187)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(159, 159, 159)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(128, 128, 128)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(95, 95, 95)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(62, 62, 62)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(28, 28, 28)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">anchored to the surface, so 50 always sits nearest the background</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">gray &middot; legacy <span class="verdict" data-for="gl#f8f8fa"></span></p>
+    <div class="ramp" data-id="gl#f8f8fa"><div class="sw" data-c="hsl(0, 0%, 98%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 96%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 93%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 88%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 74%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 62%)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 54%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 38%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 26%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 13%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">surface &middot; gamut-relative <span class="verdict" data-for="s#f8f8fa"></span></p>
+    <div class="ramp" data-id="s#f8f8fa"><div class="sw" data-c="rgb(246, 246, 246)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(233, 233, 233)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(222, 222, 222)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(210, 210, 210)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(199, 199, 199)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(248, 248, 250)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(188, 188, 188)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(178, 178, 178)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(168, 168, 168)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(159, 159, 159)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">500 is the background; every other shade is a layer on it, 50 the faintest through 900 the strongest</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">surface &middot; legacy <span class="verdict" data-for="sl#f8f8fa"></span></p>
+    <div class="ramp" data-id="sl#f8f8fa"><div class="sw" data-c="hsl(240, 20.5%, 173.81%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 13.33%, 162.09%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 10.67%, 139.64%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 12.17%, 116.2%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 14.58%, 105.46%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#f8f8fa"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 21%, 86.91%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 21%, 79.09%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 21%, 71.28%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 21%, 62.49%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#1a1a24"></i><h2>Dark surface</h2><code>#1a1a24</code></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gray &middot; gamut-relative <span class="verdict" data-for="g#1a1a24"></span></p>
+    <div class="ramp" data-id="g#1a1a24"><div class="sw" data-c="rgb(30, 30, 30)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(33, 33, 33)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(41, 41, 41)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(53, 53, 53)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(69, 69, 69)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(90, 90, 90)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(117, 117, 117)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(152, 152, 152)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(198, 198, 198)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(247, 247, 247)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">anchored to the surface, so 50 always sits nearest the background</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">gray &middot; legacy <span class="verdict" data-for="gl#1a1a24"></span></p>
+    <div class="ramp" data-id="gl#1a1a24"><div class="sw" data-c="hsl(0, 0%, 13%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 26%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 38%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 54%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 62%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 74%)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 88%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 93%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 96%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 98%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">surface &middot; gamut-relative <span class="verdict" data-for="s#1a1a24"></span></p>
+    <div class="ramp" data-id="s#1a1a24"><div class="sw" data-c="rgb(29, 29, 29)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(38, 38, 38)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(46, 46, 46)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(54, 54, 54)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(61, 61, 61)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(26, 26, 36)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(68, 68, 68)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(76, 76, 76)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(83, 83, 83)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(90, 90, 90)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">500 is the background; every other shade is a layer on it, 50 the faintest through 900 the strongest</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">surface &middot; legacy <span class="verdict" data-for="sl#1a1a24"></span></p>
+    <div class="ramp" data-id="sl#1a1a24"><div class="sw" data-c="hsl(240, 19.84%, 21.64%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 12.9%, 20.18%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 10.32%, 17.38%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 11.77%, 14.47%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 14.11%, 13.13%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#1a1a24"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 20.32%, 10.82%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 20.32%, 9.85%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 20.32%, 8.87%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(240, 20.32%, 7.78%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+</section>
+<section>
+  <header><i style="background:#000000"></i><h2>Pure black surface</h2><code>#000000</code></header>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">gray &middot; gamut-relative <span class="verdict" data-for="g#000000"></span></p>
+    <div class="ramp" data-id="g#000000"><div class="sw" data-c="rgb(7, 7, 7)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(13, 13, 13)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(24, 24, 24)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(39, 39, 39)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(56, 56, 56)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(77, 77, 77)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(103, 103, 103)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(137, 137, 137)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(180, 180, 180)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(225, 225, 225)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">anchored to the surface, so 50 always sits nearest the background</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">gray &middot; legacy <span class="verdict" data-for="gl#000000"></span></p>
+    <div class="ramp" data-id="gl#000000"><div class="sw" data-c="hsl(0, 0%, 13%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 26%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 38%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 54%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 62%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 74%)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 88%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 93%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 96%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 98%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+  <div class="two">
+    
+  <div class="col">
+    <p class="lbl">surface &middot; gamut-relative <span class="verdict" data-for="s#000000"></span></p>
+    <div class="ramp" data-id="s#000000"><div class="sw" data-c="rgb(3, 3, 3)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="rgb(20, 20, 20)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="rgb(31, 31, 31)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="rgb(40, 40, 40)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="rgb(48, 48, 48)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="rgb(0, 0, 0)"><b>500</b><em class="cr"></em></div><div class="sw" data-c="rgb(56, 56, 56)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="rgb(63, 63, 63)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="rgb(70, 70, 70)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="rgb(77, 77, 77)"><b>900</b><em class="cr"></em></div></div>
+    <p class="note">500 is the background; every other shade is a layer on it, 50 the faintest through 900 the strongest</p>
+  </div>
+    
+  <div class="col">
+    <p class="lbl">surface &middot; legacy <span class="verdict" data-for="sl#000000"></span></p>
+    <div class="ramp" data-id="sl#000000"><div class="sw" data-c="hsl(0, 0%, 0%)"><b>50</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>100</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>200</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>300</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>400</b><em class="cr"></em></div><div class="sw" data-c="#000000"><b>500</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>600</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>700</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>800</b><em class="cr"></em></div><div class="sw" data-c="hsl(0, 0%, 0%)"><b>900</b><em class="cr"></em></div></div>
+    
+  </div>
+  </div>
+</section>
+
+<footer>Generated by <code>.scripts/previewShades.mjs</code>. The palettes bundled with the library
+stay on the legacy generator, so shipped themes are unchanged.</footer>
+</div>
+<script>
+const probe = document.createElement('span');
+probe.style.display = 'none';
+document.body.appendChild(probe);
+
+const lin = v => (v /= 255) <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+const lum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+const resolve = value => {
+  probe.style.color = '';
+  probe.style.color = value;
+  return (getComputedStyle(probe).color.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
+};
+
+document.querySelectorAll('.sw').forEach(el => {
+  const rgb = resolve(el.dataset.c);
+  el.dataset.rgb = rgb.join(',');
+  el.style.setProperty('--c', 'rgb(' + rgb.join(',') + ')');
+  el.querySelector('.cr').textContent = (1.05 / (lum(rgb) + 0.05)).toFixed(1);
+  el.style.color = lum(rgb) > 0.32 ? 'rgba(0,0,0,.72)' : 'rgba(255,255,255,.85)';
+});
+
+document.querySelectorAll('.ramp[data-id]').forEach(ramp => {
+  const s = [...ramp.querySelectorAll('.sw')].map(el => el.dataset.rgb.split(',').map(Number));
+  let fails = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const a = 1.05 / (lum(s[i]) + 0.05);
+    const b = 1.05 / (lum(s[i + 5]) + 0.05);
+
+    if (b / a < 4.5) fails++;
+  }
+
+  const dup = new Set(s.map(String)).size !== s.length;
+  const v = document.querySelector('.verdict[data-for="' + ramp.dataset.id + '"]');
+
+  if (!v) return;
+
+  v.className = 'verdict ' + (fails || dup ? 'bad' : 'ok');
+  v.textContent = (fails ? fails + '/5 AA pairs fail' : 'all 5 AA pairs pass') + (dup ? ' \u00b7 duplicate shades' : '');
+});
+</script></body></html>
