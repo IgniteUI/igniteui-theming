@@ -17,6 +17,8 @@ This repository is an npm workspaces monorepo with two packages:
 
 The `igniteui-theming` package is the only published artifact — it includes both the Sass theming library and the MCP server binary.
 
+The MCP server is also listed in the [MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.IgniteUI/igniteui-theming`. The `server.json` at the repo root is its registry manifest, published automatically on release.
+
 Common commands from the repo root:
 
 ```bash
@@ -138,6 +140,10 @@ The Model Context Protocol allows AI assistants (like Claude, GitHub Copilot, an
 
 ### Quick Start
 
+Most users don't need to clone anything. The server ships inside the published `igniteui-theming` package and is listed in the [MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.IgniteUI/igniteui-theming` — clients that support registry installation can add it by that name, and everything else uses the `npx` configuration shown below.
+
+To run it from source instead:
+
 #### 1. Clone and Build
 
 Clone the repository and build:
@@ -174,7 +180,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
   "servers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming"]
     }
   }
 }
@@ -192,7 +198,7 @@ The MCP server works with any MCP-compatible client. Here are setup instructions
    - **Command**: `node` (for local) or `npx` (for package)
    - **Arguments**:
      - Local: `/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js`
-     - Package: `igniteui-theming igniteui-theming-mcp`
+     - Package: `-y igniteui-theming`
 4. Click **OK** and restart AI Assistant
 
 </details>
@@ -225,7 +231,7 @@ Add to your configuration file:
   "mcpServers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming"]
     }
   }
 }
@@ -258,7 +264,7 @@ Create or edit `.cursor/mcp.json` in your project:
   "mcpServers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming"]
     }
   }
 }
