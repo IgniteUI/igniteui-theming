@@ -215,9 +215,12 @@ $dark-bootstrap-color-picker: extend(
 
 /// Generates a dark indigo color picker schema.
 /// @type Map
+/// @prop {Map} invalid-color [color: ('error', 400)] - The color used for invalid states.
+/// @prop {Map} picker-background [color: ('gray', 50)] - The background color of the color picker dropdown.
 /// @prop {Map} label-color-invalid [color: ('gray', 800, .8)] - The color of the color picker label in invalid state.
+/// @prop {Map} label-color [contrast-color: ('gray', 50, .8)] - The color of the color picker label.
 /// @prop {Map} swatch-border-color [color: ('gray', 600)] - The border color of the predefined color swatches.
-/// @prop {Map} anchor-background-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger on hover.
+/// @prop {Map} anchor-background-hover [contrast-color: ('gray', 50, .1)] - The background color of the color picker trigger on hover.
 /// @prop {Map} anchor-background-focus-visible-hover [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + hover state.
 /// @prop {Map} anchor-background-active [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in active state.
 /// @prop {Map} anchor-background-active-focus-visible [contrast-color: ('gray', 900, .1)] - The background color of the color picker trigger in focus-visible + active state.
@@ -230,6 +233,26 @@ $dark-indigo-color-picker: extend(
     $indigo-color-picker,
     $dark-base-color-picker,
     (
+        invalid-color: (
+            color: (
+                'error',
+                400,
+            ),
+        ),
+
+        picker-background: (
+            color: (
+                'gray',
+                50,
+            ),
+        ),
+        label-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.8,
+            ),
+        ),
         label-color-invalid: (
             color: (
                 'gray',
@@ -246,28 +269,28 @@ $dark-indigo-color-picker: extend(
         anchor-background-hover: (
             contrast-color: (
                 'gray',
-                900,
+                50,
                 0.1,
             ),
         ),
         anchor-background-focus-visible-hover: (
             contrast-color: (
                 'gray',
-                900,
+                50,
                 0.1,
             ),
         ),
         anchor-background-active: (
             contrast-color: (
                 'gray',
-                900,
+                50,
                 0.1,
             ),
         ),
         anchor-background-active-focus-visible: (
             contrast-color: (
                 'gray',
-                900,
+                50,
                 0.1,
             ),
         ),

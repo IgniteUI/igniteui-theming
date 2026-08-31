@@ -51,6 +51,16 @@ This MCP server helps you create custom themes for Ignite UI applications by gen
 
 ## How to Use
 
+### Installing from the MCP Registry
+
+The server is published to the [MCP Registry](https://registry.modelcontextprotocol.io) as:
+
+```
+io.github.IgniteUI/igniteui-theming
+```
+
+Clients that support registry-based installation can add it by that name. It resolves to the `igniteui-theming` npm package over stdio — the same thing the manual configurations below set up by hand.
+
 ### When Developing or Contributing
 
 #### 1. Clone the Repository
@@ -132,7 +142,7 @@ Create or edit `.vscode/mcp.json`:
   "servers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming"]
     }
   }
 }
@@ -147,7 +157,7 @@ Create or edit `.vscode/mcp.json`:
    - **Command**: `node` (for local) or `npx` (for installed package)
    - **Arguments**:
      - Local: `/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js`
-     - Package: `igniteui-theming igniteui-theming-mcp`
+     - Package: `-y igniteui-theming`
 4. Click **OK** and restart AI Assistant
 
 #### Desktop Clients
@@ -192,7 +202,7 @@ Add to your Claude Desktop configuration file:
   "mcpServers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming"]
     }
   }
 }
@@ -235,7 +245,7 @@ Create or edit `.cursor/mcp.json` in your project:
   "servers": {
     "igniteui-theming": {
       "command": "npx",
-      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+      "args": ["-y", "igniteui-theming"]
     }
   }
 }
@@ -248,7 +258,7 @@ For any other MCP-compatible client, use the STDIO transport configuration:
 - **Command**: `node` (or `npx`)
 - **Arguments**:
   - Local: `/absolute/path/to/igniteui-theming/packages/theming/dist/mcp/index.js`
-  - Package: `igniteui-theming igniteui-theming-mcp`
+  - Package: `-y igniteui-theming`
 
 ## Tools Reference
 
