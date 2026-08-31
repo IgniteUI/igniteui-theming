@@ -1,0 +1,84 @@
+{
+  "button": {
+    "flat": {
+      "background": {
+        "idle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0,
+            "hex": "#ffffff00"
+          }
+        },
+        "hover": {
+          "$type": "reference",
+          "$value": {
+            "ref": "{primitive-colors.secondary.500}",
+            "color": {
+              "$type": "color",
+              "$value": {
+                "colorSpace": "srgb",
+                "components": [0.8745, 0.1059, 0.4549],
+                "alpha": 0.08,
+                "hex": "#df1b7414"
+              }
+            }
+          }
+        }
+      },
+      "icon": {
+        "foreground": {
+          "idle": {
+            "$type": "reference",
+            "$value": {
+              "ref": "{primitive-colors.secondary.500}",
+              "color": {
+                "$type": "color",
+                "$value": {
+                  "colorSpace": "srgb",
+                  "components": [0.8745, 0.1059, 0.4549],
+                  "alpha": 1,
+                  "hex": "#df1b74"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "reference",
+            "$value": {
+              "ref": "{primitive-colors.secondary.800}",
+              "color": {
+                "$type": "color",
+                "$value": {
+                  "colorSpace": "srgb",
+                  "components": [0.7137, 0, 0.3255],
+                  "alpha": 1,
+                  "hex": "#b60053"
+                }
+              }
+            },
+            "$extensions": {
+              "modes": {
+                "dark": {
+                  "$value": {
+                    "ref": "{primitive-colors.secondary.300}",
+                    "color": {
+                      "$type": "color",
+                      "$value": {
+                        "colorSpace": "srgb",
+                        "components": [0.8235, 0.3451, 0.5608],
+                        "alpha": 1,
+                        "hex": "#d2588f"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
