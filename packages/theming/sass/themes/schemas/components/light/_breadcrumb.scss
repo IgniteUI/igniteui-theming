@@ -19,6 +19,7 @@
 /// @param {Map} $hover-icon-color [color: ('info', 600)] - The color of the breadcrumb icon when hovered. Auto-derived from hover-text-color.
 /// @param {Map} $disabled-text-color [color: ('gray', 500)] - The text color of the breadcrumb when disabled.
 /// @param {Map} $disabled-icon-color [color: ('gray', 500)] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
+/// @param {Map} $separator-color [color: ('gray', 700)] - The color of the breadcrumb separator.
 $light-breadcrumb: (
     text-color: (
         color: (
@@ -66,6 +67,12 @@ $light-breadcrumb: (
         color: (
             'gray',
             500,
+        ),
+    ),
+    separator-color: (
+        color: (
+            'gray',
+            700,
         ),
     ),
     _meta: (
