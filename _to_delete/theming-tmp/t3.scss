@@ -1,5 +1,0 @@
-@use '../sass/color' as *;
-$p: palette($primary: #09f, $secondary: #df1b74, $surface: #fff, $gray: #333, $variant: 'test');
-raws { @each $v in ('50','100','200','300','400','500','600','700','800','900','A100','A700') { #{$v}: color($p, primary, $v); } }
-grays { @each $v in ('50','100','500','900') { #{$v}: color($p, gray, $v); } }
-surf { s500: color($p, surface, 500); }

@@ -46,6 +46,8 @@ $_enhanced-accessibility: false;
 /// @param {Color} $warn [#faa419] - The warning color used throughout the application (optional).
 /// @param {Color} $error [#ff134a] - The error color used throughout the application (optional).
 /// @param {String} $variant [null] - Used internally (optional).
+/// @param {String} $generator [$shade-generator] - Either `fitted` or `legacy` (optional).
+/// @param {String | Map | List} $scales [null] - One scale for every family, or a map keyed by family name (optional).
 /// @requires {function} shades
 /// @returns {Map} A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
 /// @example scss
@@ -58,6 +60,12 @@ $_enhanced-accessibility: false;
 ///
 ///   // Include the generated palette colors as CSS variables.
 ///   @include palette($my-palette);
+/// @example scss - Keep the original multiplier-based shades
+///   $my-palette: palette(rebeccapurple, orange, white, $generator: 'legacy');
+/// @example scss - Give the grayscale a different rhythm
+///   $my-palette: palette(rebeccapurple, orange, white, $scales: ('gray': 'carbon'));
+/// @see $shade-generator
+/// @see $scales
 @function palette(
     $primary,
     $secondary,
@@ -68,52 +76,54 @@ $_enhanced-accessibility: false;
     $warn: #faa419,
     $error: #ff134a,
     $variant: null,
-    $generator: null,
-    $ladders: null
+    $generator: config.$shade-generator,
+    $scales: null
 ) {
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
-    $g: $generator;
+
+    // Legacy palettes keep numeric surface shades.
+    $surface-shades: if($generator == 'legacy', $color-shades, types.$ISurfaceRoles);
     $primary-palette: shades(
         'primary',
         $primary,
         $color-shades,
-        $generator: $g,
-        $ladder: _ladder-for('primary', $ladders)
+        $generator: $generator,
+        $scale: _scale-for('primary', $scales)
     );
     $secondary-palette: shades(
         'secondary',
         $secondary,
         $color-shades,
-        $generator: $g,
-        $ladder: _ladder-for('secondary', $ladders)
+        $generator: $generator,
+        $scale: _scale-for('secondary', $scales)
     );
     $surface-palette: shades(
         'surface',
         $surface,
-        $color-shades,
-        $generator: $g,
-        $ladder: _ladder-for('surface', $ladders)
+        $surface-shades,
+        $generator: $generator,
+        $scale: _scale-for('surface', $scales)
     );
-    $grayscale-palette: shades('gray', $gray, $gray-shades, $surface, $g, _ladder-for('gray', $ladders));
+    $grayscale-palette: shades('gray', $gray, $gray-shades, $surface, $generator, _scale-for('gray', $scales));
     $info-palette: if(
         $info,
-        shades('info', $info, $color-shades, $generator: $g, $ladder: _ladder-for('info', $ladders)),
+        shades('info', $info, $color-shades, $generator: $generator, $scale: _scale-for('info', $scales)),
         ()
     );
     $success-palette: if(
         $success,
-        shades('success', $success, $color-shades, $generator: $g, $ladder: _ladder-for('success', $ladders)),
+        shades('success', $success, $color-shades, $generator: $generator, $scale: _scale-for('success', $scales)),
         ()
     );
     $warn-palette: if(
         $warn,
-        shades('warn', $warn, $color-shades, $generator: $g, $ladder: _ladder-for('warn', $ladders)),
+        shades('warn', $warn, $color-shades, $generator: $generator, $scale: _scale-for('warn', $scales)),
         ()
     );
     $error-palette: if(
         $error,
-        shades('error', $error, $color-shades, $generator: $g, $ladder: _ladder-for('error', $ladders)),
+        shades('error', $error, $color-shades, $generator: $generator, $scale: _scale-for('error', $scales)),
         ()
     );
 
@@ -132,19 +142,23 @@ $_enhanced-accessibility: false;
     );
 }
 
-/// Picks one family's ladder out of the `$ladders` argument, which may be a single spec
+/// Picks one family's scale out of the `$scales` argument, which may be a single spec
 /// for every family or a map keyed by family name.
 /// @access private
-@function _ladder-for($name, $ladders) {
-    @if not $ladders {
+/// @group Palettes
+/// @param {String} $name - The family to look up.
+/// @param {String | Map | List} $scales - The `palette()` argument, or null.
+/// @returns {String | Map | List} That family's scale, or null to let the generator decide.
+@function _scale-for($name, $scales) {
+    @if not $scales {
         @return null;
     }
 
-    @if meta.type-of($ladders) == 'map' and not map.has-key($ladders, range) and not map.has-key($ladders, curve) {
-        @return map.get($ladders, $name);
+    @if meta.type-of($scales) == 'map' and not map.has-key($scales, range) and not map.has-key($scales, curve) {
+        @return map.get($scales, $name);
     }
 
-    @return $ladders;
+    @return $scales;
 }
 
 /// Generates color shades for a given color.
@@ -154,6 +168,8 @@ $_enhanced-accessibility: false;
 /// @param {Color} $color - The base color used to generate the shades.
 /// @param {List} $shades - The list of shade variants.
 /// @param {Color} $surface [null] - The surface color. Useful if generating shades of gray (optional).
+/// @param {String} $generator [$shade-generator] - Either `fitted` or `legacy` (optional).
+/// @param {String | Map | List} $scale [null] - A preset name, a `(range:, curve:)` map, or a curve (optional).
 /// @requires {function} adaptive-contrast
 /// @returns {Map} A map consisting of color shades and their respective contrast colors.
 ///
@@ -166,37 +182,59 @@ $_enhanced-accessibility: false;
 ///       #{$color-name}: shades($color-name, #a57865, $IColorShades),
 ///     )
 ///   );
+/// @example scss - Pick a scale for this scale
+///   $shades: shades('accent', #a57865, $IColorShades, $scale: 'carbon');
 /// @see $IColorShades
-@function shades($name, $color, $shades, $surface: null, $generator: null, $ladder: null) {
-    $gen: if($generator, $generator, config.$shade-generator);
+/// @see $scales
+@function shades($name, $color, $shades, $surface: null, $generator: config.$shade-generator, $scale: null) {
+    $entries: if(
+        $generator == 'legacy',
+        _legacy-entries($name, $color, $shades, $surface),
+        generator.family($name, $color, $shades, $surface, $scale)
+    );
     $result: ();
 
-    @if $gen == 'legacy' {
-        @each $variant in $shades {
-            $shade: shade($name, $color, $variant, $surface);
-            $result: map.merge(
-                $result,
-                (
-                    $variant: map.get($shade, 'hsl'),
-                    '#{$variant}-contrast': adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}),
-                    '#{$variant}-raw': map.get($shade, 'raw'),
-                )
-            );
-        }
-    } @else {
-        @each $variant, $shade in generator.family($name, $color, $shades, $surface, $ladder) {
-            $result: map.merge(
-                $result,
-                (
-                    $variant: map.get($shade, 'css'),
-                    '#{$variant}-contrast': adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}),
-                    '#{$variant}-raw': map.get($shade, 'raw'),
-                )
-            );
-        }
+    @each $variant, $shade in $entries {
+        $result: map.set($result, $variant, map.get($shade, 'css'));
+        $result: map.set($result, '#{$variant}-contrast', adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}));
+        $result: map.set($result, '#{$variant}-raw', map.get($shade, 'raw'));
     }
 
     @return $result;
+}
+
+/// Builds the multiplier-based shades, plus — for a surface — the same layer roles the
+/// `fitted` generator emits. The roles are contrast steps off the background rather than
+/// points on a multiplier ramp, so they mean the same thing under either generator, and
+/// having them everywhere is what lets a schema say `('surface', 'base')` unconditionally.
+/// @access private
+/// @group Palettes
+/// @param {String} $name - The name of the color.
+/// @param {Color} $color - The base color used to generate the shades.
+/// @param {List} $shades - The list of shade variants.
+/// @param {Color} $surface [null] - The surface color, for the grayscale.
+/// @requires {function} shade
+/// @returns {Map} Each variant mapped to `(css:, raw:)`.
+@function _legacy-entries($name, $color, $shades, $surface: null) {
+    $entries: ();
+
+    @each $variant in $shades {
+        $shade: shade($name, $color, $variant, $surface);
+        $entries: map.set(
+            $entries,
+            $variant,
+            (
+                css: map.get($shade, 'hsl'),
+                raw: map.get($shade, 'raw'),
+            )
+        );
+    }
+
+    @if '#{$name}' == 'surface' {
+        @return map.merge($entries, generator.family('surface', $color, types.$ISurfaceRoles));
+    }
+
+    @return $entries;
 }
 
 /// Generates a color shade for a given base colors.
@@ -319,7 +357,8 @@ $_enhanced-accessibility: false;
 ///   .my-component-2 {
 ///      background: color($my-palette, primary, 200, $opacity: 0.5); // rgba(136, 192, 229, 0.5)
 ///    }
-@function color($palette: null, $color: primary, $variant: 500, $opacity: null) {
+@function color($palette: null, $color: primary, $variant: null, $opacity: null) {
+    $variant: if($variant, $variant, if('#{$color}' == 'surface', 'base', 500));
     $s: #{var(--ig-#{$color}-#{$variant})};
     $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
     $_alpha: if($opacity, $opacity, 1);
@@ -330,7 +369,11 @@ $_enhanced-accessibility: false;
         $base: map.get($s, #{$variant});
         $raw: map.get($s, #{$variant}-raw);
 
-        @return if($contrast, $_relative-color, if($raw, rgba($raw, $_alpha), _normalize-color($base)));
+        @return if(
+            $contrast,
+            $_relative-color,
+            if($raw, if($opacity, rgba($raw, $opacity), $raw), _normalize-color($base))
+        );
     }
 
     @return $_relative-color;
@@ -351,7 +394,9 @@ $_enhanced-accessibility: false;
 ///      background: color($color: 'primary', $variant: 200);
 ///      color: contrast-color($color: 'primary', $variant: 200);
 ///    }
-@function contrast-color($palette: null, $color: primary, $variant: 500, $opacity: null) {
+@function contrast-color($palette: null, $color: primary, $variant: null, $opacity: null) {
+    $variant: if($variant, $variant, if('#{$color}' == 'surface', 'base', 500));
+
     @return color($palette, $color, #{$variant}-contrast, $opacity);
 }
 

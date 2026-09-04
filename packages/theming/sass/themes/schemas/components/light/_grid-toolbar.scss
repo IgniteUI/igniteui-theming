@@ -147,7 +147,7 @@ $bootstrap-grid-toolbar: extend(
 
 /// Generates an indigo grid-toolbar schema.
 /// @type Map
-/// @prop {Color} background [color: ('surface', 500)] - The toolbar background color.
+/// @prop {Color} background [color: ('surface', 'base')] - The toolbar background color.
 /// @prop {Map} border-color [color: ('gray', 400)] - The toolbar border-bottom color.
 /// @requires $light-grid-toolbar
 $indigo-grid-toolbar: extend(
@@ -156,7 +156,7 @@ $indigo-grid-toolbar: extend(
         background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 

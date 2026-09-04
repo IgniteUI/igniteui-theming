@@ -371,7 +371,7 @@ $_legacy-palette: palette(
             }
         }
 
-        @include describe('gamut-relative generator') {
+        @include describe('fitted generator') {
             $_numbered: ('50', '100', '200', '300', '400', '500', '600', '700', '800', '900');
 
             @include it('keeps any two shades 500 apart at WCAG AA or better') {
@@ -426,16 +426,6 @@ $_legacy-palette: palette(
                 }
             }
 
-            @include it('leaves the surface family anchored on its seed') {
-                $p: palette(
-                    $primary: #09f,
-                    $secondary: #09f,
-                    $surface: #fff,
-                );
-
-                @include assert-equal(color($p, surface, 500), #fff);
-            }
-
             @include it('emits concrete colors, not runtime expressions') {
                 $p: palette(
                     $primary: #09f,
@@ -448,7 +438,7 @@ $_legacy-palette: palette(
                 }
             }
 
-            @include it('keeps the surface seed exactly on shade 500') {
+            @include it('keeps the surface seed on base, which is also its default variant') {
                 @each $bg in (#fff, #fcfcfd, #1a1a24, #000) {
                     $p: palette(
                         $primary: #09f,
@@ -456,42 +446,90 @@ $_legacy-palette: palette(
                         $surface: $bg,
                     );
 
-                    @include assert-equal(color($p, surface, 500), $bg);
+                    @include assert-equal(color($p, surface, 'base'), $bg);
+                    // surface has no numeric shades, so a bare reference lands on base
+                    @include assert-equal(color($p, surface), $bg);
+                    // every other family still defaults to 500
+                    @include assert-equal(color($p, primary), color($p, primary, 500));
                 }
             }
 
-            @include it('gives every surface a full set of distinct layers') {
-                // 500 is the background; the rest are layers on it, 50 the faintest
-                // through 900 the strongest. A white or black page has room on exactly
-                // one side, which is the side the whole scale uses.
-                @each $bg in (#fff, #000, #f8f8fa, #1a1a24) {
-                    $p: palette(
-                        $primary: #09f,
-                        $secondary: #09f,
-                        $surface: $bg,
-                    );
-                    $seen: ();
-                    $previous: 1;
+            @include it('moves surface layers away from the background, or collapses them onto it') {
+                // sunken goes toward black and raised/overlay toward white, so a page at
+                // either extreme resolves the roles it has no room for onto itself —
+                // elevation is carried by shadow there, the way light themes really work.
+                $white: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                $black: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #000,
+                );
+                $mid: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                );
 
-                    @each $v in ('50', '100', '200', '300', '400', '600', '700', '800', '900') {
-                        $c: color($p, surface, $v);
-                        $away: contrast($c, $bg);
+                // white page: nothing lighter exists
+                @include assert-equal(color($white, surface, 'raised'), #fff);
+                @include assert-equal(color($white, surface, 'overlay'), #fff);
+                @include assert-true(contrast(color($white, surface, 'sunken'), #fff) > 1.04);
 
-                        @include assert-true(list.index($seen, $c) == null);
-                        @include assert-true($away > $previous);
+                // black page: nothing darker exists
+                @include assert-equal(color($black, surface, 'sunken'), #000);
+                @include assert-true(contrast(color($black, surface, 'raised'), #000) > 1.04);
+                @include assert-true(contrast(color($black, surface, 'overlay'), #000) > 1.1);
 
-                        $seen: list.append($seen, $c);
-                        $previous: $away;
-                    }
-                }
+                // a page with room either side gets every role distinct, and overlay
+                // always sits further out than raised
+                @include assert-true(
+                    contrast(color($mid, surface, 'overlay'), #1a1a24) >
+                        contrast(color($mid, surface, 'raised'), #1a1a24)
+                );
+                @include assert-unequal(color($mid, surface, 'sunken'), color($mid, surface, 'base'));
             }
 
-            @include it('accepts a ladder as a preset name, a curve, or a full spec') {
+            @include it('keeps translucent containers translucent') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                $dark: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                );
+
+                @include assert-equal(color($p, surface, 'container'), rgba(#000, 0.03));
+                @include assert-equal(color($dark, surface, 'container'), rgba(#fff, 0.03));
+            }
+
+            @include it('carries a tinted background through its layers') {
+                // A cool dark and a warm dark are a deliberate choice, and the tint sits
+                // well below the threshold that rounds a near-gray seed to neutral.
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                );
+                $raised: color($p, surface, 'raised');
+
+                @include assert-true(
+                    color.channel($raised, 'blue', $space: rgb) > color.channel($raised, 'red', $space: rgb) + 5
+                );
+            }
+
+            @include it('accepts a scale as a preset name, a curve, or a full spec') {
                 $carbon: palette(
                     $primary: #09f,
                     $secondary: #09f,
                     $surface: #fff,
-                    $ladders: (
+                    $scales: (
                         'gray': 'carbon',
                     ),
                 );
@@ -499,7 +537,7 @@ $_legacy-palette: palette(
                     $primary: #09f,
                     $secondary: #09f,
                     $surface: #fff,
-                    $ladders: (
+                    $scales: (
                         'gray': (
                             0.53,
                             0,
@@ -512,7 +550,7 @@ $_legacy-palette: palette(
                     $primary: #09f,
                     $secondary: #09f,
                     $surface: #fff,
-                    $ladders: (
+                    $scales: (
                         'gray': (
                             range: (
                                 1.1,
@@ -526,9 +564,9 @@ $_legacy-palette: palette(
                     $primary: #09f,
                     $secondary: #09f,
                     $surface: #fff,
-                    $ladders: 'tailwind',
+                    $scales: 'tailwind',
                 );
-                $direct: shades('brand', #09f, $IColorShades, $ladder: 'carbon');
+                $direct: shades('brand', #09f, $IColorShades, $scale: 'carbon');
 
                 // carbon reproduces IBM's published grayscale
                 @include assert-true(contrast(color($carbon, gray, 50), #f4f4f4) < 1.02);
@@ -543,9 +581,9 @@ $_legacy-palette: palette(
                 @include assert-equal(meta.type-of(map.get($direct, '300-raw')), 'color');
             }
 
-            @include it('ships the documented ladder presets') {
-                @each $name in ('even', 'material', 'tailwind', 'carbon', 'layers') {
-                    @include assert-true(map.has-key($ladders, $name));
+            @include it('ships the documented scale presets') {
+                @each $name in ('even', 'material', 'tailwind', 'carbon') {
+                    @include assert-true(map.has-key($scales, $name));
                 }
             }
 
@@ -555,7 +593,7 @@ $_legacy-palette: palette(
                     $secondary: #09f,
                     $surface: #fff,
                 );
-                // The eased ladder reproduces the original grayscale to within ~1 JND,
+                // The eased scale reproduces the original grayscale to within ~1 JND,
                 // so existing schemas keep their intended weight.
                 $expected: (
                     '100': #f5f5f5,
@@ -622,6 +660,60 @@ $_legacy-palette: palette(
                     map.get($p, 'primary', '600'),
                     #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))}
                 );
+            }
+        }
+
+        @include describe('surface roles across generators') {
+            $_light-fitted: palette($primary: #09f, $secondary: #09f, $surface: #f8f8fa);
+            $_light-legacy: palette(
+                $primary: #09f,
+                $secondary: #09f,
+                $surface: #f8f8fa,
+                $generator: 'legacy',
+            );
+
+            @include it('gives a legacy surface the same role vocabulary a fitted one has') {
+                // Roles are contrast steps off the background rather than points on a
+                // multiplier ramp, so they mean the same thing under either generator.
+                // That is what lets a component schema say ('surface', 'base') outright.
+                @each $role in $ISurfaceRoles {
+                    @include assert-true(map.has-key($_light-fitted, 'surface', $role));
+                    @include assert-true(map.has-key($_light-legacy, 'surface', $role));
+                    @include assert-true(map.has-key($_light-legacy, 'surface', '#{$role}-raw'));
+                }
+            }
+
+            @include it('keeps the numeric shades a legacy surface has always carried') {
+                @each $shade in $IColorShades {
+                    @include assert-true(map.has-key($_light-legacy, 'surface', $shade));
+                }
+
+                // ...and a fitted surface deliberately has none of them
+                @include assert-false(map.has-key($_light-fitted, 'surface', '500'));
+            }
+
+            @include it('resolves a bare surface reference under either generator') {
+                @include assert-equal(color($_light-fitted, 'surface'), color($_light-fitted, 'surface', 'base'));
+                @include assert-equal(color($_light-legacy, 'surface'), color($_light-legacy, 'surface', 'base'));
+                @include assert-equal(color($_light-legacy, 'surface', 'base'), #f8f8fa);
+            }
+
+            @include it('derives $ISurfaceRoles from the $surface-roles config') {
+                // The two used to be maintained separately, so a role added to the public
+                // config was generated and then silently filtered back out.
+                @each $role, $spec in $surface-roles {
+                    @include assert-true(list.index($ISurfaceRoles, $role) != null);
+                }
+
+                @include assert-equal(list.length($ISurfaceRoles), list.length(map.keys($surface-roles)) + 3);
+            }
+
+            @include it('covers both surface vocabularies in $ISurfaceShades') {
+                // The Tailwind bridge is static, so it has to name every key either
+                // generator can emit.
+                @each $key in list.join($ISurfaceRoles, $IColorShades) {
+                    @include assert-true(list.index($ISurfaceShades, $key) != null);
+                }
             }
         }
 

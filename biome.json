@@ -4,6 +4,7 @@
     "includes": [
       "packages/theming/**/*.{ts,js,mjs,cjs}",
       "packages/mcp/src/**/*.ts",
+      "packages/preview/**/*.ts",
       "!!**/dist"
     ]
   },
@@ -37,7 +38,9 @@
         "noUnusedPrivateClassMembers": "off",
         "useImportExtensions": {
           "level": "error",
-          "options": { "forceJsExtensions": true }
+          "options": {
+            "forceJsExtensions": true
+          }
         }
       },
       "style": {
@@ -72,6 +75,16 @@
           },
           "correctness": {
             "useImportExtensions": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/preview/src/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
           }
         }
       }

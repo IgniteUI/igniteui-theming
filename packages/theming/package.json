@@ -35,8 +35,7 @@
     "prepack": "shx cp ../../README.md README.md && shx cp ../../LICENSE LICENSE",
     "postpack": "shx rm -f README.md LICENSE",
     "prepare": "node .scripts/setup-grammars.mjs",
-    "test": "vitest run",
-    "preview:shades": "node .scripts/previewShades.mjs --out=dist/shades.html"
+    "test": "vitest run"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,jsx,tsx}": [

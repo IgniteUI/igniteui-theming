@@ -11,8 +11,12 @@ import type {
   ColorDefinition,
   GrayDefinition,
   PLATFORMS,
+  ScalesInput,
+  ShadeGenerator,
+  SurfaceDefinition,
   ThemeVariant,
 } from "../utils/types.js";
+import { appendShadeArgs } from "./sass.js";
 
 /**
  * Result from generating CSS palette variables.
@@ -43,6 +47,10 @@ export interface PaletteCssOptions {
   warn?: string;
   error?: string;
   variant?: ThemeVariant;
+  /** Shade rhythm: a preset name, an inline spec, or a map keyed by family */
+  scales?: ScalesInput;
+  /** Which shade generator to use */
+  generator?: ShadeGenerator;
   /** Internal testing parameter for Sass importers */
   _importers?: FileImporter[];
 }
@@ -78,6 +86,8 @@ export async function generatePaletteCss(
   if (options.success) paletteArgs.push(`$success: ${options.success}`);
   if (options.warn) paletteArgs.push(`$warn: ${options.warn}`);
   if (options.error) paletteArgs.push(`$error: ${options.error}`);
+
+  appendShadeArgs(paletteArgs, options);
 
   const sassCode = `
 @use 'igniteui-theming/sass/color' as *;
@@ -115,7 +125,7 @@ export interface CustomPaletteCssOptions {
   colors: {
     primary: ColorDefinition;
     secondary: ColorDefinition;
-    surface: ColorDefinition;
+    surface: SurfaceDefinition;
     gray: GrayDefinition;
     info: ColorDefinition;
     success: ColorDefinition;

@@ -7,7 +7,11 @@
 $theme-schemas: () !default;
 
 @mixin generate-color-vars {
-    @each $colorName, $shades in $IPaletteColors {
+    // A `legacy` surface carries numeric shades on top of the roles every palette has,
+    // and this bridge is static, so it covers the union rather than picking a generator.
+    $families: map.set($IPaletteColors, 'surface', $ISurfaceShades);
+
+    @each $colorName, $shades in $families {
         @each $shade in $shades {
             --color-#{$colorName}-#{$shade}: var(--ig-#{$colorName}-#{$shade});
             --color-#{$colorName}-#{$shade}-contrast: var(--ig-#{$colorName}-#{$shade}-contrast);

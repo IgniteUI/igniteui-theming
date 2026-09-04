@@ -2,47 +2,61 @@
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:list';
-@use 'sass:string';
 @use 'sass:meta';
 @use 'config';
 @use 'gamut';
+@use 'types';
 @use 'contrast' as *;
 
 ////
-/// The gamut-relative shade generator.
-///
-/// Lightness comes from a contrast target, not from the seed. Chroma is a fraction of
-/// what the sRGB gamut allows at that lightness and hue, not a multiple of the seed's.
-/// The seed contributes its hue and its saturation *level* — how much of the available
-/// color it chooses to use — so any seed, however light, dark, muted or neon, produces
-/// a ramp with the same structure.
-///
-/// Three kinds of family:
-///
-/// - **chromatic** — primary, secondary, info, success, warn, error. Anchored to white.
-///   Identical in light and dark themes; schemas pick which shade to use.
-/// - **neutral** — gray. Anchored to the surface, so shade 50 always sits nearest the
-///   background and 900 furthest from it, in both themes.
-/// - **surface** — the background itself. Shade 500 *is* the seed; the rest are layering
-///   steps either side of it.
-///
 /// @package theming
 /// @group Palettes
 /// @access private
 ////
 
-// --- the ladder -------------------------------------------------------------
+$_default-scale: 'even';
 
-/// A cubic Bézier evaluated on one axis, with the first and last control points
-/// pinned at 0 and 1 — the same construction as a CSS `cubic-bezier()`.
-/// @access private
+// Where the accent (A100-A700) shades sit, as contrast against white.
+$_accent-targets: (
+    'A100': 1.4,
+    'A200': 2.6,
+    'A400': 4.2,
+    'A700': 6.2,
+);
+
+// Below this chroma a seed's hue is a rounding artifact. Surfaces are exempt.
+$_neutral-threshold: 0.02;
+
+// Keeps a tinted gray a gray.
+$_neutral-tint-cap: 0.12;
+
+// Chroma pulled back at the ends of a ramp, and the shape of that taper.
+$_envelope-depth: 0.3;
+$_envelope-power: 2.5;
+
+// Ceiling softness: 4 sits inside the sRGB boundary so shades survive gamut mapping;
+// 8 tracks the real boundary, which is where the accent track rides.
+$_ceiling-softness: 4;
+$_accent-ceiling-softness: 8;
+
+// How far a solved shade may sit from its contrast target before that is worth reporting.
+// The solver always returns its closest approach, so this only trips when a target is
+// genuinely out of reach for the hue.
+$_target-tolerance: 0.05;
+
+/// Evaluates one axis of a cubic Bézier whose outer control points are pinned at 0 and 1.
+/// @param {Number} $t - Position along the curve, 0 to 1.
+/// @param {Number} $p1 - First inner control point.
+/// @param {Number} $p2 - Second inner control point.
+/// @returns {Number} The value of that axis at `$t`.
 @function _bezier($t, $p1, $p2) {
     @return 3 * math.pow(1 - $t, 2) * $t * $p1 + 3 * (1 - $t) * $t * $t * $p2 + math.pow($t, 3);
 }
 
-/// Inverts the x axis of that curve, so the caller can ask "at progress `$x`, how far
-/// along is y?" — exactly what an animation timing function does.
-/// @access private
+/// Reads a cubic Bézier the way CSS reads a timing function: solves x for t, then returns y.
+/// @param {Number} $x - Progress along the x axis, 0 to 1.
+/// @param {List} $curve - Control points `(x1, y1, x2, y2)`, or null for a straight line.
+/// @returns {Number} The eased position, 0 to 1.
 @function _ease($x, $curve) {
     @if not $curve {
         @return $x;
@@ -50,9 +64,8 @@
 
     $lo: 0;
     $hi: 1;
-    $i: 0;
 
-    @while $i < 24 {
+    @for $i from 0 to 24 {
         $mid: math.div($lo + $hi, 2);
 
         @if _bezier($mid, list.nth($curve, 1), list.nth($curve, 3)) < $x {
@@ -60,80 +73,74 @@
         } @else {
             $hi: $mid;
         }
-
-        $i: $i + 1;
     }
 
     @return _bezier(math.div($lo + $hi, 2), list.nth($curve, 2), list.nth($curve, 4));
 }
 
-/// Resolves a ladder argument into `(range, curve)`.
-///
-/// Accepts a preset name from `$ladders`, a `(range:, curve:)` map, a bare
-/// `(x1, y1, x2, y2)` curve, or null for the family's default.
-/// @access private
-@function _ladder($name, $given) {
+/// Resolves a scale argument into its `(range:, curve:)` pair.
+/// @param {String} $name - The family name, used to look up a default in `$family-scales`.
+/// @param {String | Map | List} $given - A preset name, a `(range:, curve:)` map, a bare curve, or null.
+/// @returns {Map} The resolved scale. Falls back to `even` for both the scale and a missing range.
+/// @throws Unknown scale "<name>".
+@function _scale($name, $given) {
     $spec: $given;
 
     @if not $spec {
-        $spec: map.get(config.$family-ladders, $name);
+        $spec: map.get(config.$family-scales, $name);
 
         @if not $spec {
-            $spec: if(list.index(config.$surface-families, $name), 'layers', 'even');
+            $spec: $_default-scale;
         }
     }
 
     @if meta.type-of($spec) == 'string' {
-        $found: map.get(config.$ladders, $spec);
+        $found: map.get(config.$scales, $spec);
 
         @if not $found {
-            @error 'Unknown ladder "#{$spec}". Available: #{map.keys(config.$ladders)}.';
+            @error 'Unknown scale "#{$spec}". Available: #{map.keys(config.$scales)}.';
         }
 
         @return $found;
     }
 
+    $default-range: map.get(config.$scales, $_default-scale, range);
+
     @if meta.type-of($spec) == 'list' and list.length($spec) == 4 {
-        @return (range: null, curve: $spec);
+        @return (range: $default-range, curve: $spec);
     }
 
-    @return (range: map.get($spec, range), curve: map.get($spec, curve));
+    $range: map.get($spec, range);
+
+    @return (range: if($range, $range, $default-range), curve: map.get($spec, curve));
 }
 
-/// The contrast target for rung `$i` of a ladder.
-///
-/// The endpoints and the distribution between them are both configurable, so a scale can
-/// be given a different *flavor* — the same math, a different rhythm — without touching
-/// the generator. An even distribution is what makes the contrast between any two shades
-/// depend only on how many rungs apart they are.
-/// @access private
-@function _target($ladder, $i, $n, $reach: null) {
-    $range: map.get($ladder, range);
-    $lo: if($range, list.nth($range, 1), math.pow(math.$e, config.$contrast-step * config.$contrast-offset));
-    $hi: if($range, list.nth($range, 2), math.pow(math.$e, config.$contrast-step * ($n - 1 + config.$contrast-offset)));
+/// The contrast target for one shade, placed along the scale by its curve.
+/// The range is walked geometrically, so equal steps are equal contrast *ratios*.
+/// @param {Map} $scale - A resolved `(range:, curve:)` pair.
+/// @param {Number} $i - Zero-based index of the shade.
+/// @param {Number} $n - How many shades the family has.
+/// @returns {Number} The WCAG contrast this shade should reach against its anchor.
+@function _target($scale, $i, $n) {
+    $range: map.get($scale, range);
+    $lo: list.nth($range, 1);
+    $hi: list.nth($range, 2);
+    $t: _ease(math.div($i, $n - 1), map.get($scale, curve));
 
-    @if $reach {
-        $hi: math.min($hi, $reach);
-    }
-
-    $t: _ease(math.div($i, $n - 1), map.get($ladder, curve));
-
-    @return math.pow(math.$e, math.log($lo) + (math.log($hi) - math.log($lo)) * $t);
+    @return $lo * math.pow(math.div($hi, $lo), $t);
 }
 
-// --- chroma -----------------------------------------------------------------
-
-/// Pulls chroma back at the two ends of the ramp, so 50 reads as a tint and 900 as a
-/// near-neutral instead of both sitting on the gamut boundary.
-/// @access private
+/// Tapers chroma toward both ends of a ramp, so 50 reads as a tint and 900 as a near-neutral.
+/// @param {Number} $t - Position along the ramp, 0 to 1.
+/// @returns {Number} A multiplier for the chroma ceiling at that position.
 @function _envelope($t) {
-    @return 1 - config.$envelope-depth * math.pow(math.abs(2 * $t - 1), config.$envelope-power);
+    @return 1 - $_envelope-depth * math.pow(math.abs(2 * $t - 1), $_envelope-power);
 }
 
-/// OKLCH holds hue well almost everywhere. The exception is the blue-violet wedge,
-/// where keeping the number constant makes light blues drift visibly toward cyan.
-/// These are linear fits measured against CAM16, which gets the wedge right.
-/// @access private
+/// Corrects the hue drift OKLCH shows through the blue-violet wedge. Linear fits against CAM16.
+/// @param {Number} $h - The family's hue, in degrees.
+/// @param {Number} $l - Lightness of the shade being built, 0 to 1.
+/// @returns {Number} The hue to use at that lightness. Unchanged outside the wedge.
 @function _hue-at($h, $l) {
     @if $h >= 255 and $h <= 295 and $l > 0.55 {
         @return $h + 33 * ($l - 0.55);
@@ -146,40 +153,44 @@
     @return $h;
 }
 
-// --- solving ----------------------------------------------------------------
-
-/// Solves one shade: nudges lightness until the finished color's measured contrast
-/// lands on its target.
-///
-/// You cannot compute the lightness directly, because adding chroma adds light — a
-/// colorful color is brighter than the gray of the same OKLCH lightness, so the
-/// contrast solved for on a gray is wrong the moment color goes in. So: guess, measure,
-/// correct. The 0.55 damping is deliberately below 1; it converges a little slower but
-/// never oscillates.
-///
-/// @access private
-/// @param {Number} $h - The family's hue.
-/// @param {List} $tent - The family's tent.
-/// @param {Number} $s - The saturation level to apply, 0 to 1.
-/// @param {Number} $t - Position along the ramp, 0 to 1, for the envelope.
-/// @param {Number} $target - Target contrast ratio.
+/// The fixed part of a solve: what the shades of this family are being built against.
+/// @param {Number} $h - The family's hue, in degrees.
+/// @param {List} $tent - The hue's chroma tent, from `gamut.tent()`.
 /// @param {Number} $anchor-y - Luminance of whatever the contrast is measured against.
-/// @param {Boolean} $lighter - True when the shade must be lighter than the anchor.
-/// @param {Number} $p - Chroma ceiling softness.
+/// @param {Boolean} $lighter - Whether the shades sit lighter than the anchor.
+/// @returns {Map} A context for `_solve()`.
+@function _context($h, $tent, $anchor-y, $lighter) {
+    @return (h: $h, tent: $tent, anchor-y: $anchor-y, lighter: $lighter);
+}
+
+/// Finds the shade that hits a contrast target. Chroma adds light, so the lightness cannot be
+/// computed directly; contrast is monotonic in lightness, so this bisects for it.
+/// @param {Map} $ctx - The family context, from `_context()`.
+/// @param {Number} $target - The WCAG contrast to reach.
+/// @param {Map} $chroma - How to chroma the shade, plus the ceiling `softness` to use.
+///   Either `(level:, at:, softness:)` to take that share of the ceiling with the envelope
+///   applied at position `at`, or `(fixed:, softness:)` to hold chroma flat.
 /// @returns {Map} The solved `color` and the contrast it actually `reached`.
-@function _solve($h, $tent, $s, $t, $target, $anchor-y, $lighter, $p) {
-    // Contrast is monotonic in lightness, so bisect rather than nudge. A multiplicative
-    // step overshoots badly when the anchor is itself near an extreme — which is exactly
-    // the case for a surface family, where the anchor is the background.
+@function _solve($ctx, $target, $chroma) {
+    $h: map.get($ctx, 'h');
+    $tent: map.get($ctx, 'tent');
+    $anchor-y: map.get($ctx, 'anchor-y');
+    $lighter: map.get($ctx, 'lighter');
+    $fixed: map.get($chroma, 'fixed');
+    $softness: map.get($chroma, 'softness');
     $lo: 0.02;
     $hi: 0.995;
     $out: null;
     $got: 1;
-    $i: 0;
 
-    @while $i < 20 {
+    @for $i from 0 to 20 {
         $l: math.div($lo + $hi, 2);
-        $c: $s * _envelope($t) * gamut.ceiling($l, $tent, $p);
+        $ceiling: gamut.ceiling($l, $tent, $softness);
+        $c: if(
+            $fixed != null,
+            math.min($fixed, $ceiling),
+            map.get($chroma, 'level') * _envelope(map.get($chroma, 'at')) * $ceiling
+        );
         $out: color.to-gamut(gamut.make($l, $c, _hue-at($h, $l)), srgb, local-minde);
         $y: luminance($out);
         $got: if($lighter, math.div($y + 0.05, $anchor-y + 0.05), math.div($anchor-y + 0.05, $y + 0.05));
@@ -188,104 +199,186 @@
             @return (color: $out, reached: $got);
         }
 
-        $needs-more-light: if($lighter, $got < $target, $got > $target);
-
-        @if $needs-more-light {
+        @if if($lighter, $got < $target, $got > $target) {
             $lo: $l;
         } @else {
             $hi: $l;
         }
-
-        $i: $i + 1;
     }
 
     @return (color: $out, reached: $got);
 }
 
-/// The seed's saturation level: how much of the color available to it at its own
-/// lightness it actually uses. This single number replaces the whole `s:` column of the
-/// old multiplier table.
-/// @access private
+/// Solves one shade and reports a target the hue cannot reach, rather than emitting the
+/// near miss silently.
+/// @param {String} $name - The family name, for the warning.
+/// @param {String} $variant - The shade being built, for the warning.
+/// @param {Map} $ctx - The family context, from `_context()`.
+/// @param {Number} $target - The WCAG contrast to reach.
+/// @param {Map} $chroma - The chroma spec, as `_solve()` takes it.
+/// @returns {Color} The solved color.
+@function _shade-at($name, $variant, $ctx, $target, $chroma) {
+    $solved: _solve($ctx, $target, $chroma);
+    $reached: map.get($solved, 'reached');
+
+    @if math.abs($reached - $target) > $target * $_target-tolerance {
+        @warn 'Shade "#{$name}-#{$variant}" wanted #{$target}:1 but its hue only reaches #{$reached}:1.';
+    }
+
+    @return map.get($solved, 'color');
+}
+
+/// How much of the chroma available at its own lightness the seed actually uses.
+/// @param {Map} $read - The seed's OKLCH components, from `gamut.read()`.
+/// @param {List} $tent - The hue's chroma tent, from `gamut.tent()`.
+/// @param {Boolean} $chromatic - Whether the seed carries a usable hue.
+/// @param {Boolean} $muted - Whether to cap the result at `$_neutral-tint-cap`.
+/// @returns {Number} A saturation level, 0 to 1.
 @function _level($read, $tent, $chromatic, $muted) {
     @if not $chromatic {
         @return 0;
     }
 
-    $s: math.div(map.get($read, 'c'), gamut.ceiling(map.get($read, 'l'), $tent, config.$ceiling-softness));
+    $s: math.div(map.get($read, 'c'), gamut.ceiling(map.get($read, 'l'), $tent, $_ceiling-softness));
 
-    @return if($muted, math.min($s, config.$neutral-tint-cap), math.clamp(config.$saturation-floor, $s, 1));
+    @return if($muted, math.min($s, $_neutral-tint-cap), math.clamp(config.$saturation-floor, $s, 1));
 }
 
-// --- the public entry point -------------------------------------------------
+/// Packs one finished color into the pair `shades()` expects.
+/// @param {Color} $color - The solved color.
+/// @returns {Map} The color as both `raw` and `css`, in sRGB with integer channels.
+@function _entry($color) {
+    $srgb: gamut.to-srgb($color);
+
+    @return (raw: $srgb, css: $srgb);
+}
+
+/// Steps one surface layer away from its background.
+/// @param {Map} $ctx - The surface context, from `_context()`, with `lighter` set for this role.
+/// @param {Color} $anchor - The background the layer sits on.
+/// @param {Number} $c - Chroma to hold the layer at.
+/// @param {Number} $target - The WCAG contrast the layer should reach from the background.
+/// @returns {Color} The layer, or the anchor unchanged when there is no room in that direction.
+@function _layer($ctx, $anchor, $c, $target) {
+    $y: map.get($ctx, 'anchor-y');
+    $lighter: map.get($ctx, 'lighter');
+    $room: if($lighter, math.div(1.05, $y + 0.05), math.div($y + 0.05, 0.05));
+
+    @if $room < $target {
+        @return $anchor;
+    }
+
+    $solved: _solve(
+        $ctx,
+        $target,
+        (
+            fixed: $c,
+            softness: $_ceiling-softness,
+        )
+    );
+
+    @return if(map.get($solved, 'reached') >= $target * 0.9, map.get($solved, 'color'), $anchor);
+}
+
+/// Builds a surface family: a background plus the layers that sit on it. Layers hold the
+/// background's chroma flat, since scaling it reads as a color shift rather than an elevation.
+/// @param {Color} $seed - The background color.
+/// @param {List} $variants - The roles to generate, in emit order.
+/// @param {Number} $sh - The background's hue, in degrees.
+/// @param {List} $tent - The hue's chroma tent, from `gamut.tent()`.
+/// @param {Number} $c - The background's chroma.
+/// @returns {Map} Each role mapped to `(raw:, css:)`.
+/// @throws A surface family is built from roles, not numeric shades.
+@function _surface($seed, $variants, $sh, $tent, $c) {
+    $by: luminance($seed);
+    $result: (
+        'base': _entry($seed),
+        'seed': (
+            raw: $seed,
+            css: $seed,
+        ),
+    );
+
+    @each $role, $spec in config.$surface-roles {
+        $ctx: _context($sh, $tent, $by, map.get($spec, toward) == 'white');
+        $result: map.set($result, $role, _entry(_layer($ctx, $seed, $c, map.get($spec, step))));
+    }
+
+    $translucent: rgba(if($by > 0.5, #000, #fff), config.$surface-container-alpha);
+    $result: map.set(
+        $result,
+        'container',
+        (
+            raw: $translucent,
+            css: $translucent,
+        )
+    );
+    $ordered: ();
+
+    @each $variant in $variants {
+        $v: '#{$variant}';
+
+        @if map.has-key($result, $v) {
+            $ordered: map.set($ordered, $v, map.get($result, $v));
+        }
+    }
+
+    @if not map.has-key($ordered, 'base') {
+        @error 'A surface family is built from roles, not numeric shades. Pass $ISurfaceRoles ' +
+            '(or a list containing "base") as its variants, got: #{$variants}.';
+    }
+
+    @return $ordered;
+}
 
 /// Generates every shade of one color family in a single pass.
-///
-/// The gamut cusp is found once here and reused for all shades — every shade in a
-/// family shares a hue, so they share a tent. Recomputing it per shade is correct but
-/// more than ten times slower.
-///
-/// @access private
+/// The gamut cusp is found once and shared by all shades;
 /// @param {String} $name - The family name.
 /// @param {Color} $seed - The seed color.
 /// @param {List} $variants - The shade variants to generate.
 /// @param {Color} $surface [null] - The surface color, for neutral families.
-/// @param {String | Map | List} $ladder [null] - A ladder name, spec, or bare curve.
+/// @param {String | Map | List} $scale [null] - A scale name, spec, or bare curve.
 /// @returns {Map} Each variant mapped to `(raw:, css:)`.
-@function family($name, $seed, $variants, $surface: null, $ladder: null) {
+/// @throws A "<name>" family needs at least two numeric shades to span a scale.
+@function family($name, $seed, $variants, $surface: null, $scale: null) {
     $key: '#{$name}';
-    $is-surface: list.index(config.$surface-families, $key) != null;
-    $is-neutral: list.index(config.$neutral-families, $key) != null;
-    $muted: $is-surface or $is-neutral;
-    $lad: _ladder($key, $ladder);
+    $is-surface: $key == 'surface';
+    $is-neutral: $key == 'gray';
 
     @if $is-neutral and not $seed {
         $seed: if(luminance($surface) > 0.5, #000, #fff);
     }
 
-    // Chromatic families are measured against white and are identical in every theme.
-    // Neutral families are measured against the surface, so they flip with it. Surface
-    // families are measured against themselves.
-    $anchor-y: 1;
-
-    @if $is-neutral {
-        $anchor-y: luminance($surface);
-    } @else if $is-surface {
-        $anchor-y: luminance($seed);
-    }
-
-    $flip: $is-neutral and $anchor-y <= 0.5;
-
-    // A surface family only ever moves one way: into whichever side of the range has
-    // room. A white page has nothing lighter than itself and a black one nothing darker,
-    // so pretending the scale runs both ways is what produced five identical whites.
-    $up: false;
-    $reach: null;
-
-    @if $is-surface {
-        $lighter: math.div(1.05, $anchor-y + 0.05);
-        $darker: math.div($anchor-y + 0.05, 0.05);
-        $up: $lighter > $darker;
-        $reach: math.max($lighter, $darker) * 0.98;
-    }
-
     $read: gamut.read($seed);
     $sh: map.get($read, 'h');
-    $chromatic: map.get($read, 'c') >= config.$neutral-threshold;
-    $tent: if($chromatic, gamut.tent($sh), (0.0001, 0.0001));
-    $s: _level($read, $tent, $chromatic, $muted);
+
+    // Backgrounds are picked deliberately, and a warm vs cool dark sits below the
+    // threshold that rounds a near-gray seed to neutral.
+    $chromatic: if($is-surface, map.get($read, 'c') > 0, map.get($read, 'c') >= $_neutral-threshold);
+    $tent: if($chromatic, gamut.tent($sh), (0, 0));
+    $s: _level($read, $tent, $chromatic, $is-neutral);
+
+    @if $is-surface {
+        @return _surface($seed, $variants, $sh, $tent, map.get($read, 'c'));
+    }
+
+    $anchor-y: if($is-neutral, luminance($surface), 1);
+    $ctx: _context($sh, $tent, $anchor-y, $is-neutral and $anchor-y <= 0.5);
+    $sc: _scale($key, $scale);
     $result: ();
     $i: 0;
     $n: 0;
 
     @each $variant in $variants {
-        @if not(map.has-key(config.$accent-targets, '#{$variant}')) and '#{$variant}' != 'seed' {
+        @if not map.has-key($_accent-targets, '#{$variant}') and '#{$variant}' != 'seed' {
             $n: $n + 1;
         }
     }
 
-    // Surface keeps shade 500 for the background itself, so the remaining keys share one
-    // rung fewer between them.
-    $rungs: if($is-surface, $n - 1, $n);
+    // The scale spans a range across `$n` shades, so a lone shade has nowhere to sit.
+    @if $n < 2 {
+        @error 'A "#{$key}" family needs at least two numeric shades to span a scale, got #{$n}.';
+    }
 
     @each $variant in $variants {
         $v: '#{$variant}';
@@ -299,35 +392,42 @@
                     css: $seed,
                 )
             );
-        } @else if map.has-key(config.$accent-targets, $v) {
-            // The accent track: the same anchor, but riding the gamut hull rather than
-            // following the seed's restraint.
-            $solved: _solve(
-                $sh,
-                $tent,
-                if($chromatic, 1, 0),
-                0.5,
-                map.get(config.$accent-targets, $v),
-                $anchor-y,
-                $flip,
-                config.$accent-ceiling-softness
+        } @else if map.has-key($_accent-targets, $v) {
+            $result: map.set(
+                $result,
+                $v,
+                _entry(
+                    _shade-at(
+                        $key,
+                        $v,
+                        $ctx,
+                        map.get($_accent-targets, $v),
+                        (
+                            level: if($chromatic, 1, 0),
+                            at: 0.5,
+                            softness: $_accent-ceiling-softness,
+                        )
+                    )
+                )
             );
-            $result: map.set($result, $v, _entry(map.get($solved, 'color')));
-        } @else if $is-surface and $v == '500' {
-            $result: map.set($result, $v, _entry($seed));
         } @else {
-            $target: if($is-surface, _target($lad, $i, $rungs, $reach), _target($lad, $i, $rungs));
-            $solved: _solve(
-                $sh,
-                $tent,
-                $s,
-                math.div($i, $rungs - 1),
-                $target,
-                $anchor-y,
-                if($is-surface, $up, $flip),
-                config.$ceiling-softness
+            $result: map.set(
+                $result,
+                $v,
+                _entry(
+                    _shade-at(
+                        $key,
+                        $v,
+                        $ctx,
+                        _target($sc, $i, $n),
+                        (
+                            level: $s,
+                            at: math.div($i, $n - 1),
+                            softness: $_ceiling-softness,
+                        )
+                    )
+                )
             );
-            $result: map.set($result, $v, _entry(map.get($solved, 'color')));
             $i: $i + 1;
         }
     }
@@ -335,28 +435,15 @@
     @return $result;
 }
 
-/// Both halves of a shade. They hold the same value — the generator resolves colors at
-/// build time — but the pair is what `shades()` expects, and keeping `-raw` populated
-/// keeps every existing consumer working.
-/// @access private
-@function _entry($color) {
-    $srgb: gamut.to-srgb($color);
-
-    @return (raw: $srgb, css: $srgb);
-}
-
-/// Reports which shade a seed color lands nearest.
-///
-/// Under this generator the seed informs the ramp without necessarily appearing in it.
-/// Nothing depends on the answer — `--ig-{name}-seed` always holds the original — but
-/// it is worth surfacing, because someone who hands you `#00ff00` will want to know it
-/// landed at shade 100 rather than in the middle.
-///
+/// Reports which shade sits closest to the seed in lightness. Chroma and hue are not
+/// compared: each shade carries the chroma its hue can hold at that lightness, so the
+/// match is rarely the seed itself. `--ig-{name}-seed` always holds the original.
 /// @access public
 /// @group Palettes
 /// @param {Map} $palette - A generated palette.
 /// @param {String} $name ['primary'] - The color family to inspect.
-/// @returns {String} The variant whose lightness is closest to the seed's.
+/// @returns {String} The variant whose lightness is closest to the seed's, or null when
+///   the family has no seed or no numeric shades.
 /// @example scss
 ///   $where: seed-lands-on($my-palette, 'primary'); // '300'
 @function seed-lands-on($palette, $name: 'primary') {
@@ -369,21 +456,18 @@
 
     $target: map.get(gamut.read($seed), 'l');
     $best: null;
-    $best-d: 99;
+    $best-d: null;
 
-    @each $variant, $value in $family {
-        $skip: string.index($variant, 'raw') !=
-            null or
-            string.index($variant, 'contrast') !=
-            null or
-            $variant ==
-            'seed' or
-            map.has-key(config.$accent-targets, $variant);
+    // Only the numeric shades are candidates: `seed` is the input itself, the accents ride
+    // their own contrast track, and `-raw`/`-contrast` are other views of these same shades.
+    @each $variant in types.$INumericShades {
+        $raw: map.get($family, '#{$variant}-raw');
 
-        @if not $skip {
-            $d: math.abs(map.get(gamut.read(map.get($family, '#{$variant}-raw')), 'l') - $target);
+        @if $raw {
+            $d: math.abs(map.get(gamut.read($raw), 'l') - $target);
 
-            @if $d < $best-d {
+            // Only null is falsy here — a distance of 0 is a real, and winning, value.
+            @if not $best-d or $d < $best-d {
                 $best-d: $d;
                 $best: $variant;
             }

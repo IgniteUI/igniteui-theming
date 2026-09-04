@@ -39,13 +39,17 @@ export const FRAGMENTS = {
   GRAY_SHADES:
     "10 shades required: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900",
 
-  /** Luminance warning */
-  LUMINANCE_WARNING:
-    "Colors with extreme luminance (< 0.05 or > 0.45) may produce suboptimal automatic shade generation.",
+  /** Surface layer roles */
+  SURFACE_ROLES:
+    "6 layers required: base, sunken, raised, overlay, container, seed",
 
-  /** Monochromatic requirement for chromatic colors */
+  /** What a seed color does and does not control */
+  SEED_BEHAVIOUR:
+    "Every shade is solved for a contrast target, so a seed supplies HUE and SATURATION, not lightness - a very light or very dark brand color yields the same ramp as a mid-tone one. Pass the brand color as-is. The one caveat: a seed with almost no chroma (a near-white or near-gray wash) is read as neutral and produces a gray ramp.",
+
+  /** Monochromatic requirement - only applies to hand-written explicit shades */
   MONOCHROMATIC_RULE:
-    "MONOCHROMATIC REQUIREMENT: All shades in a color group (e.g., primary) must be the SAME HUE. Shades are lighter/darker versions of ONE color, NOT different colors. Example: primary shades should all be blue (#E3F2FD → #0D47A1), not blue→green→purple. Vary only lightness and saturation, keep hue constant (±30° tolerance).",
+    "In explicit mode, all shades in a group must be the SAME HUE (±30°) and run 50 lightest to 900 darkest - they are lightness steps of one color, not different colors. Shades mode enforces this for you.",
 
   /** Sass @use placement guidance for tools that generate Sass output */
   SASS_FILE_PLACEMENT: `SASS FILE PLACEMENT:
@@ -132,8 +136,8 @@ export const TOOL_DESCRIPTIONS = {
 
 <use_case>
   Use this tool when you have base colors and want to auto-generate a complete palette
-  with all shade variations (50-900, A100-A700). Best for colors with mid-range luminance
-  that will produce good automatic shade distribution.
+  with all shade variations (50-900, A100-A700). This is the right tool for almost every
+  palette - pass the brand colors and let the generator do the rest.
 </use_case>
 
 <output_formats>
@@ -148,17 +152,16 @@ export const TOOL_DESCRIPTIONS = {
 
 <workflow>
   1. Validates input colors against the theme variant
-  2. Analyzes color luminance for shade generation suitability
-  3. Generates Sass code OR compiles to CSS based on output parameter
-  4. Adds warning comments to code if issues detected
-  5. Returns validation warnings and tips in response
+  2. Generates Sass code OR compiles to CSS based on output parameter
+  3. Adds warning comments to code if issues detected
+  4. Returns validation warnings and tips in response
 </workflow>
 
 <important_notes>
   - Requires primary, secondary, and surface colors (matches Sass palette() API)
   - Gray, info, success, warn, error are optional (use design system defaults)
   - Surface color should match variant: light colors for "light", dark for "dark"
-  - ${FRAGMENTS.LUMINANCE_WARNING}
+  - ${FRAGMENTS.SEED_BEHAVIOUR}
 
   SHADE PROGRESSION (important):
   - Primary, secondary, and all chromatic colors: shades are NEVER inverted.
@@ -181,7 +184,6 @@ export const TOOL_DESCRIPTIONS = {
 <error_handling>
   - Invalid color format: Returns error with format examples
   - Variant mismatch: Warns if surface color doesn't match theme variant
-  - Luminance issues: Warns with recommendation to use create_custom_palette
 </error_handling>
 
 <example>
@@ -205,7 +207,7 @@ export const TOOL_DESCRIPTIONS = {
 
 <related_tools>
   - detect_platform: Run first to get correct platform value
-  - create_custom_palette: Use if this tool warns about luminance issues
+  - create_custom_palette: Only when exact per-shade values are mandated by a brand spec
   - create_theme: Use instead if you want palette + typography + elevations together
 </related_tools>
 
@@ -230,12 +232,18 @@ export const TOOL_DESCRIPTIONS = {
    This applies to BOTH light and dark themes. Only gray inverts for dark themes.
 
 <use_case>
-  Use this tool when:
-  - The standard palette() function produces suboptimal shade distribution
-  - You have brand guidelines specifying exact color values for each shade
-  - Base colors are too light (luminance > 0.45) or too dark (< 0.05)
-  - You have specific accessibility audit requirements with exact contrast color values (rare - auto-generated contrast is usually sufficient)
-  - You want to mix auto-generated and manually specified color groups
+  PREFER create_palette. It derives every shade from a seed by solving for a contrast
+  target, so it handles any brand color - light, dark, muted or neon - on its own.
+  ${FRAGMENTS.SEED_BEHAVIOUR}
+
+  Reach for this tool only when:
+  - A brand spec mandates exact values for specific shades, and those values must be
+    reproduced rather than generated
+  - An accessibility audit requires exact contrast color values (rare - the generated
+    adaptive-contrast() is normally what you want)
+
+  Mixing is supported and is the usual shape: pin the one group the brand specifies and
+  leave every other group in "shades" mode.
 </use_case>
 
 <output_formats>
@@ -251,69 +259,36 @@ export const TOOL_DESCRIPTIONS = {
 
 <workflow>
   1. For each color group, choose a mode:
-     - mode:"shades" → Auto-generate all shades from baseColor using shades() function
-     - mode:"explicit" → Manually specify every shade value
-  2. Validates all explicit shades for:
-     - Completeness: All required shades present
-     - Color format: Valid CSS color values
-     - Luminance progression: 50 lightest → 900 darkest (chromatic colors)
-     - Hue consistency: All shades within ±30° hue tolerance (monochromatic)
+     - mode:"shades" → Auto-generate from baseColor (the default choice)
+     - mode:"explicit" → Reproduce mandated values shade by shade
+  2. Validates explicit shades for completeness, color format, lightness order and hue
+     consistency
   3. Generates Sass code with color() map structure
   4. Returns any validation warnings
 </workflow>
 
 <important_notes>
-  CRITICAL - SHADE PROGRESSION RULES:
-  - CHROMATIC colors (primary, secondary, surface, info, success, warn, error):
-    Shade 50 = ALWAYS lightest, shade 900 = ALWAYS darkest.
-    This is TRUE FOR BOTH light AND dark themes. NEVER invert chromatic colors.
-  - GRAY color ONLY: Inverts for dark themes (50=darkest, 900=lightest).
-  - DO NOT confuse these rules. Only gray inverts, never primary/secondary/etc.
+  CHROMATIC COLORS (primary, secondary, info, success, warn, error):
+  - "shades" mode needs only a baseColor - prefer it
+  - "explicit" mode requires ${FRAGMENTS.CHROMATIC_SHADES}
+  - ${FRAGMENTS.MONOCHROMATIC_RULE}
+  - Chromatic shades are NEVER inverted: 50 is lightest and 900 darkest in BOTH light
+    and dark themes
 
-  ⚠️ CRITICAL - MONOCHROMATIC REQUIREMENT:
-  Each color group (primary, secondary, etc.) must contain shades of ONE COLOR ONLY.
-  Shades are lighter/darker variations of the SAME hue - NOT different colors!
+  GRAY (the only family that inverts):
+  - "explicit" mode requires ${FRAGMENTS.GRAY_SHADES}
+  - LIGHT themes: 50 = lightest, 900 = darkest. DARK themes: inverted
+  - Gray inverts because text and UI elements contrast against the surface
 
-  CORRECT example for primary blue:
-    50: "#E3F2FD"  (very light blue)
-    500: "#2196F3" (medium blue)
-    900: "#0D47A1" (dark blue)
-    → All shades are BLUE, just different lightness levels
+  SURFACE (not a ramp):
+  - A background plus the layers on it, keyed by ${FRAGMENTS.SURFACE_ROLES}
+  - "base" is the page; "sunken"/"raised"/"overlay" step away from it; "container" is a
+    translucent tint; "seed" is the input color
+  - There are no numeric surface shades and no hue ramp to keep monochromatic
 
-  WRONG example (DO NOT DO THIS):
-    50: "#E3F2FD"  (light blue)
-    500: "#4CAF50" (green) ← WRONG! Different hue
-    900: "#9C27B0" (purple) ← WRONG! Different hue
-    → This creates a rainbow, not a shade palette
-
-  Rule: Keep hue constant (±30° tolerance), vary only lightness and saturation.
-
-  CHROMATIC COLORS (primary, secondary, surface, info, success, warn, error):
-  - Explicit mode requires ${FRAGMENTS.CHROMATIC_SHADES}
-  - Shade 50 = lightest, shade 900 = darkest (SAME for light AND dark themes)
-  - ALL shades must be the SAME HUE (monochromatic) - see requirement above
-  - A100-A700 are accent shades (same hue, typically more saturated)
-
-  GRAY COLOR (the ONLY color that inverts):
-  - Explicit mode requires ${FRAGMENTS.GRAY_SHADES}
-  - LIGHT themes: 50 = lightest (near white), 900 = darkest (near black)
-  - DARK themes: 50 = darkest, 900 = lightest (INVERTED progression)
-  - Gray inverts because text/UI elements need to contrast against the surface
-
-  CONTRAST COLORS (AUTO-GENERATED - DO NOT PROVIDE):
-  - DO NOT include contrastOverrides in your input - OMIT THIS FIELD ENTIRELY
-  - The system AUTOMATICALLY generates contrast colors using adaptive-contrast()
-  - For each shade, the generated Sass output will include:
-      '500': #4CAF50,
-      '500-contrast': adaptive-contrast(#4CAF50),  ← AUTO-GENERATED
-      '500-raw': #4CAF50,
-  - The adaptive-contrast() function auto-selects black or white for readability
-  - Only provide contrastOverrides if you have a specific accessibility audit
-    requiring exact contrast color values (this is extremely rare)
-
-  MIXING MODES:
-  - You can use "shades" mode for some colors and "explicit" for others
-  - Example: explicit primary, shades-based secondary and surface
+  CONTRAST COLORS - OMIT contrastOverrides entirely. Each shade automatically gets
+  '<shade>-contrast': adaptive-contrast(<color>), which picks black or white for
+  readability. Only supply overrides for an audit demanding exact values.
 
   ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
@@ -339,47 +314,37 @@ export const TOOL_DESCRIPTIONS = {
 </error_handling>
 
 <example>
-  Brand green with exact shades (NOTE: ALL shades are GREEN - same hue, different lightness):
+  The usual case - every group from a seed:
+  {
+    "variant": "light",
+    "primary": { "mode": "shades", "baseColor": "#4CAF50" },
+    "secondary": { "mode": "shades", "baseColor": "#FF9800" },
+    "surface": { "mode": "shades", "baseColor": "#FAFAFA" }
+  }
 
-  INPUT (what you provide - NO contrastOverrides needed):
+  A brand spec pins primary; everything else is still generated:
   {
     "variant": "light",
     "primary": {
       "mode": "explicit",
       "shades": {
-        "50": "#E8F5E9",
-        "100": "#C8E6C9",
-        "200": "#A5D6A7",
-        "300": "#81C784",
-        "400": "#66BB6A",
-        "500": "#4CAF50",
-        "600": "#43A047",
-        "700": "#388E3C",
-        "800": "#2E7D32",
-        "900": "#1B5E20",
-        "A100": "#B9F6CA",
-        "A200": "#69F0AE",
-        "A400": "#00E676",
-        "A700": "#00C853"
+        "50": "#E8F5E9", "100": "#C8E6C9", "200": "#A5D6A7", "300": "#81C784",
+        "400": "#66BB6A", "500": "#4CAF50", "600": "#43A047", "700": "#388E3C",
+        "800": "#2E7D32", "900": "#1B5E20",
+        "A100": "#B9F6CA", "A200": "#69F0AE", "A400": "#00E676", "A700": "#00C853"
       }
-      // ↑ Only provide shades - contrast colors are AUTO-GENERATED
     },
     "secondary": { "mode": "shades", "baseColor": "#FF9800" },
     "surface": { "mode": "shades", "baseColor": "#FAFAFA" }
   }
 
-  GENERATED OUTPUT (contrast colors added automatically):
-  'primary': (
-    '500': #4CAF50,
-    '500-contrast': adaptive-contrast(#4CAF50),  // ← AUTO-GENERATED
-    '500-raw': #4CAF50,  // ← AUTO-GENERATED
-    // ... same pattern for all 14 shades
-  )
+  Note: no contrastOverrides in either input. The generated Sass adds
+  '500-contrast': adaptive-contrast(#4CAF50) for every shade automatically.
 </example>
 
 <related_tools>
   - detect_platform: Run first to get correct platform value
-  - create_palette: Use for simpler cases with mid-range luminance colors
+  - create_palette: Prefer this - it handles any seed color without hand-written shades
   - create_theme: Does not support custom palettes; use this tool + manual theme assembly
 </related_tools>
 
@@ -410,6 +375,30 @@ export const TOOL_DESCRIPTIONS = {
   // ---------------------------------------------------------------------------
   // create_typography - Medium complexity
   // ---------------------------------------------------------------------------
+  fit_color_scale: `Derive a shade scale from an existing color ladder.
+
+<use_case>
+  Use when shades must follow the rhythm of a ladder you already have - another design
+  system's grays, a brand ramp, a palette from a screenshot. Pass the returned spec to
+  create_palette or create_theme as \`scales\`. Never hand-write range/curve values.
+
+  Not needed for the built-in presets ("even" | "material" | "tailwind" | "carbon") -
+  name those in \`scales\` directly.
+</use_case>
+
+<important_notes>
+  - Order the colors LIGHTEST FIRST (a 50-900 ladder already is). 3 minimum, 10 fits best.
+  - The response reports how closely the fit reproduces the ladder; a ladder that does not
+    follow one smooth curve fits loosely and says so.
+  - A scale sets rhythm only, never hue - the seed still decides the color.
+  - Background: read_resource "igniteui-theming://guidance/colors/scales"
+</important_notes>
+
+<example>
+  { "colors": ["#f8fafc","#f1f5f9","#e2e8f0","#cbd5e1","#94a3b8",
+               "#64748b","#475569","#334155","#1e293b","#0f172a"], "name": "gray" }
+</example>`,
+
   create_typography: `Set up typography for Ignite UI themes with custom font families and type scales.
 
 <use_case>
@@ -516,13 +505,11 @@ export const TOOL_DESCRIPTIONS = {
 </use_case>
 
 <workflow>
-  1. Analyzes input colors for palette shade generation suitability
-  2. Creates color palette using palette() function
-  3. Sets up typography with specified font family (if includeTypography: true)
-  4. Configures elevations based on design system (if includeElevations: true)
-  5. Configures spacing utilities for Web Components, React, and Blazor (if includeSpacing: true)
-  6. Applies the theme using the theme() mixin
-  7. Returns luminance warnings if any colors may produce poor shades
+  1. Creates color palette using palette() function
+  2. Sets up typography with specified font family (if includeTypography: true)
+  3. Configures elevations based on design system (if includeElevations: true)
+  4. Configures spacing utilities for Web Components, React, and Blazor (if includeSpacing: true)
+  5. Applies the theme using the theme() mixin
 </workflow>
 
 <important_notes>
@@ -538,9 +525,8 @@ export const TOOL_DESCRIPTIONS = {
   - Only gray shades behave differently (for text contrast against surface).
   - DO NOT provide inverted primary/secondary colors for dark themes.
 
-  LUMINANCE ANALYSIS:
-  - ${FRAGMENTS.LUMINANCE_WARNING}
-  - If warnings appear, consider using create_custom_palette for those colors
+  SEED COLORS:
+  - ${FRAGMENTS.SEED_BEHAVIOUR}
 
   PLATFORM DIFFERENCES:
   - Angular: Uses igniteui-angular/theming with core() and theme() mixins
@@ -554,14 +540,12 @@ export const TOOL_DESCRIPTIONS = {
 <output>
   Returns:
   - Complete Sass code with all theme components
-  - Luminance analysis warnings (if applicable)
   - List of variables created/used
   - Platform-specific guidance
 </output>
 
 <error_handling>
   - Invalid color format: Returns error with format examples
-  - Luminance issues: Warns but still generates code (may produce suboptimal shades)
   - Variant mismatch: Warns if surface color doesn't match theme variant
 </error_handling>
 
@@ -582,17 +566,13 @@ export const TOOL_DESCRIPTIONS = {
 
 <next_steps>
   After generating a theme:
-  1. Review any luminance warnings in the output
-  2. If warnings suggest shade generation issues:
-     - Use create_custom_palette for problematic colors
-     - Manually assemble theme with custom palette
-  3. Import the generated Sass file in your application's main styles
-  4. Customize individual component themes as needed using component schema overrides
+  1. Import the generated Sass file in your application's main styles
+  2. Customize individual component themes as needed using component schema overrides
 </next_steps>
 
 <related_tools>
   - detect_platform: Run first to auto-detect platform from package.json
-  - create_custom_palette: Use for colors that produce luminance warnings
+  - create_custom_palette: Only when exact per-shade values are mandated by a brand spec
   - create_palette: Use if you only need a palette without full theme
   - create_typography: Use if you only need typography setup
   - create_elevations: Use if you only need elevation shadows
@@ -1248,18 +1228,34 @@ Layout tools (set_size, set_spacing, set_roundness) default to "css". Generation
   // Custom palette parameters (for create_custom_palette)
   // ---------------------------------------------------------------------------
   colorDefinition: `Color definition object with mode selection:
-• mode: "shades" + baseColor: Auto-generates all shades from one color
+• mode: "shades" + baseColor: Auto-generates all shades from one color - prefer this
 • mode: "explicit" + shades: Manually specify all ${FRAGMENTS.CHROMATIC_SHADES}
-IMPORTANT: All shades must be MONOCHROMATIC (same hue). Shades are lighter/darker versions of ONE color, not different colors.`,
+${FRAGMENTS.MONOCHROMATIC_RULE}`,
+
+  surfaceDefinition: `Surface definition object with mode selection:
+• mode: "shades" + baseColor: Auto-generates the background and its layers from one color
+• mode: "explicit" + shades: Manually specify all ${FRAGMENTS.SURFACE_ROLES}
+IMPORTANT: A surface is a background plus the layers that sit on it, so it is addressed by ROLE, not by shade number. "base" is the page background; "sunken", "raised" and "overlay" step away from it; "container" is a translucent tint. A role with no room in its direction resolves back onto "base".`,
 
   grayDefinition: `Gray color definition object with mode selection:
 • mode: "shades" + baseColor: Auto-generates all shades from one color
 • mode: "explicit" + shades: Manually specify all ${FRAGMENTS.GRAY_SHADES}
 Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightest).`,
 
-  baseColor: `Base color for automatic shade generation using shades() function. Choose a mid-luminance color (0.1-0.4) for best results. ${FRAGMENTS.COLOR_FORMAT}`,
+  scales: `OPTIONAL - omit unless asked to match another system's rhythm. Preset name ("even" | "material" | "tailwind" | "carbon"), or a map keyed by family: {"gray": "carbon"}. To match a ladder you have seen, call fit_color_scale and pass back its spec - never hand-write a curve.`,
+
+  generator: `OPTIONAL - omit it. "legacy" reproduces the original multiplier-based ramps and exists only to keep an existing theme byte-identical while migrating.`,
+
+  ladderColors: `The ladder to fit, LIGHTEST FIRST (3-20 colors). ${FRAGMENTS.COLOR_FORMAT}`,
+
+  ladderName:
+    "Optional label for the fitted scale, used in the generated Sass comment.",
+
+  baseColor: `Base color for automatic shade generation using shades() function. Pass the brand color as-is; its lightness does not need adjusting. ${FRAGMENTS.COLOR_FORMAT}`,
 
   shades: `Object with all shade values. ${FRAGMENTS.CHROMATIC_SHADES}. Luminance should decrease from 50 (lightest) to 900 (darkest). CRITICAL: All shades must be the SAME COLOR (same hue) at different lightness levels - do NOT use different colors for different shades.`,
+
+  surfaceRoles: `Object with all surface layer values. ${FRAGMENTS.SURFACE_ROLES}. "base" is the page background; "sunken" is darker, "raised" and "overlay" lighter (inverted for dark themes); "container" is a translucent black/white tint; "seed" is the original input color.`,
 
   grayShades: `Object with all gray shade values. ${FRAGMENTS.GRAY_SHADES}. For light themes: 50=lightest, 900=darkest. For dark themes: 50=darkest, 900=lightest.`,
 

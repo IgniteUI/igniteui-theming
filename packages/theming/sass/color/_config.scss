@@ -3,187 +3,93 @@
 /// @group Palettes
 ////
 
-/// The shade generator used by `palette()` and `shades()` when none is passed explicitly.
-///
-/// - `'gamut-relative'` — lightness is solved from a contrast target, chroma is a fraction
-///   of what the sRGB gamut allows at that lightness and hue. Works for any seed color.
-/// - `'legacy'` — the original fixed saturation/lightness multiplier tables. Kept for
-///   backward compatibility; the palettes shipped with this library use it.
-///
+/// Which generator builds the shades. `fitted` cuts each scale to its own hue —
+/// lightness from a contrast target, chroma from how much color that hue can actually
+/// hold. `legacy` multiplies the seed by fixed saturation and lightness tables.
 /// @type String
 /// @access public
-/// @example scss - Opt the whole build back to the original algorithm
+/// @example scss
 ///   @use 'igniteui-theming' with ($shade-generator: 'legacy');
-$shade-generator: 'gamut-relative' !default;
+$shade-generator: 'fitted' !default;
 
-/// Families generated as a background rather than as a ramp.
+/// Ready-made scale shapes.
 ///
-/// Their seed stays exactly on shade 500 — component schemas read
-/// `color($palette, 'surface', 500)` expecting the background itself — and the remaining
-/// shades are layering steps either side of it.
-/// @type List
-/// @access public
-$surface-families: ('surface') !default;
-
-/// Families generated as a near-neutral, anchored to the surface rather than to white,
-/// and flipped when the surface is dark.
-/// @type List
-/// @access public
-$neutral-families: ('gray') !default;
-
-// --- the contrast ladder ----------------------------------------------------
-
-/// Spacing between adjacent rungs of the default contrast ladder, as a natural-log step.
-/// `ln(4.5) / 5` is what makes any two shades 500 apart clear WCAG AA; the extra
-/// thousandth is a rounding buffer.
-/// @type Number
-/// @access public
-$contrast-step: 0.304 !default;
-
-/// Shifts the default ladder. 0.55 puts shade 50 at a 1.18:1 tint and shade 900 at 18.3:1.
-/// @type Number
-/// @access public
-$contrast-offset: 0.55 !default;
-
-/// Ready-made ladder flavors.
+/// `range` is the WCAG contrast the family spans, from shade 50 to shade 900, measured
+/// against white — or against the background for `gray`. So `1.182 18.232` means the
+/// lightest shade sits at 1.18:1 and the darkest at 18.23:1.
 ///
-/// A ladder is `(range: (lowest, highest), curve: (x1, y1, x2, y2))` — the contrast the
-/// scale spans, and how the rungs are distributed across it. The curve is a cubic Bézier
-/// read exactly like a CSS `cubic-bezier()` timing function: `even` is the straight line,
-/// and the others bunch the light steps together the way real design systems do.
+/// `curve` is read exactly like a CSS `cubic-bezier()` timing function: x is how far
+/// along the shades you are, y is how far into that contrast range. `null` is the
+/// straight line, and an even spread is what makes any two shades 500 apart clear AA —
+/// bunching the light end buys a familiar rhythm at the cost of that guarantee.
 ///
-/// Each was fitted to the published scale it is named after; the numbers in brackets are
-/// how closely it reproduces that scale, and how many of the five "500 apart" pairs still
-/// clear WCAG AA.
+/// Each preset was fitted to the published scale it names. Bracketed figures are the max
+/// ΔE from that scale and how many of the five "500 apart" pairs still clear AA.
 ///
-/// - `even` — straight. All five pairs clear AA. The right default for color ramps.
-/// - `material` — this library's original grayscale [ΔE 0.025, 3/5 AA]. Use it to keep
-///   existing component schemas looking exactly as they do today.
-/// - `tailwind` — Tailwind v4's neutral rhythm [ΔE 0.013, 5/5 AA].
-/// - `carbon` — IBM Carbon's gray 10–100 [ΔE 0.007, 5/5 AA].
-/// - `layers` — the shallow ladder used by surface families.
+/// - `even` — straight [5/5]
+/// - `material` — this library's original grayscale [0.025, 3/5]
+/// - `tailwind` — Tailwind v4 slate [0.013, 5/5]
+/// - `carbon` — IBM Carbon gray 10–100 [0.007, 5/5]
 ///
 /// @type Map
 /// @access public
-/// @example scss - Pick a flavor per family
-///   $palette: palette($primary: #09f, $secondary: #f0f, $surface: #fff, $ladders: ('gray': 'carbon'));
-/// @example scss - Or pass a curve directly
-///   $shades: shades('brand', #09f, $IColorShades, $ladder: (0.53, 0, 0.825, 0.785));
-$ladders: (
+/// @example scss - Name a preset
+///   $p: palette($primary: #09f, $secondary: #f0f, $surface: #fff, $scales: ('gray': 'carbon'));
+/// @example scss - Or write one inline
+///   $p: palette(#09f, #f0f, #fff, $scales: ('gray': (range: 1.1 14, curve: 0.5 0 0.8 0.8)));
+$scales: (
     'even': (
-        range: null,
+        range: 1.182 18.232,
         curve: null,
     ),
     'material': (
-        range: (
-            1.04,
-            16.1,
-        ),
-        curve: (
-            0.53,
-            0,
-            0.825,
-            0.785,
-        ),
+        range: 1.04 16.1,
+        curve: 0.53 0 0.825 0.785,
     ),
     'tailwind': (
-        range: (
-            1.04,
-            17.76,
-        ),
-        curve: (
-            0.615,
-            0.07,
-            0.225,
-            0.43,
-        ),
+        range: 1.04 17.76,
+        curve: 0.615 0.07 0.225 0.43,
     ),
     'carbon': (
-        range: (
-            1.1,
-            18.1,
-        ),
-        curve: (
-            0.525,
-            0.295,
-            0.655,
-            0.87,
-        ),
-    ),
-    'layers': (
-        range: (
-            1.02,
-            2.5,
-        ),
-        curve: null,
+        range: 1.1 18.1,
+        curve: 0.525 0.295 0.655 0.87,
     ),
 ) !default;
 
-/// Which ladder each family uses when the caller does not say. Families not listed use
-/// `even`; surface families use `layers`.
+/// Which scale each family uses. Unlisted families use `even`.
 /// @type Map
 /// @access public
-/// @example scss - Evenly spaced grays instead of the legacy rhythm
-///   @use 'igniteui-theming' with ($family-ladders: ());
-$family-ladders: (
+$family-scales: (
     'gray': 'material',
 ) !default;
 
-/// How far the strongest surface shade sits from the background, as a contrast ratio.
-/// Surface shades are layering steps, so they stay shallow: 2.5 matches the darkest
-/// surface shade the original generator produced. Capped by the room actually available.
-/// @type Number
-/// @access public
-$surface-reach: 2.5 !default;
-
-/// Contrast targets for the accent (A) shades. Same ladder, but these ride the gamut hull.
+/// The layers a surface family generates.
+/// The `toward` is the end of the range each moves to;
+/// A layer with no room resolves onto the background.
+/// The `step` is its contrast from the background.
 /// @type Map
 /// @access public
-$accent-targets: (
-    'A100': 1.4,
-    'A200': 2.6,
-    'A400': 4.2,
-    'A700': 6.2,
+$surface-roles: (
+    'sunken': (
+        toward: 'black',
+        step: 1.07,
+    ),
+    'raised': (
+        toward: 'white',
+        step: 1.08,
+    ),
+    'overlay': (
+        toward: 'white',
+        step: 1.18,
+    ),
 ) !default;
 
-// --- chroma -----------------------------------------------------------------
-
-/// Below this chroma a seed carries no usable hue — its hue is a rounding artifact —
-/// so the family is generated as a true neutral.
+/// Alpha of the translucent `container` layer — black over a light background, white over a dark one.
 /// @type Number
 /// @access public
-$neutral-threshold: 0.02 !default;
+$surface-container-alpha: 0.03 !default;
 
-/// Lower bound on the seed's saturation level, so a very muted brand color still
-/// produces a ramp with enough color in it to build a UI from.
+/// Lower bound on the seed's saturation level, so a muted brand color still yields a usable ramp.
 /// @type Number
 /// @access public
 $saturation-floor: 0.3 !default;
-
-/// Upper bound on the saturation level of neutral and surface families, so a tinted
-/// gray stays a gray.
-/// @type Number
-/// @access public
-$neutral-tint-cap: 0.12 !default;
-
-/// How much chroma is pulled back at the two ends of the ramp, so 50 reads as a tint
-/// and 900 as a near-neutral.
-/// @type Number
-/// @access public
-$envelope-depth: 0.3 !default;
-
-/// Shape of that taper. Higher keeps more of the ramp at full strength.
-/// @type Number
-/// @access public
-$envelope-power: 2.5 !default;
-
-/// Chroma ceiling softness for the numbered track. 4 sits comfortably inside the
-/// sRGB boundary, leaving headroom so shades survive gamut mapping unchanged.
-/// @type Number
-/// @access public
-$ceiling-softness: 4 !default;
-
-/// Chroma ceiling softness for the accent track. 8 tracks the real boundary closely.
-/// @type Number
-/// @access public
-$accent-ceiling-softness: 8 !default;
