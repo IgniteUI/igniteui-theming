@@ -8,6 +8,7 @@ export { handleCreateComponentTheme } from "./component-theme.js";
 export { handleGetComponentDesignTokens } from "./component-tokens.js";
 export { handleCreateCustomPalette } from "./custom-palette.js";
 export { handleCreateElevations } from "./elevations.js";
+export { handleFitColorScale } from "./fit-scale.js";
 export {
   handleSetRoundness,
   handleSetSize,

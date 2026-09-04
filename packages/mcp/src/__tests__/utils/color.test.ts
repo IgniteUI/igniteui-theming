@@ -7,14 +7,12 @@
 import { describe, expect, it } from "vitest";
 import {
   analyzeColor,
-  analyzeColorForPalette,
   analyzeSurfaceGrayColors,
   calculateContrast,
   extractHue,
   huesAreClose,
   isValidColor,
   LUMINANCE_THRESHOLD,
-  PALETTE_LUMINANCE_THRESHOLDS,
   validateColorsInBatch,
 } from "../../utils/color.js";
 
@@ -152,53 +150,6 @@ describe("huesAreClose", () => {
 
   it("handles crossing the 360/0 boundary", () => {
     expect(huesAreClose(355, 5, 15)).toBe(true);
-  });
-});
-
-describe("analyzeColorForPalette", () => {
-  it("marks mid-tone colors as suitable", async () => {
-    const result = await analyzeColorForPalette("#2ab759"); // Medium green
-    expect(result.suitable).toBe(true);
-    // TypeScript correctly narrows: issue/description don't exist on suitable results
-    if (!result.suitable) {
-      throw new Error("Expected suitable result");
-    }
-  });
-
-  it("marks very light colors as unsuitable (too light)", async () => {
-    const result = await analyzeColorForPalette("#f8f8f8"); // Very light gray
-    expect(result.suitable).toBe(false);
-    if (result.suitable) {
-      throw new Error("Expected unsuitable result");
-    }
-    expect(result.issue).toBe("too-light");
-    expect(result.description).toBeDefined();
-  });
-
-  it("marks very dark colors as unsuitable (too dark)", async () => {
-    const result = await analyzeColorForPalette("#0a0a0a"); // Very dark gray
-    expect(result.suitable).toBe(false);
-    if (result.suitable) {
-      throw new Error("Expected unsuitable result");
-    }
-    expect(result.issue).toBe("too-dark");
-    expect(result.description).toBeDefined();
-  });
-
-  it("uses correct threshold for too light", async () => {
-    const result = await analyzeColorForPalette("white");
-    expect(result.luminance).toBeGreaterThan(
-      PALETTE_LUMINANCE_THRESHOLDS.TOO_LIGHT,
-    );
-    expect(result.suitable).toBe(false);
-  });
-
-  it("uses correct threshold for too dark", async () => {
-    const result = await analyzeColorForPalette("black");
-    expect(result.luminance).toBeLessThan(
-      PALETTE_LUMINANCE_THRESHOLDS.TOO_DARK,
-    );
-    expect(result.suitable).toBe(false);
   });
 });
 

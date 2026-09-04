@@ -5,6 +5,7 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use 'sass:color';
+@use 'sass:string';
 @use 'sass-true' as *;
 @use 'color' as *;
 @use 'styles/mocks';
@@ -38,6 +39,18 @@ $_palette: palette(
     $warn: $_warn,
     $error: $_error,
     $variant: 'material',
+);
+// The original multiplier-based generator, still reachable as an escape hatch.
+$_legacy-palette: palette(
+    $primary: $_primary,
+    $secondary: $_secondary,
+    $surface: $_surface,
+    $success: $_success,
+    $info: $_info,
+    $warn: $_warn,
+    $error: $_error,
+    $variant: 'material',
+    $generator: 'legacy',
 );
 
 @include describe('Color') {
@@ -145,14 +158,14 @@ $_palette: palette(
         }
 
         @include it('should return a shade of type color string w/ palette and color as only arguments') {
-            $value: color($_palette, secondary);
+            $value: color($_legacy-palette, secondary);
 
             @include assert-equal($value, $_secondary);
         }
 
         @include it('should return a shade of type string w/ all arguments passed') {
-            $value-500: color($_palette, secondary, 500);
-            $value-800: color($_palette, secondary, 800);
+            $value-500: color($_legacy-palette, secondary, 500);
+            $value-800: color($_legacy-palette, secondary, 800);
 
             @include assert-equal($value-500, $_secondary);
             @include assert-unequal($value-500, $value-800);
@@ -203,10 +216,10 @@ $_palette: palette(
         }
 
         @include it('should retrieve colors from a palette regadless of type of key') {
-            @include assert-true(color($_palette, primary, 500));
-            @include assert-equal(color($_palette, primary, 500), $_primary);
-            @include assert-true(color($_palette, 'primary', '500'));
-            @include assert-equal(color($_palette, 'primary', '500'), $_primary);
+            @include assert-true(color($_legacy-palette, primary, 500));
+            @include assert-equal(color($_legacy-palette, primary, 500), $_primary);
+            @include assert-true(color($_legacy-palette, 'primary', '500'));
+            @include assert-equal(color($_legacy-palette, 'primary', '500'), $_primary);
             @include assert-true(contrast-color($_palette, primary, 500));
             @include assert-equal(contrast-color($_palette, primary, 500), var(--ig-primary-500-contrast));
             @include assert-true(contrast-color($_palette, 'primary', '500'));
@@ -354,6 +367,352 @@ $_palette: palette(
 
                 @include contains() {
                     color: rgb(250 250 250);
+                }
+            }
+        }
+
+        @include describe('fitted generator') {
+            $_numbered: ('50', '100', '200', '300', '400', '500', '600', '700', '800', '900');
+
+            @include it('keeps any two shades 500 apart at WCAG AA or better') {
+                @each $seed in (#09f, #df1b74, #faa419, #4eb862, #ffe9b0, #141225, #0f0, #a99bb0) {
+                    $p: palette(
+                        $primary: $seed,
+                        $secondary: $seed,
+                        $surface: #fff,
+                    );
+
+                    @for $i from 1 through 5 {
+                        $lo: color($p, primary, list.nth($_numbered, $i));
+                        $hi: color($p, primary, list.nth($_numbered, $i + 5));
+
+                        @include assert-true(contrast($lo, $hi) >= 4.5);
+                    }
+                }
+            }
+
+            @include it('keeps every shade visibly distinct, whatever the seed') {
+                // The original generator collapses here: a near-white seed made shades
+                // 50 through 300 all resolve to #fff.
+                @each $seed in (#ffe9b0, #141225, #0f0, #a99bb0, #8a8a8a) {
+                    $p: palette(
+                        $primary: $seed,
+                        $secondary: $seed,
+                        $surface: #fff,
+                    );
+                    $seen: ();
+
+                    @each $v in $_numbered {
+                        $c: color($p, primary, $v);
+
+                        @include assert-true(list.index($seen, $c) == null);
+
+                        $seen: list.append($seen, $c);
+                    }
+                }
+            }
+
+            @include it('generates a neutral ramp for a seed with no usable hue') {
+                $p: palette(
+                    $primary: #8a8a8a,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+
+                @each $v in $_numbered {
+                    $c: color($p, primary, $v);
+
+                    @include assert-equal(color.channel($c, 'saturation', $space: hsl), 0%);
+                }
+            }
+
+            @include it('emits concrete colors, not runtime expressions') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+
+                @each $v in $_numbered {
+                    @include assert-equal(meta.type-of(map.get($p, 'primary', $v)), 'color');
+                }
+            }
+
+            @include it('keeps the surface seed on base, which is also its default variant') {
+                @each $bg in (#fff, #fcfcfd, #1a1a24, #000) {
+                    $p: palette(
+                        $primary: #09f,
+                        $secondary: #09f,
+                        $surface: $bg,
+                    );
+
+                    @include assert-equal(color($p, surface, 'base'), $bg);
+                    // surface has no numeric shades, so a bare reference lands on base
+                    @include assert-equal(color($p, surface), $bg);
+                    // every other family still defaults to 500
+                    @include assert-equal(color($p, primary), color($p, primary, 500));
+                }
+            }
+
+            @include it('moves surface layers away from the background, or collapses them onto it') {
+                // sunken goes toward black and raised/overlay toward white, so a page at
+                // either extreme resolves the roles it has no room for onto itself —
+                // elevation is carried by shadow there, the way light themes really work.
+                $white: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                $black: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #000,
+                );
+                $mid: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                );
+
+                // white page: nothing lighter exists
+                @include assert-equal(color($white, surface, 'raised'), #fff);
+                @include assert-equal(color($white, surface, 'overlay'), #fff);
+                @include assert-true(contrast(color($white, surface, 'sunken'), #fff) > 1.04);
+
+                // black page: nothing darker exists
+                @include assert-equal(color($black, surface, 'sunken'), #000);
+                @include assert-true(contrast(color($black, surface, 'raised'), #000) > 1.04);
+                @include assert-true(contrast(color($black, surface, 'overlay'), #000) > 1.1);
+
+                // a page with room either side gets every role distinct, and overlay
+                // always sits further out than raised
+                @include assert-true(
+                    contrast(color($mid, surface, 'overlay'), #1a1a24) >
+                        contrast(color($mid, surface, 'raised'), #1a1a24)
+                );
+                @include assert-unequal(color($mid, surface, 'sunken'), color($mid, surface, 'base'));
+            }
+
+            @include it('keeps translucent containers translucent') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                $dark: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                );
+
+                @include assert-equal(color($p, surface, 'container'), rgba(#000, 0.03));
+                @include assert-equal(color($dark, surface, 'container'), rgba(#fff, 0.03));
+            }
+
+            @include it('carries a tinted background through its layers') {
+                // A cool dark and a warm dark are a deliberate choice, and the tint sits
+                // well below the threshold that rounds a near-gray seed to neutral.
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                );
+                $raised: color($p, surface, 'raised');
+
+                @include assert-true(
+                    color.channel($raised, 'blue', $space: rgb) > color.channel($raised, 'red', $space: rgb) + 5
+                );
+            }
+
+            @include it('accepts a scale as a preset name, a curve, or a full spec') {
+                $carbon: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': 'carbon',
+                    ),
+                );
+                $curve: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            0.53,
+                            0,
+                            0.825,
+                            0.785,
+                        ),
+                    ),
+                );
+                $spec: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: (
+                                1.1,
+                                12,
+                            ),
+                            curve: null,
+                        ),
+                    ),
+                );
+                $everything: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: 'tailwind',
+                );
+                $direct: shades('brand', #09f, $IColorShades, $scale: 'carbon');
+
+                // carbon reproduces IBM's published grayscale
+                @include assert-true(contrast(color($carbon, gray, 50), #f4f4f4) < 1.02);
+                @include assert-true(contrast(color($carbon, gray, 900), #161616) < 1.02);
+
+                // each form produces a different, valid scale
+                @include assert-unequal(color($carbon, gray, 300), color($curve, gray, 300));
+                @include assert-unequal(color($carbon, gray, 300), color($spec, gray, 300));
+
+                // a bare name applies to every family, not only the neutrals
+                @include assert-unequal(color($everything, primary, 300), color($carbon, primary, 300));
+                @include assert-equal(meta.type-of(map.get($direct, '300-raw')), 'color');
+            }
+
+            @include it('ships the documented scale presets') {
+                @each $name in ('even', 'material', 'tailwind', 'carbon') {
+                    @include assert-true(map.has-key($scales, $name));
+                }
+            }
+
+            @include it('follows the grayscale rhythm the component schemas expect') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                // The eased scale reproduces the original grayscale to within ~1 JND,
+                // so existing schemas keep their intended weight.
+                $expected: (
+                    '100': #f5f5f5,
+                    '400': #bdbdbd,
+                    '700': #616161,
+                    '900': #212121,
+                );
+
+                @each $v, $want in $expected {
+                    @include assert-true(contrast(color($p, gray, $v), $want) < 1.06);
+                }
+            }
+
+            @include it('flips the grayscale for a dark surface but not the color ramps') {
+                $light: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $gray: #333,
+                );
+                $dark: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #1a1a24,
+                    $gray: #333,
+                );
+
+                // gray-50 always sits nearest the background
+                @include assert-true(contrast(color($light, gray, 50), #fff) < 1.2);
+                @include assert-true(contrast(color($dark, gray, 50), #1a1a24) < 1.2);
+
+                // the color ramp does not move between themes
+                @each $v in $_numbered {
+                    @include assert-equal(color($light, primary, $v), color($dark, primary, $v));
+                }
+            }
+
+            @include it('reports which shade the seed lands nearest') {
+                $light: palette(
+                    $primary: #ffe9b0,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                $dark: palette(
+                    $primary: #141225,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+
+                @include assert-equal(seed-lands-on($light, 'primary'), '50');
+                @include assert-equal(seed-lands-on($dark, 'primary'), '900');
+            }
+
+            @include it('falls back to the original multipliers on request') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #97c,
+                    $surface: #fff,
+                    $generator: 'legacy',
+                );
+
+                @include assert-equal(color($p, primary, 500), #09f);
+                @include assert-equal(
+                    map.get($p, 'primary', '600'),
+                    #{hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89))}
+                );
+            }
+        }
+
+        @include describe('surface roles across generators') {
+            $_light-fitted: palette($primary: #09f, $secondary: #09f, $surface: #f8f8fa);
+            $_light-legacy: palette(
+                $primary: #09f,
+                $secondary: #09f,
+                $surface: #f8f8fa,
+                $generator: 'legacy',
+            );
+
+            @include it('gives a legacy surface the same role vocabulary a fitted one has') {
+                // Roles are contrast steps off the background rather than points on a
+                // multiplier ramp, so they mean the same thing under either generator.
+                // That is what lets a component schema say ('surface', 'base') outright.
+                @each $role in $ISurfaceRoles {
+                    @include assert-true(map.has-key($_light-fitted, 'surface', $role));
+                    @include assert-true(map.has-key($_light-legacy, 'surface', $role));
+                    @include assert-true(map.has-key($_light-legacy, 'surface', '#{$role}-raw'));
+                }
+            }
+
+            @include it('keeps the numeric shades a legacy surface has always carried') {
+                @each $shade in $IColorShades {
+                    @include assert-true(map.has-key($_light-legacy, 'surface', $shade));
+                }
+
+                // ...and a fitted surface deliberately has none of them
+                @include assert-false(map.has-key($_light-fitted, 'surface', '500'));
+            }
+
+            @include it('resolves a bare surface reference under either generator') {
+                @include assert-equal(color($_light-fitted, 'surface'), color($_light-fitted, 'surface', 'base'));
+                @include assert-equal(color($_light-legacy, 'surface'), color($_light-legacy, 'surface', 'base'));
+                @include assert-equal(color($_light-legacy, 'surface', 'base'), #f8f8fa);
+            }
+
+            @include it('derives $ISurfaceRoles from the $surface-roles config') {
+                // The two used to be maintained separately, so a role added to the public
+                // config was generated and then silently filtered back out.
+                @each $role, $spec in $surface-roles {
+                    @include assert-true(list.index($ISurfaceRoles, $role) != null);
+                }
+
+                @include assert-equal(list.length($ISurfaceRoles), list.length(map.keys($surface-roles)) + 3);
+            }
+
+            @include it('covers both surface vocabularies in $ISurfaceShades') {
+                // The Tailwind bridge is static, so it has to name every key either
+                // generator can emit.
+                @each $key in list.join($ISurfaceRoles, $IColorShades) {
+                    @include assert-true(list.index($ISurfaceShades, $key) != null);
                 }
             }
         }

@@ -11,10 +11,10 @@
 /// Generates a light base tile manager schema.
 /// @type Map
 /// @prop {Map} background [color: ('gray', 100)] - The background color of the tile manager component.
-/// @prop {Map} tile-background [color: ('surface', 500)] - The background color of the tile component inside the tile manager.
+/// @prop {Map} tile-background [color: ('surface', 'base')] - The background color of the tile component inside the tile manager.
 /// @prop {Map} title-color [color: ('gray', 900)] - The title color of the tile component.
-/// @prop {Map} header-background [color: ('surface', 500)] - The background color of the tile header component.
-/// @prop {Map} content-background [color: ('surface', 500)] - The background color of the tile component content.
+/// @prop {Map} header-background [color: ('surface', 'base')] - The background color of the tile header component.
+/// @prop {Map} content-background [color: ('surface', 'base')] - The background color of the tile component content.
 /// @prop {Map} content-color [color: ('gray', 700)] - The text color of the tile component content.
 /// @prop {Color} border-color [transparent] - The border color of the tile component.
 /// @prop {Map} hover-border-color [color: ('gray', 400)] - The border color of the tile component on hover.
@@ -38,7 +38,7 @@ $light-tile-manager: extend(
         tile-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
@@ -52,14 +52,14 @@ $light-tile-manager: extend(
         header-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
         content-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
@@ -207,7 +207,7 @@ $bootstrap-tile-manager: extend(
 
 /// Generates an indigo tile manager schema.
 /// @type Map
-/// @prop {Map} background [color: ('surface', 500)] - The background color of the tile manager component.
+/// @prop {Map} background [color: ('surface', 'base')] - The background color of the tile manager component.
 /// @prop {Map} tile-background [contrast-color: ('gray', 900)] - The background color of the tile component inside the tile manager.
 /// @prop {Map} title-color [color: ('gray', 800)] - The title color of the tile component.
 /// @prop {Map} header-background [contrast-color: ('gray', 900)] - The background color of the tile header component.
@@ -224,7 +224,7 @@ $indigo-tile-manager: extend(
         background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 

@@ -79,7 +79,7 @@
 /// @prop {Map} filtering-header-text-color [color: ('gray', 800)] - The text color of the filtered column header.
 /// @prop {Map} filtering-row-background [color: 'gray', 50)] - The background color of the filtering row.
 /// @prop {Map} filtering-row-text-color [color: ('gray', 800)] - The text color of the filtering row.
-/// @prop {Map} filtering-dialog-background [color: ('surface', 500)] - The background color of the advanced filtering dialog.
+/// @prop {Map} filtering-dialog-background [color: ('surface', 'base')] - The background color of the advanced filtering dialog.
 /// @prop {Map} excel-filtering-header-foreground [color: ('gray', 700)] - The text color of the header in the excel style filtering.
 /// @prop {Map} excel-filtering-subheader-foreground [color: ('gray', 700)] - The text color of the sorting and moving headers in the excel style filtering.
 /// @prop {Map} excel-filtering-actions-foreground [color: ('gray', 700)] - The text color of the excel style filtering options.
@@ -605,7 +605,7 @@ $light-grid: extend(
         filtering-dialog-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
@@ -1243,7 +1243,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} header-selected-text-color [color: 'gray', 900] - The table header text color when selected (ex. column selection).
 /// @prop {Map} header-border-color [color: ('gray', 400)] - The color used for header borders.
 /// @prop {Map} action-border-color [color: ('gray', 400)] - The color used for action borders.
-/// @prop {Map} filtering-row-background [color: ('surface', 500)] - The background color of the filtering row.
+/// @prop {Map} filtering-row-background [color: ('surface', 'base')] - The background color of the filtering row.
 /// @prop {Map} filtering-dialog-background [contrast-color: ('gray', 900)] - The background color of the advanced filtering dialog.
 /// @prop {Map} edited-row-indicator [color: ('primary', 400)] - The indicator's color of edited row.
 /// @prop {Map} cell-selected-background [color: ('primary', 50)] - The selected cell background color.
@@ -1267,7 +1267,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} edit-mode-color [color: ('primary', 400)] - The text color in edit mode.
 /// @prop {Map} drop-area-text-color [color: ('gray', 600)] - The drop area text color.
 /// @prop {Map} drop-area-icon-color [color: ('gray', 600)] - The drop area icon color.
-/// @prop {Map} group-row-background [color: ('surface', 500)] - The grid group row background color.
+/// @prop {Map} group-row-background [color: ('surface', 'base')] - The grid group row background color.
 /// @prop {Map} group-row-selected-background [color: ('gray', 100)] - The drop area background on drop color.
 /// @prop {Map} group-count-background [color: ('primary', 400)] - The grid group row cont badge background color.
 /// @prop {Map} group-count-text-color [contrast-color: ('primary', 900)] - The grid group row cont badge text color.
@@ -1277,7 +1277,7 @@ $bootstrap-grid: extend(
 /// @prop {Map} cell-active-border-color [color: ('primary', 400)] - The active(focused) cell border color.
 /// @prop {Map} cell-editing-background [color: ('gray' 200)] - The background for the cell in editing mode.
 /// @prop {Map} row-selected-hover-text-color [color: ('gray', 900)] - The selected row hover text color.
-/// @prop {Map} grouparea-background [color: ('surface', 500)] - The grid group area background color.
+/// @prop {Map} grouparea-background [color: ('surface', 'base')] - The grid group area background color.
 /// @prop {Map} grouparea-color [color: ('gray', 500)] - The grid group area color.
 /// @prop {Map} drop-area-background [color: ('gray', 200)] - The drop area background color.
 /// @prop {Map} row-hover-text-color [color: ('gray', 900)] - The hover row text color.
@@ -1371,7 +1371,7 @@ $indigo-grid: extend(
         filtering-row-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
@@ -1553,7 +1553,7 @@ $indigo-grid: extend(
         group-row-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
@@ -1619,7 +1619,7 @@ $indigo-grid: extend(
         grouparea-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
