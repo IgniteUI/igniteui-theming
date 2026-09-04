@@ -1,0 +1,186 @@
+@use 'sass:map';
+@use '../../config';
+@use '../../functions' as *;
+@use '../../schemas/' as *;
+@use '../../../utils/map' as *;
+@use '../../../color/functions' as *;
+@use '../../../elevations/' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+/// @author <a href="https://github.com/adrianptrv" target="_blank">Adrian Petrov</a>
+////
+/// Breadcrumb Theme
+///
+/// PRIMARY TOKENS:
+/// - `$text-color` — The text color of the breadcrumb.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $text-color [null] - The text color of the breadcrumb.
+/// @param {Color} $icon-color [null] - The color of the breadcrumb icon. Auto-derived from text-color.
+/// @param {Color} $current-text-color [null] - The text color of the currently selected breadcrumb item.
+/// @param {Color} $current-icon-color [null] - The icon color of the currently selected breadcrumb item.
+/// @param {Color} $pressed-text-color [null] - The text color of the breadcrumb when pressed. Auto-derived from text-color.
+/// @param {Color} $pressed-icon-color [null] - The color of the breadcrumb icon when pressed. Auto-derived from pressed-text-color.
+/// @param {Color} $hover-text-color [null] - The text color of the breadcrumb when hovered. Auto-derived from text-color.
+/// @param {Color} $hover-icon-color [null] - The color of the breadcrumb icon when hovered. Auto-derived from hover-text-color.
+/// @param {Color} $focus-text-color [null] - The text color of the breadcrumb when focused. Auto-derived from text-color.
+/// @param {Color} $focus-icon-color [null] - The color of the breadcrumb icon when focused. Auto-derived from focus-text-color.
+/// @param {Color} $focus-underline-color [null]- The text underline color of the breadcrumb on focus. Auto-derived from focus-text-color. Only used in the Material theme.
+/// @param {Color} $focus-border-color [null] - The focus border color.
+/// @param {Color} $focus-hover-text-color [null] - The text color of the breadcrumb when focused and hovered. Auto-derived from hover-text-color.
+/// @param {Color} $focus-hover-icon-color [null] - The color of the breadcrumb icon when focused and hovered. Auto-derived from focus-hover-text-color.
+/// @param {Color} $focus-hover-underline-color [null]- The text underline color of the breadcrumb on focus and hover. Auto-derived from focus-hover-text-color. Only used in the Material theme.
+/// @param {Color} $focus-pressed-text-color [null] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
+/// @param {Color} $focus-pressed-icon-color [null] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
+/// @param {Color} $focus-pressed-underline-color [null]- The text underline color of the breadcrumb on focus and pressed. Auto-derived from focus-pressed-text-color. Only used in the Material theme.
+/// @param {Color} $disabled-text-color [null] - The text color of the breadcrumb when disabled.
+/// @param {Color} $disabled-icon-color [null] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
+/// @param {Color} $separator-color [null] - The color of the breadcrumb separator.
+///
+/// @requires $light-material-schema
+///
+/// @example scss - Change the text and icon color of the breadcrumb:
+///   $my-breadcrumb-theme: breadcrumb-theme(
+///       $text-color: magenta,
+///       $icon-color: cyan
+///   );
+///   // Pass the theme to the css-vars mixin
+///   @include tokens($my-breadcrumb-theme);
+@function breadcrumb-theme(
+    $schema: $light-material-schema,
+
+    $text-color: null,
+    $icon-color: null,
+    $current-text-color: null,
+    $current-icon-color: null,
+    $hover-text-color: null,
+    $hover-icon-color: null,
+    $pressed-text-color: null,
+    $pressed-icon-color: null,
+    $focus-text-color: null,
+    $focus-icon-color: null,
+    $focus-underline-color: null,
+    $focus-border-color: null,
+    $focus-hover-text-color: null,
+    $focus-hover-icon-color: null,
+    $focus-hover-underline-color: null,
+    $focus-pressed-text-color: null,
+    $focus-pressed-icon-color: null,
+    $focus-pressed-underline-color: null,
+    $disabled-text-color: null,
+    $disabled-icon-color: null,
+    $separator-color: null
+) {
+    $selector: #{config.element-prefix() + '-' + 'breadcrumb'};
+    $breadcrumb-schema: ();
+
+    @if map.has-key($schema, 'breadcrumb') {
+        $breadcrumb-schema: map.get($schema, 'breadcrumb');
+    } @else {
+        $breadcrumb-schema: $schema;
+    }
+
+    $theme: digest-schema($breadcrumb-schema);
+    $variant: map.get($theme, '_meta', 'theme');
+
+    @if not($icon-color) and $text-color {
+        $icon-color: var(--text-color);
+    }
+
+    @if not($current-icon-color) and $current-text-color {
+        $current-icon-color: var(--current-text-color);
+    }
+
+    @if not($hover-text-color) and $text-color {
+        $hover-text-color: dynamic-shade(var(--text-color));
+    }
+
+    @if not($hover-icon-color) and $hover-text-color {
+        $hover-icon-color: var(--hover-text-color);
+    }
+
+    @if not($pressed-text-color) and $text-color {
+        $pressed-text-color: dynamic-shade(var(--text-color));
+    }
+
+    @if not($pressed-icon-color) and $pressed-text-color {
+        $pressed-icon-color: var(--pressed-text-color);
+    }
+
+    @if not($focus-text-color) and $text-color {
+        $focus-text-color: dynamic-shade(var(--text-color));
+    }
+
+    @if not($focus-icon-color) and $focus-text-color {
+        $focus-icon-color: var(--focus-text-color);
+    }
+
+    @if $variant == 'material' {
+        @if not($focus-underline-color) and $focus-text-color {
+            $focus-underline-color: var(--focus-text-color);
+        }
+    }
+
+    @if not($focus-hover-text-color) and $hover-text-color {
+        $focus-hover-text-color: dynamic-shade(var(--hover-text-color));
+    }
+
+    @if not($focus-hover-icon-color) and $focus-hover-text-color {
+        $focus-hover-icon-color: var(--focus-hover-text-color);
+    }
+
+    @if $variant == 'material' {
+        @if not($focus-hover-underline-color) and $focus-hover-text-color {
+            $focus-hover-underline-color: var(--focus-hover-text-color);
+        }
+    }
+
+    @if not($focus-pressed-text-color) and $pressed-text-color {
+        $focus-pressed-text-color: dynamic-shade(var(--pressed-text-color));
+    }
+
+    @if not($focus-pressed-icon-color) and $focus-pressed-text-color {
+        $focus-pressed-icon-color: var(--focus-pressed-text-color);
+    }
+
+    @if $variant == 'material' {
+        @if not($focus-pressed-underline-color) and $focus-pressed-text-color {
+            $focus-pressed-underline-color: var(--focus-pressed-text-color);
+        }
+    }
+
+    @if not($disabled-icon-color) and $disabled-text-color {
+        $disabled-icon-color: var(--disabled-text-color);
+    }
+
+    @return extend(
+        $theme,
+        (
+            selector: $selector,
+            text-color: $text-color,
+            icon-color: $icon-color,
+            current-text-color: $current-text-color,
+            current-icon-color: $current-icon-color,
+            hover-text-color: $hover-text-color,
+            hover-icon-color: $hover-icon-color,
+            pressed-text-color: $pressed-text-color,
+            pressed-icon-color: $pressed-icon-color,
+            focus-text-color: $focus-text-color,
+            focus-icon-color: $focus-icon-color,
+            focus-underline-color: $focus-underline-color,
+            focus-border-color: $focus-border-color,
+            focus-hover-text-color: $focus-hover-text-color,
+            focus-hover-icon-color: $focus-hover-icon-color,
+            focus-hover-underline-color: $focus-hover-underline-color,
+            focus-pressed-text-color: $focus-pressed-text-color,
+            focus-pressed-icon-color: $focus-pressed-icon-color,
+            focus-pressed-underline-color: $focus-pressed-underline-color,
+            disabled-text-color: $disabled-text-color,
+            disabled-icon-color: $disabled-icon-color,
+            separator-color: $separator-color,
+        )
+    );
+}
