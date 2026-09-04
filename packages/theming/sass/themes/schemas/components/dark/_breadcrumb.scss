@@ -1,0 +1,446 @@
+@use '../../../../utils/map' as *;
+@use '../light/breadcrumb' as *;
+
+////
+/// @package theming
+/// @group schemas
+/// @access public
+////
+
+/// Generates a base dark breadcrumb schema.
+/// @type Map
+/// @prop {Map} pressed-text-color [color: ('primary', 200)] - The text color of the breadcrumb when pressed. Auto-derived from text-color.
+/// @prop {Map} pressed-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-text-color [color: ('primary', 200)] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
+$dark-base-breadcrumb: (
+    pressed-text-color: (
+        color: (
+            'primary',
+            200,
+        ),
+    ),
+    pressed-icon-color: (
+        color: (
+            'primary',
+            200,
+        ),
+    ),
+    focus-pressed-text-color: (
+        color: (
+            'primary',
+            200,
+        ),
+    ),
+    focus-pressed-icon-color: (
+        color: (
+            'primary',
+            200,
+        ),
+    ),
+    _meta: (
+        name: 'breadcrumb',
+        variant: 'dark',
+    ),
+);
+
+/// Generates a dark material breadcrumb schema.
+/// @type Map
+/// @prop {Map} text-color [color: ('info', 400)] - The text color of the breadcrumb.
+/// @prop {Map} icon-color [color: ('info', 400)] - The color of the breadcrumb icon. Auto-derived from text-color.
+/// @prop {Map} hover-text-color [color: ('info', 300)] - The text color of the breadcrumb when hovered. Auto-derived from text-color.
+/// @prop {Map} hover-icon-color [color: ('info', 300)] - The color of the breadcrumb icon when hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-text-color [color: ('info', 200)] - The text color of the breadcrumb when focused. Auto-derived from text-color.
+/// @prop {Map} focus-icon-color [color: ('info', 200)] - The color of the breadcrumb icon when focused. Auto-derived from focus-text-color.
+/// @prop {Map} focus-underline-color [color: ('info', 200)] - The text underline color of the breadcrumb on focus. Auto-derived from focus-text-color. Only used in the Material theme.
+/// @prop {Map} focus-hover-text-color [color: ('info', 100)] - The text color of the breadcrumb when focused and hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-hover-icon-color [color: ('info', 100)] - The color of the breadcrumb icon when focused and hovered. Auto-derived from focus-hover-text-color.
+/// @prop {Map} focus-hover-underline-color [color: ('info', 100)] - The text underline color of the breadcrumb on focus and hover. Auto-derived from focus-hover-text-color. Only used in the Material theme.
+/// @prop {Map} pressed-text-color [color: ('info', 200)] - The text color of the breadcrumb when pressed. Auto-derived from text-color.
+/// @prop {Map} pressed-icon-color [color: ('info', 200)] - The color of the breadcrumb icon when pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-text-color [color: ('info', 50)] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-icon-color [color: ('info', 50)] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
+/// @prop {Map} focus-pressed-underline-color [color: ('info', 50)] - The text underline color of the breadcrumb on focus and pressed. Auto-derived from focus-pressed-text-color. Only used in the Material theme.
+/// @requires $material-breadcrumb
+/// @requires $dark-base-breadcrumb
+$dark-material-breadcrumb: extend(
+    $material-breadcrumb,
+    $dark-base-breadcrumb,
+    (
+        text-color: (
+            color: (
+                'info',
+                400,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'info',
+                400,
+            ),
+        ),
+        hover-text-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        hover-icon-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        focus-text-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        focus-icon-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        focus-underline-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        focus-hover-text-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        focus-hover-icon-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        focus-hover-underline-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        pressed-text-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        pressed-icon-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        focus-pressed-text-color: (
+            color: (
+                'info',
+                50,
+            ),
+        ),
+        focus-pressed-icon-color: (
+            color: (
+                'info',
+                50,
+            ),
+        ),
+        focus-pressed-underline-color: (
+            color: (
+                'info',
+                50,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark fluent breadcrumb schema.
+/// @type Map
+/// @prop {Map} text-color [color: ('info', 300)] - The text color of the breadcrumb.
+/// @prop {Map} icon-color [color: ('info', 300)] - The color of the breadcrumb icon. Auto-derived from text-color.
+/// @prop {Map} hover-text-color [color: ('info', 200)] - The text color of the breadcrumb when hovered. Auto-derived from text-color.
+/// @prop {Map} hover-icon-color [color: ('info', 200)] - The color of the breadcrumb icon when hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-text-color [color: ('info', 300)] - The text color of the breadcrumb when focused. Auto-derived from text-color.
+/// @prop {Map} focus-icon-color [color: ('info', 300)] - The color of the breadcrumb icon when focused. Auto-derived from focus-text-color.
+/// @prop {Map} focus-border-color [color: ('gray', 400)] - The focus border color. Auto-derived from text-color.
+/// @prop {Map} focus-hover-text-color [color: ('info', 200)] - The text color of the breadcrumb when focused and hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-hover-icon-color [color: ('info', 200)] - The color of the breadcrumb icon when focused and hovered. Auto-derived from focus-hover-text-color.
+/// @prop {Map} pressed-text-color [color: ('info', 100)] - The text color of the breadcrumb when pressed. Auto-derived from text-color.
+/// @prop {Map} pressed-icon-color [color: ('info', 100)] - The color of the breadcrumb icon when pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-text-color [color: ('info', 100)] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-icon-color [color: ('info', 100)] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
+/// @prop {Map} disabled-text-color [color: ('gray', 200)] - The text color of the breadcrumb when disabled.
+/// @prop {Map} disabled-icon-color [color: ('gray', 200)] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
+/// @requires $fluent-breadcrumb
+/// @requires $dark-base-breadcrumb
+$dark-fluent-breadcrumb: extend(
+    $fluent-breadcrumb,
+    $dark-base-breadcrumb,
+    (
+        text-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        hover-text-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        hover-icon-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        focus-text-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        focus-icon-color: (
+            color: (
+                'info',
+                300,
+            ),
+        ),
+        focus-border-color: (
+            color: (
+                'gray',
+                400,
+            ),
+        ),
+        focus-hover-text-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        focus-hover-icon-color: (
+            color: (
+                'info',
+                200,
+            ),
+        ),
+        pressed-text-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        pressed-icon-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        focus-pressed-text-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        focus-pressed-icon-color: (
+            color: (
+                'info',
+                100,
+            ),
+        ),
+        disabled-text-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        disabled-icon-color: (
+            color: (
+                'gray',
+                200,
+            ),
+        ),
+        _meta: (
+            theme: 'fluent',
+        ),
+    )
+);
+
+/// Generates a dark bootstrap breadcrumb schema.
+/// @type Map
+/// @prop {Map} text-color [color: ('primary', 400)] - The text color of the breadcrumb.
+/// @prop {Map} icon-color [color: ('primary', 400)] - The color of the breadcrumb icon. Auto-derived from text-color.
+/// @prop {Map} hover-text-color [color: ('primary', 300)] - The text color of the breadcrumb when hovered. Auto-derived from text-color.
+/// @prop {Map} hover-icon-color [color: ('primary', 300)] - The color of the breadcrumb icon when hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-text-color [color: ('primary', 400)] - The text color of the breadcrumb when focused. Auto-derived from text-color.
+/// @prop {Map} focus-icon-color [color: ('primary', 400)] - The color of the breadcrumb icon when focused. Auto-derived from focus-text-color.
+/// @prop {Map} focus-hover-text-color [color: ('primary', 300)] - The text color of the breadcrumb when focused and hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-hover-icon-color [color: ('primary', 300)] - The color of the breadcrumb icon when focused and hovered. Auto-derived from focus-hover-text-color.
+/// @prop {Map} disabled-text-color [color: ('primary', 200, 0.50)] - The text color of the breadcrumb when disabled.
+/// @prop {Map} disabled-icon-color [color: ('primary', 200, 0.50)] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
+/// @requires $bootstrap-breadcrumb
+/// @requires $dark-base-breadcrumb
+$dark-bootstrap-breadcrumb: extend(
+    $bootstrap-breadcrumb,
+    $dark-base-breadcrumb,
+    (
+        text-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        hover-text-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        hover-icon-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        focus-text-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        focus-icon-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
+        focus-hover-text-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        focus-hover-icon-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        disabled-text-color: (
+            color: (
+                'primary',
+                200,
+                0.5,
+            ),
+        ),
+        disabled-icon-color: (
+            color: (
+                'primary',
+                200,
+                0.5,
+            ),
+        ),
+    )
+);
+
+/// Generates a dark indigo breadcrumb schema.
+/// @type Map
+/// @prop {Map} text-color [color: ('primary', 300)] - The text color of the breadcrumb.
+/// @prop {Map} icon-color [color: ('primary', 300)] - The color of the breadcrumb icon. Auto-derived from text-color.
+/// @prop {Map} hover-text-color [color: ('primary', 200)] - The text color of the breadcrumb when hovered. Auto-derived from text-color.
+/// @prop {Map} hover-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-text-color [color: ('primary', 300)] - The text color of the breadcrumb when focused. Auto-derived from text-color.
+/// @prop {Map} focus-icon-color [color: ('primary', 300)] - The color of the breadcrumb icon when focused. Auto-derived from focus-text-color.
+/// @prop {Map} focus-hover-text-color [color: ('primary', 200)] - The text color of the breadcrumb when focused and hovered. Auto-derived from hover-text-color.
+/// @prop {Map} focus-hover-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when focused and hovered. Auto-derived from focus-hover-text-color.
+/// @prop {Map} disabled-text-color [contrast-color: ('primary', 900, 0.20)] - The text color of the breadcrumb when disabled.
+/// @prop {Map} disabled-icon-color [contrast-color: ('primary', 900, 0.20)] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
+/// @requires $indigo-breadcrumb
+/// @requires $dark-base-breadcrumb
+$dark-indigo-breadcrumb: extend(
+    $indigo-breadcrumb,
+    $dark-base-breadcrumb,
+    (
+        text-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        icon-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        hover-text-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        hover-icon-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        focus-text-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        focus-icon-color: (
+            color: (
+                'primary',
+                300,
+            ),
+        ),
+        focus-hover-text-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        focus-hover-icon-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
+        disabled-text-color: (
+            contrast-color: (
+                'primary',
+                900,
+                0.2,
+            ),
+        ),
+        disabled-icon-color: (
+            contrast-color: (
+                'primary',
+                900,
+                0.2,
+            ),
+        ),
+    )
+);
