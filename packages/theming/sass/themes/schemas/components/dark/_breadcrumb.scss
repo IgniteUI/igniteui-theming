@@ -9,10 +9,10 @@
 
 /// Generates a base dark breadcrumb schema.
 /// @type Map
-/// @param {Map} $pressed-text-color [color: ('primary', 200)] - The text color of the breadcrumb when pressed. Auto-derived from text-color.
-/// @param {Map} $pressed-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when pressed. Auto-derived from pressed-text-color.
-/// @param {Map} $focus-pressed-text-color [color: ('primary', 200)] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
-/// @param {Map} $focus-pressed-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
+/// @prop {Map} pressed-text-color [color: ('primary', 200)] - The text color of the breadcrumb when pressed. Auto-derived from text-color.
+/// @prop {Map} pressed-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-text-color [color: ('primary', 200)] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
+/// @prop {Map} focus-pressed-icon-color [color: ('primary', 200)] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
 $dark-base-breadcrumb: (
     pressed-text-color: (
         color: (
