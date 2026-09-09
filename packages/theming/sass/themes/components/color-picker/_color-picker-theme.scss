@@ -1,0 +1,210 @@
+@use 'sass:map';
+@use '../../config';
+@use '../../functions' as *;
+@use '../../schemas/' as *;
+@use '../../../utils/map' as *;
+@use '../../../color/functions' as *;
+@use '../../../elevations/' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
+/// Color Picker Theme
+///
+/// PRIMARY TOKENS:
+/// - `$anchor-background` — The background color of the color picker trigger.
+/// - `$picker-background` — The background color of the color picker dropdown.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $label-color [null] - The color of the color picker label.
+/// @param {Color} $label-color-disabled [null] - The color of the color picker label in disabled state.
+/// @param {Color} $label-color-invalid [null] - The color of the color picker label in invalid state.
+/// @param {Color} $anchor-background [null] - The background color of the color picker trigger.
+/// @param {Color} $anchor-background-hover [null] - The background color of the color picker trigger on hover.
+/// @param {Color} $anchor-background-focus-visible [null] - The background color of the color picker trigger on focus-visible.
+/// @param {Color} $anchor-background-focus-visible-hover [null] - The background color of the color picker trigger in focus-visible + hover state.
+/// @param {Color} $anchor-background-active [null] - The background color of the color picker trigger in active state.
+/// @param {Color} $anchor-background-active-focus-visible [null] - The background color of the color picker trigger in focus-visible + active state.
+/// @param {Color} $anchor-background-disabled [null] - The background color of the color picker trigger in disabled state.
+/// @param {Color} $anchor-border-color [null] - The border color of the color picker trigger.
+/// @param {Color} $anchor-border-color-disabled [null] - The border color of the color picker trigger in disabled state.
+/// @param {Color} $anchor-outline-color [null] - The outline color of the color picker trigger in focus-visible state.
+/// @param {Number} $anchor-border-radius [null] - The border radius of the color picker trigger.
+/// @param {Color} $swatch-preview-border-color [null] - The border color of the color preview inside the trigger.
+/// @param {Color} $picker-canvas-border-color [null] - The border color of the color picker canvas.
+/// @param {Color} $picker-background [null] - The background color of the color picker dropdown.
+/// @param {Color} $picker-border-color [null] - The border color of the color picker dropdown.
+/// @param {Number} $picker-border-radius [null] - The border radius of the color picker dropdown.
+/// @param {List} $picker-shadow [null] - The shadow used for the color picker dropdown.
+/// @param {Color} $slider-track-border-color [null] - The border color of the hue and alpha slider tracks.
+/// @param {Number} $slider-track-border-radius [null] - The border radius of the hue and alpha slider tracks.
+/// @param {Color} $slider-thumb-border-color [null] - The border color of the hue and alpha slider thumbs.
+/// @param {Color} $swatch-border-color [null] - The border color of the predefined color swatches.
+/// @param {Color} $swatch-separator-color [null] - The color of the separator above the swatches.
+/// @param {Number} $swatch-border-radius [null] - The border radius of the predefined color swatches.
+/// @param {Number} $swatch-size [null] - The size of the predefined color swatches.
+/// @param {Color} $transparency-grid-odd [null] - The odd color of the transparency grid.
+/// @param {Color} $transparency-grid-even [null] - The even color of the transparency grid.
+/// @param {Color} $invalid-color [null] - The color used for invalid states.
+/// @param {Number} $marker-size [null] - The size of the color picker canvas marker.
+/// @param {List} $marker-shadow [null] - The shadow used for the color picker canvas marker.
+/// @param {Color} $marker-color [null] - The color of the color picker canvas marker.
+/// @requires $light-material-schema
+///
+/// @example scss - Change the anchor and picker background colors
+///   $my-color-picker-theme: color-picker-theme($anchor-background: magenta, $picker-background: cyan);
+///   // Pass the theme to the css-vars() mixin
+///   @include css-vars($my-color-picker-theme);
+@function color-picker-theme(
+    $schema: $light-material-schema,
+
+    $label-color: null,
+    $label-color-disabled: null,
+    $label-color-invalid: null,
+
+    $anchor-background: null,
+    $anchor-background-hover: null,
+    $anchor-background-focus-visible: null,
+    $anchor-background-focus-visible-hover: null,
+    $anchor-background-active: null,
+    $anchor-background-active-focus-visible: null,
+    $anchor-background-disabled: null,
+    $anchor-border-color: null,
+    $anchor-border-color-disabled: null,
+    $anchor-outline-color: null,
+    $anchor-border-radius: null,
+
+    $swatch-preview-border-color: null,
+
+    $picker-canvas-border-color: null,
+    $picker-background: null,
+    $picker-border-color: null,
+    $picker-border-radius: null,
+    $picker-shadow: null,
+
+    $slider-track-border-color: null,
+    $slider-track-border-radius: null,
+    $slider-thumb-border-color: null,
+
+    $swatch-border-color: null,
+    $swatch-separator-color: null,
+    $swatch-border-radius: null,
+    $swatch-size: null,
+
+    $transparency-grid-odd: null,
+    $transparency-grid-even: null,
+
+    $invalid-color: null,
+
+    $marker-size: null,
+    $marker-shadow: null,
+    $marker-color: null
+) {
+    $selector: #{config.element-prefix() + '-' + 'color-picker'};
+    $color-picker-schema: ();
+
+    @if map.has-key($schema, 'color-picker') {
+        $color-picker-schema: map.get($schema, 'color-picker');
+    } @else {
+        $color-picker-schema: $schema;
+    }
+
+    $theme: digest-schema($color-picker-schema);
+
+    @if not($anchor-background-hover) and $anchor-background {
+        $anchor-background-hover: hsl(from (var(--anchor-background) h s l / 0.8));
+    }
+
+    @if not($anchor-background-focus-visible) and $anchor-background {
+        $anchor-background-focus-visible: hsl(from (var(--anchor-background) h s l / 0.16));
+    }
+
+    @if not($anchor-background-focus-visible-hover) and $anchor-background {
+        $anchor-background-focus-visible-hover: hsl(from (var(--anchor-background) h s l / 0.24));
+    }
+
+    @if not($anchor-background-active) and $anchor-background {
+        $anchor-background-active: hsl(from dynamic-shade(var(--anchor-background)) h s l / 0.16);
+    }
+
+    @if not($anchor-background-active-focus-visible) and $anchor-background-active {
+        $anchor-background-active-focus-visible: hsl(from dynamic-shade(var(--anchor-background)) h s l / 0.32);
+    }
+
+    @if not($anchor-border-color) and $anchor-background {
+        $anchor-border-color: dynamic-shade(var(--anchor-background), $offset: 20);
+    }
+
+    @if not($picker-border-color) and $picker-background {
+        $picker-border-color: dynamic-shade(var(--picker-background), $offset: 20);
+    }
+
+    @if not($picker-canvas-border-color) and $picker-border-color {
+        $picker-canvas-border-color: var(--picker-border-color);
+    }
+
+    @if not($slider-track-border-color) and $picker-border-color {
+        $slider-track-border-color: var(--picker-border-color);
+    }
+
+    @if not($swatch-border-color) and $picker-border-color {
+        $swatch-border-color: var(--picker-border-color);
+    }
+
+    @if not($swatch-separator-color) and $swatch-border-color {
+        $swatch-separator-color: var(--swatch-border-color);
+    }
+
+    @if not($picker-shadow) {
+        $picker-elevation: map.get($color-picker-schema, 'picker-elevation');
+        $picker-shadow: elevation($picker-elevation);
+    }
+
+    @if not($marker-shadow) {
+        $marker-elevation: map.get($color-picker-schema, 'marker-elevation');
+        $marker-shadow: elevation($marker-elevation);
+    }
+
+    @return extend(
+        $theme,
+        (
+            selector: $selector,
+            label-color: $label-color,
+            label-color-disabled: $label-color-disabled,
+            label-color-invalid: $label-color-invalid,
+            anchor-background: $anchor-background,
+            anchor-background-hover: $anchor-background-hover,
+            anchor-background-focus-visible: $anchor-background-focus-visible,
+            anchor-background-focus-visible-hover: $anchor-background-focus-visible-hover,
+            anchor-background-active: $anchor-background-active,
+            anchor-background-active-focus-visible: $anchor-background-active-focus-visible,
+            anchor-background-disabled: $anchor-background-disabled,
+            anchor-border-color: $anchor-border-color,
+            anchor-border-color-disabled: $anchor-border-color-disabled,
+            anchor-outline-color: $anchor-outline-color,
+            anchor-border-radius: $anchor-border-radius,
+            swatch-preview-border-color: $swatch-preview-border-color,
+            picker-canvas-border-color: $picker-canvas-border-color,
+            picker-background: $picker-background,
+            picker-border-color: $picker-border-color,
+            picker-border-radius: $picker-border-radius,
+            picker-elevation: $picker-shadow,
+            slider-track-border-color: $slider-track-border-color,
+            slider-track-border-radius: $slider-track-border-radius,
+            slider-thumb-border-color: $slider-thumb-border-color,
+            swatch-border-color: $swatch-border-color,
+            swatch-separator-color: $swatch-separator-color,
+            swatch-border-radius: $swatch-border-radius,
+            swatch-size: $swatch-size,
+            transparency-grid-odd: $transparency-grid-odd,
+            transparency-grid-even: $transparency-grid-even,
+            invalid-color: $invalid-color,
+            marker-size: $marker-size,
+            marker-elevation: $marker-shadow,
+            marker-color: $marker-color,
+        )
+    );
+}
