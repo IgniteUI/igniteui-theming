@@ -115,22 +115,22 @@
     $theme: digest-schema($color-picker-schema);
 
     @if not($anchor-background-hover) and $anchor-background {
-        $anchor-background-hover: hsl(from (var(--anchor-background) h s l / 0.8));
+        $anchor-background-hover: hsl(from var(--anchor-background) h s l / 0.8);
     }
 
     @if not($anchor-background-focus-visible) and $anchor-background {
-        $anchor-background-focus-visible: hsl(from (var(--anchor-background) h s l / 0.16));
+        $anchor-background-focus-visible: hsl(from var(--anchor-background) h s l / 0.16);
     }
 
     @if not($anchor-background-focus-visible-hover) and $anchor-background {
-        $anchor-background-focus-visible-hover: hsl(from (var(--anchor-background) h s l / 0.24));
+        $anchor-background-focus-visible-hover: hsl(from var(--anchor-background) h s l / 0.24);
     }
 
     @if not($anchor-background-active) and $anchor-background {
         $anchor-background-active: hsl(from dynamic-shade(var(--anchor-background)) h s l / 0.16);
     }
 
-    @if not($anchor-background-active-focus-visible) and $anchor-background-active {
+    @if not($anchor-background-active-focus-visible) and $anchor-background {
         $anchor-background-active-focus-visible: hsl(from dynamic-shade(var(--anchor-background)) h s l / 0.32);
     }
 
