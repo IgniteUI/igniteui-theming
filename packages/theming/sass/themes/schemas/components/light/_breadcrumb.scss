@@ -379,7 +379,7 @@ $bootstrap-breadcrumb: extend(
 /// @prop {Map} focus-pressed-text-color [color: ('primary', 600)] - The text color of the breadcrumb when focused and pressed. Auto-derived from pressed-text-color.
 /// @prop {Map} focus-pressed-icon-color [color: ('primary', 600)] - The color of the breadcrumb icon when focused and pressed. Auto-derived from focus-pressed-text-color.
 /// @prop {Map} disabled-text-color [color: ('gray', 900, 0.20)] - The text color of the breadcrumb when disabled.
-/// @prop {Map} disabled-icon-color [color: ('gray', 900, 0.20)] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
+/// @prop {Map} disabled-icon-color [color: ('gray', 900)] - The color of the breadcrumb icon when disabled. Auto-derived from disabled-text-color.
 /// @requires $light-breadcrumb
 $indigo-breadcrumb: extend(
     $light-breadcrumb,
@@ -474,7 +474,6 @@ $indigo-breadcrumb: extend(
             color: (
                 'gray',
                 900,
-                0.2,
             ),
         ),
         _meta: (
