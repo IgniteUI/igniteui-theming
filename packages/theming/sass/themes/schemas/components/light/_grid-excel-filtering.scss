@@ -158,7 +158,7 @@ $bootstrap-excel-filtering: extend(
 
 /// Generates an indigo excel filtering schema.
 /// @prop {Map} background [contrast-color: ('gray', 900)] - The background contrast color for the excel filtering area.
-/// @prop {Map} secondary-background [color: ('surface', 500)] - The secondary background color for the excel filtering area.
+/// @prop {Map} secondary-background [color: ('surface', 'base')] - The secondary background color for the excel filtering area.
 /// @type Map
 /// @requires $light-excel-filtering
 $indigo-excel-filtering: extend(
@@ -174,7 +174,7 @@ $indigo-excel-filtering: extend(
         secondary-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 

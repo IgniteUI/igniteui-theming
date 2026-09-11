@@ -494,8 +494,8 @@ $dark-bootstrap-grid: extend(
 /// @prop {Map} expand-icon-hover-color [contrast-color: ('gray', 50)] - The grid row expand icon hover color.
 /// @prop {Map} active-expand-icon-color [contrast-color: ('gray', 50, .8)] - The drop area background on drop color.
 /// @prop {Map} drop-area-on-drop-background [color: ('gray', 100)] - The drop area background on drop color.
-/// @prop {Map} header-background [color: ('surface', 500)] - The table header background color.
-/// @prop {Map} content-background [color: ('surface', 500)] - The table body background color.
+/// @prop {Map} header-background [color: ('surface', 'base')] - The table header background color.
+/// @prop {Map} content-background [color: ('surface', 'base')] - The table body background color.
 /// @prop {Map} cell-editing-background [color: ('gray' 100)] - The background for the cell in editing mode.
 /// @prop {Map} cell-editing-foreground [contrast-color: ('gray', 50)] - The cell text color in edit mode
 /// @prop {Map} cell-edited-value-color [contrast-color: ('gray', 50)] - The color of cell edited value.
@@ -518,7 +518,7 @@ $dark-indigo-grid: extend(
         content-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
@@ -763,7 +763,7 @@ $dark-indigo-grid: extend(
         header-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 

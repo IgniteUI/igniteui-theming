@@ -1,32 +1,65 @@
 @use 'sass:map';
 @use 'sass:list';
+@use 'config';
 
 ////
 /// @package theming
 /// @group Palettes
 ////
 
+/// The numeric shades every chromatic family generates.
+/// @type List
+/// @access public
+$INumericShades: ('50', '100', '200', '300', '400', '500', '600', '700', '800', '900');
+
+/// The accent shades a chromatic family adds on top of its numeric ones.
+/// @type List
+/// @access public
+$IAccentShades: ('A100', 'A200', 'A400', 'A700');
+
 /// A list consisting of all generated gray shades
 /// @type Map
 /// @access public
-$IGrayShades: ('50', '100', '200', '300', '400', '500', '600', '700', '800', '900', 'seed');
+/// @requires $INumericShades
+$IGrayShades: list.join($INumericShades, ('seed'));
 
 /// A list consisting of all generated shades for palette colors
 /// @type Map
 /// @access public
 /// @requires $IGrayShades
-$IColorShades: list.join($IGrayShades, ('A100', 'A200', 'A400', 'A700'));
+/// @requires $IAccentShades
+$IColorShades: list.join($IGrayShades, $IAccentShades);
+
+/// A background plus the layers that sit on it. A role with no room in its direction
+/// resolves onto the background. Derived from `$surface-roles`, so configuring that
+/// map is enough to add or drop a layer.
+/// @type List
+/// @access public
+/// @requires $surface-roles
+$ISurfaceRoles: list.join(('base'), list.join(map.keys(config.$surface-roles), ('container', 'seed')));
+
+/// Every key a surface family can expose. Both generators emit the roles; `legacy`
+/// additionally keeps the numeric shades it has always carried. `$IPaletteColors`
+/// deliberately lists only the roles — those are what *every* palette has — so this is
+/// for consumers that must cover a legacy palette's extras too.
+/// @type List
+/// @access public
+/// @requires $ISurfaceRoles
+/// @requires $INumericShades
+/// @requires $IAccentShades
+$ISurfaceShades: list.join($ISurfaceRoles, list.join($INumericShades, $IAccentShades));
 
 /// All palette colors mapped with corresponding color shades
 /// @type Map
 /// @access public
 /// @requires $IColorShades
 /// @requires $IGrayShades
+/// @requires $ISurfaceRoles
 $IPaletteColors: (
     'primary': $IColorShades,
     'secondary': $IColorShades,
     'gray': $IGrayShades,
-    'surface': $IColorShades,
+    'surface': $ISurfaceRoles,
     'info': $IColorShades,
     'success': $IColorShades,
     'warn': $IColorShades,

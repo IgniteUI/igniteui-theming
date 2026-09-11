@@ -33,6 +33,9 @@ import type {
   DesignSystem,
   GeneratedCode,
   Platform,
+  ScaleSpec,
+  ScalesInput,
+  ShadeGenerator,
   ThemeVariant,
 } from "../utils/types.js";
 
@@ -57,6 +60,54 @@ export {
 /**
  * Generate a palette definition.
  */
+/**
+ * Renders a scale spec as Sass. A preset is a quoted name; an inline spec becomes a map of
+ * the `range` it spans and the `curve` that eases across it.
+ */
+function scaleToSass(spec: ScaleSpec): string {
+  if (typeof spec === "string") {
+    return `'${spec}'`;
+  }
+
+  const parts: string[] = [];
+
+  if (spec.range) parts.push(`range: (${spec.range.join(", ")})`);
+  if (spec.curve) parts.push(`curve: (${spec.curve.join(", ")})`);
+
+  return `(${parts.join(", ")})`;
+}
+
+/**
+ * Renders the `$scales` argument. A bare spec applies to every family; a map keyed by
+ * family name applies per family.
+ */
+function scalesToSass(scales: ScalesInput): string {
+  if (typeof scales === "string") {
+    return `'${scales}'`;
+  }
+
+  if ("range" in scales || "curve" in scales) {
+    return scaleToSass(scales as ScaleSpec);
+  }
+
+  const entries = Object.entries(scales as Record<string, ScaleSpec>).map(
+    ([family, spec]) => `'${family}': ${scaleToSass(spec)}`,
+  );
+
+  return `(${entries.join(", ")})`;
+}
+
+/**
+ * Appends the optional `$generator` and `$scales` arguments to a palette() call.
+ */
+export function appendShadeArgs(
+  args: string[],
+  input: { generator?: ShadeGenerator; scales?: ScalesInput },
+): void {
+  if (input.generator) args.push(`$generator: '${input.generator}'`);
+  if (input.scales) args.push(`$scales: ${scalesToSass(input.scales)}`);
+}
+
 export function generatePalette(input: CreatePaletteInput): GeneratedCode {
   const variant = input.variant ?? "light";
   const name = input.name ? toVariableName(input.name) : `custom-${variant}`;
@@ -75,6 +126,8 @@ export function generatePalette(input: CreatePaletteInput): GeneratedCode {
   if (input.success) paletteArgs.push(`$success: ${input.success}`);
   if (input.warn) paletteArgs.push(`$warn: ${input.warn}`);
   if (input.error) paletteArgs.push(`$error: ${input.error}`);
+
+  appendShadeArgs(paletteArgs, input);
 
   const code = `${generateHeader(`${variant} palette with primary color ${input.primary}`)}
 ${generateUseStatement(input.platform, input.licensed)}
@@ -313,6 +366,8 @@ function generateGenericTheme(
   } else {
     paletteArgs.push(`$surface: ${variant === "dark" ? "#222222" : "white"}`);
   }
+
+  appendShadeArgs(paletteArgs, input);
 
   // Generate preset imports for typography and/or elevations
   const presetImports = generatePresetImports({

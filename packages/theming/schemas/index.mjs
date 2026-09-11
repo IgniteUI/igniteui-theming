@@ -33,6 +33,21 @@ export const PaletteMultipliersSchema = z.object({
 
 export const PaletteMetaSchema = z.record(z.string(), z.array(z.string()));
 
+/**
+ * A shade scale: the WCAG contrast `range` the family spans from shade 50 to 900, and the
+ * cubic-bezier `curve` that places each shade in it. An empty `curve` is the straight line.
+ */
+export const ShadeScalesSchema = z.record(
+  z.string(),
+  z.object({
+    range: z.array(z.string()).length(2),
+    curve: z.array(z.string()),
+  }),
+);
+
+/** Which scale each family uses by default. Unlisted families use `even`. */
+export const FamilyScalesSchema = z.record(z.string(), z.string());
+
 export const PalettesSchema = z.record(
   z.string(),
   z.object({
@@ -138,6 +153,14 @@ export const EXPORT_MAP = {
   "colors/meta/palette": {
     exportName: "PaletteMeta",
     schema: PaletteMetaSchema,
+  },
+  "colors/meta/scales": {
+    exportName: "ShadeScales",
+    schema: ShadeScalesSchema,
+  },
+  "colors/meta/family-scales": {
+    exportName: "FamilyScales",
+    schema: FamilyScalesSchema,
   },
   "colors/presets/palettes": { exportName: "Palettes", schema: PalettesSchema },
   "colors/charts/brushes": {

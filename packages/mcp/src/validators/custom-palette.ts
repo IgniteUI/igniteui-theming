@@ -29,8 +29,21 @@ import {
   type ColorDefinition,
   type CreateCustomPaletteInput,
   type GrayDefinition,
+  SURFACE_ROLES,
+  type SurfaceDefinition,
   type ThemeVariant,
 } from "../utils/types.js";
+
+/**
+ * The chromatic families that are actually a hue ramp.
+ *
+ * `surface` is a background plus the layers that sit on it, addressed by role rather than
+ * by shade number, so the ramp checks below (ordered lightness, one hue throughout) do not
+ * describe it.
+ */
+const RAMP_COLOR_GROUPS = CHROMATIC_COLOR_GROUPS.filter(
+  (g): g is Exclude<typeof g, "surface"> => g !== "surface",
+);
 
 /**
  * Result of custom palette validation.
@@ -73,7 +86,7 @@ function collectAllColors(input: CreateCustomPaletteInput): {
   const missingShades: ValidationError[] = [];
 
   // Collect chromatic colors
-  for (const group of CHROMATIC_COLOR_GROUPS) {
+  for (const group of RAMP_COLOR_GROUPS) {
     const definition = input[group];
     if (definition) {
       collectFromDefinition(
@@ -84,6 +97,17 @@ function collectAllColors(input: CreateCustomPaletteInput): {
         missingShades,
       );
     }
+  }
+
+  // Collect surface layers, which are keyed by role
+  if (input.surface) {
+    collectFromDefinition(
+      "surface",
+      input.surface,
+      SURFACE_ROLES,
+      colors,
+      missingShades,
+    );
   }
 
   // Collect gray colors
@@ -105,7 +129,7 @@ function collectAllColors(input: CreateCustomPaletteInput): {
  */
 function collectFromDefinition(
   groupName: string,
-  definition: ColorDefinition | GrayDefinition,
+  definition: ColorDefinition | GrayDefinition | SurfaceDefinition,
   expectedShades: readonly string[],
   colors: CollectedColor[],
   missingShades: ValidationError[],
@@ -177,8 +201,9 @@ export async function validateCustomPalette(
   // Cast to string[] for includes() check since we're validating user input
   const chromaticShadeSet = ALL_COLOR_SHADES as readonly string[];
   const grayShadeSet = SHADE_LEVELS as readonly string[];
+  const surfaceRoleSet = SURFACE_ROLES as readonly string[];
 
-  for (const group of CHROMATIC_COLOR_GROUPS) {
+  for (const group of RAMP_COLOR_GROUPS) {
     const definition = input[group];
     if (definition?.mode === "explicit" && definition.contrastOverrides) {
       for (const shade of Object.keys(definition.contrastOverrides)) {
@@ -188,6 +213,16 @@ export async function validateCustomPalette(
             message: `Invalid contrast override key: ${shade}. Valid keys are: ${ALL_COLOR_SHADES.join(", ")}`,
           });
         }
+      }
+    }
+  }
+  if (input.surface?.mode === "explicit" && input.surface.contrastOverrides) {
+    for (const role of Object.keys(input.surface.contrastOverrides)) {
+      if (!surfaceRoleSet.includes(role)) {
+        errors.push({
+          field: makeFieldPath("surface", role),
+          message: `Invalid contrast override key: ${role}. Valid keys are: ${SURFACE_ROLES.join(", ")}`,
+        });
       }
     }
   }
@@ -239,7 +274,7 @@ export async function validateCustomPalette(
 
   // Phase 3: Validate shade progression and monochromatic hue (only for explicit shades)
   // These use analyzeColorsWithHue which already batches colors efficiently
-  for (const group of CHROMATIC_COLOR_GROUPS) {
+  for (const group of RAMP_COLOR_GROUPS) {
     const definition = input[group];
     if (definition?.mode === "explicit") {
       await validateShadeProgression(

@@ -22,6 +22,32 @@ palette {
     }
 }
 
+/*
+* @outputDir - /colors/meta
+*/
+scales {
+    @each $name, $spec in $scales {
+        $range: map.get($spec, range);
+        $curve: map.get($spec, curve);
+
+        > #{$name} {
+            --range: [#{list.nth($range, 1)}, #{list.nth($range, 2)}];
+            --curve: [
+                #{if(
+                    $curve,
+                    '#{list.nth($curve, 1)}, #{list.nth($curve, 2)}, #{list.nth($curve, 3)}, #{list.nth($curve, 4)}',
+                    ''
+                )}];
+        }
+    }
+}
+
+family-scales {
+    @each $family, $name in $family-scales {
+        --#{$family}: #{$name};
+    }
+}
+
 multipliers {
     @each $variant in ('color', 'grayscale') {
         $multipliers: meta.module-variables(multipliers);

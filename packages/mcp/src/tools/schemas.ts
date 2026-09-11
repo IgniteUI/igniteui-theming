@@ -19,9 +19,28 @@ import {
   OUTPUT_FORMATS,
   PALETTE_COLOR_GROUPS,
   PLATFORMS,
+  SURFACE_ROLES,
   VARIANTS,
 } from "../utils/types.js";
 import { PARAM_DESCRIPTIONS } from "./descriptions.js";
+
+/**
+ * A shade scale: a preset name, or an inline spec. Accepted as one value for every family
+ * or as a map keyed by family name.
+ */
+const scaleSpecSchema = z.union([
+  z.string(),
+  z.object({
+    range: z.array(z.number()).length(2).optional(),
+    curve: z.array(z.number()).length(4).optional(),
+  }),
+]);
+
+const scalesSchema = z
+  .union([scaleSpecSchema, z.record(z.string(), scaleSpecSchema)])
+  .optional();
+
+const generatorSchema = z.enum(["fitted", "legacy"]).optional();
 
 /**
  * Regex for validating CSS color values.
@@ -130,6 +149,8 @@ export const createPaletteSchema = z.object({
   variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
   output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
+  scales: scalesSchema.describe(PARAM_DESCRIPTIONS.scales),
+  generator: generatorSchema.describe(PARAM_DESCRIPTIONS.generator),
 });
 
 /**
@@ -187,6 +208,8 @@ export const createThemeSchema = z.object({
   surfaceColor: colorSchema.describe(PARAM_DESCRIPTIONS.surfaceColor),
   variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.name),
+  scales: scalesSchema.describe(PARAM_DESCRIPTIONS.scales),
+  generator: generatorSchema.describe(PARAM_DESCRIPTIONS.generator),
   fontFamily: z.string().optional().describe(PARAM_DESCRIPTIONS.fontFamily),
   includeTypography: z
     .boolean()
@@ -286,11 +309,41 @@ const explicitGrayShadesSchema = z.object({
 });
 
 /**
+ * Schema for explicit surface layers, keyed by role rather than by shade number.
+ */
+const explicitSurfaceRolesSchema = z.object({
+  mode: z.literal("explicit"),
+  shades: z
+    .object(
+      Object.fromEntries(SURFACE_ROLES.map((s) => [s, colorSchema])) as Record<
+        string,
+        z.ZodString
+      >,
+    )
+    .describe(PARAM_DESCRIPTIONS.surfaceRoles),
+  contrastOverrides: z
+    .record(
+      z.enum(SURFACE_ROLES as unknown as [string, ...string[]]),
+      colorSchema,
+    )
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.contrastOverrides),
+});
+
+/**
  * Schema for color definition - either shades-based or explicit.
  */
 const colorDefinitionSchema = z.union([
   shadesBasedColorSchema,
   explicitColorShadesSchema,
+]);
+
+/**
+ * Schema for surface definition - either shades-based or explicit roles.
+ */
+const surfaceDefinitionSchema = z.union([
+  shadesBasedColorSchema,
+  explicitSurfaceRolesSchema,
 ]);
 
 /**
@@ -315,7 +368,9 @@ export const createCustomPaletteSchema = z.object({
   // Required colors - use colorDefinition description for detailed guidance
   primary: colorDefinitionSchema.describe(PARAM_DESCRIPTIONS.colorDefinition),
   secondary: colorDefinitionSchema.describe(PARAM_DESCRIPTIONS.colorDefinition),
-  surface: colorDefinitionSchema.describe(PARAM_DESCRIPTIONS.colorDefinition),
+  surface: surfaceDefinitionSchema.describe(
+    PARAM_DESCRIPTIONS.surfaceDefinition,
+  ),
 
   // Optional colors - defaults from design system preset if not provided
   gray: grayDefinitionSchema
@@ -518,6 +573,20 @@ export type SetRoundnessParams = z.infer<typeof setRoundnessSchema>;
 /**
  * Schema for read_resource tool.
  */
+/**
+ * Schema for fit_color_scale tool.
+ */
+export const fitColorScaleSchema = z.object({
+  colors: z
+    .array(colorSchema)
+    .min(3)
+    .max(20)
+    .describe(PARAM_DESCRIPTIONS.ladderColors),
+  name: z.string().optional().describe(PARAM_DESCRIPTIONS.ladderName),
+});
+
+export type FitColorScaleParams = z.infer<typeof fitColorScaleSchema>;
+
 export const readResourceSchema = z.object({
   uri: z.string().describe(PARAM_DESCRIPTIONS.resourceUri),
 });

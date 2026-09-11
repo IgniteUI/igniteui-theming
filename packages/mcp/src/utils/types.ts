@@ -79,6 +79,21 @@ export const SHADE_LEVELS = [
  */
 export const ACCENT_SHADE_LEVELS = ["A100", "A200", "A400", "A700"] as const;
 
+/**
+ * Surface layer roles.
+ *
+ * A surface is a background plus the layers that sit on it, not a chromatic ramp, so it
+ * is addressed by role rather than by shade number. Both shade generators emit these.
+ */
+export const SURFACE_ROLES = [
+  "base",
+  "sunken",
+  "raised",
+  "overlay",
+  "container",
+  "seed",
+] as const;
+
 // ============================================================================
 // CANONICAL TYPES (derived from constants)
 // ============================================================================
@@ -119,6 +134,28 @@ export type ShadeLevel = (typeof SHADE_LEVELS)[number];
 export type AccentShadeLevel = (typeof ACCENT_SHADE_LEVELS)[number];
 
 /**
+ * Surface layer role type.
+ */
+export type SurfaceRole = (typeof SURFACE_ROLES)[number];
+
+/**
+ * A shade scale: a preset name, or an inline spec giving the contrast `range` a family
+ * spans and the cubic-bezier `curve` that places each shade inside it.
+ */
+export type ScaleSpec = string | { range?: number[]; curve?: number[] };
+
+/**
+ * One scale for every family, or a map keyed by family name.
+ */
+export type ScalesInput = ScaleSpec | Record<string, ScaleSpec>;
+
+/**
+ * Which generator builds the shades. `fitted` solves each shade for a contrast target;
+ * `legacy` reproduces the original multiplier-based ramps.
+ */
+export type ShadeGenerator = "fitted" | "legacy";
+
+/**
  * Input parameters for palette creation.
  */
 export interface CreatePaletteInput {
@@ -146,6 +183,10 @@ export interface CreatePaletteInput {
   variant?: ThemeVariant;
   /** Custom name for the palette variable */
   name?: string;
+  /** Shade rhythm: a preset name, an inline spec, or a map keyed by family */
+  scales?: ScalesInput;
+  /** Which shade generator to use */
+  generator?: ShadeGenerator;
 }
 
 /**
@@ -222,6 +263,10 @@ export interface CreateThemeInput {
   includeElevations?: boolean;
   /** Whether to include spacing setup (Web Components only) */
   includeSpacing?: boolean;
+  /** Shade rhythm: a preset name, an inline spec, or a map keyed by family */
+  scales?: ScalesInput;
+  /** Which shade generator to use */
+  generator?: ShadeGenerator;
 }
 
 /**
@@ -334,6 +379,20 @@ export interface ExplicitGrayShades {
 export type ColorDefinition = ShadesBasedColor | ExplicitColorShades;
 
 /**
+ * Explicit surface layers, keyed by role rather than by shade number.
+ */
+export interface ExplicitSurfaceRoles {
+  mode: "explicit";
+  shades: Record<SurfaceRole, string>;
+  contrastOverrides?: Partial<Record<SurfaceRole, string>>;
+}
+
+/**
+ * Surface definition - either shades-based or explicit roles.
+ */
+export type SurfaceDefinition = ShadesBasedColor | ExplicitSurfaceRoles;
+
+/**
  * Gray definition - either shades-based or explicit.
  */
 export type GrayDefinition = ShadesBasedColor | ExplicitGrayShades;
@@ -358,8 +417,8 @@ export interface CreateCustomPaletteInput {
   primary: ColorDefinition;
   /** Secondary/accent color definition */
   secondary: ColorDefinition;
-  /** Surface/background color definition */
-  surface: ColorDefinition;
+  /** Surface/background definition, addressed by layer role */
+  surface: SurfaceDefinition;
 
   // Optional colors (defaults from design system preset)
   /** Gray/neutral color definition */
