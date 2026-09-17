@@ -15,10 +15,11 @@
   "type": "module",
   "workspaces": [
     "packages/theming",
-    "packages/mcp"
+    "packages/mcp",
+    "packages/plugins"
   ],
   "scripts": {
-    "build": "npm run build -w packages/theming",
+    "build": "npm run build -w packages/theming && npm run build -w packages/plugins",
     "clean": "npm run clean --workspaces --if-present",
     "test": "vitest run",
     "lint": "npm run lint:biome && npm run lint --workspaces --if-present",
