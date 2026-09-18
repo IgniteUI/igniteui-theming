@@ -10,14 +10,14 @@ import { legend, type Probe, strip } from "./strip.js";
 const mock = (surface: SurfaceBlock) => html`
   <ig-palette-scope class="mock" .vars=${surface.fittedVars}>
     <div class="mock-bar"><span class="mock-title"></span><span class="mock-pill"></span></div>
-    <div class="mock-well"><span>sunken &mdash; a well</span></div>
+    <div class="mock-well"><span>sunken, a well cut into the page</span></div>
     <div class="mock-card">
-      <strong>raised</strong><span>a card that sits on the page</span>
+      <strong>raised</strong><span>a card resting on the page</span>
       <div class="mock-line"></div>
       <div class="mock-line is-short"></div>
     </div>
     <div class="mock-pop">
-      <strong>overlay</strong><span>a menu above everything</span>
+      <strong>overlay</strong><span>a menu floating above everything</span>
     </div>
   </ig-palette-scope>
 `;
@@ -30,7 +30,7 @@ const role = (surface: SurfaceBlock, r: Role) => html`
     <div>
       <code>${r.key}</code>
       <span class="role-distance">
-        ${r.collapsed ? "on the background" : `${r.away.toFixed(2)}:1 away`}
+        ${r.collapsed ? "same as the page" : `${r.away.toFixed(2)}:1 from the page`}
       </span>
     </div>
   </div>
@@ -70,17 +70,18 @@ export class ViewNeutrals extends LitElement {
           <div>
             <div class="stack">${strip(surface.legacySurface, this.probe)}</div>
             <p class="note">
-              Ten numbered shades, no role names. On a page at either extreme most of
-              them collapse onto the background &mdash; the generator has nowhere left to
-              go.
+              Ten numbered shades, with nothing to say what each one is for. On a very
+              light or very dark page most of them end up the same color as the
+              background, because there is simply no room left to go lighter or darker.
             </p>
             <ig-palette-scope class="roles" .vars=${surface.fittedVars}>
               ${surface.roles.map((r) => role(surface, r))}
             </ig-palette-scope>
             <p class="note">
-              Five roles that say what they are for. A role with no room resolves onto
-              the background on purpose, and the shadow carries the elevation instead.
-              The mock on the left is built entirely from them, text included.
+              Five roles, each named after its job. When a role has no room left it
+              deliberately settles onto the background, and a shadow carries the sense
+              of depth instead. The mock page on the left is built entirely from these
+              five roles, text included.
             </p>
           </div>
         </div>
@@ -90,16 +91,17 @@ export class ViewNeutrals extends LitElement {
 
       <h3 class="group">Grayscale</h3>
       <p class="sub">
-        Anchored to the background rather than to white, so shade 50 always sits nearest
-        the page &mdash; in either theme. Seeded with <code>${surface.seed}</code>.
+        The grays are anchored to the page rather than to white, so shade 50 is always
+        the one closest to the background, in a light theme and a dark one alike. This
+        palette seeds them with <code>${surface.seed}</code>.
       </p>
       <article>
         <div class="stack">${surface.grays.map((row) => strip(row, this.probe))}</div>
         <p class="note">
-          Both sides fail the same two pairs on purpose: the gray family defaults to the
-          <code>material</code> scale, which keeps the rhythm our grayscale has always
-          had and trades two AA pairs for it. Range and curve, below, is where that
-          trade is made &mdash; and undone.
+          Both rows fail the same two pairs, and that is deliberate. The gray family uses
+          the <code>material</code> scale by default, which keeps the rhythm our grayscale
+          has always had at the cost of two AA pairs. The Scales demo below is where that
+          trade is made, and where you can undo it.
         </p>
       </article>
     `;

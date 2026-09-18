@@ -51,7 +51,7 @@ describe("reading a packed ramp", () => {
 describe("findings", () => {
   it("leads with the AA record", () => {
     expect(findings(ramp())[0]).toEqual({
-      text: "all 5 AA pairs pass",
+      text: "all 5 pairs pass AA",
       ok: true,
     });
 
@@ -63,7 +63,7 @@ describe("findings", () => {
       return `${v}${v}${v}`;
     });
     expect(findings(ramp({ hex: narrow.join("") }))[0]).toEqual({
-      text: "5 of 5 AA pairs fail",
+      text: "5 of 5 pairs fail AA",
       ok: false,
     });
   });
@@ -75,15 +75,15 @@ describe("findings", () => {
         i < 5 ? "ffffff" : "000000",
       ).join(""),
     });
-    // Five identical whites are duplicates, so only the AA line and the duplicate line show.
     expect(findings(stark).map((f) => f.text)).toEqual([
-      "all 5 AA pairs pass",
-      "8 duplicates",
+      "all 5 pairs pass AA",
+      "nothing clamped",
+      "8 shades share a color",
     ]);
   });
 
-  it("names clamping and duplicates when there are any, and sRGB when there are none", () => {
-    expect(findings(ramp()).map((f) => f.text)).toContain("all 10 inside sRGB");
+  it("always says whether anything was clamped", () => {
+    expect(findings(ramp()).map((f) => f.text)).toContain("nothing clamped");
     expect(findings(ramp({ mask: 0b11 })).map((f) => f.text)).toContain(
       "2 shades clamped",
     );

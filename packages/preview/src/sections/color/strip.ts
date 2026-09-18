@@ -140,7 +140,7 @@ export const strip = (row: Row, probe: Probe) => {
       <div
         class="strip"
         role="radiogroup"
-        aria-label=${`${row.label} shades — pick one to compare the rest against`}
+        aria-label=${`${row.label} shades. Pick one to compare the others against it.`}
         @keydown=${onKey}
       >
         ${row.swatches.map((s) => swatch(s, probe, reference, focusable))}
@@ -161,18 +161,18 @@ export const legend = (probe: Probe) => html`
       probe.pinned
         ? html`
           <span
-            >Every shade measured against its own
-            <b>${probe.pinned}</b> &mdash; AAA from 7:1, AA from 4.5:1, UI from 3:1</span
+            >Every shade is now measured against its own <b>${probe.pinned}</b>. AAA needs
+            7:1, AA needs 4.5:1, and 3:1 is enough for things like borders and icons.</span
           >
           <button type="button" class="clear" @click=${() => probe.pin(null)}>
             Clear
           </button>
         `
         : html`<span
-            >Click a shade to measure every other shade against it. Ratios shown are
-            against <b>white, or the page for a neutral</b>.</span
+            >Click any shade to measure every other shade in its row against it. Right
+            now the ratios are against <b>white</b>, or against the page for grays.</span
           >`
     }
-    <span><span class="key-twin" aria-hidden="true">=</span>same color as another shade</span>
+    <span><span class="key-twin" aria-hidden="true">=</span>the same color as another shade in the row</span>
   </div>
 `;

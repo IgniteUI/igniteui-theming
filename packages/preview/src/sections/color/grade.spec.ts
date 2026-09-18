@@ -38,15 +38,17 @@ describe("listKeys", () => {
 describe("describe", () => {
   it("names the token, the color and the ratio against the row's anchor", () => {
     expect(describeSwatch(swatch(), null, 3.02)).toBe(
-      "--ig-primary-500  #0099ff   3.02:1 vs white",
+      "--ig-primary-500  #0099ff   3.02:1 against white",
     );
   });
 
   it("grades the ratio when a reference is pinned", () => {
     expect(describeSwatch(swatch(), "100", 4.8)).toContain(
-      "4.80:1 vs 100 · AA",
+      "4.80:1 against 100 · AA",
     );
-    expect(describeSwatch(swatch(), "100", 1.2)).toContain("below 3:1");
+    expect(describeSwatch(swatch(), "100", 1.2)).toContain(
+      "below 3:1, no grade",
+    );
   });
 
   it("says what is wrong with the shade", () => {
@@ -56,6 +58,6 @@ describe("describe", () => {
       1,
     );
     expect(text).toContain("same color as 600");
-    expect(text).toContain("outside sRGB");
+    expect(text).toContain("clipped");
   });
 });

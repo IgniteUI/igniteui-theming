@@ -36,18 +36,18 @@ export const findings = (ramp: SweepRamp): Finding[] => {
   const out: Finding[] = [
     {
       text: fails
-        ? `${fails} of ${pairs} AA pairs fail`
-        : `all ${pairs} AA pairs pass`,
+        ? `${fails} of ${pairs} pairs fail AA`
+        : `all ${pairs} pairs pass AA`,
       ok: fails === 0,
     },
   ];
 
-  if (clamped) out.push({ text: `${clamped} shades clamped`, ok: false });
-  if (dup)
-    out.push({ text: `${dup} duplicate${dup > 1 ? "s" : ""}`, ok: false });
-  if (!clamped && !dup) {
-    out.push({ text: `all ${shades.length} inside sRGB`, ok: true });
-  }
+  out.push(
+    clamped
+      ? { text: `${clamped} shade${clamped > 1 ? "s" : ""} clamped`, ok: false }
+      : { text: "nothing clamped", ok: true },
+  );
+  if (dup) out.push({ text: `${dup} shades share a color`, ok: false });
 
   return out;
 };

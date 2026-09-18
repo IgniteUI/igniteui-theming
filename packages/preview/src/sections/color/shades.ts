@@ -50,10 +50,11 @@ export class ViewShades extends LitElement {
 
     return html`
       <p class="sub">
-        The guarantee: any two shades 500 apart clear WCAG AA. It holds by construction
-        under <code>fitted</code>, and by accident &mdash; or not at all &mdash; under
-        <code>legacy</code>. Hover any swatch for its token, its measured ratio and
-        whatever is wrong with it.
+        The promise is simple: any two shades that are 500 apart, like 100 and 600, have
+        enough contrast to pass the WCAG AA standard for text. The <code>fitted</code>
+        generator is built to keep that promise. The <code>legacy</code> generator keeps
+        it only by luck, and often not at all. Hover over any swatch to see its token,
+        its measured contrast, and anything that went wrong with it.
       </p>
 
       ${legend(this.probe)}
@@ -61,7 +62,7 @@ export class ViewShades extends LitElement {
       ${model.families.map((family) => block(family, this.probe))}
 
       <ig-code-block
-        label=${`${model.label} ${model.theme}, as you would write it`}
+        label=${`${model.label} ${model.theme} as Sass`}
         .code=${statement("palette", call("palette", args))}
       ></ig-code-block>
     `;

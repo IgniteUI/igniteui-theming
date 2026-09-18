@@ -30,12 +30,13 @@ export const describe = (
 
   notes.push(
     against
-      ? `${value.toFixed(2)}:1 vs ${against} · ${grade(value) ?? "below 3:1"}`
-      : `${value.toFixed(2)}:1 vs ${swatch.against}`,
+      ? `${value.toFixed(2)}:1 against ${against} · ${grade(value) ?? "below 3:1, no grade"}`
+      : `${value.toFixed(2)}:1 against ${swatch.against}`,
   );
 
   if (swatch.same.length) notes.push(`same color as ${listKeys(swatch.same)}`);
-  if (swatch.clipped) notes.push("outside sRGB, clipped to fit");
+  if (swatch.clipped)
+    notes.push("asked for a color the screen cannot show, so it was clipped");
 
   return notes.join("   ");
 };

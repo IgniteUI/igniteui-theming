@@ -146,29 +146,32 @@ export class ViewSweep extends LitElement {
       <div class="strips">${this.strip(legacy, "legacy")}${this.strip(fitted, "fitted")}</div>
 
       <div class="keyline">
-        <span><b>50 &rarr; 900</b> shade, with its contrast against white</span>
-        <span><span class="key-hatch" aria-hidden="true"></span><b>clamped</b> &mdash; asked for a color outside sRGB</span>
+        <span>Shades <b>50 to 900</b>, each with its contrast against white</span>
+        <span><span class="key-hatch" aria-hidden="true"></span><b>clamped</b>: the generator asked for a color the screen cannot show</span>
       </div>
 
       <div class="two-up is-plot">
         <ig-gamut-plot seed=${this.seed} .legacy=${legacy} .fitted=${fitted}></ig-gamut-plot>
         <div>
           <p class="note">
-            A slice through sRGB at this hue. The lit region is every color the hue can
-            produce, and its widest point &mdash; the cusp &mdash; moves by more than
-            twofold in both chroma and lightness as you sweep.
+            This is a slice through every color your screen can show, at the current hue.
+            The lit shape is the whole range for this hue. Its widest point, the cusp,
+            moves a long way as you sweep: more than twofold in both how vivid and how
+            light a color can get.
           </p>
           <p class="note">
-            Hollow rings are shades the multiplier table asked for and sRGB could not
-            deliver, with a leader to where they landed. When two clamp to the same edge,
-            two tokens resolve to the same color.
+            The hollow rings show where the legacy multiplier table asked a shade to be
+            when that was outside what a screen can show. The dotted line leads to where
+            the shade actually landed. When two shades get pushed to the same edge, two
+            tokens end up the same color.
           </p>
           <p class="note">
             Across all ${count(totals.seeds)} seeds in this grid,
-            <b>${count(totals.legacyClean)}</b> clear every AA pair under legacy against
-            <b>${count(totals.fittedClean)}</b> under fitted. Out-of-gamut shades belong to
-            the saturated end: ${count(totals.legacyOog)} of ${count(totals.shades)}, none
-            of them below ${Math.max(...data.saturations)}% saturation.
+            <b>${count(totals.legacyClean)}</b> pass every AA pair with the legacy
+            generator, against <b>${count(totals.fittedClean)}</b> with the fitted one.
+            Every shade that fell outside the screen's range came from the most vivid
+            row: ${count(totals.legacyOog)} of ${count(totals.shades)} shades, and none
+            below ${Math.max(...data.saturations)}% saturation.
           </p>
         </div>
       </div>

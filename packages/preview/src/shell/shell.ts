@@ -171,7 +171,7 @@ export class PreviewShell extends LitElement {
         ${
           this.loaded.has(view.tag)
             ? staticHtml`<${unsafeStatic(view.tag)}></${unsafeStatic(view.tag)}>`
-            : html`<p class="loading">Compiling&hellip;</p>`
+            : html`<p class="loading">Loading&hellip;</p>`
         }
       </article>
     `;

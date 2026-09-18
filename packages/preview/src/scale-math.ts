@@ -26,25 +26,25 @@ export const SCALE_PRESETS: ScalePreset[] = [
     name: "even",
     range: [1.182, 18.232],
     curve: null,
-    why: "Maximum separation. The default.",
+    why: "Spread as evenly as possible. The default.",
   },
   {
     name: "material",
     range: [1.04, 16.1],
     curve: [0.53, 0, 0.825, 0.785],
-    why: "Our original grayscale.",
+    why: "The grayscale we have always shipped.",
   },
   {
     name: "tailwind",
     range: [1.04, 17.76],
     curve: [0.615, 0.07, 0.225, 0.43],
-    why: "Tailwind v4 slate.",
+    why: "The slate scale from Tailwind v4.",
   },
   {
     name: "carbon",
     range: [1.1, 18.1],
     curve: [0.525, 0.295, 0.655, 0.87],
-    why: "IBM Carbon gray 10–100.",
+    why: "IBM Carbon's gray, 10 through 100.",
   },
 ];
 

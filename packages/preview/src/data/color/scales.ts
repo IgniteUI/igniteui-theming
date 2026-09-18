@@ -114,7 +114,7 @@ const definitions = (): Definition[] => {
       {
         key: `${entry.name}-primary`,
         label: `${capitalise(entry.name)} primary`,
-        note: "A chromatic family, measured against white.",
+        note: "A color family, measured against white.",
         family: "primary",
         seed: entry.primary,
         surface: "#ffffff",
@@ -124,7 +124,7 @@ const definitions = (): Definition[] => {
       {
         key: `${entry.name}-${entry.theme}-gray`,
         label: `Gray on a ${entry.theme} page`,
-        note: "Anchored to the page rather than to white. This is the family the material scale was fitted to.",
+        note: "Measured against the page instead of white. This is the family the material scale was tuned for.",
         family: "gray",
         seed: entry.gray,
         surface: entry.surface,

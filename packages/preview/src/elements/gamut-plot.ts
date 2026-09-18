@@ -252,7 +252,7 @@ export class GamutPlot extends LitElement {
       <p class="legend">
         <span><span class="mark is-legacy"></span>legacy</span>
         <span><span class="mark is-fitted"></span>fitted</span>
-        <span><span class="mark is-asked"></span>asked for, clamped back</span>
+        <span><span class="mark is-asked"></span>asked for, then clamped</span>
       </p>
     `;
   }

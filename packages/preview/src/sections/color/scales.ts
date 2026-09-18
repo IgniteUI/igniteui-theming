@@ -227,8 +227,8 @@ export class ViewScales extends LitElement {
         </igc-button-group>
       </div>
       <p class="note subject-note">
-        ${subject.note} Highest contrast this subject can reach against
-        <code>${subject.anchor}</code> is <b>${subject.ceiling.toFixed(2)}:1</b>.
+        ${subject.note} Against <code>${subject.anchor}</code> it tops out at
+        <b>${subject.ceiling.toFixed(2)}:1</b>.
       </p>
     `;
   }
@@ -254,7 +254,7 @@ export class ViewScales extends LitElement {
               this.lo = Math.min(detail, this.hi - MIN_RANGE);
             }}
           ></igc-slider>
-          <p class="control-hint">Contrast of shade 50 against the anchor. At 1:1 it is the anchor.</p>
+          <p class="control-hint">How much shade 50 stands out from the anchor. At 1:1 it would be the anchor itself.</p>
         </div>
         <div class="control">
           <label class="control-label" for="scale-hi">Darkest shade <b>${this.hi.toFixed(2)}:1</b></label>
@@ -272,9 +272,9 @@ export class ViewScales extends LitElement {
           <p class=${`control-hint ${overshoot ? "is-over" : ""}`}>
             ${
               overshoot
-                ? html`Past this subject&rsquo;s ceiling of ${subject.ceiling.toFixed(2)}:1 &mdash;
-                  the dark end compresses and pairs start to fail.`
-                : "Contrast of shade 900. Black on white is 21:1."
+                ? html`That is more than this subject can reach (${subject.ceiling.toFixed(2)}:1).
+                  The dark end gets squeezed and pairs start to fail.`
+                : "How much shade 900 stands out. Black on white is 21:1, the most contrast there is."
             }
           </p>
         </div>
@@ -383,7 +383,7 @@ export class ViewScales extends LitElement {
 
       ${this.table(ramp)}
 
-      <ig-code-block .code=${this.code}></ig-code-block>
+      <ig-code-block label="This scale as Sass" .code=${this.code}></ig-code-block>
     `;
   }
 }

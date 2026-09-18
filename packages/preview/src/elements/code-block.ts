@@ -82,7 +82,7 @@ export class CodeBlock extends LitElement {
   constructor() {
     super();
     this.code = "";
-    this.label = "What to paste";
+    this.label = "Sass";
     this.state = "idle";
   }
 
