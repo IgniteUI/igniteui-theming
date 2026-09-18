@@ -183,7 +183,7 @@ export class PreviewShell extends LitElement {
 
     return html`
       <header class="masthead">
-        <p class="eyebrow">igniteui-theming</p>
+        <p class="eyebrow">Ignite UI Theming</p>
         <nav class="sections" aria-label="Sections">
           ${SECTIONS.map(
             (entry) => html`

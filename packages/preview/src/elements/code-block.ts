@@ -1,4 +1,5 @@
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, type PropertyValues } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { define } from "../define.js";
 
 type State = "idle" | "copied" | "selected";
@@ -16,6 +17,7 @@ export class CodeBlock extends LitElement {
     code: { type: String },
     label: { type: String },
     state: { state: true },
+    highlighted: { state: true },
   };
 
   static styles = css`
@@ -63,27 +65,58 @@ export class CodeBlock extends LitElement {
       outline-offset: 2px;
     }
 
+    /*
+     * The theme paints the text; the block's shape is ours. The background is the
+     * theme's own page color, so the plain-text moment before highlighting matches.
+     */
     pre {
       margin: 0;
       padding: var(--space-4, 16px);
-      background: var(--line-soft, rgb(0 0 0 / 5%));
+      background: #0d1117;
       border-radius: var(--radius-sm, 3px);
       overflow-x: auto;
       font-family: var(--mono, ui-monospace, monospace);
       font-size: var(--text-sm, 12px);
       line-height: 1.65;
     }
+
+    pre:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
   `;
 
   declare code: string;
   declare label: string;
   declare state: State;
+  /** `code` as highlighted markup, or null until the highlighter has run. */
+  declare highlighted: string | null;
 
   constructor() {
     super();
     this.code = "";
     this.label = "Sass";
     this.state = "idle";
+    this.highlighted = null;
+  }
+
+  /**
+   * Plain text renders at once and the highlighted markup replaces it when ready. A
+   * result is dropped if the code moved on while it was being produced.
+   *
+   * The highlighter is imported here rather than at the top so its grammar, theme and
+   * engine are a chunk of their own, fetched the first time a code block appears.
+   */
+  willUpdate(changed: PropertyValues<this>) {
+    if (!changed.has("code")) return;
+
+    const code = this.code;
+    this.highlighted = null;
+    import("./highlight.js")
+      .then(({ highlightSass }) => highlightSass(code))
+      .then((markup) => {
+        if (this.code === code) this.highlighted = markup;
+      });
   }
 
   private get shortcut() {
@@ -128,7 +161,13 @@ export class CodeBlock extends LitElement {
         <span class="label">${this.label}</span>
         <button type="button" @click=${this.copy}>${this.action}</button>
       </header>
-      <pre role="region" aria-label=${this.label}><code>${this.code}</code></pre>
+      <div role="region" aria-label=${this.label}>
+        ${
+          this.highlighted === null
+            ? html`<pre tabindex="0"><code>${this.code}</code></pre>`
+            : unsafeHTML(this.highlighted)
+        }
+      </div>
     `;
   }
 }
