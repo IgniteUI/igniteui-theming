@@ -142,7 +142,9 @@ export type SurfaceRole = (typeof SURFACE_ROLES)[number];
  * A shade scale: a preset name, or an inline spec giving the contrast `range` a family
  * spans and the cubic-bezier `curve` that places each shade inside it.
  */
-export type ScaleSpec = string | { range?: number[]; curve?: number[] };
+export type ScaleSpec =
+  | string
+  | { range?: number[]; curve?: number[]; anchor?: "surface" | "white" };
 
 /**
  * One scale for every family, or a map keyed by family name.

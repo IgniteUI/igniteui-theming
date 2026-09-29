@@ -73,6 +73,7 @@ function scaleToSass(spec: ScaleSpec): string {
 
   if (spec.range) parts.push(`range: (${spec.range.join(", ")})`);
   if (spec.curve) parts.push(`curve: (${spec.curve.join(", ")})`);
+  if (spec.anchor) parts.push(`anchor: '${spec.anchor}'`);
 
   return `(${parts.join(", ")})`;
 }
@@ -86,7 +87,7 @@ function scalesToSass(scales: ScalesInput): string {
     return `'${scales}'`;
   }
 
-  if ("range" in scales || "curve" in scales) {
+  if ("range" in scales || "curve" in scales || "anchor" in scales) {
     return scaleToSass(scales as ScaleSpec);
   }
 

@@ -33,6 +33,7 @@ const scaleSpecSchema = z.union([
   z.object({
     range: z.array(z.number()).length(2).optional(),
     curve: z.array(z.number()).length(4).optional(),
+    anchor: z.enum(["surface", "white"]).optional(),
   }),
 ]);
 

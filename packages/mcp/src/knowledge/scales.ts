@@ -8,13 +8,20 @@
 import { FamilyScales, ShadeScales } from "igniteui-theming";
 
 export interface ShadeScale {
-  /** WCAG contrast at the lightest and darkest shade, measured against white. */
+  /** What `gray` measures the range against: the background, or white. */
+  anchor: "surface" | "white";
+  /** WCAG contrast at the lightest and darkest shade, measured against the anchor. */
   range: [number, number];
   /** Cubic-bezier control points, or null for the straight line. */
   curve: [number, number, number, number] | null;
 }
 
-const toScale = (raw: { range: string[]; curve: string[] }): ShadeScale => ({
+const toScale = (raw: {
+  anchor: "surface" | "white";
+  range: string[];
+  curve: string[];
+}): ShadeScale => ({
+  anchor: raw.anchor,
   range: [Number(raw.range[0]), Number(raw.range[1])],
   curve:
     raw.curve.length === 4 && raw.curve[0] !== ""
@@ -37,7 +44,7 @@ export const FAMILY_SCALES: Record<string, string> = FamilyScales;
 export const SCALE_NOTES: Record<string, string> = {
   even: "Straight line. Every pair of shades 500 apart clears WCAG AA - the only preset that guarantees it.",
   material:
-    "This library's original grayscale. Familiar rhythm, but 2 of the 5 AA pairs fall short.",
+    "This library's original grayscale, light and dark: fixed gray colors, reversed on a dark surface. Familiar rhythm, but 2 of the 5 AA pairs fall short.",
   tailwind: "Fitted to Tailwind v4 slate. Keeps all 5 AA pairs.",
   carbon: "Fitted to IBM Carbon gray 10-100. Keeps all 5 AA pairs.",
 };
@@ -53,7 +60,7 @@ export function buildScalesGuidance(): string {
       ? `\`${scale.curve.join(", ")}\``
       : "straight line";
 
-    return `| \`${name}\` | ${scale.range[0]}:1 → ${scale.range[1]}:1 | ${curve} | ${SCALE_NOTES[name] ?? ""} |`;
+    return `| \`${name}\` | ${scale.range[0]}:1 → ${scale.range[1]}:1 | ${curve} | \`${scale.anchor}\` | ${SCALE_NOTES[name] ?? ""} |`;
   });
 
   const defaults = Object.entries(FAMILY_SCALES)
@@ -65,18 +72,21 @@ export function buildScalesGuidance(): string {
 A scale is the *rhythm* of a color family - where each shade sits between the lightest and
 the darkest. It never changes the hue; the seed color still decides that.
 
-Two numbers describe it:
+Two numbers describe it, and a third setting matters for \`gray\`:
 
-- **range** - the WCAG contrast the family spans, from shade 50 to shade 900, measured
-  against white (or against the background, for \`gray\`). \`1.182 18.232\` means the lightest
-  shade sits at 1.18:1 and the darkest at 18.23:1.
+- **range** - the WCAG contrast the family spans, from shade 50 to shade 900. \`1.182 18.232\`
+  means the lightest shade sits at 1.18:1 and the darkest at 18.23:1.
 - **curve** - read exactly like a CSS \`cubic-bezier()\` timing function. \`x\` is how far along
   the shades you are, \`y\` is how far into the contrast range. No curve is the straight line.
+- **anchor** - what \`gray\` measures the range against. Every other family uses white.
+  \`surface\` (default): against the background, so shade 50 sits nearest the page and a dark
+  theme gets grays spaced from its own background. \`white\`: the same gray colors in every
+  theme, reversed on a dark surface (50 darkest) - how the original grayscale was built.
 
 ## Built-in scales
 
-| name | range | curve | notes |
-|------|-------|-------|-------|
+| name | range | curve | anchor | notes |
+|------|-------|-------|--------|-------|
 ${rows.join("\n")}
 
 Defaults: ${defaults}. Every other family uses \`even\`.

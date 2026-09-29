@@ -40,6 +40,22 @@ describe("shade scales", () => {
     );
   });
 
+  it("carries the anchor through the generated JSON", () => {
+    expect(SHADE_SCALES.material.anchor).toBe("white");
+    expect(SHADE_SCALES.carbon.anchor).toBe("surface");
+  });
+
+  it("emits an inline anchor", () => {
+    const code = generatePalette({
+      ...base,
+      scales: { gray: { range: [1.1, 14], anchor: "white" } },
+    }).code;
+
+    expect(code).toContain(
+      "$scales: ('gray': (range: (1.1, 14), anchor: 'white'))",
+    );
+  });
+
   it("emits the generator only when asked", () => {
     expect(generatePalette(base).code).not.toContain("$generator");
     expect(generatePalette({ ...base, generator: "legacy" }).code).toContain(
