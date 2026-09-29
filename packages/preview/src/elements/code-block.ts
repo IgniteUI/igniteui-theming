@@ -76,8 +76,8 @@ export class CodeBlock extends LitElement {
       border-radius: var(--radius-sm, 3px);
       overflow-x: auto;
       font-family: var(--mono, ui-monospace, monospace);
-      font-size: var(--text-sm, 12px);
-      line-height: 1.65;
+      font-size: var(--text-md, 14px);
+      line-height: 1.6;
     }
 
     pre:focus-visible {

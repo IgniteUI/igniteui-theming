@@ -1,8 +1,8 @@
 import "../../elements/index.js";
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing } from "lit";
 import { define } from "../../define.js";
 import { isPresetKey, isTheme, PRESETS, THEMES } from "../../variants.js";
-import { ColorStateController, setColorState } from "./state.js";
+import { ColorStateController, type ColorStore } from "./state.js";
 
 /** `igcSelect` carries the chosen button's value; an empty group emits undefined. */
 type Select = CustomEvent<string | undefined>;
@@ -16,6 +16,25 @@ type Select = CustomEvent<string | undefined>;
  * so its controls should be the components that framework themes.
  */
 export class ColorControls extends LitElement {
+  static properties = {
+    store: { attribute: false },
+    themes: { type: Boolean },
+  };
+
+  /** A store of its own; without one the controls drive the page's. */
+  declare store?: ColorStore;
+  /**
+   * Whether to offer light and dark. Only the grays and the surface depend on the page;
+   * a chromatic family is anchored to white and identical in both, so a demo of those
+   * has no use for the switch.
+   */
+  declare themes: boolean;
+
+  constructor() {
+    super();
+    this.themes = true;
+  }
+
   private state = new ColorStateController(this);
 
   createRenderRoot() {
@@ -32,7 +51,7 @@ export class ColorControls extends LitElement {
           selection="single"
           aria-labelledby="picker-palette"
           @igcSelect=${({ detail }: Select) => {
-            if (isPresetKey(detail)) setColorState({ preset: detail });
+            if (isPresetKey(detail)) this.state.set({ preset: detail });
           }}
         >
           ${PRESETS.map(
@@ -45,13 +64,16 @@ export class ColorControls extends LitElement {
         </igc-button-group>
       </div>
 
+      ${
+        this.themes
+          ? html`
       <div class="picker">
         <span class="picker-label" id="picker-theme">Theme</span>
         <igc-button-group
           selection="single"
           aria-labelledby="picker-theme"
           @igcSelect=${({ detail }: Select) => {
-            if (isTheme(detail)) setColorState({ theme: detail });
+            if (isTheme(detail)) this.state.set({ theme: detail });
           }}
         >
           ${THEMES.map(
@@ -63,6 +85,9 @@ export class ColorControls extends LitElement {
           )}
         </igc-button-group>
       </div>
+          `
+          : nothing
+      }
     `;
   }
 }

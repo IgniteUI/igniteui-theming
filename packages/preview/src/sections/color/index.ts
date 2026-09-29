@@ -11,6 +11,14 @@ export const color: SectionDef = {
   },
   views: [
     {
+      id: "seeds",
+      title: "Seeds",
+      teaches:
+        "What happens to a very dark and a very pale seed when every seed is pinned to shade 500, and what the fitted generator makes of the same two.",
+      tag: "ig-view-seeds",
+      load: () => import("./seeds.js"),
+    },
+    {
       id: "shades",
       title: "Shades",
       teaches:

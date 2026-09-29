@@ -69,12 +69,10 @@ export class GamutPlot extends LitElement {
       font-family: var(--mono, ui-monospace, monospace);
       font-size: 9px;
       fill: currentColor;
-      opacity: 0.8;
     }
 
     .axis {
       letter-spacing: 0.08em;
-      opacity: 0.6;
     }
 
     .legend {
@@ -83,7 +81,7 @@ export class GamutPlot extends LitElement {
       gap: var(--space-4, 16px);
       margin-block-start: var(--space-3, 12px);
       font-family: var(--mono, ui-monospace, monospace);
-      font-size: var(--text-xs, 11px);
+      font-size: var(--text-sm, 13px);
       color: var(--muted);
     }
 

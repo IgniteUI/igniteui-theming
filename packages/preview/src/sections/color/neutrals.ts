@@ -1,9 +1,9 @@
 import "../../elements/index.js";
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing, type TemplateResult } from "lit";
 import { define } from "../../define.js";
 import type { Role, SurfaceBlock } from "../../preset-model.js";
 import { modelFor } from "./model.js";
-import { ColorStateController, setColorState } from "./state.js";
+import { ColorStateController, type ColorStore } from "./state.js";
 import { legend, type Probe, strip } from "./strip.js";
 
 /** A page built from nothing but the five surface roles, text included. */
@@ -41,12 +41,35 @@ const role = (surface: SurfaceBlock, r: Role) => html`
  * Both are about the page rather than about a color, which is why they share a view.
  */
 export class ViewNeutrals extends LitElement {
+  static properties = {
+    store: { attribute: false },
+    embedded: { type: Boolean },
+  };
+
+  /** A store of its own; without one the view follows the page's. */
+  declare store?: ColorStore;
+  /**
+   * In an article: no explanatory prose, and the grayscale comes first — the text around
+   * the embed introduces the grays before the layers.
+   */
+  declare embedded: boolean;
+
   private state = new ColorStateController(this);
+
+  constructor() {
+    super();
+    this.embedded = false;
+  }
+
+  /** A paragraph the app shows and an embed leaves to the article. */
+  private prose(content: TemplateResult) {
+    return this.embedded ? nothing : content;
+  }
 
   private get probe(): Probe {
     return {
       pinned: this.state.value.pinned,
-      pin: (pinned) => setColorState({ pinned }),
+      pin: (pinned) => this.state.set({ pinned }),
     };
   }
 
@@ -58,7 +81,7 @@ export class ViewNeutrals extends LitElement {
     const model = modelFor(this.state.value);
     const surface = model.surface;
 
-    return html`
+    const layers = html`
       <article>
         <header>
           <span class="dot" style=${`background:${surface.bg}`}></span>
@@ -69,42 +92,51 @@ export class ViewNeutrals extends LitElement {
           ${mock(surface)}
           <div>
             <div class="stack">${strip(surface.legacySurface, this.probe)}</div>
-            <p class="note">
+            ${this.prose(html`<p class="note">
               Ten numbered shades, with nothing to say what each one is for. On a very
               light or very dark page most of them end up the same color as the
               background, because there is simply no room left to go lighter or darker.
-            </p>
+            </p>`)}
             <ig-palette-scope class="roles" .vars=${surface.fittedVars}>
               ${surface.roles.map((r) => role(surface, r))}
             </ig-palette-scope>
-            <p class="note">
+            ${this.prose(html`<p class="note">
               Five roles, each named after its job. When a role has no room left it
               deliberately settles onto the background, and a shadow carries the sense
               of depth instead. The mock page on the left is built entirely from these
               five roles, text included.
-            </p>
+            </p>`)}
           </div>
         </div>
       </article>
+    `;
 
-      ${legend(this.probe)}
-
+    const grays = html`
       <h3 class="group">Grayscale</h3>
-      <p class="sub">
+      ${this.prose(html`<p class="sub">
         The grays are anchored to the page rather than to white, so shade 50 is always
         the one closest to the background, in a light theme and a dark one alike. This
         palette seeds them with <code>${surface.seed}</code>.
-      </p>
+      </p>`)}
       <article>
         <div class="stack">${surface.grays.map((row) => strip(row, this.probe))}</div>
-        <p class="note">
+        ${this.prose(html`<p class="note">
           Both rows fail the same two pairs, and that is deliberate. The gray family uses
           the <code>material</code> scale by default, which keeps the rhythm our grayscale
           has always had at the cost of two AA pairs. The Scales demo below is where that
           trade is made, and where you can undo it.
-        </p>
+        </p>`)}
       </article>
     `;
+
+    const key = legend(this.probe, {
+      against: html`the page, <code>${surface.bg.toLowerCase()}</code>`,
+      rows: [surface.legacySurface, ...surface.grays],
+    });
+
+    return this.embedded
+      ? html`${key}${grays}<h3 class="group">Surface</h3>${layers}`
+      : html`${layers}${key}${grays}`;
   }
 }
 

@@ -44,6 +44,8 @@ export class CurveEditor extends LitElement {
     points: { attribute: false },
     low: { type: String },
     high: { type: String },
+    from: { type: String },
+    to: { type: String },
   };
 
   static styles = css`
@@ -59,16 +61,18 @@ export class CurveEditor extends LitElement {
       touch-action: none;
     }
 
+    /*
+     * In viewBox units, which render at about 0.95px each in an article column. 14 keeps
+     * the labels near 13px on screen; full opacity keeps them at the ink's contrast.
+     */
     .tick {
       font-family: var(--mono, ui-monospace, monospace);
-      font-size: 10px;
+      font-size: 14px;
       fill: currentColor;
-      opacity: 0.8;
     }
 
     .axis {
       letter-spacing: 0.08em;
-      opacity: 0.6;
     }
 
     .handle {
@@ -102,6 +106,9 @@ export class CurveEditor extends LitElement {
   declare points: CurvePoint[];
   declare low: string;
   declare high: string;
+  /** The shade at each end of the axis. A scale run in reverse starts at 900. */
+  declare from: string;
+  declare to: string;
 
   private dragging: Handle | null = null;
 
@@ -111,6 +118,8 @@ export class CurveEditor extends LitElement {
     this.points = [];
     this.low = "";
     this.high = "";
+    this.from = "50";
+    this.to = "900";
   }
 
   disconnectedCallback() {
@@ -238,9 +247,9 @@ export class CurveEditor extends LitElement {
         <!-- Closes the range, so a handle pulled above it reads as overshoot. -->
         <line x1=${LEFT} y1=${TOP} x2=${px(1)} y2=${TOP}
           stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4" />
-        <text x=${LEFT + 6} y=${TOP + 11} class="tick">${this.high}</text>
-        <text x=${LEFT + 6} y=${BOTTOM - 6} class="tick">${this.low}</text>
-        <text x="13" y=${BOTTOM} transform=${`rotate(-90 13 ${BOTTOM})`} class="tick axis">CONTRAST</text>
+        <text x=${LEFT + 6} y=${TOP + 14} class="tick">${this.high}</text>
+        <text x=${LEFT + 16} y=${BOTTOM - 8} class="tick">${this.low}</text>
+        <text x="16" y=${BOTTOM} transform=${`rotate(-90 16 ${BOTTOM})`} class="tick axis">CONTRAST</text>
         ${this.points.map(
           (
             p,
@@ -254,8 +263,8 @@ export class CurveEditor extends LitElement {
         )}
         ${this.handle("p1")}
         ${this.handle("p2")}
-        <text x=${px(0)} y="200" text-anchor="middle" class="tick">50</text>
-        <text x=${px(1)} y="200" text-anchor="middle" class="tick">900</text>
+        <text x=${px(0)} y="202" text-anchor="middle" class="tick">${this.from}</text>
+        <text x=${px(1)} y="202" text-anchor="middle" class="tick">${this.to}</text>
       </svg>
     `;
   }

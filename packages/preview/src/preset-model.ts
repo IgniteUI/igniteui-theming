@@ -175,6 +175,25 @@ const row = ({
 
 const WHITE: Rgb = [255, 255, 255];
 
+/**
+ * The ten numbered shades of one chromatic family, measured against white. For a view
+ * that shows a family on its own rather than as part of a shipped preset.
+ */
+export const familyRow = (
+  side: PresetSide,
+  label: string,
+  family: Family,
+): Row =>
+  row({
+    side,
+    label,
+    family,
+    keys: SHADES,
+    against: WHITE,
+    againstLabel: "white",
+    probeable: true,
+  });
+
 export const buildPreset = (preset: Preset): PresetModel => {
   const bg = preset.seeds.surface;
   const page = toRgb(bg);

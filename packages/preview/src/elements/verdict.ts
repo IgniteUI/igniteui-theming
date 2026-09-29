@@ -19,7 +19,7 @@ export class Verdict extends LitElement {
       flex-direction: column;
       gap: 2px;
       font-family: var(--mono, ui-monospace, monospace);
-      font-size: var(--text-xs, 11px);
+      font-size: var(--text-sm, 13px);
     }
 
     .ok {

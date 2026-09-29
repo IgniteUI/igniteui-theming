@@ -2,9 +2,9 @@
 import { describe, expect, it } from "vitest";
 import {
   ColorStateController,
-  getColorState,
+  ColorStore,
+  pageColorStore,
   readColorState,
-  setColorState,
   writeColorState,
 } from "./state.js";
 
@@ -51,30 +51,66 @@ describe("writeColorState", () => {
   });
 });
 
-describe("the store", () => {
+const fakeHost = (store?: ColorStore) => {
+  const host = {
+    updates: 0,
+    store,
+    addController() {},
+    removeController() {},
+    requestUpdate() {
+      host.updates++;
+    },
+    updateComplete: Promise.resolve(true),
+  };
+  return host;
+};
+
+describe("the page store", () => {
   it("updates the hash without navigating, and tells its hosts", () => {
-    let updates = 0;
-    const host = {
-      addController() {},
-      removeController() {},
-      requestUpdate: () => updates++,
-      updateComplete: Promise.resolve(true),
-    };
+    const host = fakeHost();
     const controller = new ColorStateController(host);
     controller.hostConnected();
 
-    setColorState({ preset: "fluent" });
+    pageColorStore().set({ preset: "fluent" });
 
-    expect(getColorState().preset).toBe("fluent");
+    expect(pageColorStore().value.preset).toBe("fluent");
     expect(controller.value.preset).toBe("fluent");
     expect(location.hash).toContain("preset=fluent");
-    expect(updates).toBe(1);
+    expect(host.updates).toBe(1);
 
-    setColorState({ preset: "fluent" });
-    expect(updates).toBe(1);
+    pageColorStore().set({ preset: "fluent" });
+    expect(host.updates).toBe(1);
 
     controller.hostDisconnected();
-    setColorState({ pinned: "50" });
-    expect(updates).toBe(1);
+    pageColorStore().set({ pinned: "50" });
+    expect(host.updates).toBe(1);
+  });
+});
+
+describe("a local store", () => {
+  it("never touches the address bar", () => {
+    const before = location.href;
+    const store = new ColorStore();
+    const host = fakeHost(store);
+    const controller = new ColorStateController(host);
+    controller.hostConnected();
+
+    controller.set({ preset: "bootstrap", theme: "dark" });
+
+    expect(location.href).toBe(before);
+    expect(store.value).toMatchObject({ preset: "bootstrap", theme: "dark" });
+    expect(host.updates).toBe(1);
+  });
+
+  it("is independent of other stores", () => {
+    const a = new ColorStore();
+    const b = new ColorStore();
+    const host = fakeHost(b);
+    new ColorStateController(host).hostConnected();
+
+    a.set({ pinned: "100" });
+
+    expect(b.value.pinned).toBeNull();
+    expect(host.updates).toBe(0);
   });
 });

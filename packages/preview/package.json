@@ -6,16 +6,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:embed": "vite --open /pages/",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json",
-    "lint": "stylelint \"./src/**/*.scss\" && npm run typecheck"
+    "lint": "stylelint \"./src/**/*.scss\" && npm run typecheck",
+    "build:embed": "vite build --config vite.embed.config.ts",
+    "preview:embed": "npm run build:embed && vite preview --config vite.embed.config.ts --open /pages/"
   },
   "devDependencies": {
     "happy-dom": "^20.14.5",
     "igniteui-webcomponents": "^7.3.2",
     "lit": "^3.2.1",
+    "marked": "^18.0.14",
     "sass-embedded": "~1.92.1",
     "shiki": "^4.4.3",
     "stylelint": "^17.5.0",

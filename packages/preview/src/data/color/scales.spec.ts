@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 import { AA, contrast, toRgb } from "../../color.js";
 import {
   rampFromTable,
+  readingFor,
   SCALE_PRESETS,
   type ScalePreset,
 } from "../../scale-math.js";
@@ -30,8 +31,11 @@ const rampFromSass = (subject: ScaleSubject, preset: ScalePreset) => {
   );
 };
 
-const rampFromData = (subject: ScaleSubject, preset: ScalePreset) =>
-  rampFromTable(subject.table, preset).map((h) => toRgb(`#${h}`));
+/** Read the way the editor reads it: a white-anchored gray from its white table. */
+const rampFromData = (subject: ScaleSubject, preset: ScalePreset) => {
+  const { table, flip } = readingFor(subject, preset);
+  return rampFromTable(table, preset, flip).map((h) => toRgb(`#${h}`));
+};
 
 /** How many of the five "500 apart" pairs clear AA, under one preset, for one subject. */
 const record = (subject: ScaleSubject, name: string) => {
@@ -116,6 +120,10 @@ describe("the AA record each preset carries", () => {
     expect(record(light, "material")).toBe(3);
     expect(record(light, "tailwind")).toBe(5);
     expect(record(light, "carbon")).toBe(5);
+  });
+
+  it("keeps the same record on a dark page, the original grays in reverse", () => {
+    expect(record(neutral("dark"), "material")).toBe(3);
   });
 
   it("is stable across subjects that can reach the range", () => {

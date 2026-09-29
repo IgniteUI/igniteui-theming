@@ -16,7 +16,7 @@
  * `material` scale exists, and it cannot be shown on a chromatic family.
  */
 import { contrast, hex, toRgb } from "../../color.js";
-import type { ScaleTable } from "../../scale-math.js";
+import type { Anchor, ScaleTable } from "../../scale-math.js";
 import { PRESETS, SHADES, THEMES, type Theme } from "../../variants.js";
 import { defineProvider } from "../provider.js";
 import { register } from "../registry.js";
@@ -35,6 +35,8 @@ export const SPAN: [number, number] = [1, 21];
 export interface ScaleSubject {
   key: string;
   label: string;
+  /** For a narrow picker: an embed in an article column, on a phone. */
+  short: string;
   /** Which `<preset>-<theme>` selections this subject serves. */
   presets: string[];
   /** What the reader is looking at, in one line. */
@@ -47,9 +49,14 @@ export interface ScaleSubject {
   table: ScaleTable;
   /** The highest contrast this subject can actually reach against its anchor. */
   ceiling: number;
+  /**
+   * Gray only: the same family under a white-anchored scale — measured against white,
+   * and reversed on a dark page.
+   */
+  white?: { table: ScaleTable; ceiling: number };
 }
 
-type Definition = Omit<ScaleSubject, "table" | "ceiling">;
+type Definition = Omit<ScaleSubject, "table" | "ceiling" | "white">;
 
 export interface ScaleData {
   subjects: ScaleSubject[];
@@ -114,6 +121,7 @@ const definitions = (): Definition[] => {
       {
         key: `${entry.name}-primary`,
         label: `${capitalise(entry.name)} primary`,
+        short: "Primary",
         note: "A color family, measured against white.",
         family: "primary",
         seed: entry.primary,
@@ -124,6 +132,7 @@ const definitions = (): Definition[] => {
       {
         key: `${entry.name}-${entry.theme}-gray`,
         label: `Gray on a ${entry.theme} page`,
+        short: `Gray on ${entry.theme}`,
         note: "Measured against the page instead of white. This is the family the material scale was tuned for.",
         family: "gray",
         seed: entry.gray,
@@ -154,15 +163,56 @@ const sampled = () =>
   );
 
 /** One rule per target: every shade pinned to the same contrast. */
-const probe = (index: number, subject: Definition, target: number) => {
+const probe = (
+  index: string,
+  subject: Definition,
+  target: number,
+  anchor: Anchor,
+) => {
   const surface =
     subject.family === "gray" ? `, $surface: ${subject.surface}` : "";
   const range = `${target.toFixed(5)} ${target.toFixed(5)}`;
 
   return (
     `o${index} { $s: shades('${subject.family}', ${subject.seed}, types.$INumericShades` +
-    `${surface}, $scale: (range: ${range}, curve: null)); v: '${shadeList("$s")}'; }`
+    `${surface}, $scale: (range: ${range}, curve: null, anchor: '${anchor}')); v: '${shadeList("$s")}'; }`
   );
+};
+
+/** The sampled rows of one subject's table, and the most contrast they reach. */
+const tableOf = (
+  payloads: Map<string, string[]>,
+  prefix: string,
+  key: string,
+  anchor: string,
+) => {
+  const rows = SHADES.map(() => [] as string[]);
+
+  for (let k = 0; k < SAMPLES; k++) {
+    const literals = payloads.get(`${prefix}_${k}`);
+    if (!literals)
+      throw new Error(`scales: missing rule for ${key} sample ${k}`);
+
+    literals.forEach((literal, position) => {
+      rows[position].push(hex(toRgb(literal)).slice(1));
+    });
+  }
+
+  const reference = toRgb(anchor);
+  const ceiling = Math.max(
+    ...rows.flatMap((row) =>
+      row.map((h) => contrast(toRgb(`#${h}`), reference)),
+    ),
+  );
+
+  return {
+    ceiling: Number(ceiling.toFixed(3)),
+    table: {
+      samples: SAMPLES,
+      span: SPAN,
+      rows: rows.map((row) => row.join("")),
+    },
+  };
 };
 
 export const scaleData = defineProvider<ScaleData>({
@@ -172,9 +222,16 @@ export const scaleData = defineProvider<ScaleData>({
   build() {
     const subjects = definitions();
     const targets = sampled();
-    const rules = subjects.flatMap((subject, s) =>
-      targets.map((target, k) => probe(s * SAMPLES + k, subject, target)),
-    );
+    const rules = subjects.flatMap((subject, s) => [
+      ...targets.map((target, k) =>
+        probe(`${s}s_${k}`, subject, target, "surface"),
+      ),
+      ...(subject.family === "gray"
+        ? targets.map((target, k) =>
+            probe(`${s}w_${k}`, subject, target, "white"),
+          )
+        : []),
+    ]);
     const { css, warnings } = compile(
       `@use 'sass:map';\n@use 'sass/color' as *;\n@use 'sass/color/types' as types;\n` +
         HEX_USE +
@@ -188,48 +245,23 @@ export const scaleData = defineProvider<ScaleData>({
       },
     );
 
-    const payloads = new Map<number, string[]>();
+    const payloads = new Map<string, string[]>();
     for (const [, index, payload] of css.matchAll(
-      /o(\d+)\s*\{\s*v:\s*"([^"]+)"/g,
+      /o(\d+[sw]_\d+)\s*\{\s*v:\s*"([^"]+)"/g,
     )) {
-      payloads.set(Number(index), payload.split("|"));
+      payloads.set(index, payload.split("|"));
     }
 
     return {
       warnings,
-      subjects: subjects.map((subject, s) => {
-        const rows = SHADES.map(() => [] as string[]);
-
-        for (let k = 0; k < SAMPLES; k++) {
-          const literals = payloads.get(s * SAMPLES + k);
-          if (!literals) {
-            throw new Error(
-              `scales: missing rule for ${subject.key} sample ${k}`,
-            );
-          }
-
-          literals.forEach((literal, position) => {
-            rows[position].push(hex(toRgb(literal)).slice(1));
-          });
-        }
-
-        const anchor = toRgb(subject.anchor);
-        const ceiling = Math.max(
-          ...rows.flatMap((row) =>
-            row.map((h) => contrast(toRgb(`#${h}`), anchor)),
-          ),
-        );
-
-        return {
-          ...subject,
-          ceiling: Number(ceiling.toFixed(3)),
-          table: {
-            samples: SAMPLES,
-            span: SPAN,
-            rows: rows.map((row) => row.join("")),
-          },
-        };
-      }),
+      subjects: subjects.map((subject, s) => ({
+        ...subject,
+        ...tableOf(payloads, `${s}s`, subject.key, subject.anchor),
+        white:
+          subject.family === "gray"
+            ? tableOf(payloads, `${s}w`, subject.key, "#ffffff")
+            : undefined,
+      })),
     };
   },
 });

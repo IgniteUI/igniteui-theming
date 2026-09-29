@@ -7,10 +7,10 @@ import {
 } from "../../variants.js";
 
 /**
- * What every view in the color section reads. One store rather than one control per
- * view: the point of the section is that a single seed set flows through the shades, the
- * surface roles and the scale editor at once, and a reader should be able to see that by
- * moving one control.
+ * What the color views read. In the preview app one store serves the whole section: the
+ * point there is that a single seed set flows through the shades, the surface roles and
+ * the scale editor at once. An embed gets a store of its own, so a demo in an article does
+ * not move because the reader changed one three sections earlier.
  */
 export interface ColorState {
   /** A palette the library ships, by name. */
@@ -20,14 +20,14 @@ export interface ColorState {
   /**
    * The shade number every numbered strip measures against, or null.
    *
-   * Section state rather than per-view: it is one key space, and a reader who pins 100 in
+   * Store state rather than per-view: it is one key space, and a reader who pins 100 in
    * one place has asked the same question of every strip that has a 100. It stays out of
    * the hash — a palette is a selection worth linking to, an inspection is not.
    */
   pinned: string | null;
 }
 
-const FALLBACK: ColorState = {
+export const DEFAULT_COLOR_STATE: ColorState = {
   preset: "material",
   theme: "light",
   pinned: null,
@@ -40,8 +40,8 @@ export const readColorState = (hash: string): ColorState => {
   const theme = query.get("theme");
 
   return {
-    preset: isPresetKey(preset) ? preset : FALLBACK.preset,
-    theme: isTheme(theme) ? theme : FALLBACK.theme,
+    preset: isPresetKey(preset) ? preset : DEFAULT_COLOR_STATE.preset,
+    theme: isTheme(theme) ? theme : DEFAULT_COLOR_STATE.theme,
     pinned: null,
   };
 };
@@ -57,53 +57,115 @@ export const writeColorState = (hash: string, state: ColorState) => {
   return `${path || "#/color"}?${params}`;
 };
 
-let state = readColorState(location.hash);
-const listeners = new Set<() => void>();
+/** A selection and the hosts watching it. */
+export class ColorStore {
+  private state: ColorState;
+  private readonly listeners = new Set<() => void>();
 
-export const getColorState = (): ColorState => state;
-
-export const setColorState = (patch: Partial<ColorState>) => {
-  const next = { ...state, ...patch };
-
-  if (
-    next.preset === state.preset &&
-    next.theme === state.theme &&
-    next.pinned === state.pinned
+  /** `onChange` runs after every real change, before the hosts are told. */
+  constructor(
+    initial: Partial<ColorState> = {},
+    private readonly onChange?: (state: ColorState) => void,
   ) {
-    return;
+    this.state = { ...DEFAULT_COLOR_STATE, ...initial };
   }
 
-  state = next;
+  get value(): ColorState {
+    return this.state;
+  }
 
-  // `replaceState` rather than assigning the hash: the selection is not a navigation,
-  // and a `hashchange` here would send the shell scrolling to the view in the path.
-  history.replaceState(null, "", writeColorState(location.hash, next));
+  set(patch: Partial<ColorState>) {
+    const next = { ...this.state, ...patch };
 
-  for (const listener of listeners) listener();
+    if (
+      next.preset === this.state.preset &&
+      next.theme === this.state.theme &&
+      next.pinned === this.state.pinned
+    ) {
+      return;
+    }
+
+    this.state = next;
+    this.onChange?.(next);
+    for (const listener of this.listeners) listener();
+  }
+
+  subscribe(listener: () => void) {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
+}
+
+let page: ColorStore | undefined;
+
+/**
+ * The preview app's store, mirrored into the hash. Created on first use rather than at
+ * import, so an embed — which always brings its own store — never reads or writes the
+ * address bar of the page it sits on.
+ */
+export const pageColorStore = (): ColorStore => {
+  page ??= new ColorStore(readColorState(location.hash), (next) =>
+    // `replaceState` rather than assigning the hash: the selection is not a navigation,
+    // and a `hashchange` here would send the shell scrolling to the view in the path.
+    history.replaceState(null, "", writeColorState(location.hash, next)),
+  );
+
+  return page;
 };
+
+/** A host that may be handed a store. Without one it reads the page's. */
+export interface ColorStoreHost extends ReactiveControllerHost {
+  store?: ColorStore;
+}
 
 /**
  * Re-renders its host whenever the selection changes. A controller rather than an event
  * on the shell so a view is independent of where it is mounted.
  */
 export class ColorStateController implements ReactiveController {
-  private readonly host: ReactiveControllerHost;
+  private readonly host: ColorStoreHost;
   private readonly listener = () => this.host.requestUpdate();
+  private bound?: ColorStore;
+  private release?: () => void;
 
-  constructor(host: ReactiveControllerHost) {
+  constructor(host: ColorStoreHost) {
     this.host = host;
     host.addController(this);
   }
 
+  get store(): ColorStore {
+    return this.host.store ?? pageColorStore();
+  }
+
   get value(): ColorState {
-    return state;
+    return this.store.value;
+  }
+
+  set(patch: Partial<ColorState>) {
+    this.store.set(patch);
+  }
+
+  private bind() {
+    const store = this.store;
+    if (store === this.bound) return;
+
+    this.release?.();
+    this.bound = store;
+    this.release = store.subscribe(this.listener);
   }
 
   hostConnected() {
-    listeners.add(this.listener);
+    this.bind();
+  }
+
+  /** A store handed over after connection takes effect on the next render. */
+  hostUpdate() {
+    if (this.bound) this.bind();
   }
 
   hostDisconnected() {
-    listeners.delete(this.listener);
+    this.release?.();
+    this.release = undefined;
+    this.bound = undefined;
   }
 }

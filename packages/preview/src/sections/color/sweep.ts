@@ -14,11 +14,14 @@ const SWEEP_INTERVAL = 45;
 /** Sweeps the seed across the whole hue circle, at more than one saturation. */
 export class ViewSweep extends LitElement {
   static properties = {
+    embedded: { type: Boolean },
     hue: { state: true },
     row: { state: true },
     running: { state: true },
   };
 
+  /** In an article: the plot with a one-line key, and the argument left to the text. */
+  declare embedded: boolean;
   declare hue: number;
   /** Index into `data.rows`: which saturation. */
   declare row: number;
@@ -28,6 +31,7 @@ export class ViewSweep extends LitElement {
 
   constructor() {
     super();
+    this.embedded = false;
     this.hue = 204;
     this.row = data.rows.length - 1;
     this.running = false;
@@ -150,6 +154,15 @@ export class ViewSweep extends LitElement {
         <span><span class="key-hatch" aria-hidden="true"></span><b>clamped</b>: the generator asked for a color the screen cannot show</span>
       </div>
 
+      ${
+        this.embedded
+          ? html`
+            <ig-gamut-plot seed=${this.seed} .legacy=${legacy} .fitted=${fitted}></ig-gamut-plot>
+            <div class="keyline">
+              <span>The lit shape is every color this hue can show on screen.</span>
+            </div>
+          `
+          : html`
       <div class="two-up is-plot">
         <ig-gamut-plot seed=${this.seed} .legacy=${legacy} .fitted=${fitted}></ig-gamut-plot>
         <div>
@@ -175,6 +188,8 @@ export class ViewSweep extends LitElement {
           </p>
         </div>
       </div>
+          `
+      }
     `;
   }
 }

@@ -1,6 +1,6 @@
 import "../../elements/index.js";
 import data from "virtual:data/color.scales";
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing } from "lit";
 import {
   AA,
   contrast,
@@ -14,6 +14,7 @@ import { define } from "../../define.js";
 import type { CurvePoint } from "../../elements/curve-editor.js";
 import {
   call,
+  type Entry,
   entries,
   list,
   map,
@@ -22,11 +23,13 @@ import {
   statement,
 } from "../../sass-code.js";
 import {
+  type Anchor,
   type Curve,
   ease,
   lookup,
   position,
   rampFromTable,
+  readingFor,
   SCALE_PRESETS,
   type Scale,
   type ScalePreset,
@@ -34,7 +37,7 @@ import {
   target,
 } from "../../scale-math.js";
 import { SHADES } from "../../variants.js";
-import { ColorStateController } from "./state.js";
+import { ColorStateController, type ColorStore } from "./state.js";
 
 /** The two ends of the range cannot cross; this keeps them apart on the sliders. */
 const MIN_RANGE = 0.5;
@@ -53,22 +56,37 @@ interface Step {
 /** Range and curve, made editable. */
 export class ViewScales extends LitElement {
   static properties = {
+    store: { attribute: false },
+    embedded: { type: Boolean },
     subject: { state: true },
     lo: { state: true },
     hi: { state: true },
     curve: { state: true },
+    anchor: { state: true },
   };
 
+  /** A store of its own; without one the view follows the page's. */
+  declare store?: ColorStore;
+  /**
+   * In an article there is no palette picker above the editor, so it offers the
+   * selected palette's subjects in both themes — the dark page is where the ceiling
+   * shows — and tucks the step table away.
+   */
+  declare embedded: boolean;
   declare subject: string;
   declare lo: number;
   declare hi: number;
   declare curve: Curve | null;
+  /** What a gray subject's range is measured against. Other families ignore it. */
+  declare anchor: Anchor;
 
   private state = new ColorStateController(this);
 
   constructor() {
     super();
+    this.embedded = false;
     this.subject = "";
+    this.anchor = "surface";
     this.apply(SCALE_PRESETS[0]);
   }
 
@@ -112,8 +130,12 @@ export class ViewScales extends LitElement {
    */
   private get available(): ScaleSubject[] {
     const { preset, theme } = this.state.value;
-    const tag = `${preset}-${theme}`;
-    const matching = data.subjects.filter((s) => s.presets.includes(tag));
+    const tags = this.embedded
+      ? [`${preset}-light`, `${preset}-dark`]
+      : [`${preset}-${theme}`];
+    const matching = data.subjects.filter((s) =>
+      tags.some((tag) => s.presets.includes(tag)),
+    );
 
     return matching.length ? matching : data.subjects;
   }
@@ -125,21 +147,36 @@ export class ViewScales extends LitElement {
   }
 
   private get scale(): Scale {
-    return { range: [this.lo, this.hi], curve: this.curve };
+    return {
+      range: [this.lo, this.hi],
+      curve: this.curve,
+      anchor: this.anchor,
+    };
   }
 
-  private get ramp(): Step[] {
-    const subject = this.current;
-    const anchor = toRgb(subject.anchor);
+  private get reading() {
+    return readingFor(this.current, this.scale);
+  }
 
-    return SHADES.map((key, i) => {
-      const x = position(i);
+  /**
+   * The ramp in scale order, nearest the anchor first. For a white-anchored gray on a dark
+   * page that runs from shade 900 to 50, so the chart, the strip and the ladder all read
+   * the same way and the keys show the reversal.
+   */
+  private get ramp(): Step[] {
+    const { table, anchor: reference, flip } = this.reading;
+    const anchor = toRgb(reference);
+    const last = SHADES.length - 1;
+
+    return SHADES.map((_, k) => {
+      const i = flip ? last - k : k;
+      const x = position(k);
       const t = ease(x, this.curve);
       const wanted = target(this.scale.range, t);
-      const hex = `#${lookup(subject.table, i, wanted)}`;
+      const hex = `#${lookup(table, i, wanted)}`;
 
       return {
-        key,
+        key: SHADES[i],
         x,
         t,
         target: wanted,
@@ -149,10 +186,11 @@ export class ViewScales extends LitElement {
     });
   }
 
-  private apply({ range, curve }: Scale) {
+  private apply({ range, curve, anchor }: Scale) {
     this.lo = range[0];
     this.hi = range[1];
     this.curve = curve ? ([...curve] as Curve) : null;
+    this.anchor = anchor ?? "surface";
   }
 
   private get code() {
@@ -177,6 +215,9 @@ export class ViewScales extends LitElement {
                   "curve",
                   this.curve ? list(...this.curve.map(num)) : raw("null"),
                 ],
+                ...(neutral && this.anchor === "white"
+                  ? [["anchor", raw("'white'")] as Entry]
+                  : []),
               ]),
             ],
           ]),
@@ -186,7 +227,8 @@ export class ViewScales extends LitElement {
   }
 
   private preset(preset: ScalePreset) {
-    const hexes = rampFromTable(this.current.table, preset);
+    const { table, flip } = readingFor(this.current, preset);
+    const hexes = rampFromTable(table, preset, flip);
     const failing = shadePairs(hexes.map((h) => toRgb(`#${h}`))).filter(
       (pair) => pair.contrast < AA,
     ).length;
@@ -208,7 +250,7 @@ export class ViewScales extends LitElement {
 
   private subjects(subject: ScaleSubject) {
     return html`
-      <div class="subjects">
+      <div class="scale-settings">
         <span class="tag" id="scale-subject">Subject</span>
         <igc-button-group
           selection="single"
@@ -220,21 +262,61 @@ export class ViewScales extends LitElement {
           ${this.available.map(
             (entry) => html`
               <igc-toggle-button value=${entry.key} ?selected=${entry === subject}>
-                ${entry.label}
+                ${this.embedded ? entry.short : entry.label}
               </igc-toggle-button>
             `,
           )}
         </igc-button-group>
+        ${subject.family === "gray" ? this.anchors() : nothing}
       </div>
-      <p class="note subject-note">
-        ${subject.note} Against <code>${subject.anchor}</code> it tops out at
-        <b>${subject.ceiling.toFixed(2)}:1</b>.
-      </p>
+      <p class="note subject-note">${this.readingNote(subject)}</p>
     `;
   }
 
-  private controls(subject: ScaleSubject) {
-    const overshoot = this.hi > subject.ceiling + CEILING_SLACK;
+  /** Gray only: what the range is measured against. */
+  private anchors() {
+    return html`
+        <span class="tag" id="scale-anchor">Measured from</span>
+        <igc-button-group
+          selection="single"
+          aria-labelledby="scale-anchor"
+          @igcSelect=${({ detail }: CustomEvent<string | undefined>) => {
+            if (detail === "surface" || detail === "white")
+              this.anchor = detail;
+          }}
+        >
+          <igc-toggle-button value="surface" ?selected=${this.anchor === "surface"}>
+            The page
+          </igc-toggle-button>
+          <igc-toggle-button value="white" ?selected=${this.anchor === "white"}>
+            White
+          </igc-toggle-button>
+        </igc-button-group>
+    `;
+  }
+
+  private readingNote(subject: ScaleSubject) {
+    const { anchor, ceiling, flip } = this.reading;
+
+    if (subject.family !== "gray") {
+      return html`${subject.note} Against <code>${anchor}</code> it tops out at
+        <b>${ceiling.toFixed(2)}:1</b>.`;
+    }
+
+    if (this.anchor === "white") {
+      return html`Measured from white, as the original grayscale was: the same ten grays
+        in every theme${flip ? html`, so on this dark page they run in reverse, <b>900</b> to <b>50</b>` : ""}.`;
+    }
+
+    return html`Measured from the page, <code>${anchor}</code>: shade 50 sits nearest it and
+      each number steps away. It tops out at <b>${ceiling.toFixed(2)}:1</b>.`;
+  }
+
+  private controls() {
+    const { ceiling, anchor, flip } = this.reading;
+    const reference = anchor === "#ffffff" ? "white" : "the page";
+    const [near, far] = flip ? ["900", "50"] : ["50", "900"];
+    const overshoot = this.hi > ceiling + CEILING_SLACK;
     const curveLabel = this.curve
       ? this.curve.map((v) => v.toFixed(2)).join(", ")
       : "linear";
@@ -242,10 +324,10 @@ export class ViewScales extends LitElement {
     return html`
       <div class="controls">
         <div class="control">
-          <label class="control-label" for="scale-lo">Lightest shade <b>${this.lo.toFixed(2)}:1</b></label>
+          <label class="control-label" for="scale-lo">Nearest shade <b>${this.lo.toFixed(2)}:1</b></label>
           <igc-slider
             id="scale-lo"
-            aria-label="Lightest shade contrast"
+            aria-label=${`Contrast of shade ${near} against ${reference}`}
             .min=${1}
             .max=${4}
             .step=${0.01}
@@ -254,13 +336,13 @@ export class ViewScales extends LitElement {
               this.lo = Math.min(detail, this.hi - MIN_RANGE);
             }}
           ></igc-slider>
-          <p class="control-hint">How much shade 50 stands out from the anchor. At 1:1 it would be the anchor itself.</p>
+          <p class="control-hint">How much shade ${near} stands out from ${reference}. At 1:1 it would be ${reference} itself.</p>
         </div>
         <div class="control">
-          <label class="control-label" for="scale-hi">Darkest shade <b>${this.hi.toFixed(2)}:1</b></label>
+          <label class="control-label" for="scale-hi">Farthest shade <b>${this.hi.toFixed(2)}:1</b></label>
           <igc-slider
             id="scale-hi"
-            aria-label="Darkest shade contrast"
+            aria-label=${`Contrast of shade ${far} against ${reference}`}
             .min=${6}
             .max=${21}
             .step=${0.01}
@@ -272,9 +354,9 @@ export class ViewScales extends LitElement {
           <p class=${`control-hint ${overshoot ? "is-over" : ""}`}>
             ${
               overshoot
-                ? html`That is more than this subject can reach (${subject.ceiling.toFixed(2)}:1).
-                  The dark end gets squeezed and pairs start to fail.`
-                : "How much shade 900 stands out. Black on white is 21:1, the most contrast there is."
+                ? html`That is more than this subject can reach (${ceiling.toFixed(2)}:1).
+                  The far end gets squeezed and pairs start to fail.`
+                : `How much shade ${far} stands out. Black on white is 21:1, the most contrast there is.`
             }
           </p>
         </div>
@@ -289,26 +371,24 @@ export class ViewScales extends LitElement {
     `;
   }
 
-  /** Every guaranteed pair as a bar spanning the two shades, on a twenty-column grid. */
+  /**
+   * Every guaranteed pair as a bar spanning the two shades, on a twenty-column grid, with
+   * its label on a line of its own starting where the bar does. Every row is the same
+   * height, and a label never has to find room beside its bar.
+   */
   private ladder(ramp: Step[]) {
     return html`
       <div class="ladder">
         ${shadePairs(ramp.map((s) => toRgb(s.hex))).map((pair) => {
-          const ok = pair.contrast >= AA;
-          // Labels sit after the bar until the bar reaches the right edge, then before it.
-          const tail = pair.j >= SHADES.length - 3;
-          const bar = `${pair.i * 2 + 2} / ${pair.j * 2 + 2}`;
-          const label = tail
-            ? `1 / ${pair.i * 2 + 2}`
-            : `${pair.j * 2 + 2} / -1`;
+          const state = pair.contrast >= AA ? "is-passing" : "is-failing";
+          const start = pair.i * 2 + 2;
 
           return html`
             <div class="ladder-row">
-              <span class=${`ladder-bar ${ok ? "is-passing" : "is-failing"}`} style=${`grid-column:${bar}`}></span>
-              <span class=${`ladder-tag ${ok ? "is-passing" : "is-failing"} ${tail ? "is-before" : ""}`}
-                style=${`grid-column:${label}`}>
+              <span class=${`ladder-tag ${state}`} style=${`grid-column:${start} / -1`}>
                 ${ramp[pair.i].key}&ndash;${ramp[pair.j].key} ${pair.contrast.toFixed(1)}:1
               </span>
+              <span class=${`ladder-bar ${state}`} style=${`grid-column:${start} / ${pair.j * 2 + 2}`}></span>
             </div>
           `;
         })}
@@ -353,7 +433,7 @@ export class ViewScales extends LitElement {
       <div class="scale-presets">${SCALE_PRESETS.map((p) => this.preset(p))}</div>
 
       ${this.subjects(subject)}
-      ${this.controls(subject)}
+      ${this.controls()}
 
       <div class="stage">
         <ig-curve-editor
@@ -361,16 +441,18 @@ export class ViewScales extends LitElement {
           .points=${points}
           low=${`${this.lo.toFixed(2)}:1`}
           high=${`${this.hi.toFixed(2)}:1`}
+          from=${ramp[0].key}
+          to=${ramp[ramp.length - 1].key}
           @curve-change=${({ detail }: CustomEvent<Curve>) => {
             this.curve = detail;
           }}
         ></ig-curve-editor>
 
-        <div class="strip is-attached">
+        <div class="strip">
           ${ramp.map(
             (s) => html`
               <span class="swatch" style=${`background:${s.hex};color:${readableOn(toRgb(s.hex))}`}
-                title=${`${s.key}  ${s.hex}\n${s.reached.toFixed(2)}:1 against ${subject.anchor}`}>
+                title=${`${s.key}  ${s.hex}\n${s.reached.toFixed(2)}:1 against ${this.reading.anchor}`}>
                 <span class="swatch-key">${s.key}</span>
                 <span class="swatch-ratio">${s.reached.toFixed(1)}:1</span>
               </span>
@@ -381,7 +463,14 @@ export class ViewScales extends LitElement {
         ${this.ladder(ramp)}
       </div>
 
-      ${this.table(ramp)}
+      ${
+        this.embedded
+          ? html`<details class="steps">
+              <summary>Every shade, step by step</summary>
+              ${this.table(ramp)}
+            </details>`
+          : this.table(ramp)
+      }
 
       <ig-code-block label="This scale as Sass" .code=${this.code}></ig-code-block>
     `;

@@ -4,14 +4,22 @@
  * tests that check the table against Sass all agree on it.
  */
 
+import { luminance, toRgb } from "./color.js";
+import type { ScaleSubject } from "./data/color/scales.js";
+
 /** Cubic bezier control points, `(x1, y1, x2, y2)`, as the Sass `curve` option takes them. */
 export type Curve = [number, number, number, number];
+
+/** What `gray` measures a range against: the background (the default), or white. */
+export type Anchor = "surface" | "white";
 
 export interface Scale {
   /** Contrast of shade 50 and shade 900 against the anchor. */
   range: [number, number];
   /** How positions are eased between them. `null` is a straight line. */
   curve: Curve | null;
+  /** Only `gray` reads it; every other family is measured against white. */
+  anchor?: Anchor;
 }
 
 export interface ScalePreset extends Scale {
@@ -32,7 +40,8 @@ export const SCALE_PRESETS: ScalePreset[] = [
     name: "material",
     range: [1.04, 16.1],
     curve: [0.53, 0, 0.825, 0.785],
-    why: "The grayscale we have always shipped.",
+    why: "The grayscale we have always shipped, light and dark.",
+    anchor: "white",
   },
   {
     name: "tailwind",
@@ -77,6 +86,36 @@ export const ease = (x: number, curve: Curve | null) => {
   return bezier((lo + hi) / 2, curve[1], curve[3]);
 };
 
+/** How a scale reads for a subject: which table, what it is measured against, which way. */
+export interface Reading {
+  table: ScaleTable;
+  anchor: string;
+  ceiling: number;
+  /** A white-anchored gray on a dark page: shade 50 takes the far end of the range. */
+  flip: boolean;
+}
+
+export const readingFor = (subject: ScaleSubject, scale: Scale): Reading =>
+  subject.white && scale.anchor === "white"
+    ? {
+        table: subject.white.table,
+        anchor: "#ffffff",
+        ceiling: subject.white.ceiling,
+        flip: luminance(toRgb(subject.surface)) <= 0.5,
+      }
+    : {
+        table: subject.table,
+        anchor: subject.anchor,
+        ceiling: subject.ceiling,
+        flip: false,
+      };
+
+export interface ScaleData {
+  subjects: ScaleSubject[];
+  /** Sass warnings raised while compiling, reported by the plugin on every serve. */
+  warnings: string[];
+}
+
 /** Where a shade sits on the 0–1 axis, before easing. */
 export const position = (index: number, count = 10) => index / (count - 1);
 
@@ -118,10 +157,24 @@ export const lookup = (
 };
 
 /** The ten hexes a scale produces from a table. */
-export const rampFromTable = (table: ScaleTable, scale: Scale) =>
-  targets(scale).map((contrast, i) => lookup(table, i, contrast));
+/**
+ * The ten hexes a scale produces from a table. `flip` reads the scale backwards, as the
+ * generator does for a white-anchored gray on a dark surface: shade 50 takes the target
+ * at the far end.
+ */
+export const rampFromTable = (
+  table: ScaleTable,
+  scale: Scale,
+  flip = false,
+) => {
+  const wanted = targets(scale);
+  const last = wanted.length - 1;
+
+  return wanted.map((_, i) => lookup(table, i, wanted[flip ? last - i : i]));
+};
 
 export const sameScale = (a: Scale, b: Scale) =>
   a.range[0] === b.range[0] &&
   a.range[1] === b.range[1] &&
-  String(a.curve) === String(b.curve);
+  String(a.curve) === String(b.curve) &&
+  (a.anchor ?? "surface") === (b.anchor ?? "surface");
