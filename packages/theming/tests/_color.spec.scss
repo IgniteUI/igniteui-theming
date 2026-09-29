@@ -426,6 +426,37 @@ $_legacy-palette: palette(
                 }
             }
 
+            @include it('keeps the tint of a cool or warm gray seed') {
+                // Bootstrap's gray: chroma 0.0145, under the color families' threshold.
+                $p: palette(
+                    $primary: #0d6efd,
+                    $secondary: #6c757d,
+                    $gray: #adb5bd,
+                    $surface: #f8f9fa,
+                );
+                $mid: color($p, gray, 500);
+
+                @include assert-true(
+                    color.channel($mid, 'blue', $space: rgb) > color.channel($mid, 'red', $space: rgb) + 8
+                );
+                @include assert-true(color.channel($mid, 'chroma', $space: oklch) < 0.03);
+            }
+
+            @include it('rounds a gray seed with only a rounding-error hue to neutral') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $gray: #7f8080,
+                    $surface: #fff,
+                );
+
+                @each $v in $_numbered {
+                    $c: color($p, gray, $v);
+
+                    @include assert-equal(color.channel($c, 'saturation', $space: hsl), 0%);
+                }
+            }
+
             @include it('emits concrete colors, not runtime expressions') {
                 $p: palette(
                     $primary: #09f,
@@ -605,6 +636,101 @@ $_legacy-palette: palette(
                 @each $v, $want in $expected {
                     @include assert-true(contrast(color($p, gray, $v), $want) < 1.06);
                 }
+            }
+
+            @include it('follows the original dark grayscale on a dark surface') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                );
+                // The legacy dark grays: the light lightness table read the other way.
+                $expected: (
+                    '50': 13%,
+                    '100': 26%,
+                    '200': 38%,
+                    '300': 54%,
+                    '400': 62%,
+                    '500': 74%,
+                    '600': 88%,
+                    '700': 93%,
+                    '800': 96%,
+                    '900': 98%,
+                );
+
+                @each $v, $l in $expected {
+                    $got: color.channel(color($p, gray, $v), 'lightness', $space: oklab);
+                    $want: color.channel(hsl(0, 0%, $l), 'lightness', $space: oklab);
+
+                    @include assert-true(math.abs($got - $want) < 2.5%);
+                }
+            }
+
+            @include it('keeps a white-anchored gray fixed and reverses it on a dark surface') {
+                $light: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+                $dark: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $gray: #000,
+                    $surface: #222,
+                );
+                $pairs: (
+                    '50': '900',
+                    '200': '700',
+                    '400': '500',
+                );
+
+                @each $a, $b in $pairs {
+                    @include assert-equal(color($dark, gray, $a), color($light, gray, $b));
+                }
+            }
+
+            @include it('measures a surface-anchored gray from the page') {
+                $p: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                    $scales: (
+                        'gray': 'even',
+                    ),
+                );
+
+                // shade 50 sits nearest the page, and the range is read from it
+                @include assert-true(contrast(color($p, gray, 50), #222) < 1.25);
+                @include assert-true(contrast(color($p, gray, 400), #222) < 4);
+            }
+
+            @include it('takes an anchor on an inline scale') {
+                $preset: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                );
+                $inline: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: 0.53 0 0.825 0.785,
+                            anchor: 'white',
+                        ),
+                    ),
+                );
+                $light: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                );
+
+                @include assert-equal(color($inline, gray, 300), color($preset, gray, 300));
+                // chromatic families are measured against white either way
+                @include assert-equal(color($preset, primary, 600), color($light, primary, 600));
             }
 
             @include it('flips the grayscale for a dark surface but not the color ramps') {

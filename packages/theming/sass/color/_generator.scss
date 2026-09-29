@@ -24,8 +24,12 @@ $_accent-targets: (
     'A700': 6.2,
 );
 
-// Below this chroma a seed's hue is a rounding artifact. Surfaces are exempt.
+// Below this chroma a color seed is treated as gray. Surfaces are exempt.
 $_neutral-threshold: 0.02;
+
+// Below this chroma a gray seed's hue is a rounding artifact. Gray has no saturation floor,
+// so a cool or warm gray keeps its tint, capped by `$_neutral-tint-cap`.
+$_gray-hue-threshold: 0.004;
 
 // Keeps a tinted gray a gray.
 $_neutral-tint-cap: 0.12;
@@ -78,11 +82,12 @@ $_target-tolerance: 0.05;
     @return _bezier(math.div($lo + $hi, 2), list.nth($curve, 2), list.nth($curve, 4));
 }
 
-/// Resolves a scale argument into its `(range:, curve:)` pair.
+/// Resolves a scale argument into its `(range:, curve:, anchor:)` map.
 /// @param {String} $name - The family name, used to look up a default in `$family-scales`.
 /// @param {String | Map | List} $given - A preset name, a `(range:, curve:)` map, a bare curve, or null.
 /// @returns {Map} The resolved scale. Falls back to `even` for both the scale and a missing range.
 /// @throws Unknown scale "<name>".
+/// @throws Unknown scale anchor "<anchor>".
 @function _scale($name, $given) {
     $spec: $given;
 
@@ -101,18 +106,23 @@ $_target-tolerance: 0.05;
             @error 'Unknown scale "#{$spec}". Available: #{map.keys(config.$scales)}.';
         }
 
-        @return $found;
+        $spec: $found;
     }
 
     $default-range: map.get(config.$scales, $_default-scale, range);
 
     @if meta.type-of($spec) == 'list' and list.length($spec) == 4 {
-        @return (range: $default-range, curve: $spec);
+        @return (range: $default-range, curve: $spec, anchor: 'surface');
     }
 
     $range: map.get($spec, range);
+    $anchor: map.get($spec, anchor) or 'surface';
 
-    @return (range: if($range, $range, $default-range), curve: map.get($spec, curve));
+    @if not list.index(('surface', 'white'), $anchor) {
+        @error 'Unknown scale anchor "#{$anchor}". Use "surface" or "white".';
+    }
+
+    @return (range: if($range, $range, $default-range), curve: map.get($spec, curve), anchor: $anchor);
 }
 
 /// The contrast target for one shade, placed along the scale by its curve.
@@ -354,7 +364,8 @@ $_target-tolerance: 0.05;
 
     // Backgrounds are picked deliberately, and a warm vs cool dark sits below the
     // threshold that rounds a near-gray seed to neutral.
-    $chromatic: if($is-surface, map.get($read, 'c') > 0, map.get($read, 'c') >= $_neutral-threshold);
+    $threshold: if($is-neutral, $_gray-hue-threshold, $_neutral-threshold);
+    $chromatic: if($is-surface, map.get($read, 'c') > 0, map.get($read, 'c') >= $threshold);
     $tent: if($chromatic, gamut.tent($sh), (0, 0));
     $s: _level($read, $tent, $chromatic, $is-neutral);
 
@@ -362,9 +373,13 @@ $_target-tolerance: 0.05;
         @return _surface($seed, $variants, $sh, $tent, map.get($read, 'c'));
     }
 
-    $anchor-y: if($is-neutral, luminance($surface), 1);
-    $ctx: _context($sh, $tent, $anchor-y, $is-neutral and $anchor-y <= 0.5);
     $sc: _scale($key, $scale);
+    $on-surface: $is-neutral and map.get($sc, anchor) == 'surface';
+    $anchor-y: if($on-surface, luminance($surface), 1);
+    $ctx: _context($sh, $tent, $anchor-y, $on-surface and $anchor-y <= 0.5);
+
+    // A white-anchored gray keeps its colors on a dark surface and runs them in reverse.
+    $flip: $is-neutral and not $on-surface and luminance($surface) <= 0.5;
     $result: ();
     $i: 0;
     $n: 0;
@@ -419,10 +434,10 @@ $_target-tolerance: 0.05;
                         $key,
                         $v,
                         $ctx,
-                        _target($sc, $i, $n),
+                        _target($sc, if($flip, $n - 1 - $i, $i), $n),
                         (
                             level: $s,
-                            at: math.div($i, $n - 1),
+                            at: math.div(if($flip, $n - 1 - $i, $i), $n - 1),
                             softness: $_ceiling-softness,
                         )
                     )

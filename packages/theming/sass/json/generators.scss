@@ -31,6 +31,7 @@ scales {
         $curve: map.get($spec, curve);
 
         > #{$name} {
+            --anchor: #{map.get($spec, anchor) or 'surface'};
             --range: [#{list.nth($range, 1)}, #{list.nth($range, 2)}];
             --curve: [
                 #{if(

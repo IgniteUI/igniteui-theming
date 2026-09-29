@@ -14,20 +14,28 @@ $shade-generator: 'fitted' !default;
 
 /// Ready-made scale shapes.
 ///
-/// `range` is the WCAG contrast the family spans, from shade 50 to shade 900, measured
-/// against white — or against the background for `gray`. So `1.182 18.232` means the
-/// lightest shade sits at 1.18:1 and the darkest at 18.23:1.
+/// `range` is the WCAG contrast the family spans, from shade 50 to shade 900. So
+/// `1.182 18.232` means the lightest shade sits at 1.18:1 and the darkest at 18.23:1.
 ///
 /// `curve` is read exactly like a CSS `cubic-bezier()` timing function: x is how far
 /// along the shades you are, y is how far into that contrast range. `null` is the
 /// straight line, and an even spread is what makes any two shades 500 apart clear AA —
 /// bunching the light end buys a familiar rhythm at the cost of that guarantee.
 ///
+/// `anchor` is what `range` is measured against for `gray`. Every other family is
+/// measured against white.
+///
+/// - `'surface'` (default) — against the background. Shade 50 sits nearest the page and
+///   each number steps away from it, so a dark theme gets grays spaced from its own
+///   background.
+/// - `'white'` — against white, as the original grayscale was built. The ten grays are
+///   the same colors in every theme; on a dark surface they run in reverse, 50 darkest.
+///
 /// Each preset was fitted to the published scale it names. Bracketed figures are the max
 /// ΔE from that scale and how many of the five "500 apart" pairs still clear AA.
 ///
 /// - `even` — straight [5/5]
-/// - `material` — this library's original grayscale [0.025, 3/5]
+/// - `material` — this library's original grayscale, light and dark [0.025, 3/5]
 /// - `tailwind` — Tailwind v4 slate [0.013, 5/5]
 /// - `carbon` — IBM Carbon gray 10–100 [0.007, 5/5]
 ///
@@ -37,6 +45,8 @@ $shade-generator: 'fitted' !default;
 ///   $p: palette($primary: #09f, $secondary: #f0f, $surface: #fff, $scales: ('gray': 'carbon'));
 /// @example scss - Or write one inline
 ///   $p: palette(#09f, #f0f, #fff, $scales: ('gray': (range: 1.1 14, curve: 0.5 0 0.8 0.8)));
+/// @example scss - Keep a gray ramp's colors fixed across light and dark themes
+///   $p: palette(#09f, #f0f, #121212, $scales: ('gray': (range: 1.1 14, anchor: 'white')));
 $scales: (
     'even': (
         range: 1.182 18.232,
@@ -45,6 +55,7 @@ $scales: (
     'material': (
         range: 1.04 16.1,
         curve: 0.53 0 0.825 0.785,
+        anchor: 'white',
     ),
     'tailwind': (
         range: 1.04 17.76,

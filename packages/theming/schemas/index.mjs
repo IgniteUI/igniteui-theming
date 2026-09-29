@@ -34,12 +34,14 @@ export const PaletteMultipliersSchema = z.object({
 export const PaletteMetaSchema = z.record(z.string(), z.array(z.string()));
 
 /**
- * A shade scale: the WCAG contrast `range` the family spans from shade 50 to 900, and the
- * cubic-bezier `curve` that places each shade in it. An empty `curve` is the straight line.
+ * A shade scale: the WCAG contrast `range` the family spans from shade 50 to 900, the
+ * cubic-bezier `curve` that places each shade in it, and what `gray` measures the range
+ * against. An empty `curve` is the straight line.
  */
 export const ShadeScalesSchema = z.record(
   z.string(),
   z.object({
+    anchor: z.enum(["surface", "white"]),
     range: z.array(z.string()).length(2),
     curve: z.array(z.string()),
   }),
