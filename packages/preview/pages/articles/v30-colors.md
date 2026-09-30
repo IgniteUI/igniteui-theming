@@ -8,7 +8,7 @@ Now imagine doing it again for another starting color.
 
 A palette generator should make that work easier for whatever color arrives in the brief: a deep navy, a pale mint, a vivid orange. Each needs a usable range of shades, from quiet backgrounds to strong accents and dark text.
 
-Our previous palette generator in Ignite UI Theming could produce a pleasant scale from some seeds. Give it a very dark or very light color, though, and its limitations became obvious. A dark seed could produce an entire family of dark shades. A pale seed could produce several tokens that all resolved to white. You had ten shades, but fewer useful choices.
+Our previous palette generator in Ignite UI Theming could produce a pleasant scale from some seeds. Give it a very dark or very light color, though, and its limitations became obvious. A dark seed could produce an entire family of dark shades. A pale seed could produce several tokens that all resolved to white. You had ten numbered shades, but fewer useful choices.
 
 That is a fairly fundamental shortcoming for a tool whose input is supposed to be *your* color. We had made the quality of the result too dependent on where that color happened to start. The work of compensating for our algorithm fell back on the person using it.
 
@@ -16,7 +16,7 @@ Our new fitted palette generator addresses that problem by separating the charac
 
 To see why that required a different approach, it helps to look at what the old generator did.
 
-We call the input color a *seed*. It becomes a family such as `primary`, with ten numbered shades from `50` to `900`. In the old generator, the seed occupied `500`. The other shades were calculated by multiplying its HSL saturation and lightness by fixed values.
+We call the input color a *seed*. It becomes a family such as `primary`, with ten numbered shades from `50` to `900`. The color families also get four accent shades, `A100` to `A700`; most of what follows is about the numbered ten. In the old generator, the seed occupied `500`. The other shades were calculated by multiplying its HSL saturation and lightness by fixed values.
 
 For shade `50`, the lightness multiplier was 1.78. Starting at 50% lightness, that gives you 89%: a plausible pale shade. Starting at 10%, it gives you 17.8%. The shade labeled as the lightest in the family is still dark.
 
@@ -59,11 +59,11 @@ Imagine making a blue progressively paler while insisting that it remain just as
 
 Our previous generator did not fit its adjustments to that boundary. At higher saturation, it could ask for colors outside sRGB and leave the display conversion to resolve them. That is another place where a neat sequence of calculated values could conceal a less useful result.
 
-This is what “fitted” refers to. Each family is built with its hue's available color range in mind. The generator varies chroma across the scale, tapering it toward the ends, and solves for the lightness needed to reach each contrast target. It measures contrast after gamut mapping, so the target concerns the color that can actually be emitted.
+This is what “fitted” refers to. Each family is built with its hue's available color range in mind. The generator varies chroma across the scale, tapering it toward the ends, and solves for the lightness needed to reach each contrast target. It measures contrast after gamut mapping, so the target concerns the color that can actually be emitted. The accents are solved the same way, against fixed targets of their own and at the edge of what the hue can hold, which is what keeps them vivid.
 
 The seed supplies the starting character of the family. The scale supplies its contrast structure.
 
-Separating those two things is what makes the feature useful across brands. You can change the color without inventing a new structure, or change the structure without individually editing ten colors.
+Separating those two things is what makes the feature useful across brands. You can change the color without inventing a new structure, or change the structure without editing each shade by hand.
 
 Once the generator can build a full scale independently of the seed's starting lightness, we can give that scale more useful rules. Contrast is one of them.
 
