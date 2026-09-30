@@ -442,6 +442,25 @@ $_legacy-palette: palette(
                 @include assert-true(color.channel($mid, 'chroma', $space: oklch) < 0.03);
             }
 
+            @include it('keeps the tint of a muted color seed') {
+                $p: palette(
+                    $primary: #0d6efd,
+                    $secondary: #6c757d,
+                    $surface: #fff,
+                );
+
+                @each $v in (100, 300, 500, 700, 'A200', 'A700') {
+                    $c: color($p, secondary, $v);
+                    $hue: color.channel($c, 'hue', $space: oklch);
+
+                    @include assert-true(color.channel($c, 'blue', $space: rgb) > color.channel($c, 'red', $space: rgb) + 5);
+                    @include assert-true($hue > 230deg and $hue < 260deg);
+
+                    // Tinted, not lifted to the saturation floor.
+                    @include assert-true(color.channel($c, 'chroma', $space: oklch) < 0.025);
+                }
+            }
+
             @include it('rounds a gray seed with only a rounding-error hue to neutral') {
                 $p: palette(
                     $primary: #09f,

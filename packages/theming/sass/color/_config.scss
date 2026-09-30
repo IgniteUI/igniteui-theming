@@ -101,6 +101,7 @@ $surface-roles: (
 $surface-container-alpha: 0.03 !default;
 
 /// Lower bound on the seed's saturation level, so a muted brand color still yields a usable ramp.
+/// A seed under 0.02 OKLCH chroma is read as a tinted gray and keeps the tint it has instead.
 /// @type Number
 /// @access public
 $saturation-floor: 0.3 !default;

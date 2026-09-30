@@ -45,7 +45,7 @@ export const FRAGMENTS = {
 
   /** What a seed color does and does not control */
   SEED_BEHAVIOUR:
-    "Every shade is solved for a contrast target, so a seed supplies HUE and SATURATION, not lightness - a very light or very dark brand color yields the same ramp as a mid-tone one. Pass the brand color as-is. The one caveat: a seed with almost no chroma (a near-white or near-gray wash) is read as neutral and produces a gray ramp.",
+    "Every shade is solved for a contrast target, so a seed supplies HUE and SATURATION, not lightness - a very light or very dark brand color yields the same ramp as a mid-tone one. Pass the brand color as-is. The one caveat: a seed with very little chroma (a tinted gray such #6c757d) keeps that tint rather than being saturated, so it produces a tinted-gray ramp; a seed with no measurable hue produces a pure gray one.",
 
   /** Monochromatic requirement - only applies to hand-written explicit shades */
   MONOCHROMATIC_RULE:

@@ -24,12 +24,12 @@ $_accent-targets: (
     'A700': 6.2,
 );
 
-// Below this chroma a color seed is treated as gray. Surfaces are exempt.
-$_neutral-threshold: 0.02;
+// Below this chroma a seed's hue is a rounding artifact, and the family is built neutral.
+$_hue-threshold: 0.004;
 
-// Below this chroma a gray seed's hue is a rounding artifact. Gray has no saturation floor,
-// so a cool or warm gray keeps its tint, capped by `$_neutral-tint-cap`.
-$_gray-hue-threshold: 0.004;
+// Below this chroma a color seed is a tinted gray. It keeps the tint it has rather than
+// being lifted to `config.$saturation-floor`. Gray always is one.
+$_muted-threshold: 0.02;
 
 // Keeps a tinted gray a gray.
 $_neutral-tint-cap: 0.12;
@@ -362,12 +362,12 @@ $_target-tolerance: 0.05;
     $read: gamut.read($seed);
     $sh: map.get($read, 'h');
 
-    // Backgrounds are picked deliberately, and a warm vs cool dark sits below the
-    // threshold that rounds a near-gray seed to neutral.
-    $threshold: if($is-neutral, $_gray-hue-threshold, $_neutral-threshold);
-    $chromatic: if($is-surface, map.get($read, 'c') > 0, map.get($read, 'c') >= $threshold);
+    // Backgrounds are picked deliberately, so a surface keeps any hue it has.
+    $c: map.get($read, 'c');
+    $chromatic: if($is-surface, $c > 0, $c >= $_hue-threshold);
+    $muted: $is-neutral or $c < $_muted-threshold;
     $tent: if($chromatic, gamut.tent($sh), (0, 0));
-    $s: _level($read, $tent, $chromatic, $is-neutral);
+    $s: _level($read, $tent, $chromatic, $muted);
 
     @if $is-surface {
         @return _surface($seed, $variants, $sh, $tent, map.get($read, 'c'));
@@ -418,7 +418,7 @@ $_target-tolerance: 0.05;
                         $ctx,
                         map.get($_accent-targets, $v),
                         (
-                            level: if($chromatic, 1, 0),
+                            level: if($muted, $s, if($chromatic, 1, 0)),
                             at: 0.5,
                             softness: $_accent-ceiling-softness,
                         )
