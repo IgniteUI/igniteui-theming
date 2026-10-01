@@ -33,6 +33,14 @@ $theme-schemas: () !default;
         )
     );
 
+    // Breadcrumb
+    @include tailwind-theme(
+        $component: breadcrumb,
+        $props: (
+            text-color,
+        )
+    );
+
     // Button Group
     @include tailwind-theme(
         $component: button-group,
@@ -86,6 +94,15 @@ $theme-schemas: () !default;
         $component: chip,
         $props: (
             background,
+        )
+    );
+
+    // Color Picker
+    @include tailwind-theme(
+        $component: color-picker,
+        $props: (
+            anchor-background,
+            picker-background,
         )
     );
 
@@ -203,6 +220,14 @@ $theme-schemas: () !default;
     // // Navdrawer
     @include tailwind-theme(
         $component: navdrawer,
+        $props: (
+            background,
+        )
+    );
+
+    // QR Code
+    @include tailwind-theme(
+        $component: qr-code,
         $props: (
             background,
         )
