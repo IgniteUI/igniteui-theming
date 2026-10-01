@@ -11,8 +11,8 @@
 
 /// Generates a base light query builder schema.
 /// @type Map
-/// @prop {Map} background [color: ('surface', 500)] - The background color of the query builder.
-/// @prop {Map} header-background [color: ('surface', 500)] - The background color of the query builder header.
+/// @prop {Map} background [color: ('surface', 'base')] - The background color of the query builder.
+/// @prop {Map} header-background [color: ('surface', 'base')] - The background color of the query builder header.
 /// @prop {Map} header-foreground [color: ('gray', 900)] - The foreground color of the query builder header.
 /// @prop {Color} header-border [transparent] - The border color of the query builder header.
 /// @prop {Map} label-foreground [color: ('gray', 700)] - The color for query builder labels "from" & "select".
@@ -30,14 +30,14 @@ $light-query-builder: extend(
         background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 
         header-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 

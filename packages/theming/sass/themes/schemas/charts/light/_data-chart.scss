@@ -28,7 +28,7 @@ $light-data-chart: (
 /// @prop {List} marker-brushes [series] - Defines the palette from which automatically assigned marker brushes are selected.
 /// @prop {List} outlines [series] - Defines the palette from which automatically assigned series outline colors are selected.
 /// @prop {List} marker-outlines [series] - Defines the palette from which automatically assigned marker outlines are selected.
-/// @prop {Color} plot-area-background [color: ('surface', 500)] - Sets the brush used as the background for the current Chart object's plot area.
+/// @prop {Color} plot-area-background [color: ('surface', 'base')] - Sets the brush used as the background for the current Chart object's plot area.
 /// @prop {String} title-horizontal-alignment [null] - The horizontal alignment to use for the title.
 /// @prop {String} subtitle-horizontal-alignment [null] - The horizontal alignment to use for the subtitle.
 /// @prop {List} axis-label-margin [null] - Sets the margin (top, right, bottom, left) of labels on the both axes.
@@ -74,7 +74,7 @@ $material-data-chart: extend(
         plot-area-background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
         title-horizontal-alignment: null,

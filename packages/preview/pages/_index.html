@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Embed test pages</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { max-width: 680px; margin: 64px auto; padding: 0 16px; font: 17px/1.6 system-ui, sans-serif; }
+  h2 { margin-block: 40px 8px; font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+  ul { padding-inline-start: 20px; }
+</style>
+</head>
+<body>
+<h1>Embed test pages</h1>
+<p>The embeddable demos, in the pages they are written for. Articles live in
+<code>pages/articles/*.md</code>; the demo list comes from <code>src/embed/catalog.ts</code>.</p>
+<h2>Articles</h2>
+<ul>
+{{articles}}
+</ul>
+<h2>Demos</h2>
+<ul>
+<li><a href="demos.html">Every demo, under a hostile stylesheet</a></li>
+</ul>
+</body>
+</html>

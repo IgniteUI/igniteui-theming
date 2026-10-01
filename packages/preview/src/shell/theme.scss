@@ -1,0 +1,19 @@
+// The preview app's theme: the mixins in `_theme-tokens.scss`, put on `:root`. A demo scope
+// redefining `--ig-gray-*` must not repaint a control sitting above it, which is also
+// why `chrome()` resolves to concrete colors.
+@use "theme-tokens" as theme;
+@include theme.structure;
+
+:root {
+    @include theme.scheme-light;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        @include theme.scheme-dark;
+    }
+}
+
+:root[data-theme="dark"] {
+    @include theme.scheme-dark;
+}

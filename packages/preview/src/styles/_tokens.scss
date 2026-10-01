@@ -1,0 +1,43 @@
+/*
+ * Type, space and layout tokens. A mixin rather than a rule, so the app can put them on
+ * `:root` and an embedded demo on its shadow `:host`.
+ */
+@mixin tokens {
+    --sans: ui-sans-serif, system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", menlo, monospace;
+
+    /*
+     * The widest thing on the page is a ten-swatch strip with a label and a ratio in each
+     * swatch, which stops gaining from extra width at about this point. Past it the rows
+     * only get longer to scan, so on a wide display the page centres instead.
+     */
+    --measure: 1280px;
+
+    /*
+     * Type. Nothing below 12px, so the smallest label is still a label — the one exception
+     * is the grade in a swatch's corner, which the swatch's tooltip and accessible name
+     * repeat. Anything read as a sentence (hints, legends, notes) is set at the base size.
+     */
+    --text-xs: 0.75rem;
+    --text-sm: 0.8125rem;
+    --text-md: 0.875rem;
+    --text-base: 0.9375rem;
+    --text-lg: 1.05rem;
+    --text-xl: 1.2rem;
+    --text-2xl: clamp(1.7rem, 4vw, 2.3rem);
+
+    /* Space, on a 4px grid. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --radius-sm: 3px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+    --swatch-height: 46px;
+}

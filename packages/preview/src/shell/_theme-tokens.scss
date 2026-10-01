@@ -1,0 +1,92 @@
+// The app is styled by the library it demonstrates. Chrome tokens resolve to concrete
+// colors here rather than aliasing `--ig-*`, because a demo scope that redefines
+// `--ig-gray-*` would otherwise repaint the chrome sitting inside it. Only the neutral
+// and semantic families are used: chrome carrying a hue of its own would change how the
+// swatches under test read.
+
+// Mixins rather than rules, so the preview app puts them on `:root` (theme.scss) and an
+// embedded demo on its shadow `:host` (embed/embed.scss).
+@use "../../../theming/sass/color" as *;
+@use "../../../theming/sass/elevations" as *;
+@use "../../../theming/sass/elevations/presets" as elevation-presets;
+@use "../../../theming/sass/themes" as themes;
+@use "../../../theming/sass/typography" as *;
+@use "../../../theming/sass/typography/presets" as type-presets;
+
+// Neutral surfaces, with no hue of their own: a demo embedded in someone else's article
+// has to sit on whatever page that is, and a tinted panel would clash with most of them.
+$light: palette($primary: #09f, $secondary: #df1b74, $surface: #fafafa, $gray: #333);
+$dark: palette($primary: #09f, $secondary: #df1b74, $surface: #1e1e1e, $gray: #333);
+
+@mixin chrome($palette, $semantic) {
+    // The page is the well and a card sits at the base level. Going the other way puts
+    // `raised` against a near-white page, where it has no room and collapses by design.
+    --ground: #{color($palette, "surface", "sunken")};
+    --panel: #{color($palette, "surface", "base")};
+    --raised: #{color($palette, "surface", "raised")};
+    --overlay: #{color($palette, "surface", "overlay")};
+    --ink: #{color($palette, "gray", 900)};
+
+    // 700, not 600: secondary text still has to clear 4.5:1 against the panel. On these
+    // neutral surfaces 600 lands near 3.7:1 in both schemes.
+    --muted: #{color($palette, "gray", 700)};
+    --line: #{color($palette, "gray", 200)};
+    --line-soft: #{color($palette, "gray", 100)};
+    --plot-ink: #{color($palette, "gray", 800)};
+    --pass: #{color($palette, "success", $semantic)};
+    --fail: #{color($palette, "error", $semantic)};
+}
+
+/*
+ * `igc-slider` and `igc-color-picker` still ask for `--ig-surface-500`, which the fitted
+ * generator no longer emits — surface became five named roles. Every numbered token
+ * resolves to `base`, which is the model rather than a fudge: under the fitted generator
+ * the page is one color and depth is carried by the roles and the elevation shadow. The
+ * library has the same decision to make for real consumers.
+ */
+@mixin surface-compat($palette) {
+    @each $shade in (50, 100, 200, 300, 400, 500, 600, 700, 800, 900) {
+        --ig-surface-#{$shade}: #{color($palette, "surface", "base")};
+        --ig-surface-#{$shade}-contrast: #{contrast-color($palette, "surface", "base")};
+    }
+}
+
+/*
+ * Sizing, spacing, type and elevation, the structure the shipped components assume.
+ * `indigo` throughout: `configureTheme` in `elements/ignite.ts` picks the same family.
+ *
+ * Emitted at the top level these land on `:root`; nested, on the enclosing selector. The
+ * `@property` registrations they carry are only honoured in a document stylesheet, which
+ * is why the embed lifts them out (see embed/styles.ts).
+ */
+@mixin structure {
+    @include themes.sizing;
+    @include themes.spacing;
+    @include typography($font-family: (ui-sans-serif, system-ui, sans-serif), $type-scale: type-presets.$indigo-type-scale);
+    @include elevations(elevation-presets.$indigo-elevations);
+}
+
+/*
+ * The shipped components read `--ig-*` at runtime, so supplying the branch's own palette
+ * here is what themes them — no rebuild of `igniteui-webcomponents`, and the controls are
+ * painted by the generator the demos are about.
+ *
+ * Semantic colors are chromatic, so they are anchored to white whatever the page is. The
+ * light scheme needs a dark variant of them and the dark scheme a light one.
+ */
+@mixin scheme-light {
+    color-scheme: light dark;
+
+    @include chrome($light, 700);
+    @include palette($light);
+    @include surface-compat($light);
+
+    --ig-theme-variant: light;
+}
+
+@mixin scheme-dark {
+    @include chrome($dark, 300);
+    @include surface-compat($dark);
+
+    --ig-theme-variant: dark;
+}

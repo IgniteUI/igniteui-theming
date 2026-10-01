@@ -6,10 +6,7 @@ import { formatCssOutput, generateThemeCss } from "../../generators/css.js";
 import { generateTheme } from "../../generators/sass.js";
 import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import {
-  analyzeThemeColorsForPalette,
-  formatPaletteSuitabilityWarnings,
   formatValidationResult,
-  generatePaletteSuitabilityComments,
   generateWarningComments,
   validatePaletteColors,
 } from "../../validators/index.js";
@@ -26,24 +23,16 @@ export async function handleCreateTheme(params: CreateThemeParams) {
     surface: params.surfaceColor,
   });
 
-  // Analyze colors for palette shade generation suitability
-  const suitabilityAnalysis = await analyzeThemeColorsForPalette({
-    primary: params.primaryColor,
-    secondary: params.secondaryColor,
-    surface: params.surfaceColor,
-  });
-
   if (output === "css") {
-    return handleCssOutput(params, validation, suitabilityAnalysis);
+    return handleCssOutput(params, validation);
   }
 
-  return handleSassOutput(params, validation, suitabilityAnalysis);
+  return handleSassOutput(params, validation);
 }
 
 async function handleCssOutput(
   params: CreateThemeParams,
   validation: Awaited<ReturnType<typeof validatePaletteColors>>,
-  suitabilityAnalysis: Awaited<ReturnType<typeof analyzeThemeColorsForPalette>>,
 ) {
   try {
     const result = await generateThemeCss({
@@ -91,11 +80,6 @@ async function handleCssOutput(
       responseParts.push(validationText);
     }
 
-    if (!suitabilityAnalysis.allSuitable) {
-      responseParts.push("");
-      responseParts.push(formatPaletteSuitabilityWarnings(suitabilityAnalysis));
-    }
-
     responseParts.push("");
     responseParts.push("```css");
     responseParts.push(formattedCss.trimEnd());
@@ -121,7 +105,6 @@ async function handleCssOutput(
 async function handleSassOutput(
   params: CreateThemeParams,
   validation: Awaited<ReturnType<typeof validatePaletteColors>>,
-  suitabilityAnalysis: Awaited<ReturnType<typeof analyzeThemeColorsForPalette>>,
 ) {
   // Generate the theme code
   const result = generateTheme({
@@ -148,13 +131,6 @@ async function handleSassOutput(
   // Add variant validation warnings (single-line comments)
   if (!validation.isValid) {
     allWarningComments.push(...generateWarningComments(validation));
-  }
-
-  // Add suitability warnings (block comment)
-  if (!suitabilityAnalysis.allSuitable) {
-    allWarningComments.push(
-      ...generatePaletteSuitabilityComments(suitabilityAnalysis),
-    );
   }
 
   // Insert all warning comments after the header but before the @use statement
@@ -205,12 +181,6 @@ async function handleSassOutput(
   if (validationText) {
     responseParts.push("");
     responseParts.push(validationText);
-  }
-
-  // Add suitability warnings (luminance issues)
-  if (!suitabilityAnalysis.allSuitable) {
-    responseParts.push("");
-    responseParts.push(formatPaletteSuitabilityWarnings(suitabilityAnalysis));
   }
 
   responseParts.push("");

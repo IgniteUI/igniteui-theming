@@ -25,8 +25,13 @@ describe("generatePaletteCss", () => {
     expect(result.css).toContain("--ig-primary-900");
     expect(result.css).toContain("--ig-secondary-50");
     expect(result.css).toContain("--ig-secondary-500");
-    expect(result.css).toContain("--ig-surface-50");
-    expect(result.css).toContain("--ig-surface-500");
+    // A surface is addressed by layer role, not by shade number
+    expect(result.css).toContain("--ig-surface-base");
+    expect(result.css).toContain("--ig-surface-sunken");
+    expect(result.css).toContain("--ig-surface-raised");
+    expect(result.css).toContain("--ig-surface-overlay");
+    expect(result.css).toContain("--ig-surface-container");
+    expect(result.css).not.toContain("--ig-surface-500");
     expect(result.css).toContain("--ig-gray-50");
     expect(result.css).toContain("--ig-gray-500");
     expect(result.css).toContain("--ig-wcag-aa");
@@ -51,7 +56,7 @@ describe("generatePaletteCss", () => {
     expect(result.description).toContain("dark palette");
     expect(result.css).toContain("--ig-primary-500");
     expect(result.css).toContain("--ig-secondary-500");
-    expect(result.css).toContain("--ig-surface-500");
+    expect(result.css).toContain("--ig-surface-base");
     expect(result.css).toContain("--ig-gray-500");
   });
 

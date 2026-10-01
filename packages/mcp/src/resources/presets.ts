@@ -62,6 +62,7 @@ import {
   WEBCOMPONENTS_RUNTIME_CONFIG,
   WEBCOMPONENTS_USAGE_EXAMPLES,
 } from "../knowledge/platforms/webcomponents.js";
+import { buildScalesGuidance } from "../knowledge/scales.js";
 import { TYPOGRAPHY_PRESETS } from "../knowledge/typography.js";
 
 /**
@@ -96,6 +97,7 @@ export const RESOURCE_URIS = {
   GUIDANCE_COLORS_STATES: `${RESOURCE_SCHEME}://guidance/colors/states`,
   GUIDANCE_COLORS_THEMES: `${RESOURCE_SCHEME}://guidance/colors/themes`,
   GUIDANCE_COLORS_CHARTS: `${RESOURCE_SCHEME}://guidance/colors/charts`,
+  GUIDANCE_COLORS_SCALES: `${RESOURCE_SCHEME}://guidance/colors/scales`,
   // Chart preset resources
   PRESETS_CHART_BRUSHES: `${RESOURCE_SCHEME}://presets/chart-brushes`,
   // Layout documentation resources
@@ -243,6 +245,13 @@ export const RESOURCE_DEFINITIONS = [
     name: "Chart Series Colors Guidance",
     description:
       "Guidance on the shared chart series brush palette (regular/color-blind), the accessibility toggle, per-chart-type color tokens (category, data, doughnut, pie, funnel, shape, financial, gauge, bullet graph), and the theme-vs-component-property override precedence. Excludes sparkline and selection/highlight colors.",
+    mimeType: "text/markdown",
+  },
+  {
+    uri: RESOURCE_URIS.GUIDANCE_COLORS_SCALES,
+    name: "Shade Scales",
+    description:
+      "The rhythm a color family follows from its lightest shade to its darkest: the built-in scales, what each trades away, and how to match a ladder from another design system",
     mimeType: "text/markdown",
   },
   {
@@ -510,6 +519,13 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
               mimeType: "application/json",
             },
             {
+              uri: RESOURCE_URIS.GUIDANCE_COLORS_SCALES,
+              name: "Shade Scales",
+              description:
+                "Built-in shade rhythms and how to fit one to an existing ladder",
+              mimeType: "text/markdown",
+            },
+            {
               uri: RESOURCE_URIS.GUIDANCE_COLORS_CHARTS,
               name: "Chart Series Colors Guidance",
               description:
@@ -572,6 +588,13 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
     RESOURCE_URIS.GUIDANCE_COLORS_CHARTS,
     () => ({
       content: CHART_SERIES_COLORS_MARKDOWN,
+      mimeType: "text/markdown",
+    }),
+  ],
+  [
+    RESOURCE_URIS.GUIDANCE_COLORS_SCALES,
+    () => ({
+      content: buildScalesGuidance(),
       mimeType: "text/markdown",
     }),
   ],
