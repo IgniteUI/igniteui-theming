@@ -16,14 +16,16 @@
 /// Tabs Theme
 ///
 /// PRIMARY TOKENS:
-/// - `$item-background` — The tabs header background.
+/// - `$item-background` — The tab items background.
 /// - `$item-active-color` — The active tab text color.
 ///
-/// Setting just `$item-background` will theme all tab states consistently.
+/// Setting just `$item-background` will theme all tab states consistently, including the
+/// header behind the items, which follows it unless `$header-background` is set.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {Color} $item-text-color [null] - The color used for the tab text color. Auto-derived from item-background or synced with item-icon-color.
-/// @param {Color} $item-background [null] - The background color used for the tabs header. PRIMARY - derives most colors.
+/// @param {Color} $item-background [null] - The background color used for the tab items. PRIMARY - derives most colors.
+/// @param {Color} $header-background [null] - The background color of the tabs header, behind the tab items. Auto-derived from item-background.
 /// @param {Color} $item-hover-background [null] - The background used for the tabs on hover. Auto-derived from item-background.
 /// @param {Color} $item-hover-color [null] - The text color used for the tabs on hover. Auto-derived from item-text-color or item-hover-background.
 /// @param {Color} $item-icon-color [null] - The color used for the tab icon. Auto-derived from item-background or synced with item-text-color.
@@ -58,6 +60,7 @@
     $schema: $light-material-schema,
     $item-text-color: null,
     $item-background: null,
+    $header-background: null,
     $item-hover-background: null,
     $item-hover-color: null,
     $item-icon-color: null,
@@ -93,6 +96,10 @@
 
     $theme: digest-schema($tabs-schema);
     $variant: map.get($theme, '_meta', 'theme');
+
+    @if not($header-background) and $item-background {
+        $header-background: var(--item-background);
+    }
 
     @if not($item-active-background) and $item-background {
         $item-active-background: var(--item-background);
@@ -273,6 +280,7 @@
             selector: $selector,
             item-text-color: $item-text-color,
             item-background: $item-background,
+            header-background: $header-background,
             item-hover-color: $item-hover-color,
             item-hover-background: $item-hover-background,
             item-icon-color: $item-icon-color,
