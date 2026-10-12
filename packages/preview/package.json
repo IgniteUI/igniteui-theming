@@ -13,7 +13,8 @@
     "typecheck": "tsc -p tsconfig.json",
     "lint": "stylelint \"./src/**/*.scss\" && npm run typecheck",
     "build:embed": "vite build --config vite.embed.config.ts",
-    "preview:embed": "npm run build:embed && vite preview --config vite.embed.config.ts --open /pages/"
+    "preview:embed": "npm run build:embed && vite preview --config vite.embed.config.ts --open /pages/",
+    "export:samples": "node scripts/export-samples.mjs"
   },
   "devDependencies": {
     "happy-dom": "^20.14.5",
