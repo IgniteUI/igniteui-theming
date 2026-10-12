@@ -197,11 +197,34 @@ $_enhanced-accessibility: false;
 
     @each $variant, $shade in $entries {
         $result: map.set($result, $variant, map.get($shade, 'css'));
-        $result: map.set($result, '#{$variant}-contrast', adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}));
+        $result: map.set($result, '#{$variant}-contrast', adaptive-contrast(_contrast-source($name, $variant, $shade)));
         $result: map.set($result, '#{$variant}-raw', map.get($shade, 'raw'));
     }
 
     @return $result;
+}
+
+/// The color a shade's contrast color is measured against. A translucent shade is seen over its
+/// backdrop, so it is measured as the two composited; measuring the translucent color alone would
+/// ignore its alpha and read a faint black layer as solid black. Both stay CSS variables, so the
+/// contrast follows either one at runtime.
+/// @access private
+/// @group Palettes
+/// @param {String} $name - The family name.
+/// @param {String} $variant - The shade variant.
+/// @param {Map} $shade - The shade entry, `(css:, raw:)`, with an optional `backdrop` variant.
+/// @returns {String} A CSS color to measure.
+@function _contrast-source($name, $variant, $shade) {
+    $self: var(--ig-#{$name}-#{$variant});
+    $backdrop: map.get($shade, 'backdrop');
+
+    @if not $backdrop {
+        @return #{$self};
+    }
+
+    $alpha: math.percentage(color.alpha(map.get($shade, 'raw')));
+
+    @return string.unquote('color-mix(in srgb, rgb(from #{$self} r g b) #{$alpha}, var(--ig-#{$name}-#{$backdrop}))');
 }
 
 /// Builds the multiplier-based shades or — for a surface — the same layer roles the

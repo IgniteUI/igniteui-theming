@@ -297,7 +297,8 @@ $_target-tolerance: 0.05;
 /// @param {Number} $sh - The background's hue, in degrees.
 /// @param {List} $tent - The hue's chroma tent, from `gamut.tent()`.
 /// @param {Number} $c - The background's chroma.
-/// @returns {Map} Each role mapped to `(raw:, css:)`.
+/// @returns {Map} Each role mapped to `(raw:, css:)`. The translucent `container` also names the
+///   `backdrop` role it is laid over.
 /// @throws A surface family is built from roles, not numeric shades.
 @function _surface($seed, $variants, $sh, $tent, $c) {
     $by: luminance($seed);
@@ -321,6 +322,7 @@ $_target-tolerance: 0.05;
         (
             raw: $translucent,
             css: $translucent,
+            backdrop: 'base',
         )
     );
     $ordered: ();

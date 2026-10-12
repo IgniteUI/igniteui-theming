@@ -853,6 +853,20 @@ $_legacy-palette: palette(
                 );
             }
 
+            @include it('measures the contrast of the translucent container over base') {
+                @each $p in ($_light-fitted, $_light-legacy) {
+                    $contrast: '#{map.get($p, 'surface', 'container-contrast')}';
+
+                    @include assert-true(string.index($contrast, 'var(--ig-surface-base)') != null);
+                    @include assert-true(string.index($contrast, ' 3%') != null);
+                    // opaque roles are measured on themselves
+                    @include assert-equal(
+                        map.get($p, 'surface', 'raised-contrast'),
+                        adaptive-contrast(#{var(--ig-surface-raised)})
+                    );
+                }
+            }
+
             @include it('resolves a bare surface reference under either generator') {
                 @include assert-equal(color($_light-fitted, 'surface'), color($_light-fitted, 'surface', 'base'));
                 @include assert-equal(color($_light-legacy, 'surface'), color($_light-legacy, 'surface', 'base'));
