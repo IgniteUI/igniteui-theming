@@ -284,7 +284,8 @@ export const TOOL_DESCRIPTIONS = {
   - A background plus the layers on it, keyed by ${FRAGMENTS.SURFACE_ROLES}
   - "base" is the page; "sunken"/"raised"/"overlay" step away from it; "container" is a
     translucent tint; "seed" is the input color
-  - There are no numeric surface shades and no hue ramp to keep monochromatic
+  - There is no hue ramp to keep monochromatic. Palettes still emit numeric surface shades
+    for compatibility, but they are deprecated: read and override the roles
 
   CONTRAST COLORS - OMIT contrastOverrides entirely. Each shade automatically gets
   '<shade>-contrast': adaptive-contrast(<color>), which picks black or white for

@@ -497,7 +497,7 @@ $_legacy-palette: palette(
                     );
 
                     @include assert-equal(color($p, surface, 'base'), $bg);
-                    // surface has no numeric shades, so a bare reference lands on base
+                    // a bare surface reference lands on base, not on 500
                     @include assert-equal(color($p, surface), $bg);
                     // every other family still defaults to 500
                     @include assert-equal(color($p, primary), color($p, primary, 500));
@@ -828,13 +828,29 @@ $_legacy-palette: palette(
                 }
             }
 
-            @include it('keeps the numeric shades a legacy surface has always carried') {
-                @each $shade in $IColorShades {
+            @include it('gives a surface its numeric shades under either generator') {
+                @each $shade in $ISurfaceNumericShades {
                     @include assert-true(map.has-key($_light-legacy, 'surface', $shade));
+                    @include assert-true(map.has-key($_light-fitted, 'surface', $shade));
                 }
+            }
 
-                // ...and a fitted surface deliberately has none of them
-                @include assert-false(map.has-key($_light-fitted, 'surface', '500'));
+            @include it('points the 500 of a fitted surface at base and holds the seed on a legacy one') {
+                @include assert-equal(map.get($_light-fitted, 'surface', '500'), #{var(--ig-surface-base)});
+                @include assert-equal(map.get($_light-fitted, 'surface', '500-raw'), #f8f8fa);
+                @include assert-equal(map.get($_light-legacy, 'surface', '500'), #f8f8fa);
+                // the other numeric shades derive from 500 the same way under both
+                @include assert-equal(
+                    map.get($_light-fitted, 'surface', '600'),
+                    map.get($_light-legacy, 'surface', '600')
+                );
+            }
+
+            @include it('builds the surface of a palette from $ISurfaceShades') {
+                @include assert-equal(
+                    list.length(map.keys(map.get($_light-fitted, 'surface'))),
+                    list.length($ISurfaceShades) * 3
+                );
             }
 
             @include it('resolves a bare surface reference under either generator') {

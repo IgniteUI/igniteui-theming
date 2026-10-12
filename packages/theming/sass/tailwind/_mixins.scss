@@ -7,8 +7,7 @@
 $theme-schemas: () !default;
 
 @mixin generate-color-vars {
-    // A `legacy` surface carries numeric shades on top of the roles every palette has,
-    // and this bridge is static, so it covers the union rather than picking a generator.
+    // A surface carries numeric shades next to its roles
     $families: map.set($IPaletteColors, 'surface', $ISurfaceShades);
 
     @each $colorName, $shades in $families {

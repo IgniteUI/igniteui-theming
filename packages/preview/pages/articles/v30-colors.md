@@ -169,7 +169,7 @@ Those layers now have names: `base`, `sunken`, `raised`, `overlay`, and `contain
 
 On a pure-white base, a raised layer cannot become whiter. It resolves to the base color, leaving borders or shadows to communicate the separation. Explicit roles make that behavior easier to reason about.
 
-For existing themes, this improvement also creates migration work. Fitted surfaces use these roles in place of numbered shades. References such as `--ig-surface-500` need to be reviewed and mapped to the appropriate role. That is a cost of correcting the model, and it falls on and the people who built against the API we provided. The legacy generator remains available while you migrate your components and apps.
+For existing themes, this improvement also creates migration work. Styles should address the surface by role rather than by number, so references such as `--ig-surface-500` need to be reviewed and mapped to the appropriate role. We don't want that to break anything overnight: every palette still emits the numbered surface shades, and in a fitted palette `--ig-surface-500` points to the base role. They are deprecated, and they will be removed in a future release once components and apps have had time to move.
 
 The broader idea has good precedents. [Adobe Leonardo](https://leonardocolor.io/) generates colors from target contrast ratios. [Radix](https://www.radix-ui.com/colors/docs/overview/custom-palettes) offers custom scales from reference colors. These are useful approaches to the same underlying need: making color relationships repeatable. Ignite UI Theming brings contrast targets, hue-aware fitting, configurable scales, and surface-aware neutrals into its existing Sass palette function.
 

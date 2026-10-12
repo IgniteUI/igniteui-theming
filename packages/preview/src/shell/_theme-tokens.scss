@@ -38,20 +38,6 @@ $dark: palette($primary: #09f, $secondary: #df1b74, $surface: #1e1e1e, $gray: #3
 }
 
 /*
- * `igc-slider` and `igc-color-picker` still ask for `--ig-surface-500`, which the fitted
- * generator no longer emits — surface became five named roles. Every numbered token
- * resolves to `base`, which is the model rather than a fudge: under the fitted generator
- * the page is one color and depth is carried by the roles and the elevation shadow. The
- * library has the same decision to make for real consumers.
- */
-@mixin surface-compat($palette) {
-    @each $shade in (50, 100, 200, 300, 400, 500, 600, 700, 800, 900) {
-        --ig-surface-#{$shade}: #{color($palette, "surface", "base")};
-        --ig-surface-#{$shade}-contrast: #{contrast-color($palette, "surface", "base")};
-    }
-}
-
-/*
  * Sizing, spacing, type and elevation, the structure the shipped components assume.
  * `indigo` throughout: `configureTheme` in `elements/ignite.ts` picks the same family.
  *
@@ -79,14 +65,13 @@ $dark: palette($primary: #09f, $secondary: #df1b74, $surface: #1e1e1e, $gray: #3
 
     @include chrome($light, 700);
     @include palette($light);
-    @include surface-compat($light);
 
     --ig-theme-variant: light;
 }
 
 @mixin scheme-dark {
     @include chrome($dark, 300);
-    @include surface-compat($dark);
+    @include palette($dark);
 
     --ig-theme-variant: dark;
 }

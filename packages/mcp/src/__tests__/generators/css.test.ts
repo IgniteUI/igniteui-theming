@@ -31,7 +31,8 @@ describe("generatePaletteCss", () => {
     expect(result.css).toContain("--ig-surface-raised");
     expect(result.css).toContain("--ig-surface-overlay");
     expect(result.css).toContain("--ig-surface-container");
-    expect(result.css).not.toContain("--ig-surface-500");
+    // The numeric surface shades of a fitted palette follow base
+    expect(result.css).toContain("--ig-surface-500: var(--ig-surface-base)");
     expect(result.css).toContain("--ig-gray-50");
     expect(result.css).toContain("--ig-gray-500");
     expect(result.css).toContain("--ig-wcag-aa");

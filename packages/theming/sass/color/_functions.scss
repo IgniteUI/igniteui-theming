@@ -81,9 +81,6 @@ $_enhanced-accessibility: false;
 ) {
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
-
-    // Legacy palettes keep numeric surface shades.
-    $surface-shades: if($generator == 'legacy', $color-shades, types.$ISurfaceRoles);
     $primary-palette: shades(
         'primary',
         $primary,
@@ -101,7 +98,7 @@ $_enhanced-accessibility: false;
     $surface-palette: shades(
         'surface',
         $surface,
-        $surface-shades,
+        types.$ISurfaceShades,
         $generator: $generator,
         $scale: _scale-for('surface', $scales)
     );
@@ -194,6 +191,10 @@ $_enhanced-accessibility: false;
     );
     $result: ();
 
+    @if '#{$name}' == 'surface' {
+        $entries: map.merge(_surface-numbers($color, $shades, $generator), $entries);
+    }
+
     @each $variant, $shade in $entries {
         $result: map.set($result, $variant, map.get($shade, 'css'));
         $result: map.set($result, '#{$variant}-contrast', adaptive-contrast(#{var(--ig-#{$name}-#{$variant})}));
@@ -203,7 +204,7 @@ $_enhanced-accessibility: false;
     @return $result;
 }
 
-/// Builds the multiplier-based shades, plus — for a surface — the same layer roles the
+/// Builds the multiplier-based shades or — for a surface — the same layer roles the
 /// `fitted` generator emits. The roles are contrast steps off the background rather than
 /// points on a multiplier ramp, so they mean the same thing under either generator, and
 /// having them everywhere is what lets a schema say `('surface', 'base')` unconditionally.
@@ -216,6 +217,10 @@ $_enhanced-accessibility: false;
 /// @requires {function} shade
 /// @returns {Map} Each variant mapped to `(css:, raw:)`.
 @function _legacy-entries($name, $color, $shades, $surface: null) {
+    @if '#{$name}' == 'surface' {
+        @return generator.family('surface', $color, types.$ISurfaceRoles);
+    }
+
     $entries: ();
 
     @each $variant in $shades {
@@ -230,8 +235,40 @@ $_enhanced-accessibility: false;
         );
     }
 
-    @if '#{$name}' == 'surface' {
-        @return map.merge($entries, generator.family('surface', $color, types.$ISurfaceRoles));
+    @return $entries;
+}
+
+/// Builds the numeric shades of a surface from its `500` with the legacy multipliers. A legacy
+/// surface holds its seed on `500`. A fitted surface points `500` at `base`, so its numeric
+/// shades follow the background, including when `base` changes at runtime.
+/// @access private
+/// @group Palettes
+/// @param {Color} $color - The surface color.
+/// @param {List} $shades - The requested variants; only those in `$ISurfaceNumericShades` are built.
+/// @param {String} $generator - Either `fitted` or `legacy`.
+/// @requires {function} shade
+/// @returns {Map} Each numeric variant mapped to `(css:, raw:)`.
+@function _surface-numbers($color, $shades, $generator) {
+    $entries: ();
+
+    @each $variant in $shades {
+        @if list.index(types.$ISurfaceNumericShades, '#{$variant}') {
+            $shade: shade('surface', $color, $variant);
+            $css: map.get($shade, 'hsl');
+
+            @if $generator != 'legacy' and '#{$variant}' == '500' {
+                $css: #{var(--ig-surface-base)};
+            }
+
+            $entries: map.set(
+                $entries,
+                $variant,
+                (
+                    css: $css,
+                    raw: map.get($shade, 'raw'),
+                )
+            );
+        }
     }
 
     @return $entries;

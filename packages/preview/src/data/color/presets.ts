@@ -46,7 +46,7 @@ export interface PresetData {
 
 type Generator = "legacy" | "fitted";
 
-/** The variants a family exposes. Surface has roles under fitted and numbers under legacy. */
+/** The variants a family shows. Surface shows its roles under fitted and its numbers under legacy. */
 const variants = (family: Family, generator: Generator): readonly string[] => {
   if (family !== "surface") return [...SHADES, ...ACCENTS];
   return generator === "fitted" ? ROLES : SHADES;

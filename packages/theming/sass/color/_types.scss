@@ -38,16 +38,24 @@ $IColorShades: list.join($IGrayShades, $IAccentShades);
 /// @requires $surface-roles
 $ISurfaceRoles: list.join(('base'), list.join(map.keys(config.$surface-roles), ('container', 'seed')));
 
-/// Every key a surface family can expose. Both generators emit the roles; `legacy`
-/// additionally keeps the numeric shades it has always carried. `$IPaletteColors`
-/// deliberately lists only the roles — those are what *every* palette has — so this is
-/// for consumers that must cover a legacy palette's extras too.
+/// The numeric shades a surface family generates next to its roles. They derive from `500`,
+/// which holds the seed in a `legacy` palette and points at `base` in a `fitted` one.
+/// @deprecated Read the surface roles in `$ISurfaceRoles` instead. The numeric surface shades
+/// will be removed in a future release.
+/// @type List
+/// @access public
+/// @requires $INumericShades
+/// @requires $IAccentShades
+$ISurfaceNumericShades: list.join($INumericShades, $IAccentShades);
+
+/// Every key a surface family generates: its roles and its numeric shades. `$IPaletteColors`
+/// lists only the roles, which are what styles read, so this is for consumers that must
+/// cover every key a palette emits.
 /// @type List
 /// @access public
 /// @requires $ISurfaceRoles
-/// @requires $INumericShades
-/// @requires $IAccentShades
-$ISurfaceShades: list.join($ISurfaceRoles, list.join($INumericShades, $IAccentShades));
+/// @requires $ISurfaceNumericShades
+$ISurfaceShades: list.join($ISurfaceRoles, $ISurfaceNumericShades);
 
 /// All palette colors mapped with corresponding color shades
 /// @type Map
