@@ -12,7 +12,8 @@
 /// Generates a base light tabs schema.
 /// @type Map
 /// @prop {Map} item-text-color [color: ('gray', 700)] - The color used for the tab text color.
-/// @prop {Map} item-background [color: ('surface')] - The background color used for the tabs header.
+/// @prop {Map} item-background [color: ('surface')] - The background color used for the tab items.
+/// @prop {Map} header-background [color: ('surface')] - The background color of the tabs header, behind the tab items.
 /// @prop {Map} item-hover-background [color: ('gray', 200)] - The background used for the tabs on hover.
 /// @prop {Map} item-hover-color [color: ('gray', 900)] - The text color used for the tabs on hover.
 /// @prop {Map} item-icon-color [color: ('gray', 700)] - The color used for the tab icon.
@@ -45,6 +46,11 @@ $light-tabs: (
         ),
     ),
     item-background: (
+        color: (
+            'surface',
+        ),
+    ),
+    header-background: (
         color: (
             'surface',
         ),
@@ -471,7 +477,8 @@ $bootstrap-tabs: extend(
 
 /// Generates an indigo tabs schema.
 /// @type Map
-/// @prop {Color} item-background [transparent] - The background color used for the tabs header.
+/// @prop {Color} item-background [transparent] - The background color used for the tab items.
+/// @prop {Color} header-background [transparent] - The background color of the tabs header, behind the tab items.
 /// @prop {Map} item-hover-background [color: ('gray', 900, .05)] - The background used for the tabs on hover.
 /// @prop {Color} item-active-background [transparent] - The color used for the active tab background.
 /// @prop {Map} item-active-hover-background [color: ('gray', 900, .05)] - The color used for the active tab background on hover and focus.
@@ -497,6 +504,7 @@ $indigo-tabs: extend(
     $light-tabs,
     (
         item-background: transparent,
+        header-background: transparent,
         item-hover-background: (
             color: (
                 'gray',
