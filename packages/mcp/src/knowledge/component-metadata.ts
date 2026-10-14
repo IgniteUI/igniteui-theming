@@ -110,6 +110,13 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   "bottom-nav": {
     selectors: { angular: "igx-bottom-nav", webcomponents: null },
   },
+  breadcrumbs: {
+    selectors: { angular: "igc-breadcrumbs", webcomponents: "igc-breadcrumbs" },
+    theme: "breadcrumb",
+  },
+  breadcrumb: {
+    childOf: "breadcrumbs",
+  },
   button: {
     selectors: { angular: ".igx-button", webcomponents: "igc-button" },
     variants: [
@@ -239,6 +246,13 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       guidance:
         "Make sure to theme these child components to visually coordinate with each other and the overall column actions background.",
     },
+  },
+  "color-picker": {
+    selectors: {
+      angular: "igc-color-picker",
+      webcomponents: "igc-color-picker",
+    },
+    aliases: ["colour picker"],
   },
   combo: {
     selectors: { angular: "igx-combo", webcomponents: "igc-combo" },
@@ -560,6 +574,10 @@ and descriptions from get_component_design_tokens for each child to guide value 
       guidance: `The query builder uses input-groups and selects for expression values and operator/field selection, \
 chips for displaying conditions, and buttons/button-groups for adding and grouping expressions.`,
     },
+  },
+  "qr-code": {
+    selectors: { angular: "igc-qr-code", webcomponents: "igc-qr-code" },
+    aliases: ["qr", "qrcode"],
   },
   radio: {
     selectors: { angular: "igx-radio", webcomponents: "igc-radio" },
