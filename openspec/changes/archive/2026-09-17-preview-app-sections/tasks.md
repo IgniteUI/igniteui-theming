@@ -1,0 +1,124 @@
+## 1. Data Layer
+
+- [x] 1.1 Define the `DataProvider<T>` contract in `src/data/provider.ts` with `id`, `deps` and `build()`
+- [x] 1.2 Add a provider registry in `src/data/registry.ts` that fails on duplicate ids
+- [x] 1.3 Write the Vite plugin that resolves `virtual:data/<id>` by invoking the matching provider
+- [x] 1.4 Add on-disk caching keyed on a hash of `deps` file contents plus the provider module source
+- [x] 1.5 Move the existing Sass compilation from `src/palettes.ts` into `src/data/color/palettes.ts` as a provider
+- [x] 1.6 Add the hue sweep provider: every hue at three saturations, both generators, carrying each clamped request's position
+- [x] 1.7 Add the scale table provider using the degenerate-range technique, across three chromatic seeds and a neutral on a light and a dark page
+- [x] 1.8 Test that editing a provider's source invalidates its cache while an unrelated edit does not
+- [x] 1.9 Carry Sass warnings through the cache, so a cached build still reports what the generator said
+- [x] 1.10 Add OKLCH conversion and gamut helpers to the shared color module, with tests
+- [x] 1.11 Fix `inSrgb` to apply its tolerance to encoded rather than linear channels
+
+## 2. Assertions Move Into Tests
+
+- [x] 2.1 Assert in vitest that the fitted generator produces zero AA-pair failures across the sweep
+- [x] 2.2 Assert that the fitted generator emits no out-of-gamut shade and no duplicate shades
+- [x] 2.3 Assert that the scale lookup table reproduces all four shipped presets on every subject, within two steps per channel
+- [x] 2.4 Assert that the curve and target math matches the AA record documented for each preset
+- [x] 2.5 Confirm `npm test` from the repository root runs these alongside the existing suites
+
+## 3. Shell and Registry
+
+- [x] 3.1 Add `lit` to `packages/preview` devDependencies and confirm biome and tsc accept the decorator-free syntax in use
+- [x] 3.2 Define `SectionDef` and `DemoDef` in `src/sections/types.ts`
+- [x] 3.3 Build the section registry in `src/sections/index.ts`, exporting sections in display order
+- [x] 3.4 Implement `<ig-preview-shell>`: navigation rendered from the registry, section body, no per-section knowledge
+- [x] 3.5 Implement hash routing for `#/<section>/<demo>` with a fallback to the first section and demo
+- [x] 3.6 Code-split sections so a section's demos and data load on first visit
+- [x] 3.7 Style the shell from the library's `gray` family and surface roles
+
+## 4. Shared Elements
+
+- [x] 4.1 Render the demo frame in the shell from registry metadata, so no demo renders its own title or teaching line
+- [x] 4.2 Implement `<ig-code-block>`: generated Sass with a copy control and a fallback when the clipboard is unavailable
+- [x] 4.3 Implement `<ig-verdict>`: a pass or fail readout, used only by demos whose subject has one
+- [x] 4.4 Implement `<ig-palette-scope>`, which applies a compiled palette's custom properties to its own subtree without rendering over its children
+- [x] 4.5 Confirm a demo element renders correctly when mounted outside the shell, with no frame present
+- [x] 4.6 Ensure keyboard operation and visible focus for every control the shared elements render
+
+## 5. Color Section
+
+- [x] 5.1 Register the `color` section with its three demos
+- [x] 5.2 Port the generator comparison to `<ig-demo-generators>`, keeping the thirty scoped palettes and the surface role mocks
+- [x] 5.3 Implement `<ig-demo-sweep>`: hue and saturation controls, stacked legacy and fitted ramps, verdict per ramp, and the sRGB cross-section for the selected seed
+- [x] 5.4 Implement `<ig-demo-scales>`: subject picker including a neutral on a light and a dark page, preset gallery, draggable curve, range controls with a ceiling warning, guarantee ladder, and the per-shade mechanism table
+- [x] 5.5 Register each demo's one-line statement of what it teaches, and compose `<ig-code-block>` for its generated `palette()` or `$scales` snippet
+- [x] 5.6 Verify both demos operate by keyboard alone, including the curve control points
+
+## 6. Retire the Report Path
+
+- [x] 6.1 Remove `src/render.ts`, `src/html.ts` and the placeholder-filling plugin. `src/model.ts` stays: it is now a pure function of provider output and the comparison demo renders from it
+- [x] 6.2 Reduce `index.html` to the shell mount point
+- [x] 6.3 Confirm `npm run preview` and `npm run preview:build` still work under their existing names. The build is now served rather than opened from disk, since code splitting rules out a single file
+- [x] 6.4 Run biome, stylelint, tsc and vitest across the repository
+- [x] 6.5 Check the built app at 390px and at desktop width, in both light and dark, with no horizontal overflow
+- [x] 6.6 Use Lit's `svg` template tag for every fragment inserted into an `<svg>`
+- [x] 6.7 Choose swatch label color from contrast with the swatch, not with the anchor
+
+## 7. One Page Per Section
+
+- [x] 7.1 Add the `color.presets` provider: each shipped palette as it ships, and regenerated by the fitted generator from the seeds it records
+- [x] 7.2 Derive the scale editor's subjects from those same seeds, deduplicated by family, seed and surface
+- [x] 7.3 Normalise Sass-emitted color keywords at the provider, leaving legacy `hsl()` untouched
+- [x] 7.4 Extend `SectionDef` with an optional persistent controls element, and rename `demos` to `views`
+- [x] 7.5 Render a section as one page: controls pinned, views stacked, each imported as it nears the viewport
+- [x] 7.6 Route `#/<section>` to the section and `#/<section>/<view>` to a scroll target, with the nav following the view in view
+- [x] 7.7 Add the color section's shared store and `ReactiveController`, mirrored into the hash
+- [x] 7.8 Implement `<ig-color-controls>`: the shipped-palette picker and the theme picker
+- [x] 7.9 Rebuild the shades and neutrals views on the selected preset, keeping the surface roles and card mock
+- [x] 7.10 Filter the scale editor's subjects to the selected preset, falling back rather than resetting
+- [x] 7.11 Retire the `color.palettes` provider, `src/model.ts` and `src/palettes.ts`; add `src/preset-model.ts` and `src/variants.ts`
+- [x] 7.12 Report out-of-gamut shades per preset, replacing the seed-count tile
+- [x] 7.13 Name each view with one word — Shades, Neutrals, Scales, Sweep — matching the library's own vocabulary, and match each id, tag and module to it
+- [x] 7.13 Re-run biome, stylelint, tsc and vitest, and re-check 390px and desktop in both schemes
+
+## 8. The App's Controls Are the Library's Components
+
+- [x] 8.1 Add `igniteui-webcomponents` as a devDependency of `packages/preview`
+- [x] 8.2 Audit which palette families each candidate component's compiled CSS reads, and record what is usable under a fitted palette
+- [x] 8.3 Emit the branch's own palette, typography, elevations, sizing and spacing onto `:root` so the components are themed by this generator
+- [x] 8.4 Alias `--ig-surface-50`–`900` onto `surface.base` for the components that still ask for them
+- [x] 8.5 Register the components in one module, noting that the package's `exports` map forbids subpath imports
+- [x] 8.6 Swap the palette, theme, saturation and subject pickers to `igc-button-group`
+- [x] 8.7 Swap the range controls to `igc-slider` and the action buttons to `igc-button`
+- [x] 8.8 Theme the button group to the chrome neutrals through its published tokens
+- [x] 8.9 Keep the hue slider bespoke and say why in the markup
+- [x] 8.10 Assert each slider's value after its definition resolves, so the thumb and its label agree
+- [x] 8.11 Match the slider step to the precision the labels print at
+- [x] 8.12 Delete the `.btn`, `.picker` and range-input CSS the components replace
+- [x] 8.13 Read the current view from geometry rather than observer entries, so returning to the top does not leave the nav behind
+- [x] 8.14 Set the component family to `indigo` on both sides, with the variant following `prefers-color-scheme` rather than the palette picker
+- [x] 8.15 Re-run biome, stylelint, tsc and vitest; verify keyboard operation, both schemes, 1280px and 390px
+
+## 9. Page Feel
+
+- [x] 9.1 Cap the content to a measure the widest row actually needs and centre it, so the page stops spanning an ultrawide display
+- [x] 9.2 Derive the curve chart's viewBox from the bound a control point may be pulled to, so a released handle is never drawn off-canvas
+- [x] 9.3 Give each handle a target wider than its mark, and paint the handles above the shade dots rather than behind them
+- [x] 9.4 Close the range on the chart, so a handle pulled past it reads as overshoot
+- [x] 9.5 Take focus on pointer-grab, so the arrow keys carry on from where a drag ended
+- [x] 9.6 Verify at 2560px, 1440px and 390px in both schemes, and that a handle pulled to the limit can be grabbed again
+
+## 10. Reading the Page
+
+- [x] 10.1 Drop the before/after score tiles: a reader comparing presets does not care what a number used to be
+- [x] 10.2 Mark both members of every pair five apart that misses AA, on the swatches themselves
+- [x] 10.3 Keep the out-of-gamut count the tiles carried, as a per-family verdict rather than a page-level total
+- [x] 10.4 Move the range and curve controls above the chart, so the instruction is read before the thing it describes
+- [x] 10.5 Stop capping paragraph line length
+- [x] 10.6 Remove the readout beside every shade strip; the marks on the shades carry it
+- [x] 10.7 Mark a shade that resolves to the same color as another in its row
+- [x] 10.8 State which shades pair with which, so a row of ten marks reads as five pairs
+
+## 11. The Contrast Probe
+
+- [x] 11.1 Pin a shade *number*; every numbered strip measures against its own shade of it
+- [x] 11.2 Report the ratio and the best WCAG grade it earns, and mark anything under 3:1
+- [x] 11.3 Make the swatches native buttons in a radio group: roving tabindex, arrows to move and pin, Escape to clear
+- [x] 11.4 Hold the pin in section state so one inspection covers every strip, and keep it out of the hash
+- [x] 11.5 Serve the whole app from one `igc-tooltip`, moved to the swatch under the pointer or focus
+- [x] 11.6 Remove the failing-pair dots; the probe answers the pair question for any pair
+- [x] 11.7 Scope the readout column to Sweep, which still summarises because nothing there is marked per shade

@@ -1,0 +1,136 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+
+////
+/// sRGB gamut geometry in OKLCH. Chroma rises from 0 at black, peaks at the hue's cusp,
+/// and falls back to 0 at white — a tent whose height these functions report.
+/// @package theming
+/// @group Palettes
+/// @access private
+////
+
+/// Reads a color's OKLCH components as plain numbers. `color.channel()` returns units —
+/// lightness as `70.8%`, hue as `314.6deg` — which break arithmetic silently.
+/// @param {Color} $c - The color to read.
+/// @returns {Map} Its `l`, `c` and `h`, unitless.
+@function read($c) {
+    $ok: color.to-space($c, oklch);
+
+    @return (
+        l: math.div(color.channel($ok, 'lightness', $space: oklch), 100%),
+        c: color.channel($ok, 'chroma', $space: oklch),
+        h: math.div(color.channel($ok, 'hue', $space: oklch), 1deg)
+    );
+}
+
+/// Builds an OKLCH color from unitless components.
+/// @param {Number} $l - Lightness, 0 to 1.
+/// @param {Number} $c - Chroma.
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {Color} The color, which may fall outside sRGB.
+@function make($l, $c, $h) {
+    @return oklch($l $c $h);
+}
+
+/// Whether an OKLCH color fits inside sRGB.
+/// @param {Number} $l - Lightness, 0 to 1.
+/// @param {Number} $c - Chroma.
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {Boolean} True when the color is displayable.
+@function in-srgb($l, $c, $h) {
+    @return color.is-in-gamut(make($l, $c, $h), srgb);
+}
+
+/// The most chroma sRGB can hold at one lightness, found by bisection.
+/// 18 rounds narrow the search from 0.45 to about 0.0000017.
+/// @param {Number} $l - Lightness, 0 to 1.
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {Number} The highest in-gamut chroma there.
+@function max-chroma($l, $h) {
+    $lo: 0;
+    $hi: 0.45;
+
+    @for $i from 0 to 18 {
+        $mid: math.div($lo + $hi, 2);
+
+        @if in-srgb($l, $mid, $h) {
+            $lo: $mid;
+        } @else {
+            $hi: $mid;
+        }
+    }
+
+    @return $lo;
+}
+
+/// The peak of a hue's chroma curve.
+/// The `max-chroma` rises then falls, so a ternary search is used.
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {Map} The peak's `l` and `c`.
+@function cusp($h) {
+    $lo: 0.02;
+    $hi: 0.995;
+
+    @for $i from 0 to 26 {
+        $a: $lo + math.div($hi - $lo, 3);
+        $b: $hi - math.div($hi - $lo, 3);
+
+        @if max-chroma($a, $h) < max-chroma($b, $h) {
+            $lo: $a;
+        } @else {
+            $hi: $b;
+        }
+    }
+
+    $l: math.div($lo + $hi, 2);
+
+    @return (l: $l, c: max-chroma($l, $h));
+}
+
+/// The cusp as the two slopes of a tent, which turns the chroma available at a given lightness into a single multiply.
+/// @param {Number} $h - Hue, in degrees.
+/// @returns {List} `(rising-slope, falling-slope)`.
+@function tent($h) {
+    $k: cusp($h);
+    $lc: map.get($k, 'l');
+    $cc: map.get($k, 'c');
+
+    @return (math.div($cc, $lc), math.div($cc, 1 - $lc));
+}
+
+/// A `min()` that curves, so the tent has no corner for a shade to land on.
+/// @param {Number} $a - First value.
+/// @param {Number} $b - Second value.
+/// @param {Number} $p - Softness. Higher tracks the true minimum more closely.
+/// @returns {Number} The softened minimum, or 0 if either value is non-positive.
+@function soft-min($a, $b, $p) {
+    @if $a <= 0 or $b <= 0 {
+        @return 0;
+    }
+
+    @return math.pow(math.div(1, math.div(1, math.pow($a, $p)) + math.div(1, math.pow($b, $p))), math.div(1, $p));
+}
+
+/// Converts a color to sRGB with integer channels.
+/// @param {Color} $c - The color to convert.
+/// @returns {Color} The color as `rgb()` with rounded channels.
+@function to-srgb($c) {
+    $rgb: color.to-space($c, rgb);
+
+    @return rgb(
+        math.round(color.channel($rgb, 'red', $space: rgb)),
+        math.round(color.channel($rgb, 'green', $space: rgb)),
+        math.round(color.channel($rgb, 'blue', $space: rgb))
+    );
+}
+
+/// How much chroma a hue can hold at one lightness, read off its tent.
+/// @param {Number} $l - Lightness, 0 to 1.
+/// @param {List} $tent - The hue's tent, from `tent()`.
+/// @param {Number} $p - Softness of the tent's peak.
+/// @returns {Number} The chroma ceiling there.
+@function ceiling($l, $tent, $p) {
+    @return soft-min($l * list.nth($tent, 1), (1 - $l) * list.nth($tent, 2), $p);
+}

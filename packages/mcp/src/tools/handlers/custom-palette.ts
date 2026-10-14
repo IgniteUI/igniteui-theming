@@ -22,6 +22,7 @@ import type {
   ColorDefinition,
   GrayDefinition,
   ShadesBasedColor,
+  SurfaceDefinition,
 } from "../../utils/types.js";
 import {
   formatCustomPaletteValidation,
@@ -40,13 +41,13 @@ export async function handleCreateCustomPalette(
   const preset = PALETTE_PRESETS[presetName];
 
   // Determine surface color for gray generation
-  // If surface is explicit, extract a representative color (500 shade)
+  // If surface is explicit, extract a representative color (the `base` layer)
   // If surface is shades-based, use the baseColor
   let surfaceColorForGray: string;
   if (params.surface.mode === "shades") {
     surfaceColorForGray = params.surface.baseColor;
   } else {
-    surfaceColorForGray = params.surface.shades["500"];
+    surfaceColorForGray = params.surface.shades.base;
   }
 
   // Fill in missing colors with defaults from preset (using shades mode)
@@ -54,7 +55,7 @@ export async function handleCreateCustomPalette(
   const colors: {
     primary: ColorDefinition;
     secondary: ColorDefinition;
-    surface: ColorDefinition;
+    surface: SurfaceDefinition;
     gray: GrayDefinition;
     info: ColorDefinition;
     success: ColorDefinition;
@@ -63,7 +64,7 @@ export async function handleCreateCustomPalette(
   } = {
     primary: params.primary as ColorDefinition,
     secondary: params.secondary as ColorDefinition,
-    surface: params.surface as ColorDefinition,
+    surface: params.surface as SurfaceDefinition,
     gray:
       (params.gray as GrayDefinition) ??
       ({ mode: "shades", baseColor: preset.gray } as ShadesBasedColor),
@@ -145,7 +146,7 @@ async function handleCssOutput(
   colors: {
     primary: ColorDefinition;
     secondary: ColorDefinition;
-    surface: ColorDefinition;
+    surface: SurfaceDefinition;
     gray: GrayDefinition;
     info: ColorDefinition;
     success: ColorDefinition;
@@ -235,7 +236,7 @@ function handleSassOutput(
   colors: {
     primary: ColorDefinition;
     secondary: ColorDefinition;
-    surface: ColorDefinition;
+    surface: SurfaceDefinition;
     gray: GrayDefinition;
     info: ColorDefinition;
     success: ColorDefinition;

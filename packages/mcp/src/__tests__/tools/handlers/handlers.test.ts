@@ -173,17 +173,17 @@ describe("handleCreateTheme", () => {
     expect(text).not.toContain("@include typography(");
   });
 
-  it("warns about color suitability issues", async () => {
-    const result = await handleCreateTheme({
-      ...baseThemeParams,
-      primaryColor: "#fafafa", // very light color
-    });
+  it("accepts extreme seed colors without a luminance warning", async () => {
+    for (const primaryColor of ["#fafafa", "#050a14"]) {
+      const result = await handleCreateTheme({
+        ...baseThemeParams,
+        primaryColor,
+      });
+      const text = result.content[0].text;
 
-    const text = result.content[0].text;
-    // Should warn about luminance issues - check for warning indicators
-    const hasWarning =
-      text.includes("luminance") || text.toLowerCase().includes("warning");
-    expect(hasWarning).toBe(true);
+      expect(text).not.toContain("luminance");
+      expect(text).not.toContain("SUITABILITY");
+    }
   });
 
   it("shows Angular-specific content for angular platform", async () => {

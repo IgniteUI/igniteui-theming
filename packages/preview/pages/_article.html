@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{{title}}</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --text: #1d1d1f;
+    --muted: #5f5f66;
+    --page: #fdfcf8;
+    --rule: #e4e1d8;
+    --code-bg: #f1eee6;
+    --link: #0a5bd6;
+    --measure: 680px;
+    --wide: 900px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8e6e1;
+      --muted: #a09e98;
+      --page: #141418;
+      --rule: #2c2c33;
+      --code-bg: #1f1f25;
+      --link: #7fb2ff;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 64px 16px 120px;
+    background: var(--page);
+    color: var(--text);
+    font: 19px / 1.65 Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    text-rendering: optimizeLegibility;
+  }
+
+  main > * {
+    max-width: var(--measure);
+    margin-inline: auto;
+  }
+
+  h1 {
+    margin-block: 0 48px;
+    font: 700 clamp(2rem, 5vw, 2.8rem) / 1.15 system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  p, ul, ol, table { margin-block: 0 1.2em; }
+
+  a { color: var(--link); text-underline-offset: 0.15em; }
+
+  code {
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    background: var(--code-bg);
+    font: 0.84em ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  /* Code blocks, drawn like the demos' Sass output: a label, then a dark panel in the
+     github-dark-default theme, whatever the page's scheme. */
+  figure.code { margin: 0 auto 1.4em; }
+
+  figure.code figcaption {
+    margin-block-end: 8px;
+    color: var(--muted);
+    font: 500 12px / 1 ui-monospace, "SF Mono", Menlo, monospace;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  figure.code pre {
+    margin: 0;
+    overflow-x: auto;
+    padding: 16px;
+    border-radius: 3px;
+    background: #0d1117 !important;
+    color: #e6edf3;
+    font: 14px / 1.6 ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  figure.code pre code { padding: 0; background: none; font: inherit; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font: 0.8em / 1.5 system-ui, sans-serif;
+  }
+
+  th, td {
+    padding: 10px 12px;
+    border-block-end: 1px solid var(--rule);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  th { font-weight: 600; }
+
+  /* The demos get more room than the text column, as figures do in a printed piece. */
+  main > .demo {
+    max-width: var(--wide);
+    margin-block: 40px 12px;
+  }
+
+  /* A demo without a caption still needs air before the text resumes. */
+  main > .demo + :not(.caption) {
+    margin-block-start: 40px;
+  }
+
+  .back { font: 0.8em system-ui, sans-serif; }
+
+  .caption {
+    margin-block-end: 40px;
+    color: var(--muted);
+    font: italic 0.82em / 1.55 system-ui, sans-serif;
+  }
+</style>
+<script type="module" src="{{script}}"></script>
+</head>
+<body>
+<main>
+<p class="back"><a href="../">All pages</a></p>
+{{body}}
+</main>
+</body>
+</html>

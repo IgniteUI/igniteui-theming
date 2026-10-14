@@ -15,7 +15,8 @@
   "type": "module",
   "workspaces": [
     "packages/theming",
-    "packages/mcp"
+    "packages/mcp",
+    "packages/preview"
   ],
   "scripts": {
     "build": "npm run build -w packages/theming",
@@ -26,7 +27,9 @@
     "format": "biome check --fix && npm run format --workspaces --if-present",
     "prepare": "husky install && npm run prepare --workspaces --if-present",
     "coverage": "vitest run --coverage",
-    "mcp:inspector": "npx @modelcontextprotocol/inspector ./packages/theming/dist/mcp/index.js"
+    "mcp:inspector": "npx @modelcontextprotocol/inspector ./packages/theming/dist/mcp/index.js",
+    "preview": "npm run dev -w packages/preview",
+    "preview:build": "npm run build -w packages/preview"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",
