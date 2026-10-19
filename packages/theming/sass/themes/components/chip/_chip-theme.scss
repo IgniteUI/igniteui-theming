@@ -19,9 +19,10 @@
 /// - `$background` — The main chip background.
 /// - `$selected-background` — Selected state background.
 /// - `$outlined-background` — The outlined chip background.
-/// - `$outlined-selected-background` — The outlined selected state background.
+/// - `$selected-outlined-background` — The outlined selected state background.
 ///
 /// Setting just `$background` will create a complete chip theme with all states properly derived.
+/// Chips with a `variant` (primary, info, success, warning, danger) use the variant colors, which override `$background`, `$text-color` and `$border-color`.
 ///
 /// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
 /// @param {List} $border-radius [null] - The chip border-radius.
