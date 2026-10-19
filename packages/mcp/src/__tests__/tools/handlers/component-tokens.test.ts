@@ -269,4 +269,24 @@ describe("handleGetComponentDesignTokens", () => {
       "- **Web Components / React / Blazor:** `igc-banner`",
     );
   });
+
+  // ===== Token Alias Tests =====
+
+  it("shows the emitted CSS variable for renamed tokens", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "dialog",
+    });
+    const text = result.content[0].text;
+
+    expect(text).toContain("**Renamed tokens:**");
+    expect(text).toContain("| `shadow` | `--ig-dialog-elevation` |");
+  });
+
+  it("omits the renamed tokens table when nothing is renamed", async () => {
+    const result = await handleGetComponentDesignTokens({
+      component: "avatar",
+    });
+
+    expect(result.content[0].text).not.toContain("**Renamed tokens:**");
+  });
 });
