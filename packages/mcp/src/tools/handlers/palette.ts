@@ -9,6 +9,8 @@ import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
 import {
   formatValidationResult,
   generateWarningComments,
+  invalidColorsResponse,
+  validateColorInputs,
   validatePaletteColors,
 } from "../../validators/index.js";
 import type { CreatePaletteParams } from "../schemas.js";
@@ -17,6 +19,21 @@ export async function handleCreatePalette(params: CreatePaletteParams) {
   const variant = params.variant ?? "light";
   const output =
     params.output ?? (params.platform === "angular" ? "sass" : "css");
+
+  const colorCheck = await validateColorInputs({
+    primary: params.primary,
+    secondary: params.secondary,
+    surface: params.surface,
+    gray: params.gray,
+    info: params.info,
+    success: params.success,
+    warn: params.warn,
+    error: params.error,
+  });
+
+  if (!colorCheck.isValid) {
+    return invalidColorsResponse(colorCheck);
+  }
 
   // Validate surface and gray colors against the variant
   const validation = await validatePaletteColors({
@@ -90,6 +107,7 @@ async function handleCssOutput(
           text: `**Error generating CSS palette**\n\n${message}`,
         },
       ],
+      isError: true,
     };
   }
 }

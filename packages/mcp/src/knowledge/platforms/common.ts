@@ -27,6 +27,12 @@ export const TYPOGRAPHY_PRESETS_PATHS = {
 } as const;
 
 /**
+ * Schema presets module path. The igniteui-theming root module doesn't
+ * forward schemas, so non-Angular output must import them explicitly.
+ */
+export const SCHEMAS_PATH = "igniteui-theming/sass/themes/schemas";
+
+/**
  * Available schema presets
  */
 export const SCHEMAS = {

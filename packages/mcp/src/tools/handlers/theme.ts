@@ -11,6 +11,8 @@ import {
   formatValidationResult,
   generatePaletteSuitabilityComments,
   generateWarningComments,
+  invalidColorsResponse,
+  validateColorInputs,
   validatePaletteColors,
 } from "../../validators/index.js";
 import type { CreateThemeParams } from "../schemas.js";
@@ -19,6 +21,16 @@ export async function handleCreateTheme(params: CreateThemeParams) {
   const variant = params.variant ?? "light";
   const output =
     params.output ?? (params.platform === "angular" ? "sass" : "css");
+
+  const colorCheck = await validateColorInputs({
+    primaryColor: params.primaryColor,
+    secondaryColor: params.secondaryColor,
+    surfaceColor: params.surfaceColor,
+  });
+
+  if (!colorCheck.isValid) {
+    return invalidColorsResponse(colorCheck);
+  }
 
   // Validate surface color against the variant
   const validation = await validatePaletteColors({
