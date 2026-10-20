@@ -64,9 +64,7 @@ jobs:
         run: npm publish --tag ${NPM_TAG} --provenance
         working-directory: packages/theming
 
-  # Separate job so a registry failure can be retried with "Re-run failed jobs"
-  # without republishing to npm (which fails once the version exists), and so
-  # an already-published version can be registered via workflow_dispatch.
+  # Kept separate so it can be retried without republishing to npm
   mcp-registry:
     needs: build
     if: ${{ !cancelled() && (needs.build.result == 'success' || needs.build.result == 'skipped') }}
@@ -84,8 +82,6 @@ jobs:
             echo "Prerelease ${VERSION}: not registering in the MCP Registry"
           fi
 
-      # The registry validates the version against npm, which can take a few
-      # minutes to become visible after `npm publish` (v29.1.0 failed this way).
       - name: Wait for npm to serve the version
         if: env.SKIP_REGISTRY != 'true'
         run: |
@@ -119,8 +115,6 @@ jobs:
           chmod +x mcp-publisher
           ./mcp-publisher login github-oidc
 
-          # npm being visible to us doesn't guarantee the registry's own check
-          # sees it yet, so retry with backoff
           for i in 1 2 3 4 5; do
             if ./mcp-publisher publish; then
               exit 0
