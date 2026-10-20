@@ -254,6 +254,26 @@ ${suggestions.length === 0 ? `\nTotal available: ${COMPONENT_NAMES.length} compo
     responseParts.push("");
   }
 
+  const resolvedName = resolution?.resolvedName ?? normalizedName;
+  const aliases = COMPONENT_METADATA[resolvedName]?.tokenAliases ?? {};
+  const renamedTokens = theme.tokens.filter((t) => aliases[t.name]);
+
+  if (renamedTokens.length > 0) {
+    responseParts.push(
+      "**Renamed tokens:** pass the token name to the theme function, but when writing CSS custom properties by hand use the emitted variable name:",
+    );
+    responseParts.push("| Token | CSS variable |");
+    responseParts.push("| --- | --- |");
+
+    for (const token of renamedTokens) {
+      responseParts.push(
+        `| \`${token.name}\` | \`--ig-${resolvedName}-${aliases[token.name]}\` |`,
+      );
+    }
+
+    responseParts.push("");
+  }
+
   responseParts.push("---");
   responseParts.push(
     "**Next step:** Use `create_component_theme` with ONLY the **primary tokens** above. " +
