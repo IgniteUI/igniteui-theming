@@ -51,25 +51,16 @@ function findNodeModules(): string {
 
 const NODE_MODULES = findNodeModules();
 
-/**
- * Angular output imports `igniteui-angular/theming`, which is only
- * compilable when igniteui-angular is installed.
- */
-const HAS_ANGULAR = existsSync(
-  path.join(NODE_MODULES, "igniteui-angular", "package.json"),
-);
+/** Holds a stand-in for `igniteui-angular/theming`. */
+const FIXTURES = path.join(import.meta.dirname, "fixtures");
 
-/** Platforms whose output compiles against `igniteui-theming` alone. */
-const THEMING_PLATFORMS: Platform[] = [
+const PLATFORMS: Platform[] = [
+  "angular",
   "webcomponents",
   "react",
   "blazor",
   "generic",
 ];
-
-const PLATFORMS: Platform[] = HAS_ANGULAR
-  ? ["angular", ...THEMING_PLATFORMS]
-  : THEMING_PLATFORMS;
 
 /** Platforms with Ignite UI components (excludes `generic`). */
 const PRODUCT_PLATFORMS = PLATFORMS.filter((p) => p !== "generic");
@@ -136,7 +127,7 @@ function extractBlocks(text: string): CodeBlock[] {
 async function compileBlock(block: CodeBlock): Promise<string> {
   const result = await compiler.compileStringAsync(block.code, {
     syntax: block.lang === "css" ? "css" : "scss",
-    loadPaths: [NODE_MODULES],
+    loadPaths: [NODE_MODULES, FIXTURES],
   });
 
   return result.css;
