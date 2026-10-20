@@ -94,8 +94,10 @@ export const seedData = defineProvider<SeedData>({
   id: "color.seeds",
   module: import.meta.url,
   deps: [COLOR_SASS],
-  build() {
-    const { css, warnings } = compile(PRELUDE + SEEDS.map(probe).join("\n"));
+  async build() {
+    const { css, warnings } = await compile(
+      PRELUDE + SEEDS.map(probe).join("\n"),
+    );
 
     const side = (key: string, generator: Generator): PresetSide => ({
       vars: primaryVars(css, `s-${key}-${generator}`),

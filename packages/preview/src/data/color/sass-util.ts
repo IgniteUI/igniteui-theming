@@ -55,10 +55,13 @@ export interface CompileOptions {
  * "shade 900 wanted 16.1:1 but its hue only reaches 15.2:1" reaches the terminal on
  * every run and not only the one that compiled it.
  */
-export const compile = (source: string, { expected }: CompileOptions = {}) => {
+export const compile = async (
+  source: string,
+  { expected }: CompileOptions = {},
+) => {
   const warnings = new Set<string>();
 
-  const { css } = sass.compileString(source, {
+  const { css } = await sass.compileStringAsync(source, {
     loadPaths: [fileURLToPath(THEMING)],
     logger: {
       warn(message, options) {

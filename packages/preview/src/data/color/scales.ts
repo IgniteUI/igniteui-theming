@@ -73,7 +73,7 @@ interface Seeds {
 }
 
 /** Read from the shipped palettes so the editor's subjects are the ones the picker offers. */
-const readSeeds = (): Seeds[] => {
+const readSeeds = async (): Promise<Seeds[]> => {
   const rules = PRESETS.flatMap(({ key }) =>
     THEMES.map(
       (theme) =>
@@ -87,7 +87,7 @@ const readSeeds = (): Seeds[] => {
         " }",
     ),
   );
-  const { css } = compile(
+  const { css } = await compile(
     `@use 'sass:map';\n@use 'sass/color/presets' as *;\n${HEX_USE}${HEX_FN}${rules.join("\n")}`,
   );
 
@@ -113,10 +113,10 @@ const capitalise = (name: string) => name[0].toUpperCase() + name.slice(1);
  * a chromatic family is anchored to white whatever the page is, so the list collapses
  * well below one entry per preset.
  */
-const definitions = (): Definition[] => {
+const definitions = async (): Promise<Definition[]> => {
   const seen = new Map<string, Definition>();
 
-  for (const entry of readSeeds()) {
+  for (const entry of await readSeeds()) {
     const candidates: Definition[] = [
       {
         key: `${entry.name}-primary`,
@@ -219,8 +219,8 @@ export const scaleData = defineProvider<ScaleData>({
   id: "color.scales",
   module: import.meta.url,
   deps: [COLOR_SASS],
-  build() {
-    const subjects = definitions();
+  async build() {
+    const subjects = await definitions();
     const targets = sampled();
     const rules = subjects.flatMap((subject, s) => [
       ...targets.map((target, k) =>
@@ -232,7 +232,7 @@ export const scaleData = defineProvider<ScaleData>({
           )
         : []),
     ]);
-    const { css, warnings } = compile(
+    const { css, warnings } = await compile(
       `@use 'sass:map';\n@use 'sass/color' as *;\n@use 'sass/color/types' as types;\n` +
         HEX_USE +
         HEX_FN +

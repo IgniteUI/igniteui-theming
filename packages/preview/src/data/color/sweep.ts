@@ -107,14 +107,14 @@ export const sweepData = defineProvider<SweepData>({
   id: "color.sweep",
   module: import.meta.url,
   deps: [COLOR_SASS],
-  build() {
+  async build() {
     const seeds = SATURATIONS.flatMap((saturation) =>
       hues().map((hue) => ({
         saturation,
         seed: `hsl(${hue}, ${saturation}%, 50%)`,
       })),
     );
-    const { css, warnings } = compile(
+    const { css, warnings } = await compile(
       `@use 'sass:map';\n@use 'sass/color' as *;\n@use 'sass/color/types' as types;\n` +
         HEX_USE +
         HEX_FN +

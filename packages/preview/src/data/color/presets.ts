@@ -122,11 +122,11 @@ export const presetData = defineProvider<PresetData>({
   id: "color.presets",
   module: import.meta.url,
   deps: [COLOR_SASS],
-  build() {
+  async build() {
     const selections = PRESETS.flatMap((preset) =>
       THEMES.map((theme) => ({ ...preset, theme })),
     );
-    const { css, warnings } = compile(
+    const { css, warnings } = await compile(
       PRELUDE + selections.map((s) => probe(s.key, s.theme)).join("\n"),
     );
 

@@ -16,10 +16,10 @@ import { compile } from "./sass-util.js";
 import { type ScaleSubject, scaleData } from "./scales.js";
 
 /** What the generator itself produces for a subject under a shipped scale. */
-const rampFromSass = (subject: ScaleSubject, preset: ScalePreset) => {
+const rampFromSass = async (subject: ScaleSubject, preset: ScalePreset) => {
   const surface =
     subject.family === "gray" ? `, $surface: ${subject.surface}` : "";
-  const { css } = compile(
+  const { css } = await compile(
     `@use 'sass:map';\n@use 'sass/color' as *;\n@use 'sass/color/types' as types;\n` +
       `o { $s: shades('${subject.family}', ${subject.seed}, types.$INumericShades${surface}, $scale: '${preset.name}');\n` +
       SHADES.map((v) => `  v${v}: '#{map.get($s, "${v}-raw")}';`).join("\n") +
@@ -72,9 +72,9 @@ const neutral = (theme: Theme) => {
 describe("the scale lookup table", () => {
   for (const subject of data.subjects) {
     for (const preset of SCALE_PRESETS) {
-      it(`reproduces ${preset.name} on ${subject.key}`, () => {
+      it(`reproduces ${preset.name} on ${subject.key}`, async () => {
         const got = rampFromData(subject, preset);
-        const want = rampFromSass(subject, preset);
+        const want = await rampFromSass(subject, preset);
         const worst = Math.max(
           ...got.map((c, i) =>
             Math.max(...c.map((v, ch) => Math.abs(v - want[i][ch]))),
