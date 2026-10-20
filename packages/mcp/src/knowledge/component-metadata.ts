@@ -75,6 +75,8 @@ export interface ComponentMetadata {
   childOf?: string;
   /** Present only for components with variant-specific themes (e.g., button) */
   variants?: string[];
+  /** Theme param name -> key emitted as `--ig-<theme>-<key>`, for params the theme function renames. */
+  tokenAliases?: Record<string, string>;
   /** Present only for compound components */
   compound?: CompoundInfo;
 }
@@ -97,6 +99,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   },
   badge: {
     selectors: { angular: "igx-badge", webcomponents: "igc-badge" },
+    tokenAliases: { shadow: "elevation" },
   },
   banner: {
     selectors: { angular: "igx-banner", webcomponents: "igc-banner" },
@@ -109,6 +112,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   "bottom-nav": {
     selectors: { angular: "igx-bottom-nav", webcomponents: null },
+    tokenAliases: { shadow: "elevation" },
   },
   breadcrumbs: {
     selectors: { angular: "igc-breadcrumbs", webcomponents: "igc-breadcrumbs" },
@@ -137,6 +141,12 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       angular: [".igx-button--contained"],
       webcomponents: 'igc-button[variant="contained"]',
     },
+    tokenAliases: {
+      "resting-shadow": "resting-elevation",
+      "hover-shadow": "hover-elevation",
+      "focus-shadow": "focus-elevation",
+      "active-shadow": "active-elevation",
+    },
   },
   "outlined-button": {
     selectors: {
@@ -148,6 +158,12 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: [".igx-button--fab"],
       webcomponents: 'igc-button[variant="fab"]',
+    },
+    tokenAliases: {
+      "resting-shadow": "resting-elevation",
+      "hover-shadow": "hover-elevation",
+      "focus-shadow": "focus-elevation",
+      "active-shadow": "active-elevation",
     },
   },
   "icon-button": {
@@ -184,12 +200,17 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
       angular: "igx-buttongroup",
       webcomponents: "igc-button-group",
     },
+    tokenAliases: { shadow: "elevation" },
   },
   calendar: {
     selectors: { angular: "igx-calendar", webcomponents: "igc-calendar" },
   },
   card: {
     selectors: { angular: "igx-card", webcomponents: "igc-card" },
+    tokenAliases: {
+      "resting-shadow": "resting-elevation",
+      "hover-shadow": "hover-elevation",
+    },
     compound: {
       description:
         "The card component can contain various child components like avatars, buttons, chips, and icons.",
@@ -210,6 +231,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   carousel: {
     selectors: { angular: "igx-carousel", webcomponents: "igc-carousel" },
+    tokenAliases: { "button-shadow": "button-elevation" },
   },
   chat: {
     selectors: { angular: "igc-chat", webcomponents: "igc-chat" },
@@ -230,6 +252,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   chip: {
     selectors: { angular: "igx-chip", webcomponents: "igc-chip" },
+    tokenAliases: { "ghost-shadow": "ghost-elevation" },
   },
   "column-actions": {
     selectors: { angular: "igx-column-actions", webcomponents: null },
@@ -251,6 +274,10 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: "igc-color-picker",
       webcomponents: "igc-color-picker",
+    },
+    tokenAliases: {
+      "picker-shadow": "picker-elevation",
+      "marker-shadow": "marker-elevation",
     },
     aliases: ["colour picker"],
   },
@@ -355,6 +382,7 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
   },
   dialog: {
     selectors: { angular: ".igx-dialog", webcomponents: "igc-dialog" },
+    tokenAliases: { shadow: "elevation" },
     aliases: ["modal", "popup"],
     compound: {
       description: "The dialog component uses flat-buttons for the actions",
@@ -380,6 +408,7 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
       angular: ".igx-drop-down__list",
       webcomponents: "igc-dropdown",
     },
+    tokenAliases: { shadow: "elevation" },
     aliases: ["dropdown menu"],
   },
   "drop-down-item": {
@@ -411,6 +440,10 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   grid: {
     selectors: { angular: "igx-grid", webcomponents: "igc-grid" },
+    tokenAliases: {
+      "grid-shadow": "grid-elevation",
+      "drag-shadow": "drag-elevation",
+    },
     compound: GRID_COMPOUND_INFO,
   },
   "tree-grid": {
@@ -468,6 +501,11 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   "input-group": {
     selectors: { angular: "igx-input-group", webcomponents: "igc-input" },
+    tokenAliases: {
+      "search-resting-shadow": "search-resting-elevation",
+      "search-hover-shadow": "search-hover-elevation",
+      "search-disabled-shadow": "search-disabled-elevation",
+    },
   },
   label: {
     selectors: { angular: "[igxLabel]", webcomponents: "igc-label" },
@@ -483,6 +521,7 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   navbar: {
     selectors: { angular: "igx-navbar", webcomponents: "igc-navbar" },
+    tokenAliases: { shadow: "elevation" },
     compound: {
       description:
         "The navbar contains buttons and icons-buttons for navigation.",
@@ -500,6 +539,7 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
   },
   navdrawer: {
     selectors: { angular: "igx-nav-drawer", webcomponents: "igc-nav-drawer" },
+    tokenAliases: { shadow: "elevation" },
     aliases: [
       "drawer",
       "side drawer",
@@ -618,6 +658,7 @@ The drop-down background should match the select surface intent.`,
   },
   snackbar: {
     selectors: { angular: "igx-snackbar", webcomponents: "igc-snackbar" },
+    tokenAliases: { shadow: "elevation" },
   },
   splitter: {
     selectors: { angular: "igx-splitter", webcomponents: "igc-splitter" },
@@ -630,6 +671,11 @@ The drop-down background should match the select surface intent.`,
   },
   switch: {
     selectors: { angular: "igx-switch", webcomponents: "igc-switch" },
+    tokenAliases: {
+      "resting-shadow": "resting-elevation",
+      "hover-shadow": "hover-elevation",
+      "disabled-shadow": "disabled-elevation",
+    },
     aliases: ["toggle"],
   },
   tabs: {
@@ -640,6 +686,10 @@ The drop-down background should match the select surface intent.`,
   },
   "time-picker": {
     selectors: { angular: "igx-time-picker", webcomponents: null },
+    tokenAliases: {
+      "modal-shadow": "modal-elevation",
+      "dropdown-shadow": "dropdown-elevation",
+    },
     compound: {
       description: "The time picker uses an input-group for the input field.",
       relatedThemes: ["input-group", "time-picker", "flat-button"],
@@ -656,9 +706,11 @@ The input-group text color should coordinate with the time-picker header.`,
   },
   toast: {
     selectors: { angular: "igx-toast", webcomponents: "igc-toast" },
+    tokenAliases: { shadow: "elevation" },
   },
   tooltip: {
     selectors: { angular: ".igx-tooltip", webcomponents: "igc-tooltip" },
+    tokenAliases: { shadow: "elevation" },
   },
   tree: {
     selectors: { angular: "igx-tree-node", webcomponents: "igc-tree" },
