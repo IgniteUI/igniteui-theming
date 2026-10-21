@@ -25,10 +25,12 @@ export {
 export {
   formatValidationResult,
   generateWarningComments,
+  invalidColorsResponse,
   type PaletteValidationMetadata,
   type PaletteValidationResult,
   type PaletteWarning,
   type ValidatePaletteColorsInput,
+  validateColorInputs,
   validatePaletteColors,
   type WarningSeverity,
 } from "./palette.js";

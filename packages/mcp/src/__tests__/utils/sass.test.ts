@@ -89,6 +89,11 @@ describe("quoteFontFamily", () => {
     const input = '"Titillium Web", sans-serif';
     expect(quoteFontFamily(input)).toBe(`'"Titillium Web", sans-serif'`);
   });
+
+  it("leaves Sass variable references unquoted", () => {
+    expect(quoteFontFamily("$typeface")).toBe("$typeface");
+    expect(quoteFontFamily("$material-typeface")).toBe("$material-typeface");
+  });
 });
 
 describe("generateUseStatement", () => {

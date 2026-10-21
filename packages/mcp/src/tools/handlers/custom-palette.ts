@@ -110,6 +110,7 @@ export async function handleCreateCustomPalette(
           text: `**Validation Failed**\n\n${errorText}\n\nPlease fix the errors and try again.`,
         },
       ],
+      isError: true,
     };
   }
 
@@ -221,6 +222,7 @@ async function handleCssOutput(
           text: `**Error generating CSS palette**\n\n${message}`,
         },
       ],
+      isError: true,
     };
   }
 }

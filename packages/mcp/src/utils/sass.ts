@@ -27,8 +27,14 @@ import {
  * - `'Roboto'` -> `'Roboto'` (unchanged)
  * - `'Titillium Web', sans-serif` -> `"'Titillium Web', sans-serif"`
  * - `"Titillium Web", sans-serif` -> `'"Titillium Web", sans-serif'`
+ * - `$typeface` -> `$typeface` (Sass variable, unchanged)
  */
 export function quoteFontFamily(typeface: string): string {
+  if (typeface.startsWith("$")) {
+    // Sass variable reference (e.g. a preset typeface): quoting it would
+    // turn it into the literal string "$typeface".
+    return typeface;
+  }
   if (typeface.includes(",")) {
     // Font stack: wrap entire value in quotes to preserve as single string.
     // Use opposite quote type to avoid escaping inner quotes.

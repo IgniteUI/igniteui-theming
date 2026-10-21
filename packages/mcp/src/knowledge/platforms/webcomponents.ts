@@ -17,7 +17,6 @@ import {
   generatePaletteCode,
   generateTypographyCode,
   generateUseStatement,
-  quoteFontFamily,
 } from "../../utils/sass.js";
 import type { DesignSystem, ThemeVariant } from "../../utils/types.js";
 import { PALETTE_PRESETS, type PalettePresetName } from "../palettes.js";
@@ -180,15 +179,14 @@ export function generateWCRootVariables(options: {
 
   lines.push(`${indent}:root {`);
 
+  // The design system is known at generation time, so it is always emitted
+  // as a literal (palettes don't carry it in their metadata).
+  lines.push(`${indent}  --ig-theme: ${designSystem};`);
+
   if (usePaletteMap) {
-    // When using a palette variable, get theme from the palette's metadata
-    lines.push(
-      `${indent}  --ig-theme: #{map.get($palette, '_meta', 'variant')};`,
-    );
+    // Inside the theme() mixin the variant comes from the mixin argument
     lines.push(`${indent}  --ig-theme-variant: #{$variant};`);
   } else {
-    // When using preset palette, use literal values
-    lines.push(`${indent}  --ig-theme: ${designSystem};`);
     lines.push(`${indent}  --ig-theme-variant: ${variant};`);
   }
 
@@ -442,7 +440,8 @@ export function generateWebComponentsThemeSass(
   } = template;
 
   // Determine the font-family value to use
-  const typefaceValue = fontFamily ? quoteFontFamily(fontFamily) : "$typeface";
+  // Quoting happens in generateTypographyCode
+  const typefaceValue = fontFamily ?? "$typeface";
 
   // Determine if using custom or preset palette
   const hasCustomColors = !!(primaryColor || secondaryColor || surfaceColor);

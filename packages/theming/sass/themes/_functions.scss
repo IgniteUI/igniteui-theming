@@ -135,6 +135,17 @@
     @return clamp(#{$min}, #{calc(var(--ig-radius-factor, #{$factor}) * #{$max})}, #{$max});
 }
 
+/// Returns the absolute value of a number at compile time.
+/// Non-numeric values (var(), calc(), etc.) are kept as a runtime max() expression.
+/// @access private
+@function _abs($value) {
+    @if meta.type-of($value) == 'number' {
+        @return math.abs($value);
+    }
+
+    @return max(#{$value}, -1 * #{$value});
+}
+
 /// Used to switch between values based on the size of the component.
 /// The passed sizes are converted to absolute values before comparing.
 /// @group themes
@@ -146,9 +157,9 @@
 ///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
 /// @return {Function} The evaluated value.
 @function sizable($sm, $md: $sm, $lg: $md) {
-    $sm: max(#{$sm}, -1 * #{$sm});
-    $md: max(#{$md}, -1 * #{$md});
-    $lg: max(#{$lg}, -1 * #{$lg});
+    $sm: _abs($sm);
+    $md: _abs($md);
+    $lg: _abs($lg);
 
     @return max(
         calc(var(--is-large, 1) * #{$lg}),
@@ -172,9 +183,9 @@
 /// @return {Function} The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
     $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
-    $sm: max(#{$sm}, -1 * #{$sm});
-    $md: max(#{$md}, -1 * #{$md});
-    $lg: max(#{$lg}, -1 * #{$lg});
+    $sm: _abs($sm);
+    $md: _abs($md);
+    $lg: _abs($lg);
 
     @return max(
         calc(var(--is-large, 1) * #{$lg} * var(#{$spacing}-large, var(#{$spacing}, var(--ig-spacing)))),

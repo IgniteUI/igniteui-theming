@@ -885,9 +885,41 @@ $schema: (
 
                     @include expect() {
                         width: max(
-                            calc(var(--is-large, 1) * max(#{$lg}, -1 * #{$lg})),
-                            calc(var(--is-medium, 1) * max(#{$md}, -1 * #{$md})),
-                            calc(var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}))
+                            calc(var(--is-large, 1) * $lg),
+                            calc(var(--is-medium, 1) * $md),
+                            calc(var(--is-small, 1) * $sm)
+                        );
+                    }
+                }
+            }
+
+            @include it('should convert negative sizes to absolute values') {
+                @include assert() {
+                    @include output() {
+                        width: sizable(-8px, -16px, 24px);
+                    }
+
+                    @include expect() {
+                        width: max(
+                            calc(var(--is-large, 1) * 24px),
+                            calc(var(--is-medium, 1) * 16px),
+                            calc(var(--is-small, 1) * 8px)
+                        );
+                    }
+                }
+            }
+
+            @include it('should keep the runtime max() for non-numeric sizes') {
+                @include assert() {
+                    @include output() {
+                        width: sizable(var(--size));
+                    }
+
+                    @include expect() {
+                        width: max(
+                            calc(var(--is-large, 1) * max(var(--size), -1 * var(--size))),
+                            calc(var(--is-medium, 1) * max(var(--size), -1 * var(--size))),
+                            calc(var(--is-small, 1) * max(var(--size), -1 * var(--size)))
                         );
                     }
                 }
@@ -906,15 +938,15 @@ $schema: (
                     @include expect() {
                         padding: max(
                             calc(
-                                var(--is-large, 1) * max(#{$value}, -1 * #{$value}) *
+                                var(--is-large, 1) * $value *
                                     var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing)))
                             ),
                             calc(
-                                var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) *
+                                var(--is-medium, 1) * $value *
                                     var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing)))
                             ),
                             calc(
-                                var(--is-small, 1) * max(#{$value}, -1 * #{$value}) *
+                                var(--is-small, 1) * $value *
                                     var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing)))
                             )
                         );
@@ -933,15 +965,15 @@ $schema: (
                     @include expect() {
                         padding-inline: max(
                             calc(
-                                var(--is-large, 1) * max(#{$value}, -1 * #{$value}) *
+                                var(--is-large, 1) * $value *
                                     var(--ig-spacing-inline-large, var(--ig-spacing-inline, var(--ig-spacing)))
                             ),
                             calc(
-                                var(--is-medium, 1) * max(#{$value}, -1 * #{$value}) *
+                                var(--is-medium, 1) * $value *
                                     var(--ig-spacing-inline-medium, var(--ig-spacing-inline, var(--ig-spacing)))
                             ),
                             calc(
-                                var(--is-small, 1) * max(#{$value}, -1 * #{$value}) *
+                                var(--is-small, 1) * $value *
                                     var(--ig-spacing-inline-small, var(--ig-spacing-inline, var(--ig-spacing)))
                             )
                         );
@@ -962,15 +994,15 @@ $schema: (
                     @include expect() {
                         padding-block: max(
                             calc(
-                                var(--is-large, 1) * max(#{$lg}, -1 * #{$lg}) *
+                                var(--is-large, 1) * $lg *
                                     var(--ig-spacing-block-large, var(--ig-spacing-block, var(--ig-spacing)))
                             ),
                             calc(
-                                var(--is-medium, 1) * max(#{$md}, -1 * #{$md}) *
+                                var(--is-medium, 1) * $md *
                                     var(--ig-spacing-block-medium, var(--ig-spacing-block, var(--ig-spacing)))
                             ),
                             calc(
-                                var(--is-small, 1) * max(#{$sm}, -1 * #{$sm}) *
+                                var(--is-small, 1) * $sm *
                                     var(--ig-spacing-block-small, var(--ig-spacing-block, var(--ig-spacing)))
                             )
                         );

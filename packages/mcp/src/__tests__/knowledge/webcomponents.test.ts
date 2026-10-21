@@ -144,7 +144,7 @@ describe("generateWCRootVariables", () => {
     expect(output).toContain("--ig-scrollbar-size: #{rem(16px)}");
   });
 
-  it("generates root variables with map.get for custom palette", () => {
+  it("generates root variables with the variant argument for custom palette", () => {
     const vars = generateWCRootVariables({
       designSystem: "indigo",
       variant: "dark",
@@ -152,9 +152,9 @@ describe("generateWCRootVariables", () => {
     });
     const output = vars.join("\n");
 
-    expect(output).toContain(
-      "--ig-theme: #{map.get($palette, '_meta', 'variant')}",
-    );
+    // The design system is emitted as a literal; map.get would need sass:map
+    expect(output).toContain("--ig-theme: indigo;");
+    expect(output).not.toContain("map.get");
     expect(output).toContain("--ig-theme-variant: #{$variant}");
   });
 
@@ -212,7 +212,8 @@ describe("generateWCThemingMixins", () => {
     expect(output).toContain("@include palette($my-palette)");
     expect(output).toContain("@include elevations($material-elevations)");
     expect(output).toContain("@include typography(");
-    expect(output).toContain("$font-family: '$typeface'"); // quoteFontFamily adds quotes
+    // Sass variables must not be quoted, or they'd compile to a literal string
+    expect(output).toContain("$font-family: $typeface,");
     expect(output).toContain("@include spacing()");
   });
 

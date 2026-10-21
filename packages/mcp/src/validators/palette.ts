@@ -13,11 +13,15 @@ import {
   LUMINANCE_THRESHOLD,
   SUGGESTED_COLORS,
   type SurfaceGrayAnalysis,
+  validateColorsInBatch,
 } from "../utils/color.js";
 import {
   formatValidationMessages,
+  type ValidationError,
   type ValidationResult,
   type ValidationWarning,
+  validationFailure,
+  validationSuccess,
 } from "../utils/result.js";
 import type { ThemeVariant } from "../utils/types.js";
 
@@ -254,6 +258,50 @@ function validateGrayColor(
         ? `> ${LUMINANCE_THRESHOLD}`
         : `<= ${LUMINANCE_THRESHOLD}`,
     },
+  };
+}
+
+/**
+ * Validate that every provided color input is a color Sass can parse.
+ *
+ * The input schemas only check the general shape of a color (so a word like
+ * `notacolor` passes as a "named color"); this catches values that would make
+ * the generated code fail to compile. Undefined entries are skipped.
+ */
+export async function validateColorInputs(
+  colors: Record<string, string | undefined>,
+): Promise<ValidationResult> {
+  const provided = Object.fromEntries(
+    Object.entries(colors).filter(
+      (entry): entry is [string, string] => entry[1] !== undefined,
+    ),
+  );
+
+  const validity = await validateColorsInBatch(provided);
+  const errors: ValidationError[] = Object.entries(provided)
+    .filter(([field]) => !validity[field])
+    .map(([field, value]) => ({
+      field,
+      message: `"${value}" is not a valid CSS color.`,
+      suggestion: "Use a hex, rgb(), hsl(), or named CSS color.",
+      currentValue: value,
+    }));
+
+  return errors.length > 0 ? validationFailure(errors) : validationSuccess();
+}
+
+/**
+ * Build an `isError` tool response for invalid color inputs.
+ */
+export function invalidColorsResponse(result: ValidationResult) {
+  return {
+    content: [
+      {
+        type: "text" as const,
+        text: `**Invalid color input**\n\n${formatValidationMessages(result)}`,
+      },
+    ],
+    isError: true,
   };
 }
 
