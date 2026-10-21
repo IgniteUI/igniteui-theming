@@ -1,0 +1,49 @@
+// Test stand-in for `igniteui-angular/theming`: same forwards and
+// Angular-only mixin signatures as igniteui-angular, with no styles.
+
+@use 'sass:meta';
+@use 'igniteui-theming/sass/elevations/presets' as elevations;
+@use 'igniteui-theming/sass/themes/schemas';
+@use 'igniteui-theming/sass/typography' as theming-typography;
+@use 'igniteui-theming/sass/typography/presets' as typography-presets;
+
+@forward 'igniteui-theming/sass/bem';
+@forward 'igniteui-theming/sass/color';
+@forward 'igniteui-theming/sass/elevations';
+@forward 'igniteui-theming/sass/themes';
+@forward 'igniteui-theming/sass/themes/components';
+@forward 'igniteui-theming/sass/typography' hide typography;
+@forward 'igniteui-theming/sass/utils';
+@forward 'igniteui-theming/sass/color/presets';
+@forward 'igniteui-theming/sass/elevations/presets';
+@forward 'igniteui-theming/sass/typography/presets';
+@forward 'igniteui-theming/sass/animations';
+@forward 'igniteui-theming/sass/themes/schemas';
+
+@mixin core($print-layout: true, $enhanced-accessibility: false) {
+}
+
+@mixin typography(
+    $font-family: typography-presets.$material-typeface,
+    $type-scale: typography-presets.$material-type-scale,
+    $exclude: null
+) {
+    @include theming-typography.typography($font-family, $type-scale);
+}
+
+@mixin theme(
+    $palette,
+    $schema: schemas.$light-material-schema,
+    $exclude: (),
+    $roundness: null,
+    $elevation: true,
+    $elevations: elevations.$material-elevations
+) {
+    @if meta.type-of($palette) != 'map' {
+        @error 'theme(): $palette must be a palette map, got #{meta.inspect($palette)}';
+    }
+
+    @if meta.type-of($schema) != 'map' {
+        @error 'theme(): $schema must be a schema map, got #{meta.inspect($schema)}';
+    }
+}

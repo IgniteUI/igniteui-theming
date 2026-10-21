@@ -15,7 +15,6 @@ import {
   generatePaletteCode,
   generateTypographyCode,
   generateUseStatement,
-  quoteFontFamily,
 } from "../../utils/sass.js";
 import type { DesignSystem, ThemeVariant } from "../../utils/types.js";
 import { PALETTE_PRESETS, type PalettePresetName } from "../palettes.js";
@@ -212,9 +211,8 @@ export function generateAngularThemeSass(
   // Typography mixin
   if (includeTypography) {
     // Use custom font family if provided, otherwise use preset variable
-    const typefaceValue = fontFamily
-      ? quoteFontFamily(fontFamily)
-      : TYPEFACES[designSystem];
+    // Quoting happens in generateTypographyCode
+    const typefaceValue = fontFamily ?? TYPEFACES[designSystem];
     const typeScale = TYPE_SCALES[designSystem];
 
     // Use shared typography code generator

@@ -28,11 +28,13 @@ export {
   formatValidationResult,
   generatePaletteSuitabilityComments,
   generateWarningComments,
+  invalidColorsResponse,
   type PaletteValidationMetadata,
   type PaletteValidationResult,
   type PaletteWarning,
   type ThemeColorsSuitabilityResult,
   type ValidatePaletteColorsInput,
+  validateColorInputs,
   validatePaletteColors,
   type WarningSeverity,
 } from "./palette.js";

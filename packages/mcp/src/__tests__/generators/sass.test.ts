@@ -685,6 +685,32 @@ describe("generateTheme", () => {
 });
 
 describe("generateComponentTheme", () => {
+  it.each([
+    "webcomponents",
+    "react",
+    "blazor",
+  ] as const)("imports schemas for %s (not forwarded by igniteui-theming)", (platform) => {
+    const result = generateComponentTheme({
+      platform,
+      component: "avatar",
+      tokens: { background: "#ff0000" },
+    });
+
+    expect(result.code).toContain(
+      "@use 'igniteui-theming/sass/themes/schemas' as *;",
+    );
+  });
+
+  it("does not import schemas for Angular (forwarded by igniteui-angular/theming)", () => {
+    const result = generateComponentTheme({
+      platform: "angular",
+      component: "avatar",
+      tokens: { background: "#ff0000" },
+    });
+
+    expect(result.code).not.toContain("themes/schemas");
+  });
+
   it("uses @include tokens() mixin in output", () => {
     const result = generateComponentTheme({
       platform: "angular",

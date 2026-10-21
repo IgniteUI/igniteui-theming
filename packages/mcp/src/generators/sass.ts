@@ -15,7 +15,10 @@ import {
 } from "../knowledge/component-metadata.js";
 import { getComponentTheme } from "../knowledge/component-themes.js";
 import { generateAngularThemeSass } from "../knowledge/platforms/angular.js";
-import { SCHEMAS as SCHEMA_PRESETS } from "../knowledge/platforms/common.js";
+import {
+  SCHEMAS as SCHEMA_PRESETS,
+  SCHEMAS_PATH,
+} from "../knowledge/platforms/common.js";
 import { generateWebComponentsThemeSass } from "../knowledge/platforms/webcomponents.js";
 import { TYPOGRAPHY_PRESETS } from "../knowledge/typography.js";
 import {
@@ -447,10 +450,19 @@ export function generateComponentTheme(
   const sections: string[] = [
     generateHeader(`Custom ${themeComponentName} theme`),
     generateUseStatement(input.platform, input.licensed),
+  ];
+
+  // Schemas aren't forwarded from the igniteui-theming root module
+  // (igniteui-angular/theming does forward them)
+  if (input.platform !== "angular") {
+    sections.push(`@use '${SCHEMAS_PATH}' as *;`);
+  }
+
+  sections.push(
     "",
     `// Custom ${themeComponentName} theme`,
     `${themeName}: ${themeFn}(`,
-  ];
+  );
 
   // Add token arguments with proper indentation
   if (tokenArgs.length > 0) {
