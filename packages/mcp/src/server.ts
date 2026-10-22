@@ -18,6 +18,7 @@ import {
   createThemeSchema,
   createTypographySchema,
   detectPlatformSchema,
+  fitColorScaleSchema,
   getChartSeriesColorsSchema,
   getColorSchema,
   getComponentDesignTokensSchema,
@@ -28,6 +29,7 @@ import {
   handleCreateTheme,
   handleCreateTypography,
   handleDetectPlatform,
+  handleFitColorScale,
   handleGetChartSeriesColors,
   handleGetColor,
   handleGetComponentDesignTokens,
@@ -101,6 +103,8 @@ function registerTools(server: McpServer): void {
         licensed: createPaletteSchema.shape.licensed,
         variant: createPaletteSchema.shape.variant,
         name: createPaletteSchema.shape.name,
+        scales: createPaletteSchema.shape.scales,
+        generator: createPaletteSchema.shape.generator,
         output: createPaletteSchema.shape.output,
         primary: createPaletteSchema.shape.primary,
         secondary: createPaletteSchema.shape.secondary,
@@ -198,6 +202,8 @@ function registerTools(server: McpServer): void {
         surfaceColor: createThemeSchema.shape.surfaceColor,
         variant: createThemeSchema.shape.variant,
         name: createThemeSchema.shape.name,
+        scales: createThemeSchema.shape.scales,
+        generator: createThemeSchema.shape.generator,
         fontFamily: createThemeSchema.shape.fontFamily,
         includeTypography: createThemeSchema.shape.includeTypography,
         includeElevations: createThemeSchema.shape.includeElevations,
@@ -350,6 +356,23 @@ function registerTools(server: McpServer): void {
     async (params) => {
       const validated = getChartSeriesColorsSchema.parse(params);
       return handleGetChartSeriesColors(validated);
+    },
+  );
+
+  // fit_color_scale tool
+  server.registerTool(
+    "fit_color_scale",
+    {
+      title: "Fit Color Scale",
+      description: TOOL_DESCRIPTIONS.fit_color_scale,
+      inputSchema: {
+        colors: fitColorScaleSchema.shape.colors,
+        name: fitColorScaleSchema.shape.name,
+      },
+    },
+    async (params) => {
+      const validated = fitColorScaleSchema.parse(params);
+      return handleFitColorScale(validated);
     },
   );
 

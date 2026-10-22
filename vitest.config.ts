@@ -5,6 +5,7 @@ export default defineConfig({
     projects: [
       'packages/theming',
       'packages/mcp',
+      'packages/preview',
     ],
   },
 });

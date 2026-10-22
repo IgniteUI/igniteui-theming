@@ -1,0 +1,103 @@
+/*
+ * One embedded demo's stylesheet, adopted by its shadow root.
+ *
+ * The same tokens, theme and view rules as the preview app, scoped to `:host` so nothing
+ * reaches the article around it and nothing from the article reaches in. The scheme
+ * follows the reader's system unless the tag says otherwise with `scheme="light"` or
+ * `scheme="dark"`.
+ */
+@use "../styles/tokens";
+@use "../styles/views";
+@use "../shell/theme-tokens" as theme;
+
+// At the top level, where the library's mixins emit `@property` rules and `:root`. The
+// loader in styles.ts lifts the former into the document and turns the latter into
+// `:host`; nested here, Sass would wrap each `@property` body in a selector.
+@include theme.structure;
+
+:host {
+    @include theme.scheme-light;
+    @include tokens.tokens;
+
+    display: block;
+    container: page / inline-size;
+    padding: var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--panel);
+    color: var(--ink);
+    font: var(--text-base) / 1.55 var(--sans);
+    text-align: start;
+}
+
+@media (prefers-color-scheme: dark) {
+    :host(:not([scheme="light"])) {
+        @include theme.scheme-dark;
+    }
+}
+
+:host([scheme="dark"]) {
+    @include theme.scheme-dark;
+}
+
+/* The first article in a demo needs no rule above it: the frame is the separation. */
+.demo > :first-child,
+.demo > [embedded] > article:first-child,
+.demo > [embedded] > .keyline:first-child {
+    margin-block-start: 0;
+}
+
+.demo-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin-block-end: var(--space-4);
+}
+
+.demo-loading {
+    min-height: 240px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: var(--text-sm);
+}
+
+details.steps {
+    margin-block-start: var(--space-4);
+
+    > summary {
+        cursor: pointer;
+        color: var(--muted);
+        font-size: var(--text-sm);
+    }
+}
+
+.family-picker {
+    flex-wrap: wrap;
+    margin-block: var(--space-4) 0;
+}
+
+/*
+ * A button group does not wrap. In a narrow column it scrolls sideways instead of
+ * clipping its last labels.
+ */
+.picker,
+.scale-settings {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+}
+
+.picker igc-button-group,
+.scale-settings igc-button-group {
+    max-inline-size: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+/* The group lays its buttons out in equal `1fr` columns, which squeezes long labels. */
+@container page (width <= 620px) {
+    .picker igc-button-group::part(group),
+    .scale-settings igc-button-group::part(group) {
+        grid-auto-columns: max-content;
+    }
+}

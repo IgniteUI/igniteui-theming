@@ -12,6 +12,8 @@ import {
   type ColorDefinition,
   type GrayDefinition,
   type Platform,
+  SURFACE_ROLES,
+  type SurfaceDefinition,
   type ThemeVariant,
 } from "./types.js";
 
@@ -366,7 +368,7 @@ export interface CustomPaletteCodeOptions {
   colors: {
     primary: ColorDefinition;
     secondary: ColorDefinition;
-    surface: ColorDefinition;
+    surface: SurfaceDefinition;
     gray: GrayDefinition;
     info: ColorDefinition;
     success: ColorDefinition;
@@ -406,7 +408,7 @@ export function generateCustomPaletteCode(
 
   const colorGroups: Array<{
     name: string;
-    def: ColorDefinition | GrayDefinition;
+    def: ColorDefinition | GrayDefinition | SurfaceDefinition;
     shades: readonly string[];
     isGray: boolean;
   }> = [
@@ -429,9 +431,11 @@ export function generateCustomPaletteCode(
       isGray: true,
     },
     {
+      // A surface is a background plus its layers, addressed by role rather than by
+      // shade number. Both generators emit these keys.
       name: "surface",
       def: options.colors.surface,
-      shades: ALL_COLOR_SHADES,
+      shades: SURFACE_ROLES,
       isGray: false,
     },
     {

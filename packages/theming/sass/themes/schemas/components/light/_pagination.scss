@@ -105,7 +105,7 @@ $bootstrap-pagination: extend(
 
 /// Generates an indigo pagination schema.
 /// @type Map
-/// @prop {Map} background [color: ('surface', 500)] - The background color of the paging panel.
+/// @prop {Map} background [color: ('surface', 'base')] - The background color of the paging panel.
 /// @prop {Map} border-color [color: ('gray', 400)] - The border color of the paging panel.
 /// @requires $light-pagination
 $indigo-pagination: extend(
@@ -114,7 +114,7 @@ $indigo-pagination: extend(
         background: (
             color: (
                 'surface',
-                500,
+                'base',
             ),
         ),
 

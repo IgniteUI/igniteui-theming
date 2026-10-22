@@ -23,16 +23,12 @@ export {
 } from "./custom-palette.js";
 // Palette validation
 export {
-  analyzeThemeColorsForPalette,
-  formatPaletteSuitabilityWarnings,
   formatValidationResult,
-  generatePaletteSuitabilityComments,
   generateWarningComments,
   invalidColorsResponse,
   type PaletteValidationMetadata,
   type PaletteValidationResult,
   type PaletteWarning,
-  type ThemeColorsSuitabilityResult,
   type ValidatePaletteColorsInput,
   validateColorInputs,
   validatePaletteColors,
