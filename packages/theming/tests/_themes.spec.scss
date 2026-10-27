@@ -924,6 +924,55 @@ $schema: (
                     }
                 }
             }
+
+            @include it('should fall back to the initial size values when they are not registered') {
+                @include assert() {
+                    @include output() {
+                        @include sizable();
+                    }
+
+                    @include expect() {
+                        --is-large: clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-large, 3), 1);
+                        --is-medium: min(
+                            clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-medium, 2), 1),
+                            clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
+                        );
+                        --is-small: clamp(0, var(--ig-size-medium, 2) - var(--component-size, 1), 1);
+                    }
+                }
+            }
+
+            @include it('should emit the size properties at the root when included in a nested scope') {
+                @include assert() {
+                    @include output($selector: false) {
+                        @media (prefers-color-scheme: dark) {
+                            .scoped {
+                                @include sizing();
+                            }
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        @property --ig-size-small {
+                            syntax: '<number> | <integer>';
+                            initial-value: 1;
+                            inherits: true;
+                        }
+
+                        @property --ig-size-medium {
+                            syntax: '<number> | <integer>';
+                            initial-value: 2;
+                            inherits: true;
+                        }
+
+                        @property --ig-size-large {
+                            syntax: '<number> | <integer>';
+                            initial-value: 3;
+                            inherits: true;
+                        }
+                    }
+                }
+            }
         }
 
         @include describe('Spacing') {
@@ -939,15 +988,15 @@ $schema: (
                         padding: max(
                             calc(
                                 var(--is-large, 1) * $value *
-                                    var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing)))
+                                    var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing, 1)))
                             ),
                             calc(
                                 var(--is-medium, 1) * $value *
-                                    var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing)))
+                                    var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing, 1)))
                             ),
                             calc(
                                 var(--is-small, 1) * $value *
-                                    var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing)))
+                                    var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing, 1)))
                             )
                         );
                     }
@@ -966,15 +1015,15 @@ $schema: (
                         padding-inline: max(
                             calc(
                                 var(--is-large, 1) * $value *
-                                    var(--ig-spacing-inline-large, var(--ig-spacing-inline, var(--ig-spacing)))
+                                    var(--ig-spacing-inline-large, var(--ig-spacing-inline, var(--ig-spacing, 1)))
                             ),
                             calc(
                                 var(--is-medium, 1) * $value *
-                                    var(--ig-spacing-inline-medium, var(--ig-spacing-inline, var(--ig-spacing)))
+                                    var(--ig-spacing-inline-medium, var(--ig-spacing-inline, var(--ig-spacing, 1)))
                             ),
                             calc(
                                 var(--is-small, 1) * $value *
-                                    var(--ig-spacing-inline-small, var(--ig-spacing-inline, var(--ig-spacing)))
+                                    var(--ig-spacing-inline-small, var(--ig-spacing-inline, var(--ig-spacing, 1)))
                             )
                         );
                     }
@@ -995,17 +1044,48 @@ $schema: (
                         padding-block: max(
                             calc(
                                 var(--is-large, 1) * $lg *
-                                    var(--ig-spacing-block-large, var(--ig-spacing-block, var(--ig-spacing)))
+                                    var(--ig-spacing-block-large, var(--ig-spacing-block, var(--ig-spacing, 1)))
                             ),
                             calc(
                                 var(--is-medium, 1) * $md *
-                                    var(--ig-spacing-block-medium, var(--ig-spacing-block, var(--ig-spacing)))
+                                    var(--ig-spacing-block-medium, var(--ig-spacing-block, var(--ig-spacing, 1)))
                             ),
                             calc(
                                 var(--is-small, 1) * $sm *
-                                    var(--ig-spacing-block-small, var(--ig-spacing-block, var(--ig-spacing)))
+                                    var(--ig-spacing-block-small, var(--ig-spacing-block, var(--ig-spacing, 1)))
                             )
                         );
+                    }
+                }
+            }
+
+            @include it('should keep the spacing variables in a nested scope and emit the spacing property at the root') {
+                @include assert() {
+                    @include output($selector: false) {
+                        @media (prefers-color-scheme: dark) {
+                            .scoped {
+                                @include spacing();
+                            }
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        @media (prefers-color-scheme: dark) {
+                            .scoped {
+                                --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
+                                --ig-spacing-inline-medium: var(--ig-spacing-inline, var(--ig-spacing-medium));
+                                --ig-spacing-inline-large: var(--ig-spacing-inline, var(--ig-spacing-large));
+                                --ig-spacing-block-small: var(--ig-spacing-block, var(--ig-spacing-small));
+                                --ig-spacing-block-medium: var(--ig-spacing-block, var(--ig-spacing-medium));
+                                --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
+                            }
+                        }
+
+                        @property --ig-spacing {
+                            syntax: '<number> | <integer>';
+                            initial-value: 1;
+                            inherits: true;
+                        }
                     }
                 }
             }
