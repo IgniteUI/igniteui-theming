@@ -325,22 +325,24 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// @group themes
 /// @access private
 @mixin sizing() {
-    @property --ig-size-small {
-        syntax: '<number> | <integer>';
-        initial-value: 1;
-        inherits: true;
-    }
+    @at-root (without: all) {
+        @property --ig-size-small {
+            syntax: '<number> | <integer>';
+            initial-value: 1;
+            inherits: true;
+        }
 
-    @property --ig-size-medium {
-        syntax: '<number> | <integer>';
-        initial-value: 2;
-        inherits: true;
-    }
+        @property --ig-size-medium {
+            syntax: '<number> | <integer>';
+            initial-value: 2;
+            inherits: true;
+        }
 
-    @property --ig-size-large {
-        syntax: '<number> | <integer>';
-        initial-value: 3;
-        inherits: true;
+        @property --ig-size-large {
+            syntax: '<number> | <integer>';
+            initial-value: 3;
+            inherits: true;
+        }
     }
 }
 
@@ -357,7 +359,7 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
         clamp(0, (var(--component-size, 1) + 1) - var(--ig-size-medium, 2), 1),
         clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
     );
-    --is-small: clamp(0, var(--ig-size-medium) - var(--component-size, 1), 1);
+    --is-small: clamp(0, var(--ig-size-medium, 2) - var(--component-size, 1), 1);
 }
 
 /// Adds spacing CSS variables to the scope.
@@ -366,12 +368,6 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 @mixin spacing() {
     $scope: if(is-root(), ':root', '&');
 
-    @property --ig-spacing {
-        syntax: '<number> | <integer>';
-        initial-value: 1;
-        inherits: true;
-    }
-
     #{$scope} {
         --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
         --ig-spacing-inline-medium: var(--ig-spacing-inline, var(--ig-spacing-medium));
@@ -379,5 +375,13 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
         --ig-spacing-block-small: var(--ig-spacing-block, var(--ig-spacing-small));
         --ig-spacing-block-medium: var(--ig-spacing-block, var(--ig-spacing-medium));
         --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
+    }
+
+    @at-root (without: all) {
+        @property --ig-spacing {
+            syntax: '<number> | <integer>';
+            initial-value: 1;
+            inherits: true;
+        }
     }
 }
