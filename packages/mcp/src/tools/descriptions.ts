@@ -511,6 +511,10 @@ export const TOOL_DESCRIPTIONS = {
   3. Configures elevations based on design system (if includeElevations: true)
   4. Configures spacing utilities for Web Components, React, and Blazor (if includeSpacing: true)
   5. Applies the theme using the theme() mixin
+
+  For Web Components, React, and Blazor the output always includes sizing(), the progress
+  @property rules, the scrollbar variables and .ig-scrollbar class, RTL support, and the tile
+  manager view transitions.
 </workflow>
 
 <important_notes>
