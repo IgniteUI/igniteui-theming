@@ -115,11 +115,33 @@ $_target-tolerance: 0.05;
         @return (range: $default-range, curve: $spec, anchor: 'surface');
     }
 
-    $range: map.get($spec, range);
     $anchor: map.get($spec, anchor) or 'surface';
 
+    // An anchor-only spec keeps the family's default range and curve.
+    @if not map.has-key($spec, range) and not map.has-key($spec, curve) {
+        $default: map.get(config.$scales, $_default-scale);
+
+        @if $given {
+            $default: _scale($name, null);
+        }
+
+        $spec: map.merge(
+            $spec,
+            (
+                range: map.get($default, range),
+                curve: map.get($default, curve),
+            )
+        );
+    }
+
+    $range: map.get($spec, range);
+
+    @if meta.type-of($anchor) == 'color' and meta.inspect($anchor) == 'white' {
+        $anchor: 'white';
+    }
+
     @if not list.index(('surface', 'white'), $anchor) {
-        @error 'Unknown scale anchor "#{$anchor}". Use "surface" or "white".';
+        @error 'Unknown scale anchor #{meta.inspect($anchor)}. Use \'surface\' or \'white\' (quoted).';
     }
 
     @return (range: if($range, $range, $default-range), curve: map.get($spec, curve), anchor: $anchor);

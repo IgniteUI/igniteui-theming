@@ -19,6 +19,7 @@ import {
   OUTPUT_FORMATS,
   PALETTE_COLOR_GROUPS,
   PLATFORMS,
+  SCALED_COLOR_GROUPS,
   SURFACE_ROLES,
   VARIANTS,
 } from "../utils/types.js";
@@ -28,17 +29,51 @@ import { PARAM_DESCRIPTIONS } from "./descriptions.js";
  * A shade scale: a preset name, or an inline spec. Accepted as one value for every family
  * or as a map keyed by family name.
  */
-const scaleSpecSchema = z.union([
-  z.string(),
-  z.object({
+// Strict, so a family map doesn't parse as an empty spec.
+const scaleSpecObjectSchema = z
+  .object({
     range: z.array(z.number()).length(2).optional(),
     curve: z.array(z.number()).length(4).optional(),
     anchor: z.enum(["surface", "white"]).optional(),
-  }),
-]);
+  })
+  .strict();
+
+const scaleSpecSchema = z.union([z.string(), scaleSpecObjectSchema]);
+
+const SCALE_SPEC_KEYS = ["range", "curve", "anchor"];
 
 const scalesSchema = z
   .union([scaleSpecSchema, z.record(z.string(), scaleSpecSchema)])
+  .superRefine((scales, ctx) => {
+    if (typeof scales !== "object") return;
+
+    const keys = Object.keys(scales);
+
+    if (keys.some((key) => SCALE_SPEC_KEYS.includes(key))) {
+      if (!scaleSpecObjectSchema.safeParse(scales).success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            'A single scales spec takes only range (2 numbers), curve (4 numbers) and anchor ("surface" | "white"). To scale families separately, key every entry by family.',
+        });
+      }
+
+      return;
+    }
+
+    for (const key of keys) {
+      if (!(SCALED_COLOR_GROUPS as readonly string[]).includes(key)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [key],
+          message:
+            key === "surface"
+              ? "A surface is built from its roles and takes no scale."
+              : `Unknown scales key "${key}". Key scales by palette family (${SCALED_COLOR_GROUPS.join(", ")}), or pass a single { range, curve, anchor } spec for all of them.`,
+        });
+      }
+    }
+  })
   .optional();
 
 const generatorSchema = z.enum(["fitted", "legacy"]).optional();
@@ -583,6 +618,10 @@ export const fitColorScaleSchema = z.object({
     .min(3)
     .max(20)
     .describe(PARAM_DESCRIPTIONS.ladderColors),
+  family: z
+    .enum(SCALED_COLOR_GROUPS)
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.ladderFamily),
   name: z.string().optional().describe(PARAM_DESCRIPTIONS.ladderName),
 });
 

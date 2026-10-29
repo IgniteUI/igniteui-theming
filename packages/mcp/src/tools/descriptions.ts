@@ -392,12 +392,14 @@ export const TOOL_DESCRIPTIONS = {
   - The response reports how closely the fit reproduces the ladder; a ladder that does not
     follow one smooth curve fits loosely and says so.
   - A scale sets rhythm only, never hue - the seed still decides the color.
-  - Background: read_resource "igniteui-theming://guidance/colors/scales"
+  - Set \`family\` to the palette family the ladder is for; it keys the returned scales map.
+    \`name\` is only a label.
+  - Background: read_resource "${FRAGMENTS.RESOURCE_SCHEME}guidance/colors/scales"
 </important_notes>
 
 <example>
   { "colors": ["#f8fafc","#f1f5f9","#e2e8f0","#cbd5e1","#94a3b8",
-               "#64748b","#475569","#334155","#1e293b","#0f172a"], "name": "gray" }
+               "#64748b","#475569","#334155","#1e293b","#0f172a"], "family": "gray", "name": "Tailwind slate" }
 </example>`,
 
   create_typography: `Set up typography for Ignite UI themes with custom font families and type scales.
@@ -1249,8 +1251,11 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
 
   ladderColors: `The ladder to fit, LIGHTEST FIRST (3-20 colors). ${FRAGMENTS.COLOR_FORMAT}`,
 
+  ladderFamily:
+    'Palette family the scale applies to; it keys the returned scales map. Defaults to "gray". A surface takes no scale.',
+
   ladderName:
-    "Optional label for the fitted scale, used in the generated Sass comment.",
+    "Optional label for the fitted scale, shown in the response and as a comment in the Sass. Does not change the scales map - use `family` for that.",
 
   baseColor: `Base color for automatic shade generation using shades() function. Pass the brand color as-is; its lightness does not need adjusting. ${FRAGMENTS.COLOR_FORMAT}`,
 

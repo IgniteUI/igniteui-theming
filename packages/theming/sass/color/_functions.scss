@@ -151,11 +151,42 @@ $_enhanced-accessibility: false;
         @return null;
     }
 
-    @if meta.type-of($scales) == 'map' and not map.has-key($scales, range) and not map.has-key($scales, curve) {
-        @return map.get($scales, $name);
+    @if meta.type-of($scales) == 'map' {
+        $families: ('primary', 'secondary', 'gray', 'info', 'success', 'warn', 'error');
+        $is-spec: _is-scale-spec($scales);
+
+        // Warn once per palette() call.
+        @if $name == 'primary' {
+            @each $key in map.keys($scales) {
+                $k: '#{$key}';
+
+                @if $is-spec and not list.index(('range', 'curve', 'anchor'), $k) {
+                    @warn '$scales key "#{$k}" is ignored. A $scales map with range, curve or anchor is ' +
+                        'one spec for every family; key every entry by family to scale them separately.';
+                } @else if not $is-spec and $k == 'surface' {
+                    @warn '$scales key "surface" is ignored. A surface is built from its roles and takes no scale.';
+                } @else if not $is-spec and not list.index($families, $k) {
+                    @warn 'Unknown $scales key "#{$k}" is ignored. Key $scales by palette family ' +
+                        '(#{$families}), or pass a single (range:, curve:, anchor:) spec for all of them.';
+                }
+            }
+        }
+
+        @if not $is-spec {
+            @return map.get($scales, $name);
+        }
     }
 
     @return $scales;
+}
+
+/// Whether a `$scales` map is a single spec rather than a map keyed by family.
+/// @access private
+/// @group Palettes
+/// @param {Map} $scales - The `palette()` argument.
+/// @returns {Boolean}
+@function _is-scale-spec($scales) {
+    @return map.has-key($scales, range) or map.has-key($scales, curve) or map.has-key($scales, anchor);
 }
 
 /// Generates color shades for a given color.

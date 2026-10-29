@@ -78,7 +78,8 @@ Two numbers describe it, and a third setting matters for \`gray\`:
   means the lightest shade sits at 1.18:1 and the darkest at 18.23:1.
 - **curve** - read exactly like a CSS \`cubic-bezier()\` timing function. \`x\` is how far along
   the shades you are, \`y\` is how far into the contrast range. No curve is the straight line.
-- **anchor** - what \`gray\` measures the range against. Every other family uses white.
+- **anchor** - what \`gray\` measures the range against. Every other family uses white. It is
+  a keyword, \`"surface"\` or \`"white"\`, not a color - \`"#fff"\` is rejected.
   \`surface\` (default): against the background, so shade 50 sits nearest the page and a dark
   theme gets grays spaced from its own background. \`white\`: the same gray colors in every
   theme, reversed on a dark surface (50 darkest) - how the original grayscale was built.
