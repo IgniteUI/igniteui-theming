@@ -42,38 +42,61 @@ const scaleSpecSchema = z.union([z.string(), scaleSpecObjectSchema]);
 
 const SCALE_SPEC_KEYS = ["range", "curve", "anchor"];
 
+// Checked before the union, which would otherwise report its own branch errors first.
 const scalesSchema = z
-  .union([scaleSpecSchema, z.record(z.string(), scaleSpecSchema)])
-  .superRefine((scales, ctx) => {
-    if (typeof scales !== "object") return;
-
-    const keys = Object.keys(scales);
-
-    if (keys.some((key) => SCALE_SPEC_KEYS.includes(key))) {
-      if (!scaleSpecObjectSchema.safeParse(scales).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message:
-            'A single scales spec takes only range (2 numbers), curve (4 numbers) and anchor ("surface" | "white"). To scale families separately, key every entry by family.',
-        });
+  .preprocess(
+    (scales, ctx) => {
+      if (!scales || typeof scales !== "object" || Array.isArray(scales)) {
+        return scales;
       }
 
-      return;
-    }
-
-    for (const key of keys) {
-      if (!(SCALED_COLOR_GROUPS as readonly string[]).includes(key)) {
+      const fail = (message: string, path: (string | number)[] = []) =>
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          path: [key],
-          message:
+          message,
+          path,
+          fatal: true,
+        });
+
+      const checkSpec = (spec: unknown, path: string[] = []) => {
+        const result = scaleSpecObjectSchema.safeParse(spec);
+
+        for (const issue of result.error?.issues ?? []) {
+          fail(issue.message, [...path, ...issue.path]);
+        }
+      };
+
+      const keys = Object.keys(scales);
+
+      if (keys.some((key) => SCALE_SPEC_KEYS.includes(key))) {
+        if (keys.every((key) => SCALE_SPEC_KEYS.includes(key))) {
+          checkSpec(scales);
+        } else {
+          fail(
+            'A single scales spec takes only range (2 numbers), curve (4 numbers) and anchor ("surface" | "white"). To scale families separately, key every entry by family.',
+          );
+        }
+
+        return scales;
+      }
+
+      for (const [key, spec] of Object.entries(scales)) {
+        if (!(SCALED_COLOR_GROUPS as readonly string[]).includes(key)) {
+          fail(
             key === "surface"
               ? "A surface is built from its roles and takes no scale."
               : `Unknown scales key "${key}". Key scales by palette family (${SCALED_COLOR_GROUPS.join(", ")}), or pass a single { range, curve, anchor } spec for all of them.`,
-        });
+            [key],
+          );
+        } else if (typeof spec !== "string") {
+          checkSpec(spec, [key]);
+        }
       }
-    }
-  })
+
+      return scales;
+    },
+    z.union([scaleSpecSchema, z.record(z.string(), scaleSpecSchema)]),
+  )
   .optional();
 
 const generatorSchema = z.enum(["fitted", "legacy"]).optional();

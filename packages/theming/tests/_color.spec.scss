@@ -806,6 +806,60 @@ $_legacy-palette: palette(
                 @include assert-equal(color($top-level, primary, 300), color($preset, primary, 300));
             }
 
+            @include it('takes the family range for a curve-only spec') {
+                $curve: 0.2 0.3 0.6 0.9;
+                $curve-only: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            curve: $curve,
+                        ),
+                    ),
+                );
+                $full: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: $curve,
+                        ),
+                    ),
+                );
+
+                @include assert-equal(color($curve-only, gray, 50), color($full, gray, 50));
+                @include assert-equal(color($curve-only, gray, 300), color($full, gray, 300));
+            }
+
+            @include it('spans a range-only spec on a straight line') {
+                $range-only: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                        ),
+                    ),
+                );
+                $straight: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: null,
+                        ),
+                    ),
+                );
+
+                @include assert-equal(color($range-only, gray, 300), color($straight, gray, 300));
+            }
+
             @include it('flips the grayscale for a dark surface but not the color ramps') {
                 $light: palette(
                     $primary: #09f,

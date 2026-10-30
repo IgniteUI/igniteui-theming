@@ -32,6 +32,9 @@ $shade-generator: 'fitted' !default;
 /// - `'white'` — against white, as the original grayscale was built. The ten grays are
 ///   the same colors in every theme; on a dark surface they run in reverse, 50 darkest.
 ///
+/// A spec without a `range` takes the family's default range, and its curve too unless it
+/// has one. A `range` without a `curve` is a straight line.
+///
 /// Each preset was fitted to the published scale it names. Bracketed figures are the max
 /// ΔE from that scale and how many of the five "500 apart" pairs still clear AA.
 ///

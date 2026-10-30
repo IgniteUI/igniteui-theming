@@ -30,7 +30,7 @@ export async function handleFitColorScale(params: FitColorScaleParams) {
   const { colors, name } = params;
   const family =
     params.family ??
-    SCALED_COLOR_GROUPS.find((group) => group === name) ??
+    SCALED_COLOR_GROUPS.find((group) => group === name?.trim().toLowerCase()) ??
     "gray";
 
   const analyzed = await analyzeColorsWithHue(
@@ -75,6 +75,12 @@ export async function handleFitColorScale(params: FitColorScaleParams) {
     `- range: \`(${fitted.range[0]}, ${fitted.range[1]})\` — contrast against white at the lightest and darkest rungs`,
     `- curve: ${fitted.curve ? `\`(${fitted.curve.join(", ")})\`` : "`null` — the ladder is already evenly spread, so no curve is needed"}`,
     `- fit: RMS ${fitted.rms}, worst rung off by ${(worst * 100).toFixed(1)}%`,
+    ...(family === "gray"
+      ? [
+          "",
+          "Gray is measured against the surface by default, so this matches the ladder exactly on a white surface and keeps its rhythm, spaced from the background, on any other. Add `anchor: 'white'` to keep the ladder's exact colors on every theme instead.",
+        ]
+      : []),
     "",
     "Pass it to create_palette or create_theme as:",
     "```json",

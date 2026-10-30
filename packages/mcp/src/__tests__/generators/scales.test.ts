@@ -120,8 +120,29 @@ describe("shade scales", () => {
     });
 
     it("rejects a single spec mixed with family keys", () => {
-      expect(parse({ anchor: "white", gray: "carbon" }).success).toBe(false);
-      expect(parse({ anchor: "carbon" }).success).toBe(false);
+      const parsed = parse({ range: [1, 10], gray: "carbon" });
+
+      expect(parsed.success).toBe(false);
+      expect(parsed.error?.issues).toHaveLength(1);
+      expect(parsed.error?.issues[0].message).toContain(
+        "key every entry by family",
+      );
+    });
+
+    it("reports a bad field in a single spec", () => {
+      const parsed = parse({ anchor: "carbon" });
+
+      expect(parsed.success).toBe(false);
+      expect(parsed.error?.issues[0].path).toEqual(["scales", "anchor"]);
+    });
+
+    it("reports a bad field in a family entry at that field", () => {
+      const parsed = parse({ gray: { range: [1, 10], foo: 1 } });
+
+      expect(parsed.success).toBe(false);
+      expect(parsed.error?.issues).toHaveLength(1);
+      expect(parsed.error?.issues[0].path).toEqual(["scales", "gray"]);
+      expect(parsed.error?.issues[0].message).toContain("'foo'");
     });
 
     it("rejects a surface key, which takes no scale", () => {
@@ -185,6 +206,19 @@ describe("shade scales", () => {
       expect(
         fitColorScaleSchema.safeParse({ colors, family: "surface" }).success,
       ).toBe(false);
+    });
+
+    it("matches a family name in any case", async () => {
+      expect(await text({ colors, name: " Primary " })).toContain(
+        "$scales: ('primary': (",
+      );
+    });
+
+    it("explains the anchor for a gray fit only", async () => {
+      expect(await text({ colors })).toContain("anchor: 'white'");
+      expect(await text({ colors, family: "primary" })).not.toContain(
+        "anchor: 'white'",
+      );
     });
 
     it("defaults the family to gray", async () => {

@@ -79,6 +79,12 @@ $_enhanced-accessibility: false;
     $generator: config.$shade-generator,
     $scales: null
 ) {
+    @if $generator == 'legacy' and $scales {
+        @warn '$scales is ignored. The legacy generator does not use scales.';
+
+        $scales: null;
+    }
+
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
     $primary-palette: shades(
@@ -152,6 +158,7 @@ $_enhanced-accessibility: false;
     }
 
     @if meta.type-of($scales) == 'map' {
+        // Mirrored by SCALED_COLOR_GROUPS in the MCP package.
         $families: ('primary', 'secondary', 'gray', 'info', 'success', 'warn', 'error');
         $is-spec: _is-scale-spec($scales);
 

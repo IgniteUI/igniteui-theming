@@ -125,7 +125,8 @@ $p: palette(#09f, #f0f, #fff, $scales: (
 ));
 \`\`\`
 
-\`range\` alone is valid too - it spans that contrast range on a straight line.
+\`range\` alone is valid too - it spans that contrast range on a straight line. A spec without
+a \`range\` takes the family's default range, and its curve too unless it has one.
 
 ## Generators
 
