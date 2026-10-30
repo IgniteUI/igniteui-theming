@@ -85,7 +85,7 @@ $_target-tolerance: 0.05;
 /// Resolves a scale argument into its `(range:, curve:, anchor:)` map.
 /// @param {String} $name - The family name, used to look up a default in `$family-scales`.
 /// @param {String | Map | List} $given - A preset name, a `(range:, curve:)` map, a bare curve, or null.
-/// @returns {Map} The resolved scale. Falls back to `even` for both the scale and a missing range.
+/// @returns {Map} The resolved scale. A missing range comes from the family's default scale.
 /// @throws Unknown scale "<name>".
 /// @throws Unknown scale anchor "<anchor>".
 @function _scale($name, $given) {
@@ -109,20 +109,38 @@ $_target-tolerance: 0.05;
         $spec: $found;
     }
 
-    $default-range: map.get(config.$scales, $_default-scale, range);
-
     @if meta.type-of($spec) == 'list' and list.length($spec) == 4 {
-        @return (range: $default-range, curve: $spec, anchor: 'surface');
+        $spec: (
+            curve: $spec,
+        );
     }
 
-    $range: map.get($spec, range);
     $anchor: map.get($spec, anchor) or 'surface';
 
-    @if not list.index(('surface', 'white'), $anchor) {
-        @error 'Unknown scale anchor "#{$anchor}". Use "surface" or "white".';
+    // A spec without a range takes the family's, and its curve too unless it has one.
+    @if not map.has-key($spec, range) {
+        $default: map.get(config.$scales, $_default-scale);
+
+        @if $given {
+            $default: _scale($name, null);
+        }
+
+        $spec: map.set($spec, range, map.get($default, range));
+
+        @if not map.has-key($spec, curve) {
+            $spec: map.set($spec, curve, map.get($default, curve));
+        }
     }
 
-    @return (range: if($range, $range, $default-range), curve: map.get($spec, curve), anchor: $anchor);
+    @if meta.type-of($anchor) == 'color' and meta.inspect($anchor) == 'white' {
+        $anchor: 'white';
+    }
+
+    @if not list.index(('surface', 'white'), $anchor) {
+        @error 'Unknown scale anchor #{meta.inspect($anchor)}. Use \'surface\' or \'white\' (quoted).';
+    }
+
+    @return (range: map.get($spec, range), curve: map.get($spec, curve), anchor: $anchor);
 }
 
 /// The contrast target for one shade, placed along the scale by its curve.

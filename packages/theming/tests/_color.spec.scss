@@ -752,6 +752,114 @@ $_legacy-palette: palette(
                 @include assert-equal(color($preset, primary, 600), color($light, primary, 600));
             }
 
+            @include it('accepts an unquoted white anchor') {
+                $preset: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                );
+                $unquoted: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: 0.53 0 0.825 0.785,
+                            anchor: white,
+                        ),
+                    ),
+                );
+
+                @include assert-equal(color($unquoted, gray, 300), color($preset, gray, 300));
+            }
+
+            @include it('reads a top-level anchor as one spec that keeps each family scale') {
+                $top-level: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                    $scales: (
+                        anchor: 'surface',
+                    ),
+                );
+                $per-family: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: 0.53 0 0.825 0.785,
+                            anchor: 'surface',
+                        ),
+                    ),
+                );
+                $preset: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #222,
+                );
+
+                @include assert-equal(color($top-level, gray, 300), color($per-family, gray, 300));
+                @include assert-unequal(color($top-level, gray, 300), color($preset, gray, 300));
+                @include assert-equal(color($top-level, primary, 300), color($preset, primary, 300));
+            }
+
+            @include it('takes the family range for a curve-only spec') {
+                $curve: 0.2 0.3 0.6 0.9;
+                $curve-only: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            curve: $curve,
+                        ),
+                    ),
+                );
+                $full: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: $curve,
+                        ),
+                    ),
+                );
+
+                @include assert-equal(color($curve-only, gray, 50), color($full, gray, 50));
+                @include assert-equal(color($curve-only, gray, 300), color($full, gray, 300));
+            }
+
+            @include it('spans a range-only spec on a straight line') {
+                $range-only: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                        ),
+                    ),
+                );
+                $straight: palette(
+                    $primary: #09f,
+                    $secondary: #09f,
+                    $surface: #fff,
+                    $scales: (
+                        'gray': (
+                            range: 1.04 16.1,
+                            curve: null,
+                        ),
+                    ),
+                );
+
+                @include assert-equal(color($range-only, gray, 300), color($straight, gray, 300));
+            }
+
             @include it('flips the grayscale for a dark surface but not the color ramps') {
                 $light: palette(
                     $primary: #09f,

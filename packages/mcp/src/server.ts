@@ -367,6 +367,7 @@ function registerTools(server: McpServer): void {
       description: TOOL_DESCRIPTIONS.fit_color_scale,
       inputSchema: {
         colors: fitColorScaleSchema.shape.colors,
+        family: fitColorScaleSchema.shape.family,
         name: fitColorScaleSchema.shape.name,
       },
     },
