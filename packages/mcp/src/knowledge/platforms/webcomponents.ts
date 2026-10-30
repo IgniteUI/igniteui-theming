@@ -152,13 +152,13 @@ export function generateWCImports(options: {
 export function generateWCProgressProperties(indent = ""): string[] {
   return [
     `${indent}@property --_progress-integer {`,
-    `${indent}  syntax: '<integer>';`,
+    `${indent}  syntax: '<number>';`,
     `${indent}  initial-value: 0;`,
     `${indent}  inherits: true;`,
     `${indent}}`,
     "",
     `${indent}@property --_progress-fraction {`,
-    `${indent}  syntax: '<integer>';`,
+    `${indent}  syntax: '<number>';`,
     `${indent}  initial-value: 0;`,
     `${indent}  inherits: true;`,
     `${indent}}`,
@@ -190,9 +190,6 @@ export function generateWCRootVariables(options: {
     lines.push(`${indent}  --ig-theme-variant: ${variant};`);
   }
 
-  lines.push(`${indent}  --ig-size-small: 1;`);
-  lines.push(`${indent}  --ig-size-medium: 2;`);
-  lines.push(`${indent}  --ig-size-large: 3;`);
   lines.push(`${indent}  --ig-scrollbar-size: #{rem(16px)};`);
   lines.push(`${indent}}`);
 
@@ -210,21 +207,115 @@ export function generateWCRtlSupport(indent = ""): string[] {
   ];
 }
 
+const SCROLLBAR_TRACK_SHADES: Record<DesignSystem, number> = {
+  material: 100,
+  bootstrap: 100,
+  fluent: 100,
+  indigo: 200,
+};
+
 /**
  * Generate scrollbar customization using palette colors.
  */
-export function generateWCScrollbarCustomization(): string[] {
+export function generateWCScrollbarCustomization(
+  designSystem: DesignSystem,
+  indent = "",
+): string[] {
+  const track = SCROLLBAR_TRACK_SHADES[designSystem];
+
   return [
-    "// Scrollbar customization",
-    ":root {",
-    "  --ig-scrollbar-thumb-background: #{color($color: gray, $variant: 400)};",
-    "  --ig-scrollbar-track-background: #{color($color: gray, $variant: 100)};",
-    "}",
+    `${indent}// Scrollbar customization`,
+    `${indent}:root {`,
+    `${indent}  --ig-scrollbar-thumb-background: #{color($color: gray, $variant: 400)};`,
+    `${indent}  --ig-scrollbar-track-background: #{color($color: gray, $variant: ${track})};`,
+    `${indent}}`,
   ];
 }
 
+export function generateWCScrollbarUtility(indent = ""): string[] {
+  return [
+    "// Scrollbar utility class",
+    ".ig-scrollbar {",
+    "  --size: var(--ig-scrollbar-size, #{rem(16px)});",
+    "  --thumb-background: var(--ig-scrollbar-thumb-background, #{color($color: gray, $variant: 400)});",
+    "  --track-background: var(--ig-scrollbar-track-background, #{color($color: gray, $variant: 100)});",
+    "",
+    "  scrollbar-width: var(--size);",
+    "  scrollbar-color: var(--thumb-background) var(--track-background);",
+    "}",
+    "",
+    ".ig-scrollbar ::-webkit-scrollbar {",
+    "  width: var(--size);",
+    "  height: var(--size);",
+    "  background: var(--track-background);",
+    "}",
+    "",
+    ".ig-scrollbar ::-webkit-scrollbar-thumb {",
+    "  background: var(--thumb-background);",
+    "}",
+    "",
+    "@media (hover: none) {",
+    "  .ig-scrollbar ::-webkit-scrollbar {",
+    "    width: auto;",
+    "    height: auto;",
+    "  }",
+    "}",
+  ].map((line) => (line ? `${indent}${line}` : line));
+}
+
+export function generateWCTileManagerTransitions(indent = ""): string[] {
+  return [
+    "// Tile manager view transitions",
+    "::view-transition-group(*.igc-tile-resize) {",
+    "  z-index: 1;",
+    "}",
+    "",
+    "::view-transition-old(*.igc-tile-resize),",
+    "::view-transition-new(*.igc-tile-resize) {",
+    "  block-size: 100%;",
+    "  object-fit: none;",
+    "  object-position: left top;",
+    "  overflow: clip;",
+    "  mix-blend-mode: normal;",
+    "}",
+    "",
+    "::view-transition-old(*.igc-tile-resize.igc-tile-rtl),",
+    "::view-transition-new(*.igc-tile-resize.igc-tile-rtl) {",
+    "  object-position: right top;",
+    "}",
+    "",
+    "::view-transition-new(*.igc-tile-resize) {",
+    "  animation-name: igc-tile-fade-in;",
+    "}",
+    "",
+    "@keyframes igc-tile-fade-in {",
+    "  0% {",
+    "    opacity: 0;",
+    "  }",
+    "",
+    "  40%,",
+    "  100% {",
+    "    opacity: 1;",
+    "  }",
+    "}",
+    "",
+    "::view-transition-group(dragged-tile-ghost) {",
+    "  z-index: 2;",
+    "}",
+    "",
+    "::view-transition-group(dragged-tile-ghost),",
+    "::view-transition-new(dragged-tile-ghost) {",
+    "  animation: none;",
+    "}",
+    "",
+    "::view-transition-old(dragged-tile-ghost) {",
+    "  display: none;",
+    "}",
+  ].map((line) => (line ? `${indent}${line}` : line));
+}
+
 /**
- * Generate theming mixin calls (palette, elevations, typography, spacing).
+ * Generate theming mixin calls (palette, elevations, typography, sizing, spacing).
  */
 export function generateWCThemingMixins(options: {
   paletteVar: string;
@@ -273,6 +364,10 @@ export function generateWCThemingMixins(options: {
     );
     if (addComments) lines.push("");
   }
+
+  if (addComments) lines.push(`${indent}// Apply sizing CSS variables`);
+  lines.push(`${indent}@include sizing();`);
+  if (addComments && includeSpacing) lines.push("");
 
   // Spacing mixin
   if (includeSpacing) {
@@ -332,9 +427,6 @@ function generateCustomPaletteTheme(
   // Generate theme() mixin wrapper
   lines.push("// Theme configuration");
   lines.push("@mixin theme($palette, $variant) {");
-  lines.push("  // Root-level CSS custom properties");
-  lines.push(...generateWCProgressProperties("  "));
-  lines.push("");
   lines.push(
     ...generateWCRootVariables({
       designSystem,
@@ -345,6 +437,8 @@ function generateCustomPaletteTheme(
   );
   lines.push("");
   lines.push(...generateWCRtlSupport("  "));
+  lines.push("");
+  lines.push(...generateWCScrollbarCustomization(designSystem, "  "));
   lines.push("");
   lines.push(
     ...generateWCThemingMixins({
@@ -361,6 +455,13 @@ function generateCustomPaletteTheme(
   lines.push("");
   lines.push("// Apply the theme");
   lines.push(`@include theme(${paletteResult.variableName}, '${variant}');`);
+  lines.push("");
+  // Document-level rules stay outside theme(), so including it under a selector can't scope them.
+  lines.push(...generateWCProgressProperties());
+  lines.push("");
+  lines.push(...generateWCTileManagerTransitions());
+  lines.push("");
+  lines.push(...generateWCScrollbarUtility());
 
   return lines;
 }
@@ -383,7 +484,7 @@ function generatePresetPaletteTheme(
   const lines: string[] = [];
 
   // Scrollbar customization (uses color() function from palette preset)
-  lines.push(...generateWCScrollbarCustomization());
+  lines.push(...generateWCScrollbarCustomization(designSystem));
   lines.push("");
 
   // Progress properties at root level
@@ -410,6 +511,10 @@ function generatePresetPaletteTheme(
       addComments: true,
     }),
   );
+  lines.push("");
+  lines.push(...generateWCTileManagerTransitions());
+  lines.push("");
+  lines.push(...generateWCScrollbarUtility());
 
   return lines;
 }
@@ -475,99 +580,60 @@ export function generateWebComponentsThemeSass(
 }
 
 /**
+ * Render a theme example with the generator, so it can't drift from its output.
+ */
+export function generateWCThemeExample(
+  comments: string[],
+  template: WebComponentsThemeTemplate,
+): string {
+  const code = generateWebComponentsThemeSass(template)
+    .split("\n")
+    .slice(generateWCHeader().length)
+    .join("\n");
+
+  return `\n${comments.map((line) => `// ${line}`).join("\n")}\n${code}\n`;
+}
+
+/**
  * Example usage documentation
  */
 export const WEBCOMPONENTS_USAGE_EXAMPLES = {
-  basic: `
-// Basic Material Light Theme for Web Components
-@use 'igniteui-theming/sass/color/presets/light/material' as *;
-@use 'igniteui-theming' as *;
-@use 'igniteui-theming/sass/typography/presets/material' as *;
-@use 'igniteui-theming/sass/elevations/presets' as *;
+  get basic() {
+    return generateWCThemeExample(
+      ["Basic Material Light Theme for Web Components"],
+      { designSystem: "material", variant: "light" },
+    );
+  },
 
-:root {
-  --ig-theme: material;
-  --ig-theme-variant: light;
-  --ig-size-small: 1;
-  --ig-size-medium: 2;
-  --ig-size-large: 3;
-  --ig-scrollbar-size: #{rem(16px)};
-}
+  get customPalette() {
+    return generateWCThemeExample(["Custom Palette Theme for Web Components"], {
+      designSystem: "material",
+      variant: "light",
+      primaryColor: "#2ab759",
+      secondaryColor: "#f96a88",
+      surfaceColor: "#ffffff",
+    });
+  },
 
-@include palette($palette);
-@include elevations($material-elevations);
-@include typography(
-  $font-family: $typeface,
-  $type-scale: $type-scale
-);
-@include spacing();
-`,
+  get darkTheme() {
+    return generateWCThemeExample(["Dark Indigo Theme for Web Components"], {
+      designSystem: "indigo",
+      variant: "dark",
+    });
+  },
 
-  customPalette: `
-// Custom Palette Theme for Web Components
-@use 'igniteui-theming' as *;
-@use 'igniteui-theming/sass/typography/presets/material' as *;
-@use 'igniteui-theming/sass/elevations/presets' as *;
-
-$my-palette: palette(
-  $primary: #2ab759,
-  $secondary: #f96a88,
-  $surface: #ffffff
-);
-
-:root {
-  --ig-theme: material;
-  --ig-theme-variant: light;
-  --ig-size-small: 1;
-  --ig-size-medium: 2;
-  --ig-size-large: 3;
-}
-
-@include palette($my-palette);
-@include elevations($material-elevations);
-@include typography(
-  $font-family: $typeface,
-  $type-scale: $type-scale
-);
-@include spacing();
-`,
-
-  darkTheme: `
-// Dark Indigo Theme for Web Components
-@use 'igniteui-theming/sass/color/presets/dark/indigo' as *;
-@use 'igniteui-theming' as *;
-@use 'igniteui-theming/sass/typography/presets/indigo' as *;
-@use 'igniteui-theming/sass/elevations/presets' as *;
-
-:root {
-  --ig-theme: indigo;
-  --ig-theme-variant: dark;
-  --ig-size-small: 1;
-  --ig-size-medium: 2;
-  --ig-size-large: 3;
-}
-
-@include palette($palette);
-@include elevations($indigo-elevations);
-@include typography(
-  $font-family: $typeface,
-  $type-scale: $type-scale
-);
-@include spacing();
-`,
-
-  minimalConfig: `
-// Minimal theme (palette only, no typography/elevations)
-@use 'igniteui-theming/sass/color/presets/light/bootstrap' as *;
-@use 'igniteui-theming' as *;
-
-:root {
-  --ig-theme: bootstrap;
-  --ig-theme-variant: light;
-}
-
-@include palette($palette);
-`,
+  get minimalConfig() {
+    return generateWCThemeExample(
+      ["Minimal theme (palette only, no typography/elevations/spacing)"],
+      {
+        designSystem: "bootstrap",
+        variant: "light",
+        includeTypography: false,
+        includeElevations: false,
+        includeSpacing: false,
+      },
+    );
+  },
 } as const;
 
 /**
