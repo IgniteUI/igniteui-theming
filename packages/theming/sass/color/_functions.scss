@@ -231,6 +231,12 @@ $_enhanced-accessibility: false;
 
     @if '#{$name}' == 'surface' {
         $entries: map.merge(_surface-numbers($color, $shades, $generator), $entries);
+
+        // A legacy surface holds its seed on 500, so base follows it at runtime. A fitted
+        // surface points 500 at base instead; aliasing it this way too would be a cycle.
+        @if $generator == 'legacy' and map.has-key($entries, '500') {
+            $entries: map.set($entries, 'base', 'css', #{var(--ig-surface-500)});
+        }
     }
 
     @each $variant, $shade in $entries {

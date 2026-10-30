@@ -954,6 +954,12 @@ $_legacy-palette: palette(
                 );
             }
 
+            @include it('points the base of a legacy surface at 500 and keeps its raw value') {
+                @include assert-equal(map.get($_light-legacy, 'surface', 'base'), #{var(--ig-surface-500)});
+                @include assert-equal(map.get($_light-legacy, 'surface', 'base-raw'), #f8f8fa);
+                @include assert-equal(map.get($_light-fitted, 'surface', 'base'), #f8f8fa);
+            }
+
             @include it('builds the surface of a palette from $ISurfaceShades') {
                 @include assert-equal(
                     list.length(map.keys(map.get($_light-fitted, 'surface'))),
