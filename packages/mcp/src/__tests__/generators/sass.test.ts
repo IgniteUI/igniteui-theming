@@ -17,6 +17,7 @@ import {
   generateTheme,
   generateTypography,
 } from "../../generators/sass.js";
+import { generateWebComponentsThemeSass } from "../../knowledge/platforms/webcomponents.js";
 import { themingImporter } from "../../utils/theming-resolve.js";
 
 /**
@@ -488,6 +489,29 @@ describe("generateTheme", () => {
       });
 
       expect(result.code).not.toContain("@include spacing(");
+    });
+
+    it.each([
+      ["a custom", { primaryColor: "#2ab759" }],
+      ["a preset", {}],
+    ])("compiles %s palette theme that matches the library's globals", async (_, colors) => {
+      const css = await compileSass(
+        generateWebComponentsThemeSass({
+          designSystem: "indigo",
+          variant: "light",
+          ...colors,
+        }),
+      );
+
+      expect(css).toMatch(/^@property --ig-size-small \{/m);
+      expect(css).toMatch(
+        /@property --_progress-fraction \{\s*syntax: "<number>";/,
+      );
+      expect(css).toContain(
+        "--ig-scrollbar-track-background: var(--ig-gray-200)",
+      );
+      expect(css).toMatch(/^::view-transition-group\(\*\.igc-tile-resize\)/m);
+      expect(css).toMatch(/^\.ig-scrollbar \{/m);
     });
 
     it("uses correct elevation preset for design system", () => {
