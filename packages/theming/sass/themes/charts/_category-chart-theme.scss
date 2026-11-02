@@ -74,8 +74,8 @@
 ///
 /// @example scss
 ///   $custom-chart-theme: category-chart-theme($brushes: (red, green, blue));
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($custom-chart-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($custom-chart-theme);
 @function category-chart-theme(
     $schema: $light-material-schema,
     $target: 'angular',

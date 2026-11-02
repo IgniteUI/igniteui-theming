@@ -17,6 +17,9 @@
 /// @access private
 $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typography', '_meta');
 
+// Flag used to print the css-vars() deprecation warning only once per compilation.
+$_css-vars-warned: false;
+
 // -----------------------------------------------------------------------------
 // Private helper functions for the tokens mixin.
 // These are implementation details and should not be used directly.
@@ -253,6 +256,12 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///     @include css-vars($my-grid-theme);
 ///   }
 @mixin css-vars($theme, $scope: null) {
+    @if not $_css-vars-warned {
+        @warn 'css-vars() is deprecated. Use tokens($theme) instead, or tokens($theme, $mode: \'scoped\') for an exact equivalent.';
+
+        $_css-vars-warned: true !global;
+    }
+
     @include tokens($theme, $mode: 'scoped', $scope: $scope);
 }
 

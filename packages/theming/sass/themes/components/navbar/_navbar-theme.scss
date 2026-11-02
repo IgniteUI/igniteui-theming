@@ -32,8 +32,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the background color
 ///   $my-navbar-theme: navbar-theme($background: green);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-navbar-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-navbar-theme);
 @function navbar-theme(
     $schema: $light-material-schema,
     $background: null,

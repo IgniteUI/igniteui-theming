@@ -79,8 +79,8 @@
 ///
 /// @example scss
 ///   $my-chart-theme: financial-chart-theme($title-alignment: left, $brushes: red, blue, yellow, pink);
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($my-chart-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-chart-theme);
 @function financial-chart-theme(
     $schema: $light-material-schema,
     $target: 'angular',

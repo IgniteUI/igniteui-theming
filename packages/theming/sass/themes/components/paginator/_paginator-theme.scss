@@ -31,8 +31,8 @@
 ///   $my-paginator-theme: paginator-theme(
 ///     $stripes-color: orange
 ///   );
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-paginator-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-paginator-theme);
 @function paginator-theme(
     $schema: $light-material-schema,
 

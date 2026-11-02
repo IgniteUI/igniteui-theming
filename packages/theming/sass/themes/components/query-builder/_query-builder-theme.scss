@@ -43,8 +43,8 @@
 ///
 /// @example scss - Set custom query-builder colors
 ///   $my-query-builder-theme: query-builder-theme($background: red);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-query-builder-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-query-builder-theme);
 @function query-builder-theme(
     $schema: $light-material-schema,
     $background: null,

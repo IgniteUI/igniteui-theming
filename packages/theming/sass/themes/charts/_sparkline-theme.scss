@@ -39,8 +39,8 @@
 ///
 /// @example scss
 ///   $my-sparkline-theme: sparkline-theme($brushes: (orange, blue, pink));
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($my-sparkline-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-sparkline-theme);
 @function sparkline-theme(
     $schema: $light-material-schema,
     $target: 'angular',

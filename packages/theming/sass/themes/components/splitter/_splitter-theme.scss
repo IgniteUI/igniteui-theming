@@ -32,8 +32,8 @@
 /// @requires $light-material-schema
 /// @example scss - Set a custom expander color
 ///   $my-splitter-theme: splitter-theme($expander-color: red);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-splitter-them);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-splitter-theme);
 @function splitter-theme(
     $schema: $light-material-schema,
 
