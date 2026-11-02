@@ -464,8 +464,8 @@ $schema: (
                 }
 
                 @include expect($selector: false) {
-                    .my-theme,
-                    .my-theme #{$selector} {
+                    .my-theme #{$selector},
+                    .my-theme:where(#{$selector}) {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 
@@ -513,8 +513,8 @@ $schema: (
                 }
 
                 @include expect($selector: false) {
-                    .my-theme,
-                    .my-theme .custom-selector {
+                    .my-theme .custom-selector,
+                    .my-theme:where(.custom-selector) {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 
@@ -811,8 +811,35 @@ $schema: (
                     }
 
                     @include expect($selector: false) {
-                        .my-theme,
-                        .my-theme #{$selector} {
+                        .my-theme #{$selector},
+                        .my-theme:where(#{$selector}) {
+                            @each $key, $value in map.remove($theme, $ignored-keys...) {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+
+                                --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+
+                            --ig-theme: material;
+                            --ig-theme-variant: light;
+                        }
+                    }
+                }
+            }
+
+            @include it('should emit nested scoped tokens on the parent selector when the theme has no selector') {
+                $theme: digest-schema($schema);
+                $name: map.get($theme, '_meta', 'name');
+                $vp: config.variable-prefix();
+
+                @include assert() {
+                    @include output($selector: false) {
+                        .igc-avatar {
+                            @include tokens($theme, $mode: 'scoped');
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        .igc-avatar {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
                                 $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 
@@ -838,6 +865,40 @@ $schema: (
 
                     @include expect($selector: false) {
                         .custom-scope {
+                            @each $key, $value in map.remove($theme, $ignored-keys...) {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+
+                                --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+
+                            --ig-theme: material;
+                            --ig-theme-variant: light;
+                        }
+                    }
+                }
+            }
+
+            @include it('should only emit tokens on a parent selector that matches the custom scope') {
+                $theme: map.merge(
+                    digest-schema($schema),
+                    (
+                        selector: 'igc-avatar',
+                    )
+                );
+                $name: map.get($theme, '_meta', 'name');
+                $vp: config.variable-prefix();
+
+                @include assert() {
+                    @include output($selector: false) {
+                        .my-theme {
+                            @include tokens($theme, $mode: 'scoped', $scope: '.custom-scope, igc-avatar');
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        .my-theme .custom-scope,
+                        .my-theme igc-avatar,
+                        .my-theme:where(.custom-scope, igc-avatar) {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
                                 $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 

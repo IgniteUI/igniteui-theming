@@ -50,8 +50,8 @@
 ///
 /// @example scss
 ///   $my-chart-theme: data-chart-theme($brushes: (orange, blue, pink));
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($my-chart-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-chart-theme);
 @function data-chart-theme(
     $schema: $light-material-schema,
     $target: 'angular',

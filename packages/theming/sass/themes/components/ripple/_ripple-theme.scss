@@ -22,8 +22,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the color
 ///   $my-ripple-theme: igx-ripple-theme($color: yellow);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-ripple-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-ripple-theme);
 @function ripple-theme($schema: $light-material-schema, $color: null) {
     $selector: (#{config.element-prefix() + '-' + 'ripple'}, #{'[' + config.element-prefix() + 'Ripple]'});
     $ripple-schema: ();

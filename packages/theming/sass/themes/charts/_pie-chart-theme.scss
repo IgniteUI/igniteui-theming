@@ -30,8 +30,8 @@
 ///
 /// @example scss
 ///   $my-chart-theme: pie-chart-theme($brushes: (red, orange, blue));
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($my-chart-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-chart-theme);
 @function pie-chart-theme(
     $schema: $light-material-schema,
     $target: 'angular',

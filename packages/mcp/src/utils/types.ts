@@ -335,6 +335,16 @@ export const CHROMATIC_COLOR_GROUPS = PALETTE_COLOR_GROUPS.filter(
 );
 
 /**
+ * Color groups that take a shade scale. A surface is built from its roles, not a scale.
+ */
+export const SCALED_COLOR_GROUPS = PALETTE_COLOR_GROUPS.filter(
+  (g): g is Exclude<PaletteColorGroup, "surface"> => g !== "surface",
+) as [
+  Exclude<PaletteColorGroup, "surface">,
+  ...Exclude<PaletteColorGroup, "surface">[],
+];
+
+/**
  * Type for chromatic color group names.
  */
 export type ChromaticColorGroup = (typeof CHROMATIC_COLOR_GROUPS)[number];

@@ -21,8 +21,8 @@
 ///
 /// @example scss
 ///   $my-map-theme: geo-map-theme($width: 550px);
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($my-map-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-map-theme);
 @function geo-map-theme($schema: $light-material-schema, $target: 'angular', $plot-area-background: null) {
     $name: 'geo-map';
     $selector: #{element-prefix()}-#{$name};

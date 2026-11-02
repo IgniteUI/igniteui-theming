@@ -33,8 +33,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the rating filled symbol color
 ///   $my-rating-theme: rating-theme($symbol-full-color: red);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-rating-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-rating-theme);
 @function rating-theme($schema: $light-material-schema, $rest...) {
     $selector: 'igc-rating';
     $rating-schema: ();

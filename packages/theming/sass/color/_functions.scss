@@ -19,6 +19,11 @@
 
 $_enhanced-accessibility: false;
 
+// Flags used to print each deprecation warning only once per compilation.
+$_text-contrast-warned: false;
+$_to-opaque-warned: false;
+$_to-hsl-warned: false;
+
 /// Configures the color module.
 /// @access public
 /// @group color
@@ -79,6 +84,12 @@ $_enhanced-accessibility: false;
     $generator: config.$shade-generator,
     $scales: null
 ) {
+    @if $generator == 'legacy' and $scales {
+        @warn '$scales is ignored. The legacy generator does not use scales.';
+
+        $scales: null;
+    }
+
     $color-shades: types.$IColorShades;
     $gray-shades: types.$IGrayShades;
     $primary-palette: shades(
@@ -151,11 +162,43 @@ $_enhanced-accessibility: false;
         @return null;
     }
 
-    @if meta.type-of($scales) == 'map' and not map.has-key($scales, range) and not map.has-key($scales, curve) {
-        @return map.get($scales, $name);
+    @if meta.type-of($scales) == 'map' {
+        // Mirrored by SCALED_COLOR_GROUPS in the MCP package.
+        $families: ('primary', 'secondary', 'gray', 'info', 'success', 'warn', 'error');
+        $is-spec: _is-scale-spec($scales);
+
+        // Warn once per palette() call.
+        @if $name == 'primary' {
+            @each $key in map.keys($scales) {
+                $k: '#{$key}';
+
+                @if $is-spec and not list.index(('range', 'curve', 'anchor'), $k) {
+                    @warn '$scales key "#{$k}" is ignored. A $scales map with range, curve or anchor is ' +
+                        'one spec for every family; key every entry by family to scale them separately.';
+                } @else if not $is-spec and $k == 'surface' {
+                    @warn '$scales key "surface" is ignored. A surface is built from its roles and takes no scale.';
+                } @else if not $is-spec and not list.index($families, $k) {
+                    @warn 'Unknown $scales key "#{$k}" is ignored. Key $scales by palette family ' +
+                        '(#{$families}), or pass a single (range:, curve:, anchor:) spec for all of them.';
+                }
+            }
+        }
+
+        @if not $is-spec {
+            @return map.get($scales, $name);
+        }
     }
 
     @return $scales;
+}
+
+/// Whether a `$scales` map is a single spec rather than a map keyed by family.
+/// @access private
+/// @group Palettes
+/// @param {Map} $scales - The `palette()` argument.
+/// @returns {Boolean}
+@function _is-scale-spec($scales) {
+    @return map.has-key($scales, range) or map.has-key($scales, curve) or map.has-key($scales, anchor);
 }
 
 /// Generates color shades for a given color.
@@ -502,6 +545,12 @@ $_enhanced-accessibility: false;
 /// @returns {Color} Returns either white, black, or the provided foreground color if it meets the required contrast level.
 /// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html WCAG 2.0 Contrast
 @function text-contrast($background, $foreground: white, $contrast: 'AAA') {
+    @if not $_text-contrast-warned {
+        @warn 'text-contrast() is deprecated. Use adaptive-contrast() instead.';
+
+        $_text-contrast-warned: true !global;
+    }
+
     @if meta.type-of($foreground) != 'list' and meta.type-of($background) != 'color' {
         @return $background;
     }
@@ -553,6 +602,12 @@ $_enhanced-accessibility: false;
 /// @param {Color} $color-2 [#fff] - The second color, usually opaque.
 /// @return {Color} The color representation of the rgba value.
 @function to-opaque($color-1, $color-2: #fff) {
+    @if not $_to-opaque-warned {
+        @warn 'to-opaque() is deprecated. Use the CSS color-mix() function instead.';
+
+        $_to-opaque-warned: true !global;
+    }
+
     @if meta.type-of($color-1) == color and meta.type-of($color-2) == color {
         $red: color.channel($color-1, 'red', $space: rgb);
         $green: color.channel($color-1, 'green', $space: rgb);
@@ -577,6 +632,12 @@ $_enhanced-accessibility: false;
 ///   $hsl-list: to-hsl(#000); // (0deg, 0%, 0%);
 /// @return {List} This list of HSL values.
 @function to-hsl($color) {
+    @if not $_to-hsl-warned {
+        @warn 'to-hsl() is deprecated and will be removed in a future release. It is no longer needed.';
+
+        $_to-hsl-warned: true !global;
+    }
+
     @return (
         math.round(color.channel($color, 'hue', $space: hsl)),
         math.round(color.channel($color, 'saturation', $space: hsl)),

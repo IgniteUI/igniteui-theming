@@ -77,8 +77,8 @@
 ///     $item-background: rgba(0, 0, 0, .8),
 ///     $item-border-color: #dadada
 ///   );
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-button-group-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-button-group-theme);
 @function button-group-theme(
     $schema: $light-material-schema,
     $shadow: null,

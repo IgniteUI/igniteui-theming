@@ -44,8 +44,8 @@
 ///   $my-toolbar-theme: grid-toolbar-theme(
 ///     $background: black
 ///   );
-///   // Pass the theme to the css-vars mixin
-///   @include css-vars($my-toolbar-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-toolbar-theme);
 @function grid-toolbar-theme(
     $schema: $light-material-schema,
 
