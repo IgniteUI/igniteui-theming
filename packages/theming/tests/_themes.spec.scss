@@ -515,7 +515,7 @@ $schema: (
 
                 @include expect($selector: false) {
                     .my-theme .custom-selector,
-                    .my-theme:is(.custom-selector) {
+                    .my-theme:where(.custom-selector) {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 
@@ -875,7 +875,7 @@ $schema: (
                     @include expect($selector: false) {
                         .my-theme .custom-scope,
                         .my-theme igc-avatar,
-                        .my-theme:is(.custom-scope, igc-avatar) {
+                        .my-theme:where(.custom-scope, igc-avatar) {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
                                 $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 
