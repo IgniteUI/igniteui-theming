@@ -257,7 +257,7 @@ $_css-vars-warned: false;
 ///   }
 @mixin css-vars($theme, $scope: null) {
     @if not $_css-vars-warned {
-        @warn 'css-vars() is deprecated. Use tokens($theme) instead, or tokens($theme, $mode: \'scoped\') for an exact equivalent.';
+        @warn 'css-vars() is deprecated. Use tokens($theme) instead.';
 
         $_css-vars-warned: true !global;
     }
