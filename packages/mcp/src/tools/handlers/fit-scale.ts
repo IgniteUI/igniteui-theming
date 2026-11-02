@@ -5,6 +5,7 @@
 
 import { analyzeColorsWithHue } from "../../utils/color.js";
 import { fitScale } from "../../utils/scale-fit.js";
+import { SCALED_COLOR_GROUPS } from "../../utils/types.js";
 import type { FitColorScaleParams } from "../schemas.js";
 
 /** Renders the fitted spec as the Sass a user would paste into palette(). */
@@ -12,6 +13,7 @@ function toSass(
   range: [number, number],
   curve: [number, number, number, number] | null,
   family: string,
+  name?: string,
 ): string {
   const parts = [`range: (${range[0]}, ${range[1]})`];
 
@@ -19,11 +21,17 @@ function toSass(
     parts.push(`curve: (${curve.join(", ")})`);
   }
 
-  return `$scales: ('${family}': (${parts.join(", ")}))`;
+  const sass = `$scales: ('${family}': (${parts.join(", ")}))`;
+
+  return name ? `// ${name.replace(/\s+/g, " ").trim()}\n${sass}` : sass;
 }
 
 export async function handleFitColorScale(params: FitColorScaleParams) {
   const { colors, name } = params;
+  const family =
+    params.family ??
+    SCALED_COLOR_GROUPS.find((group) => group === name?.trim().toLowerCase()) ??
+    "gray";
 
   const analyzed = await analyzeColorsWithHue(
     Object.fromEntries(colors.map((c, i) => [`rung${i}`, c])),
@@ -57,17 +65,22 @@ export async function handleFitColorScale(params: FitColorScaleParams) {
     };
   }
 
-  const family = name ?? "gray";
   const worst = Math.max(
     ...fitted.rungs.map((r) => Math.abs(r.fitted - r.actual) / r.actual),
   );
 
   const lines = [
-    `**Fitted scale${name ? ` for "${name}"` : ""}**`,
+    `**Fitted ${family} scale${name ? ` for "${name}"` : ""}**`,
     "",
     `- range: \`(${fitted.range[0]}, ${fitted.range[1]})\` — contrast against white at the lightest and darkest rungs`,
     `- curve: ${fitted.curve ? `\`(${fitted.curve.join(", ")})\`` : "`null` — the ladder is already evenly spread, so no curve is needed"}`,
     `- fit: RMS ${fitted.rms}, worst rung off by ${(worst * 100).toFixed(1)}%`,
+    ...(family === "gray"
+      ? [
+          "",
+          "Gray is measured against the surface by default, so this matches the ladder exactly on a white surface and keeps its rhythm, spaced from the background, on any other. Add `anchor: 'white'` to keep the ladder's exact colors on every theme instead.",
+        ]
+      : []),
     "",
     "Pass it to create_palette or create_theme as:",
     "```json",
@@ -86,7 +99,7 @@ export async function handleFitColorScale(params: FitColorScaleParams) {
     "",
     "Or write it directly in Sass:",
     "```scss",
-    toSass(fitted.range, fitted.curve, family),
+    toSass(fitted.range, fitted.curve, family, name),
     "```",
     "",
     "| rung | ladder | fitted |",
