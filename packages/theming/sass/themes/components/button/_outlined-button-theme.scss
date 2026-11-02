@@ -57,8 +57,8 @@
 ///   $my-button-theme: outlined-button-theme(
 ///     $foreground: black,
 ///   );
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-button-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-button-theme);
 @function outlined-button-theme(
     $schema: $light-material-schema,
 

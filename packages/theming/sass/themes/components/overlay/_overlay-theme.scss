@@ -23,8 +23,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the background color
 ///   $my-overlay-theme: overlay-theme($background-color: rgba(yellow, .74));
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-overlay-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-overlay-theme);
 @function overlay-theme($schema: $light-material-schema, $background-color: null) {
     $selector: (
         #{config.element-prefix() + '-' + 'overlay'},

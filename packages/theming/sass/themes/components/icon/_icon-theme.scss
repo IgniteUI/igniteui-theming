@@ -25,8 +25,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the icon color
 ///   $my-icon-theme: icon-theme($color: orange);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-icon-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-icon-theme);
 @function icon-theme(
     $schema: $light-material-schema,
 

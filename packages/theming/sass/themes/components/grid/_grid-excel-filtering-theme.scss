@@ -36,7 +36,7 @@
 /// @requires $light-material-schema
 /// @example scss - Change excel filtering header color
 ///   $my-excel-filtering-theme: excel-filtering-theme($background: blue, $accent-color: orange);
-///   @include css-vars($my-excel-filtering-theme);
+///   @include tokens($my-excel-filtering-theme);
 @function excel-filtering-theme(
     $schema: $light-material-schema,
     $background: null,

@@ -36,8 +36,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the header background color
 ///   $my-expansion-panel-theme: expansion-panel-theme($header-background: black);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-expansion-panel-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-expansion-panel-theme);
 @function expansion-panel-theme(
     $schema: $light-material-schema,
 

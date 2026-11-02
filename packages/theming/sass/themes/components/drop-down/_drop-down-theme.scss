@@ -51,8 +51,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the background-color of the dropdown
 ///   $my-dropdown-theme: drop-down-theme($background-color: #09f);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-dropdown-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-dropdown-theme);
 @function drop-down-theme(
     $schema: $light-material-schema,
 

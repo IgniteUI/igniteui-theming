@@ -30,8 +30,8 @@
 /// @requires $light-material-schema
 /// @example scss - Set a custom background color
 ///   $my-snackbar-theme: snackbar-theme($background: white);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-snackbar-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-snackbar-theme);
 @function snackbar-theme(
     $schema: $light-material-schema,
 
