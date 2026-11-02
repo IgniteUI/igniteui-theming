@@ -187,6 +187,8 @@ $_css-vars-warned: false;
 /// Includes a universal `--ig-*` fallback chain so that global tokens can override
 /// component-scoped variables. Emits `--ig-theme` and `--ig-theme-variant` metadata.
 ///
+/// When nested, the parent selector receives the tokens only if it matches the component selector.
+///
 /// @access public
 /// @group themes
 /// @param {Map} $theme - The component theme map to generate tokens from.
@@ -216,20 +218,23 @@ $_css-vars-warned: false;
 ///   @include tokens(avatar-theme($schema: $schema), $mode: 'scoped');
 /// @example scss - Generate scoped component tokens with a custom scope
 ///   @include tokens(dialog-theme($schema: $schema), $mode: 'scoped', $scope: '.igx-dialog');
+/// @example scss - Generate scoped component tokens inside another selector
+///   .dark-theme {
+///     @include tokens(tooltip-theme($schema: $schema), $mode: 'scoped', $scope: '.igx-tooltip');
+///   }
+///   // Output:
+///   // .dark-theme .igx-tooltip,
+///   // .dark-theme:where(.igx-tooltip) {
+///   //   --background: ...;
+///   //   ...
+///   // }
 @mixin tokens($theme, $mode: 'global', $scope: null, $ignored: $ignored-keys) {
     @if $mode == 'scoped' {
-        $selector: map.get($theme, 'selector');
-        $name: if($scope, $scope, $selector);
+        $name: if($scope, $scope, map.get($theme, 'selector'));
+        $target: if(is-root(), $name, if($name, '#{$name}, &:where(#{$name})', '&'));
 
-        @if is-root() {
-            #{$name} {
-                @include css-vars-from-theme($theme);
-            }
-        } @else {
-            &,
-            #{$name} {
-                @include css-vars-from-theme($theme);
-            }
+        #{$target} {
+            @include css-vars-from-theme($theme);
         }
     } @else {
         $parent: if(is-root(), ':root', '&');
