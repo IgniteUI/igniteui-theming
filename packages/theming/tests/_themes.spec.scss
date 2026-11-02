@@ -504,7 +504,8 @@ $schema: (
                 }
             }
 
-            // Calling from within another selector w/ custom selector provided
+            // Calling from within another selector w/ custom selector provided:
+            // the parent selector receives the tokens only when it matches the custom selector itself.
             @include assert() {
                 @include output($selector: false) {
                     .my-theme {
@@ -513,8 +514,8 @@ $schema: (
                 }
 
                 @include expect($selector: false) {
-                    .my-theme,
-                    .my-theme .custom-selector {
+                    .my-theme .custom-selector,
+                    .my-theme:is(.custom-selector) {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 
@@ -838,6 +839,43 @@ $schema: (
 
                     @include expect($selector: false) {
                         .custom-scope {
+                            @each $key, $value in map.remove($theme, $ignored-keys...) {
+                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+
+                                --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
+                            }
+
+                            --ig-theme: material;
+                            --ig-theme-variant: light;
+                        }
+                    }
+                }
+            }
+
+            @include it('should only emit tokens on a parent selector that matches the custom scope') {
+                $theme: map.merge(
+                    digest-schema($schema),
+                    (
+                        selector: 'igc-avatar',
+                    )
+                );
+                $name: map.get($theme, '_meta', 'name');
+                $vp: config.variable-prefix();
+
+                // A wrapper such as a theme class must not receive the component's generic
+                // variables (e.g. --background), or every descendant inherits them. A class put
+                // on the component itself (`<igc-avatar class="my-theme">`) still matches.
+                @include assert() {
+                    @include output($selector: false) {
+                        .my-theme {
+                            @include tokens($theme, $mode: 'scoped', $scope: '.custom-scope, igc-avatar');
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        .my-theme .custom-scope,
+                        .my-theme igc-avatar,
+                        .my-theme:is(.custom-scope, igc-avatar) {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
                                 $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
 

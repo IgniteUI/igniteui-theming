@@ -184,11 +184,20 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 /// Includes a universal `--ig-*` fallback chain so that global tokens can override
 /// component-scoped variables. Emits `--ig-theme` and `--ig-theme-variant` metadata.
 ///
+/// When included inside another selector without a `$scope`, the variables are emitted on
+/// both the parent selector and the theme's component selector (`&, <selector>`), so a
+/// class put directly on the component (`.my-avatar { ... }`) is themed as well.
+/// When a `$scope` is passed, the variables are emitted on the scope inside the parent
+/// selector, and on the parent selector only when it matches the scope itself
+/// (`& <scope>, &:is(<scope>)`). So `.vip { ... }` still themes an `.igx-avatar.vip`,
+/// but the component's generic variables (e.g. `--background`) never land on an unrelated
+/// wrapper, such as a theme class, where every element below it would inherit them.
+///
 /// @access public
 /// @group themes
 /// @param {Map} $theme - The component theme map to generate tokens from.
 /// @param {String} $mode ['global'] - The generation mode: 'global' for universal tokens, 'scoped' for component-level CSS variables.
-/// @param {String} $scope [null] - Only used in 'scoped' mode. Overrides the selector from the theme map.
+/// @param {String} $scope [null] - Only used in 'scoped' mode. Overrides the selector from the theme map. When nested, the parent selector receives the tokens only if it matches the scope itself.
 /// @param {Map} $ignored [$ignored-keys] - A list of ignored keywords to be excluded when generating tokens.
 /// @example scss - Generate universal avatar tokens (global mode)
 ///   :root {
@@ -213,6 +222,16 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 ///   @include tokens(avatar-theme($schema: $schema), $mode: 'scoped');
 /// @example scss - Generate scoped component tokens with a custom scope
 ///   @include tokens(dialog-theme($schema: $schema), $mode: 'scoped', $scope: '.igx-dialog');
+/// @example scss - A custom scope inside another selector never themes an unrelated parent
+///   .dark-theme {
+///     @include tokens(tooltip-theme($schema: $schema), $mode: 'scoped', $scope: '.igx-tooltip');
+///   }
+///   // Output:
+///   // .dark-theme .igx-tooltip,
+///   // .dark-theme:is(.igx-tooltip) {
+///   //   --background: ...;
+///   //   ...
+///   // }
 @mixin tokens($theme, $mode: 'global', $scope: null, $ignored: $ignored-keys) {
     @if $mode == 'scoped' {
         $selector: map.get($theme, 'selector');
@@ -220,6 +239,11 @@ $ignored-keys: ('name', 'palette', 'variant', 'selector', 'type', 'theme', 'typo
 
         @if is-root() {
             #{$name} {
+                @include css-vars-from-theme($theme);
+            }
+        } @else if $scope {
+            #{$name},
+            &:is(#{$name}) {
                 @include css-vars-from-theme($theme);
             }
         } @else {
