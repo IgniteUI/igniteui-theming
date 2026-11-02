@@ -54,8 +54,8 @@
 ///   $my-tabs-theme: tabs-theme(
 ///      $item-background: orange
 ///    );
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-tabs-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-tabs-theme);
 @function tabs-theme(
     $schema: $light-material-schema,
     $item-text-color: null,
@@ -267,11 +267,11 @@
     // Button end
 
     @if not($tab-ripple-color) and $item-active-background {
-        $tab-ripple-color: text-contrast($item-active-background);
+        $tab-ripple-color: adaptive-contrast($item-active-background);
     }
 
     @if not($tab-ripple-color) and $item-background {
-        $tab-ripple-color: text-contrast($item-background);
+        $tab-ripple-color: adaptive-contrast($item-background);
     }
 
     @return extend(

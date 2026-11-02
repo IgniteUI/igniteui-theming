@@ -46,8 +46,8 @@
 /// @requires $light-material-schema
 /// @example scss - Set custom track and thumb on colors
 ///   $my-slider-theme: slider-theme($thumb-color: black, $track-color: yellow);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-slider-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-slider-theme);
 @function slider-theme(
     $schema: $light-material-schema,
 

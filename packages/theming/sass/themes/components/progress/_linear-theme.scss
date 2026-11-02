@@ -34,8 +34,8 @@
 ///   $my-progress-linear-theme: progress-linear-theme(
 ///     $stripes-color: orange
 ///   );
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-progress-linear-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-progress-linear-theme);
 @function progress-linear-theme(
     $schema: $light-material-schema,
     $track-color: null,

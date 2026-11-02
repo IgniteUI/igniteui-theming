@@ -56,8 +56,8 @@
 /// @requires $light-material-schema
 /// @example scss - Change the list background color
 ///   $my-list-theme: list-theme($background: black);
-///   // Pass the theme to the css-vars() mixin
-///   @include css-vars($my-list-theme);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-list-theme);
 @function list-theme(
     $schema: $light-material-schema,
 
