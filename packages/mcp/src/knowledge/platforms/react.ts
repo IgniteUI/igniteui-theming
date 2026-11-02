@@ -12,6 +12,8 @@
  * - Theming approach is identical to Web Components
  */
 
+import { generateWCThemeExample } from "./webcomponents.js";
+
 export const REACT_PLATFORM = {
   id: "react",
   name: "Ignite UI for React",
@@ -47,32 +49,15 @@ export const REACT_PLATFORM = {
  * Example usage documentation for React
  */
 export const REACT_USAGE_EXAMPLES = {
-  basic: `
-// Basic Material Light Theme for React (Vite)
-// In your styles.scss or theme.scss file:
-
-@use 'igniteui-theming/sass/color/presets/light/material' as *;
-@use 'igniteui-theming' as *;
-@use 'igniteui-theming/sass/typography/presets/material' as *;
-@use 'igniteui-theming/sass/elevations/presets' as *;
-
-:root {
-  --ig-theme: material;
-  --ig-theme-variant: light;
-  --ig-size-small: 1;
-  --ig-size-medium: 2;
-  --ig-size-large: 3;
-  --ig-scrollbar-size: #{rem(16px)};
-}
-
-@include palette($palette);
-@include elevations($material-elevations);
-@include typography(
-  $font-family: $typeface,
-  $type-scale: $type-scale
-);
-@include spacing();
-`,
+  get basic() {
+    return generateWCThemeExample(
+      [
+        "Basic Material Light Theme for React (Vite)",
+        "In your styles.scss or theme.scss file:",
+      ],
+      { designSystem: "material", variant: "light" },
+    );
+  },
 
   viteConfig: `
 // vite.config.ts - Sass configuration for Ignite UI theming
@@ -103,57 +88,31 @@ module.exports = {
 };
 `,
 
-  customPalette: `
-// Custom Palette Theme for React
-@use 'igniteui-theming' as *;
-@use 'igniteui-theming/sass/typography/presets/material' as *;
-@use 'igniteui-theming/sass/elevations/presets' as *;
+  get customPalette() {
+    return generateWCThemeExample(
+      [
+        "Custom Palette Theme for React",
+        "In your styles.scss or theme.scss file:",
+      ],
+      {
+        designSystem: "material",
+        variant: "light",
+        primaryColor: "#2ab759",
+        secondaryColor: "#f96a88",
+        surfaceColor: "#ffffff",
+      },
+    );
+  },
 
-$my-palette: palette(
-  $primary: #2ab759,
-  $secondary: #f96a88,
-  $surface: #ffffff
-);
-
-:root {
-  --ig-theme: material;
-  --ig-theme-variant: light;
-  --ig-size-small: 1;
-  --ig-size-medium: 2;
-  --ig-size-large: 3;
-}
-
-@include palette($my-palette);
-@include elevations($material-elevations);
-@include typography(
-  $font-family: $typeface,
-  $type-scale: $type-scale
-);
-@include spacing();
-`,
-
-  darkTheme: `
-// Dark Indigo Theme for React
-@use 'igniteui-theming' as *;
-@use 'igniteui-theming/sass/typography/presets/indigo' as *;
-@use 'igniteui-theming/sass/elevations/presets' as *;
-
-:root {
-  --ig-theme: indigo;
-  --ig-theme-variant: dark;
-  --ig-size-small: 1;
-  --ig-size-medium: 2;
-  --ig-size-large: 3;
-}
-
-@include palette($palette);
-@include elevations($indigo-elevations);
-@include typography(
-  $font-family: $typeface,
-  $type-scale: $type-scale
-);
-@include spacing();
-`,
+  get darkTheme() {
+    return generateWCThemeExample(
+      [
+        "Dark Indigo Theme for React",
+        "In your styles.scss or theme.scss file:",
+      ],
+      { designSystem: "indigo", variant: "dark" },
+    );
+  },
 } as const;
 
 /**
