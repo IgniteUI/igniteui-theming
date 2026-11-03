@@ -18,7 +18,11 @@ import {
   validateTokens,
 } from "../../knowledge/index.js";
 import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
-import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
+import {
+  DARK_SCOPE_PLACEHOLDER,
+  SASS_USE_ASSEMBLY_NOTE,
+  scopeSelector,
+} from "../../utils/sass.js";
 import type { CreateComponentThemeParams } from "../schemas.js";
 
 /**
@@ -53,6 +57,27 @@ function getComposedTokenWarning(
     `The other ${nonPrimaryTokens.length} token(s) override auto-derived values, which may cause visual inconsistencies. ` +
     "If the user did not explicitly request these tokens, consider re-generating with only the primary tokens."
   );
+}
+
+/**
+ * Build a note on covering both light and dark variants.
+ * A single call produces one variant, and the app's dark-mode selector isn't known,
+ * so the dark block has to be scoped by the agent.
+ */
+function getVariantNote(variant: string, selector: string | undefined): string {
+  if (variant === "both") {
+    return `\n\n🌗 **Light & dark:** Replace \`${DARK_SCOPE_PLACEHOLDER}\` with your app's dark-mode selector.`;
+  }
+
+  const example = selector
+    ? ` (e.g. "${scopeSelector(DARK_SCOPE_PLACEHOLDER, selector)}")`
+    : "";
+
+  if (variant === "dark") {
+    return `\n\n🌗 **Light & dark:** This block covers the dark variant only. Scope it under your app's dark-mode selector${example} so it doesn't override the light theme. For the light variant, call again with \`variant: "light"\`.`;
+  }
+
+  return `\n\n🌗 **Light & dark:** This block covers the light variant only. For a dark variant, call again with \`variant: "dark"\` and scope it under your app's dark-mode selector${example}.`;
 }
 
 export async function handleCreateComponentTheme(
@@ -266,7 +291,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
       // Design system info
       responseParts.push(
-        `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant})`,
+        `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant === "both" ? "light + dark" : variant})`,
       );
 
       // Selector info
@@ -298,7 +323,10 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
         content: [
           {
             type: "text" as const,
-            text: responseParts.join("\n") + cssWarning,
+            text:
+              responseParts.join("\n") +
+              cssWarning +
+              getVariantNote(variant, finalSelector),
           },
         ],
       };
@@ -342,7 +370,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
     // Design system info
     responseParts.push(
-      `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant})`,
+      `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant === "both" ? "light + dark" : variant})`,
     );
 
     // Selector info
@@ -375,7 +403,10 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
       content: [
         {
           type: "text" as const,
-          text: responseParts.join("\n") + sassWarning,
+          text:
+            responseParts.join("\n") +
+            sassWarning +
+            getVariantNote(variant, finalSelector),
         },
       ],
     };

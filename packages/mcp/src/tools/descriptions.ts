@@ -857,11 +857,18 @@ export const TOOL_DESCRIPTIONS = {
 <important_notes>
   DESIGN SYSTEM & VARIANT:
   - designSystem: Choose "material" (default), "bootstrap", "fluent", or "indigo"
-  - variant: Choose "light" (default) or "dark"
+  - variant: Choose "light" (default), "dark", or "both"
   - The correct schema (e.g., $light-bootstrap-schema, $dark-material-schema) is
     automatically selected and passed to the component theme function
   - The correct output: Choose output format based on the target file type (Sass vs CSS)
   - This ensures component tokens inherit proper defaults from the design system
+
+  LIGHT & DARK:
+  - Each call produces one variant. If the app supports light and dark, call this tool
+    for each variant — do not ship only the light one.
+  - Scope the dark call under the app's dark-mode selector so it doesn't override the
+    light theme (e.g. ".your-dark-scope igc-avatar").
+  - The response includes a note with the scoped selector for the other variant.
 
   TOKEN VALIDATION:
   - All provided token names are validated against the component's schema
@@ -919,6 +926,7 @@ export const TOOL_DESCRIPTIONS = {
   - Description of what was generated
   - Design system and variant used
   - List of tokens used
+  - A light/dark note on covering the other variant
 </output>
 
 <error_handling>
@@ -1275,6 +1283,8 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   // ---------------------------------------------------------------------------
   // Component theming parameters
   // ---------------------------------------------------------------------------
+  componentThemeVariant: `Theme variant: "light" (default), "dark", or "both". "both" returns a light block on the default selector and a dark block scoped under the \`.your-dark-scope\` placeholder, which must be replaced with the app's dark-mode selector.`,
+
   component: `Component name to get design tokens for (e.g., "button", "avatar", "grid"). Use exact names like "flat-button" for button variants. Child sub-component names like "list-item", "card-header", "accordion-header", "tab-item", "step" are also supported — they resolve to the parent component's theme. Call this tool to discover available tokens BEFORE using create_component_theme.`,
 
   componentTheme: `Component name to theme (e.g., "button", "avatar", "flat-button", "grid"). Must match a valid component from get_component_design_tokens. For button/icon-button variants, use specific names like "flat-button", "contained-button", "outlined-button", "fab-button". Child sub-component names (e.g., "list-item", "card-header") are supported and automatically resolve to the parent theme with the parent's selector and variable name.`,

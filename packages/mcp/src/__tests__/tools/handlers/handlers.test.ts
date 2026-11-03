@@ -465,6 +465,71 @@ describe("handleCreateCustomPalette", () => {
 });
 
 describe("handleCreateComponentTheme", () => {
+  it("tells agents how to add a scoped dark variant after a light call", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      tokens: { background: "#ff5722" },
+      output: "css",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain("covers the light variant only");
+    expect(text).toContain('variant: "dark"');
+    expect(text).toContain('".your-dark-scope igc-avatar"');
+    expect(text).not.toContain('"both"');
+  });
+
+  it("tells agents to scope a dark call and add the light variant", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "avatar",
+      variant: "dark",
+      tokens: { background: "#ff5722" },
+      output: "sass",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain("covers the dark variant only");
+    expect(text).toContain('".your-dark-scope igx-avatar"');
+    expect(text).toContain('variant: "light"');
+  });
+
+  it("returns light and scoped dark CSS blocks for variant both", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      variant: "both",
+      tokens: { background: "#ff5722" },
+      output: "css",
+    });
+
+    expect(result.isError).toBeUndefined();
+    const text = result.content[0].text;
+    expect(text).toContain("(light + dark)");
+    expect(text).toMatch(/^igc-avatar \{/m);
+    expect(text).toMatch(/^\.your-dark-scope igc-avatar \{/m);
+    expect(text).toContain("Replace `.your-dark-scope`");
+  });
+
+  it("returns light and dark Sass themes with one set of @use rules for variant both", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "avatar",
+      variant: "both",
+      tokens: { background: "#ff5722" },
+      output: "sass",
+    });
+
+    expect(result.isError).toBeUndefined();
+    const text = result.content[0].text;
+    expect(text).toContain("$schema: $light-material-schema");
+    expect(text).toContain("$schema: $dark-material-schema");
+    expect(text).toContain("$custom-avatar-theme-dark");
+    expect(text).toContain(".your-dark-scope igx-avatar {");
+    expect(text.match(/^@use /gm)).toHaveLength(1);
+  });
+
   it("returns error when platform is not provided", async () => {
     const result = await handleCreateComponentTheme({
       component: "avatar",

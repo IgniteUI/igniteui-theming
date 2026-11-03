@@ -483,7 +483,10 @@ export const createComponentThemeSchema = z.object({
   platform: z.enum(PLATFORMS).describe(PARAM_DESCRIPTIONS.platform),
   licensed: licensedSchema,
   designSystem: designSystemSchema.describe(PARAM_DESCRIPTIONS.designSystem),
-  variant: variantSchema.describe(PARAM_DESCRIPTIONS.variant),
+  variant: z
+    .enum([...VARIANTS, "both"])
+    .optional()
+    .describe(PARAM_DESCRIPTIONS.componentThemeVariant),
   component: z.string().describe(PARAM_DESCRIPTIONS.componentTheme),
   tokens: z
     .record(z.string(), tokenValueSchema)

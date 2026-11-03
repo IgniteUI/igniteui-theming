@@ -240,7 +240,7 @@ describe("tool output compiles", () => {
     const cases = cartesian({
       platform: PRODUCT_PLATFORMS,
       designSystem: DESIGN_SYSTEMS,
-      variant: VARIANTS,
+      variant: [...VARIANTS, "both"],
       output: OUTPUTS,
       component: ["flat-button", "avatar"],
     });

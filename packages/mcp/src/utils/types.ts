@@ -46,6 +46,11 @@ export const DESIGN_SYSTEMS = [
 export const VARIANTS = ["light", "dark"] as const;
 
 /**
+ * Variant option for component themes: a single variant, or both light and dark.
+ */
+export type ComponentThemeVariant = (typeof VARIANTS)[number] | "both";
+
+/**
  * Supported elevation presets.
  */
 export const ELEVATION_PRESETS = ["material", "indigo"] as const;
