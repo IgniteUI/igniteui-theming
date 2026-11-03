@@ -66,6 +66,7 @@ export {
   type ComponentToken,
   getComponentTheme,
   getTokenNames,
+  resolveComponentName,
   resolveComponentTheme,
   searchComponents,
   validateTokens,

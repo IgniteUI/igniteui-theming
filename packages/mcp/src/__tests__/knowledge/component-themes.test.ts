@@ -9,12 +9,54 @@ import {
   COMPONENT_THEMES,
   getComponentTheme,
   getTokenNames,
+  resolveComponentName,
   resolveComponentTheme,
   searchComponents,
   validateTokens,
 } from "../../knowledge/component-themes.js";
 
 describe("Component Themes Knowledge Base", () => {
+  describe("resolveComponentName", () => {
+    it("keeps component keys as they are", () => {
+      expect(resolveComponentName("navdrawer")).toBe("navdrawer");
+      expect(resolveComponentName("nav-drawer-item")).toBe("nav-drawer-item");
+    });
+
+    it("resolves element selectors with or without the prefix", () => {
+      expect(resolveComponentName("nav-drawer")).toBe("navdrawer");
+      expect(resolveComponentName("igc-nav-drawer")).toBe("navdrawer");
+      expect(resolveComponentName(" igx-nav-drawer ")).toBe("navdrawer");
+      expect(resolveComponentName("igx-linear-bar")).toBe("progress-linear");
+    });
+
+    it("resolves React (Igr*) and Blazor (Igb*) component names", () => {
+      expect(resolveComponentName("IgrNavDrawer")).toBe("navdrawer");
+      expect(resolveComponentName("IgbNavDrawer")).toBe("navdrawer");
+      expect(resolveComponentName("IgrNavDrawerItem")).toBe("nav-drawer-item");
+      expect(resolveComponentName("IgbDatePicker")).toBe("date-picker");
+      expect(resolveComponentName("IgrLinearProgress")).toBe("progress-linear");
+    });
+
+    it("only resolves tag names with their exact casing and prefix", () => {
+      for (const name of [
+        "IGX-Nav-Drawer",
+        "IgcAvatar",
+        "IgxAvatar",
+        "Igravatar",
+        "IgrNavdrawer",
+        "igrNavDrawer",
+        "igr-nav-drawer",
+        "navDrawer",
+      ]) {
+        expect(resolveComponentName(name)).toBe(name.toLowerCase());
+      }
+    });
+
+    it("leaves unknown names normalized but unresolved", () => {
+      expect(resolveComponentName("Unknown-Thing")).toBe("unknown-thing");
+    });
+  });
+
   describe("COMPONENT_THEMES", () => {
     it("should contain expected components", () => {
       expect(COMPONENT_THEMES).toHaveProperty("avatar");

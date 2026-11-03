@@ -6,6 +6,7 @@ import {
   COMPONENT_METADATA,
   getComponentPlatformAvailability,
   getComponentSelector,
+  resolveComponentName,
 } from "../../knowledge/index.js";
 import type { Platform } from "../../utils/types.js";
 import type {
@@ -31,7 +32,7 @@ interface ScopeError {
 }
 
 function normalizeComponentName(component?: string): string | null {
-  return component ? component.toLowerCase().trim() : null;
+  return component ? resolveComponentName(component) : null;
 }
 
 function buildSelectorList(value: string | string[]): string[] {

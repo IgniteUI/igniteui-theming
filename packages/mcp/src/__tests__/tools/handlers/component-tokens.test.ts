@@ -6,6 +6,20 @@ import { describe, expect, it } from "vitest";
 import { handleGetComponentDesignTokens } from "../../../tools/handlers/component-tokens.js";
 
 describe("handleGetComponentDesignTokens", () => {
+  it.each([
+    "nav-drawer",
+    "igc-nav-drawer",
+    "IgrNavDrawer",
+    "IgbNavDrawer",
+  ])("resolves %s to the navdrawer component", async (component) => {
+    const result = await handleGetComponentDesignTokens({ component });
+    const text = result.content[0].text;
+
+    expect(text).toContain(
+      "Implement a theme for the `navdrawer` component using the following guidance.",
+    );
+  });
+
   it("uses instruction-oriented opening format", async () => {
     const result = await handleGetComponentDesignTokens({
       component: "date-range-picker",

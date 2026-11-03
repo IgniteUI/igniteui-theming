@@ -14,6 +14,7 @@ import {
   getVariants,
   hasVariants,
   isComponentAvailable,
+  resolveComponentName,
   searchComponents,
   validateTokens,
 } from "../../knowledge/index.js";
@@ -93,7 +94,7 @@ export async function handleCreateComponentTheme(
     designSystem = "material",
     variant = "light",
   } = params;
-  const normalizedComponent = component.toLowerCase().trim();
+  const normalizedComponent = resolveComponentName(component);
 
   if (!platform) {
     return {
