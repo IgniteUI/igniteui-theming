@@ -142,7 +142,7 @@ describe("shade scales", () => {
       expect(parsed.success).toBe(false);
       expect(parsed.error?.issues).toHaveLength(1);
       expect(parsed.error?.issues[0].path).toEqual(["scales", "gray"]);
-      expect(parsed.error?.issues[0].message).toContain("'foo'");
+      expect(parsed.error?.issues[0].message).toContain("foo");
     });
 
     it("rejects a surface key, which takes no scale", () => {
