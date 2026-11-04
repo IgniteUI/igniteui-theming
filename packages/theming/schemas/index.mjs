@@ -21,7 +21,7 @@ const shadeLevels = [
   "A700",
 ];
 
-const shadeRecord = z.record(
+const shadeRecord = z.partialRecord(
   z.enum(/** @type {[string, ...string[]]} */ (shadeLevels)),
   z.string(),
 );

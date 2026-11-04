@@ -88,41 +88,55 @@ function zodToTSType(schema) {
   if (!schema?._def) return "unknown";
 
   const def = schema._def;
-  const typeName = def.typeName;
+  const typeName = def.typeName ?? def.type;
 
   switch (typeName) {
     case "ZodString":
+    case "string":
       return "string";
 
     case "ZodNumber":
+    case "number":
       return "number";
 
     case "ZodBoolean":
+    case "boolean":
       return "boolean";
 
     case "ZodArray":
-      return `${zodToTSType(def.type)}[]`;
-
-    case "ZodOptional":
-      return `${zodToTSType(def.innerType)} | undefined`;
-
-    case "ZodRecord": {
-      const keyType = def.keyType ? zodToTSType(def.keyType) : "string";
-      const valueType = zodToTSType(def.valueType);
-      return `Record<${keyType}, ${valueType}>`;
+    case "array": {
+      const element =
+        def.element ?? (typeof def.type === "object" ? def.type : undefined);
+      return `${zodToTSType(element)}[]`;
     }
 
-    case "ZodObject": {
-      const shape = def.shape?.();
+    case "ZodOptional":
+    case "optional":
+      return `${zodToTSType(def.innerType)} | undefined`;
+
+    case "ZodRecord":
+    case "record": {
+      const keyType = def.keyType ? zodToTSType(def.keyType) : "string";
+      const valueType = zodToTSType(def.valueType);
+      const recordType = `Record<${keyType}, ${valueType}>`;
+      return def.partial ? `Partial<${recordType}>` : recordType;
+    }
+
+    case "ZodObject":
+    case "object": {
+      const shape = typeof def.shape === "function" ? def.shape() : def.shape;
       if (!shape) return "Record<string, unknown>";
 
       const catchallType =
-        def.catchall?._def?.typeName !== "ZodNever"
+        def.catchall &&
+        def.catchall._def?.typeName !== "ZodNever" &&
+        def.catchall._def?.type !== "never"
           ? zodToTSType(def.catchall)
           : null;
 
       const entries = Object.entries(shape).map(([key, val]) => {
-        const optional = val._def?.typeName === "ZodOptional";
+        const optional =
+          val._def?.typeName === "ZodOptional" || val._def?.type === "optional";
         const type = optional
           ? zodToTSType(val._def.innerType)
           : zodToTSType(val);
@@ -137,7 +151,10 @@ function zodToTSType(schema) {
     }
 
     case "ZodEnum":
-      return def.values.map((v) => JSON.stringify(v)).join(" | ");
+    case "enum": {
+      const values = def.values ?? Object.values(def.entries ?? {});
+      return values.map((v) => JSON.stringify(v)).join(" | ");
+    }
 
     default:
       return "unknown";
