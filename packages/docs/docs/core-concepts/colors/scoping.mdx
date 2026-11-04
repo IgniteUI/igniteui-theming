@@ -1,0 +1,57 @@
+---
+sidebar_position: 8
+description: Add different palettes to different scopes by including the `palette` mixin inside the desired selector. 
+---
+
+import ColorsScopingSample from '@/components/Samples/ColorsScoping';
+
+# Scoping
+
+  Another interesting aspect of the `palette{:sass}` mixin is that it only declares the palette variables in the current scope.
+
+  If we include our palette with the mixin inside a selector, the variables will only be available within that selector and all its child elements. This allows multiple palettes to coexist in the same application, each used for different elements.
+
+  For example, consider the following HTML structure:
+
+  ```html
+  <button type="button" data-theme="light">Light chip</button>
+  <button type="button" data-theme="dark">Dark chip</button>
+  ```
+
+  Unlike the [Manually created palettes](manually-created-palettes) sample, where we used the [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark) function to derive two colors from a single palette, here we create two separate palettes and include each one in its respective scope.
+
+  ```scss
+  $light-palette: palette(
+    $primary: #100f28,
+    $secondary: #0C1333,
+    $surface: #b6b6b6
+  );
+
+  $dark-palette: palette(
+    $primary: #b6b6b6,
+    $secondary: #545c80,
+    $surface: #100f28
+  );
+
+  [data-theme='light'] {
+    @include palette($light-palette); /* [!code highlight] */
+  }
+
+  [data-theme='dark'] {
+    @include palette($dark-palette); /* [!code highlight] */
+  }
+  ```
+
+  This way, each palette's colors are declared in their respective scope, allowing the same color name and variant to resolve to different values depending on the context.
+
+  ```scss
+  button {
+    background: color($color: 'surface', $variant: 500);
+    color: color($color: 'primary', $variant: 400);
+    border-color: color($color: 'secondary', $variant: 400);
+  }
+	```
+
+  Both `button{:css}` elements reference the same color names - `surface-500{:sass}`, `primary-400{:sass}`, and `secondary-400{:sass}`. However, because `$light-palette` is included in the `[data-theme='light']{:css}` element scope, and `$dark-palette` is included in the `[data-theme='dark']{:css}` element scope, each element uses the colors from its respective palette. This demonstrates how different palette scopes can coexist.
+
+	<ColorsScopingSample />

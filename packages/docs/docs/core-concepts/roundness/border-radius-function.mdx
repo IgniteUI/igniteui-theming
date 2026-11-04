@@ -1,0 +1,43 @@
+---
+sidebar_position: 2
+title: 'border-radius() function'
+description: Learn how to use the `border-radius()` function to calculate border-radius values based on a radius factor, allowing for easy adjustments across your application.
+---
+
+
+# border-radius() function 
+
+  You can pass up to three values into the function, which can be used at different states:
+
+  - First value (`$radius` parameter - default border radius): This value is always used when the `--ig-radius-factor{:sass}` variable is not declared in the current scope.
+
+  - Second value (`$min` parameter - minimum border radius): This value is applied when the `--ig-radius-factor{:sass}` variable is declared and its value is `0`.
+
+  - Third value (`$max` parameter - maximum border radius): This value is applied when the `--ig-radius-factor{:sass}` variable is declared and its value is `1` or higher. 
+
+  Only the first parameter, `$radius`, is required for the function to work. The `$max` parameter defaults to the `$radius` value, so if you don’t provide `$max`, it will use `$radius` instead. The `$min` parameter defaults to `0`, so if you don’t provide it, it will automatically be set to `0`.
+
+  ```scss
+  .wrapper {
+    border-radius: border-radius($radius: 10px, $max: 20px);
+    --ig-radius-factor: 0;
+
+    // The border-radius here will be 0px;
+  }
+  ```
+
+  ## How the calculation is made
+
+  As mentioned earlier, if the `--ig-radius-factor{:sass}` variable is not declared, the applied value defaults to the `$radius` value. In all other cases, when `--ig-radius-factor{:sass}` is provided, the function relies on the CSS `clamp(){:js}` function to calculate the final value.
+   
+  The value of the `$min` parameter becomes the minimum of the `clamp(){:js}`, while the `$max` parameter becomes the maximum. The current value is then calculated by multiplying the `--ig-radius-factor{:sass}` by the maximum value.
+
+  - If `--ig-radius-factor = 1{:sass}`: Current value will be → `1 * 20 = 20` → the maximum value (`20px{:sass}`) is applied.
+  
+  :::note
+    If the value of `--ig-radius-factor{:sass}` is greater than `1`, the maximum value will still be applied — in this case, `20px{:sass}`.
+  :::  
+
+  - If `--ig-radius-factor = 0{:sass}`: Current value will be → `0 * 20 = 0` → but since the minimum value is `5px{:sass}`, the applied value is `5px{:sass}`.
+
+  - If `--ig-radius-factor = 0.75{:sass}`: Current value will be → `0.75 * 20 = 15` → the applied value is `15px{:sass}`.

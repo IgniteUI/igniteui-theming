@@ -1,0 +1,54 @@
+---
+sidebar_position: 8
+---
+
+import ColorsScopingSample from '@/components/Samples/ColorsScoping';
+
+# Scoping
+
+  Another interesting aspect of the `palette{:sass}` mixin is that it only declares the palette variables in the current scope.
+
+  If we include our palette with the mixin inside a selector, the variables will only be available within that selector and all its child elements. This allows multiple palettes to coexist in the same application, each used for different elements.
+
+  For example, consider the following HTML structure:
+
+  ```html
+  <div class='wrapper'>
+    <p class='light'>Light box</p>
+    <p class='dark'>Dark box</p>
+  </div>
+  ```
+
+  And the corresponding SCSS:
+
+  ```scss
+  $light-palette: palette(
+    $primary: #100f28,
+    $secondary: #0C1333,
+    $surface: #b6b6b6
+  );
+
+  $dark-palette: palette(
+    $primary: #b6b6b6,
+    $secondary: #545c80,
+    $surface: #100f28
+  );
+
+  .light {
+    @include palette($light-palette); /* [!code highlight] */
+  }
+
+  .dark {
+    @include palette($dark-palette); /* [!code highlight] */
+  }
+
+  .wrapper > p {
+    background: color($color: 'surface', $variant: 500);
+    color: color($color: 'primary', $variant: 400);
+    border-color: color($color: 'secondary', $variant: 400);
+  }
+  ```
+
+	In this example, both elements inside the `.wrapper{:css}` reference the `surface-500{:sass}`, `primary-400{:sass}`, and `secondary-400{:sass}` colors. However, because `$light-palette` is included in the `.light{:css}` element scope, and `$dark-palette` is included in the `.dark{:css}` element scope, each element uses the colors from its respective palette. This demonstrates how different palette scopes can coexist.
+
+	<ColorsScopingSample />

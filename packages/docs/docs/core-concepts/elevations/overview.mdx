@@ -1,0 +1,132 @@
+---
+sidebar_position: 1
+title: Overview
+description: Define elevation levels and apply them consistently across your project.
+hide_title: true
+pagination_next: core-concepts/elevations/custom-elevations
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import styles from '@/styles/docs/tables.module.scss';
+import ElevationsSample from '@/components/Samples/Elevations';
+
+<CoreConceptHeader
+  title="Elevations"
+  description="Elevations are the shadows that give elements depth and a sense of layering in a design system."
+  image="core_elevations_docs.svg"
+/>
+
+  Elevations are the shadows that give elements depth and a sense of layering in a design system. They help show which components are on top, which ones are grouped together, and which parts of the interface should draw the most attention.
+
+  In our Ignite UI Theming, elevations are defined as reusable shadow styles that you can apply consistently across your project. Instead of writing box-shadow values by hand, you set up an elevation map with named elevation levels. From there, you can:
+
+  - Use predefined mixins and functions to apply the elevation levels to elements.
+
+  - Keep your elevation styles consistent with your design system.
+
+  - Quickly adjust all shadows at once.
+
+  This way, managing shadows becomes easier, more scalable, and always aligned with your design system.
+
+  Let's say that you have the following elevations in your design system:
+
+  <table className={`${styles.table} ${styles.table__elevations}`}>
+    <thead className={styles.table__header}>
+      <tr>
+        <th>Level</th>
+        <th>X offset</th>
+        <th>Y offset</th>
+        <th>Blur</th>
+        <th>Spread</th>
+        <th>Opacity</th>
+      </tr>
+    </thead>
+    <tbody className={styles.table__content}>
+      <tr>
+        <td>Shadow XS</td>
+        <td>10px</td>
+        <td>2px</td>
+        <td>4px</td>
+        <td>2px</td>
+        <td>40%</td>
+      </tr>
+      <tr>
+        <td>Shadow S</td>
+        <td>10px</td>
+        <td>6px</td>
+        <td>6px</td>
+        <td>2px</td>
+        <td>45%</td>
+      </tr>
+      <tr>
+        <td>Shadow M</td>
+        <td>10px</td>
+        <td>8px</td>
+        <td>6px</td>
+        <td>4px</td>
+        <td>50%</td>
+      </tr>
+      <tr>
+        <td>Shadow L</td>
+        <td>10px</td>
+        <td>12px</td>
+        <td>6px</td>
+        <td>6px</td>
+        <td>55%</td>
+      </tr>
+      <tr>
+        <td>Shadow XL</td>
+        <td>10px</td>
+        <td>16px</td>
+        <td>6px</td>
+        <td>8px</td>
+        <td>60%</td>
+      </tr>
+      <tr>
+        <td>Shadow 2XL</td>
+        <td>10px</td>
+        <td>20px</td>
+        <td>6px</td>
+        <td>10px</td>
+        <td>65%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
+  The easiest way to convert the elevation design system into a usable one is the following:
+
+  - First, you would need to create a map with the elevation levels as keys and the corresponding box-shadow values as values.
+
+  ```scss
+  $custom-elevations: (
+    'xs': box-shadow(10px 2px 4px 2px rgb(0 0 0 / 40%)),
+    'small': box-shadow(10px 6px 6px 2px rgb(0 0 0 / 45%)),
+    'medium': box-shadow(10px 8px 6px 4px rgb(0 0 0 / 50%)),
+    'large': box-shadow(10px 12px 6px 6px rgb(0 0 0 / 55%)),
+    'xl': box-shadow(10px 16px 6px 8px rgb(0 0 0 / 60%)),
+    '2xl': box-shadow(10px 20px 6px 10px rgb(0 0 0 / 65%)),
+  );
+  ```
+
+  - After that you can include the map with the help of the [elevations](custom-elevations#including-the-elevations-map) mixin, which will generate elevation CSS variables based on the map that you created.
+
+
+  ```scss
+  @include elevations($custom-elevations);
+  ```
+
+  - Now you are ready to use the generated CSS variables in your stylesheet. You can apply them to your elements with the [elevation()](custom-elevations#using-the-elevations-css-variables) function, by passing the desired elevation level as a parameter.
+
+  ```scss
+  .button--small {
+    box-shadow: elevation('small');
+  }
+  ```
+	
+	This will apply the corresponding box-shadow value from the map to the element. If you want to change the shadow style for a specific elevation level, you can simply update the value in the map, and it will be reflected everywhere that elevation level is used.
+
+<ElevationsSample />
+
+

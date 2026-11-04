@@ -1,0 +1,167 @@
+---
+// `<Tabs>`/`<TabItem>` for MDX, rendered statically. `src/scripts/tabs.ts` adds click/keyboard
+// handling, `queryString` and the `it.tab.<groupId>` localStorage group sync in the browser.
+import styles from './Tabs.module.css';
+
+let tabsCount = 0;
+
+interface TabValue {
+  value: string;
+  label?: string;
+  default?: boolean;
+  attributes?: Record<string, unknown> & { className?: string };
+}
+interface Props {
+  className?: string;
+  block?: boolean;
+  defaultValue?: string | null;
+  values?: TabValue[];
+  groupId?: string;
+  queryString?: string | boolean;
+  /** Accepted for API compatibility only: a static page has no later render, so every panel is emitted hidden. */
+  lazy?: boolean;
+}
+const {
+  className,
+  block = false,
+  defaultValue,
+  values: valuesProp,
+  groupId,
+  queryString = false,
+} = Astro.props;
+
+interface Panel extends TabValue {
+  html: string;
+}
+
+/** Splits the rendered slot into the top-level `[role="tabpanel"]` divs that <TabItem> produced. */
+function parsePanels(html: string): Panel[] {
+  const panels: Panel[] = [];
+  const open = /<div\s+role="tabpanel"[^>]*>/g;
+  let match: RegExpExecArray | null;
+  while ((match = open.exec(html))) {
+    const start = match.index;
+    let depth = 1;
+    const tag = /<div\b|<\/div>/g;
+    tag.lastIndex = start + match[0].length;
+    let end = -1;
+    let t: RegExpExecArray | null;
+    while ((t = tag.exec(html))) {
+      depth += t[0] === '</div>' ? -1 : 1;
+      if (depth === 0) {
+        end = t.index + t[0].length;
+        break;
+      }
+    }
+    if (end === -1) break;
+    const attr = (name: string) => {
+      const m = new RegExp(`\\s${name}="([^"]*)"`).exec(match![0]);
+      return m
+        ? m[1]!
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&')
+        : undefined;
+    };
+    const value = attr('data-tab-value');
+    if (value === undefined) continue;
+    const attributesJson = attr('data-tab-attributes');
+    panels.push({
+      value,
+      label: attr('data-tab-label'),
+      default: /\sdata-tab-default(?:="")?(?=[\s>])/.test(match[0]),
+      attributes: attributesJson
+        ? (JSON.parse(attributesJson) as TabValue['attributes'])
+        : undefined,
+      html: html.slice(start, end),
+    });
+    open.lastIndex = end;
+  }
+  return panels;
+}
+
+const panels = parsePanels(await Astro.slots.render('default'));
+const values: TabValue[] = valuesProp ?? panels.map(({ html: _h, ...v }) => v);
+if (values.length === 0) {
+  throw new Error(
+    'The <Tabs> component requires at least one <TabItem> children component'
+  );
+}
+let selected: string | null;
+if (defaultValue === null) {
+  selected = null;
+} else if (defaultValue) {
+  if (!values.some((v) => v.value === defaultValue)) {
+    throw new Error(
+      `<Tabs> has a defaultValue "${defaultValue}" but none of its children has the corresponding value.`
+    );
+  }
+  selected = defaultValue;
+} else {
+  selected = (values.find((v) => v.default) ?? values[0]!).value;
+}
+let qsKey: string | null = null;
+if (typeof queryString === 'string') qsKey = queryString;
+else if (queryString === true) {
+  if (!groupId)
+    throw new Error(
+      'The <Tabs> component groupId prop is required if queryString=true.'
+    );
+  qsKey = groupId;
+}
+
+// Each tab names its panel and vice versa; ids are unique per instance on the page.
+tabsCount += 1;
+const tabsId = `it-tabs-${tabsCount}`;
+const slug = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, '-');
+const tabId = (value: string) => `${tabsId}-tab-${slug(value)}`;
+const panelId = (value: string) => `${tabsId}-panel-${slug(value)}`;
+const panelHtml = (p: Panel) =>
+  p.html.replace(
+    /^<div\b/,
+    `<div id="${panelId(p.value)}" aria-labelledby="${tabId(p.value)}" tabindex="0"${p.value === selected ? '' : ' hidden'}`
+  );
+---
+
+<div
+  class:list={['it-tabs', styles.tabList]}
+  data-tabs
+  data-group-id={groupId}
+  data-query-string={qsKey ?? undefined}
+>
+  <ul
+    role="tablist"
+    aria-orientation="horizontal"
+    class:list={['it-tabs__list', { 'it-tabs__list--block': block }, className]}
+  >
+    {values.map(({ value, label, attributes }) => {
+      const { className: attrClass, ...rest } = attributes ?? {};
+      return (
+        <li
+          role="tab"
+          id={tabId(value)}
+          aria-controls={panelId(value)}
+          tabindex={selected === value ? 0 : -1}
+          aria-selected={selected === value}
+          data-value={value}
+          {...rest}
+          class:list={[
+            'it-tabs__item',
+            styles.tabItem,
+            attrClass,
+            { 'it-tabs__item--active': selected === value },
+          ]}
+        >
+          {label ?? value}
+        </li>
+      );
+    })}
+  </ul>
+  <div class="it-margin-top--md">
+    {panels.map((p) => (
+      <Fragment set:html={panelHtml(p)} />
+    ))}
+  </div>
+</div>

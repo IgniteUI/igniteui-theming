@@ -1,0 +1,110 @@
+---
+sidebar_position: 1
+title: 概要
+description: 自動シェード生成によるカラーパレットの作成と管理。`palette()` 関数は、単一のベースカラーから14のカラーバリアント（50-900とA100-A700）と、アクセシビリティのための適応的コントラストカラーを生成します。
+hide_title: true
+pagination_next: core-concepts/colors/auto-generated-palettes
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import styles from '@/styles/docs/colors.module.scss';
+import ColorsSample from '@/components/Samples/Colors';
+
+
+<CoreConceptHeader
+  label="コアコンセプト"
+  title="カラー"
+  description="カラーパレットは、デザインシステムの基盤となる事前定義されたカラーのセットです。"
+  image="core_colors_docs.svg"
+/>
+
+  カラーパレットは、デザインシステムの基盤となる事前定義されたカラーのセットです。各パレットは、ブランドカラー、ニュートラルカラー、機能的カラー（primary、gray、success、warningなど）を一貫性のある再利用可能なコレクションにまとめます。
+
+  カラーパレットを使用することで、製品全体のコンポーネントが一貫したビジュアル言語を共有することが保証されます。値をハードコーディングする代わりに、パレット変数を参照することで、以下が簡単になります：
+
+  - すべてのUI要素間で一貫性を維持
+
+  - テーマやブランド更新を迅速に適用
+
+  - コントラスト対応のカラーペアでアクセシビリティを念頭に置く
+
+  実際には、パレットはカラー使用の唯一の信頼できる情報源として機能します。パレット内の値を更新すると、フレームワーク全体に自動的に伝播し、デザインとコードが完璧に整合します。
+
+  たとえば、デザインシステムが以下のカラーパレットを提供しているとしましょう：
+
+  <div className={styles.colorList}>
+    <div className={styles.colorItem}>
+      <span className={`${styles.colorSwatch} ${styles.colorPrimary}`}></span>
+      <div>
+        <p className={styles.colorLabel}>Primary <span className={styles.colorCode}>#F34E4E</span></p>
+      </div>
+    </div>
+    <div className={styles.colorItem}>
+      <span className={`${styles.colorSwatch} ${styles.colorSecondary}`}></span>
+      <div>
+        <p className={styles.colorLabel}>Secondary <span className={styles.colorCode}>#FFF6EA</span></p>
+      </div>
+    </div>
+    <div className={styles.colorItem}>
+      <span className={`${styles.colorSwatch} ${styles.colorAction}`}></span>
+      <div>
+        <p className={styles.colorLabel}>Action <span className={styles.colorCode}>#7BB9FA</span></p>
+      </div>
+    </div>
+    <div className={styles.colorItem}>
+      <span className={`${styles.colorSwatch} ${styles.colorGrey}`}></span>
+      <div>
+        <p className={styles.colorLabel}>Surface <span className={styles.colorCode}>#EBEBEB</span></p>
+      </div>
+    </div>
+    <div className={styles.colorItem}>
+      <span className={`${styles.colorSwatch} ${styles.colorBlack}`}></span>
+      <div>
+        <p className={styles.colorLabel}>Black <span className={styles.colorCode}>#282828</span></p>
+      </div>
+    </div>
+  </div>
+
+  以下のようにして、使用可能なSCSSパレットに変換できます：
+
+  - まず、.scssファイルにigniteui-themingパッケージを追加します：
+
+  ```scss
+  @use 'igniteui-theming/' as *; 
+  ```
+
+  - 次に、提供されたデザインシステムのカラーを変数に追加してパレットを作成します。
+  パレットには2種類あります：すべてのカラー値を直接追加する[手動作成パレット](manually-created-palettes)と、いくつかのキーカラーに基づいてカラー生成関数を使用して完全なパレットを作成する[自動生成パレット](auto-generated-palettes)です。
+  
+  - この例では、自動生成パレットを作成します。提供されたデザインシステムのカラー値をマップとして[palette()](auto-generated-palettes)関数に渡します。
+
+  ```scss 
+  $my-palette: palette(
+    $primary: #f34e4e,
+    $secondary: #fff6ea,
+    $surface: #ebebeb
+  );
+  ```
+
+  - [palette()](auto-generated-palettes)関数を使用すると、提供されたカラーとは別に、グループごとに追加で11のバリアント、さらに各バリアントのコントラストカラーも生成されます。
+
+  - パレットを作成したら、[palette mixin](palette-mixin)を使用してプロジェクトに含める準備が整います。これにより、[palette()](auto-generated-palettes)関数で作成したマップに基づいてCSS変数が生成されます。 
+
+  ```scss
+  @include palette($my-palette);
+  ```
+
+  - これにより、パレット内の各カラーのCSS変数が生成され、スタイルシート全体で使用できるようになります。提供されたカラー値はそのカラーグループの`500{:js}`バリアントになり、その他の明るいバリアントと暗いバリアントは`50{:js}`から`900{:js}`まであります。
+  
+  - 生成されたパレットからカラーを参照するには、カラーバリアントには[color()](accessing-the-css-variables)関数を、コントラストカラーには[contrast-color()](accessing-the-css-variables)関数を使用できます。たとえば：
+
+  ```scss
+  .demo-box {
+    background: color($color: 'primary', $variant: 600);
+    color: contrast-color($color: 'primary', $variant: 600);
+  }
+  ```
+
+  生成されたCSS変数を使用することで、スタイルを整理され保守可能な状態に保ちながら、アプリケーション全体にデザインシステムのカラーを簡単に適用できます。
+
+<ColorsSample />

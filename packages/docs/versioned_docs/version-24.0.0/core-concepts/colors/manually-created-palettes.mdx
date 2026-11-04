@@ -1,0 +1,55 @@
+---
+sidebar_position: 3
+---
+
+import ManualColorSample from '@/components/Samples/ColorsManually';
+
+# Manually Created Palettes
+
+  Manually created palettes are Sass maps that you define yourself. All color values that you set are generated as CSS variables when you include the palette with the `palette{:sass}` mixin. No additional variants or contrast colors are generated; only the values that you define in the map are included in the output.
+
+  They are useful when you want full control over the generated CSS variables and want to include only specific colors in your palette, without additional generated values.
+
+  To manually create a palette, first you would need to define a variable to hold all palette values. In the context of the Ignite UI Theming, palettes are declared as Sass maps, with map keys representing color groups (e.g., primary, secondary, surface). 
+     
+  Each color group is itself a map that defines its variants. Variants are key–value pairs: the key is the variant name (like 500 or 600) and the value is the actual color.
+
+  There are no restrictions on:
+
+  - How many color groups you define
+
+  - How many variants each group contains
+
+  - The format of the color value (hex, rgba, hsl() etc.)
+
+  For example:
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #6797de,
+      '500-contrast': white,
+      '600': rgba(54, 129, 221, 1),
+      '600-contrast': white
+    )
+  );
+  ```
+  It's important to know that the variant names (`'500'{:sass}`, `'600'{:sass}`, etc.) are the lowest map level that is supported by our functions and mixins, if you add more levels inside the variant key names, the map becomes unusable.
+
+  When creating a palette map, both color groups and variants can be named however you like, the only requirement is that they are quoted strings.
+
+  Palettes also support contrast colors. You can manually add a contrast color for any variant to ensure text or foreground elements remain readable. The only requirement is that the variant name must end with the `-contrast{:sass}` suffix, so the Ignite UI theming contrast functions can recognize it.
+
+  :::danger[Important]
+
+   Always wrap map keys in quotes. For example: `primary{:sass}`, `secondary{:sass}`, `gray{:sass}`, `500{:sass}`, `500-contrast{:sass}`. Unquoted keys will not be recognized correctly.
+
+  :::
+
+  When creating a palette manually, you can combine it with other CSS functions. For example, you can use the [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark) function to set different color values for light and dark mode in the same variable, so the palette automatically adapts to the active app theme. This makes palettes more flexible, because you can provide different values for the same variant without creating separate palettes for light and dark mode.
+
+	In our example below we are using the [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark) function to set different color values for light and dark mode for all of the three color groups - `primary`, `secondary` and `gray`. The two boxes have different `color-scheme{:sass}` values set to them, so that they can have different color values applied from the same color variant. One will use the light value and the other one will use the dark value from the [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark) function. 
+
+  Instead of hardcoding contrast colors, we are using the `adaptive-contrast(){:bash}` theming function to set the text color, so it automatically picks the right contrast color based on the value in use.
+   
+	<ManualColorSample/>

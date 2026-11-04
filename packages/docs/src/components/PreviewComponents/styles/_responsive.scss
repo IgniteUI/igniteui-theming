@@ -1,0 +1,105 @@
+@use 'igniteui-theming' as *;
+@use '../../../styles/breakpoints' as *;
+
+// Breakpoint adjustments for the whole preview.
+@media screen and (width > $bp-wide) {
+  @media (width < 1750px) {
+    .preview__list {
+      display: none;
+    }
+  }
+
+  @media (width <= $bp-xwide) {
+    igc-calendar {
+      display: none;
+    }
+
+    .preview__tabs {
+      grid-column: 2 / span 2;
+    }
+  }
+
+  @media (width < 1380px) {
+    .preview {
+      margin-right: 0;
+      gap: 20px;
+    }
+  }
+}
+
+@media screen and (width <= 1300px) {
+  igc-calendar {
+    display: none;
+  }
+
+  .preview__list {
+    display: none;
+  }
+
+  .preview {
+    grid-template-rows: 1fr max-content;
+    grid-template-columns: auto rem(305px);
+    gap: 0;
+    grid-row: 4;
+    margin-right: 0;
+  }
+
+  .preview__card--horizontal {
+    grid-column: 1;
+    align-self: flex-end;
+    margin-right: rem(30px);
+  }
+
+  .preview__card--vertical {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: flex-end;
+  }
+
+  @media (width > 890px) {
+    .preview__card--horizontal {
+      grid-row: 2;
+    }
+
+    .preview__tabs {
+      grid-column: 1;
+      grid-row: 1;
+      place-self: flex-end flex-end;
+      margin-block-end: rem(30px);
+      margin-inline-end: rem(30px);
+    }
+
+    .preview__card-content--vertical {
+      grid-row: 1 / span 2;
+    }
+
+    .it-hero__description {
+      grid-column: 1 / 6;
+    }
+  }
+
+  @media (width <= 890px) {
+    .it-hero__title {
+      grid-column: 1 / 7;
+    }
+
+    .it-hero__description {
+      grid-column: 1 / 6;
+    }
+
+    .preview__card--horizontal {
+      grid-row: 1;
+    }
+
+    .preview__tabs {
+      grid-column: 1 / span 2;
+      grid-row: 2;
+      place-self: flex-start center;
+      margin-block-start: rem(30px);
+    }
+
+    .preview__card--vertical {
+      grid-row: 1;
+    }
+  }
+}

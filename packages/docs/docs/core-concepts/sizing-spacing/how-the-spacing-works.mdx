@@ -1,0 +1,43 @@
+---
+sidebar_position: 4
+description: Learn how the `sizable` mixin and `pad()` function work together to create responsive designs by allowing you to define and switch between different size values dynamically.	
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+	# How the spacing works
+
+  ## `sizable` mixin
+  
+  To make an element able to receive dynamic spacing, you need to include the `sizable{:sass}` mixin in your element's scope. Including the mixin declares three variables: `--is-small{:sass}`, `--is-medium{:sass}`, and `--is-large{:sass}`. Each variable holds a different calculation that determines which of the three sizes: `small`, `medium`, or `large`, is applied to the element. These variables are required in order to switch between the three sizes. 
+  
+  It’s important to note that only the element where the `sizable{:sass}` mixin is included becomes sizable. Child elements inside it will not automatically inherit this behavior.
+
+  ## `pad()` function
+
+  The `pad(){:js}` function works in the same way as the [sizable()](how-the-sizing-works#sizable-function) function: based on the `--component-size{:sass}` value, one of the three size variables (`--is-small{:sass}`, `--is-medium{:sass}`, and `--is-large{:sass}`) is set to `1`, while the others remain `0`. The `pad(){:js}` function then multiplies these variables by the size values passed as parameters. Since two of them are `0`, only the active size produces a positive result in the calculations. The difference here is that, before the result is applied to the element’s property, it is also multiplied by a spacing factor, `--ig-spacing{:sass}`, which acts as a multiplier for the values passed to the `pad(){:js}` function. We will discuss the multiplier in more detail in the next section about the [Spacing factor](spacing-factor)
+
+  ## `pad-inline()` and `pad-block()` functions
+
+  In addition to the `pad(){:js}` function, there are two additional functions: `pad-inline(){:bash}` and `pad-block(){:bash}`. They can be used to style only the inline padding (left and right) or only the block padding (top and bottom). The two functions work the same way as the `pad(){:js}` function, but they tie the returned size calculations to different multipliers than the default `--ig-spacing{:sass}`.
+
+  - `pad-inline(){:bash}` uses the `--ig-spacing-inline{:sass}` multiplier.
+
+  - `pad-block(){:bash}` uses the `--ig-spacing-block{:sass}` multiplier.
+
+  We highly recommend using the `pad-inline(){:bash}` function only when styling the padding-inline property, and the `pad-block(){:bash}` function only when styling the padding-block property. This ensures that all padding is tied to the correct multipliers and that you are applying padding only where it is needed.
+
+  ```scss
+  .wrapper {
+    @include sizable();
+    padding-inline: pad-inline($sm: 10px, $md: 20px, $lg: 50px); /* [!code highlight] */
+    padding-block: pad-block($sm: 10px, $md: 20px, $lg: 50px); /* [!code highlight] */
+    --component-size: var(--ig-size-medium);
+  }
+  ```
+
+  ### API References
+
+  - <a href={`${sassDoc}/utilities/#function-pad`}>pad() function</a>
+  - <a href={`${sassDoc}/utilities/#function-pad-inline`}>pad-inline() function</a>
+  - <a href={`${sassDoc}/utilities/#function-pad-block`}>pad-block() function</a>

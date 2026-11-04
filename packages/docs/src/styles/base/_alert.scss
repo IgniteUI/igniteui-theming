@@ -1,0 +1,49 @@
+// Generic "alert" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-alert--secondary {
+    --it-alert-background-color: var(--it-color-secondary-contrast-background);
+    --it-alert-background-color-highlight: rgb(235, 237, 240, 0.15);
+    --it-alert-foreground-color: var(--it-color-secondary-contrast-foreground);
+    --it-alert-border-color: var(--it-color-secondary-dark);
+  }
+
+  .it-alert--info {
+    --it-alert-background-color: var(--it-color-info-contrast-background);
+    --it-alert-background-color-highlight: rgb(84, 199, 236, 0.15);
+    --it-alert-foreground-color: var(--it-color-info-contrast-foreground);
+    --it-alert-border-color: var(--it-color-info-dark);
+  }
+
+  .it-alert--danger {
+    --it-alert-background-color: var(--it-color-danger-contrast-background);
+    --it-alert-background-color-highlight: rgb(250, 56, 62, 0.15);
+    --it-alert-foreground-color: var(--it-color-danger-contrast-foreground);
+    --it-alert-border-color: var(--it-color-danger-dark);
+  }
+
+  .it-alert {
+    --it-code-background: var(--it-alert-background-color-highlight);
+    --it-link-color: var(--it-alert-foreground-color);
+    --it-link-hover-color: var(--it-alert-foreground-color);
+    --it-link-decoration: underline;
+    --it-tabs-color: var(--it-alert-foreground-color);
+    --it-tabs-color-active: var(--it-alert-foreground-color);
+    --it-tabs-color-active-border: var(--it-alert-border-color);
+
+    background-color: var(--it-alert-background-color);
+    border: var(--it-alert-border-width) solid var(--it-alert-border-color);
+    border-left-width: var(--it-alert-border-left-width);
+    border-radius: var(--it-alert-border-radius);
+    box-shadow: var(--it-alert-shadow);
+    color: var(--it-alert-foreground-color);
+    padding: var(--it-alert-padding-vertical) var(--it-alert-padding-horizontal);
+  }
+
+  .it-alert a {
+    text-decoration-color: var(--it-alert-border-color);
+  }
+
+  .it-alert a:hover {
+    text-decoration-thickness: 2px;
+  }
+}

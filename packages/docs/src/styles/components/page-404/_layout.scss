@@ -1,0 +1,226 @@
+@use 'igniteui-theming' as *;
+@use '../../breakpoints' as *;
+
+// 404 page (NotFound.astro): hero, illustration and responsive layout.
+.it-404-main {
+  overflow: hidden;
+  grid-template-rows: rem(850px);
+}
+
+.it-404-hero__title {
+  @include type-style('h2');
+
+  color: light-dark(var(--ig-gray-900), var(--ig-gray-100));
+  width: fit-content;
+  background-color: light-dark(var(--ig-surface-white), var(--ig-surface-dark));
+  margin-inline: auto;
+}
+
+.it-404-hero__content {
+  @include type-style('body', false);
+
+  color: light-dark(var(--ig-quinary-450), var(--ig-quinary-300));
+  margin-block-start: var(--ig-spacing-2xs);
+  margin-inline: auto;
+  width: max-content;
+  background-color: light-dark(var(--ig-surface-white), var(--ig-surface-dark));
+
+  igc-icon-button {
+    --foreground: #{light-dark(var(--ig-quinary-450), var(--ig-quinary-300))};
+  }
+
+  --hover-foreground: #{light-dark(
+      var(--ig-quinary-300),
+      var(--ig-quinary-400)
+    )};
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &::part(icon) {
+    --size: #{rem(12px)};
+  }
+}
+
+.it-404-hero-wrapper {
+  margin: auto;
+  text-align: center;
+  margin-top: rem(320px);
+  z-index: 3;
+}
+
+.it-404-container {
+  --d: 2px;
+  --color1: light-dark(#bbbbbe, #3f4253);
+  --color2: var(--ig-quinary-300);
+  --color3: var(--ig-quinary-300);
+  --color4: var(--ig-quinary-300);
+
+  margin-block-start: rem(30px);
+  animation: dots-glow 3s linear infinite;
+  background:
+    /* Scattered red dots at irregular positions */
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color2) 91deg,
+        transparent 0
+      )
+      180px 90px/540px 540px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color3) 91deg,
+        transparent 0
+      )
+      360px 180px/540px 540px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color4) 91deg,
+        transparent 0
+      )
+      90px 270px/450px 540px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color2) 91deg,
+        transparent 0
+      )
+      270px 360px/450px 450px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color3) 91deg,
+        transparent 0
+      )
+      450px 90px/540px 540px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color4) 91deg,
+        transparent 0
+      )
+      0 450px/450px 500px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color2) 91deg,
+        transparent 0
+      )
+      360px 450px/540px 500px,
+    conic-gradient(
+        from 270deg at var(--d) var(--d),
+        var(--color1) 91deg,
+        transparent 0
+      )
+      0 0/90px 90px;
+  max-width: unset;
+}
+
+.it-404-main .it-404-container {
+  max-width: unset;
+}
+
+.it-404-bg {
+  font-size: 475px;
+  position: absolute;
+  inset-inline: 0;
+  top: 10%;
+  text-align: center;
+  z-index: 3;
+  font-weight: 400;
+  letter-spacing: 0;
+
+  --d: 1.5px;
+  --bg-color1: light-dark(var(--ig-surface-dark), var(--ig-quinary-300));
+  --bg-color2: light-dark(var(--ig-surface-white), var(--ig-surface-dark));
+
+  animation: fade-in 4s ease-in-out;
+  background: conic-gradient(
+    from 270deg at var(--d) var(--d),
+    var(--bg-color1) 91deg,
+    var(--bg-color2) 0
+  );
+  background-size: 7px 7px;
+  background-clip: text;
+  color: transparent;
+}
+
+.it-404-illustration--header {
+  position: absolute;
+  top: 0;
+  z-index: 4;
+  animation: float 10s linear infinite;
+}
+
+.it-404-illustration--footer {
+  position: absolute;
+  z-index: 2;
+}
+
+.it-404-illustration--footer svg {
+  offset-path: path('M73 207C133 224 563 278 825-40');
+  offset-anchor: auto;
+  width: 53rem;
+  height: 14rem;
+  animation: rocket 5s linear forwards infinite;
+}
+
+@media screen and (width < 1550px) {
+  .it-404-illustration--footer {
+    width: rem(750px);
+  }
+}
+
+@media screen and (width < $bp-wide) {
+  .it-404-bg {
+    font-size: rem(440px);
+  }
+
+  .it-404-illustration--footer {
+    width: rem(485px);
+    height: rem(145px);
+
+    svg {
+      offset-path: path('M73 207C133 224 440 276 673 2');
+    }
+  }
+}
+
+@media screen and (width < 900px) {
+  .it-404-bg {
+    font-size: rem(365px);
+    top: 14%;
+  }
+}
+
+@media screen and (width < $bp-mobile) {
+  .it-404-bg {
+    font-size: 46dvw;
+    top: 14%;
+
+    --d: 1px;
+  }
+
+  .it-404-illustration--header img {
+    width: 65%;
+    height: auto;
+  }
+
+  .it-404-hero__content {
+    @include type-style('navigation', false);
+
+    margin-block-start: rem(10px);
+  }
+
+  .it-404-container {
+    padding-inline: 0;
+    min-height: 77dvh;
+  }
+
+  .it-404-illustration--footer svg {
+    offset-path: path('M58 207C80 167 84 161 320-286');
+  }
+}
+
+.it-404-wrapper {
+  margin: auto;
+  height: 100%;
+  position: relative;
+  width: clamp(30%, 960px, 98%);
+}

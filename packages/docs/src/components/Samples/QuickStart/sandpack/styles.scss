@@ -1,0 +1,35 @@
+@use 'igniteui-theming' as *;
+
+$my-palette: palette(
+  $primary: #640ee6,
+  $secondary: #db7f23,
+  $surface: #0c052b,
+);
+
+@include palette($my-palette);
+
+.card {
+  --background: #{color($color: surface, $variant: 200)};
+  --foreground: #{adaptive-contrast(var(--background))};
+  --accent: #{color($color: secondary, $variant: 600)};
+
+  background: var(--background);
+  border: 1px solid var(--accent);
+}
+
+@scope (.card) {
+  .content__title {
+    color: var(--foreground);
+  }
+
+  .content__description {
+    color: oklch(from var(--foreground) l c h / 0.6);
+  }
+
+  .icon {
+    width: em(32px);
+    aspect-ratio: 1;
+    mask: url('/public/verified-account.svg') no-repeat center;
+    background-color: var(--accent);
+  }
+}

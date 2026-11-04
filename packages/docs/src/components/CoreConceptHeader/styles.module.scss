@@ -1,0 +1,73 @@
+@use 'igniteui-theming' as *;
+@use '../../styles/breakpoints' as *;
+
+.doc__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--ig-spacing-m);
+  margin-bottom: var(--ig-spacing-xl);
+  border-block-end: rem(1px) solid
+    light-dark(var(--ig-gray-200), var(--ig-gray-500));
+  padding-block-end: var(--ig-spacing-xl);
+}
+
+.doc__header__wrapper {
+  display: grid;
+  gap: var(--ig-spacing-s);
+
+  span {
+    @include type-style('caption');
+
+    color: light-dark(var(--ig-gray-500), var(--ig-gray-300));
+  }
+
+  h1 {
+    @include type-style('h2');
+
+    margin: 0;
+    color: light-dark(var(--ig-surface-dark), var(--ig-surface-white));
+  }
+
+  p {
+    @include type-style('h4');
+
+    margin: 0;
+    color: light-dark(var(--ig-gray-500), var(--ig-gray-300));
+  }
+}
+
+/* The article's heading rule (`.it-markdown h1`) adds bottom padding; the header lays its own spacing out with the grid gap. */
+.doc__header .doc__header__wrapper h1 {
+  padding: 0;
+}
+
+.doc__header__image {
+  width: 100%;
+  height: auto;
+}
+
+/* Both theme variants are in the DOM; show the one matching the active theme. */
+:global([data-theme='light']) .doc__header__image__dark,
+:global([data-theme='dark']) .doc__header__image__light {
+  display: none;
+}
+
+@media screen and (width <= $bp-mobile) {
+  .doc__header {
+    grid-template-columns: 1fr;
+    gap: initial;
+    margin-bottom: var(--ig-spacing-s);
+    padding-block-end: var(--ig-spacing-s);
+  }
+
+  .doc__header__image {
+    grid-row: 1;
+    justify-self: end;
+
+    svg,
+    img {
+      float: right;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+---
+// The landing page shell. The sections are static Astro components; the only island is the component
+// preview inside the hero. `src/scripts/landing.ts` inlines the animated illustrations and runs their
+// animations; `.it-section-wrapper` keeps the layout stable.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Locale } from '../../lib/docs/config';
+import Hero from './Hero.astro';
+import CoreConcepts from './CoreConcepts.astro';
+import KeyBenefits from './KeyBenefits.astro';
+import { PALETTE_CODE } from './palette-code';
+import { codeToHtml } from 'shiki';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const pathname = locale === 'en' ? '/' : `/${locale}/`;
+// Highlighted here, at build time, so Shiki and its grammars never reach the browser.
+const paletteHtml = await codeToHtml(PALETTE_CODE, {
+  lang: 'scss',
+  themes: { light: 'ayu-light', dark: 'ayu-dark' },
+});
+---
+
+<BaseLayout
+  title="Ignite UI Theming Framework"
+  description="Find a simple solution for implementing and applying design systems across platforms"
+  locale={locale}
+  pathname={pathname}
+>
+  <Hero locale={locale} />
+  <div class="it-section-wrapper">
+    <CoreConcepts locale={locale} />
+    <KeyBenefits locale={locale} paletteHtml={paletteHtml} />
+  </div>
+</BaseLayout>
+
+<script>
+  import '../../scripts/landing';
+</script>

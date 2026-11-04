@@ -1,0 +1,173 @@
+---
+sidebar_position: 5
+description: Additional ways to apply the generated CSS variables, such as using the `type-style-elements` and `type-style-classes` mixins for easier application to elements and classes.
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Additional ways to use the CSS variables
+
+  Apart from the `type-style{:sass}` mixin, we also provide two more mixins that make applying the generated CSS variables easier: `type-style-elements{:sass}` and `type-style-classes{:sass}`.
+
+  ## The `type-style-elements` mixin
+
+  The idea of the `type-style-elements{:sass}` mixin is to apply all of the generated category CSS variables directly to the elements they are meant for in the current scope. 
+   
+  For example, when included, all `h1{:sass}` elements will automatically get the `h1{:sass}` CSS variables applied. To do this, the mixin uses an additional map called [$IElementCategories](https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L29). In this map, the keys are the scale categories from `$ITypeScale`, and the values are the elements to which they will be applied. When included, the `type-style-elements{:sass}` mixin goes through this map and applies the CSS variables of each category to the corresponding elements, if those elements are present in the scope.
+
+  By default the map looks like this:
+
+  ```scss
+  $IElementCategories: (
+    'h1': 'h1',
+    'h2': 'h2',
+    'h3': 'h3',
+    'h4': 'h4',
+    'h5': 'h5',
+    'h6': 'h6',
+    'body-1': 'p'
+	...
+  )
+  ```
+
+  Of course, you are free to edit it as you like.
+
+  Let’s say we want to adjust it to use the type categories from our earlier example. If we have the following HTML structure:
+
+  ```html
+  <div class="wrapper">
+    <h1>Title</h1>
+    <h3>Subtitle</h3>
+    <p>Content text</p>
+  </div>
+  ```
+
+  And we want to apply:
+
+  - the `h1{:sass}` category variables to the `h1{:sass}` element
+
+  - the `subtitle{:bash}` category variables to the `h3{:sass}` element
+
+  - the `body{:sass}` category variables to the `p{:sass}` element
+
+  We would do the following:
+
+  ```scss
+  @use 'igniteui-theming/sass/typography/types' as * with (
+    $ITypeScale: (h1, subtitle, body),
+    $ITypeStyle: (
+      font-family: inherit,
+      font-size: null,
+      font-weight: normal,
+      line-height: normal
+    ),
+    $IElementCategories: (h1: 'h1', subtitle: 'h3', body: 'p') /* [!code highlight] */
+  );
+
+  .wrapper {
+    @include type-style-elements();
+  }
+  ```
+
+  That way, when we include the `type-style-elements{:sass}` mixin, the three elements (`h1{:sass}`, `h3{:sass}`, and `p{:sass}`) will each get their corresponding generated CSS variables.
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+	.wrapper h1 {
+      font-family: var(--ig-h1-font-family, var(--ig-font-family));
+      font-size: var(--ig-h1-font-size);
+      font-weight: var(--ig-h1-font-weight);
+      line-height: var(--ig-h1-line-height);
+  }
+
+	.wrapper h3 {
+      font-family: var(--ig-subtitle-font-family, var(--ig-font-family));
+      font-size: var(--ig-subtitle-font-size);
+      font-weight: var(--ig-subtitle-font-weight);
+      line-height: var(--ig-subtitle-line-height);
+  }
+
+	.wrapper p {
+      font-family: var(--ig-body-font-family, var(--ig-font-family));
+      font-size: var(--ig-body-font-size);
+      font-weight: var(--ig-body-font-weight);
+      line-height: var(--ig-body-line-height);
+  }
+	```
+
+  ## The `type-style-classes` mixin
+
+  Another way to apply the generated CSS variables is with the `type-style-classes{:sass}` mixin. When included, it creates classes for all categories in `$ITypeScale`. Each class has the corresponding CSS variables applied to the relevant properties. This gives you ready-to-use classes out of the box.
+
+  These are especially useful when you have multiple elements of the same type but want to apply the style only to some of them. For example, if you have multiple `p{:sass}` elements, you can assign the generated class only to the ones you want styled.
+
+  The other useful benefit of the `type-style-classes{:sass}` mixin is that it helps keep your HTML semantically correct.
+  For example, imagine that you want to use an `<h3>{:html}` tag for your main heading because of its visual size.
+  That’s not ideal, since the first heading in a document should always be an `<h1>` to preserve proper semantic structure.
+
+  With this mixin, you can use the correct `<h1>{:html}` element and apply the `.typography__subtitle{:scss}` class generated from the mixin to give it the appearance of an `<h3>{:html}`.
+  This way, your document remains both semantically valid and visually consistent with your design.
+
+  If you have multiple typographies included in your application, the `type-style-classes{:sass}` mixin allows you to have two completely different sets of styles for the same class it declares — each adapting automatically depending on which typography is used in the current scope.
+
+  The naming convention for the classes is as follows: if the parent selector is `.wrapper{:css}` and the category is `h1{:sass}`, the class will be `.wrapper__h1{:css}`.
+
+  Let's say that we have the following HTML structure:
+
+  ```html
+  <div class="wrapper">
+    <h1>Heading text</h1>
+    <h3>Subtitle</h3>
+    <p>Content text</p>
+    <p>Content text</p>
+    <p>Content text</p>
+  </div>
+  ```
+  And we included the `type-style-classes{:sass}` mixin. 
+
+  ```scss
+  @use 'igniteui-theming/sass/typography/types' as * with (
+    $ITypeScale: (h1, subtitle, body)
+  );
+
+  .wrapper {
+    @include type-style-classes(); /* [!code highlight] */
+  }
+  ```
+
+  Three classes will be created - `.wrapper__h1{:css}`, `.wrapper__subtitle{:css}` and `.wrapper__body{:css}`.
+
+	:::note
+    It's important to know that the mixin works with `$ITypeScale` and creates classes for all categories mentioned there.
+  :::
+
+  So now the only thing we need to do is to set some of the new classes to the elements we want.
+
+  ```html
+  <div class="wrapper">
+    <h1>Heading text</h1>
+    <h3>Subtitle</h3>
+    <p class="wrapper__body">Content text</p>
+    <p>Content text</p>
+    <p>Content text</p>
+  </div>
+  ```
+
+  Now only the first `p{:sass}` element will have the new generated `body{:sass}` CSS variables applied to it.
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+	.wrapper .wrapper__body {
+      font-family: var(--ig-body-font-family, var(--ig-font-family));
+      font-size: var(--ig-body-font-size);
+      font-weight: var(--ig-body-font-weight);
+      line-height: var(--ig-body-line-height);
+  }
+	```
+
+  ### API References
+
+  - <a href={`${sassDoc}/typography/#mixin-type-style-classes`}>type-style-classes mixin</a> 
+  - <a href={`${sassDoc}/typography/#mixin-type-style-elements`}>type-style-elements mixin</a>
+  - <a href={'https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L29'}>$IElementCategories</a>

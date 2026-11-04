@@ -1,0 +1,159 @@
+---
+sidebar_position: 5
+description: How to access the generated CSS variables using the `color()` and `contrast-color()` functions, as well as how to reference them directly.
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# Accessing the CSS variables
+  
+  After the color variables are generated, there are a few ways to use them for styling in your application.
+
+  One way is to use the `color(){:js}` function. Simply pass the color group and variant you want as parameters. The function then combines this information and resolves it to the correct CSS variable, based on the name assembled from the color group and variant.
+
+  For example: 
+
+  ```scss
+  .wrapper {
+    background-color: color($color: 'primary', $variant: 500);
+  }
+  ```
+
+  Will result in the following at runtime:
+
+  ```scss
+  .wrapper {
+    background-color: var(--ig-primary-500);
+  }
+  ```
+
+  Now the background color is tied to the value of the `--ig-primary-500{:sass}` variable. If you update the color value in the palette map at any point, every usage will be updated automatically—because you’re referencing the variable instead of hardcoding the value.
+
+  This only works if the palette has already been included using the `palette{:sass}` mixin. However, the `color(){:js}` function can also pull colors directly from a palette variable, even if that palette hasn’t been included with the mixin. To do this, use the `$palette` parameter:
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #f34e4e
+    ),
+    'secondary': (
+      '500': #fff6ea
+    )
+  );
+
+  .wrapper {
+    background-color: color($palette: $custom-palette, $color: 'primary', $variant: 500);
+  }
+  ```
+
+  Here, without including and declaring all palette variables, we selected and applied the `primary-500{:sass}` color directly from the palette map to the element.
+
+  The result will be:
+
+  ```scss
+  .wrapper {
+    background-color: #f34e4e;
+  }
+  ```
+
+  It’s important to note that in this case, the function returns the hex value directly and applies it as a hardcoded value. The benefit of using the `color(){:js}` function is that if the palette map value changes, this usage updates automatically, since the color is resolved through the function rather than hardcoded.
+
+  ## Opacity
+
+  Another useful parameter you can use with the `color(){:js}` function is `$opacity`. This lets you adjust a color’s opacity directly when selecting it.
+  The function takes the resolved color variable and outputs a relative color with the specified opacity.
+
+  For example: 
+
+  ```scss
+  .wrapper {
+    background-color: color($color: 'primary', $variant: 500, $opacity: 0.5);
+  }
+  ```
+
+  Will result in: 
+
+  ```scss
+  .wrapper {
+    background-color: hsl(from var(--ig-primary-500) h s l / 0.5);
+  }
+  ```
+
+  Opacity can also be applied when selecting the color directly from a palette map.
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #f34e4e
+    ),
+    'secondary': (
+      '500': #fff6ea
+    )
+  );
+
+  .wrapper {
+    background-color: color($palette: $custom-palette, $color: 'primary', $variant: 500, $opacity: 0.5);
+  }
+  ```
+
+  ## Contrast Color
+
+  There is also a dedicated `contrast-color(){:bash}` function, which works like the `color(){:js}` one, but is specifically designed for retrieving contrast variants. It works only if the palette includes colors with the '-contrast' suffix.
+
+  For example, given a palette with a declared contrast color:
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #f34e4e,
+      '500-contrast' : black
+    )
+  );
+  ```
+
+  You can select it like this:
+
+  ```scss
+  .wrapper {
+    background-color: contrast-color($color: 'primary', $variant: 500);
+  }
+  ```
+
+  This will result in:
+
+  ```scss
+  .wrapper {
+    background-color: var(--ig-primary-500-contrast);
+  }
+  ```
+
+  Just like with the `color(){:js}` function, you can also pass the `$opacity` parameter to adjust a color’s opacity directly when selecting it.
+
+  For example:
+
+  ```scss
+  .wrapper {
+    background-color: contrast-color($color: 'primary', $variant: 500, $opacity: 0.5);
+  }
+  ```
+
+  Will result in: 
+
+  ```scss
+  .wrapper {
+    background-color: hsl(from var(--ig-primary-500-contrast) h s l / 0.5);
+  }
+  ```
+
+  ## Using Variables Directly
+   
+  Of course, it's not mandatory to use the `color(){:js}` or `contrast-color(){:bash}` functions. You can always reference the generated CSS variables directly if you prefer:
+
+  ```css
+  background-color: var(--ig-primary-500);
+  ```
+
+  ### API References
+
+  - <a href={`${sassDoc}/palettes/#function-color`}>color() function</a>
+  - <a href={`${sassDoc}/palettes/#function-contrast-color`}>contrast-color() function</a>

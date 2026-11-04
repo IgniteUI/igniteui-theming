@@ -1,0 +1,158 @@
+---
+sidebar_position: 1
+title: 概要
+description: タイポグラフィは、アプリケーションでのテキストの表示方法（フォント、サイズ、ウェイト、line-height、その他のテキストプロパティ）を制御します。適切に構造化されたタイポグラフィシステムは、一貫性と可読性を保証します。
+hide_title: true
+pagination_next: core-concepts/typography/manually-created-type-scale
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import styles from '@/styles/docs/tables.module.scss';
+
+
+<CoreConceptHeader
+  title="タイポグラフィ"
+  description="タイポグラフィは、アプリケーションでのテキストの表示方法（フォント、サイズ、ウェイト、スペーシング）を制御するシステムです。"
+  image="core_typography_docs.svg"
+/>
+
+タイポグラフィは、アプリケーションでのテキストの表示方法（フォント、サイズ、ウェイト、スペーシングなど）を制御するシステムです。見出し、本文、キャプション、その他のテキスト要素がアプリケーション全体で一貫性があり読みやすいことを保証します。適切に構造化されたタイポグラフィシステムは、視覚的な一貫性を維持し、全体的なユーザーエクスペリエンスを向上させます。
+
+Ignite UI Themingでは、必要なフォントスケールとスタイリングプロパティを定義すると、フレームワークが対応するCSS変数を自動的に生成し、繰り返しのフォント宣言を記述する手間を省きます。
+
+このアプローチにより、次のことが可能になります。
+
+- 単一の設定から完全なタイプシステムを構築します。
+
+- テキストスタイルをデザインシステムと一貫性を保ちます。
+
+- ミックスイン、関数、またはすぐに使用できるCSS変数を通じて、タイプスタイルを簡単に適用します。
+
+Ignite UI Themingのタイポグラフィは、2つの主要なテンプレートによって生成されます：[$ITypeScaleリスト](https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L9)と[$ITypeStyleマップ](https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L14)です。これら2つのテンプレートは、タイポグラフィ用に生成されるすべてのフォントカテゴリとフォントプロパティを定義します。
+
+- `$ITypeScale`リストは、変数が作成されるすべてのタイプスケールを格納します。これらのスケールは、タイポグラフィ変数を生成する際に必須です。つまり、タイポグラフィの関数とミックスインを使用する際は常にこれらを提供する必要があります。
+
+- `$ITypeStyle`マップは、各タイプスケールの変数として作成されるすべてのスタイリングプロパティを格納します。
+
+デフォルトでは、`$ITypeScale`リストには、Material Designシステムに基づいた13のタイプスケールが含まれています。
+
+```scss
+$ITypeScale: (
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  subtitle-1,
+  subtitle-2,
+  body-1,
+  body-2,
+  button,
+  caption,
+  overline
+);
+```
+
+すべてを使用する必要はなく、必要に応じてリストをカスタマイズできます。
+
+デフォルトでは、`$ITypeStyle`マップには次のプロパティが含まれています。
+
+```scss
+font-family: inherit,
+font-size: null,
+font-weight: normal,
+font-style: normal,
+line-height: normal,
+letter-spacing: normal,
+text-transform: none,
+margin-top: 0,
+margin-bottom: 0
+```
+
+各タイプスタイルにはデフォルト値があり、タイポグラフィを含める際に明示的に設定しなくても適用されます。
+
+デザインシステムに次のタイポグラフィがあるとしましょう。
+  <table className={`${styles.table} ${styles.table__typography}`}>
+    <thead className={styles.table__header}>
+      <tr>
+        <th>スタイル</th>
+        <th>サイズ</th>
+        <th>ウェイト</th>
+      </tr>
+    </thead>
+    <tbody className={styles.table__content}>
+      <tr>
+        <td>H1</td>
+        <td>24px</td>
+        <td>Medium (500)</td>
+      </tr>
+      <tr>
+        <td>Subtitle</td>
+        <td>20px</td>
+        <td>Regular (400)</td>
+      </tr>
+      <tr>
+        <td>Body</td>
+        <td>14px</td>
+        <td>Light (300)</td>
+      </tr>
+    </tbody>
+  </table>
+<br/>
+
+タイポグラフィデザインシステムを使用可能なものに変換する最も簡単な方法は次のとおりです。
+
+- まず、`$ITypeScale`リストをカスタマイズして、必要なタイプスケールのみを追加します。この場合、3つのタイプスケール（`h1{:scss}`、`subtitle{:bash}`、`body{:sass}`）を使用します。また、`$ITypeStyle`マップをカスタマイズして、タイポグラフィに必要なスタイリングプロパティのみを追加します。この場合、`font-family{:css}`、`font-size{:css}`、`font-weight{:css}`のみを使用します。
+
+```scss
+@use 'igniteui-theming/sass/typography/types' as * with (
+  $ITypeScale: (
+    h1,
+    subtitle,
+    body
+  ),
+  $ITypeStyle: (
+    font-size: null,
+    font-weight: normal,
+    line-height: normal
+  )
+);
+```
+
+- その後、`type-scale(){:bash}` 関数を使用してタイプスケールマップを作成する必要があります。これには、すべてのタイプスケールがキーとして含まれ、対応するスタイリングプロパティが値として含まれます。`type-style(){:bash}` 関数を使用してマップの値を作成できます。この関数はスタイリングプロパティをパラメータとして受け取ります。
+
+- タイプスケールマップができたら、`typography{:sass}` ミックスインを使用してプロジェクトにタイポグラフィを含め、フォントファミリとタイプスケールマップをパラメータとして渡します。
+
+```scss
+
+$custom-typography: type-scale(
+  $h1: type-style(
+    $font-size: rem(24px),
+    $font-weight: 500
+  ),
+  $subtitle: type-style(
+    $font-size: rem(20px),
+    $font-weight: 400
+  ),
+  $body: type-style(
+    $font-size: rem(14px),
+    $font-weight: 300
+  )
+);
+
+@include typography( /* [!code highlight] */
+  $font-family: 'Inter, sans-serif', /* [!code highlight] */
+  $type-scale: $custom-typography /* [!code highlight] */
+); /* [!code highlight] */
+```
+
+- これにより、タイポグラフィに必要なすべてのCSS変数が生成され、要素に適用できます。適用方法はいくつかありますが、ここでは `type-style{:sass}` ミックスインを使用します。
+
+```scss
+.wrapper {
+  @include type-style('body');
+}
+```
+
+- これで、`.wrapper{:css}` 要素に `body{:sass}` タイポグラフィスタイルが適用され、`typography{:sass}` ミックスインで定義されたフォントファミリを継承します。

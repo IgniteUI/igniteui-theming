@@ -1,0 +1,182 @@
+---
+// one docs sidebar item (html / link / category): `it-menu__*` design classes on the `it-nav-menu__*`
+// structure. Categories containing the active page are expanded at build time; `src/scripts/sidebar.ts`
+// animates toggles.
+import type { SidebarItem as Item } from '../../lib/docs/types';
+import SidebarItems from './SidebarItems.astro';
+
+interface Props {
+  item: Item;
+  activePath: string;
+  level: number;
+  expanded: Set<Item>;
+  tabIndex?: number;
+}
+const { item, activePath, level, expanded, tabIndex } = Astro.props;
+const samePath = (a?: string, b?: string) =>
+  !!a && !!b && a.replace(/\/$/, '') === b.replace(/\/$/, '');
+function containsActive(node: Item): boolean {
+  if (node.type === 'link') return samePath(node.href, activePath);
+  if (node.type === 'category')
+    return samePath(node.href, activePath) || node.items.some(containsActive);
+  return false;
+}
+const linkItem =
+  item.type === 'link'
+    ? item
+    : item.type === 'category' && item.items.length === 0 && item.href
+      ? item
+      : undefined;
+---
+
+{item.type === 'html' && (
+  <li
+    class:list={[
+      'it-sidebar-item--link',
+      item.defaultStyle && [
+        'it-nav-menu__html-item',
+        'it-nav-menu__list-item',
+        'it-menu__list-item',
+      ],
+      item.className,
+    ]}
+    set:html={item.value}
+  />
+)}
+{linkItem &&
+  (() => {
+    const href = linkItem.href!;
+    const isActive = samePath(href, activePath);
+    const isInternal = !/^[a-z]+:/i.test(href);
+    return (
+      <li
+        class:list={[
+          'it-sidebar-item--link',
+          'it-nav-menu__list-item',
+          'it-menu__list-item',
+          linkItem.type === 'category' ? linkItem.className : undefined,
+        ]}
+      >
+        <a
+          class:list={[
+            'it-nav-menu__link',
+            'it-menu__link',
+            !isInternal && 'it-nav-menu__link--external',
+            {
+              'it-nav-menu__link--active': isActive,
+              'it-menu__link--active': isActive,
+            },
+          ]}
+          aria-current={isActive ? 'page' : undefined}
+          tabindex={tabIndex}
+          href={href}
+          {...(!isInternal
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
+          <span title={linkItem.label} class="it-sidebar-link__label">
+            {linkItem.label}
+          </span>
+          {!isInternal && (
+            <svg
+              width="13.5"
+              height="13.5"
+              aria-label="(opens in new tab)"
+              class="it-icon-external-link"
+            >
+              <use href="#theme-svg-external-link" />
+            </svg>
+          )}
+        </a>
+      </li>
+    );
+  })()}
+{item.type === 'category' &&
+  !linkItem &&
+  (() => {
+    const isActive = containsActive(item);
+    const isCurrentPage = samePath(item.href, activePath);
+    const collapsed = item.collapsible
+      ? expanded.has(item) || isActive
+        ? false
+        : item.collapsed
+      : false;
+    return (
+      <li
+        class:list={[
+          'it-sidebar-item--category',
+          'it-nav-menu__list-item',
+          'it-menu__list-item',
+          {
+            'it-nav-menu__list-item--collapsed': collapsed,
+            'it-menu__list-item--collapsed': collapsed,
+          },
+          item.className,
+        ]}
+      >
+        <div
+          class:list={[
+            'it-menu__list-item-collapsible',
+            'it-nav-menu__list-item-collapsible',
+            {
+              'it-nav-menu__list-item-collapsible--active': isCurrentPage,
+              'it-menu__list-item-collapsible--active': isCurrentPage,
+            },
+          ]}
+        >
+          <a
+            class:list={[
+              'it-sidebar-category__link',
+              'it-menu__link',
+              'it-nav-menu__link',
+              {
+                'it-nav-menu__link--sublist': item.collapsible,
+                'it-menu__link--sublist': item.collapsible,
+                'it-nav-menu__link--sublist-caret':
+                  !item.href && item.collapsible,
+                'it-nav-menu__link--active': isActive,
+                'it-menu__link--active': isActive,
+              },
+            ]}
+            aria-current={isCurrentPage ? 'page' : undefined}
+            role={item.collapsible && !item.href ? 'button' : undefined}
+            aria-expanded={
+              item.collapsible && !item.href ? !collapsed : undefined
+            }
+            href={item.collapsible ? (item.href ?? '#') : item.href}
+            tabindex={tabIndex}
+          >
+            <span title={item.label} class="it-sidebar-category__label">
+              {item.label}
+            </span>
+          </a>
+          {item.href && item.collapsible && (
+            <button
+              aria-label={
+                collapsed
+                  ? `Expand sidebar category '${item.label}'`
+                  : `Collapse sidebar category '${item.label}'`
+              }
+              aria-expanded={!collapsed}
+              type="button"
+              class="it-button-reset it-nav-menu__caret"
+            />
+          )}
+        </div>
+        <ul
+          class="it-menu__list it-nav-menu__list"
+          style={
+            collapsed ? 'display:none;overflow:hidden;height:0px;' : undefined
+          }
+        >
+          <SidebarItems
+            items={item.items}
+            activePath={activePath}
+            level={level + 1}
+            expanded={expanded}
+            tabIndex={collapsed ? -1 : 0}
+          />
+        </ul>
+      </li>
+    );
+  })()}

@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+pagination_next: utility-concepts/animations/animation_mixin
+---
+
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Overview
+
+  Ignite UI Theming also provides a set of predefined animations that you can use right away in your project.
+
+  ```scss
+  // Include the 'fade-in-top' keyframes animation mixin
+  @include fade-in-top();
+
+  // Include the animation mixin with parameters
+  .wrapper {
+    @include animation('fade-in-top' 3s linear infinite);
+  }
+  ```
+
+  All predefined Ignite UI animations are stored as mixins, making them easy to include and reuse. When you include one of these animation mixins, it automatically calls another mixin - `keyframes{:sass}`, which defines the `@keyframes{:sass}` rule and sets up all the specific animation styles and values.
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+	@keyframes fade-in-top {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+	}
+	```
+
+  The predefined list of animations includes groups such as `fade`, `slide`, `rotate`, `bounce`, and many more. Each group contains several different animations with unique styles. You can find the complete list here: [Animations](http://infragistics.com/products/ignite-ui-angular/docs/sass/latest/animations/#mixin-animation)
+   

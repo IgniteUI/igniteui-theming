@@ -1,0 +1,69 @@
+@use 'igniteui-theming' as *;
+
+div.sp-layout {
+  display: grid;
+  border: none;
+  border-radius: var(--ig-border-radius-small);
+  overflow: hidden;
+  gap: 0;
+
+  .sp-editor {
+    order: 1;
+    height: auto;
+    font-size: 14px;
+  }
+
+  .sp-preview {
+    width: 100% !important;
+    min-height: 160px;
+  }
+
+  .sp-tabs-scrollable-container {
+    border-block: 1px solid
+      color-mix(in srgb, var(--shiki-code-bg), var(--ig-gray-300) 15%);
+  }
+
+  .sp-bridge-frame {
+    display: none;
+  }
+
+  .sp-preview-actions {
+    display: none;
+  }
+
+  .sp-preview-container {
+    background: var(--shiki-code-bg);
+  }
+
+  &.sp-layout--auto-resize .sp-preview-container {
+    overflow: hidden;
+  }
+
+  .sp-tab-container:has(button:focus) {
+    outline: none;
+  }
+
+  .cm-scroller {
+    scrollbar-width: thin;
+    scrollbar-color: light-dark(var(--ig-gray-300), var(--ig-gray-600))
+      transparent;
+  }
+}
+
+.cm-lineNumbers {
+  font-size: 0.875em !important;
+}
+
+.sp-wrapper .cm-content,
+.sp-wrapper .cm-gutters {
+  font-family: var(--it-font-family-monospace);
+  font-size: var(--it-font-size-monospace);
+  line-height: var(--it-line-height-monospace);
+  letter-spacing: 0;
+  font-variant-ligatures: none;
+}
+
+// Reserve the sample's rendered height until the Sandpack island mounts (no layout shift).
+.it-sample:not(:has(.sp-wrapper)) {
+  min-height: var(--it-sample-height, 30rem);
+}

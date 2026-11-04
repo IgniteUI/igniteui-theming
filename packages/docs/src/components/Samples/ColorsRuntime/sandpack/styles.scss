@@ -1,0 +1,36 @@
+@use 'sass:list';
+@use 'igniteui-theming' as *;
+
+$my-palette: palette(
+  $primary: #ff4000,
+  $secondary: #fff6ea,
+  $surface: #ebebeb,
+);
+
+@include palette($my-palette);
+
+$list: (
+  50,
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900,
+  'A100',
+  'A200',
+  'A400',
+  'A700'
+);
+
+@for $i from 1 through list.length($list) {
+  li:nth-of-type(#{$i}) {
+    $variant: list.nth($list, $i);
+
+    background: color($color: 'primary', $variant: $variant);
+    color: contrast-color($color: 'primary', $variant: $variant);
+  }
+}

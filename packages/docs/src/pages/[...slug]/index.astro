@@ -1,0 +1,10 @@
+---
+// Every documentation page, for every locale and version (`/docs/…`, `/docs/24.0.0/…`, `/ja/docs/…`,
+// `/ja/docs/24.0.0/…`). The landing, search and 404 pages are static routes and take precedence.
+import DocPage from '../../components/docs/DocPage.astro';
+import { allDocStaticPaths } from '../../lib/docs/routes';
+
+export const getStaticPaths = () => allDocStaticPaths();
+---
+
+<DocPage {...Astro.props} />

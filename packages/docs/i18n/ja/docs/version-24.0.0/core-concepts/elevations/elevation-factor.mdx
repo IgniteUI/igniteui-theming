@@ -1,0 +1,57 @@
+---
+sidebar_position: 5
+---
+
+import ElevationFactorSample from '@/components/Samples/ElevationFactor';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# エレベーション係数
+
+  `box-shadow(){:bash}`関数から生成されたすべてのエレベーション変数は、計算に`--ig-elevation-factor{:sass}`という変数を使用します。この変数により、エレベーションの値を簡単に調整でき、返されるbox-shadow値の乗数として機能します。これは、提供されたサイズを乗算する比率です。デフォルト値は`1`です。
+
+  次のシナリオを考えてみましょう：アプリケーション内のすべての要素に適切なエレベーションが適用されており、ある時点ですべてのエレベーションを半分に減らして全体的な見た目を変更したいとします。通常、エレベーションマップに戻って、すべてのbox-shadow値を手動で半分にする必要があります。
+	
+  しかし、`box-shadow(){:bash}`関数を使用すると、`--ig-elevation-factor{:sass}`くbox-shadow計算に含まれます。box-shadowの各部分は`--ig-elevation-factor{:sass}`の値で乗算されます。そのため、エレベーションを半分にするには、`--ig-elevation-factor{:sass}`を`0.5`に設定するだけで、アプリケーション内のすべてのエレベーションが自動的に調整されます。同様に、エレベーションを2倍にするには、係数を`2`に設定できます。これにより、すべてのエレベーションを粗いに制御でき、一度に調整する迅速な方法を提供します。
+
+  例：
+
+  ```scss
+  $custom-elevations: (
+    'small': box-shadow(0 2px 4px 0 black)
+  );
+
+  :root {
+    @include elevations($custom-elevations);
+    --ig-elevation-factor: 2; /* [!code highlight] */
+  }
+
+  .wrapper {
+    @include elevation('small');
+  }
+  ```
+
+  :::note
+    `box-shadow(){:bash}`関数は、必ずしもエレベーションマップで使用する必要をやりません。アプリケーション内のどこでも使用できます。使用されるところではどこでも、`--ig-elevation-factor{:sass}`変数にリンクされ、`--ig-elevation-factor{:sass}`が変更ゕれると変更ゕれます。そのため、アプリケーションの一部の要素を粗いに変更できます。
+  :::
+  <br/>
+
+  上記の例で`elevation{:sass}`ミックスインのインクルードからの出力は次のようになります：
+  
+  <CodeBlockHeader title="CSS出力"/>
+  ```css
+  .wrapper {
+    box-shadow: var(--ig-elevation-small);
+
+    // この変数内で行われる計算は以下のとおりです。
+    // ⮑ 0 calc(2 * 2px) calc (2 * 4px) 0 black
+  }
+  ```
+
+  ここで、`--ig-elevation-factor: 2{:sass}`の場合、適用されるbox-shadowは`0 4px 8px 0 black{:sass}`になります。なぜなら、値（`2px{:sass}`と`4px{:sass}`）が`2`に設定された`--ig-elevation-factor{:sass}`で乗算されるからです。係数がデフォルト値の`1`のままであれば、box-shadowは`0 2px 4px 0 black{:sass}`になります。
+
+  :::danger[Important]
+    `--ig-elevation-factor{:sass}`は、すべての値が正しく計算されるように、`elevations{:sass}`ミックスインがインクルードされる場所と同じまたはより高いスコープで宣言する必要があります。
+  :::	
+  <br/>
+
+<ElevationFactorSample/>

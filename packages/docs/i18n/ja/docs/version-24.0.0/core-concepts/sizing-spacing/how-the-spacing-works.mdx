@@ -1,0 +1,42 @@
+---
+sidebar_position: 4
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# スペーシングの仕組み
+
+  ## `sizable` ミックスイン {/* #sizable-mixin */}
+  
+  要素で動的なスペーシングを利用できるようにするには、要素のスコープで `sizable{:sass}` ミックスインをインクルードする必要があります。ミックスインをインクルードすると、`--is-small{:sass}`、`--is-medium{:sass}`、`--is-large{:sass}` の3つの変数が宣言されます。各変数には、`small`、`medium`、`large` のどのサイズを適用するかを判定する計算式が入ります。これらの変数は、3つのサイズを切り替えるために必要です。
+  
+  重要なのは、`sizable{:sass}` ミックスインをインクルードした要素だけがサイズ変更可能になる点です。その子要素は、この挙動を自動では継承しません。
+
+  ## `pad()` function {/* #pad-function */}
+
+  `pad(){:js}` 関数は [sizable()](how-the-sizing-works) 関数と同じ仕組みで動作します。`--component-size{:sass}` の値に応じて、3つのサイズ変数（`--is-small{:sass}`、`--is-medium{:sass}`、`--is-large{:sass}`）のうち1つが `1` になり、残りは `0` のままです。その後、`pad(){:js}` 関数はこれらの変数と、パラメータで渡されたサイズ値を掛け合わせます。2つは `0` なので、有効なサイズだけが正の計算結果になります。違いは、結果が要素のプロパティに適用される前に、`--ig-spacing{:sass}` というスペーシング係数でも掛け算される点です。これは `pad(){:js}` 関数に渡した値に対する乗数として機能します。この乗数については、次の [Spacing factor](spacing-factor) で詳しく説明します。
+
+  ## `pad-inline()` と `pad-block()` 関数 {/* #pad-inline-and-pad-block-functions */}
+
+  `pad(){:js}` 関数に加えて、`pad-inline(){:bash}` と `pad-block(){:bash}` という2つの関数があります。これらは、インライン方向のパディング（左右）またはブロック方向のパディング（上下）だけをスタイリングするために使えます。2つの関数は `pad(){:js}` 関数と同じように動作しますが、返されるサイズ計算は既定の `--ig-spacing` とは異なる乗数に結び付けられます。
+
+  - `pad-inline(){:bash}` は `--ig-spacing-inline{:sass}` を乗数として使います。
+
+  - `pad-block(){:bash}` は `--ig-spacing-block{:sass}` を乗数として使います。
+
+  `pad-inline(){:bash}` 関数は `padding-inline{:bash}` プロパティをスタイリングする場合にのみ、`pad-block(){:bash}` 関数は `padding-block{:bash}` プロパティをスタイリングする場合にのみ使うことを強くおすすめします。これにより、すべてのパディングが正しい乗数に紐付き、必要な場所にだけパディングを適用できます。
+
+  ```scss
+  .wrapper {
+    @include sizable();
+    padding-inline: pad-inline($sm: 10px, $md: 20px, $lg: 50px); /* [!code highlight] */
+    padding-block: pad-block($sm: 10px, $md: 20px, $lg: 50px); /* [!code highlight] */
+    --component-size: var(--ig-size-medium);
+  }
+  ```
+
+  ### API リファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/utilities/#function-pad`}>pad() 関数</a>
+  - <a href={`${sassDoc}/utilities/#function-pad-inline`}>pad-inline() 関数</a>
+  - <a href={`${sassDoc}/utilities/#function-pad-block`}>pad-block() 関数</a>

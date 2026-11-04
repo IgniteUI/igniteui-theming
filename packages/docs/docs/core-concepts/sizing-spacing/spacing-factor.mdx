@@ -1,0 +1,89 @@
+---
+sidebar_position: 5
+description: How to easily adjust all spacing values at once by modifying the `--ig-spacing` variable, which acts as a multiplier in the padding calculations.
+---
+
+import styles from '@/styles/docs/tables.module.scss';
+
+# Spacing factor
+  
+  As mentioned, the values returned by the `pad(){:js}` function all use the `--ig-spacing{:sass}` variable in their calculations as a multiplier. This allows us to quickly scale the padding values. By default, `--ig-spacing{:sass}` is set to `1`, meaning the returned values match the ones passed to the function. For example, if we set it to `2`, all returned values will be twice as large. This provides an easy way to increase or decrease the spacing for all elements at once, ensuring consistency and avoiding missed values.
+  
+  With the `--ig-spacing{:sass}` variable, we can control the values of the provided padding for all three functions: `pad(){:js}`, `pad-block(){:bash}`, and `pad-inline(){:bash}`.
+  Apart from the `--ig-spacing{:sass}` variable, there are two additional specific variables we can use to multiply the passed paddings:
+  
+  - `--ig-spacing-inline{:sass}` - which controls only the passed paddings to the `pad-inline(){:bash}` function.
+  
+  - `--ig-spacing-block{:sass}` - which controls only the passed padding to the `pad-block(){:bash}` function.
+  
+  Apart from these two direction-based variables, there are also three additional size-based variables for each direction, allowing you to be even more specific when multiplying spacings:
+  <br/>
+<table className={`${styles.table} ${styles.table__spacing}`}>
+
+    <tbody className={styles.table__content}>
+      <tr>
+        <td><b>--ig-spacing-inline-small</b></td>
+        <td>controls only the passed small size padding with the `pad-inline()` function.</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-inline-medium</b></td>
+        <td>controls only the passed medium size padding with the `pad-inline()` function.</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-inline-large</b></td>
+        <td>controls only the passed large size padding with the `pad-inline()` function.</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-block-small</b></td>
+        <td>controls only the passed small size padding with the `pad-block()` function.</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-block-medium</b></td>
+        <td>controls only the passed medium size padding with the `pad-block()` function.</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-block-large</b></td>
+        <td>controls only the passed large size padding with the `pad-block()` function.</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+
+  With these additional variables, we can be even more specific when controlling the spacings. This is another benefit of using the specific `pad-inline(){:bash}` and `pad-block(){:bash}` functions.
+
+	:::danger[Important]
+    All inline and block spacing multiplier variables only affect values passed to the `pad-inline(){:bash}` and `pad-block(){:bash}` functions, while `--ig-spacing{:sass}` affects all spacing values in all three functions. Be careful which multiplier variable you use.
+	:::
+  
+  Because there are multiple multipliers, they follow a specificity order. For example, if we use the following function:
+  
+  ```scss
+  padding-inline: pad-inline($sm: 10px, $md: 20px, $lg: 30px);
+  ```
+  
+  The most specific multiplier variable takes precedence:
+  
+  1. Size-specific variables: `--ig-spacing-inline-small{:sass}`, `--ig-spacing-inline-medium{:sass}`, `--ig-spacing-inline-large{:sass}` (highest specificity).
+  2. Direction-specific variables: `--ig-spacing-inline{:sass}`.
+  3. Default spacing variable: `--ig-spacing{:sass}` (lowest specificity).
+  
+  So, if all of the variables are declared:
+  
+  ```scss
+  .wrapper {
+    @include sizable();
+    padding-inline: pad-inline($sm: 10px, $md: 20px, $lg: 50px);
+    --component-size: var(--ig-size-medium);
+  
+    --ig-spacing-inline-medium: 2; /* [!code highlight] */
+    --ig-spacing-inline: 3; /* [!code highlight] */
+    --ig-spacing: 4; /* [!code highlight] */
+  }
+  ```
+  
+  With the element size set to medium, `--ig-spacing-inline-medium{:sass}` is applied, so the inline padding is `40px{:sass}`.
+  
+  If the element size changes to small, `--ig-spacing-inline{:sass}` is applied, and the inline padding becomes `30px{:sass}`.
+  
+  If `--ig-spacing-inline{:sass}` is removed and the element size is small or large, `--ig-spacing{:sass}` is applied.
+  

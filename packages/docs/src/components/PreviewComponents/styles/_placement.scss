@@ -1,0 +1,29 @@
+@use 'igniteui-theming' as *;
+
+// Where each preview sits in the grid.
+.preview__list {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: right;
+}
+
+.preview__calendar {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  place-self: end;
+
+  igc-calendar::part(header-title) {
+    display: none;
+  }
+}
+
+.preview__tabs {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  max-width: rem(388px);
+  place-self: end;
+
+  ::part(tab-header):focus-within::after {
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,62 @@
+---
+sidebar_position: 3
+---
+
+import RadiusSample from '@/components/Samples/Radius';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# 半径係数
+
+  半径係数変数`--ig-radius-factor{:sass}`は、`border-radius(){:bash}`関数が最終値を計算する方法の重要な部分です。これは、提供されたborder-radius値のうち、`最小`、`最大`、またはその間の値のどれが適用されるかを決定します。半径係数は最大値に適用される乗数として機能し、この計算の結果によってborder-radiusが`最小`、`最大`、またはその中間のカスタム値になるかが決まります。
+
+  - 半径係数が宣言されていない → 最初のデフォルト（`$radius`）値が適用されます。
+
+  - 半径係数 = 0 → 最小（`$min`）値が適用されます。
+
+  - 半径係数 = 1 → 最大（`$max`）値が適用されます。
+
+  - 半径係数が0と1の間 → border-radiusは`$min`と`$max`の間で比例的に計算されます。
+
+  ```scss
+  // ここでは、境界線の半径は5pxになります。
+  .button1 {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+  }
+
+  // ここでは、境界線の半径は0pxになります。
+  .button2 {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+    --ig-radius-factor: 0;
+  }
+
+  // ここでは、境界線の半径は20pxになります。
+  .button3 {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+    --ig-radius-factor: 1;
+  }
+
+  // ここでは、境界線の半径は10pxになります。
+  .button4 {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+    --ig-radius-factor: 0.5;
+  }
+  ```
+
+  このように、`--ig-radius-factor{:sass}`値を調整することで、要素のborder-radiusを簡単に制御でき、アプリケーション全体で一貫したデザインを作成できます。
+
+  <RadiusSample />
+  <br/>
+
+  `--ig-radius-factor{:sass}`変数を渡したときの半径係数clamp関数の見た目は次のとおりです：
+
+  <CodeBlockHeader title="CSS出力"/>
+  ```css
+  .button1 {
+    border-radius: clamp(0px, calc(var(--ig-radius-factor, 0.25) * 20px), 20px);
+  	
+    // --ig-radius-factorに1を渡すと、計算結果は次のようになります
+    // ⮑ clamp(0px, calc(var(--ig-radius-factor, 0.25) * 20px), 20px)
+    // ⮑ clamp(0px, 20px, 20px)
+    // ⮑ 20px
+  }
+  ```

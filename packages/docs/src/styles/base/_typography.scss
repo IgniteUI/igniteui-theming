@@ -1,0 +1,200 @@
+// Generic "typography" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--it-background-color);
+    color: var(--it-font-color-base);
+    color-scheme: var(--it-color-scheme);
+    font: var(--it-font-size-base) / var(--it-line-height-base)
+      var(--it-font-family-base);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizelegibility;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+
+  iframe {
+    border: 0;
+    color-scheme: auto;
+  }
+
+  code {
+    background-color: var(--it-code-background);
+    border: 0.1rem solid rgb(0, 0, 0, 0.1);
+    border-radius: var(--it-code-border-radius);
+    font-family: var(--it-font-family-monospace);
+    font-size: var(--it-code-font-size);
+    padding: var(--it-code-padding-vertical) var(--it-code-padding-horizontal);
+    vertical-align: middle;
+  }
+
+  a code {
+    color: inherit;
+  }
+
+  pre {
+    background-color: var(--it-pre-background);
+    border-radius: var(--it-pre-border-radius);
+    color: var(--it-pre-color);
+    font: var(--it-code-font-size) / var(--it-pre-line-height)
+      var(--it-font-family-monospace);
+    margin: 0 0 var(--it-spacing-vertical);
+    overflow: auto;
+    padding: var(--it-pre-padding);
+  }
+
+  pre code {
+    background-color: transparent;
+    border: none;
+    font-size: 100%;
+    line-height: inherit;
+    padding: 0;
+  }
+
+  kbd {
+    background-color: var(--it-color-emphasis-0);
+    border: 1px solid var(--it-color-emphasis-400);
+    border-radius: 0.2rem;
+    box-shadow: inset 0 -1px 0 var(--it-color-emphasis-400);
+    color: var(--it-color-emphasis-800);
+    font: 80% var(--it-font-family-monospace);
+    padding: 0.15rem 0.3rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--it-heading-color);
+    font-family: var(--it-heading-font-family);
+    font-weight: var(--it-heading-font-weight);
+    line-height: var(--it-heading-line-height);
+    margin: var(--it-heading-margin-top) 0 var(--it-heading-margin-bottom) 0;
+  }
+
+  h1 {
+    font-size: var(--it-h1-font-size);
+  }
+
+  h2 {
+    font-size: var(--it-h2-font-size);
+  }
+
+  h3 {
+    font-size: var(--it-h3-font-size);
+  }
+
+  h4 {
+    font-size: var(--it-h4-font-size);
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 var(--it-list-margin);
+    padding-left: var(--it-list-left-padding);
+  }
+
+  ul ul,
+  ol ul {
+    margin: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    display: block;
+    margin-bottom: var(--it-spacing-vertical);
+    overflow: auto;
+  }
+
+  table thead tr {
+    border-bottom: 2px solid var(--it-table-border-color);
+  }
+
+  table thead {
+    background-color: var(--it-table-stripe-background);
+  }
+
+  table tr {
+    background-color: var(--it-table-background);
+    border-top: var(--it-table-border-width) solid var(--it-table-border-color);
+  }
+
+  table tr:nth-child(2n) {
+    background-color: var(--it-table-stripe-background);
+  }
+
+  table th,
+  table td {
+    border: var(--it-table-border-width) solid var(--it-table-border-color);
+    padding: var(--it-table-cell-padding);
+  }
+
+  table th {
+    background-color: var(--it-table-head-background);
+    color: var(--it-table-head-color);
+    font-weight: var(--it-table-head-font-weight);
+  }
+
+  table td {
+    color: var(--it-table-cell-color);
+  }
+
+  strong {
+    font-weight: var(--it-font-weight-bold);
+  }
+
+  a {
+    color: var(--it-link-color);
+
+    /* autoprefixer: ignore next */
+    text-decoration: var(--it-link-decoration);
+    transition: color var(--it-transition-fast)
+      var(--it-transition-timing-default);
+  }
+
+  a:hover {
+    color: var(--it-link-hover-color);
+
+    /* autoprefixer: ignore next */
+    text-decoration: var(--it-link-hover-decoration);
+  }
+
+  a:not([href]) {
+    text-decoration: none;
+  }
+
+  p {
+    margin: 0 0 var(--it-paragraph-margin-bottom);
+  }
+
+  blockquote {
+    border-left: var(--it-blockquote-border-left-width) solid
+      var(--it-blockquote-border-color);
+    box-shadow: var(--it-blockquote-shadow);
+    color: var(--it-blockquote-color);
+    font-size: var(--it-blockquote-font-size);
+    margin: 0 0 var(--it-spacing-vertical);
+    padding: var(--it-blockquote-padding-vertical)
+      var(--it-blockquote-padding-horizontal);
+  }
+
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+}

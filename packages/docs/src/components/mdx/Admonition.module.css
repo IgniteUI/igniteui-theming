@@ -1,0 +1,35 @@
+.admonition {
+  margin-bottom: 1em;
+}
+
+.admonitionHeading {
+  font: var(--it-heading-font-weight) var(--it-h5-font-size)
+    var(--it-heading-line-height) var(--it-heading-font-family);
+  text-transform: uppercase;
+}
+
+/* Heading alone without content (does not handle fragment content) */
+.admonitionHeading:not(:last-child) {
+  margin-bottom: 0.3rem;
+}
+
+.admonitionHeading code {
+  text-transform: none;
+}
+
+.admonitionIcon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.4em;
+}
+
+.admonitionIcon svg {
+  display: inline-block;
+  height: 1.6em;
+  width: 1.6em;
+  fill: var(--it-alert-foreground-color);
+}
+
+.admonitionContent > :last-child {
+  margin-bottom: 0;
+}

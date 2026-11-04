@@ -1,0 +1,70 @@
+---
+sidebar_position: 7
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import AdaptiveContrastSample from '@/components/Samples/AdaptiveContrast';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Adaptive contrasts
+
+  Ignite UI Theming provides both a mixin and a function for adaptive contrasts.
+
+  The `adaptive-contrast{:sass}` mixin is especially useful when generating adaptive contrast colors with the `adaptive-contrast(){:bash}` function. It sets the [WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html) contrast level variables, which the `adaptive-contrast(){:bash}` function uses to generate the correct contrast color. There are three [WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html) levels - A, AA, and AAA. To include them, pass the desired level (in lowercase) to the mixin parameter.
+
+  For example:
+
+  ```scss
+  @include adaptive-contrast($level: 'a');
+
+  .button {
+    --ig-primary-500: #ee6c6c;
+
+    background-color: var(--ig-primary-500);
+    color: adaptive-contrast(#{var(--ig-primary-500)});
+    // The returned color will be 'white'
+  };
+  ```
+
+  Because the `adaptive-contrast{:sass}` mixin sets the WCAG level to 'A', the resulting color for the `.button{:css}` class will be white.
+  If we change the WCAG level to double or triple A ('aa' or 'aaa'), the resulting color will be black:
+
+  ```scss
+  @include adaptive-contrast($level: 'aaa');
+
+  .button {
+    --ig-primary-500: #ee6c6c;
+
+    background-color: var(--ig-primary-500);
+    color: adaptive-contrast(#{var(--ig-primary-500)});
+    // The returned color will be 'black'
+  };
+  ```
+
+  The `adaptive-contrast(){:bash}` function accepts a color value and, then dynamically calculates which of the two preset colors would be a better fit to be its contrast color - black or white. All of this based on the contrast level that is currently set by the mixin.
+
+  <AdaptiveContrastSample />
+  <br/>
+
+  The calculation is done through a combination of CSS color functions and mathematical operations. We drew inspiration from Lea Verou and her article about [Contrast colors](https://lea.verou.me/blog/2024/contrast-color/#using-rcs-to-automatically-compute-a-contrasting-text-color), especially from the [Lloyd Kupchanko demo](https://lea.verou.me/blog/2024/contrast-color/#addendum).
+
+  <CodeBlockHeader title="CSS output"/>
+  ```css 
+  :root {
+    --ig-wcag-a: 0.31;
+    --ig-wcag-aa: 0.185;
+    --ig-wcag-aaa: 0.178;
+    --ig-contrast-level: var(--ig-wcag-level);
+    --y: clamp(0,(y / var(--ig-contrast-level) - 1) * -infinity, 1);
+    --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
+  }
+
+  // The calculations behind the '--y-contrast' variable
+  // ⮑ xyz-d65 clamp(0, (y / 0.31 - 1) * -infinity, 1) clamp(0, (y / 0.31 - 1) * -infinity, 1) clamp(0, (y / 0.31 - 1) * -infinity, 1)
+
+  ```
+
+  ### API References
+
+  - <a href={`${sassDoc}/palettes/#function-adaptive-contrast`}>adaptive-contrast() function</a>
+  - <a href={`${sassDoc}/palettes/#mixin-adaptive-contrast`}>adaptive-contrast() mixin</a>

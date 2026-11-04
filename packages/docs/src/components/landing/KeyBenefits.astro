@@ -1,0 +1,181 @@
+---
+// "Key benefits": four items with animated SVG illustrations (fetched and inlined per theme and viewport by
+// src/scripts/landing.ts), the framework logos and the palette snippet highlighted at build time.
+import type { Locale } from '../../lib/docs/config';
+import { localeBase, SITE_BASE } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+import angularSvg from '../../../public/svg/logos/logo_angular.svg?raw';
+import reactSvg from '../../../public/svg/logos/logo_react.svg?raw';
+import vueSvg from '../../../public/svg/logos/logo_vue.svg?raw';
+import jsSvg from '../../../public/svg/logos/logo_js.svg?raw';
+import styles from './key-benefits.module.scss';
+
+interface Props {
+  locale: Locale;
+  /** The palette snippet, highlighted at build time in LandingPage.astro. */
+  paletteHtml: string;
+}
+const { locale, paletteHtml } = Astro.props;
+const t = translator(locale);
+const docsBase = `${localeBase(locale)}/docs`;
+const illustration = (file: string) => `${SITE_BASE}/illustrations/${file}`;
+const frameworks = [
+  { label: 'Angular', svg: angularSvg },
+  { label: 'React', svg: reactSvg },
+  { label: 'Vue.js', svg: vueSvg },
+  { label: 'Vanilla', svg: jsSvg },
+];
+---
+
+<section class:list={[styles['it-key-benefits'], 'scroll-slide']}>
+  <header class={styles['it-key-benefits__header']}>
+    <h2 class={styles['it-key-benefits__title']}>
+      {t({
+        id: 'keyBenefits.sectionTitle',
+        message: 'Key Benefits of IgniteUI-Theming',
+      })}
+    </h2>
+    <igc-button
+      variant="flat"
+      href={`${docsBase}/getting-started/overview#why-we-chose-sass-for-our-framework`}
+      class="highlight-button"
+    >
+      {t({ id: 'keyBenefits.viewMore', message: 'View more' })}
+      <igc-icon slot="suffix" name="arrow"></igc-icon>
+    </igc-button>
+  </header>
+  <div class={styles['it-key-benefits__content']}>
+    <div
+      class:list={[
+        styles['it-key-benefits__item'],
+        styles['it-key-benefits__item--production'],
+      ]}
+      data-animate
+      data-threshold="0.5"
+    >
+      <h3 class={styles['it-key-benefits__item__title']}>
+        {t({
+          id: 'keyBenefits.production.title',
+          message: 'Production Ready',
+        })}
+      </h3>
+      <p class={styles['it-key-benefits__item__desc']}>
+        {t({
+          id: 'keyBenefits.production.description',
+          message:
+            'Includes advanced features like responsive sizing, elevation systems, and accessibility compliance out of the box.',
+        })}{' '}
+        <br />{' '}
+        <a
+          class="highlight-text"
+          href={`${docsBase}/core-concepts/colors/overview`}
+        >
+          {t({
+            id: 'keyBenefits.production.tryDemo',
+            message: 'Try demo here.',
+          })}
+        </a>
+      </p>
+      <span
+        hidden
+        data-inline-svg
+        data-src-dark={illustration('Illustration_production_ready.svg')}
+        data-src-light={illustration(
+          'light/illustration_production_ready_light.svg'
+        )}
+        data-src-dark-mobile={illustration(
+          'Illustration_production_ready_mobile.svg'
+        )}
+        data-src-light-mobile={illustration(
+          'light/Illustration_production_ready_mobile.svg'
+        )}
+      />
+    </div>
+    <div
+      class:list={[
+        styles['it-key-benefits__item'],
+        styles['it-key-benefits__item--schema'],
+      ]}
+    >
+      <h3 class={styles['it-key-benefits__item__title']}>
+        {t({
+          id: 'keyBenefits.schema.title',
+          message: 'Schema-Based Architecture',
+        })}
+      </h3>
+      <p class={styles['it-key-benefits__item__desc']}>
+        {t({
+          id: 'keyBenefits.schema.description',
+          message:
+            'Unlike most tools that focus on tokens or components separately, IgniteUI-Theming provides a unified schema system that bridges design tokens and real theme implementation.',
+        })}
+      </p>
+      <div
+        class={styles['it-key-benefits__item__media']}
+        data-animate
+        data-threshold="0.2"
+      >
+        <span
+          hidden
+          data-inline-svg
+          data-src-dark={illustration('Illustration_schema_based.svg')}
+          data-src-light={illustration(
+            'light/Illustration_schema_based_light.svg'
+          )}
+          data-src-dark-mobile={illustration(
+            'Illustration_schema_based_mobile.svg'
+          )}
+          data-src-light-mobile={illustration(
+            'light/Illustration_schema_based_mobile.svg'
+          )}
+        />
+      </div>
+    </div>
+    <div
+      class:list={[
+        styles['it-key-benefits__item'],
+        styles['it-key-benefits__item--framework'],
+      ]}
+    >
+      <h3 class={styles['it-key-benefits__item__title']}>
+        {t({
+          id: 'keyBenefits.framework.title',
+          message: 'Framework Agnostic',
+        })}
+      </h3>
+      <p class={styles['it-key-benefits__item__desc']}>
+        {t({
+          id: 'keyBenefits.framework.description',
+          message:
+            'Works with any framework (React, Vue, Angular, Vanilla) vs framework-specific solutions.',
+        })}
+      </p>
+      <ul class={styles['it-key-benefits__item__list']}>
+        {frameworks.map((f) => (
+          <li>
+            <a href={`${docsBase}/getting-started/installation`}>
+              <Fragment set:html={f.svg} />
+              <span>{f.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class={styles['it-key-benefits__item']}>
+      <h3 class={styles['it-key-benefits__item__title']}>
+        {t({ id: 'keyBenefits.css.title', message: 'CSS-Native' })}
+      </h3>
+      <p class={styles['it-key-benefits__item__desc']}>
+        {t({
+          id: 'keyBenefits.css.description',
+          message:
+            'Uses CSS custom properties and Sass, avoiding JavaScript runtime dependencies.',
+        })}
+      </p>
+      <div
+        class:list={['shiki-code-wrapper', styles['it-key-benefits__code']]}
+        set:html={paletteHtml}
+      />
+    </div>
+  </div>
+</section>

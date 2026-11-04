@@ -1,0 +1,37 @@
+---
+// Code blocks: the `.shiki-code-wrapper` with a copy button.
+// Static markup; `src/scripts/copy-code.ts` performs the copy in the browser.
+const props = Astro.props;
+---
+
+<div class="shiki-code-wrapper">
+  <button
+    class="shiki-code-copy-button"
+    type="button"
+    title="Copy code"
+    aria-label="Copy code to clipboard"
+    data-copy-code
+  >
+    <span class="shiki-code-copy-button__copy">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24px"
+        height="24px"
+        viewBox="0 -960 960 960"
+      >
+        <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"></path>
+      </svg>
+    </span>
+    <span class="shiki-code-copy-button__copied" hidden>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24px"
+        height="24px"
+        viewBox="0 -960 960 960"
+      >
+        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"></path>
+      </svg>
+    </span>
+  </button>
+  <pre {...props}><slot /></pre>
+</div>

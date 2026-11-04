@@ -1,0 +1,69 @@
+{
+  "name": "@igniteui-theming/docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Documentation site for Ignite UI Theming, built with Astro.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && pagefind --site dist && node scripts/copy-llms-files.mjs dist",
+    "preview": "astro preview",
+    "check": "astro check",
+    "fonts": "node scripts/subset-fonts.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint:style": "stylelint \"**/*.{css,scss}\"",
+    "format": "prettier --write \"**/*.{js,mjs,jsx,ts,tsx,astro,css,scss,md}\"",
+    "lint": "npm run lint:style && npm run check",
+    "clean": "shx rm -rf dist .astro"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,tsx,astro,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@astrojs/mdx": "^8.0.2",
+    "@astrojs/react": "^7.0.0",
+    "@codesandbox/sandpack-react": "^2.20.0",
+    "@codesandbox/sandpack-themes": "^2.0.21",
+    "@shikijs/rehype": "^4.0.2",
+    "astro": "^7.3.5",
+    "clsx": "^2.0.0",
+    "github-slugger": "^2.0.0",
+    "igniteui-theming": "*",
+    "igniteui-webcomponents": "^7.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remark-directive": "^4.0.0",
+    "shiki": "^4.4.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@dicebear/collection": "^9.4.2",
+    "@dicebear/core": "^9.4.2",
+    "@igniteui/material-icons-extended": "^3.1.0",
+    "@shikijs/transformers": "^4.0.2",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.3.0",
+    "cookie": "^2.0.1",
+    "gray-matter": "^4.0.3",
+    "pagefind": "^1.5.2",
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "^1.1.0",
+    "sass": "^1.93.2",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-prettier": "^5.0.3",
+    "stylelint-scss": "^6.13.0",
+    "subset-font": "^2.9.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.2"
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}

@@ -1,0 +1,105 @@
+---
+sidebar_position: 2
+pagination_next: utility-concepts/bem/bem
+pagination_next_label: "Explore BEM →"
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Animationミックスイン
+
+  アニメーションキーフレームが定義されたら、`animation{:sass}`ミックスインを使用して要素にアニメーションを適用できます。
+  このミックスインはCSSのanimationプロパティと同じように機能します：アニメーション名を受け取り、`duration`、`delay`、`direction`、`iteration count`などの追加プロパティを指定できます。
+
+  すべての値はリストに結合され、CSS animationプロパティの値として適用されます。
+
+  <CodeBlockHeader title="CSS出力"/>
+  ```css
+  .wrapper {
+    animation: fade-in-top 3s linear infinite;
+  }
+  ```
+   
+  また、1つのインクルードで複数のアニメーションを重ねることもできます：
+
+  ```scss
+  .wrapper {
+    @include animation('fade-in-top' 3s linear infinite, 'rotate-in-center' 3s ease-in infinite);
+  }
+  ```
+
+  アニメーションとは別に、Ignite UI Themingは、よりスムーズなトランジションのためにアニメーションに適用できる事前定義されたイージングオプションセットも公開しています。これらの事前定義されたイージングはすべて`Cubic Bezier`曲線に基づいており、`cubic-bezier(){:bash}`関数を使用しています。各イージングは異なる値を持ち、`$ease-out-quad`などの変数に保存されています。
+  
+  それらのいずれかを使用するには、`animation{:sass}`ミックスインのパラメータとして変数名を渡すだけです：
+
+  ```scss
+  .wrapper {
+    @include animation('fade-in-top' 3s $ease-out-quad infinite);
+  }
+  ```
+
+  ここでは、事前定義されたイージングの1つである`$ease-out-quad`を使用しています。これは`cubic-bezier(0.25, 0.46, 0.45, 0.94){:sass}`の値を持っています。Ignite UI Themingは多くの異なるイージングオプションを提供しており、完全なリストはこちらで確認できます： [Easings](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/animations/)
+
+  ## アニメーションミックスインの手動作成 {/* #manual-creation-of-animation-mixins */}
+
+  事前定義されたものと同じように、独自のアニメーションミックスインを作成し、アプリケーション全体で再利用することもできます。
+  アニメーションミックスインを作成するには： 
+
+  - まず、選択した名前でミックスインを作成します。
+
+  - そのミックスイン内で、`keyframes{:sass}`ミックスインをインクルードし、アニメーション名をパラメータとして渡します。*（一貫性を保つため、ミックスインとkeyframesパラメータの両方に同じ名前を使用することをお勧めします。）* 
+  `keyframes{:sass}`ミックスインをインクルードする際には、アニメーションが従うルールとスタイルも定義する必要があります。
+
+  - カスタムミックスインが準備できたら、プロジェクトにインクルードし、事前定義されたアニメーションと同じように`animation{:sass}`ミックスインを使用して要素に適用できます。
+
+  ```scss
+  // 新しいアニメーションを作成する
+  @mixin new-animation {
+    @include keyframes(new-animation) {
+      0% {
+        transform: rotateY(-180deg);
+        opacity: 0;
+      }
+
+      100% {
+        transform: rotateX(360deg);
+        opacity: 1;
+      }
+    }
+  }
+
+  // 新しいアニメーションのキーフレームルールを宣言する
+  @include new-animation();
+
+  .wrapper {
+    // 新しいアニメーションを適用する
+    @include animation('new-animation' 3s $ease-out-quad infinite);
+  }
+  ```
+
+  これにより、`new-animation`という名前の新しいアニメーションが作成され、`.wrapper{:css}`要素に適用されます。
+
+  <CodeBlockHeader title="CSS出力"/>
+  ```css
+  .wrapper {
+    animation: new-animation 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  }
+  
+  @keyframes new-animation {
+    0% {
+      transform: rotateY(-180deg);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: rotateX(360deg);
+      opacity: 1;
+    }
+  }
+  ```
+
+  ### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/animations/#mixin-animation`}>animation ミックスイン</a> 
+  - <a href={`${sassDoc}/animations/#mixin-keyframes`}>keyframes ミックスイン</a>

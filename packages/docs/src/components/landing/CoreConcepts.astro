@@ -1,0 +1,127 @@
+---
+// "Core concepts" cards. The illustrations are animated SVGs fetched and inlined by src/scripts/landing.ts
+// (per theme), which also replays their hover animations; the card itself is one link.
+import type { Locale } from '../../lib/docs/config';
+import { localeBase, SITE_BASE } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+import styles from './core-concepts.module.scss';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translator(locale);
+const docsBase = `${localeBase(locale)}/docs`;
+const svgBase = `${SITE_BASE}/svg/logos`;
+
+const concepts = [
+  {
+    key: 'colors',
+    svg: 'core_colors',
+    title: 'colors',
+    description: 'Create a rich and easy-to-use color palette',
+    cta: 'Explore Colors',
+    href: '/core-concepts/colors/overview',
+  },
+  {
+    key: 'typography',
+    svg: 'core_typography',
+    title: 'typography',
+    description: 'Apply various font sizes and types with ease',
+    cta: 'See Typography',
+    href: '/core-concepts/typography/overview',
+  },
+  {
+    key: 'elevation',
+    svg: 'core_elevations',
+    title: 'elevation',
+    description: 'Create and apply elevation styles effortlessly',
+    cta: 'View Elevations',
+    href: '/core-concepts/elevations/overview',
+  },
+  {
+    key: 'sizing',
+    svg: 'core_sizing',
+    title: 'sizing',
+    description: 'Quickly switch between different element sizes',
+    cta: 'See Utilities',
+    href: '/core-concepts/sizing-spacing/sizing-overview',
+  },
+  {
+    key: 'spacing',
+    svg: 'core_spacing',
+    title: 'spacing',
+    description: 'Quickly switch between different element spacings',
+    cta: 'Browse Spacing',
+    href: '/core-concepts/sizing-spacing/spacing-overview',
+  },
+  {
+    key: 'roundness',
+    svg: 'core_roundness',
+    title: 'roundness',
+    description: 'Adjust the shape of elements quickly and easy',
+    cta: 'Adjust Roundness',
+    href: '/core-concepts/roundness/overview',
+  },
+];
+---
+
+<section class:list={[styles['it-core-concepts'], 'scroll-slide']}>
+  <header class={styles['it-core-concepts__header']}>
+    <h2 class={styles['it-core-concepts__title']}>
+      {t({ id: 'coreConcepts.sectionTitle', message: 'Core concepts' })}
+    </h2>
+    <igc-button
+      variant="flat"
+      class="highlight-button"
+      href={`${docsBase}/core-concepts/colors/overview`}
+    >
+      {t({ id: 'coreConcepts.viewMore', message: 'View more' })}
+      <igc-icon slot="suffix" name="arrow"></igc-icon>
+    </igc-button>
+  </header>
+  <ul class={styles['it-core-concepts__list']}>
+    {concepts.map((c) => (
+      <li class={styles['it-core-concepts__item']} data-concept>
+        <a href={`${docsBase}${c.href}`}>
+          <article class={styles['it-card']}>
+            <div class={styles['it-card__illustration']}>
+              <span
+                hidden
+                data-inline-svg
+                data-src-dark={`${svgBase}/${c.svg}.svg`}
+                data-src-light={`${svgBase}/light/${c.svg}.svg`}
+              />
+            </div>
+            <div class={styles['it-card__content']}>
+              <h3 class={styles['it-card__title']}>
+                {t({
+                  id: `coreConcepts.${c.key}.title`,
+                  message: c.title,
+                })}
+              </h3>
+              <p class={styles['it-card__description']}>
+                {t({
+                  id: `coreConcepts.${c.key}.description`,
+                  message: c.description,
+                })}
+              </p>
+              <div class={styles['it-card__footer']}>
+                <span
+                  class={styles['it-card__action']}
+                  aria-label={t({
+                    id: `coreConcepts.${c.key}.cta`,
+                    message: c.cta,
+                  })}
+                  role="img"
+                >
+                  <igc-icon name="arrow" aria-hidden="true"></igc-icon>
+                </span>
+              </div>
+            </div>
+          </article>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

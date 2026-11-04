@@ -1,0 +1,163 @@
+/* Rosé Pine Dawn (light) / Moon (dark) — matches Sandpack surface1 */
+:root {
+  --shiki-code-bg: #f0f0f5;
+}
+
+[data-theme='dark'] {
+  --shiki-code-bg: #191f39;
+}
+
+.shiki {
+  --it-shiki-code-highlight: color(
+    from var(--it-color-emphasis-500) srgb r g b / 0.1
+  );
+  --it-shiki-diff-add-bg: color(
+    from var(--it-color-success-light) srgb r g b / 0.1
+  );
+  --it-shiki-diff-add: var(--it-color-success-light);
+  --it-shiki-diff-remove-bg: color(
+    from var(--it-color-danger-light) srgb r g b / 0.1
+  );
+  --it-shiki-diff-remove: var(--it-color-danger-light);
+}
+
+/* highlighted */
+.shiki .line.highlighted {
+  position: relative;
+  display: inline-block;
+  margin: 0 calc(var(--it-pre-padding) * -1);
+  padding: 0 var(--it-pre-padding);
+  width: calc(100% + calc(var(--it-pre-padding) * 2));
+  background-color: var(--it-shiki-code-highlight) !important;
+}
+
+/* diff */
+.shiki .line.diff {
+  position: relative;
+  display: inline-block;
+  margin: 0 calc(var(--it-pre-padding) * -1);
+  padding: 0 var(--it-pre-padding);
+  width: calc(100% + calc(var(--it-pre-padding) * 2));
+}
+
+.shiki .line.diff::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 0.5em 0 0.2em;
+}
+
+.shiki .line.diff.add {
+  background-color: var(--it-shiki-diff-add-bg) !important;
+}
+
+.shiki .line.diff.add::before {
+  color: var(--it-shiki-diff-add);
+  content: '+';
+}
+
+.shiki .line.diff.remove {
+  background-color: var(--it-shiki-diff-remove-bg) !important;
+  user-select: none;
+}
+
+.shiki .line.diff.remove::before {
+  color: var(--it-shiki-diff-remove);
+  content: '-';
+}
+
+/* focus */
+.shiki:has(.it-navbar__search--focused) .line:not(.it-navbar__search--focused) {
+  filter: blur(0.095rem);
+  opacity: 0.4;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
+}
+
+.shiki:has(.it-navbar__search--focused):hover
+  .line:not(.it-navbar__search--focused) {
+  filter: blur(0);
+  opacity: 1;
+}
+
+.shiki .line.it-navbar__search--focused {
+  opacity: 1;
+}
+
+/* Code block wrapper — background matches Sandpack surface1 */
+.shiki-code-wrapper {
+  position: relative;
+  background: var(--shiki-code-bg);
+  border-radius: var(--it-pre-border-radius);
+  margin-block-end: var(--it-leading);
+
+  /* Clip the <pre> so Shiki's inline background doesn't bleed past the radius */
+  overflow: hidden;
+}
+
+/* Make the <pre> transparent so the wrapper background shows through */
+.shiki-code-wrapper pre.shiki {
+  background: transparent !important;
+  margin: 0;
+}
+
+.shiki-code-copy-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  inset: 0.5rem 0.5rem auto auto;
+  width: 2rem;
+  aspect-ratio: 1/1;
+  padding: 0.4rem;
+  border: none;
+  border-radius: var(--it-global-radius);
+  background: color-mix(
+    in srgb,
+    var(--it-color-emphasis-600),
+    var(--shiki-code-bg) 80%
+  );
+  color: var(--it-color-emphasis-800);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease-out,
+    background-color 0.2s ease-out;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentcolor;
+  }
+}
+
+.shiki-code-wrapper:hover .shiki-code-copy-button {
+  opacity: 1;
+}
+
+.shiki-code-copy-button:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--it-color-emphasis-400),
+    var(--shiki-code-bg) 80%
+  );
+  color: var(--it-color-emphasis-800);
+}
+
+.shiki-code-copy-button:active {
+  background-color: color-mix(
+    in srgb,
+    var(--it-color-emphasis-300),
+    var(--shiki-code-bg) 80%
+  );
+}
+
+/* Show button on focus for accessibility */
+.shiki-code-copy-button:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--it-color-primary);
+  outline-offset: 2px;
+}

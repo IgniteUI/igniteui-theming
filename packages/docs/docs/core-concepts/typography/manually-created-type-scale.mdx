@@ -1,0 +1,107 @@
+---
+sidebar_position: 2
+description: Manually create a type scale by defining a structure and setting the styling properties for each type style using the `type-scale` and `type-style` functions.
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# Manually creating a type scale 
+
+  To manually create a type scale, first, you need to define the type scale structure by customizing the `$ITypeScale` list and the `$ITypeStyle` map. The `$ITypeScale` list should include all the type styles you want to use in your design system, while the `$ITypeStyle` map should contain all the styling properties you want to define for each type style.
+  
+  ```scss
+  @use 'igniteui-theming/sass/typography/types' as * with (
+    $ITypeScale: (
+      h1,
+      h3,
+      body,
+      navigation
+    ),
+    $ITypeStyle: (
+      font-family: inherit,
+      font-size: null,
+      font-weight: normal,
+      line-height: normal
+    )
+  );
+```
+
+After defining the typography scale structure, we can set the properties for each style. This is done by creating a variable that holds the result of the `type-scale(){:bash}` function. Each style is passed as a variable containing the return value of the `type-style(){:bash}` function, where we define the styling properties.
+
+```scss
+$custom-typography: type-scale (
+  $h1: type-style(
+    $font-size: rem(24px),
+    $font-weight: 500
+  ),
+  $h3: type-style(
+    $font-size: rem(20px),
+    $font-weight: 400
+  ),
+  $body: type-style(
+    $font-size: rem(14px),
+    $font-weight: 300
+  ),
+  $navigation: type-style(
+    $font-size: rem(16px),
+    $font-weight: 400,
+    $line-height: 1.5
+  )
+);
+```
+
+  It's important to note that:
+
+  - The names of the style category variables inside the `type-scale(){:bash}` function and the style properties inside the `type-style(){:bash}` function must exactly match the keys in `$ITypeScale` and `$ITypeStyle`.
+
+  - All style categories must be passed to the `type-scale(){:bash}` function.
+
+  - For styling properties, it is not necessary to pass all of them, since default values are applied automatically. (In the examples above, that would be `font-family{:css}`, `font-weight{:css}` and `line-height{:css}`.)
+
+  The `type-style(){:bash}` function checks the properties you pass against `$ITypeStyle`.
+
+  - If the property exists, it assigns the given value.
+
+  - If the property does not exist, the function throws an error.
+
+  - If you omit a property that has a default, the default value is used.
+
+  For example, since we set font-size in `$ITypeStyle` to null, we are required to provide a font size whenever we call the `type-style(){:bash}` function.
+
+  The `type-scale(){:bash}` function collects the style property maps for each type style (`h1{:sass}`, `subtitle{:bash}`, `body{:sass}`) and verifies that the variables correspond to the `$ITypeScale` list. If everything is valid, it returns a complete map of all styles with their type properties. Note that all styles from `$ITypeScale` must be included. 
+
+  The complete map, looks like this: 
+
+  ```scss
+  'h1': (
+    'font-family': inherit, 
+    'font-size': 2rem, 
+    'font-weight': 300, 
+    'line-height': normal
+  ), 
+  'subtitle': (
+    'font-family': inherit, 
+    'font-size': 1.25rem, 
+    'font-weight': 400, 
+    'line-height': normal
+  ), 
+  'body': (
+    'font-family': inherit, 
+    'font-size': 1.125rem, 
+    'font-weight': 300, 
+    'line-height': normal
+  ),
+  'navigation': (
+    'font-family': inherit,
+    'font-size': 1rem, 
+    'font-weight': 400, 
+    'line-height': 1.5
+  )
+  ```
+
+  ### API References
+
+  - <a href={`${sassDoc}/typography/#function-type-scale`}>type-scale() function</a> 
+  - <a href={`${sassDoc}/typography/#function-type-style`}>type-style() function</a>
+  - <a href={'https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L9'}>$ITypeScale</a>
+  - <a href={'https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L14'}>$ITypeStyle</a>

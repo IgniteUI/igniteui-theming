@@ -1,0 +1,109 @@
+---
+sidebar_position: 2
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Custom Elevations
+
+  ## Elevation map
+
+  We use Sass maps to store all of the different elevation levels which are used throughout the given design system. 
+	
+	Every map key in the elevations map, needs to be a different elevation level and for each key, you need to assign the desired box-shadow as the map value. You can either write the box-shadow directly or use the `box-shadow(){:bash}` function.
+
+  The `box-shadow(){:bash}` function accepts a single parameter in the standard box-shadow format. Each elevation level you define in the map will be declared.
+	Using the `box-shadow(){:bash}` function links each box-shadow to the `--ig-elevation-factor{:sass}` variable, which acts as a multiplier and makes adjustments easier later. The function multiplies the passed box-shadow values by `--ig-elevation-factor{:sass}` and returns a new list with the calculated box-shadow values. Because of it, we highly recommend using the `box-shadow(){:bash}` function for every map value, instead of hardcoding the box-shadow values when creating the map.
+
+  You can learn more about the `--ig-elevation-factor{:sass}` by checking out the [--ig-elevation-factor](./elevation-factor) section.
+
+  ```scss
+  $custom-elevations: (
+    'small': box-shadow(0 2px 4px 0 black)
+  );
+  // The returned value from the box-shadow() function is: 0 0 calc(--ig-elevation-factor * 2px) calc(--ig-elevation-factor * 3px) black
+  ```
+
+  ## Including the elevations map
+
+  Once your map is ready, you can include it in your application using the `elevations{:sass}` mixin. Simply pass the map variable to the mixin. The mixin then iterates through all the keys in the map and declares a new CSS variable for each one, using the matching value.
+
+  ```scss
+  .wrapper {
+    @include elevations($custom-elevations);
+  }
+	```
+
+  The generated variables follow this structure:
+
+  ```scss
+  --ig-elevation-{elevation-type}: {elevation-value};
+  ```
+
+  Here, `elevation-type` refers to the keys in the elevation map, and `elevation-value` are the values.
+
+  For example:
+
+  ```scss
+  --ig-elevation-xs: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  ```
+
+  Before the generation of the CSS variables, the `elevations{:sass}` mixin first checks whether it is included inside a selector. This is handled by the custom [is-root()](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/utilities/#function-is-root) function. If the mixin is not inside a selector, the CSS variables are declared at the `:root{:css}` level. If it is inside a selector, the variables are scoped to that selector.
+
+  The final result looks like this: 
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+  .wrapper {
+      --ig-elevation-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+      --ig-elevation-small: 0 calc(var(--ig-elevation-factor, 1) * 2px) calc(var(--ig-elevation-factor, 1) * 4px) 0 rgba(0, 0, 0, 0.2);
+      --ig-elevation-medium: 0 calc(var(--ig-elevation-factor, 1) * 4px) calc(var(--ig-elevation-factor, 1) * 6px) calc(var(--ig-elevation-factor, 1) * -1px) rgba(0, 0, 0, 0.2);
+      --ig-elevation-large: 0 calc(var(--ig-elevation-factor, 1) * 8px) calc(var(--ig-elevation-factor, 1) * 12px) calc(var(--ig-elevation-factor, 1) * -2px) rgba(0, 0, 0, 0.25);
+      --ig-elevation-xl: 0 calc(var(--ig-elevation-factor, 1) * 12px) calc(var(--ig-elevation-factor, 1) * 20px) calc(var(--ig-elevation-factor, 1) * -4px) rgba(0, 0, 0, 0.3);
+      --ig-elevation-2xl: 0 calc(var(--ig-elevation-factor, 1) * 20px) calc(var(--ig-elevation-factor, 1) * 40px) calc(var(--ig-elevation-factor, 1) * -6px) rgba(0, 0, 0, 0.35);
+	}
+	```
+
+	## Using the elevations CSS variables
+
+  Once the CSS variables for all elevation levels in the map are created, you can apply them to your elements.
+
+  To apply an elevation level, you can use the `elevation{:sass}` mixin. You just need to pass the level you want to use, and the mixin will return the box-shadow value of the specified elevation level.
+
+  ```scss
+  .wrapper {
+    @include elevation('medium');
+  }
+  ```
+
+  Another way is to use the `elevation(){:js}` function, which works similarly to the `elevation{:sass}` mixin. You just need to pass the level you want to use, and the function will return the box-shadow value of the specified elevation type.
+
+  ```scss
+  .wrapper {
+    box-shadow: elevation('medium');
+  }
+  ```
+
+  A benefit of the `elevation(){:js}` function is that you can easily stack two or more elevation levels together, as with the standard box-shadow CSS property.
+
+  ```scss
+  .wrapper {
+    box-shadow: elevation('medium'), elevation('large');
+  }
+  ```
+
+  Alternatively, you can reference the generated CSS variables directly if you prefer:
+
+  ```scss
+  .wrapper {
+    box-shadow: var(--ig-elevation-medium);
+  }
+  ```
+
+  ### API References
+
+  - <a href={`${sassDoc}/palettes/#function-box-shadow`}>box-shadow() function</a>
+  - <a href={`${sassDoc}/palettes/#function-elevation`}>elevation() function</a>
+  - <a href={`${sassDoc}/palettes/#mixin-elevations`}>elevations() mixin</a>
+  - <a href={`${sassDoc}/palettes/#mixin-elevation`}>elevation() mixin</a>

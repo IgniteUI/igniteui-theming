@@ -1,0 +1,33 @@
+---
+sidebar_position: 1
+---
+
+# Modularity
+
+It’s not necessary to include the entire Ignite UI Theming framework if you only need part of it, for example, just `typography`, `colors`, or `elevations`. The Ignite UI Theming is separated into several Sass modules, which can be imported and used independently.
+
+The available modules are:
+
+- `color` – Includes all color-related functions and mixins, such as `palette(){:js}`, `color(){:js}`, and `adaptive-contrast(){:bash}`.
+
+- `typography` – Contains typography-related functions and mixins, such as `type-style(){:bash}`, `type-scale(){:bash}`, and `typography(){:js}`.
+
+- `elevations` – Provides all elevation functions and mixins, such as `elevation(){:js}` and `box-shadow(){:bash}`.
+
+- `themes` – Provides component-oriented utilities like `sizable(){:js}`, `pad-inline(){:bash}`, `pad-block(){:bash}`, and `border-radius(){:bash}`.
+
+- `animations` – Contains all predefined animations and easings, along with the functions and mixins for using them.
+
+- `bem` – Includes BEM helper functions and mixins for easily generating BEM class selectors.
+
+To use a specific module, simply import it in your Sass file rather than the entire theming package:
+
+```scss
+// Use 'igniteui-theming' if you want to use the whole theming package with all its modules.
+// @use 'igniteui-theming' as *;
+
+// Use the specific module name, if you want to only use the specific module
+@use 'igniteui-theming/sass/color' as *;
+```
+
+With this setup, only the `color` module will be included in your project, meaning you’ll have access to just the color-related functions and mixins like `palette(){:js}`, `color(){:js}`, `adaptive-contrast(){:bash}`, etc.

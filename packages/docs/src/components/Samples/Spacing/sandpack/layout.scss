@@ -1,0 +1,39 @@
+[data-theme='dark'] {
+  button {
+		border-color: #9abca2;
+	}
+}
+
+[data-theme='light'] {
+	button {
+		border-color: #000;
+	}
+}
+
+button {
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+	font-weight: 500;
+  border: 2px solid;
+	border-radius: 0.5rem;
+  line-height: 3;
+  background-color: #167f2d;
+	box-sizing: content-box;
+	width: 30%;
+
+	@media (width < 450px) {
+		width: 45%;
+	}
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+	margin: 0;
+}
+
+article {
+	display: contents;
+}

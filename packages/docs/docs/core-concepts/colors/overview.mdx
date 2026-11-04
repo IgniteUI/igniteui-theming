@@ -1,0 +1,85 @@
+---
+sidebar_position: 1
+title: Overview
+description: Create and manage color palettes in your design system, ensuring consistency and ease of maintenance across your project.
+hide_title: true
+pagination_next: core-concepts/colors/auto-generated-palettes
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import styles from '@/styles/docs/colors.module.scss';
+import ColorsSample from '@/components/Samples/Colors';
+import ColorSwatch from '@/components/ColorSwatch';
+
+<CoreConceptHeader
+  label="CORE CONCEPTS"
+  title="Colors"
+  description="Color palettes are predefined sets of colors that serve as the foundation of our design system."
+  image="core_colors_docs.svg"
+/>
+
+  Each palette groups together brand, neutral, and functional colors (such as primary, gray, success, warning, and other colors) into a consistent and reusable collection.
+
+  By using color palettes, you ensure that components across the product share a consistent visual language. Instead of hardcoding values, you reference the palette variables, which makes it easy to:
+
+  - Maintain consistency across all UI elements
+
+  - Apply themes or brand updates quickly
+
+  - Keep accessibility in mind with contrast-ready color pairs
+
+  In practice, palettes act as the single source of truth for color usage. Updating a value in the palette automatically propagates through the entire framework, keeping design and code perfectly aligned.
+
+  For example, let’s say your design system provides the following color palette:
+
+  <div className={styles.colorList}>
+    <ColorSwatch label="Primary"   dark="#F34E4E"  swatchClass={styles.colorPrimary} />
+    <ColorSwatch label="Secondary" dark="#FFF6EA" light="#E17707" swatchClass={styles.colorSecondary} />
+    <ColorSwatch label="Action"    dark="#7BB9FA" light="#3196FF" swatchClass={styles.colorAction} />
+    <ColorSwatch label="Surface"   dark="#EBEBEB" light="#939393" swatchClass={styles.colorGrey} />
+    <ColorSwatch label="Black"     dark="#282828"  swatchClass={styles.colorBlack} />
+  </div>
+
+  You can transform it into a usable SCSS palette as follows:
+
+  - First, add the igniteui-theming package to your .scss file:
+
+  ```scss
+  @use 'igniteui-theming' as *; 
+  ```
+
+  - Then provide the supplied design system colors to our palette function.
+  You can have two kinds of palettes: a [manually created palette](manually-created-palettes), where you directly add all color values you want your palette to have, or an [auto-generated palette](auto-generated-palettes), where you use the color generation functions to create a full palette based on just a few key colors.
+  
+  - For this example, we will create an auto-generated palette. Supply the provided design system color values as a map to the [palette()](auto-generated-palettes) function.
+
+  ```scss 
+  $my-palette: palette(
+    $primary: #f34e4e,
+    $secondary: #fff6ea,
+    $surface: #ebebeb
+  );
+  ```
+
+  - By using the [palette()](auto-generated-palettes) function, apart from the supplied color, it also generates additional 11 variants per group, plus a contrast color for each of the variants. 
+
+  - After we created our palette, we are ready to include it in our project with the [palette mixin](palette-mixin). This will generate CSS variables based on the Sass map we get by using the [palette()](auto-generated-palettes) function. 
+
+  ```scss
+  @include palette($my-palette);
+  ```
+
+  - This will generate CSS variables for each color in the palette, which you can then use in your stylesheets. The supplied color value becomes the `500{:js}` variant of that color group while the other lighter and darker variants/shades go from `50{:js}` to `900{:js}`. 
+  
+  - To reference a color from the generated palette, you can use the [color()](accessing-the-css-variables) function, for the color variants and the [contrast-color()](accessing-the-css-variables) function for the contrast colors. For example:
+
+  ```scss
+  .demo-box {
+    background: color($color: 'primary', $variant: 600);
+    color: contrast-color($color: 'primary', $variant: 600);
+  }
+  ```
+
+  By using the generated CSS variables, you can easily apply your design system colors across your application while keeping your design system colors organized and maintainable.
+
+<ColorsSample />

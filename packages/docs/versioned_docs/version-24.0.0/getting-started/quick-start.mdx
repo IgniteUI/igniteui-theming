@@ -1,0 +1,60 @@
+---
+sidebar_position: 2
+---
+
+import QuickStartSample from '@/components/Samples/QuickStart';
+
+# Quick Start
+
+The whole setup of the Ignite UI Theming framework is fairly simple. The only requirement is that the project where it is used has Sass support. The setup process is almost the same for all frameworks and project types, but there are still small differences from one to another. You can see more specific setup instructions for some of the more popular frameworks in the [Installation](installation) section.
+
+## Install dependencies
+
+First, the Ignite UI Theming package needs to be installed in your project. If Sass is not installed yet, install it as well.
+
+```bash
+npm install --save-dev sass
+npm install igniteui-theming
+```
+
+## Load the framework
+
+After the Ignite UI Theming package is installed, it needs to be loaded in your stylesheet.
+
+```scss
+@use 'igniteui-theming' as *;
+```
+
+Depending on your framework, you might need to configure Sass load paths so the package can be imported directly, instead of using relative paths.
+
+## Add framework concepts
+
+After the framework is loaded in the stylesheet, you can start using Ignite UI Theming features. For this example, we will create a custom palette and apply its colors.
+
+```scss
+@use 'igniteui-theming' as *;
+
+$my-palette: palette(
+  $primary: #e4e7f2,
+  $secondary: #1b2140,
+  $surface: #5c6bc0
+);
+
+@include palette($my-palette);
+
+.list-item {
+  background: color($color: 'surface', $variant: 600);
+}
+	
+.list-item__content {
+  color: contrast-color($color: 'surface', $variant: 600);
+}
+```
+
+## Import the stylesheet
+
+Import the `.scss` file in your app entry styles (for example `styles.scss`, `main.scss`, or your framework’s global stylesheet).
+
+Now you can see the generated output from the included mixins and the applied colors on your elements.
+
+<QuickStartSample/>

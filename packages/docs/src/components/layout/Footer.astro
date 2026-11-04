@@ -1,0 +1,254 @@
+---
+// footer. `variant="site"` is the landing/404 footer (logo, 6 columns, copyright + toggle);
+// `variant="docs"` is the compact footer rendered inside the doc layout (logo, last column, toggle) with its
+// desktop (`it-docs-footer`) and mobile (`it-mobile-docs-footer`) arrangements.
+import type { Locale } from '../../lib/docs/config';
+import {
+  footerColumns,
+  footerCopyright,
+  footerLogo,
+  type FooterColumn,
+} from '../../config/site';
+import { Image } from 'astro:assets';
+import ColorModeToggle from './ColorModeToggle.astro';
+
+interface Props {
+  locale: Locale;
+  variant: 'site' | 'docs';
+}
+const { locale, variant } = Astro.props;
+const columns = footerColumns(locale);
+const lastColumn = columns.slice(-1);
+const copyright = footerCopyright();
+const isExternal = (href: string) => /^[a-z]+:/i.test(href);
+
+// The "My Account" and "Compare" columns are grouped into one column (matched on the untranslated titles).
+const sourceTitles = footerColumns('en').map((c) => c.title);
+const groups: FooterColumn[][] = [];
+for (let i = 0; i < columns.length; i++) {
+  if (sourceTitles[i] === 'My Account' && sourceTitles[i + 1] === 'Compare') {
+    groups.push([columns[i]!, columns[i + 1]!]);
+    i += 1;
+  } else {
+    groups.push([columns[i]!]);
+  }
+}
+---
+
+<footer
+  class:list={['it-footer', 'it-footer', 'it-footer', 'it-footer--dark']}
+  data-footer-variant={variant}
+>
+  <div class="it-footer-container it-container it-container--fluid">
+    {variant === 'site' && (
+      <>
+        <div class="it-margin-bottom--md it-footer__logo">
+          <Image
+            src={footerLogo.src}
+            alt={footerLogo.alt}
+            loading="eager"
+            class="it-footer__logo-image it-themed-image it-themed-image--light"
+          />
+          <Image
+            src={footerLogo.src}
+            alt={footerLogo.alt}
+            loading="eager"
+            class="it-footer__logo-image it-themed-image it-themed-image--dark"
+          />
+        </div>
+        <div class="it-footer__links--row it-row">
+          {groups.map((group) =>
+            group.length === 2 ? (
+              <div class="it-custom-col it-col it-footer-col">
+                {group.map((column) => (
+                  <div class="it-col it-footer-col">
+                    <div class="it-footer__title">{column.title}</div>
+                    <ul class="it-footer__items it-list-reset">
+                      {column.items.map((item) =>
+                        item.html ? (
+                          <li
+                            class:list={[
+                              'it-footer__list-item',
+                              item.className,
+                            ]}
+                            set:html={item.html}
+                          />
+                        ) : (
+                          <li class="it-footer__list-item it-footer__item">
+                            <a
+                              class="it-footer__link"
+                              href={item.href}
+                              {...(isExternal(item.href!)
+                                ? {
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer',
+                                  }
+                                : {})}
+                            >
+                              {item.label}
+                              <svg
+                                width="13.5"
+                                height="13.5"
+                                aria-label="(opens in new tab)"
+                                class="it-icon-external-link"
+                              >
+                                <use href="#theme-svg-external-link"></use>
+                              </svg>
+                            </a>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div class="it-col it-footer-col">
+                <div class="it-footer__title">{group[0]!.title}</div>
+                <ul class="it-footer__items it-list-reset">
+                  {group[0]!.items.map((item) =>
+                    item.html ? (
+                      <li
+                        class:list={['it-footer__list-item', item.className]}
+                        set:html={item.html}
+                      />
+                    ) : (
+                      <li class="it-footer__list-item it-footer__item">
+                        <a
+                          class="it-footer__link"
+                          href={item.href}
+                          {...(isExternal(item.href!)
+                            ? { target: '_blank', rel: 'noopener noreferrer' }
+                            : {})}
+                        >
+                          {item.label}
+                          <svg
+                            width="13.5"
+                            height="13.5"
+                            aria-label="(opens in new tab)"
+                            class="it-icon-external-link"
+                          >
+                            <use href="#theme-svg-external-link"></use>
+                          </svg>
+                        </a>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+            )
+          )}
+        </div>
+      </>
+    )}
+    <div class="it-footer__bottom it-text--center">
+      <div class="it-docs-footer it-footer__copyright">
+        {variant === 'docs' && (
+          <div class="it-footer__copyright__logo">
+            <Image
+              src={footerLogo.src}
+              alt={footerLogo.alt}
+              loading="eager"
+              class="it-footer__logo-image it-themed-image it-themed-image--light"
+            />
+            <Image
+              src={footerLogo.src}
+              alt={footerLogo.alt}
+              loading="eager"
+              class="it-footer__logo-image it-themed-image it-themed-image--dark"
+            />
+          </div>
+        )}
+        <div class="it-footer__copyright__wrapper">
+          <span set:html={copyright} />
+          {variant === 'site' && <ColorModeToggle />}
+        </div>
+        {variant === 'docs' && (
+          <>
+            <div class="it-footer__copyright__links">
+              <div class="it-footer__links--row it-row">
+                {lastColumn.map((column) => (
+                  <div class="it-col it-footer-col">
+                    <div class="it-footer__title">{column.title}</div>
+                    <ul class="it-footer__items it-list-reset">
+                      {column.items.map((item) => (
+                        <li
+                          class:list={['it-footer__list-item', item.className]}
+                          set:html={item.html}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <ColorModeToggle />
+          </>
+        )}
+      </div>
+      <div class="it-mobile-docs-footer it-footer__copyright">
+        <div class="it-footer__logo-links">
+          {variant === 'docs' && (
+            <>
+              <div class="it-footer__copyright__logo">
+                <Image
+                  src={footerLogo.src}
+                  alt={footerLogo.alt}
+                  loading="eager"
+                  class="it-footer__logo-image it-themed-image it-themed-image--light"
+                />
+                <Image
+                  src={footerLogo.src}
+                  alt={footerLogo.alt}
+                  loading="eager"
+                  class="it-footer__logo-image it-themed-image it-themed-image--dark"
+                />
+              </div>
+              <div class="it-footer__copyright__links">
+                <div class="it-footer__links--row it-row">
+                  {lastColumn.map((column) => (
+                    <div class="it-col it-footer-col">
+                      <div class="it-footer__title">{column.title}</div>
+                      <ul class="it-footer__items it-list-reset">
+                        {column.items.map((item) => (
+                          <li
+                            class:list={[
+                              'it-footer__list-item',
+                              item.className,
+                            ]}
+                            set:html={item.html}
+                          />
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <div class="it-footer__copyright__wrapper">
+          <span set:html={copyright} />
+          <ColorModeToggle />
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // `it-footer--dark`/`--light` follow the colour mode; keep the class in sync.
+  const sync = () => {
+    const dark =
+      document.documentElement.getAttribute('data-theme') !== 'light';
+    for (const footer of document.querySelectorAll('.it-footer')) {
+      footer.classList.toggle('it-footer--dark', dark);
+      footer.classList.toggle('it-footer--light', !dark);
+    }
+  };
+  new MutationObserver(sync).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+  sync();
+</script>

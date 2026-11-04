@@ -1,0 +1,56 @@
+---
+// `.it-doc-main` wrapper with the back-to-top button, the sidebar and main columns, and the docs-variant
+// footer rendered inside the layout (the site footer is hidden on docs pages).
+import type { Locale } from '../../lib/docs/config';
+import type { SidebarItem } from '../../lib/docs/types';
+import SidebarMenu from './SidebarMenu.astro';
+import Footer from '../layout/Footer.astro';
+import { translator } from '../../lib/i18n/Translate';
+
+interface Props {
+  locale: Locale;
+  sidebar: SidebarItem[];
+  activePath: string;
+}
+const { locale, sidebar, activePath } = Astro.props;
+const t = translator(locale);
+---
+
+<div class="docsWrapper it-doc-main">
+  <div class="it-back-to-top">
+    <button
+      aria-label={t({
+        id: 'theme.BackToTopButton.buttonAriaLabel',
+        message: 'Scroll back to top',
+      })}
+      class="it-button-reset it-back-to-top__button"
+      type="button"
+    ></button>
+  </div>
+  <div class="it-doc-wrapper">
+    <aside class="it-doc-sidebar">
+      <div class="it-doc-sidebar__viewport">
+        <div class="it-doc-sidebar__inner">
+          <nav
+            aria-label={t({
+              id: 'theme.docs.sidebar.navAriaLabel',
+              message: 'Docs sidebar',
+            })}
+            class="it-menu it-nav-menu it-thin-scrollbar"
+          >
+            <SidebarMenu items={sidebar} activePath={activePath} />
+          </nav>
+        </div>
+      </div>
+    </aside>
+    <div class="it-doc-content">
+      <slot />
+    </div>
+    <Footer locale={locale} variant="docs" />
+  </div>
+</div>
+
+<script>
+  import '../../scripts/sidebar';
+  import '../../scripts/back-to-top';
+</script>

@@ -1,0 +1,42 @@
+---
+sidebar_position: 1
+---
+
+# Overview
+
+The Ignite UI Theming Framework provides a simple solution for implementing and applying design systems across platforms. It enables developers to define, customize, and maintain themes - covering colors, typography, spacing, elevations and more. Built on a rich set of Sass mixins and functions, the framework makes it easy to create reusable design tokens and apply them.
+
+## What problems the framework solves
+
+Building and maintaining a design system in plain CSS usually involves a lot of manual work:
+
+- **You need many color values** — even a simple palette requires multiple shades for each brand color, plus readable foreground colors for text and UI states.
+- **Accessibility is harder to maintain** — every color combination needs to be checked for contrast, and a single missed case can make part of the UI inaccessible.
+- **Global changes are time-consuming** — updating shadows, spacing, roundness, or other design properties often means hunting through many individual style declarations.
+- **Component sizing needs extra effort** — supporting small, medium, and large component sizes typically requires duplicated styles or additional responsive logic.
+
+Ignite UI Theming reduces that manual work by generating and managing design tokens for you. With only a small set of inputs — as few as three base colors — the framework can generate a complete theme foundation, including color shades, accessible contrast colors, and the CSS variables needed to apply them.
+
+It also provides centralized control variables for system-wide adjustments. Instead of updating styles component by component, you can change values such as spacing, roundness, elevations, or sizing in one place and have those changes flow through the entire application.
+
+The framework handles the underlying calculations, helps enforce accessibility requirements, and outputs standard CSS variables that work with any styling approach. This lets developers spend less time maintaining tokens manually and more time making design decisions.
+
+## Why we chose Sass for our framework
+
+When building Ignite UI Theming, our goal was to make it easy to create consistent and flexible design systems. Native CSS variables are powerful, but on their own they don’t provide the tools needed to manage complex theme structures yet. Sass fills that gap. It's closer to a programming language thanks to its control flow and logical operators (if, for), data structures (map, list), and features like functions and mixins. These capabilities let us add logic, reuse code, and generate styles dynamically — things plain CSS still can’t do. By leveraging these advantages, SASS gave us the missing CSS capabilities we needed to build a theming framework that is organized, reusable, and easy to maintain.
+
+## How Sass helps us
+
+**Structured data with maps and lists:**
+Sass provides maps and lists, which are perfect for modeling design systems. Palettes, typography scales, spacing, and elevations can all be stored in maps. This makes them easier to maintain, easier to reference, and easier to update. Change a value once, and it updates everywhere.
+
+**Reusable logic with functions and mixins:**
+Because CSS still doesn’t have functions and mixins, we cannot create reusable logic. Sass functions and mixins solve this by letting us encapsulate logic and reuse it across styles. Functions generate values and handle logic, while mixins define reusable blocks of styles that can be applied consistently.
+
+**Scalability with modules:**
+Sass modules let us split the Ignite UI Theming into logical parts (colors, typography, utilities, spacing, etc.) and import only what we need. This keeps the codebase organized, maintainable, and scalable.
+
+**A better developer experience**
+With just a few lines of Sass, a complete design system (palette, typography, elevations) can be generated and compiled into CSS variables. Developers don’t need to manually declare every variable — the framework handles the heavy lifting while still outputting clean, standards-based CSS. This allows developers to focus on design decisions instead of boilerplate.
+
+Since Ignite UI Theming is built with Sass, it works with any framework that supports Sass. As long as Sass is installed in your project, you can use Ignite UI Theming. 

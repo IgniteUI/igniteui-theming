@@ -1,0 +1,107 @@
+---
+sidebar_position: 1
+pagination_next: utility-concepts/animations/overview
+description: How to use the converting functions for easy and seamless conversion between relative units (em, rem) and absolute units (px).
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Overview
+
+  Ignite UI Theming provides converting functions for easy and seamless conversion between relative units (`em{:sass}`, `rem{:sass}`) and absolute units (`px{:sass}`).
+
+  All conversions are based on the base font size defined in the Ignite UI Theming [config file](https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/config/_index.scss#L1). By default, this value is `16px{:sass}`, but you can customize it when importing Ignite UI Theming in your SCSS file:
+
+  ```scss
+  @use 'igniteui-theming' as * with (
+    $base-font-size: 10px
+  );
+  ```
+
+  With this setup, all converting functions will use `10px{:sass}` as the base font size instead of `16px{:sass}`, which will affect the results of your conversions.
+
+  ## To px
+
+  The `px(){:js}` function converts relative units (`em{:sass}` or `rem{:sass}`) into pixels. You simply provide the value via the `$num` parameter, and the function calculates the new value based on the base font size.
+
+  ```scss
+  .wrapper {
+    margin: px($num: 3rem);
+  }
+  ```
+
+  If you want to use a custom font size without modifying the global base font size when importing Ignite UI Theming, you can provide it using the `$context` parameter:
+
+  ```scss
+  .wrapper {
+    margin: px($num: 3em, $context: 20px);
+  }
+  ```
+
+  This will result in the following output:
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+	.wrapper {
+      margin: 60px;
+	}
+	```
+
+  ## To rem 
+
+  The `rem(){:js}` function accepts pixel values and converts them into rem units. Just like the `px(){:js}` function, it also accepts two parameters:
+
+  - `$pixels` – the pixel value you want to convert
+
+  - `$context` – an optional custom base font size to use for the conversion
+
+  ```scss
+  .wrapper {
+    margin: rem($pixels: 40px);
+  }
+  ```
+  ```scss
+  .wrapper {
+    margin: rem($pixels: 40px, $context: 20px);
+  }
+  ```
+
+  The above example will result in the following output in the application:
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+	.wrapper {
+      margin: 2rem;
+	}
+	```
+
+  ## To em
+
+  The `em(){:js}` function works just like the `rem(){:js}` one, with the same `$pixels` and `$context` parameters. The only difference is that it outputs values in `em{:sass}` instead of `rem{:sass}`.
+
+  ```scss
+  .wrapper {
+    margin: em($pixels: 30px);
+  }
+  ```
+  ```scss
+  .wrapper {
+    margin: em($pixels: 30px, $context: 20px);
+  }
+  ```
+
+  This will result in the following output:
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+	.wrapper {
+      margin: 1.5em;
+	}
+	```
+
+  ### API References
+
+  - <a href={`${sassDoc}/typography/#function-px`}>px() function</a> 
+  - <a href={`${sassDoc}/typography/#function-rem`}>rem() function</a>
+  - <a href={`${sassDoc}/typography/#function-em`}>em() function</a>

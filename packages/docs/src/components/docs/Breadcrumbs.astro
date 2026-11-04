@@ -1,0 +1,68 @@
+---
+// breadcrumbs with the home icon crumb; on mobile the whole row opens the sidebar
+// (a `<div data-mobile-sidebar-toggle>` wraps it). JSON-LD is emitted by DocPage.
+import type { Breadcrumb } from '../../lib/docs/types';
+import { type Locale, localeBase } from '../../lib/docs/config';
+import { ICON_MENU } from '../layout/icons';
+import { translator } from '../../lib/i18n/Translate';
+
+interface Props {
+  items: Breadcrumb[];
+  locale: Locale;
+}
+const { items, locale } = Astro.props;
+const t = translator(locale);
+const homeHref = `${localeBase(locale)}/`;
+---
+
+<div data-mobile-sidebar-toggle>
+  <button
+    type="button"
+    class="it-breadcrumbs__toggle"
+    aria-controls="it-navbar-sidebar"
+    aria-expanded="false"
+    aria-label={t({
+      id: 'theme.docs.sidebar.toggleSidebarButtonAriaLabel',
+      message: 'Toggle navigation bar',
+    })}
+    set:html={ICON_MENU('it-breadcrumbs__home-icon')}
+  />
+  <nav
+    class="it-breadcrumbs"
+    aria-label={t({
+      id: 'theme.docs.breadcrumbs.navAriaLabel',
+      message: 'Breadcrumbs',
+    })}
+  >
+    <ul class="it-breadcrumbs__list">
+      <li class="it-breadcrumbs__item">
+        <a
+          aria-label={t({
+            id: 'theme.docs.breadcrumbs.home',
+            message: 'Home page',
+          })}
+          class="it-breadcrumbs__link"
+          href={homeHref}
+          set:html={ICON_MENU('it-breadcrumbs__home-icon')}
+        />
+      </li>
+      {items.map((crumb, i) =>
+        i === items.length - 1 ? (
+          <li class="it-breadcrumbs__item it-breadcrumbs__item--active">
+            <span class="it-breadcrumbs__link">{crumb.label}</span>
+          </li>
+        ) : (
+          <li class="it-breadcrumbs__item">
+            {crumb.href ? (
+              <a class="it-breadcrumbs__link" href={crumb.href}>
+                <span>{crumb.label}</span>
+              </a>
+            ) : (
+              <span class="it-breadcrumbs__link">{crumb.label}</span>
+            )}
+          </li>
+        )
+      )}
+    </ul>
+  </nav>
+</div>

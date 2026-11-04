@@ -1,0 +1,17 @@
+@use 'igniteui-theming' as *;
+
+// Create a custom palette
+$my-palette: palette(
+  $primary: #f34e4e,
+  $secondary: #fff6ea,
+  $surface: #ebebeb,
+);
+
+// Generate CSS Custom Properties
+@include palette($my-palette);
+
+// Use palette colors
+div {
+  background: color($color: 'primary', $variant: 300);
+  color: contrast-color($color: 'primary', $variant: 300);
+}

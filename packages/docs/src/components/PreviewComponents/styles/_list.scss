@@ -1,0 +1,78 @@
+@use 'igniteui-theming' as *;
+
+// igc-list preview: theme and item states.
+igc-list {
+  @include tokens(
+    list-theme(
+      $border-radius: var(--ig-border-radius-medium),
+      $background: light-dark(var(--ig-surface-white), var(--ig-gray-900)),
+      $item-title-color: light-dark(
+          var(--ig-primary-600),
+          var(--ig-primary-100)
+        ),
+      $item-subtitle-color: light-dark(
+          var(--ig-neutral-500),
+          var(--ig-neutral-200)
+        )
+    )
+  );
+}
+
+[data-theme='light'] igc-list {
+  border: rem(1px) solid var(--ig-gray-150);
+  box-shadow: 4px 4px 4px 4px var(--ig-gray-100);
+}
+
+igc-list-item {
+  padding: 0.5rem 1rem;
+  width: rem(360px);
+
+  igc-avatar::part(base) {
+    border-radius: var(--ig-border-radius-xsmall);
+  }
+
+  h4 {
+    @include type-style('navigation', false);
+
+    text-align: left;
+  }
+
+  span[slot='subtitle'] {
+    @include type-style('body-3', false);
+
+    text-align: left;
+  }
+
+  span[slot='end'] {
+    @include type-style('caption', false);
+
+    color: light-dark(var(--ig-primary-600), var(--ig-primary-300));
+  }
+
+  igc-icon-button::part(base) {
+    background: none;
+  }
+}
+
+[data-theme='light'] igc-list-item:nth-child(1) {
+  background: var(--ig-tertiary-100);
+}
+
+[data-theme='dark'] igc-list-item:nth-child(1) {
+  background: var(--ig-linear-item);
+}
+
+igc-list-item:nth-child(1) igc-icon-button::part(icon) {
+  --size: #{rem(10px)};
+
+  color: var(--ig-quinary-300);
+}
+
+igc-list-item:nth-child(n + 2) igc-icon-button::part(icon) {
+  --size: #{rem(12px)};
+
+  color: var(--ig-neutral-300);
+  transform: translateY(5px);
+}
+
+// Card styles
