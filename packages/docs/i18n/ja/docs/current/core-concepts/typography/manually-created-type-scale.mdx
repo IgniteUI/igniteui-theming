@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# タイプスケールを手動で作成する
+
+  タイプスケールを手動で作成するには、まず `$ITypeScale` リストと `$ITypeStyle` マップをカスタマイズしてタイプスケール構造を定義する必要があります。`$ITypeScale` リストには、デザインシステムで使用したいすべてのタイプスタイルを含める必要があります。一方、`$ITypeStyle` マップには、各タイプスタイルに定義したいすべてのスタイリングプロパティを含める必要があります。
+  
+  ```scss
+  @use 'igniteui-theming/sass/typography/types' as * with (
+    $ITypeScale: (
+      h1,
+      h3,
+      body,
+      navigation
+    ),
+    $ITypeStyle: (
+      font-family: inherit,
+      font-size: null,
+      font-weight: normal,
+      line-height: normal
+    )
+  );
+```
+
+タイポグラフィスケール構造を定義した後、各スタイルのプロパティを設定できます。これは、`type-scale(){:bash}` 関数の結果を保持する変数を作成することで行われます。各スタイルは、スタイリングプロパティを定義する `type-style(){:bash}` 関数の戻り値を含む変数として渡されます。
+
+```scss
+$custom-typography: type-scale (
+  $h1: type-style(
+    $font-size: rem(24px),
+    $font-weight: 500
+  ),
+  $h3: type-style(
+    $font-size: rem(20px),
+    $font-weight: 400
+  ),
+  $body: type-style(
+    $font-size: rem(14px),
+    $font-weight: 300
+  ),
+  $navigation: type-style(
+    $font-size: rem(16px),
+    $font-weight: 400,
+    $line-height: 1.5
+  )
+);
+```
+
+  It's important to note that:
+
+  - The names of the style category variables inside the `type-scale(){:bash}` function and the style properties inside the `type-style(){:bash}` function must exactly match the keys in `$ITypeScale` and `$ITypeStyle`.
+
+  - All style categories must be passed to the `type-scale(){:bash}` function.
+
+  - For styling properties, it is not necessary to pass all of them, since default values are applied automatically. (In the examples above, that would be `font-family{:css}`, `font-weight{:css}` and `line-height{:css}`.)
+
+  The `type-style(){:bash}` function checks the properties you pass against `$ITypeStyle`.
+
+  - If the property exists, it assigns the given value.
+
+  - If the property does not exist, the function throws an error.
+
+  - If you omit a property that has a default, the default value is used.
+
+  For example, since we set font-size in `$ITypeStyle` to null, we are required to provide a font size whenever we call the `type-style(){:bash}` function.
+
+  The `type-scale(){:bash}` function collects the style property maps for each type style (`h1{:sass}`, `subtitle{:bash}`, `body{:sass}`) and verifies that the variables correspond to the `$ITypeScale` list. If everything is valid, it returns a complete map of all styles with their type properties. Note that all styles from `$ITypeScale` must be included. 
+
+  The complete map, looks like this: 
+
+  ```scss
+  'h1': (
+    'font-family': inherit, 
+    'font-size': 2rem, 
+    'font-weight': 300, 
+    'line-height': normal
+  ), 
+  'subtitle': (
+    'font-family': inherit, 
+    'font-size': 1.25rem, 
+    'font-weight': 400, 
+    'line-height': normal
+  ), 
+  'body': (
+    'font-family': inherit, 
+    'font-size': 1.125rem, 
+    'font-weight': 300, 
+    'line-height': normal
+  ),
+  'navigation': (
+    'font-family': inherit,
+    'font-size': 1rem, 
+    'font-weight': 400, 
+    'line-height': 1.5
+  )
+  ```
+
+  ### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/typography/#function-type-scale`}>type-scale() 関数</a> 
+  - <a href={`${sassDoc}/typography/#function-type-style`}>type-style() 関数</a>
+  - <a href={'https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L9'}>$ITypeScale</a>
+  - <a href={'https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/typography/_types.scss#L14'}>$ITypeStyle</a>

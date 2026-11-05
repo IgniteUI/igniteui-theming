@@ -1,0 +1,35 @@
+// Generic "toc" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-toc {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    padding: var(--it-toc-padding-vertical) 0;
+    list-style: none;
+    padding-left: var(--it-toc-padding-horizontal);
+  }
+
+  .it-toc li {
+    margin: var(--it-toc-padding-vertical) var(--it-toc-padding-horizontal);
+  }
+
+  .it-toc--left-border {
+    border-left: 1px solid var(--it-toc-border-color);
+  }
+
+  .it-toc__link {
+    color: var(--it-toc-link-color);
+    display: block;
+  }
+
+  .it-toc__link:hover,
+  .it-toc__link:hover code {
+    color: var(--it-color-primary);
+    text-decoration: none;
+  }
+
+  @media print {
+    .it-toc {
+      display: none;
+    }
+  }
+}

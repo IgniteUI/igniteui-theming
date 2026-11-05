@@ -1,0 +1,60 @@
+---
+sidebar_position: 2
+---
+
+import QuickStartSample from '@/components/Samples/QuickStart';
+
+# クイックスタート
+
+Ignite UI Themingフレームワークのセットアップ全体は非常にシンプルです。唯一の要件は、使用するプロジェクトがSassサポートを持っていることです。セットアッププロセスはすべてのフレームワークとプロジェクトタイプでほぼ同じですが、それでも多少の違いがあります。より人気のあるフレームワークのいくつかについて、より具体的なセットアップ手順は[インストール](installation)セクションで確認できます。
+
+## 依存関係のインストール {/* #install-dependencies */}
+
+まず、Ignite UI Themingパッケージをプロジェクトにインストールする必要があります。Sassがまだインストールされていない場合は、それもインストールしてください。
+
+```bash
+npm install --save-dev sass
+npm install igniteui-theming
+```
+
+## フレームワークの読み込み {/* #load-the-framework */}
+
+Ignite UI Themingパッケージがインストールされた後、スタイルシートに読み込む必要があります。
+
+```scss
+@use 'igniteui-theming' as *;
+```
+
+フレームワークによっては、相対パスを使用する代わりにパッケージを直接インポートできるように、Sassのロードパスを設定する必要がある場合があります。
+
+## フレームワークコンセプトの追加 {/* #add-framework-concepts */}
+
+フレームワークがスタイルシートに読み込まれたら、Ignite UI Themingの機能を使い始めることができます。この例では、カスタムパレットを作成してそのカラーを適用します。
+
+```scss
+@use 'igniteui-theming' as *;
+
+$my-palette: palette(
+  $primary: #e4e7f2,
+  $secondary: #1b2140,
+  $surface: #5c6bc0
+);
+
+@include palette($my-palette);
+
+.list-item {
+  background: color($color: 'surface', $variant: 600);
+}
+	
+.list-item__content {
+  color: contrast-color($color: 'surface', $variant: 600);
+}
+```
+
+## スタイルシートのインポート {/* #import-the-stylesheet */}
+
+アプリのエントリースタイル（例：`styles.scss`、`main.scss`、またはフレームワークのグローバルスタイルシート）に`.scss`ファイルをインポートします。
+
+これで、インクルードされたミックスインから生成された出力と、要素に適用されたカラーを確認できます。
+
+<QuickStartSample/>

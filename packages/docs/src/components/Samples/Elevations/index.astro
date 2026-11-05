@@ -1,0 +1,15 @@
+---
+// Astro wrapper: hydrates the React Sandpack sample in `index.tsx` as a client-only island. MDX imports
+// `@/components/Samples/Elevations`; the resolver in astro.config.mjs maps that to this file.
+// `--it-sample-height` reserves the rendered height (measured at 1440px) until the island mounts, avoiding
+// layout shift.
+import Sample from './index.tsx';
+---
+
+<div
+  class="it-sample"
+  data-sample="Elevations"
+  style="--it-sample-height: 1026px"
+>
+  <Sample client:only="react" />
+</div>

@@ -1,0 +1,10 @@
+@use 'igniteui-theming' as *;
+
+button {
+  @include sizable();
+
+  width: sizable($sm: 60%, $md: 80%, $lg: 100%);
+
+  // Try changing the size to '1' or '3'
+  --component-size: 2;
+}

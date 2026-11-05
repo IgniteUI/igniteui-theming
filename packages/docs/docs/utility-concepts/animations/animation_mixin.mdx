@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+pagination_next: utility-concepts/bem/bem
+pagination_next_label: "Explore BEM →"
+description: How to use the `animation` mixin to apply predefined or custom animations to your elements, along with the available easing options.
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Animation mixin
+
+  Once the animation keyframes are defined, you can apply the animation to an element using the `animation{:sass}` mixin.
+  This mixin works just like the CSS animation property: it takes the animation name and lets you specify additional properties such as `duration`, `delay`, `direction`, `iteration count`, and more.
+
+  All of the values are combined into a list and applied as the value of the CSS animation property.
+
+  <CodeBlockHeader title="CSS output"/>
+  ```css
+  .wrapper {
+    animation: fade-in-top 3s linear infinite;
+  }
+  ```
+   
+  You can also stack multiple animations in a single include:
+
+  ```scss
+  .wrapper {
+    @include animation('fade-in-top' 3s linear infinite, 'rotate-in-center' 3s ease-in infinite);
+  }
+  ```
+
+  Apart from animations, Ignite UI Theming also exposes a set of predefined easing options that you can apply to your animations for smoother transitions. All of these predefined easings are based on the `Cubic Bezier` curve and use the `cubic-bezier(){:bash}` function. Each easing has different values and is stored in a variable, such as `$ease-out-quad`. 
+  
+  To use one of them, you simply pass the variable name as a parameter in the `animation{:sass}` mixin:
+
+  ```scss
+  .wrapper {
+    @include animation('fade-in-top' 3s $ease-out-quad infinite);
+  }
+  ```
+
+  Here we are using one of the predefined easings - `$ease-out-quad`, which has the value of - `cubic-bezier(0.25, 0.46, 0.45, 0.94){:sass}`. Ignite UI Theming provides many different easing options, and you can check the full list here: [Easings](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/animations/)
+
+  ## Manual creation of animation mixins
+
+  You also have the ability to create your own animation mixin, just like the predefined ones, and reuse it throughout your application.
+  To create an animation mixin: 
+
+  - First, create a mixin with the name of your choice.
+
+  - Inside that mixin, include the `keyframes{:sass}` mixin and pass the animation name as a parameter. *(We recommend using the same name for both the mixin and the keyframes parameter to keep things consistent.)* 
+  When including the `keyframes{:sass}` mixin, you also need to define the rules and styles that the animation will follow.
+
+  - Once your custom mixin is ready, you can include it in your project and then apply it to elements using the `animation{:sass}` mixin, just like you would with the predefined animations.
+
+  ```scss
+  // Creating the new animation
+  @mixin new-animation {
+    @include keyframes(new-animation) {
+      0% {
+        transform: rotateY(-180deg);
+        opacity: 0;
+      }
+
+      100% {
+        transform: rotateX(360deg);
+        opacity: 1;
+      }
+    }
+  }
+
+  // Declaring the keyframe rules of the new animation
+  @include new-animation();
+
+  .wrapper {
+    // Applying the new animation
+    @include animation('new-animation' 3s $ease-out-quad infinite);
+  }
+  ```
+
+This will result in the creation of a new animation with the name `new-animation`, which is then applied to the `.wrapper{:css}` element.
+
+<CodeBlockHeader title="CSS output"/>
+```css
+.wrapper {
+  animation: new-animation 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+@keyframes new-animation {
+  0% {
+    transform: rotateY(-180deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotateX(360deg);
+    opacity: 1;
+  }
+}
+```
+
+  ### API References
+
+  - <a href={`${sassDoc}/animations/#mixin-animation`}>animation mixin</a> 
+  - <a href={`${sassDoc}/animations/#mixin-keyframes`}>keyframes mixin</a>

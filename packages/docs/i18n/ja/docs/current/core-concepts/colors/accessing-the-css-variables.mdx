@@ -1,0 +1,158 @@
+---
+sidebar_position: 5
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# CSS変数へのアクセス
+  
+  カラー変数が生成された後、アプリケーションでスタイリングに使用する方法がいくつかあります。
+
+  1つの方法は `color(){:js}` 関数を使用することです。必要なカラーグループとバリアントをパラメータとして渡すだけです。関数は、この情報を組み合わせて、カラーグループとバリアントから組み立てられた名前に基づいて、正しいCSS変数に解決します。
+
+  例： 
+
+  ```scss
+  .wrapper {
+    background-color: color($color: 'primary', $variant: 500);
+  }
+  ```
+
+  実行時には以下のようになります：
+
+  ```scss
+  .wrapper {
+    background-color: var(--ig-primary-500);
+  }
+  ```
+
+  これで、背景色は `--ig-primary-500{:sass}` 変数の値に紐付けられます。パレットマップ内のカラー値をいつでも更新すれば、すべての使用箇所が自動的に更新されます—値をハードコーディングするのではなく、変数を参照しているためです。
+
+  これは、パレットが既に `palette{:sass}` ミックスインを使用して含まれている場合にのみ機能します。ただし、`color(){:js}` 関数は、そのパレットがミックスインで含まれていない場合でも、パレット変数から直接カラーを取得できます。これを行うには、`$palette` パラメータを使用します：
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #f34e4e
+    ),
+    'secondary': (
+      '500': #fff6ea
+    )
+  );
+
+  .wrapper {
+    background-color: color($palette: $custom-palette, $color: 'primary', $variant: 500);
+  }
+  ```
+
+  ここでは、すべてのパレット変数を含めて宣言することなく、パレットマップから `primary-500{:sass}` カラーを直接選択して要素に適用しました。
+
+  結果は次のようになります：
+
+  ```scss
+  .wrapper {
+    background-color: #f34e4e;
+  }
+  ```
+
+  この場合、関数は16進数値を直接返し、ハードコーディングされた値として適用することに注意することが重要です。`color(){:js}` 関数を使用する利点は、パレットマップ値が変更された場合、カラーがハードコーディングされるのではなく関数を通じて解決されるため、この使用箇所が自動的に更新されることです。
+
+  ## 不透明度 {/* #opacity */}
+
+  `color(){:js}` 関数で使用できるもう1つの便利なパラメータは `$opacity` です。これにより、カラーを選択する際に直接不透明度を調整できます。
+  関数は、解決されたカラー変数を受け取り、指定された不透明度を持つ相対カラーを出力します。
+
+  例：
+
+  ```scss
+  .wrapper {
+    background-color: color($color: 'primary', $variant: 500, $opacity: 0.5);
+  }
+  ```
+
+  結果： 
+
+  ```scss
+  .wrapper {
+    background-color: hsl(from var(--ig-primary-500) h s l / 0.5);
+  }
+  ```
+
+  不透明度は、パレットマップから直接カラーを選択する際にも適用できます。
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #f34e4e
+    ),
+    'secondary': (
+      '500': #fff6ea
+    )
+  );
+
+  .wrapper {
+    background-color: color($palette: $custom-palette, $color: 'primary', $variant: 500, $opacity: 0.5);
+  }
+  ```
+
+  ## コントラストカラー {/* contrast-colors */}
+
+  専用の `contrast-color(){:bash}` 関数もあります。これは `color(){:js}` 関数と同様に機能しますが、コントラストバリアントを取得するために特別に設計されています。パレットに '-contrast' サフィックスを持つカラーが含まれている場合にのみ機能します。
+
+  例えば、コントラストカラーが宣言されたパレットがある場合：
+
+  ```scss
+  $custom-palette: (
+    'primary': (
+      '500': #f34e4e,
+      '500-contrast' : black
+    )
+  );
+  ```
+
+  次のように選択できます：
+
+  ```scss
+  .wrapper {
+    background-color: contrast-color($color: 'primary', $variant: 500);
+  }
+  ```
+
+  これにより次のようになります：
+
+  ```scss
+  .wrapper {
+    background-color: var(--ig-primary-500-contrast);
+  }
+  ```
+
+  `color(){:js}` 関数と同様に、`$opacity` パラメータを渡して、カラーを選択する際に直接不透明度を調整することもできます。
+
+  例：
+
+  ```scss
+  .wrapper {
+    background-color: contrast-color($color: 'primary', $variant: 500, $opacity: 0.5);
+  }
+  ```
+
+  結果： 
+
+  ```scss
+  .wrapper {
+    background-color: hsl(from var(--ig-primary-500-contrast) h s l / 0.5);
+  }
+  ```
+
+  ## 変数を直接使用する {/* #using-variables-directly */}
+   
+  もちろん、`color(){:js}` または `contrast-color(){:bash}` 関数を使用する必要はありません。必要に応じて、生成されたCSS変数を常に直接参照できます：
+
+  ```css
+  background-color: var(--ig-primary-500);
+  ```
+
+  ### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/palettes/#function-color`}>color() 関数</a>
+  - <a href={`${sassDoc}/palettes/#function-contrast-color`}>contrast-color() 関数</a>

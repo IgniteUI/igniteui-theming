@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 70%;
+  height: max-content;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: Inter, sans-serif;
+}
+
+@scope (.card) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+
+    * {
+      margin: 0;
+    }
+
+    &__title {
+      font-size: 1.25rem;
+      margin-block-end: 0.25rem;
+      font-weight: 600;
+    }
+
+    &__description {
+      font-size: 0.875rem;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@use 'igniteui-theming' as *;
+
+button {
+  --ig-primary-500: #ee6c6c;
+
+  background-color: var(--ig-primary-500);
+  color: adaptive-contrast(var(--ig-primary-500));
+}
+
+.button--low {
+  @include adaptive-contrast($level: 'a');
+  // The returned text color will be 'white'
+}
+
+.button--high {
+  @include adaptive-contrast($level: 'aaa');
+  // The returned text color will be 'black'
+}

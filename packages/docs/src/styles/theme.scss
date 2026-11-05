@@ -1,0 +1,177 @@
+@use 'base/index';
+@use 'config' as *;
+@use 'layout' as *;
+@use 'shiki' as *;
+@use 'components/index' as *;
+@use 'scroll-animations' as *;
+@use 'font-inter' as *;
+
+@font-face {
+  font-family: Inter;
+
+  // Latin subset embedded as a data URI (scripts/subset-fonts.mjs): the body font arrives with the stylesheet,
+  // in dev and in production, so no navigation ever lays text out with the fallback font
+  src: url($inter-regular-woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+
+  // never paint the fallback font: a full page load per navigation made the swap visible
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('../../public/fonts/fira-code/FiraCode-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('../../public/fonts/fira-code/FiraCode-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('../../public/fonts/fira-code/FiraCode-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+body {
+  background-color: var(--it-site-background);
+  color: adaptive-contrast(var(--it-site-background));
+}
+
+.highlight-text {
+  color: var(--ig-quinary-300);
+}
+
+// Cross-document view transitions. The `@view-transition { navigation: auto }` opt-in is an inline <style> in
+// BaseLayout.astro (it must apply before this stylesheet does); the rules below shape the transition.
+
+// The pseudo-element tree covers the viewport while the content fade runs (0.65s) and would otherwise swallow
+// every click in that window, so a quick second sidebar click did nothing. Let clicks fall through to the page.
+::view-transition {
+  pointer-events: none;
+}
+
+// The navbar and the docs sidebar are static chrome: snap them to their new state instead of animating.
+::view-transition-group(navbar),
+::view-transition-new(navbar),
+::view-transition-group(doc-sidebar),
+::view-transition-new(doc-sidebar) {
+  animation: none;
+}
+
+::view-transition-old(navbar),
+::view-transition-old(doc-sidebar) {
+  display: none;
+}
+
+// Everything outside the named groups (sidebar, TOC, footer) would otherwise be cross-faded by the default
+// root animation. Only the article changes between pages, so snap the root and let only the content fade.
+::view-transition-group(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  display: none;
+}
+
+@supports (-webkit-hyphens: none) {
+  ::view-transition-group(safari-navbar),
+  ::view-transition-new(safari-navbar) {
+    transition: none;
+    animation: none;
+  }
+
+  ::view-transition-old(safari-navbar) {
+    transition: none;
+    display: none;
+  }
+}
+
+// Apply a fade transition to the content when navigating between pages, on all browsers WITHOUT Firefox.
+// Firefox's implementation of view transitions is currently very buggy and causes more issues than it solves, so we are disabling it for now.
+@supports not (-moz-appearance: none) {
+  .it-doc-content {
+    view-transition-name: content-transition;
+  }
+}
+
+::view-transition-old(content-transition),
+::view-transition-new(content-transition) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(content-transition) {
+    animation: 0.15s cubic-bezier(0.4, 0, 1, 1) both fade-out;
+  }
+
+  ::view-transition-new(content-transition) {
+    animation: 0.5s cubic-bezier(0, 0, 0.2, 1) both fade-in;
+    animation-delay: 0.15s;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* Shiki block backgrounds are handled in _shiki.css */
+
+/* Keep text colors working */
+[data-theme='dark'] pre.shiki,
+[data-theme='dark'] span.shiki {
+  color: var(--shiki-dark) !important;
+}
+
+[data-theme='dark'] pre.shiki span,
+[data-theme='dark'] span.shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+span.shiki {
+  --shiki-dark-bg: unset !important;
+
+  background-color: unset !important;
+}
+
+.it-toc__link--active code,
+.it-toc__link:hover code {
+  color: unset;
+}
+
+pre.shiki,
+pre.shiki code,
+span.shiki {
+  font-family: var(--it-font-family-monospace);
+  font-size: var(--it-font-size-monospace);
+  line-height: var(--it-line-height-monospace);
+  font-weight: 400 !important;
+}

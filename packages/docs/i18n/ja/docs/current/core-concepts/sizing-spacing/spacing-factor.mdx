@@ -1,0 +1,88 @@
+---
+sidebar_position: 5
+---
+
+import styles from '@/styles/docs/tables.module.scss';
+
+# スペーシング係数
+  
+  前述のとおり、`pad(){:js}` 関数が返す値は、計算時に `--ig-spacing{:sass}` 変数を乗数として使用します。これにより、パディング値を素早くスケールできます。既定で `--ig-spacing{:sass}` は `1` に設定されており、戻り値は関数に渡した値と同じになります。たとえば `2` に設定すると、戻り値はすべて2倍になります。これにより、すべての要素のスペーシングを一括で増減でき、一貫性を保ちつつ設定漏れも防げます。
+  
+  `--ig-spacing{:sass}` 変数を使うと、`pad(){:js}`、`pad-block(){:bash}`、`pad-inline(){:bash}` の3つすべてで、渡したパディング値を制御できます。
+  `--ig-spacing{:sass}` 以外にも、渡したパディング値に掛けるための専用変数が2つあります。
+  
+  - `--ig-spacing-inline{:sass}`: `pad-inline(){:bash}` 関数に渡したパディング値のみを制御します。
+  
+  - `--ig-spacing-block{:sass}`: `pad-block(){:bash}` 関数に渡したパディング値のみを制御します。
+  
+  さらに、これらの方向別変数に加えて、各方向ごとにサイズ別の変数が3つずつあり、スペーシングの乗数をより細かく制御できます。
+  <br/>
+<table className={`${styles.table} ${styles.table__spacing}`}>
+
+    <tbody className={styles.table__content}>
+      <tr>
+        <td><b>--ig-spacing-inline-small</b></td>
+        <td>`pad-inline()` 関数の small サイズに渡したパディングのみを制御します。</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-inline-medium</b></td>
+        <td>`pad-inline()` 関数の medium サイズに渡したパディングのみを制御します。</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-inline-large</b></td>
+        <td>`pad-inline()` 関数の large サイズに渡したパディングのみを制御します。</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-block-small</b></td>
+        <td>`pad-block()` 関数の small サイズに渡したパディングのみを制御します。</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-block-medium</b></td>
+        <td>`pad-block()` 関数の medium サイズに渡したパディングのみを制御します。</td>
+      </tr>
+      <tr>
+        <td><b>--ig-spacing-block-large</b></td>
+        <td>`pad-block()` 関数の large サイズに渡したパディングのみを制御します。</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+
+  これらの追加変数により、スペーシングをより具体的に制御できます。これは `pad-inline(){:bash}` と `pad-block(){:bash}` を使う大きな利点の1つです。
+
+	:::danger[重要]
+    インライン／ブロック用のスペーシング乗数変数は、`pad-inline(){:bash}` と `pad-block(){:bash}` に渡した値にのみ影響します。一方で `--ig-spacing{:sass}` は3つの関数すべてのスペーシング値に影響します。どの乗数変数を使うかに注意してください。
+	:::
+  
+  乗数は複数存在するため、優先順位（詳細度）に従って適用されます。たとえば、次の関数を使う場合。
+  
+  ```scss
+  padding-inline: pad-inline($sm: 10px, $md: 20px, $lg: 30px);
+  ```
+  
+  最も詳細度の高い乗数変数が優先されます。
+  
+  1. サイズ別変数: `--ig-spacing-inline-small{:sass}`、`--ig-spacing-inline-medium{:sass}`、`--ig-spacing-inline-large{:sass}`（最優先）。
+  2. 方向別変数: `--ig-spacing-inline{:sass}`。
+  3. 既定のスペーシング変数: `--ig-spacing{:sass}`（最後）。
+  
+  したがって、すべての変数が宣言されている場合は次のようになります。
+  
+  ```scss
+  .wrapper {
+    @include sizable();
+    padding-inline: pad-inline($sm: 10px, $md: 20px, $lg: 50px);
+    --component-size: var(--ig-size-medium);
+  
+    --ig-spacing-inline-medium: 2; /* [!code highlight] */
+    --ig-spacing-inline: 3; /* [!code highlight] */
+    --ig-spacing: 4; /* [!code highlight] */
+  }
+  ```
+  
+  要素サイズが medium の場合は `--ig-spacing-inline-medium{:sass}` が適用されるため、インライン方向のパディングは `40px{:sass}` になります。
+  
+  要素サイズを small に変更すると `--ig-spacing-inline{:sass}` が適用され、インライン方向のパディングは `30px{:sass}` になります。
+  
+  `--ig-spacing-inline{:sass}` を削除し、要素サイズが small または large の場合は `--ig-spacing{:sass}` が適用されます。
+  

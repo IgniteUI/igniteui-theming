@@ -1,0 +1,134 @@
+---
+sidebar_position: 1
+title: 概要
+description: 深さとレイヤー化のためのbox-shadowスタイルを管理します。エレベーションレベルを定義し、プロジェクト全体で一貫して適用します。
+hide_title: true
+pagination_next: core-concepts/elevations/custom-elevations
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import styles from '@/styles/docs/tables.module.scss';
+import ElevationsSample from '@/components/Samples/Elevations';
+
+<CoreConceptHeader
+  title="エレベーション"
+  description="エレベーションは、デザインシステムで要素に深さとレイヤーの感覚を与える影です。"
+  image="core_elevations_docs.svg"
+/>
+
+  エレベーションは、デザインシステムで要素に深さとレイヤーの感覚を与える影です。どのコンポーネントが上にあるか、どれが一緒にグループ化されているか、インターフェースのどの部分が最も注目を集めるべきかを示すのに役立ちます。
+
+  Ignite UI Themingでは、エレベーションはプロジェクト全体で一貫して適用できる再利用可能な影スタイルとして定義されます。box-shadow値を手動で書く代わりに、名前付きのエレベーションレベルを持つエレベーションマップを設定します。そこから、次のことができます：
+
+  - 事前定義されたミックスインと関数を使用して要素にエレベーションレベルを適用する。
+
+  - デザインシステムと一貫したエレベーションスタイルを維持する。
+
+  - すべての影を一度に素早く調整する。
+
+  このように、影の管理がより簡単に、よりスケーラブルになり、常にデザインシステムと一致します。
+
+  デザインシステムに次のエレベーションがあるとしましょう：
+
+  <table className={`${styles.table} ${styles.table__elevations}`}>
+    <thead className={styles.table__header}>
+      <tr>
+        <th>レベル</th>
+        <th>Xオフセット</th>
+        <th>Yオフセット</th>
+        <th>ボカシ</th>
+        <th>拡散</th>
+        <th>不透明度</th>
+      </tr>
+    </thead>
+    <tbody className={styles.table__content}>
+      <tr>
+        <td>Shadow XS</td>
+        <td>10px</td>
+        <td>2px</td>
+        <td>4px</td>
+        <td>2px</td>
+        <td>40%</td>
+      </tr>
+      <tr>
+        <td>Shadow S</td>
+        <td>10px</td>
+        <td>6px</td>
+        <td>6px</td>
+        <td>2px</td>
+        <td>45%</td>
+      </tr>
+      <tr>
+        <td>Shadow M</td>
+        <td>10px</td>
+        <td>8px</td>
+        <td>6px</td>
+        <td>4px</td>
+        <td>50%</td>
+      </tr>
+      <tr>
+        <td>Shadow L</td>
+        <td>10px</td>
+        <td>12px</td>
+        <td>6px</td>
+        <td>6px</td>
+        <td>55%</td>
+      </tr>
+      <tr>
+        <td>Shadow XL</td>
+        <td>10px</td>
+        <td>16px</td>
+        <td>6px</td>
+        <td>8px</td>
+        <td>60%</td>
+      </tr>
+      <tr>
+        <td>Shadow 2XL</td>
+        <td>10px</td>
+        <td>20px</td>
+        <td>6px</td>
+        <td>10px</td>
+        <td>65%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
+  エレベーションデザインシステムを使用可能なものに変換する最も簡単な方法は次のとおりです：
+
+  - まず、エレベーションレベルをキーとし、対応するbox-shadow値を値とするマップを作成する必要があります。
+
+  ```scss
+  $custom-elevations: (
+    'xs': box-shadow(10px 2px 4px 2px rgb(0 0 0 / 40%)),
+    'small': box-shadow(10px 6px 6px 2px rgb(0 0 0 / 45%)),
+    'medium': box-shadow(10px 8px 6px 4px rgb(0 0 0 / 50%)),
+    'large': box-shadow(10px 12px 6px 6px rgb(0 0 0 / 55%)),
+    'xl': box-shadow(10px 16px 6px 8px rgb(0 0 0 / 60%)),
+    '2xl': box-shadow(10px 20px 6px 10px rgb(0 0 0 / 65%)),
+  );
+  ```
+
+  - その後、[elevations](custom-elevations#including-the-elevations-map)ミックスインを使用してマップをインクルードできます。これにより、作成したマップに基づいてエレベーションCSS変数が生成されます。
+
+
+  ```scss
+  .btn-wrapper {
+    @include elevations($custom-elevations);
+  }
+  ```
+
+  - これで、スタイルシートで生成されたCSS変数を使用する準備が整いました。[elevation()](custom-elevations#using-the-elevations-css-variables)関数に目的のエレベーションレベルをパラメータとして渡すことで、要素に適用できます。
+
+  ```scss
+  .button1 {
+    box-shadow: elevation('small');
+  }
+  ```
+	
+	これにより、マップから対応するbox-shadow値が要素に適用されます。特定のエレベーションレベルの影スタイルを変更したい場合は、マップ内の値を更新するだけで、そのエレベーションレベルが使用されているすべての場所に反映されます。
+
+<ElevationsSample />
+
+

@@ -1,0 +1,109 @@
+---
+sidebar_position: 2
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# カスタムエレベーション
+
+  ## エレベーションマップ {/* #elevation-map */}
+
+  Sassマップを使用して、特定のデザインシステム全体で使用されるすべての異なるエレベーションレベルを保存します。
+	
+	エレベーションマップ内のすべてのマップキーは、異なるエレベーションレベルである必要があり、各キーに対して、マップ値として目的のbox-shadowを割り当てる必要があります。box-shadowを直接記述するか、`box-shadow(){:bash}`関数を使用できます。
+
+  `box-shadow(){:bash}`関数は、標準のbox-shadow形式で単一のパラメータを受け入れます。マップで定義した各エレベーションレベルが宣言されます。
+	`box-shadow(){:bash}`関数を使用すると、各box-shadowが乗数として機能し、後で調整を容易にする`--ig-elevation-factor{:sass}`変数にリンクされます。この関数は、渡されたbox-shadow値に`--ig-elevation-factor{:sass}`を乗算し、計算されたbox-shadow値を含む新しいリストを返します。そのため、マップを作成する際にbox-shadow値をハードコーディングする代わりに、すべてのマップ値に`box-shadow(){:bash}`関数を使用することを強くお勧めします。
+
+  `--ig-elevation-factor{:sass}`の詳細については、[--ig-elevation-factor](./elevation-factor)セクションをご覧ください。
+
+  ```scss
+  $custom-elevations: (
+    'small': box-shadow(0 2px 4px 0 black)
+  );
+  // box-shadow() 関数から返される値は次のとおりです: 0 0 calc(--ig-elevation-factor * 2px) calc(--ig-elevation-factor * 3px) black
+  ```
+
+  ## エレベーションマップのインクルード {/* #including-the-elevations-map */}
+
+  マップの準備ができたら、`elevations{:sass}`ミックスインを使用してアプリケーションに含めることができます。マップ変数をミックスインに渡すだけです。ミックスインはマップ内のすべてのキーを反復処理し、一致する値を使用して各キーに新しいCSS変数を宣言します。
+
+  ```scss
+  .wrapper {
+    @include elevations($custom-elevations);
+  }
+	```
+
+  生成される変数は次の構造に従います：
+
+  ```scss
+  --ig-elevation-{elevation-type}: {elevation-value};
+  ```
+
+  ここで、`elevation-type`はエレベーションマップのキーを指し、`elevation-value`は値です。
+
+  例：
+
+  ```scss
+  --ig-elevation-xs: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  ```
+
+  CSS変数を生成する前に、`elevations{:sass}`ミックスインはまずセレクタ内にインクルードされているかどうかを確認します。これはカスタムの[is-root()](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/utilities/#function-is-root)関数によって処理されます。ミックスインがセレクタ内にない場合、CSS変数は`:root{:css}`レベルで宣言されます。セレクタ内にある場合、変数はそのセレクタにスコープされます。
+
+  最終的な結果は次のようになります： 
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+  .wrapper {
+      --ig-elevation-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+      --ig-elevation-small: 0 calc(var(--ig-elevation-factor, 1) * 2px) calc(var(--ig-elevation-factor, 1) * 4px) 0 rgba(0, 0, 0, 0.2);
+      --ig-elevation-medium: 0 calc(var(--ig-elevation-factor, 1) * 4px) calc(var(--ig-elevation-factor, 1) * 6px) calc(var(--ig-elevation-factor, 1) * -1px) rgba(0, 0, 0, 0.2);
+      --ig-elevation-large: 0 calc(var(--ig-elevation-factor, 1) * 8px) calc(var(--ig-elevation-factor, 1) * 12px) calc(var(--ig-elevation-factor, 1) * -2px) rgba(0, 0, 0, 0.25);
+      --ig-elevation-xl: 0 calc(var(--ig-elevation-factor, 1) * 12px) calc(var(--ig-elevation-factor, 1) * 20px) calc(var(--ig-elevation-factor, 1) * -4px) rgba(0, 0, 0, 0.3);
+      --ig-elevation-2xl: 0 calc(var(--ig-elevation-factor, 1) * 20px) calc(var(--ig-elevation-factor, 1) * 40px) calc(var(--ig-elevation-factor, 1) * -6px) rgba(0, 0, 0, 0.35);
+	}
+	```
+
+	## エレベーションCSS変数の使用 {/* #using-the-elevations-css-variables */}
+
+  マップ内のすべてのエレベーションレベル用のCSS変数が作成されたら、要素に適用できます。
+
+  エレベーションレベルを適用するには、`elevation{:sass}`ミックスインを使用できます。使用したいレベルを渡すだけで、ミックスインが指定されたエレベーションレベルのbox-shadow値を返します。
+
+  ```scss
+  .wrapper {
+    @include elevation('medium');
+  }
+  ```
+
+  別の方法は、`elevation(){:js}`関数を使用することです。これは`elevation{:sass}`ミックスインと同様に機能します。使用したいレベルを渡すだけで、関数が指定されたエレベーションタイプのbox-shadow値を返します。
+
+  ```scss
+  .wrapper {
+    box-shadow: elevation('medium');
+  }
+  ```
+
+  `elevation(){:js}`関数の利点は、標準のbox-shadow CSSプロパティと同じように、2つ以上のエレベーションレベルを簡単に重ねて使用できることです。
+
+  ```scss
+  .wrapper {
+    box-shadow: elevation('medium'), elevation('large');
+  }
+  ```
+
+  また、必要に応じて生成されたCSS変数を直接参照することもできます：
+
+  ```scss
+  .wrapper {
+    box-shadow: var(--ig-elevation-medium);
+  }
+  ```
+
+  ### APIリファレンス {/* #api-references */}	
+
+  - <a href={`${sassDoc}/palettes/#function-box-shadow`}>box-shadow() 関数</a>
+  - <a href={`${sassDoc}/palettes/#function-elevation`}>elevation() 関数</a>
+  - <a href={`${sassDoc}/palettes/#mixin-elevations`}>elevations() ミックスイン</a>
+  - <a href={`${sassDoc}/palettes/#mixin-elevation`}>elevation() ミックスイン</a>

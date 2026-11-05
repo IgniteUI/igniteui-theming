@@ -1,0 +1,54 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+// Back-to-top button (DocLayout.astro): the base rules, then the site's colours.
+
+// ---- base rules, layered below the site rules
+@layer base.theme {
+  .it-back-to-top__button {
+    position: fixed;
+    right: 1.3rem;
+    bottom: 1.3rem;
+    border-radius: 50%;
+    background-color: var(--it-color-emphasis-200);
+    width: 3rem;
+    height: 3rem;
+    z-index: calc(var(--it-z-index-fixed) - 1);
+    box-shadow: var(--it-global-shadow-lw);
+    transition: all var(--it-transition-fast)
+      var(--it-transition-timing-default);
+    opacity: 0;
+    transform: scale(0);
+    visibility: hidden;
+  }
+
+  .it-back-to-top__button::after {
+    content: ' ';
+    display: inline-block;
+    mask: var(--it-menu-link-sublist-icon) 50% / 2rem 2rem no-repeat;
+    background-color: var(--it-color-emphasis-1000);
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (hover: hover) {
+    .it-back-to-top__button:hover {
+      background-color: var(--it-color-emphasis-300);
+    }
+  }
+
+  .it-back-to-top__button--visible {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
+}
+
+// ---- site
+.it-back-to-top {
+  display: contents;
+
+  button {
+    background-color: light-dark(var(--ig-gray-100), var(--ig-gray-800));
+  }
+}

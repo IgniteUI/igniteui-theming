@@ -1,0 +1,45 @@
+@use 'igniteui-theming' as *;
+
+.it-alert {
+  border-left-width: 0;
+  border-bottom-width: rem(2px);
+  border-radius: var(--ig-spacing-2xs) var(--ig-spacing-2xs) 0 0;
+  padding: var(--ig-spacing-s) var(--ig-spacing-s) rem(28px) var(--ig-spacing-s);
+}
+
+.it-alert .it-alert__heading,
+.it-alert__content {
+  @include type-style('navigation');
+}
+
+.it-alert div.it-alert__heading {
+  text-transform: uppercase;
+  margin-bottom: var(--ig-spacing-xs);
+
+  svg {
+    width: rem(20px);
+    height: rem(18px);
+    vertical-align: text-bottom;
+  }
+}
+
+.it-alert .it-alert__icon {
+  margin-right: var(--ig-spacing-2xs);
+}
+
+.it-alert--danger {
+  background-color: light-dark(var(--ig-senary-100), #4e1605cc);
+  border-color: light-dark(var(--ig-quinary-450), var(--ig-quinary-300));
+
+  .it-alert__heading svg {
+    fill: light-dark(var(--ig-quinary-450), var(--ig-quinary-300));
+  }
+}
+
+[data-theme='light'] .it-alert--danger .shiki .line span {
+  color: var(--ig-quinary-450) !important;
+}
+
+.it-alert--secondary {
+  background-color: light-dark(var(--ig-neutral-100), var(--ig-neutral-500));
+}

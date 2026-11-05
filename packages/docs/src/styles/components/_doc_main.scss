@@ -1,0 +1,88 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+.it-doc-content {
+  display: flex;
+  width: 100%;
+
+  > :nth-child(1) {
+    @media (width >= $bp-desktop) and (width < $bp-wide) {
+      padding: rem(50px);
+    }
+
+    @media (width >= $bp-wide) {
+      padding: rem(50px) 0;
+    }
+  }
+}
+
+@media (width > $bp-desktop) {
+  html:is(.it-doc-id-styling-with-ai\/overview) .it-doc-content {
+    > :nth-child(1) {
+      padding-block: 0;
+      margin-block: rem(40px);
+    }
+
+    .it-markdown {
+      > :first-child {
+        margin-block-start: 0;
+      }
+    }
+  }
+
+  .it-main .it-doc-sidebar {
+    border-color: var(--it-global-separator-color);
+  }
+}
+
+.it-doc-content .factor-sample-wrapper .sp-preview {
+  height: 14rem;
+}
+
+.it-table-of-contents:not(:has(ul)) {
+  display: none;
+}
+
+.it-install-tabs {
+  align-items: center;
+  text-align: center;
+}
+
+@media (width < $bp-desktop) {
+  html:is(.it-doc-id-styling-with-ai\/overview) .it-markdown {
+    > h2:nth-of-type(1) {
+      margin-top: 0;
+    }
+  }
+}
+
+// ---- doc layout rules
+.it-doc-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.docsWrapper {
+  display: flex;
+  flex: 1 0 auto;
+}
+
+// DocRoot/Layout/Main
+
+@media (min-width: 997px) {
+  .it-doc-content {
+    flex-grow: 1;
+    max-width: calc(99% - var(--doc-sidebar-width));
+  }
+}
+
+.it-doc-item header + *,
+.it-doc-item article > *:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 769px) {
+  .it-doc-item-col {
+    min-width: 50% !important;
+  }
+}

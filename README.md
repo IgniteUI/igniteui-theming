@@ -8,12 +8,14 @@ The Ignite UI Theming repository collects a set of Sass mixins, functions, and v
 
 ## Repository Structure
 
-This repository is an npm workspaces monorepo with two packages:
+This repository is an npm workspaces monorepo with these packages:
 
-| Package            | Name                   | Description                                                 |
-| ------------------ | ---------------------- | ----------------------------------------------------------- |
-| `packages/theming` | `igniteui-theming`     | Sass source, JSON build artifacts, published to npm         |
-| `packages/mcp`     | `igniteui-theming-mcp` | MCP server sources, built into `packages/theming/dist/mcp/` |
+| Package            | Name                        | Description                                                                     |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------- |
+| `packages/theming` | `igniteui-theming`          | Sass source, JSON build artifacts, published to npm                             |
+| `packages/mcp`     | `igniteui-theming-mcp`      | MCP server sources, built into `packages/theming/dist/mcp/`                     |
+| `packages/preview` | `@igniteui-theming/preview` | Interactive demos of the theming system (not published)                         |
+| `packages/docs`    | `@igniteui-theming/docs`    | Documentation site (Astro), built with each release, served at `/theming-docs/` |
 
 The `igniteui-theming` package is the only published artifact — it includes both the Sass theming library and the MCP server binary.
 
@@ -24,8 +26,9 @@ Common commands from the repo root:
 ```bash
 npm install    # install all workspace dependencies
 npm run build  # build theming + MCP in dependency order
-npm test       # run all tests across both packages
+npm test       # run all tests across all packages
 npm run lint   # lint all packages
+npm run docs   # serve the documentation site locally (see packages/docs/README.md)
 ```
 
 ## Palettes

@@ -1,0 +1,50 @@
+:root {
+  scrollbar-width: thin;
+}
+
+body {
+  --spacing: 2rem;
+
+  margin: var(--spacing);
+  font-family: Inter, sans-serif;
+}
+
+.cards {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(50%, 300px), 1fr));
+  gap: var(--spacing);
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+article {
+  display: grid;
+  gap: var(--spacing);
+  grid-template-columns: 1fr;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+}
+
+button {
+  appearance: none;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+[data-theme='dark'] {
+  scrollbar-color: #363b54 transparent;
+}
+
+[data-theme='light'] {
+  scrollbar-color: #a0a5c2 transparent;
+}

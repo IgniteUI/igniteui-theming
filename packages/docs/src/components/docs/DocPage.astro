@@ -1,0 +1,96 @@
+---
+// the doc page — breadcrumbs (+ JSON-LD), mobile TOC, MDX content, paginator and the desktop TOC column,
+// inside DocLayout. The version banner is deliberately omitted (it returns null today).
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocLayout from './DocLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Paginator from './Paginator.astro';
+import TOC from './TOC.astro';
+import MobileTOC from './MobileTOC.astro';
+import { SITE_BASE, SITE_URL } from '../../lib/docs/config';
+import { getDocsModel } from '../../lib/docs/astro-model';
+import type { DocRouteProps } from '../../lib/docs/routes';
+import { mdxComponents } from '../mdx/components';
+import type { TocItem } from '../../lib/markdown/rehype-heading-links';
+
+type Props = DocRouteProps;
+const { locale, version, doc } = Astro.props;
+const model = await getDocsModel(locale, version);
+const entry = model.entries.get(doc.id);
+if (!entry)
+  throw new Error(
+    `No content entry for doc "${doc.id}" (${locale}/${version})`
+  );
+const { Content, remarkPluginFrontmatter } = await render(entry);
+// h2 + h3 entries; the TOC components list h2 only, the column shows whenever the page has any of them.
+const toc = (remarkPluginFrontmatter.toc ?? []) as TocItem[];
+const { previous, next } = model.navigation(doc);
+const breadcrumbs = model.breadcrumbs(doc);
+const hideTitle = doc.frontmatter.hide_title ?? false;
+// A synthetic <h1> is rendered only when the content has no title heading of its own.
+const syntheticTitle = !hideTitle && !doc.contentTitle ? doc.title : undefined;
+const pathname = doc.permalink.slice(SITE_BASE.length);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    item: `${SITE_URL}${c.href ?? doc.permalink}`,
+    name: c.label,
+    position: i + 1,
+  })),
+};
+---
+
+<BaseLayout
+  title={doc.title}
+  description={doc.description}
+  locale={locale}
+  pathname={pathname}
+  doc={{ id: doc.id, version }}
+  sidebar={model.sidebar}
+  footer="docs"
+>
+  <script
+    is:inline
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(structuredData)}
+  />
+  <DocLayout locale={locale} sidebar={model.sidebar} activePath={doc.permalink}>
+    <div class="it-col it-doc-item-col">
+      <div class="it-doc-item">
+        <article>
+          <Breadcrumbs items={breadcrumbs} locale={locale} />
+          {toc.length > 0 && <MobileTOC toc={toc} />}
+          <div
+            class="it-markdown"
+            data-pagefind-body
+            data-pagefind-filter={`version:${version}`}
+            data-pagefind-meta={`title:${doc.title}`}
+          >
+            {syntheticTitle && (
+              <header>
+                <h1>{syntheticTitle}</h1>
+              </header>
+            )}
+            <Content components={mdxComponents} />
+          </div>
+        </article>
+        <Paginator previous={previous} next={next} />
+      </div>
+    </div>
+    {toc.length > 0 && (
+      <div class="it-col it-col--3 it-table-of-contents">
+        <TOC toc={toc} />
+      </div>
+    )}
+  </DocLayout>
+</BaseLayout>
+
+<script>
+  import '../../scripts/tabs';
+  import '../../scripts/copy-code';
+  import '../../scripts/toc';
+</script>

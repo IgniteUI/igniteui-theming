@@ -1,0 +1,39 @@
+---
+// two-state colour-mode toggle. `src/scripts/color-mode.ts`
+// enables it and swaps the theme; both icons are in the DOM and `[data-theme-choice]` CSS shows one.
+import { ICON_DARK_MODE, ICON_LIGHT_MODE } from './icons';
+
+interface Props {
+  className?: string;
+  buttonClassName?: string;
+}
+const { className, buttonClassName } = Astro.props;
+---
+
+<div class:list={['it-color-mode-toggle', 'it-color-mode-toggle', className]}>
+  <button
+    class:list={[
+      'it-button-reset',
+      'it-clean-btn',
+      'it-color-mode-toggle__button',
+      'it-color-mode-toggle__button--disabled',
+      buttonClassName,
+    ]}
+    type="button"
+    disabled
+    title="dark mode"
+    aria-label="Switch between dark and light mode (currently dark mode)"
+    data-color-mode-toggle
+  >
+    <Fragment
+      set:html={ICON_LIGHT_MODE(
+        'it-toggle-icon--light it-color-mode-toggle__icon'
+      )}
+    />
+    <Fragment
+      set:html={ICON_DARK_MODE(
+        'it-toggle-icon--dark it-color-mode-toggle__icon'
+      )}
+    />
+  </button>
+</div>

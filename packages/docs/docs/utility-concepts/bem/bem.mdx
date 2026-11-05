@@ -1,0 +1,91 @@
+---
+sidebar_position: 3
+pagination_next: modularity/intro
+description: The BEM methodology and how Ignite UI Theming provides functions and mixins to generate BEM class selectors efficiently, reducing the need for manual typing of long and repetitive class names.
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Overview
+
+  The Ignite UI Theming also offers functions and mixins that can make BEM class selector declarations easier. With them, you no longer need to manually type long and repetitive BEM class names in your styling files. You can choose between different functions and mixins to generate BEM selectors efficiently.
+
+  For example, if you want to create a class consisting of a block, element, and modifier, you can use either the `bem-selector(){:bash}` function or the `bem{:sass}` mixin. Both will produce the same output, the only difference is which approach works best for you and your project.
+
+  ```scss
+  $selector: bem-selector(block, $elem: (elem, mod));
+    
+  #{$selector} {
+    background: green;
+  }
+  
+  // Both will return .block__elem--mod selectors
+
+  @include bem(block, $elem: (elem, mod)) {
+    background: blue;
+  }
+  ```
+
+  ```html
+  <div class="block__elem--mod">
+    <h1>Heading text</h1>
+    <p>Content text</p>
+  </div>
+  ```
+
+  This will result in the following CSS output:
+
+  <CodeBlockHeader title="CSS output"/>
+  ```css
+  .block__elem--mod {
+    background: blue;
+  }
+
+  .block__elem--mod {
+    background: green;
+  }
+  ```
+
+  As you can see, with both the `bem-selector(){:bash}` function and the `bem{:sass}` mixin, you only need to provide the names for the block, element, and modifier parts of the class, and the selector is generated automatically. This isn’t the only way to use these functions and mixins, for example, you can also create multiple block modifiers using the same mixin and function.
+
+  ```scss
+  $selector: bem-selector(block, $mods: (mod-1, mod-2));
+    
+  #{$selector} {
+    background: green;
+  }
+
+  // Both will return .block--mod-1.block--mod-2 selectors
+
+  @include bem(block, $mods: (mod-1, mod-2)) {
+    background: blue;
+  }
+  ```
+  ```html
+  <div class="block--mod-1 block--mod-2">
+    <h1>Heading text</h1>
+    <p>Content text</p>
+  </div>
+  ```
+
+  This will result in the following CSS output:
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+    .block--mod-1, .block--mod-2 {
+      background: blue;
+    }
+
+    .block--mod-1, .block--mod-2 {
+      background: green;
+    }
+	```
+
+  There are many more possibilities and ways to create more advanced selectors with these and the other BEM functions and mixins that Ignite UI Theming offers. You can check them all out here:
+  [BEM](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/bem)
+
+	### API References
+
+  - <a href={`${sassDoc}/bem/#function-bem-selector`}>bem-selector() function</a> 
+  - <a href={`${sassDoc}/bem/#mixin-bem`}>bem mixin</a>

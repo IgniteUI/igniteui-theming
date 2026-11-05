@@ -1,0 +1,68 @@
+---
+// sidebar item list. Level 1 groups the items under each `it-sidebar-title` html item into an
+// `.it-sidebar-section`; deeper levels render the items in place.
+import type { SidebarItem as Item } from '../../lib/docs/types';
+import SidebarItem from './SidebarItem.astro';
+
+interface Props {
+  items: Item[];
+  activePath: string;
+  level: number;
+  expanded: Set<Item>;
+  tabIndex?: number;
+}
+const { items, activePath, level, expanded, tabIndex } = Astro.props;
+
+type Group = { title?: Item; items: Item[] };
+const groups: Group[] = [];
+if (level === 1) {
+  let current: Group | undefined;
+  for (const item of items) {
+    if (item.type === 'html' && item.className?.includes('it-sidebar-title')) {
+      if (current && current.items.length > 0) groups.push(current);
+      current = { title: item, items: [] };
+    } else {
+      current ??= { items: [] };
+      current.items.push(item);
+    }
+  }
+  if (current && current.items.length > 0) groups.push(current);
+}
+---
+
+{level === 1
+  ? groups.map((group) => (
+      <>
+        {group.title && (
+          <SidebarItem
+            item={group.title}
+            activePath={activePath}
+            level={level}
+            expanded={expanded}
+            tabIndex={tabIndex}
+          />
+        )}
+        <li class="it-sidebar-section">
+          <ul class="it-sidebar-section__list">
+            {group.items.map((item) => (
+              <SidebarItem
+                item={item}
+                activePath={activePath}
+                level={level}
+                expanded={expanded}
+                tabIndex={tabIndex}
+              />
+            ))}
+          </ul>
+        </li>
+      </>
+    ))
+  : items.map((item) => (
+      <SidebarItem
+        item={item}
+        activePath={activePath}
+        level={level}
+        expanded={expanded}
+        tabIndex={tabIndex}
+      />
+    ))}

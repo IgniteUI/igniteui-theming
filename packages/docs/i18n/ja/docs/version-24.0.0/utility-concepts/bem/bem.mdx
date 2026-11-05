@@ -1,0 +1,90 @@
+---
+sidebar_position: 3
+pagination_next: modularity/intro
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# 概要
+
+  Ignite UI Themingは、BEMクラスセレクターの宣言を簡単にする関数とミックスインも提供します。これらを使用することで、スタイルファイルで長く繰り返しのBEMクラス名を手動で入力する必要がなくなります。BEMセレクターを効率的に生成するために、異なる関数とミックスインから選択できます。
+
+  たとえば、ブロック、要素、修飾子から構成されるクラスを作成したい場合、`bem-selector(){:bash}`関数または`bem{:sass}`ミックスインのいずれかを使用できます。両方とも同じ出力を生成しますが、唯一の違いは、あなたとプロジェクトに最適なアプローチがどれかです。
+
+  ```scss
+  $selector: bem-selector(block, $elem: (elem, mod));
+
+  #{$selector} {
+    background: green;
+  }
+
+  // どちらも .block__elem--mod セレクターを返します
+
+  @include bem(block, $elem: (elem, mod)) {
+    background: blue;
+  }
+  ```
+
+  ```html
+  <div class="block__elem--mod">
+    <h1>Heading text</h1>
+    <p>Content text</p>
+  </div>
+  ```
+
+ これにより、以下のCSS出力が得られます。
+
+  <CodeBlockHeader title="CSS出力"/>
+  ```css
+  .block__elem--mod {
+    background: blue;
+  }
+
+  .block__elem--mod {
+    background: green;
+  }
+  ```
+
+  ご覧のとおり、`bem-selector(){:bash}`関数と`bem{:sass}`ミックスインの両方で、クラスのブロック、要素、修飾子部分の名前を指定するだけで、セレクターが自動的に生成されます。これがこれらの関数とミックスインを使用する唯一の方法ではありません。たとえば、同じミックスインと関数を使用して複数のブロック修飾子を作成することもできます。
+
+  ```scss
+  $selector: bem-selector(block, $mods: (mod-1, mod-2));
+
+  #{$selector} {
+    background: green;
+  }
+
+  // どちらも .block--mod-1.block--mod-2 セレクターを返します
+
+  @include bem(block, $mods: (mod-1, mod-2)) {
+    background: blue;
+  }
+  ```
+  ```html
+  <div class="block--mod-1 block--mod-2">
+    <h1>Heading text</h1>
+    <p>Content text</p>
+  </div>
+  ```
+
+ これにより、以下のCSS出力が得られます。
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+    .block--mod-1, .block--mod-2 {
+      background: blue;
+    }
+
+    .block--mod-1, .block--mod-2 {
+      background: green;
+    }
+	```
+
+  これらや他のIgnite UI Themingが提供するBEM関数とミックスインを使用して、より高度なセレクターを作成する方法は他にもたくさんあります。すべてこちらで確認できます：
+  [BEM](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/bem)
+
+	### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/bem/#function-bem-selector`}>bem-selector() 関数</a> 
+  - <a href={`${sassDoc}/bem/#mixin-bem`}>bem ミックスイン</a>

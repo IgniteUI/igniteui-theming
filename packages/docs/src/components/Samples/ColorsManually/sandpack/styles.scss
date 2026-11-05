@@ -1,0 +1,41 @@
+@use 'igniteui-theming' as *;
+
+$custom-palette: (
+  'primary': (
+    '500': light-dark(#6b7280, #94a3b8),
+  ),
+  'surface': (
+    '500': light-dark(#f6f7f9, #1e293b),
+  ),
+  'gray': (
+    '500': light-dark(#1f2937, #f8fafc),
+  ),
+);
+
+@include palette($custom-palette);
+
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+article {
+  --background: #{color($color: 'surface', $variant: 500)};
+  --foreground: #{adaptive-contrast(var(--background))};
+  --border-color: #{color($color: 'gray', $variant: 500)};
+
+  background: var(--background);
+  color: var(--foreground);
+  border: 2px solid
+    color-mix(in srgb, var(--border-color), var(--background) 80%);
+}
+
+button {
+  --background: #{color($color: 'gray', $variant: 500)};
+
+  background: var(--background);
+  color: adaptive-contrast(var(--background));
+}

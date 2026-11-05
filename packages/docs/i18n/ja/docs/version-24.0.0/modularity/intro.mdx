@@ -1,0 +1,33 @@
+---
+sidebar_position: 1
+---
+
+# モジュール性
+
+Ignite UI Themingフレームワーク全体を含める必要はありません。たとえば、`typography`、`colors`、または`elevations`だけが必要な場合、部分的な使用が可能です。Ignite UI Themingは複数のSassモジュールに分離されており、それぞれを独立してインポートおよび使用できます。
+
+利用可能なモジュールは次のとおりです：
+
+- `color` – `palette(){:js}`、`color(){:js}`、`adaptive-contrast(){:bash}`などのすべてのカラー関連の関数とミックスインを含みます。
+
+- `typography` – `type-style(){:bash}`、`type-scale(){:bash}`、`typography(){:js}`などのタイポグラフィ関連の関数とミックスインを含みます。
+
+- `elevations` – `elevation(){:js}`、`box-shadow(){:bash}`などのすべてのエレベーション関数とミックスインを提供します。
+
+- `themes` – `sizable(){:js}`、`pad-inline(){:bash}`、`pad-block(){:bash}`、`border-radius(){:bash}`などのコンポーネント指向のユーティリティを提供します。
+
+- `animations` – すべての事前定義されたアニメーションとイージング、およびそれらを使用するための関数とミックスインを含みます。
+
+- `bem` – BEMクラスセレクターを簡単に生成するためのBEMヘルパー関数とミックスインを含みます。
+
+特定のモジュールを使用するには、テーマ設定パッケージ全体ではなく、Sassファイルにそれをインポートするだけです：
+
+```scss
+// すべてのモジュールを含むテーマ設定パッケージ全体を使用したい場合は、'igniteui-theming'を使用します。
+// @use 'igniteui-theming' as *;
+
+// 特定のモジュールのみを使用したい場合は、特定のモジュール名を使用します
+@use 'igniteui-theming/sass/color' as *;
+```
+
+このセットアップでは、`color`モジュールのみがプロジェクトに含まれます。つまり、`palette(){:js}`、`color(){:js}`、`adaptive-contrast(){:bash}`などのカラー関連の関数とミックスインのみにアクセスできます。

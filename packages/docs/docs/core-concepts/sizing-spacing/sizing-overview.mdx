@@ -1,0 +1,58 @@
+---
+sidebar_position: 1
+title: Sizing Overview
+description: The sizing system provides a consistent way to define and manage element dimensions.
+hide_title: true
+pagination_next: core-concepts/sizing-spacing/how-the-sizing-works
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import SizesSample from '@/components/Samples/Sizes';
+
+<CoreConceptHeader
+  title="Sizing"
+  description="The sizing system provides a consistent way to define and manage element dimensions."
+  image="core_sizing_docs.svg"
+/>
+
+  The sizing system in Ignite UI Theming provides a consistent way to define and manage element dimensions. Instead of hardcoding fixed values, you can define up to three distinct size states — `small`, `medium`, and `large`, and switch between them dynamically.
+
+  Key benefits of using the sizing system are:
+
+  - Making it easy to switch between sizes globally or per component.
+  - Reduces hardcoded values, improving maintainability.
+  - Keeps your styles flexible and ready for growth.
+
+  To make an element dynamically sizable, you would need to: 
+
+  - First, include the `sizable{:sass}` mixin in the element’s styles. This sets up the necessary CSS variables and structure for the sizing system to work.
+
+  ```scss
+  button {
+    @include sizable();
+  }
+  ```
+
+	- Then, you can define the sizes for the element using the `sizable(){:js}` function. It accepts three parameters for the `small`, `medium`, and `large` sizes. The function will declare CSS variables for each size based on the passed values.
+
+	```scss
+	button {
+      // Define sizes for small (60%), medium (80%), and large (100%)
+      width: sizable($sm: 60%, $md: 80%, $lg: 100%);
+	}
+	```
+
+	- Finally to set the element to a specific size, you just need to assign the corresponding CSS variable to the `--component-size{:sass}` variable. Here the element will be set to medium size by assigning `var(--ig-size-medium){:sass}` to `--component-size{:sass}`. 
+
+  ```scss
+  button {
+    // Sets the element to use the medium size - (--ig-size-medium)
+    --component-size: var(--ig-size-medium);
+  }
+  ```
+
+	You can easily switch it to small or large by changing the assigned variable to `var(--ig-size-small){:sass}` or `var(--ig-size-large){:sass}`, respectively.
+
+	<SizesSample />
+  <br/>
+  Here, the `button{:css}` element has assigned three different sizes: `60%{:sass}`, `80%{:sass}`, and `100%{:sass}`, for its width property. These can be easily changed through the value of the `--component-size{:sass}` variable, making the element’s width easily switchable.

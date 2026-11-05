@@ -1,0 +1,13 @@
+// Viewport breakpoints shared by the site styles and the component stylesheets. This partial emits no CSS,
+// so any stylesheet can `@use` it. One-off widths that tune a single component stay inline in that file.
+// $bp-mobile       phones below, tablets from here
+// $bp-desktop      desktop navbar + docs sidebar from here (the 996px max-width and 997px min-width rules of
+//                  the base styles mean the same boundary, so both are written `< $bp-desktop` / `>= $bp-desktop`)
+// $bp-wide         the wide docs / landing grid
+// $bp-footer-wide  footer columns stop wrapping
+// $bp-xwide        hero and component preview scale down below this
+$bp-mobile: 768px;
+$bp-desktop: 997px;
+$bp-wide: 1280px;
+$bp-footer-wide: 1320px;
+$bp-xwide: 1680px;

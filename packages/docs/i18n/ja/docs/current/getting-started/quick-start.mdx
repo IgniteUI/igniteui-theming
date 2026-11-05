@@ -1,0 +1,38 @@
+---
+sidebar_position: 2
+---
+
+import QuickStartSample from '@/components/Samples/QuickStart';
+
+# クイックスタート
+
+Ignite UI Themingフレームワークのセットアップは非常に簡単です。必要なのは、プロジェクトがSassをサポートしていることだけです。セットアップ手順は、すべてのフレームワークとプロジェクトタイプでほぼ同じですが、若干の違いがあります。より一般的なフレームワークの具体的なセットアップ手順については、[インストール](installation)セクションをご覧ください。
+
+## 依存関係のインストール {/* #install-dependencies */}
+
+まず、Ignite UI Themingパッケージをプロジェクトにインストールする必要があります。Sassがまだインストールされていない場合は、それもインストールしてください。
+
+```bash
+npm install --save-dev sass
+npm install igniteui-theming
+```
+
+:::info
+__sass__ の代わりに [__sass-embedded__](https://www.npmjs.com/package/sass-embedded) パッケージを使用することもできます。
+:::
+
+## フレームワークの読み込み {/* #load-the-framework */}
+
+Ignite UI Themingパッケージがインストールされた後、スタイルシートに読み込む必要があります。
+
+```scss
+@use 'igniteui-theming' as *;
+```
+
+フレームワークによっては、絶対パスや相対パスを使用する代わりにモジュールを直接インポートできるように、[Sass ロード パス](https://sass-lang.com/documentation/at-rules/use/#finding-the-module) を設定する必要がある場合があります。
+
+## Ignite UI Theming を使用する {/* #use-ignite-ui-theming */}
+
+スタイルシートにフレームワークが読み込まれたら、Ignite UI Theming 機能を使用できるようになります。カスタムパレットを作成して、インクルードを適用してみましょう。
+
+<QuickStartSample />

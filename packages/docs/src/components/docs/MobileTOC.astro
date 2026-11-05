@@ -1,0 +1,44 @@
+---
+// the collapsible mobile TOC, collapsed by default.
+import type { TocItem } from '../../lib/markdown/rehype-heading-links';
+import { localeFrom } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+
+interface Props {
+  toc: TocItem[];
+}
+const { toc } = Astro.props;
+const t = translator(localeFrom(Astro.currentLocale));
+// themeConfig.tableOfContents: minHeadingLevel 2, maxHeadingLevel 2 — only h2 entries are listed. The data still
+// carries h3 entries so the column is rendered whenever the page has any h2/h3.
+const items = toc.filter((h) => h.level === 2);
+---
+
+<div class="it-toc-mobile">
+  <button
+    type="button"
+    class="it-button-reset it-toc-mobile__button"
+    aria-expanded="false"
+    aria-controls="toc-collapsible-content"
+  >
+    {t({
+      id: 'theme.TOCCollapsible.toggleButtonLabel',
+      message: 'On this page',
+    })}
+  </button>
+  <div
+    id="toc-collapsible-content"
+    class="it-toc-mobile__content"
+    style="display:none;overflow:hidden;height:0px;"
+  >
+    {items.length > 0 && (
+      <ul class="it-toc it-toc--left-border">
+        {items.map((h) => (
+          <li>
+            <a href={`#${h.id}`} class="it-toc__link" set:html={h.value} />
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</div>

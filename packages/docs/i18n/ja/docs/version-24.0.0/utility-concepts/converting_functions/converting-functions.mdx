@@ -1,0 +1,106 @@
+---
+sidebar_position: 1
+pagination_next: utility-concepts/animations/overview
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# 概要
+
+  Ignite UI Themingは、相対単位（`em{:sass}`、`rem{:sass}`）と絶対単位（`px{:sass}`）間の簡単でシームレスな変換を行うための変換関数を提供します。
+
+  すべての変換は、Ignite UI Themingの[設定ファイル](https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/config/_index.scss#L1)で定義されたベースフォントサイズに基づいています。デフォルトではこの値は`16px{:sass}`ですが、SCSSファイルにIgnite UI Themingをインポートする際にカスタマイズできます：
+
+  ```scss
+  @use 'igniteui-theming' as * with (
+    $base-font-size: 10px
+  );
+  ```
+
+  このセットアップでは、すべての変換関数が`16px{:sass}`の代わりに`10px{:sass}`をベースフォントサイズとして使用し、変換結果に影響します。
+
+  ## pxへ変換 {/* #to-px */}
+
+  `px(){:js}`関数は相対単位（`em{:sass}`または`rem{:sass}`）をピクセルに変換します。`$num`パラメータで値を指定するだけで、関数がベースフォントサイズに基づいて新しい値を計算します。
+
+  ```scss
+  .wrapper {
+    margin: px($num: 3rem);
+  }
+  ```
+
+  Ignite UI Themingをインポートする際にグローバルなベースフォントサイズを変更せずにカスタムフォントサイズを使用したい場合は、`$context`パラメータで指定できます：
+
+  ```scss
+  .wrapper {
+    margin: px($num: 3em, $context: 20px);
+  }
+  ```
+
+  これは次の出力になります：
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+	.wrapper {
+      margin: 60px;
+	}
+	```
+
+  ## remへ変換 {/* #to-rem */}
+
+  `rem(){:js}`関数はピクセル値を受け取り、rem単位に変換します。`px(){:js}`関数と同様に、2つのパラメータを受け入れます：
+
+  - `$pixels` – 変換したいピクセル値
+
+  - `$context` – 変換に使用するオプションのカスタムベースフォントサイズ
+
+  ```scss
+  .wrapper {
+    margin: rem($pixels: 40px);
+  }
+  ```
+  ```scss
+  .wrapper {
+    margin: rem($pixels: 40px, $context: 20px);
+  }
+  ```
+
+  上記の例はアプリケーションで次の出力になります：
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+	.wrapper {
+      margin: 2rem;
+	}
+	```
+
+  ## emへ変換 {/* #to-em */}
+
+  `em(){:js}`関数は`rem(){:js}`と同じように機能し、同じ`$pixels`と`$context`パラメータを持ちます。唯一の違いは、`rem{:sass}`の代わりに`em{:sass}`で値を出力することです。
+
+  ```scss
+  .wrapper {
+    margin: em($pixels: 30px);
+  }
+  ```
+  ```scss
+  .wrapper {
+    margin: em($pixels: 30px, $context: 20px);
+  }
+  ```
+
+  これは次の出力になります：
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+	.wrapper {
+      margin: 1.5em;
+	}
+	```
+
+  ### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/typography/#function-px`}>px() 関数</a> 
+  - <a href={`${sassDoc}/typography/#function-rem`}>rem() 関数</a>
+  - <a href={`${sassDoc}/typography/#function-em`}>em() 関数</a>

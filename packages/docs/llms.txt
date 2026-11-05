@@ -1,0 +1,48 @@
+# Ignite UI Theming
+
+> Official Ignite UI Theming documentation
+
+
+## theming-docs
+
+
+### docs
+
+- [Accessing the CSS variables](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/accessing-the-css-variables.md): How to access the generated CSS variables using the `color()` and `contrast-color()` functions, as well as how to reference them directly.
+- [Adaptive contrasts](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/adaptive-contrasts.md): Use the `adaptive-contrast()` function to automatically generate WCAG-compliant contrast colors based on the background color and the configured contrast level.
+- [Advanced](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/advanced.md): Learn how the color variants are generated based on the base color and the predefined multipliers.
+- [Auto-generated palettes](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/auto-generated-palettes.md): Generate full color systems from a base color with the help of the `palette()` function.
+- [Manually created palettes](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/manually-created-palettes.md): Create a color palette by defining exact color values for complete control. Manually created palettes are Sass maps that you define yourself.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/overview.md): Create and manage color palettes in your design system, ensuring consistency and ease of maintenance across your project.
+- [Palette Mixin](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/palette-mixin.md): Learn how to use the `palette` mixin to generate CSS variables from the created palette map.
+- [Runtime changes](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/runtime-changes.md): Change the whole palette dynamically by updating the base color value.
+- [Scoping](https://staging.infragistics.com/theming-docs/docs/core-concepts/colors/scoping.md): Add different palettes to different scopes by including the `palette` mixin inside the desired selector.
+- [Custom Elevations](https://staging.infragistics.com/theming-docs/docs/core-concepts/elevations/custom-elevations.md): Learn how to create a custom elevation map, include it in your application, and apply the generated CSS variables to your elements.
+- [Elevation factor](https://staging.infragistics.com/theming-docs/docs/core-concepts/elevations/elevation-factor.md): How to easily adjust all elevation values at once by modifying the `--ig-elevation-factor` variable, which acts as a multiplier in the box-shadow calculations.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/core-concepts/elevations/overview.md): Define elevation levels and apply them consistently across your project.
+- [border-radius() function](https://staging.infragistics.com/theming-docs/docs/core-concepts/roundness/border-radius-function.md): Learn how to use the `border-radius()` function to calculate border-radius values based on a radius factor, allowing for easy adjustments across your application.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/core-concepts/roundness/overview.md): The roundness system provides consistent border-radius management with minimum, default, and maximum values.
+- [Radius factor](https://staging.infragistics.com/theming-docs/docs/core-concepts/roundness/radius-factor.md): How to easily adjust all border-radius values at once by modifying the `--ig-radius-factor` variable, which acts as a multiplier in the border-radius calculations.
+- [How the sizing works](https://staging.infragistics.com/theming-docs/docs/core-concepts/sizing-spacing/how-the-sizing-works.md): Learn how the `sizable` mixin and `sizable()` function work together to create responsive designs by allowing you to define and switch between different size values dynamically.
+- [How the spacing works](https://staging.infragistics.com/theming-docs/docs/core-concepts/sizing-spacing/how-the-spacing-works.md): Learn how the `sizable` mixin and `pad()` function work together to create responsive designs by allowing you to define and switch between different size values dynamically.
+- [Sizing Overview](https://staging.infragistics.com/theming-docs/docs/core-concepts/sizing-spacing/sizing-overview.md): The sizing system provides a consistent way to define and manage element dimensions.
+- [Spacing factor](https://staging.infragistics.com/theming-docs/docs/core-concepts/sizing-spacing/spacing-factor.md): How to easily adjust all spacing values at once by modifying the `--ig-spacing` variable, which acts as a multiplier in the padding calculations.
+- [Spacing Overview](https://staging.infragistics.com/theming-docs/docs/core-concepts/sizing-spacing/spacing-overview.md): The spacing system makes it easy to define and manage spacing values for components.
+- [Additional ways to use the CSS variables](https://staging.infragistics.com/theming-docs/docs/core-concepts/typography/additional-ways-to-use-css-variables.md): Additional ways to apply the generated CSS variables, such as using the `type-style-elements` and `type-style-classes` mixins for easier application to elements and classes.
+- [Manually creating a type scale](https://staging.infragistics.com/theming-docs/docs/core-concepts/typography/manually-created-type-scale.md): Manually create a type scale by defining a structure and setting the styling properties for each type style using the `type-scale` and `type-style` functions.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/core-concepts/typography/overview.md): Typography controls how text appears in your application - font, size, weight, line-height, and other text properties. A well-structured typography system ensures consistency and readability.
+- [Setting the CSS variables to elements](https://staging.infragistics.com/theming-docs/docs/core-concepts/typography/setting-the-css-variables-to-elements.md): How to apply the generated CSS variables to your elements using the `type-style` mixin or by applying the variables directly.
+- [Typography mixin](https://staging.infragistics.com/theming-docs/docs/core-concepts/typography/typography-mixn.md): How to transform type scale maps into a set of CSS variables using the `typography` mixin.
+- [Installation](https://staging.infragistics.com/theming-docs/docs/getting-started/installation.md): Start using Ignite UI Theming with the framework of your choice by following our simple installation guide.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/getting-started/overview.md): The Ignite UI Theming Framework provides a simple solution for implementing and applying design systems across platforms. It contains comprehensive set of Sass functions and mixins for managing colors, typography, spacing, elevations, and more.
+- [Quick Start](https://staging.infragistics.com/theming-docs/docs/getting-started/quick-start.md): Implement your design system with Ignite UI Theming in just a few steps. All you need is a project with Sass support.
+- [Modularity](https://staging.infragistics.com/theming-docs/docs/modularity/intro.md): Add only the necessary modules to your project by importing specific parts of the Ignite UI Theming framework, allowing for a more modular and efficient use of the theming capabilities.
+- [Showcase](https://staging.infragistics.com/theming-docs/docs/showcase/intro.md)
+- [Overview](https://staging.infragistics.com/theming-docs/docs/styling-with-ai/overview.md): How to use AI tools to generate color palettes, typography systems, and complete themes with the Ignite UI Theming MCP server.
+- [Animation mixin](https://staging.infragistics.com/theming-docs/docs/utility-concepts/animations/animation_mixin.md): How to use the `animation` mixin to apply predefined or custom animations to your elements, along with the available easing options.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/utility-concepts/animations/overview.md): An overview of the predefined animations available in Ignite UI Theming and how to use them in your project.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/utility-concepts/bem.md): The BEM methodology and how Ignite UI Theming provides functions and mixins to generate BEM class selectors efficiently, reducing the need for manual typing of long and repetitive class names.
+- [Overview](https://staging.infragistics.com/theming-docs/docs/utility-concepts/converting_functions/converting-functions.md): How to use the converting functions for easy and seamless conversion between relative units (em, rem) and absolute units (px).
+
+## Optional
+- [GitHub Repository](https://github.com/IgniteUI/igniteui-theming): Source code, issues, and release notes.

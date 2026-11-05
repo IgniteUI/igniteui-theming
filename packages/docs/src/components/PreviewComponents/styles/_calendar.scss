@@ -1,0 +1,131 @@
+@use 'igniteui-theming' as *;
+
+// igc-calendar preview: theme and parts.
+igc-calendar {
+  @include tokens(
+    calendar-theme(
+      $border-radius: var(--ig-border-radius-medium),
+      $content-background: light-dark(
+          var(--ig-surface-white),
+          var(--ig-gray-900)
+        ),
+      $header-foreground: light-dark(
+          var(--ig-primary-600),
+          var(--ig-secondary-100)
+        ),
+      $header-background: var(--ig-linear-header),
+      $picker-foreground: light-dark(
+          var(--ig-primary-600),
+          var(--ig-gray-900-light)
+        ),
+      $navigation-color: light-dark(
+          var(--ig-primary-600),
+          var(--ig-gray-800-light)
+        ),
+      $weekday-color: light-dark(var(--ig-primary-400), var(--ig-primary-300)),
+      $inactive-color: light-dark(var(--ig-primary-400), var(--ig-primary-300)),
+      $weekend-color: light-dark(var(--ig-gray-600), var(--ig-gray-900-light)),
+      $week-number-foreground: light-dark(
+          var(--ig-primary-500),
+          var(--ig-primary-200)
+        ),
+      $week-number-background: light-dark(
+          var(--ig-gray-100),
+          var(--ig-secondary-600)
+        ),
+      $date-selected-background: var(--ig-quinary-300),
+      $date-selected-foreground: var(--ig-gray-900-light),
+      $date-selected-hover-background: var(--ig-quinary-400),
+      $date-selected-hover-foreground: var(--ig-gray-900-light),
+      $date-special-border-color: light-dark(
+          var(--ig-gray-400),
+          var(--ig-gray-900-light)
+        )
+    )
+  );
+}
+
+[data-theme='light'] igc-calendar {
+  box-shadow: 4px 4px 4px 4px var(--ig-gray-100);
+}
+
+[data-theme='light'] igc-calendar::part(header) {
+  --header-background: var(--ig-tertiary-100);
+
+  border: rem(1px) solid var(--ig-gray-150);
+}
+
+@supports (-moz-appearance: none) {
+  igc-calendar::part(header) {
+    background-size: 101% 101%;
+  }
+}
+
+[data-theme='dark'] igc-calendar::part(header) {
+  border-bottom: rem(1px) solid var(--ig-secondary-400);
+}
+
+igc-calendar::part(navigation) {
+  padding-inline: var(--component-spacing-s);
+}
+
+igc-calendar::part(header) {
+  padding: var(--component-spacing-xs) var(--component-spacing-s);
+}
+
+igc-calendar::part(header-date) {
+  @include type-style('h4');
+}
+
+[data-theme='light'] igc-calendar::part(content) {
+  border: rem(1px) solid var(--ig-gray-150);
+  border-block-start: none;
+}
+
+igc-calendar::part(days-view),
+igc-calendar::part(months-navigation),
+igc-calendar::part(years-navigation) {
+  @include type-style('navigation', false);
+}
+
+igc-calendar::part(days-view) {
+  padding: var(--component-spacing-1xs) var(--component-spacing-xs);
+}
+
+igc-calendar::part(years-view),
+igc-calendar::part(months-view) {
+  @include type-style('body-2');
+
+  padding: var(--component-spacing-xs) var(--component-spacing-2xs);
+}
+
+igc-calendar::part(week-number-inner),
+igc-calendar::part(label) {
+  font-style: normal;
+}
+
+igc-calendar::part(week-number) {
+  margin-inline-end: var(--component-spacing-3xs);
+}
+
+igc-calendar::part(week-number first) {
+  background: var(--week-number-background);
+  color: var(--week-number-foreground);
+  border-top-left-radius: var(--week-number-border-radius);
+  border-top-right-radius: var(--week-number-border-radius);
+
+  &::after {
+    content: '';
+    background: var(--week-number-background);
+    width: var(--size);
+    inset-block-start: 100%;
+    position: absolute;
+    height: 0.5rem;
+  }
+}
+
+igc-calendar::part(days-row first) {
+  background: transparent;
+}
+
+// Tabs styles

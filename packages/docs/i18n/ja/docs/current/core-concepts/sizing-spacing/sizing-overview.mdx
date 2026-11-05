@@ -1,0 +1,59 @@
+---
+sidebar_position: 1
+title: サイズ概要
+description: サイジングシステムは、要素の寸法を一貫して定義・管理する方法を提供します。
+hide_title: true
+pagination_next: core-concepts/sizing-spacing/how-the-sizing-works
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import SizesSample from '@/components/Samples/Sizes';
+
+<CoreConceptHeader
+  title="Sizing"
+  description="サイジングシステムは、要素の寸法を一貫して定義・管理する方法を提供します。"
+  image="core_sizing_docs.svg"
+/>
+
+  Ignite UI Theming のサイジングシステムは、要素の寸法を一貫して定義・管理する方法を提供します。固定値をハードコードする代わりに、`small`、`medium`、`large` の最大3つのサイズ状態を定義し、動的に切り替えることができます。
+
+  サイジングシステムを使う主なメリットは次のとおりです。
+
+  - グローバルまたはコンポーネント単位でサイズを簡単に切り替えられる。
+  - ハードコードされた値を減らし、保守性を高められる。
+  - スタイルを柔軟に保ち、拡張しやすくできる。
+
+  要素を動的にサイズ変更可能にするには、次の手順を行います。
+
+	- まず、要素のスタイルに `sizable{:sass}` ミックスインをインクルードします。これにより、サイジングシステムに必要なCSS変数と構造がセットアップされます。
+
+  ```scss
+  .wrapper {
+    // 要素をサイズ変更可能にする
+    @include sizable();
+  }
+  ```
+
+	- 次に、`sizable(){:js}` 関数を使って要素のサイズを定義します。small、medium、large の3つの値をパラメータとして受け取ります。渡した値に基づいて、各サイズ用のCSS変数が宣言されます。
+
+	```scss
+	.wrapper {
+      // small (60%)、medium (80%)、large (100%) を定義
+      width: sizable($sm: 60%, $md: 80%, $lg: 100%);
+	}
+	```
+
+  - 最後に、要素に特定のサイズを適用するには、対応するCSS変数を `--component-size{:sass}` に代入します。ここでは `var(--ig-size-medium){:sass}` を `--component-size{:sass}` に割り当てることで、要素が medium サイズになります。
+
+  ```scss
+  .wrapper {
+    // 要素を medium サイズに設定（--ig-size-medium）
+    --component-size: var(--ig-size-medium);
+  }
+  ```
+
+	割り当てる変数を `var(--ig-size-small){:sass}` または `var(--ig-size-large){:sass}` に変えるだけで、small や large に簡単に切り替えられます。
+
+	<SizesSample />
+  <br/>
+  ここでは、`.wrapper{:css}` 要素の width に `60%{:sass}`、`80%{:sass}`、`100%{:sass}` の3つのサイズが設定されています。これらは `--component-size{:sass}` の値で簡単に切り替えられるため、要素の幅を柔軟に変更できます。

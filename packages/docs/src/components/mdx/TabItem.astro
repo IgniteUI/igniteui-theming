@@ -1,0 +1,31 @@
+---
+// `<TabItem>`. Inside MDX Astro renders this before <Tabs> sees it, so the panel carries its tab
+// metadata as data attributes and <Tabs> reads them back from its slot (labels must be plain text).
+import styles from './Tabs.module.css';
+
+interface Props {
+  value: string;
+  label?: string;
+  default?: boolean;
+  className?: string;
+  attributes?: Record<string, unknown> & { className?: string };
+}
+const {
+  value,
+  label,
+  default: isDefault = false,
+  className,
+  attributes,
+} = Astro.props;
+---
+
+<div
+  role="tabpanel"
+  class:list={[styles.tabItemPanel, className]}
+  data-tab-value={value}
+  data-tab-label={label}
+  data-tab-default={isDefault ? '' : undefined}
+  data-tab-attributes={attributes ? JSON.stringify(attributes) : undefined}
+>
+  <slot />
+</div>

@@ -1,0 +1,48 @@
+---
+// previous/next links with `igc-icon-button` arrows.
+// Plain links: cross-document view transitions animate the navigation.
+import type { NavigationLink } from '../../lib/docs/types';
+import { localeFrom } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+
+interface Props {
+  previous?: NavigationLink;
+  next?: NavigationLink;
+}
+const { previous, next } = Astro.props;
+const t = translator(localeFrom(Astro.currentLocale));
+---
+
+<nav
+  class="it-margin-top--lg it-pagination"
+  aria-label={t({
+    id: 'theme.docs.paginator.navAriaLabel',
+    message: 'Docs pages',
+  })}
+>
+  {previous && (
+    <a class="it-nav it-pagination__link--prev" href={previous.permalink}>
+      <span class="it-nav-icon--previous">
+        <igc-icon name="left_arrow" aria-hidden="true"></igc-icon>
+      </span>
+      <div class="it-pagination__sublabel">
+        {t({
+          id: 'theme.docs.paginator.previous',
+          message: 'Previous',
+        })}
+      </div>
+      <div class="it-pagination__label">{previous.title}</div>
+    </a>
+  )}
+  {next && (
+    <a class="it-nav it-pagination__link--next" href={next.permalink}>
+      <span class="it-nav-icon--next">
+        <igc-icon name="arrow" aria-hidden="true"></igc-icon>
+      </span>
+      <div class="it-pagination__sublabel">
+        {t({ id: 'theme.docs.paginator.next', message: 'Next' })}
+      </div>
+      <div class="it-pagination__label">{next.title}</div>
+    </a>
+  )}
+</nav>

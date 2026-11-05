@@ -1,0 +1,101 @@
+# Builds the documentation site (packages/docs) and uploads it as en/ja artifacts.
+# Runs on every release, and on pull requests and pushes that touch the docs or the Sass sources they compile against.
+
+name: Docs
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'packages/docs/**'
+      - 'packages/theming/sass/**'
+      - 'packages/theming/_index.scss'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'packages/docs/**'
+      - 'packages/theming/sass/**'
+      - 'packages/theming/_index.scss'
+      - '.github/workflows/docs.yml'
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build -w packages/docs
+
+      - name: Upload artifact (en)
+        uses: actions/upload-artifact@v7
+        with:
+          name: theming-docs-en
+          path: |
+            packages/docs/dist
+            !packages/docs/dist/ja
+          retention-days: 1
+
+      - name: Upload artifact (ja)
+        uses: actions/upload-artifact@v7
+        with:
+          name: theming-docs-ja
+          path: packages/docs/dist/ja
+          retention-days: 1
+
+      # Staging deploy through IgniteUI/igniteui-actions; enabled once the deploy side is confirmed.
+      - name: '[EN] Trigger Deploy Workflow in IgniteUI Actions'
+        if: false
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.CLASSIC_PAT_GITHUB }}
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: 'IgniteUI',
+              repo: 'igniteui-actions',
+              event_type: 'igniteui-theming-docs-cd',
+              client_payload: {
+                calling_branch: "${{ github.ref_name }}",
+                environment: "staging",
+                artifact_name: "theming-docs-en",
+                base_href: "theming-docs",
+                platform: "angular",
+                repository: "${{ github.repository }}",
+                run_id: "${{ github.run_id }}",
+                locale: "en"
+              }
+            });
+
+      - name: '[JA] Trigger Deploy Workflow in IgniteUI Actions'
+        if: false
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.CLASSIC_PAT_GITHUB }}
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: 'IgniteUI',
+              repo: 'igniteui-actions',
+              event_type: 'igniteui-theming-docs-cd',
+              client_payload: {
+                calling_branch: "${{ github.ref_name }}",
+                environment: "staging",
+                artifact_name: "theming-docs-ja",
+                base_href: "theming-docs",
+                platform: "angular",
+                repository: "${{ github.repository }}",
+                run_id: "${{ github.run_id }}",
+                locale: "ja"
+              }
+            });

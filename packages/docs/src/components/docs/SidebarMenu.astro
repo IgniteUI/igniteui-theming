@@ -1,0 +1,22 @@
+---
+// the `ul.it-nav-menu__list` used by the desktop sidebar and the mobile secondary menu.
+import type { SidebarItem } from '../../lib/docs/types';
+import { expandedCategoryPaths } from '../../lib/docs/navigation';
+import SidebarItems from './SidebarItems.astro';
+
+interface Props {
+  items: SidebarItem[];
+  activePath: string;
+}
+const { items, activePath } = Astro.props;
+const expanded = expandedCategoryPaths(items, activePath);
+---
+
+<ul class="it-nav-menu__list">
+  <SidebarItems
+    items={items}
+    activePath={activePath}
+    level={1}
+    expanded={expanded}
+  />
+</ul>

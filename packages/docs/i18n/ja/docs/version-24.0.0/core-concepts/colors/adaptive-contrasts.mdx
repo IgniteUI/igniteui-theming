@@ -1,0 +1,70 @@
+---
+sidebar_position: 7
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import AdaptiveContrastSample from '@/components/Samples/AdaptiveContrast';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# 適応的コントラスト
+
+  Ignite UI Themingは、適応的コントラストのためのミックスインと関数の両方を提供しています。
+
+  `adaptive-contrast{:sass}` ミックスインは、`adaptive-contrast(){:bash}` 関数で適応的コントラストカラーを生成する際に特に便利です。これは [WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html) コントラストレベル変数を設定し、`adaptive-contrast(){:bash}` 関数がこれを使用して正しいコントラストカラーを生成します。[WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html) レベルは3つあります - A、AA、AAA。これらを含めるには、希望するレベル（小文字）をミックスインパラメータに渡します。
+
+  例：
+
+  ```scss
+  @include adaptive-contrast($level: 'a');
+
+  .button {
+    --ig-primary-500: #ee6c6c;
+
+    background-color: var(--ig-primary-500);
+    color: adaptive-contrast(#{var(--ig-primary-500)});
+    // 返される色は 'white'
+  };
+  ```
+
+  `adaptive-contrast{:sass}` ミックスインがWCAGレベルを'A'に設定しているため、`.button{:css}` クラスの結果のカラーは白になります。
+  WCAGレベルをダブルまたはトリプルA（'aa'または'aaa'）に変更すると、結果のカラーは黒になります：
+
+  ```scss
+  @include adaptive-contrast($level: 'aaa');
+
+  .button {
+    --ig-primary-500: #ee6c6c;
+
+    background-color: var(--ig-primary-500);
+    color: adaptive-contrast(#{var(--ig-primary-500)});
+    // 返される色は 'black'
+  };
+  ```
+
+  `adaptive-contrast(){:bash}` 関数はカラー値を受け取り、2つのプリセットカラー（黒または白）のうち、どちらがそのコントラストカラーとしてより適しているかを動的に計算します。これはすべて、ミックスインによって現在設定されているコントラストレベルに基づいています。
+
+  <AdaptiveContrastSample />
+  <br/>
+
+  計算は、CSSカラー関数と数学演算の組み合わせを通じて行われます。私たちは、Lea Verouと彼女の[コントラストカラー](https://lea.verou.me/blog/2024/contrast-color/#using-rcs-to-automatically-compute-a-contrasting-text-color)に関する記事、特に[Lloyd Kupchankoのデモ](https://lea.verou.me/blog/2024/contrast-color/#addendum)からインスピレーションを得ました。
+
+  <CodeBlockHeader title="CSS出力"/>
+  ```css
+  :root {
+    --ig-wcag-a: 0.31;
+    --ig-wcag-aa: 0.185;
+    --ig-wcag-aaa: 0.178;
+    --ig-contrast-level: var(--ig-wcag-level);
+    --y: clamp(0,(y / var(--ig-contrast-level) - 1) * -infinity, 1);
+    --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
+  }
+
+  // '--y-contrast'変数の背後にある計算
+  // ⮑ xyz-d65 clamp(0, (y / 0.31 - 1) * -infinity, 1) clamp(0, (y / 0.31 - 1) * -infinity, 1) clamp(0, (y / 0.31 - 1) * -infinity, 1)
+
+  ```
+
+  ### APIリファレンス
+
+  - <a href={`${sassDoc}/palettes/#function-adaptive-contrast`}>adaptive-contrast() 関数</a>
+  - <a href={`${sassDoc}/palettes/#mixin-adaptive-contrast`}>adaptive-contrast() ミックスイン</a>

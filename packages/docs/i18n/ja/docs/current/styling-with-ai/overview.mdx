@@ -1,0 +1,228 @@
+---
+sidebar_position: 1
+title: 概要
+hide_title: true
+---
+
+import Tabs from '@/components/mdx/Tabs.astro';
+import styles from '@/styles/docs/tables.module.scss';
+import TabItem from '@/components/mdx/TabItem.astro';
+
+## コンテキストファイル {/* #context-files */}
+Ignite UI Themingは、AIプロセシングに最適化された、プレーンテキスト形式の完全なドキュメントコンテンツを含む[llms.txt](/theming-docs/llms.txt)と[llms-full.txt](/theming-docs/llms-full.txt)ファイルも提供しています。これらのファイルは言語モデルへの入力として意図されており、ドキュメント構造とコンテンツを理解し、正確で関連性の高い応答を生成するのに役立ちます。
+
+## MCPサーバー {/* #mcp-server */}
+コンテキストファイルとは別に、Ignite UI Themingには独自の[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)サーバーがあり、AIアシスタントがプロジェクト用の本番対応のテーマ設定コードを生成できるようにします。
+
+## MCPとは？ {/* #what-is-mcp */}
+Model Context Protocolは、AIアシスタント（Claude、GitHub Copilotなど）が外部ツールやデータソースに接続できるようにします。Ignite UI Theming MCPサーバーは、次のことができる専門的なテーマ設定アシスタントとして機能します：
+
+🎨 自動シェードバリエーションを持つカラーパレットを生成 <br/>
+📝 デザイン標準に従ったタイポグラフィシステムを作成 <br/>
+🌓 ライトモードとダークモード用の完全なテーマを構築 <br/>
+🎯 デザイントークンでコンポーネントをカスタマイズ <br/>
+✅ アクセシビリティ準拠のための色を検証 <br/>
+
+## MCPサーバーの使用方法 {/* #how-to-use-the-mcp-server */}
+
+1. クローンとビルド
+リポジトリをクローンし、MCPサーバーをビルドします：
+
+```bash
+npm install
+npm run build:mcp
+```
+
+2. AIクライアントの設定
+
+  MCPサーバーは、MCP互換の任意のクライアントで動作します。人気のあるクライアントのセットアップ手順は次のとおりです：
+
+<Tabs>
+<TabItem value="vscode" label="VS Code" default>
+ローカル開発用 - .vscode/mcp.jsonを作成または編集します：
+```json
+{
+  "servers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+    }
+  }
+}
+```
+公開パッケージを使用する場合：
+```json
+{
+  "servers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+</TabItem>
+<TabItem value="webstorm" label="WebStorm / JetBrains IDEs">
+1. Settings → Tools → AI Assistant → MCP Serversに移動
+2. + Add MCP Serverをクリック
+3. 設定：
+ - Name: igniteui-theming
+ - Command: node（ローカル用）またはnpx（パッケージ用）
+ - Arguments:
+   - ローカル: /absolute/path/to/igniteui-theming/dist/mcp/index.js
+   - パッケージ: igniteui-theming igniteui-theming-mcp
+4. OKをクリックし、AI Assistantを再起動
+</TabItem>
+<TabItem value="claude" label="Claude Desktop">
+設定ファイルに追加します：
+
+macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+ローカル開発用：
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+    }
+  }
+}
+```
+
+公開パッケージを使用する場合：
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+</TabItem>
+<TabItem value="cursor" label="Cursor">
+プロジェクト内の`.cursor/mcp.json`を作成または編集します：
+
+ローカル開発用：
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+    }
+  }
+}
+```
+
+公開パッケージを使用する場合：
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+</TabItem>
+</Tabs>
+
+## MCPサーバーでできること {/* #what-can-the-mcp-server-do */}
+
+🎨 完全なテーマを作成
+
+AIアシスタントにテーマを説明するだけです：
+
+> "Gruvboxカラースキームからインスピレーションを得たAngularアプリ用のマテリアルデザインダークテーマを作成してください。"
+
+AIは、次のような本番対応のSassコードを生成します：
+
+- すべてのシェードバリエーションを持つカラーパレット
+- 適切なタイプスケールを持つタイポグラフィのセットアップ
+- エレベーションシャドウ
+- プラットフォーム固有のインポートと設定
+
+🌈 カラーパレットを生成
+
+> "ティールをプライマリ、パープルをセカンダリとして使用するライトテーマパレットを生成してください"
+
+デザインシステム標準に従って完璧に計算されたカラーシェードが得られます。
+
+📝 タイポグラフィをセットアップ
+
+> "Web Components用にInterフォントとマテリアルデザインのタイプスケールを使用してタイポグラフィをセットアップしてください"
+
+フォントファミリとレスポンシブなタイプスケールを持つ適切なタイポグラフィ設定が得られます。
+
+## 利用可能な機能 {/* #available-capabilities */}
+
+MCPサーバーが提供するツールには次のものがあります：
+
+<table className={`${styles.table} ${styles.table__elevations}`}>
+<thead className={styles.table__header}>
+<tr>
+	<th>ツール</th>
+	<th style={{ width: "30rem" }}>説明</th>
+</tr>
+</thead>
+<tbody className={styles.table__content}>	
+<tr>
+	<td><strong>create_palette</strong></td>
+	<td>自動シェード計算でカラーパレットを生成します。</td>
+</tr>
+<tr>
+	<td><strong>create_custom_palette</strong></td>
+	<td>個々のシェードを細かく制御できるパレットを作成します。</td>
+</tr>
+<tr>
+	<td><strong>create_typography</strong></td>
+	<td>フォントファミリとタイプスケールでタイポグラフィをセットアップします。</td>
+</tr>
+<tr>
+	<td><strong>create_elevations</strong></td>
+	<td>エレベーションシャドウを設定します。</td>
+</tr>
+<tr>
+	<td><strong>create_theme</strong></td>
+	<td>完全なテーマ（パレット + タイポグラフィ + エレベーション）を生成します。</td>
+</tr>
+</tbody>
+</table>
+
+ツールとは別に、MCPサーバーは次のリソースも提供します：
+`プリセットライブラリ`: 事前に構築されたパレット、タイポグラフィ、エレベーションセット
+`カラーガイダンス`: カラー選択と使用のベストプラクティス
+
+
+## 例：インタラクション {/* #example-interactions */}
+
+<Tabs>
+<TabItem value="new-project-theme" label="新しいプロジェクトテーマの作成">
+**あなた:** "Ignite UIを使った新しいAngularプロジェクトを開始します。プライマリブルー、セカンダリコーラル、ライトテーマ、Robotoフォントを使用した完全なマテリアルデザインテーマを作成してください"
+
+**AI:** `create_theme`ツールを使用して、すぐに使用できる完全なSassコードを生成します
+</TabItem>
+<TabItem value="adding-dark-mode" label="ダークモードの追加">
+**あなた:** "同じプライマリブルーでダークサーフェスのダークモードバージョンが必要です"
+
+**AI:** variant: "dark"を指定した`create_theme`を使用して、ダークテーマコードを生成します
+</TabItem>
+<TabItem value="customizing-components" label="コンポーネントのカスタマイズ">
+**あなた:** "カードコンポーネントでカスタマイズできるプロパティは何ですか？"
+
+**AI:** `get_component_design_tokens`を使用して利用可能なトークンを表示します
+
+**あなた:** "カードを淺いグレーの背景と微妙な影にしてください"
+
+**AI:** `create_component_theme`を使用してコンポーネントテーマコードを生成します
+</TabItem>
+</Tabs>
+
+## 完全なドキュメント {/* #full-documentation */}
+
+MCPサーバーの使用、利用可能なツール、ベストプラクティスの詳細なドキュメントについては、[MCP Server README](https://github.com/IgniteUI/igniteui-theming/blob/master/src/mcp/README.md)をご覧ください。

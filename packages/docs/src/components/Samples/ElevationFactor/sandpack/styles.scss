@@ -1,0 +1,16 @@
+@use 'igniteui-theming' as *;
+
+// Create a custom elevation map
+$custom-elevations: (
+  'small': box-shadow(10px 6px 6px 2px rgb(0 0 0 / 80%))
+);
+
+// Generate CSS custom elevations
+.button-wrapper {
+  @include elevations($custom-elevations);
+}
+
+// Apply the elevations
+button {
+  box-shadow: elevation('small');
+}

@@ -1,0 +1,351 @@
+---
+sidebar_position: 3
+---
+
+import Tabs from '@/components/mdx/Tabs.astro';
+import TabItem from '@/components/mdx/TabItem.astro';
+
+# インストール
+
+  Ignite UI Themingのインストールは非常に簡単です。テーマ設定パッケージはnpmで利用可能なので、必要なのは選択したフレームワークとSassがインストールされた環境を準備するだけです。
+
+  その後、Ignite UI Themingをインストールする準備が整います：
+
+  ```bash
+  npm install igniteui-theming
+  ```
+
+  以下では、環境のセットアップ、Sassのインストール、さまざまなプロジェクトタイプとフレームワークでIgnite UI Themingを追加するための最適なアプローチだと考えられる例をいくつか紹介します。
+
+  <Tabs>
+  <TabItem value="react" label="React + Next.js" default>
+  1. まず、新しいプロジェクトを作成します：
+
+  ```bash
+  npx create-next-app@latest my-app
+  cd my-app
+  ```
+
+  セットアップ中に、TypeScriptまたはJavaScript、ESLintなど、希望するオプションを選択します。
+
+  2. 次に、Sassをインストールします。最も簡単な方法は次のとおりです：
+
+  ```bash
+  npm install sass --save-dev
+  ```
+
+  3. Sassがインストールされたら、次のステップはIgnite UI Themingをインストールすることです：
+
+  ```bash
+  npm install igniteui-theming
+  ```
+
+  最後に、Ignite UI Themingの関数とミックスインを使用するために、`.scss`ファイルにテーマ設定フレームワークをインポートします：
+
+  ```scss
+  @use 'igniteui-theming' as *; 
+  ```
+
+  以上です。これでReactプロジェクトでIgnite UI Themingを使用する準備が整いました。
+  </TabItem>
+  <TabItem value="vite" label="Vite">
+1. まず、新しいプロジェクトを作成します：
+
+  ```bash
+npm create vite@latest my-vite-app
+cd my-vite-app 
+  ```
+
+  セットアップ中に、希望するフレームワークとバリアントを選択します。
+
+  2. Sassをインストールします：
+
+  ```bash
+  npm install sass --save-dev
+  ```
+
+  3. 次にIgnite UI Themingをインストールします：  
+
+  ```bash
+  npm install igniteui-theming
+  ```
+
+  最後に、Ignite UI Themingの関数とミックスインを使用するために、.scssファイルにテーマ設定フレームワークをインポートします：
+
+  ```scss
+  @use 'igniteui-theming' as *; 
+  ```
+
+  以上です。これでViteプロジェクトでIgnite UI Themingを使用する準備が整いました。
+  </TabItem>
+  <TabItem value="angular" label="Angular">
+  1. まず、Angular CLIをインストールします（まだインストールしていない場合）：
+
+  ```bash
+  npm install -g @angular/cli
+  ```
+
+  2. Sassサポートを有効にして新しいプロジェクトを作成します：
+
+  ```bash
+  ng new my-angular-app --style=scss
+  ```
+
+  Angularの優れた点は、Sassを第一級サポートしているため、プロジェクト作成ステップから直接有効にできることです。
+
+  3. 次に、Ignite UI Themingをインストールします：
+
+  ```bash
+  npm install igniteui-theming
+  ```
+
+	4. Ignite UI Themingの直接インポートを有効にするために、`angular.json`ファイルのビルドオプションに`stylePreprocessorOptions`を追加してSassプリプロセッサを設定します：
+
+	```json
+  "stylePreprocessorOptions": {
+    "includePaths": [
+      "node_modules"
+    ]
+  }
+	```
+
+  この設定により、相対ファイルパスを使用せずにパッケージを直接インポートできます。
+
+  5. 最後に、Ignite UI Themingの関数とミックスインを使用するために、.scssファイルにテーマ設定フレームワークをインポートします：
+
+  ```scss
+  @use 'igniteui-theming' as *; 
+  ```
+
+  以上です。これでAngularプロジェクトでIgnite UI Themingを使用する準備が整いました。
+  </TabItem>
+  <TabItem value="bun" label="Bun">
+  Bunは、さまざまなフレームワークやセットアップでうまく機能する高速JavaScriptランタイムです。このガイドでは、BunプロジェクトにIgnite UI Themingを追加するための基本的な手順を説明します。
+
+  1. Sassをインストールします（SCSSをコンパイルするために必要）：
+
+  ```bash
+  bun add -d sass
+  ```
+
+  2. Ignite UI Themingをインストールします：
+
+  ```bash
+  bun add igniteui-theming
+  ```
+
+  3. テーマスタイルファイルを作成します（例：`styles.scss`）：
+
+  ```scss
+  @use 'igniteui-theming' as *;
+  ```
+
+  4. **スタイルをビルド/コンパイルする：** 正確なプロセスはBunプロジェクトのセットアップによって異なります：
+
+  **バンドラ（Vite、Webpackなど）またはフレームワーク（React、Vueなど）を使用したBunの場合：**
+  - プロジェクトがバンドラを使用している場合、通常SCSSコンパイルは自動的に処理されます。メインのJavaScript/TypeScriptファイルにSCSSファイルをインポートするだけです：
+  
+  ```typescript
+  import './styles.scss';
+  ```
+
+  **バニラBun（手動コンパイル）の場合：**
+  - 正しいロードパスを使用してSass CLIでSCSSをCSSにコンパイルします：
+
+  ```bash
+  bunx sass --load-path=node_modules styles.scss styles.css
+  ```
+
+  - 開発用のウォッチモード（変更時の自動再コンパイル）を使用する場合：
+
+  ```bash
+  bunx sass --load-path=node_modules --watch styles.scss:styles.css
+  ```
+
+  - コンパイルされたCSSをHTMLファイルにリンクします：
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bun + Ignite UI Theming</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <h1>Hello Bun!</h1>
+  </body>
+  </html>
+  ```
+
+  5. セットアップに応じてBunプロジェクトを実行します（例：`bun run index.ts`、`bun dev`など）。
+
+  BunプロジェクトでIgnite UI Themingを使用する準備が整いました！
+  </TabItem>
+  <TabItem value="webpack" label="Webpack (Vanilla JS)">
+  このガイドでは、WebpackとIgnite UI Themingを使用したバニラJavaScriptプロジェクトをゼロからセットアップする方法を説明します。
+
+  1. まず、新しいプロジェクトディレクトリを作成し、npmを初期化します：
+
+  ```bash
+  mkdir my-webpack-app
+  cd my-webpack-app
+  npm init -y
+  ```
+
+  2. Webpack、Webpack CLI、および必要なローダーをインストールします：
+
+  ```bash
+  npm install --save-dev webpack webpack-cli webpack-dev-server
+  npm install --save-dev sass sass-loader css-loader style-loader
+  ```
+
+  3. Ignite UI Themingをインストールします：
+
+  ```bash
+  npm install igniteui-theming
+  ```
+
+  4. プロジェクトルートに`webpack.config.js`ファイルを作成してWebpackを設定します：
+
+  ```javascript
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                sassOptions: {
+                  includePaths: ['node_modules']
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    devServer: {
+      static: './dist',
+    },
+  };
+  ```
+
+  `includePaths: ['node_modules']`オプションにより、相対パスを使用せずにIgnite UI Themingを直接インポートできます。
+
+  5. プロジェクト構造を作成します。
+	
+	まず、`dist/index.html`を作成します：
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Webpack App</title>
+  </head>
+  <body>
+    <h1>Hello Webpack!</h1>
+    <script src="bundle.js"></script>
+  </body>
+  </html>
+  ```
+
+  次に`src/index.js`を作成します：
+
+  ```javascript
+  import './styles.scss';
+  ```
+
+  そして`src/styles.scss`を作成します：
+
+  ```scss
+  @use 'igniteui-theming' as *;
+    
+  // Your theming code here
+  ```
+
+  6. `package.json`にビルドスクリプトを追加します：
+
+  ```json
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development --open"
+  }
+  ```
+
+  WebpackプロジェクトでIgnite UI Themingを使用する準備が整いました。`npm run dev`を実行して開発サーバーを起動します。
+  </TabItem>
+  <TabItem value="webpack-existing" label="Webpack (既存プロジェクト)">
+  既存のWebpackプロジェクトにアッとIgnite UI Themingを追加したい場合は、次の手順に従ってください：
+
+  1. Sassと必要なローダーをインストールします（まだインストールしていない場合）：
+
+  ```bash
+  npm install --save-dev sass sass-loader css-loader style-loader
+  ```
+
+  2. Ignite UI Themingをインストールします：
+
+  ```bash
+  npm install igniteui-theming
+  ```
+
+  3. `webpack.config.js`を更新してSassローダーを設定します。module rulesセクションを見つけるか追加します：
+
+  ```javascript
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: ['node_modules']
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  ```
+
+  `includePaths: ['node_modules']`オプションにより、相対パスを使用せずにIgnite UI Themingを直接インポートできます。
+
+  4. SCSSファイル（例：`styles.scss`）を作成し、JavaScriptエントリーポイント（例：`index.js`）にインポートします：
+
+  ```javascript
+  import './styles.scss';
+  ```
+
+  5. SCSSファイルにIgnite UI Themingをインポートします：
+
+  ```scss
+  @use 'igniteui-theming' as *;
+  ```
+
+  以上です！既存のWebpackプロジェクトでIgnite UI Themingを使用できるようになりました。
+  </TabItem>
+  </Tabs>
+
+  ## エディターのセットアップ {/* #editor-setup */}
+
+  VS Codeを使用している場合は、`Some Sass`拡張機能を試すことをお勧めします。コードの提案、定義への移動、参照の検索などの機能により、Ignite UI Themingの使用とナビゲーションが非常に容易になります。

@@ -1,0 +1,30 @@
+---
+// desktop TOC (h2 only); `src/scripts/toc.ts` does the scroll-spy.
+import type { TocItem } from '../../lib/markdown/rehype-heading-links';
+import { localeFrom } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+
+interface Props {
+  toc: TocItem[];
+}
+const { toc } = Astro.props;
+const t = translator(localeFrom(Astro.currentLocale));
+// themeConfig.tableOfContents: minHeadingLevel 2, maxHeadingLevel 2 — only h2 entries are listed. The data still
+// carries h3 entries so the column is rendered whenever the page has any h2/h3.
+const items = toc.filter((h) => h.level === 2);
+---
+
+<span class="it-sidebar-title it-toc-title">
+  {t({ id: 'toc.onThisPage', message: 'On this page' })}
+</span>
+<div class="it-doc-toc it-thin-scrollbar">
+  {items.length > 0 && (
+    <ul class="it-toc it-toc--left-border">
+      {items.map((h) => (
+        <li>
+          <a href={`#${h.id}`} class="it-toc__link" set:html={h.value} />
+        </li>
+      ))}
+    </ul>
+  )}
+</div>

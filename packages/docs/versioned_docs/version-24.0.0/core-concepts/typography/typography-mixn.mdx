@@ -1,0 +1,59 @@
+---
+sidebar_position: 3
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Typography mixin 
+
+  The `typography{:sass}` mixin is responsible for transforming type scale maps into a set of CSS variables.
+
+	```scss
+	@include typography (
+      $font-family: 'Inter, sans-serif',
+      $type-scale: $custom-typography
+  )
+	```
+
+  It accepts two mandatory parameters:
+
+  - `$font-family` – the font family to use
+  - `$type-scale` – the variable containing your custom type scales
+
+  :::note
+  The font family passed here has lower specificity than the font family defined in `$ITypeStyle` for each scale.
+  :::
+  
+  After we include the `typography{:sass}` mixin, it first checks whether it is included inside a selector. This check is handled by the custom [is-root()](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/utilities/#function-is-root) function. If the mixin is not inside a selector, the CSS variables are declared at the `:root{:css}` level.
+
+  Next, the font family passed into the mixin is declared as a variable for the current scope — `--ig-font-family{:sass}`. 
+  Along with it, another variable is declared — `--ig-base-font-size{:sass}`. This base font size is retrieved from a [standalone file](https://github.com/IgniteUI/igniteui-theming/blob/f82a03149a0882f9ac5e851d4c9cda06c6e09bc1/sass/config/_index.scss#L1) and is mainly used for the calculation of the [rem(), em() and px()](../../utility-concepts/converting_functions/converting-functions.mdx) functions.
+
+  After that for all of the typography types in the type scale map, a custom mixin called `type-style-vars{:sass}` is included, which goes through every type and declares each of its style properties into a standalone CSS variable. 
+
+  The result is a list of CSS variables that look like this:
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+  :root {
+      --ig-font-family: Inter, sans-serif;
+      --ig-base-font-size: 16px;
+      --ig-h1-font-size: 1.5rem;
+      --ig-h1-font-weight: 500;
+      --ig-h1-line-height: normal;
+      --ig-subtitle-font-size: 1.25rem;
+      --ig-subtitle-font-weight: 400;
+      --ig-subtitle-line-height: normal;
+      --ig-body-font-size: 0.875rem;
+      --ig-body-font-weight: 300;
+      --ig-body-line-height: normal;
+      --ig-navigation-font-size: 1rem;
+      --ig-navigation-font-weight: 400;
+      --ig-navigation-line-height: 1.5;
+  }
+	```
+
+  ### API References
+
+  - <a href={`${sassDoc}/typography/#mixin-typography`}>typography mixin</a> 

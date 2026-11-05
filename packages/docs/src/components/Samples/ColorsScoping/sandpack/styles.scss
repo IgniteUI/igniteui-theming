@@ -1,0 +1,27 @@
+@use 'igniteui-theming' as *;
+
+$light-palette: palette(
+  $primary: #18203a,
+  $secondary: #d9a93d,
+  $surface: #f4c86a,
+);
+
+$dark-palette: palette(
+  $primary: #f7f8ff,
+  $secondary: #6c7de0,
+  $surface: #4b5fd1,
+);
+
+[data-theme='light'] {
+  @include palette($light-palette);
+}
+
+[data-theme='dark'] {
+  @include palette($dark-palette);
+}
+
+button {
+  background: color($color: 'surface', $variant: 500);
+  color: color($color: 'primary', $variant: 400);
+  border: 4px solid color($color: 'secondary', $variant: 400);
+}

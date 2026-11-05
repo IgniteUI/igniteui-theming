@@ -1,0 +1,100 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+// Keyboard route to the mobile sidebar: hidden until focused (the row itself opens it on tap), absent on desktop.
+.it-breadcrumbs__toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+
+  &:focus-visible {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    clip-path: none;
+    display: inline-flex;
+    background: none;
+    color: inherit;
+  }
+}
+
+@media screen and (width >= $bp-desktop) {
+  .it-breadcrumbs__toggle {
+    display: none;
+  }
+}
+
+@media screen and (width < $bp-desktop) {
+  .it-breadcrumbs {
+    height: rem(48px);
+    align-items: center;
+    display: grid;
+    border-bottom: rem(1px) solid
+      light-dark(var(--ig-gray-100), var(--ig-gray-900));
+    margin-inline: rem(-22px);
+    padding-inline: 22px;
+  }
+
+  .it-doc-content .it-breadcrumbs {
+    margin-bottom: var(--ig-spacing-xl);
+  }
+
+  .it-breadcrumbs__link {
+    padding: 0;
+
+    &:hover {
+      color: initial;
+    }
+  }
+
+  .it-breadcrumbs__item:nth-of-type(n + 2) .it-breadcrumbs__link {
+    color: light-dark(var(--ig-gray-500), var(--ig-gray-300));
+  }
+
+  .it-breadcrumbs__item.it-breadcrumbs__item--active .it-breadcrumbs__link {
+    font-weight: 700;
+    background: none;
+    color: light-dark(var(--ig-gray-900), var(--ig-gray-100));
+  }
+}
+
+.it-toc-mobile {
+  display: none;
+}
+
+@media (width < $bp-mobile) {
+  .it-breadcrumbs__item--active {
+    max-width: calc(100% - 140px);
+    vertical-align: middle;
+    margin-top: rem(-1px);
+
+    .it-breadcrumbs__link {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+  }
+}
+
+// ---- breadcrumb layout rules
+.it-breadcrumbs {
+  --it-breadcrumb-size-multiplier: 0.8;
+
+  margin-bottom: 0.8rem;
+}
+
+.it-breadcrumbs__home-icon {
+  position: relative;
+  top: 1px;
+  vertical-align: top;
+  height: 1.3rem;
+  width: 1rem;
+}

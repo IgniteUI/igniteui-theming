@@ -1,0 +1,17 @@
+@use 'igniteui-theming' as *;
+
+button {
+  @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+}
+
+.button--minimum {
+  --ig-radius-factor: 0;
+}
+
+.button--middle {
+  --ig-radius-factor: 0.5;
+}
+
+.button--maximum {
+  --ig-radius-factor: 1;
+}

@@ -1,0 +1,106 @@
+@use './breakpoints' as *;
+
+@keyframes scroll-fade-alt {
+  0% {
+    opacity: 0;
+    transform: translateY(250px);
+    filter: brightness(0.55);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-250px);
+    filter: brightness(0.75);
+  }
+}
+
+@keyframes scroll-fade-alt-tablet {
+  0% {
+    opacity: 0;
+    transform: translateY(120px);
+    filter: brightness(0.75);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-120px);
+    filter: brightness(0.75);
+  }
+}
+
+@keyframes scroll-fade-alt-mobile {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: brightness(0.9);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+    filter: brightness(0.9);
+  }
+}
+
+.scroll-slide {
+  // Fallback for browsers without scroll-driven animation support
+  opacity: 1;
+
+  @supports (animation-timeline: view()) {
+    animation: scroll-fade-alt linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 95%;
+
+    @media screen and (width > 1024px) and (width < $bp-wide) {
+      animation: scroll-fade-alt-tablet linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 95%;
+    }
+
+    @media screen and (width < 1024px) {
+      animation: scroll-fade-alt-mobile linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 95%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+}

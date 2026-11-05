@@ -1,0 +1,56 @@
+// Generic "pagination" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-pagination {
+    display: grid;
+    gap: var(--it-spacing-horizontal);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .it-nav {
+    border: 1px solid var(--it-color-emphasis-300);
+    border-radius: var(--it-pagination-nav-border-radius);
+    display: block;
+    height: 100%;
+    line-height: var(--it-heading-line-height);
+    padding: var(--it-global-spacing);
+    transition: border-color var(--it-transition-fast)
+      var(--it-transition-timing-default);
+  }
+
+  .it-nav:hover {
+    border-color: var(--it-pagination-nav-color-hover);
+    text-decoration: none;
+  }
+
+  .it-pagination__link--next {
+    grid-column: 2/3;
+    text-align: right;
+  }
+
+  .it-pagination__label {
+    font-size: var(--it-h4-font-size);
+    font-weight: var(--it-heading-font-weight);
+    overflow-wrap: anywhere;
+  }
+
+  .it-pagination__link--prev .it-pagination__label::before {
+    content: '« ';
+  }
+
+  .it-pagination__link--next .it-pagination__label::after {
+    content: ' »';
+  }
+
+  .it-pagination__sublabel {
+    color: var(--it-color-content-secondary);
+    font-size: var(--it-h5-font-size);
+    font-weight: var(--it-font-weight-semibold);
+    margin-bottom: 0.25rem;
+  }
+
+  @media print {
+    .it-pagination {
+      display: none;
+    }
+  }
+}

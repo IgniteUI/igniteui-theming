@@ -1,0 +1,117 @@
+// Generic "menu" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-nav-menu {
+    font-weight: var(--it-font-weight-semibold);
+    overflow-x: hidden;
+  }
+
+  .it-nav-menu__list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .it-nav-menu__list .it-nav-menu__list {
+    flex: 0 0 100%;
+    margin-top: 0.25rem;
+    padding-left: var(--it-menu-link-padding-horizontal);
+  }
+
+  .it-nav-menu__list-item:not(:first-child) {
+    margin-top: 0.25rem;
+  }
+
+  .it-nav-menu__list-item--collapsed .it-nav-menu__list {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .it-nav-menu__list-item--collapsed .it-nav-menu__link--sublist::after,
+  .it-nav-menu__list-item--collapsed .it-nav-menu__caret::before {
+    transform: rotateZ(90deg);
+  }
+
+  .it-nav-menu__list-item-collapsible {
+    flex-wrap: wrap;
+    position: relative;
+    border-radius: 0.25rem;
+    display: flex;
+    transition: background var(--it-transition-fast)
+      var(--it-transition-timing-default);
+  }
+
+  .it-nav-menu__list-item-collapsible:hover {
+    background: var(--it-menu-color-background-hover);
+  }
+
+  .it-nav-menu__list-item-collapsible--active {
+    background: var(--it-menu-color-background-hover);
+  }
+
+  .it-nav-menu__list-item-collapsible .it-nav-menu__link:hover,
+  .it-nav-menu__list-item-collapsible .it-nav-menu__link--active {
+    background: none !important;
+  }
+
+  .it-nav-menu__link,
+  .it-nav-menu__caret {
+    align-items: center;
+    border-radius: 0.25rem;
+    display: flex;
+    transition: background var(--it-transition-fast)
+      var(--it-transition-timing-default);
+  }
+
+  .it-nav-menu__link:hover,
+  .it-nav-menu__caret:hover {
+    background: var(--it-menu-color-background-hover);
+  }
+
+  .it-nav-menu__link {
+    color: var(--it-menu-color);
+    flex: 1;
+    line-height: 1.25;
+    padding: var(--it-menu-link-padding-vertical)
+      var(--it-menu-link-padding-horizontal);
+  }
+
+  .it-nav-menu__link:hover {
+    text-decoration: none;
+    color: var(--it-menu-color);
+    transition: color var(--it-transition-fast)
+      var(--it-transition-timing-default);
+  }
+
+  .it-nav-menu__link--active {
+    color: var(--it-menu-color-active);
+  }
+
+  .it-nav-menu__link--active:hover {
+    color: var(--it-menu-color-active);
+  }
+
+  .it-nav-menu__link--active:not(.it-nav-menu__link--sublist) {
+    background-color: var(--it-menu-color-background-active);
+  }
+
+  .it-nav-menu__caret {
+    padding: var(--it-menu-link-padding-vertical)
+      var(--it-menu-link-padding-horizontal);
+  }
+
+  .it-nav-menu__caret::before {
+    content: '';
+    background: var(--it-menu-link-sublist-icon) 50% / 2rem 2rem;
+    filter: var(--it-menu-link-sublist-icon-filter);
+    height: 1.25rem;
+    transform: rotate(180deg);
+    width: 1.25rem;
+    transition: transform var(--it-transition-fast) linear;
+  }
+
+  @media print {
+    .it-nav-menu {
+      display: none;
+    }
+  }
+}

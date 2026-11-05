@@ -1,0 +1,105 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+// The colour-mode toggle (ColorModeToggle.astro): the base rules, the
+// site's button design, and where the footer places it on the landing and doc layouts.
+
+// ---- base
+.it-color-mode-toggle {
+  width: 2rem;
+  height: 2rem;
+}
+
+.it-color-mode-toggle__button {
+  -webkit-tap-highlight-color: transparent;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: background var(--it-transition-fast);
+}
+
+.it-color-mode-toggle__button:hover {
+  background: var(--it-color-emphasis-200);
+}
+
+.it-color-mode-toggle__icon {
+  display: none;
+}
+
+[data-theme-choice='light'] .it-toggle-icon--light,
+[data-theme-choice='dark'] .it-toggle-icon--dark {
+  display: initial;
+}
+
+.it-color-mode-toggle__button--disabled {
+  cursor: not-allowed;
+}
+
+// ---- navbar
+.it-toggle-icon--light,
+.it-toggle-icon--dark {
+  width: rem(18px);
+  height: rem(18px);
+  color: light-dark(var(--ig-gray-400), var(--ig-gray-150));
+}
+
+div.it-color-mode-toggle {
+  display: block;
+  border: rem(1px) solid light-dark(var(--ig-gray-150), var(--ig-gray-600));
+  border-radius: var(--ig-border-radius-large);
+  height: rem(30px);
+  width: rem(30px);
+
+  .it-clean-btn {
+    padding: rem(3px);
+    width: rem(28px);
+    height: rem(28px);
+  }
+}
+
+@media screen and (width < $bp-wide) {
+  .it-navbar__right div.it-color-mode-toggle {
+    display: none;
+  }
+}
+
+// ---- footer placement (landing page)
+html:not(.it-docs-page) {
+  .it-color-mode-toggle {
+    right: 0;
+    top: rem(-7px);
+  }
+}
+
+.it-footer__copyright .it-color-mode-toggle {
+  position: absolute;
+  right: var(--ig-spacing-m);
+  top: var(--ig-spacing-m);
+}
+
+// ---- footer placement (doc pages)
+.it-doc-main {
+  .it-footer__copyright .it-color-mode-toggle {
+    position: unset;
+  }
+}
+
+@media screen and (width < $bp-wide) {
+  .it-doc-main {
+    .it-footer__bottom .it-footer__copyright .it-color-mode-toggle {
+      right: var(--ig-spacing-m);
+      top: var(--ig-spacing-m);
+    }
+  }
+}
+
+@media screen and (width < $bp-desktop) {
+  .it-doc-main .it-footer__copyright .it-footer__copyright__wrapper {
+    .it-color-mode-toggle {
+      margin-left: auto;
+    }
+  }
+}

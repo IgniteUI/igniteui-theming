@@ -1,0 +1,59 @@
+// Generic "breadcrumbs" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-breadcrumbs__list {
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+
+  .it-breadcrumbs__item {
+    display: inline-block;
+  }
+
+  .it-breadcrumbs__item:not(:last-child)::after {
+    background: var(--it-breadcrumb-separator) center;
+    content: ' ';
+    display: inline-block;
+    filter: var(--it-breadcrumb-separator-filter);
+
+    /* prettier-ignore */
+    height: calc(var(--it-breadcrumb-separator-size) * var(--it-breadcrumb-size-multiplier) * var(--it-breadcrumb-separator-size-multiplier));
+    margin: 0 var(--it-breadcrumb-spacing);
+    opacity: 0.5;
+
+    /* prettier-ignore */
+    width: calc(var(--it-breadcrumb-separator-size) * var(--it-breadcrumb-size-multiplier) * var(--it-breadcrumb-separator-size-multiplier));
+
+    /* rtl:raw:
+        transform: rotate(180deg);
+        */
+  }
+
+  .it-breadcrumbs__item--active .it-breadcrumbs__link {
+    background: var(--it-breadcrumb-item-background-active);
+    color: var(--it-breadcrumb-color-active);
+  }
+
+  .it-breadcrumbs__link {
+    border-radius: var(--it-breadcrumb-border-radius);
+    color: var(--it-font-color-base);
+    display: inline-block;
+    font-size: calc(1rem * var(--it-breadcrumb-size-multiplier));
+
+    /* prettier-ignore */
+    padding: calc(var(--it-breadcrumb-padding-vertical) * var(--it-breadcrumb-size-multiplier)) calc(var(--it-breadcrumb-padding-horizontal) * var(--it-breadcrumb-size-multiplier));
+    transition-property: background, color;
+    transition-duration: var(--it-transition-fast);
+    transition-timing-function: var(--it-transition-timing-default);
+  }
+
+  .it-breadcrumbs__link:link:hover,
+  .it-breadcrumbs__link:visited:hover {
+    background: var(--it-breadcrumb-item-background-active);
+    text-decoration: none;
+  }
+
+  .it-breadcrumbs__link:any-link:hover {
+    background: var(--it-breadcrumb-item-background-active);
+    text-decoration: none;
+  }
+}

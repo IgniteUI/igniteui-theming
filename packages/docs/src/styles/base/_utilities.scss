@@ -1,0 +1,64 @@
+// Generic "utilities" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-margin-top--md {
+    margin-top: 1rem !important;
+  }
+
+  .it-margin-bottom--md {
+    margin-bottom: 1rem !important;
+  }
+
+  .it-margin-vert--lg {
+    margin-bottom: 2rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .it-text--center {
+    text-align: center;
+  }
+
+  .it-text--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .it-button-reset {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  .it-list-reset {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  @media (pointer: fine) {
+    .it-thin-scrollbar {
+      scrollbar-width: thin;
+    }
+
+    .it-thin-scrollbar::-webkit-scrollbar {
+      height: var(--it-scrollbar-size);
+      width: var(--it-scrollbar-size);
+    }
+
+    .it-thin-scrollbar::-webkit-scrollbar-track {
+      background: var(--it-scrollbar-track-background-color);
+      border-radius: 10px;
+    }
+
+    .it-thin-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--it-scrollbar-thumb-background-color);
+      border-radius: 10px;
+    }
+
+    .it-thin-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: var(--it-scrollbar-thumb-hover-background-color);
+    }
+  }
+}

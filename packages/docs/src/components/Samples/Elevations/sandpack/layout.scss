@@ -1,0 +1,51 @@
+[data-theme='dark'] {
+  button {
+		border-color: #9aa0b8;
+
+		&:hover {
+			background: #121252;
+		}
+	}
+}
+
+[data-theme='light'] {
+	button {
+		border-color: #000;
+
+		&:hover {
+			background: #222296;
+		}
+	}
+}
+
+button {
+  height: 3rem;
+  width: 10rem;
+  border: 2px solid;
+	border-radius: 0.375rem;
+  background-color: #302e76;
+  color: #fff;
+  margin: 10px;
+
+  &:hover {
+    cursor: pointer;
+    content: 'btn';
+  }
+}
+
+article {
+	display: contents;
+}
+
+body {
+  display: flex;
+  align-items: center;
+	justify-content: center;
+  height: 100vh;
+	margin: 0;
+  gap: 1rem;
+
+  @media (width < 610px) {
+    flex-direction: column;
+  }
+}
