@@ -1,0 +1,121 @@
+@use 'sass:map';
+@use '../../config';
+@use '../../functions' as *;
+@use '../../schemas/' as *;
+@use '../../../utils/map' as *;
+@use '../../../color/functions' as *;
+@use '../../../elevations/' as *;
+
+////
+/// @package theming
+/// @group themes
+/// @access public
+////
+
+/// Tile Manager Theme
+///
+/// PRIMARY TOKENS:
+/// - `$tile-background` — The background color of the tiles. Derives header/content backgrounds and text colors.
+///
+/// Derived colors are auto-calculated for contrast.
+///
+/// @param {Map} $schema [$light-material-schema] - The schema used as basis for styling the component.
+/// @param {Color} $background [null] - The background color of the tile manager component.
+/// @param {Color} $tile-background [null] - The background color of the tile component. PRIMARY - derives header/content backgrounds and text colors.
+/// @param {Color} $title-color [null] - The title color of the tile component. Auto-derived from header-background.
+/// @param {Color} $header-background [null] - The background color of the tile header. Auto-derived from tile-background.
+/// @param {Color} $content-background [null] - The background color of the tile content. Auto-derived from tile-background.
+/// @param {Color} $content-color [null] - The text color of the tile content. Auto-derived from content-background.
+/// @param {Color} $border-color [null] - The border color of the tile component.
+/// @param {Color} $hover-border-color [null] - The border color of the tile component on hover.
+/// @param {Color} $placeholder-background [null] - The background color of the ghost element that appears during drag and drop and while resizing.
+/// @param {Color} $overlay-background [null] - The background color of the ghost element that appears on top of the tile that will be swapped.
+/// @param {Color} $ghost-border [null] - The border color of the ghost element that appears during drag and drop and while resizing.
+/// @param {Color} $divider-color [null] - The color of the divider inside the tile header.
+/// @param {Number} $border-radius [null] - The border radius of the tile component.
+/// @param {List} $resting-shadow [null] - The shadow of the tile component in its resting state.
+/// @param {List} $drag-shadow [null] - The shadow of the tile component while being dragged.
+/// @requires $light-material-schema
+///
+/// @example scss - Change the tile manager and tile backgrounds
+///   $my-tile-manager-theme: tile-manager-theme($background: #eee, $tile-background: white);
+///   // Pass the theme to the tokens() mixin
+///   @include tokens($my-tile-manager-theme);
+@function tile-manager-theme(
+    $schema: $light-material-schema,
+
+    $background: null,
+    $tile-background: null,
+    $title-color: null,
+    $header-background: null,
+    $content-background: null,
+    $content-color: null,
+    $border-color: null,
+    $hover-border-color: null,
+    $placeholder-background: null,
+    $overlay-background: null,
+    $ghost-border: null,
+    $divider-color: null,
+    $border-radius: null,
+    $resting-shadow: null,
+    $drag-shadow: null
+) {
+    $selector: #{config.element-prefix() + '-' + 'tile-manager'};
+    $tile-manager-schema: ();
+
+    @if map.has-key($schema, 'tile-manager') {
+        $tile-manager-schema: map.get($schema, 'tile-manager');
+    } @else {
+        $tile-manager-schema: $schema;
+    }
+
+    $theme: digest-schema($tile-manager-schema);
+
+    @if not($header-background) and $tile-background {
+        $header-background: var(--tile-background);
+    }
+
+    @if not($content-background) and $tile-background {
+        $content-background: var(--tile-background);
+    }
+
+    @if not($title-color) and $header-background {
+        $title-color: adaptive-contrast(var(--header-background));
+    }
+
+    @if not($content-color) and $content-background {
+        $content-color: adaptive-contrast(var(--content-background));
+    }
+
+    @if not($resting-shadow) {
+        $resting-elevation: map.get($tile-manager-schema, 'resting-elevation');
+        $resting-shadow: elevation($resting-elevation);
+    }
+
+    @if not($drag-shadow) {
+        $drag-elevation: map.get($tile-manager-schema, 'drag-elevation');
+        $drag-shadow: elevation($drag-elevation);
+    }
+
+    @return extend(
+        $theme,
+        (
+            selector: $selector,
+            background: $background,
+            tile-background: $tile-background,
+            title-color: $title-color,
+            header-background: $header-background,
+            content-background: $content-background,
+            content-color: $content-color,
+            border-color: $border-color,
+            hover-border-color: $hover-border-color,
+            placeholder-background: $placeholder-background,
+            overlay-background: $overlay-background,
+            ghost-border: $ghost-border,
+            divider-color: $divider-color,
+            border-radius: $border-radius,
+            resting-elevation: $resting-shadow,
+            drag-elevation: $drag-shadow,
+        )
+    );
+}
