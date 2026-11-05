@@ -36,7 +36,7 @@
 /// @param {Color} $input-prefix-color [null] - The input prefix color in the idle state. Auto-derived from box/search-background.
 /// @param {Color} $input-prefix-background [null] - The background color of an input prefix in the idle state. Synced with suffix-background.
 /// @param {Color} $input-prefix-color--filled [null] - The input prefix color in the filled state. Auto-derived from prefix-color or background.
-/// @param {Color} $input-prefix-background--filled - The background color of an input prefix in the filled state.
+/// @param {Color} $input-prefix-background--filled [null] - The background color of an input prefix in the filled state.
 /// @param {Color} $input-prefix-color--focused [null] - The input prefix color in the focused state. Auto-derived from prefix-color--filled or background.
 /// @param {Color} $input-prefix-background--focused [null] - The background color of an input prefix in the focused state.
 /// @param {Color} $input-suffix-color [null] - The input suffix color in the idle state. Auto-derived from box/search-background. Synced with prefix-color.
@@ -46,6 +46,7 @@
 /// @param {Color} $input-suffix-color--focused [null] - The input suffix color in the focused state.
 /// @param {Color} $input-suffix-background--focused [null] - The background color of an input suffix in the focused state.
 /// @param {Color} $idle-secondary-color [null] - The label color in the idle state. Auto-derived from box-background or placeholder-color.
+/// @param {Color} $filled-secondary-color [null] - The label color in the filled state. Auto-derived from idle-secondary-color.
 /// @param {Color} $focused-secondary-color [null] - The label color in the focused state. Auto-derived from focused-bottom-line-color or focused-border-color.
 /// @param {Color} $idle-bottom-line-color [null] - The bottom line and border colors in the idle state. PRIMARY for material bottom line.
 /// @param {Color} $hover-bottom-line-color [null] - The bottom line and border colors in the hover state. Auto-derived from idle-bottom-line-color.
@@ -99,6 +100,7 @@
     $disabled-text-color: null,
 
     $idle-secondary-color: null,
+    $filled-secondary-color: null,
     $focused-secondary-color: null,
 
     $idle-bottom-line-color: null,
@@ -395,6 +397,10 @@
         }
     }
 
+    @if not($filled-secondary-color) and $idle-secondary-color {
+        $filled-secondary-color: var(--idle-secondary-color);
+    }
+
     @if not($idle-text-color) and $search-background {
         $idle-text-color: adaptive-contrast(var(--search-background));
     }
@@ -569,6 +575,7 @@
             border-border-radius: $border-border-radius,
             search-border-radius: $search-border-radius,
             idle-secondary-color: $idle-secondary-color,
+            filled-secondary-color: $filled-secondary-color,
             focused-secondary-color: $focused-secondary-color,
             idle-bottom-line-color: $idle-bottom-line-color,
             hover-bottom-line-color: $hover-bottom-line-color,

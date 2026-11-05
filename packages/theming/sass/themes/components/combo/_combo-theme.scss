@@ -39,9 +39,11 @@
 /// @param {Color} $clear-button-background-focus [null] - The combo clear button background color when the combo is focused. PRIMARY for clear button focus.
 /// @param {Color} $clear-button-foreground [null] - The combo clear button foreground color.
 /// @param {Color} $clear-button-foreground-focus [null] - The combo clear button foreground color when the combo is focused. Auto-derived from clear-button-background-focus.
+/// @param {Color} $case-icon-color [null] - The case sensitive icon color in inactive state for combo search input.
+/// @param {Color} $case-icon-color-active [null] - The case sensitive icon color in active state for combo search input.
 /// @requires $light-material-schema
 /// @example scss - Change the combo empty list background
-///   $my-combo-theme: igx-checkbox-theme($empty-list-background);
+///   $my-combo-theme: combo-theme($empty-list-background);
 ///   // Pass the theme to the tokens() mixin
 ///   @include tokens($my-combo-theme);
 @function combo-theme(
@@ -60,7 +62,9 @@
     $clear-button-background-focus: null,
     $clear-button-foreground: null,
     $clear-button-foreground-focus: null,
-    $toggle-button-foreground-filled: null
+    $toggle-button-foreground-filled: null,
+    $case-icon-color: null,
+    $case-icon-color-active: null
 ) {
     $selector: (
         #{config.element-prefix() + '-' + 'combo'},
@@ -147,6 +151,8 @@
             clear-button-background-focus: $clear-button-background-focus,
             clear-button-foreground: $clear-button-foreground,
             clear-button-foreground-focus: $clear-button-foreground-focus,
+            case-icon-color: $case-icon-color,
+            case-icon-color-active: $case-icon-color-active,
         )
     );
 }

@@ -22,7 +22,6 @@
 /// @prop {Color} anchor-outline-color [transparent] - The outline color of the color picker trigger in focus-visible state.
 /// @prop {Number} anchor-border-radius [rem(4px)] - The border radius of the color picker trigger.
 /// @prop {Map} swatch-preview-border-color [color: ('gray', 300)] - The border color of the color preview inside the trigger.
-/// @prop {Number} swatch-preview-border-radius [rem(2px)] - The border radius of the color preview inside the trigger.
 /// @prop {Map} picker-canvas-border-color [color: ('gray', 600)] - The border color of the color picker canvas.
 /// @prop {Map} picker-background [color: 'surface'] - The background color of the color picker dropdown.
 /// @prop {Color} picker-border-color [transparent] - The border color of the color picker dropdown.
@@ -91,9 +90,6 @@ $light-color-picker: extend(
                 'gray',
                 300,
             ),
-        ),
-        swatch-preview-border-radius: (
-            border-radius: rem(2px),
         ),
         picker-background: (
             color: 'surface',
