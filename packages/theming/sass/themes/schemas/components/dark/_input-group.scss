@@ -63,6 +63,7 @@ $dark-material-input-group: extend(
 /// Generates a dark fluent input-group schema.
 /// @type Map
 /// @prop {Map} idle-secondary-color [color: ('gray', 800)] - The label color in the idle state.
+/// @prop {Map} filled-secondary-color [color: ('gray', 800)] - The label color in the filled state.
 /// @prop {Map} disabled-text-color [color: ('gray', 300)] - The input text color in the disabled state.
 /// @prop {Map} input-prefix-color [color: ('gray', 400)] - The text color of an input prefix of type line, box and border.
 /// @prop {Map} input-prefix-color--filled [color: ('gray', 400)] - The input prefix color in the filled state.
@@ -90,6 +91,12 @@ $dark-fluent-input-group: extend(
     $dark-base-input-group,
     (
         idle-secondary-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
+        filled-secondary-color: (
             color: (
                 'gray',
                 800,
@@ -248,6 +255,7 @@ $dark-bootstrap-input-group: extend($bootstrap-input-group, $dark-base-input-gro
 /// @prop {Map} box-background-hover [contrast-color: ('gray', 50, .1)] - The background color of an input group of type box on hover.
 /// @prop {Map} box-background-focus [contrast-color: ('gray', 50, .1)] - The background color of an input group of type box on focus.
 /// @prop {Map} idle-secondary-color [contrast-color: ('gray', 50, .6)] - The label color in the idle state.
+/// @prop {Map} filled-secondary-color [contrast-color: ('gray', 50, .6)] - The label color in the filled state.
 /// @prop {Map} focused-text-color [contrast-color: ('gray', 50)] - The input text color in the focused state.
 /// @prop {Map} focused-secondary-color [contrast-color: ('gray', 50, .6)] - The label color in the focused state.
 /// @prop {Map} placeholder-color [contrast-color: ('gray', 50, .6)] - The placeholder color of an input group.
@@ -374,6 +382,13 @@ $dark-indigo-input-group: extend(
             ),
         ),
         idle-secondary-color: (
+            contrast-color: (
+                'gray',
+                50,
+                0.6,
+            ),
+        ),
+        filled-secondary-color: (
             contrast-color: (
                 'gray',
                 50,
