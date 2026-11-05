@@ -684,6 +684,20 @@ The drop-down background should match the select surface intent.`,
   "tab-item": {
     childOf: "tabs",
   },
+  "tile-manager": {
+    selectors: {
+      angular: "igc-tile-manager",
+      webcomponents: "igc-tile-manager",
+    },
+    tokenAliases: {
+      "resting-shadow": "resting-elevation",
+      "drag-shadow": "drag-elevation",
+    },
+    aliases: ["tiles", "dashboard tiles"],
+  },
+  tile: {
+    childOf: "tile-manager",
+  },
   "time-picker": {
     selectors: { angular: "igx-time-picker", webcomponents: null },
     tokenAliases: {

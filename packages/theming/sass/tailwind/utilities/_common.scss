@@ -97,6 +97,14 @@ $theme-schemas: () !default;
         )
     );
 
+    // Tile Manager
+    @include tailwind-theme(
+        $component: tile-manager,
+        $props: (
+            tile-background,
+        )
+    );
+
     // Color Picker
     @include tailwind-theme(
         $component: color-picker,
