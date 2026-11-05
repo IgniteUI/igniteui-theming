@@ -66,19 +66,15 @@ function getComposedTokenWarning(
  * so the dark block has to be scoped by the agent.
  */
 function getVariantNote(variant: string, selector: string | undefined): string {
-  if (variant === "both") {
-    return `\n\n🌗 **Light & dark:** Replace \`${DARK_SCOPE_PLACEHOLDER}\` with your app's dark-mode selector.`;
-  }
-
   const example = selector
     ? ` (e.g. "${scopeSelector(DARK_SCOPE_PLACEHOLDER, selector)}")`
     : "";
 
   if (variant === "dark") {
-    return `\n\n🌗 **Light & dark:** This block covers the dark variant only. Scope it under your app's dark-mode selector${example} so it doesn't override the light theme. For the light variant, call again with \`variant: "light"\`.`;
+    return `\n\n🌗 **Light & dark:** This block covers the dark variant only. Scope it under your app's dark-mode selector${example} so it doesn't override the light theme. Put that selector on a root element (\`html\` or \`body\`) so overlay content is included. For the light variant, call again with \`variant: "light"\` and token values for a light surface.`;
   }
 
-  return `\n\n🌗 **Light & dark:** This block covers the light variant only. For a dark variant, call again with \`variant: "dark"\` and scope it under your app's dark-mode selector${example}.`;
+  return `\n\n🌗 **Light & dark:** This block covers the light variant only. For a dark variant, call again with \`variant: "dark"\` and token values for a dark surface (usually different from these), and scope it under your app's dark-mode selector${example}.`;
 }
 
 export async function handleCreateComponentTheme(
@@ -292,7 +288,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
       // Design system info
       responseParts.push(
-        `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant === "both" ? "light + dark" : variant})`,
+        `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant})`,
       );
 
       // Selector info
@@ -371,7 +367,7 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
 
     // Design system info
     responseParts.push(
-      `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant === "both" ? "light + dark" : variant})`,
+      `Design System: ${designSystem.charAt(0).toUpperCase() + designSystem.slice(1)} (${variant})`,
     );
 
     // Selector info

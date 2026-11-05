@@ -110,10 +110,23 @@ export const SASS_USE_INLINE_COMMENT =
 /** Placeholder scope for dark component themes; the app's dark-mode selector isn't known. */
 export const DARK_SCOPE_PLACEHOLDER = ".your-dark-scope";
 
-/** Prefix every selector in a comma-separated list with an ancestor scope. */
+/**
+ * Prefix every selector in a comma-separated list with an ancestor scope.
+ * Only top-level commas split the list; commas inside `()` and `[]` are kept.
+ */
 export function scopeSelector(scope: string, selector: string): string {
-  return selector
-    .split(",")
+  let depth = 0;
+  // Mark top-level commas, then split on the marks
+  const marked = [...selector]
+    .map((char) => {
+      if ("([".includes(char)) depth++;
+      if (")]".includes(char)) depth--;
+      return char === "," && depth === 0 ? "\0" : char;
+    })
+    .join("");
+
+  return marked
+    .split("\0")
     .map((part) => `${scope} ${part.trim()}`)
     .join(", ");
 }

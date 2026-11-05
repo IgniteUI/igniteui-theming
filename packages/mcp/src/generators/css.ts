@@ -241,8 +241,7 @@ export async function generateComponentThemeCss(
     getThemingSelector,
     SCHEMA_PRESETS,
   } = await import("../knowledge/index.js");
-  const { DARK_SCOPE_PLACEHOLDER, scopeSelector, toVariableName } =
-    await import("../utils/sass.js");
+  const { toVariableName } = await import("../utils/sass.js");
 
   // Validate component exists
   const theme = getComponentTheme(options.component);
@@ -261,8 +260,14 @@ export async function generateComponentThemeCss(
     ? `$${toVariableName(options.name)}`
     : `$custom-${themeComponentName}-theme`;
 
-  // Build token arguments - the schema is added per variant below
-  const tokenArgs: string[] = [];
+  // Get the schema variable based on design system and variant
+  const schemaVar =
+    SCHEMA_PRESETS[variant as "light" | "dark"][
+      designSystem as "material" | "indigo" | "bootstrap" | "fluent"
+    ];
+
+  // Build token arguments - schema comes first
+  const tokenArgs: string[] = [`$schema: ${schemaVar}`];
 
   for (const [tokenName, value] of Object.entries(options.tokens)) {
     const stringValue = typeof value === "number" ? String(value) : value;
@@ -279,36 +284,20 @@ export async function generateComponentThemeCss(
     options.selector ||
     (defaultSelectors.length > 0 ? defaultSelectors[0] : options.component);
 
-  // "both" adds a dark block with its own variable, scoped under a placeholder
-  const variants = variant === "both" ? ["light", "dark"] : [variant];
-  const blocks = variants.map((v) => {
-    const isDark = variant === "both" && v === "dark";
-    const varName = isDark ? `${themeName}-dark` : themeName;
-    const varSelector = isDark
-      ? scopeSelector(DARK_SCOPE_PLACEHOLDER, selector)
-      : selector;
-    const schemaVar =
-      SCHEMA_PRESETS[v as "light" | "dark"][
-        designSystem as "material" | "indigo" | "bootstrap" | "fluent"
-      ];
-
-    return `
-// Custom ${themeComponentName} theme
-${varName}: ${themeFn}(
-  ${[`$schema: ${schemaVar}`, ...tokenArgs].join(",\n  ")}
-);
-
-// Apply the theme to ${varSelector}
-${varSelector} {
-  @include tokens(${varName});
-}`;
-  });
-
   // Generate Sass code
   const sassCode = `
 @use 'igniteui-theming/sass/themes' as *;
 @use 'igniteui-theming/sass/themes/schemas' as *;
-${blocks.join("\n")}
+
+// Custom ${themeComponentName} theme
+${themeName}: ${themeFn}(
+  ${tokenArgs.join(",\n  ")}
+);
+
+// Apply the theme to ${selector}
+${selector} {
+  @include tokens(${themeName});
+}
 `;
 
   try {
@@ -320,7 +309,7 @@ ${blocks.join("\n")}
 
     return {
       css: result.css,
-      description: `Generated CSS custom properties for ${themeComponentName} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant === "both" ? "light + dark" : variant} variant)`,
+      description: `Generated CSS custom properties for ${themeComponentName} component with ${Object.keys(options.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

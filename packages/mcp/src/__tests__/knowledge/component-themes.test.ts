@@ -22,34 +22,26 @@ describe("Component Themes Knowledge Base", () => {
       expect(resolveComponentName("nav-drawer-item")).toBe("nav-drawer-item");
     });
 
-    it("resolves element selectors with or without the prefix", () => {
-      expect(resolveComponentName("nav-drawer")).toBe("navdrawer");
-      expect(resolveComponentName("igc-nav-drawer")).toBe("navdrawer");
-      expect(resolveComponentName(" igx-nav-drawer ")).toBe("navdrawer");
+    it.each([
+      "igc-nav-drawer",
+      "igx-nav-drawer",
+      "nav-drawer",
+      "Nav-Drawer",
+      "IGC-NAV-DRAWER",
+      "IgrNavDrawer",
+      "IgbNavDrawer",
+    ])("resolves %s to navdrawer", (name) => {
+      expect(resolveComponentName(name)).toBe("navdrawer");
+    });
+
+    it("resolves selectors whose name differs from the key", () => {
       expect(resolveComponentName("igx-linear-bar")).toBe("progress-linear");
     });
 
-    it("resolves React (Igr*) and Blazor (Igb*) component names", () => {
-      expect(resolveComponentName("IgrNavDrawer")).toBe("navdrawer");
-      expect(resolveComponentName("IgbNavDrawer")).toBe("navdrawer");
-      expect(resolveComponentName("IgrNavDrawerItem")).toBe("nav-drawer-item");
-      expect(resolveComponentName("IgbDatePicker")).toBe("date-picker");
-      expect(resolveComponentName("IgrLinearProgress")).toBe("progress-linear");
-    });
-
-    it("only resolves tag names with their exact casing and prefix", () => {
-      for (const name of [
-        "IGX-Nav-Drawer",
-        "IgcAvatar",
-        "IgxAvatar",
-        "Igravatar",
-        "IgrNavdrawer",
-        "igrNavDrawer",
-        "igr-nav-drawer",
-        "navDrawer",
-      ]) {
-        expect(resolveComponentName(name)).toBe(name.toLowerCase());
-      }
+    it("does not resolve React names that aren't listed in metadata", () => {
+      expect(resolveComponentName("IgrAccordionHeader")).toBe(
+        "igraccordionheader",
+      );
     });
 
     it("leaves unknown names normalized but unresolved", () => {

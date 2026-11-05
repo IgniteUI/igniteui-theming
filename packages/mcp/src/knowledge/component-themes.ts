@@ -158,52 +158,11 @@ export function validateTokens(
   };
 }
 
-function toPascalCase(name: string): string {
-  return name
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join("");
-}
-
 /**
- * Exact component tag names mapped to their component key:
- * Angular / Web Components selectors with and without their prefix
- * (`igx-nav-drawer`, `igc-nav-drawer`, `nav-drawer`) and React / Blazor
- * component names (`IgrNavDrawer`, `IgbNavDrawer`).
+ * Normalize a component name and resolve it to its component key.
+ * Accepts the key itself or any of its selectors / React / Blazor names
+ * (e.g. "nav-drawer", "igc-nav-drawer", "IgrNavDrawer" → "navdrawer").
  */
-const COMPONENTS_BY_TAG = new Map<string, string>();
-
-function addTag(tag: string, key: string) {
-  if (!COMPONENTS_BY_TAG.has(tag)) {
-    COMPONENTS_BY_TAG.set(tag, key);
-  }
-}
-
-for (const [key, metadata] of Object.entries(COMPONENT_METADATA)) {
-  if (!metadata.selectors) {
-    addTag(`Igr${toPascalCase(key)}`, key);
-    addTag(`Igb${toPascalCase(key)}`, key);
-  }
-
-  for (const [platform, value] of Object.entries(metadata.selectors ?? {})) {
-    for (const selector of [value].flat()) {
-      const element = selector?.match(/^ig[cx]-([a-z0-9-]+)$/)?.[1];
-
-      if (!selector || !element) {
-        continue;
-      }
-
-      addTag(selector, key);
-      addTag(element, key);
-
-      if (platform === "webcomponents") {
-        addTag(`Igr${toPascalCase(element)}`, key);
-        addTag(`Igb${toPascalCase(element)}`, key);
-      }
-    }
-  }
-}
-
 export function resolveComponentName(name: string): string {
   const normalized = name.toLowerCase().trim();
 
@@ -211,7 +170,7 @@ export function resolveComponentName(name: string): string {
     return normalized;
   }
 
-  return COMPONENTS_BY_TAG.get(name.trim()) ?? normalized;
+  return componentSearcher.resolve(name) ?? normalized;
 }
 
 /**

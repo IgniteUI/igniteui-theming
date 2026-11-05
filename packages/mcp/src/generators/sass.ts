@@ -22,16 +22,13 @@ import {
 import { generateWebComponentsThemeSass } from "../knowledge/platforms/webcomponents.js";
 import { TYPOGRAPHY_PRESETS } from "../knowledge/typography.js";
 import {
-  DARK_SCOPE_PLACEHOLDER,
   generateHeader,
   generatePresetImports,
   generateUseStatement,
   quoteFontFamily,
-  scopeSelector,
   toVariableName,
 } from "../utils/sass.js";
 import type {
-  ComponentThemeVariant,
   CreateElevationsInput,
   CreatePaletteInput,
   CreateThemeInput,
@@ -452,8 +449,8 @@ export interface CreateComponentThemeInput {
   licensed?: boolean;
   /** Design system (defaults to 'material') */
   designSystem?: DesignSystem;
-  /** Theme variant - light, dark, or both (defaults to 'light') */
-  variant?: ComponentThemeVariant;
+  /** Theme variant - light or dark (defaults to 'light') */
+  variant?: ThemeVariant;
   /** Component name (e.g., "flat-button", "avatar") */
   component: string;
   /** Token name-value pairs */
@@ -477,7 +474,7 @@ export function generateComponentTheme(
   }
 
   const designSystem: DesignSystem = input.designSystem ?? "material";
-  const variant: ComponentThemeVariant = input.variant ?? "light";
+  const variant: ThemeVariant = input.variant ?? "light";
   const themeFn = theme.themeFunctionName;
   // For child components, derive variable name from parent to avoid
   // generating a separate variable that signals "different theme"
@@ -487,8 +484,11 @@ export function generateComponentTheme(
     ? `$${toVariableName(input.name)}`
     : `$custom-${themeComponentName}-theme`;
 
-  // Build token arguments - the schema is added per variant below
-  const tokenArgs: string[] = [];
+  // Get the schema variable based on design system and variant
+  const schemaVar = SCHEMA_PRESETS[variant][designSystem];
+
+  // Build token arguments - schema comes first
+  const tokenArgs: string[] = [`$schema: ${schemaVar}`];
   for (const [tokenName, value] of Object.entries(input.tokens)) {
     // Convert value to string if needed
     const stringValue = typeof value === "number" ? String(value) : value;
@@ -514,41 +514,30 @@ export function generateComponentTheme(
     sections.push(`@use '${SCHEMAS_PATH}' as *;`);
   }
 
-  // "both" adds a dark block with its own variable, scoped under a placeholder
-  const variants: ThemeVariant[] =
-    variant === "both" ? ["light", "dark"] : [variant];
-  const variables: string[] = [];
+  sections.push(
+    "",
+    `// Custom ${themeComponentName} theme`,
+    `${themeName}: ${themeFn}(`,
+  );
 
-  for (const v of variants) {
-    const isDark = variant === "both" && v === "dark";
-    const varName = isDark ? `${themeName}-dark` : themeName;
-    const varSelector = isDark
-      ? scopeSelector(DARK_SCOPE_PLACEHOLDER, selector)
-      : selector;
-    const args = [`$schema: ${SCHEMA_PRESETS[v][designSystem]}`, ...tokenArgs];
-    variables.push(varName);
-
-    sections.push(
-      "",
-      `// Custom ${themeComponentName} theme`,
-      `${varName}: ${themeFn}(`,
-      `  ${args.join(",\n  ")}`,
-      ");",
-    );
-
-    // Apply the theme using tokens mixin (global mode)
-    sections.push("");
-    sections.push(`// Apply the theme to ${varSelector}`);
-    sections.push(`${varSelector} {`);
-    sections.push(`  @include tokens(${varName});`);
-    sections.push("}");
+  // Add token arguments with proper indentation
+  if (tokenArgs.length > 0) {
+    sections.push(`  ${tokenArgs.join(",\n  ")}`);
   }
+  sections.push(");");
+
+  // Apply the theme using tokens mixin (global mode)
+  sections.push("");
+  sections.push(`// Apply the theme to ${selector}`);
+  sections.push(`${selector} {`);
+  sections.push(`  @include tokens(${themeName});`);
+  sections.push("}");
 
   const code = `${sections.join("\n")}\n`;
 
   return {
     code,
-    description: `Generated custom ${themeComponentName} theme with ${Object.keys(input.tokens).length} token(s) using ${designSystem} design system (${variant === "both" ? "light + dark" : variant} variant)`,
-    variables,
+    description: `Generated custom ${themeComponentName} theme with ${Object.keys(input.tokens).length} token(s) using ${designSystem} design system (${variant} variant)`,
+    variables: [themeName],
   };
 }

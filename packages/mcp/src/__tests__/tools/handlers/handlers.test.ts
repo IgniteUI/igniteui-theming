@@ -474,10 +474,8 @@ describe("handleCreateComponentTheme", () => {
     });
 
     const text = result.content[0].text;
-    expect(text).toContain("covers the light variant only");
     expect(text).toContain('variant: "dark"');
     expect(text).toContain('".your-dark-scope igc-avatar"');
-    expect(text).not.toContain('"both"');
   });
 
   it("tells agents to scope a dark call and add the light variant", async () => {
@@ -490,44 +488,8 @@ describe("handleCreateComponentTheme", () => {
     });
 
     const text = result.content[0].text;
-    expect(text).toContain("covers the dark variant only");
     expect(text).toContain('".your-dark-scope igx-avatar"');
     expect(text).toContain('variant: "light"');
-  });
-
-  it("returns light and scoped dark CSS blocks for variant both", async () => {
-    const result = await handleCreateComponentTheme({
-      platform: "webcomponents",
-      component: "avatar",
-      variant: "both",
-      tokens: { background: "#ff5722" },
-      output: "css",
-    });
-
-    expect(result.isError).toBeUndefined();
-    const text = result.content[0].text;
-    expect(text).toContain("(light + dark)");
-    expect(text).toMatch(/^igc-avatar \{/m);
-    expect(text).toMatch(/^\.your-dark-scope igc-avatar \{/m);
-    expect(text).toContain("Replace `.your-dark-scope`");
-  });
-
-  it("returns light and dark Sass themes with one set of @use rules for variant both", async () => {
-    const result = await handleCreateComponentTheme({
-      platform: "angular",
-      component: "avatar",
-      variant: "both",
-      tokens: { background: "#ff5722" },
-      output: "sass",
-    });
-
-    expect(result.isError).toBeUndefined();
-    const text = result.content[0].text;
-    expect(text).toContain("$schema: $light-material-schema");
-    expect(text).toContain("$schema: $dark-material-schema");
-    expect(text).toContain("$custom-avatar-theme-dark");
-    expect(text).toContain(".your-dark-scope igx-avatar {");
-    expect(text.match(/^@use /gm)).toHaveLength(1);
   });
 
   it("returns error when platform is not provided", async () => {
@@ -561,23 +523,17 @@ describe("handleCreateComponentTheme", () => {
     expect(text).toContain("not supported");
   });
 
-  it("suggests progress-linear for linear progress phrasing", async () => {
+  it("resolves linear progress phrasing to progress-linear", async () => {
     const result = await handleCreateComponentTheme({
       platform: "angular",
       component: "linear progress",
       tokens: {
-        background: "#ff5722",
+        "fill-color-info": "#ff5722",
       },
     });
 
-    expect(result.isError).toBe(true);
-
-    const text = result.content[0].text;
-    expect(text).toContain('Component "linear progress" not found.');
-    expect(text).toContain("**Similar components:**");
-
-    const suggestions = text.split("**Similar components:**")[1] ?? "";
-    expect(suggestions.trimStart().startsWith("- progress-linear")).toBe(true);
+    expect(result.isError).toBeUndefined();
+    expect(result.content[0].text).toContain("progress-linear");
   });
 
   it("suggests progress components for common typo phrasing", async () => {
