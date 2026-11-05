@@ -23,7 +23,10 @@
 
     @for $i from 1 through 4 {
         $n: $i % $len;
-        $n: if($n != 0, $n, $len);
+
+        @if $n == 0 {
+            $n: $len;
+        }
 
         @if $len == 3 and $i == 4 {
             $n: 2;

@@ -124,7 +124,7 @@
 
     @each $style, $value in types.$ITypeStyle {
         $overwrite: map.get($keywords, $style);
-        $value: if($overwrite, $overwrite, $value);
+        $value: $overwrite or $value;
 
         @if not($value) {
             @error 'Missing argument $#{$style}.';

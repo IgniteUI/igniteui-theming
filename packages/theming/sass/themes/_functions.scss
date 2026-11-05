@@ -112,7 +112,11 @@
     @if map.has-key($theme, $property) {
         $p: --#{$property};
 
-        @return if($fallback, var($p, $fallback), var($p));
+        @if $fallback {
+            @return var($p, $fallback);
+        }
+
+        @return var($p);
     } @else {
         @error 'The #{map.get($theme, name)} theme does \not contain property "#{$property}".';
     }
@@ -182,7 +186,12 @@
 ///   }
 /// @return {Function} The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
-    $spacing: if($dir, --ig-spacing-#{$dir}, --ig-spacing);
+    $spacing: --ig-spacing;
+
+    @if $dir {
+        $spacing: --ig-spacing-#{$dir};
+    }
+
     $sm: _abs($sm);
     $md: _abs($md);
     $lg: _abs($lg);

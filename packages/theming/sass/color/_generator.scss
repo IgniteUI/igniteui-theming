@@ -214,20 +214,27 @@ $_target-tolerance: 0.05;
     @for $i from 0 to 20 {
         $l: math.div($lo + $hi, 2);
         $ceiling: gamut.ceiling($l, $tent, $softness);
-        $c: if(
-            $fixed != null,
-            math.min($fixed, $ceiling),
-            map.get($chroma, 'level') * _envelope(map.get($chroma, 'at')) * $ceiling
-        );
+        $c: null;
+
+        @if $fixed {
+            $c: math.min($fixed, $ceiling);
+        } @else {
+            $c: map.get($chroma, 'level') * _envelope(map.get($chroma, 'at')) * $ceiling;
+        }
+
         $out: color.to-gamut(gamut.make($l, $c, _hue-at($h, $l)), srgb, local-minde);
         $y: luminance($out);
-        $got: if($lighter, math.div($y + 0.05, $anchor-y + 0.05), math.div($anchor-y + 0.05, $y + 0.05));
+        $got: math.div($anchor-y + 0.05, $y + 0.05);
+
+        @if $lighter {
+            $got: math.div($y + 0.05, $anchor-y + 0.05);
+        }
 
         @if math.abs($got - $target) < 0.005 {
             @return (color: $out, reached: $got);
         }
 
-        @if if($lighter, $got < $target, $got > $target) {
+        @if $lighter and $got < $target or not $lighter and $got > $target {
             $lo: $l;
         } @else {
             $hi: $l;
@@ -269,7 +276,11 @@ $_target-tolerance: 0.05;
 
     $s: math.div(map.get($read, 'c'), gamut.ceiling(map.get($read, 'l'), $tent, $_ceiling-softness));
 
-    @return if($muted, math.min($s, $_neutral-tint-cap), math.clamp(config.$saturation-floor, $s, 1));
+    @if $muted {
+        @return math.min($s, $_neutral-tint-cap);
+    }
+
+    @return math.clamp(config.$saturation-floor, $s, 1);
 }
 
 /// Packs one finished color into the pair `shades()` expects.
@@ -290,7 +301,11 @@ $_target-tolerance: 0.05;
 @function _layer($ctx, $anchor, $c, $target) {
     $y: map.get($ctx, 'anchor-y');
     $lighter: map.get($ctx, 'lighter');
-    $room: if($lighter, math.div(1.05, $y + 0.05), math.div($y + 0.05, 0.05));
+    $room: math.div($y + 0.05, 0.05);
+
+    @if $lighter {
+        $room: math.div(1.05, $y + 0.05);
+    }
 
     @if $room < $target {
         @return $anchor;
@@ -305,7 +320,11 @@ $_target-tolerance: 0.05;
         )
     );
 
-    @return if(map.get($solved, 'reached') >= $target * 0.9, map.get($solved, 'color'), $anchor);
+    @if map.get($solved, 'reached') >= $target * 0.9 {
+        @return map.get($solved, 'color');
+    }
+
+    @return $anchor;
 }
 
 /// Builds a surface family: a background plus the layers that sit on it. Layers hold the
@@ -333,7 +352,13 @@ $_target-tolerance: 0.05;
         $result: map.set($result, $role, _entry(_layer($ctx, $seed, $c, map.get($spec, step))));
     }
 
-    $translucent: rgba(if($by > 0.5, #000, #fff), config.$surface-container-alpha);
+    $ink: #fff;
+
+    @if $by > 0.5 {
+        $ink: #000;
+    }
+
+    $translucent: rgba($ink, config.$surface-container-alpha);
     $result: map.set(
         $result,
         'container',
@@ -376,7 +401,11 @@ $_target-tolerance: 0.05;
     $is-neutral: $key == 'gray';
 
     @if $is-neutral and not $seed {
-        $seed: if(luminance($surface) > 0.5, #000, #fff);
+        $seed: #fff;
+
+        @if luminance($surface) > 0.5 {
+            $seed: #000;
+        }
     }
 
     $read: gamut.read($seed);
@@ -384,9 +413,19 @@ $_target-tolerance: 0.05;
 
     // Backgrounds are picked deliberately, so a surface keeps any hue it has.
     $c: map.get($read, 'c');
-    $chromatic: if($is-surface, $c > 0, $c >= $_hue-threshold);
+    $chromatic: $c >= $_hue-threshold;
+
+    @if $is-surface {
+        $chromatic: $c > 0;
+    }
+
     $muted: $is-neutral or $c < $_muted-threshold;
-    $tent: if($chromatic, gamut.tent($sh), (0, 0));
+    $tent: (0, 0);
+
+    @if $chromatic {
+        $tent: gamut.tent($sh);
+    }
+
     $s: _level($read, $tent, $chromatic, $muted);
 
     @if $is-surface {
@@ -395,11 +434,26 @@ $_target-tolerance: 0.05;
 
     $sc: _scale($key, $scale);
     $on-surface: $is-neutral and map.get($sc, anchor) == 'surface';
-    $anchor-y: if($on-surface, luminance($surface), 1);
+    $anchor-y: 1;
+
+    @if $on-surface {
+        $anchor-y: luminance($surface);
+    }
+
     $ctx: _context($sh, $tent, $anchor-y, $on-surface and $anchor-y <= 0.5);
 
     // A white-anchored gray keeps its colors on a dark surface and runs them in reverse.
     $flip: $is-neutral and not $on-surface and luminance($surface) <= 0.5;
+
+    // Accents keep a muted family's level and run a chromatic one at full chroma.
+    $accent-level: 0;
+
+    @if $muted {
+        $accent-level: $s;
+    } @else if $chromatic {
+        $accent-level: 1;
+    }
+
     $result: ();
     $i: 0;
     $n: 0;
@@ -438,7 +492,7 @@ $_target-tolerance: 0.05;
                         $ctx,
                         map.get($_accent-targets, $v),
                         (
-                            level: if($muted, $s, if($chromatic, 1, 0)),
+                            level: $accent-level,
                             at: 0.5,
                             softness: $_accent-ceiling-softness,
                         )
@@ -446,6 +500,12 @@ $_target-tolerance: 0.05;
                 )
             );
         } @else {
+            $step: $i;
+
+            @if $flip {
+                $step: $n - 1 - $i;
+            }
+
             $result: map.set(
                 $result,
                 $v,
@@ -454,10 +514,10 @@ $_target-tolerance: 0.05;
                         $key,
                         $v,
                         $ctx,
-                        _target($sc, if($flip, $n - 1 - $i, $i), $n),
+                        _target($sc, $step, $n),
                         (
                             level: $s,
-                            at: math.div(if($flip, $n - 1 - $i, $i), $n - 1),
+                            at: math.div($step, $n - 1),
                             softness: $_ceiling-softness,
                         )
                     )
@@ -483,7 +543,7 @@ $_target-tolerance: 0.05;
 ///   $where: seed-lands-on($my-palette, 'primary'); // '300'
 @function seed-lands-on($palette, $name: 'primary') {
     $family: map.get($palette, $name);
-    $seed: if($family, map.get($family, 'seed'), null);
+    $seed: $family and map.get($family, 'seed');
 
     @if not $seed {
         @return null;

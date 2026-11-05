@@ -9,7 +9,11 @@
 /// @access public
 /// @example scss - Check if the current scope is root
 ///   @mixin smart-mixin() {
-///     $scope: if(is-root(), ':root', '&');
+///     $scope: '&';
+///
+///     @if is-root() {
+///       $scope: ':root';
+///     }
 ///
 ///     #{$scope} {
 ///       /* style rules here */
