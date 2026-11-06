@@ -159,6 +159,21 @@ export function validateTokens(
 }
 
 /**
+ * Normalize a component name and resolve it to its component key.
+ * Accepts the key itself or any of its selectors / React / Blazor names
+ * (e.g. "nav-drawer", "igc-nav-drawer", "IgrNavDrawer" → "navdrawer").
+ */
+export function resolveComponentName(name: string): string {
+  const normalized = name.toLowerCase().trim();
+
+  if (COMPONENT_THEMES[normalized] || COMPONENT_METADATA[normalized]) {
+    return normalized;
+  }
+
+  return componentSearcher.resolve(name) ?? normalized;
+}
+
+/**
  * Find components that match a search query.
  * @param query - Search string to match against component names
  * @returns Array of matching component names

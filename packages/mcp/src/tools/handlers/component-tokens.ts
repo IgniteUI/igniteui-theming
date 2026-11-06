@@ -7,6 +7,7 @@ import {
   getVariants,
   hasVariants,
   isCompoundComponent,
+  resolveComponentName,
   resolveComponentTheme,
   searchComponents,
 } from "../../knowledge/index.js";
@@ -16,7 +17,7 @@ export async function handleGetComponentDesignTokens(
   params: GetComponentDesignTokensParams,
 ) {
   const { component } = params;
-  const normalizedName = component.toLowerCase().trim();
+  const normalizedName = resolveComponentName(component);
 
   const resolution = resolveComponentTheme(normalizedName);
   const theme = resolution?.theme;

@@ -863,6 +863,20 @@ export const TOOL_DESCRIPTIONS = {
   - The correct output: Choose output format based on the target file type (Sass vs CSS)
   - This ensures component tokens inherit proper defaults from the design system
 
+  LIGHT & DARK:
+  - Each call produces one variant. If the app supports light and dark, call this tool
+    for each variant — do not ship only the light one.
+  - The dark call usually needs different token values than the light one (e.g. colors
+    that work on a dark surface). Do not repeat the light tokens unchanged.
+  - Scope the dark call under the app's dark-mode selector so it doesn't override the
+    light theme (e.g. ".your-dark-scope igc-avatar").
+  - Put that dark-mode selector on a root element (\`html\`, \`body\`, or the app's theme
+    root), not on an app container. On Angular, overlay-hosted components
+    (\`.igx-dialog\`, \`.igx-drop-down__list\`, \`.igx-tooltip\`, \`.igx-overlay__content\`)
+    are moved to the overlay outlet under \`body\`, so a scope on an app container
+    won't match them.
+  - The response includes a note with the scoped selector for the other variant.
+
   TOKEN VALIDATION:
   - All provided token names are validated against the component's schema
   - Invalid tokens return an error with the list of valid token names
@@ -919,6 +933,7 @@ export const TOOL_DESCRIPTIONS = {
   - Description of what was generated
   - Design system and variant used
   - List of tokens used
+  - A light/dark note on covering the other variant
 </output>
 
 <error_handling>
