@@ -620,6 +620,8 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: {
       angular: "igx-grid-toolbar",
       webcomponents: "igc-grid-toolbar",
+      react: "IgrGridToolbar",
+      blazor: "IgbGridToolbar",
     },
   },
   highlight: {
@@ -717,7 +719,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: { angular: ".igx-overlay__content", webcomponents: null },
   },
   paginator: {
-    selectors: { angular: "igx-paginator", webcomponents: "igc-paginator" },
+    selectors: {
+      angular: "igx-paginator",
+      webcomponents: "igc-paginator",
+      react: "IgrPaginator",
+      blazor: "IgbPaginator",
+    },
     aliases: ["pagination", "pager"],
     compound: {
       description:
@@ -731,6 +738,8 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: {
       angular: "igx-pivot-data-selector",
       webcomponents: "igc-pivot-data-selector",
+      react: "IgrPivotDataSelector",
+      blazor: "IgbPivotDataSelector",
     },
     compound: {
       description:
