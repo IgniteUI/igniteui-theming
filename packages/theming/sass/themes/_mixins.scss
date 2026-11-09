@@ -108,8 +108,6 @@ $_css-vars-warned: false;
         $n: 'unknown-component';
     }
 
-    $t: map.get($theme, '_meta', 'theme');
-    $v: map.get($theme, '_meta', 'variant');
     $p: map.get($theme, 'prefix');
     $vp: config.variable-prefix();
 
@@ -123,14 +121,6 @@ $_css-vars-warned: false;
                 --#{$local}: var(--#{$vp}-#{$n}-#{$key}, var(--ig-#{$n}-#{$key}, #{$value}));
             }
         }
-    }
-
-    @if $t and meta.type-of($t) == 'string' {
-        --ig-theme: #{$t};
-    }
-
-    @if $v and meta.type-of($v) == 'string' {
-        --ig-theme-variant: #{$v};
     }
 }
 
@@ -185,7 +175,7 @@ $_css-vars-warned: false;
 /// **`'scoped'`:** Generates component-scoped CSS variables using the configured
 /// `variable-prefix` (e.g., `igx`). Handles selector scoping and `is-root()` branching.
 /// Includes a universal `--ig-*` fallback chain so that global tokens can override
-/// component-scoped variables. Emits `--ig-theme` and `--ig-theme-variant` metadata.
+/// component-scoped variables. Emits the `--ig-theme` and `--ig-theme-variant` markers through `theme-markers()`.
 ///
 /// When nested, the parent selector receives the tokens only if it matches the component selector.
 ///
@@ -235,6 +225,7 @@ $_css-vars-warned: false;
 
         #{$target} {
             @include css-vars-from-theme($theme);
+            @include theme-markers(map.get($theme, '_meta', 'theme'), map.get($theme, '_meta', 'variant'));
         }
     } @else {
         $parent: if(is-root(), ':root', '&');
@@ -374,6 +365,34 @@ $_css-vars-warned: false;
         clamp(0, var(--ig-size-large, 3) - var(--component-size, 1), 1)
     );
     --is-small: clamp(0, var(--ig-size-medium, 2) - var(--component-size, 1), 1);
+}
+
+/// Declares the `--ig-theme` and `--ig-theme-variant` markers in the current scope.
+/// The markers inherit, so every element inside the scope reads them, including nested components.
+/// Include it where the active theme is declared, such as `:root`, or on an element whose subtree uses another theme.
+/// `null` and values that aren't strings are skipped.
+/// @access public
+/// @group themes
+/// @param {String} $theme [null] - The theme name, e.g. `material`, `bootstrap`, `fluent` or `indigo`.
+/// @param {String} $variant [null] - The theme variant, `light` or `dark`.
+/// @example scss - Declare the active theme on the root
+///   :root {
+///     @include theme-markers(material, light);
+///   }
+///   // Output:
+///   // :root {
+///   //   --ig-theme: material;
+///   //   --ig-theme-variant: light;
+///   // }
+@mixin theme-markers($theme: null, $variant: null) {
+    // An unquoted `indigo` is a CSS color keyword, which interpolates back to `indigo`.
+    @if $theme and list.index(('string', 'color'), meta.type-of($theme)) {
+        --ig-theme: #{$theme};
+    }
+
+    @if $variant and meta.type-of($variant) == 'string' {
+        --ig-theme-variant: #{$variant};
+    }
 }
 
 /// Adds spacing CSS variables to the scope.

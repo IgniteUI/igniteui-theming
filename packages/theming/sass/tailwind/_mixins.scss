@@ -58,6 +58,7 @@ $theme-schemas: () !default;
 
             @utility #{$_variant}-#{$component} {
                 @include css-vars-from-theme($_t);
+                @include theme-markers(map.get($_t, _meta, theme), $_variant);
             }
         }
     }
