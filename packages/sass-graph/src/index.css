@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* The explorer is dark only; native controls and scrollbars follow. */
+:root {
+  color-scheme: dark;
+  background: #020617;
+}
+
+/* Keeps every paragraph to a readable line length. */
+@layer base {
+  p {
+    max-width: 70ch;
+  }
+}
+
+/* Edges and file boxes are read-only drawings, so a drag on them pans the canvas. */
+.react-flow__edge,
+.react-flow .react-flow__node-file {
+  pointer-events: none;
+}
+
+:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* Floating controls use the same raised surface as the other canvas overlays. */
+.react-flow.dark {
+  --xy-controls-button-background-color: #1e293b;
+  --xy-controls-button-background-color-hover: #334155;
+  --xy-controls-button-color: #e2e8f0;
+  --xy-controls-button-color-hover: #ffffff;
+  --xy-controls-button-border-color: #475569;
+  --xy-controls-box-shadow: 0 4px 12px rgb(0 0 0 / 0.5);
+}
+
+/* Cards glide to their new place after a relayout instead of jumping. */
+@media (prefers-reduced-motion: no-preference) {
+  .react-flow__node {
+    transition: transform 280ms ease;
+  }
+}
+
+/* Matches the canvas to the page (slate-950) instead of React Flow's dark gray. */
+.react-flow.dark {
+  --xy-background-color: #020617;
+}
