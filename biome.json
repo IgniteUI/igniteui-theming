@@ -5,6 +5,7 @@
       "packages/theming/**/*.{ts,js,mjs,cjs}",
       "packages/mcp/src/**/*.ts",
       "packages/preview/**/*.ts",
+      "packages/sass-graph/**/*.{ts,tsx}",
       "!!**/dist"
     ]
   },
@@ -91,6 +92,16 @@
     },
     {
       "includes": ["packages/mcp/src/knowledge/**/*.ts"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useImportExtensions": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/sass-graph/src/main.tsx"],
       "linter": {
         "rules": {
           "correctness": {

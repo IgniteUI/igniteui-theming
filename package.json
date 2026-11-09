@@ -16,7 +16,8 @@
   "workspaces": [
     "packages/theming",
     "packages/mcp",
-    "packages/preview"
+    "packages/preview",
+    "packages/sass-graph"
   ],
   "scripts": {
     "build": "npm run build -w packages/theming",
@@ -29,7 +30,9 @@
     "coverage": "vitest run --coverage",
     "mcp:inspector": "npx @modelcontextprotocol/inspector ./packages/theming/dist/mcp/index.js",
     "preview": "npm run dev -w packages/preview",
-    "preview:build": "npm run build -w packages/preview"
+    "preview:build": "npm run build -w packages/preview",
+    "graph": "npm run dev -w packages/sass-graph",
+    "graph:build": "npm run build -w packages/sass-graph"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",

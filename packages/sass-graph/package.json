@@ -1,0 +1,32 @@
+{
+  "name": "@igniteui-theming/sass-graph",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Interactive dependency map and impact explorer for the igniteui-theming Sass library.",
+  "type": "module",
+  "scripts": {
+    "graph:build": "tsx scripts/build-graph.ts",
+    "predev": "npm run graph:build",
+    "dev": "vite",
+    "prebuild": "npm run graph:build",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "npm run typecheck"
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.12.1",
+    "elkjs": "^0.12.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "tailwindcss": "^4.3.5"
+  }
+}

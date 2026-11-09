@@ -6,6 +6,7 @@ export default defineConfig({
       'packages/theming',
       'packages/mcp',
       'packages/preview',
+      'packages/sass-graph',
     ],
   },
 });
