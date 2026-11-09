@@ -9,12 +9,46 @@ import {
   COMPONENT_THEMES,
   getComponentTheme,
   getTokenNames,
+  resolveComponentName,
   resolveComponentTheme,
   searchComponents,
   validateTokens,
 } from "../../knowledge/component-themes.js";
 
 describe("Component Themes Knowledge Base", () => {
+  describe("resolveComponentName", () => {
+    it("keeps component keys as they are", () => {
+      expect(resolveComponentName("navdrawer")).toBe("navdrawer");
+      expect(resolveComponentName("nav-drawer-item")).toBe("nav-drawer-item");
+    });
+
+    it.each([
+      "igc-nav-drawer",
+      "igx-nav-drawer",
+      "nav-drawer",
+      "Nav-Drawer",
+      "IGC-NAV-DRAWER",
+      "IgrNavDrawer",
+      "IgbNavDrawer",
+    ])("resolves %s to navdrawer", (name) => {
+      expect(resolveComponentName(name)).toBe("navdrawer");
+    });
+
+    it("resolves selectors whose name differs from the key", () => {
+      expect(resolveComponentName("igx-linear-bar")).toBe("progress-linear");
+    });
+
+    it("does not resolve React names that aren't listed in metadata", () => {
+      expect(resolveComponentName("IgrAccordionHeader")).toBe(
+        "igraccordionheader",
+      );
+    });
+
+    it("leaves unknown names normalized but unresolved", () => {
+      expect(resolveComponentName("Unknown-Thing")).toBe("unknown-thing");
+    });
+  });
+
   describe("COMPONENT_THEMES", () => {
     it("should contain expected components", () => {
       expect(COMPONENT_THEMES).toHaveProperty("avatar");

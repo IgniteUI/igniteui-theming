@@ -8,8 +8,33 @@ import {
   generatePaletteCode,
   generateUseStatement,
   quoteFontFamily,
+  scopeSelector,
   toVariableName,
 } from "../../utils/sass.js";
+
+describe("scopeSelector", () => {
+  it("prefixes a single selector", () => {
+    expect(scopeSelector(".dark", "igc-avatar")).toBe(".dark igc-avatar");
+  });
+
+  it("prefixes each selector in a list", () => {
+    expect(scopeSelector(".dark", "igx-avatar, .my-avatar")).toBe(
+      ".dark igx-avatar, .dark .my-avatar",
+    );
+  });
+
+  it("keeps commas inside parentheses", () => {
+    expect(scopeSelector(".dark", ":is(.a, .b) igc-avatar")).toBe(
+      ".dark :is(.a, .b) igc-avatar",
+    );
+  });
+
+  it("keeps commas inside attribute selectors", () => {
+    expect(scopeSelector(".dark", 'igc-avatar[data-label="a,b"]')).toBe(
+      '.dark igc-avatar[data-label="a,b"]',
+    );
+  });
+});
 
 describe("toVariableName", () => {
   it("converts spaces to hyphens", () => {

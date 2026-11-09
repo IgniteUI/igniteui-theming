@@ -107,6 +107,30 @@ export function generateHeader(description: string): string {
 export const SASS_USE_INLINE_COMMENT =
   "// NOTE: @use rules must be at the top of the file. Deduplicate when combining multiple outputs.";
 
+/** Placeholder scope for dark component themes; the app's dark-mode selector isn't known. */
+export const DARK_SCOPE_PLACEHOLDER = ".your-dark-scope";
+
+/**
+ * Prefix every selector in a comma-separated list with an ancestor scope.
+ * Only top-level commas split the list; commas inside `()` and `[]` are kept.
+ */
+export function scopeSelector(scope: string, selector: string): string {
+  let depth = 0;
+  // Mark top-level commas, then split on the marks
+  const marked = [...selector]
+    .map((char) => {
+      if ("([".includes(char)) depth++;
+      if (")]".includes(char)) depth--;
+      return char === "," && depth === 0 ? "\0" : char;
+    })
+    .join("");
+
+  return marked
+    .split("\0")
+    .map((part) => `${scope} ${part.trim()}`)
+    .join(", ");
+}
+
 /** Markdown assembly note appended after Sass code blocks in handler responses. */
 export const SASS_USE_ASSEMBLY_NOTE =
   "\n> **File placement:** `@use` rules must appear at the very top of the `.scss` file, before any other statements. When combining outputs from multiple tools, keep only one `@use` per module path.";
