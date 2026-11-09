@@ -917,6 +917,8 @@ The drop-down background should match the select surface intent.`,
     selectors: {
       angular: "igc-tile-manager",
       webcomponents: "igc-tile-manager",
+      react: "IgrTileManager",
+      blazor: "IgbTileManager",
     },
     tokenAliases: {
       "resting-shadow": "resting-elevation",
