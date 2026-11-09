@@ -269,9 +269,6 @@ $schema: (
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
-
-                    --ig-theme: material;
-                    --ig-theme-variant: light;
                 }
             }
         }
@@ -299,9 +296,6 @@ $schema: (
                             --igc-#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
                     }
-
-                    --ig-theme: material;
-                    --ig-theme-variant: light;
                 }
             }
         }
@@ -325,9 +319,6 @@ $schema: (
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
-
-                    --ig-theme: material;
-                    --ig-theme-variant: light;
                 }
             }
         }
@@ -383,9 +374,6 @@ $schema: (
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
-
-                    --ig-theme: material;
-                    --ig-theme-variant: light;
                 }
             }
         }
@@ -415,8 +403,33 @@ $schema: (
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
+                }
+            }
+        }
 
+        @include it('should declare the theme markers with theme-markers') {
+            @include assert() {
+                @include output() {
+                    @include theme-markers(material, dark);
+                }
+
+                @include expect() {
                     --ig-theme: material;
+                    --ig-theme-variant: dark;
+                }
+            }
+        }
+
+        @include it('should skip the theme markers that are not strings') {
+            @include assert() {
+                @include output() {
+                    @include theme-markers(indigo);
+                    @include theme-markers(null, light);
+                    @include theme-markers(1, (dark, light));
+                }
+
+                @include expect() {
+                    --ig-theme: indigo;
                     --ig-theme-variant: light;
                 }
             }
