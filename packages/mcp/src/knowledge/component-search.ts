@@ -22,6 +22,8 @@ interface NormalizedSearchTerm {
 interface ComponentSearchEntry {
   name: string;
   signals: NormalizedSearchTerm[];
+  /** Compact forms of the component key and its selectors (not aliases), used by `resolve`. */
+  exactKeys: Set<string>;
 }
 
 /** Options accepted by {@link createComponentSearcher}. */
@@ -30,9 +32,11 @@ export interface CreateComponentSearcherOptions {
   metadata: Record<string, ComponentMetadata>;
 }
 
-/** Pre-built search index with a single `search` method. */
+/** Pre-built search index with `search` and `resolve` methods. */
 export interface ComponentSearcher {
   search(query: string): string[];
+  /** The component whose key or selector matches the query exactly, if exactly one does. */
+  resolve(query: string): string | undefined;
 }
 
 /*
@@ -100,7 +104,12 @@ function getSelectorSearchSignals(selectors?: ComponentSelectors): string[] {
     return [];
   }
 
-  const values = [selectors.angular, selectors.webcomponents];
+  const values = [
+    selectors.angular,
+    selectors.webcomponents,
+    selectors.react,
+    selectors.blazor,
+  ];
   const signals: string[] = [];
 
   for (const value of values) {
@@ -149,8 +158,13 @@ function buildComponentSearchIndex(
     const signals = getComponentSearchSignals(name, metadataByName)
       .map(normalizeSearchTerm)
       .filter((signal): signal is NormalizedSearchTerm => !!signal);
+    const exactKeys = new Set(
+      [name, ...getSelectorSearchSignals(metadataByName[name]?.selectors)]
+        .map((term) => normalizeSearchTerm(term)?.compact)
+        .filter((key): key is string => !!key),
+    );
 
-    return { name, signals };
+    return { name, signals, exactKeys };
   });
 }
 
@@ -352,6 +366,20 @@ export function createComponentSearcher(
         .filter((match) => match.score >= MIN_SEARCH_SCORE)
         .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
         .map((match) => match.name);
+    },
+
+    resolve(query: string): string | undefined {
+      const normalizedQuery = normalizeSearchTerm(query);
+
+      if (!normalizedQuery) {
+        return undefined;
+      }
+
+      const matches = componentSearchIndex.filter((entry) =>
+        entry.exactKeys.has(normalizedQuery.compact),
+      );
+
+      return matches.length === 1 ? matches[0].name : undefined;
     },
   };
 }

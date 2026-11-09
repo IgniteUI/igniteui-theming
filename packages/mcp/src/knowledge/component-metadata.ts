@@ -9,6 +9,10 @@ export interface ComponentSelectors {
   angular: string | string[] | null;
   /** Web Components selector(s) - can be single string, array, or null if not available on Web Components */
   webcomponents: string | string[] | null;
+  /** React component name (e.g. `IgrNavDrawer`). Used only to resolve component names; React CSS uses `webcomponents`. */
+  react?: string;
+  /** Blazor component name (e.g. `IgbNavDrawer`). Used only to resolve component names; Blazor CSS uses `webcomponents`. */
+  blazor?: string;
 }
 
 /**
@@ -83,7 +87,12 @@ export interface ComponentMetadata {
 
 export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   accordion: {
-    selectors: { angular: "igx-accordion", webcomponents: "igc-accordion" },
+    selectors: {
+      angular: "igx-accordion",
+      webcomponents: "igc-accordion",
+      react: "IgrAccordion",
+      blazor: "IgbAccordion",
+    },
   },
   "accordion-body": {
     childOf: "accordion",
@@ -95,14 +104,29 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
     selectors: { angular: "igx-action-strip", webcomponents: null },
   },
   avatar: {
-    selectors: { angular: "igx-avatar", webcomponents: "igc-avatar" },
+    selectors: {
+      angular: "igx-avatar",
+      webcomponents: "igc-avatar",
+      react: "IgrAvatar",
+      blazor: "IgbAvatar",
+    },
   },
   badge: {
-    selectors: { angular: "igx-badge", webcomponents: "igc-badge" },
+    selectors: {
+      angular: "igx-badge",
+      webcomponents: "igc-badge",
+      react: "IgrBadge",
+      blazor: "IgbBadge",
+    },
     tokenAliases: { shadow: "elevation" },
   },
   banner: {
-    selectors: { angular: "igx-banner", webcomponents: "igc-banner" },
+    selectors: {
+      angular: "igx-banner",
+      webcomponents: "igc-banner",
+      react: "IgrBanner",
+      blazor: "IgbBanner",
+    },
     compound: {
       description: "The banner component uses flat-buttons for the actions",
       relatedThemes: ["flat-button"],
@@ -115,14 +139,24 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     tokenAliases: { shadow: "elevation" },
   },
   breadcrumbs: {
-    selectors: { angular: "igc-breadcrumbs", webcomponents: "igc-breadcrumbs" },
+    selectors: {
+      angular: "igc-breadcrumbs",
+      webcomponents: "igc-breadcrumbs",
+      react: "IgrBreadcrumbs",
+      blazor: "IgbBreadcrumbs",
+    },
     theme: "breadcrumb",
   },
   breadcrumb: {
     childOf: "breadcrumbs",
   },
   button: {
-    selectors: { angular: ".igx-button", webcomponents: "igc-button" },
+    selectors: {
+      angular: ".igx-button",
+      webcomponents: "igc-button",
+      react: "IgrButton",
+      blazor: "IgbButton",
+    },
     variants: [
       "flat-button",
       "contained-button",
@@ -170,6 +204,8 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: [".igx-icon-button"],
       webcomponents: "igc-icon-button",
+      react: "IgrIconButton",
+      blazor: "IgbIconButton",
     },
     variants: [
       "flat-icon-button",
@@ -199,14 +235,26 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: "igx-buttongroup",
       webcomponents: "igc-button-group",
+      react: "IgrButtonGroup",
+      blazor: "IgbButtonGroup",
     },
     tokenAliases: { shadow: "elevation" },
   },
   calendar: {
-    selectors: { angular: "igx-calendar", webcomponents: "igc-calendar" },
+    selectors: {
+      angular: "igx-calendar",
+      webcomponents: "igc-calendar",
+      react: "IgrCalendar",
+      blazor: "IgbCalendar",
+    },
   },
   card: {
-    selectors: { angular: "igx-card", webcomponents: "igc-card" },
+    selectors: {
+      angular: "igx-card",
+      webcomponents: "igc-card",
+      react: "IgrCard",
+      blazor: "IgbCard",
+    },
     tokenAliases: {
       "resting-shadow": "resting-elevation",
       "hover-shadow": "hover-elevation",
@@ -230,11 +278,21 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     childOf: "card",
   },
   carousel: {
-    selectors: { angular: "igx-carousel", webcomponents: "igc-carousel" },
+    selectors: {
+      angular: "igx-carousel",
+      webcomponents: "igc-carousel",
+      react: "IgrCarousel",
+      blazor: "IgbCarousel",
+    },
     tokenAliases: { "button-shadow": "button-elevation" },
   },
   chat: {
-    selectors: { angular: "igc-chat", webcomponents: "igc-chat" },
+    selectors: {
+      angular: "igc-chat",
+      webcomponents: "igc-chat",
+      react: "IgrChat",
+      blazor: "IgbChat",
+    },
     compound: {
       description:
         "The chat component uses a flat-icon-button, contained-icon-button, and a textarea internally.",
@@ -248,10 +306,20 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     },
   },
   checkbox: {
-    selectors: { angular: "igx-checkbox", webcomponents: "igc-checkbox" },
+    selectors: {
+      angular: "igx-checkbox",
+      webcomponents: "igc-checkbox",
+      react: "IgrCheckbox",
+      blazor: "IgbCheckbox",
+    },
   },
   chip: {
-    selectors: { angular: "igx-chip", webcomponents: "igc-chip" },
+    selectors: {
+      angular: "igx-chip",
+      webcomponents: "igc-chip",
+      react: "IgrChip",
+      blazor: "IgbChip",
+    },
     tokenAliases: { "ghost-shadow": "ghost-elevation" },
   },
   "column-actions": {
@@ -274,6 +342,8 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: "igc-color-picker",
       webcomponents: "igc-color-picker",
+      react: "IgrColorPicker",
+      blazor: "IgbColorPicker",
     },
     tokenAliases: {
       "picker-shadow": "picker-elevation",
@@ -282,7 +352,12 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     aliases: ["colour picker"],
   },
   combo: {
-    selectors: { angular: "igx-combo", webcomponents: "igc-combo" },
+    selectors: {
+      angular: "igx-combo",
+      webcomponents: "igc-combo",
+      react: "IgrCombo",
+      blazor: "IgbCombo",
+    },
     aliases: ["combobox", "autocomplete"],
     compound: {
       description:
@@ -334,7 +409,12 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     },
   },
   "date-picker": {
-    selectors: { angular: "igx-date-picker", webcomponents: "igc-date-picker" },
+    selectors: {
+      angular: "igx-date-picker",
+      webcomponents: "igc-date-picker",
+      react: "IgrDatePicker",
+      blazor: "IgbDatePicker",
+    },
     compound: {
       description:
         "The date-picker combines input, calendar, and flat-button components.",
@@ -353,6 +433,8 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: "igx-date-range-picker",
       webcomponents: "igc-date-range-picker",
+      react: "IgrDateRangePicker",
+      blazor: "IgbDateRangePicker",
     },
     compound: {
       description:
@@ -377,11 +459,21 @@ If customizing the banner background, ensure flat-button foreground contrasts ag
     theme: "input-group",
   },
   "date-time-input": {
-    selectors: { angular: null, webcomponents: "igc-date-time-input" },
+    selectors: {
+      angular: null,
+      webcomponents: "igc-date-time-input",
+      react: "IgrDateTimeInput",
+      blazor: "IgbDateTimeInput",
+    },
     aliases: ["datetime input", "date time input"],
   },
   dialog: {
-    selectors: { angular: ".igx-dialog", webcomponents: "igc-dialog" },
+    selectors: {
+      angular: ".igx-dialog",
+      webcomponents: "igc-dialog",
+      react: "IgrDialog",
+      blazor: "IgbDialog",
+    },
     tokenAliases: { shadow: "elevation" },
     aliases: ["modal", "popup"],
     compound: {
@@ -398,15 +490,27 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
     },
   },
   divider: {
-    selectors: { angular: "igx-divider", webcomponents: "igc-divider" },
+    selectors: {
+      angular: "igx-divider",
+      webcomponents: "igc-divider",
+      react: "IgrDivider",
+      blazor: "IgbDivider",
+    },
   },
   "dock-manager": {
-    selectors: { angular: "igc-dockmanager", webcomponents: "igc-dockmanager" },
+    selectors: {
+      angular: "igc-dockmanager",
+      webcomponents: "igc-dockmanager",
+      react: "IgrDockManager",
+      blazor: "IgbDockManager",
+    },
   },
   "drop-down": {
     selectors: {
       angular: ".igx-drop-down__list",
       webcomponents: "igc-dropdown",
+      react: "IgrDropdown",
+      blazor: "IgbDropdown",
     },
     tokenAliases: { shadow: "elevation" },
     aliases: ["dropdown menu"],
@@ -418,6 +522,8 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: "igx-expansion-panel",
       webcomponents: "igc-expansion-panel",
+      react: "IgrExpansionPanel",
+      blazor: "IgbExpansionPanel",
     },
   },
   "expansion-panel-body": {
@@ -430,6 +536,7 @@ If customizing the dialog background, ensure flat-button foreground contrasts ag
     selectors: {
       angular: 'igx-input-group[class~="igx-input-group--file"]',
       webcomponents: "igc-file-input",
+      react: "IgrFileInput",
     },
     compound: {
       description: "The file-input uses an input-group for the input field.",
@@ -439,7 +546,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     },
   },
   grid: {
-    selectors: { angular: "igx-grid", webcomponents: "igc-grid" },
+    selectors: {
+      angular: "igx-grid",
+      webcomponents: "igc-grid",
+      react: "IgrGrid",
+      blazor: "IgbGrid",
+    },
     tokenAliases: {
       "grid-shadow": "grid-elevation",
       "drag-shadow": "drag-elevation",
@@ -447,7 +559,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     compound: GRID_COMPOUND_INFO,
   },
   "tree-grid": {
-    selectors: { angular: "igx-tree-grid", webcomponents: "igc-tree-grid" },
+    selectors: {
+      angular: "igx-tree-grid",
+      webcomponents: "igc-tree-grid",
+      react: "IgrTreeGrid",
+      blazor: "IgbTreeGrid",
+    },
     theme: "grid",
     compound: GRID_COMPOUND_INFO,
   },
@@ -455,17 +572,29 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: {
       angular: "igx-hierarchical-grid",
       webcomponents: "igc-hierarchical-grid",
+      react: "IgrHierarchicalGrid",
+      blazor: "IgbHierarchicalGrid",
     },
     theme: "grid",
     compound: GRID_COMPOUND_INFO,
   },
   "pivot-grid": {
-    selectors: { angular: "igx-pivot-grid", webcomponents: "igc-pivot-grid" },
+    selectors: {
+      angular: "igx-pivot-grid",
+      webcomponents: "igc-pivot-grid",
+      react: "IgrPivotGrid",
+      blazor: "IgbPivotGrid",
+    },
     theme: "grid",
     compound: GRID_COMPOUND_INFO,
   },
   "grid-lite": {
-    selectors: { angular: "igx-grid-lite", webcomponents: "igc-grid-lite" },
+    selectors: {
+      angular: "igx-grid-lite",
+      webcomponents: "igc-grid-lite",
+      react: "IgrGridLite",
+      blazor: "IgbGridLite",
+    },
     theme: "grid",
     compound: {
       description:
@@ -491,16 +620,33 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: {
       angular: "igx-grid-toolbar",
       webcomponents: "igc-grid-toolbar",
+      react: "IgrGridToolbar",
+      blazor: "IgbGridToolbar",
     },
   },
   highlight: {
-    selectors: { angular: "igx-highlight", webcomponents: "igc-highlight" },
+    selectors: {
+      angular: "igx-highlight",
+      webcomponents: "igc-highlight",
+      react: "IgrHighlight",
+      blazor: "IgbHighlight",
+    },
   },
   icon: {
-    selectors: { angular: "igx-icon", webcomponents: "igc-icon" },
+    selectors: {
+      angular: "igx-icon",
+      webcomponents: "igc-icon",
+      react: "IgrIcon",
+      blazor: "IgbIcon",
+    },
   },
   "input-group": {
-    selectors: { angular: "igx-input-group", webcomponents: "igc-input" },
+    selectors: {
+      angular: "igx-input-group",
+      webcomponents: "igc-input",
+      react: "IgrInput",
+      blazor: "IgbInput",
+    },
     tokenAliases: {
       "search-resting-shadow": "search-resting-elevation",
       "search-hover-shadow": "search-hover-elevation",
@@ -511,7 +657,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: { angular: "[igxLabel]", webcomponents: "igc-label" },
   },
   list: {
-    selectors: { angular: "igx-list", webcomponents: "igc-list" },
+    selectors: {
+      angular: "igx-list",
+      webcomponents: "igc-list",
+      react: "IgrList",
+      blazor: "IgbList",
+    },
   },
   "list-header": {
     childOf: "list",
@@ -520,7 +671,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     childOf: "list",
   },
   navbar: {
-    selectors: { angular: "igx-navbar", webcomponents: "igc-navbar" },
+    selectors: {
+      angular: "igx-navbar",
+      webcomponents: "igc-navbar",
+      react: "IgrNavbar",
+      blazor: "IgbNavbar",
+    },
     tokenAliases: { shadow: "elevation" },
     compound: {
       description:
@@ -538,13 +694,20 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     },
   },
   navdrawer: {
-    selectors: { angular: "igx-nav-drawer", webcomponents: "igc-nav-drawer" },
+    selectors: {
+      angular: "igx-nav-drawer",
+      webcomponents: "igc-nav-drawer",
+      react: "IgrNavDrawer",
+      blazor: "IgbNavDrawer",
+    },
     tokenAliases: { shadow: "elevation" },
     aliases: [
       "drawer",
       "side drawer",
       "side nav",
+      "side panel",
       "sidenav",
+      "sidebar",
       "navigation drawer",
       "navigation panel",
     ],
@@ -556,7 +719,12 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: { angular: ".igx-overlay__content", webcomponents: null },
   },
   paginator: {
-    selectors: { angular: "igx-paginator", webcomponents: "igc-paginator" },
+    selectors: {
+      angular: "igx-paginator",
+      webcomponents: "igc-paginator",
+      react: "IgrPaginator",
+      blazor: "IgbPaginator",
+    },
     aliases: ["pagination", "pager"],
     compound: {
       description:
@@ -570,6 +738,8 @@ Both themes should share the same visual treatment as the file-input wrapper.`,
     selectors: {
       angular: "igx-pivot-data-selector",
       webcomponents: "igc-pivot-data-selector",
+      react: "IgrPivotDataSelector",
+      blazor: "IgbPivotDataSelector",
     },
     compound: {
       description:
@@ -585,6 +755,8 @@ and descriptions from get_component_design_tokens for each child to guide value 
     selectors: {
       angular: "igx-circular-bar",
       webcomponents: "igc-circular-progress",
+      react: "IgrCircularProgress",
+      blazor: "IgbCircularProgress",
     },
     aliases: ["spinner", "circular loader", "loading spinner"],
   },
@@ -592,6 +764,8 @@ and descriptions from get_component_design_tokens for each child to guide value 
     selectors: {
       angular: "igx-linear-bar",
       webcomponents: "igc-linear-progress",
+      react: "IgrLinearProgress",
+      blazor: "IgbLinearProgress",
     },
     aliases: ["progress-bar", "loading bar", "linear loader"],
   },
@@ -616,24 +790,49 @@ chips for displaying conditions, and buttons/button-groups for adding and groupi
     },
   },
   "qr-code": {
-    selectors: { angular: "igc-qr-code", webcomponents: "igc-qr-code" },
+    selectors: {
+      angular: "igc-qr-code",
+      webcomponents: "igc-qr-code",
+      react: "IgrQrCode",
+      blazor: "IgbQrCode",
+    },
     aliases: ["qr", "qrcode"],
   },
   radio: {
-    selectors: { angular: "igx-radio", webcomponents: "igc-radio" },
+    selectors: {
+      angular: "igx-radio",
+      webcomponents: "igc-radio",
+      react: "IgrRadio",
+      blazor: "IgbRadio",
+    },
   },
   rating: {
-    selectors: { angular: "igc-rating", webcomponents: "igc-rating" },
+    selectors: {
+      angular: "igc-rating",
+      webcomponents: "igc-rating",
+      react: "IgrRating",
+      blazor: "IgbRating",
+    },
     aliases: ["star rating"],
   },
   ripple: {
-    selectors: { angular: "igx-ripple", webcomponents: "igc-ripple" },
+    selectors: {
+      angular: "igx-ripple",
+      webcomponents: "igc-ripple",
+      react: "IgrRipple",
+      blazor: "IgbRipple",
+    },
   },
   scrollbar: {
     selectors: { angular: ".ig-scrollbar", webcomponents: ".ig-scrollbar" },
   },
   select: {
-    selectors: { angular: "igx-select", webcomponents: "igc-select" },
+    selectors: {
+      angular: "igx-select",
+      webcomponents: "igc-select",
+      react: "IgrSelect",
+      blazor: "IgbSelect",
+    },
     aliases: ["select box"],
     compound: {
       description:
@@ -654,23 +853,48 @@ The drop-down background should match the select surface intent.`,
     },
   },
   slider: {
-    selectors: { angular: "igx-slider", webcomponents: "igc-slider" },
+    selectors: {
+      angular: "igx-slider",
+      webcomponents: "igc-slider",
+      react: "IgrSlider",
+      blazor: "IgbSlider",
+    },
   },
   snackbar: {
-    selectors: { angular: "igx-snackbar", webcomponents: "igc-snackbar" },
+    selectors: {
+      angular: "igx-snackbar",
+      webcomponents: "igc-snackbar",
+      react: "IgrSnackbar",
+      blazor: "IgbSnackbar",
+    },
     tokenAliases: { shadow: "elevation" },
   },
   splitter: {
-    selectors: { angular: "igx-splitter", webcomponents: "igc-splitter" },
+    selectors: {
+      angular: "igx-splitter",
+      webcomponents: "igc-splitter",
+      react: "IgrSplitter",
+      blazor: "IgbSplitter",
+    },
   },
   step: {
     childOf: "stepper",
   },
   stepper: {
-    selectors: { angular: "igx-stepper", webcomponents: "igc-stepper" },
+    selectors: {
+      angular: "igx-stepper",
+      webcomponents: "igc-stepper",
+      react: "IgrStepper",
+      blazor: "IgbStepper",
+    },
   },
   switch: {
-    selectors: { angular: "igx-switch", webcomponents: "igc-switch" },
+    selectors: {
+      angular: "igx-switch",
+      webcomponents: "igc-switch",
+      react: "IgrSwitch",
+      blazor: "IgbSwitch",
+    },
     tokenAliases: {
       "resting-shadow": "resting-elevation",
       "hover-shadow": "hover-elevation",
@@ -679,7 +903,12 @@ The drop-down background should match the select surface intent.`,
     aliases: ["toggle"],
   },
   tabs: {
-    selectors: { angular: "igx-tabs", webcomponents: "igc-tabs" },
+    selectors: {
+      angular: "igx-tabs",
+      webcomponents: "igc-tabs",
+      react: "IgrTabs",
+      blazor: "IgbTabs",
+    },
   },
   "tab-item": {
     childOf: "tabs",
@@ -701,19 +930,36 @@ The input-group text color should coordinate with the time-picker header.`,
     selectors: {
       angular: ".igx-input-group--textarea-group",
       webcomponents: "igc-textarea",
+      react: "IgrTextarea",
+      blazor: "IgbTextarea",
     },
     theme: "input-group",
   },
   toast: {
-    selectors: { angular: "igx-toast", webcomponents: "igc-toast" },
+    selectors: {
+      angular: "igx-toast",
+      webcomponents: "igc-toast",
+      react: "IgrToast",
+      blazor: "IgbToast",
+    },
     tokenAliases: { shadow: "elevation" },
   },
   tooltip: {
-    selectors: { angular: ".igx-tooltip", webcomponents: "igc-tooltip" },
+    selectors: {
+      angular: ".igx-tooltip",
+      webcomponents: "igc-tooltip",
+      react: "IgrTooltip",
+      blazor: "IgbTooltip",
+    },
     tokenAliases: { shadow: "elevation" },
   },
   tree: {
-    selectors: { angular: "igx-tree-node", webcomponents: "igc-tree" },
+    selectors: {
+      angular: "igx-tree-node",
+      webcomponents: "igc-tree",
+      react: "IgrTree",
+      blazor: "IgbTree",
+    },
   },
   watermark: {
     selectors: {

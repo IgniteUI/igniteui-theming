@@ -14,11 +14,16 @@ import {
   getVariants,
   hasVariants,
   isComponentAvailable,
+  resolveComponentName,
   searchComponents,
   validateTokens,
 } from "../../knowledge/index.js";
 import { PLATFORM_METADATA } from "../../knowledge/platforms/index.js";
-import { SASS_USE_ASSEMBLY_NOTE } from "../../utils/sass.js";
+import {
+  DARK_SCOPE_PLACEHOLDER,
+  SASS_USE_ASSEMBLY_NOTE,
+  scopeSelector,
+} from "../../utils/sass.js";
 import type { CreateComponentThemeParams } from "../schemas.js";
 
 /**
@@ -55,6 +60,23 @@ function getComposedTokenWarning(
   );
 }
 
+/**
+ * Build a note on covering both light and dark variants.
+ * A single call produces one variant, and the app's dark-mode selector isn't known,
+ * so the dark block has to be scoped by the agent.
+ */
+function getVariantNote(variant: string, selector: string | undefined): string {
+  const example = selector
+    ? ` (e.g. "${scopeSelector(DARK_SCOPE_PLACEHOLDER, selector)}")`
+    : "";
+
+  if (variant === "dark") {
+    return `\n\n🌗 **Light & dark:** This block covers the dark variant only. Scope it under your app's dark-mode selector${example} so it doesn't override the light theme. Put that selector on a root element (\`html\` or \`body\`) so overlay content is included. For the light variant, call again with \`variant: "light"\` and token values for a light surface.`;
+  }
+
+  return `\n\n🌗 **Light & dark:** This block covers the light variant only. For a dark variant, call again with \`variant: "dark"\` and token values for a dark surface (usually different from these), and scope it under your app's dark-mode selector${example}.`;
+}
+
 export async function handleCreateComponentTheme(
   params: CreateComponentThemeParams,
 ) {
@@ -68,7 +90,7 @@ export async function handleCreateComponentTheme(
     designSystem = "material",
     variant = "light",
   } = params;
-  const normalizedComponent = component.toLowerCase().trim();
+  const normalizedComponent = resolveComponentName(component);
 
   if (!platform) {
     return {
@@ -298,7 +320,10 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
         content: [
           {
             type: "text" as const,
-            text: responseParts.join("\n") + cssWarning,
+            text:
+              responseParts.join("\n") +
+              cssWarning +
+              getVariantNote(variant, finalSelector),
           },
         ],
       };
@@ -375,7 +400,10 @@ Use \`get_component_design_tokens\` to see all tokens with descriptions.`,
       content: [
         {
           type: "text" as const,
-          text: responseParts.join("\n") + sassWarning,
+          text:
+            responseParts.join("\n") +
+            sassWarning +
+            getVariantNote(variant, finalSelector),
         },
       ],
     };

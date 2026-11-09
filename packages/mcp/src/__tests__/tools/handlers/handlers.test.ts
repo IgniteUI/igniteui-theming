@@ -465,6 +465,33 @@ describe("handleCreateCustomPalette", () => {
 });
 
 describe("handleCreateComponentTheme", () => {
+  it("tells agents how to add a scoped dark variant after a light call", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "webcomponents",
+      component: "avatar",
+      tokens: { background: "#ff5722" },
+      output: "css",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('variant: "dark"');
+    expect(text).toContain('".your-dark-scope igc-avatar"');
+  });
+
+  it("tells agents to scope a dark call and add the light variant", async () => {
+    const result = await handleCreateComponentTheme({
+      platform: "angular",
+      component: "avatar",
+      variant: "dark",
+      tokens: { background: "#ff5722" },
+      output: "sass",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toContain('".your-dark-scope igx-avatar"');
+    expect(text).toContain('variant: "light"');
+  });
+
   it("returns error when platform is not provided", async () => {
     const result = await handleCreateComponentTheme({
       component: "avatar",
@@ -496,23 +523,17 @@ describe("handleCreateComponentTheme", () => {
     expect(text).toContain("not supported");
   });
 
-  it("suggests progress-linear for linear progress phrasing", async () => {
+  it("resolves linear progress phrasing to progress-linear", async () => {
     const result = await handleCreateComponentTheme({
       platform: "angular",
       component: "linear progress",
       tokens: {
-        background: "#ff5722",
+        "fill-color-info": "#ff5722",
       },
     });
 
-    expect(result.isError).toBe(true);
-
-    const text = result.content[0].text;
-    expect(text).toContain('Component "linear progress" not found.');
-    expect(text).toContain("**Similar components:**");
-
-    const suggestions = text.split("**Similar components:**")[1] ?? "";
-    expect(suggestions.trimStart().startsWith("- progress-linear")).toBe(true);
+    expect(result.isError).toBeUndefined();
+    expect(result.content[0].text).toContain("progress-linear");
   });
 
   it("suggests progress components for common typo phrasing", async () => {
