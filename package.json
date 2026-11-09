@@ -32,7 +32,11 @@
     "preview": "npm run dev -w packages/preview",
     "preview:build": "npm run build -w packages/preview",
     "graph": "npm run dev -w packages/sass-graph",
-    "graph:build": "npm run build -w packages/sass-graph"
+    "graph:build": "npm run build -w packages/sass-graph",
+    "graph:flow": "npm run flow -w packages/sass-graph --",
+    "graph:impact": "npm run impact -w packages/sass-graph --",
+    "graph:report": "npm run report -w packages/sass-graph --",
+    "graph:mcp": "npm run mcp -w packages/sass-graph"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",
