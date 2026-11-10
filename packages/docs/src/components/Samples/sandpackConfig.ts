@@ -1,7 +1,7 @@
 export const sandpackSharedCustomSetup = {
   dependencies: {
     sass: '^1.91.2',
-    'igniteui-theming': '^29.0.0',
+    'igniteui-theming': '^30.0.0',
   },
 } as const;
 
