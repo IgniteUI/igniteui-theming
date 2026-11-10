@@ -1,0 +1,49 @@
+---
+sidebar_position: 6
+---
+
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+import multipliers from './assets/Multipliers.png';
+import { Image } from 'astro:assets';
+
+# 高度な設定 
+
+  ## バリアントの計算方法 {/* #how-the-variants-are-calculated */}
+
+  乗数マップの構造は次のリンクで確認できます： [Multipliers](https://github.com/IgniteUI/igniteui-theming/blob/master/sass/color/_multipliers.scss)
+
+  ご覧のように、カラーグループ`($color)`には14のバリアント、グレーカラー`($grayscale)`には9のバリアントがあります。
+  
+  マップを確認した後、バリアントが実際にどのように生成されるかを見てみましょう。例として**600バリアント**を取り上げます。
+	 
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+    :root {
+	  ...
+      --ig-primary-400: hsl(from var(--ig-primary-500) h calc(s * 0.875) calc(l * 1.08));
+      --ig-primary-400-contrast: hsla(from color(from var(--ig-primary-400) var(--y-contrast)) h 0 l / 1);
+      --ig-primary-500: #f34e4e;
+      --ig-primary-500-contrast: hsla(from color(from var(--ig-primary-500) var(--y-contrast)) h 0 l / 1);
+      --ig-primary-600: hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89));
+      --ig-primary-600-contrast: hsla(from color(from var(--ig-primary-600) var(--y-contrast)) h 0 l / 1);
+      --ig-primary-700: hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.81));
+      --ig-primary-700-contrast: hsla(from color(from var(--ig-primary-700) var(--y-contrast)) h 0 l / 1);
+	  ...
+    }
+  ```
+
+  まず、ご覧のように`--ig-primary-500{:sass}`は、パレット関数に渡した値（この場合は`#f34e4e{:css}`）を使用します。
+
+  `--ig-primary-600{:sass}`カラーを生成するために、CSSの相対カラー構文と[hsl()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl#from_color)関数を使用します。まず`--ig-primary-500{:sass}`の値を読み込み、**色相**を変更せず、**彩度 (s)** と **明度 (l)** をカラー乗数マップ($colors)から取得した関連する乗数で乗算します。
+
+  他のすべてのカラーバリアントにも同じプロセスが適用されますが、唯一の違いは各バリアントに対する事前定義された乗数の値です。
+
+	<Image src={multipliers} height={450} densities={[1, 2]} format="png" alt="Multipliers" />
+	<br/>
+	<br/>
+
+  :::info
+  残念ながら、現時点では型リスト（`$IGrayShades`、`$IColorShades`）と乗数マップ（`$colors`、`$grayscale`）をカスタマイズして、独自のテンプレートと乗数値に基づいて変数を生成することはできません。この機能は近日中にIgnite UI Themingに追加する予定です。
+  :::
+
+  一方、コントラストカラーバリアントは少し異なる方法で計算されます。生成には、`shades(){:js}`関数が`adaptive-contrast(){:bash}`関数を呼び出します。コントラストカラーの計算の詳細については、[アダプティブコントラスト](adaptive-contrasts)セクションをご覧ください。

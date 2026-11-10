@@ -1,0 +1,62 @@
+---
+sidebar_position: 4
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# CSS変数を要素に設定する
+
+  CSS変数を取得したら、アプリケーションの要素に適用します。スタイルのグループ全体を適用する最も簡単な方法は、`type-style{:sass}` ミックスインを使用することです。
+   
+  適用したいタイプスタイルをパラメータとして渡すことができ、ミックスインはスタイルの名前が `$ITypeScale` 変数に存在するかどうかを確認します。存在する場合、そのスタイルに関連付けられたすべての変数、つまり `$ITypeStyle` から宣言されたすべてのスタイルプロパティ変数が適用されます。
+
+  例えば、次の構造がある場合： 
+
+  ```html
+  <div class="wrapper">
+    <h1>Heading text</h1>
+    <p>Content text</p>
+  </div>
+  ```
+
+  次のようにして、生成されたすべての `body{:sass}` 変数を `p{:sass}` 要素に簡単に適用できます。
+
+  ```scss
+  .wrapper p {
+    @include type-style($category: 'body');
+  }
+  ```
+
+  結果は次のようになります。 
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+	.wrapper p {
+      font-family: var(--ig-body-font-family, var(--ig-font-family));
+      font-size: var(--ig-body-font-size);
+      font-weight: var(--ig-body-font-weight);
+      line-height: var(--ig-body-line-height);
+	}
+	```
+
+  `$category` パラメータ以外に、ミックスインは `$check` パラメータも受け取ります。これはデフォルトで `true{:bash}` に設定されています。
+   
+  このパラメータは、渡されたカテゴリスタイルが `$ITypeScale` に存在するかどうかを確認する役割を担います。`true{:bash}` に設定されていてカテゴリが欠落している場合、スタイリングは適用されません。`false{:bash}` に設定すると、そのカテゴリが `$ITypeScale` の一部ではなく、スタイリング変数が宣言されていなくても、渡されたカテゴリのすべてのスタイリングパラメータが適用されます。
+
+  ## 変数を直接使用する {/* #using-variables-directly */}
+
+  もちろん、`type-style{:sass}` ミックスインを使用する必要はありません。必要に応じて、生成されたCSS変数を直接適用することもできます。
+
+  ```scss
+  .wrapper p {
+    font-family: var(--ig-font-family);
+    font-size: var(--ig-body-font-size);
+    font-weight: var(--ig-body-font-weight);
+    line-height: var(--ig-body-line-height);
+  }
+  ```
+
+  ### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/typography/#mixin-type-style`}>type-style ミックスイン</a> 

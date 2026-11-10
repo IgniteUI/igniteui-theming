@@ -1,0 +1,17 @@
+---
+// 404 page (ja).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NotFound from '../../components/layout/NotFound.astro';
+import { translator } from '../../lib/i18n/Translate';
+const t = translator('ja');
+---
+
+<BaseLayout
+  title={t({ id: 'theme.NotFound.title', message: 'Page Not Found' })}
+  locale="ja"
+  pathname="/ja/404.html"
+  alternates={{ en: '/404.html', ja: '/ja/404.html' }}
+  mainClass="it-404-main"
+>
+  <NotFound locale="ja" />
+</BaseLayout>

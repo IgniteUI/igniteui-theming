@@ -1,0 +1,44 @@
+@use 'igniteui-theming' as *;
+
+// igc-tabs preview: theme and parts.
+igc-tabs {
+  @include tokens(
+    tabs-theme(
+      $item-text-color: light-dark(
+          var(--ig-primary-600),
+          var(--ig-secondary-100)
+        ),
+      $button-color: light-dark(var(--ig-primary-600), var(--ig-secondary-100)),
+      $button-disabled-color: light-dark(
+          var(--ig-primary-600),
+          var(--ig-secondary-100)
+        ),
+      $item-background: light-dark(var(--ig-tertiary-100), var(--ig-gray-900)),
+      $button-background: light-dark(var(--ig-tertiary-100), var(--ig-gray-900)),
+      $indicator-color: var(--ig-quinary-300)
+    )
+  );
+
+  border-radius: var(--ig-border-radius-medium);
+}
+
+[data-theme='light'] igc-tabs {
+  border: rem(1px) solid var(--ig-gray-150);
+  box-shadow: 4px 4px 4px 4px var(--ig-gray-100);
+}
+
+igc-tabs::part(selected-indicator) {
+  display: block;
+  height: 0.125rem;
+  margin-block-start: calc(0.125rem * -1);
+}
+
+igc-tab::part(content) {
+  @include type-style('navigation', false);
+}
+
+igc-tab::part(tab-header) {
+  padding: var(--component-spacing-1xs) var(--component-spacing-xs);
+}
+
+// List styles

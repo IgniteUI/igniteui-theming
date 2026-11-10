@@ -1,0 +1,203 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+// "On this page" TOC (TOC.astro, MobileTOC.astro): base rules first, then the site's design.
+
+// ---- base: mobile TOC rules, layered below the site rules
+@layer base.theme {
+  .it-toc-mobile__button {
+    font-size: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+  }
+
+  .it-toc-mobile__button::after {
+    content: '';
+    background: var(--it-menu-link-sublist-icon) 50% 50% / 2rem 2rem no-repeat;
+    filter: var(--it-menu-link-sublist-icon-filter);
+    height: 1.25rem;
+    width: 1.25rem;
+    transform: rotate(180deg);
+    transition: transform var(--it-transition-fast);
+  }
+
+  .it-toc-mobile__button--expanded::after {
+    transform: none;
+  }
+
+  .it-toc-mobile {
+    background-color: var(--it-menu-color-background-active);
+    border-radius: var(--it-global-radius);
+    margin: 1rem 0;
+  }
+
+  .it-toc-mobile__content > ul {
+    border-left: none;
+    border-top: 1px solid var(--it-color-emphasis-300);
+    padding: 0.2rem 0;
+    font-size: 15px;
+  }
+
+  .it-toc-mobile__content ul li {
+    margin: 0.4rem 0.8rem;
+  }
+
+  .it-toc-mobile__content a {
+    display: block;
+  }
+
+  .it-toc-mobile--expanded {
+    transform: none;
+  }
+}
+
+// ---- TOC layout rules
+@media (min-width: 997px) {
+  .it-toc-mobile {
+    display: none;
+  }
+}
+
+@media print {
+  .it-toc-mobile {
+    display: none;
+  }
+}
+
+.it-doc-toc {
+  max-height: calc(100vh - (var(--it-navbar-height) + 2rem));
+  overflow-y: auto;
+  position: sticky;
+  top: calc(var(--it-navbar-height) + 1rem);
+}
+
+@media (max-width: 996px) {
+  .it-doc-toc {
+    display: none;
+  }
+}
+
+// ---- site
+.it-toc {
+  padding-block: 0;
+  padding-inline-start: var(--ig-spacing-xs);
+  border: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    width: 0.0625rem;
+    height: 100%;
+    background-color: light-dark(var(--ig-gray-150), var(--ig-gray-800));
+  }
+}
+
+.it-toc li:not([class]):has(> .it-toc__link--active)::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  width: 0.0625rem;
+  top: 0;
+  bottom: 0;
+  left: rem(-24px);
+  background-color: var(--ig-quinary-300);
+  transition: background-color 0.3s ease;
+}
+
+// CSS Anchor Positioning: single indicator that slides between active items.
+// Requires Chrome 125+. Falls back to the per-li ::before above.
+@supports (anchor-name: --it-toc-active) {
+  .it-toc li:not([class]):has(> .it-toc__link--active) {
+    anchor-name: --it-toc-active;
+  }
+
+  // Hide per-li indicators — replaced by the single anchor-positioned one.
+  .it-toc li:not([class]):has(> .it-toc__link--active)::before {
+    display: none;
+  }
+
+  .it-toc::after {
+    content: '';
+    position: absolute;
+    position-anchor: --it-toc-active;
+    left: 0;
+    width: 0.0625rem;
+    top: anchor(top);
+    bottom: anchor(bottom);
+    background-color: var(--ig-quinary-300);
+    transition:
+      top 0.25s ease,
+      bottom 0.25s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
+.it-toc__link:not(.it-toc__link--active) {
+  @include type-style('navigation', false);
+
+  color: light-dark(var(--ig-gray-900), var(--ig-gray-100));
+
+  &:hover {
+    text-shadow:
+      0 0 0.8px light-dark(var(--ig-gray-900), var(--ig-gray-100)),
+      0 0 0.8px light-dark(var(--ig-gray-900), var(--ig-gray-100)),
+      0 0 0.8px light-dark(var(--ig-gray-900), var(--ig-gray-100));
+    transition: text-shadow 0.3s;
+    line-height: var(--ig-spacing-s);
+  }
+}
+
+.it-toc__link.it-toc__link--active {
+  @include type-style('navigation', false);
+
+  text-shadow:
+    0 0 0.8px light-dark(var(--ig-gray-900), var(--ig-gray-100)),
+    0 0 0.8px light-dark(var(--ig-gray-900), var(--ig-gray-100)),
+    0 0 0.8px light-dark(var(--ig-gray-900), var(--ig-gray-100));
+  transition: text-shadow 0.3s;
+  line-height: var(--ig-spacing-s);
+  color: light-dark(var(--ig-gray-900), var(--ig-surface-white));
+}
+
+.it-toc ul:not([class]) {
+  padding-inline-start: 0;
+
+  li:not([class]) {
+    margin-inline-start: 0;
+  }
+}
+
+.it-toc li:not([class]) {
+  margin-block: 0;
+  margin-inline-end: 0;
+  padding-block: 0.5rem;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+div.it-doc-toc {
+  overflow-y: visible;
+  top: calc(var(--it-navbar-height) + 4.2rem);
+}
+
+.it-toc-title {
+  margin-block-start: rem(45px);
+  display: block;
+  padding-block-end: 1rem;
+  position: sticky;
+  top: calc(var(--it-navbar-height) + 1rem);
+}
+
+@media screen and (width < $bp-wide) {
+  .it-toc {
+    padding-inline-end: 1rem;
+  }
+}

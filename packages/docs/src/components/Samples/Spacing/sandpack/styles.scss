@@ -1,0 +1,12 @@
+@use 'igniteui-theming' as *;
+
+button {
+  --ig-spacing: 1;
+
+  @include sizable();
+
+  padding: pad($sm: 10px, $md: 20px, $lg: 40px);
+
+  // Try changing the size to '1' or '3'
+  --component-size: 2;
+}

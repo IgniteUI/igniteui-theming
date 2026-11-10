@@ -1,0 +1,56 @@
+---
+// /search/ and /ja/search/, the full-page search; results come from Pagefind.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_TITLE, type Locale } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+import SearchResults from './SearchResults';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translator(locale);
+const title = t({
+  id: 'theme.SearchPage.emptyResultsTitle',
+  message: 'Search the documentation',
+});
+const pathname = locale === 'en' ? '/search' : `/${locale}/search`;
+---
+
+<BaseLayout
+  title={title}
+  rawTitle
+  ogTitle={SITE_TITLE}
+  locale={locale}
+  pathname={pathname}
+>
+  <div class="it-container it-margin-vert--lg">
+    <h1>{title}</h1>
+    <div class="it-row">
+      <div class="it-col it-col--12">
+        <input
+          class="it-search-page__input"
+          placeholder={t({
+            id: 'theme.SearchPage.inputPlaceholder',
+            message: 'Type your search here',
+          })}
+          aria-label="Search"
+          name="q"
+          type="search"
+        />
+      </div>
+    </div>
+    <section>
+      <SearchResults client:load version="current" locale={locale} />
+      {/* `?version=` overrides */}
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .it-search-page__input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font: inherit;
+  }
+</style>

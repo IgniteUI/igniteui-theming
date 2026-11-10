@@ -1,0 +1,80 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+.colorList {
+  display: flex;
+  justify-content: space-between;
+  gap: rem(16px);
+  margin-block: var(--ig-spacing-xl);
+}
+
+.colorItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ig-spacing-s);
+}
+
+.colorSwatch {
+  --swatch-color: #f34e4e;
+
+  position: relative;
+  width: rem(48px);
+  height: rem(48px);
+  border-radius: 50%;
+  border: rem(1px) solid var(--swatch-color);
+  display: inline-block;
+}
+
+.colorSwatch::after {
+  content: '';
+  position: absolute;
+  inset: rem(10px);
+  border-radius: 50%;
+  background: var(--swatch-color);
+}
+
+.colorLabel {
+  @include type-style('body-3', false);
+
+  color: light-dark(var(--ig-gray-900), var(--ig-gray-100));
+  margin: 0;
+  text-align: center;
+}
+
+.colorCode {
+  margin: 0;
+  color: var(--ig-gray-400);
+}
+
+.colorPrimary {
+  --swatch-color: #f34e4e;
+}
+
+.colorSecondary {
+  --swatch-color: light-dark(#e17707, #fff6ea);
+}
+
+.colorAction {
+  --swatch-color: light-dark(#3196ff, #7bb9fa);
+}
+
+.colorGrey {
+  --swatch-color: light-dark(#939393, #ebebeb);
+}
+
+.colorBlack {
+  --swatch-color: #282828;
+}
+
+@media screen and (width < $bp-mobile) {
+  .colorLabel {
+    font-size: 10px;
+  }
+}
+
+/* ColorSwatch renders both hex values; show the one matching the active theme. */
+:global([data-theme='light']) .colorCodeDark,
+:global([data-theme='dark']) .colorCodeLight {
+  display: none;
+}

@@ -1,0 +1,16 @@
+// The generic base rules (variables first: that file declares the base layer order); `theme.scss` loads this
+// before the site styles, so every site rule wins over them regardless of specificity.
+@use 'variables';
+@use 'typography';
+@use 'grid';
+@use 'utilities';
+@use 'navbar';
+@use 'menu';
+@use 'footer';
+@use 'breadcrumbs';
+@use 'pagination';
+@use 'toc';
+@use 'markdown';
+@use 'alert';
+@use 'tabs';
+@use 'hero';

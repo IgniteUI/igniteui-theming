@@ -1,0 +1,63 @@
+// Generic "footer" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-footer {
+    background-color: var(--it-footer-background-color);
+    color: var(--it-footer-color);
+    padding: var(--it-footer-padding-vertical)
+      var(--it-footer-padding-horizontal);
+  }
+
+  .it-footer__links--row {
+    margin-bottom: 1rem;
+  }
+
+  .it-footer__link {
+    color: var(--it-footer-link-color);
+    line-height: 2;
+  }
+
+  .it-footer__link:hover {
+    color: var(--it-footer-link-hover-color);
+  }
+
+  .it-footer__logo-image {
+    margin-top: 1rem;
+    max-width: var(--it-footer-logo-max-width);
+  }
+
+  .it-footer__title {
+    color: var(--it-footer-title-color);
+    font: 700 var(--it-h4-font-size) / var(--it-heading-line-height)
+      var(--it-font-family-base);
+    margin-bottom: var(--it-heading-margin-bottom);
+  }
+
+  .it-footer__list-item {
+    margin-top: 0;
+  }
+
+  .it-footer__items {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 996px) {
+    .it-footer {
+      --it-footer-padding-horizontal: 0;
+    }
+
+    .it-footer-col {
+      margin-bottom: calc(var(--it-spacing-vertical) * 3);
+    }
+
+    .it-footer__link {
+      display: block;
+      width: max-content;
+    }
+  }
+
+  @media print {
+    .it-footer {
+      display: none;
+    }
+  }
+}

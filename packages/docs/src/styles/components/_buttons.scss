@@ -1,0 +1,47 @@
+@use 'igniteui-theming' as *;
+
+igc-button igc-icon,
+igc-icon-button igc-icon svg {
+  width: rem(12px);
+  height: rem(12px);
+}
+
+.highlight-button {
+  @include type-style('button', false);
+  @include tokens(
+    flat-button-theme(
+      $foreground: var(--ig-quinary-300),
+      $hover-foreground: var(--ig-quinary-400),
+      $hover-background: none,
+      $active-background: none,
+      $active-foreground: var(--ig-quinary-400)
+    )
+  );
+
+  igc-icon {
+    --size: #{rem(12px)};
+  }
+}
+
+.it-outlined-button--style {
+  @include type-style('button');
+  @include tokens(
+    outlined-button-theme(
+      $background: light-dark(var(--ig-surface-white), transparent),
+      $foreground: light-dark(var(--ig-gray-900), var(--ig-tertiary-100)),
+      $icon-color: light-dark(var(--ig-gray-900), var(--ig-gray-400)),
+      $border-color: light-dark(var(--ig-gray-900), var(--ig-gray-500)),
+      $border-radius: var(--ig-border-radius-2xl),
+      $size: rem(44px)
+    )
+  );
+
+  igc-icon {
+    --size: #{rem(12px)};
+  }
+
+  &::part(base) {
+    border-width: rem(2px);
+    padding: 0;
+  }
+}

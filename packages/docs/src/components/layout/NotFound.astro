@@ -1,0 +1,55 @@
+---
+// the 404 content with the rocket illustration inlined.
+import { translator } from '../../lib/i18n/Translate';
+import { type Locale, versionPath } from '../../lib/docs/config';
+import { Image } from 'astro:assets';
+import rocket from '../../../public/illustrations/illustration_rocket_dark_3.svg?raw';
+import cosmonaut from '../../assets/illustration-cosmonaut.svg';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translator(locale);
+// Locale-aware, so /ja/404.html points at the Japanese docs.
+const docsHref = `${versionPath(locale, 'current')}/core-concepts/colors/overview`;
+---
+
+<div class="it-404-container it-container">
+  <div class="it-404-wrapper">
+    <div class="it-row">
+      <picture class="it-404-illustration--header">
+        <Image
+          src={cosmonaut}
+          alt="404 cosmonaut illustration"
+          loading="lazy"
+        />
+      </picture>
+      <h3 class="it-404-bg">404</h3>
+      <div class="it-col it-col--6 it-col--offset-3 it-404-hero-wrapper">
+        <h1 class="it-404-hero__title">
+          {t({ id: 'theme.NotFound.title', message: 'Lost in space?' })}
+        </h1>
+        <p class="it-404-hero__content">
+          {t({
+            id: 'theme.NotFound.p1',
+            message: 'I’ll take your brains to another dimension',
+          })}
+          <igc-icon-button
+            variant="flat"
+            href={docsHref}
+            name="arrow"
+            aria-label={t({
+              id: 'theme.SearchBar.browseCoreConcepts',
+              message: 'Browse core concepts',
+            })}
+          ></igc-icon-button>
+        </p>
+      </div>
+    </div>
+    <div class="it-404-illustration--footer" set:html={rocket} />
+    <svg width="0" xmlns="http://www.w3.org/2000/svg">
+      <path id="svgRect" d="M73 207C133 224 563 278 825-40"></path>
+    </svg>
+  </div>
+</div>

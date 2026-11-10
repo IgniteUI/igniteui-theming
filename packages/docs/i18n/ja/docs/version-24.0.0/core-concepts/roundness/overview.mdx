@@ -1,0 +1,36 @@
+---
+sidebar_position: 1
+title: 概要
+description: ラウンドネスシステムは、最小、デフォルト、最大値を使用した一貫したborder-radius管理を提供します。
+hide_title: true
+pagination_next: core-concepts/roundness/border-radius-function
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+
+<CoreConceptHeader
+  title="ラウンドネス"
+  description="ラウンドネスシステムは、要素のborder-radiusを定義および管理するための一貫した方法を提供します。"
+  image="core_roundness_docs.svg"
+/>
+
+Ignite UI Themingのラウンドネスシステムは、要素のborder-radiusを定義および管理するための一貫した方法を提供します。固定値を手動で設定する代わりに、最大3つの異なる丸みレベル（`デフォルト`、`最小`、`最大`）を定義し、動的に切り替えることができます。
+
+ラウンドネスシステムを使用する主な利点は次のとおりです：
+
+- 丸みレベル間の切り替えが簡単になります。
+
+- ハードコーディングされたborder-radius値を減らし、保守性が向上します。
+
+- アプリケーション全体でスタイルを柔軟かつ一貫した状態に保ちます。
+
+```scss
+.wrapper {
+  border-radius: border-radius($radius: 10px, $min: 0px, $max: 20px);
+  --ig-radius-factor: 1;
+
+  // この例では、border-radiusは20pxになります
+}
+```
+
+ラウンドネスシステムを使用する際、要素のborder-radiusを決定する主な要素が2つあります：デフォルト値と適用可能な最小および最大限度を定義する`border-radius(){:bash}`関数と、それらの限度間で使用される値を決定する`--ig-radius-factor{:sass}`変数です。

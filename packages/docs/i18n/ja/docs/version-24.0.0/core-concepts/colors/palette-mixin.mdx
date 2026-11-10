@@ -1,0 +1,54 @@
+---
+sidebar_position: 4
+---
+
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# パレットミックスイン
+
+  デザインシステムのカラーを使用してパレットマップを作成した後、paletteミックスインを使用してそれをインクルードできます。これにより、マップに基づいたCSS変数が生成されます。
+
+	<br/>
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+	:root {
+	  --ig-primary-500: #f34e4e;
+	  --ig-secondary-500: #fff6ea;
+	  --ig-actions-500: #7bb9fa;
+	  --ig-gray-500: #ebebeb;
+	  --ig-black-500: #282828;
+	}
+	```
+	<br/>
+
+  パレットがミックスインに渡されると、まずセレクタ内にインクルードされているかどうかをチェックします。これはカスタムの[is-root()](https://www.infragistics.com/products/ignite-ui-angular/docs/sass/latest/utilities/#function-is-root)関数によって処理されます。ミックスインがセレクタ内にない場合、CSS変数は`:root{:sass}`レベルで宣言されます。
+
+  次に、パレットマップを反復処理し、`shade{:sass}`というカスタムミックスインで各カラーグループとバリアントを処理します。`shade{:sass}`ミックスインは、渡されたマップのカラーグループ、バリアント、カラーを収集し、それらに基づいて新しい変数を作成します。つまり、マップで設定した名前が変数の作成に使用されます。
+
+  生成される変数は次の構造に従います：
+
+  ```css
+  --ig-{color-type}-{color-variant}: {color-value};
+  ```
+
+  例：
+
+  ```css
+  --ig-primary-500: #f34e4e;
+  ```
+
+  ## コントラストパラメータ {/* #contrast-parameters */}
+
+  パレットに加えて、`palette{:sass}`ミックスインは`$contrast`や`$contrast-level`などのコントラスト関連のパラメータも受け入れます：
+  
+  - `$contrast`: ブール値（trueまたはfalse）。コントラストカラー計算用のCSS変数をパレットに含めるかどうかを決定します。（デフォルトでは`true{:js}`に設定されています）
+
+  - `$contrast-level`: `adaptive-contrast(){:bash}`関数を介してアダプティブコントラストカラーを計算する際に使用される[WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)コントラストレベル（A、AA、またはAAA）を設定します。（デフォルトでは'AA'に設定されています）
+  
+  [WCAG](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)コントラストレベルを変更したい場合は、`$contrast-level`パラメータを使用して3つのレベル（小文字）のいずれかを渡すことができます：'a'、'aa'、または'aaa'。たとえば、レベルをAAA（'aaa'）に設定すると、`adaptive-contrast(){:bash}`関数で計算されるこのスコープ内のすべてのコントラストカラーがAAA要件を満たすように再計算されます。
+
+	```scss
+    @include palette($my-palette, $contrast-level: 'aaa');
+	```
+
+  `adaptive-contrast(){:bash}`関数の詳細については、[アダプティブコントラスト](adaptive-contrasts)セクションをご覧ください。

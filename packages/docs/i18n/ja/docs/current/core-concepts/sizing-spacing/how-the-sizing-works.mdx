@@ -1,0 +1,99 @@
+---
+sidebar_position: 2
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# サイズの仕組み
+  
+  ## `sizable` ミックスイン {/* #sizable-mixin */}
+  
+  要素をサイズ変更可能にするには、`sizable{:sass}` ミックスインをインクルードする必要があります。ミックスインをインクルードすると、要素のスコープ内に `--is-small{:sass}`、`--is-medium{:sass}`、`--is-large{:sass}` の3つの変数が宣言されます。各変数には、`small`、`medium`、`large` のどのサイズを要素に適用するかを判定する計算式が入ります。これらの変数により、3つのサイズを切り替えられるようになります。
+  
+  重要なのは、`sizable{:sass}` ミックスインをインクルードした要素だけがサイズ変更可能になる点です。その子要素は、この挙動を自動的には継承しません。
+  
+  ## `sizable()` 関数 {/* #sizable-function */}
+  
+	CSSプロパティで `sizable(){:js}` 関数を使うと、動的に切り替えたいサイズを定義できます。この関数は最大3つの値を受け取り、1つ目が `small`、2つ目が `medium`、3つ目が `large` に対応します。少なくとも1つの値は必須です。2つだけ指定した場合、2つ目の値が medium と large の両方に適用されます。
+  
+  ```scss
+  // small は 10px、medium と large は 20px
+  width: sizable($sm: 10px, $md: 20px);
+  ```
+  
+  関数の戻り値を変数に代入することもできます。（戻り値だけを保持するため、補間することを忘れないでください。）
+  
+  ```scss
+  // small (10px)、medium (20px)、large (50px) のサイズを変数で定義
+  --size: #{sizable($sm: 10px, $md: 20px, $lg: 50px)};
+  width: var(--size);
+  ```
+  
+  ## サイズの制御 {/* #managing-the-size */}
+  
+  `sizable(){:js}` 関数でサイズを設定したら、`--component-size{:sass}` 変数を宣言します。この変数は必須で、`sizable{:sass}` ミックスインで使われる `--is-small{:sass}`、`--is-medium{:sass}`、`--is-large{:sass}` の計算を制御するため、常に定義されている必要があります。
+  
+  `--component-size{:sass}` には、要素に適用したいサイズを設定します。サイズは `--ig-size-small{:sass}`、`--ig-size-medium{:sass}`、`--ig-size-large{:sass}` の3つの定義済み変数で決まります。これらのいずれかを `--component-size{:sass}` に代入すると、対応するサイズが適用されます。
+  
+  - `--ig-size-small{:sass}` は `sizable(){:js}` 関数に渡した1つ目の値を使います。
+  
+  - `--ig-size-medium{:sass}` は2つ目の値を使います。
+  
+  - `--ig-size-large{:sass}` は3つ目の値を使います。
+  
+  完全な変数名の代わりに数値を使うこともできます。
+  
+  - `--ig-size-small{:sass}` -> `1`
+  
+  - `--ig-size-medium{:sass}` -> `2`
+  
+  - `--ig-size-large{:sass}` -> `3`
+  
+  どちらの指定方法も同等です。
+  
+  ```scss
+  .wrapper {
+    ...
+    --component-size: var(--ig-size-medium);
+    --component-size: 2;
+    ...
+  }
+  ```
+  
+  どちらの場合も、要素には medium サイズが適用されます。
+  
+  :::note
+	  たとえば `--component-size{:sass}` を medium に設定すると、現在のスコープ内で `sizable(){:js}` 関数を使っているすべてのCSSプロパティに medium の値が適用されます。
+  :::
+
+  `--component-size{:sass}` で別の変数を参照し、デフォルトサイズを設定することもできます。
+  
+  ```scss
+  // 要素サイズを --ig-size 変数に連動させ、既定値を --ig-size-medium に設定
+  --component-size: var(--ig-size, var(--ig-size-medium));
+  
+  // 要素サイズを large に設定
+  --ig-size: var(--ig-size-large);
+  ```
+  
+  これは、子要素すべての `--component-size{:sass}` をまとめて変更したい場合に特に便利です。
+  
+  ## 計算の仕組み {/* #how-the-calculation-is-made */}
+  
+  `--component-size{:sass}` の値が設定されると、`--is-small{:sass}`、`--is-medium{:sass}`、`--is-large{:sass}` の3つの変数の計算によって、どのサイズが有効かが決まります。選択されたサイズは `1`、それ以外は `0` になります。次に `sizable(){:js}` 関数が、これらの変数とパラメータで渡されたサイズ値を掛け合わせます。2つは `0` なので、有効なサイズだけが正の結果となり、その値が要素のプロパティに適用されます。
+  
+  ```scss
+  .wrapper {
+    @include sizable();
+    width: sizable($sm: 10px, $md: 20px, $lg: 50px);
+    --component-size: var(--ig-size-medium);
+  }
+  ```
+  
+  この例では `--component-size{:sass}` が `--ig-size-medium{:sass}` に設定されているため、`--is-medium{:sass}` が `1` になり、他の2つ（`--is-small{:sass}` と `--is-large{:sass}`）は `0` のままです。その結果、`sizable(){:js}` 関数に渡した `$sm: 10px, $md: 20px, $lg: 50px{:sass}` は、計算後に `0, 20px, 0{:sass}` になります。
+  その後、関数は3つの値に Sass の `max(){:js}` 関数を適用して正の値を取り出し、この場合は `20px{:sass}` が要素に適用されます。
+
+  ### API リファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/themes/#function-sizable`}>sizable() 関数</a>
+  - <a href={`${sassDoc}/themes/#mixin-sizable`}>sizable() ミックスイン</a>

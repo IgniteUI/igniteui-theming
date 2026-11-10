@@ -1,0 +1,54 @@
+---
+sidebar_position: 8
+---
+
+import ColorsScopingSample from '@/components/Samples/ColorsScoping';
+
+# スコープ設定
+
+  `palette{:sass}`ミックスインのもう一つの興味深い側面は、パレット変数を現在のスコープ内でのみ宣言することです。
+
+  セレクタ内でミックスインを使用してパレットをインクルードすると、変数はそのセレクタとそのすべての子要素内でのみ使用できます。これにより、複数のパレットが同じアプリケーション内に共存し、それぞれ異なる要素に使用できます。
+
+  たとえば、次のHTML構造を考えてみましょう：
+
+  ```html
+  <div class='wrapper'>
+    <p class='light'>Light box</p>
+    <p class='dark'>Dark box</p>
+  </div>
+  ```
+
+  対応するSCSS：
+
+  ```scss
+  $light-palette: palette(
+    $primary: #100f28,
+    $secondary: #0C1333,
+    $surface: #b6b6b6
+  );
+
+  $dark-palette: palette(
+    $primary: #b6b6b6,
+    $secondary: #545c80,
+    $surface: #100f28
+  );
+
+  .light {
+    @include palette($light-palette); /* [!code highlight] */
+  }
+
+  .dark {
+    @include palette($dark-palette); /* [!code highlight] */
+  }
+
+  .wrapper > p {
+    background: color($color: 'surface', $variant: 500);
+    color: color($color: 'primary', $variant: 400);
+    border-color: color($color: 'secondary', $variant: 400);
+  }
+  ```
+
+  この例では、`.wrapper{:css}`内の両方の要素が`surface-500{:sass}`、`primary-400{:sass}`、`secondary-400{:sass}`カラーを参照しています。しかし、`$light-palette`が`.light{:css}`要素スコープにインクルードされ、`$dark-palette`が`.dark{:css}`要素スコープにインクルードされているため、各要素はそれぞれのパレットからのカラーを使用します。これにより、異なるパレットスコープが共存できることが実証されます。
+
+	<ColorsScopingSample />

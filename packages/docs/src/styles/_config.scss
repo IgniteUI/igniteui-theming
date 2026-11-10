@@ -1,0 +1,267 @@
+@use 'igniteui-theming/sass/typography/types' as * with (
+  $ITypeScale: (
+    h1,
+    h2,
+    h3,
+    h4,
+    button,
+    navigation,
+    body,
+    body-2,
+    body-3,
+    caption,
+    copyright,
+  ),
+  $ITypeStyle: (
+    font-weight: 400,
+    font-style: normal,
+    font-size: 16px,
+    line-height: 24px,
+    letter-spacing: 0,
+    text-transform: none,
+    margin-top: 0,
+    margin-bottom: 0,
+  )
+);
+@use 'igniteui-theming/sass/typography/functions' as *;
+@use 'igniteui-theming/sass/color' as *;
+@use 'igniteui-theming/sass/typography/mixins' as *;
+
+:root {
+  // Base variable overrides (code font + no <pre> background)
+  --it-pre-background: unset;
+  --it-font-family-monospace: 'Fira Code', monospace;
+  --it-font-size-monospace: 14px;
+  --it-line-height-monospace: 1.6;
+
+  // The active tab colour, darkened / lightened just enough for 4.5:1 contrast on both themes.
+  --it-tabs-color-active: light-dark(
+    color-mix(in srgb, var(--it-color-primary) 86%, black),
+    color-mix(in srgb, var(--it-color-primary) 84%, white)
+  );
+  --it-site-background: light-dark(
+    var(--ig-surface-white),
+    var(--ig-surface-dark)
+  );
+  --it-global-separator-color: light-dark(
+    var(--ig-gray-100),
+    var(--ig-gray-900)
+  );
+  --it-concept-illustration-size: #{rem(80px)};
+  --it-concept-min-width: #{33%};
+  --it-viewport-gap: #{rem(24px)};
+  --ig-spacing-2xs: #{rem(8px)};
+  --ig-spacing-xs: #{rem(16px)};
+  --ig-spacing-s: #{rem(24px)};
+  --ig-spacing-m: #{rem(32px)};
+  --ig-spacing-l: #{rem(36px)};
+  --ig-spacing-xl: #{rem(40px)};
+  --ig-spacing-2xl: #{rem(80px)};
+  --ig-border-radius-xsmall: #{rem(4px)};
+  --ig-border-radius-small: #{rem(8px)};
+  --ig-border-radius-medium: #{rem(12px)};
+  --ig-border-radius-large: #{rem(16px)};
+  --ig-border-radius-xl: #{rem(20px)};
+  --ig-border-radius-2xl: #{rem(24px)};
+  --ig-linear-header: linear-gradient(
+    264.84deg,
+    rgb(230, 226, 224, 0.2) 5.82%,
+    rgb(0, 153, 255, 0.2) 33.92%,
+    rgb(249, 89, 36, 0.2) 90.64%
+  );
+  --ig-linear-body: linear-gradient(
+    55.66deg,
+    rgb(230, 226, 224, 0.2) 4.75%,
+    rgb(0, 153, 255, 0.2) 25.19%,
+    rgb(249, 89, 36, 0.2) 73.42%
+  );
+  --ig-linear-item: linear-gradient(
+    88.38deg,
+    rgb(230, 226, 224, 0.2) 4.5%,
+    rgb(0, 153, 255, 0.2) 46.89%,
+    rgb(249, 89, 36, 0.2) 92.3%
+  );
+  --ig-linear-card: linear-gradient(
+    61.92deg,
+    rgb(230, 226, 224, 0.2) 7.83%,
+    rgb(0, 153, 255, 0.2) 34.32%,
+    rgb(249, 89, 36, 0.2) 90.09%
+  );
+  --ig-linear-border: linear-gradient(
+    180deg,
+    #e6e2e0 0%,
+    #09f 60.1%,
+    #f95924 100%
+  );
+  --ig-linear-border-light: linear-gradient(
+    121.75deg,
+    #09f 27.97%,
+    #f95924 70.43%
+  );
+
+  scrollbar-width: thin;
+  scrollbar-color: light-dark(var(--ig-gray-300), var(--ig-gray-600))
+    transparent;
+  font-family: var(--ig-font-family);
+}
+
+$custom-typography: type-scale(
+  $h1: type-style(
+      $font-size: rem(76px),
+      $line-height: rem(92px),
+    ),
+  $h2: type-style(
+      $font-weight: 500,
+      $font-size: rem(42px),
+      $line-height: rem(50px),
+    ),
+  $h3: type-style(
+      $font-weight: 300,
+      $font-size: rem(32px),
+      $line-height: rem(46px),
+    ),
+  $h4: type-style(
+      $font-size: rem(22px),
+      $line-height: rem(32px),
+      $letter-spacing: rem(0.44px),
+    ),
+  $button: type-style(
+      $font-weight: 600,
+      $font-size: rem(14px),
+      $line-height: rem(22px),
+    ),
+  $navigation: type-style(
+      $font-size: rem(14px),
+      $line-height: rem(24px),
+      $letter-spacing: rem(0.3px),
+    ),
+  $body: type-style(
+      $font-weight: 300,
+      $font-size: rem(16px),
+      $line-height: rem(28px),
+      $letter-spacing: rem(0.32px),
+    ),
+  $body-2: type-style(
+      $font-weight: 400,
+      $font-size: rem(14px),
+      $line-height: rem(20px),
+      $letter-spacing: rem(0.4px),
+    ),
+  $body-3: type-style(
+      $font-weight: 300,
+      $font-size: rem(12px),
+      $line-height: rem(20px),
+      $letter-spacing: rem(0.4px),
+    ),
+  $caption: type-style(
+      $font-size: rem(12px),
+      $line-height: rem(18px),
+      $letter-spacing: rem(1.2px),
+      $text-transform: uppercase,
+    ),
+  $copyright: type-style(
+      $font-weight: 400,
+      $font-size: rem(10px),
+      $line-height: rem(16px),
+      $letter-spacing: rem(1px),
+      $text-transform: uppercase,
+    ),
+);
+$color-palette: (
+  'primary': (
+    '100': #e1e1f1,
+    '200': #b8b7df,
+    '300': #8f8ecc,
+    '400': #6867b7,
+    '500': #44429a,
+    '600': #27265f,
+    '700': #0e0d2b,
+  ),
+  'secondary': (
+    '100': #f0f0f5,
+    '200': #cacddc,
+    '300': #a0a5c2,
+    '400': #787fa7,
+    '500': #545c80,
+    '600': #363b54,
+    '700': #1a1d2c,
+  ),
+  'tertiary': (
+    '100': #eff0fa,
+    '200': #c3c7ee,
+    '300': #979de1,
+    '400': #6975d3,
+    '500': #4050b5,
+    '600': #273277,
+    '700': #11173e,
+  ),
+  'quinary': (
+    '100': #fdd3ce,
+    '200': #fb9c8e,
+    '300': #f95924,
+    '400': #bc4118,
+    '450': #dc3700,
+    '500': #832b0e,
+    '600': #4e1605,
+    '700': #260701,
+  ),
+  'senary': (
+    '100': #ffcdb2,
+    '200': #ff961e,
+    '300': #cb7500,
+    '400': #975600,
+    '500': #673800,
+    '600': #3a1e00,
+    '700': #1e0d00,
+  ),
+  'neutral': (
+    '100': #e2e2e4,
+    '200': #bbbbbe,
+    '300': #94949a,
+    '400': #6f6f77,
+    '500': #4d4d54,
+    '600': #2d2d32,
+    '700': #111113,
+  ),
+  'gray': (
+    '100': #f0f0f5,
+    '150': #cacddc,
+    '200': #b7b9cd,
+    '300': #a0a5c2,
+    '400': #787fa7,
+    '500': #545c80,
+    '600': #363b54,
+    '700': #4d4d4d,
+    '800': #242b4a,
+    '800-light': #f5f5f5,
+    '900': #191f39,
+    '900-light': #fafafa,
+    '950': #131934,
+    '950-semi': #191f3980,
+  ),
+  'surface': (
+    'dark': #100f28,
+    'white': #fff,
+  ),
+);
+
+@include typography(
+  $font-family: 'Inter, sans-serif',
+  $type-scale: $custom-typography
+);
+@include palette($color-palette);
+
+html {
+  background-color: light-dark(var(--ig-surface-white), var(--ig-surface-dark));
+  scroll-behavior: smooth;
+
+  &[lang='ja-JP'] {
+    .it-main {
+      font-size-adjust: 0.5;
+    }
+
+    .it-locale span {
+      line-height: rem(22px);
+    }
+  }
+}

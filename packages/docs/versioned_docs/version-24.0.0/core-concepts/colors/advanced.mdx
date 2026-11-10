@@ -1,0 +1,49 @@
+---
+sidebar_position: 6
+---
+
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+import multipliers from './assets/Multipliers.png';
+import { Image } from 'astro:assets';
+
+# Advanced 
+
+  ## How the variants are calculated
+
+  You can see how the multiplier maps look here: [Multipliers](https://github.com/IgniteUI/igniteui-theming/blob/master/sass/color/_multipliers.scss)
+
+  As you can see we have all of the 14 variants for the color groups `($color)`, and the 9 variants for the gray color `($grayscale)`.
+  
+  After reviewing the map, let’s see how the variants are actually generated. Let’s take the **600 variant** as an example.
+
+  <CodeBlockHeader title="CSS output"/>
+	```css
+    :root {
+	  ...
+      --ig-primary-400: hsl(from var(--ig-primary-500) h calc(s * 0.875) calc(l * 1.08));
+      --ig-primary-400-contrast: hsla(from color(from var(--ig-primary-400) var(--y-contrast)) h 0 l / 1);
+      --ig-primary-500: #f34e4e;
+      --ig-primary-500-contrast: hsla(from color(from var(--ig-primary-500) var(--y-contrast)) h 0 l / 1);
+      --ig-primary-600: hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.89));
+      --ig-primary-600-contrast: hsla(from color(from var(--ig-primary-600) var(--y-contrast)) h 0 l / 1);
+      --ig-primary-700: hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.81));
+      --ig-primary-700-contrast: hsla(from color(from var(--ig-primary-700) var(--y-contrast)) h 0 l / 1);
+	  ...
+    }
+  ```
+
+  First, as you can see the `--ig-primary-500{:sass}` uses the value we passed to our palette function, in this case, `#f34e4e{:css}`.
+
+  To generate the `--ig-primary-600{:sass}` color, we use the CSS relative color syntax and the function [hsl()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl#from_color). It first loads the `--ig-primary-500{:sass}` value, keeps the **hue** unchanged, and multiplies the **saturation (s)** and **lightness (l)** by the relevant multipliers from the color multipliers map ($colors).
+
+  The same process is applied for all other color variants, the only difference is the predefined multiplier values for each variant.
+
+	<Image src={multipliers} height={450} densities={[1, 2]} format="png" alt="Multipliers" />
+	<br/>
+	<br/>
+
+  :::info
+  Unfortunately, at the moment the type lists (`$IGrayShades`, `$IColorShades`) and multiplier maps (`$colors`, `$grayscale`) cannot be customized to produce variables based on your own template and multiplier values. We plan to add this functionality to the Ignite UI Theming very soon.
+  :::
+
+  The contrast color variants, on the other hand, are calculated slightly differently. For their generation, the `shades(){:js}` function invokes the `adaptive-contrast(){:bash}` function. You can see more about the contrast color calculations in the [Adaptive contrast](adaptive-contrasts) section.

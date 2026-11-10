@@ -1,0 +1,17 @@
+---
+// 404 page (en). Served by the static host for unknown paths under /theming-docs/.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NotFound from '../components/layout/NotFound.astro';
+import { translator } from '../lib/i18n/Translate';
+const t = translator('en');
+---
+
+<BaseLayout
+  title={t({ id: 'theme.NotFound.title', message: 'Page Not Found' })}
+  locale="en"
+  pathname="/404.html"
+  alternates={{ en: '/404.html', ja: '/ja/404.html' }}
+  mainClass="it-404-main"
+>
+  <NotFound locale="en" />
+</BaseLayout>

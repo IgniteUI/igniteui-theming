@@ -1,0 +1,60 @@
+// Generic "grid" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-container {
+    margin: 0 auto;
+    max-width: var(--it-container-width);
+    padding: 0 var(--it-spacing-horizontal);
+    width: 100%;
+  }
+
+  .it-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 calc(var(--it-spacing-horizontal) * -1);
+  }
+
+  .it-col {
+    --it-col-width: 100%;
+
+    flex: 1 0;
+    margin-left: 0;
+    max-width: var(--it-col-width);
+    padding: 0 var(--it-spacing-horizontal);
+    width: 100%;
+  }
+
+  .it-col[class*='it-col--'] {
+    flex: 0 0 var(--it-col-width);
+  }
+
+  .it-col--3 {
+    --it-col-width: calc(3 / 12 * 100%);
+  }
+
+  .it-col--offset-3 {
+    margin-left: calc(3 / 12 * 100%);
+  }
+
+  .it-col--6 {
+    --it-col-width: calc(6 / 12 * 100%);
+  }
+
+  .it-col--12 {
+    --it-col-width: calc(12 / 12 * 100%);
+  }
+
+  @media (min-width: 1440px) {
+    .it-container {
+      max-width: var(--it-container-width-xl);
+    }
+  }
+
+  @media (max-width: 996px) {
+    .it-col {
+      --it-col-width: 100%;
+
+      flex-basis: var(--it-col-width);
+      margin-left: 0;
+    }
+  }
+}

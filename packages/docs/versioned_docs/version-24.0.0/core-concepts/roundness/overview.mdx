@@ -1,0 +1,36 @@
+---
+sidebar_position: 1
+title: Overview
+description: The roundness system provides consistent border-radius management with minimum, default, and maximum values.
+hide_title: true
+pagination_next: core-concepts/roundness/border-radius-function
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+
+<CoreConceptHeader
+  title="Roundness"
+  description="The Roundness system provides a consistent way to define and manage element border-radius."
+  image="core_roundness_docs.svg"
+/>
+
+The Roundness system in Ignite UI Theming provides a consistent way to define and manage element border-radius. Instead of setting fixed values manually, you can define up to three different rounding levels: `default`, `minimum`, and `maximum`, and switch between them dynamically.
+
+Key benefits of using the Roundness system are:
+
+- Makes it easy to switch between rounding levels.
+
+- Reduces hardcoded border-radius values, improving maintainability.
+
+- Keeps your styles flexible and consistent across your application.
+
+```scss
+.wrapper {
+  border-radius: border-radius($radius: 10px, $min: 0px, $max: 20px);
+  --ig-radius-factor: 1;
+
+  // The border-radius in this example will be 20px
+}
+```
+
+When using the Roundness system, there are two main factors that determine the border radius of an element: the `border-radius(){:bash}` function, which defines the default value along with the minimum and maximum limits that can be applied, and the `--ig-radius-factor{:sass}` variable, which determines which value between those limits will be used.

@@ -1,0 +1,253 @@
+@use 'igniteui-theming' as *;
+
+// igc-card previews (vertical + horizontal) and the hover border.
+.preview__card--vertical {
+  grid-column: 4;
+  grid-row: 2 / span 3;
+
+  igc-card {
+    border: none;
+
+    @include tokens(
+      card-theme(
+        $border-radius: var(--ig-border-radius-medium),
+        $background: none,
+        $content-text-color: light-dark(
+            var(--ig-primary-600),
+            var(--ig-primary-100)
+          )
+      )
+    );
+  }
+
+  igc-card-header {
+    padding: var(--component-spacing-xs);
+
+    h3 {
+      @include type-style('h4');
+    }
+
+    .preview__card-subtitle {
+      @include type-style('navigation', false);
+    }
+  }
+
+  igc-card-header::part(title) {
+    color: light-dark(var(--ig-primary-600), var(--ig-900-light));
+  }
+
+  igc-card-header::part(subtitle) {
+    color: light-dark(var(--ig-gray-400), var(--ig-neutral-300));
+  }
+
+  igc-card-content {
+    padding-inline: var(--component-spacing-xs);
+    padding-block: 0 var(--component-spacing-xs);
+
+    p {
+      @include type-style('body-3', false);
+    }
+  }
+
+  igc-card-actions {
+    padding-block: 0 rem(16px);
+    padding-inline: rem(16px);
+  }
+
+  igc-card-actions igc-button::part(base) {
+    @include type-style('button', false);
+
+    height: rem(32px);
+    padding-inline: rem(8px);
+  }
+
+  igc-card-actions igc-button {
+    @include tokens(
+      contained-button-theme(
+        $foreground: light-dark(var(--ig-surface-white), var(--ig-surface-dark)),
+        $icon-color: light-dark(var(--ig-surface-white), var(--ig-surface-dark)),
+        $background: var(--ig-quinary-300),
+        $border-radius: var(--ig-border-radius-large)
+      )
+    );
+  }
+
+  igc-card-actions igc-icon-button::part(base) {
+    background: none;
+    border-radius: var(--ig-border-radius-xl);
+    border-color: var(--ig-gray-500);
+  }
+
+  igc-card-actions igc-button igc-icon {
+    --size: #{rem(12px)};
+  }
+
+  igc-card-actions igc-icon-button::part(icon) {
+    --size: #{rem(15px)};
+
+    color: var(--ig-quinary-300);
+  }
+}
+
+.preview__card-content--vertical {
+  background: var(--ig-linear-body);
+  text-align: left;
+}
+
+[data-theme='dark'] .preview__card--vertical igc-card {
+  background: var(--ig-surface-dark);
+}
+
+[data-theme='light'] .preview__card-content--vertical {
+  background: var(--ig-tertiary-100);
+  border: rem(1px) solid var(--ig-gray-150);
+  border-bottom-left-radius: var(--ig-border-radius-medium);
+  border-bottom-right-radius: var(--ig-border-radius-medium);
+}
+
+[data-theme='light'] igc-card {
+  box-shadow: 4px 4px 4px 4px var(--ig-gray-100);
+}
+
+.it-hover-border {
+  &:hover {
+    > ::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      border-radius: var(--ig-border-radius-medium);
+      padding: rem(1px);
+      background: var(--ig-linear-border);
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+}
+
+// Card 2 styles
+.preview__card--horizontal {
+  grid-column: 2 / span 2;
+  grid-row: 3;
+  min-width: rem(460px);
+  border: none;
+
+  igc-card {
+    border: none;
+
+    img {
+      border-radius: var(--ig-border-radius-small);
+    }
+
+    @include tokens(
+      card-theme(
+        $border-radius: var(--ig-border-radius-medium),
+        $background: var(--ig-linear-card)
+      )
+    );
+  }
+
+  igc-card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding-block: var(--component-spacing-2xs) var(--component-spacing-xs);
+    padding-inline: var(--component-spacing-s);
+
+    span {
+      color: light-dark(var(--ig-gray-500), var(--ig-primary-200));
+
+      @include type-style('body-2', false);
+    }
+
+    igc-linear-progress {
+      flex: 5 1 0;
+      padding-inline: (var(--component-spacing-xs));
+    }
+  }
+
+  igc-card-header {
+    padding: var(--component-spacing-s);
+    text-align: left;
+    align-items: start;
+
+    &::part(title) {
+      color: light-dark(var(--ig-primary-600), var(--ig-surface-white));
+    }
+
+    &::part(subtitle) {
+      color: light-dark(var(--ig-gray-700), var(--ig-neutral-300));
+    }
+
+    h4 {
+      @include type-style('h4');
+    }
+
+    h5 {
+      @include type-style('navigation', false);
+    }
+
+    img {
+      margin-inline-end: var(--ig-spacing-xs);
+    }
+
+    igc-icon-button {
+      position: absolute;
+      top: var(--component-spacing-s);
+      right: var(--component-spacing-s);
+    }
+
+    igc-icon-button::part(base) {
+      border-color: var(--ig-gray-400);
+      background: none;
+      border-radius: var(--ig-border-radius-xl);
+    }
+
+    igc-icon-button::part(icon) {
+      --size: #{rem(15px)};
+
+      color: var(--ig-quinary-300);
+    }
+  }
+
+  igc-card-header::part(header) {
+    margin-inline-start: var(--component-spacing-xs);
+  }
+
+  igc-linear-progress::part(track) {
+    --fill-bg: var(--ig-quinary-300);
+
+    background: light-dark(var(--ig-surface-white), var(--ig-gray-100));
+    height: rem(4px);
+    border-radius: 0;
+  }
+
+  igc-card-actions {
+    width: 60%;
+    margin: auto;
+    color: light-dark(var(--ig-primary-600), var(--ig-primary-300));
+    padding: 0 0 var(--component-spacing-s) 0;
+
+    igc-icon:nth-child(-n + 4) {
+      --size: auto;
+    }
+  }
+}
+
+[data-theme='dark'] .preview__card--horizontal {
+  background: var(--ig-surface-dark);
+}
+
+[data-theme='light'] .preview__card--horizontal:hover ::before {
+  background: var(--ig-linear-border-light);
+}
+
+[data-theme='light'] .preview__card--horizontal igc-card {
+  background: var(--ig-tertiary-100);
+  border: 1px solid var(--ig-gray-150);
+}

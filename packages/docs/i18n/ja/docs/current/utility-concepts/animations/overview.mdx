@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+pagination_next: utility-concepts/animations/animation_mixin
+---
+
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# 概要
+
+  Ignite UI Themingは、プロジェクトですぐに使用できる事前定義されたアニメーションセットも提供しています。
+
+  ```scss
+  // 'fade-in-top' のキーフレームアニメーションミックスインをインクルードする
+  @include fade-in-top();
+
+  // パラメータ付きで animation ミックスインをインクルードする
+  .wrapper {
+    @include animation('fade-in-top' 3s linear infinite);
+  }
+  ```
+
+  すべての事前定義されたIgnite UIアニメーションはミックスインとして保存されており、簡単にインクルードして再利用できます。これらのアニメーションミックスインのいずれかをインクルードすると、自動的に別のミックスイン - `keyframes{:sass}`を呼び出し、`@keyframes{:sass}`ルールを定義し、すべての具体的なアニメーションスタイルと値を設定します。
+
+  <CodeBlockHeader title="CSS出力"/>
+	```css
+	@keyframes fade-in-top {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+	}
+	```
+
+  事前定義されたアニメーションリストには、`fade`、`slide`、`rotate`、`bounce`などのグループが含まれています。各グループには、独自のスタイルを持ついくつかの異なるアニメーションが含まれています。完全なリストはこちらで確認できます： [Animations](http://infragistics.com/products/ignite-ui-angular/docs/sass/latest/animations/#mixin-animation)
+   

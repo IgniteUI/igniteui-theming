@@ -1,0 +1,236 @@
+---
+// the page shell — head metadata, the blocking colour-mode
+// bootstrap, skip link, navbar, main and (site variant) footer, plus the web-components bootstrap.
+import '../styles/theme.scss';
+import {
+  LOCALES,
+  SITE_BASE,
+  SITE_TITLE,
+  SITE_URL,
+  type Locale,
+  type Version,
+} from '../lib/docs/config';
+import { FAVICON, SOCIAL_CARD } from '../config/site';
+import {
+  COLOR_MODE_STORAGE_KEY,
+  FALLBACK_COLOR_MODE_STORAGE_KEYS,
+} from '../lib/theme/color-mode';
+import { translator } from '../lib/i18n/Translate';
+import { getSiteNav } from '../lib/site-nav';
+import { localePathCounterpart } from '../lib/docs/versions';
+import type { SidebarItem } from '../lib/docs/types';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+// Preload the exact (hashed) code-font files that theme.scss references, so the preloads are actually used.
+// Inter is inlined into the stylesheet (astro.config `assetsInlineLimit`), so it needs no preload.
+import firaLight from '../../public/fonts/fira-code/FiraCode-Light.woff2?url';
+import firaRegular from '../../public/fonts/fira-code/FiraCode-Regular.woff2?url';
+import firaMedium from '../../public/fonts/fira-code/FiraCode-Medium.woff2?url';
+
+interface Props {
+  /** Page title without the site suffix. */
+  title: string;
+  description?: string;
+  locale?: Locale;
+  /** Path of this page relative to the site base, e.g. `/docs/foo` or `/ja/`. */
+  pathname: string;
+  /** Alternates for other locales (relative to the site base); defaults to the locale-swapped pathname. */
+  alternates?: Partial<Record<Locale, string>>;
+  doc?: { id: string; version: Version };
+  sidebar?: SidebarItem[];
+  htmlClass?: string;
+  mainClass?: string;
+  /** `site`: landing/404 footer under <main>; `docs`: DocLayout renders its own footer. */
+  footer?: 'site' | 'docs' | 'none';
+  noIndex?: boolean;
+  /** Use `title` as-is, without the " | Ignite UI Theming" suffix (the search page). */
+  rawTitle?: boolean;
+  /** og:title override (the site title on pages without their own metadata title). */
+  ogTitle?: string;
+}
+const {
+  title,
+  description,
+  locale = 'en',
+  pathname,
+  alternates,
+  doc,
+  sidebar,
+  htmlClass,
+  mainClass,
+  footer = 'site',
+  noIndex = false,
+  rawTitle = false,
+  ogTitle,
+} = Astro.props;
+const t = translator(locale);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fullTitle = rawTitle ? title : `${title} | ${SITE_TITLE}`;
+const absolute = (p: string) => `${SITE_URL}${p}`;
+const pageUrl = absolute(`${SITE_BASE}${pathname}`);
+const isDocsPage = !!doc;
+const nav = await getSiteNav(locale, `${SITE_BASE}${pathname}`, doc);
+const alternateHref = (l: Locale) => {
+  const explicit = alternates?.[l];
+  if (explicit) return absolute(`${SITE_BASE}${explicit}`);
+  if (doc) return absolute(nav.localeLinks.find((x) => x.locale === l)!.href);
+  return absolute(localePathCounterpart(`${SITE_BASE}${pathname}`, locale, l));
+};
+const imageUrl = absolute(`${SITE_BASE}/${SOCIAL_CARD}`);
+const ogLocale = LOCALES[locale].htmlLang.replace('-', '_');
+const ogAlternates = (Object.keys(LOCALES) as Locale[])
+  .filter((l) => l !== locale)
+  .map((l) => LOCALES[l].htmlLang.replace('-', '_'));
+const versionName = doc?.version ?? 'current';
+// `it-docs-page` switches the chrome to the docs layout; `it-doc-id-*` lets a stylesheet target one page.
+const htmlClasses = [
+  isDocsPage && ['it-docs-page', `it-doc-id-${doc!.id}`],
+  htmlClass,
+]
+  .flat()
+  .filter(Boolean)
+  .join(' ');
+const fontPreloads = [firaLight, firaRegular, firaMedium];
+const skipLabel = t({
+  id: 'theme.common.skipToMainContent',
+  message: 'Skip to main content',
+});
+---
+
+<!doctype html>
+<html
+  lang={LOCALES[locale].htmlLang}
+  dir="ltr"
+  class={htmlClasses || undefined}
+  data-theme="dark"
+  data-theme-choice="dark"
+>
+  <head>
+    <meta charset="UTF-8" />
+    {/* Cross-document view transitions. The opt-in lives inline, first in <head>: when it only arrives with the
+        stylesheet, the browser's first style pass on a new page can run before the sheet applies and skips the
+        transition ("ViewTransition opt-in disabled"). The expect link holds the first paint until the main
+        content is parsed, so the transition never animates to a blank page. */}
+    <style is:inline>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <link rel="expect" href="#main-content" blocking="render" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogAlternates.map((l) => (
+      <meta property="og:locale:alternate" content={l} />
+    ))}
+    <meta property="og:title" content={ogTitle ?? fullTitle} />
+    {description && <meta name="description" content={description} />}
+    {description && <meta property="og:description" content={description} />}
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href={`${base}/${FAVICON}`} />
+    <link rel="canonical" href={pageUrl} />
+    {(Object.keys(LOCALES) as Locale[]).map((l) => (
+      <link
+        rel="alternate"
+        href={alternateHref(l)}
+        hreflang={LOCALES[l].htmlLang}
+      />
+    ))}
+    <link rel="alternate" href={alternateHref('en')} hreflang="x-default" />
+    {fontPreloads.map((f) => (
+      <link
+        rel="preload"
+        href={f}
+        as="font"
+        type="font/woff2"
+        crossorigin="anonymous"
+      />
+    ))}
+    <slot name="head" />
+    <script
+      is:inline
+      define:vars={{
+        storageKey: COLOR_MODE_STORAGE_KEY,
+        fallbackKeys: FALLBACK_COLOR_MODE_STORAGE_KEYS,
+      }}
+    >
+      // apply the saved colour mode before first paint (`?theme=light|dark` overrides the saved choice;
+      // default dark).
+      (function () {
+        var t =
+          (function () {
+            try {
+              return new URLSearchParams(window.location.search).get('theme');
+            } catch (e) {}
+          })() ||
+          (function () {
+            try {
+              // Fallback keys the choice may have been saved under.
+              return (
+                window.localStorage.getItem(storageKey) ||
+                fallbackKeys
+                  .map((k) => window.localStorage.getItem(k))
+                  .find(Boolean)
+              );
+            } catch (e) {}
+          })();
+        var mode = t === 'light' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', mode);
+        document.documentElement.setAttribute('data-theme-choice', mode);
+        // Platform hint for the search shortcut (⌘K on Apple devices), decided before first paint.
+        document.documentElement.setAttribute(
+          'data-platform',
+          /mac|iphone|ipad/i.test(navigator.platform) ? 'mac' : 'other'
+        );
+      })();
+    </script>
+  </head>
+  <body>
+    <svg style="display: none;">
+      <defs>
+        <symbol id="theme-svg-external-link" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"
+          ></path>
+        </symbol>
+      </defs>
+    </svg>
+    <div id="it-root">
+      <div role="region" aria-label={skipLabel}>
+        <a class="it-skip-to-content" href="#main-content">
+          {skipLabel}
+        </a>
+      </div>
+      <div class="it-site-wrapper">
+        <Navbar
+          locale={locale}
+          versionLinks={nav.versionLinks}
+          localeLinks={nav.localeLinks}
+          docsHref={nav.docsHref}
+          isDocsPage={isDocsPage}
+          version={versionName}
+          sidebar={sidebar}
+          activePath={`${SITE_BASE}${pathname}`}
+        />
+        <main
+          id="main-content"
+          class:list={['it-main', 'it-main', 'it-main', 'it-main', mainClass]}
+        >
+          <slot />
+        </main>
+        {footer === 'site' && <Footer locale={locale} variant="site" />}
+      </div>
+    </div>
+    <script>
+      import '../scripts/bootstrap';
+      import '../scripts/color-mode';
+      import '../scripts/navbar';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,229 @@
+---
+sidebar_position: 1
+title: Overview
+hide_title: true
+description: How to use AI tools to generate color palettes, typography systems, and complete themes with the Ignite UI Theming MCP server.
+---
+
+import Tabs from '@/components/mdx/Tabs.astro';
+import styles from '@/styles/docs/tables.module.scss';
+import TabItem from '@/components/mdx/TabItem.astro';
+
+## Context files
+Ignite UI Theming also provides [llms.txt](/theming-docs/llms.txt) and [llms-full.txt](/theming-docs/llms-full.txt) files that contain the full documentation content in plain text format, optimized for AI processing. These files are intended as input for language models, helping them understand the documentation structure and content and generate accurate, relevant responses.
+
+## MCP Server
+Apart from the context files, Ignite UI Theming also has its own [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that enables AI assistants to generate production-ready theming code for your project.
+
+## What is MCP?
+The Model Context Protocol allows AI assistants (like Claude, GitHub Copilot, and others) to connect to external tools and data sources. The Ignite UI Theming MCP server acts as an expert theming assistant that can:
+
+🎨 Generate color palettes with automatic shade variations <br/>
+📝 Create typography systems following design standards <br/>
+🌓 Build complete themes for light and dark modes <br/>
+🎯 Customize components with design tokens <br/>
+✅ Validate colors for accessibility compliance <br/>
+
+## How to use the MCP server?
+
+1. Clone and Build
+Clone the repository and build the MCP server:
+
+```bash
+npm install
+npm run build:mcp
+```
+
+2. Configure Your AI Client
+
+  The MCP server works with any MCP-compatible client. Here are setup instructions for popular clients:
+
+<Tabs>
+<TabItem value="vscode" label="VS Code" default>
+For local development - Create or edit .vscode/mcp.json:
+```json
+{
+  "servers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+    }
+  }
+}
+```
+Using published package:
+```json
+{
+  "servers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+</TabItem>
+<TabItem value="webstorm" label="WebStorm / JetBrains IDEs">
+1. Go to Settings → Tools → AI Assistant → MCP Servers
+2. Click + Add MCP Server
+3. Configure:
+ - Name: igniteui-theming
+ - Command: node (for local) or npx (for package)
+ - Arguments:
+   - Local: /absolute/path/to/igniteui-theming/dist/mcp/index.js
+   - Package: igniteui-theming igniteui-theming-mcp
+4. Click OK and restart AI Assistant
+</TabItem>
+<TabItem value="claude" label="Claude Desktop">
+Add to your configuration file:
+
+macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+For local development:
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+    }
+  }
+}
+```
+
+Using published package:
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+</TabItem>
+<TabItem value="cursor" label="Cursor">
+Create or edit `.cursor/mcp.json` in your project:
+
+For local development:
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "node",
+      "args": ["/absolute/path/to/igniteui-theming/dist/mcp/index.js"]
+    }
+  }
+}
+```
+
+Using published package:
+```json
+{
+  "mcpServers": {
+    "igniteui-theming": {
+      "command": "npx",
+      "args": ["-y", "igniteui-theming", "igniteui-theming-mcp"]
+    }
+  }
+}
+```
+</TabItem>
+</Tabs>
+
+## What can the MCP server do?
+
+🎨 Create Complete Themes
+
+Simply describe your theme to your AI assistant:
+
+> "Create a Material Design dark theme for my Angular app with that takes inspiration from the Gruvbox color scheme."
+
+The AI will generate production-ready Sass code with:
+
+- Color palette with all shade variations
+- Typography setup with proper type scales
+- Elevation shadows
+- Platform-specific imports and configuration
+
+🌈 Generate Color Palettes
+
+> "Generate a light theme palette using teal as primary and purple as secondary"
+
+Get perfectly calculated color shades following design system standards.
+
+📝 Setup Typography
+
+> "Set up typography using Inter font with Material Design type scale for Web Components"
+
+Get proper typography configuration with font families and responsive type scales.
+
+## Available Capabilities
+
+Some of the tools that the MCP server provides include:
+
+<table className={`${styles.table} ${styles.table__elevations}`}>
+<thead className={styles.table__header}>
+<tr>
+	<th>Tool</th>
+	<th style={{ width: "30rem" }}>Description</th>
+</tr>
+</thead>
+<tbody className={styles.table__content}>	
+<tr>
+	<td><strong>create_palette</strong></td>
+	<td>Generate color palette with automatic shade calculations.</td>
+</tr>
+<tr>
+	<td><strong>create_custom_palette</strong></td>
+	<td>Create palette with fine-grained control over individual shades.</td>
+</tr>
+<tr>
+	<td><strong>create_typography</strong></td>
+	<td>Setup typography with font families and type scales.</td>
+</tr>
+<tr>
+	<td><strong>create_elevations</strong></td>
+	<td>	Configure elevation shadows.</td>
+</tr>
+<tr>
+	<td><strong>create_theme</strong></td>
+	<td>	Generate complete theme (palette + typography + elevations).</td>
+</tr>
+</tbody>
+</table>
+
+Apart from the tools, the MCP server also provides the following resources:
+`Preset Libraries`: Pre-built palettes, typography, and elevation sets
+`Color Guidance`: Best practices for color selection and usage
+
+
+## Example Interactions 
+
+<Tabs>
+<TabItem value="new-project-theme" label="Creating a new project theme">
+**You:** "I'm starting a new Angular project with Ignite UI. Create a complete Material Design theme with primary blue, secondary coral, light theme, and Roboto font"
+
+**AI:** Uses `create_theme` tool and generates complete Sass code ready to use
+</TabItem>
+<TabItem value="adding-dark-mode" label="Adding dark mode">
+**You:** "I need a dark mode version with the same primary blue but dark surface"
+
+**AI:** Uses `create_theme` with variant: "dark" and generates dark theme code
+</TabItem>
+<TabItem value="customizing-components" label="Customizing components">
+**You:** "What properties can I customize on the card component?"
+
+**AI:** Uses `get_component_design_tokens` to show available tokens
+
+**You:** "Make the card have a light gray background with subtle shadow"
+
+**AI:** Uses `create_component_theme` to generate component theme code
+</TabItem>
+</Tabs>
+
+## Full Documentation
+
+For detailed documentation on using the MCP server, available tools, and best practices, check out the [MCP Server README](https://github.com/IgniteUI/igniteui-theming/blob/master/src/mcp/README.md).

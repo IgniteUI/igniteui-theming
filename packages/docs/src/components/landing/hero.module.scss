@@ -1,0 +1,328 @@
+@use 'igniteui-theming' as *;
+@use '../../styles/breakpoints' as *;
+
+.it-hero {
+  padding-block: var(--ig-spacing-xl);
+  min-height: 70dvh;
+  grid-column: document-start / document-end;
+  grid-template-columns: subgrid;
+  display: grid;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+
+    // inset: -17% -3%;
+    inset: -21% 5%;
+    z-index: -1;
+
+    --d: 2px;
+    --color1: light-dark(#bbbbbe, #3f4253);
+    --color2: var(--ig-quinary-300);
+    --color3: var(--ig-quinary-300);
+    --color4: var(--ig-quinary-300);
+
+    animation: dots-glow 3s linear infinite;
+    background:
+      /* Scattered red dots at irregular positions */
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color2) 91deg,
+          transparent 0
+        )
+        180px 90px/540px 540px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color3) 91deg,
+          transparent 0
+        )
+        360px 180px/540px 540px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color4) 91deg,
+          transparent 0
+        )
+        90px 270px/450px 540px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color2) 91deg,
+          transparent 0
+        )
+        270px 360px/450px 450px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color3) 91deg,
+          transparent 0
+        )
+        450px 90px/540px 540px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color4) 91deg,
+          transparent 0
+        )
+        0 450px/450px 450px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color2) 91deg,
+          transparent 0
+        )
+        360px 450px/540px 540px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color1) 91deg,
+          transparent 0
+        )
+        0 0/90px 90px;
+  }
+}
+
+.it-hero__content {
+  grid-column: content-start / content-end;
+  position: relative;
+  overflow: visible;
+  max-width: rem(1650px);
+  margin: 0 auto;
+
+  @media screen and (width < $bp-wide) {
+    inset-inline-start: 5px;
+    background:
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color2) 91deg,
+          transparent 0
+        )
+        44% 177px / 57% 521px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color3) 91deg,
+          transparent 0
+        )
+        0% 88px / 95% 435px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color4) 91deg,
+          transparent 0
+        )
+        78% 260px / 76% 520px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color2) 91deg,
+          transparent 0
+        )
+        88% 350px / 57% 450px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color3) 91deg,
+          transparent 0
+        )
+        61% 47px / 38% 560px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color4) 91deg,
+          transparent 0
+        )
+        44% 435px / 57% 520px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color2) 91deg,
+          transparent 0
+        )
+        0% 350px / 76% 520px,
+      conic-gradient(
+          from 270deg at var(--d) var(--d),
+          var(--color1) 91deg,
+          transparent 0
+        )
+        0 0 / 19% 87px;
+  }
+
+  // @media screen and (width < $bp-mobile) {
+  // 	background: conic-gradient(from 270deg at var(--d) var(--d), var(--color2) 91deg, transparent 0) 148px 87px/540px 522px, conic-gradient(from 270deg at var(--d) var(--d), var(--color3) 91deg, transparent 0) 369px 174px/540px 522px, conic-gradient(from 270deg at var(--d) var(--d), var(--color4) 91deg, transparent 0) 148px 261px/450px 520px, conic-gradient(from 270deg at var(--d) var(--d), var(--color2) 91deg, transparent 0) 295px 348px/450px 450px, conic-gradient(from 270deg at var(--d) var(--d), var(--color3) 91deg, transparent 0) 480px 50px/540px 540px, conic-gradient(from 270deg at var(--d) var(--d), var(--color4) 91deg, transparent 0) 74px 435px/450px 450px, conic-gradient(from 270deg at var(--d) var(--d), var(--color2) 91deg, transparent 0) 370px 435px/540px 520px, conic-gradient(from 270deg at var(--d) var(--d), var(--color1) 91deg, transparent 0) 0 0/19% 87px
+  // }
+}
+
+.it-hero__caption {
+  @include type-style('caption');
+
+  color: var(--ig-gray-300);
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: block;
+  margin-bottom: var(--ig-spacing-xs);
+}
+
+.it-hero__title {
+  color: light-dark(var(--ig-gray-900), var(--ig-gray-100));
+  font-size: clamp(rem(32px), 2.2vw + rem(20px), rem(56px));
+  line-height: clamp(rem(40px), 2.4vw + rem(24px), rem(64px));
+  grid-row: 2;
+  grid-column: 1 / 6;
+  margin-bottom: var(--ig-spacing-s);
+}
+
+.it-hero__description {
+  color: light-dark(var(--ig-gray-500), var(--ig-gray-200));
+  grid-row: 3;
+  grid-column: 1 / 5;
+
+  @media screen and (width < 890px) {
+    grid-column: 1 / 6;
+  }
+}
+
+.it-hero .it-hero__description {
+  margin-block-end: var(--ig-spacing-xl);
+}
+
+.it-hero__action {
+  grid-row: 4;
+  grid-column: 1 / 2;
+  margin-bottom: var(--ig-spacing-s);
+  width: rem(136px);
+  height: fit-content;
+  background: light-dark(var(--ig-surface-white), var(--ig-surface-dark));
+}
+
+.it-hero__logo {
+  display: block;
+  margin: 0 auto;
+  grid-column: 1 / span 2;
+  grid-row: 5 / span 6;
+  width: 14rem;
+  height: auto;
+  margin-top: 9rem;
+
+  @media (width < $bp-mobile) {
+    margin-top: 5rem;
+  }
+}
+
+.preview {
+  grid-template-rows: auto;
+}
+
+.it-hero-preview {
+  grid-column: 3 / span 8;
+  grid-row: 2 / span 5;
+}
+
+@media screen and (width > $bp-wide) {
+  @media (width <= $bp-xwide) {
+    .it-hero__title {
+      grid-column: 1 / 8;
+    }
+  }
+
+  @media (width < 1380px) {
+    .it-hero__description {
+      grid-column: 1 / 7;
+    }
+
+    .it-hero__logo {
+      width: 13rem;
+    }
+  }
+}
+
+@media screen and (width <= $bp-wide) {
+  .it-hero {
+    padding-block-end: unset;
+  }
+
+  @media (width >= $bp-mobile) {
+    .it-hero__content {
+      margin-inline: rem(30px) rem(20px);
+    }
+
+    .it-hero__logo {
+      grid-column: 6 / span 7;
+    }
+  }
+
+  @media (width > 940px) {
+    .it-hero__title {
+      grid-column: 1 / 9;
+    }
+  }
+
+  @media (width <= 940px) {
+    .it-hero__title {
+      grid-column: 1 / 10;
+    }
+  }
+
+  @media (width > 890px) {
+    .it-hero__description {
+      grid-column: 1 / 7;
+    }
+  }
+}
+
+@media screen and (width <= 890px) {
+  .it-hero__title {
+    @include type-style('h2');
+
+    grid-column: 1 / 9;
+  }
+
+  .it-hero .it-hero__title {
+    margin-block-end: var(--ig-spacing-s);
+  }
+
+  .it-hero__description {
+    @include type-style('body', false);
+  }
+}
+
+@media screen and (width > 890px) {
+  .it-hero__title {
+    @include type-style('h1');
+  }
+
+  .it-hero__description {
+    @include type-style('h4');
+  }
+
+  .it-hero .it-hero__description {
+    margin-block-start: var(--ig-spacing-s);
+  }
+}
+
+@media screen and (width >= $bp-mobile) {
+  .it-hero__content {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+  }
+
+  .it-hero__logo {
+    margin-inline-start: 0;
+  }
+}
+
+@keyframes dots-glow {
+  30% {
+    --color2: var(--ig-surface-white);
+    --color3: var(--ig-quinary-300);
+    --color4: var(--ig-quinary-300);
+  }
+
+  60% {
+    --color2: var(--ig-quinary-300);
+    --color3: var(--ig-quinary-300);
+    --color4: var(--ig-surface-white);
+  }
+
+  90% {
+    --color2: var(--ig-quinary-300);
+    --color3: var(--ig-surface-white);
+    --color4: var(--ig-quinary-300);
+  }
+}
+
+// One logo per theme; the default (no data-theme yet) is dark, like the rest of the site.
+html[data-theme='light'] .it-hero__logo--dark,
+html:not([data-theme='light']) .it-hero__logo--light {
+  display: none;
+}

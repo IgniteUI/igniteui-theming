@@ -1,0 +1,69 @@
+---
+sidebar_position: 3
+title: スペーシング概要
+description: スペーシングシステムは、コンポーネントの一貫した余白値を簡単に定義できます。
+hide_title: true
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import SpacingSample from '@/components/Samples/Spacing';
+
+<CoreConceptHeader
+  title="Spacing"
+  description="スペーシングシステムは、コンポーネントの一貫したパディング値を簡単に定義できます。"
+  image="core_spacing_docs.svg"
+/>
+
+Ignite UI Theming のスペーシングシステムを使うと、コンポーネントの一貫したパディング値を簡単に定義できます。`small`、`medium`、`large` の最大3段階を設定し、動的に切り替えることができます。
+
+スペーシングシステムを使う主なメリットは次のとおりです。
+
+- すべてのコンポーネントで一貫したスペーシングを適用できる。
+- 1つの変数で、グローバルまたは要素単位のスペーシングを調整できる。
+- スタイルを書き直さずにレイアウトを拡張しやすい。
+
+要素で動的スペーシングを使うには、次の手順を行います。
+
+- まず、要素のスタイルに `sizable{:sass}` ミックスインをインクルードします。これにより、スペーシングシステムに必要なCSS変数と構造がセットアップされます。
+
+```scss
+.wrapper {
+  // 要素をサイズ変更可能にする
+  @include sizable();
+}
+```
+
+- 次に、`pad(){:js}` 関数で要素のスペーシング（パディング）を定義します。`small`、`medium`、`large` の3つの値を指定できます。この関数は、渡した値に基づいて各スペーシング値のCSS変数を宣言します。少なくとも1つの値は必須です。2つだけ指定した場合、2つ目の値が `medium` と `large` の両方に適用されます。
+
+```scss
+.wrapper {
+  // small (10px)、medium (20px)、large (40px) のパディングを定義
+  padding: pad($sm: 10px, $md: 20px, $lg: 40px);
+}
+```
+
+- 次に、スペーシング値の乗数として機能する `--ig-spacing{:sass}` 変数を設定します。既定値は `1` です。
+
+```scss
+.wrapper {
+  // 要素のスペーシングに対する乗数を設定
+  --ig-spacing: 1;
+}
+```
+
+- 最後に、要素に特定のスペーシングレベルを適用するには、対応するCSS変数を `--component-size{:sass}` に代入します。この例では、`var(--ig-size-medium){:sass}` を `--component-size{:sass}` に代入し、medium のスペーシングを使います。
+
+```scss
+.wrapper {
+  // 要素を medium スペーシングに設定（--ig-size-medium）
+  --component-size: var(--ig-size-medium);
+}
+```
+
+`--component-size{:sass}` を `var(--ig-size-small){:sass}` または `var(--ig-size-large){:sass}` に変えることで、small や large に切り替えられます。上の例では `var(--ig-size-medium){:sass}` を使っているため、要素の全方向のパディングは `20px{:sass}` になります。
+
+:::note
+  `--component-size{:sass}` には、`var(--ig-size-medium){:sass}` のような名前付きサイズと、数値（`1`、`2`、`3`）の両方を指定できます。
+:::
+
+<SpacingSample />

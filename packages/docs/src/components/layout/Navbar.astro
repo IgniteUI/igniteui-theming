@@ -1,0 +1,290 @@
+---
+// navbar (logo, version dropdown, docs link, GitHub, inline locale list, search slot,
+// colour toggle) and the mobile sidebar (primary menu + docs sidebar as the secondary panel).
+import type { Locale } from '../../lib/docs/config';
+import { LOCALES } from '../../lib/docs/config';
+import type { SidebarItem } from '../../lib/docs/types';
+import {
+  GITHUB_ICON_SVG,
+  GITHUB_URL,
+  navbarLabels,
+  navbarLogo,
+} from '../../config/site';
+import { translator } from '../../lib/i18n/Translate';
+import ColorModeToggle from './ColorModeToggle.astro';
+import SidebarMenu from '../docs/SidebarMenu.astro';
+import { Image } from 'astro:assets';
+import SearchBar from '../search/SearchBar';
+
+export interface NavLink {
+  label: string;
+  href: string;
+  active: boolean;
+}
+interface Props {
+  locale: Locale;
+  versionLinks: NavLink[];
+  localeLinks: (NavLink & { locale: Locale })[];
+  docsHref: string;
+  isDocsPage: boolean;
+  /** Docs version the search is scoped to (`current` outside the docs). */
+  version: string;
+  sidebar?: SidebarItem[];
+  activePath: string;
+}
+const {
+  locale,
+  versionLinks,
+  localeLinks,
+  docsHref,
+  isDocsPage,
+  version,
+  sidebar,
+  activePath,
+} = Astro.props;
+const t = translator(locale);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const homeHref = `${base}/${LOCALES[locale].path ? `${LOCALES[locale].path}/` : ''}`;
+const displayed = versionLinks.find((v) => v.active) ?? versionLinks[0]!;
+const logoAlt = navbarLogo.alt(locale);
+const docsLabel = navbarLabels.docs(locale);
+const showSecondary = !!sidebar;
+---
+
+<nav
+  aria-label={t({ id: 'theme.NavBar.navAriaLabel', message: 'Main' })}
+  class="it-navbar"
+>
+  <div class="it-navbar__inner">
+    <div class="it-navbar__left it-navbar__group">
+      <a class="it-navbar__brand" href={homeHref}>
+        <div class="it-navbar__logo">
+          <Image
+            src={navbarLogo.src}
+            alt={logoAlt}
+            class="it-themed-image it-themed-image--light"
+            loading="eager"
+          />
+          <Image
+            src={navbarLogo.srcDark}
+            alt={logoAlt}
+            class="it-themed-image it-themed-image--dark"
+            loading="eager"
+          />
+        </div>
+        <b class="it-navbar__title it-text--truncate"></b>
+      </a>
+      <div class="it-navbar__entry it-dropdown" data-click-dropdown>
+        <a
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="it-version-menu"
+          role="button"
+          class="it-navbar__link it-navbar__dropdown--active"
+          href={displayed.href}
+        >
+          {displayed.label}
+        </a>
+        <ul class="it-dropdown__menu" id="it-version-menu">
+          {versionLinks.map((v) => (
+            <li>
+              <a
+                class:list={[
+                  'it-dropdown__link',
+                  {
+                    'it-dropdown__link--active': v.active,
+                  },
+                ]}
+                href={v.href}
+                aria-current={v.active ? 'page' : undefined}
+              >
+                {v.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="it-navbar__right it-navbar__group">
+      <div class="it-navbar__search-container">
+        <slot name="search">
+          <SearchBar client:load locale={locale} version={version} />
+        </slot>
+      </div>
+      <div class="it-navbar-wrapper--right">
+        <a
+          class:list={[
+            'it-navbar__entry',
+            'it-navbar__link',
+            'it-navbar__item',
+            'it-navbar__item--docs',
+            { 'it-navbar__link--active': isDocsPage },
+          ]}
+          href={docsHref}
+          aria-current={isDocsPage ? 'page' : undefined}
+        >
+          {docsLabel}
+        </a>
+        <a
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="it-navbar__entry it-navbar__link it-navbar__item it-navbar__item--github"
+          aria-label="GitHub"
+          set:html={GITHUB_ICON_SVG}
+        />
+        <div class="it-locale" role="navigation" aria-label="Language switcher">
+          {localeLinks.map((l, i) => (
+            <>
+              <a
+                lang={LOCALES[l.locale].htmlLang}
+                href={l.href}
+                target="_self"
+                class:list={[
+                  'it-locale__link',
+                  'it-locale__link',
+                  { 'it-locale__link--active': l.active },
+                ]}
+              >
+                {l.label}
+              </a>
+              {i < localeLinks.length - 1 && <span aria-hidden="true">|</span>}
+            </>
+          ))}
+        </div>
+        <ColorModeToggle />
+      </div>
+    </div>
+  </div>
+  <svg
+    class="svg-mask"
+    width="100%"
+    height="100%"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <mask id="frostyGlassMask">
+      <rect
+        class="header-rect"
+        width="100%"
+        height="100%"
+        fill="white"
+        rx="8"
+        ry="8"
+      ></rect>
+    </mask>
+  </svg>
+  <div role="presentation" class="it-navbar-sidebar__backdrop"></div>
+  <div class="it-navbar-sidebar" id="it-navbar-sidebar">
+    <div
+      class:list={[
+        'it-navbar-sidebar__items',
+        'it-navbar-sidebar__items',
+        { 'it-navbar-sidebar__items--show-secondary': showSecondary },
+      ]}
+    >
+      <div class="it-navbar-sidebar__panel it-nav-menu" inert={showSecondary}>
+        <ul class="it-nav-menu__list">
+          <li class="it-nav-menu__list-item">
+            <a
+              class:list={[
+                'it-nav-menu__link',
+                'it-navbar__item',
+                'it-navbar__item--docs',
+                { 'it-nav-menu__link--active': isDocsPage },
+              ]}
+              href={docsHref}
+            >
+              {docsLabel}
+            </a>
+          </li>
+          <li class="it-nav-menu__list-item">
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="it-nav-menu__link it-navbar__item it-navbar__item--github"
+              aria-label="GitHub"
+              set:html={GITHUB_ICON_SVG}
+            />
+          </li>
+          <li
+            class="it-nav-menu__list-item it-nav-menu__list-item--collapsed"
+            data-mobile-dropdown
+          >
+            <div class="it-nav-menu__list-item-collapsible">
+              <a
+                role="button"
+                class="it-navbar-sidebar__dropdown-link it-nav-menu__link it-nav-menu__link--sublist"
+                href="#"
+              >
+                {t({
+                  id: 'theme.navbar.mobileVersionsDropdown.label',
+                  message: 'Versions',
+                })}
+              </a>
+              <button
+                aria-label={t({
+                  id: 'theme.navbar.mobileDropdown.collapseButton.expandAriaLabel',
+                  message: 'Expand the dropdown',
+                })}
+                aria-expanded="false"
+                aria-controls="it-mobile-version-menu"
+                type="button"
+                class="it-button-reset it-nav-menu__caret"
+              ></button>
+            </div>
+            <ul class="it-nav-menu__list" id="it-mobile-version-menu" hidden>
+              {versionLinks.map((v) => (
+                <li class="it-nav-menu__list-item">
+                  <a
+                    class:list={[
+                      'it-nav-menu__link',
+                      { 'it-nav-menu__link--active': v.active },
+                    ]}
+                    href={v.href}
+                  >
+                    {v.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+          <li class="it-nav-menu__list-item">
+            <div
+              class="it-locale"
+              role="navigation"
+              aria-label="Language switcher"
+            >
+              {localeLinks.map((l, i) => (
+                <>
+                  <a
+                    lang={LOCALES[l.locale].htmlLang}
+                    href={l.href}
+                    target="_self"
+                    class:list={[
+                      'it-locale__link',
+                      'it-locale__link',
+                      { 'it-locale__link--active': l.active },
+                    ]}
+                  >
+                    {l.label}
+                  </a>
+                  {i < localeLinks.length - 1 && (
+                    <span aria-hidden="true">|</span>
+                  )}
+                </>
+              ))}
+              <span class="it-locale__spacer"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="it-navbar-sidebar__panel it-nav-menu" inert={!showSecondary}>
+        <div class="it-navbar-sidebar__menu">
+          {sidebar && <SidebarMenu items={sidebar} activePath={activePath} />}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

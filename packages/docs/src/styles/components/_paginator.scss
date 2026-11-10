@@ -1,0 +1,76 @@
+@use 'igniteui-theming' as *;
+@use '../breakpoints' as *;
+
+.it-nav {
+  display: grid;
+  grid-template-columns: auto auto;
+  height: fit-content;
+  padding: 0;
+  width: fit-content;
+  border: none;
+}
+
+.it-nav-icon--previous {
+  padding-inline-end: var(--ig-spacing-xs);
+}
+
+.it-nav-icon--next {
+  grid-column: 2;
+  padding-inline-start: var(--ig-spacing-xs);
+}
+
+.it-pagination__link--next {
+  justify-self: end;
+}
+
+.it-pagination__link--prev .it-pagination__sublabel {
+  grid-column: 2;
+}
+
+.it-nav-icon--previous,
+.it-nav-icon--next {
+  grid-row: 1 / span 2;
+  align-self: center;
+  display: inline-flex;
+
+  // Decorative: the link text carries the meaning, so this is a plain circle, not a button.
+  igc-icon {
+    --size: #{rem(12px)};
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(36px);
+    height: rem(36px);
+    border-radius: rem(36px);
+    background: light-dark(var(--ig-gray-100), #292946);
+    color: light-dark(var(--ig-gray-500), var(--ig-gray-400));
+  }
+}
+
+.it-pagination__sublabel {
+  @include type-style('caption', false);
+
+  color: light-dark(var(--ig-gray-500), var(--ig-gray-300));
+}
+
+.it-pagination__label {
+  @include type-style('navigation', false);
+
+  grid-row: 2;
+  color: light-dark(var(--ig-gray-900), var(--ig-gray-100));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+  }
+}
+
+@media screen and (width < $bp-desktop) {
+  .it-pagination {
+    margin-block: 3rem;
+  }
+}

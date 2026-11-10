@@ -16,7 +16,8 @@
   "workspaces": [
     "packages/theming",
     "packages/mcp",
-    "packages/preview"
+    "packages/preview",
+    "packages/docs"
   ],
   "scripts": {
     "build": "npm run build -w packages/theming",
@@ -29,12 +30,14 @@
     "coverage": "vitest run --coverage",
     "mcp:inspector": "npx @modelcontextprotocol/inspector ./packages/theming/dist/mcp/index.js",
     "preview": "npm run dev -w packages/preview",
-    "preview:build": "npm run build -w packages/preview"
+    "preview:build": "npm run build -w packages/preview",
+    "docs": "npm run dev -w packages/docs",
+    "docs:build": "npm run build -w packages/docs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",
     "@types/node": "^25.4.0",
-    "@vitest/coverage-v8": "^5.0.5",
+    "@vitest/coverage-v8": "^5.1.0",
     "husky": "^8.0.3",
     "prettier": "^3.2.5",
     "shx": "^0.4.0",
@@ -42,6 +45,6 @@
     "typescript": "^6.0.0",
     "vite": "^8.3.4",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^5.0.4"
+    "vitest": "^5.1.0"
   }
 }

@@ -1,0 +1,110 @@
+@use 'igniteui-theming' as *;
+
+.table {
+  width: fit-content;
+  border-radius: rem(6px);
+
+  td {
+    border: 1px solid light-dark(var(--ig-gray-300), var(--ig-gray-600));
+    padding: var(--ig-spacing-xs) var(--ig-spacing-s);
+  }
+
+  th {
+    border: 1px solid light-dark(var(--ig-gray-300), var(--ig-gray-500));
+    padding-inline: var(--ig-spacing-s);
+    padding-block: var(--ig-spacing-xs) var(--ig-spacing-2xs);
+  }
+}
+
+.table__header {
+  color: light-dark(var(--ig-neutral-600), var(--ig-neutral-200));
+
+  tr {
+    border: none;
+  }
+
+  th {
+    @include type-style('navigation', false);
+
+    font-weight: 300;
+    background-color: light-dark(var(--ig-gray-150), var(--ig-gray-600));
+    border-top: none;
+  }
+}
+
+.table__content {
+  font-weight: 400;
+  color: light-dark(var(--ig-gray-900), var(--ig-gray-150));
+
+  td {
+    @include type-style('body-3', false);
+
+    background-color: light-dark(var(--ig-gray-100), var(--ig-gray-900));
+  }
+}
+
+.table__header th:nth-of-type(1),
+.table__content td:nth-of-type(1) {
+  text-align: left;
+  border-left: none;
+}
+
+.table__header th:nth-of-type(n + 2),
+.table__content td:nth-of-type(n + 2) {
+  text-align: right;
+  border-right: none;
+}
+
+.table__elevations {
+  .table__header th:nth-of-type(1),
+  .table__content td:nth-of-type(1) {
+    width: rem(128px);
+  }
+
+  .table__header th:nth-of-type(n + 2),
+  .table__content td:nth-of-type(n + 2) {
+    width: rem(146px);
+  }
+}
+
+.table__typography {
+  .table__header th,
+  .table__content td {
+    width: min(28dvw, rem(184px));
+  }
+}
+
+.table.table__spacing {
+  td {
+    text-align: unset;
+
+    @include type-style('body-2');
+  }
+}
+
+@media screen and (width < 800px) and (width > 600px) {
+  .table__elevations {
+    th,
+    td {
+      padding: var(--ig-spacing-2xs);
+    }
+  }
+}
+
+@media screen and (width < 800px) {
+  .table__typography {
+    th,
+    td {
+      padding: var(--ig-spacing-2xs);
+    }
+  }
+}
+
+@media screen and (width < 600px) {
+  .table__elevations {
+    th,
+    td {
+      padding: rem(4px);
+    }
+  }
+}

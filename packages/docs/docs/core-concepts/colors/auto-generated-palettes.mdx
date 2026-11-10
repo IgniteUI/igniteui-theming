@@ -1,0 +1,91 @@
+---
+sidebar_position: 2
+description: Generate full color systems from a base color with the help of the `palette()` function.
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# Auto-generated palettes 
+
+  If your design system only provides a single color per group but you need a complete palette with multiple variants, you can use the `palette(){:js}` function.
+
+  This function automatically generates additional variants for each provided color group. The base color you pass becomes the 500 shade, and from it the function generates the following variants:
+
+  - **5 lighter shades**: `50{:js}`, `100{:js}`, `200{:js}`, `300{:js}`, `400{:js}`
+
+  - **4 darker shades**: `600{:js}`, `700{:js}`, `800{:js}`, `900{:js}`
+
+  - **4 accent colors**: `A100{:jsonc}`, `A200{:jsonc}`, `A400{:jsonc}`, `A700{:jsonc}`
+
+  For every generated color, the function also calculates the best contrast color (black or white) and declares it with the '-contrast' suffix.
+    
+  **Generated color groups**
+
+  Shade variants are generated for the following color groups: `primary{:jsonc}`, `secondary{:jsonc}`, `surface{:jsonc}`, `gray{:jsonc}`, `info{:jsonc}`, `success{:jsonc}`, `warn{:jsonc}`, `error{:jsonc}`.
+
+  Each type has its own role in the design system:
+
+  - The `primary{:jsonc}` and `secondary{:jsonc}` colors are the two dominant colors for your brand.
+
+  - The `surface{:jsonc}` and `gray{:jsonc}` colors are usually used as background and foreground colors. These two are usually displayed against one another. For that reason, if you provide both manually, the gray color variants should always contrast the surface colors counterparts. If you only pass the surface color to the `palette(){:js}` function, the gray variants will be automatically calculated, depending on the [luminance](https://en.wikipedia.org/wiki/Luminance) of the surface color:
+   
+    - If luminance is above 0.5 (lighter), `--ig-gray-500{:sass}` will be set to dark gray `hsl(0, 0%, 62%){:scss}`.
+
+    - If luminance is below 0.5 (darker), `--ig-gray-500{:sass}` will be set to light gray `hsl(0, 0%, 74%){:scss}`.
+   
+  - The `surface{:jsonc}` color is usually used for element backgrounds, while the `gray{:jsonc}` color mostly covers borders, dividers, disabled states, and text colors. 
+
+    :::danger[Important]
+      You should know that the `gray` colors only have the 50–900 shades generated, omitting the accent colors.
+    :::
+
+  - The `info{:jsonc}`, `success{:jsonc}`, `warn{:jsonc}`, and `error{:jsonc}` colors are additional colors, mainly used to indicate the states of elements, such as info messages, success indicators, warning highlights, and error states.
+
+  ## Using the `palette()` function
+
+  To automatically generate a full color palette, you can invoke the `palette(){:js}` function and pass the `$primary{:scss}`, `$secondary{:scss}`, and `$surface{:scss}` colors, which are mandatory for variant generation.
+
+  ```scss 
+  $custom-palette: palette(
+    $primary: #f34e4e,
+    $secondary: #fff6ea,
+    $surface: #7bb9fa
+  );
+
+  @include palette($custom-palette); 
+  ```
+  
+  After that, include the newly created palette with the `palette{:sass}` mixin.
+
+  The additional parameters that you can pass to the `palette(){:js}` function are:
+
+  - `$gray{:scss}` - the 500 shade of the gray color. If not provided, it will be automatically generated based on the passed `$surface{:scss}` color.
+
+  - `$info{:scss}` - the 500 shade for the info color. By default, it uses `#1377d5`.
+
+  - `$success{:scss}` - the 500 shade for the success color. By default, it uses `#4eb862`.
+
+  - `$warn{:scss}` - the 500 shade for the warn color. By default, it uses `#faa419`.
+
+  - `$error{:scss}` - the 500 shade for the error color. By default, it uses `#ff134a`.
+
+  After the parameters are passed to the function, the `shades(){:js}` function is executed for all color groups.
+  The `shades(){:js}` function loads two predefined type lists:
+
+  `$IGrayShades{:scss}` → `('50','100','200','300','400','500','600','700','800','900'){:js}`
+
+  `$IColorShades{:scss}` → all of `$IGrayShades{:scss}` + accent variants `('A100','A200','A400','A700'){:js}`
+
+  These two lists act as templates for generating variants from the initial 500 shade value.
+
+  After loading the lists, the function then iterates over each list, and for every variant calls the `shade(){:js}` function. This function retrieves the relevant saturation and lightness multipliers from a predefined map and uses them to calculate the new variant color.
+  
+  - For colors (primary, secondary, etc.), the `$IColorShades{:scss}` list is used and both saturation and lightness multipliers are applied.
+
+  - For gray, the `$IGrayShades{:scss}` list is used and only the lightness multipliers are applied.
+
+  ### API References
+
+  - <a href={`${sassDoc}/palettes/#function-palette`}>palette() function</a>
+  - <a href={`${sassDoc}/palettes/#function-shades`}>shades() function</a>
+  - <a href={`${sassDoc}/palettes/#mixin-palette`}>palette() mixin</a>

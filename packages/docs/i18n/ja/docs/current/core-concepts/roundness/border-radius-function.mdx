@@ -1,0 +1,41 @@
+---
+sidebar_position: 2
+---
+
+
+# border-radius() 関数 
+
+  関数には最大3つの値を渡すことができ、異なる状態で使用されます：
+
+  - 最初の値（`$radius`パラメータ - デフォルトのborder-radius）：この値は、`--ig-radius-factor{:sass}`変数が現在のスコープで宣言されていない場合に常に使用されます。
+
+  - 2番目の値（`$min`パラメータ - 最小border-radius）：この値は、`--ig-radius-factor{:sass}`変数が宣言され、その値が`0`の場合に適用されます。
+
+  - 3番目の値（`$max`パラメータ - 最大border-radius）：この値は、`--ig-radius-factor{:sass}`変数が宣言され、その値が`1`以上の場合に適用されます。
+
+  関数が機能するには、最初のパラメータ`$radius`のみが必要です。`$max`パラメータは`$radius`値がデフォルトなので、`$max`を指定しない場合は`$radius`が代わりに使用されます。$minパラメータは`0`がデフォルトなので、指定しない場合は自動的に`0`に設定されます。
+
+  ```scss
+  .wrapper {
+    border-radius: border-radius($radius: 10px, $max: 20px);
+    --ig-radius-factor: 0;
+
+    // この場合のborder-radiusは0pxになります。
+  }
+  ```
+
+  ## 計算方法 {/* #how-the-calculation-is-made */}
+
+  前述のとおり、`--ig-radius-factor{:sass}`変数が宣言されていない場合、適用される値はデフォルトで`$radius`値になります。`--ig-radius-factor{:sass}`が提供されている他のすべての場合、関数はCSSの`clamp(){:js}`関数に依存して最終値を計算します。
+   
+  `$min`パラメータの値が`clamp(){:js}`の最小値になり、`$max`パラメータが最大値になります。現在の値は、`--ig-radius-factor{:sass}`に最大値を乗算して計算されます。
+
+  - `--ig-radius-factor = 1{:sass}`の場合：現在の値は → `1 * 20 = 20` → 最大値（`20px{:sass}`）が適用されます。
+  
+  :::note
+    `--ig-radius-factor{:sass}`の値が`1`より大きい場合でも、最大値が適用されます。この場合は`20px{:sass}`です。
+  :::  
+
+  - `--ig-radius-factor = 0{:sass}`の場合：現在の値は → `0 * 20 = 0` → しかし最小値が`5px{:sass}`なので、適用される値は`5px{:sass}`です。
+
+  - `--ig-radius-factor = 0.75{:sass}`の場合：現在の値は → `0.75 * 20 = 15` → 適用される値は`15px{:sass}`です。

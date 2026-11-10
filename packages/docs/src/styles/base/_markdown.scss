@@ -1,0 +1,81 @@
+// Generic "markdown" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-markdown {
+    --it-h2-vertical-rhythm-top: 2;
+    --it-h3-vertical-rhythm-top: 1.5;
+    --it-h1-vertical-rhythm-bottom: 1.25;
+    --it-heading-vertical-rhythm-bottom: 1;
+  }
+
+  .it-markdown::before {
+    content: '';
+    display: table;
+  }
+
+  .it-markdown::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+  .it-markdown > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .it-markdown h1:first-child {
+    --it-h1-font-size: 3rem;
+
+    margin-bottom: calc(
+      var(--it-h1-vertical-rhythm-bottom) * var(--it-leading)
+    );
+  }
+
+  .it-markdown > h2 {
+    --it-h2-font-size: 2rem;
+
+    margin-bottom: calc(
+      var(--it-heading-vertical-rhythm-bottom) * var(--it-leading)
+    );
+    margin-top: calc(var(--it-h2-vertical-rhythm-top) * var(--it-leading));
+  }
+
+  .it-markdown > h3 {
+    --it-h3-font-size: 1.5rem;
+
+    margin-bottom: calc(
+      var(--it-heading-vertical-rhythm-bottom) * var(--it-leading)
+    );
+    margin-top: calc(var(--it-h3-vertical-rhythm-top) * var(--it-leading));
+  }
+
+  .it-markdown > ul,
+  .it-markdown > p {
+    margin-bottom: var(--it-leading);
+  }
+
+  .it-markdown li {
+    overflow-wrap: break-word;
+  }
+
+  .it-markdown li > p {
+    margin-top: var(--it-list-paragraph-margin);
+  }
+
+  .it-markdown li + li {
+    margin-top: var(--it-list-item-margin);
+  }
+
+  @media (max-width: 576px) {
+    .it-markdown h1:first-child {
+      --it-h1-font-size: 2rem;
+    }
+
+    .it-markdown > h2 {
+      --it-h2-font-size: 1.5rem;
+    }
+
+    .it-markdown > h3 {
+      --it-h3-font-size: 1.25rem;
+    }
+  }
+}

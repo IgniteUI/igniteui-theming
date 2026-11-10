@@ -1,0 +1,57 @@
+---
+sidebar_position: 5
+---
+
+import ElevationFactorSample from '@/components/Samples/ElevationFactor';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Elevation factor
+
+  All of the elevation variables generated from the `box-shadow(){:bash}` function use a variable called `--ig-elevation-factor{:sass}` in their calculation. This variable allows us to easily adjust the values of the elevations, acting as a multiplier for the returned box-shadow values. It is the ratio by which the provided sizes are multiplied. The default value is `1`.
+
+  Let’s say we have the following scenario: all elements in our application have their appropriate elevations applied, and at some point we want to change the overall look by reducing all elevations by half. Normally, you would need to go back to your elevations map and manually cut all the box-shadow values in half.
+	
+  However, if we use the `box-shadow(){:bash}` function, the `--ig-elevation-factor{:sass}` is included in the box-shadow calculations. Every part of the box-shadow is multiplied by the value of `--ig-elevation-factor{:sass}`. So, to cut the elevations in half, we only need to set `--ig-elevation-factor{:sass}` to `0.5`, and all elevations in the application will adjust automatically. Similarly, to make the elevations twice as large, we can set the factor to `2`. This provides easy control over all elevations and a quick way to adjust them at once.
+
+  Here’s an example:
+
+  ```scss
+  $custom-elevations: (
+    'small': box-shadow(0 2px 4px 0 black)
+  );
+
+  :root {
+    @include elevations($custom-elevations);
+    --ig-elevation-factor: 2; /* [!code highlight] */
+  }
+
+  .wrapper {
+    @include elevation('small');
+  }
+  ```
+
+  :::note
+    The `box-shadow(){:bash}` function doesn’t always need to be used in the elevation map. You can use it everywhere in your application. Everywhere it's used, it will still be linked to the `--ig-elevation-factor{:sass}` variable and it will be changed when the `--ig-elevation-factor{:sass}` changes, that way we can make some of our application elements to change easily.
+  :::
+  <br/>
+
+  The output from the include of the `elevation{:sass}` mixin in the example above would be: 
+  
+	<CodeBlockHeader title="CSS output"/>
+  ```css
+  .wrapper {
+    box-shadow: var(--ig-elevation-small);
+
+    // The calculation that is done inside of this variable will be:
+    // ⮑ 0 calc(2 * 2px) calc (2 * 4px) 0 black
+  }
+  ```
+
+  Here, with `--ig-elevation-factor: 2{:sass}`, the applied box-shadow becomes `0 4px 8px 0 black{:sass}` because the values (`2px{:sass}` and `4px{:sass}`) are multiplied by the `--ig-elevation-factor{:sass}` which is set to `2`. If the factor remained at its default value of `1`, the box-shadow would be `0 2px 4px 0 black{:sass}`.
+
+  :::danger[Important]
+    The `--ig-elevation-factor{:sass}` should be declared at the same or a higher scope than where the `elevations{:sass}` mixin is included, so that all values are calculated correctly.
+  :::	
+  <br/>
+
+<ElevationFactorSample/>

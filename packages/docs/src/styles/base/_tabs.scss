@@ -1,0 +1,38 @@
+// Generic "tabs" base rules, layered under every site rule (base.generic).
+@layer base.generic {
+  .it-tabs__list {
+    color: var(--it-tabs-color);
+    display: flex;
+    font-weight: var(--it-font-weight-bold);
+    margin-bottom: 0;
+    overflow-x: auto;
+    padding-left: 0;
+  }
+
+  .it-tabs__item {
+    border-bottom: 3px solid transparent;
+    border-radius: var(--it-global-radius);
+    cursor: pointer;
+    display: inline-flex;
+    padding: var(--it-tabs-padding-vertical) var(--it-tabs-padding-horizontal);
+    transition: background-color var(--it-transition-fast)
+      var(--it-transition-timing-default);
+  }
+
+  .it-tabs__item--active {
+    border-bottom-color: var(--it-tabs-color-active-border);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: var(--it-tabs-color-active);
+  }
+
+  .it-tabs__item:hover {
+    background-color: var(--it-hover-overlay);
+  }
+
+  @media print {
+    .it-tabs__list {
+      break-inside: avoid;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+---
+sidebar_position: 3
+description: How to easily adjust all border-radius values at once by modifying the `--ig-radius-factor` variable, which acts as a multiplier in the border-radius calculations.
+---
+
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+import RadiusSample from '@/components/Samples/Radius';
+
+# Radius factor
+
+  The radius factor variable `--ig-radius-factor{:sass}` is an important part of how the `border-radius(){:bash}` function calculates the final value. It determines which of the provided border-radius values: `minimum`, `maximum`, or a value in between, will be applied. The radius factor acts as a multiplier applied to the maximum value, and the result of this calculation determines whether the border radius will be the `minimum`, the `maximum`, or a custom value between the two.
+
+  - No radius factor declared → the first default (`$radius`) value is applied.
+
+  - Radius factor = `0` → the minimum (`$min`) value is applied.
+
+  - Radius factor = `1` → the maximum (`$max`) value is applied.
+
+  - Radius factor between `0` and `1` → the border radius is calculated proportionally between `$min` and `$max`.
+
+  ```scss
+  // Here the border radius will be 5px
+  .button--default {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+  }
+
+  // Here the border radius will be 0px
+  .button--minimum {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+    --ig-radius-factor: 0;
+  }
+
+  // Here the border radius will be 20px
+  .button--maximum {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+    --ig-radius-factor: 1;
+  }
+
+  // Here the border radius will be 10px
+  .button--middle {
+    @include border-radius($radius: 5px, $min: 0px, $max: 20px);
+    --ig-radius-factor: 0.5;
+  }
+  ```
+
+  That way, by adjusting the `--ig-radius-factor{:sass}` value, you can easily control the border radius of your elements and create a consistent design across your application.
+
+  <RadiusSample />
+  <br/>
+
+  Here is how the radius-factor clamp function looks like when we pass a `--ig-radius-factor{:sass}` variable:
+
+<CodeBlockHeader title="CSS output"/>
+```css
+.button--default {
+  border-radius: clamp(0px, calc(var(--ig-radius-factor, 0.25) * 20px), 20px);
+	
+  // When we pass the --ig-radius-factor as 1 the calculation will be:
+  // ⮑ clamp(0px, calc(var(--ig-radius-factor, 0.25) * 20px), 20px)
+  // ⮑ clamp(0px, 20px, 20px)
+  // ⮑ 20px
+}
+```

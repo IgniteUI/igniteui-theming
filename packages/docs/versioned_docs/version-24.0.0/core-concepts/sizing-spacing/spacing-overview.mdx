@@ -1,0 +1,69 @@
+---
+sidebar_position: 3
+title: Spacing Overview
+description: The spacing system makes it easy to define consistent spacing values for components.
+hide_title: true
+---
+
+import CoreConceptHeader from '@/components/CoreConceptHeader';
+import SpacingSample from '@/components/Samples/Spacing';
+
+<CoreConceptHeader
+  title="Spacing"
+  description="The spacing system makes it easy to define consistent padding values for components."
+  image="core_spacing_docs.svg"
+/>
+
+The spacing system in Ignite UI Theming makes it easy to define consistent padding values for components. You can configure up to three levels: `small`, `medium`, and `large`, and switch between them dynamically.
+
+Key benefits of using the spacing system include:
+
+- Apply consistent spacing across all components.
+- Adjust spacing globally or per element with a single variable.
+- Scale layouts easily without rewriting styles.
+
+To make an element use dynamic spacing:
+
+- First, include the `sizable{:sass}` mixin in the element styles. This sets up the CSS variables and structure required for the spacing system to work.
+
+```scss
+.wrapper {
+  // Make the element sizable
+  @include sizable();
+}
+```
+
+- Next, define the element spacings (paddings) with the `pad(){:js}` function. It accepts three parameters for `small`, `medium`, and `large` spacing values. The function declares CSS variables for each spacing value based on the values you pass. You must provide at least one value. If you provide only two values, the second one is applied to both `medium` and `large` sizes.
+
+```scss
+.wrapper {
+  // Define the paddings for small (10px), medium (20px), and large (40px)
+  padding: pad($sm: 10px, $md: 20px, $lg: 40px);
+}
+```
+
+- Then, set up the `--ig-spacing{:sass}` variable, which acts as a multiplier for the spacing values. By default, it is set to `1`.
+
+```scss
+.wrapper {
+  // Sets the multiplier value for the spacing of the element
+  --ig-spacing: 1;
+}
+```
+
+- Finally, to set a specific spacing level for the element, assign the corresponding CSS variable to `--component-size{:sass}`. In this example, the element uses medium spacing by assigning `var(--ig-size-medium){:sass}` to the `--component-size{:sass}`.
+
+```scss
+.wrapper {
+  // Sets the element to use the medium spacing - (--ig-size-medium)
+  --component-size: var(--ig-size-medium);
+}
+```
+
+You can now switch the element spacing to small or large by changing `--component-size{:sass}` to `var(--ig-size-small){:sass}` or `var(--ig-size-large){:sass}`, respectively. In the example above, using `var(--ig-size-medium){:sass}` sets the padding on all sides of the element to `20px{:sass}`.
+
+:::note
+  The `--component-size{:sass}` variable accepts both named sizes such as `var(--ig-size-medium){:sass}` and numeric values (`1`, `2`, or `3`).
+:::
+
+<SpacingSample />

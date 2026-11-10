@@ -1,0 +1,68 @@
+---
+// Landing hero: caption, title, call to action and the themed logo; the component preview is the only island.
+import type { Locale } from '../../lib/docs/config';
+import { localeBase } from '../../lib/docs/config';
+import { translator } from '../../lib/i18n/Translate';
+import { Image } from 'astro:assets';
+import PreviewComponents from '../PreviewComponents';
+import heroLogo from '../../assets/hero-logo.svg';
+import heroLogoLight from '../../assets/hero-logo-light.svg';
+import styles from './hero.module.scss';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = translator(locale);
+const docsBase = `${localeBase(locale)}/docs`;
+---
+
+<header class={styles['it-hero']}>
+  <div class={styles['it-hero__content']}>
+    <PreviewComponents client:load locale={locale} />
+
+    <span class={styles['it-hero__caption']}>
+      {t({ id: 'hero.caption.first', message: 'With' })} Ignite UI{' '}
+      <span class="highlight-text">
+        {t({ id: 'hero.caption.second', message: 'Theming Framework' })}
+      </span>
+    </span>
+
+    <h1 class={styles['it-hero__title']}>
+      {t({
+        id: 'hero.title',
+        message: 'Bring your next project to life faster',
+      })}
+    </h1>
+
+    <p class={styles['it-hero__description']}>
+      {t({
+        id: 'hero.description',
+        message:
+          'Find a simple solution for implementing and applying design systems across platforms',
+      })}
+    </p>
+
+    <igc-button
+      class:list={[styles['it-hero__action'], 'it-outlined-button--style']}
+      variant="outlined"
+      href={`${docsBase}/getting-started/overview`}
+    >
+      {t({ id: 'hero.getStarted', message: 'Get started' })}
+      <igc-icon slot="suffix" name="arrow"></igc-icon>
+    </igc-button>
+
+    <Image
+      src={heroLogo}
+      class={`${styles['it-hero__logo']} ${styles['it-hero__logo--dark']}`}
+      alt="Hero Logo"
+      loading="eager"
+    />
+    <Image
+      src={heroLogoLight}
+      class={`${styles['it-hero__logo']} ${styles['it-hero__logo--light']}`}
+      alt="Hero Logo"
+      loading="eager"
+    />
+  </div>
+</header>

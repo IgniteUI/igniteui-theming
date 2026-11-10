@@ -1,0 +1,62 @@
+---
+sidebar_position: 4
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+import CodeBlockHeader from '@/components/CodeBlockHeader';
+
+# Setting the CSS variables to elements
+
+  After you have your CSS variables, it’s time to apply them to the elements in your application. The easiest way to apply a whole group of styles is by using the `type-style{:sass}` mixin. 
+   
+  You can pass the type style that you want to apply as a parameter, and then the mixin will check if the name of the style exists in the `$ITypeScale` variable. If it does, it will apply all the variables associated with that style — meaning all of the declared style property variables from `$ITypeStyle`.
+
+  For example, if we have the following structure: 
+
+  ```html
+  <div class="wrapper">
+    <h1>Heading text</h1>
+    <p>Content text</p>
+  </div>
+  ```
+
+  We can easily apply all of the generated `body{:sass}` variables to the `p{:sass}` element like this:
+
+  ```scss
+  .wrapper p {
+    @include type-style($category: 'body');
+  }
+  ```
+
+  Which will result in the following: 
+
+  <CodeBlockHeader title="CSS output"/>
+	```scss
+	.wrapper p {
+      font-family: var(--ig-body-font-family, var(--ig-font-family));
+      font-size: var(--ig-body-font-size);
+      font-weight: var(--ig-body-font-weight);
+      line-height: var(--ig-body-line-height);
+	}
+	```
+
+  Except for the `$category` parameter, the mixin also accepts a `$check` parameter, which by default is set to `true{:bash}`. 
+   
+  This parameter is responsible for checking if the passed category style exists in `$ITypeScale`. If set to `true{:bash}` and the category is missing, no styling will be applied. If we set it to `false{:bash}`, all styling parameters for the passed category will be applied, even if the category is not part of `$ITypeScale` and its styling variables are not declared.
+
+  ## Using Variables Directly
+
+  Of course, you are not required to use the `type-style{:sass}` mixin. You can always apply the generated CSS variables directly if you prefer:
+
+  ```scss
+  .wrapper p {
+    font-family: var(--ig-font-family);
+    font-size: var(--ig-body-font-size);
+    font-weight: var(--ig-body-font-weight);
+    line-height: var(--ig-body-line-height);
+  }
+  ```
+
+  ### API References
+
+  - <a href={`${sassDoc}/typography/#mixin-type-style`}>type-style mixin</a> 

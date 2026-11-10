@@ -1,0 +1,90 @@
+---
+sidebar_position: 2
+---
+
+import { sassDoc } from '@/utils/sassdoc';
+
+# 自動生成パレット 
+
+  デザインシステムがグループごとに1色しか提供していないが、複数のバリアントを持つ完全なパレットが必要な場合、`palette(){:js}`関数を使用できます。
+
+  この関数は、提供された各カラーグループに対して追加のバリアントを自動的に生成します。渡したベースカラーは500シェードになり、そこから関数は次のバリアントを生成します：
+
+  - **5つの明るいシェード**: `50{:js}`, `100{:js}`, `200{:js}`, `300{:js}`, `400{:js}`
+
+  - **4つの暗いシェード**: `600{:js}`, `700{:js}`, `800{:js}`, `900{:js}`
+
+  - **4つのアクセントカラー**: `A100{:jsonc}`, `A200{:jsonc}`, `A400{:jsonc}`, `A700{:jsonc}`
+
+  生成された各カラーについて、関数は最適なコントラストカラー（黒または白）を計算し、'-contrast'接尾辞を付けて宣言します。
+    
+  **生成されるカラーグループ**
+
+  シェードバリアントは次のカラーグループに対して生成されます： `primary{:jsonc}`, `secondary{:jsonc}`, `surface{:jsonc}`, `gray{:jsonc}`, `info{:jsonc}`, `success{:jsonc}`, `warn{:jsonc}`, `error{:jsonc}`.
+
+  各タイプはデザインシステム内で独自の役割を持っています：
+
+  - `primary{:jsonc}`および`secondary{:jsonc}`カラーは、ブランドの2つの主要なカラーです。
+
+  - `surface{:jsonc}`および`gray{:jsonc}`色は通常、背景色と前景色として使用されます。これら2色は通常、互いに対照的に表示されます。そのため、両方を手動で指定する場合は、グレーのバリエーションは常に表面色の先端と対照的である必要があります。`palette(){:js}` 関数に表面色のみを渡すと、表面色の [輝度](https://en.wikipedia.org/wiki/Luminance) に応じて、グレーのバリエーションが自動的に計算されます。
+   
+    - 輝度が0.5を超える（明るい）場合、`--ig-gray-500{:sass}`は暗いグレー `hsl(0, 0%, 62%){:scss}` に設定されます。
+
+    - 輝度が0.5未満（暗い）場合、`--ig-gray-500{:sass}`は明るいグレー `hsl(0, 0%, 74%){:scss}` に設定されます。
+   
+  - `surface{:jsonc}`カラーは通常要素の背景に使用され、`gray{:jsonc}`カラーは主に枠線、区切り線、無効状態、テキストカラーをカバーします。 
+
+    :::danger[Important]
+      **gray**の色は、アクセントカラーを除いて、50～900の濃淡のみが生成されることを覚えておいてください。
+    :::
+
+  - `info{:jsonc}`、`success{:jsonc}`、`warn{:jsonc}`、`error{:jsonc}`カラーは追加のカラーで、主に情報メッセージ、成功インジケーター、警告ハイライト、エラー状態など、要素の状態を示すために使用されます。
+
+  ## `palette()`関数の使用 {/* #using-the-palette-function */}
+
+  完全なカラーパレットを自動生成するには、`palette(){:js}`関数を呼び出し、バリアント生成に必須の`$primary{:scss}`、`$secondary{:scss}`、`$surface{:scss}`カラーを渡します。
+
+  ```scss 
+  $custom-palette: palette(
+    $primary: #f34e4e,
+    $secondary: #fff6ea, 
+    $surface: #7bb9fa
+  );
+
+  @include palette($custom-palette);
+  ```
+  
+  その後、新しく作成したパレットを`palette{:sass}`ミックスインでインクルードします。
+
+  `palette(){:js}`関数に渡すことができる追加パラメータは次のとおりです：
+
+  - `$gray{:scss}` - グレーカラーの500シェード。提供されない場合、渡された`$surface{:scss}`カラーに基づいて自動生成されます。
+
+  - `$info{:scss}` - infoカラーの500シェード。デフォルトでは `#1377d5` を使用します。
+
+  - `$success{:scss}` - successカラーの500シェード。デフォルトでは `#4eb862` を使用します。
+
+  - `$warn{:scss}` - warnカラーの500シェード。デフォルトでは `#faa419` を使用します。
+
+  - `$error{:scss}` - errorカラーの500シェード。デフォルトでは `#ff134a` を使用します。
+
+  パラメータが関数に渡されると、すべてのカラーグループに対して`shades(){:js}`関数が実行されます。
+  `shades(){:js}`関数は2つの事前定義された型リストを読み込みます：
+
+  `$IGrayShades{:scss}` → `('50','100','200','300','400','500','600','700','800','900'){:js}`
+
+  `$IColorShades{:scss}` → $IGrayShadesのすべて + アクセントバリアント `('A100','A200','A400','A700'){:js}`
+
+  これら2つのリストは、初期の500シェード値からバリアントを生成するためのテンプレートとして機能します。
+
+  リストを読み込んだ後、関数は各リストを反復処理し、各バリアントに対して`shade(){:js}`関数を呼び出します。この関数は、定義済みのマップから関連する彩度と明度の乗数を取得し、それらを使用して新しいバリアントの色を計算します。
+  
+  - カラー（primary、secondaryなど）には、`$IColorShades{:scss}`リストが使用され、彩度と明度の両方の乗数が適用されます。
+
+  - グレーには、`$IGrayShades{:scss}`リストが使用され、明度の乗数のみが適用されます。
+
+  ### APIリファレンス {/* #api-references */}
+
+  - <a href={`${sassDoc}/palettes/#function-palette`}>palette() 関数</a>
+  - <a href={`${sassDoc}/palettes/#function-shades`}>shades() 関数</a>
+  - <a href={`${sassDoc}/palettes/#mixin-palette`}>palette() ミックスイン</a>

@@ -1,0 +1,9 @@
+---
+// h1 headings carry no id (they never appear in the TOC); Astro's heading collector always adds one, so the
+// MDX `h1` is mapped here to drop it.
+const { id: _id, ...props } = Astro.props;
+---
+
+<h1 {...props}>
+  <slot />
+</h1>
