@@ -1,4 +1,3 @@
-import type { Role } from "../graph/model.js";
 import type { NodeKind } from "../parser/types.js";
 
 export const KIND_LABEL: Record<NodeKind, string> = {
@@ -8,29 +7,17 @@ export const KIND_LABEL: Record<NodeKind, string> = {
   module: "file",
 };
 
-/** Kind colors (badge background). */
-export const KIND_BG: Record<NodeKind, string> = {
-  variable: "bg-blue-500",
-  mixin: "bg-emerald-500",
-  function: "bg-violet-500",
-  module: "bg-slate-400",
-};
-
-/** Edge strokes per kind of the symbol an arrow carries; the same hues as `KIND_BG`, lighter for a dark canvas. */
+/** Edge strokes per kind of the symbol an arrow carries; mirrored by the --kind-* properties in index.css. */
 export const EDGE_HEX: Record<NodeKind, string> = {
-  variable: "#60a5fa",
-  mixin: "#34d399",
-  function: "#a78bfa",
-  module: "#94a3b8",
+  variable: "#4cc2ff",
+  mixin: "#6ccb5f",
+  function: "#b4a0ff",
+  module: "#a0a0a0",
 };
 
-export const ROLE_CLASS: Record<Role, string> = {
-  selected: "ring-2 ring-sky-500 border-sky-500 bg-slate-900",
-  changed: "ring-2 ring-rose-600 border-rose-500 bg-rose-950",
-  upstream: "border-amber-500 bg-amber-950/50",
-  downstream: "border-rose-700 bg-rose-950/50",
-  neutral: "border-slate-600 bg-slate-900",
-};
+/** Neutral and highlighted edge strokes; mirrored by --edge and --accent in index.css. */
+export const EDGE_NEUTRAL = "#8a8a8a";
+export const EDGE_LIT = "#ffb900";
 
 export const displayName = (kind: NodeKind, name: string) =>
   kind === "variable" ? `$${name}` : kind === "module" ? name : `${name}()`;

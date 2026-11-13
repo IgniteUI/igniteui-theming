@@ -1,4 +1,5 @@
 import { ReactFlowProvider } from "@xyflow/react";
+import { IgrButton, IgrTab, IgrTabs } from "igniteui-react";
 import { useEffect, useState } from "react";
 import { createModel } from "../graph/model.js";
 import type { SassGraph } from "../parser/types.js";
@@ -11,49 +12,44 @@ import { ReportView } from "./ReportView.js";
 import { Sidebar } from "./Sidebar.js";
 import { navigate, type SymbolTab, useStore } from "./store.js";
 
+const SYMBOL_TABS: [SymbolTab, string][] = [
+  ["outline", "Outline"],
+  ["graph", "Graph"],
+];
+
 function SymbolTabs() {
   const { symbolTab, setSymbolTab } = useStore();
-  const tabs: [SymbolTab, string][] = [
-    ["outline", "Outline"],
-    ["graph", "Graph"],
-  ];
   return (
-    <div className="flex shrink-0 gap-1 border-b border-slate-700 bg-slate-900 px-3 pt-2 text-xs">
-      {tabs.map(([tab, text]) => (
-        <button
+    <IgrTabs
+      className="symbol-tabs"
+      onChange={(e) =>
+        setSymbolTab(e.detail.id.replace("tab-", "") as SymbolTab)
+      }
+    >
+      {SYMBOL_TABS.map(([tab, text]) => (
+        <IgrTab
           key={tab}
-          type="button"
-          onClick={() => setSymbolTab(tab)}
-          className={`-mb-px rounded-t border px-3 py-1 ${
-            symbolTab === tab
-              ? "border-slate-700 border-b-slate-900 bg-slate-900 font-semibold text-slate-100"
-              : "border-transparent text-slate-400 hover:text-white"
-          }`}
-        >
-          {text}
-        </button>
+          id={`tab-${tab}`}
+          label={text}
+          selected={symbolTab === tab}
+        />
       ))}
-    </div>
+    </IgrTabs>
   );
 }
 
 function MissingSymbol({ id }: { id: string }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center text-sm text-slate-400">
+    <div className="empty-state">
       <p>
-        No symbol with id <code className="text-slate-200">{id}</code>. It may
-        have been renamed or removed since the link was made.
+        No symbol with id <code>{id}</code>. It may have been renamed or removed
+        since the link was made.
       </p>
-      <button
-        type="button"
-        onClick={() => navigate({ view: "map" })}
-        className="rounded-md bg-sky-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-500"
-      >
+      <IgrButton onClick={() => navigate({ view: "map" })}>
         Back to the map
-      </button>
-      <p className="text-xs">
-        Or press <kbd className="rounded border border-slate-600 px-1">/</kbd>{" "}
-        to search for it.
+      </IgrButton>
+      <p className="muted">
+        Or press <kbd>/</kbd> to search for it.
       </p>
     </div>
   );
@@ -67,9 +63,9 @@ function Main() {
   }
   if (route.view === "symbol") {
     return (
-      <div className="flex h-full flex-col">
+      <div className="symbol-view">
         <SymbolTabs />
-        <div className="min-h-0 flex-1">
+        <div className="symbol-view__body">
           {symbolTab === "outline" ? <FlowView id={route.id} /> : <GraphView />}
         </div>
       </div>
@@ -102,39 +98,35 @@ export function App() {
     return () => window.removeEventListener("hashchange", sync);
   }, [visit]);
 
-  if (error) return <div className="p-6 text-sm text-rose-400">{error}</div>;
-  if (!model)
-    return <div className="p-6 text-sm text-slate-400">Loading graph…</div>;
+  if (error) return <p className="boot boot--error">{error}</p>;
+  if (!model) return <p className="boot">Loading graph…</p>;
+
+  const panel =
+    (route.view === "symbol" && model.byId.has(route.id)) ||
+    route.view === "impact";
 
   return (
     <ReactFlowProvider>
-      <div className="flex h-screen w-screen flex-col bg-slate-950 text-slate-100">
+      <div className="app" data-panel={panel || undefined}>
         <Header />
-        <div className="flex min-h-0 flex-1">
-          <Sidebar />
-          <main className="min-w-0 flex-1">
-            <Main />
-          </main>
-          {((route.view === "symbol" && model.byId.has(route.id)) ||
-            route.view === "impact") && (
-            <aside className="flex w-80 shrink-0 flex-col gap-4 overflow-auto border-l border-slate-700 bg-slate-900 p-3">
-              {route.view === "symbol" && (
-                <section>
-                  <h2 className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Details
-                  </h2>
-                  <DetailsPanel />
-                </section>
-              )}
-              <section>
-                <h2 className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-400">
-                  What breaks if I change this?
-                </h2>
-                <ImpactPanel />
+        <Sidebar />
+        <main className="app__main">
+          <Main />
+        </main>
+        {panel && (
+          <aside className="app__panel ig-scrollbar">
+            {route.view === "symbol" && (
+              <section className="panel-section">
+                <h2 className="section-title">Details</h2>
+                <DetailsPanel />
               </section>
-            </aside>
-          )}
-        </div>
+            )}
+            <section className="panel-section">
+              <h2 className="section-title">What breaks if I change this?</h2>
+              <ImpactPanel />
+            </section>
+          </aside>
+        )}
       </div>
     </ReactFlowProvider>
   );

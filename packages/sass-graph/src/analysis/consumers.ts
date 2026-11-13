@@ -127,3 +127,52 @@ export function directUsers(
     .map(([consumer, files]) => ({ consumer, files: files.length }))
     .sort((a, b) => b.files - a.files);
 }
+
+/**
+ * The library component a theme file belongs to: the folder that holds its `themes`
+ * folder (`card/src/card/themes/_base.scss` → `card`, `src/components/list/themes/…` → `list`).
+ * Shared theme files (`styles/themes/…`) and files outside a `themes` folder have none.
+ */
+export function libraryComponentOf(file: string): string | null {
+  const parts = file.split("/");
+  const at = parts.indexOf("themes");
+  if (at <= 0) return null;
+  const owner = parts.slice(0, at).filter((p) => p !== "src");
+  const name = owner[owner.length - 1];
+  return name && name !== "styles" ? name : null;
+}
+
+export interface LibraryReach {
+  name: string;
+  /** Library files that call one of the symbols directly. */
+  files: number;
+  /** Components whose theme files are among them. */
+  components: string[];
+}
+
+/** Per library, the files and components that call any of `ids` directly. */
+export function libraryReach(
+  usage: ConsumerUsage | undefined,
+  ids: Iterable<string>,
+): LibraryReach[] {
+  const files = new Map<string, Set<string>>();
+  for (const id of ids) {
+    for (const [name, list] of Object.entries(usage?.direct[id] ?? {})) {
+      if (!files.has(name)) files.set(name, new Set());
+      for (const f of list) files.get(name)!.add(f);
+    }
+  }
+  return [...files]
+    .map(([name, set]) => ({
+      name,
+      files: set.size,
+      components: [
+        ...new Set(
+          [...set]
+            .map(libraryComponentOf)
+            .filter((c): c is string => c !== null),
+        ),
+      ].sort(),
+    }))
+    .sort((a, b) => b.files - a.files);
+}

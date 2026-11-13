@@ -6,9 +6,18 @@ import {
   ReactFlow,
   useReactFlow,
 } from "@xyflow/react";
+import {
+  IgrButton,
+  IgrButtonGroup,
+  IgrCard,
+  IgrCardActions,
+  IgrCardContent,
+  IgrCardHeader,
+  IgrToggleButton,
+} from "igniteui-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SYSTEM_INFO, systemOf } from "../analysis/systems.js";
-import { type Box, layout } from "../graph/layout.js";
+import { type LayoutResult, layout } from "../graph/layout.js";
 import {
   focusView,
   impactSet,
@@ -18,6 +27,7 @@ import {
   systemView,
   type ViewEdge,
 } from "../graph/model.js";
+import { downstream, upstream } from "../graph/traverse.js";
 import type { NodeKind } from "../parser/types.js";
 import { GuideContent } from "./Guide.js";
 import {
@@ -28,13 +38,14 @@ import {
   type SymbolFlowNode,
   type SystemFlowNode,
 } from "./nodes.js";
+import { edgeTypes } from "./RoutedEdge.js";
 import { toHash } from "./route.js";
 import { navigate, useFilters, useStore } from "./store.js";
-import { EDGE_HEX } from "./theme.js";
+import { EDGE_HEX, EDGE_LIT, EDGE_NEUTRAL } from "./theme.js";
 
 function Arrow({ color, dashed }: { color: string; dashed?: boolean }) {
   return (
-    <svg width="34" height="8" aria-hidden="true" className="shrink-0">
+    <svg width="34" height="8" aria-hidden="true" className="legend__arrow">
       <line
         x1="0"
         y1="4"
@@ -52,42 +63,37 @@ function Arrow({ color, dashed }: { color: string; dashed?: boolean }) {
 function Legend() {
   const route = useStore((s) => s.route);
   return (
-    <div className="pointer-events-none absolute bottom-3 right-3 space-y-0.5 rounded-md border border-slate-600 bg-slate-800 shadow-lg shadow-black/50 px-3 py-2 text-[11px] text-slate-200">
-      <div className="mb-1 text-slate-400">
-        Arrows point from what is used to what uses it
-      </div>
+    <div className="overlay legend">
+      <p className="muted">Arrows point from what is used to what uses it</p>
       {route.view === "map" ? (
-        <div className="flex items-center gap-2">
-          <Arrow color="#64748b" /> links between systems; the number counts
-          them
+        <div className="legend__row">
+          <Arrow color={EDGE_NEUTRAL} /> links between systems; the number
+          counts them
         </div>
       ) : (
         <>
-          <div className="flex items-center gap-2">
+          <div className="legend__row">
             <Arrow color={EDGE_HEX.mixin} /> includes a mixin
           </div>
-          <div className="flex items-center gap-2">
+          <div className="legend__row">
             <Arrow color={EDGE_HEX.function} /> calls a function
           </div>
-          <div className="flex items-center gap-2">
+          <div className="legend__row">
             <Arrow color={EDGE_HEX.variable} /> reads a variable
           </div>
         </>
       )}
-      <div className="flex items-center gap-2">
-        <Arrow color="#94a3b8" dashed /> through a hidden variable or file
+      <div className="legend__row">
+        <Arrow color={EDGE_NEUTRAL} dashed /> through a hidden variable or file
       </div>
-      <div className="flex gap-3 pt-1">
-        <span>
-          <span className="mr-1 inline-block h-2 w-2 rounded-sm border border-amber-500 bg-amber-950/50" />
+      <div className="legend__roles">
+        <span className="swatch" data-role="upstream">
           relied on
         </span>
-        <span>
-          <span className="mr-1 inline-block h-2 w-2 rounded-sm border border-rose-700 bg-rose-950/50" />
+        <span className="swatch" data-role="downstream">
           affected
         </span>
-        <span>
-          <span className="mr-1 inline-block h-2 w-2 rounded-sm border border-rose-500 bg-rose-950" />
+        <span className="swatch" data-role="changed">
           marked
         </span>
       </div>
@@ -96,64 +102,97 @@ function Legend() {
 }
 
 /** How many links away from the symbol (or the marked changes) the graph reaches. */
+const MAX_STEPS = 6;
+
+/** The farthest any symbol is from the selected symbol or the marked changes, capped at MAX_STEPS. */
+function useReach(): number {
+  const { model, route, edits } = useStore();
+  return useMemo(() => {
+    if (!model) return 0;
+    let far = 0;
+    const scan = (distances: Map<string, number>) => {
+      for (const d of distances.values()) far = Math.max(far, d);
+    };
+    if (route.view === "symbol" && model.byId.has(route.id)) {
+      scan(upstream(model.adjacency, route.id));
+      scan(downstream(model.adjacency, route.id));
+    } else if (route.view === "impact") {
+      scan(impactSet(model, edits.keys()));
+    }
+    return Math.min(far, MAX_STEPS);
+  }, [model, route, edits]);
+}
+
+/** Steps away, offering only the counts that change the drawing. */
 function StepsControl() {
   const { depth, setDepth, route } = useStore();
+  const reach = useReach();
   const subject =
     route.view === "impact" ? "the marked changes" : "the selected symbol";
+  const shown = Math.min(depth, reach);
   return (
-    <fieldset className="absolute right-3 top-3 z-10 rounded-md border border-slate-600 bg-slate-800 px-3 py-2 text-xs text-slate-200 shadow-lg shadow-black/50">
-      <legend className="float-left mr-2 py-0.5">Steps away</legend>
-      <div className="flex">
-        <div className="flex rounded bg-slate-950 p-0.5">
-          {[1, 2, 3, 4, 5, 6].map((n) => (
-            <button
-              key={n}
-              type="button"
-              aria-pressed={depth === n}
-              aria-label={`${n} step${n > 1 ? "s" : ""} away`}
-              onClick={() => setDepth(n)}
-              className={`w-6 rounded py-0.5 font-mono ${
-                depth === n
-                  ? "bg-sky-600 font-semibold text-white"
-                  : "text-slate-300 hover:bg-slate-700"
-              }`}
-            >
-              {n}
-            </button>
-          ))}
-        </div>
-      </div>
-      <p className="clear-left mt-1 max-w-[34ch] text-[11px] leading-snug text-slate-400">
-        How many links away from {subject} to draw. 1 shows only direct links.
-      </p>
-    </fieldset>
+    <div className="overlay steps">
+      {reach > 1 ? (
+        <>
+          <span className="steps__label" id="steps-label">
+            Steps away
+          </span>
+          <IgrButtonGroup
+            selection="single-required"
+            aria-labelledby="steps-label"
+            onSelect={(e) => e.detail && setDepth(Number(e.detail))}
+          >
+            {Array.from({ length: reach }, (_, i) => i + 1).map((n) => (
+              <IgrToggleButton
+                key={n}
+                value={String(n)}
+                selected={shown === n}
+                aria-label={`${n} step${n > 1 ? "s" : ""} away`}
+              >
+                {n}
+              </IgrToggleButton>
+            ))}
+          </IgrButtonGroup>
+          <p className="steps__hint">
+            How many links away from {subject} to draw. 1 shows only direct
+            links; {reach} reaches everything.
+          </p>
+        </>
+      ) : (
+        <p className="steps__hint">
+          Everything connected to {subject} is one link away.
+        </p>
+      )}
+    </div>
   );
 }
 
 function Welcome() {
   const dismiss = useStore((s) => s.dismissWelcome);
   return (
-    <div className="absolute inset-x-0 top-12 z-10 mx-auto w-[min(620px,90%)] rounded-xl border border-sky-600 bg-slate-800 p-4 shadow-2xl shadow-black/60">
-      <div className="mb-3 flex items-start justify-between gap-4">
-        <div>
-          <h2 className="text-base font-bold text-slate-100">Start here</h2>
-          <p className="text-xs text-slate-400">
-            Each card is one system of the Sass engine. Arrows show which system
-            uses which; the number counts the links.
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={dismiss}
-          className="shrink-0 rounded-md bg-sky-600 px-3 py-1 text-xs font-semibold text-white hover:bg-sky-500"
-        >
+    <IgrCard elevated className="welcome">
+      <IgrCardHeader>
+        <h2 slot="title" className="page-title">
+          Start here
+        </h2>
+        <p slot="subtitle">
+          Each card is one system of the Sass engine. Arrows show which system
+          uses which; the number counts the links.
+        </p>
+      </IgrCardHeader>
+      <IgrCardContent>
+        <GuideContent onAction={dismiss} />
+      </IgrCardContent>
+      <IgrCardActions>
+        <IgrButton slot="end" onClick={dismiss}>
           Got it
-        </button>
-      </div>
-      <GuideContent onAction={dismiss} />
-    </div>
+        </IgrButton>
+      </IgrCardActions>
+    </IgrCard>
   );
 }
+
+const EMPTY_LAYOUT: LayoutResult = { boxes: new Map(), routes: new Map() };
 
 type FlowNode = SymbolFlowNode | SystemFlowNode | FileFlowNode;
 
@@ -295,8 +334,8 @@ export function GraphView() {
   const [laid, setLaid] = useState<{
     scene: Scene;
     shape: string;
-    boxes: Map<string, Box>;
-  }>({ scene, shape: "", boxes: new Map() });
+    result: LayoutResult;
+  }>({ scene, shape: "", result: EMPTY_LAYOUT });
   const [busy, setBusy] = useState(false);
   const [fitRequest, setFitRequest] = useState(0);
   // Refits only when the route changes, so filter changes keep the viewport.
@@ -304,14 +343,15 @@ export function GraphView() {
   const fittedKey = useRef<string | null>(null);
 
   const shapeKey = useMemo(
-    () => `${scene.nodes.map((n) => n.id).join("|")}#${scene.edges.length}`,
+    () =>
+      `${scene.nodes.map((n) => n.id).join("|")}#${scene.edges.map((e) => e.id).join("|")}`,
     [scene],
   );
   // biome-ignore lint/correctness/useExhaustiveDependencies: layout depends only on shape.
   useEffect(() => {
     let cancelled = false;
     if (!scene.nodes.length) {
-      setLaid({ scene, shape: shapeKey, boxes: new Map() });
+      setLaid({ scene, shape: shapeKey, result: EMPTY_LAYOUT });
       // An empty scene unmounts the canvas, so the next one has to fit again.
       fittedKey.current = null;
       return;
@@ -328,7 +368,7 @@ export function GraphView() {
       edges: scene.edges,
     }).then((result) => {
       if (cancelled) return;
-      setLaid({ scene, shape: shapeKey, boxes: result });
+      setLaid({ scene, shape: shapeKey, result });
       setBusy(false);
       if (fittedKey.current !== fitKey) {
         fittedKey.current = fitKey;
@@ -346,7 +386,7 @@ export function GraphView() {
 
   // Same shape: the current scene, so data changes show at once. New shape: the last laid-out one.
   const shown = laid.shape === shapeKey ? scene : laid.scene;
-  const boxes = laid.boxes;
+  const { boxes, routes } = laid.result;
 
   // Hover: highlight the hovered node and its direct neighbours.
   const neighbours = useMemo(() => {
@@ -375,6 +415,8 @@ export function GraphView() {
           return {
             ...n,
             position: { x: box.x, y: box.y },
+            // Cards sit above the edges (zIndex 1); file boxes stay below them.
+            zIndex: 2,
             data: {
               ...n.data,
               dimmed: neighbours ? !neighbours.has(n.id) : false,
@@ -398,17 +440,19 @@ export function GraphView() {
         const lit = hoverId && (e.source === hoverId || e.target === hoverId);
         // An arrow takes the color of what it carries: the kind of the symbol at its tail.
         const kind = kindOf.get(e.source);
-        const stroke = lit ? "#38bdf8" : kind ? EDGE_HEX[kind] : "#64748b";
+        const stroke = lit ? EDGE_LIT : kind ? EDGE_HEX[kind] : EDGE_NEUTRAL;
         return {
           ...e,
+          type: "routed",
+          data: { points: routes.get(e.id) },
           selectable: false,
           focusable: false,
           interactionWidth: 0,
           zIndex: 1,
           animated: Boolean(lit),
           label: e.weight,
-          labelStyle: { fontSize: 10, fill: "#cbd5e1" },
-          labelBgStyle: { fill: "#0f172a" },
+          labelStyle: { fontSize: 10, fill: "var(--muted)" },
+          labelBgStyle: { fill: "var(--bg)" },
           markerEnd: { type: MarkerType.ArrowClosed, color: stroke },
           style: {
             stroke,
@@ -418,20 +462,16 @@ export function GraphView() {
           },
         };
       }),
-    [shown.edges, hoverId, neighbours, kindOf],
+    [shown.edges, hoverId, neighbours, kindOf, routes],
   );
 
   if (scene.empty) {
-    return (
-      <div className="flex h-full items-center justify-center p-8 text-center text-sm text-slate-400">
-        {scene.empty}
-      </div>
-    );
+    return <div className="empty-state">{scene.empty}</div>;
   }
 
   const symbols = nodes.filter((n) => n.type !== "file").length;
   return (
-    <div className="relative h-full w-full">
+    <div className="canvas">
       <ReactFlow
         colorMode="dark"
         fitView
@@ -439,6 +479,7 @@ export function GraphView() {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         nodesConnectable={false}
         edgesFocusable={false}
         edgesReconnectable={false}
@@ -453,14 +494,14 @@ export function GraphView() {
         }}
         proOptions={{ hideAttribution: true }}
       >
-        <Background gap={24} color="#1e293b" />
+        <Background gap={24} />
         <Controls showInteractive={false} />
       </ReactFlow>
       <Legend />
       {(route.view === "symbol" || route.view === "impact") && <StepsControl />}
       {route.view === "map" && welcome && <Welcome />}
-      <div className="pointer-events-none absolute left-3 top-3 flex max-w-[70ch] flex-col items-start gap-1 text-xs">
-        <span className="rounded-md border border-slate-600 bg-slate-800 shadow-lg shadow-black/50 px-2 py-1 text-slate-200">
+      <div className="canvas__notes">
+        <span className="overlay note">
           {symbols} {route.view === "map" ? "systems" : "symbols"} ·{" "}
           {edges.length} links
           {busy && " · laying out…"}
@@ -468,14 +509,13 @@ export function GraphView() {
             " · numbers count the links · click a system to open it"}
         </span>
         {route.view === "system" && SYSTEM_INFO[route.system] && (
-          <span className="rounded-md border border-slate-600 bg-slate-800 shadow-lg shadow-black/50 px-2 py-1 text-slate-200">
-            <strong className="text-slate-100">{route.system}</strong>:{" "}
-            {SYSTEM_INFO[route.system]} Dashed boxes are helpers from other
-            systems.
+          <span className="overlay note">
+            <strong>{route.system}</strong>: {SYSTEM_INFO[route.system]} Dashed
+            boxes are helpers from other systems.
           </span>
         )}
         {scene.truncated > 0 && (
-          <span className="rounded-md border border-amber-600 bg-amber-950 px-2 py-1 text-amber-100 shadow-lg shadow-black/50">
+          <span className="overlay note" data-tone="warn">
             {scene.truncated} more reachable symbols hidden. Choose fewer steps
             away, or use the Outline tab.
           </span>

@@ -1,10 +1,12 @@
+import { IgrChip, IgrExpansionPanel, IgrList } from "igniteui-react";
 import { useMemo } from "react";
 import { directUsers } from "../analysis/consumers.js";
 import { downstream, upstream } from "../graph/traverse.js";
 import type { GraphNode } from "../parser/types.js";
+import { KindBadge } from "./KindBadge.js";
 import { SymbolRow } from "./Sidebar.js";
 import { selectedIdOf, useStore } from "./store.js";
-import { displayName, KIND_BG, KIND_LABEL, sourceUrl } from "./theme.js";
+import { displayName, sourceUrl } from "./theme.js";
 
 function NodeList({ title, ids }: { title: string; ids: string[] }) {
   const model = useStore((s) => s.model);
@@ -14,16 +16,16 @@ function NodeList({ title, ids }: { title: string; ids: string[] }) {
     .filter((n): n is GraphNode => Boolean(n))
     .sort((a, b) => a.name.localeCompare(b.name));
   return (
-    <details className="text-xs">
-      <summary className="cursor-pointer font-semibold text-slate-200">
+    <IgrExpansionPanel className="panel">
+      <span slot="title">
         {title} ({nodes.length})
-      </summary>
-      <div className="mt-1 max-h-48 overflow-auto">
+      </span>
+      <IgrList className="panel__list ig-scrollbar">
         {nodes.map((n) => (
           <SymbolRow key={n.id} node={n} />
         ))}
-      </div>
-    </details>
+      </IgrList>
+    </IgrExpansionPanel>
   );
 }
 
@@ -34,30 +36,28 @@ function LibraryUse({ id }: { id: string }) {
   const callers = directUsers(usage, id);
   const reexported = usage.reexported[id] ?? [];
   return (
-    <div className="text-xs">
-      <div className="font-semibold text-slate-200">Used by the libraries</div>
+    <div className="stack">
+      <h3 className="subsection-title">Used by the libraries</h3>
       {callers.length === 0 && reexported.length === 0 && (
-        <p className="mt-1 text-slate-400">
-          No library calls or re-exports it.
-        </p>
+        <p className="muted">No library calls or re-exports it.</p>
       )}
       {callers.map((c) => (
-        <details key={c.consumer} className="mt-1">
-          <summary className="cursor-pointer text-slate-300">
-            <span className="font-mono">{c.consumer}</span> calls it in{" "}
-            {c.files} {c.files === 1 ? "file" : "files"}
-          </summary>
-          <ul className="ml-4 mt-1 max-h-40 overflow-auto font-mono text-[11px] text-slate-400">
+        <IgrExpansionPanel key={c.consumer} className="panel">
+          <span slot="title">
+            <span className="mono">{c.consumer}</span> calls it in {c.files}{" "}
+            {c.files === 1 ? "file" : "files"}
+          </span>
+          <ul className="file-list ig-scrollbar">
             {usage.direct[id][c.consumer].map((f) => (
-              <li key={f} className="truncate" title={f}>
+              <li key={f} title={f}>
                 {f}
               </li>
             ))}
           </ul>
-        </details>
+        </IgrExpansionPanel>
       ))}
       {reexported.length > 0 && (
-        <p className="mt-1 text-slate-400">
+        <p className="muted">
           Re-exported by {reexported.join(", ")}, so apps can call it.
         </p>
       )}
@@ -81,75 +81,61 @@ export function DetailsPanel() {
   }, [model, node]);
 
   if (!node || !counts) {
-    return (
-      <p className="text-xs text-slate-400">
-        Select a node to see its details.
-      </p>
-    );
+    return <p className="muted">Select a node to see its details.</p>;
   }
 
   return (
-    <div className="space-y-3">
-      <div>
-        <div className="flex items-center gap-2">
-          <span
-            className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase text-white ${KIND_BG[node.kind]}`}
-          >
-            {KIND_LABEL[node.kind]}
-          </span>
-          <span className="break-all font-mono text-sm font-semibold text-slate-100">
+    <div className="stack">
+      <div className="details-head">
+        <div className="details-head__name">
+          <KindBadge kind={node.kind} />
+          <span className="mono strong">
             {displayName(node.kind, node.name)}
           </span>
         </div>
         <a
+          className="link mono"
           href={sourceUrl(node.file, node.line)}
           target="_blank"
           rel="noreferrer"
-          className="mt-1 block break-all font-mono text-[11px] text-sky-400 hover:underline"
         >
           {node.file}:{node.line}
         </a>
-        <div className="mt-1 flex gap-2 text-[11px] text-slate-400">
-          <span>{node.access}</span>
-          {node.group && <span>group: {node.group}</span>}
-        </div>
+        <span className="muted">
+          {node.access}
+          {node.group && ` · group: ${node.group}`}
+        </span>
       </div>
 
-      {node.description && (
-        <p className="text-xs text-slate-200">{node.description}</p>
-      )}
+      {node.description && <p>{node.description}</p>}
 
       {node.params && node.params.length > 0 && (
-        <div className="text-xs">
-          <div className="font-semibold text-slate-200">Parameters</div>
-          <div className="mt-1 flex flex-wrap gap-1">
+        <div className="stack stack--tight">
+          <h3 className="subsection-title">Parameters</h3>
+          <div className="chips">
             {node.params.map((p) => (
-              <code key={p} className="rounded bg-slate-800 px-1 text-[11px]">
+              <IgrChip key={p} className="mono">
                 {p}
-              </code>
+              </IgrChip>
             ))}
           </div>
         </div>
       )}
 
       {node.value !== undefined && (
-        <div className="text-xs">
-          <div className="font-semibold text-slate-200">Value</div>
-          <pre className="mt-1 max-h-32 overflow-auto whitespace-pre-wrap rounded bg-slate-800 p-2 text-[11px]">
-            {node.value}
-          </pre>
+        <div className="stack stack--tight">
+          <h3 className="subsection-title">Value</h3>
+          <pre className="code-block ig-scrollbar">{node.value}</pre>
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-2 text-center text-xs">
-        <div className="rounded bg-amber-950/50 p-2">
-          <div className="text-lg font-bold text-amber-300">{counts.allUp}</div>
+      <div className="stats">
+        <div className="stat" data-tone="upstream">
+          <span className="stat__value">{counts.allUp}</span>
           relies on (transitive)
         </div>
-        <div className="rounded bg-rose-950/50 p-2">
-          <div className="text-lg font-bold text-rose-400">
-            {counts.allDown}
-          </div>
+        <div className="stat" data-tone="downstream">
+          <span className="stat__value">{counts.allDown}</span>
           affected if changed
         </div>
       </div>

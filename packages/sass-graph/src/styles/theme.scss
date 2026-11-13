@@ -1,0 +1,46 @@
+// Dark Fluent theme for the explorer, compiled from this repo's engine through the workspace link.
+@use 'igniteui-theming' as *;
+@use 'igniteui-theming/sass/typography/presets/fluent' as *;
+@use 'igniteui-theming/sass/elevations/presets' as *;
+@use 'igniteui-theming/sass/themes/schemas' as *;
+
+$primary-color: #0078d4;
+$secondary-color: #2b88d8;
+$surface-color: rgb(27, 27, 27);
+
+$explorer-dark-palette: palette(
+  $primary: $primary-color,
+  $secondary: $secondary-color,
+  $surface: $surface-color
+);
+
+@mixin theme($palette, $variant) {
+  :root {
+    --ig-theme: fluent;
+    --ig-theme-variant: #{$variant};
+    --ig-scrollbar-size: #{rem(12px)};
+    --ig-scrollbar-thumb-background: #{color($color: gray, $variant: 300)};
+    --ig-scrollbar-track-background: transparent;
+  }
+
+  @include palette($palette);
+  @include elevations($material-elevations);
+  @include typography(
+    $font-family: '"Segoe UI", "Open Sans", system-ui, sans-serif',
+    $type-scale: $type-scale
+  );
+  @include sizing();
+  @include spacing();
+}
+
+@include theme($explorer-dark-palette, 'dark');
+
+// Selected toggle buttons use the primary color.
+$explorer-button-group: button-group-theme(
+  $schema: $dark-fluent-schema,
+  $item-selected-background: $primary-color
+);
+
+igc-button-group {
+  @include tokens($explorer-button-group);
+}

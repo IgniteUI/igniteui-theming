@@ -1,3 +1,4 @@
+import { IgrCard, IgrCardContent, IgrCardHeader } from "igniteui-react";
 import { useMemo } from "react";
 import { buildReport } from "../analysis/report.js";
 import { navigate, useStore } from "./store.js";
@@ -11,103 +12,93 @@ export function ReportView() {
   const t = report.totals;
 
   return (
-    <div className="h-full overflow-auto p-6">
-      <div className="mx-auto max-w-5xl space-y-6">
-        <header>
-          <h2 className="text-lg font-bold text-slate-100">Engine report</h2>
-          <p className="text-xs text-slate-400">
+    <div className="report ig-scrollbar">
+      <div className="report__inner">
+        <header className="report__header">
+          <h2 className="page-title">Engine report</h2>
+          <p className="muted">
             {t.files} files · {t.variables} variables · {t.mixins} mixins ·{" "}
             {t.functions} functions · {t.componentThemes} component themes. Same
             output as <code>npm run graph:report</code>.
           </p>
-          <p
-            className={`mt-1 text-xs ${report.consumers ? "text-slate-400" : "text-amber-300"}`}
-          >
+          <p className={report.consumers ? "muted" : "warn-text"}>
             {report.consumers
               ? `Library use counted from ${report.consumers.map((c) => `${c.name} (${c.files} Sass files)`).join(", ")}.`
               : "Library use is not counted: graph.json was built without the consumer repos, so the unused checks only see the engine."}
           </p>
         </header>
 
-        <nav className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <nav className="report__summary" aria-label="Checks">
           {report.checks.map((c) => (
             <a
               key={c.id}
               href={`#check-${c.id}`}
+              className="summary-card"
+              data-clean={c.findings.length === 0 || undefined}
               onClick={(e) => {
                 e.preventDefault();
                 document
                   .getElementById(`check-${c.id}`)
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="rounded-lg border border-slate-700 bg-slate-900 p-3 hover:border-sky-500"
             >
-              <div
-                className={`text-xl font-bold ${c.findings.length ? "text-slate-100" : "text-emerald-400"}`}
-              >
-                {c.findings.length}
-              </div>
-              <div className="text-xs text-slate-300">{c.title}</div>
+              <span className="summary-card__count">{c.findings.length}</span>
+              <span className="summary-card__title">{c.title}</span>
             </a>
           ))}
         </nav>
 
         {report.checks.map((c) => (
-          <section
-            key={c.id}
-            id={`check-${c.id}`}
-            className="rounded-lg border border-slate-700 bg-slate-900"
-          >
-            <div className="border-b border-slate-800 p-3">
-              <h3 className="text-sm font-semibold text-slate-100">
+          <IgrCard key={c.id} id={`check-${c.id}`} className="check">
+            <IgrCardHeader>
+              <h3 slot="title" className="check__title">
                 {c.title} ({c.findings.length})
               </h3>
-              <p className="mt-1 text-xs text-slate-300">{c.description}</p>
-            </div>
-            {c.findings.length === 0 ? (
-              <p className="p-3 text-xs text-emerald-400">None.</p>
-            ) : (
-              <table className="w-full text-left text-xs">
-                <tbody>
-                  {c.findings.map((f) => (
-                    <tr
-                      key={`${f.subject}|${f.file}|${f.line}|${f.note}`}
-                      className="border-t border-slate-800 align-top"
-                    >
-                      <td className="px-3 py-1.5">
-                        {f.id ? (
-                          <button
-                            type="button"
-                            onClick={() =>
-                              navigate({ view: "symbol", id: f.id! })
-                            }
-                            className="font-mono font-semibold text-slate-100 hover:text-sky-300 hover:underline"
+              <p slot="subtitle" className="check__description">
+                {c.description}
+              </p>
+            </IgrCardHeader>
+            <IgrCardContent>
+              {c.findings.length === 0 ? (
+                <p className="ok-text">None.</p>
+              ) : (
+                <table className="findings">
+                  <tbody>
+                    {c.findings.map((f) => (
+                      <tr key={`${f.subject}|${f.file}|${f.line}|${f.note}`}>
+                        <td>
+                          {f.id ? (
+                            <button
+                              type="button"
+                              className="link link--strong mono"
+                              onClick={() =>
+                                navigate({ view: "symbol", id: f.id! })
+                              }
+                            >
+                              {f.subject}
+                            </button>
+                          ) : (
+                            <span className="mono">{f.subject}</span>
+                          )}
+                        </td>
+                        <td>
+                          <a
+                            className="link mono muted"
+                            href={sourceUrl(f.file, f.line)}
+                            target="_blank"
+                            rel="noreferrer"
                           >
-                            {f.subject}
-                          </button>
-                        ) : (
-                          <span className="font-mono">{f.subject}</span>
-                        )}
-                      </td>
-                      <td className="px-3 py-1.5">
-                        <a
-                          href={sourceUrl(f.file, f.line)}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-mono text-slate-400 hover:text-sky-300 hover:underline"
-                        >
-                          {f.file}:{f.line}
-                        </a>
-                      </td>
-                      <td className="max-w-[70ch] px-3 py-1.5 text-slate-300">
-                        {f.note}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </section>
+                            {f.file}:{f.line}
+                          </a>
+                        </td>
+                        <td className="findings__note">{f.note}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </IgrCardContent>
+          </IgrCard>
         ))}
       </div>
     </div>

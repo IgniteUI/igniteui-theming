@@ -2,7 +2,11 @@ import { createModel, type GraphModel, impactSet } from "../graph/model.js";
 import { buildGraph, moduleId, symbolId } from "../parser/build.js";
 import { parseFile } from "../parser/parse-file.js";
 import type { GraphNode, ParsedFile } from "../parser/types.js";
-import type { ConsumerUsage } from "./consumers.js";
+import {
+  type ConsumerUsage,
+  type LibraryReach,
+  libraryReach,
+} from "./consumers.js";
 import { componentOf, systemOf } from "./systems.js";
 
 export type ChangeKind = "added" | "changed" | "removed";
@@ -23,8 +27,8 @@ export interface Impact {
   components: string[];
   /** Affected symbols per system, components excluded. */
   systems: { system: string; count: number }[];
-  /** Consumer libraries that call a changed or affected symbol, with their file counts; empty without usage data. */
-  libraries: { name: string; files: number }[];
+  /** Consumer libraries that call a changed or affected symbol, with their files and components; empty without usage data. */
+  libraries: LibraryReach[];
 }
 
 /** `kind:name` → code of each declaration, plus the file's top-level code. */
@@ -131,21 +135,11 @@ export function analyzeImpact(
     }
   }
 
-  const libraryFiles = new Map<string, Set<string>>();
-  for (const id of [...changedIds, ...affected.keys()]) {
-    for (const [name, files] of Object.entries(usage?.direct[id] ?? {})) {
-      if (!libraryFiles.has(name)) libraryFiles.set(name, new Set());
-      for (const f of files) libraryFiles.get(name)!.add(f);
-    }
-  }
-
   return {
     changes,
     commentOnly,
     affected,
-    libraries: [...libraryFiles]
-      .map(([name, files]) => ({ name, files: files.size }))
-      .sort((a, b) => b.files - a.files),
+    libraries: libraryReach(usage, [...changedIds, ...affected.keys()]),
     components: [...components].sort(),
     systems: [...systems]
       .map(([system, count]) => ({ system, count }))

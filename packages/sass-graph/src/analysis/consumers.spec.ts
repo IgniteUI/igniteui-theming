@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { createModel } from "../graph/model.js";
 import { buildGraph } from "../parser/build.js";
-import { consumerUsage, directUsers, engineAlias } from "./consumers.js";
+import {
+  consumerUsage,
+  directUsers,
+  engineAlias,
+  libraryComponentOf,
+  libraryReach,
+} from "./consumers.js";
 import { ids, LIBRARY } from "./fixtures.js";
 import { formatImpact, formatReport } from "./format.js";
 import { analyzeImpact } from "./impact.js";
@@ -31,6 +37,48 @@ describe("engineAlias", () => {
     expect(engineAlias("igniteui-theming/sass")).toBe("index");
     expect(engineAlias("igniteui-theming")).toBe("@package/index");
     expect(engineAlias("./local")).toBeUndefined();
+  });
+});
+
+describe("libraryComponentOf", () => {
+  it("names the folder that holds the themes folder", () => {
+    expect(
+      libraryComponentOf(
+        "projects/igniteui-angular/card/src/card/themes/_base.scss",
+      ),
+    ).toBe("card");
+    expect(
+      libraryComponentOf(
+        "projects/igniteui-angular/grids/pivot-grid/src/themes/_base.scss",
+      ),
+    ).toBe("pivot-grid");
+    expect(
+      libraryComponentOf("src/components/list/themes/light/_themes.scss"),
+    ).toBe("list");
+  });
+
+  it("has no component for shared theme files or files outside a themes folder", () => {
+    expect(
+      libraryComponentOf("src/styles/themes/base/_fluent.scss"),
+    ).toBeNull();
+    expect(libraryComponentOf("src/_a.scss")).toBeNull();
+  });
+});
+
+describe("libraryReach", () => {
+  it("collects files and components per library across symbols", () => {
+    const usage = {
+      consumers: [],
+      reexported: {},
+      reached: [],
+      direct: {
+        a: { lib: ["x/card/themes/_base.scss", "x/styles/themes/_s.scss"] },
+        b: { lib: ["x/card/themes/_base.scss", "x/chip/themes/_base.scss"] },
+      },
+    };
+    expect(libraryReach(usage, ["a", "b"])).toEqual([
+      { name: "lib", files: 3, components: ["card", "chip"] },
+    ]);
   });
 });
 
@@ -151,7 +199,9 @@ describe("consumerUsage", () => {
       createModel(buildGraph(head)),
       usage,
     );
-    expect(impact.libraries).toEqual([{ name: "lib", files: 2 }]);
+    expect(impact.libraries).toEqual([
+      { name: "lib", files: 2, components: [] },
+    ]);
     expect(formatImpact(impact, "text")).toContain(
       "Libraries that call the changed or affected code: lib 2 files.",
     );

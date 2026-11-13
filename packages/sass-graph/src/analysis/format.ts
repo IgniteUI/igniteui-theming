@@ -115,6 +115,13 @@ export function formatImpact(
         .join(", ")}.`,
       "",
     );
+    for (const l of impact.libraries) {
+      if (!l.components.length) continue;
+      out.push(
+        `${l.name} components affected (${l.components.length}): ${l.components.join(", ")}.`,
+        "",
+      );
+    }
   }
   if (impact.components.length) {
     const list = impact.components.join(", ");

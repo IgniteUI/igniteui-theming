@@ -1,46 +1,39 @@
+import {
+  IgrBreadcrumb,
+  IgrBreadcrumbs,
+  IgrButton,
+  IgrIcon,
+  IgrIconButton,
+  IgrNavbar,
+  IgrTab,
+  IgrTabs,
+} from "igniteui-react";
 import { systemOf } from "../analysis/systems.js";
 import { GuideDialog } from "./Guide.js";
 import { Logo } from "./Logo.js";
-import type { Route } from "./route.js";
+import { type Route, toHash } from "./route.js";
 import { navigate, useStore } from "./store.js";
 import { displayName } from "./theme.js";
 
-function Crumb({ route, text }: { route?: Route; text: string }) {
-  if (!route) {
-    return <span className="font-semibold text-slate-100">{text}</span>;
-  }
-  return (
-    <button
-      type="button"
-      onClick={() => navigate(route)}
-      className="text-sky-400 hover:underline"
-    >
-      {text}
-    </button>
-  );
-}
+type Section = "explore" | "report" | "impact";
 
-/** Title, a breadcrumb back to the map, and links to the report and the sandbox impact. */
+const SECTION_ROUTE: Record<Section, Route> = {
+  explore: { view: "map" },
+  report: { view: "report" },
+  impact: { view: "impact" },
+};
+
+const sectionOf = (route: Route): Section =>
+  route.view === "report"
+    ? "report"
+    : route.view === "impact"
+      ? "impact"
+      : "explore";
+
+/** Logo home link, history, breadcrumb, the three sections and the guide. */
 export function Header() {
   const { model, route, edits, guideOpen, setGuideOpen, startOver, trail, at } =
     useStore();
-  const step = (
-    text: string,
-    label: string,
-    enabled: boolean,
-    go: () => void,
-  ) => (
-    <button
-      type="button"
-      onClick={go}
-      disabled={!enabled}
-      aria-label={label}
-      title={`${label} (${label === "Back" ? "Alt+←" : "Alt+→"})`}
-      className="rounded px-1.5 py-0.5 text-slate-300 hover:bg-slate-800 hover:text-white disabled:pointer-events-none disabled:opacity-30"
-    >
-      {text}
-    </button>
-  );
 
   const crumbs: { route?: Route; text: string }[] = [];
   if (route.view === "map") crumbs.push({ text: "Map" });
@@ -60,72 +53,95 @@ export function Header() {
     crumbs.push({ text: "Impact of marked changes" });
   if (route.view === "report") crumbs.push({ text: "Report" });
 
-  const tab = (target: Route, text: string, active: boolean) => (
-    <button
-      type="button"
-      onClick={() => navigate(target)}
-      className={`rounded px-2.5 py-1 ${active ? "bg-slate-700 font-semibold text-white shadow" : "text-slate-300 hover:text-white"}`}
-    >
-      {text}
-    </button>
-  );
+  const section = sectionOf(route);
+  const tabs: [Section, string][] = [
+    ["explore", "Explore"],
+    ["report", "Report"],
+    ["impact", edits.size ? `Impact (${edits.size})` : "Impact"],
+  ];
 
   return (
-    <header className="flex h-12 shrink-0 items-center gap-4 border-b border-slate-700 bg-slate-900 px-4">
-      <a
-        href={import.meta.env.BASE_URL}
-        className="flex shrink-0 items-center gap-2 rounded"
-        title="Home: reload on the map"
-      >
-        <Logo size={26} />
-        <h1 className="text-sm font-bold text-slate-100">Theming engine</h1>
-      </a>
-      <div className="flex shrink-0 items-center text-sm">
-        {step("←", "Back", at > 0, () => history.back())}
-        {step("→", "Forward", at < trail.length - 1, () => history.forward())}
+    <IgrNavbar className="app__header">
+      <div slot="start" className="header-start">
+        <a
+          href={import.meta.env.BASE_URL}
+          className="brand"
+          title="Home: reload on the map"
+        >
+          <Logo size={26} />
+          <h1 className="brand__title">Theming engine</h1>
+        </a>
+        <IgrIconButton
+          variant="flat"
+          name="back"
+          aria-label="Back"
+          title="Back (Alt+←)"
+          disabled={at <= 0}
+          onClick={() => history.back()}
+        />
+        <IgrIconButton
+          variant="flat"
+          name="forward"
+          aria-label="Forward"
+          title="Forward (Alt+→)"
+          disabled={at >= trail.length - 1}
+          onClick={() => history.forward()}
+        />
       </div>
-      <nav
-        aria-label="Breadcrumb"
-        className="flex min-w-0 items-center gap-1.5 truncate font-mono text-xs"
-      >
-        {crumbs.map((c, i) => (
-          <span key={c.text} className="flex items-center gap-1.5">
-            {i > 0 && <span className="text-slate-500">›</span>}
-            <Crumb route={c.route} text={c.text} />
-          </span>
+
+      <IgrBreadcrumbs aria-label="Breadcrumb" className="crumbs">
+        {crumbs.map((c) => (
+          <IgrBreadcrumb key={c.text}>
+            {c.route ? (
+              <a
+                href={toHash(c.route)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(c.route!);
+                }}
+              >
+                {c.text}
+              </a>
+            ) : (
+              <span aria-current="page">{c.text}</span>
+            )}
+          </IgrBreadcrumb>
         ))}
-      </nav>
-      <div className="ml-auto flex shrink-0 rounded-md bg-slate-800 p-0.5 text-xs">
-        {tab(
-          { view: "map" },
-          "Explore",
-          route.view === "map" ||
-            route.view === "system" ||
-            route.view === "symbol",
-        )}
-        {tab({ view: "report" }, "Report", route.view === "report")}
-        {tab(
-          { view: "impact" },
-          edits.size ? `Impact (${edits.size})` : "Impact",
-          route.view === "impact",
-        )}
+      </IgrBreadcrumbs>
+
+      <div slot="end" className="header-end">
+        <IgrTabs
+          className="section-tabs"
+          aria-label="Sections"
+          onChange={(e) =>
+            navigate(
+              SECTION_ROUTE[e.detail.id.replace("section-", "") as Section],
+            )
+          }
+        >
+          {tabs.map(([id, text]) => (
+            <IgrTab
+              key={id}
+              id={`section-${id}`}
+              label={text}
+              selected={section === id}
+            />
+          ))}
+        </IgrTabs>
+        <IgrButton
+          variant="flat"
+          onClick={startOver}
+          title="Back to the map with default filters. Marked changes are kept."
+        >
+          <IgrIcon slot="prefix" name="restart" />
+          Start over
+        </IgrButton>
+        <IgrButton variant="outlined" onClick={() => setGuideOpen(true)}>
+          <IgrIcon slot="prefix" name="help" />
+          How to use
+        </IgrButton>
       </div>
-      <button
-        type="button"
-        onClick={startOver}
-        title="Back to the map with default filters. Marked changes are kept."
-        className="shrink-0 rounded-md border border-slate-600 px-2.5 py-1 text-xs text-slate-200 hover:border-sky-500 hover:text-white"
-      >
-        ⟲ Start over
-      </button>
-      <button
-        type="button"
-        onClick={() => setGuideOpen(true)}
-        className="shrink-0 rounded-md border border-slate-600 px-2.5 py-1 text-xs text-slate-200 hover:border-sky-500 hover:text-white"
-      >
-        How to use
-      </button>
       <GuideDialog open={guideOpen} onClose={() => setGuideOpen(false)} />
-    </header>
+    </IgrNavbar>
   );
 }

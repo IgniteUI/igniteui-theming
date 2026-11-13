@@ -1,4 +1,11 @@
+import {
+  IgrButton,
+  IgrChip,
+  IgrExpansionPanel,
+  IgrIconButton,
+} from "igniteui-react";
 import { useMemo } from "react";
+import { type LibraryReach, libraryReach } from "../analysis/consumers.js";
 import { affectedComponents, impactSet } from "../graph/model.js";
 import type { GraphNode } from "../parser/types.js";
 import { navigate, selectedIdOf, useStore } from "./store.js";
@@ -9,46 +16,69 @@ function ParamPicker({ node }: { node: GraphNode }) {
   const { edits, setEdit } = useStore();
   const edited = edits.get(node.id);
   const changed = new Set(edited ? edited.split(",").filter(Boolean) : []);
-  const toggle = (param: string) => {
+  const set = (param: string, on: boolean) => {
     const next = new Set(changed);
-    if (next.has(param)) next.delete(param);
-    else next.add(param);
+    if (on) next.add(param);
+    else next.delete(param);
     setEdit(node.id, next.size ? [...next].join(",") : null);
   };
   const options = [...(node.params ?? []), "body"];
 
   return (
-    <details
-      className="text-xs"
+    <IgrExpansionPanel
+      className="panel"
       open={changed.size > 0 && !changed.has("body")}
     >
-      <summary className="cursor-pointer text-slate-400 hover:text-slate-200">
-        Only some parameters change
-      </summary>
-      <p className="mt-1 text-slate-400">
-        The reach is the same; this records what you plan to touch.
-      </p>
-      <div className="mt-1 flex flex-wrap gap-1">
-        {options.map((p) => (
-          <label
-            key={p}
-            className={`cursor-pointer rounded border px-1.5 py-0.5 font-mono text-[11px] focus-within:ring-2 focus-within:ring-sky-500 ${
-              changed.has(p)
-                ? "border-rose-500 bg-rose-950/50 text-rose-300"
-                : "border-slate-600 text-slate-300 hover:border-slate-400"
-            }`}
-          >
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={changed.has(p)}
-              onChange={() => toggle(p)}
-            />
-            {p}
-          </label>
-        ))}
+      <span slot="title">Only some parameters change</span>
+      <div className="stack stack--tight">
+        <p className="muted">
+          The reach is the same; this records what you plan to touch.
+        </p>
+        <div className="chips">
+          {options.map((p) => (
+            <IgrChip
+              key={p}
+              className="mono"
+              selectable
+              selected={changed.has(p)}
+              variant={changed.has(p) ? "danger" : undefined}
+              onSelect={(e) => set(p, e.detail)}
+            >
+              {p}
+            </IgrChip>
+          ))}
+        </div>
       </div>
-    </details>
+    </IgrExpansionPanel>
+  );
+}
+
+/** Library files and components that call the changed code or anything it reaches. */
+function LibraryImpact({ reach }: { reach: LibraryReach[] }) {
+  if (!reach.length) return null;
+  return (
+    <div className="stack stack--tight">
+      {reach.map((l) => (
+        <IgrExpansionPanel key={l.name} className="panel">
+          <span slot="title">
+            <span className="mono">{l.name}</span>: {l.components.length}{" "}
+            {l.components.length === 1 ? "component" : "components"}, {l.files}{" "}
+            {l.files === 1 ? "file" : "files"}
+          </span>
+          {l.components.length ? (
+            <div className="chips">
+              {l.components.map((c) => (
+                <IgrChip key={c} className="mono">
+                  {c}
+                </IgrChip>
+              ))}
+            </div>
+          ) : (
+            <p className="muted">Only shared theme files call it.</p>
+          )}
+        </IgrExpansionPanel>
+      ))}
+    </div>
   );
 }
 
@@ -58,27 +88,39 @@ function SelectedImpact({ node }: { node: GraphNode }) {
   const reach = useMemo(() => {
     if (!model) return null;
     const affected = impactSet(model, [node.id]);
+    const libraries = libraryReach(model.graph.consumers, [
+      node.id,
+      ...affected.keys(),
+    ]);
     return {
       size: affected.size,
       components: affectedComponents(model, affected.keys()),
+      libraries,
+      libraryComponents: libraries.reduce((n, l) => n + l.components.length, 0),
     };
   }, [model, node.id]);
   if (!reach) return null;
   const marked = edits.has(node.id);
 
   return (
-    <div className="space-y-2 text-xs">
-      <p className="text-slate-300">
-        If{" "}
-        <code className="font-semibold text-slate-100">
-          {displayName(node.kind, node.name)}
-        </code>{" "}
-        changes, <strong className="text-rose-300">{reach.size}</strong> symbols
-        and <strong className="text-rose-300">{reach.components.length}</strong>{" "}
-        component themes are affected.
+    <div className="stack">
+      <p>
+        If <code>{displayName(node.kind, node.name)}</code> changes,{" "}
+        <strong className="danger-text">{reach.size}</strong> symbols and{" "}
+        <strong className="danger-text">{reach.components.length}</strong>{" "}
+        engine component themes are affected
+        {model?.graph.consumers ? (
+          <>
+            , and{" "}
+            <strong className="danger-text">{reach.libraryComponents}</strong>{" "}
+            library components call it or something it reaches.
+          </>
+        ) : (
+          ". Library use was not scanned."
+        )}
       </p>
       {reach.components.length > 0 && (
-        <p className="text-slate-400">
+        <p className="muted">
           {reach.components
             .slice(0, 12)
             .map((c) => c.component)
@@ -87,22 +129,19 @@ function SelectedImpact({ node }: { node: GraphNode }) {
             `, +${reach.components.length - 12} more`}
         </p>
       )}
-      <button
-        type="button"
+      <LibraryImpact reach={reach.libraries} />
+      <IgrButton
+        className="block-button"
+        variant={marked ? "outlined" : "contained"}
         onClick={() =>
           setEdit(
             node.id,
             marked ? null : node.kind === "variable" ? "value" : "body",
           )
         }
-        className={`w-full rounded-md px-3 py-1.5 font-semibold ${
-          marked
-            ? "border border-rose-500 text-rose-300 hover:bg-rose-950/50"
-            : "bg-sky-600 text-white hover:bg-sky-500"
-        }`}
       >
         {marked ? "Marked as changed · undo" : "Mark as changed"}
-      </button>
+      </IgrButton>
       {node.kind !== "variable" && <ParamPicker node={node} />}
     </div>
   );
@@ -119,87 +158,88 @@ function MarkedChanges() {
     () => (model ? affectedComponents(model, impact.keys()) : []),
     [model, impact],
   );
+  const libraries = useMemo(
+    () =>
+      model
+        ? libraryReach(model.graph.consumers, [
+            ...edits.keys(),
+            ...impact.keys(),
+          ])
+        : [],
+    [model, edits, impact],
+  );
   if (!model || edits.size === 0) return null;
 
   return (
-    <div className="space-y-3 border-t border-slate-700 pt-3 text-xs">
-      <div className="flex items-center justify-between">
-        <span className="font-semibold text-slate-200">
-          Marked changes ({edits.size})
-        </span>
-        <button
-          type="button"
-          onClick={clearEdits}
-          className="text-slate-400 hover:text-slate-200"
-        >
+    <div className="stack marked">
+      <div className="row row--between">
+        <h3 className="subsection-title">Marked changes ({edits.size})</h3>
+        <IgrButton variant="flat" onClick={clearEdits}>
           Clear all
-        </button>
+        </IgrButton>
       </div>
-      <ul className="space-y-0.5">
+      <ul className="marked__list">
         {[...edits.keys()].map((id) => {
           const n = model.byId.get(id)!;
+          const name = displayName(n.kind, n.name);
           return (
-            <li key={id} className="flex items-center gap-1">
+            <li key={id}>
               <button
                 type="button"
-                className="flex-1 truncate text-left font-mono text-rose-300 hover:underline"
+                className="link mono danger-text"
                 onClick={() => navigate({ view: "symbol", id })}
               >
-                {displayName(n.kind, n.name)}
+                {name}
               </button>
-              <button
-                type="button"
-                className="rounded px-1 text-slate-400 hover:bg-slate-800 hover:text-slate-200"
-                aria-label={`Unmark ${displayName(n.kind, n.name)}`}
+              <IgrIconButton
+                variant="flat"
+                name="close"
+                aria-label={`Unmark ${name}`}
                 onClick={() => setEdit(id, null)}
-              >
-                ×
-              </button>
+              />
             </li>
           );
         })}
       </ul>
-      <div className="rounded bg-rose-950/50 p-2 text-rose-200">
+      <div className="callout callout--danger">
         Together they reach <strong>{impact.size}</strong> symbols in{" "}
-        <strong>{components.length}</strong> component themes.{" "}
+        <strong>{components.length}</strong> engine component themes
+        {libraries.length > 0 &&
+          ` and ${libraries.reduce((n, l) => n + l.components.length, 0)} library components`}
+        .{" "}
         <button
           type="button"
-          className="underline"
+          className="link"
           onClick={() => navigate({ view: "impact" })}
         >
           Show the impact graph
         </button>
       </div>
-      {components.length > 0 && (
-        <ul className="max-h-64 space-y-0.5 overflow-auto">
-          {components.map((c) => (
-            <li key={c.component}>
-              <details>
-                <summary className="cursor-pointer">
-                  <span className="font-mono">{c.component}</span>{" "}
-                  <span className="text-slate-500">({c.ids.length})</span>
-                </summary>
-                <ul className="ml-4">
-                  {c.ids.map((id) => {
-                    const n = model.byId.get(id)!;
-                    return (
-                      <li key={id}>
-                        <button
-                          type="button"
-                          className="font-mono text-sky-400 hover:underline"
-                          onClick={() => navigate({ view: "symbol", id })}
-                        >
-                          {displayName(n.kind, n.name)}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </details>
-            </li>
-          ))}
-        </ul>
-      )}
+      <LibraryImpact reach={libraries} />
+      {components.map((c) => (
+        <IgrExpansionPanel key={c.component} className="panel">
+          <span slot="title">
+            <span className="mono">{c.component}</span>{" "}
+            <span className="muted">({c.ids.length})</span>
+          </span>
+          <ul className="plain-list">
+            {c.ids.map((id) => {
+              const n = model.byId.get(id)!;
+              return (
+                <li key={id}>
+                  <button
+                    type="button"
+                    className="link mono"
+                    onClick={() => navigate({ view: "symbol", id })}
+                  >
+                    {displayName(n.kind, n.name)}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </IgrExpansionPanel>
+      ))}
     </div>
   );
 }
@@ -210,11 +250,11 @@ export function ImpactPanel() {
   const node = selectedId ? model?.byId.get(selectedId) : undefined;
 
   return (
-    <div className="space-y-3">
+    <div className="stack">
       {node ? (
         <SelectedImpact node={node} />
       ) : (
-        <p className="text-xs text-slate-400">
+        <p className="muted">
           Open a symbol to see what it reaches and to mark it as changed.
         </p>
       )}

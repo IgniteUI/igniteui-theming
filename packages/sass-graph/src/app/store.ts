@@ -17,7 +17,6 @@ interface State {
   showMixins: boolean;
   showFunctions: boolean;
   showVariables: boolean;
-  showFiles: boolean;
   publicOnly: boolean;
   symbolTab: SymbolTab;
   direction: Direction;
@@ -39,7 +38,6 @@ interface State {
   setShowMixins: (value: boolean) => void;
   setShowFunctions: (value: boolean) => void;
   setShowVariables: (value: boolean) => void;
-  setShowFiles: (value: boolean) => void;
   setPublicOnly: (value: boolean) => void;
   setSymbolTab: (tab: SymbolTab) => void;
   setDirection: (direction: Direction) => void;
@@ -58,7 +56,6 @@ export const DEFAULT_VIEW = {
   showMixins: true,
   showFunctions: true,
   showVariables: false,
-  showFiles: false,
   publicOnly: false,
   symbolTab: "outline" as SymbolTab,
   direction: "dependencies" as Direction,
@@ -100,7 +97,6 @@ export const useStore = create<State>((set) => ({
   setShowMixins: (showMixins) => set({ showMixins }),
   setShowFunctions: (showFunctions) => set({ showFunctions }),
   setShowVariables: (showVariables) => set({ showVariables }),
-  setShowFiles: (showFiles) => set({ showFiles }),
   setPublicOnly: (publicOnly) => set({ publicOnly }),
   setSymbolTab: (symbolTab) => set({ symbolTab }),
   setDirection: (direction) => set({ direction }),
@@ -115,11 +111,9 @@ export const useStore = create<State>((set) => ({
   setGuideOpen: (guideOpen) => set({ guideOpen }),
   resetFilters: () =>
     set({
-      depth: DEFAULT_VIEW.depth,
       showMixins: DEFAULT_VIEW.showMixins,
       showFunctions: DEFAULT_VIEW.showFunctions,
       showVariables: DEFAULT_VIEW.showVariables,
-      showFiles: DEFAULT_VIEW.showFiles,
       publicOnly: DEFAULT_VIEW.publicOnly,
     }),
   startOver: () => {
@@ -146,19 +140,18 @@ export function navigate(route: Route): void {
 export const selectedIdOf = (route: Route) =>
   route.view === "symbol" ? route.id : null;
 
-/** The kinds the Show checkboxes leave visible, and the public-only switch. */
+/** The kinds the Show switches leave visible, plus entry files, and the public-only switch. */
 export function useFilters(): Filters {
   const mixins = useStore((s) => s.showMixins);
   const functions = useStore((s) => s.showFunctions);
   const variables = useStore((s) => s.showVariables);
-  const files = useStore((s) => s.showFiles);
   const publicOnly = useStore((s) => s.publicOnly);
   return useMemo(() => {
     const kinds = new Set<NodeKind>();
     if (mixins) kinds.add("mixin");
     if (functions) kinds.add("function");
     if (variables) kinds.add("variable");
-    if (files) kinds.add("module");
+    kinds.add("module");
     return { kinds, publicOnly };
-  }, [mixins, functions, variables, files, publicOnly]);
+  }, [mixins, functions, variables, publicOnly]);
 }

@@ -22,7 +22,7 @@ Start from the question you have. Each recipe takes a minute or two.
 3. Switch the outline to **Used by** to see who calls it. In the terminal: `npm run graph:flow -- function:palette`.
 
 **"I am about to change `digest-schema()`. What breaks?"**
-1. Press `/`, type `digest`, Enter. "What breaks if I change this?" on the right says how many symbols and component themes it reaches.
+1. Press `/`, type `digest`, Enter. "What breaks if I change this?" on the right says how many symbols and engine component themes it reaches, and which library components (igniteui-angular, igniteui-webcomponents, …) call it or anything it reaches.
 2. Click **Mark as changed**. Mark other symbols you plan to touch; the panel adds them up, and **Impact** draws the combined graph.
 3. After editing, run `npm run graph:impact` to see what actually changed against `origin/master`. Comment-only edits do not count.
 
@@ -89,7 +89,7 @@ npm run graph:impact -- --format markdown --out impact.md
 - Their files are parsed with the engine, and `igniteui-theming`, `igniteui-theming/sass` and `igniteui-theming/sass/<path>` resolve to engine files the way Sass resolves them. So a library call is a real edge, not a name match.
 - Each engine symbol gets: the library files that call it, the libraries that re-export it with `@forward` (after `show`/`hide`), and whether library code reaches it through other engine code.
 - Demos and tests are not scanned; they do not ship. A missing repo is reported on stderr and skipped. `--no-consumers` skips all of them.
-- `graph:impact` adds "Libraries that call the changed or affected code" with file counts.
+- `graph:impact` adds "Libraries that call the changed or affected code" with file counts, then the components of each library whose theme files are among them.
 
 ### `graph:report`: engine health
 
@@ -121,7 +121,7 @@ npm run graph          # parse the library and start the explorer
 npm run graph:build    # static build into packages/sass-graph/dist
 ```
 
-The explorer is dark. Every view has its own URL (`#/system/typography`, `#/symbol/<id>`, `#/report`), so a link shows the same view to someone else.
+The explorer is built with Ignite UI for React in the dark Fluent theme. `src/styles/theme.scss` compiles that theme from this repo's engine through the `igniteui-theming` workspace link. Every view has its own URL (`#/system/typography`, `#/symbol/<id>`, `#/report`), so a link shows the same view to someone else.
 
 | View | Behavior |
 | --- | --- |
@@ -130,9 +130,11 @@ The explorer is dark. Every view has its own URL (`#/system/typography`, `#/symb
 | **Symbol: Outline** | The default for a symbol. The `graph:flow` tree, either "Built from" or "Used by", with links to each symbol and its source line. It opens collapsed to the first level; chevrons, "Expand all" and "Collapse all" open it further. |
 | **Symbol: Graph** | The symbol with what it relies on (amber) and what it affects (red). **Steps away** (1–6, on the canvas) sets how many links out to draw; 1 shows only direct links. |
 | **Report** | The `graph:report` checks. Every finding links to its symbol and source. |
-| **Impact** | "What breaks if I change this?" on the right of a symbol says how many symbols and component themes it reaches. **Mark as changed** adds it to a list (optionally only some parameters); the Impact view draws everything downstream of the list, and the panel lists the component themes reached. Nothing is evaluated. |
+| **Impact** | "What breaks if I change this?" on the right of a symbol says how many symbols and engine component themes it reaches, and lists per library the components whose theme files call it or anything it reaches (the folder that holds a `themes` folder names the component). **Mark as changed** adds it to a list (optionally only some parameters); the Impact view draws everything downstream of the list, and the panel lists the component themes reached. Nothing is evaluated. |
 
-- **Show:** Mixins, Functions, Variables, Entry files and "Public API only", each with a one-line hint. Variables and entry files are off by default. *Entry files* are stylesheets whose own code (outside any mixin or function) uses a symbol, such as the Tailwind theme files. "Reset filters" appears when the filters differ from the defaults.
+- **Filter by type** (sidebar): Mixins, Functions, Variables and "Public API only", each with a one-line hint. Variables are off by default. "Public API only" is disabled in the Outline, which keeps private helpers so every step stays visible. "Reset filters" appears when the filters differ from the defaults. The report ignores the filters, so the sidebar says so there. **Filter by system** lists every system; a dimmed one has nothing the type filters show.
+- **Entry files** are always shown where dependents are drawn: "Used by" in the Outline, and the symbol and impact graphs. They are stylesheets whose own code (outside any mixin or function) uses a symbol, such as the Tailwind theme files.
+- **Steps away** on the canvas offers only the counts that change the drawing, up to the farthest reachable symbol (at most 6).
 - **Arrows** take the color of what they carry: green includes a mixin, violet calls a function, blue reads a variable. An arrow through a hidden node is dashed, so chains stay connected.
 - **Steady layout:** toggling a filter keeps the controls in place and the old graph on screen until the new layout is ready; cards then glide to their new places.
 - **Breadcrumb and history:** `Map › color › palette()` leads back up. ← and → next to it step back and forward through the views you opened, like the browser's buttons, and are disabled at either end.
@@ -182,7 +184,9 @@ src/analysis/            shared by CLI, MCP and explorer
 src/node/sources.ts      working tree and git-ref readers (Node only)
 src/node/consumers.ts    finds and reads the library repos; engineGraph() attaches their usage
 src/mcp/server.ts        MCP tools
-src/app/                 React + React Flow + Tailwind explorer, zustand store, hash routes
+src/app/                 React explorer: Ignite UI for React components, React Flow canvas, zustand store, hash routes
+src/styles/theme.scss    dark Fluent theme, compiled from the local engine
+src/index.css            layout (CSS grid and flexbox) on the theme's --ig-* tokens
 ```
 
 ### Graph model

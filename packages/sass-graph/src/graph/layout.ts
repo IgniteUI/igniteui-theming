@@ -1,4 +1,7 @@
-import ELK, { type ElkNode } from "elkjs/lib/elk.bundled.js";
+import ELK, {
+  type ElkExtendedEdge,
+  type ElkNode,
+} from "elkjs/lib/elk.bundled.js";
 
 const elk = new ELK();
 
@@ -16,14 +19,26 @@ export interface Box {
   height: number;
 }
 
+export interface Point {
+  x: number;
+  y: number;
+}
+
+export interface LayoutResult {
+  /** Node boxes; a child's position is relative to its group, as React Flow expects. */
+  boxes: Map<string, Box>;
+  /** Orthogonal edge routes in canvas coordinates, from the source side to the target side. */
+  routes: Map<string, Point[]>;
+}
+
 /** Room above a group's children for its label. */
 export const GROUP_HEADER = 28;
 
 /**
  * Layered left-to-right layout: dependencies on the left, dependents on the right.
- * Child positions are relative to their group, as React Flow expects.
+ * Edges are routed orthogonally around the boxes.
  */
-export async function layout(input: LayoutInput): Promise<Map<string, Box>> {
+export async function layout(input: LayoutInput): Promise<LayoutResult> {
   const groups = new Map<string, ElkNode>(
     (input.groups ?? []).map((g) => [
       g.id,
@@ -54,6 +69,12 @@ export async function layout(input: LayoutInput): Promise<Map<string, Box>> {
       "elk.spacing.nodeNode": "16",
       "elk.layered.nodePlacement.strategy": "BRANDES_KOEPF",
       "elk.layered.cycleBreaking.strategy": "GREEDY",
+      "elk.edgeRouting": "ORTHOGONAL",
+      "elk.layered.spacing.edgeNodeBetweenLayers": "24",
+      "elk.layered.spacing.edgeEdgeBetweenLayers": "8",
+      "elk.spacing.edgeNode": "16",
+      // Edge sections in root coordinates, also for edges ELK moves into a group.
+      "elk.json.edgeCoords": "ROOT",
     },
     children: top,
     edges: input.edges.map((e) => ({
@@ -64,8 +85,22 @@ export async function layout(input: LayoutInput): Promise<Map<string, Box>> {
   });
 
   const boxes = new Map<string, Box>();
+  const routes = new Map<string, Point[]>();
+  const route = (edges: ElkExtendedEdge[] = []) => {
+    for (const e of edges) {
+      const section = e.sections?.[0];
+      if (!section) continue;
+      routes.set(e.id, [
+        section.startPoint,
+        ...(section.bendPoints ?? []),
+        section.endPoint,
+      ]);
+    }
+  };
+  route(result.edges);
   const collect = (nodes: ElkNode[] = []) => {
     for (const c of nodes) {
+      route(c.edges);
       boxes.set(c.id, {
         x: c.x ?? 0,
         y: c.y ?? 0,
@@ -76,5 +111,5 @@ export async function layout(input: LayoutInput): Promise<Map<string, Box>> {
     }
   };
   collect(result.children);
-  return boxes;
+  return { boxes, routes };
 }

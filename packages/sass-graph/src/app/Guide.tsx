@@ -1,4 +1,11 @@
-import { useEffect, useRef } from "react";
+import {
+  IgrButton,
+  IgrCard,
+  IgrCardActions,
+  IgrCardContent,
+  IgrCardHeader,
+  IgrDialog,
+} from "igniteui-react";
 import { navigate } from "./store.js";
 
 const TASKS: {
@@ -32,7 +39,7 @@ const TASKS: {
   },
 ];
 
-export const SHORTCUTS: [string, string][] = [
+const SHORTCUTS: [string, string][] = [
   ["/", "Find a symbol"],
   ["↑ ↓ Enter", "Pick a search result"],
   ["Esc", "Clear the search or close this guide"],
@@ -41,60 +48,52 @@ export const SHORTCUTS: [string, string][] = [
 /** Task-first instructions: what to click for each question the tool answers. */
 export function GuideContent({ onAction }: { onAction?: () => void }) {
   return (
-    <div className="space-y-4 text-sm">
-      <ol className="space-y-3">
+    <div className="guide">
+      <ol className="guide__tasks">
         {TASKS.map((t, i) => (
-          <li
-            key={t.title}
-            className="rounded-lg border border-slate-600 bg-slate-950/60 p-3"
-          >
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="font-semibold text-slate-100">
-                <span className="mr-2 text-sky-400">{i + 1}.</span>
-                {t.title}
-              </h3>
+          <li key={t.title}>
+            <IgrCard className="guide__task">
+              <IgrCardHeader>
+                <h3 slot="title" className="guide__title">
+                  <span className="guide__step">{i + 1}.</span> {t.title}
+                </h3>
+              </IgrCardHeader>
+              <IgrCardContent>
+                <p>{t.steps}</p>
+                {t.cli && (
+                  <p className="muted">
+                    Terminal: <code>{t.cli}</code>
+                  </p>
+                )}
+              </IgrCardContent>
               {t.go && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    t.go?.();
-                    onAction?.();
-                  }}
-                  className="shrink-0 text-xs text-sky-400 hover:text-sky-300 hover:underline"
-                >
-                  {t.action} →
-                </button>
+                <IgrCardActions>
+                  <IgrButton
+                    slot="start"
+                    variant="flat"
+                    onClick={() => {
+                      t.go?.();
+                      onAction?.();
+                    }}
+                  >
+                    {t.action}
+                  </IgrButton>
+                </IgrCardActions>
               )}
-            </div>
-            <p className="mt-1 text-xs leading-relaxed text-slate-300">
-              {t.steps}
-            </p>
-            {t.cli && (
-              <p className="mt-1.5 text-xs text-slate-400">
-                Terminal:{" "}
-                <code className="rounded bg-slate-800 px-1 text-slate-200">
-                  {t.cli}
-                </code>
-              </p>
-            )}
+            </IgrCard>
           </li>
         ))}
       </ol>
-      <div className="text-xs text-slate-400">
-        <span className="font-semibold text-slate-300">
-          Reading the graph:{" "}
-        </span>
-        arrows point from what is used to what uses it. Dashed arrows pass
-        through hidden variables or files. Amber means relied on, red means
-        affected.
-      </div>
-      <dl className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400">
+      <p className="muted">
+        <strong>Reading the graph:</strong> arrows point from what is used to
+        what uses it. Dashed arrows pass through hidden variables or files.
+        Amber means relied on, red means affected.
+      </p>
+      <dl className="shortcuts">
         {SHORTCUTS.map(([key, what]) => (
-          <div key={key} className="flex gap-1.5">
+          <div key={key}>
             <dt>
-              <kbd className="rounded border border-slate-600 bg-slate-800 px-1 font-mono text-[11px] text-slate-200">
-                {key}
-              </kbd>
+              <kbd>{key}</kbd>
             </dt>
             <dd>{what}</dd>
           </div>
@@ -104,7 +103,7 @@ export function GuideContent({ onAction }: { onAction?: () => void }) {
   );
 }
 
-/** Modal dialog with the guide; closes on Esc, the backdrop or the close button. */
+/** Modal guide; closes on Esc, a click outside or the Close button. */
 export function GuideDialog({
   open,
   onClose,
@@ -112,39 +111,18 @@ export function GuideDialog({
   open: boolean;
   onClose: () => void;
 }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    const dialog = ref.current;
-    if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
-    if (!open && dialog.open) dialog.close();
-  }, [open]);
-
   return (
-    <dialog
-      ref={ref}
-      onClose={onClose}
-      onClick={(e) => e.target === ref.current && onClose()}
-      onKeyDown={(e) => e.key === "Escape" && onClose()}
-      aria-labelledby="guide-title"
-      className="m-auto w-[min(640px,92vw)] rounded-xl border border-slate-500 bg-slate-800 p-0 text-slate-100 shadow-2xl shadow-black/60 backdrop:bg-black/70"
+    <IgrDialog
+      open={open}
+      closeOnOutsideClick
+      onClosed={onClose}
+      className="guide-dialog"
     >
-      <div className="max-h-[85vh] overflow-auto p-5">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 id="guide-title" className="text-base font-bold">
-            How to use the engine explorer
-          </h2>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close the guide"
-            className="rounded px-2 py-1 text-slate-400 hover:bg-slate-800 hover:text-slate-100"
-          >
-            ✕
-          </button>
-        </div>
-        <GuideContent onAction={onClose} />
-      </div>
-    </dialog>
+      <span slot="title">How to use the engine explorer</span>
+      <GuideContent onAction={onClose} />
+      <IgrButton slot="footer" variant="flat" onClick={onClose}>
+        Close
+      </IgrButton>
+    </IgrDialog>
   );
 }
