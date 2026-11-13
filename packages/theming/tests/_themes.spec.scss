@@ -1031,12 +1031,50 @@ $schema: (
             }
 
             @include it('should emit the size properties at the root when included in a nested scope') {
+                @include once-reset('igniteui-theming.sizing');
+
                 @include assert() {
                     @include output($selector: false) {
                         @media (prefers-color-scheme: dark) {
                             .scoped {
                                 @include sizing();
                             }
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        @property --ig-size-small {
+                            syntax: '<number> | <integer>';
+                            initial-value: 1;
+                            inherits: true;
+                        }
+
+                        @property --ig-size-medium {
+                            syntax: '<number> | <integer>';
+                            initial-value: 2;
+                            inherits: true;
+                        }
+
+                        @property --ig-size-large {
+                            syntax: '<number> | <integer>';
+                            initial-value: 3;
+                            inherits: true;
+                        }
+                    }
+                }
+            }
+
+            @include it('should register the size properties once when included again') {
+                @include once-reset('igniteui-theming.sizing');
+
+                @include assert() {
+                    @include output($selector: false) {
+                        .light {
+                            @include sizing();
+                        }
+
+                        .dark {
+                            @include sizing();
                         }
                     }
 
@@ -1148,6 +1186,8 @@ $schema: (
             }
 
             @include it('should keep the spacing variables in a nested scope and emit the spacing property at the root') {
+                @include once-reset('igniteui-theming.spacing');
+
                 @include assert() {
                     @include output($selector: false) {
                         @media (prefers-color-scheme: dark) {
@@ -1173,6 +1213,48 @@ $schema: (
                             syntax: '<number> | <integer>';
                             initial-value: 1;
                             inherits: true;
+                        }
+                    }
+                }
+            }
+
+            @include it('should keep the spacing variables in every scope and register the spacing property once') {
+                @include once-reset('igniteui-theming.spacing');
+
+                @include assert() {
+                    @include output($selector: false) {
+                        .light {
+                            @include spacing();
+                        }
+
+                        .dark {
+                            @include spacing();
+                        }
+                    }
+
+                    @include expect($selector: false) {
+                        .light {
+                            --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
+                            --ig-spacing-inline-medium: var(--ig-spacing-inline, var(--ig-spacing-medium));
+                            --ig-spacing-inline-large: var(--ig-spacing-inline, var(--ig-spacing-large));
+                            --ig-spacing-block-small: var(--ig-spacing-block, var(--ig-spacing-small));
+                            --ig-spacing-block-medium: var(--ig-spacing-block, var(--ig-spacing-medium));
+                            --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
+                        }
+
+                        @property --ig-spacing {
+                            syntax: '<number> | <integer>';
+                            initial-value: 1;
+                            inherits: true;
+                        }
+
+                        .dark {
+                            --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
+                            --ig-spacing-inline-medium: var(--ig-spacing-inline, var(--ig-spacing-medium));
+                            --ig-spacing-inline-large: var(--ig-spacing-inline, var(--ig-spacing-large));
+                            --ig-spacing-block-small: var(--ig-spacing-block, var(--ig-spacing-small));
+                            --ig-spacing-block-medium: var(--ig-spacing-block, var(--ig-spacing-medium));
+                            --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
                         }
                     }
                 }

@@ -8,6 +8,7 @@
 @use 'sass:string';
 @use 'sass-true' as *;
 @use 'color' as *;
+@use 'color/presets' as presets;
 @use 'styles/mocks';
 
 // base colors
@@ -28,7 +29,7 @@ $_palette-with-gray: palette(
     $warn: $_warn,
     $error: $_error,
     $gray: $_gray,
-    $variant: 'material',
+    $theme: 'material',
 );
 $_palette: palette(
     $primary: $_primary,
@@ -38,7 +39,7 @@ $_palette: palette(
     $info: $_info,
     $warn: $_warn,
     $error: $_error,
-    $variant: 'material',
+    $theme: 'material',
 );
 // The original multiplier-based generator, still reachable as an escape hatch.
 $_legacy-palette: palette(
@@ -49,7 +50,7 @@ $_legacy-palette: palette(
     $info: $_info,
     $warn: $_warn,
     $error: $_error,
-    $variant: 'material',
+    $theme: 'material',
     $generator: 'legacy',
 );
 
@@ -151,6 +152,50 @@ $_legacy-palette: palette(
     }
 
     @include describe('palette') {
+        @include it('should store the design system as the theme in the palette meta') {
+            $palette: palette($_primary, $_secondary, $_surface, $theme: 'fluent');
+
+            @include assert-equal(map.get($palette, '_meta', 'theme'), 'fluent');
+            @include assert-equal(map.get($palette, '_meta', 'variant'), 'fluent');
+        }
+
+        @include it('should keep the variant next to the theme in the palette meta') {
+            $palette: palette($_primary, $_secondary, $_surface, $theme: 'fluent', $variant: 'dark');
+
+            @include assert-equal(map.get($palette, '_meta', 'theme'), 'fluent');
+            @include assert-equal(map.get($palette, '_meta', 'variant'), 'dark');
+        }
+
+        @include it('should move a design system passed as the variant to the theme') {
+            $palette: palette($_primary, $_secondary, $_surface, $variant: 'indigo');
+
+            @include assert-equal(map.get($palette, '_meta', 'theme'), 'indigo');
+            @include assert-equal(map.get($palette, '_meta', 'variant'), 'indigo');
+        }
+
+        @include it('should leave the palette meta empty without a theme or a variant') {
+            $palette: palette($_primary, $_secondary, $_surface);
+
+            @include assert-equal(map.get($palette, '_meta', 'theme'), null);
+            @include assert-equal(map.get($palette, '_meta', 'variant'), null);
+        }
+
+        @include it('should name the design system in the meta of every preset palette') {
+            $presets: (
+                'material': (presets.$light-material-palette, presets.$dark-material-palette),
+                'fluent': (presets.$light-fluent-palette, presets.$dark-fluent-palette),
+                'bootstrap': (presets.$light-bootstrap-palette, presets.$dark-bootstrap-palette),
+                'indigo': (presets.$light-indigo-palette, presets.$dark-indigo-palette),
+            );
+
+            @each $theme, $palettes in $presets {
+                @each $palette in $palettes {
+                    @include assert-equal(map.get($palette, '_meta', 'theme'), $theme);
+                    @include assert-equal(map.get($palette, '_meta', 'variant'), $theme);
+                }
+            }
+        }
+
         @include it('should return a shade of type color w/ palette as only argument') {
             $value: color($_palette);
 
@@ -273,14 +318,14 @@ $_legacy-palette: palette(
                     @include assert-true(map.get($_palette, $color, $shade));
                     @include assert-true(meta.type-of(map.get($_palette, $color, $shade)), 'color');
 
-                    @if $shade != variant {
+                    @if $color != _meta {
                         // Test if each contrast shade exits and is a color
                         @include assert-true(map.get($_palette, $color, #{$shade}-contrast));
                         @include assert-true(meta.type-of(map.get($_palette, $color, #{$shade}-contrast)), 'color');
                     }
 
-                    @if $shade == variant {
-                        @include assert-true(meta.type-of(map.get($_palette, $shade)), 'string');
+                    @if $color == _meta {
+                        @include assert-equal(meta.type-of(map.get($_palette, $color, $shade)), 'string');
                     }
                 }
             }

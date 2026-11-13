@@ -332,11 +332,11 @@ $_css-vars-warned: false;
     appearance: none;
 }
 
-/// Adds sizing CSS variables to the scope.
+/// Registers the size properties, once per compilation and at the root of the document.
 /// @group themes
 /// @access private
 @mixin sizing() {
-    @at-root (without: all) {
+    @include once('igniteui-theming.sizing') {
         @property --ig-size-small {
             syntax: '<number> | <integer>';
             initial-value: 1;
@@ -402,6 +402,7 @@ $_css-vars-warned: false;
 }
 
 /// Adds spacing CSS variables to the scope.
+/// Registers the spacing property once per compilation, at the root of the document.
 /// @group themes
 /// @access private
 @mixin spacing() {
@@ -416,7 +417,7 @@ $_css-vars-warned: false;
         --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
     }
 
-    @at-root (without: all) {
+    @include once('igniteui-theming.spacing') {
         @property --ig-spacing {
             syntax: '<number> | <integer>';
             initial-value: 1;
