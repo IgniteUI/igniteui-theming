@@ -401,11 +401,7 @@ $_target-tolerance: 0.05;
     $is-neutral: $key == 'gray';
 
     @if $is-neutral and not $seed {
-        $seed: #fff;
-
-        @if luminance($surface) > 0.5 {
-            $seed: #000;
-        }
+        $seed: if(sass(luminance($surface) > 0.5): #000; else: #fff);
     }
 
     $read: gamut.read($seed);
@@ -413,12 +409,7 @@ $_target-tolerance: 0.05;
 
     // Backgrounds are picked deliberately, so a surface keeps any hue it has.
     $c: map.get($read, 'c');
-    $chromatic: $c >= $_hue-threshold;
-
-    @if $is-surface {
-        $chromatic: $c > 0;
-    }
-
+    $chromatic: if(sass($is-surface): $c > 0; else: $c >= $_hue-threshold);
     $muted: $is-neutral or $c < $_muted-threshold;
     $tent: (0, 0);
 
@@ -434,12 +425,7 @@ $_target-tolerance: 0.05;
 
     $sc: _scale($key, $scale);
     $on-surface: $is-neutral and map.get($sc, anchor) == 'surface';
-    $anchor-y: 1;
-
-    @if $on-surface {
-        $anchor-y: luminance($surface);
-    }
-
+    $anchor-y: if(sass($on-surface): luminance($surface); else: 1);
     $ctx: _context($sh, $tent, $anchor-y, $on-surface and $anchor-y <= 0.5);
 
     // A white-anchored gray keeps its colors on a dark surface and runs them in reverse.
@@ -500,12 +486,7 @@ $_target-tolerance: 0.05;
                 )
             );
         } @else {
-            $step: $i;
-
-            @if $flip {
-                $step: $n - 1 - $i;
-            }
-
+            $step: if(sass($flip): $n - 1 - $i; else: $i);
             $result: map.set(
                 $result,
                 $v,

@@ -75,6 +75,8 @@ When `platform` is `null` and `ambiguous` is not `true`:
 
 If the user will consume **Sass output** (not CSS), they need `node_modules` in their Sass compiler's load paths so that `@use 'igniteui-theming' as *;` resolves correctly.
 
+Their compiler must be Dart Sass 1.97.1 or later (`sass` or `sass-embedded`). Older versions fail to compile the library. If the project pins an older `sass` or `sass-embedded`, tell the user to upgrade it.
+
 The `detect_platform` response includes config-file signals. Use them to give the right guidance:
 
 ### Angular (`angular.json` detected)

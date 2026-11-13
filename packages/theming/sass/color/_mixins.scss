@@ -56,11 +56,7 @@ $_added: () !default;
 ///     --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
 ///   }
 @mixin adaptive-contrast($level: 'aa') {
-    $scope: '&';
-
-    @if is-root() {
-        $scope: ':root';
-    }
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     #{$scope} {
         --ig-wcag-a: 0.31;
@@ -86,11 +82,7 @@ $_added: () !default;
 /// @require {function} to-string
 /// @require {mixin} adaptive-contrast
 @mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
-    $scope: '&';
-
-    @if is-root() {
-        $scope: ':root';
-    }
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     @if $contrast {
         @include adaptive-contrast($contrast-level);

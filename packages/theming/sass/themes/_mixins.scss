@@ -113,11 +113,7 @@ $_css-vars-warned: false;
 
     @each $key, $value in map.remove($theme, $ignored...) {
         @if _is-emittable($key, $value) {
-            $local: $key;
-
-            @if $p {
-                $local: '#{$p}-#{$key}';
-            }
+            $local: if(sass($p): '#{$p}-#{$key}'; else: $key);
 
             @if $vp == 'ig' {
                 --#{$local}: var(--ig-#{$n}-#{$key}, #{$value});
@@ -238,11 +234,7 @@ $_css-vars-warned: false;
             @include theme-markers(map.get($theme, '_meta', 'theme'), map.get($theme, '_meta', 'variant'));
         }
     } @else {
-        $parent: '&';
-
-        @if is-root() {
-            $parent: ':root';
-        }
+        $parent: if(sass(is-root()): ':root'; else: '&');
 
         #{$parent} {
             @include _tokens-global($theme, $ignored);
@@ -300,20 +292,9 @@ $_css-vars-warned: false;
 /// @example scss - Truncates text after the fourth line
 ///    @include line-clamp(4, true, true);
 @mixin line-clamp($lines, $inline, $vertical) {
-    $display: -webkit-box;
-    $orient: initial;
-
-    @if $inline {
-        $display: -webkit-inline-box;
-    }
-
-    @if $vertical {
-        $orient: vertical;
-    }
-
-    display: $display;
+    display: if(sass($inline): -webkit-inline-box; else: -webkit-box);
     -webkit-line-clamp: $lines or initial;
-    -webkit-box-orient: $orient;
+    -webkit-box-orient: if(sass($vertical): vertical; else: initial);
     overflow: hidden;
 }
 
@@ -424,11 +405,7 @@ $_css-vars-warned: false;
 /// @group themes
 /// @access private
 @mixin spacing() {
-    $scope: '&';
-
-    @if is-root() {
-        $scope: ':root';
-    }
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     #{$scope} {
         --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));

@@ -27,3 +27,27 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm test
+
+  # Builds and tests with the lowest Sass versions the supported range allows.
+  sass-minimum:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.x
+      - name: Install the minimum supported Sass
+        run: |
+          lowest() {
+            npm view "$1@$2" version --json | node -e "console.log([].concat(JSON.parse(require('fs').readFileSync(0)))[0])"
+          }
+          range=$(node -p "require('./packages/theming/package.json').peerDependencies.sass")
+          embedded=$(lowest sass-embedded "$range")
+          dart=$(lowest sass "$range")
+          echo "sass-embedded@$embedded, sass@$dart"
+          npm pkg set "overrides.sass-embedded=$embedded" "overrides.sass=$dart"
+          npm install --no-audit --no-fund
+      - run: npm run build
+      - run: npm test

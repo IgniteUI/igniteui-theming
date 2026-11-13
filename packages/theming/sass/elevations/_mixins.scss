@@ -19,11 +19,7 @@
 ///   }
 /// @require {function} is-root
 @mixin elevations($elevations) {
-    $scope: '&';
-
-    @if is-root() {
-        $scope: ':root';
-    }
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     #{$scope} {
         @each $level, $shadow in $elevations {

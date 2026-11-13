@@ -167,11 +167,7 @@
 @mixin typography($font-family, $type-scale, $allow-exclusion: false) {
     $root: is-root();
     $host: is-host();
-    $scope: '&';
-
-    @if $root {
-        $scope: ':root';
-    }
+    $scope: if(sass($root): ':root'; else: '&');
 
     #{$scope} {
         --ig-font-family: #{_normalize-font-family($font-family)};

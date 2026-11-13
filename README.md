@@ -78,6 +78,8 @@ In order to use the Ignite UI Theming in your application you should install the
 npm install igniteui-theming
 ```
 
+The package requires Dart Sass 1.97.1 or later, either `sass` or `sass-embedded`. LibSass and Ruby Sass are not supported.
+
 Next, you will need to **use** it in the file that you want like this:
 
 ```scss
@@ -400,4 +402,4 @@ npm run inspect
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and feel free to submit a Pull Request.

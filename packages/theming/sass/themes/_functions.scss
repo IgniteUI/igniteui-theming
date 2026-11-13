@@ -186,12 +186,7 @@
 ///   }
 /// @return {Function} The evaluated value.
 @function pad($sm, $md: $sm, $lg: $md, $dir: null) {
-    $spacing: --ig-spacing;
-
-    @if $dir {
-        $spacing: --ig-spacing-#{$dir};
-    }
-
+    $spacing: if(sass($dir): --ig-spacing-#{$dir}; else: --ig-spacing);
     $sm: _abs($sm);
     $md: _abs($md);
     $lg: _abs($lg);

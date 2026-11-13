@@ -128,11 +128,7 @@ $_bem-mod-cache: () !default;
 /// @param {String} $elem - The sub-element name.
 /// @param {String} $mod - The modifier name.
 @function bem--bem-str($block, $elem, $mod) {
-    @if $elem {
-        $elem: ' ' + $elem;
-    } @else {
-        $elem: '';
-    }
+    $elem: if(sass($elem): ' ' + $elem; else: '');
 
     @return ($block + $bem--sep-mod + bem--mod-str($mod) + $elem);
 }

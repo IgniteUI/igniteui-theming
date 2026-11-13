@@ -232,7 +232,7 @@ function buildOutputFormatNotes(hasThemingPackage: boolean): string[] {
       "The `igniteui-theming` package was **not found** in this project's dependencies.",
       "",
       "- **CSS output** works without any local installation — the MCP compiles Sass to CSS server-side.",
-      "- **Sass output** requires `igniteui-theming` to be resolvable in your project. Run `npm install igniteui-theming` to install it, then configure `loadPaths` as described above.",
+      "- **Sass output** requires `igniteui-theming` to be resolvable in your project and Dart Sass 1.97.1 or later. Run `npm install igniteui-theming` to install it, then configure `loadPaths` as described above.",
     );
   } else {
     lines.push(
