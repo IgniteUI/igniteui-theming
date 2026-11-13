@@ -48,7 +48,7 @@ Another valuable module of our theming package is the typography, helping you ha
 
 ![Typography](https://user-images.githubusercontent.com/45598235/189596034-d8697bc1-e683-4d4a-a113-96e17fc90d4b.png)
 
-You can set any of the typefaces by using the `typography` mixin, which accepts 2 arguments(font-family and type-scale). By default the typography is using the material typeface and type-scale.
+You can set any of the typefaces by using the `typography` mixin, which takes a font family and a type scale.
 
 ```scss
 @include typography($font-family: $material-typeface, $type-scale: $material-type-scale);
@@ -97,6 +97,36 @@ We provide presets for **material, bootstrap, fluent and indigo** themes for the
 ```scss
 @use '.../node_modules/igniteui-theming/sass/typography/presets' as *;
 ```
+
+### Global theme
+
+The library's functions, such as `color()`, `elevation()`, `pad()` and `sizable()`, read their values from global CSS custom properties, such as `--ig-primary-500`, `--ig-elevation-4` and `--ig-spacing`. A global theme declares all of them in one place. Include one in your app's global stylesheet.
+
+```scss
+@use 'igniteui-theming/sass/themes/theme' as *;
+
+@include typography($font-family: $material-typeface, $type-scale: $material-type-scale);
+@include theme($palette: $light-material-palette, $schema: $light-material-schema);
+```
+
+`typography()` sets the font family and the type scale. `theme()` declares:
+
+- every shade of the palette and its contrast color, such as `--ig-primary-500` and `--ig-primary-500-contrast`;
+- the elevations, `--ig-elevation-1` to `--ig-elevation-24`;
+- the spacing variables, and the size and spacing properties that `sizable()` and `pad()` read;
+- `--ig-theme` and `--ig-theme-variant`, which name the design system and the variant.
+
+The schema supplies the theme markers and, unless you pass `$elevations`, the elevations of its design system. Leave out the parts you don't need with `$exclude`, for example `$exclude: (markers)`.
+
+At the top level, `theme()` writes to `:root`. Inside a selector, it writes to that selector, so part of the page can use another theme, such as a dark one:
+
+```scss
+.dark {
+    @include theme($palette: $dark-material-palette, $schema: $dark-material-schema);
+}
+```
+
+The module forwards the root module, the presets and the schemas. Loading all the presets adds about 300 ms to each compilation, so use it for theme files and the root module for component stylesheets.
 
 You can read more about what the package contains on the [Wiki page](https://github.com/IgniteUI/igniteui-theming/wiki)
 
