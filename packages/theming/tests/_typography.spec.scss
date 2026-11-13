@@ -70,6 +70,25 @@ $scale: type-scale(
     }
 
     @include describe('generation') {
+        @include it('should store the design system as the theme and the variant in the type scale meta') {
+            @include assert-equal(map.get($scale, '_meta', 'theme'), $theme);
+            @include assert-equal(map.get($scale, '_meta', 'variant'), $theme);
+        }
+
+        @include it('should name the design system in the meta of every preset type scale') {
+            $presets: (
+                'material': presets.$material-type-scale,
+                'fluent': presets.$fluent-type-scale,
+                'bootstrap': presets.$bootstrap-type-scale,
+                'indigo': presets.$indigo-type-scale,
+            );
+
+            @each $theme, $type-scale in $presets {
+                @include assert-equal(map.get($type-scale, '_meta', 'theme'), $theme);
+                @include assert-equal(map.get($type-scale, '_meta', 'variant'), $theme);
+            }
+        }
+
         @include it('should produce a map of default type style rules matching the ITypeStyle map') {
             $font-size: 18px;
             $rules: type-style($font-size: $font-size);
