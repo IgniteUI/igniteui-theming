@@ -405,7 +405,8 @@ $_css-vars-warned: false;
 /// Registers the spacing property once per compilation, at the root of the document.
 /// @group themes
 /// @access private
-@mixin spacing() {
+/// @param {Boolean} $register [true] - Registers the spacing property. Pass `false` where a registration has no effect, such as a shadow root.
+@mixin spacing($register: true) {
     $scope: if(sass(is-root()): ':root'; else: '&');
 
     #{$scope} {
@@ -417,11 +418,13 @@ $_css-vars-warned: false;
         --ig-spacing-block-large: var(--ig-spacing-block, var(--ig-spacing-large));
     }
 
-    @include once('igniteui-theming.spacing') {
-        @property --ig-spacing {
-            syntax: '<number> | <integer>';
-            initial-value: 1;
-            inherits: true;
+    @if $register {
+        @include once('igniteui-theming.spacing') {
+            @property --ig-spacing {
+                syntax: '<number> | <integer>';
+                initial-value: 1;
+                inherits: true;
+            }
         }
     }
 }

@@ -1,0 +1,280 @@
+// stylelint-disable max-nesting-depth
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'themes/theme' as t;
+
+$_once-keys: ('igniteui-theming.sizing', 'igniteui-theming.spacing', 'igniteui-theming.progress');
+
+// The registrations only theme() declares.
+@mixin _progress-registrations() {
+    @property --_progress-integer {
+        syntax: '<number>';
+        initial-value: 0;
+        inherits: true;
+    }
+
+    @property --_progress-fraction {
+        syntax: '<number>';
+        initial-value: 0;
+        inherits: true;
+    }
+}
+
+@include describe('Theme entry point') {
+    @include describe('theme') {
+        @include it('should take the markers from the schema') {
+            $schema: t.$light-indigo-schema;
+
+            @include assert() {
+                @include output($selector: false) {
+                    .scope {
+                        @include t.theme(
+                            $palette: t.$light-indigo-palette,
+                            $schema: $schema,
+                            $exclude: (core, palette, elevations)
+                        );
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .scope {
+                        @include t.theme-markers(map.get($schema, '_meta', 'theme'), map.get($schema, '_meta', 'variant'));
+                    }
+
+                    .scope {
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+        }
+
+        @include it('should set the elevation and radius factors') {
+            @include assert() {
+                @include output($selector: false) {
+                    .scope {
+                        @include t.theme(
+                            $palette: t.$light-material-palette,
+                            $schema: t.$light-material-schema,
+                            $exclude: (core, palette, elevations, markers),
+                            $roundness: 0.5,
+                            $elevation: false
+                        );
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .scope {
+                        --ig-elevation-factor: 0;
+                        --ig-radius-factor: 0.5;
+                    }
+
+                    .scope {
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+        }
+
+        @include it('should emit the content block in the theme scope after its declarations') {
+            @include assert() {
+                @include output($selector: false) {
+                    .scope {
+                        @include t.theme(
+                            $palette: t.$light-material-palette,
+                            $schema: t.$light-material-schema,
+                            $exclude: (core, palette, elevations, markers)
+                        ) {
+                            --my-brand: var(--ig-primary-500);
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .scope {
+                        @include t.spacing($register: false);
+                    }
+
+                    .scope {
+                        --my-brand: var(--ig-primary-500);
+                    }
+                }
+            }
+        }
+
+        @include it('should use the elevations of the schema design system') {
+            @include assert() {
+                @include output($selector: false) {
+                    .scope {
+                        @include t.theme(
+                            $palette: t.$dark-indigo-palette,
+                            $schema: t.$dark-indigo-schema,
+                            $exclude: (core, palette, markers)
+                        );
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .scope {
+                        @include t.elevations(t.$indigo-elevations);
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+        }
+
+        @include it('should prefer the elevations it is given') {
+            @include assert() {
+                @include output($selector: false) {
+                    .scope {
+                        @include t.theme(
+                            $palette: t.$dark-indigo-palette,
+                            $schema: t.$dark-indigo-schema,
+                            $exclude: (core, palette, markers),
+                            $elevations: t.$material-elevations
+                        );
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .scope {
+                        @include t.elevations(t.$material-elevations);
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+        }
+
+        @include it('should register the size, spacing and progress properties once, at the root') {
+            @include t.once-reset($_once-keys...);
+
+            @include assert() {
+                @include output($selector: false) {
+                    .light {
+                        @include t.theme(
+                            $palette: t.$light-material-palette,
+                            $schema: t.$light-material-schema,
+                            $exclude: (palette, elevations, markers)
+                        );
+                    }
+
+                    @media (prefers-color-scheme: dark) {
+                        .dark {
+                            @include t.theme(
+                                $palette: t.$dark-material-palette,
+                                $schema: t.$dark-material-schema,
+                                $exclude: (palette, elevations, markers)
+                            );
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    @include t.once-reset($_once-keys...);
+                    @include t.sizing();
+                    @include _progress-registrations();
+
+                    .light {
+                        @include t.spacing();
+                    }
+
+                    @media (prefers-color-scheme: dark) {
+                        .dark {
+                            @include t.spacing();
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should register nothing when core is excluded') {
+            @include t.once-reset($_once-keys...);
+
+            @include assert() {
+                @include output($selector: false) {
+                    :host {
+                        @include t.theme(
+                            $palette: t.$light-material-palette,
+                            $schema: t.$light-material-schema,
+                            $exclude: (core, palette, elevations, markers)
+                        );
+                    }
+                }
+
+                @include expect($selector: false) {
+                    :host {
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+        }
+
+        @include it('should register the properties outside a cascade layer') {
+            @include t.once-reset($_once-keys...);
+
+            @include assert() {
+                @include output($selector: false) {
+                    @layer themes {
+                        .layered {
+                            @include t.theme(
+                                $palette: t.$light-material-palette,
+                                $schema: t.$light-material-schema,
+                                $exclude: (palette, elevations, markers)
+                            );
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    @include t.once-reset($_once-keys...);
+
+                    // Sass splits the layer around the hoisted rules.
+                    @layer themes {
+                    }
+
+                    @include t.sizing();
+                    @include _progress-registrations();
+
+                    @layer themes {
+                        .layered {
+                            @include t.spacing();
+                        }
+                    }
+                }
+            }
+        }
+
+        @include it('should leave the output of a component theme next to it unchanged') {
+            $schema: t.$light-material-schema;
+            $component: (
+                selector: 'my-component',
+                background: red,
+                _meta: (
+                    name: 'my-component',
+                ),
+            );
+
+            @include t.once-reset($_once-keys...);
+
+            @include assert() {
+                @include output($selector: false) {
+                    .scope {
+                        @include t.theme($palette: t.$light-material-palette, $schema: $schema, $exclude: (core));
+                        @include t.tokens($component, $mode: 'scoped');
+                    }
+                }
+
+                @include expect($selector: false) {
+                    @include t.once-reset($_once-keys...);
+
+                    .scope {
+                        @include t.theme($palette: t.$light-material-palette, $schema: $schema, $exclude: (core));
+                    }
+
+                    .scope {
+                        @include t.tokens($component, $mode: 'scoped');
+                    }
+                }
+            }
+        }
+    }
+}
