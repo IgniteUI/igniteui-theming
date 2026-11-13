@@ -27,7 +27,7 @@
 ///
 ///   // Generated CSS
 ///   .block-element { background: blue; }
-$bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
+$bem--sep-elem: '__' !default;
 
 /// The Modifier separator used. Default '--'.
 /// @type String
@@ -43,7 +43,7 @@ $bem--sep-elem: if(meta.variable-exists(bem--sep-elem), $bem--sep-elem, '__');
 ///
 ///   // Generated CSS
 ///   .block---modifier { background: red; }
-$bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
+$bem--sep-mod: '--' !default;
 
 /// The Modifier Value separator used. Default '-'.
 /// @type String
@@ -59,7 +59,7 @@ $bem--sep-mod: if(meta.variable-exists(bem--sep-mod), $bem--sep-mod, '--');
 ///
 ///   // Generated CSS
 ///   .block--modifier_value { background: red; }
-$bem--sep-mod-val: if(meta.variable-exists(bem--sep-mod-val), $bem--sep-mod-val, '-');
+$bem--sep-mod-val: '-' !default;
 
 /// Cache for modifier string conversions
 /// @type Map
@@ -83,7 +83,11 @@ $_bem-mod-cache: () !default;
 @function bem--with-dot($x) {
     $first: string.slice($x, 0, 1);
 
-    @return if($first == '.', $x, string.insert($x, '.', -100));
+    @if $first == '.' {
+        @return $x;
+    }
+
+    @return string.insert($x, '.', -100);
 }
 
 /// Converts a key-value map into a modifier string
@@ -97,7 +101,12 @@ $_bem-mod-cache: () !default;
         @return map.get($_bem-mod-cache, $cache-key);
     }
 
-    $result: if(meta.type-of($m) == 'map', list.nth($m, 1) + $bem--sep-mod-val + list.nth($m, 2), $m);
+    $result: $m;
+
+    @if meta.type-of($m) == 'map' {
+        $result: list.nth($m, 1) + $bem--sep-mod-val + list.nth($m, 2);
+    }
+
     $_bem-mod-cache: map.set($_bem-mod-cache, $cache-key, $result) !global;
 
     @return $result;
@@ -119,7 +128,7 @@ $_bem-mod-cache: () !default;
 /// @param {String} $elem - The sub-element name.
 /// @param {String} $mod - The modifier name.
 @function bem--bem-str($block, $elem, $mod) {
-    $elem: if($elem, ' ' + $elem, '');
+    $elem: if(sass($elem): ' ' + $elem; else: '');
 
     @return ($block + $bem--sep-mod + bem--mod-str($mod) + $elem);
 }
@@ -193,7 +202,13 @@ $_bem-mod-cache: () !default;
     // A space that precedes an attribute selector is a descendant combinator —
     // treat the whole selector as a single unit (no split before the [...])
     $space-before-attr: $space and $bracket and $space < $bracket;
-    $eow: if($parens, string.index($x, ')'), if($space-before-attr, -1, $space or -1));
+    $eow: $space or -1;
+
+    @if $parens {
+        $eow: string.index($x, ')');
+    } @else if $space-before-attr {
+        $eow: -1;
+    }
 
     @return string.slice($x, 1, $eow);
 }
@@ -317,6 +332,16 @@ $_bem-mod-cache: () !default;
     @return $bemcls;
 }
 
+/// Returns the selector a :not() excludes: the element with the modifier when $elem is set, the block otherwise.
+/// @access private
+@function bem--not-selector($block, $elem, $mod) {
+    @if $elem {
+        @return bem-selector($block, $e: ($elem, $mod));
+    }
+
+    @return bem-selector($block, $m: $mod);
+}
+
 /// Wraps content with :not selector if needed
 /// @access private
 @mixin bem--apply-not($not, $block, $selector, $elem: null) {
@@ -325,14 +350,10 @@ $_bem-mod-cache: () !default;
 
         @if meta.type-of($not) == 'list' {
             @each $n in $not {
-                $not-selectors: list.append(
-                    $not-selectors,
-                    if($elem, bem-selector($block, $e: ($elem, $n)), bem-selector($block, $m: $n)),
-                    $separator: comma
-                );
+                $not-selectors: list.append($not-selectors, bem--not-selector($block, $elem, $n), $separator: comma);
             }
         } @else {
-            $not-selectors: if($elem, bem-selector($block, $e: ($elem, $not)), bem-selector($block, $m: $not));
+            $not-selectors: bem--not-selector($block, $elem, $not);
         }
 
         #{$selector}:not(#{$not-selectors}) {

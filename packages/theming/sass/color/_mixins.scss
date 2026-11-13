@@ -17,8 +17,8 @@ $_added: () !default;
 /// @access private
 @mixin _shade($color, $shade, $value, $contrast) {
     $_shade: meta.type-of($shade) == 'string';
-    $_hsl: if($_shade, string.index($shade, 'hsl'), false);
-    $_contrast: if($_shade, string.index($shade, 'contrast'), false);
+    $_hsl: $_shade and string.index($shade, 'hsl');
+    $_contrast: $_shade and string.index($shade, 'contrast');
     $_color: '' + $color;
     $_exists: list.index($_added, #{$_color}-#{$shade});
 
@@ -56,7 +56,7 @@ $_added: () !default;
 ///     --y-contrast: xyz-d65 var(--y) var(--y) var(--y);
 ///   }
 @mixin adaptive-contrast($level: 'aa') {
-    $scope: if(is-root(), ':root', '&');
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     #{$scope} {
         --ig-wcag-a: 0.31;
@@ -82,7 +82,7 @@ $_added: () !default;
 /// @require {function} to-string
 /// @require {mixin} adaptive-contrast
 @mixin palette($palette, $contrast: true, $contrast-level: 'aa') {
-    $scope: if(is-root(), ':root', '&');
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     @if $contrast {
         @include adaptive-contrast($contrast-level);

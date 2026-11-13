@@ -140,11 +140,19 @@
     }
 
     @if not($hover-foreground) and $hover-background {
-        $hover-foreground: if($foreground, var(--foreground), adaptive-contrast(var(--hover-background)));
+        @if $foreground {
+            $hover-foreground: var(--foreground);
+        } @else {
+            $hover-foreground: adaptive-contrast(var(--hover-background));
+        }
     }
 
     @if not($icon-color-hover) and $hover-background {
-        $icon-color-hover: if($icon-color, var(--icon-color), adaptive-contrast(var(--hover-background)));
+        @if $icon-color {
+            $icon-color-hover: var(--icon-color);
+        } @else {
+            $icon-color-hover: adaptive-contrast(var(--hover-background));
+        }
     }
 
     @if not($focus-hover-background) and $hover-background {
@@ -172,11 +180,19 @@
     }
 
     @if not($focus-foreground) and $focus-background {
-        $focus-foreground: if($foreground, var(--foreground), adaptive-contrast(var(--focus-background)));
+        @if $foreground {
+            $focus-foreground: var(--foreground);
+        } @else {
+            $focus-foreground: adaptive-contrast(var(--focus-background));
+        }
     }
 
     @if not($focus-hover-foreground) and $focus-hover-background {
-        $focus-hover-foreground: if($foreground, var(--foreground), adaptive-contrast(var(--focus-hover-background)));
+        @if $foreground {
+            $focus-hover-foreground: var(--foreground);
+        } @else {
+            $focus-hover-foreground: adaptive-contrast(var(--focus-hover-background));
+        }
     }
 
     @if not($focus-visible-foreground) and $focus-visible-background {

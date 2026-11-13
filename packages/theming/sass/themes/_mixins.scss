@@ -113,7 +113,7 @@ $_css-vars-warned: false;
 
     @each $key, $value in map.remove($theme, $ignored...) {
         @if _is-emittable($key, $value) {
-            $local: if($p, '#{$p}-#{$key}', $key);
+            $local: if(sass($p): '#{$p}-#{$key}'; else: $key);
 
             @if $vp == 'ig' {
                 --#{$local}: var(--ig-#{$n}-#{$key}, #{$value});
@@ -220,15 +220,21 @@ $_css-vars-warned: false;
 ///   // }
 @mixin tokens($theme, $mode: 'global', $scope: null, $ignored: $ignored-keys) {
     @if $mode == 'scoped' {
-        $name: if($scope, $scope, map.get($theme, 'selector'));
-        $target: if(is-root(), $name, if($name, '#{$name}, &:where(#{$name})', '&'));
+        $name: $scope or map.get($theme, 'selector');
+        $target: '&';
+
+        @if is-root() {
+            $target: $name;
+        } @else if $name {
+            $target: '#{$name}, &:where(#{$name})';
+        }
 
         #{$target} {
             @include css-vars-from-theme($theme);
             @include theme-markers(map.get($theme, '_meta', 'theme'), map.get($theme, '_meta', 'variant'));
         }
     } @else {
-        $parent: if(is-root(), ':root', '&');
+        $parent: if(sass(is-root()): ':root'; else: '&');
 
         #{$parent} {
             @include _tokens-global($theme, $ignored);
@@ -286,9 +292,9 @@ $_css-vars-warned: false;
 /// @example scss - Truncates text after the fourth line
 ///    @include line-clamp(4, true, true);
 @mixin line-clamp($lines, $inline, $vertical) {
-    display: if($inline, -webkit-inline-box, -webkit-box);
-    -webkit-line-clamp: if($lines, $lines, initial);
-    -webkit-box-orient: if($vertical, vertical, initial);
+    display: if(sass($inline): -webkit-inline-box; else: -webkit-box);
+    -webkit-line-clamp: $lines or initial;
+    -webkit-box-orient: if(sass($vertical): vertical; else: initial);
     overflow: hidden;
 }
 
@@ -399,7 +405,7 @@ $_css-vars-warned: false;
 /// @group themes
 /// @access private
 @mixin spacing() {
-    $scope: if(is-root(), ':root', '&');
+    $scope: if(sass(is-root()): ':root'; else: '&');
 
     #{$scope} {
         --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));

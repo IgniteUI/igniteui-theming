@@ -1203,7 +1203,7 @@ export const PARAM_DESCRIPTIONS = {
   name: `Custom variable name (without $ prefix). If omitted, auto-generates based on tool and variant (e.g., "custom-light", "my-theme").`,
   output: `Output format for the generated code.
 
-"sass" — Returns Sass source using igniteui-theming functions and mixins. Requires a Sass pipeline in the consuming project. Prefer for Angular (Angular CLI handles Sass compilation automatically).
+"sass" — Returns Sass source using igniteui-theming functions and mixins. Requires a Sass pipeline with Dart Sass 1.97.1 or later in the consuming project. Prefer for Angular (Angular CLI handles Sass compilation automatically).
 
 "css" — The MCP server compiles the Sass internally and returns ready-to-use CSS custom properties. No local Sass toolchain needed. Prefer for Web Components, React, and Blazor unless the project has a confirmed Sass setup (e.g. .scss files and a sass build step are present). When in doubt, use "css" or ask the user.
 

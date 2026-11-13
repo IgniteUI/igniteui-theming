@@ -93,6 +93,8 @@ You probably already have this dependency if you're using Ignite UI for Angular
 npm install igniteui-theming
 ```
 
+The package requires Dart Sass 1.97.1 or later (`sass` or `sass-embedded`). It installs `sass-embedded` as a dependency, which the MCP server uses to compile CSS output.
+
 #### 2. Configure Your AI Assistant to Use the MCP Server
 
 Follow the instructions in the [AI Assistant Configuration](#ai-assistant-configuration) section below to set up your editor or desktop AI assistant to connect to the MCP server.
@@ -804,6 +806,8 @@ Ensure you have the correct Ignite UI package installed:
   For custom Sass theming: `npm install igniteui-theming sass`
 - **Blazor**: Install the `IgniteUI.Blazor` NuGet package.  
   For Sass theming, set up a separate npm environment in `wwwroot/`: `npm install igniteui-theming sass`
+
+Sass output requires Dart Sass 1.97.1 or later in the consuming project.
 
 For Web Components, React, and Blazor, if you don't have a Sass pipeline, use `output: "css"` to get ready-to-use CSS custom properties compiled server-side by the MCP.
 

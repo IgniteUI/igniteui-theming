@@ -51,8 +51,12 @@
     $strip-size: null
 ) {
     $selector: (#{config.element-prefix() + '-' + 'linear-bar'}, #{config.element-prefix() + '-' + 'linear-progress'});
-    $linear-bar-schema: ();
-    $linear-bar-schema: if(map.has-key($schema, 'linear-bar'), map.get($schema, 'linear-bar'), $schema);
+    $linear-bar-schema: $schema;
+
+    @if map.has-key($schema, 'linear-bar') {
+        $linear-bar-schema: map.get($schema, 'linear-bar');
+    }
+
     $theme: digest-schema($linear-bar-schema);
 
     @if not($track-border-radius) {

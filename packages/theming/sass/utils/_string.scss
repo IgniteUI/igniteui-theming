@@ -72,8 +72,13 @@
         '8': 8,
         '9': 9,
     );
+    $start: 1;
 
-    @for $i from if($minus, 2, 1) through string.length($value) {
+    @if $minus {
+        $start: 2;
+    }
+
+    @for $i from $start through string.length($value) {
         $character: string.slice($value, $i, $i);
 
         @if not(list.index(map.keys($numbers), $character) or $character == '.') {
@@ -90,5 +95,9 @@
         }
     }
 
-    @return if($minus, -$result, $result);
+    @if $minus {
+        @return -$result;
+    }
+
+    @return $result;
 }

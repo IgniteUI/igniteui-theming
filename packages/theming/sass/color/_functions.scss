@@ -114,26 +114,10 @@ $_to-hsl-warned: false;
         $scale: _scale-for('surface', $scales)
     );
     $grayscale-palette: shades('gray', $gray, $gray-shades, $surface, $generator, _scale-for('gray', $scales));
-    $info-palette: if(
-        $info,
-        shades('info', $info, $color-shades, $generator: $generator, $scale: _scale-for('info', $scales)),
-        ()
-    );
-    $success-palette: if(
-        $success,
-        shades('success', $success, $color-shades, $generator: $generator, $scale: _scale-for('success', $scales)),
-        ()
-    );
-    $warn-palette: if(
-        $warn,
-        shades('warn', $warn, $color-shades, $generator: $generator, $scale: _scale-for('warn', $scales)),
-        ()
-    );
-    $error-palette: if(
-        $error,
-        shades('error', $error, $color-shades, $generator: $generator, $scale: _scale-for('error', $scales)),
-        ()
-    );
+    $info-palette: _optional-shades('info', $info, $color-shades, $generator, $scales);
+    $success-palette: _optional-shades('success', $success, $color-shades, $generator, $scales);
+    $warn-palette: _optional-shades('warn', $warn, $color-shades, $generator, $scales);
+    $error-palette: _optional-shades('error', $error, $color-shades, $generator, $scales);
 
     @return (
         'primary': $primary-palette,
@@ -148,6 +132,23 @@ $_to-hsl-warned: false;
             'variant': $variant,
         )
     );
+}
+
+/// Builds a family's shades when the palette has a color for it and an empty map otherwise.
+/// @access private
+/// @group Palettes
+/// @param {String} $name - The family name.
+/// @param {Color | null} $color - The family's seed color, or null to leave the family out.
+/// @param {Map} $shades - The shades to generate.
+/// @param {String} $generator - The shade generator to use.
+/// @param {String | Map | List} $scales - The `palette()` scales argument, or null.
+/// @returns {Map} The family's shades, or an empty map.
+@function _optional-shades($name, $color, $shades, $generator, $scales) {
+    @if not $color {
+        @return ();
+    }
+
+    @return shades($name, $color, $shades, $generator: $generator, $scale: _scale-for($name, $scales));
 }
 
 /// Picks one family's scale out of the `$scales` argument, which may be a single spec
@@ -227,11 +228,14 @@ $_to-hsl-warned: false;
 /// @see $IColorShades
 /// @see $scales
 @function shades($name, $color, $shades, $surface: null, $generator: config.$shade-generator, $scale: null) {
-    $entries: if(
-        $generator == 'legacy',
-        _legacy-entries($name, $color, $shades, $surface),
-        generator.family($name, $color, $shades, $surface, $scale)
-    );
+    $entries: null;
+
+    @if $generator == 'legacy' {
+        $entries: _legacy-entries($name, $color, $shades, $surface);
+    } @else {
+        $entries: generator.family($name, $color, $shades, $surface, $scale);
+    }
+
     $result: ();
 
     @if '#{$name}' == 'surface' {
@@ -363,7 +367,14 @@ $_to-hsl-warned: false;
 
     @if #{$name} == 'gray' {
         $lum: luminance($surface);
-        $color: if($color, $color, if($lum > 0.5, #000, #fff));
+
+        @if not $color {
+            $color: #fff;
+
+            @if $lum > 0.5 {
+                $color: #000;
+            }
+        }
 
         @if #{$shade} == 'seed' {
             @return (raw: $color, hsl: $color);
@@ -372,7 +383,12 @@ $_to-hsl-warned: false;
         $lmap: map.get(multipliers.$grayscale, 'l');
         $len: list.length($lmap);
         $i: list.index(map.keys($lmap), #{$shade});
-        $l: list.nth(map.values($lmap), if($lum > 0.5, $len - $i + 1, $i));
+
+        @if $lum > 0.5 {
+            $i: $len - $i + 1;
+        }
+
+        $l: list.nth(map.values($lmap), $i);
         $raw: hsl(
             to-fixed(color.channel($color, 'hue', $space: hsl)),
             to-fixed(color.channel($color, 'saturation', $space: hsl)),
@@ -416,6 +432,24 @@ $_to-hsl-warned: false;
 /// @returns {Color} The dynamically shaded color in LCH color space
 @function dynamic-shade($color, $lightness: 50, $factor: 0.1, $offset: 5) {
     @return lch(from $color calc(l + ($lightness - l) * $factor + sign($lightness - l) * $offset) c h);
+}
+
+/// Returns the variant to read when none is given: the base of a surface and 500 of every other color.
+/// @access private
+/// @group Color
+/// @param {String} $color - The color name.
+/// @param {String | Number | null} $variant - The requested variant, or null.
+/// @returns {String | Number} The variant to read.
+@function _default-variant($color, $variant) {
+    @if $variant {
+        @return $variant;
+    }
+
+    @if '#{$color}' == 'surface' {
+        @return 'base';
+    }
+
+    @return 500;
 }
 
 /// Normalizes a color value to ensure consistent format output.
@@ -467,22 +501,29 @@ $_to-hsl-warned: false;
 ///      background: color($my-palette, primary, 200, $opacity: 0.5); // rgba(136, 192, 229, 0.5)
 ///    }
 @function color($palette: null, $color: primary, $variant: null, $opacity: null) {
-    $variant: if($variant, $variant, if('#{$color}' == 'surface', 'base', 500));
+    $variant: _default-variant($color, $variant);
     $s: #{var(--ig-#{$color}-#{$variant})};
-    $contrast: if(meta.type-of($variant) == string, string.index($variant, 'contrast'), false);
-    $_alpha: if($opacity, $opacity, 1);
-    $_relative-color: if($opacity, hsl(from $s h s l / $opacity), $s);
+    $contrast: meta.type-of($variant) == string and string.index($variant, 'contrast');
+    $_relative-color: $s;
+
+    @if $opacity {
+        $_relative-color: hsl(from $s h s l / $opacity);
+    }
 
     @if $palette {
         $s: map.get($palette, #{$color});
         $base: map.get($s, #{$variant});
         $raw: map.get($s, #{$variant}-raw);
 
-        @return if(
-            $contrast,
-            $_relative-color,
-            if($raw, if($opacity, rgba($raw, $opacity), $raw), _normalize-color($base))
-        );
+        @if $contrast {
+            @return $_relative-color;
+        }
+
+        @if $raw and $opacity {
+            @return rgba($raw, $opacity);
+        }
+
+        @return $raw or _normalize-color($base);
     }
 
     @return $_relative-color;
@@ -504,7 +545,7 @@ $_to-hsl-warned: false;
 ///      color: contrast-color($color: 'primary', $variant: 200);
 ///    }
 @function contrast-color($palette: null, $color: primary, $variant: null, $opacity: null) {
-    $variant: if($variant, $variant, if('#{$color}' == 'surface', 'base', 500));
+    $variant: _default-variant($color, $variant);
 
     @return color($palette, $color, #{$variant}-contrast, $opacity);
 }
@@ -653,5 +694,9 @@ $_to-hsl-warned: false;
 /// @see $brushes-regular
 /// @see $brushes-color-blind
 @function chart-brushes() {
-    @return if($_enhanced-accessibility, charts.$brushes-color-blind, charts.$brushes-regular);
+    @if $_enhanced-accessibility {
+        @return charts.$brushes-color-blind;
+    }
+
+    @return charts.$brushes-regular;
 }

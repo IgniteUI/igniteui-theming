@@ -10,6 +10,15 @@
 @use 'themes/config' as config;
 @use '../index' as *;
 
+// The fallback a token carries: the raw value under the ig prefix, the --ig- variable otherwise.
+@function _fallback($vp, $name, $key, $value) {
+    @if $vp == 'ig' {
+        @return #{$value};
+    }
+
+    @return var(--ig-#{$name}-#{$key}, #{$value});
+}
+
 $schema: (
     background: (
         color: (
@@ -117,8 +126,13 @@ $schema: (
 
                     #{$selector} {
                         @each $dir in ('top', 'right', 'bottom', 'left') {
-                            $val: if($dir == 'top' or $dir == 'bottom', 4px, 8px);
-                            $fallback: if($vp == 'ig', #{$val}, var(--ig-#{$n}-title-padding-#{$dir}, #{$val}));
+                            $val: 8px;
+
+                            @if $dir == 'top' or $dir == 'bottom' {
+                                $val: 4px;
+                            }
+
+                            $fallback: _fallback($vp, $n, 'title-padding-#{$dir}', $val);
 
                             --title-padding-#{$dir}: var(--#{$vp}-#{$n}-title-padding-#{$dir}, #{$fallback});
                         }
@@ -265,7 +279,7 @@ $schema: (
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        $fallback: _fallback($vp, $name, $key, $value);
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
@@ -291,7 +305,7 @@ $schema: (
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
                         @if $key != 'prefix' {
-                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            $fallback: _fallback($vp, $name, $key, $value);
 
                             --igc-#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
@@ -315,7 +329,7 @@ $schema: (
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        $fallback: _fallback($vp, $name, $key, $value);
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
@@ -344,7 +358,7 @@ $schema: (
                     #{$selector} {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
                             @if $key != 'prefix' {
-                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                $fallback: _fallback($vp, $name, $key, $value);
 
                                 --igc-#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                             }
@@ -370,7 +384,7 @@ $schema: (
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        $fallback: _fallback($vp, $name, $key, $value);
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
@@ -399,7 +413,7 @@ $schema: (
 
                 @include expect() {
                     @each $key, $value in map.remove($theme, $ignored-keys...) {
-                        $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                        $fallback: _fallback($vp, $name, $key, $value);
 
                         --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                     }
@@ -457,7 +471,7 @@ $schema: (
                 @include expect($selector: false) {
                     #{$selector} {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            $fallback: _fallback($vp, $name, $key, $value);
 
                             --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
@@ -480,7 +494,7 @@ $schema: (
                     .my-theme #{$selector},
                     .my-theme:where(#{$selector}) {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            $fallback: _fallback($vp, $name, $key, $value);
 
                             --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
@@ -506,7 +520,7 @@ $schema: (
                 @include expect($selector: false) {
                     .custom-selector {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            $fallback: _fallback($vp, $name, $key, $value);
 
                             --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
@@ -529,7 +543,7 @@ $schema: (
                     .my-theme .custom-selector,
                     .my-theme:where(.custom-selector) {
                         @each $key, $value in map.remove($theme, $ignored-keys...) {
-                            $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                            $fallback: _fallback($vp, $name, $key, $value);
 
                             --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                         }
@@ -545,7 +559,7 @@ $schema: (
             $border-radius: border-radius(rem(4px), rem(2px), rem(4px));
             $expected: clamp(0.125rem, meta.inspect(calc(var(--ig-radius-factor, 1) * 0.25rem)), 0.25rem);
 
-            @include assert-equal($assert: $border-radius, $expected: $expected, $inspect: true);
+            @include assert-equal($assert: meta.inspect($border-radius), $expected: meta.inspect($expected));
         }
 
         @include it('should include border-radius styles to a given scope with a value between min and max') {
@@ -804,7 +818,7 @@ $schema: (
                     @include expect($selector: false) {
                         #{$selector} {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
-                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                $fallback: _fallback($vp, $name, $key, $value);
 
                                 --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                             }
@@ -827,7 +841,7 @@ $schema: (
                         .my-theme #{$selector},
                         .my-theme:where(#{$selector}) {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
-                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                $fallback: _fallback($vp, $name, $key, $value);
 
                                 --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                             }
@@ -854,7 +868,7 @@ $schema: (
                     @include expect($selector: false) {
                         .igc-avatar {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
-                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                $fallback: _fallback($vp, $name, $key, $value);
 
                                 --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                             }
@@ -879,7 +893,7 @@ $schema: (
                     @include expect($selector: false) {
                         .custom-scope {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
-                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                $fallback: _fallback($vp, $name, $key, $value);
 
                                 --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                             }
@@ -913,7 +927,7 @@ $schema: (
                         .my-theme igc-avatar,
                         .my-theme:where(.custom-scope, igc-avatar) {
                             @each $key, $value in map.remove($theme, $ignored-keys...) {
-                                $fallback: if($vp == 'ig', #{$value}, var(--ig-#{$name}-#{$key}, #{$value}));
+                                $fallback: _fallback($vp, $name, $key, $value);
 
                                 --#{$key}: var(--#{$vp}-#{$name}-#{$key}, #{$fallback});
                             }
