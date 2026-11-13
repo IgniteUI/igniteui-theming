@@ -10,100 +10,40 @@ $theme-schemas: () !default;
     @include configure-variable-prefix('ig');
 
     // Avatar
-    @include tailwind-theme(
-        $component: avatar,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: avatar, $props: (background));
 
     // Badge
-    @include tailwind-theme(
-        $component: badge,
-        $props: (
-            background-color,
-        )
-    );
+    @include tailwind-theme($component: badge, $props: (background-color));
 
     // Bottom Navigation
-    @include tailwind-theme(
-        $component: bottom-nav,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: bottom-nav, $props: (background));
 
     // Breadcrumb
-    @include tailwind-theme(
-        $component: breadcrumb,
-        $props: (
-            text-color,
-        )
-    );
+    @include tailwind-theme($component: breadcrumb, $props: (text-color));
 
     // Button Group
-    @include tailwind-theme(
-        $component: button-group,
-        $props: (
-            item-background,
-        )
-    );
+    @include tailwind-theme($component: button-group, $props: (item-background));
 
     // Flat Button
-    @include tailwind-theme(
-        $component: flat-button,
-        $props: (
-            foreground,
-        )
-    );
+    @include tailwind-theme($component: flat-button, $props: (foreground));
 
     // Contained Button
-    @include tailwind-theme(
-        $component: contained-button,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: contained-button, $props: (background));
 
     // Outlined Button
-    @include tailwind-theme(
-        $component: outlined-button,
-        $props: (
-            foreground,
-        )
-    );
+    @include tailwind-theme($component: outlined-button, $props: (foreground));
 
     // FAB Button
-    @include tailwind-theme(
-        $component: fab-button,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: fab-button, $props: (background));
 
     // Card
-    @include tailwind-theme(
-        $component: card,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: card, $props: (background));
 
     // Chip
-    @include tailwind-theme(
-        $component: chip,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: chip, $props: (background));
 
     // Tile Manager
-    @include tailwind-theme(
-        $component: tile-manager,
-        $props: (
-            tile-background,
-        )
-    );
+    @include tailwind-theme($component: tile-manager, $props: (tile-background));
 
     // Color Picker
     @include tailwind-theme(
@@ -142,12 +82,7 @@ $theme-schemas: () !default;
     );
 
     // Combo
-    @include tailwind-theme(
-        $component: combo,
-        $props: (
-            toggle-button-background,
-        )
-    );
+    @include tailwind-theme($component: combo, $props: (toggle-button-background));
 
     // // Expansion Panel
     @include tailwind-theme(
@@ -159,44 +94,19 @@ $theme-schemas: () !default;
     );
 
     // Grid
-    @include tailwind-theme(
-        $component: grid,
-        $props: (
-            content-background,
-        )
-    );
+    @include tailwind-theme($component: grid, $props: (content-background));
 
     // Icon
-    @include tailwind-theme(
-        $component: icon,
-        $props: (
-            color,
-        )
-    );
+    @include tailwind-theme($component: icon, $props: (color));
 
     // Flat Icon Button
-    @include tailwind-theme(
-        $component: flat-icon-button,
-        $props: (
-            foreground,
-        )
-    );
+    @include tailwind-theme($component: flat-icon-button, $props: (foreground));
 
     // Contained Icon Button
-    @include tailwind-theme(
-        $component: contained-icon-button,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: contained-icon-button, $props: (background));
 
     // Outlined Icon Button
-    @include tailwind-theme(
-        $component: outlined-icon-button,
-        $props: (
-            foreground,
-        )
-    );
+    @include tailwind-theme($component: outlined-icon-button, $props: (foreground));
 
     // Input Group
     @include tailwind-theme(
@@ -218,36 +128,16 @@ $theme-schemas: () !default;
     );
 
     // Navbar
-    @include tailwind-theme(
-        $component: navbar,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: navbar, $props: (background));
 
     // // Navdrawer
-    @include tailwind-theme(
-        $component: navdrawer,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: navdrawer, $props: (background));
 
     // QR Code
-    @include tailwind-theme(
-        $component: qr-code,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: qr-code, $props: (background));
 
     // Query Builder
-    @include tailwind-theme(
-        $component: query-builder,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: query-builder, $props: (background));
 
     // Radio
     @include tailwind-theme(
@@ -259,66 +149,26 @@ $theme-schemas: () !default;
     );
 
     // Select
-    @include tailwind-theme(
-        $component: select,
-        $props: (
-            toggle-button-background,
-        )
-    );
+    @include tailwind-theme($component: select, $props: (toggle-button-background));
 
     // Snackbar
-    @include tailwind-theme(
-        $component: snackbar-theme,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: snackbar-theme, $props: (background));
 
     // Splitter
-    @include tailwind-theme(
-        $component: splitter,
-        $props: (
-            bar-color,
-        )
-    );
+    @include tailwind-theme($component: splitter, $props: (bar-color));
 
     // Stepper
-    @include tailwind-theme(
-        $component: stepper,
-        $props: (
-            step-background,
-        )
-    );
+    @include tailwind-theme($component: stepper, $props: (step-background));
 
     // Tabs
-    @include tailwind-theme(
-        $component: tabs,
-        $props: (
-            item-background,
-        )
-    );
+    @include tailwind-theme($component: tabs, $props: (item-background));
 
     // Toast
-    @include tailwind-theme(
-        $component: toast,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: toast, $props: (background));
 
     // Tooltip
-    @include tailwind-theme(
-        $component: tooltip,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: tooltip, $props: (background));
 
     // Tree - use with tree-node, not tree directly
-    @include tailwind-theme(
-        $component: tree,
-        $props: (
-            background,
-        )
-    );
+    @include tailwind-theme($component: tree, $props: (background));
 }
