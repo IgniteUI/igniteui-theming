@@ -102,5 +102,5 @@ Result:
 ```
 
 ## Notes
-- Requires @include sizing() and @include sizable() in component styles.
-- Requires @include spacing() once to set spacing variables.
+- Requires @include sizable() in component styles.
+- Requires the size and spacing variables, which theme() declares. Without theme(), include @include sizing() and @include spacing() once.

@@ -376,14 +376,6 @@ export const CSS_VARIABLE_PATTERNS = {
   },
   /** Roundness scaling */
   roundness: "--ig-radius-factor",
-  /** Scrollbar customization */
-  scrollbar: {
-    size: "--ig-scrollbar-size",
-    thumbBackground: "--ig-scrollbar-thumb-background",
-    trackBackground: "--ig-scrollbar-track-background",
-  },
-  /** RTL direction multiplier */
-  direction: "--ig-dir",
   /** Color function pattern: --ig-{color}-{shade} */
   colorPattern: "--ig-{color}-{shade}",
   /** Elevation pattern: --ig-elevation-{level} */

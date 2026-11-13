@@ -256,7 +256,7 @@ export async function handleSetSpacing(params: SetSpacingParams) {
   const guidance =
     output === "sass"
       ? [
-          "Sass note: pad() functions require @include spacing() once at root scope.",
+          "Sass note: pad() functions read the spacing variables that theme() declares. Without theme(), include @include spacing() once at root scope.",
         ]
       : [];
 

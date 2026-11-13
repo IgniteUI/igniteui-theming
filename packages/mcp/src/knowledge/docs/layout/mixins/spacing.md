@@ -25,4 +25,4 @@ Defines [CSS @property](https://developer.mozilla.org/en-US/docs/Web/CSS/Referen
 ```
 
 ## Notes
-- spacing() is typically included once at the root scope/stylesheet.
+- theme() includes spacing(). Without theme(), include it once at the root scope/stylesheet.

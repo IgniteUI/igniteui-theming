@@ -1,9 +1,17 @@
+import * as sass from "sass-embedded";
 import { describe, expect, it } from "vitest";
 import {
   formatCssOutput,
   generateCustomPaletteCss,
   generatePaletteCss,
+  generateThemeCss,
 } from "../../generators/css.js";
+import { generateTheme } from "../../generators/sass.js";
+import {
+  generateThemeCompileSass,
+  generateThemeSass,
+} from "../../utils/sass.js";
+import { themingImporter } from "../../utils/theming-resolve.js";
 import { SHADE_LEVELS } from "../../utils/types.js";
 
 describe("generatePaletteCss", () => {
@@ -416,5 +424,73 @@ describe("generateComponentThemeCss", () => {
     // Should default to material light
     expect(result.description).toContain("material");
     expect(result.description).toContain("light");
+  });
+});
+
+describe("generateThemeCss", () => {
+  const colors = {
+    primaryColor: "#2ab759",
+    secondaryColor: "#f7bd32",
+    surfaceColor: "#222",
+  };
+
+  it.each([
+    "webcomponents",
+    "react",
+    "blazor",
+    "generic",
+  ] as const)("declares the theme markers and registers the properties for %s", async (platform) => {
+    const { css } = await generateThemeCss({
+      ...colors,
+      platform,
+      designSystem: "indigo",
+      variant: "dark",
+    });
+
+    expect(css).toContain("--ig-theme: indigo;");
+    expect(css).toContain("--ig-theme-variant: dark;");
+    expect(css).toMatch(/^@property --ig-size-small \{/m);
+    expect(css).toMatch(/^@property --_progress-integer \{/m);
+  });
+
+  it("compiles the Sass that the Sass output returns", async () => {
+    const options = {
+      ...colors,
+      platform: "react",
+      designSystem: "fluent",
+      variant: "dark",
+      name: "brand",
+      generator: "legacy",
+      includeElevations: false,
+    } as const;
+    const { css } = await generateThemeCss(options);
+    const { code } = generateTheme(options);
+    const expected = await sass.compileStringAsync(code, {
+      importers: [themingImporter],
+      style: "expanded",
+    });
+
+    expect(css).toBe(expected.css);
+  });
+
+  it("compiles a preset palette theme like the entry point does", async () => {
+    const options = { designSystem: "indigo", variant: "light" } as const;
+    const compile = async (code: string) =>
+      (
+        await sass.compileStringAsync(code, {
+          importers: [themingImporter],
+          style: "expanded",
+        })
+      ).css;
+
+    expect(await compile(generateThemeCompileSass(options))).toBe(
+      await compile(generateThemeSass(options).code),
+    );
+  });
+
+  it("flags the Angular output, which has no component styles", async () => {
+    const result = await generateThemeCss({ ...colors, platform: "angular" });
+
+    expect(result.angularCaveat).toBe(true);
   });
 });
