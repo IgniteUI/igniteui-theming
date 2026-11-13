@@ -4,9 +4,8 @@
  *
  * Supported platforms:
  * - Angular: Uses `igniteui-angular/theming` with `core()` and `theme()` mixins
- * - Web Components: Uses `igniteui-theming` directly with individual mixins
- * - Blazor: Uses `igniteui-theming` directly with individual mixins
- * - React: Uses `igniteui-theming` directly with individual mixins
+ * - Web Components, React, Blazor and standalone: Use the igniteui-theming theme entry point
+ *   with `typography()` and `theme()`
  */
 
 import {
@@ -19,11 +18,12 @@ import {
   SCHEMAS as SCHEMA_PRESETS,
   SCHEMAS_PATH,
 } from "../knowledge/platforms/common.js";
-import { generateWebComponentsThemeSass } from "../knowledge/platforms/webcomponents.js";
 import { TYPOGRAPHY_PRESETS } from "../knowledge/typography.js";
 import {
+  appendShadeArgs,
   generateHeader,
   generatePresetImports,
+  generateThemeSass,
   generateUseStatement,
   quoteFontFamily,
   toVariableName,
@@ -36,9 +36,6 @@ import type {
   DesignSystem,
   GeneratedCode,
   Platform,
-  ScaleSpec,
-  ScalesInput,
-  ShadeGenerator,
   ThemeVariant,
 } from "../utils/types.js";
 
@@ -50,6 +47,7 @@ export type {
 } from "../utils/sass.js";
 // Re-export utilities for external use
 export {
+  appendShadeArgs,
   generateElevationsCode,
   generateHeader,
   generatePaletteCode,
@@ -63,55 +61,6 @@ export {
 /**
  * Generate a palette definition.
  */
-/**
- * Renders a scale spec as Sass. A preset is a quoted name; an inline spec becomes a map of
- * the `range` it spans and the `curve` that eases across it.
- */
-function scaleToSass(spec: ScaleSpec): string {
-  if (typeof spec === "string") {
-    return `'${spec}'`;
-  }
-
-  const parts: string[] = [];
-
-  if (spec.range) parts.push(`range: (${spec.range.join(", ")})`);
-  if (spec.curve) parts.push(`curve: (${spec.curve.join(", ")})`);
-  if (spec.anchor) parts.push(`anchor: '${spec.anchor}'`);
-
-  return `(${parts.join(", ")})`;
-}
-
-/**
- * Renders the `$scales` argument. A bare spec applies to every family; a map keyed by
- * family name applies per family.
- */
-function scalesToSass(scales: ScalesInput): string {
-  if (typeof scales === "string") {
-    return `'${scales}'`;
-  }
-
-  if ("range" in scales || "curve" in scales || "anchor" in scales) {
-    return scaleToSass(scales as ScaleSpec);
-  }
-
-  const entries = Object.entries(scales as Record<string, ScaleSpec>).map(
-    ([family, spec]) => `'${family}': ${scaleToSass(spec)}`,
-  );
-
-  return `(${entries.join(", ")})`;
-}
-
-/**
- * Appends the optional `$generator` and `$scales` arguments to a palette() call.
- */
-export function appendShadeArgs(
-  args: string[],
-  input: { generator?: ShadeGenerator; scales?: ScalesInput },
-): void {
-  if (input.generator) args.push(`$generator: '${input.generator}'`);
-  if (input.scales) args.push(`$scales: ${scalesToSass(input.scales)}`);
-}
-
 export function generatePalette(input: CreatePaletteInput): GeneratedCode {
   const variant = input.variant ?? "light";
   const name = input.name ? toVariableName(input.name) : `custom-${variant}`;
@@ -228,12 +177,9 @@ ${imports}
 /**
  * Generate a complete theme (palette + typography + elevations).
  *
- * Supports two platforms:
  * - `angular`: Uses `igniteui-angular/theming` with `core()` and `theme()` mixins
- * - `webcomponents`: Uses `igniteui-theming` directly with individual mixins
- *
- * If no platform is specified, defaults to generating platform-agnostic code
- * using igniteui-theming directly (similar to webcomponents but simpler).
+ * - Every other platform, and no platform: Uses `typography()` and `theme()` from the
+ *   igniteui-theming theme entry point
  */
 export function generateTheme(input: CreateThemeInput): GeneratedCode {
   const platform = input.platform;
@@ -244,12 +190,8 @@ export function generateTheme(input: CreateThemeInput): GeneratedCode {
   switch (platform) {
     case "angular":
       return generateAngularTheme(input, designSystem, variant);
-    case "webcomponents":
-    case "react":
-    case "blazor":
-      return generateWebComponentsTheme(input, designSystem, variant);
     default:
-      return generateGenericTheme(input, designSystem, variant);
+      return generateGlobalTheme(input, designSystem, variant);
   }
 }
 
@@ -294,144 +236,43 @@ function generateAngularTheme(
   };
 }
 
+const PLATFORM_NAMES: Record<Exclude<Platform, "angular">, string> = {
+  webcomponents: "Ignite UI for Web Components",
+  react: "Ignite UI for React",
+  blazor: "Ignite UI for Blazor",
+  generic: "Ignite UI Theming",
+};
+
 /**
- * Generate Web Components-specific theme using individual mixins.
+ * Generate a theme with `typography()` and `theme()` from the theme entry point.
  */
-function generateWebComponentsTheme(
+function generateGlobalTheme(
   input: CreateThemeInput,
   designSystem: DesignSystem,
   variant: ThemeVariant,
 ): GeneratedCode {
-  const code = generateWebComponentsThemeSass({
+  const platform = input.platform === "angular" ? undefined : input.platform;
+  const { code, variables } = generateThemeSass({
     designSystem,
     variant,
+    platform,
     primaryColor: input.primaryColor,
     secondaryColor: input.secondaryColor,
     surfaceColor: input.surfaceColor,
-    customPaletteName: input.name
-      ? `$${toVariableName(input.name)}-palette`
-      : undefined,
+    paletteName: input.name ? toVariableName(input.name) : undefined,
+    generator: input.generator,
+    scales: input.scales,
     fontFamily: input.fontFamily,
     includeTypography: input.includeTypography !== false,
     includeElevations: input.includeElevations !== false,
-    includeSpacing: input.includeSpacing !== false,
   });
-
-  const variables: string[] = [];
-  if (input.name) {
-    variables.push(`$${toVariableName(input.name)}-palette`);
-  } else {
-    variables.push("$palette");
-  }
-  if (input.includeTypography !== false) {
-    // If custom font family provided, we're not using the preset $typeface variable
-    if (!input.fontFamily) {
-      variables.push("$typeface");
-    }
-    variables.push("$type-scale");
-  }
-  if (input.includeElevations !== false) {
-    variables.push(
-      designSystem === "indigo" ? "$indigo-elevations" : "$material-elevations",
-    );
-  }
+  const target = PLATFORM_NAMES[platform ?? "generic"];
 
   return {
-    code,
-    description: `Generated Web Components ${variant} theme based on ${designSystem} design system`,
-    variables,
-  };
-}
+    code: `${generateHeader(`${target}: ${variant} theme based on the ${designSystem} design system`)}
 
-/**
- * Generate platform-agnostic theme (legacy behavior).
- * Uses igniteui-theming directly without platform-specific optimizations.
- */
-function generateGenericTheme(
-  input: CreateThemeInput,
-  designSystem: DesignSystem,
-  variant: ThemeVariant,
-): GeneratedCode {
-  const themeName = input.name
-    ? toVariableName(input.name)
-    : `${variant}-${designSystem}`;
-  const paletteVar = `$${themeName}-palette`;
-  const includeTypography = input.includeTypography !== false;
-  const includeElevations = input.includeElevations !== false;
-
-  const variables: string[] = [paletteVar];
-
-  // Build palette arguments
-  const paletteArgs: string[] = [`$primary: ${input.primaryColor}`];
-  if (input.secondaryColor)
-    paletteArgs.push(`$secondary: ${input.secondaryColor}`);
-  if (input.surfaceColor) {
-    paletteArgs.push(`$surface: ${input.surfaceColor}`);
-  } else {
-    paletteArgs.push(`$surface: ${variant === "dark" ? "#222222" : "white"}`);
-  }
-
-  appendShadeArgs(paletteArgs, input);
-
-  // Generate preset imports for typography and/or elevations
-  const presetImports = generatePresetImports({
-    platform: input.platform,
-    includeTypography,
-    includeElevations,
-  });
-
-  // Build the code sections
-  const sections: string[] = [
-    generateHeader(
-      `Complete ${variant} theme based on ${designSystem} design system`,
-    ),
-    '// NOTE: Specify platform ("angular" or "webcomponents") for optimized output',
-    generateUseStatement(input.platform, input.licensed),
-    ...presetImports,
-    "",
-    `// ${themeName} palette`,
-    `${paletteVar}: palette(`,
-    `  ${paletteArgs.join(",\n  ")}`,
-    ");",
-    "",
-    "// Apply the palette",
-    `@include palette(${paletteVar});`,
-  ];
-
-  if (includeTypography) {
-    const preset = TYPOGRAPHY_PRESETS[designSystem];
-    const typeface = input.fontFamily || preset.typeface;
-    const typeScaleVar = `$${designSystem}-type-scale`;
-    variables.push(typeScaleVar);
-
-    sections.push(
-      "",
-      "// Typography setup",
-      "@include typography(",
-      `  $font-family: ${quoteFontFamily(typeface)},`,
-      `  $type-scale: ${typeScaleVar}`,
-      ");",
-    );
-  }
-
-  if (includeElevations) {
-    // Use material elevations for material/bootstrap, indigo for indigo/fluent
-    const elevationPreset = designSystem === "indigo" ? "indigo" : "material";
-    const elevationsVar = `$${elevationPreset}-elevations`;
-    variables.push(elevationsVar);
-
-    sections.push(
-      "",
-      "// Elevations setup",
-      `@include elevations(${elevationsVar});`,
-    );
-  }
-
-  const code = `${sections.join("\n")}\n`;
-
-  return {
-    code,
-    description: `Generated complete ${variant} theme based on ${designSystem} design system (platform-agnostic)`,
+${code}`,
+    description: `Generated ${target} ${variant} theme based on ${designSystem} design system`,
     variables,
   };
 }

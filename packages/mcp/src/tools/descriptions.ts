@@ -515,13 +515,12 @@ export const TOOL_DESCRIPTIONS = {
 <workflow>
   1. Creates color palette using palette() function
   2. Sets up typography with specified font family (if includeTypography: true)
-  3. Configures elevations based on design system (if includeElevations: true)
-  4. Configures spacing utilities for Web Components, React, and Blazor (if includeSpacing: true)
-  5. Applies the theme using the theme() mixin
+  3. Applies the theme using the theme() mixin, with the elevations of the design system
+     (if includeElevations: true)
 
-  For Web Components, React, and Blazor the output always includes sizing(), the progress
-  @property rules, the scrollbar variables and .ig-scrollbar class, RTL support, and the tile
-  manager view transitions.
+  For Web Components, React, Blazor and standalone use, typography() and theme() come from the
+  igniteui-theming theme entry point. theme() also declares the spacing, the theme markers and
+  the size and progress properties.
 </workflow>
 
 <important_notes>
@@ -542,9 +541,8 @@ export const TOOL_DESCRIPTIONS = {
 
   PLATFORM DIFFERENCES:
   - Angular: Uses igniteui-angular/theming with core() and theme() mixins
-  - Web Components: Uses igniteui-theming directly with palette(), typography(), elevations() mixins
-  - React: Uses igniteui-theming directly (same as Web Components), common with Vite/Next.js
-  - Blazor: Uses igniteui-theming for Sass compilation, theme CSS referenced in Blazor components
+  - Web Components, React and Blazor: Use typography() and theme() from igniteui-theming/sass/themes/theme
+  - Blazor: The compiled theme CSS is referenced in Blazor components
 
   ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
@@ -665,7 +663,8 @@ export const TOOL_DESCRIPTIONS = {
 </behavior>
 
 <sass_notes>
-  - pad(), pad-inline(), pad-block() require @include spacing() once
+  - pad(), pad-inline(), pad-block() read the spacing variables that theme() declares;
+    without theme(), they require @include spacing() once
 </sass_notes>
 
 <example>
@@ -1248,8 +1247,6 @@ Layout tools (set_size, set_spacing, set_roundness) default to "css". Generation
     "Include typography setup in the generated theme. Set to false if you want to configure typography separately. Defaults to true.",
   includeElevations:
     "Include elevation shadows in the generated theme. Set to false if you want to configure elevations separately. Defaults to true.",
-  includeSpacing:
-    "Include spacing CSS custom properties. Applies to Web Components, React, and Blazor. Has no effect on Angular. Defaults to true.",
 
   // ---------------------------------------------------------------------------
   // Custom palette parameters (for create_custom_palette)

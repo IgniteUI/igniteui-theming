@@ -189,16 +189,6 @@ describe("CSS_VARIABLE_PATTERNS", () => {
     expect(CSS_VARIABLE_PATTERNS.roundness).toBe("--ig-radius-factor");
   });
 
-  it("has correct scrollbar variables", () => {
-    expect(CSS_VARIABLE_PATTERNS.scrollbar.size).toBe("--ig-scrollbar-size");
-    expect(CSS_VARIABLE_PATTERNS.scrollbar.thumbBackground).toBe(
-      "--ig-scrollbar-thumb-background",
-    );
-    expect(CSS_VARIABLE_PATTERNS.scrollbar.trackBackground).toBe(
-      "--ig-scrollbar-track-background",
-    );
-  });
-
   it("has correct patterns for color and elevation", () => {
     expect(CSS_VARIABLE_PATTERNS.colorPattern).toBe("--ig-{color}-{shade}");
     expect(CSS_VARIABLE_PATTERNS.elevationPattern).toBe(

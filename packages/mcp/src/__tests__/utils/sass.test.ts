@@ -3,12 +3,18 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { PALETTE_PRESETS } from "../../knowledge/palettes.js";
 import {
+  GLOBAL_THEME_MODULE,
   generateHeader,
   generatePaletteCode,
+  generateThemeCompileSass,
+  generateThemeExample,
+  generateThemeSass,
   generateUseStatement,
   quoteFontFamily,
   scopeSelector,
+  THEME_ENTRY_POINT,
   toVariableName,
 } from "../../utils/sass.js";
 
@@ -227,6 +233,155 @@ describe("generatePaletteCode", () => {
     expect(result.colorVariables).toContain("$surface-color: white;");
     expect(result.paletteDefinition.join("\n")).toContain(
       "$primary: $primary-color",
+    );
+  });
+});
+
+describe("generateThemeSass", () => {
+  it("uses the preset palette of the design system and variant without custom colors", () => {
+    const { code, variables } = generateThemeSass({
+      designSystem: "indigo",
+      variant: "dark",
+      platform: "webcomponents",
+    });
+
+    expect(code).toContain(`@use '${THEME_ENTRY_POINT}' as *;`);
+    expect(code).toContain(
+      "@include typography($font-family: $indigo-typeface, $type-scale: $indigo-type-scale, $allow-exclusion: true);",
+    );
+    expect(code).toContain(
+      "@include theme($palette: $dark-indigo-palette, $schema: $dark-indigo-schema);",
+    );
+    expect(code).not.toContain("palette(\n");
+    expect(variables).toEqual([
+      "$dark-indigo-palette",
+      "$dark-indigo-schema",
+      "$indigo-typeface",
+      "$indigo-type-scale",
+    ]);
+  });
+
+  it("defines a custom palette, with the preset colors for the ones not given", () => {
+    const { code, variables } = generateThemeSass({
+      designSystem: "material",
+      variant: "light",
+      primaryColor: "#2ab759",
+      paletteName: "brand",
+      generator: "legacy",
+    });
+
+    const preset = PALETTE_PRESETS["light-material-palette"];
+
+    expect(code).toContain(
+      `$brand-palette: palette(\n  $primary: #2ab759,\n  $secondary: ${preset.secondary},\n  $surface: ${preset.surface},\n  $generator: 'legacy'\n);`,
+    );
+    expect(code).toContain(
+      "@include theme($palette: $brand-palette, $schema: $light-material-schema);",
+    );
+    expect(variables[0]).toBe("$brand-palette");
+  });
+
+  it("lets the products' elements opt out of the typography, but not standalone use", () => {
+    const product = generateThemeSass({
+      designSystem: "fluent",
+      variant: "light",
+      platform: "blazor",
+    });
+    const generic = generateThemeSass({
+      designSystem: "fluent",
+      variant: "light",
+      platform: "generic",
+    });
+    const none = generateThemeSass({
+      designSystem: "fluent",
+      variant: "light",
+    });
+
+    expect(product.code).toContain("$allow-exclusion: true");
+    expect(generic.code).not.toContain("$allow-exclusion");
+    expect(none.code).not.toContain("$allow-exclusion");
+  });
+
+  it("uses a custom font family in place of the typeface", () => {
+    const { code, variables } = generateThemeSass({
+      designSystem: "bootstrap",
+      variant: "light",
+      fontFamily: "'Inter', sans-serif",
+    });
+
+    expect(code).toContain(`$font-family: "'Inter', sans-serif"`);
+    expect(variables).not.toContain("$bootstrap-typeface");
+  });
+
+  it("leaves out the typography and the elevations when asked", () => {
+    const { code, variables } = generateThemeSass({
+      designSystem: "bootstrap",
+      variant: "light",
+      includeTypography: false,
+      includeElevations: false,
+    });
+
+    expect(code).not.toContain("typography(");
+    expect(code).toContain("$exclude: (elevations)");
+    expect(variables).toEqual([
+      "$light-bootstrap-palette",
+      "$light-bootstrap-schema",
+    ]);
+  });
+});
+
+describe("generateThemeExample", () => {
+  it("renders the generator output under its comments", () => {
+    const options = { designSystem: "indigo", variant: "dark" } as const;
+    const example = generateThemeExample(
+      ["Dark Indigo", "Second line"],
+      options,
+    );
+
+    expect(example).toBe(
+      `\n// Dark Indigo\n// Second line\n${generateThemeSass(options).code}`,
+    );
+  });
+});
+
+describe("generateThemeCompileSass", () => {
+  it("loads theme() without the entry point and its color presets", () => {
+    const code = generateThemeCompileSass({
+      designSystem: "material",
+      variant: "light",
+      primaryColor: "#2ab759",
+    });
+
+    expect(code).toContain(`@use '${GLOBAL_THEME_MODULE}' as *;`);
+    expect(code).not.toContain(THEME_ENTRY_POINT);
+    expect(code).not.toContain("color/presets");
+  });
+
+  it("loads the color presets for a preset palette", () => {
+    const code = generateThemeCompileSass({
+      designSystem: "material",
+      variant: "light",
+    });
+
+    expect(code).toContain("@use 'igniteui-theming/sass/color/presets' as *;");
+  });
+
+  it("has the statements of the Sass output", () => {
+    const options = {
+      designSystem: "fluent",
+      variant: "dark",
+      platform: "react",
+      primaryColor: "#2ab759",
+    } as const;
+    const statements = (code: string) =>
+      code
+        .split("\n")
+        .filter(
+          (line) => line && !line.startsWith("@use") && !line.startsWith("//"),
+        );
+
+    expect(statements(generateThemeCompileSass(options))).toEqual(
+      statements(generateThemeSass(options).code),
     );
   });
 });

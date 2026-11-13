@@ -415,7 +415,6 @@ Generates a complete, production-ready theme with palette, typography, and eleva
 | `fontFamily`        | string                                                      | No       | Font family                                                                                                                   |
 | `includeTypography` | boolean                                                     | No       | Include typography (default: `true`)                                                                                          |
 | `includeElevations` | boolean                                                     | No       | Include elevations (default: `true`)                                                                                          |
-| `includeSpacing`    | boolean                                                     | No       | Include spacing CSS custom properties — applies to Web Components, React, and Blazor. No effect on Angular. (default: `true`) |
 
 **Example prompts:**
 
@@ -712,16 +711,14 @@ The AI will first use `detect_platform`, then use the detected platform for `cre
 
 ### Ignite UI for Web Components
 
-- Uses `@use "igniteui-theming"` directly
-- Uses individual mixins (`palette()`, `typography()`, `elevations()`)
+- Uses `typography()` and `theme()` from `@use "igniteui-theming/sass/themes/theme"`
 - Supports runtime theme switching via JavaScript API
-- Includes optional `spacing()` mixin
 - Ships pre-compiled CSS themes; `igniteui-theming` must be installed separately for custom Sass theming
 - Default output format: `"css"` (use `output: "sass"` only when a Sass pipeline is confirmed)
 
 ### Ignite UI for React
 
-- Uses `@use "igniteui-theming"` directly (same Sass module as Web Components)
+- Uses the same Sass as Web Components: `typography()` and `theme()` from `igniteui-theming/sass/themes/theme`
 - Common project setups: Vite (configure `css.preprocessorOptions.scss.loadPaths` in `vite.config.ts`) or Next.js (`sassOptions.includePaths` in `next.config.js`)
 - No required root class; themes apply via CSS custom properties on `:root`
 - Ships pre-compiled CSS; `igniteui-theming` must be installed separately for custom Sass theming
@@ -733,10 +730,10 @@ The AI will first use `detect_platform`, then use the detected platform for `cre
 - For custom Sass theming, create a separate npm environment:
   1. `npm init -y` in your project's `wwwroot/` (or a dedicated styles directory)
   2. `npm install igniteui-theming sass`
-  3. Create `wwwroot/css/theme.scss` using `@use "igniteui-theming" as *`
+  3. Create `wwwroot/css/theme.scss` using `@use "igniteui-theming/sass/themes/theme" as *`
   4. Add a build script: `"build:theme": "sass wwwroot/css/theme.scss wwwroot/css/theme.css"`
   5. Reference the compiled CSS in `_Host.cshtml` or `index.html`
-- Uses the same Sass mixins as Web Components (`palette()`, `typography()`, `elevations()`, `spacing()`)
+- Uses the same Sass as Web Components: `typography()` and `theme()`
 - Default output format: `"css"` (the MCP compiles server-side; no local Sass toolchain needed unless you want to customise further)
 
 ---

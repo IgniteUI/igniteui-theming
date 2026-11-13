@@ -11,4 +11,4 @@ Defines [CSS @property](https://developer.mozilla.org/en-US/docs/Web/CSS/Referen
 ```
 
 ## Notes
-- Typically included once at the root scope/stylesheet.
+- theme() includes sizing(). Without theme(), include it once at the root scope/stylesheet.

@@ -12,7 +12,7 @@
  * - Theming approach is identical to Web Components
  */
 
-import { generateWCThemeExample } from "./webcomponents.js";
+import { generateThemeExample } from "../../utils/sass.js";
 
 export const REACT_PLATFORM = {
   id: "react",
@@ -50,12 +50,12 @@ export const REACT_PLATFORM = {
  */
 export const REACT_USAGE_EXAMPLES = {
   get basic() {
-    return generateWCThemeExample(
+    return generateThemeExample(
       [
         "Basic Material Light Theme for React (Vite)",
         "In your styles.scss or theme.scss file:",
       ],
-      { designSystem: "material", variant: "light" },
+      { designSystem: "material", variant: "light", platform: "react" },
     );
   },
 
@@ -89,7 +89,7 @@ module.exports = {
 `,
 
   get customPalette() {
-    return generateWCThemeExample(
+    return generateThemeExample(
       [
         "Custom Palette Theme for React",
         "In your styles.scss or theme.scss file:",
@@ -97,6 +97,7 @@ module.exports = {
       {
         designSystem: "material",
         variant: "light",
+        platform: "react",
         primaryColor: "#2ab759",
         secondaryColor: "#f96a88",
         surfaceColor: "#ffffff",
@@ -105,18 +106,17 @@ module.exports = {
   },
 
   get darkTheme() {
-    return generateWCThemeExample(
+    return generateThemeExample(
       [
         "Dark Indigo Theme for React",
         "In your styles.scss or theme.scss file:",
       ],
-      { designSystem: "indigo", variant: "dark" },
+      { designSystem: "indigo", variant: "dark", platform: "react" },
     );
   },
 } as const;
 
 /**
- * Note: React uses the same Sass code generation as Web Components.
- * The generateWebComponentsThemeSass function from webcomponents.ts can be reused for React.
- * The only difference is in how the Sass files are imported and bundled (Vite vs Angular CLI).
+ * Note: React uses the same Sass as Web Components: typography() and theme() from the
+ * igniteui-theming theme entry point. Only the bundling differs (Vite vs Angular CLI).
  */

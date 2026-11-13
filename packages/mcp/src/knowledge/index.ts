@@ -142,7 +142,6 @@ export {
   detectPlatformFromDependencies,
   type FrameworkDetectionSignal,
   generateAngularThemeSass,
-  generateWebComponentsThemeSass,
   isLicensedPackage,
   type PackageDetectionSignal,
   PLATFORM_METADATA,
@@ -158,7 +157,6 @@ export {
   WEBCOMPONENTS_PLATFORM,
   WEBCOMPONENTS_RUNTIME_CONFIG,
   WEBCOMPONENTS_USAGE_EXAMPLES,
-  type WebComponentsThemeTemplate,
 } from "./platforms/index.js";
 // Sass API Manifest (centralized API knowledge)
 export {
