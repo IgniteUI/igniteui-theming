@@ -559,7 +559,7 @@ $schema: (
             $border-radius: border-radius(rem(4px), rem(2px), rem(4px));
             $expected: clamp(0.125rem, meta.inspect(calc(var(--ig-radius-factor, 1) * 0.25rem)), 0.25rem);
 
-            @include assert-equal($assert: $border-radius, $expected: $expected, $inspect: true);
+            @include assert-equal($assert: meta.inspect($border-radius), $expected: meta.inspect($expected));
         }
 
         @include it('should include border-radius styles to a given scope with a value between min and max') {
