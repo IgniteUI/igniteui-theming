@@ -43,6 +43,10 @@ export const FRAGMENTS = {
   SURFACE_ROLES:
     "6 layers required: base, sunken, raised, overlay, container, seed",
 
+  /** When surface roles fall back onto base */
+  SURFACE_ROLE_FALLBACK:
+    'A role that does not have enough room to move resolves to "base": on a pure white surface, "raised" and "overlay" are white too, and on a pure black surface, "sunken" is black too. Borders or elevations then carry the separation. The same can happen on surfaces close to white or black, even when there is a little room left. If each role needs its own color, choose a surface color slightly further from white or black and check the generated --ig-surface-* values.',
+
   /** What a seed color does and does not control */
   SEED_BEHAVIOUR:
     "Every shade is solved for a contrast target, so a seed supplies HUE and SATURATION, not lightness - a very light or very dark brand color yields the same ramp as a mid-tone one. Pass the brand color as-is. The one caveat: a seed with very little chroma (a tinted gray such #6c757d) keeps that tint rather than being saturated, so it produces a tinted-gray ramp; a seed with no measurable hue produces a pure gray one.",
@@ -284,6 +288,7 @@ export const TOOL_DESCRIPTIONS = {
   - A background plus the layers on it, keyed by ${FRAGMENTS.SURFACE_ROLES}
   - "base" is the page; "sunken"/"raised"/"overlay" step away from it; "container" is a
     translucent tint; "seed" is the input color
+  - ${FRAGMENTS.SURFACE_ROLE_FALLBACK}
   - There is no hue ramp to keep monochromatic. Palettes still emit numeric surface shades
     for compatibility, but they are deprecated: read and override the roles
 
@@ -1214,7 +1219,7 @@ Layout tools (set_size, set_spacing, set_roundness) default to "css". Generation
   // ---------------------------------------------------------------------------
   primary: `Primary brand color - used for main actions, active states, and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
   secondary: `Secondary/accent color - used for FABs, selection controls, highlights. ${FRAGMENTS.COLOR_FORMAT}`,
-  surface: `Surface/background color - should be light for "light" variant, dark for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
+  surface: `Surface/background color - should be light for "light" variant, dark for "dark" variant. ${FRAGMENTS.SURFACE_ROLE_FALLBACK} ${FRAGMENTS.COLOR_FORMAT}`,
   gray: `Gray/neutral base color for text, borders, disabled states. Optional - defaults from design system preset. ${FRAGMENTS.COLOR_FORMAT}`,
   info: `Info state color (typically blue) for informational messages. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
   success: `Success state color (typically green) for success messages and positive actions. Optional - defaults from design system. ${FRAGMENTS.COLOR_FORMAT}`,
@@ -1238,7 +1243,7 @@ Layout tools (set_size, set_spacing, set_roundness) default to "css". Generation
   // ---------------------------------------------------------------------------
   primaryColor: `Primary brand color for the theme - used for main actions and emphasis. ${FRAGMENTS.COLOR_FORMAT}`,
   secondaryColor: `Secondary/accent color for the theme - used for highlights and selection. ${FRAGMENTS.COLOR_FORMAT}`,
-  surfaceColor: `Surface/background color for the theme. Use light colors (#FAFAFA) for "light" variant, dark colors (#121212) for "dark" variant. ${FRAGMENTS.COLOR_FORMAT}`,
+  surfaceColor: `Surface/background color for the theme. Use light colors (#FAFAFA) for "light" variant, dark colors (#121212) for "dark" variant. ${FRAGMENTS.SURFACE_ROLE_FALLBACK} ${FRAGMENTS.COLOR_FORMAT}`,
   includeTypography:
     "Include typography setup in the generated theme. Set to false if you want to configure typography separately. Defaults to true.",
   includeElevations:
@@ -1257,7 +1262,7 @@ ${FRAGMENTS.MONOCHROMATIC_RULE}`,
   surfaceDefinition: `Surface definition object with mode selection:
 • mode: "shades" + baseColor: Auto-generates the background and its layers from one color
 • mode: "explicit" + shades: Manually specify all ${FRAGMENTS.SURFACE_ROLES}
-IMPORTANT: A surface is a background plus the layers that sit on it, so it is addressed by ROLE, not by shade number. "base" is the page background; "sunken", "raised" and "overlay" step away from it; "container" is a translucent tint. A role with no room in its direction resolves back onto "base".`,
+IMPORTANT: A surface is a background plus the layers that sit on it, so it is addressed by ROLE, not by shade number. "base" is the page background; "sunken", "raised" and "overlay" step away from it; "container" is a translucent tint. ${FRAGMENTS.SURFACE_ROLE_FALLBACK}`,
 
   grayDefinition: `Gray color definition object with mode selection:
 • mode: "shades" + baseColor: Auto-generates all shades from one color
