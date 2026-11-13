@@ -126,7 +126,7 @@ At the top level, `theme()` writes to `:root`. Inside a selector, it writes to t
 }
 ```
 
-The module forwards the root module, the presets and the schemas. Loading all the presets adds about 300 ms to each compilation, so use it for theme files and the root module for component stylesheets.
+The module forwards the root module, the presets and the schemas. Loading all the color presets adds about 300 ms to each compilation, so use it for theme files and the root module for component stylesheets. To skip the color presets, `@use` the root module, the presets you need and `igniteui-theming/sass/themes/global-theme`, which has `theme()` alone.
 
 You can read more about what the package contains on the [Wiki page](https://github.com/IgniteUI/igniteui-theming/wiki)
 
