@@ -14,12 +14,7 @@
 
 // Theme specific utilities
 // Slider
-@include tailwind-theme(
-    $component: slider,
-    $props: (
-        thumb-color,
-    )
-);
+@include tailwind-theme($component: slider, $props: (thumb-color));
 
 // // Switch
 @include tailwind-theme(

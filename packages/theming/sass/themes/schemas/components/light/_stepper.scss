@@ -60,11 +60,11 @@
 $light-stepper: (
     // Step incomplete
     content-foreground: (
-            color: (
-                'gray',
-                900,
-            ),
+        color: (
+            'gray',
+            900,
         ),
+    ),
     step-background: transparent,
     indicator-background: transparent,
     indicator-outline: (
@@ -216,14 +216,10 @@ $light-stepper: (
     // Invalid
     invalid-step-background: transparent,
     invalid-indicator-background: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-indicator-outline: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-indicator-color: (
         contrast-color: (
@@ -232,43 +228,31 @@ $light-stepper: (
         ),
     ),
     invalid-title-color: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-title-hover-color: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-title-focus-color: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-subtitle-color: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-subtitle-hover-color: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
     invalid-subtitle-focus-color: (
-        color: (
-            'error',
-        ),
+        color: ('error'),
     ),
 
     // Disabled
     disabled-indicator-color: (
-            color: (
-                'gray',
-                500,
-            ),
+        color: (
+            'gray',
+            500,
         ),
+    ),
     disabled-indicator-background: transparent,
     disabled-indicator-outline: (
         color: (
@@ -291,11 +275,11 @@ $light-stepper: (
 
     // Separator
     step-separator-color: (
-            color: (
-                'gray',
-                300,
-            ),
+        color: (
+            'gray',
+            300,
         ),
+    ),
     complete-step-separator-color: (
         color: (
             'primary',
@@ -321,7 +305,7 @@ $light-stepper: (
     _meta: (
         name: 'stepper',
         variant: 'light',
-    )
+    ),
 );
 
 /// Generates a material stepper schema.
@@ -543,11 +527,11 @@ $fluent-stepper: extend(
 
         // Complete
         complete-indicator-background: (
-                color: (
-                    'gray',
-                    300,
-                ),
+            color: (
+                'gray',
+                300,
             ),
+        ),
         complete-indicator-outline: transparent,
         complete-indicator-color: (
             contrast-color: (
@@ -762,11 +746,11 @@ $bootstrap-stepper: extend(
         ),
         // Complete
         complete-indicator-background: (
-                color: (
-                    'gray',
-                    400,
-                ),
+            color: (
+                'gray',
+                400,
             ),
+        ),
         complete-indicator-outline: (
             color: (
                 'gray',
@@ -782,11 +766,11 @@ $bootstrap-stepper: extend(
 
         // Disabled
         disabled-indicator-outline: (
-                color: (
-                    'gray',
-                    300,
-                ),
+            color: (
+                'gray',
+                300,
             ),
+        ),
 
         // Separator
         step-separator-style: 'solid',
