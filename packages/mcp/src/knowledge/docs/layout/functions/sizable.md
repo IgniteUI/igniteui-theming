@@ -5,7 +5,7 @@ Returns a size-aware value based on the values --ig-size and a user-declared --c
 ## Mechanism
 The sizable() function chooses between small/medium/large values using:
 - --component-size (user declared and liked to --ig-size)
-- --ig-size-small/medium/large (set by @include sizing())
+- --ig-size-small/medium/large (registered by theme() or @include sizing())
 - --is-small/medium/large from @include sizable()
 
 ## Sass example
@@ -30,4 +30,4 @@ The sizable() function chooses between small/medium/large values using:
 
 ## Notes
 - Requires `@include sizable()` in component styles.
-- Requires `@include sizing()` once to set size variables.
+- Requires the size variables, which `theme()` registers. Without `theme()`, include `@include sizing()` once.

@@ -263,8 +263,6 @@ export interface CreateThemeInput {
   includeTypography?: boolean;
   /** Whether to include elevations setup */
   includeElevations?: boolean;
-  /** Whether to include spacing setup (Web Components only) */
-  includeSpacing?: boolean;
   /** Shade rhythm: a preset name, an inline spec, or a map keyed by family */
   scales?: ScalesInput;
   /** Which shade generator to use */

@@ -17,7 +17,6 @@ import {
   generateTheme,
   generateTypography,
 } from "../../generators/sass.js";
-import { generateWebComponentsThemeSass } from "../../knowledge/platforms/webcomponents.js";
 import { themingImporter } from "../../utils/theming-resolve.js";
 
 /**
@@ -332,104 +331,84 @@ describe("generateElevations", () => {
 });
 
 describe("generateTheme", () => {
-  describe("platform-agnostic (no platform specified)", () => {
-    it("generates code with correct structure", () => {
+  const targets = [
+    [undefined, "Ignite UI Theming"],
+    ["generic", "Ignite UI Theming"],
+    ["webcomponents", "Ignite UI for Web Components"],
+    ["react", "Ignite UI for React"],
+    ["blazor", "Ignite UI for Blazor"],
+  ] as const;
+
+  describe.each(targets)("platform %s", (platform, name) => {
+    it("uses typography() and theme() from the theme entry point", () => {
       const result = generateTheme({
+        platform,
         primaryColor: "#2ab759",
-      });
-
-      expect(result.code).toContain("@use");
-      expect(result.code).toContain("palette(");
-      expect(result.code).toContain("@include palette(");
-    });
-
-    it("includes typography by default", () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.code).toContain("@include typography(");
-    });
-
-    it("includes elevations by default", () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.code).toContain("@include elevations(");
-    });
-
-    it("can exclude typography", () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
-        includeTypography: false,
-      });
-
-      expect(result.code).not.toContain("@include typography(");
-    });
-
-    it("can exclude elevations", () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
-        includeElevations: false,
-      });
-
-      expect(result.code).not.toContain("@include elevations(");
-    });
-
-    it("uses dark surface color for dark variant", () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
+        designSystem: "indigo",
         variant: "dark",
       });
 
-      expect(result.code).toContain("$surface: #222222");
+      expect(result.code).toContain(
+        "@use 'igniteui-theming/sass/themes/theme' as *;",
+      );
+      expect(result.code).toContain("@include typography(");
+      expect(result.code).toContain(
+        "@include theme($palette: $custom-dark-palette, $schema: $dark-indigo-schema);",
+      );
+      expect(result.code).not.toMatch(
+        /@include (palette|elevations|sizing|spacing|core)\(/,
+      );
+      expect(result.description).toContain(name);
     });
 
-    it("generates valid Sass that compiles with defaults", async () => {
+    it("leaves out the typography and the elevations when asked", () => {
       const result = generateTheme({
+        platform,
         primaryColor: "#2ab759",
-        secondaryColor: "#f7bd32",
-        surfaceColor: "white",
-      });
-      expect(await isValidSass(result.code)).toBe(true);
-    });
-
-    it("generates valid Sass that compiles without typography", async () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
-        secondaryColor: "#f7bd32",
-        surfaceColor: "white",
         includeTypography: false,
-      });
-      expect(await isValidSass(result.code)).toBe(true);
-      expect(result.code).not.toContain("typography/presets");
-    });
-
-    it("generates valid Sass that compiles without elevations", async () => {
-      const result = generateTheme({
-        primaryColor: "#2ab759",
-        secondaryColor: "#f7bd32",
-        surfaceColor: "white",
         includeElevations: false,
       });
-      expect(await isValidSass(result.code)).toBe(true);
-      expect(result.code).not.toContain("elevations/presets");
+
+      expect(result.code).not.toContain("typography(");
+      expect(result.code).toContain("$exclude: (elevations)");
     });
 
-    it("includes preset imports for typography and elevations", () => {
+    it("passes the shade generator and the scales to palette()", () => {
       const result = generateTheme({
+        platform,
         primaryColor: "#2ab759",
-        designSystem: "material",
+        generator: "fitted",
+        scales: "carbon",
       });
 
-      expect(result.code).toContain(
-        "@use 'igniteui-theming/sass/typography/presets' as *;",
-      );
-      expect(result.code).toContain(
-        "@use 'igniteui-theming/sass/elevations/presets' as *;",
-      );
+      expect(result.code).toContain("$generator: 'fitted'");
+      expect(result.code).toContain("$scales: 'carbon'");
     });
+  });
+
+  it.each([
+    "light",
+    "dark",
+  ] as const)("generates Sass that compiles for every %s design system", async (variant) => {
+    for (const designSystem of [
+      "material",
+      "fluent",
+      "bootstrap",
+      "indigo",
+    ] as const) {
+      const result = generateTheme({
+        platform: "webcomponents",
+        primaryColor: "#2ab759",
+        secondaryColor: "#f7bd32",
+        surfaceColor: variant === "light" ? "white" : "#222",
+        designSystem,
+        variant,
+      });
+      const css = await compileSass(result.code);
+
+      expect(css).toContain(`--ig-theme: ${designSystem};`);
+      expect(css).toContain(`--ig-theme-variant: ${variant};`);
+    }
   });
 
   describe("Angular platform", () => {
@@ -455,223 +434,6 @@ describe("generateTheme", () => {
       });
 
       expect(result.variables).toContain("$dark-indigo-schema");
-    });
-  });
-
-  describe("Web Components platform", () => {
-    it("generates code with individual mixins", () => {
-      const result = generateTheme({
-        platform: "webcomponents",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(result.code).toContain("igniteui-theming");
-      expect(result.code).not.toContain("igniteui-angular");
-      expect(result.code).toContain("@include palette(");
-      expect(result.description).toContain("Web Components");
-    });
-
-    it("includes spacing by default", () => {
-      const result = generateTheme({
-        platform: "webcomponents",
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.code).toContain("@include spacing(");
-    });
-
-    it("can exclude spacing", () => {
-      const result = generateTheme({
-        platform: "webcomponents",
-        primaryColor: "#2ab759",
-        includeSpacing: false,
-      });
-
-      expect(result.code).not.toContain("@include spacing(");
-    });
-
-    it.each([
-      ["a custom", { primaryColor: "#2ab759" }],
-      ["a preset", {}],
-    ])("compiles %s palette theme that matches the library's globals", async (_, colors) => {
-      const css = await compileSass(
-        generateWebComponentsThemeSass({
-          designSystem: "indigo",
-          variant: "light",
-          ...colors,
-        }),
-      );
-
-      expect(css).toMatch(/^@property --ig-size-small \{/m);
-      expect(css).toMatch(
-        /@property --_progress-fraction \{\s*syntax: "<number>";/,
-      );
-      expect(css).toContain(
-        "--ig-scrollbar-track-background: var(--ig-gray-200)",
-      );
-      expect(css).toMatch(/^::view-transition-group\(\*\.igc-tile-resize\)/m);
-      expect(css).toMatch(/^\.ig-scrollbar \{/m);
-    });
-
-    it("uses correct elevation preset for design system", () => {
-      const indigoResult = generateTheme({
-        platform: "webcomponents",
-        primaryColor: "#2ab759",
-        designSystem: "indigo",
-      });
-
-      expect(indigoResult.variables).toContain("$indigo-elevations");
-
-      const materialResult = generateTheme({
-        platform: "webcomponents",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(materialResult.variables).toContain("$material-elevations");
-    });
-  });
-
-  describe("React platform", () => {
-    it("generates Web Components-style code (uses igniteui-theming)", () => {
-      const result = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(result.code).toContain("igniteui-theming");
-      expect(result.code).not.toContain("igniteui-angular");
-    });
-
-    it("generates individual mixins, not Angular core()/theme() pattern", () => {
-      const result = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(result.code).toContain("@include palette(");
-      expect(result.code).toContain("@include elevations(");
-      expect(result.code).toContain("@include typography(");
-      // Angular-specific: core() mixin is never used in Web Components/React/Blazor
-      expect(result.code).not.toContain("@include core(");
-      // Note: WC generator creates a @mixin theme() wrapper, but does NOT use Angular's theme() mixin
-      // The key difference is: no $schema parameter and no igniteui-angular/theming import
-      expect(result.code).not.toContain("$schema:");
-    });
-
-    it("includes spacing by default", () => {
-      const result = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.code).toContain("@include spacing(");
-    });
-
-    it("can exclude spacing", () => {
-      const result = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-        includeSpacing: false,
-      });
-
-      expect(result.code).not.toContain("@include spacing(");
-    });
-
-    it("uses correct elevation preset for design system", () => {
-      const indigoResult = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-        designSystem: "indigo",
-      });
-
-      expect(indigoResult.variables).toContain("$indigo-elevations");
-
-      const materialResult = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(materialResult.variables).toContain("$material-elevations");
-    });
-
-    it("description mentions Web Components (shared generator)", () => {
-      const result = generateTheme({
-        platform: "react",
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.description).toContain("Web Components");
-    });
-  });
-
-  describe("Blazor platform", () => {
-    it("generates Web Components-style code (uses igniteui-theming)", () => {
-      const result = generateTheme({
-        platform: "blazor",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(result.code).toContain("igniteui-theming");
-      expect(result.code).not.toContain("igniteui-angular");
-    });
-
-    it("generates individual mixins, not Angular core()/theme() pattern", () => {
-      const result = generateTheme({
-        platform: "blazor",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(result.code).toContain("@include palette(");
-      expect(result.code).toContain("@include elevations(");
-      expect(result.code).toContain("@include typography(");
-      // Angular-specific: core() mixin is never used in Web Components/React/Blazor
-      expect(result.code).not.toContain("@include core(");
-      // Note: WC generator creates a @mixin theme() wrapper, but does NOT use Angular's theme() mixin
-      // The key difference is: no $schema parameter and no igniteui-angular/theming import
-      expect(result.code).not.toContain("$schema:");
-    });
-
-    it("includes spacing by default", () => {
-      const result = generateTheme({
-        platform: "blazor",
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.code).toContain("@include spacing(");
-    });
-
-    it("uses correct elevation preset for design system", () => {
-      const indigoResult = generateTheme({
-        platform: "blazor",
-        primaryColor: "#2ab759",
-        designSystem: "indigo",
-      });
-
-      expect(indigoResult.variables).toContain("$indigo-elevations");
-
-      const materialResult = generateTheme({
-        platform: "blazor",
-        primaryColor: "#2ab759",
-        designSystem: "material",
-      });
-
-      expect(materialResult.variables).toContain("$material-elevations");
-    });
-
-    it("description mentions Web Components (shared generator)", () => {
-      const result = generateTheme({
-        platform: "blazor",
-        primaryColor: "#2ab759",
-      });
-
-      expect(result.description).toContain("Web Components");
     });
   });
 
