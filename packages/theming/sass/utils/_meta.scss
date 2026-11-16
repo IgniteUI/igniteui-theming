@@ -1,9 +1,14 @@
+@use 'sass:list';
 @use 'sass:selector';
 
 ////
 /// @package theming
 /// @group utilities
 ////
+
+/// The keys `once()` has emitted in this compilation.
+/// @access private
+$_once-keys: ();
 
 /// Returns true if the scope where it's called is the root of the document.
 /// @access public
@@ -35,4 +40,65 @@
 /// @return {Boolean} Returns a boolean depending on the scope where it's called
 @function is-host() {
     @return not(is-root()) and selector.is-superselector(':host', &);
+}
+
+/// Emits its content once per compilation for each key, at the root of the document.
+/// Later calls with the same key emit nothing, whatever the nesting.
+/// Separate compilations each emit their own copy.
+/// Use it for rules that must be declared once and at the top level, such as property registrations and keyframes.
+/// @access public
+/// @param {String} $key - Identifies the content. Prefix it with the name of your package to avoid collisions.
+/// @content The rules to emit.
+/// @example scss - Declare keyframes once, even when the mixin runs in several nested scopes
+///   @mixin my-theme() {
+///     @include once('my-package.fade') {
+///       @keyframes my-fade {
+///         from { opacity: 0; }
+///         to { opacity: 1; }
+///       }
+///     }
+///
+///     --my-animation: my-fade;
+///   }
+///
+///   .dark {
+///     @include my-theme();
+///   }
+///
+///   .light {
+///     @include my-theme();
+///   }
+///
+///   // Output:
+///   // .dark { --my-animation: my-fade; }
+///   // @keyframes my-fade { ... }
+///   // .light { --my-animation: my-fade; }
+@mixin once($key) {
+    @if not list.index($_once-keys, $key) {
+        $_once-keys: list.append($_once-keys, $key) !global;
+
+        @at-root (without: all) {
+            @content;
+        }
+    }
+}
+
+/// Forgets the given keys, so the next `once()` call with each key emits its content again.
+/// Without arguments, forgets every key. Meant for tests.
+/// @access private
+/// @param {String} $keys... - The keys to forget.
+@mixin once-reset($keys...) {
+    @if list.length($keys) == 0 {
+        $_once-keys: () !global;
+    } @else {
+        $remaining: ();
+
+        @each $key in $_once-keys {
+            @if not list.index($keys, $key) {
+                $remaining: list.append($remaining, $key);
+            }
+        }
+
+        $_once-keys: $remaining !global;
+    }
 }

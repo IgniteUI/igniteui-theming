@@ -75,6 +75,130 @@
                 }
             }
         }
+
+        @include it('should emit the content of once() a single time for each key') {
+            @include once-reset('spec.once');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include once('spec.once') {
+                        .first {
+                            content: 1;
+                        }
+                    }
+
+                    @include once('spec.once') {
+                        .second {
+                            content: 2;
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .first {
+                        content: 1;
+                    }
+                }
+            }
+        }
+
+        @include it('should emit the content of once() for each distinct key') {
+            @include once-reset('spec.once-a', 'spec.once-b');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include once('spec.once-a') {
+                        .a {
+                            content: 1;
+                        }
+                    }
+
+                    @include once('spec.once-b') {
+                        .b {
+                            content: 2;
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .a {
+                        content: 1;
+                    }
+
+                    .b {
+                        content: 2;
+                    }
+                }
+            }
+        }
+
+        @include it('should emit the content of once() at the root when called in a nested scope') {
+            @include once-reset('spec.once-nested');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @media (min-width: 1px) {
+                        .scoped {
+                            --spec-size: 2;
+
+                            @include once('spec.once-nested') {
+                                @property --spec-size {
+                                    syntax: '<number>';
+                                    initial-value: 1;
+                                    inherits: true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    @media (min-width: 1px) {
+                        .scoped {
+                            --spec-size: 2;
+                        }
+                    }
+
+                    @property --spec-size {
+                        syntax: '<number>';
+                        initial-value: 1;
+                        inherits: true;
+                    }
+                }
+            }
+        }
+
+        @include it('should emit the content of once() again after once-reset()') {
+            @include once-reset('spec.once-reset');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include once('spec.once-reset') {
+                        .first {
+                            content: 1;
+                        }
+                    }
+
+                    @include once-reset('spec.once-reset');
+
+                    @include once('spec.once-reset') {
+                        .second {
+                            content: 2;
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .first {
+                        content: 1;
+                    }
+
+                    .second {
+                        content: 2;
+                    }
+                }
+            }
+        }
     }
 
     @include describe('map') {

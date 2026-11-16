@@ -176,6 +176,8 @@
     $categories: meta.keywords($args);
     $result: (
         _meta: (
+            theme: $_theme,
+            // Older readers take the design system from `variant`.
             variant: $_theme,
         ),
     );

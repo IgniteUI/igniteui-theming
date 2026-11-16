@@ -23,6 +23,10 @@ $_enhanced-accessibility: false;
 $_text-contrast-warned: false;
 $_to-opaque-warned: false;
 $_to-hsl-warned: false;
+$_palette-variant-warned: false;
+
+// The design systems a palette can belong to.
+$_design-systems: ('material', 'fluent', 'bootstrap', 'indigo');
 
 /// Configures the color module.
 /// @access public
@@ -50,9 +54,10 @@ $_to-hsl-warned: false;
 /// @param {Color} $success [#4eb862] - The success color used throughout the application (optional).
 /// @param {Color} $warn [#faa419] - The warning color used throughout the application (optional).
 /// @param {Color} $error [#ff134a] - The error color used throughout the application (optional).
-/// @param {String} $variant [null] - Used internally (optional).
+/// @param {String} $variant [null] - The variant of the palette, `light` or `dark` (optional). A design system name here is deprecated; pass it as `$theme`.
 /// @param {String} $generator [$shade-generator] - Either `fitted` or `legacy` (optional).
 /// @param {String | Map | List} $scales [null] - One scale for every family, or a map keyed by family name (optional).
+/// @param {String} $theme [null] - The design system the palette belongs to: `material`, `fluent`, `bootstrap` or `indigo` (optional).
 /// @requires {function} shades
 /// @returns {Map} A map consisting of color shades for the passed base colors (primary, secondary, gray, etc).
 /// @example scss
@@ -82,8 +87,20 @@ $_to-hsl-warned: false;
     $error: #ff134a,
     $variant: null,
     $generator: config.$shade-generator,
-    $scales: null
+    $scales: null,
+    $theme: null
 ) {
+    @if $variant and list.index($_design-systems, '#{$variant}') {
+        @if not $_palette-variant-warned {
+            @warn 'Passing a design system to palette($variant) is deprecated. Pass it as $theme instead.';
+
+            $_palette-variant-warned: true !global;
+        }
+
+        $theme: $theme or $variant;
+        $variant: null;
+    }
+
     @if $generator == 'legacy' and $scales {
         @warn '$scales is ignored. The legacy generator does not use scales.';
 
@@ -129,7 +146,9 @@ $_to-hsl-warned: false;
         'warn': $warn-palette,
         'error': $error-palette,
         '_meta': (
-            'variant': $variant,
+            'theme': $theme,
+            // Older readers take the design system from `variant`.
+            'variant': $variant or $theme,
         )
     );
 }
