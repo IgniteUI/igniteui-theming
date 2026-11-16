@@ -13,7 +13,7 @@
  * - Theming approach is similar to Web Components/React
  */
 
-import { generateWCThemeExample } from "./webcomponents.js";
+import { generateThemeExample } from "../../utils/sass.js";
 
 export const BLAZOR_PLATFORM = {
   id: "blazor",
@@ -50,12 +50,12 @@ export const BLAZOR_PLATFORM = {
  */
 export const BLAZOR_USAGE_EXAMPLES = {
   get basic() {
-    return generateWCThemeExample(
+    return generateThemeExample(
       [
         "Basic Material Light Theme for Blazor",
         "In your wwwroot/css/theme.scss file:",
       ],
-      { designSystem: "material", variant: "light" },
+      { designSystem: "material", variant: "light", platform: "blazor" },
     );
   },
 
@@ -95,7 +95,7 @@ npm install igniteui-theming sass
 `,
 
   get customPalette() {
-    return generateWCThemeExample(
+    return generateThemeExample(
       [
         "Custom Palette Theme for Blazor",
         "In your wwwroot/css/theme.scss file:",
@@ -103,6 +103,7 @@ npm install igniteui-theming sass
       {
         designSystem: "material",
         variant: "light",
+        platform: "blazor",
         primaryColor: "#2ab759",
         secondaryColor: "#f96a88",
         surfaceColor: "#ffffff",
@@ -111,15 +112,14 @@ npm install igniteui-theming sass
   },
 
   get darkTheme() {
-    return generateWCThemeExample(
+    return generateThemeExample(
       ["Dark Indigo Theme for Blazor", "In your wwwroot/css/theme.scss file:"],
-      { designSystem: "indigo", variant: "dark" },
+      { designSystem: "indigo", variant: "dark", platform: "blazor" },
     );
   },
 } as const;
 
 /**
- * Note: Blazor uses the same Sass code generation as Web Components/React.
- * The generateWebComponentsThemeSass function from webcomponents.ts can be reused for Blazor.
- * The main difference is in the build pipeline (npm + sass CLI vs Angular CLI).
+ * Note: Blazor uses the same Sass as Web Components and React: typography() and theme() from the
+ * igniteui-theming theme entry point. Only the build pipeline differs (npm + sass CLI vs Angular CLI).
  */

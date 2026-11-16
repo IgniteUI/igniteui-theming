@@ -57,8 +57,9 @@ async function handleCssOutput(
       fontFamily: params.fontFamily,
       includeTypography: params.includeTypography,
       includeElevations: params.includeElevations,
-      includeSpacing: params.includeSpacing,
       name: params.name,
+      scales: params.scales,
+      generator: params.generator,
     });
 
     const formattedCss = formatCssOutput(result.css, result.description);
@@ -131,7 +132,8 @@ async function handleSassOutput(
     fontFamily: params.fontFamily,
     includeTypography: params.includeTypography,
     includeElevations: params.includeElevations,
-    includeSpacing: params.includeSpacing,
+    scales: params.scales,
+    generator: params.generator,
   });
 
   // Add warning comments to the generated code if there are validation issues

@@ -280,11 +280,6 @@ export const createThemeSchema = z.object({
     .optional()
     .default(true)
     .describe(PARAM_DESCRIPTIONS.includeElevations),
-  includeSpacing: z
-    .boolean()
-    .optional()
-    .default(true)
-    .describe(PARAM_DESCRIPTIONS.includeSpacing),
   output: outputFormatSchema.describe(PARAM_DESCRIPTIONS.output),
 });
 

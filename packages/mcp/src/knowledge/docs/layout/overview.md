@@ -58,5 +58,5 @@ igc-calendar {
 
 ### Sass notes
 - To react to --ig-size, component styles must include @include sizable() and --component-size.
-- To use pad(), pad-inline(), or pad-block(), include @include spacing() once.
+- pad(), pad-inline() and pad-block() read the spacing variables that theme() declares. Without theme(), include @include spacing() once.
 - border-radius() responds to --ig-radius-factor without extra mixins.
