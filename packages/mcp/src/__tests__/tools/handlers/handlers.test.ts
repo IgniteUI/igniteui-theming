@@ -348,6 +348,14 @@ describe("layout handlers", () => {
     expect(text).toContain("--ig-size: 3;");
     expect(text).toContain(".my-section");
   });
+
+  it("set_size without a component or scope uses the root selector of the themes", async () => {
+    const result = await handleSetSize({ size: "medium" });
+
+    expect(result.content[0].text).toContain(
+      ":root,\n:scope,\n:host\n{\n  --ig-size: 2;\n}",
+    );
+  });
 });
 
 describe("handleCreateElevations", () => {
