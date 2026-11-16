@@ -338,7 +338,7 @@ $_legacy-palette: palette(
                 }
 
                 @include contains($selector: false) {
-                    :root {
+                    :root, :scope, :host {
                         @each $color, $shades in map.remove($IPalette, '_meta') {
                             @each $shade in $shades {
                                 $value: map.get($_palette, $color, $shade);
@@ -386,7 +386,7 @@ $_legacy-palette: palette(
                 }
 
                 @include contains($selector: false) {
-                    :root {
+                    :root, :scope, :host {
                         @each $color, $shades in map.remove($IPalette, '_meta') {
                             @each $shade in $shades {
                                 $value: map.get($_palette, $color, $shade);
@@ -1062,7 +1062,7 @@ $_legacy-palette: palette(
                 }
 
                 @include contains($selector: false) {
-                    :root {
+                    :root, :scope, :host {
                         --ig-wcag-a: 0.31;
                         --ig-wcag-aa: 0.185;
                         --ig-wcag-aaa: 0.178;
@@ -1083,7 +1083,7 @@ $_legacy-palette: palette(
                     }
 
                     @include contains($selector: false) {
-                        :root {
+                        :root, :scope, :host {
                             --ig-primary-seed: #{$_primary};
                             --ig-gray-seed: #{$_gray};
                         }
@@ -1097,7 +1097,7 @@ $_legacy-palette: palette(
                     }
 
                     @include contains($selector: false) {
-                        :root {
+                        :root, :scope, :host {
                             --ig-primary-seed: #{$_primary};
                             --ig-gray-seed: #000;
                         }

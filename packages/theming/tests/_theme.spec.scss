@@ -297,6 +297,34 @@ $_once-keys: ('igniteui-theming.sizing', 'igniteui-theming.spacing', 'igniteui-t
             }
         }
 
+        @include it('should use the configured root selector') {
+            @include t.configure-root-selector(':scope, :host');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include t.theme(
+                        $palette: t.$light-material-palette,
+                        $schema: t.$light-material-schema,
+                        $exclude: (core, palette, elevations)
+                    );
+                }
+
+                @include expect($selector: false) {
+                    :scope,
+                    :host {
+                        @include t.theme-markers(material, light);
+                    }
+
+                    :scope,
+                    :host {
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+
+            @include t.configure-root-selector(':root, :scope, :host');
+        }
+
         @include it('should leave the output of a component theme next to it unchanged') {
             $schema: t.$light-material-schema;
             $component: (

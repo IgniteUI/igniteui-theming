@@ -53,7 +53,7 @@
     $elevations: null,
     $enhanced-accessibility: null
 ) {
-    $scope: if(sass(is-root()): ':root'; else: '&');
+    $scope: global-scope();
     $core: not list.index($exclude, core);
 
     @if $core {
