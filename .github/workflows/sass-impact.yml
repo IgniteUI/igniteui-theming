@@ -1,0 +1,51 @@
+# Reports which declarations a PR changes in the Sass library and which component themes they reach.
+name: Sass impact
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'packages/theming/sass/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  impact:
+    runs-on: ubuntu-latest
+    steps:
+      # The default checkout is the PR merged into the base, so comparing with the base tip shows only the PR's changes.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.x
+          cache: 'npm'
+      - run: npm ci
+      - name: Analyze impact
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          LINK_BASE: https://github.com/${{ github.repository }}/blob/${{ github.event.pull_request.head.sha }}/packages/theming/sass/
+        run: |
+          npm run --silent graph:impact -- --base "origin/$BASE_REF" --format markdown --link-base "$LINK_BASE" --out sass-impact.md
+          cat sass-impact.md >> "$GITHUB_STEP_SUMMARY"
+      # Fork PRs get a read-only token, so they only get the job summary.
+      - name: Update PR comment
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const fs = require('node:fs');
+            const marker = '<!-- sass-impact -->';
+            const body = `${marker}\n${fs.readFileSync('sass-impact.md', 'utf8')}`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find((c) => c.body?.startsWith(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
