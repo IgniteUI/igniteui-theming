@@ -27,9 +27,9 @@
 /// @param {Map} $schema - The schema of the design system and variant, such as `$light-material-schema`. It should match the palette.
 /// @param {List} $exclude [()] - Parts to leave out: `core`, `palette`, `elevations` and `markers`. Exclude `core` where a property registration has no effect, such as a shadow root.
 /// @param {Number} $roundness [null] - Sets `--ig-radius-factor`, a number between 0 and 1.
-/// @param {Boolean} $elevation [true] - Pass `false` to set `--ig-elevation-factor` to 0, which turns the shadows off.
+/// @param {Boolean} $elevation [null] - Pass `false` to set `--ig-elevation-factor` to 0, which turns the shadows off, and `true` to set it to 1, which turns them back on in a nested theme. By default the factor is inherited.
 /// @param {Map} $elevations [null] - The elevations to use. Defaults to the elevations of the schema's design system.
-/// @param {Boolean} $enhanced-accessibility [false] - Uses the color blind friendly brushes in the chart themes.
+/// @param {Boolean} $enhanced-accessibility [null] - Pass `true` to use the color blind friendly brushes in the chart themes. Like `configure-colors()`, it applies to the chart themes that come after it in the compilation, and a later `false` doesn't turn it off.
 /// @content Custom properties and rules to add to the theme's scope.
 /// @example scss - A light and a dark theme
 ///   @use 'igniteui-theming/sass/themes/theme' as *;
@@ -49,9 +49,9 @@
     $schema,
     $exclude: (),
     $roundness: null,
-    $elevation: true,
+    $elevation: null,
     $elevations: null,
-    $enhanced-accessibility: false
+    $enhanced-accessibility: null
 ) {
     $scope: if(sass(is-root()): ':root'; else: '&');
     $core: not list.index($exclude, core);
@@ -83,6 +83,8 @@
 
         @if $elevation == false {
             --ig-elevation-factor: 0;
+        } @else if $elevation == true {
+            --ig-elevation-factor: 1;
         }
 
         @if $roundness {

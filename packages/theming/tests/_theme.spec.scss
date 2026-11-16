@@ -75,6 +75,60 @@ $_once-keys: ('igniteui-theming.sizing', 'igniteui-theming.spacing', 'igniteui-t
             }
         }
 
+        @include it('should turn the elevations back on in a nested theme, and inherit the factor by default') {
+            @include assert() {
+                @include output($selector: false) {
+                    .parent {
+                        @include t.theme(
+                            $palette: t.$light-material-palette,
+                            $schema: t.$light-material-schema,
+                            $exclude: (core, palette, elevations, markers),
+                            $elevation: false
+                        );
+
+                        .enabled {
+                            @include t.theme(
+                                $palette: t.$light-material-palette,
+                                $schema: t.$light-material-schema,
+                                $exclude: (core, palette, elevations, markers),
+                                $elevation: true
+                            );
+                        }
+
+                        .inherited {
+                            @include t.theme(
+                                $palette: t.$light-material-palette,
+                                $schema: t.$light-material-schema,
+                                $exclude: (core, palette, elevations, markers)
+                            );
+                        }
+                    }
+                }
+
+                @include expect($selector: false) {
+                    .parent {
+                        --ig-elevation-factor: 0;
+                    }
+
+                    .parent {
+                        @include t.spacing($register: false);
+                    }
+
+                    .parent .enabled {
+                        --ig-elevation-factor: 1;
+                    }
+
+                    .parent .enabled {
+                        @include t.spacing($register: false);
+                    }
+
+                    .parent .inherited {
+                        @include t.spacing($register: false);
+                    }
+                }
+            }
+        }
+
         @include it('should emit the content block in the theme scope after its declarations') {
             @include assert() {
                 @include output($selector: false) {
