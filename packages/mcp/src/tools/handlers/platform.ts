@@ -177,7 +177,7 @@ function buildToolEligibilitySection(): string[] {
     "- `create_typography` — Set up typography/type scales",
     "- `create_elevations` — Configure shadow/elevation system",
     "- `create_theme` — Generate a complete theme",
-    "- `set_size` / `set_spacing` / `set_roundness` — Layout tokens (use `scope` with a custom CSS selector or omit for `:root`; do **not** use `component` as it targets Ignite UI component selectors)",
+    "- `set_size` / `set_spacing` / `set_roundness` — Layout tokens (use `scope` with a custom CSS selector or omit for `:root, :scope, :host`; do **not** use `component` as it targets Ignite UI component selectors)",
     "- `get_color` — Get CSS variable references for palette colors",
     "- `read_resource` — Read theming reference data",
     "",

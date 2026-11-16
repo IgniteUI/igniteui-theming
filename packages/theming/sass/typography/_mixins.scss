@@ -2,6 +2,7 @@
 @use 'sass:meta' as meta;
 @use 'sass:string';
 @use 'sass:list';
+@use 'sass:selector';
 @use '../utils/meta' as *;
 @use './types';
 @use '../themes/mixins' as *;
@@ -145,8 +146,40 @@
     @include css-vars-from-theme((#{$name}: #{$fw $fz $ff}, _meta: (name: $prefix)));
 }
 
+/// Returns the selectors of the `.ig-typography` class for a root selector.
+/// Beside the class itself, the class works on each root and around it, so it applies inside `@scope`
+/// whether it's on the scoping root or on an ancestor outside it. On `:host`, it's on the host element.
+/// `:root` adds nothing. The added selectors are in `:where()`, so the specificity stays that of the class.
+/// @access private
+/// @param {String} $root - The root selector, such as `:root, :scope, :host`.
+/// @return {List} The selectors.
+@function _typography-scopes($root) {
+    $roots: ();
+
+    @each $complex in selector.parse($root) {
+        $s: '#{$complex}';
+
+        @if $s == ':host' {
+            $roots: list.append($roots, ':host(.ig-typography)', $separator: comma);
+        } @else if $s != ':root' {
+            $roots: list.join(
+                $roots,
+                (selector.unify($s, '.ig-typography'), selector.nest('.ig-typography', $s)),
+                $separator: comma
+            );
+        }
+    }
+
+    @if list.length($roots) == 0 {
+        @return '.ig-typography';
+    }
+
+    @return ('.ig-typography', ':where(#{$roots})');
+}
+
 /// Adds typography styles for h1-h6, paragraph and creates custom typography class selectors.
 /// The produced styles are based on the passed typeface and type scale.
+/// At the root of the stylesheet, the variables go on the root selector set with `configure-root-selector()`.
 /// @access public
 /// @param {String | List} $font-family - The font family to be used across all typographic elements.
 /// @param {Map} $type-scale - A type scale map as produced by the type-scale function.
@@ -158,16 +191,16 @@
 /// @example scss - Using a CSS variable reference
 ///   @include typography(var(--my-custom-font), $my-type-scale);
 ///
-/// @requires {function} is-root
+/// @requires {function} global-scope
 /// @requires {mixin} type-style-vars
-/// @requires {mixin} type-style-classes
+/// @requires {mixin} type-style
 /// @requires {mixin} type-style-elements
 /// @requires {function} is-root
 /// @requires {function} is-host
 @mixin typography($font-family, $type-scale, $allow-exclusion: false) {
     $root: is-root();
     $host: is-host();
-    $scope: if(sass($root): ':root'; else: '&');
+    $scope: global-scope();
 
     #{$scope} {
         --ig-font-family: #{_normalize-font-family($font-family)};
@@ -179,9 +212,14 @@
     }
 
     @if $root or $host {
-        .ig-typography {
+        #{if(sass($root): _typography-scopes($scope); else: '.ig-typography')} {
             @include type-style-elements($allow-exclusion);
-            @include type-style-classes();
+
+            @each $category in types.$ITypeScale {
+                .ig-typography__#{$category} {
+                    @include type-style($category);
+                }
+            }
         }
     }
 }

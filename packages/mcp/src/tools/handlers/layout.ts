@@ -128,9 +128,9 @@ ${availablePlatforms.length > 0 ? `Available platforms: ${availablePlatforms.joi
   }
 
   return {
-    selectors: [":root"],
+    selectors: [":root", ":scope", ":host"],
     notes,
-    scopeLabel: "global scope (:root)",
+    scopeLabel: "global scope (:root, :scope, :host)",
   };
 }
 

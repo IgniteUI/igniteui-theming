@@ -42,6 +42,36 @@ $_once-keys: ();
     @return not(is-root()) and selector.is-superselector(':host', &);
 }
 
+/// The selector of the global rules at the root of the stylesheet.
+/// @access private
+$_root-selector: ':root, :scope, :host';
+
+/// Sets the selector of the global rules that `theme()`, `typography()`, `palette()`, `elevations()`
+/// and the global `tokens()` emit at the root of the stylesheet. Inside a selector they use `&`.
+/// The default, `:root, :scope, :host`, applies in the document, inside `@scope` and in a shadow root.
+/// @access public
+/// @param {String} $selector - The selector, such as `:root`.
+/// @example scss - Emit a theme for the document only
+///   @include configure-root-selector(':root');
+///   @include theme($palette: $light-material-palette, $schema: $light-material-schema);
+///   // Output:
+///   // :root {
+///   //   --ig-theme: material;
+///   //   ...
+///   // }
+@mixin configure-root-selector($selector) {
+    @if $selector {
+        $_root-selector: $selector !global;
+    }
+}
+
+/// Returns the selector of the global rules: the configured root selector at the root of the stylesheet, `&` inside a selector.
+/// @access private
+/// @return {String} The selector.
+@function global-scope() {
+    @return if(sass(is-root()): $_root-selector; else: '&');
+}
+
 /// Emits its content once per compilation for each key, at the root of the document.
 /// Later calls with the same key emit nothing, whatever the nesting.
 /// Separate compilations each emit their own copy.

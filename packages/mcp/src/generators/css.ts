@@ -75,7 +75,7 @@ export interface PaletteCssOptions {
  *   surface: '#fafafa',
  *   variant: 'light'
  * });
- * // result.css contains :root { --ig-primary-50: ...; --ig-primary-100: ...; ... }
+ * // result.css contains :root, :scope, :host { --ig-primary-50: ...; --ig-primary-100: ...; ... }
  */
 export async function generatePaletteCss(
   options: PaletteCssOptions,

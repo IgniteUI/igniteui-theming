@@ -51,7 +51,7 @@ When `platform` is `"generic"`:
 | `create_component_theme`      | **NO**    | Requires Ignite UI component selectors |
 | `get_component_design_tokens` | **NO**    | Requires Ignite UI components          |
 
-**IMPORTANT:** For layout tools (`set_size`, `set_spacing`, `set_roundness`) in generic mode, do NOT use the `component` parameter — it resolves Ignite UI component selectors that don't exist in the project. Use `scope` with a custom CSS selector, or omit both for `:root` targeting.
+**IMPORTANT:** For layout tools (`set_size`, `set_spacing`, `set_roundness`) in generic mode, do NOT use the `component` parameter — it resolves Ignite UI component selectors that don't exist in the project. Use `scope` with a custom CSS selector, or omit both for `:root, :scope, :host` targeting.
 
 ### Ambiguous detection
 
@@ -198,7 +198,7 @@ After detection and setup, follow this order for a complete theme:
 - Uses `igniteui-theming` directly.
 - No Ignite UI components — all theme output applies globally via CSS custom properties.
 - Component-specific tools are not available.
-- Layout tools work only with `:root` or custom `scope` selectors.
+- Layout tools work only with the default `:root, :scope, :host` or custom `scope` selectors.
 - Read `theming://platforms/generic` for presets available in this mode.
 
 ### Preset imports for non-Angular platforms

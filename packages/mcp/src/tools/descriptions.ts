@@ -179,7 +179,7 @@ export const TOOL_DESCRIPTIONS = {
 <output>
   Returns:
   - Generated Sass code with palette() function call, OR
-  - Generated CSS with custom properties (:root { --ig-primary-50: ...; })
+  - Generated CSS with custom properties (:root, :scope, :host { --ig-primary-50: ...; })
   - Platform-specific module imports (Sass only)
   - Validation warnings (if any colors have issues)
   - Variable name created (e.g., $my-palette) (Sass only)
@@ -302,7 +302,7 @@ export const TOOL_DESCRIPTIONS = {
 <output>
   Returns:
   - Generated Sass code with color() map definitions, OR
-  - Generated CSS with custom properties (:root { --ig-primary-50: ...; })
+  - Generated CSS with custom properties (:root, :scope, :host { --ig-primary-50: ...; })
   - Summary of which colors use shades() vs explicit values
   - Variable name created (e.g., $custom-light-palette) (Sass only)
   - Validation warnings (if any)
@@ -612,9 +612,9 @@ export const TOOL_DESCRIPTIONS = {
 </use_case>
 
 <behavior>
-  - Sets --ig-size in the chosen scope (defaults to :root)
+  - Sets --ig-size in the chosen scope (defaults to :root, :scope, :host, the root selector of the themes)
   - Accepts "small", "medium", "large" (mapped to 1, 2, 3) or numeric values
-  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root.
+  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root, :scope, :host.
 </behavior>
 
 <sass_notes>
@@ -655,11 +655,11 @@ export const TOOL_DESCRIPTIONS = {
 </use_case>
 
 <behavior>
-  - Sets --ig-spacing in the chosen scope (defaults to :root)
+  - Sets --ig-spacing in the chosen scope (defaults to :root, :scope, :host, the root selector of the themes)
   - Optional overrides for --ig-spacing-inline and --ig-spacing-block
   - 0 = no spacing, 1 = default, 2 = double (fractions allowed)
   - spacing is required; inline/block are optional overrides
-  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root.
+  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root, :scope, :host.
 </behavior>
 
 <sass_notes>
@@ -701,9 +701,9 @@ export const TOOL_DESCRIPTIONS = {
 </use_case>
 
 <behavior>
-  - Sets --ig-radius-factor in the chosen scope (defaults to :root)
+  - Sets --ig-radius-factor in the chosen scope (defaults to :root, :scope, :host, the root selector of the themes)
   - 0 = minimum radius, 1 = maximum radius, values between interpolate
-  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root.
+  - When platform is "generic", do NOT use the "component" parameter (it resolves Ignite UI component selectors). Use "scope" with a custom CSS selector instead, or omit both for :root, :scope, :host.
 </behavior>
 
 <sass_notes>
@@ -1305,7 +1305,7 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   // ---------------------------------------------------------------------------
   // Layout tool parameters
   // ---------------------------------------------------------------------------
-  layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root. Note: component targets Ignite UI framework selectors — do not use with platform "generic". Use "scope" instead for custom CSS selectors.`,
+  layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root, :scope, :host. Note: component targets Ignite UI framework selectors — do not use with platform "generic". Use "scope" instead for custom CSS selectors.`,
   scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
   sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
   spacing:

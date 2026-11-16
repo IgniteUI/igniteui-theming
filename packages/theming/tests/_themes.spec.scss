@@ -8,6 +8,7 @@
 @use 'sass-true' as *;
 @use 'themes/schemas' as schemas;
 @use 'themes/config' as config;
+@use 'themes/charts/theme' as charts;
 @use '../index' as *;
 
 // The fallback a token carries: the raw value under the ig prefix, the --ig- variable otherwise.
@@ -1259,6 +1260,27 @@ $schema: (
                     }
                 }
             }
+        }
+    }
+
+    @include describe('chart themes') {
+        @include it('should put the chart brushes on the configured root selector') {
+            @include configure-root-selector(':scope, :host');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include charts.chart-themes($schema: schemas.$light-material-schema);
+                }
+
+                @include contains($selector: false) {
+                    :scope,
+                    :host {
+                        --chart-brushes: var(--ig-chart-brushes, #{chart-brushes()});
+                    }
+                }
+            }
+
+            @include configure-root-selector(':root, :scope, :host');
         }
     }
 }

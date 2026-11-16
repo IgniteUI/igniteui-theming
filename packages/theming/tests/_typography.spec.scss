@@ -9,6 +9,7 @@
 @use 'sass-true' as *;
 @use 'typography' as *;
 @use 'typography/presets' as presets;
+@use 'utils/meta' as *;
 
 $h1: (font-size: 96px);
 $h2: (font-size: 70px);
@@ -287,7 +288,49 @@ $scale: type-scale(
             }
         }
 
-        @include it('should include typography variables in the :root scope') {
+        @include it('should include the typography class rules inside :host') {
+            @include assert() {
+                @include output($selector: false) {
+                    :host {
+                        @include typography('Roboto, sans-serif', $scale);
+                    }
+                }
+
+                @include contains($selector: false) {
+                    :host .ig-typography h1 {
+                        @include type-style('h1');
+                    }
+
+                    :host .ig-typography .ig-typography__h1 {
+                        @include type-style('h1');
+                    }
+                }
+            }
+        }
+
+        @include it('should apply the class on and around each root, without raising its specificity') {
+            @include assert() {
+                @include output($selector: false) {
+                    @include typography('Roboto, sans-serif', $scale);
+                }
+
+                @include contains($selector: false) {
+                    .ig-typography h1,
+                    :where(.ig-typography:scope, .ig-typography :scope, :host(.ig-typography)) h1 {
+                        @include type-style('h1');
+                    }
+
+                    .ig-typography .ig-typography__h1,
+                    :where(.ig-typography:scope, .ig-typography :scope, :host(.ig-typography)) .ig-typography__h1 {
+                        @include type-style('h1');
+                    }
+                }
+            }
+        }
+
+        @include it('should use only the class with a :root root selector') {
+            @include configure-root-selector(':root');
+
             @include assert() {
                 @include output($selector: false) {
                     @include typography('Roboto, sans-serif', $scale);
@@ -295,6 +338,30 @@ $scale: type-scale(
 
                 @include contains($selector: false) {
                     :root {
+                        --ig-font-family: Roboto, sans-serif;
+                    }
+
+                    .ig-typography h1 {
+                        @include type-style('h1');
+                    }
+
+                    .ig-typography .ig-typography__h1 {
+                        @include type-style('h1');
+                    }
+                }
+            }
+
+            @include configure-root-selector(':root, :scope, :host');
+        }
+
+        @include it('should include typography variables in the :root scope') {
+            @include assert() {
+                @include output($selector: false) {
+                    @include typography('Roboto, sans-serif', $scale);
+                }
+
+                @include contains($selector: false) {
+                    :root, :scope, :host {
                         --ig-font-family: Roboto, sans-serif;
 
                         @each $category, $styles in map.remove($scale, '_meta') {

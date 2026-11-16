@@ -118,12 +118,20 @@ The library's functions, such as `color()`, `elevation()`, `pad()` and `sizable(
 
 The schema supplies the theme markers and, unless you pass `$elevations`, the elevations of its design system. Leave out the parts you don't need with `$exclude`, for example `$exclude: (markers)`.
 
-At the top level, `theme()` writes to `:root`. Inside a selector, it writes to that selector, so part of the page can use another theme, such as a dark one:
+At the top level, `theme()` writes to `:root, :scope, :host`. In a document, that matches the same element as `:root`, with the same specificity. The same stylesheet also applies when it's inlined in an `@scope` block or adopted by a shadow root, and the `.ig-typography` class works on the scoping root, on an ancestor of it, or on the host.
+
+Inside a selector, it writes to that selector, so part of the page can use another theme, such as a dark one:
 
 ```scss
 .dark {
     @include theme($palette: $dark-material-palette, $schema: $dark-material-schema);
 }
+```
+
+To write to another selector at the top level, configure it before the theme. For example, for the document only:
+
+```scss
+@include configure-root-selector(':root');
 ```
 
 The module forwards the root module, the presets and the schemas. Loading all the color presets adds about 300 ms to each compilation, so use it for theme files and the root module for component stylesheets. To skip the color presets, `@use` the root module, the presets you need and `igniteui-theming/sass/themes/global-theme`, which has `theme()` alone.

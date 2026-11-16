@@ -265,9 +265,7 @@ function buildChartTypeText(chartType: string, palette: string[]): TextResult {
       "",
       `$custom-theme: ${info.themeFunctionName}(${exampleArgs}\n);`,
       "",
-      ":root {",
-      "  @include tokens($custom-theme);",
-      "}",
+      "@include tokens($custom-theme);",
       "```",
     );
   }

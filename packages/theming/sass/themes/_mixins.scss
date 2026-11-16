@@ -234,7 +234,7 @@ $_css-vars-warned: false;
             @include theme-markers(map.get($theme, '_meta', 'theme'), map.get($theme, '_meta', 'variant'));
         }
     } @else {
-        $parent: if(sass(is-root()): ':root'; else: '&');
+        $parent: global-scope();
 
         #{$parent} {
             @include _tokens-global($theme, $ignored);
@@ -407,7 +407,7 @@ $_css-vars-warned: false;
 /// @access private
 /// @param {Boolean} $register [true] - Registers the spacing property. Pass `false` where a registration has no effect, such as a shadow root.
 @mixin spacing($register: true) {
-    $scope: if(sass(is-root()): ':root'; else: '&');
+    $scope: global-scope();
 
     #{$scope} {
         --ig-spacing-inline-small: var(--ig-spacing-inline, var(--ig-spacing-small));
