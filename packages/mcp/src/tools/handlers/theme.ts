@@ -57,6 +57,7 @@ async function handleCssOutput(
       fontFamily: params.fontFamily,
       includeTypography: params.includeTypography,
       includeElevations: params.includeElevations,
+      scope: params.scope,
       name: params.name,
       scales: params.scales,
       generator: params.generator,
@@ -91,6 +92,10 @@ async function handleCssOutput(
     if (validationText) {
       responseParts.push("");
       responseParts.push(validationText);
+    }
+
+    if (params.scope) {
+      responseParts.push("", islandNote(params));
     }
 
     responseParts.push("");
@@ -132,6 +137,7 @@ async function handleSassOutput(
     fontFamily: params.fontFamily,
     includeTypography: params.includeTypography,
     includeElevations: params.includeElevations,
+    scope: params.scope,
     scales: params.scales,
     generator: params.generator,
   });
@@ -197,6 +203,10 @@ async function handleSassOutput(
     responseParts.push(validationText);
   }
 
+  if (params.scope) {
+    responseParts.push("", islandNote(params));
+  }
+
   responseParts.push("");
   responseParts.push(`Variables created/used: ${result.variables.join(", ")}`);
   responseParts.push("");
@@ -213,4 +223,52 @@ async function handleSassOutput(
       },
     ],
   };
+}
+
+const PROVIDERS: Partial<
+  Record<
+    NonNullable<CreateThemeParams["platform"]>,
+    (theme: string, variant: string) => string
+  >
+> = {
+  webcomponents: (theme, variant) =>
+    `<igc-theme-provider theme="${theme}" variant="${variant}">`,
+  react: (theme, variant) =>
+    `<IgrThemeProvider theme="${theme}" variant="${variant}">`,
+  blazor: (theme, variant) =>
+    `<IgbThemeProvider Theme="Theme.${capitalize(theme)}" Variant="ThemeVariant.${capitalize(variant)}">`,
+};
+
+function capitalize(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+/**
+ * Explains how to use a theme generated for a theme island on the target platform.
+ */
+function islandNote(params: CreateThemeParams): string {
+  const designSystem = params.designSystem ?? "material";
+  const variant = params.variant ?? "light";
+  const lines = [
+    `🏝️ **Theme island:** the theme applies to the elements that match \`${params.scope}\` and their descendants.`,
+  ];
+
+  if (params.platform === "angular") {
+    lines.push(
+      "Include `core()` and the app's theme once in the global styles, and this theme after them. Declare drop-downs, dialogs, pickers and tooltips inside the island so they keep its theme.",
+    );
+  }
+
+  const provider = params.platform ? PROVIDERS[params.platform] : undefined;
+  if (provider) {
+    lines.push(
+      `The components switch their styles through a theme provider, not CSS. Wrap the island's content in \`${provider(designSystem, variant)}\`, inside the element that matches \`${params.scope}\`.`,
+    );
+  }
+
+  lines.push(
+    'Read "theming://guidance/theme-islands" for overlays, drag ghosts, prebuilt theme files in @scope and shadow roots.',
+  );
+
+  return lines.join("\n");
 }

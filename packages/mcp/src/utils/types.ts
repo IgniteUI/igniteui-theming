@@ -267,6 +267,8 @@ export interface CreateThemeInput {
   scales?: ScalesInput;
   /** Which shade generator to use */
   generator?: ShadeGenerator;
+  /** A selector for a theme island */
+  scope?: string;
 }
 
 /**
