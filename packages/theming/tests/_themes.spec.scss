@@ -1101,6 +1101,40 @@ $schema: (
             }
         }
 
+        @include describe('Splitter') {
+            @include it('defaults to small in every theme') {
+                @each $name, $schema in meta.module-variables(schemas) {
+                    @include assert-equal(map.get($schema, 'splitter', 'default-size'), 1, '#{$name} default-size');
+                }
+            }
+
+            @include it('keeps the size token a plain 4px number in every theme') {
+                @each $name, $schema in meta.module-variables(schemas) {
+                    @include assert-equal(map.get($schema, 'splitter', 'size'), rem(4px), '#{$name} size');
+                }
+            }
+
+            @include it('rounds the handle by 2px at small and 8px at medium and large, scaled by the radius factor, in every theme') {
+                $radius-steps: sizable(
+                    clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(2px)), rem(2px)),
+                    clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(8px)), rem(8px)),
+                    clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(8px)), rem(8px))
+                );
+
+                @each $name, $schema in meta.module-variables(schemas) {
+                    $theme: digest-schema(map.get($schema, 'splitter'));
+
+                    @include assert-equal(map.get($theme, 'border-radius'), $radius-steps, '#{$name} border-radius');
+                }
+            }
+
+            @include it('applies a passed border-radius at every size') {
+                $theme: splitter-theme($border-radius: 4px);
+
+                @include assert-equal(map.get($theme, 'border-radius'), 4px);
+            }
+        }
+
         @include describe('Spacing') {
             @include it('should use customizable spacing when declaring padding/margin') {
                 $value: 14px;
