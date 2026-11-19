@@ -234,6 +234,24 @@ describe("tool output compiles", () => {
         fontFamily: "'Inter', sans-serif",
       });
     });
+
+    it.each(
+      cartesian({ platform: PLATFORMS, output: OUTPUTS }),
+    )("$platform / $output for a theme island", async ({
+      platform,
+      output,
+    }) => {
+      await expectCompiles("create_theme", {
+        platform,
+        output,
+        designSystem: "indigo",
+        variant: "dark",
+        primaryColor: "#7b2cbf",
+        secondaryColor: "#ff9e00",
+        surfaceColor: SURFACES.dark,
+        scope: ".reports-panel",
+      });
+    });
   });
 
   describe("create_component_theme", () => {

@@ -247,6 +247,61 @@ describe("handleCreateTheme", () => {
     const text = result.content[0].text;
     expect(text).toContain(SASS_USE_ASSEMBLY_NOTE);
   });
+
+  it("puts an island's typography and theme in its scope, after the palette", async () => {
+    const result = await handleCreateTheme({
+      ...baseThemeParams,
+      platform: "webcomponents",
+      designSystem: "indigo",
+      variant: "dark",
+      surfaceColor: "#222",
+      output: "sass" as const,
+      scope: ".reports-panel",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toMatch(/^\$custom-dark-palette: palette\(/m);
+    expect(text).toMatch(
+      /^\.reports-panel \{\n {2}@include typography\([^\n]*\);\n {2}@include theme\([^\n]*\);\n\}$/m,
+    );
+    expect(text).toContain(
+      '<igc-theme-provider theme="indigo" variant="dark">',
+    );
+    expect(text).toContain("theming://guidance/theme-islands");
+  });
+
+  it("leaves core() out of an Angular island", async () => {
+    const result = await handleCreateTheme({
+      ...baseThemeParams,
+      scope: ".reports-panel",
+    });
+
+    const text = result.content[0].text;
+    expect(text).not.toContain("@include core(");
+    expect(text).toMatch(/^\.reports-panel \{\n {2}@include typography\(/m);
+    expect(text).toMatch(
+      /^ {2}@include theme\(\n {4}\$palette: [^\n]+,\n {4}\$schema: \$light-material-schema\n {2}\);\n\}$/m,
+    );
+  });
+
+  it("compiles an island's CSS to its scope", async () => {
+    const result = await handleCreateTheme({
+      ...baseThemeParams,
+      platform: "react",
+      output: "css",
+      scope: ".reports-panel",
+    });
+
+    const text = result.content[0].text;
+    expect(text).toMatch(
+      /^\.reports-panel \{\n {2}--ig-theme: material;\n {2}--ig-theme-variant: light;$/m,
+    );
+    expect(text).toMatch(/^ {2}--ig-primary-500: rgb\(/m);
+    expect(text).not.toMatch(/^:root, :scope, :host \{/m);
+    expect(text).toContain(
+      '<IgrThemeProvider theme="material" variant="light">',
+    );
+  });
 });
 
 describe("handleCreateTypography", () => {

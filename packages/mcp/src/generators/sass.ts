@@ -214,6 +214,7 @@ function generateAngularTheme(
       : undefined,
     fontFamily: input.fontFamily,
     includeTypography: input.includeTypography !== false,
+    scope: input.scope,
   });
 
   const variables: string[] = [];
@@ -265,6 +266,7 @@ function generateGlobalTheme(
     fontFamily: input.fontFamily,
     includeTypography: input.includeTypography !== false,
     includeElevations: input.includeElevations !== false,
+    scope: input.scope,
   });
   const target = PLATFORM_NAMES[platform ?? "generic"];
 

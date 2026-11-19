@@ -15,6 +15,7 @@ import {
   generatePaletteCode,
   generateTypographyCode,
   generateUseStatement,
+  wrapInScope,
 } from "../../utils/sass.js";
 import type { DesignSystem, ThemeVariant } from "../../utils/types.js";
 import { PALETTE_PRESETS, type PalettePresetName } from "../palettes.js";
@@ -117,6 +118,8 @@ export interface AngularThemeTemplate {
   includeTypography?: boolean;
   coreOptions?: CoreMixinOptions;
   themeOptions?: Partial<ThemeMixinOptions>;
+  /** A selector for a theme island. The island's theme leaves out `core()`, which the app includes once. */
+  scope?: string;
 }
 
 /**
@@ -142,6 +145,7 @@ export function generateAngularThemeSass(
     includeTypography = true,
     coreOptions = {},
     themeOptions = {},
+    scope,
   } = template;
 
   const lines: string[] = [
@@ -193,20 +197,24 @@ export function generateAngularThemeSass(
   }
 
   // Core mixin
-  lines.push("// IMPORTANT: Always include core first!");
-  const coreArgs: string[] = [];
-  if (coreOptions.printLayout === false) {
-    coreArgs.push("$print-layout: false");
-  }
-  if (coreOptions.enhancedAccessibility) {
-    coreArgs.push("$enhanced-accessibility: true");
+  if (scope) {
+    lines.push(
+      "// A theme island: include core() and the app's theme once, before it.",
+    );
+  } else {
+    lines.push("// IMPORTANT: Always include core first!");
+    const coreArgs: string[] = [];
+    if (coreOptions.printLayout === false) {
+      coreArgs.push("$print-layout: false");
+    }
+    if (coreOptions.enhancedAccessibility) {
+      coreArgs.push("$enhanced-accessibility: true");
+    }
+
+    lines.push(`@include core(${coreArgs.join(", ")});`);
   }
 
-  if (coreArgs.length > 0) {
-    lines.push(`@include core(${coreArgs.join(", ")});`);
-  } else {
-    lines.push("@include core();");
-  }
+  const themeLines: string[] = [];
 
   // Typography mixin
   if (includeTypography) {
@@ -220,7 +228,7 @@ export function generateAngularThemeSass(
       fontFamily: typefaceValue,
       typeScaleVar: typeScale,
     });
-    lines.push(...typographyLines);
+    themeLines.push(...typographyLines);
   }
 
   // Theme mixin
@@ -243,11 +251,15 @@ export function generateAngularThemeSass(
     themeArgs.push(`  $exclude: (${themeOptions.exclude.join(", ")})`);
   }
 
-  lines.push("");
-  lines.push("// Apply the theme");
-  lines.push("@include theme(");
-  lines.push(themeArgs.join(",\n"));
-  lines.push(");");
+  if (!scope) {
+    themeLines.push("");
+  }
+  themeLines.push("// Apply the theme");
+  themeLines.push("@include theme(");
+  themeLines.push(...themeArgs.join(",\n").split("\n"));
+  themeLines.push(");");
+
+  lines.push(...wrapInScope(themeLines, scope));
 
   return lines.join("\n");
 }

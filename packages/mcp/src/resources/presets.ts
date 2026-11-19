@@ -63,6 +63,7 @@ import {
   WEBCOMPONENTS_USAGE_EXAMPLES,
 } from "../knowledge/platforms/webcomponents.js";
 import { buildScalesGuidance } from "../knowledge/scales.js";
+import { THEME_ISLANDS_MARKDOWN } from "../knowledge/theme-islands.js";
 import { TYPOGRAPHY_PRESETS } from "../knowledge/typography.js";
 
 /**
@@ -89,6 +90,7 @@ export const RESOURCE_URIS = {
   ELEVATIONS: `${RESOURCE_SCHEME}://presets/elevations`,
   // Platform setup guidance
   GUIDANCE_PLATFORM_SETUP: `${RESOURCE_SCHEME}://guidance/platform-setup`,
+  GUIDANCE_THEME_ISLANDS: `${RESOURCE_SCHEME}://guidance/theme-islands`,
   // Color guidance resources (organized under colors/ parent)
   GUIDANCE_COLORS: `${RESOURCE_SCHEME}://guidance/colors`,
   GUIDANCE_COLORS_RULES: `${RESOURCE_SCHEME}://guidance/colors/rules`,
@@ -195,6 +197,13 @@ export const RESOURCE_DEFINITIONS = [
     name: "Platform Setup Guide",
     description:
       "Instruction guide for platform detection, Sass configuration, dependency handling, and the recommended theming workflow. Read this before generating theme code.",
+    mimeType: "text/markdown",
+  },
+  {
+    uri: RESOURCE_URIS.GUIDANCE_THEME_ISLANDS,
+    name: "Theme Islands Guide",
+    description:
+      "How to give a part of a page another theme than the rest of it, per platform: the theme in a selector, theme providers, prebuilt theme files in @scope, and what happens to overlays, drag ghosts and shadow roots. Read this before generating a theme with a scope.",
     mimeType: "text/markdown",
   },
   // Color guidance resources (organized under colors/ parent)
@@ -475,6 +484,13 @@ const RESOURCE_HANDLERS: Map<string, ResourceHandler> = new Map([
     RESOURCE_URIS.GUIDANCE_PLATFORM_SETUP,
     () => ({
       content: PLATFORM_SETUP_MARKDOWN,
+      mimeType: "text/markdown",
+    }),
+  ],
+  [
+    RESOURCE_URIS.GUIDANCE_THEME_ISLANDS,
+    () => ({
+      content: THEME_ISLANDS_MARKDOWN,
       mimeType: "text/markdown",
     }),
   ],
