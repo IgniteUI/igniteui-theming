@@ -53,6 +53,7 @@
 /// @param {List} $item-border-radius [null] - The border radius used for list item.
 /// @param {Color} $border-width [null] - The list border width.
 /// @param {Number} $border-color [null] - The list border color. Auto-derived from item-background (fluent/bootstrap).
+/// @param {Color} $item-focus-outline-color [null] - The focus outline color of the list item.
 /// @requires $light-material-schema
 /// @example scss - Change the list background color
 ///   $my-list-theme: list-theme($background: black);
@@ -91,7 +92,8 @@
     $item-thumbnail-color-active: null,
     $item-thumbnail-color-selected: null,
     $border-color: null,
-    $border-width: null
+    $border-width: null,
+    $item-focus-outline-color: null
 ) {
     $selector: #{config.element-prefix() + '-' + 'list'};
     $list-schema: ();
@@ -270,6 +272,7 @@
             item-thumbnail-color-selected: $item-thumbnail-color-selected,
             border-color: $border-color,
             border-width: $border-width,
+            item-focus-outline-color: $item-focus-outline-color,
         )
     );
 }
