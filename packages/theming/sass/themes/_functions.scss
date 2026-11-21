@@ -58,6 +58,15 @@
 /// @param {Map} $instructions - The map to be used as instruction set.
 /// @example scss - Resolve primary 500 color
 ///   $value: resolve-value((color: (primary, 500)));
+/// @example scss - Resolve a border radius for each size, with small as the default step
+///   $value: resolve-value((
+///     sizable: (
+///       (border-radius: rem(2px)),
+///       (border-radius: rem(8px)),
+///       (border-radius: rem(8px)),
+///       1,
+///     ),
+///   ));
 /// @returns {Map} The resolved value.
 @function resolve-value($instructions) {
     $result: ();
@@ -88,11 +97,34 @@
         }
 
         @if $self {
-            @if $fn == 'sizable' or $fn == 'border-radius' {
-                $func: meta.get-function($fn);
-                $result: meta.call($func, $args...);
+            @if $fn == 'border-radius' {
+                $result: border-radius($args...);
+            }
+
+            @if $fn == 'sizable' {
+                $result: sizable(_resolve-args($args)...);
             }
         }
+    }
+
+    @return $result;
+}
+
+/// Resolves the arguments of an instruction that are instructions themselves.
+/// @access private
+/// @param {List} $args - The arguments of an instruction.
+/// @example scss - Resolve the border radius argument and keep the plain one
+///   $args: _resolve-args(((border-radius: rem(2px)), rem(8px)));
+/// @returns {List} The arguments, with each map replaced by its resolved value.
+@function _resolve-args($args) {
+    $result: ();
+
+    @each $arg in $args {
+        @if meta.type-of($arg) == 'map' {
+            $arg: resolve-value($arg);
+        }
+
+        $result: list.append($result, $arg, $separator: comma);
     }
 
     @return $result;
@@ -157,18 +189,30 @@
 /// @param {Number} $sm - The preferred value when the component's size is small.
 /// @param {Number} $md [$sm] - The preferred value when the component's size is medium.
 /// @param {Number} $lg [$md] - The preferred value when the component's size is large.
+/// @param {Number} $default [null] - The size (1, 2 or 3) used when the component doesn't include the sizable() mixin. When null, that component gets the largest step.
 /// @example scss
 ///   --size: #{sizable(rem(40px), rem(64px), rem(88px))};
+/// @example scss - Use the small step without the sizable() mixin
+///   --radius: #{sizable(rem(2px), rem(8px), rem(8px), $default: 1)};
 /// @return {Function} The evaluated value.
-@function sizable($sm, $md: $sm, $lg: $md) {
+@function sizable($sm, $md: $sm, $lg: $md, $default: null) {
     $sm: _abs($sm);
     $md: _abs($md);
     $lg: _abs($lg);
+    $fallbacks: (1, 1, 1);
+
+    @if $default {
+        @if not list.index((1, 2, 3), $default) {
+            @error 'sizable() expects $default to be 1 (small), 2 (medium) or 3 (large), got #{meta.inspect($default)}.';
+        }
+
+        $fallbacks: list.set-nth((0, 0, 0), $default, 1);
+    }
 
     @return max(
-        calc(var(--is-large, 1) * #{$lg}),
-        calc(var(--is-medium, 1) * #{$md}),
-        calc(var(--is-small, 1) * #{$sm})
+        calc(var(--is-large, #{list.nth($fallbacks, 3)}) * #{$lg}),
+        calc(var(--is-medium, #{list.nth($fallbacks, 2)}) * #{$md}),
+        calc(var(--is-small, #{list.nth($fallbacks, 1)}) * #{$sm})
     );
 }
 
