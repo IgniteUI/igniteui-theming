@@ -1013,6 +1013,83 @@ $schema: (
                 }
             }
 
+            @include it('should fall back to every step without a default size') {
+                @include assert() {
+                    @include output() {
+                        width: sizable(2px, 8px, 8px);
+                    }
+
+                    @include expect() {
+                        width: max(
+                            calc(var(--is-large, 1) * 8px),
+                            calc(var(--is-medium, 1) * 8px),
+                            calc(var(--is-small, 1) * 2px)
+                        );
+                    }
+                }
+            }
+
+            @include it('should fall back to the step of the default size only') {
+                @include assert() {
+                    @include output() {
+                        width: sizable(2px, 4px, 8px, $default: 1);
+                        height: sizable(2px, 4px, 8px, $default: 2);
+                        margin: sizable(2px, 4px, 8px, $default: 3);
+                    }
+
+                    @include expect() {
+                        width: max(
+                            calc(var(--is-large, 0) * 8px),
+                            calc(var(--is-medium, 0) * 4px),
+                            calc(var(--is-small, 1) * 2px)
+                        );
+                        height: max(
+                            calc(var(--is-large, 0) * 8px),
+                            calc(var(--is-medium, 1) * 4px),
+                            calc(var(--is-small, 0) * 2px)
+                        );
+                        margin: max(
+                            calc(var(--is-large, 1) * 8px),
+                            calc(var(--is-medium, 0) * 4px),
+                            calc(var(--is-small, 0) * 2px)
+                        );
+                    }
+                }
+            }
+
+            @include it('should resolve the instruction maps inside a sizable instruction') {
+                $value: resolve-value(
+                    (
+                        sizable: (
+                            (
+                                border-radius: rem(2px),
+                            ),
+                            (
+                                border-radius: (
+                                    rem(8px),
+                                    rem(1px),
+                                    rem(16px),
+                                ),
+                            ),
+                            rem(8px),
+                            1,
+                        ),
+                    )
+                );
+
+                @include assert-equal(
+                    $value,
+                    sizable(border-radius(rem(2px)), border-radius(rem(8px), rem(1px), rem(16px)), rem(8px), 1)
+                );
+            }
+
+            @include it('should resolve a sizable instruction of plain values as before') {
+                @include assert-equal(
+                    resolve-value((sizable: (rem(32px), rem(40px), rem(48px)))),
+                    sizable(rem(32px), rem(40px), rem(48px))
+                );
+            }
+
             @include it('should fall back to the initial size values when they are not registered') {
                 @include assert() {
                     @include output() {
@@ -1115,11 +1192,7 @@ $schema: (
             }
 
             @include it('rounds the handle by 2px at small and 8px at medium and large, scaled by the radius factor, in every theme') {
-                $radius-steps: sizable(
-                    clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(2px)), rem(2px)),
-                    clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(8px)), rem(8px)),
-                    clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(8px)), rem(8px))
-                );
+                $radius-steps: sizable(border-radius(rem(2px)), border-radius(rem(8px)), border-radius(rem(8px)), 1);
 
                 @each $name, $schema in meta.module-variables(schemas) {
                     $theme: digest-schema(map.get($schema, 'splitter'));

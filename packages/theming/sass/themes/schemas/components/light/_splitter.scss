@@ -12,12 +12,12 @@
 /// @prop {Map} bar-color [color: ('gray', 200)] - The background color of the bar.
 /// @prop {Map} handle-color [color: ('gray', 400)] - The color for the bar drag handle.
 /// @prop {Map} expander-color [color: ('gray', 400)] - The color for the arrow expander's.
-/// @prop {List} border-radius [(rem(2px), rem(8px), rem(8px))] - The border radius of the bar drag handle for each size, scaled by the radius factor.
+/// @prop {Map} border-radius [sizable: (2px, 8px, 8px)] - The border radius of the drag handle at small, medium and large, scaled by the radius factor.
 /// @prop {Map} focus-color [color: ('primary', 500)] - The color used for focused splitter bar.
 /// @prop {Map} bar-color-active [color: ('gray', 300)] - The background color of the bar when pressed.
 /// @prop {Map} handle-color-active [color: ('gray', 600)] - The color for the bar drag handle when pressed.
 /// @prop {Map} expander-color-active [color: ('gray', 600)] - The color for the arrow expander's when pressed.
-/// @prop {Number} size [4px] - The base thickness: the drag handle and the arrow expander's at the small size. The components add a step to it for each size.
+/// @prop {Number} size [4px] - The drag handle thickness and the expander height at the small size. The bar and the medium and large sizes derive from it.
 /// @prop {Number} default-size [1] - The default size used for the splitter component.
 $light-splitter: (
     bar-color: (
@@ -72,12 +72,18 @@ $light-splitter: (
     size: rem(4px),
     default-size: 1,
 
-    // Each step is what border-radius() returns for a fixed value.
     border-radius: (
         sizable: (
-            clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(2px)), rem(2px)),
-            clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(8px)), rem(8px)),
-            clamp(rem(0), calc(var(--ig-radius-factor, 1) * rem(8px)), rem(8px)),
+            (
+                border-radius: rem(2px),
+            ),
+            (
+                border-radius: rem(8px),
+            ),
+            (
+                border-radius: rem(8px),
+            ),
+            1,
         ),
     ),
 
