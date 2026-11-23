@@ -40,6 +40,7 @@
 /// @prop {Map} item-border-radius [border-radius: (rem(0), rem(0), rem(24px))] - The border radius used for list item.
 /// @prop {Color} border-color [transparent] - The list border color.
 /// @prop {Number} border-width [0] - The list border width.
+/// @prop {Map} item-focus-outline-color [color: ('secondary', 500)] - The focus outline color of the list item.
 /// @prop {Number} default-size [2] - The default size used for the list component.
 $light-list: (
     background: (
@@ -186,6 +187,13 @@ $light-list: (
 
     border-width: 0,
 
+    item-focus-outline-color: (
+        color: (
+            'secondary',
+            500,
+        ),
+    ),
+
     border-radius: (
         border-radius: (
             rem(0),
@@ -243,6 +251,7 @@ $material-list: extend(
 /// @prop {Map} border-color [color: ('gray', 200)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
 /// @prop {Map} typography [header: (value: 'overline'), item: (value: 'caption'), title: (value: 'caption'), subtitle: (value: 'caption')] - The typography styles used for the component.
+/// @prop {Map} item-focus-outline-color [color: ('gray', 800)] - The focus outline color of the list item.
 /// @requires $light-list
 $fluent-list: extend(
     $light-list,
@@ -274,6 +283,12 @@ $fluent-list: extend(
                 value: 'caption',
             ),
         ),
+        item-focus-outline-color: (
+            color: (
+                'gray',
+                800,
+            ),
+        ),
         _meta: (
             theme: 'fluent',
         ),
@@ -292,6 +307,7 @@ $fluent-list: extend(
 /// @prop {Map} border-color [color: ('gray', 300)] - The list border color.
 /// @prop {Number} border-width [rem(1px)] - The list border width.
 /// @prop {Map} typography [header: (value: 'overline'), item: (value: 'body-2'), title: (value: 'body-1'), subtitle: (value: 'body-2')] - The typography styles used for the component.
+/// @prop {Map} item-focus-outline-color [color: ('primary', 200)] - The focus outline color of the list item.
 /// @requires $light-list
 $bootstrap-list: extend(
     $light-list,
@@ -369,6 +385,12 @@ $bootstrap-list: extend(
             ),
         ),
 
+        item-focus-outline-color: (
+            color: (
+                'primary',
+                200,
+            ),
+        ),
         _meta: (
             theme: 'bootstrap',
         ),
@@ -403,6 +425,7 @@ $bootstrap-list: extend(
 /// @prop {Map} item-thumbnail-color-selected [color: ('gray', 700)] - The list item thumbnail selected color.
 /// @prop {Number} item-border-radius [rem(4px)] - The border radius used for list item.
 /// @prop {Map} typography [ header: (value: 'overline'), item: (value: 'body-2'), title: (value: 'body-2'), subtitle: (value: 'body-2')] - The typography styles used for the component.
+/// @prop {Map} item-focus-outline-color [color: ('primary', 400)] - The focus outline color of the list item.
 /// @requires $light-list
 $indigo-list: extend(
     $light-list,
@@ -579,6 +602,12 @@ $indigo-list: extend(
             ),
         ),
 
+        item-focus-outline-color: (
+            color: (
+                'primary',
+                400,
+            ),
+        ),
         _meta: (
             theme: 'indigo',
         ),
