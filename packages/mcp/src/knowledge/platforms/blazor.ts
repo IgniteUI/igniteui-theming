@@ -40,7 +40,7 @@ export const BLAZOR_PLATFORM = {
   configFiles: [".csproj"],
 
   /**
-   * No required root class (themes apply via CSS variables on :root)
+   * No required root class (themes apply via CSS variables on :root, :scope, :host)
    */
   rootClass: null,
 } as const;

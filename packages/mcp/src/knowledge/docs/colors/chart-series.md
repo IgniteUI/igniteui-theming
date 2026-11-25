@@ -9,7 +9,7 @@ Two variants of this palette exist:
 - **Regular** — the default, visually distinct categorical colors.
 - **Color-blind** — an alternate palette chosen for better distinguishability under common color vision deficiencies.
 
-Both are exposed as a single CSS custom property, `--chart-brushes`, set once at `:root` by the chart theme mixin:
+Both are exposed as a single CSS custom property, `--chart-brushes`, set once at `:root, :scope, :host` by the chart theme mixin:
 
 ```scss
 --chart-brushes: var(--ig-chart-brushes, #{color.chart-brushes()});
@@ -59,6 +59,7 @@ Note that Financial Chart's `negative-brushes`/`negative-outlines` default to th
 Pass an explicit color list to any of the tokens above to override the shared palette for that chart instance's theme:
 
 ```scss
+@use 'igniteui-theming/sass/themes' as *;
 @use 'igniteui-theming/sass/themes/charts' as *;
 
 $custom-chart-theme: category-chart-theme(
@@ -66,12 +67,10 @@ $custom-chart-theme: category-chart-theme(
   $marker-brushes: (#4285f4, #ea4335, #fbbc05, #34a853),
 );
 
-:root {
-  @include tokens($custom-chart-theme);
-}
+@include tokens($custom-chart-theme);
 ```
 
-`tokens()` is the current mixin for emitting a theme's CSS custom properties — it superseded the deprecated `css-vars()` mixin (which now just forwards to `tokens($theme, $mode: 'scoped')` internally). Chart themes are applied globally, so use the default `'global'` mode at `:root` as shown above, matching the pattern the framework itself uses in `themes/charts/_theme.scss` (`@include tokens(category-chart-theme($schema: $schema));`).
+`tokens()` is the current mixin for emitting a theme's CSS custom properties — it superseded the deprecated `css-vars()` mixin (which now just forwards to `tokens($theme, $mode: 'scoped')` internally). Chart themes are applied globally, so use the default `'global'` mode at the top level of the stylesheet as shown above, which writes to `:root, :scope, :host`, matching the pattern the framework itself uses in `themes/charts/_theme.scss` (`@include tokens(category-chart-theme($schema: $schema));`).
 
 You can also override the shared palette globally (affecting every chart using `series` for a given token) by setting the `--ig-chart-brushes` CSS custom property, which the theme mixin reads before falling back to the built-in palette:
 

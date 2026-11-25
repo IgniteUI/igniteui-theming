@@ -76,6 +76,24 @@
             }
         }
 
+        @include it('should resolve the global scope to the root selector at the root of the stylesheet, and to & inside a selector') {
+            @include assert-equal(global-scope(), ':root, :scope, :host');
+
+            @include configure-root-selector(':scope, :host');
+            @include assert-equal(global-scope(), ':scope, :host');
+            @include configure-root-selector(':root, :scope, :host');
+
+            @include assert() {
+                @include output($selector: true) {
+                    content: global-scope();
+                }
+
+                @include expect($selector: true) {
+                    content: '&';
+                }
+            }
+        }
+
         @include it('should emit the content of once() a single time for each key') {
             @include once-reset('spec.once');
 
