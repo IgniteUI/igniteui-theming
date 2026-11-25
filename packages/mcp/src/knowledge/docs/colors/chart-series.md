@@ -59,6 +59,7 @@ Note that Financial Chart's `negative-brushes`/`negative-outlines` default to th
 Pass an explicit color list to any of the tokens above to override the shared palette for that chart instance's theme:
 
 ```scss
+@use 'igniteui-theming/sass/themes' as *;
 @use 'igniteui-theming/sass/themes/charts' as *;
 
 $custom-chart-theme: category-chart-theme(

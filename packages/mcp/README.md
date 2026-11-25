@@ -438,7 +438,7 @@ Sets the size scale for all components or a specific component by updating `--ig
 | ----------- | ----------------------------------------------------------- | -------- | ----------------------------------------------- |
 | `size`      | `"small"` \| `"medium"` \| `"large"` \| `1` \| `2` \| `3`   | Yes      | Size value (small/medium/large or 1/2/3)        |
 | `component` | string                                                      | No       | Component name to scope (e.g., `"flat-button"`) |
-| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)            |
+| `scope`     | string                                                      | No       | CSS selector scope (default `:root, :scope, :host`)            |
 | `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                   |
 | `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                |
 
@@ -460,7 +460,7 @@ Sets the spacing scale for all components or a specific component by updating `-
 | `inline`    | number                                                      | No       | Override inline spacing (`--ig-spacing-inline`)   |
 | `block`     | number                                                      | No       | Override block spacing (`--ig-spacing-block`)     |
 | `component` | string                                                      | No       | Component name to scope                           |
-| `scope`     | string                                                      | No       | CSS selector scope (default `:root`)              |
+| `scope`     | string                                                      | No       | CSS selector scope (default `:root, :scope, :host`)              |
 | `platform`  | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors                     |
 | `output`    | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)                  |
 
@@ -480,7 +480,7 @@ Sets the roundness scale for all components or a specific component by updating 
 | -------------- | ----------------------------------------------------------- | -------- | ------------------------------------ |
 | `radiusFactor` | number                                                      | Yes      | Roundness factor (0 = min, 1 = max)  |
 | `component`    | string                                                      | No       | Component name to scope              |
-| `scope`        | string                                                      | No       | CSS selector scope (default `:root`) |
+| `scope`        | string                                                      | No       | CSS selector scope (default `:root, :scope, :host`) |
 | `platform`     | `"angular"` \| `"webcomponents"` \| `"react"` \| `"blazor"` | No       | Target platform for selectors        |
 | `output`       | `"css"` \| `"sass"`                                         | No       | Output format (default: `"css"`)     |
 
@@ -720,7 +720,7 @@ The AI will first use `detect_platform`, then use the detected platform for `cre
 
 - Uses the same Sass as Web Components: `typography()` and `theme()` from `igniteui-theming/sass/themes/theme`
 - Common project setups: Vite (configure `css.preprocessorOptions.scss.loadPaths` in `vite.config.ts`) or Next.js (`sassOptions.includePaths` in `next.config.js`)
-- No required root class; themes apply via CSS custom properties on `:root`
+- No required root class; themes apply via CSS custom properties on `:root, :scope, :host`
 - Ships pre-compiled CSS; `igniteui-theming` must be installed separately for custom Sass theming
 - Default output format: `"css"` (use `output: "sass"` only when a Sass pipeline is confirmed)
 

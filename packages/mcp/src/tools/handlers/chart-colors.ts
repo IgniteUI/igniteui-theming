@@ -261,6 +261,7 @@ function buildChartTypeText(chartType: string, palette: string[]): TextResult {
 
     lines.push(
       "```scss",
+      "@use 'igniteui-theming/sass/themes' as *;",
       "@use 'igniteui-theming/sass/themes/charts' as *;",
       "",
       `$custom-theme: ${info.themeFunctionName}(${exampleArgs}\n);`,

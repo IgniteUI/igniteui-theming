@@ -316,16 +316,63 @@ $scale: type-scale(
 
                 @include contains($selector: false) {
                     .ig-typography h1,
-                    :where(.ig-typography:scope, .ig-typography :scope, :host(.ig-typography)) h1 {
+                    :host(:where(.ig-typography)) h1,
+                    :where(.ig-typography:scope, .ig-typography :scope) h1 {
                         @include type-style('h1');
                     }
 
                     .ig-typography .ig-typography__h1,
-                    :where(.ig-typography:scope, .ig-typography :scope, :host(.ig-typography)) .ig-typography__h1 {
+                    :host(:where(.ig-typography)) .ig-typography__h1,
+                    :where(.ig-typography:scope, .ig-typography :scope) .ig-typography__h1 {
                         @include type-style('h1');
                     }
                 }
             }
+        }
+
+        @include it('should put the class inside the argument of a :host() root selector') {
+            @include configure-root-selector(':host(.dark), :scope');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include typography('Roboto, sans-serif', $scale);
+                }
+
+                @include contains($selector: false) {
+                    .ig-typography h1,
+                    :host(:where(.dark.ig-typography)) h1,
+                    :where(.ig-typography:scope, .ig-typography :scope) h1 {
+                        @include type-style('h1');
+                    }
+
+                    .ig-typography .ig-typography__h1,
+                    :host(:where(.dark.ig-typography)) .ig-typography__h1,
+                    :where(.ig-typography:scope, .ig-typography :scope) .ig-typography__h1 {
+                        @include type-style('h1');
+                    }
+                }
+            }
+
+            @include configure-root-selector(':root, :scope, :host');
+        }
+
+        @include it('should treat a :host() followed by other selectors as a regular root selector') {
+            @include configure-root-selector(':host(.a) .b');
+
+            @include assert() {
+                @include output($selector: false) {
+                    @include typography('Roboto, sans-serif', $scale);
+                }
+
+                @include contains($selector: false) {
+                    .ig-typography h1,
+                    :where(:host(.a) .b.ig-typography, .ig-typography :host(.a) .b) h1 {
+                        @include type-style('h1');
+                    }
+                }
+            }
+
+            @include configure-root-selector(':root, :scope, :host');
         }
 
         @include it('should use only the class with a :root root selector') {
