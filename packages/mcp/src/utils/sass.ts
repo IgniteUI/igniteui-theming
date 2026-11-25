@@ -463,6 +463,8 @@ export interface ThemeSassOptions {
   fontFamily?: string;
   includeTypography?: boolean;
   includeElevations?: boolean;
+  /** A selector for a theme island. Without it, the theme applies to the root selector of the themes. */
+  scope?: string;
 }
 
 /**
@@ -481,6 +483,21 @@ interface ThemeBody {
   variables: string[];
   /** Whether the theme uses a preset palette, which needs the color presets. */
   presetPalette: boolean;
+}
+
+/**
+ * Wraps statements in a selector block, or returns them as they are without a selector.
+ */
+export function wrapInScope(statements: string[], scope?: string): string[] {
+  if (!scope) {
+    return statements;
+  }
+
+  return [
+    `${scope} {`,
+    ...statements.map((line) => (line ? `  ${line}` : line)),
+    "}",
+  ];
 }
 
 /**
@@ -523,6 +540,7 @@ function generateThemeBody(options: ThemeSassOptions): ThemeBody {
   }
 
   const variables = [paletteVar, schemaVar];
+  const includes: string[] = [];
 
   if (includeTypography) {
     const typeScaleVar = TYPE_SCALE_PRESETS[designSystem];
@@ -537,7 +555,7 @@ function generateThemeBody(options: ThemeSassOptions): ThemeBody {
 
     if (!fontFamily) variables.push(typeface);
     variables.push(typeScaleVar);
-    lines.push(`@include typography(${args.join(", ")});`);
+    includes.push(`@include typography(${args.join(", ")});`);
   }
 
   const themeArgs = [`$palette: ${paletteVar}`, `$schema: ${schemaVar}`];
@@ -546,7 +564,8 @@ function generateThemeBody(options: ThemeSassOptions): ThemeBody {
     themeArgs.push("$exclude: (elevations)");
   }
 
-  lines.push(`@include theme(${themeArgs.join(", ")});`);
+  includes.push(`@include theme(${themeArgs.join(", ")});`);
+  lines.push(...wrapInScope(includes, options.scope));
 
   return { lines, variables, presetPalette };
 }

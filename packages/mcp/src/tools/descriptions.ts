@@ -131,6 +131,7 @@ export const TOOL_DESCRIPTIONS = {
 
 <related_resources>
   - "theming://guidance/platform-setup": Comprehensive setup guide covering detection workflow, Sass load path configuration, dependency handling, and the recommended theming sequence. Read this for detailed platform-specific setup instructions.
+  - "theming://guidance/theme-islands": How to give a part of the page another theme than the rest of it, per platform.
 </related_resources>`,
 
   // ---------------------------------------------------------------------------
@@ -544,6 +545,15 @@ export const TOOL_DESCRIPTIONS = {
   - Web Components, React and Blazor: Use typography() and theme() from igniteui-theming/sass/themes/theme
   - Blazor: The compiled theme CSS is referenced in Blazor components
 
+  THEME ISLANDS:
+  - For a part of the page with another theme than the rest of it (e.g. a dark panel in a
+    light app, or another design system), pass the selector of that part as "scope".
+    typography() and theme() then go inside that selector, and the output is meant to come
+    after the app's theme. For Angular, core() is left out, as the app includes it once.
+  - Web Components, React and Blazor also need a theme provider around the island's content
+    for the component styles; the response includes the markup.
+  - Read "theming://guidance/theme-islands" before generating an island.
+
   ${FRAGMENTS.SASS_FILE_PLACEMENT}
 </important_notes>
 
@@ -590,6 +600,7 @@ export const TOOL_DESCRIPTIONS = {
 
   <related_resources>
   Call read_resource to load reference data:
+  - "theming://guidance/theme-islands" — themes for a part of the page
   - "theming://presets/palettes" — preset palette colors
   - "theming://guidance/colors" — color guidance overview
   - "theming://guidance/colors/rules" — light/dark theme color rules
@@ -875,10 +886,9 @@ export const TOOL_DESCRIPTIONS = {
   - Scope the dark call under the app's dark-mode selector so it doesn't override the
     light theme (e.g. ".your-dark-scope igc-avatar").
   - Put that dark-mode selector on a root element (\`html\`, \`body\`, or the app's theme
-    root), not on an app container. On Angular, overlay-hosted components
-    (\`.igx-dialog\`, \`.igx-drop-down__list\`, \`.igx-tooltip\`, \`.igx-overlay__content\`)
-    are moved to the overlay outlet under \`body\`, so a scope on an app container
-    won't match them.
+    root), not on an app container. Drag ghosts render in \`body\`, and so do the overlays
+    of Ignite UI for Angular before 21.2, so a scope on an app container won't match them.
+    For a part of the page with another theme, see "theming://guidance/theme-islands".
   - The response includes a note with the scoped selector for the other variant.
 
   TOKEN VALIDATION:
@@ -1307,6 +1317,7 @@ Important: Gray progression is INVERTED for dark themes (50=darkest, 900=lightes
   // ---------------------------------------------------------------------------
   layoutComponent: `Optional component name to scope the layout change (e.g., "flat-button", "calendar", "avatar"). If omitted, the change applies globally via :root, :scope, :host. Note: component targets Ignite UI framework selectors — do not use with platform "generic". Use "scope" instead for custom CSS selectors.`,
   scope: `Optional CSS selector scope for the change (e.g., ".my-theme", ":root", "#app"). Ignored when component is provided.`,
+  themeScope: `Optional selector of a theme island, a part of the page with another theme than the rest of it (e.g., ".reports-panel"). The theme then applies to that element and its descendants, after the app's theme. Omit it for the app's theme.`,
   sizeValue: `Size value to set for --ig-size. Accepts "small" (1), "medium" (2), "large" (3), or numeric 1, 2, 3 only.`,
   spacing:
     "Spacing scale multiplier for --ig-spacing. 0 = none, 1 = default, 2 = double. Fractions allowed.",

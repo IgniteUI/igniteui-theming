@@ -207,6 +207,7 @@ function registerTools(server: McpServer): void {
         fontFamily: createThemeSchema.shape.fontFamily,
         includeTypography: createThemeSchema.shape.includeTypography,
         includeElevations: createThemeSchema.shape.includeElevations,
+        scope: createThemeSchema.shape.scope,
         output: createThemeSchema.shape.output,
       },
     },

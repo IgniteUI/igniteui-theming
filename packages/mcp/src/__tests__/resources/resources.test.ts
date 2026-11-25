@@ -45,6 +45,14 @@ describe("resource handlers", () => {
     expect(result?.content.length).toBeGreaterThan(0);
   });
 
+  it("returns theme islands guidance resource", () => {
+    const result = getResourceContent(RESOURCE_URIS.GUIDANCE_THEME_ISLANDS);
+
+    expect(result).not.toBeNull();
+    expect(result?.mimeType).toBe("text/markdown");
+    expect(result?.content).toContain("# Theme Islands");
+  });
+
   it("returns layout documentation resource", () => {
     const result = getResourceContent(RESOURCE_URIS.DOCS_LAYOUT_OVERVIEW);
 

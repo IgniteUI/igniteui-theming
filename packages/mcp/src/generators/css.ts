@@ -445,6 +445,8 @@ export interface ThemeCssOptions {
   name?: string;
   scales?: ScalesInput;
   generator?: ShadeGenerator;
+  /** A selector for a theme island */
+  scope?: string;
   /** Internal testing parameter for Sass importers */
   _importers?: FileImporter[];
 }
@@ -488,6 +490,7 @@ export async function generateThemeCss(
     fontFamily: options.fontFamily,
     includeTypography: options.includeTypography !== false,
     includeElevations: options.includeElevations !== false,
+    scope: options.scope,
   });
 
   try {

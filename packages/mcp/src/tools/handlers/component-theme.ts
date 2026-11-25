@@ -71,7 +71,7 @@ function getVariantNote(variant: string, selector: string | undefined): string {
     : "";
 
   if (variant === "dark") {
-    return `\n\n🌗 **Light & dark:** This block covers the dark variant only. Scope it under your app's dark-mode selector${example} so it doesn't override the light theme. Put that selector on a root element (\`html\` or \`body\`) so overlay content is included. For the light variant, call again with \`variant: "light"\` and token values for a light surface.`;
+    return `\n\n🌗 **Light & dark:** This block covers the dark variant only. Scope it under your app's dark-mode selector${example} so it doesn't override the light theme. Put that selector on a root element (\`html\` or \`body\`) so drag ghosts, which render in \`body\`, are included. For the light variant, call again with \`variant: "light"\` and token values for a light surface.`;
   }
 
   return `\n\n🌗 **Light & dark:** This block covers the light variant only. For a dark variant, call again with \`variant: "dark"\` and token values for a dark surface (usually different from these), and scope it under your app's dark-mode selector${example}.`;

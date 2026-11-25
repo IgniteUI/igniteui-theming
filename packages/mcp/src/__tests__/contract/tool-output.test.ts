@@ -18,6 +18,23 @@ import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import * as sass from "sass-embedded";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createServer } from "../../server.js";
+import {
+  createComponentThemeSchema,
+  createCustomPaletteSchema,
+  createElevationsSchema,
+  createPaletteSchema,
+  createThemeSchema,
+  createTypographySchema,
+  detectPlatformSchema,
+  fitColorScaleSchema,
+  getChartSeriesColorsSchema,
+  getColorSchema,
+  getComponentDesignTokensSchema,
+  readResourceSchema,
+  setRoundnessSchema,
+  setSizeSchema,
+  setSpacingInputSchema,
+} from "../../tools/index.js";
 
 type Platform = "angular" | "webcomponents" | "react" | "blazor" | "generic";
 
@@ -233,6 +250,30 @@ describe("tool output compiles", () => {
         surfaceColor: SURFACES.light,
         fontFamily: "'Inter', sans-serif",
       });
+    });
+
+    it.each(
+      cartesian({ platform: PLATFORMS, output: OUTPUTS }),
+    )("$platform / $output for a theme island", async ({
+      platform,
+      output,
+    }) => {
+      const args = {
+        platform,
+        output,
+        designSystem: "indigo",
+        variant: "dark",
+        primaryColor: "#7b2cbf",
+        secondaryColor: "#ff9e00",
+        surfaceColor: SURFACES.dark,
+        scope: ".reports-panel",
+      };
+
+      await expectCompiles("create_theme", args);
+
+      const { text } = await callTool("create_theme", args);
+
+      expect(text).toContain(".reports-panel");
     });
   });
 
@@ -455,5 +496,44 @@ describe("handler failures are flagged with isError", () => {
     });
 
     expect(isError, text).toBe(true);
+  });
+});
+
+describe("tool registration", () => {
+  const schemas: Record<string, { shape: Record<string, unknown> }> = {
+    detect_platform: detectPlatformSchema,
+    create_palette: createPaletteSchema,
+    create_custom_palette: createCustomPaletteSchema,
+    create_typography: createTypographySchema,
+    create_elevations: createElevationsSchema,
+    create_theme: createThemeSchema,
+    set_size: setSizeSchema,
+    set_spacing: setSpacingInputSchema,
+    set_roundness: setRoundnessSchema,
+    get_component_design_tokens: getComponentDesignTokensSchema,
+    create_component_theme: createComponentThemeSchema,
+    get_color: getColorSchema,
+    get_chart_series_colors: getChartSeriesColorsSchema,
+    fit_color_scale: fitColorScaleSchema,
+    read_resource: readResourceSchema,
+  };
+
+  it("registers every tool", async () => {
+    const { tools } = await client.listTools();
+
+    expect(tools.map((t) => t.name).sort()).toEqual(
+      Object.keys(schemas).sort(),
+    );
+  });
+
+  it.each(
+    Object.keys(schemas),
+  )("%s accepts every parameter of its schema", async (name) => {
+    const { tools } = await client.listTools();
+    const tool = tools.find((t) => t.name === name);
+
+    expect(Object.keys(tool?.inputSchema.properties ?? {}).sort()).toEqual(
+      Object.keys(schemas[name].shape).sort(),
+    );
   });
 });
