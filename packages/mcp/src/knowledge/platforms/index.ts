@@ -33,22 +33,9 @@ export { BLAZOR_PLATFORM, BLAZOR_USAGE_EXAMPLES } from "./blazor.js";
 export { REACT_PLATFORM, REACT_USAGE_EXAMPLES } from "./react.js";
 // Web Components platform
 export {
-  // Helper functions for testability and reuse
-  generateWCHeader,
-  generateWCImports,
-  generateWCProgressProperties,
-  generateWCRootVariables,
-  generateWCRtlSupport,
-  generateWCScrollbarCustomization,
-  generateWCScrollbarUtility,
-  generateWCThemingMixins,
-  generateWCTileManagerTransitions,
-  generateWebComponentsThemeSass,
-  getWCElevationPreset,
   WEBCOMPONENTS_PLATFORM,
   WEBCOMPONENTS_RUNTIME_CONFIG,
   WEBCOMPONENTS_USAGE_EXAMPLES,
-  type WebComponentsThemeTemplate,
 } from "./webcomponents.js";
 
 // ============================================================================

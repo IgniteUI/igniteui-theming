@@ -203,7 +203,13 @@ After detection and setup, follow this order for a complete theme:
 
 ### Preset imports for non-Angular platforms
 
-For all non-Angular platforms (Web Components, React, Blazor, Generic), using preset variables such as `$material-type-scale`, `$indigo-type-scale`, `$material-elevations`, or `$indigo-elevations` requires additional `@use` imports beyond the base `@use 'igniteui-theming' as *;`:
+`create_theme` uses the theme entry point, which forwards the root module, all the presets and the schemas, like Angular's `igniteui-angular/theming`:
+
+```scss
+@use 'igniteui-theming/sass/themes/theme' as *;
+```
+
+With the root module alone, for all non-Angular platforms (Web Components, React, Blazor, Generic), using preset variables such as `$material-type-scale`, `$indigo-type-scale`, `$material-elevations`, or `$indigo-elevations` requires additional `@use` imports beyond the base `@use 'igniteui-theming' as *;`:
 
 ```scss
 // Base module (always required)
@@ -216,7 +222,7 @@ For all non-Angular platforms (Web Components, React, Blazor, Generic), using pr
 @use 'igniteui-theming/sass/elevations/presets' as *;
 ```
 
-The MCP tools (`create_typography`, `create_elevations`, `create_theme`) automatically include these imports in their generated Sass output. Angular is not affected — its `igniteui-angular/theming` module re-exports all presets.
+The MCP tools `create_typography` and `create_elevations` include these imports in their generated Sass output. Angular is not affected — its `igniteui-angular/theming` module re-exports all presets.
 
 ---
 

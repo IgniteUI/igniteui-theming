@@ -6,12 +6,24 @@
  * (standalone tools and platform-specific theme generators).
  */
 
-import { SHADE_LEVELS } from "../knowledge/index.js";
+import {
+  PALETTE_PRESETS,
+  PALETTES_PRESETS,
+  SCHEMA_PRESETS,
+  SHADE_LEVELS,
+  TYPE_SCALE_PRESETS,
+  TYPEFACE_PRESETS,
+} from "../knowledge/index.js";
+import type { PalettePresetName } from "../knowledge/palettes.js";
 import {
   ALL_COLOR_SHADES,
   type ColorDefinition,
+  type DesignSystem,
   type GrayDefinition,
   type Platform,
+  type ScaleSpec,
+  type ScalesInput,
+  type ShadeGenerator,
   SURFACE_ROLES,
   type SurfaceDefinition,
   type ThemeVariant,
@@ -370,6 +382,229 @@ export function generateElevationsCode(
 ): string[] {
   const indent = options.indent ?? "";
   return [`${indent}@include elevations(${options.elevationsVar});`];
+}
+
+/**
+ * Renders a scale spec as Sass. A preset is a quoted name; an inline spec becomes a map of
+ * the `range` it spans and the `curve` that eases across it.
+ */
+function scaleToSass(spec: ScaleSpec): string {
+  if (typeof spec === "string") {
+    return `'${spec}'`;
+  }
+
+  const parts: string[] = [];
+
+  if (spec.range) parts.push(`range: (${spec.range.join(", ")})`);
+  if (spec.curve) parts.push(`curve: (${spec.curve.join(", ")})`);
+  if (spec.anchor) parts.push(`anchor: '${spec.anchor}'`);
+
+  return `(${parts.join(", ")})`;
+}
+
+/**
+ * Renders the `$scales` argument. A bare spec applies to every family; a map keyed by
+ * family name applies per family.
+ */
+function scalesToSass(scales: ScalesInput): string {
+  if (typeof scales === "string") {
+    return `'${scales}'`;
+  }
+
+  if ("range" in scales || "curve" in scales || "anchor" in scales) {
+    return scaleToSass(scales as ScaleSpec);
+  }
+
+  const entries = Object.entries(scales as Record<string, ScaleSpec>).map(
+    ([family, spec]) => `'${family}': ${scaleToSass(spec)}`,
+  );
+
+  return `(${entries.join(", ")})`;
+}
+
+/**
+ * Appends the optional `$generator` and `$scales` arguments to a palette() call.
+ */
+export function appendShadeArgs(
+  args: string[],
+  input: { generator?: ShadeGenerator; scales?: ScalesInput },
+): void {
+  if (input.generator) args.push(`$generator: '${input.generator}'`);
+  if (input.scales) args.push(`$scales: ${scalesToSass(input.scales)}`);
+}
+
+// ============================================================================
+// GLOBAL THEME CODE GENERATION
+// ============================================================================
+
+/** The igniteui-theming module with `theme()`, the presets and the schemas. */
+export const THEME_ENTRY_POINT = "igniteui-theming/sass/themes/theme";
+
+/** The igniteui-theming module with `theme()` alone, without the presets. */
+export const GLOBAL_THEME_MODULE = "igniteui-theming/sass/themes/global-theme";
+
+/**
+ * Options for a global theme built on the igniteui-theming theme entry point.
+ */
+export interface ThemeSassOptions {
+  designSystem: DesignSystem;
+  variant: ThemeVariant;
+  /** The Ignite UI product, or `generic` for igniteui-theming on its own. */
+  platform?: Platform;
+  /** Custom colors. Without any, the preset palette of the design system and variant is used. */
+  primaryColor?: string;
+  secondaryColor?: string;
+  surfaceColor?: string;
+  /** Variable name for a custom palette, without the `$`. */
+  paletteName?: string;
+  generator?: ShadeGenerator;
+  scales?: ScalesInput;
+  /** A font family in place of the design system's typeface. */
+  fontFamily?: string;
+  includeTypography?: boolean;
+  includeElevations?: boolean;
+}
+
+/**
+ * Generated global theme code and the Sass variables it uses.
+ */
+export interface ThemeSassResult {
+  code: string;
+  variables: string[];
+}
+
+/**
+ * The statements of a global theme, without its `@use` rules.
+ */
+interface ThemeBody {
+  lines: string[];
+  variables: string[];
+  /** Whether the theme uses a preset palette, which needs the color presets. */
+  presetPalette: boolean;
+}
+
+/**
+ * Builds the palette, `typography()` and `theme()` statements of a global theme.
+ * The Ignite UI components let elements opt out of the typography with `data-no-typography`,
+ * so the products get `$allow-exclusion: true`.
+ */
+function generateThemeBody(options: ThemeSassOptions): ThemeBody {
+  const {
+    designSystem,
+    variant,
+    platform,
+    primaryColor,
+    secondaryColor,
+    surfaceColor,
+    fontFamily,
+    includeTypography = true,
+    includeElevations = true,
+  } = options;
+
+  const schemaVar = SCHEMA_PRESETS[variant][designSystem];
+  const lines: string[] = [];
+  const presetPalette = !(primaryColor || secondaryColor || surfaceColor);
+  let paletteVar: string = PALETTES_PRESETS[variant][designSystem];
+
+  if (!presetPalette) {
+    const preset =
+      PALETTE_PRESETS[
+        `${variant}-${designSystem}-palette` as PalettePresetName
+      ];
+    const args = [
+      `$primary: ${primaryColor ?? preset.primary}`,
+      `$secondary: ${secondaryColor ?? preset.secondary}`,
+      `$surface: ${surfaceColor ?? preset.surface}`,
+    ];
+
+    appendShadeArgs(args, options);
+    paletteVar = `$${options.paletteName ?? `custom-${variant}`}-palette`;
+    lines.push(`${paletteVar}: palette(`, `  ${args.join(",\n  ")}`, ");", "");
+  }
+
+  const variables = [paletteVar, schemaVar];
+
+  if (includeTypography) {
+    const typeScaleVar = TYPE_SCALE_PRESETS[designSystem];
+    const typeface = fontFamily
+      ? quoteFontFamily(fontFamily)
+      : TYPEFACE_PRESETS[designSystem];
+    const args = [`$font-family: ${typeface}`, `$type-scale: ${typeScaleVar}`];
+
+    if (platform && platform !== "generic") {
+      args.push("$allow-exclusion: true");
+    }
+
+    if (!fontFamily) variables.push(typeface);
+    variables.push(typeScaleVar);
+    lines.push(`@include typography(${args.join(", ")});`);
+  }
+
+  const themeArgs = [`$palette: ${paletteVar}`, `$schema: ${schemaVar}`];
+
+  if (!includeElevations) {
+    themeArgs.push("$exclude: (elevations)");
+  }
+
+  lines.push(`@include theme(${themeArgs.join(", ")});`);
+
+  return { lines, variables, presetPalette };
+}
+
+/**
+ * Generates a global theme: `typography()` and `theme()` from the theme entry point,
+ * with the preset palette of the design system and variant, or a custom palette.
+ * Angular apps use Angular's own `theme()` for Sass, so for Angular this is the
+ * globals-only CSS output.
+ */
+export function generateThemeSass(options: ThemeSassOptions): ThemeSassResult {
+  const { lines, variables } = generateThemeBody(options);
+  const code = [
+    SASS_USE_INLINE_COMMENT,
+    `@use '${THEME_ENTRY_POINT}' as *;`,
+    "",
+    ...lines,
+  ];
+
+  return { code: `${code.join("\n")}\n`, variables };
+}
+
+/**
+ * Generates the theme of `generateThemeSass()` for compiling it to CSS. It loads `theme()`
+ * and only the presets the theme uses, instead of the entry point, which also loads every
+ * color preset. The compiled CSS is the same.
+ */
+export function generateThemeCompileSass(options: ThemeSassOptions): string {
+  const { lines, presetPalette } = generateThemeBody(options);
+  const modules = [
+    "igniteui-theming/sass",
+    GLOBAL_THEME_MODULE,
+    "igniteui-theming/sass/themes/schemas",
+  ];
+
+  if (options.includeTypography !== false) {
+    modules.push("igniteui-theming/sass/typography/presets");
+  }
+
+  if (presetPalette) {
+    modules.push("igniteui-theming/sass/color/presets");
+  }
+
+  const code = [...modules.map((url) => `@use '${url}' as *;`), "", ...lines];
+
+  return `${code.join("\n")}\n`;
+}
+
+/**
+ * Renders a theme example for the docs with the generator, so it can't drift from its output.
+ */
+export function generateThemeExample(
+  comments: string[],
+  options: ThemeSassOptions,
+): string {
+  const { code } = generateThemeSass(options);
+
+  return `\n${comments.map((line) => `// ${line}`).join("\n")}\n${code}`;
 }
 
 // ============================================================================
