@@ -28,6 +28,16 @@ The sizable() function chooses between small/medium/large values using:
 }
 ```
 
+## Default step without the sizable() mixin
+Without `@include sizable()` the `--is-*` flags are not set, and the function returns the largest of the three values. Pass `$default` (1, 2 or 3) to return that step instead.
+
+```scss
+.my-handle {
+  // 2px when the element does not include sizable()
+  border-radius: sizable(2px, 8px, 8px, $default: 1);
+}
+```
+
 ## Notes
-- Requires `@include sizable()` in component styles.
+- Requires `@include sizable()` in component styles. Without it, the value is the largest step, or the `$default` step when it is set.
 - Requires the size variables, which `theme()` registers. Without `theme()`, include `@include sizing()` once.

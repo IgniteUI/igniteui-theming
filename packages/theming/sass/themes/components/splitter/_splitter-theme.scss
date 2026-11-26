@@ -23,12 +23,12 @@
 /// @param {Color} $bar-color [null] - The background color of the bar. PRIMARY - derives handle, expander, focus colors.
 /// @param {Color} $handle-color [null] - The color for the bar drag handle. Auto-derived from bar-color.
 /// @param {Color} $expander-color [null] - The color for the arrow expander's. Auto-derived from bar-color.
-/// @param {List} $border-radius [null] - the border radios of the splitter bar drag handle
+/// @param {Number} $border-radius [null] - The border radius of the bar drag handle. A plain value applies at every size.
 /// @param {Color} $focus-color [null] - The color used for focused splitter bar. Auto-derived from bar-color (variant-dependent).
 /// @param {Color} $bar-color-active [null] - The background color of the bar when pressed.
 /// @param {Color} $handle-color-active [null] - The color for the bar drag handle when pressed.
 /// @param {Color} $expander-color-active [null] - The color for the arrow expander's when pressed.
-/// @param {Number} $size [null] - The size of the splitter, its width for vertical and height for horizontal splitter.
+/// @param {Number} $size [null] - The drag handle thickness and the expander height at the small size. The bar and the medium and large sizes derive from it.
 /// @requires $light-material-schema
 /// @example scss - Set a custom expander color
 ///   $my-splitter-theme: splitter-theme($expander-color: red);
