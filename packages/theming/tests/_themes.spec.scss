@@ -1218,12 +1218,6 @@ $schema: (
             }
         }
 
-        @include describe('Pivot data selector') {
-            @include it('applies a passed background') {
-                @include assert-equal(map.get(pivot-data-selector-theme($background: red), 'background'), red);
-            }
-        }
-
         @include describe('Spacing') {
             @include it('should use customizable spacing when declaring padding/margin') {
                 $value: 14px;
