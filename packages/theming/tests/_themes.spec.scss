@@ -1208,6 +1208,22 @@ $schema: (
             }
         }
 
+        @include describe('Scrollbar') {
+            @include it('applies a passed sb-size') {
+                @include assert-equal(map.get(scrollbar-theme($sb-size: 4px), 'sb-size'), 4px);
+            }
+
+            @include it('keeps the schema sb-size without one') {
+                @include assert-equal(map.get(scrollbar-theme(), 'sb-size'), rem(16px));
+            }
+        }
+
+        @include describe('Pivot data selector') {
+            @include it('applies a passed background') {
+                @include assert-equal(map.get(pivot-data-selector-theme($background: red), 'background'), red);
+            }
+        }
+
         @include describe('Spacing') {
             @include it('should use customizable spacing when declaring padding/margin') {
                 $value: 14px;
